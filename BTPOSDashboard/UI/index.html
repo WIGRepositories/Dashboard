@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head><title>Dashboard | Dashboard</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -68,7 +68,69 @@
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                 <ul class="nav navbar-nav    ">
                     <li class="active"><a href="index.html">Dashboard</a></li>
-                    <li><a href="index.html">Users</a></li>
+
+
+                    <li>
+                        <a href="index.html" data-toggle="dropdown" class="dropdown-toggle">
+                            Users
+                            &nbsp;<i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="Company.html">Company</a></li>
+                            <li><a href="Users.html">User</li>
+                            <li><a href="layout-right-sidebar.html">Right Sidebar</a></li>
+                            <li><a href="layout-left-sidebar-collasped.html">Left Sidebar Collasped</a></li>
+                            <li><a href="layout-right-sidebar-collasped.html">Right Sidebar Collasped</a></li>
+                            <li class="dropdown-submenu">
+                                <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Second level link</a></li>
+                                    <li class="dropdown-submenu">
+                                        <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Second level link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="active">
+                        <a href="index.html" data-toggle="dropdown" class="dropdown-toggle">
+                            BTPOS
+                            &nbsp;<i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="BTPOSDetails.html">BTPOSDetails</a></li>
+                            <li><a href="layout-right-sidebar.html">Right Sidebar</a></li>
+                            <li><a href="layout-left-sidebar-collasped.html">Left Sidebar Collasped</a></li>
+                            <li><a href="layout-right-sidebar-collasped.html">Right Sidebar Collasped</a></li>
+                            <li class="dropdown-submenu">
+                                <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Second level link</a></li>
+                                    <li class="dropdown-submenu">
+                                        <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                            <li><a href="#">Third level link</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Second level link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="active"><a href="TypeGroups.html">Type Groups</a></li>
                     <li><a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">Layouts
                         &nbsp;<i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
@@ -320,19 +382,73 @@
                     <li class="active"><a href="index.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
-                    
                     <li>
-                        <a href="#">
-                            <i class="fa fa-send-o fa-fw">
+                        <a href="TypeGroups.html">
+                            <i class="fa fa-slack fa-fw">
                                 <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">Type Groups</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Types.html">
+                            <i class="fa fa-slack fa-fw">
+                                <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">Types</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="Roles.html">
+                            <i class="fa fa-tachometer fa-fw">
+                                <div class="icon-bg bg-orange"></div>
+                            </i><span class="menu-title">Roles</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html">
+                            <i class="fa fa-desktop fa-fw">
+                                <div class="icon-bg bg-pink"></div>
                             </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                            
-                          
+                            <li><a href="Users.html"><i class="fa fa-align-left"></i><span class="submenu-title">User</span></a></li>
+                        </ul>
+                        <ul class="nav nav-second-level">
+                            <li><a href="Users.html"><i class="fa fa-align-left"></i><span class="submenu-title">User</span></a></li>
+                            <li class="active"><a href="Company.html"><i class="fa fa-align-left"></i><span class="submenu-title">Company</span></a></li>
+                            <li><a href="layout-left-sidebar-collapsed.html"><i class="fa fa-angle-double-left"></i><span class="submenu-title">Left Sidebar Collapsed</span></a></li>
+                            <li><a href="layout-right-sidebar.html"><i class="fa fa-align-right"></i><span class="submenu-title">Right Sidebar</span></a></li>
+                            <li><a href="layout-right-sidebar-collapsed.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Right Sidebar Collapsed</span></a></li>
+                            <li><a href="layout-horizontal-menu.html"><i class="fa fa-header"></i><span class="submenu-title">Horizontal Menu</span></a></li>
+                            <li><a href="layout-horizontal-menu-sidebar.html"><i class="fa fa-h-square"></i><span class="submenu-title">Horizontal Menu & Sidebar</span></a></li>
+                            <li><a href="layout-fixed-topbar.html"><i class="fa fa-magnet"></i><span class="submenu-title">Fixed Topbar</span></a></li>
+                            <li><a href="layout-boxed.html"><i class="fa fa-columns"></i><span class="submenu-title">Boxed Layout</span></a></li>
+                            <li><a href="layout-hidden-footer.html"><i class="fa fa-eye-slash"></i><span class="submenu-title">Hidden Footer</span></a></li>
+                            <li><a href="layout-header-topbar.html"><i class="fa fa-paperclip"></i><span class="submenu-title">Header & Topbar</span></a></li>
+                            <li><a href="layout-title-breadcrumb.html"><i class="fa fa-link"></i><span class="submenu-title">Title & Breadcrumb</span></a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="index.html">
+                            <i class="fa fa-desktop fa-fw">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">BTPOS</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BTPOSDetails</span></a></li>
+                            <li><a href="layout-left-sidebar-collapsed.html"><i class="fa fa-angle-double-left"></i><span class="submenu-title">Left Sidebar Collapsed</span></a></li>
+                            <li><a href="layout-right-sidebar.html"><i class="fa fa-align-right"></i><span class="submenu-title">Right Sidebar</span></a></li>
+                            <li><a href="layout-right-sidebar-collapsed.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Right Sidebar Collapsed</span></a></li>
+                            <li><a href="layout-horizontal-menu.html"><i class="fa fa-header"></i><span class="submenu-title">Horizontal Menu</span></a></li>
+                            <li><a href="layout-horizontal-menu-sidebar.html"><i class="fa fa-h-square"></i><span class="submenu-title">Horizontal Menu & Sidebar</span></a></li>
+                            <li><a href="layout-fixed-topbar.html"><i class="fa fa-magnet"></i><span class="submenu-title">Fixed Topbar</span></a></li>
+                            <li><a href="layout-boxed.html"><i class="fa fa-columns"></i><span class="submenu-title">Boxed Layout</span></a></li>
+                            <li><a href="layout-hidden-footer.html"><i class="fa fa-eye-slash"></i><span class="submenu-title">Hidden Footer</span></a></li>
+                            <li><a href="layout-header-topbar.html"><i class="fa fa-paperclip"></i><span class="submenu-title">Header & Topbar</span></a></li>
+                            <li><a href="layout-title-breadcrumb.html"><i class="fa fa-link"></i><span class="submenu-title">Title & Breadcrumb</span></a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="#"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
                     </i><span class="menu-title">Layouts</span><span class="fa arrow"></span></a>

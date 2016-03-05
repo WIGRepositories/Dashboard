@@ -74,6 +74,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="UI\animations.html" />
+    <Content Include="UI\BTPOSDetails.html" />
     <Content Include="UI\charts-chartjs.html" />
     <Content Include="UI\charts-flotchart.html" />
     <Content Include="UI\charts-highchart-area.html" />
@@ -216,6 +217,7 @@
     <Content Include="UI\images\icons\loading.gif" />
     <Content Include="UI\index.html" />
     <Content Include="UI\js\animation.js" />
+    <Content Include="UI\js\BTPOSDetails.js" />
     <Content Include="UI\js\charts-chartjs.js" />
     <Content Include="UI\js\charts-flotchart.js" />
     <Content Include="UI\js\charts-highchart-area.js" />
@@ -226,6 +228,7 @@
     <Content Include="UI\js\charts-highchart-more.js" />
     <Content Include="UI\js\charts-highchart-pie.js" />
     <Content Include="UI\js\charts-highchart-scatter-bubble.js" />
+    <Content Include="UI\js\CompanyGroups.js" />
     <Content Include="UI\js\email-compose-mail.js" />
     <Content Include="UI\js\email-inbox.js" />
     <Content Include="UI\js\extra-signup.js" />
@@ -247,10 +250,13 @@
     <Content Include="UI\js\page-gallery.js" />
     <Content Include="UI\js\raphael-min.js" />
     <Content Include="UI\js\respond.min.js" />
+    <Content Include="UI\js\roles.js" />
     <Content Include="UI\js\table-action.js" />
     <Content Include="UI\js\table-advanced.js" />
     <Content Include="UI\js\table-filter.js" />
     <Content Include="UI\js\table-sample.js" />
+    <Content Include="UI\js\TypeGroups.js" />
+    <Content Include="UI\js\Types.js" />
     <Content Include="UI\js\ui-checkbox-radio.js" />
     <Content Include="UI\js\ui-editors.js" />
     <Content Include="UI\js\ui-nestable-list.js" />
@@ -260,6 +266,7 @@
     <Content Include="UI\js\ui-tabs.js" />
     <Content Include="UI\js\ui-toastr-notifications.js" />
     <Content Include="UI\js\ui-treeview.js" />
+    <Content Include="UI\js\Users.js" />
     <Content Include="UI\layout-boxed.html" />
     <Content Include="UI\layout-fixed-topbar.html" />
     <Content Include="UI\layout-header-topbar.html" />
@@ -278,12 +285,15 @@
     <Content Include="UI\page-contact.html" />
     <Content Include="UI\page-gallery.html" />
     <Content Include="UI\page-timeline.html" />
+    <Content Include="UI\Roles.html" />
     <Content Include="UI\table-action.html" />
     <Content Include="UI\table-advanced.html" />
     <Content Include="UI\table-basic.html" />
     <Content Include="UI\table-filter.html" />
     <Content Include="UI\table-responsive.html" />
     <Content Include="UI\table-sample.html" />
+    <Content Include="UI\TypeGroups.html" />
+    <Content Include="UI\Types.html" />
     <Content Include="UI\ui-buttons.html" />
     <Content Include="UI\ui-checkbox-radio.html" />
     <Content Include="UI\ui-editors.html" />
@@ -1699,10 +1709,12 @@
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
     <Compile Include="Controllers\BTPOSController.cs" />
+    <Compile Include="Controllers\BTPOSDetailsController.cs" />
     <Compile Include="Controllers\BTPOSGroupsController.cs" />
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
     <Compile Include="Controllers\FleetOwnerLicenseController.cs" />
@@ -1723,11 +1735,14 @@
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
+    <Compile Include="Controllers\Users1Controller.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\Models.cs" />
+    <Compile Include="Models\POS.cs" />
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\DAL\DataBase.cs" />
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\DAL\StatusQueries.cs" />
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\Domain\Models\Item.cs" />

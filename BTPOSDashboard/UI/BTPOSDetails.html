@@ -104,7 +104,7 @@
                             </ul>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <a href="index.html" data-toggle="dropdown" class="dropdown-toggle">
                                 BTPOS
                                 &nbsp;<i class="fa fa-angle-down"></i>
@@ -425,7 +425,7 @@
                                 </i><span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="index.html">
                                 <i class="fa fa-desktop fa-fw">
                                     <div class="icon-bg bg-pink"></div>
@@ -446,7 +446,9 @@
                             </ul>
                         </li>
 
-                        <li>
+                        
+
+                        <li class="active">
                             <a href="index.html">
                                 <i class="fa fa-desktop fa-fw">
                                     <div class="icon-bg bg-pink"></div>
@@ -817,16 +819,22 @@
                                                             </select>&nbsp;
                                                             records | Found total 58 records
                                                         </div>
-                                                      </div>
-
-
-                                                    <div class="actions">
-                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0">  Add New Company</button>
-
+                                                        
                                                     </div>
 
 
-                                                    <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+
+                                                    
+                                                    
+                                                    
+                                                    <div class="actions">
+                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0"> Add New Company</button>
+                                                                                                                 
+                                                     </div>
+
+
+
+                                                     <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
@@ -836,33 +844,51 @@
                                                                 <div class="modal-body">
                                                                     <table>
                                                                         <tr>
-                                                                            <td> Name:</td>
-                                                                            <td><input type="text" id="Name" ng-model="Group.Name"></td>
+                                                                            <td> GroupName:</td>
+                                                                            <td><input type="text" id="GroupName" ng-model="Group.GroupName"></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td> admin:</td>
-                                                                            <td><input type="text" id="admin" ng-model="Group.admin"></td>
+                                                                            <td> GroupId:</td>
+                                                                            <td><input type="text" id="admin" ng-model="Group.GroupId"></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td> adminId:</td>
-                                                                            <td><input type="text" id="adminId" ng-model="Group.adminId"></td>
+                                                                            <td> IMEI:</td>
+                                                                            <td><input type="text" id="IMEI" ng-model="Group.IMEI"></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td> code:</td>
-                                                                            <td><input type="text" id="code" ng-model="Group.code"></td>
+                                                                            <td> Location:</td>
+                                                                            <td><input type="text" id="Location" ng-model="Group.Location"></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td> descr:</td>
-                                                                            <td><input type="text" id="descr" ng-model="Group.descr"></td>
+                                                                            <td> POSID:</td>
+                                                                            <td><input type="text" id="POSID" ng-model="Group.POSID"></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>active:</td>
+                                                                            <td> StatusId:</td>
+                                                                            <td><input type="text" id="StatusId" ng-model="Group.StatusId"></td>
+                                                                        </tr>
+
+                                                                        
+                                                                        <tr>
+                                                                            <td> Status:</td>
                                                                             <td>
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" ng-model="Group.active" />
-                                                                                </label>
+                                                                                <div class="tb-group-actions pull-left">
+                                                                                    <select class="table-group-action-input form-control input-inline input-small input-sm mlm">
+                                                                                        <option value="">Approved</option>
+                                                                                        <option value="Cancel">Pending</option>
+                                                                                        <option value="Cancel">Suspended</option>
+                                                                                        <option value="Cancel">Blocked</option>
+
+                                                                                    </select>&nbsp;
+
+
+                                                                                </div>
+
+                                       
                                                                             </td>
                                                                         </tr>
+
+
                                                                     </table>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -903,14 +929,7 @@
                                                                             <td> descr:</td>
                                                                             <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
                                                                         </tr>
-                                                                        <tr>
-                                                                            <td>active:</td>
-                                                                            <td>
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" ng-model="currGroup.active" />
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
+                                                                        
                                                                     </table>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -941,13 +960,13 @@
                                                         <tr>
 
                                                             <th>Id</th>
-                                                            <th>Name</th>
-                                                            <th>admin</th>
-                                                            <th>adminId</th>
-                                                            <th>code</th>
-                                                            <th>descr</th>
-                                                            <th>active</th>
-                                                            <th>Update</th>
+                                                            <th>GroupName</th>
+                                                            <th>GroupId</th>
+                                                            <th>IMEI</th>
+                                                            <th>Location</th>
+                                                            <th>POSID</th>
+                                                            <th>StatusId</th>
+                                                            <th>Status</th>
 
                                                         </tr>
                                                     </thead>
@@ -956,25 +975,24 @@
                                                         <tr ng-repeat="group in Group" class="gradeA">
                                                             {{5+5}}
                                                             <td>{{group.Id}}</td>
-                                                            <td>{{group.Name}}</td>
-                                                            <td>{{group.admin}}</td>
-                                                            <td>{{group.adminId}}</td>
-                                                            <td>{{group.code}}</td>
-                                                            <td>{{group.descr}}</td>
-                                                            <td>{{group.active}}</td>
+                                                            <td>{{group.GroupName}}</td>
+                                                            <td>{{group.GroupId}}</td>
+                                                            <td>{{group.IMEI}}</td>
+                                                            <td>{{group.Location}}</td>
+                                                            <td>{{group.POSID}}</td>
+                                                            <td>{{group.StatusId}}</td>
+                                                          
+                                                              
                                                             <td>
-                                                                {{group.Update}}
-                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
+                                                                {{group.Status}}
                                                             </td>
-                                                        </tr>
-                                                     
-                                                                                                      
+</tr>
 
 
-                                                     
+
+
+
+
 
 
                                                     </tbody>
@@ -1011,9 +1029,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                         
-                                            
-                                        </div>
+                                            </div>
                                     </div>
                                 </div>
                                 
@@ -1187,7 +1203,7 @@
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-    
+
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -1206,6 +1222,6 @@
 
     </script>
     <script src="js/angular.js"></script>
-    <script src="js/CompanyGroups.js"></script>
+    <script src="js/BTPOSDetails.js"></script>
 </body>
 </html>

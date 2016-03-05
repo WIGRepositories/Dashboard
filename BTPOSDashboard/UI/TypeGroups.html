@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
     <title>Action Tables | Tables</title>
     <meta charset="utf-8">
@@ -24,9 +24,19 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+
+
+
 </head>
 
-<body ng-model="Groups">
+<body ng-model="TypeGroups">
     <div>
         <!--BEGIN THEME SETTING-->
         <div id="theme-setting">
@@ -73,67 +83,6 @@
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
                     <ul class="nav navbar-nav    ">
                         <li class="active"><a href="index.html">Dashboard</a></li>
-
-                        <li>
-                            <a href="index.html" data-toggle="dropdown" class="dropdown-toggle">
-                                Users
-                                &nbsp;<i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="Company.html">Company</a></li>
-                                <li><a href="layout-right-sidebar.html">Right Sidebar</a></li>
-                                <li><a href="layout-left-sidebar-collasped.html">Left Sidebar Collasped</a></li>
-                                <li><a href="layout-right-sidebar-collasped.html">Right Sidebar Collasped</a></li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Second level link</a></li>
-                                        <li class="dropdown-submenu">
-                                            <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Second level link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="index.html" data-toggle="dropdown" class="dropdown-toggle">
-                                BTPOS
-                                &nbsp;<i class="fa fa-angle-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="BTPOSDetails.html">BTPOSDetails</a></li>
-                                <li><a href="layout-right-sidebar.html">Right Sidebar</a></li>
-                                <li><a href="layout-left-sidebar-collasped.html">Left Sidebar Collasped</a></li>
-                                <li><a href="layout-right-sidebar-collasped.html">Right Sidebar Collasped</a></li>
-                                <li class="dropdown-submenu">
-                                    <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Second level link</a></li>
-                                        <li class="dropdown-submenu">
-                                            <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">More Options</a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                                <li><a href="#">Third level link</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Second level link</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-
                         <li>
                             <a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle">
                                 Layouts
@@ -425,48 +374,6 @@
                                 </i><span class="menu-title">Dashboard</span>
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="index.html">
-                                <i class="fa fa-desktop fa-fw">
-                                    <div class="icon-bg bg-pink"></div>
-                                </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li class="active"><a href="Company.html"><i class="fa fa-align-left"></i><span class="submenu-title">Company</span></a></li>
-                                <li><a href="layout-left-sidebar-collapsed.html"><i class="fa fa-angle-double-left"></i><span class="submenu-title">Left Sidebar Collapsed</span></a></li>
-                                <li><a href="layout-right-sidebar.html"><i class="fa fa-align-right"></i><span class="submenu-title">Right Sidebar</span></a></li>
-                                <li><a href="layout-right-sidebar-collapsed.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Right Sidebar Collapsed</span></a></li>
-                                <li><a href="layout-horizontal-menu.html"><i class="fa fa-header"></i><span class="submenu-title">Horizontal Menu</span></a></li>
-                                <li><a href="layout-horizontal-menu-sidebar.html"><i class="fa fa-h-square"></i><span class="submenu-title">Horizontal Menu & Sidebar</span></a></li>
-                                <li><a href="layout-fixed-topbar.html"><i class="fa fa-magnet"></i><span class="submenu-title">Fixed Topbar</span></a></li>
-                                <li><a href="layout-boxed.html"><i class="fa fa-columns"></i><span class="submenu-title">Boxed Layout</span></a></li>
-                                <li><a href="layout-hidden-footer.html"><i class="fa fa-eye-slash"></i><span class="submenu-title">Hidden Footer</span></a></li>
-                                <li><a href="layout-header-topbar.html"><i class="fa fa-paperclip"></i><span class="submenu-title">Header & Topbar</span></a></li>
-                                <li><a href="layout-title-breadcrumb.html"><i class="fa fa-link"></i><span class="submenu-title">Title & Breadcrumb</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="index.html">
-                                <i class="fa fa-desktop fa-fw">
-                                    <div class="icon-bg bg-pink"></div>
-                                </i><span class="menu-title">BTPOS</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li class="active"><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BTPOSDetails</span></a></li>
-                                <li><a href="layout-left-sidebar-collapsed.html"><i class="fa fa-angle-double-left"></i><span class="submenu-title">Left Sidebar Collapsed</span></a></li>
-                                <li><a href="layout-right-sidebar.html"><i class="fa fa-align-right"></i><span class="submenu-title">Right Sidebar</span></a></li>
-                                <li><a href="layout-right-sidebar-collapsed.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Right Sidebar Collapsed</span></a></li>
-                                <li><a href="layout-horizontal-menu.html"><i class="fa fa-header"></i><span class="submenu-title">Horizontal Menu</span></a></li>
-                                <li><a href="layout-horizontal-menu-sidebar.html"><i class="fa fa-h-square"></i><span class="submenu-title">Horizontal Menu & Sidebar</span></a></li>
-                                <li><a href="layout-fixed-topbar.html"><i class="fa fa-magnet"></i><span class="submenu-title">Fixed Topbar</span></a></li>
-                                <li><a href="layout-boxed.html"><i class="fa fa-columns"></i><span class="submenu-title">Boxed Layout</span></a></li>
-                                <li><a href="layout-hidden-footer.html"><i class="fa fa-eye-slash"></i><span class="submenu-title">Hidden Footer</span></a></li>
-                                <li><a href="layout-header-topbar.html"><i class="fa fa-paperclip"></i><span class="submenu-title">Header & Topbar</span></a></li>
-                                <li><a href="layout-title-breadcrumb.html"><i class="fa fa-link"></i><span class="submenu-title">Title & Breadcrumb</span></a></li>
-                            </ul>
-                        </li>
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-desktop fa-fw">
@@ -528,16 +435,16 @@
                                 <li><a href="form-dropzone-file-upload.html"><i class="fa fa-cloud-upload"></i><span class="submenu-title">Dropzone File Upload</span></a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-th-list fa-fw">
                                     <div class="icon-bg bg-blue"></div>
                                 </i><span class="menu-title">Tables</span><span class="fa arrow"></span>
                             </a>
-                            <ul class="nav nav-second-level">
+                            <ul class="nav nav-second-level in">
                                 <li><a href="table-basic.html"><i class="fa fa-th-large"></i><span class="submenu-title">Basic Tables</span></a></li>
                                 <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Responsive Tables</span></a></li>
-                                <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Action Tables</span></a></li>
+                                <li class="active"><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Action Tables</span></a></li>
                                 <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Filter Tables</span></a></li>
                                 <li><a href="table-advanced.html"><i class="fa fa-indent"></i><span class="submenu-title">Advanced Tables</span></a></li>
                                 <li><a href="table-sample.html"><i class="fa fa-table"></i><span class="submenu-title">Sample Tables</span></a></li>
@@ -792,7 +699,7 @@
                         <div class="col-lg-12">
                             <ul id="tableactiondTab" class="nav nav-tabs">
                                 <li class="active"><a href="#table-table-tab" data-toggle="tab">Action Tables</a></li>
-                                
+                                <li><a href="#table-row-tab" data-toggle="tab">Action Rows</a></li>
                                 <li><a href="#table-panel-tab" data-toggle="tab">Action Panels</a></li>
                             </ul>
                             <div id="tableactionTabContent" class="tab-content">
@@ -817,111 +724,8 @@
                                                             </select>&nbsp;
                                                             records | Found total 58 records
                                                         </div>
-                                                      </div>
-
-
-                                                    <div class="actions">
-                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0">  Add New Company</button>
-
+                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-green" >+ADD NEW</button>
                                                     </div>
-
-
-                                                    <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Company</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td> Name:</td>
-                                                                            <td><input type="text" id="Name" ng-model="Group.Name"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> admin:</td>
-                                                                            <td><input type="text" id="admin" ng-model="Group.admin"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> adminId:</td>
-                                                                            <td><input type="text" id="adminId" ng-model="Group.adminId"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> code:</td>
-                                                                            <td><input type="text" id="code" ng-model="Group.code"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> descr:</td>
-                                                                            <td><input type="text" id="descr" ng-model="Group.descr"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>active:</td>
-                                                                            <td>
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" ng-model="Group.active" />
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-model="currGroup">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td> Name:</td>
-                                                                            <td><input type="text" id="Name" ng-model="currGroup.Name"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> admin:</td>
-                                                                            <td><input type="text" id="admin" ng-model="currGroup.admin"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> adminId:</td>
-                                                                            <td><input type="text" id="adminId" ng-model="currGroup.adminId"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> code:</td>
-                                                                            <td><input type="text" id="code" ng-model="currGroup.code"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> descr:</td>
-                                                                            <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>active:</td>
-                                                                            <td>
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" ng-model="currGroup.active" />
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
                                                     <div class="col-lg-6 text-right">
                                                         <div class="pagination-panel">
                                                             <ul class="pagination pagination-sm man">
@@ -936,49 +740,74 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header modal-header-primary">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                <h4 id="modal-header-primary-label" class="modal-title">ADD NEW TYPE</h4>
+                                                            </div>
+                                                            <div class="modal-body" ng-model="Types">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td> Name:
+                                                                        <td>
+                                                                        <td> <input type="text" id="Name" ng-model="Types.Name" /></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> Desc:
+                                                                        <td>
+                                                                        <td> <input type="text" id="Desc" ng-model="Types.Desc" /></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Active:</td>
+                                                                        <td>
+                                                                            <label class="checkbox">
+                                                                                <input type="checkbox" ng-checked="Types.Active" ng-model="Types.Active" />
+                                                                            </label>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                <button type="button" class="btn btn-primary" ng-click="save(Types);">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
                                                         <tr>
 
                                                             <th>Id</th>
                                                             <th>Name</th>
-                                                            <th>admin</th>
-                                                            <th>adminId</th>
-                                                            <th>code</th>
-                                                            <th>descr</th>
-                                                            <th>active</th>
+                                                            <th>Desc</th>
+                                                            <th>Active</th>
                                                             <th>Update</th>
-
                                                         </tr>
-                                                    </thead>
+
                                                     <tbody>
+                                                    <thead>
+                                                        <tr ng-repeat="T in TypeGroups" class="gradeA">
+                                                            <td>{{T.Id}}</td>
+                                                            <td>{{T.Name}}</td>
+                                                            <td>{{T.Desc}}</td>
+                                                            <td>{{T.Active}}</td>
+                                                            
 
-                                                        <tr ng-repeat="group in Group" class="gradeA">
-                                                            {{5+5}}
-                                                            <td>{{group.Id}}</td>
-                                                            <td>{{group.Name}}</td>
-                                                            <td>{{group.admin}}</td>
-                                                            <td>{{group.adminId}}</td>
-                                                            <td>{{group.code}}</td>
-                                                            <td>{{group.descr}}</td>
-                                                            <td>{{group.active}}</td>
-                                                            <td>
-                                                                {{group.Update}}
-                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
+                                                           <td> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button></td>
+                                                            <!--<button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-green">View Demo</button>-->
+
                                                         </tr>
-                                                     
-                                                                                                      
 
 
-                                                     
-
-
-                                                    </tbody>
-
+                                                    </thead>
                                                 </table>
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -1011,142 +840,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                         
                                             
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div id="table-panel-tab" class="tab-pane fade">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="portlet portlet-white">
-                                                <div class="portlet-header pam mbn">
-                                                    <div class="caption">Customer Listing</div>
-                                                    <div class="actions">
-                                                        <a href="#" class="btn btn-info btn-sm">
-                                                            <i class="fa fa-plus"></i>&nbsp;
-                                                            New Customer
-                                                        </a>&nbsp;
-                                                        <div class="btn-group">
-                                                            <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
-                                                                <i class="fa fa-wrench"></i>&nbsp;
-                                                                Tools
-                                                            </a>
-                                                            <ul class="dropdown-menu pull-right">
-                                                                <li><a href="#">Export to Excel</a></li>
-                                                                <li><a href="#">Export to CSV</a></li>
-                                                                <li><a href="#">Export to XML</a></li>
-                                                                <li class="divider"></li>
-                                                                <li><a href="#">Print Invoices</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="portlet-body pan">
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="3%"><input type="checkbox" class="checkall" /></th>
-                                                                <th width="9%">Record #</th>
-                                                                <th>Username</th>
-                                                                <th width="10%">Country</th>
-                                                                <th width="10%">Gender</th>
-                                                                <th width="7%">Order</th>
-                                                                <th width="12%">Date</th>
-                                                                <th width="10%">Price</th>
-                                                                <th width="9%">Status</th>
-                                                                <th width="12%">Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>1</td>
-                                                                <td>Henry</td>
-                                                                <td>United States</td>
-                                                                <td>Male</td>
-                                                                <td>32</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-success">Approved</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>2</td>
-                                                                <td>John</td>
-                                                                <td>United States</td>
-                                                                <td>Female</td>
-                                                                <td>45</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-info">Pending</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>3</td>
-                                                                <td>Larry</td>
-                                                                <td>United States</td>
-                                                                <td>Female</td>
-                                                                <td>40</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>4</td>
-                                                                <td>Lahm</td>
-                                                                <td>United States</td>
-                                                                <td>Female</td>
-                                                                <td>15</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>5</td>
-                                                                <td>Henry</td>
-                                                                <td>United States</td>
-                                                                <td>Male</td>
-                                                                <td>32</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-success">Approved</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                               
                                                 </div>
                                             </div>
                                         </div>
@@ -1156,11 +855,8 @@
                         </div>
                     </div>
                 </div>
-                <!--END CONTENT--><!--BEGIN FOOTER-->
-                <div id="footer">
-                    <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
-                </div>
-                <!--END FOOTER-->
+            
+                
             </div>
             <!--END PAGE WRAPPER-->
         </div>
@@ -1187,7 +883,6 @@
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-    
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -1205,7 +900,7 @@
 
 
     </script>
-    <script src="js/angular.js"></script>
-    <script src="js/CompanyGroups.js"></script>
+    <script src="angular.js"></script>
+    <script src="TypeGroups.js"></script>
 </body>
 </html>
