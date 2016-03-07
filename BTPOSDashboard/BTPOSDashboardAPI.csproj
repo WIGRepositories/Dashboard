@@ -1703,6 +1703,8 @@
     <Content Include="UI\vendors\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="UI\vendors\summernote\summernote.css" />
     <Content Include="UI\vendors\summernote\summernote.js" />
+    <Content Include="UI\vendors\TypeGroups.html" />
+    <Content Include="UI\vendors\Types.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
