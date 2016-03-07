@@ -52,7 +52,7 @@ namespace POSDBAccess.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelBTPOSDetails";
+                cmd.CommandText = "InsUpdDelELBTPOSDetails";
                 cmd.Connection = conn;
 
                 conn.Open();

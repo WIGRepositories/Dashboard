@@ -2,7 +2,7 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:8020/api/types/users').then(function (res, data) {
+    $http.get('http://localhost:1476/api/types/users').then(function (res, data) {
         $scope.Types = res.data;
 
 

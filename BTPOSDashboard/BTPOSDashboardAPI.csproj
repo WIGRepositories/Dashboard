@@ -72,6 +72,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
@@ -2113,6 +2114,8 @@
           <DevelopmentServerPort>1537</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1476/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:1476/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

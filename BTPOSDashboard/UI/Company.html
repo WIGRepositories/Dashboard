@@ -27,956 +27,715 @@
 </head>
 
 <body ng-model="Groups">
-    <div><!--BEGIN THEME SETTING-->
-<!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
-<div id="header-topbar-option-demo" class="page-header-topbar">
-    <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
-        <div class="navbar-header">
-            <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-            <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">BTPOS Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
-        </div>
-        <div class="topbar-main">
-            <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
-
-            <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
-                <div class="input-icon right"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control" /></div>
-            </form>
-
-            <ul class="nav navbar navbar-top-links navbar-right mbn">
-                <li class="dropdown">
-                    <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li><p>You have 14 new notifications</p></li>
-                        <li>
-                            <div class="dropdown-slimscroll">
-                                <ul>
-                                    <li><a href="#"><span class="label label-blue"><i class="fa fa-comment"></i></span>New Comment<span class="pull-right text-muted small">4 mins ago</span></a></li>
-                                    <li><a href="#"><span class="label label-violet"><i class="fa fa-twitter"></i></span>3 New Followers<span class="pull-right text-muted small">12 mins ago</span></a></li>
-                                    <li><a href="#"><span class="label label-pink"><i class="fa fa-envelope"></i></span>Message Sent<span class="pull-right text-muted small">15 mins ago</span></a></li>
-                                    <li><a href="#"><span class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span class="pull-right text-muted small">18 mins ago</span></a></li>
-                                    <li><a href="#"><span class="label label-yellow"><i class="fa fa-upload"></i></span>Server Rebooted<span class="pull-right text-muted small">19 mins ago</span></a></li>
-                                    <li><a href="#"><span class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span class="pull-right text-muted small">2 days ago</span></a></li>
-                                    <li><a href="#"><span class="label label-pink"><i class="fa fa-envelope"></i></span>Message Sent<span class="pull-right text-muted small">5 days ago</span></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="last"><a href="#" class="text-right">See all alerts</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span></a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li><p>You have 14 new messages</p></li>
-                        <li>
-                            <div class="dropdown-slimscroll">
-                                <ul>
-                                    <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">Jessica Spencer</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
-                                    <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith<span class="label label-blue pull-right">New</span></span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
-                                    <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Doe<span class="label label-orange pull-right">10 min</span></span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
-                                    <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
-                                    <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="last"><a href="#">Read all messages</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li><p>You have 14 pending tasks</p></li>
-                        <li>
-                            <div class="dropdown-slimscroll">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <span class="task-item">Fix the HTML code<small class="pull-right text-muted">40%</small></span>
-
-                                            <div class="progress progress-sm">
-                                                <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;" class="progress-bar progress-bar-orange"><span class="sr-only">40% Complete (success)</span></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="task-item">Make a wordpress theme<small class="pull-right text-muted">60%</small></span>
-
-                                            <div class="progress progress-sm">
-                                                <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" class="progress-bar progress-bar-blue"><span class="sr-only">60% Complete (success)</span></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="task-item">Convert PSD to HTML<small class="pull-right text-muted">55%</small></span>
-
-                                            <div class="progress progress-sm">
-                                                <div role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%;" class="progress-bar progress-bar-green"><span class="sr-only">55% Complete (success)</span></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="task-item">Convert HTML to Wordpress<small class="pull-right text-muted">78%</small></span>
-
-                                            <div class="progress progress-sm">
-                                                <div role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%;" class="progress-bar progress-bar-yellow"><span class="sr-only">78% Complete (success)</span></div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="last"><a href="#">See all tasks</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown topbar-user">
-                    <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">John Doe</span>&nbsp;<span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-user pull-right">
-                        <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
-                        <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
-                        <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                        <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
-                        <li class="divider"></li>
-                        <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                        <li><a href="extra-signin.html"><i class="fa fa-key"></i>Log Out</a></li>
-                    </ul>
-                </li>
-                <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
-            </ul>
-        </div>
-    </nav>
-    <!--BEGIN MODAL CONFIG PORTLET-->
-    <div id="modal-config" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 class="modal-title">Modal title</h4>
+    <div>
+        <!--BEGIN THEME SETTING-->
+        <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
+        <div id="header-topbar-option-demo" class="page-header-topbar">
+            <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+                <div class="navbar-header">
+                    <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">BTPOS Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
-                <div class="modal-body">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend et nisl eget porta. Curabitur elementum sem molestie nisl varius, eget tempus odio molestie. Nunc vehicula sem arcu, eu pulvinar neque cursus ac. Aliquam ultricies lobortis magna et aliquam. Vestibulum egestas eu urna sed ultricies. Nullam pulvinar dolor vitae quam dictum
-                        condimentum. Integer a sodales elit, eu pulvinar leo. Nunc nec aliquam nisi, a mollis neque. Ut vel felis quis tellus hendrerit placerat. Vivamus vel nisl non magna feugiat dignissim sed ut nibh. Nulla elementum, est a pretium hendrerit, arcu risus luctus augue, mattis aliquet orci ligula eget massa. Sed ut ultricies felis.
-                    </p>
+                <div class="topbar-main">
+                    <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+                    <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+                        <div class="input-icon right"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control" /></div>
+                    </form>
+
+                    <ul class="nav navbar navbar-top-links navbar-right mbn">
+                        <li class="dropdown">
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li><p>You have 14 new notifications</p></li>
+                                <li>
+                                    <div class="dropdown-slimscroll">
+                                        <ul>
+                                            <li><a href="#"><span class="label label-blue"><i class="fa fa-comment"></i></span>New Comment<span class="pull-right text-muted small">4 mins ago</span></a></li>
+                                            <li><a href="#"><span class="label label-violet"><i class="fa fa-twitter"></i></span>3 New Followers<span class="pull-right text-muted small">12 mins ago</span></a></li>
+                                            <li><a href="#"><span class="label label-pink"><i class="fa fa-envelope"></i></span>Message Sent<span class="pull-right text-muted small">15 mins ago</span></a></li>
+                                            <li><a href="#"><span class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span class="pull-right text-muted small">18 mins ago</span></a></li>
+                                            <li><a href="#"><span class="label label-yellow"><i class="fa fa-upload"></i></span>Server Rebooted<span class="pull-right text-muted small">19 mins ago</span></a></li>
+                                            <li><a href="#"><span class="label label-green"><i class="fa fa-tasks"></i></span>New Task<span class="pull-right text-muted small">2 days ago</span></a></li>
+                                            <li><a href="#"><span class="label label-pink"><i class="fa fa-envelope"></i></span>Message Sent<span class="pull-right text-muted small">5 days ago</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="last"><a href="#" class="text-right">See all alerts</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span></a>
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li><p>You have 14 new messages</p></li>
+                                <li>
+                                    <div class="dropdown-slimscroll">
+                                        <ul>
+                                            <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">Jessica Spencer</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith<span class="label label-blue pull-right">New</span></span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Doe<span class="label label-orange pull-right">10 min</span></span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="images/user.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="last"><a href="#">Read all messages</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
+                            <ul class="dropdown-menu dropdown-tasks">
+                                <li><p>You have 14 pending tasks</p></li>
+                                <li>
+                                    <div class="dropdown-slimscroll">
+                                        <ul>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="task-item">Fix the HTML code<small class="pull-right text-muted">40%</small></span>
+
+                                                    <div class="progress progress-sm">
+                                                        <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;" class="progress-bar progress-bar-orange"><span class="sr-only">40% Complete (success)</span></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="task-item">Make a wordpress theme<small class="pull-right text-muted">60%</small></span>
+
+                                                    <div class="progress progress-sm">
+                                                        <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" class="progress-bar progress-bar-blue"><span class="sr-only">60% Complete (success)</span></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="task-item">Convert PSD to HTML<small class="pull-right text-muted">55%</small></span>
+
+                                                    <div class="progress progress-sm">
+                                                        <div role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%;" class="progress-bar progress-bar-green"><span class="sr-only">55% Complete (success)</span></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <span class="task-item">Convert HTML to Wordpress<small class="pull-right text-muted">78%</small></span>
+
+                                                    <div class="progress progress-sm">
+                                                        <div role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%;" class="progress-bar progress-bar-yellow"><span class="sr-only">78% Complete (success)</span></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="last"><a href="#">See all tasks</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown topbar-user">
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">John Doe</span>&nbsp;<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-user pull-right">
+                                <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
+                                <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                                <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
+                                <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
+                                <li class="divider"></li>
+                                <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
+                                <li><a href="extra-signin.html"><i class="fa fa-key"></i>Log Out</a></li>
+                            </ul>
+                        </li>
+                        <li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>
+                    </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+            </nav>
+            <!--BEGIN MODAL CONFIG PORTLET-->
+            <div id="modal-config" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend et nisl eget porta. Curabitur elementum sem molestie nisl varius, eget tempus odio molestie. Nunc vehicula sem arcu, eu pulvinar neque cursus ac. Aliquam ultricies lobortis magna et aliquam. Vestibulum egestas eu urna sed ultricies. Nullam pulvinar dolor vitae quam dictum
+                                condimentum. Integer a sodales elit, eu pulvinar leo. Nunc nec aliquam nisi, a mollis neque. Ut vel felis quis tellus hendrerit placerat. Vivamus vel nisl non magna feugiat dignissim sed ut nibh. Nulla elementum, est a pretium hendrerit, arcu risus luctus augue, mattis aliquet orci ligula eget massa. Sed ut ultricies felis.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!--END MODAL CONFIG PORTLET-->
         </div>
-    </div>
-    <!--END MODAL CONFIG PORTLET-->
-</div>
-<!--END TOPBAR-->
-<div id="wrapper">
-    <!--BEGIN SIDEBAR MENU-->
-    <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
-        <div class="sidebar-collapse menu-scroll">
-            <ul id="side-menu" class="nav">
-                <li class="user-panel">
-                    <div class="thumb"><img src="images/user.jpg" alt="" class="img-circle" /></div>
-                    <div class="info">
-                        <p>John Doe</p>
-                        <ul class="list-inline list-unstyled">
-                            <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
-                            <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
-                            <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
-                            <li><a href="extra-signin.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+        <!--END TOPBAR-->
+        <div id="wrapper">
+            <!--BEGIN SIDEBAR MENU-->
+            <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
+                <div class="sidebar-collapse menu-scroll">
+                    <ul id="side-menu" class="nav">
+                        <li class="user-panel">
+                            <div class="thumb"><img src="images/user.jpg" alt="" class="img-circle" /></div>
+                            <div class="info">
+                                <p>John Doe</p>
+                                <ul class="list-inline list-unstyled">
+                                    <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                    <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
+                                    <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
+                                    <li><a href="extra-signin.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </li>
+                        <li class="active">
+                            <a href="index.html">
+                                <i class="fa fa-tachometer fa-fw">
+                                    <div class="icon-bg bg-orange"></div>
+                                </i><span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Users</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="ui-generals.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
+                                <li><a href="ui-panels.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                                <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-edit fa-fw">
+                                    <div class="icon-bg bg-violet"></div>
+                                </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="form-layouts.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-th-list fa-fw">
+                                    <div class="icon-bg bg-blue"></div>
+                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="table-basic.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-envelope-o">
+                                    <div class="icon-bg bg-primary"></div>
+                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
+            <div id="chat-form" class="fixed">
+                <div class="chat-inner">
+                    <h2 class="chat-header">
+                        <a href="javascript:;" class="chat-form-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><i class="fa fa-user"></i>&nbsp;
+                        Chat
+                        &nbsp;<span class="badge badge-info">3</span>
+                    </h2>
+
+                    <div id="group-1" class="chat-group">
+                        <strong>Favorites</strong><a href="#">
+                            <span class="user-status is-online"></span>
+                            <small>Verna Morton</small>
+                            <span class="badge badge-info">2</span>
+                        </a><a href="#">
+                            <span class="user-status is-online"></span>
+                            <small>Delores Blake</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-busy"></span>
+                            <small>Nathaniel Morris</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-idle"></span>
+                            <small>Boyd Bridges</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-offline"></span>
+                            <small>Meredith Houston</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a>
+                    </div>
+                    <div id="group-2" class="chat-group">
+                        <strong>Office</strong><a href="#">
+                            <span class="user-status is-busy"></span>
+                            <small>Ann Scott</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-offline"></span>
+                            <small>Sherman Stokes</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-offline"></span>
+                            <small>Florence Pierce</small>
+                            <span class="badge badge-info">1</span>
+                        </a>
+                    </div>
+                    <div id="group-3" class="chat-group">
+                        <strong>Friends</strong><a href="#">
+                            <span class="user-status is-online"></span>
+                            <small>Willard Mckenzie</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-busy"></span>
+                            <small>Jenny Frazier</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-offline"></span>
+                            <small>Chris Stewart</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a><a href="#">
+                            <span class="user-status is-offline"></span>
+                            <small>Olivia Green</small>
+                            <span class="badge badge-info is-hidden">0</span>
+                        </a>
+                    </div>
+                </div>
+                <div id="chat-box" style="top:400px">
+                    <div class="chat-box-header">
+                        <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><span class="user-status is-online"></span><span class="display-name">Willard Mckenzie</span>
+                        <small>Online</small>
+                    </div>
+                    <div class="chat-content">
+                        <ul class="chat-box-body">
+                            <li>
+                                <p><img src="images/user.jpg" class="avt" /><span class="user">John Doe</span><span class="time">09:33</span></p>
+
+                                <p>Hi Swlabs, we have some comments for you.</p>
+                            </li>
+                            <li class="odd">
+                                <p><img src="images/user.jpg" class="avt" /><span class="user">Swlabs</span><span class="time">09:33</span></p>
+
+                                <p>Hi, we're listening you...</p>
+                            </li>
                         </ul>
                     </div>
+                    <div class="chat-textarea"><input placeholder="Type your message" class="form-control" /></div>
+                </div>
+            </div 
+            <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+            <div id="page-wrapper">
+                <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                    <div class="page-header pull-left">
+                        <div class="page-title">Action Tables</div>
+                    </div>
+                    <ol class="breadcrumb page-breadcrumb pull-right">
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Action Tables</li>
+                    </ol>
                     <div class="clearfix"></div>
-                </li>
-                <li>
-                    <a href="index.html">
-                        <i class="fa fa-tachometer fa-fw">
-                            <div class="icon-bg bg-orange"></div>
-                        </i><span class="menu-title">Dashboard</span>
-                    </a>
-                </li>
+                </div>
+                <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                <div class="page-content">
+                    <div id="table-action" class="row">
+                        <div class="col-lg-12">
+                            <ul id="tableactiondTab" class="nav nav-tabs">
+                                <li class="active"><a href="#table-table-tab" data-toggle="tab">Action Tables</a></li>
 
-                <li class="active">
-                    <a href="#">
-                        <i class="fa fa-send-o fa-fw">
-                            <div class="icon-bg bg-green"></div>
-                        </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                        <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-desktop fa-fw">
-                            <div class="icon-bg bg-pink"></div>
-                        </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="layout-left-sidebar.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-send-o fa-fw">
-                            <div class="icon-bg bg-green"></div>
-                        </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="ui-generals.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                        <li><a href="ui-panels.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                        <li><a href="ui-buttons.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-edit fa-fw">
-                            <div class="icon-bg bg-violet"></div>
-                        </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="form-layouts.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-th-list fa-fw">
-                            <div class="icon-bg bg-blue"></div>
-                        </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="table-basic.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                        <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                        <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                        <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-envelope-o">
-                            <div class="icon-bg bg-primary"></div>
-                        </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                        <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                        <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                        <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                        <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-    <div id="chat-form" class="fixed">
-        <div class="chat-inner">
-            <h2 class="chat-header">
-                <a href="javascript:;" class="chat-form-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><i class="fa fa-user"></i>&nbsp;
-                Chat
-                &nbsp;<span class="badge badge-info">3</span>
-            </h2>
+                                <li><a href="#table-panel-tab" data-toggle="tab">Action Panels</a></li>
+                            </ul>
+                            <div id="tableactionTabContent" class="tab-content">
+                                <div id="table-table-tab" class="tab-pane fade in active">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4 class="box-heading">Pagination</h4>
 
-            <div id="group-1" class="chat-group">
-                <strong>Favorites</strong><a href="#">
-                    <span class="user-status is-online"></span>
-                    <small>Verna Morton</small>
-                    <span class="badge badge-info">2</span>
-                </a><a href="#">
-                    <span class="user-status is-online"></span>
-                    <small>Delores Blake</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-busy"></span>
-                    <small>Nathaniel Morris</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-idle"></span>
-                    <small>Boyd Bridges</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-offline"></span>
-                    <small>Meredith Houston</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a>
-            </div>
-            <div id="group-2" class="chat-group">
-                <strong>Office</strong><a href="#">
-                    <span class="user-status is-busy"></span>
-                    <small>Ann Scott</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-offline"></span>
-                    <small>Sherman Stokes</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-offline"></span>
-                    <small>Florence Pierce</small>
-                    <span class="badge badge-info">1</span>
-                </a>
-            </div>
-            <div id="group-3" class="chat-group">
-                <strong>Friends</strong><a href="#">
-                    <span class="user-status is-online"></span>
-                    <small>Willard Mckenzie</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-busy"></span>
-                    <small>Jenny Frazier</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-offline"></span>
-                    <small>Chris Stewart</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a><a href="#">
-                    <span class="user-status is-offline"></span>
-                    <small>Olivia Green</small>
-                    <span class="badge badge-info is-hidden">0</span>
-                </a>
-            </div>
-        </div>
-        <div id="chat-box" style="top:400px">
-            <div class="chat-box-header">
-                <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><span class="user-status is-online"></span><span class="display-name">Willard Mckenzie</span>
-                <small>Online</small>
-            </div>
-            <div class="chat-content">
-                <ul class="chat-box-body">
-                    <li>
-                        <p><img src="images/user.jpg" class="avt" /><span class="user">John Doe</span><span class="time">09:33</span></p>
+                                            <div class="table-container">
+                                                <div class="row mbm">
+                                                    <div class="col-lg-6">
+                                                        <div class="pagination-panel">
+                                                            Page
+                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
+                                                            of 6 | View
+                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
+                                                                <option value="20" selected="selected">20</option>
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="150">150</option>
+                                                                <option value="-1">All</option>
+                                                            </select>&nbsp;
+                                                            records | Found total 58 records
+                                                        </div>
+                                                    </div>
 
-                        <p>Hi Swlabs, we have some comments for you.</p>
-                    </li>
-                    <li class="odd">
-                        <p><img src="images/user.jpg" class="avt" /><span class="user">Swlabs</span><span class="time">09:33</span></p>
 
-                        <p>Hi, we're listening you...</p>
-                    </li>
-                </ul>
-            </div>
-            <div class="chat-textarea"><input placeholder="Type your message" class="form-control" /></div>
-        </div>
-    </div>
-    <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
-    <div id="page-wrapper">
-        <!--BEGIN TITLE & BREADCRUMB PAGE-->
-        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-            <div class="page-header pull-left">
-                <div class="page-title">Company Groups</div>
-            </div>
-            <ol class="breadcrumb page-breadcrumb pull-right">
-                <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                <li><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                <li class="active">Action Tables</li>
-            </ol>
-            <div class="clearfix"></div>
-        </div>
-        <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-        <div class="page-content">
-            <div id="table-action" class="row">
-                <div class="col-lg-12">
-                    <ul id="tableactiondTab" class="nav nav-tabs">
-                        <li class="active"><a href="#table-table-tab" data-toggle="tab">Company Groups</a></li>
-                        <li><a href="#table-row-tab" data-toggle="tab">Action Rows</a></li>
-                        <li><a href="#table-panel-tab" data-toggle="tab">Action Panels</a></li>
-                    </ul>
-                    <div id="tableactionTabContent" class="tab-content">
-                        <div id="table-table-tab" class="tab-pane fade in active">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <h4 class="box-heading">Pagination</h4>
+                                                    <div class="actions">
+                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0">  Add New Company</button>
 
-                                    <div class="table-container">
-                                        <div class="row mbm">
-                                            <div class="col-lg-6">
-                                                <div class="pagination-panel">
-                                                    Page
-                                                    &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                    of 6 | View
-                                                    &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                        <option value="20" selected="selected">20</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                        <option value="150">150</option>
-                                                        <option value="-1">All</option>
-                                                    </select>&nbsp;
-                                                    records | Found total 58 records
+                                                    </div>
+
+
+                                                    <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Company</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td> Name:</td>
+                                                                            <td><input type="text" id="Name" ng-model="Group.Name"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> admin:</td>
+                                                                            <td><input type="text" id="admin" ng-model="Group.admin"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> adminId:</td>
+                                                                            <td><input type="text" id="adminId" ng-model="Group.adminId"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> code:</td>
+                                                                            <td><input type="text" id="code" ng-model="Group.code"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> descr:</td>
+                                                                            <td><input type="text" id="descr" ng-model="Group.descr"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>active:</td>
+                                                                            <td>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" ng-model="Group.active" />
+                                                                                </label>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
+                                                                    <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
+                                                                </div>
+                                                                <div class="modal-body" ng-model="currGroup">
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td> Name:</td>
+                                                                            <td><input type="text" id="Name" ng-model="currGroup.Name"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> admin:</td>
+                                                                            <td><input type="text" id="admin" ng-model="currGroup.admin"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> adminId:</td>
+                                                                            <td><input type="text" id="adminId" ng-model="currGroup.adminId"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> code:</td>
+                                                                            <td><input type="text" id="code" ng-model="currGroup.code"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td> descr:</td>
+                                                                            <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>active:</td>
+                                                                            <td>
+                                                                                <label class="checkbox">
+                                                                                    <input type="checkbox" ng-model="currGroup.active" />
+                                                                                </label>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                    <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-6 text-right">
+                                                        <div class="pagination-panel">
+                                                            <ul class="pagination pagination-sm man">
+                                                                <li><a href="#">&laquo;</a></li>
+                                                                <li><a href="#">1</a></li>
+                                                                <li><a href="#">2</a></li>
+                                                                <li><a href="#">3</a></li>
+                                                                <li><a href="#">4</a></li>
+                                                                <li><a href="#">5</a></li>
+                                                                <li><a href="#">&raquo;</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-green">View Demo</button>
-                                            </div>
-                                            <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header modal-header-primary">
-                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                            <h4 id="modal-header-primary-label" class="modal-title">Add New Company</h4>
+                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th>Id</th>
+                                                            <th>Name</th>
+                                                            <th>admin</th>
+                                                            <th>adminId</th>
+                                                            <th>code</th>
+                                                            <th>descr</th>
+                                                            <th>active</th>
+                                                            <th>Update</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat="group in Group" class="gradeA">
+                                                            {{5+7}}
+                                                            <td>{{group.Id}}</td>
+                                                            <td>{{group.Name}}</td>
+                                                            <td>{{group.admin}}</td>
+                                                            <td>{{group.adminId}}</td>
+                                                            <td>{{group.code}}</td>
+                                                            <td>{{group.descr}}</td>
+                                                            <td>{{group.active}}</td>
+                                                            <td>
+                                                                {{group.Update}}
+                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+
+
+
+
+
+
+
+                                                    </tbody>
+
+                                                </table>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="pagination-panel">
+                                                            Page
+                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
+                                                            of 6 | View
+                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
+                                                                <option value="20" selected="selected">20</option>
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="150">150</option>
+                                                                <option value="-1">All</option>
+                                                            </select>&nbsp;
+                                                            records | Found total 58 records
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <table>
-                                                                <tr>
-                                                                    <td> Name:</td>
-                                                                    <td><input type="text" id="Name" ng-model="Group.Name"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td> admin:</td>
-                                                                    <td><input type="text" id="Name" ng-model="Group.Name"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td> adminId:</td>
-                                                                    <td><input type="text" id="Name" ng-model="Group.Name"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td> code:</td>
-                                                                    <td><input type="text" id="Name" ng-model="Group.Name"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td> descr:</td>
-                                                                    <td><input type="text" id="Name" ng-model="Group.Name"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Active:</td>
-                                                                    <td>
-                                                                        <label class="checkbox">
-                                                                            <input type="checkbox" ng-model="GroupActive" />
-                                                                        </label>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                            <button type="button" class="btn btn-primary" ng-click="save(Groups);">Save changes</button>
+                                                    </div>
+                                                    <div class="col-lg-6 text-right">
+                                                        <div class="pagination-panel">
+                                                            <ul class="pagination pagination-sm man">
+                                                                <li><a href="#">&laquo;</a></li>
+                                                                <li><a href="#">1</a></li>
+                                                                <li><a href="#">2</a></li>
+                                                                <li><a href="#">3</a></li>
+                                                                <li><a href="#">4</a></li>
+                                                                <li><a href="#">5</a></li>
+                                                                <li><a href="#">&raquo;</a></li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-lg-6 text-right">
-                                                <div class="pagination-panel">
-                                                    <ul class="pagination pagination-sm man">
-                                                        <li><a href="#">&laquo;</a></li>
-                                                        <li><a href="#">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">4</a></li>
-                                                        <li><a href="#">5</a></li>
-                                                        <li><a href="#">&raquo;</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                            <thead>
-                                                <tr>
 
-                                                    <th>Id</th>
-                                                    <th>Name</th>
-                                                    <th>admin</th>
-                                                    <th>adminId</th>
-                                                    <th>code</th>
-                                                    <th>descr</th>
-                                                    <th>active</th>
-                                                    <th>Update</th>
-
-                                                </tr>
-                                            <tbody>
-
-                                                <tr ng-repeat="group in Group" class="gradeA">
-                                                    <td>{{group.Id}}</td>
-                                                    <td>{{group.Name}}</td>
-                                                    <td>{{group.admin}}</td>
-                                                    <td>{{group.adminId}}</td>
-                                                    <td>{{group.code}}</td>
-                                                    <td>{{group.descr}}</td>
-                                                    <td>{{group.active}}</td>
-                                                    <td>
-                                                        {{group.Update}}
-                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                            Edit
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-
-                                        </table>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="pagination-panel">
-                                                    Page
-                                                    &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                    of 6 | View
-                                                    &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                        <option value="20" selected="selected">20</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                        <option value="150">150</option>
-                                                        <option value="-1">All</option>
-                                                    </select>&nbsp;
-                                                    records | Found total 58 records
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 text-right">
-                                                <div class="pagination-panel">
-                                                    <ul class="pagination pagination-sm man">
-                                                        <li><a href="#">&laquo;</a></li>
-                                                        <li><a href="#">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">4</a></li>
-                                                        <li><a href="#">5</a></li>
-                                                        <li><a href="#">&raquo;</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                    <hr class="mtxl mbxl" />
-                                    <h4 class="box-heading">Search Filter</h4>
+                                </div>
 
-                                    <div class="table-container">
-                                        <div class="row mbl">
-                                            <div class="col-lg-6">
-                                                <div class="input-group input-group-sm mbs">
-                                                    <span class="input-group-btn">
-                                                        <button type="button" data-toggle="dropdown" class="btn btn-danger dropdown-toggle">
-                                                            Filter
-                                                            &nbsp;<span class="caret"></span>
-                                                        </button><ul class="dropdown-menu">
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="fa fa-tint"></i>&nbsp;
-                                                                    Newest
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="fa fa-star"></i>&nbsp;
-                                                                    Rating
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="fa fa-money"></i>&nbsp;
-                                                                    Price
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <i class="fa fa-user"></i>&nbsp;
-                                                                    Sales
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </span><input type="text" placeholder="Enter here..." class="form-control" /><span class="input-group-btn"><button type="button" data-toggle="dropdown" class="btn btn-success dropdown-toggle">Search</button></span>
+                                <div id="table-panel-tab" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="portlet portlet-white">
+                                                <div class="portlet-header pam mbn">
+                                                    <div class="caption">Customer Listing</div>
+                                                    <div class="actions">
+                                                        <a href="#" class="btn btn-info btn-sm">
+                                                            <i class="fa fa-plus"></i>&nbsp;
+                                                            New Customer
+                                                        </a>&nbsp;
+                                                        <div class="btn-group">
+                                                            <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
+                                                                <i class="fa fa-wrench"></i>&nbsp;
+                                                                Tools
+                                                            </a>
+                                                            <ul class="dropdown-menu pull-right">
+                                                                <li><a href="#">Export to Excel</a></li>
+                                                                <li><a href="#">Export to CSV</a></li>
+                                                                <li><a href="#">Export to XML</a></li>
+                                                                <li class="divider"></li>
+                                                                <li><a href="#">Print Invoices</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body pan">
+                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
+                                                        <thead>
+                                                            <tr>
+                                                                <th width="3%"><input type="checkbox" class="checkall" /></th>
+                                                                <th width="9%">Record #</th>
+                                                                <th>Username</th>
+                                                                <th width="10%">Country</th>
+                                                                <th width="10%">Gender</th>
+                                                                <th width="7%">Order</th>
+                                                                <th width="12%">Date</th>
+                                                                <th width="10%">Price</th>
+                                                                <th width="9%">Status</th>
+                                                                <th width="12%">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="checkbox" /></td>
+                                                                <td>1</td>
+                                                                <td>Henry</td>
+                                                                <td>United States</td>
+                                                                <td>Male</td>
+                                                                <td>32</td>
+                                                                <td>20-05-2014</td>
+                                                                <td>$240.50</td>
+                                                                <td><span class="label label-sm label-success">Approved</span></td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-default btn-xs">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="checkbox" /></td>
+                                                                <td>2</td>
+                                                                <td>John</td>
+                                                                <td>United States</td>
+                                                                <td>Female</td>
+                                                                <td>45</td>
+                                                                <td>20-05-2014</td>
+                                                                <td>$240.50</td>
+                                                                <td><span class="label label-sm label-info">Pending</span></td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-default btn-xs">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="checkbox" /></td>
+                                                                <td>3</td>
+                                                                <td>Larry</td>
+                                                                <td>United States</td>
+                                                                <td>Female</td>
+                                                                <td>40</td>
+                                                                <td>20-05-2014</td>
+                                                                <td>$240.50</td>
+                                                                <td><span class="label label-sm label-warning">Suspended</span></td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-default btn-xs">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="checkbox" /></td>
+                                                                <td>4</td>
+                                                                <td>Lahm</td>
+                                                                <td>United States</td>
+                                                                <td>Female</td>
+                                                                <td>15</td>
+                                                                <td>20-05-2014</td>
+                                                                <td>$240.50</td>
+                                                                <td><span class="label label-sm label-danger">Blocked</span></td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-default btn-xs">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><input type="checkbox" /></td>
+                                                                <td>5</td>
+                                                                <td>Henry</td>
+                                                                <td>United States</td>
+                                                                <td>Male</td>
+                                                                <td>32</td>
+                                                                <td>20-05-2014</td>
+                                                                <td>$240.50</td>
+                                                                <td><span class="label label-sm label-success">Approved</span></td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-default btn-xs">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="tb-group-actions pull-right">
-                                                    <span>10 records selected:</span><select class="table-group-action-input form-control input-inline input-small input-sm mlm">
-                                                        <option value="">Select...</option>
-                                                        <option value="Cancel">Cancel</option>
-                                                        <option value="Cancel">Hold</option>
-                                                        <option value="Cancel">On Hold</option>
-                                                        <option value="Close">Close</option>
-                                                    </select>&nbsp;
-                                                    <button class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-check"></i>&nbsp;
-                                                        Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th width="3%"><input type="checkbox" class="checkall" /></th>
-                                                    <th width="9%">Record #</th>
-                                                    <th>Username</th>
-                                                    <th width="10%">Country</th>
-                                                    <th width="10%">Gender</th>
-                                                    <th width="7%">Order</th>
-                                                    <th width="12%">Date</th>
-                                                    <th width="10%">Price</th>
-                                                    <th width="9%">Status</th>
-                                                    <th width="12%">Actions</th>
-                                                </tr>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td>1</td>
-                                                    <td>Henry</td>
-                                                    <td>United States</td>
-                                                    <td>Male</td>
-                                                    <td>32</td>
-                                                    <td>20-05-2014</td>
-                                                    <td>$240.50</td>
-                                                    <td><span class="label label-sm label-success">Approved</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-default btn-xs">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                            Edit
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td>2</td>
-                                                    <td>John</td>
-                                                    <td>United States</td>
-                                                    <td>Female</td>
-                                                    <td>45</td>
-                                                    <td>20-05-2014</td>
-                                                    <td>$240.50</td>
-                                                    <td><span class="label label-sm label-info">Pending</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-default btn-xs">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                            Edit
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td>3</td>
-                                                    <td>Larry</td>
-                                                    <td>United States</td>
-                                                    <td>Female</td>
-                                                    <td>40</td>
-                                                    <td>20-05-2014</td>
-                                                    <td>$240.50</td>
-                                                    <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-default btn-xs">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                            Edit
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td>4</td>
-                                                    <td>Lahm</td>
-                                                    <td>United States</td>
-                                                    <td>Female</td>
-                                                    <td>15</td>
-                                                    <td>20-05-2014</td>
-                                                    <td>$240.50</td>
-                                                    <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-default btn-xs">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                            Edit
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input type="checkbox" /></td>
-                                                    <td>5</td>
-                                                    <td>Henry</td>
-                                                    <td>United States</td>
-                                                    <td>Male</td>
-                                                    <td>32</td>
-                                                    <td>20-05-2014</td>
-                                                    <td>$240.50</td>
-                                                    <td><span class="label label-sm label-success">Approved</span></td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-default btn-xs">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                            Edit
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="table-row-tab" class="tab-pane fade">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                        <thead>
-                                            <tr>
-                                                <th width="3%"><input type="checkbox" class="checkall" /></th>
-                                                <th width="7%">Record #</th>
-                                                <th>Username</th>
-                                                <th width="10%">Country</th>
-                                                <th width="10%">Gender</th>
-                                                <th width="7%">Order</th>
-                                                <th width="10%">Date</th>
-                                                <th width="15%">Skills</th>
-                                                <th width="7%">Status</th>
-                                                <th width="12%">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="checkbox" /></td>
-                                                <td>1</td>
-                                                <td>Henry</td>
-                                                <td>United States</td>
-                                                <td>
-                                                    <select class="form-control">
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </td>
-                                                <td><input type="text" value="32" class="spinner input-mini" /></td>
-                                                <td>20-05-2014</td>
-                                                <td>
-                                                    <div data-hover="tooltip" title="75%" class="progress progress-xs mbs">
-                                                        <div role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;" class="progress-bar progress-bar-green"><span class="sr-only">75% Complete</span></div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="label label-sm label-success">Approved</span></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-default btn-xs">
-                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                        Edit
-                                                    </button>
-                                                    &nbsp;
-                                                    <button type="button" class="btn btn-danger btn-xs">
-                                                        <i class="fa fa-trash-o"></i>&nbsp;
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" /></td>
-                                                <td>2</td>
-                                                <td>John</td>
-                                                <td>United States</td>
-                                                <td>
-                                                    <select class="form-control">
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </td>
-                                                <td><input type="text" value="45" class="spinner input-mini" /></td>
-                                                <td>20-05-2014</td>
-                                                <td>
-                                                    <div data-hover="tooltip" title="40%" class="progress progress-xs mbs">
-                                                        <div role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;" class="progress-bar progress-bar-red six-sec-ease-in-out"><span class="sr-only">40% Complete</span></div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="label label-sm label-info">Pending</span></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-default btn-xs">
-                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                        Edit
-                                                    </button>
-                                                    &nbsp;
-                                                    <button type="button" class="btn btn-danger btn-xs">
-                                                        <i class="fa fa-trash-o"></i>&nbsp;
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" /></td>
-                                                <td>3</td>
-                                                <td>Larry</td>
-                                                <td>United States</td>
-                                                <td>
-                                                    <select class="form-control">
-                                                        <option>Male</option>
-                                                        <option selected="selected">Female</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </td>
-                                                <td><input type="text" value="40" class="spinner input-mini" /></td>
-                                                <td>20-05-2014</td>
-                                                <td>
-                                                    <div data-hover="tooltip" title="80%" class="progress progress-xs mbs">
-                                                        <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;" class="progress-bar progress-bar-yellow"><span class="sr-only">80% Complete</span></div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-default btn-xs">
-                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                        Edit
-                                                    </button>
-                                                    &nbsp;
-                                                    <button type="button" class="btn btn-danger btn-xs">
-                                                        <i class="fa fa-trash-o"></i>&nbsp;
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" /></td>
-                                                <td>4</td>
-                                                <td>Lahm</td>
-                                                <td>United States</td>
-                                                <td>
-                                                    <select class="form-control">
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </td>
-                                                <td><input type="text" value="15" class="spinner input-mini" /></td>
-                                                <td>20-05-2014</td>
-                                                <td>
-                                                    <div data-hover="tooltip" title="60%" class="progress progress-xs mbs">
-                                                        <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" class="progress-bar progress-bar-violet"><span class="sr-only">60% Complete</span></div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                <td>
-                                                    <button type="button" class="btn btn-default btn-xs">
-                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                        Edit
-                                                    </button>
-                                                    &nbsp;
-                                                    <button type="button" class="btn btn-danger btn-xs">
-                                                        <i class="fa fa-trash-o"></i>&nbsp;
-                                                        Delete
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="table-panel-tab" class="tab-pane fade">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="portlet portlet-white">
-                                        <div class="portlet-header pam mbn">
-                                            <div class="caption">Customer Listing</div>
-                                            <div class="actions">
-                                                <a href="#" class="btn btn-info btn-sm">
-                                                    <i class="fa fa-plus"></i>&nbsp;
-                                                    New Customer
-                                                </a>&nbsp;
-                                                <div class="btn-group">
-                                                    <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
-                                                        <i class="fa fa-wrench"></i>&nbsp;
-                                                        Tools
-                                                    </a>
-                                                    <ul class="dropdown-menu pull-right">
-                                                        <li><a href="#">Export to Excel</a></li>
-                                                        <li><a href="#">Export to CSV</a></li>
-                                                        <li><a href="#">Export to XML</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#">Print Invoices</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portlet-body pan">
-                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
-                                                <thead>
-                                                    <tr>
-                                                        <th width="3%"><input type="checkbox" class="checkall" /></th>
-                                                        <th width="9%">Record #</th>
-                                                        <th>Username</th>
-                                                        <th width="10%">Country</th>
-                                                        <th width="10%">Gender</th>
-                                                        <th width="7%">Order</th>
-                                                        <th width="12%">Date</th>
-                                                        <th width="10%">Price</th>
-                                                        <th width="9%">Status</th>
-                                                        <th width="12%">Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><input type="checkbox" /></td>
-                                                        <td>1</td>
-                                                        <td>Henry</td>
-                                                        <td>United States</td>
-                                                        <td>Male</td>
-                                                        <td>32</td>
-                                                        <td>20-05-2014</td>
-                                                        <td>$240.50</td>
-                                                        <td><span class="label label-sm label-success">Approved</span></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-default btn-xs">
-                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                Edit
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" /></td>
-                                                        <td>2</td>
-                                                        <td>John</td>
-                                                        <td>United States</td>
-                                                        <td>Female</td>
-                                                        <td>45</td>
-                                                        <td>20-05-2014</td>
-                                                        <td>$240.50</td>
-                                                        <td><span class="label label-sm label-info">Pending</span></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-default btn-xs">
-                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                Edit
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" /></td>
-                                                        <td>3</td>
-                                                        <td>Larry</td>
-                                                        <td>United States</td>
-                                                        <td>Female</td>
-                                                        <td>40</td>
-                                                        <td>20-05-2014</td>
-                                                        <td>$240.50</td>
-                                                        <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-default btn-xs">
-                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                Edit
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" /></td>
-                                                        <td>4</td>
-                                                        <td>Lahm</td>
-                                                        <td>United States</td>
-                                                        <td>Female</td>
-                                                        <td>15</td>
-                                                        <td>20-05-2014</td>
-                                                        <td>$240.50</td>
-                                                        <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-default btn-xs">
-                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                Edit
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" /></td>
-                                                        <td>5</td>
-                                                        <td>Henry</td>
-                                                        <td>United States</td>
-                                                        <td>Male</td>
-                                                        <td>32</td>
-                                                        <td>20-05-2014</td>
-                                                        <td>$240.50</td>
-                                                        <td><span class="label label-sm label-success">Approved</span></td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-default btn-xs">
-                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                Edit
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -984,16 +743,14 @@
                         </div>
                     </div>
                 </div>
+                <!--END CONTENT--><!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
+                </div>
+                <!--END FOOTER-->
             </div>
+            <!--END PAGE WRAPPER-->
         </div>
-        <!--END CONTENT--><!--BEGIN FOOTER-->
-        <div id="footer">
-            <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
-        </div>
-        <!--END FOOTER-->
-    </div>
-    <!--END PAGE WRAPPER-->
-</div>
     </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
@@ -1017,6 +774,7 @@
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
+
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -1034,5 +792,7 @@
 
 
     </script>
+    <script src="js/angular.js"></script>
+    <script src="js/CompanyGroups.js"></script>
 </body>
 </html>
