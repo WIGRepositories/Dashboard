@@ -447,20 +447,9 @@
                                                                         <td> <input type="text" id="Desc" ng-model="Types.Desc" style="margin:5px;" /></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td style="margin:5px;">
-
-                                                                            TypeGroup :
-
-                                                                        </td>
+                                                                        <td> TypeGroup:
                                                                         <td>
-                                                                            <select ng-model="Types" ng-change="changedValue(Types)"
-                                                                                    data-ng-options="Types as Types.name for Types in Types">
-                                                                                <option value="">Select Account</option>
-                                                                            </select>
-                                                                            {{itemList}}
-
-
-                                                                        </td>
+                                                                        <td> <input type="text" id="TypeGroup" ng-model="Types.TypeGroup" style="margin:5px;" /></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td style="margin:5px;">Active:</td>
@@ -547,7 +536,7 @@
                                                          {{5+9}}   <td>{{T.Id}}</td>
                                                             <td>{{T.Name}}</td>
                                                             <td>{{T.Desc}}</td>
-                                                            <td>{{T.TypeGroupId}}</td>
+                                                            <td>{{T.TypeGroup}}</td>
                                                             <td>{{T.Active}}</td>
 
 

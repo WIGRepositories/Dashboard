@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
     public class Users1Controller : ApiController
     {
         [HttpGet]
-        public DataTable Users()//Main Method
+        public DataTable Users1()//Main Method
         {
             DataTable Tbl = new DataTable();
             //connect to database
@@ -34,7 +34,7 @@ namespace WebApplication1.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable Users1(Users12 U)
+        public DataTable Users2(Users12 U)
         {
             DataTable Tbl = new DataTable();
             try

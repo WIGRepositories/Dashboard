@@ -59,7 +59,11 @@ namespace DAshboard.Controllers
             Gid.Value = b.Name;
             cmd.Parameters.Add(Gid);
 
-            
+            SqlParameter Gim = new SqlParameter();
+            Gim.ParameterName = "@Id";
+            Gim.SqlDbType = SqlDbType.Int;
+            Gim.Value = Convert.ToString(b.Id);
+            cmd.Parameters.Add(Gim);
 
             SqlParameter pid = new SqlParameter();
             pid.ParameterName = "@Desc ";
@@ -68,7 +72,7 @@ namespace DAshboard.Controllers
             cmd.Parameters.Add(pid);
             SqlParameter llid = new SqlParameter();
             llid.ParameterName = "@Active";
-            llid.SqlDbType = SqlDbType.VarChar;
+            llid.SqlDbType = SqlDbType.Int;
             llid.Value = Convert.ToBoolean(b.Active) ? "1" : "0";
             //llid.Value = b.Active;
             cmd.Parameters.Add(llid);

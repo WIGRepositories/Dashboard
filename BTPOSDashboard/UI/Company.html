@@ -26,7 +26,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-init="GetCompanys();" ng-model="Groups">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -189,7 +189,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="index.html">
                                 <i class="fa fa-tachometer fa-fw">
                                     <div class="icon-bg bg-orange"></div>
@@ -197,14 +197,14 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
                                 </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                <li class="active"><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                 <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                             </ul>
                         </li>
@@ -408,7 +408,7 @@
 
 
                                                     <div class="actions">
-                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0">  Add New Company</button>
+                                                        <a href="newcompany.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0">  Add New Company</button></a>
 
                                                     </div>
 
