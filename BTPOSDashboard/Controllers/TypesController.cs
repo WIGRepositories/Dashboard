@@ -13,7 +13,8 @@ namespace DAshboard.Controllers
     public class TypesController : ApiController
     {
         [HttpGet]
-        public DataTable users()
+        public DataTable Type1()
+        
         {
             DataTable Tbl = new DataTable();
 
@@ -36,7 +37,7 @@ namespace DAshboard.Controllers
             return Tbl;
         }
           [HttpPost]
-          public DataTable pos(Types b)
+          public DataTable Type2(Types b)
         {
             DataTable Tbl = new DataTable();
 
@@ -48,7 +49,7 @@ namespace DAshboard.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_InsTypes";
+            cmd.CommandText = "InsUpdDelTypes";
             cmd.Connection = conn;
             conn.Open();
             SqlParameter Aid = new SqlParameter();
@@ -65,22 +66,20 @@ namespace DAshboard.Controllers
             cmd.Parameters.Add(Gid);
 
             SqlParameter lid = new SqlParameter();
-            lid.ParameterName = "@TypeGroupId";
-            lid.SqlDbType = SqlDbType.Int;
-            lid.Value = Convert.ToString(b.TypeGroupId);
-            lid.Value = b.TypeGroupId;
+            lid.ParameterName = "@TypeGroup";
+            lid.SqlDbType = SqlDbType.VarChar;
+            lid.Value = b.TypeGroup;
             cmd.Parameters.Add(lid);
            
 
             SqlParameter pid = new SqlParameter();
-            pid.ParameterName = "@Desc ";
+            pid.ParameterName = "@Desc";
             pid.SqlDbType = SqlDbType.VarChar;
             pid.Value =b.Desc;
             cmd.Parameters.Add(pid);
             SqlParameter llid = new SqlParameter();
             llid.ParameterName = "@Active";
-            llid.SqlDbType = SqlDbType.Int;
-            llid.Value = Convert.ToString(b.Active);
+            llid.SqlDbType = SqlDbType.VarChar;
             llid.Value = b.Active;
             cmd.Parameters.Add(llid);
            

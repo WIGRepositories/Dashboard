@@ -2,10 +2,13 @@
 // JavaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/GetBTPOSDetails').then(function (response, req) {
-        $scope.Group = response.data;
 
-    });
+    $scope.GetCompanys = function () {
+        $http.get('http://localhost:8020/api/GetCompanyGroups').then(function (response) {
+            $scope.Group = response.data;
+
+        });
+    }
     $scope.save = function (Group) {
         
         var Group = {
@@ -23,7 +26,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CompanyGroups/CompanyGroups2',
+            url: 'http://localhost:8020/api/CompanyGroups/CompanyGroups2',
             data: Group
         }
         $http(req).then(function (response) { });

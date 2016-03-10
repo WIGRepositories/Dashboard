@@ -1,8 +1,8 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/GetBTPOSDetails').then(function (response, req) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $http.get('http://localhost:8020/api/getbtposdetails').then(function (response, req) {
         $scope.Group = response.data;
 
     });
@@ -24,7 +24,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/BTPOSDetails/BTPOSDetails2',
+            url: 'http://localhost:8020/api/BTPOSDetails/BTPOSDetails2',
             data: Group
         }
         $http(req).then(function (response) { });
@@ -41,6 +41,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.clearGroup = function () {
         $scope.currGroup = null;
     }
+
+    $scope.GotToBTPOSDetails(btposid)
+    {
+        $localStorage.btposid = btposid;
+        $window.location.href = 'AddNewBTPOSDetails.html';
+    }
   
-    
+    $scope.GetBTPOSDetails()
+    {
+        var btposid = $localStorage.btposid;
+
+        $http.get('http://localhost:8020/api/getbtposdetails?id=' + btposid).then(function (response, req) {
+            $scope.btposdetails = response.data;
+
+        });
+    }
 });

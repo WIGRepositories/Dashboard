@@ -33,7 +33,7 @@
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
 
 </head>
-<body ng-model="Types">
+<body ng-model="roles">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -434,7 +434,7 @@
                                                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                 <h4 id="modal-header-primary-label" class="modal-title">ADD NEW TYPE</h4>
                                                             </div>
-                                                            <div class="modal-body" ng-model="T">
+                                                            <div class="modal-body" ng-model="roles">
                                                                 <table>
                                                                     <tr>
                                                                         <td> Name:
@@ -448,12 +448,9 @@
                                                                     </tr>
 
                                                                     <tr>
-                                                                        <td>Active:</td>
+                                                                        <td> Active:
                                                                         <td>
-                                                                            <label class="checkbox">
-                                                                                <input type="checkbox" ng-checked="Types.Active" ng-model="roles.Active" />
-                                                                            </label>
-                                                                        </td>
+                                                                        <td> <input type="text" id="Active" ng-model="roles.Active" /></td>
                                                                     </tr>
                                                                 </table>
                                                             </div>

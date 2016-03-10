@@ -26,7 +26,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-init="GetCompanys();" ng-model="Groups">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -189,7 +189,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="index.html">
                                 <i class="fa fa-tachometer fa-fw">
                                     <div class="icon-bg bg-orange"></div>
@@ -197,14 +197,14 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
                                 </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                <li class="active"><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                 <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                             </ul>
                         </li>
@@ -408,59 +408,11 @@
 
 
                                                     <div class="actions">
-                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0">  Add New Company</button>
+                                                        <a href="AddNewCompany.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0">  Add New Company</button></a>
 
                                                     </div>
-
-
-                                                    <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Company</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td> Name:</td>
-                                                                            <td><input type="text" id="Name" ng-model="Group.Name"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> admin:</td>
-                                                                            <td><input type="text" id="admin" ng-model="Group.admin"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> adminId:</td>
-                                                                            <td><input type="text" id="adminId" ng-model="Group.adminId"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> code:</td>
-                                                                            <td><input type="text" id="code" ng-model="Group.code"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> descr:</td>
-                                                                            <td><input type="text" id="descr" ng-model="Group.descr"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>active:</td>
-                                                                            <td>
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" ng-model="Group.active" />
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
+                                                                                                    
+                                                    
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">

@@ -189,7 +189,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="index.html">
                                 <i class="fa fa-tachometer fa-fw">
                                     <div class="icon-bg bg-orange"></div>
@@ -215,7 +215,7 @@
                                 </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                <li class="active"><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -225,8 +225,8 @@
                                 </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="ui-generals.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                                <li><a href="ui-panels.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                                <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
+                                <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
                                 <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
                             </ul>
                         </li>
@@ -407,70 +407,11 @@
 
                                                     </div>
 
-
-
-
-
-
                                                     <div class="actions">
-                                                        <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0"> Add New Company</button>
+                                                        <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0"> Add New Company</button></a>
 
                                                     </div>
-
-
-
-                                                    <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Company</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td> GroupName:</td>
-                                                                            <td><input type="text" id="GroupName" ng-model="Group.GroupName"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> GroupId:</td>
-                                                                            <td><input type="text" id="admin" ng-model="Group.GroupId"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> IMEI:</td>
-                                                                            <td><input type="text" id="IMEI" ng-model="Group.IMEI"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> Location:</td>
-                                                                            <td><input type="text" id="Location" ng-model="Group.Location"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> POSID:</td>
-                                                                            <td><input type="text" id="POSID" ng-model="Group.POSID"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> StatusId:</td>
-                                                                            <td><input type="text" id="StatusId" ng-model="Group.StatusId"></td>
-                                                                        </tr>
-
-
-                                                                        <tr>
-                                                                            <td> Status:</td>
-                                                                            <td><input type="text" id="Status" ng-model="Group.Status"></td>
-                                                                        </tr>
-
-
-                                                                    </table>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
+                                                    
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -500,7 +441,10 @@
                                                                             <td> descr:</td>
                                                                             <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
                                                                         </tr>
-
+                                                                        <tr>
+                                                                            <td> descr:</td>
+                                                                            <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
+                                                                        </tr>
                                                                     </table>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -538,6 +482,7 @@
                                                             <th>POSID</th>
                                                             <th>StatusId</th>
                                                             <th>Status</th>
+                                                            
 
                                                         </tr>
                                                     </thead>
@@ -548,7 +493,7 @@
                                                             <td>{{group.Id}}</td>
                                                             <td>{{group.GroupName}}</td>
                                                             <td>{{group.GroupId}}</td>
-                                                            <td>{{group.IMEI}}</td>
+                                                            <td><a href="" ng-click="GotToBTPOSDetails(group.POSID);">{{group.IMEI}}</a> </td>
                                                             <td>{{group.Location}}</td>
                                                             <td>{{group.POSID}}</td>
                                                             <td>{{group.StatusId}}</td>
@@ -607,135 +552,47 @@
                                 <div id="table-panel-tab" class="tab-pane fade">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div class="portlet portlet-white">
-                                                <div class="portlet-header pam mbn">
-                                                    <div class="caption">Customer Listing</div>
-                                                    <div class="actions">
-                                                        <a href="#" class="btn btn-info btn-sm">
-                                                            <i class="fa fa-plus"></i>&nbsp;
-                                                            New Customer
-                                                        </a>&nbsp;
-                                                        <div class="btn-group">
-                                                            <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
-                                                                <i class="fa fa-wrench"></i>&nbsp;
-                                                                Tools
-                                                            </a>
-                                                            <ul class="dropdown-menu pull-right">
-                                                                <li><a href="#">Export to Excel</a></li>
-                                                                <li><a href="#">Export to CSV</a></li>
-                                                                <li><a href="#">Export to XML</a></li>
-                                                                <li class="divider"></li>
-                                                                <li><a href="#">Print Invoices</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="portlet-body pan">
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="3%"><input type="checkbox" class="checkall" /></th>
-                                                                <th width="9%">Record #</th>
-                                                                <th>Username</th>
-                                                                <th width="10%">Country</th>
-                                                                <th width="10%">Gender</th>
-                                                                <th width="7%">Order</th>
-                                                                <th width="12%">Date</th>
-                                                                <th width="10%">Price</th>
-                                                                <th width="9%">Status</th>
-                                                                <th width="12%">Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>1</td>
-                                                                <td>Henry</td>
-                                                                <td>United States</td>
-                                                                <td>Male</td>
-                                                                <td>32</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-success">Approved</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>2</td>
-                                                                <td>John</td>
-                                                                <td>United States</td>
-                                                                <td>Female</td>
-                                                                <td>45</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-info">Pending</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>3</td>
-                                                                <td>Larry</td>
-                                                                <td>United States</td>
-                                                                <td>Female</td>
-                                                                <td>40</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>4</td>
-                                                                <td>Lahm</td>
-                                                                <td>United States</td>
-                                                                <td>Female</td>
-                                                                <td>15</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><input type="checkbox" /></td>
-                                                                <td>5</td>
-                                                                <td>Henry</td>
-                                                                <td>United States</td>
-                                                                <td>Male</td>
-                                                                <td>32</td>
-                                                                <td>20-05-2014</td>
-                                                                <td>$240.50</td>
-                                                                <td><span class="label label-sm label-success">Approved</span></td>
-                                                                <td>
-                                                                    <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                            <div class="modal-body">
+                                                <table>
+                                                    <tr>
+                                                        <td> GroupName:</td>
+                                                        <td><input type="text" id="GroupName" ng-model="Group.GroupName"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> GroupId:</td>
+                                                        <td><input type="text" id="admin" ng-model="Group.GroupId"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> IMEI:</td>
+                                                        <td><input type="text" id="IMEI" ng-model="Group.IMEI"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> Location:</td>
+                                                        <td><input type="text" id="Location" ng-model="Group.Location"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> POSID:</td>
+                                                        <td><input type="text" id="POSID" ng-model="Group.POSID"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td> StatusId:</td>
+                                                        <td><input type="text" id="StatusId" ng-model="Group.StatusId"></td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td> Status:</td>
+                                                        <td><input type="text" id="Status" ng-model="Group.Status"></td>
+                                                    </tr>
+
+
+                                                </table>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
+                                                <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -794,5 +651,6 @@
     </script>
     <script src="js/angular.js"></script>
     <script src="js/BTPOSDetails.js"></script>
+    <script src="js/ngStorage.js"></script>
 </body>
 </html>
