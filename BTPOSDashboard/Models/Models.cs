@@ -295,6 +295,8 @@ namespace DAshboard.Models
         public string Name { set; get; }
         public string Active { set; get; }
         public int TypeGroupId { set; get; }
+
+        public object TypeGroup { get; set; }
     }
 public class TypeGroups
 {

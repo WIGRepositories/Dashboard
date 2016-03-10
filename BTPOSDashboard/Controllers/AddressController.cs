@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Configuration;
 
 
-namespace WebApplication1.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class AddressController : ApiController
     {
