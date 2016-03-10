@@ -185,7 +185,6 @@
     <Content Include="UI\grid-pagination-only.html" />
     <Content Include="UI\grid-range-slider.html" />
     <Content Include="UI\grid-without-item-per-page.html" />
-    <Content Include="UI\HtmlPage1.html" />
     <Content Include="UI\images\bg\1.jpg" />
     <Content Include="UI\images\bg\2.jpg" />
     <Content Include="UI\images\bg\3.jpg" />
