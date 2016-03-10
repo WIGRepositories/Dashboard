@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    <title>Action Tables | Tables</title>
+    <title>Form Layouts | Forms</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,8 +25,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-
-<body ng-model="Groups">
+<body ng-init="GetBTPOSDetails();" ng-model="btposdetails">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -197,25 +196,25 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
                                 </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                <li class="active"><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                 <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-desktop fa-fw">
                                     <div class="icon-bg bg-pink"></div>
                                 </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li class="active"><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -364,242 +363,96 @@
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Action Tables</div>
+                        <div class="page-title">Form Layouts</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Action Tables</li>
+                        <li><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Form Layouts</li>
                     </ol>
                     <div class="clearfix"></div>
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                 <div class="page-content">
-                    <div id="table-action" class="row">
+                    <div id="form-layouts" class="row">
                         <div class="col-lg-12">
-                            <ul id="tableactiondTab" class="nav nav-tabs">
-                                <li class="active"><a href="#table-table-tab" data-toggle="tab">Action Tables</a></li>
 
-                                <li><a href="#table-panel-tab" data-toggle="tab">Action Panels</a></li>
-                            </ul>
-                            <div id="tableactionTabContent" class="tab-content">
-                                <div id="table-table-tab" class="tab-pane fade in active">
+                            <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
+                                <div id="tab-form-actions" class="tab-pane fade active in">
                                     <div class="row">
-                                        <div class="col-lg-12">
-                                            <h4 class="box-heading">Pagination</h4>
 
-                                            <div class="table-container">
-                                                <div class="row mbm">
-                                                    <div class="col-lg-6">
-                                                        <div class="pagination-panel">
-                                                            Page
-                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                            of 6 | View
-                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                <option value="20" selected="selected">20</option>
-                                                                <option value="50">50</option>
-                                                                <option value="100">100</option>
-                                                                <option value="150">150</option>
-                                                                <option value="-1">All</option>
-                                                            </select>&nbsp;
-                                                            records | Found total 58 records
+                                        <div class="col-lg-6">
+                                            <div class="panel panel-violet">
+                                                <div class="panel-heading">Add New BTPOSDetails</div>
+                                                <div class="panel-body pan">
+                                                    <form action="#" class="form-horizontal">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                {{5+7}}
+                                                                <label for="GroupName" class="col-md-3 control-label"> Group Name <span class='require'>*</span></label>
+
+                                                                <div class="col-md-4"><input id="GroupName" type="text" ng-model="Group.GroupName" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="GroupId" class="col-md-3 control-label">Group Id <span class='require'>*</span></label>
+
+                                                                <div class="col-md-4"><input id="GroupId" type="text" ng-model="Group.GroupId" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="IMEI" class="col-md-3 control-label">IMEI <span class='require'>*</span></label>
+
+                                                                <div class="col-md-4"><input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="Location" class="col-md-3 control-label">Location <span class='require'>*</span></label>
+
+                                                                <div class="col-md-4"><input id="Location" type="text" ng-model="Group.Location" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="POSID" class="col-md-3 control-label">POSID <span class='require'>*</span></label>
+
+                                                                <div class="col-md-4"><input id="POSID" type="text" ng-model="Group.POSID" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="StatusId" class="col-md-3 control-label">Status Id <span class='require'>*</span></label>
+
+                                                                <div class="col-md-4"><input id="StatusId" type="text" ng-model="Group.StatusId" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="Status" class="col-md-3 control-label">Status <span class='require'>*</span></label>
+
+                                                                <div class="col-md-4"><input id="Status" type="text" ng-model="Group.Status" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>
+
+
                                                         </div>
+                                                        <div class="form-actions">
+                                                            <div class="col-md-offset-3 col-md-9">
+                                                                <button type="submit" class="btn btn-primary" ng-click="save(Group);">Save</button>
 
-                                                    </div>
-
-                                                    <div class="actions">
-                                                        <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0"> Add New Company</button></a>
-
-                                                    </div>
-                                                    
-                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-model="currGroup">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td> Name:</td>
-                                                                            <td><input type="text" id="Name" ng-model="currGroup.Name"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> admin:</td>
-                                                                            <td><input type="text" id="admin" ng-model="currGroup.admin"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> adminId:</td>
-                                                                            <td><input type="text" id="adminId" ng-model="currGroup.adminId"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> code:</td>
-                                                                            <td><input type="text" id="code" ng-model="currGroup.code"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> descr:</td>
-                                                                            <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> descr:</td>
-                                                                            <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
-                                                                </div>
+                                                                <button type="button" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
                                                             </div>
                                                         </div>
-                                                    </div>
-
-
-                                                    <div class="col-lg-6 text-right">
-                                                        <div class="pagination-panel">
-                                                            <ul class="pagination pagination-sm man">
-                                                                <li><a href="#">&laquo;</a></li>
-                                                                <li><a href="#">1</a></li>
-                                                                <li><a href="#">2</a></li>
-                                                                <li><a href="#">3</a></li>
-                                                                <li><a href="#">4</a></li>
-                                                                <li><a href="#">5</a></li>
-                                                                <li><a href="#">&raquo;</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                    <thead>
-                                                        <tr>
-
-                                                            <th>Id</th>
-                                                            <th>GroupName</th>
-                                                            <th>GroupId</th>
-                                                            <th>IMEI</th>
-                                                            <th>Location</th>
-                                                            <th>POSID</th>
-                                                            <th>StatusId</th>
-                                                            <th>Status</th>
-                                                            
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        <tr ng-repeat="group in Group" class="gradeA">
-                                                            {{5+5}}
-                                                            <td>{{group.Id}}</td>
-                                                            <td>{{group.GroupName}}</td>
-                                                            <td>{{group.GroupId}}</td>
-                                                            <td><a href="" ng-click="GotToBTPOSDetails(group.POSID);">{{group.IMEI}}</a> </td>
-                                                            <td>{{group.Location}}</td>
-                                                            <td>{{group.POSID}}</td>
-                                                            <td>{{group.StatusId}}</td>
-
-
-                                                            <td>
-                                                                {{group.Status}}
-                                                            </td>
-                                                        </tr>
-
-
-
-
-
-
-
-
-                                                    </tbody>
-
-                                                </table>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="pagination-panel">
-                                                            Page
-                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                            of 6 | View
-                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                <option value="20" selected="selected">20</option>
-                                                                <option value="50">50</option>
-                                                                <option value="100">100</option>
-                                                                <option value="150">150</option>
-                                                                <option value="-1">All</option>
-                                                            </select>&nbsp;
-                                                            records | Found total 58 records
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <div class="pagination-panel">
-                                                            <ul class="pagination pagination-sm man">
-                                                                <li><a href="#">&laquo;</a></li>
-                                                                <li><a href="#">1</a></li>
-                                                                <li><a href="#">2</a></li>
-                                                                <li><a href="#">3</a></li>
-                                                                <li><a href="#">4</a></li>
-                                                                <li><a href="#">5</a></li>
-                                                                <li><a href="#">&raquo;</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
                                     </div>
                                 </div>
 
-                                <div id="table-panel-tab" class="tab-pane fade">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="modal-body">
-                                                <table>
-                                                    <tr>
-                                                        <td> GroupName:</td>
-                                                        <td><input type="text" id="GroupName" ng-model="Group.GroupName"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> GroupId:</td>
-                                                        <td><input type="text" id="admin" ng-model="Group.GroupId"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> IMEI:</td>
-                                                        <td><input type="text" id="IMEI" ng-model="Group.IMEI"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> Location:</td>
-                                                        <td><input type="text" id="Location" ng-model="Group.Location"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> POSID:</td>
-                                                        <td><input type="text" id="POSID" ng-model="Group.POSID"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td> StatusId:</td>
-                                                        <td><input type="text" id="StatusId" ng-model="Group.StatusId"></td>
-                                                    </tr>
 
 
-                                                    <tr>
-                                                        <td> Status:</td>
-                                                        <td><input type="text" id="Status" ng-model="Group.Status"></td>
-                                                    </tr>
 
-
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
-                                                <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!--END CONTENT--><!--BEGIN FOOTER-->
                 <div id="footer">
                     <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
@@ -627,11 +480,8 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
+    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -646,7 +496,6 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', 'UA-145464-12', 'auto');
         ga('send', 'pageview');
-
 
     </script>
     <script src="js/angular.js"></script>

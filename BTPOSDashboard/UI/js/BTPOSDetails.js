@@ -1,7 +1,7 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $http.get('http://localhost:8020/api/getbtposdetails').then(function (response, req) {
         $scope.Group = response.data;
 
@@ -41,6 +41,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.clearGroup = function () {
         $scope.currGroup = null;
     }
+
+    $scope.GotToBTPOSDetails(btposid)
+    {
+        $localStorage.btposid = btposid;
+        $window.location.href = 'AddNewBTPOSDetails.html';
+    }
   
-    
+    $scope.GetBTPOSDetails()
+    {
+        var btposid = $localStorage.btposid;
+
+        $http.get('http://localhost:8020/api/getbtposdetails?id=' + btposid).then(function (response, req) {
+            $scope.btposdetails = response.data;
+
+        });
+    }
 });
