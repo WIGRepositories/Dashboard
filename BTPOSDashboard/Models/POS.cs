@@ -170,7 +170,7 @@ namespace POSDBAccess.Models
            public int typegrpid { get; set; }
 
        }
-       public class Inventory
+       public class Inventory1
        {
            public int Active { get; set; }
 

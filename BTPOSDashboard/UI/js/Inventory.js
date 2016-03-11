@@ -31,5 +31,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             data: Group
         }
         $http(req).then(function (response) { });
+        alert("saved");
+      
     };
 });
