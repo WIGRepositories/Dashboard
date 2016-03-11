@@ -85,6 +85,7 @@
     <Content Include="UI\AddLP.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
+    <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
     <Content Include="UI\charts-chartjs.html" />
@@ -196,7 +197,6 @@
     <Content Include="UI\grid-pagination-only.html" />
     <Content Include="UI\grid-range-slider.html" />
     <Content Include="UI\grid-without-item-per-page.html" />
-    <Content Include="UI\HtmlPage1.html" />
     <Content Include="UI\images\bg\1.jpg" />
     <Content Include="UI\images\bg\2.jpg" />
     <Content Include="UI\images\bg\3.jpg" />
@@ -229,6 +229,7 @@
     <Content Include="UI\images\icons\loading.gif" />
     <Content Include="UI\images\user.jpg" />
     <Content Include="UI\index.html" />
+    <Content Include="UI\js\angular.js" />
     <Content Include="UI\js\animation.js" />
     <Content Include="UI\js\BTPOSDetails.js" />
     <Content Include="UI\js\charts-chartjs.js" />
@@ -259,6 +260,7 @@
     <Content Include="UI\js\jquery.menu.js" />
     <Content Include="UI\js\LicensePayments.js" />
     <Content Include="UI\js\main.js" />
+    <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\page-calendar.js" />
     <Content Include="UI\js\page-contact.js" />
     <Content Include="UI\js\page-gallery.js" />
