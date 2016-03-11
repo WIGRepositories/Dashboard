@@ -196,7 +196,7 @@
                             </a>
                         </li>
 
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
@@ -207,14 +207,24 @@
                                 <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-desktop fa-fw">
                                     <div class="icon-bg bg-pink"></div>
                                 </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                <li class="active"><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">License</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -363,11 +373,11 @@
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Form Layouts</div>
+                        <div class="page-title">BTPOS</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><a href="#">BTPOSDetails</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="active">Form Layouts</li>
                     </ol>
                     <div class="clearfix"></div>
@@ -389,18 +399,18 @@
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 {{5+7}}
-                                                                <label for="GroupName" class="col-md-3 control-label"> Group Name <span class='require'>*</span></label>
+                                                                <label for="GroupName" class="col-md-3 control-label"style="color:red;"> Group Name <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="GroupName" type="text" ng-model="Group.GroupName" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="GroupId" class="col-md-3 control-label">Group Id <span class='require'>*</span></label>
+                                                                <label for="GroupId" class="col-md-3 control-label" style="color:red;">Group Id <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="GroupId" type="text" ng-model="Group.GroupId" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="IMEI" class="col-md-3 control-label">IMEI <span class='require'>*</span></label>
+                                                                <label for="IMEI" class="col-md-3 control-label" style="color:red;">IMEI <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
@@ -410,7 +420,7 @@
                                                                 <div class="col-md-4"><input id="Location" type="text" ng-model="Group.Location" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="POSID" class="col-md-3 control-label">POSID <span class='require'>*</span></label>
+                                                                <label for="POSID" class="col-md-3 control-label" style="color:red;">POSID <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="POSID" type="text" ng-model="Group.POSID" class="form-control" /><span class="help-block"></span></div>
                                                             </div>

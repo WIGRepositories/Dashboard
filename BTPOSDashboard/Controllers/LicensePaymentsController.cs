@@ -13,7 +13,7 @@ namespace DAshboard.Controllers
     public class LicensePaymentsController : ApiController
     {
         [HttpGet]
-        
+        [Route("api/GetLicensePayments")]
         public DataTable LicensePayment1()
         
         {
@@ -49,7 +49,7 @@ namespace DAshboard.Controllers
                 //connect to database
                 SqlConnection conn = new SqlConnection();
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-                conn.ConnectionString = "Data Source=HARISH-PC\\SQLEXPRESS;Initial Catalog=POSDashboard1;Integrated Security=SSPI;";
+                conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;

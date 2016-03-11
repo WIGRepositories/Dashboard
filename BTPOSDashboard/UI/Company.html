@@ -220,6 +220,16 @@
                         </li>
                         <li>
                             <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">License</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
                                 </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
@@ -364,11 +374,11 @@
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Action Tables</div>
+                        <div class="page-title">Company</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><a href="#">Company</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="active">Action Tables</li>
                     </ol>
                     <div class="clearfix"></div>
@@ -479,7 +489,6 @@
                                                     <thead>
                                                         <tr>
 
-                                                            <th>Id</th>
                                                             <th>Name</th>
                                                             <th>admin</th>
                                                             <th>adminId</th>
@@ -494,7 +503,7 @@
 
                                                         <tr ng-repeat="group in Group" class="gradeA">
                                                             {{5+7}}
-                                                            <td>{{group.Id}}</td>
+                                                       
                                                             <td>{{group.Name}}</td>
                                                             <td>{{group.admin}}</td>
                                                             <td>{{group.adminId}}</td>
