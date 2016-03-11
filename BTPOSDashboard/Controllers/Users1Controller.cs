@@ -6,9 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WebApplication1.Models;
+using BTPOSDashboardAPI.Models;
 
-namespace WebApplication1.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class Users1Controller : ApiController
     {

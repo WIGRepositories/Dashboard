@@ -81,11 +81,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScripts\DBScripts.sql" />
-    <Content Include="Global.asax" />
-    <Content Include="UI\AddLP.html" />
+    <Content Include="Global.asax" />    
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewUser.html" />
+    <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
     <Content Include="UI\charts-chartjs.html" />
@@ -181,6 +181,7 @@
     <Content Include="UI\form-multiple-file-upload.html" />
     <Content Include="UI\form-validation.html" />
     <Content Include="UI\form-wizard.html" />
+    <Content Include="UI\GetInventory.html" />
     <Content Include="UI\grid-datepicker.html" />
     <Content Include="UI\grid-deep-linking.html" />
     <Content Include="UI\grid-double-sort.html" />
@@ -253,6 +254,7 @@
     <Content Include="UI\js\form-wizard.js" />
     <Content Include="UI\js\html5shiv.js" />
     <Content Include="UI\js\index.js" />
+    <Content Include="UI\js\Inventory.js" />
     <Content Include="UI\js\jplist.js" />
     <Content Include="UI\js\jquery-1.10.2.min.js" />
     <Content Include="UI\js\jquery-migrate-1.2.1.min.js" />
@@ -951,6 +953,7 @@
     <Content Include="UI\vendors\fullcalendar\fullcalendar.min.js" />
     <Content Include="UI\vendors\fullcalendar\fullcalendar.print.css" />
     <Content Include="UI\vendors\fullcalendar\gcal.js" />
+    <Content Include="UI\vendors\GetInventory.html" />
     <Content Include="UI\vendors\gmaps\gmaps.js" />
     <Content Include="UI\vendors\holder\holder.js" />
     <Content Include="UI\vendors\iCheck\custom.min.js" />
@@ -1741,6 +1744,7 @@
     <Compile Include="Controllers\countryController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
     <Compile Include="Controllers\FleetOwnerLicenseController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\InventoryDetailsController.cs" />
     <Compile Include="Controllers\InventoryMasterController.cs" />
     <Compile Include="Controllers\LicensePaymentsController.cs" />
