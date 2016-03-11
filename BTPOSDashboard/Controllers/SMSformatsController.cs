@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace WebApplication1.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class SMSformatsController : ApiController
     {

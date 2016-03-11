@@ -81,7 +81,7 @@ namespace POSDBAccess.Models
 
         public string IsVisible { get; set; }
 
-        public string TypeGrpId { get; set; }
+        public string TypeGroup { get; set; }
 
         public string Key { get; set; }
 
@@ -212,7 +212,7 @@ namespace POSDBAccess.Models
            public int transactionId { get; set; }
 
        }
-       public class LicensePayments
+       public class LicensePayment
        {
            public DateTime expiryOn { get; set; }
 

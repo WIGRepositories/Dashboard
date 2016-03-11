@@ -42,7 +42,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = null;
     }
 
-    $scope.GotToBTPOSDetails(btposid)
+    $scope.GotToBTPOSDetails=function (btposid)
     {
         $localStorage.btposid = btposid;
         $window.location.href = 'AddNewBTPOSDetails.html';

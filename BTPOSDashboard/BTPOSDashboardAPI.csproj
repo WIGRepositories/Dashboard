@@ -40,8 +40,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -51,6 +62,17 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -58,22 +80,12 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DBScripts\DBScripts.sql" />
-    <Content Include="Global.asax" />
+    <Content Include="Global.asax" />    
+    <Content Include="UI\AddNewBTPOSDetails.html" />
+    <Content Include="UI\AddNewCompany.html" />
+    <Content Include="UI\AddNewUser.html" />
+    <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
     <Content Include="UI\charts-chartjs.html" />
@@ -169,6 +181,7 @@
     <Content Include="UI\form-multiple-file-upload.html" />
     <Content Include="UI\form-validation.html" />
     <Content Include="UI\form-wizard.html" />
+    <Content Include="UI\GetInventory.html" />
     <Content Include="UI\grid-datepicker.html" />
     <Content Include="UI\grid-deep-linking.html" />
     <Content Include="UI\grid-double-sort.html" />
@@ -217,6 +230,7 @@
     <Content Include="UI\images\icons\loading.gif" />
     <Content Include="UI\images\user.jpg" />
     <Content Include="UI\index.html" />
+    <Content Include="UI\js\angular.js" />
     <Content Include="UI\js\animation.js" />
     <Content Include="UI\js\BTPOSDetails.js" />
     <Content Include="UI\js\charts-chartjs.js" />
@@ -240,12 +254,15 @@
     <Content Include="UI\js\form-wizard.js" />
     <Content Include="UI\js\html5shiv.js" />
     <Content Include="UI\js\index.js" />
+    <Content Include="UI\js\Inventory.js" />
     <Content Include="UI\js\jplist.js" />
     <Content Include="UI\js\jquery-1.10.2.min.js" />
     <Content Include="UI\js\jquery-migrate-1.2.1.min.js" />
     <Content Include="UI\js\jquery-ui.js" />
     <Content Include="UI\js\jquery.menu.js" />
+    <Content Include="UI\js\LicensePayments.js" />
     <Content Include="UI\js\main.js" />
+    <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\page-calendar.js" />
     <Content Include="UI\js\page-contact.js" />
     <Content Include="UI\js\page-gallery.js" />
@@ -279,6 +296,10 @@
     <Content Include="UI\layout-right-sidebar-collapsed.html" />
     <Content Include="UI\layout-right-sidebar.html" />
     <Content Include="UI\layout-title-breadcrumb.html" />
+    <Content Include="UI\LicensePayments.html" />
+    <Content Include="UI\newBTPOS.html" />
+    <Content Include="UI\newcompany.html" />
+    <Content Include="UI\newuser.html" />
     <Content Include="UI\page-about.html" />
     <Content Include="UI\page-blog-item.html" />
     <Content Include="UI\page-blog.html" />
@@ -312,6 +333,7 @@
     <Content Include="UI\ui-treeview.html" />
     <Content Include="UI\ui-typography.html" />
     <Content Include="UI\Users.html" />
+    <Content Include="UI\vendors\AddNewUser.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />
@@ -931,6 +953,7 @@
     <Content Include="UI\vendors\fullcalendar\fullcalendar.min.js" />
     <Content Include="UI\vendors\fullcalendar\fullcalendar.print.css" />
     <Content Include="UI\vendors\fullcalendar\gcal.js" />
+    <Content Include="UI\vendors\GetInventory.html" />
     <Content Include="UI\vendors\gmaps\gmaps.js" />
     <Content Include="UI\vendors\holder\holder.js" />
     <Content Include="UI\vendors\iCheck\custom.min.js" />
@@ -1722,8 +1745,10 @@
     <Compile Include="Controllers\countryController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
     <Compile Include="Controllers\FleetOwnerLicenseController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\InventoryDetailsController.cs" />
     <Compile Include="Controllers\InventoryMasterController.cs" />
+    <Compile Include="Controllers\LicensePaymentsController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
     <Compile Include="Controllers\PayablesMasterController.cs" />
     <Compile Include="Controllers\PaymentDetailsController.cs" />

@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 
 
-namespace WebApplication1.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class FleetOwnerLicenseController : ApiController
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebApplication1.Models;
+using BTPOSDashboardAPI.Models;
 
-namespace WebApplication1.Models
+namespace BTPOSDashboardAPI.Models
 {
     public class Class1
     {
