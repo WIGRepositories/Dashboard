@@ -25,9 +25,12 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetBTPOSDetails();" ng-model="btposdetails">
+<body ng-init="GetCompanys();" ng-model="Group">
     <div>
-        <!--BEGIN THEME SETTING-->
+
+
+
+        <!--BEGIN THEME SETTINGS-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
@@ -383,49 +386,51 @@
 
                                         <div class="col-lg-6">
                                             <div class="panel panel-violet">
-                                                <div class="panel-heading">Add New BTPOSDetails</div>
+                                                <div class="panel-heading">Add New License Payments</div>
                                                 <div class="panel-body pan">
                                                     <form action="#" class="form-horizontal">
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 {{5+7}}
-                                                                <label for="GroupName" class="col-md-3 control-label"> Group Name <span class='require'>*</span></label>
+                                                                <label for="expiryOn" class="col-md-3 control-label"> expiryOn <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="GroupName" type="text" ng-model="Group.GroupName" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4"><input id="expiryOn" type="text" ng-model="Group.expiryOn" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="GroupId" class="col-md-3 control-label">Group Id <span class='require'>*</span></label>
+                                                                <label for="licenseFor" class="col-md-3 control-label">licenseFor <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="GroupId" type="text" ng-model="Group.GroupId" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4"><input id="licenseFor" type="text" ng-model="Group.licenseFor" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="IMEI" class="col-md-3 control-label">IMEI <span class='require'>*</span></label>
+                                                                <label for="licenseId" class="col-md-3 control-label">license Id <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4"><input id="licenseId" type="text" ng-model="Group.licenseId" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="Location" class="col-md-3 control-label">Location <span class='require'>*</span></label>
+                                                                <label for="licenseType" class="col-md-3 control-label">licenseType <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="Location" type="text" ng-model="Group.Location" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4"><input id="licenseType" type="text" ng-model="Group.licenseType" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="POSID" class="col-md-3 control-label">POSID <span class='require'>*</span></label>
+                                                                <label for="Paidon" class="col-md-3 control-label">Paidon <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="POSID" type="text" ng-model="Group.POSID" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4"><input id="Paidon" type="text" ng-model="Group.Paidon" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="StatusId" class="col-md-3 control-label">Status Id <span class='require'>*</span></label>
+                                                                <label for="renewedon" class="col-md-3 control-label">renewedon <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="StatusId" type="text" ng-model="Group.StatusId" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4">
+                                                                    <div><input id="renewedon" type="text" ng-model="Group.renewedon" class="form-control" /></div>
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="Status" class="col-md-3 control-label">Status <span class='require'>*</span></label>
+                                                                <label for="transId" class="col-md-3 control-label">transId <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="Status" type="text" ng-model="Group.Status" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4">
+                                                                    <div><input id="transId" type="text" ng-model="Group.transId" class="form-control" /></div>
+                                                                </div>
                                                             </div>
-
-
                                                         </div>
                                                         <div class="form-actions">
                                                             <div class="col-md-offset-3 col-md-9">
@@ -499,7 +504,6 @@
 
     </script>
     <script src="js/angular.js"></script>
-    <script src="js/BTPOSDetails.js"></script>
-    <script src="js/ngStorage.js"></script>
+    <script src="js/LicensePayments.js"></script>
 </body>
 </html>

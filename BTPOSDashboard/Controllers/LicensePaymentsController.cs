@@ -8,13 +8,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace POSDBAccess.Controllers
+namespace DAshboard.Controllers
 {
-    public class CompanyGroupsController : ApiController
+    public class LicensePaymentsController : ApiController
     {
         [HttpGet]
-        [Route("api/GetCompanyGroups")]
-        public DataTable CompanyGroups1()
+        
+        public DataTable LicensePayment1()
+        
         {
             DataTable Tbl = new DataTable();
 
@@ -22,11 +23,11 @@ namespace POSDBAccess.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-          conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getCompanyGroups";
+            cmd.CommandText = "getLicensePayments";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -39,7 +40,7 @@ namespace POSDBAccess.Controllers
 
         [HttpPost]
 
-        public DataTable CompanyGroups2(CompanyGroups n)
+        public DataTable LicensePayment2(LicensePayment n)
         {
             DataTable Tbl = new DataTable();
 
@@ -48,56 +49,64 @@ namespace POSDBAccess.Controllers
                 //connect to database
                 SqlConnection conn = new SqlConnection();
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-                conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+                conn.ConnectionString = "Data Source=HARISH-PC\\SQLEXPRESS;Initial Catalog=POSDashboard1;Integrated Security=SSPI;";
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelCompanyGroups";
+                cmd.CommandText = "InsUpdDelLicensePayments";
                 cmd.Connection = conn;
 
                 conn.Open();
-
-                SqlParameter gsa = new SqlParameter();
-                gsa.ParameterName = "@active";
-                gsa.SqlDbType = SqlDbType.Int;
-                gsa.Value = Convert.ToBoolean(n.active) ? "0" : "1";
-                cmd.Parameters.Add(gsa);
-
                 SqlParameter gs = new SqlParameter();
-                gs.ParameterName = "@admin";
-                gs.SqlDbType = SqlDbType.VarChar;
-                gs.Value = n.admin;
+                gs.ParameterName = "@expiryOn";
+                gs.SqlDbType = SqlDbType.DateTime;
+                gs.Value = Convert.ToString(n.expiryOn);
                 cmd.Parameters.Add(gs);
 
-                SqlParameter gsaa = new SqlParameter();
-                gsaa.ParameterName = "@adminId";
-                gsaa.SqlDbType = SqlDbType.Int;
-                gsaa.Value = Convert.ToString(n.adminId);
-                cmd.Parameters.Add(gsaa);
-
-                SqlParameter gsn = new SqlParameter();
-                gsn.ParameterName = "@code";
-                gsn.SqlDbType = SqlDbType.VarChar;
-                gsn.Value = n.code;
-                cmd.Parameters.Add(gsn);
-
-                SqlParameter gsab = new SqlParameter();
-                gsab.ParameterName = "@descr";
-                gsab.SqlDbType = SqlDbType.VarChar;
-                gsab.Value = n.descr;
-                cmd.Parameters.Add(gsab);
-
-                SqlParameter gsac = new SqlParameter();
-                gsac.ParameterName = "@Id";
-                gsac.SqlDbType = SqlDbType.Int;
-                gsac.Value = Convert.ToString(n.Id);
-                cmd.Parameters.Add(gsac);
+                SqlParameter gsa = new SqlParameter();
+                gsa.ParameterName = "@Id";
+                gsa.SqlDbType = SqlDbType.Int;
+                gsa.Value = Convert.ToString(n.Id);
+                cmd.Parameters.Add(gsa);
 
                 SqlParameter gid = new SqlParameter();
-                gid.ParameterName = "@Name";
+                gid.ParameterName = "@licenseFor";
                 gid.SqlDbType = SqlDbType.VarChar;
-                gid.Value = n.Name;
+                gid.Value = n.licenseFor;
                 cmd.Parameters.Add(gid);
+
+                SqlParameter gsab = new SqlParameter();
+                gsab.ParameterName = "@licenseId";
+                gsab.SqlDbType = SqlDbType.Int;
+                gsab.Value = Convert.ToString(n.licenseId);
+                cmd.Parameters.Add(gsab);
+
+                SqlParameter gidb = new SqlParameter();
+                gidb.ParameterName = "@licenseType";
+                gidb.SqlDbType = SqlDbType.VarChar;
+                gidb.Value = n.licenseType;
+                cmd.Parameters.Add(gidb);
+
+                SqlParameter guid = new SqlParameter();
+                guid.ParameterName = "@paidon";
+                guid.SqlDbType = SqlDbType.DateTime;
+                guid.Value = Convert.ToString(n.paidon);
+                cmd.Parameters.Add(guid);
+
+                SqlParameter guida = new SqlParameter();
+                guida.ParameterName = "@renewedon";
+                guida.SqlDbType = SqlDbType.DateTime;
+                guida.Value = Convert.ToString(n.renewedon);
+                cmd.Parameters.Add(guida);
+
+                SqlParameter gidbc = new SqlParameter();
+                gidbc.ParameterName = "@transId";
+                gidbc.SqlDbType = SqlDbType.VarChar;
+                gidbc.Value = n.transId;
+                cmd.Parameters.Add(gidbc);
+
+               
+
 
                 //SqlParameter ga = new SqlParameter();
                 //ga.ParameterName = "@Active";

@@ -212,7 +212,7 @@ namespace POSDBAccess.Models
            public int transactionId { get; set; }
 
        }
-       public class LicensePayments
+       public class LicensePayment
        {
            public DateTime expiryOn { get; set; }
 
