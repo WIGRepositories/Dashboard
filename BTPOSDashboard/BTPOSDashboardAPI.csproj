@@ -81,7 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScripts\DBScripts.sql" />
-    <Content Include="Global.asax" />    
+    <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewUser.html" />
@@ -1743,6 +1743,7 @@
     <Compile Include="Controllers\busdetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
     <Compile Include="Controllers\FleetOwnerLicenseController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
