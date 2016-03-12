@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
     <title>Action Tables | Tables</title>
     <meta charset="utf-8">
@@ -24,16 +24,9 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-
 </head>
-<body ng-model="Types">
+
+<body ng-model="Groups">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -235,7 +228,7 @@
                                 <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                             </ul>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
@@ -243,7 +236,7 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                                <li class="active"><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                                <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
                                 <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
                             </ul>
                         </li>
@@ -254,7 +247,7 @@
                                 </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="form-layouts.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -270,7 +263,7 @@
                                 <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-envelope-o">
                                     <div class="icon-bg bg-primary"></div>
@@ -281,329 +274,33 @@
                                 <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
                                 <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
                                 <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                                <li class="active"><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </nav>
             <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-            <div id="chat-form" class="fixed">
-                <div class="chat-inner">
-                    <h2 class="chat-header">
-                        <a href="javascript:;" class="chat-form-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><i class="fa fa-user"></i>&nbsp;
-                        Chat
-                        &nbsp;<span class="badge badge-info">3</span>
-                    </h2>
-
-                    <div id="group-1" class="chat-group">
-                        <strong>Favorites</strong><a href="#">
-                            <span class="user-status is-online"></span>
-                            <small>Verna Morton</small>
-                            <span class="badge badge-info">2</span>
-                        </a><a href="#">
-                            <span class="user-status is-online"></span>
-                            <small>Delores Blake</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-busy"></span>
-                            <small>Nathaniel Morris</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-idle"></span>
-                            <small>Boyd Bridges</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-offline"></span>
-                            <small>Meredith Houston</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a>
-                    </div>
-                    <div id="group-2" class="chat-group">
-                        <strong>Office</strong><a href="#">
-                            <span class="user-status is-busy"></span>
-                            <small>Ann Scott</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-offline"></span>
-                            <small>Sherman Stokes</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-offline"></span>
-                            <small>Florence Pierce</small>
-                            <span class="badge badge-info">1</span>
-                        </a>
-                    </div>
-                    <div id="group-3" class="chat-group">
-                        <strong>Friends</strong><a href="#">
-                            <span class="user-status is-online"></span>
-                            <small>Willard Mckenzie</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-busy"></span>
-                            <small>Jenny Frazier</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-offline"></span>
-                            <small>Chris Stewart</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a><a href="#">
-                            <span class="user-status is-offline"></span>
-                            <small>Olivia Green</small>
-                            <span class="badge badge-info is-hidden">0</span>
-                        </a>
-                    </div>
-                </div>
-                <div id="chat-box" style="top:400px">
-                    <div class="chat-box-header">
-                        <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><span class="user-status is-online"></span><span class="display-name">Willard Mckenzie</span>
-                        <small>Online</small>
-                    </div>
-                    <div class="chat-content">
-                        <ul class="chat-box-body">
-                            <li>
-                                <p><img src="images/user.jpg" class="avt" /><span class="user">Admin</span><span class="time">09:33</span></p>
-
-                                <p>Hi Swlabs, we have some comments for you.</p>
-                            </li>
-                            <li class="odd">
-                                <p><img src="images/user.jpg" class="avt" /><span class="user">Swlabs</span><span class="time">09:33</span></p>
-
-                                <p>Hi, we're listening you...</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="chat-textarea"><input placeholder="Type your message" class="form-control" /></div>
-                </div>
-            </div>
             <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
             <div id="page-wrapper">
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Action Tables</div>
+                        <div class="page-title">ConfigureAlerts</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><a href="#">ConfigureAlerts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="active">Action Tables</li>
                     </ol>
                     <div class="clearfix"></div>
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                <div class="page-content">
-                    <div id="table-action" class="row">
-                        <div class="col-lg-12">
-                            <ul id="tableactiondTab" class="nav nav-tabs">
-                                <li class="active"><a href="#table-table-tab" data-toggle="tab">Action Tables</a></li>
-                                <li><a href="#table-row-tab" data-toggle="tab">Action Rows</a></li>
-                                <li><a href="#table-panel-tab" data-toggle="tab">Action Panels</a></li>
-                            </ul>
-                            <div id="tableactionTabContent" class="tab-content">
-                                <div id="table-table-tab" class="tab-pane fade in active">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <h4 class="box-heading">Pagination</h4>
-
-                                            <div class="table-container">
-                                                <div class="row mbm">
-                                                    <div class="col-lg-6">
-                                                        <div class="pagination-panel">
-                                                            Page
-                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                            of 6 | View
-                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                <option value="20" selected="selected">20</option>
-                                                                <option value="50">50</option>
-                                                                <option value="100">100</option>
-                                                                <option value="150">150</option>
-                                                                <option value="-1">All</option>
-                                                            </select>&nbsp;
-                                                            records | Found total 58 records
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <div class="pagination-panel">
-                                                            <ul class="pagination pagination-sm man">
-                                                                <li><a href="#">&laquo;</a></li>
-                                                                <li><a href="#">1</a></li>
-                                                                <li><a href="#">2</a></li>
-                                                                <li><a href="#">3</a></li>
-                                                                <li><a href="#">4</a></li>
-                                                                <li><a href="#">5</a></li>
-                                                                <li><a href="#">&raquo;</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-green">+ADD NEW</button>
-                                                <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header modal-header-primary">
-                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                <h4 id="modal-header-primary-label" class="modal-title">ADD NEW TYPE</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <table>
-                                                                    <tr>
-                                                                        <td> Name:
-                                                                        <td>
-                                                                        <td> <input type="text" id="Name" ng-model="Types.Name" style="margin:5px;" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> Desc:
-                                                                        <td>
-                                                                        <td> <input type="text" id="Desc" ng-model="Types.Desc" style="margin:5px;" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> TypeGroup:
-                                                                        <td>
-                                                                        <td> <input type="text" id="TypeGroup" ng-model="Types.TypeGroup" style="margin:5px;" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="margin:5px;">Active:</td>
-                                                                        <td>
-                                                                            <label class="checkbox">
-                                                                                <input type="checkbox" ng-checked="Types.Active" ng-model="Types.Active" style="margin:5px;" />
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                <button type="button" class="btn btn-primary" ng-click="save(Types);">Save changes</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header modal-header-primary">
-                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                <h4 id="modal-header-primary-label" class="modal-title">Edit TYPE</h4>
-                                                            </div>
-                                                            <div class="modal-body" ng-model="grpTypes">
-                                                                <table>
-                                                                    <tr>
-                                                                        <td> Name:
-                                                                        <td>
-                                                                        <td> <input type="text" id="Name" ng-model="grpTypes.Name" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td> Desc:
-                                                                        <td>
-                                                                        <td> <input type="text" id="Desc" ng-model="grpTypes.Desc" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-
-                                                                            TypeGroup :
-
-                                                                        </td>
-                                                                        <td>
-                                                                            <select id="TypeGroup" name="TypeGroup">
-                                                                                >
-                                                                                <option value="1">Value 1</option>
-                                                                                <option value="2">Value 2</option>
-                                                                                <option value="3">Value 3</option>
-                                                                            </select>
-
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Active:</td>
-                                                                        <td>
-                                                                            <label class="checkbox">
-                                                                                <input type="checkbox" ng-checked="Types.Active" ng-model="grpTypes.Active" />
-                                                                            </label>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                <button type="button" class="btn btn-primary" ng-click="save(grpTypes);">Save changes</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>Name</th>
-                                                            <th>Desc</th>
-                                                            <th>TypeGroup</th>
-                                                            <th>Active</th>
-                                                            <th>Update</th>
-                                                        </tr>
-                                                    <tbody>
-                                                        <tr ng-repeat="T in Types">
-                                                         {{5+9}}   <td>{{T.Id}}</td>
-                                                            <td>{{T.Name}}</td>
-                                                            <td>{{T.Desc}}</td>
-                                                            <td>{{T.TypeGroup}}</td>
-                                                            <td>{{T.Active}}</td>
-
-
-                                                            <td>
-                                                                <button type="button" data-target="#Modal-header-primary" class="btn btn-default btn-xs" data-toggle="modal" ng-click="setTypes(T);">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        s
-                                                    </tbody>
-                                                    </thead>
-                                                </table>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="pagination-panel">
-                                                            Page
-                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                            of 6 | View
-                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                <option value="20" selected="selected">20</option>
-                                                                <option value="50">50</option>
-                                                                <option value="100">100</option>
-                                                                <option value="150">150</option>
-                                                                <option value="-1">All</option>
-                                                            </select>&nbsp;
-                                                            records | Found total 58 records
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <div class="pagination-panel">
-                                                            <ul class="pagination pagination-sm man">
-                                                                <li><a href="#">&laquo;</a></li>
-                                                                <li><a href="#">1</a></li>
-                                                                <li><a href="#">2</a></li>
-                                                                <li><a href="#">3</a></li>
-                                                                <li><a href="#">4</a></li>
-                                                                <li><a href="#">5</a></li>
-                                                                <li><a href="#">&raquo;</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                <!--END CONTENT--><!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
                 </div>
-
+                <!--END FOOTER-->
             </div>
             <!--END PAGE WRAPPER-->
         </div>
@@ -630,6 +327,7 @@
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
+
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -648,6 +346,7 @@
 
     </script>
     <script src="js/angular.js"></script>
-    <script src="js/Types.js"></script>
+    <script src="js/BTPOSDetails.js"></script>
+    <script src="js/ngStorage.js"></script>
 </body>
 </html>

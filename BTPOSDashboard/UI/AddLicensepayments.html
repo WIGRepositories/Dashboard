@@ -199,7 +199,7 @@
                             </a>
                         </li>
 
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
@@ -218,6 +218,16 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">License</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li class="active"><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -262,11 +272,11 @@
                                 </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -366,7 +376,7 @@
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Form Layouts</div>
+                        <div class="page-title">Dashboard</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -392,30 +402,30 @@
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 {{5+7}}
-                                                                <label for="expiryOn" class="col-md-3 control-label"> expiryOn <span class='require'>*</span></label>
+                                                                <label for="expiryOn" class="col-md-3 control-label" style="color:red;"> expiryOn <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="expiryOn" type="text" ng-model="Group.expiryOn" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <label for="licenseFor" class="col-md-3 control-label">licenseFor <span class='require'>*</span></label>
+                                                                <label for="licenseFor" class="col-md-3 control-label" style="color:red;">licenseFor <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="licenseFor" type="text" ng-model="Group.licenseFor" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="licenseId" class="col-md-3 control-label">license Id <span class='require'>*</span></label>
+                                                                <label for="licenseId" class="col-md-3 control-label" style="color:red;">license Id <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="licenseId" type="text" ng-model="Group.licenseId" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="licenseType" class="col-md-3 control-label">licenseType <span class='require'>*</span></label>
+                                                                <label for="licenseType" class="col-md-3 control-label" style="color:red;">licenseType <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="licenseType" type="text" ng-model="Group.licenseType" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4"><input id="licenseType" type="text" ng-model="Group.licenseType" class="form-control"  /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="Paidon" class="col-md-3 control-label">Paidon <span class='require'>*</span></label>
+                                                                <label for="paidon" class="col-md-3 control-label">Paidon <span class='require'>*</span></label>
 
-                                                                <div class="col-md-4"><input id="Paidon" type="text" ng-model="Group.Paidon" class="form-control" /><span class="help-block"></span></div>
+                                                                <div class="col-md-4"><input id="paidon" type="text" ng-model="Group.paidon" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="renewedon" class="col-md-3 control-label">renewedon <span class='require'>*</span></label>
@@ -425,7 +435,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="transId" class="col-md-3 control-label">transId <span class='require'>*</span></label>
+                                                                <label for="transId" class="col-md-3 control-label" style="color:red;">transId <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4">
                                                                     <div><input id="transId" type="text" ng-model="Group.transId" class="form-control" /></div>

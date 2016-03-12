@@ -220,6 +220,16 @@
                         </li>
                         <li>
                             <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">License</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-green"></div>
                                 </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
@@ -260,11 +270,11 @@
                                 </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -364,11 +374,11 @@
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Action Tables</div>
+                        <div class="page-title">BTPOS</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Tables</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><a href="#">BTPOS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="active">Action Tables</li>
                     </ol>
                     <div class="clearfix"></div>
@@ -408,10 +418,10 @@
                                                     </div>
 
                                                     <div class="actions">
-                                                        <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0"> Add New Company</button></a>
+                                                        <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0"> Add New BTPOSDetails</button></a>
 
                                                     </div>
-                                                    
+
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -474,7 +484,7 @@
                                                     <thead>
                                                         <tr>
 
-                                                            <th>Id</th>
+
                                                             <th>GroupName</th>
                                                             <th>GroupId</th>
                                                             <th>IMEI</th>
@@ -482,7 +492,7 @@
                                                             <th>POSID</th>
                                                             <th>StatusId</th>
                                                             <th>Status</th>
-                                                            
+
 
                                                         </tr>
                                                     </thead>
@@ -490,7 +500,7 @@
 
                                                         <tr ng-repeat="group in Group" class="gradeA">
                                                             {{5+5}}
-                                                            <td>{{group.Id}}</td>
+
                                                             <td>{{group.GroupName}}</td>
                                                             <td>{{group.GroupId}}</td>
                                                             <td><a href="" ng-click="GotToBTPOSDetails(group.POSID);">{{group.IMEI}}</a> </td>

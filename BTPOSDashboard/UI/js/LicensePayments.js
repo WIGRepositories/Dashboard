@@ -2,7 +2,7 @@
 // JavaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/LicensePayments/LicensePayment1').then(function (response, req) {
+    $http.get('http://localhost:1476/api/GetLicensePayments').then(function (response, req) {
         $scope.Group = response.data;
 
     });
@@ -15,7 +15,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             licenseId: Group.licenseId,
 
             licenseType: Group.licenseType,
-            Paidon: Group.Paidon,
+            paidon: Group.paidon,
             renewedon: Group.renewedon,
             transId: Group.transId
         }
