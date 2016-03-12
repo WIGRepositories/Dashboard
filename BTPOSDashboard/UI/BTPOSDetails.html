@@ -270,11 +270,11 @@
                                 </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -421,7 +421,7 @@
                                                         <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="position: absolute;right:0;top:0"> Add New BTPOSDetails</button></a>
 
                                                     </div>
-                                                    
+
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -484,7 +484,7 @@
                                                     <thead>
                                                         <tr>
 
-                                                            
+
                                                             <th>GroupName</th>
                                                             <th>GroupId</th>
                                                             <th>IMEI</th>
@@ -492,7 +492,7 @@
                                                             <th>POSID</th>
                                                             <th>StatusId</th>
                                                             <th>Status</th>
-                                                            
+
 
                                                         </tr>
                                                     </thead>
@@ -500,7 +500,7 @@
 
                                                         <tr ng-repeat="group in Group" class="gradeA">
                                                             {{5+5}}
-                                           
+
                                                             <td>{{group.GroupName}}</td>
                                                             <td>{{group.GroupId}}</td>
                                                             <td><a href="" ng-click="GotToBTPOSDetails(group.POSID);">{{group.IMEI}}</a> </td>

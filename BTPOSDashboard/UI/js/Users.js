@@ -3,13 +3,13 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:8020/api/Users1/Users1').then(function (res, data) {
+    $http.get('http://localhost:1476/api/Users1/Users').then(function (res, data) {
         $scope.User = res.data;
 
 
     });
     $scope.save = function (User) {                      
-        
+        alert("ok");
         var User = {                  
             Id: User.Id,
             FirstName: User.FirstName,
@@ -23,12 +23,17 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             Role1:User.Role1,
             Active: User.Active
             
-        }
-     
+        };
+        $scope.save
         var req = {
             method: 'POST',
-            url: 'http://localhost:8020/api/Users1/Users2',
-           data: User
+            url: 'http://localhost:1476/api/Users1/Users1',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: User
+
+
         }
         $http(req).then(function (response) { });
 
@@ -36,13 +41,12 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $scope.User1 = null;
     };
 
-    $scope.setUsers = function (usr) {
+    $scope.setUser = function (usr) {
         $scope.User1 = usr;
     };
 
-    $scope.clearUsers = function () {
+    $scope.clearUser = function () {
         $scope.User1 = null;
     }
 });
  
-

@@ -86,6 +86,7 @@
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
+    <Content Include="UI\Alerts.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
     <Content Include="UI\charts-chartjs.html" />
@@ -99,6 +100,8 @@
     <Content Include="UI\charts-highchart-pie.html" />
     <Content Include="UI\charts-highchart-scatter-bubble.html" />
     <Content Include="UI\Company.html" />
+    <Content Include="UI\ComposeMail.html" />
+    <Content Include="UI\ConfigureAlerts.html" />
     <Content Include="UI\css\style-responsive.css" />
     <Content Include="UI\css\themes\style1\blue-dark.css" />
     <Content Include="UI\css\themes\style1\blue-grey.css" />
@@ -160,9 +163,11 @@
     <Content Include="UI\css\themes\style3\yellow-dark.css" />
     <Content Include="UI\css\themes\style3\yellow-green.css" />
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
+    <Content Include="UI\EditHistory.html" />
     <Content Include="UI\email-compose-mail.html" />
     <Content Include="UI\email-inbox.html" />
     <Content Include="UI\email-view-mail.html" />
+    <Content Include="UI\Empty.html" />
     <Content Include="UI\extra-404.html" />
     <Content Include="UI\extra-500.html" />
     <Content Include="UI\extra-blank.html" />
@@ -229,6 +234,7 @@
     <Content Include="UI\images\gallery\blog_item1.jpg" />
     <Content Include="UI\images\icons\loading.gif" />
     <Content Include="UI\images\user.jpg" />
+    <Content Include="UI\Inbox.html" />
     <Content Include="UI\index.html" />
     <Content Include="UI\js\angular.js" />
     <Content Include="UI\js\animation.js" />
@@ -1728,6 +1734,7 @@
     <Content Include="UI\vendors\summernote\summernote.js" />
     <Content Include="UI\vendors\TypeGroups.html" />
     <Content Include="UI\vendors\Types.html" />
+    <Content Include="UI\ViewMail.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1743,6 +1750,7 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\busdetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
