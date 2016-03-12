@@ -86,6 +86,7 @@
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
+    <Content Include="UI\AddTroubleTicketingDetails.html" />
     <Content Include="UI\Alerts.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
@@ -279,6 +280,7 @@
     <Content Include="UI\js\table-advanced.js" />
     <Content Include="UI\js\table-filter.js" />
     <Content Include="UI\js\table-sample.js" />
+    <Content Include="UI\js\TroubleTicketingDetails.js" />
     <Content Include="UI\js\TypeGroups.js" />
     <Content Include="UI\js\Types.js" />
     <Content Include="UI\js\ui-checkbox-radio.js" />
@@ -321,6 +323,7 @@
     <Content Include="UI\table-filter.html" />
     <Content Include="UI\table-responsive.html" />
     <Content Include="UI\table-sample.html" />
+    <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
     <Content Include="UI\ui-buttons.html" />
@@ -1770,6 +1773,7 @@
     <Compile Include="Controllers\SMSformatsController.cs" />
     <Compile Include="Controllers\SMSProviderConfigController.cs" />
     <Compile Include="Controllers\STATEController.cs" />
+    <Compile Include="Controllers\TroubleTicketingDetailsController.cs" />
     <Compile Include="Controllers\TypeGroupsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
