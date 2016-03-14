@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Configuration;
 
-namespace BTPOSDashboard.Controllers
+
+namespace POSDBAccess.Controllers
 {
     public class DashboardController : ApiController
     {
@@ -21,7 +23,8 @@ namespace BTPOSDashboard.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString(); //"Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
