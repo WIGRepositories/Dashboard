@@ -242,18 +242,38 @@ namespace BTPOSDashboardAPI.Models
         public string FirmwareVersion { set; get; }
         public string Ipconfig { set; get; }
     }
-     public class Users12
+     public class Users
      {
          public int Id { set; get; }
          public string FirstName { set; get; }
          public string LastName { set; get; }
-         public int UserType { set; get; }
+         public string UserType { set; get; }
          public int EmpNo { set; get; }
          public string Email { set; get; }
          public int AdressId { set; get; }
-         public int MobileNo { set; get; }
-         public string Role1 { set; get; }
+         public string MobileNo { set; get; }
+         public string Role { set; get; }
          public int Active { get; set; }
+         public string UserName { get; set; }
+         public string Password { get; set; }
          
+     }
+
+     public class Register
+     {
+         public string UserName { get; set; }
+         public string Password { get; set; }
+         public string FirstName { get; set; }
+         public string LastName { get; set; }
+         public string Emailaddress { get; set; }
+         public string ConfirmPassword { get; set; }        
+
+     }
+
+     public class login
+     {
+         public string UserName { get; set; }
+         public string Password { get; set; }
+         public int result { get; set; }
      }
 }

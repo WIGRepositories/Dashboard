@@ -279,6 +279,7 @@
     <Content Include="UI\js\RegistrationBTPOS.js" />
     <Content Include="UI\js\respond.min.js" />
     <Content Include="UI\js\roles.js" />
+    <Content Include="UI\js\source.js" />
     <Content Include="UI\js\table-action.js" />
     <Content Include="UI\js\table-advanced.js" />
     <Content Include="UI\js\table-filter.js" />
@@ -1788,7 +1789,7 @@
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
-    <Compile Include="Controllers\Users1Controller.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -95,11 +95,7 @@ namespace POSDBAccess.Controllers
                 bf.Value = Convert.ToString(n.POSID);
                 cmd.Parameters.Add(bf);
 
-                SqlParameter bg = new SqlParameter();
-                bg.ParameterName = "@StatusId";
-                bg.SqlDbType = SqlDbType.Int;
-                bg.Value = Convert.ToString(n.StatusId);
-                cmd.Parameters.Add(bg);
+              
 
                 SqlParameter bh = new SqlParameter();
                 bh.ParameterName = "@Status";

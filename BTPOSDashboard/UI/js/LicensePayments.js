@@ -20,8 +20,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             transId: Group.transId
         }
 
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
-
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/LicensePayments/LicensePayment2',

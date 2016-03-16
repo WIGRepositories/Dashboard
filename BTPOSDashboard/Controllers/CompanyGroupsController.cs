@@ -69,11 +69,7 @@ namespace POSDBAccess.Controllers
                 gs.Value = n.admin;
                 cmd.Parameters.Add(gs);
 
-                SqlParameter gsaa = new SqlParameter();
-                gsaa.ParameterName = "@adminId";
-                gsaa.SqlDbType = SqlDbType.Int;
-                gsaa.Value = Convert.ToString(n.adminId);
-                cmd.Parameters.Add(gsaa);
+                
 
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@code";

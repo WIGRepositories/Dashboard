@@ -4,7 +4,7 @@ var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
     $scope.GetCompanys = function () {
-        $http.get('http://localhost:8020/api/GetCompanyGroups').then(function (response) {
+        $http.get('http://localhost:1476/api/GetCompanyGroups').then(function (response, data) {
             $scope.Group = response.data;
 
         });
@@ -15,7 +15,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             Id: Group.Id,
             Name: Group.Name,
             admin: Group.admin,
-            adminId: Group.adminId,
             code: Group.code,
             descr: Group.descr,
             active: Group.active
@@ -26,7 +25,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:8020/api/CompanyGroups/CompanyGroups2',
+            url: 'http://localhost:1476/api/CompanyGroups/CompanyGroups2',
             data: Group
         }
         $http(req).then(function (response) { });
