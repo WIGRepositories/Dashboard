@@ -13,9 +13,9 @@ namespace BTPOSDashboard.Controllers
     {
 
         [HttpGet]
-        public DataTable getdashboard()
+        public DataSet getdashboard()
         {
-            DataTable Tbl = new DataTable();
+            DataTable Ds = new DataTable();
 
 
             //connect to database
@@ -26,14 +26,15 @@ namespace BTPOSDashboard.Controllers
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetDashboardDetails";
+        
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
-            Tbl = ds.Tables[0];
+           // Tbl = ds.Tables[0];
 
             // int found = 0;
-            return Tbl;
+            return ds;
         }
     }
 }
