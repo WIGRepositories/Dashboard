@@ -22,7 +22,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         }
 
-
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/TroubleTicketingDetails/saveTroubleTicketingDetails',

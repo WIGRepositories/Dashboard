@@ -22,9 +22,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
             // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
 
-        
-
-
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/LicensePayments/LicensePayment2',

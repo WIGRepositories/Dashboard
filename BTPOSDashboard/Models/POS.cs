@@ -582,5 +582,23 @@ namespace POSDBAccess.Models
            public string ChangeRendered { get; set; }
 
        }
+       public class RegistrationBTPOS
+       {
+           public string code { get; set; }
 
+           public string uniqueId { get; set; }
+
+           public string ipconfig { get; set; }
+
+           public string RegeneratedNo { get; set; }
+
+           public int Active { get; set; }
+       }
+
+    public class loginpage
+    {
+        public string userid { get; set; }
+
+        public string password { get; set; }
+    }
     }

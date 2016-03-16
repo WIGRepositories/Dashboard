@@ -268,12 +268,15 @@
     <Content Include="UI\js\jquery-ui.js" />
     <Content Include="UI\js\jquery.menu.js" />
     <Content Include="UI\js\LicensePayments.js" />
+    <Content Include="UI\js\login.js" />
     <Content Include="UI\js\main.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\page-calendar.js" />
     <Content Include="UI\js\page-contact.js" />
     <Content Include="UI\js\page-gallery.js" />
     <Content Include="UI\js\raphael-min.js" />
+    <Content Include="UI\js\registerform.js" />
+    <Content Include="UI\js\RegistrationBTPOS.js" />
     <Content Include="UI\js\respond.min.js" />
     <Content Include="UI\js\roles.js" />
     <Content Include="UI\js\table-action.js" />
@@ -317,6 +320,7 @@
     <Content Include="UI\page-timeline.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
+    <Content Include="UI\RegistrationBTPOS.html" />
     <Content Include="UI\table-action.html" />
     <Content Include="UI\table-advanced.html" />
     <Content Include="UI\table-basic.html" />
@@ -1738,6 +1742,7 @@
     <Content Include="UI\vendors\TypeGroups.html" />
     <Content Include="UI\vendors\Types.html" />
     <Content Include="UI\ViewMail.html" />
+    <Content Include="UI\Welcome.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1763,12 +1768,16 @@
     <Compile Include="Controllers\InventoryDetailsController.cs" />
     <Compile Include="Controllers\InventoryMasterController.cs" />
     <Compile Include="Controllers\LicensePaymentsController.cs" />
+    <Compile Include="Controllers\LOGINController.cs" />
+    <Compile Include="Controllers\loginpageController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
     <Compile Include="Controllers\PayablesMasterController.cs" />
     <Compile Include="Controllers\PaymentDetailsController.cs" />
     <Compile Include="Controllers\PaymentgatewayController.cs" />
     <Compile Include="Controllers\ReceivingsController.cs" />
     <Compile Include="Controllers\ReceivingsMasterController.cs" />
+    <Compile Include="Controllers\RegisterFormController.cs" />
+    <Compile Include="Controllers\RegistrationBTPOSController.cs" />
     <Compile Include="Controllers\RoleDetailsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SMSformatsController.cs" />
