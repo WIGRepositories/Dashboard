@@ -9,7 +9,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     });
     $scope.save = function (TypeGroups) {
-        alert("ok");
+       
         var TypeGroups = {
 
              

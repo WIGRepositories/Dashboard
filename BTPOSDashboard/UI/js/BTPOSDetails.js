@@ -29,7 +29,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
         }
         $http(req).then(function (response) { });
 
-        alert("saved");
+      
         $scope.currGroup = null;
     };
 

@@ -8,7 +8,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     });
     $scope.save = function (roles) {
-        alert("ok");
+      
         var roles = {
             Id: roles.Id,
             Name:roles.Name,

@@ -3,7 +3,7 @@ var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
   
     $scope.save = function (Group) {
-        alert("saved");
+    
         var Group = {
                 
             code: Group.code,

@@ -9,7 +9,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
     });
     $scope.save = function (User) {
-        alert("saved");
+     
         var User = {
             Id: User.Id,
             FirstName: User.FirstName,
@@ -33,7 +33,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
         }
         $http(req).then(function (response) { });
 
-        alert("saved");
+    
         $scope.User1 = null;
     };
 

@@ -29,7 +29,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
         }
         $http(req).then(function (res) { });
-        alert("ok");
+      
     };
     
 });

@@ -9,7 +9,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         //alerts("hi");
     });
     $scope.save = function (type) {
-        alert('welcome')
+       
         var type = {
 
             UserName: type.UserName,

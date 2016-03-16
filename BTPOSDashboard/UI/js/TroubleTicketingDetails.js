@@ -7,7 +7,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
     });
     $scope.save = function (Group) {
-        alert("saved");
+       
         var Group = {
             addInfo: Group.addInfo,
             createdBy: Group.createdBy,

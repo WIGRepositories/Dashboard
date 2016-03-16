@@ -14,7 +14,7 @@
 ////}
 var myapp1 = angular.module('myApp', [])
 var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http) {
-    alert('hai')
+   
     $scope.Signin = function () {
         var u = $scope.UserName;
         var p = $scope.Password;
