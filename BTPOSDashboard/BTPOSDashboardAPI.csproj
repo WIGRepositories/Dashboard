@@ -90,16 +90,6 @@
     <Content Include="UI\Alerts.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
-    <Content Include="UI\charts-chartjs.html" />
-    <Content Include="UI\charts-flotchart.html" />
-    <Content Include="UI\charts-highchart-area.html" />
-    <Content Include="UI\charts-highchart-column-bar.html" />
-    <Content Include="UI\charts-highchart-combinations.html" />
-    <Content Include="UI\charts-highchart-dynamic.html" />
-    <Content Include="UI\charts-highchart-line.html" />
-    <Content Include="UI\charts-highchart-more.html" />
-    <Content Include="UI\charts-highchart-pie.html" />
-    <Content Include="UI\charts-highchart-scatter-bubble.html" />
     <Content Include="UI\Company.html" />
     <Content Include="UI\ComposeMail.html" />
     <Content Include="UI\ConfigureAlerts.html" />
@@ -348,7 +338,6 @@
     <Content Include="UI\ui-treeview.html" />
     <Content Include="UI\ui-typography.html" />
     <Content Include="UI\Users.html" />
-    <Content Include="UI\vendors\AddNewUser.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />

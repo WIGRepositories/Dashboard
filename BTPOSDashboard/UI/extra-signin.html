@@ -1,69 +1,57 @@
-﻿ll<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrl">
 <head>
     <title>Sign In | Extra</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+    <link type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
-    <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+    <!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style1/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
-    <!--<link rel="shortcut icon" href="images/favicon.ico">-->
+    <link rel="shortcut icon" href="images/favicon.ico">
 </head>
-<body ng-model="type">
+<body id="signin-page" ng-model="type">
     <div class="page-form">
-        <form class="form-signin">
+        <form action="index.html" class="form">
             <div class="header-content"><h1>Log In</h1></div>
-            <!--<div class="body-content"><p>Log in with a social network:</p>-->
-            <!--<div class="row mbm text-center">
-                <div class="col-md-4"><a href="#" class="btn btn-sm btn-twitter btn-block"><i class="fa fa-twitter fa-fw"></i>Twitter</a></div>
-                <div class="col-md-4"><a href="#" class="btn btn-sm btn-facebook btn-block"><i class="fa fa-facebook fa-fw"></i>Facebook</a></div>
-                <div class="col-md-4"><a href="#" class="btn btn-sm btn-google-plus btn-block"><i class="fa fa-google-plus fa-fw"></i>Google Plus</a></div>
-            </div>-->
-            <div class="form-group">
-                <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="Username" name="username" class="form-control" ng-model="UserName"></div>
-            </div>
-            <div class="form-group">
-                <div class="input-icon right"><i class="fa fa-key"></i><input type="password" placeholder="Password" name="password" class="form-control" ng-model="Password"></div>
-            </div>
-            <div class="form-group pull-left">
-                <div class="checkbox-list">
-                    <label>
-                        <input type="checkbox">&nbsp;
-                        Keep me signed in
-                    </label>
+            <div class="body-content">
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="Username" name="username" class="form-control" ng-model="UserName"></div>
                 </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-key"></i><input type="password" placeholder="Password" name="password" class="form-control" ng-model="Password"></div>
+                </div>
+                <div class="form-group pull-left">
+                    <div class="checkbox-list">
+                        <label>
+                            <input type="checkbox">&nbsp;
+                            Keep me signed in
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group pull-right">
+                    <button ng-click="Signin()" class="btn btn-success">
+                        Log In
+                        &nbsp;<i class="fa fa-chevron-circle-right"></i>
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+                <div class="forget-password">
+                    <h4>Forgotten your Password?</h4>
+                    <p>please click <a href='#' class='btn-forgot-pwd'>here</a> to reset your password.</p>
+                </div>
+                <hr>
+                <p>Don't have an account? <a id="btn-register" href="extra-signup.html">Register Now</a></p>
             </div>
-            <div class="form-group pull-right">
-                <button class="btn btn-success" ng-click="Signin()">
-                    Log In
-                    &nbsp;<i class="fa fa-chevron-circle-right"></i>
-                </button>
-            </div>
-            <div class="clearfix"></div>
-            <div class="forget-password">
-                <a href="#">   <h4>Forgotten your Password?</h4></a>
-
-                <p>no worries, click <a href='#' class='btn-forgot-pwd'>here</a> to reset your password.</p>
-            </div>
-            <hr>
-            <p>Don't have an account? <a id="btn-register" href="extra-signup.html">Register Now</a></p>
-
         </form>
     </div>
     <script src="js/jquery-1.10.2.min.js"></script>
@@ -86,19 +74,19 @@
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
     <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
+    <script>
+        //BEGIN CHECKBOX & RADIO
+        $('input[type="checkbox"]').iCheck({
+            checkboxClass: 'icheckbox_minimal-grey',
+            increaseArea: '20%' // optional
+        });
+        $('input[type="radio"]').iCheck({
+            radioClass: 'iradio_minimal-grey',
+            increaseArea: '20%' // optional
+        });
+        //END CHECKBOX & RADIO</script>
+
     <script src="js/main.js"></script>
-    <!---- <script>
-         //BEGIN CHECKBOX & RADIO
-         $('input[type="checkbox"]').iCheck({
-             checkboxClass: 'icheckbox_minimal-grey',
-             increaseArea: '20%' // optional
-         });
-         $('input[type="radio"]').iCheck({
-             radioClass: 'iradio_minimal-grey',
-             increaseArea: '20%' // optional
-         });
-         //END CHECKBOX & RADIO</script>-->
 
 
     <script src="js/angular.js"></script>
