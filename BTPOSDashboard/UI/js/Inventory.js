@@ -7,7 +7,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
     });
     $scope.save = function (Group) {
-        alert("saved");
+        
         var Group = {
             Active: Group.Active,
             availableQty: Group.availableQty,

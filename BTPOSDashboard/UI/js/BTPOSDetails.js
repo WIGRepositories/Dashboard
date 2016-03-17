@@ -1,8 +1,8 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $http.get('http://localhost:8020/api/getbtposdetails').then(function (response, req) {
+var ctrl = app.controller('myCtrl', function ($scope, $http) {
+    $http.get('http://localhost:1476/api/GetBTPOSDetails').then(function (response, req) {
         $scope.Group = response.data;
 
     });
@@ -15,7 +15,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             IMEI: Group.IMEI,
             Location: Group.Location,
             POSID: Group.POSID,
-            StatusId: Group.StatusId,
+          
             Status: Group.Status
             // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
 
@@ -24,12 +24,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:8020/api/BTPOSDetails/BTPOSDetails2',
+            url: 'http://localhost:1476/api/BTPOSDetails/BTPOSDetails2',
             data: Group
         }
         $http(req).then(function (response) { });
 
-        alert("saved");
+      
         $scope.currGroup = null;
     };
 
@@ -42,19 +42,4 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = null;
     }
 
-    $scope.GotToBTPOSDetails(btposid)
-    {
-        $localStorage.btposid = btposid;
-        $window.location.href = 'AddNewBTPOSDetails.html';
-    }
-  
-    $scope.GetBTPOSDetails()
-    {
-        var btposid = $localStorage.btposid;
-
-        $http.get('http://localhost:8020/api/getbtposdetails?id=' + btposid).then(function (response, req) {
-            $scope.btposdetails = response.data;
-
-        });
-    }
 });

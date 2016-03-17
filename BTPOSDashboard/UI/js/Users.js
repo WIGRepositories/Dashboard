@@ -1,38 +1,39 @@
 // JavaScript source code
 // JavaScript source code
-var myapp1 = angular.module('myApp', [])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
+var app = angular.module('myApp', [])
+var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:8020/api/Users1/Users1').then(function (res, data) {
+    $http.get('http://localhost:1476/api/Users/GetUsers').then(function (res, data) {
         $scope.User = res.data;
 
 
     });
-    $scope.save = function (User) {                      
-        
-        var User = {                  
+    $scope.save = function (User) {
+     
+        var User = {
             Id: User.Id,
             FirstName: User.FirstName,
             LastName: User.LastName,
             UserType: User.UserType,
-           
             EmpNo: User.EmpNo,
             Email: User.Email,
             AdressId: User.AdressId,
             MobileNo: User.MobileNo,
-            Role1:User.Role1,
-            Active: User.Active
-            
+            Role: User.Role,
+            Active: User.Active,
+            UserName: User.UserName,
+            Password: User.Password
+
         }
-     
+
         var req = {
             method: 'POST',
-            url: 'http://localhost:8020/api/Users1/Users2',
-           data: User
+            url: 'http://localhost:1476/api/users/saveusers',
+            data: User
         }
         $http(req).then(function (response) { });
 
-        alert("saved");
+    
         $scope.User1 = null;
     };
 
@@ -44,5 +45,5 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $scope.User1 = null;
     }
 });
- 
+
 

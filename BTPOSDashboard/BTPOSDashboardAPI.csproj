@@ -40,8 +40,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -51,6 +62,17 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -58,36 +80,19 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
+    <Content Include="UI\AddNewBTPOSDetails.html" />
+    <Content Include="UI\AddNewCompany.html" />
+    <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
+    <Content Include="UI\AddTroubleTicketingDetails.html" />
+    <Content Include="UI\Alerts.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
-    <Content Include="UI\charts-chartjs.html" />
-    <Content Include="UI\charts-flotchart.html" />
-    <Content Include="UI\charts-highchart-area.html" />
-    <Content Include="UI\charts-highchart-column-bar.html" />
-    <Content Include="UI\charts-highchart-combinations.html" />
-    <Content Include="UI\charts-highchart-dynamic.html" />
-    <Content Include="UI\charts-highchart-line.html" />
-    <Content Include="UI\charts-highchart-more.html" />
-    <Content Include="UI\charts-highchart-pie.html" />
-    <Content Include="UI\charts-highchart-scatter-bubble.html" />
     <Content Include="UI\Company.html" />
+    <Content Include="UI\ComposeMail.html" />
+    <Content Include="UI\ConfigureAlerts.html" />
     <Content Include="UI\css\style-responsive.css" />
     <Content Include="UI\css\themes\style1\blue-dark.css" />
     <Content Include="UI\css\themes\style1\blue-grey.css" />
@@ -149,9 +154,11 @@
     <Content Include="UI\css\themes\style3\yellow-dark.css" />
     <Content Include="UI\css\themes\style3\yellow-green.css" />
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
+    <Content Include="UI\EditHistory.html" />
     <Content Include="UI\email-compose-mail.html" />
     <Content Include="UI\email-inbox.html" />
     <Content Include="UI\email-view-mail.html" />
+    <Content Include="UI\Empty.html" />
     <Content Include="UI\extra-404.html" />
     <Content Include="UI\extra-500.html" />
     <Content Include="UI\extra-blank.html" />
@@ -187,7 +194,6 @@
     <Content Include="UI\grid-pagination-only.html" />
     <Content Include="UI\grid-range-slider.html" />
     <Content Include="UI\grid-without-item-per-page.html" />
-    <Content Include="UI\HtmlPage1.html" />
     <Content Include="UI\images\bg\1.jpg" />
     <Content Include="UI\images\bg\2.jpg" />
     <Content Include="UI\images\bg\3.jpg" />
@@ -219,6 +225,7 @@
     <Content Include="UI\images\gallery\blog_item1.jpg" />
     <Content Include="UI\images\icons\loading.gif" />
     <Content Include="UI\images\user.jpg" />
+    <Content Include="UI\Inbox.html" />
     <Content Include="UI\index.html" />
     <Content Include="UI\js\angular.js" />
     <Content Include="UI\js\animation.js" />
@@ -250,17 +257,24 @@
     <Content Include="UI\js\jquery-migrate-1.2.1.min.js" />
     <Content Include="UI\js\jquery-ui.js" />
     <Content Include="UI\js\jquery.menu.js" />
+    <Content Include="UI\js\LicensePayments.js" />
+    <Content Include="UI\js\login.js" />
     <Content Include="UI\js\main.js" />
+    <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\page-calendar.js" />
     <Content Include="UI\js\page-contact.js" />
     <Content Include="UI\js\page-gallery.js" />
     <Content Include="UI\js\raphael-min.js" />
+    <Content Include="UI\js\registerform.js" />
+    <Content Include="UI\js\RegistrationBTPOS.js" />
     <Content Include="UI\js\respond.min.js" />
     <Content Include="UI\js\roles.js" />
+    <Content Include="UI\js\source.js" />
     <Content Include="UI\js\table-action.js" />
     <Content Include="UI\js\table-advanced.js" />
     <Content Include="UI\js\table-filter.js" />
     <Content Include="UI\js\table-sample.js" />
+    <Content Include="UI\js\TroubleTicketingDetails.js" />
     <Content Include="UI\js\TypeGroups.js" />
     <Content Include="UI\js\Types.js" />
     <Content Include="UI\js\ui-checkbox-radio.js" />
@@ -284,6 +298,10 @@
     <Content Include="UI\layout-right-sidebar-collapsed.html" />
     <Content Include="UI\layout-right-sidebar.html" />
     <Content Include="UI\layout-title-breadcrumb.html" />
+    <Content Include="UI\LicensePayments.html" />
+    <Content Include="UI\newBTPOS.html" />
+    <Content Include="UI\newcompany.html" />
+    <Content Include="UI\newuser.html" />
     <Content Include="UI\page-about.html" />
     <Content Include="UI\page-blog-item.html" />
     <Content Include="UI\page-blog.html" />
@@ -292,12 +310,15 @@
     <Content Include="UI\page-gallery.html" />
     <Content Include="UI\page-timeline.html" />
     <Content Include="UI\Roles.html" />
+    <Content Include="UI\AddLicensepayments.html" />
+    <Content Include="UI\RegistrationBTPOS.html" />
     <Content Include="UI\table-action.html" />
     <Content Include="UI\table-advanced.html" />
     <Content Include="UI\table-basic.html" />
     <Content Include="UI\table-filter.html" />
     <Content Include="UI\table-responsive.html" />
     <Content Include="UI\table-sample.html" />
+    <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
     <Content Include="UI\ui-buttons.html" />
@@ -1710,7 +1731,11 @@
     <Content Include="UI\vendors\summernote\summernote.js" />
     <Content Include="UI\vendors\TypeGroups.html" />
     <Content Include="UI\vendors\Types.html" />
-    <Content Include="Web.config" />
+    <Content Include="UI\ViewMail.html" />
+    <Content Include="UI\Welcome.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1723,29 +1748,37 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\busdetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
     <Compile Include="Controllers\FleetOwnerLicenseController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\InventoryDetailsController.cs" />
     <Compile Include="Controllers\InventoryMasterController.cs" />
+    <Compile Include="Controllers\LicensePaymentsController.cs" />
+    <Compile Include="Controllers\LOGINController.cs" />
+    <Compile Include="Controllers\loginpageController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
     <Compile Include="Controllers\PayablesMasterController.cs" />
     <Compile Include="Controllers\PaymentDetailsController.cs" />
     <Compile Include="Controllers\PaymentgatewayController.cs" />
     <Compile Include="Controllers\ReceivingsController.cs" />
     <Compile Include="Controllers\ReceivingsMasterController.cs" />
+    <Compile Include="Controllers\RegisterFormController.cs" />
+    <Compile Include="Controllers\RegistrationBTPOSController.cs" />
     <Compile Include="Controllers\RoleDetailsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SMSformatsController.cs" />
     <Compile Include="Controllers\SMSProviderConfigController.cs" />
     <Compile Include="Controllers\STATEController.cs" />
+    <Compile Include="Controllers\TroubleTicketingDetailsController.cs" />
     <Compile Include="Controllers\TypeGroupsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
-    <Compile Include="Controllers\Users1Controller.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1763,7 +1796,9 @@
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\WEB\JPListHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Properties\PublishProfiles\Dashboard.pubxml" />
     <Content Include="UI\vendors\bootstrap-clockface\.gitignore" />
     <Content Include="UI\vendors\bootstrap-clockface\.jshintignore" />

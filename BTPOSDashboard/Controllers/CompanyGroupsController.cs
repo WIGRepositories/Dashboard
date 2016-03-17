@@ -22,7 +22,7 @@ namespace POSDBAccess.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-          conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+          conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -48,7 +48,7 @@ namespace POSDBAccess.Controllers
                 //connect to database
                 SqlConnection conn = new SqlConnection();
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-                conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -69,11 +69,7 @@ namespace POSDBAccess.Controllers
                 gs.Value = n.admin;
                 cmd.Parameters.Add(gs);
 
-                SqlParameter gsaa = new SqlParameter();
-                gsaa.ParameterName = "@adminId";
-                gsaa.SqlDbType = SqlDbType.Int;
-                gsaa.Value = Convert.ToString(n.adminId);
-                cmd.Parameters.Add(gsaa);
+                
 
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@code";
