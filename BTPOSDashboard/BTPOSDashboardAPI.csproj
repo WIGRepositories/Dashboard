@@ -301,7 +301,6 @@
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
     <Content Include="UI\newcompany.html" />
-    <Content Include="UI\newuser.html" />
     <Content Include="UI\page-about.html" />
     <Content Include="UI\page-blog-item.html" />
     <Content Include="UI\page-blog.html" />

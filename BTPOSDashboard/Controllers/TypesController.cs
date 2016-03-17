@@ -80,7 +80,7 @@ namespace DAshboard.Controllers
             SqlParameter llid = new SqlParameter();
             llid.ParameterName = "@Active";
             llid.SqlDbType = SqlDbType.VarChar;
-            llid.Value = b.Active;
+            llid.Value = Convert.ToBoolean(b.Active)?"1":"0";
             cmd.Parameters.Add(llid);
            
           

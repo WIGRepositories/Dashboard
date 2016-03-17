@@ -12,6 +12,7 @@ namespace BTPOSDashboard.Controllers
 {
     public class RegistrationBTPOSController : ApiController
     {
+        [HttpPost]
          public DataTable saveRegistrationBTPOS(RegistrationBTPOS n)
         {
             DataTable Tbl = new DataTable();
@@ -45,7 +46,7 @@ namespace BTPOSDashboard.Controllers
                 SqlParameter gb = new SqlParameter();
                 gb.ParameterName = "@uniqueId";
                 gb.SqlDbType = SqlDbType.VarChar;
-                gb.Value = n.uniqueId;
+                gb.Value = "POS"+ Guid.NewGuid();
                 cmd.Parameters.Add(gb);
 
                  SqlParameter gc = new SqlParameter();
@@ -54,11 +55,11 @@ namespace BTPOSDashboard.Controllers
                 gc.Value = n.ipconfig;
                 cmd.Parameters.Add(gc);
 
-                 SqlParameter gd = new SqlParameter();
-                gd.ParameterName = "@RegeneratedNo";
-                gd.SqlDbType = SqlDbType.VarChar;
-                gd.Value = n.RegeneratedNo;
-                cmd.Parameters.Add(gd);
+                // SqlParameter gd = new SqlParameter();
+                //gd.ParameterName = "@RegeneratedNo";
+                //gd.SqlDbType = SqlDbType.VarChar;
+                //gd.Value = n.RegeneratedNo;
+                //cmd.Parameters.Add(gd);
 
                 cmd.ExecuteScalar();
                 conn.Close();

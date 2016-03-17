@@ -17,7 +17,7 @@ var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http) {
    
     $scope.Signin = function () {
         var u = $scope.UserName;
-        var p = $scope.Password;
+        var p = $scope.Password
 
         $http.get('http://localhost:1476/api/LOGIN/ValidateCredentials?username=' + u + '&pwd=' + p).then(function (res,data) {
            
