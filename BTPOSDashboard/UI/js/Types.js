@@ -20,7 +20,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $scope.save
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/types/pos',
+            url: 'http://localhost:8020/api/types/pos',
             //headers: {
             //    'Content-Type': undefined
 

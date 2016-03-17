@@ -170,7 +170,7 @@ namespace POSDBAccess.Models
            public int typegrpid { get; set; }
 
        }
-       public class Inventory
+       public class Inventory1
        {
            public int Active { get; set; }
 
@@ -212,7 +212,7 @@ namespace POSDBAccess.Models
            public int transactionId { get; set; }
 
        }
-       public class LicensePayment
+       public class LicensePayments
        {
            public DateTime expiryOn { get; set; }
 

@@ -2,7 +2,7 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/roles/roles').then(function (res, data) {
+    $http.get('http://localhost:8020/api/Roles/roles').then(function (res, data) {
         $scope.roles = res.data;
 
 
@@ -16,10 +16,10 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             Active:roles.Active
 
         };
-        $scope.save
+       
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/roles/role',
+            url: 'http://localhost:8020/api/Roles/role',
             //headers: {
             //    'Content-Type': undefined
 
