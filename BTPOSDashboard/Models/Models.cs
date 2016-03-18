@@ -304,36 +304,4 @@ public class TypeGroups
     public string Name { set; get; }
     public string Active { set; get; }
 }
-public class BusDetails
-{
-    public int busId { get; set; }
-
-    public int busTypeId { get; set; }
-
-    public int conductorId { get; set; }
-
-    public string conductorName { get; set; }
-
-    public int driverId { get; set; }
-
-    public string driverName { get; set; }
-
-    public int fleetOwnerId { get; set; }
-
-    public string groupname { get; set; }
-
-    public int Id { get; set; }
-
-    public int POSID { get; set; }
-
-    public string RegNo { get; set; }
-
-    public string route { get; set; }
-
-    public string Status { get; set; }
-
-    public int statusid { get; set; }
-
-}
-
 }

@@ -212,7 +212,7 @@ $(function () {
                 $element += "<li>";
                 $element += "<p>";
                 $element += "<img class='avt' src='"+$my_avt+"'>";
-                $element += "<span class='user'>Admin</span>";
+                $element += "<span class='user'>John Doe</span>";
                 $element += "<span class='time'>" + h + ":" + m + "</span>";
                 $element += "</p>";
                 $element = $element + "<p>" + $content +  "</p>";

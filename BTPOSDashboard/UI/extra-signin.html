@@ -19,9 +19,9 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <link rel="shortcut icon" href="images/favicon.ico">
 </head>
-<body id="signin-page" ng-model="type">
+<body ng-model="type">
     <div class="page-form">
-        <form action="index.html" class="form">
+        <form  class="form-signin">
             <div class="header-content"><h1>Log In</h1></div>
             <div class="body-content">
                 <div class="form-group">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="form-group pull-right">
-                    <button ng-click="Signin()" class="btn btn-success">
+                    <button type="reset" ng-click="Signin()" class="btn btn-success">
                         Log In
                         &nbsp;<i class="fa fa-chevron-circle-right"></i>
                     </button>
@@ -74,7 +74,7 @@
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
     <script src="js/table-action.js"></script>
-    <script>
+    <!--<script>
         //BEGIN CHECKBOX & RADIO
         $('input[type="checkbox"]').iCheck({
             checkboxClass: 'icheckbox_minimal-grey',
@@ -86,7 +86,7 @@
         });
         //END CHECKBOX & RADIO</script>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js"></script>-->
 
 
     <script src="js/angular.js"></script>

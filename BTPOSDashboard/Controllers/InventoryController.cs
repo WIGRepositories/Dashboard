@@ -36,7 +36,7 @@ namespace BTPOSDashboardAPI.Controllers
         }
         [HttpPost]
 
-        public DataTable SaveInventory(Inventory n)
+        public DataTable SaveInventory(Inventory1 n)
         {
             DataTable Tbl = new DataTable();
 
@@ -56,7 +56,7 @@ namespace BTPOSDashboardAPI.Controllers
                 SqlParameter gs = new SqlParameter();
                 gs.ParameterName = "@Active";
                 gs.SqlDbType = SqlDbType.Int;
-                gs.Value = Convert.ToString(n.Active);
+                gs.Value = Convert.ToBoolean(n.Active) ? "1" : "0";
                 cmd.Parameters.Add(gs);
 
                 SqlParameter gb = new SqlParameter();

@@ -34,8 +34,8 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
-        [HttpPost]
-        public DataTable saveloginpage(loginpage n)
+        [HttpGet]
+        public DataTable saveloginpage(string userid, string pwd)
         {
             DataTable Tbl = new DataTable();
 
@@ -56,13 +56,13 @@ namespace BTPOSDashboard.Controllers
                 SqlParameter gc = new SqlParameter();
                 gc.ParameterName = "@userid";
                 gc.SqlDbType = SqlDbType.VarChar;
-                gc.Value = n.userid;
+                gc.Value = userid;
                 cmd.Parameters.Add(gc);
 
                 SqlParameter gd = new SqlParameter();
                 gd.ParameterName = "@password";
                 gd.SqlDbType = SqlDbType.VarChar;
-                gd.Value = n.password;
+                gd.Value = pwd;
                 cmd.Parameters.Add(gd);
 
                 cmd.ExecuteScalar();

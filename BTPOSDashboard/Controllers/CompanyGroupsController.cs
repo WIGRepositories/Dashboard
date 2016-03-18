@@ -60,7 +60,7 @@ namespace POSDBAccess.Controllers
                 SqlParameter gsa = new SqlParameter();
                 gsa.ParameterName = "@active";
                 gsa.SqlDbType = SqlDbType.Int;
-                gsa.Value = Convert.ToBoolean(n.active) ? "0" : "1";
+                gsa.Value = Convert.ToBoolean(n.active) ? "1" : "0";
                 cmd.Parameters.Add(gsa);
 
                 SqlParameter gs = new SqlParameter();

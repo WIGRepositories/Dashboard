@@ -96,32 +96,31 @@ namespace Login.Controllers
 
         }
 
-        //[HttpGet]
+ 
+        [HttpGet]
+        public DataTable login()
+        {
+            DataTable Tbl = new DataTable();
 
-        //public DataTable login()
-        
-        //{
-        //    DataTable Tbl = new DataTable();
 
+           // connect to database
+           SqlConnection conn = new SqlConnection();
+           // connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-        //    //connect to database
-        //    SqlConnection conn = new SqlConnection();
-        //    //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-        //    conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "Getsp_login";
+            cmd.Connection = conn;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            Tbl = ds.Tables[0];
 
-        //    SqlCommand cmd = new SqlCommand();
-        //    cmd.CommandType = CommandType.StoredProcedure;
-        //    cmd.CommandText = "Getsp_login";
-        //    cmd.Connection = conn;
-        //    DataSet ds = new DataSet();
-        //    SqlDataAdapter db = new SqlDataAdapter(cmd);
-        //    db.Fill(ds);
-        //    Tbl = ds.Tables[0];
-
-        //    // int found = 0;
-        //    return Tbl;
-        //}
-         [HttpPost]
+           //  int found = 0;
+            return Tbl;
+        }
+        [HttpPost]
         public DataTable password(login l)
         {
             DataTable Tbl = new DataTable();
@@ -129,7 +128,7 @@ namespace Login.Controllers
 
             //connect to database
             SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+           // connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
           
             SqlCommand cmd = new SqlCommand();
@@ -148,7 +147,7 @@ namespace Login.Controllers
              SqlParameter lPassword = new SqlParameter();
              lPassword.ParameterName = "@Password";
              lPassword.SqlDbType = SqlDbType.VarChar;
-             lPassword.Value = l.Password;
+             lPassword.Value =l.Password;
              cmd.Parameters.Add(lPassword);
 
 
@@ -178,20 +177,20 @@ namespace Login.Controllers
             SqlParameter rresult = new SqlParameter();
             rresult.ParameterName = "@result";
             rresult.SqlDbType = SqlDbType.Int;
-            rresult.Value = 1;
+            rresult.Value = 0;
             rresult.Direction = ParameterDirection.Output;
 
             cmd.Parameters.Add(rresult);
-             
-             //lresult.Value = Convert.ToString(l.Password);
-             //cmd.Parameters.Add(lresult);
+
+            //lresult.Value = Convert.ToString(l.Password);
+            //cmd.Parameters.Add(lresult);
 
             cmd.ExecuteScalar();
 
             string val = rresult.Value.ToString();
 
             conn.Close();
-            // int found = 0;
+             //int found = 0;
             return Tbl;
         }
          public void Options() { }
