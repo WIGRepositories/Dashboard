@@ -49,15 +49,9 @@ namespace DAshboard.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelTypes";
+            cmd.CommandText = "Sp_InsTypes";
             cmd.Connection = conn;
             conn.Open();
-            SqlParameter Aid = new SqlParameter();
-            Aid.ParameterName = "@Id";
-            Aid.SqlDbType = SqlDbType.Int;
-            Aid.Value = b.Id;
-            Aid.Value = Convert.ToString(b.Id);
-            cmd.Parameters.Add(Aid);
 
             SqlParameter Gid = new SqlParameter();
             Gid.ParameterName = "@Name";

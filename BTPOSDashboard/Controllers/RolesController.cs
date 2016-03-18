@@ -13,7 +13,7 @@ namespace DAshboard.Controllers
     public class RolesController : ApiController
     {
         [HttpGet]
-        public DataTable roles()
+        public DataTable getroles()
         {
             DataTable Tbl = new DataTable();
 
@@ -36,7 +36,7 @@ namespace DAshboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable role(roles b)
+        public DataTable saveroles(roles b)
         {
             DataTable Tbl = new DataTable();
 
@@ -58,15 +58,15 @@ namespace DAshboard.Controllers
             bb.Value = b.Name;
             cmd.Parameters.Add(bb);
             SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Desc";
+            dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Desc;
+            dd.Value = b.Description;
             cmd.Parameters.Add(dd);
        
             SqlParameter aa = new SqlParameter();
             aa.ParameterName = "@Active";
             aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = b.Active;
+            aa.Value = Convert.ToBoolean(b.Active)?"1":"0";
             cmd.Parameters.Add(aa);
 
 

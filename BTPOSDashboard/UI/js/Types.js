@@ -2,16 +2,16 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/Types/users').then(function (res, data) {
+    $http.get('http://localhost:1476/api/Types/type1').then(function (res, data) {
         $scope.Types = res.data;
 
 
     });
     $scope.save = function (Types) {
-   
+        alert("ok");
         var Types = {
 
-            Id: Types.Id,
+         
             Name: Types.Name,
             Desc: Types.Desc,
             Active: Types.Active,
@@ -20,7 +20,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $scope.save
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/types/pos',
+            url: 'http://localhost:1476/api/types/type2',
             //headers: {
             //    'Content-Type': undefined
 
