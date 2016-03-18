@@ -2,7 +2,7 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/roles/getroles').then(function (res, data) {
+    $http.get('http://localhost:1476/api/Roles/getroles').then(function (res, data) {
         $scope.roles = res.data;
 
 
@@ -10,16 +10,16 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     $scope.save = function (roles) {
         alert("ok");
         var roles = {
-           
+            Id:roles.Id,
             Name: roles.Name,
             Description: roles.Description,
-            Active:roles.Active
+            Active: roles.Active
 
         };
       
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/roles/saveroles',
+            url: 'http://localhost:1476/api/Roles/saveroles',
             //headers: {
             //    'Content-Type': undefined
 
@@ -27,7 +27,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
 
         }
-        $http(req).then(function (res) { });
-
+        $http(req).then(function (response) { });
+        $scope.roles = null;
     };
 });

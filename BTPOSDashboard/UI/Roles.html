@@ -328,25 +328,26 @@
                                                             <th>Description</th>
 
                                                             <th>Active</th>
-
+                                                            
                                                         </tr>
+                                                        </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="T in roles">
+                                                        <tr ng-repeat="role in roles">
                                                           
-                                                            <td>{{T.Name}}</td>
-                                                            <td>{{T.Description}}</td>
+                                                            <td>{{role.Name}}</td>
+                                                            <td>{{role.Description}}</td>
 
-                                                            <td>{{T.Active}}</td>
+                                                            <td><input type="checkBox"checked /></td>
 
 
 
                                                         </tr>
 
-
+                                                        
 
 
                                                     </tbody>
-                                                    </thead>
+                                              
                                                 </table>
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -361,7 +362,7 @@
                                                                 <option value="150">150</option>
                                                                 <option value="-1">All</option>
                                                             </select>&nbsp;
-                                                            records | Found total 58 records
+                                                            records 
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 text-right">

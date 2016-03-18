@@ -290,7 +290,7 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Action Tables</div>
+                            <div class="page-title">Types</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -331,21 +331,20 @@
                                                                     </tr>
                                                                 <tbody>
                                                                     <tr ng-repeat="T in Types">
-                                                                        {{5+9}}
+                                                                        
                                                                      
                                                                         <td>{{T.Name}}</td>
                                                                         <td>{{T.Desc}}</td>
                                                                         <td>{{T.TypeGroup}}</td>
-                                                                        <td>{{T.Active}}</td>
+                                                                        <td><input type="checkBox" checked /></td>
 
 
                                                                         <td>
-                                                                            <button type="button" data-target="#Modal-header-primary" class="btn btn-default btn-xs" data-toggle="modal" ng-click="setTypes(T);">
+                                                                            <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
                                                                                 <i class="fa fa-edit"></i>&nbsp;
                                                                                 Edit
                                                                             </button>
                                                                         </td>
-                                                                    </tr>
                                                                     s
                                                                 </tbody>
                                                                 </thead>
@@ -363,7 +362,7 @@
                                                                             <option value="150">150</option>
                                                                             <option value="-1">All</option>
                                                                         </select>&nbsp;
-                                                                        records | Found total 58 records
+                                                                        records 
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6 text-right">

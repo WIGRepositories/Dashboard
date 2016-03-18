@@ -64,9 +64,9 @@ namespace DAshboard.Models
     }
     public class roles
     {
-        
-        public int Name { get; set; }
-        public int Description { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public string Active { get; set; }
 
     }
@@ -290,11 +290,12 @@ namespace DAshboard.Models
     }
     public class Types
     {
-       
+        public int Id { set; get; }
         public string Name { set; get; }
         public string Desc { set; get; }
-        public string Active { set; get; }
+       
         public string TypeGroup { get; set; }
+        public string Active { set; get; }
     }
 public class TypeGroups
 {

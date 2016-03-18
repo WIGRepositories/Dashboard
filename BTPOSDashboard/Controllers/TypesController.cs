@@ -52,6 +52,11 @@ namespace DAshboard.Controllers
             cmd.CommandText = "Sp_InsTypes";
             cmd.Connection = conn;
             conn.Open();
+            SqlParameter Cid = new SqlParameter();
+            Cid.ParameterName = "@Id";
+            Cid.SqlDbType = SqlDbType.Int;
+            Cid.Value =Convert.ToInt32( b.Id);
+            cmd.Parameters.Add(Cid);
 
             SqlParameter Gid = new SqlParameter();
             Gid.ParameterName = "@Name";
@@ -66,16 +71,18 @@ namespace DAshboard.Controllers
             cmd.Parameters.Add(lid);
            
 
-            SqlParameter pid = new SqlParameter();
-            pid.ParameterName = "@Desc";
-            pid.SqlDbType = SqlDbType.VarChar;
-            pid.Value =b.Desc;
-            cmd.Parameters.Add(pid);
-            SqlParameter llid = new SqlParameter();
-            llid.ParameterName = "@Active";
-            llid.SqlDbType = SqlDbType.VarChar;
-            llid.Value = b.Active;
-            cmd.Parameters.Add(llid);
+            SqlParameter pDesc = new SqlParameter();
+            pDesc.ParameterName = "@Desc";
+            pDesc.SqlDbType = SqlDbType.VarChar;
+            pDesc.Value =b.Desc;
+            cmd.Parameters.Add(pDesc);
+
+            SqlParameter lAct = new SqlParameter();
+            lAct.ParameterName = "@Active";
+            lAct.SqlDbType = SqlDbType.VarChar;
+            lAct.Value =Convert.ToBoolean (b.Active)? "1" : "0";
+            //llid.Value = b.Active;
+            cmd.Parameters.Add(lAct);
            
           
             //DataSet ds = new DataSet();

@@ -51,12 +51,16 @@ namespace DAshboard.Controllers
             cmd.CommandText = "InsUpdDelRoles";
             cmd.Connection = conn;
             conn.Open();
-           
-            SqlParameter bb = new SqlParameter();
-            bb.ParameterName = "@Name";
-            bb.SqlDbType = SqlDbType.VarChar;
-            bb.Value = b.Name;
-            cmd.Parameters.Add(bb);
+            SqlParameter cc = new SqlParameter();
+            cc.ParameterName = "@Id";
+            cc.SqlDbType = SqlDbType.Int;
+            cc.Value =Convert.ToString (b.Id);
+            cmd.Parameters.Add(cc);
+            SqlParameter cname = new SqlParameter();
+            cname.ParameterName = "@Name";
+            cname.SqlDbType = SqlDbType.VarChar;
+            cname.Value = b.Name;
+            cmd.Parameters.Add(cname);
             SqlParameter dd = new SqlParameter();
             dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
