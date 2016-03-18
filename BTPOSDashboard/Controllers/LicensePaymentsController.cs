@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DAshboard.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class LicensePaymentsController : ApiController
     {

@@ -7,8 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using DAshboard.Controllers;
-using DAshboard.Models;
+using BTPOSDashboardAPI.Controllers;
+using BTPOSDashboardAPI.Models;
 
 namespace blocklist1.Controllers
 {

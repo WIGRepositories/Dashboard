@@ -1769,6 +1769,7 @@
     <Compile Include="Controllers\RegistrationBTPOSController.cs" />
     <Compile Include="Controllers\RoleDetailsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\SMSformatsController.cs" />
     <Compile Include="Controllers\SMSProviderConfigController.cs" />
     <Compile Include="Controllers\STATEController.cs" />

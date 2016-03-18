@@ -1,4 +1,4 @@
-﻿using DAshboard.Models;
+﻿using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;

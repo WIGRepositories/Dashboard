@@ -7,9 +7,9 @@ using System.Web.Http;
 using System.Data;
 
 using System.Data.SqlClient;
-using DAshboard.Models;
+using BTPOSDashboardAPI.Models;
 
-namespace DAshboard.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class InventoryMasterController : ApiController
     {
