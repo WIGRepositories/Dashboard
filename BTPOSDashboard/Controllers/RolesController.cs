@@ -13,7 +13,7 @@ namespace BTPOSDashboardAPI.Controllers
     public class RouteController : ApiController
     {
         [HttpGet]
-        public DataTable roles()
+        public DataTable getroles()
         {
             DataTable Tbl = new DataTable();
 
@@ -36,7 +36,7 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable role(roles b)
+        public DataTable saveroles(roles b)
         {
             DataTable Tbl = new DataTable();
 
@@ -51,22 +51,26 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.CommandText = "InsUpdDelRoles";
             cmd.Connection = conn;
             conn.Open();
-           
-            SqlParameter bb = new SqlParameter();
-            bb.ParameterName = "@Name";
-            bb.SqlDbType = SqlDbType.VarChar;
-            bb.Value = b.Name;
-            cmd.Parameters.Add(bb);
+            SqlParameter cc = new SqlParameter();
+            cc.ParameterName = "@Id";
+            cc.SqlDbType = SqlDbType.Int;
+            cc.Value =Convert.ToString (b.Id);
+            cmd.Parameters.Add(cc);
+            SqlParameter cname = new SqlParameter();
+            cname.ParameterName = "@Name";
+            cname.SqlDbType = SqlDbType.VarChar;
+            cname.Value = b.Name;
+            cmd.Parameters.Add(cname);
             SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Desc";
+            dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Desc;
+            dd.Value = b.Description;
             cmd.Parameters.Add(dd);
        
             SqlParameter aa = new SqlParameter();
             aa.ParameterName = "@Active";
             aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = b.Active;
+            aa.Value = Convert.ToBoolean(b.Active)?"1":"0";
             cmd.Parameters.Add(aa);
 
 

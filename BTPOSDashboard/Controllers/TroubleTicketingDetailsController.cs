@@ -13,7 +13,7 @@ namespace POSDBAccess.Controllers
     public class TroubleTicketingDetailsController : ApiController
     {
         [HttpGet]
-        [Route("api/GetTroubleTicketingDetails")]
+        
         public DataTable getTroubleTicketingDetails()
         {
             DataTable Tbl = new DataTable();

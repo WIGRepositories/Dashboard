@@ -73,7 +73,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlParameter llid = new SqlParameter();
             llid.ParameterName = "@Active";
             llid.SqlDbType = SqlDbType.Int;
-            llid.Value = Convert.ToBoolean(b.Active) ? "1" : "0";
+            llid.Value = Convert.ToBoolean(b.Active)? "1" : "0";
             //llid.Value = b.Active;
             cmd.Parameters.Add(llid);
            
