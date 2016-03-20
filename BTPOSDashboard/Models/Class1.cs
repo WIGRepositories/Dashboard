@@ -172,7 +172,7 @@ namespace BTPOSDashboardAPI.Models
     {
         public int Id { set; get; }
         public int Active { set; get; }      
-        public string Desc1 { set; get; }
+        public string Desc { set; get; }
         public string Name { set; get; }
     }
     public class ExpensesClass

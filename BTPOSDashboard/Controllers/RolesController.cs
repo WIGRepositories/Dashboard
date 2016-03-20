@@ -1,4 +1,4 @@
-﻿using DAshboard.Models;
+﻿using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,9 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DAshboard.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
-    public class RolesController : ApiController
+    public class RouteController : ApiController
     {
         [HttpGet]
         public DataTable getroles()

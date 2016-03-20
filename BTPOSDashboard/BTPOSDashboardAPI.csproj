@@ -84,6 +84,7 @@
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
+    <Content Include="UI\Addnewroute.html" />
     <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
@@ -269,6 +270,7 @@
     <Content Include="UI\js\RegistrationBTPOS.js" />
     <Content Include="UI\js\respond.min.js" />
     <Content Include="UI\js\roles.js" />
+    <Content Include="UI\js\Routes.js" />
     <Content Include="UI\js\source.js" />
     <Content Include="UI\js\table-action.js" />
     <Content Include="UI\js\table-advanced.js" />
@@ -311,6 +313,7 @@
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
     <Content Include="UI\RegistrationBTPOS.html" />
+    <Content Include="UI\Routes.html" />
     <Content Include="UI\table-action.html" />
     <Content Include="UI\table-advanced.html" />
     <Content Include="UI\table-basic.html" />
@@ -1769,9 +1772,11 @@
     <Compile Include="Controllers\RegistrationBTPOSController.cs" />
     <Compile Include="Controllers\RoleDetailsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\SMSformatsController.cs" />
     <Compile Include="Controllers\SMSProviderConfigController.cs" />
     <Compile Include="Controllers\STATEController.cs" />
+    <Compile Include="Controllers\TicketGenerationController.cs" />
     <Compile Include="Controllers\TroubleTicketingDetailsController.cs" />
     <Compile Include="Controllers\TypeGroupsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
