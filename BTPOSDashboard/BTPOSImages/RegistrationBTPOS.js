@@ -3,24 +3,22 @@ var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
   
     $scope.save = function (Group) {
-        alert("saved");
-        var RegistrationBTPOS = {
-                
-            code: Group.code,
-            ipconfig:"100.100.100.01"
-          
-            
+        window.location.href = "http://localhost:1476/BTPOSImages/poweron.html";
 
-        }
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/RegistrationBTPOS/saveRegistrationBTPOS',
+        //var RegistrationBTPOS = {                
+        //    code: Group.code,
+        //    ipconfig:"100.100.100.01"   
+        //}
 
-            data: RegistrationBTPOS
+        //var req = {
+        //    method: 'POST',
+        //    url: 'http://localhost:1476/api/RegistrationBTPOS/saveRegistrationBTPOS',
+        //    data: RegistrationBTPOS
+        //}
 
-        }
-
-        $http(req).then(function (response) { });
+        //$http(req).then(function (response) {
+        //    window.location.href = "http://localhost:1476/BTPOSImages/poweron.html";
+        //});
     };
 });

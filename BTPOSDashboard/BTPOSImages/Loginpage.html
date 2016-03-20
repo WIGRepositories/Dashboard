@@ -24,6 +24,11 @@
             document.getElementById('masterimg').src = 'menu.jpg';
 
         }
+
+        function goToMenu()
+        {
+            window.location.href = "http://localhost:1476/BTPOSImages/menu.html";
+        }
     </script>
 </head>
 <body ng-model="Group">
@@ -86,7 +91,7 @@
 
                 <table style="width:100%;">
                     <tr>
-                        <td> please enter fleet owner code<input type="text" name="codetxtBx" /></td>
+                        <td> </td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -104,9 +109,22 @@
         </tr>
 
     </table>
-    UserId:<input type="text" ng-model="Group.userid"><br>
-    Password:<input type="password" ng-model="Group.password"><br>
-    <input type="button" value="save" ng-click="save(Group)"><br>
+
+    <table>
+        <tr>
+            <td>UserId:</td>
+            <td><input type="text" ng-model="Group.userid"></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" ng-model="Group.password"></td>
+        </tr>
+        <tr>
+            <!--<td><input type="button" value="submit" ng-click="save(Group);" /></td>-->
+            <td><input type="button" value="login" onclick="goToMenu();"></td>
+            <td></td>
+        </tr>
+    </table>  
 
     <script src="angular.js"></script>
     <script src="loginpage.js"></script>

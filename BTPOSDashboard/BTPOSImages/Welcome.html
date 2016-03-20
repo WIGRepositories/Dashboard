@@ -48,9 +48,12 @@
 
 
         function GotToRestart() {
-            document.getElementById('masterimg').src = 'restart.jpg';
+            // document.getElementById('masterimg').src = 'restart.jpg';
+            window.location.href = "http://localhost:1476/BTPOSImages/restart.html";
 
         }
+
+
 
     </script>
 
@@ -58,18 +61,9 @@
 
 <body ng-model="Group">
     <table>
-
-
         <img id='masterimg' src="welcome.jpeg" alt="Planets" usemap="#planetmap" style="width:258px;height:552px;">
 
-
-
         <map name="planetmap">
-
-
-
-
-
             <area shape="rect" style="background-color:red" coords="70,315,40,350" alt="Sun" href="loginpage.html" onclick="('#');">
             <area shape="rect" style="background-color:red" coords=" 120,315,85,350" alt="sun" href="#" onclick="alert('functions');">
             <area shape="rect" style="background-color:red" coords="160,315,125,350" alt="Sun" href="#" onclick="alert('alpha');">
@@ -113,13 +107,26 @@
         </map>
 
     </table>
-    IPconfig:
-    <input type="text" name="ipconfigue" placeholder="100.100.100.01" ng-model="Group.ipconfig">
-    <br>
-    BTPOS Code:
-    <input type="text" name="code" ng-model="Group.code">
-    <br>
-    <input type="button" value="save" ng-click="save(Group);" />
+    <table>
+        <tr>
+            <td>IPconfig:</td>
+            <td><input type="text" name="ipconfigue" placeholder="100.100.100.01" ng-model="Group.ipconfig"></td>
+        </tr>
+        <tr>
+            <td>Fleet owner Code:</td>
+            <td><input type="text" name="code" ng-model="Group.code"></td>
+        </tr>
+        <tr>
+            <!--<td><input type="button" value="submit" ng-click="save(Group);" /></td>-->
+            <td><input type="button" value="submit" onclick="GotToRestart();" /></td>
+            <td></td>
+        </tr>
+    </table>
+    
+    <br/>
+    
+    <br/>
+    
 
 
     <script src="angular.js"></script>
