@@ -13,7 +13,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             GroupName: Group.GroupName,
             GroupId: Group.GroupId,
             IMEI: Group.IMEI,
-            Location: Group.Location,
+            
             POSID: Group.POSID,
           
             Status: Group.Status

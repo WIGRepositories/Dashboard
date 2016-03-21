@@ -103,6 +103,8 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                                 </ul>
                             </li>
                             <li class="active">
@@ -116,26 +118,8 @@
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">License</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">ToubleTicketing</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">ToubleTicketingDetails</span></a></li>
-                                </ul>
-                            </li>
+                            
+                            
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -156,6 +140,7 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -332,10 +317,7 @@
                                                                                 <td> IMEI:</td>
                                                                                 <td><input type="text" id="IMEI" ng-model="currGroup.IMEI"></td>
                                                                             </tr>
-                                                                            <tr>
-                                                                                <td> Location:</td>
-                                                                                <td><input type="text" id="Location" ng-model="currGroup.Location"></td>
-                                                                            </tr>
+
                                                                             <tr>
                                                                                 <td> POSID:</td>
                                                                                 <td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>
@@ -373,8 +355,7 @@
                                                                 <th>IMEI</th>
                                                                 <th width="15%">Group Name</th>
                                                                 
-                                                               
-                                                                <th>Location</th>
+                                                            
                                                               
 
                                                                 <th>Status</th>
@@ -389,7 +370,7 @@
                                                                 <td>{{group.IMEI}} </td>
                                                                 <td>{{group.GroupName}}</td>
                                                                                                                                 
-                                                                <td>{{group.Location}}</td>
+                                                       
                                                                  <td>
                                                                     {{group.Status}}
                                                                 </td>

@@ -87,7 +87,7 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="index.html">
+                                <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
@@ -103,6 +103,8 @@
                                 <ul class="nav nav-second-level">
                                     <li class="active"><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -113,29 +115,14 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                </ul>
+                                <ul class="nav nav-second-level">
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                 </ul>
+
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">License</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">ToubleTicketing</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">ToubleTicketingDetails</span></a></li>
-                                </ul>
-                            </li>
+
+
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -156,6 +143,7 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -165,10 +153,10 @@
                                     </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                     <li ><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                    <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                    <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                                    <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -286,8 +274,8 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="Users.html">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-<li><a href="Company.html">Company</a>
-                      
+                            <li><a href="Company.html">Company</a>
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -295,16 +283,16 @@
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
-                                
+
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                          
+
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
-                                                      
+
                                                         <div class="actions">
                                                             <a href="AddNewCompany.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New Company</button></a>
 
@@ -364,7 +352,7 @@
                                                         </div>
 
 
-                                                        
+
                                                     </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
@@ -383,12 +371,12 @@
                                                         <tbody>
 
                                                             <tr ng-repeat="group in Group" class="gradeA">
-                                                            
+
 
                                                                 <td>{{group.Name}}</td>
                                                                 <td>{{group.code}}</td>
                                                                 <td>{{group.admin}}</td>
-                                                                <td>{{group.descr}}</td>                                                               
+                                                                <td>{{group.descr}}</td>
                                                                 <td>
                                                                     <input type="checkbox" checked>
                                                                 </td>
@@ -427,7 +415,7 @@
                                                                     <li><a href="#">1</a></li>
                                                                     <li><a href="#">2</a></li>
                                                                     <li><a href="#">3</a></li>
-                                                             
+
                                                                     <li><a href="#">&raquo;</a></li>
                                                                 </ul>
                                                             </div>
@@ -440,7 +428,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -454,30 +442,30 @@
                 <!--END PAGE WRAPPER-->
             </div>
         </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <!--loading bootstrap js-->
+        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+        <script src="vendors/iCheck/icheck.min.js"></script>
+        <script src="vendors/iCheck/custom.min.js"></script>
+        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+        <script src="js/jquery.menu.js"></script>
+        <script src="vendors/jquery-pace/pace.min.js"></script>
+        <script src="vendors/holder/holder.js"></script>
+        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+        <!--LOADING SCRIPTS FOR PAGE-->
+        <script src="js/table-action.js"></script>
+        <!--CORE JAVASCRIPT-->
+        <script src="js/main.js"></script>
 
-    <script>
+        <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -493,8 +481,8 @@
         ga('send', 'pageview');
 
 
-    </script>
-    <script src="js/angular.js"></script>
-    <script src="js/CompanyGroups.js"></script>
+        </script>
+        <script src="js/angular.js"></script>
+        <script src="js/CompanyGroups.js"></script>
 </body>
 </html>
