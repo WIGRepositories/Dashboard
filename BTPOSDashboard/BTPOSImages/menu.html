@@ -34,6 +34,10 @@ function TicketGeneration()
 
 }
 
+function goToTicketGeneration()
+{
+    window.location.href = "http://localhost:1476/BTPOSImages/TicketGeneration.html";
+}
 
 
 
@@ -119,7 +123,7 @@ function TicketGeneration()
         <input type="radio" name="ticket">Settings<br>
         <input type="radio" name="ticket">Reports<br>
 
-    <a href="TicketGeneration.html"><input type="button" value="save"onclick="alert('saved')"></a>
+   <input type="button" value="submit"onclick="goToTicketGeneration();"></a>
         </form>
 </body>
 </html>
