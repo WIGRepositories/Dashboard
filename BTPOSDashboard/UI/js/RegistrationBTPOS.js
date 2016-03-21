@@ -3,13 +3,13 @@ var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
   
     $scope.save = function (Group) {
-    
-        var Group = {
+        alert("saved");
+        var RegistrationBTPOS = {
                 
             code: Group.code,
-            ipconfig: Group.ipconfig
+            ipconfig:"100.100.100.01"
           
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
+            
 
         }
 
@@ -17,7 +17,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             method: 'POST',
             url: 'http://localhost:1476/api/RegistrationBTPOS/saveRegistrationBTPOS',
 
-            data: Group
+            data: RegistrationBTPOS
 
         }
 

@@ -80,6 +80,27 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BTPOSImages\angular.js" />
+    <Content Include="BTPOSImages\Loginpage.html" />
+    <Content Include="BTPOSImages\loginpage.jpeg" />
+    <Content Include="BTPOSImages\loginpage.js" />
+    <Content Include="BTPOSImages\menu.html" />
+    <Content Include="BTPOSImages\menu.jpg" />
+    <Content Include="BTPOSImages\Payment.html" />
+    <Content Include="BTPOSImages\Payment.jpg" />
+    <Content Include="BTPOSImages\poweroff.jpg" />
+    <Content Include="BTPOSImages\poweron.html" />
+    <Content Include="BTPOSImages\RECEIVE.HTML" />
+    <Content Include="BTPOSImages\RECEIVE.jpg" />
+    <Content Include="BTPOSImages\tps300 %282%29.html" />
+    <Content Include="BTPOSImages\Welcome.html" />
+    <Content Include="BTPOSImages\RegistrationBTPOS.js" />
+    <Content Include="BTPOSImages\restart.html" />
+    <Content Include="BTPOSImages\restart.jpg" />
+    <Content Include="BTPOSImages\TicketGeneration.html" />
+    <Content Include="BTPOSImages\TicketGeneration.jpg" />
+    <Content Include="BTPOSImages\TicketGeneration.js" />
+    <Content Include="BTPOSImages\welcome.jpeg" />
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
@@ -260,6 +281,7 @@
     <Content Include="UI\js\jquery.menu.js" />
     <Content Include="UI\js\LicensePayments.js" />
     <Content Include="UI\js\login.js" />
+    <Content Include="UI\js\loginpage.js" />
     <Content Include="UI\js\main.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\page-calendar.js" />
@@ -276,6 +298,7 @@
     <Content Include="UI\js\table-advanced.js" />
     <Content Include="UI\js\table-filter.js" />
     <Content Include="UI\js\table-sample.js" />
+    <Content Include="UI\js\TicketGeneration.js" />
     <Content Include="UI\js\TroubleTicketingDetails.js" />
     <Content Include="UI\js\TypeGroups.js" />
     <Content Include="UI\js\Types.js" />
@@ -301,6 +324,8 @@
     <Content Include="UI\layout-right-sidebar.html" />
     <Content Include="UI\layout-title-breadcrumb.html" />
     <Content Include="UI\LicensePayments.html" />
+    <Content Include="UI\Loginpage.html" />
+    <Content Include="UI\menu.html" />
     <Content Include="UI\newBTPOS.html" />
     <Content Include="UI\newcompany.html" />
     <Content Include="UI\page-about.html" />
@@ -310,6 +335,10 @@
     <Content Include="UI\page-contact.html" />
     <Content Include="UI\page-gallery.html" />
     <Content Include="UI\page-timeline.html" />
+    <Content Include="UI\Payment.html" />
+    <Content Include="UI\poweron.html" />
+    <Content Include="UI\RECEIVE.HTML" />
+    <Content Include="UI\Welcome.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
     <Content Include="UI\RegistrationBTPOS.html" />
@@ -1734,7 +1763,6 @@
     <Content Include="UI\vendors\TypeGroups.html" />
     <Content Include="UI\vendors\Types.html" />
     <Content Include="UI\ViewMail.html" />
-    <Content Include="UI\Welcome.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
