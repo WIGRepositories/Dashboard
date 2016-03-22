@@ -105,6 +105,7 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                 </ul>
                             </li>
                             <li class="active">
@@ -118,26 +119,8 @@
                                     <li class="active"><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">License</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">ToubleTicketing</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">ToubleTicketingDetails</span></a></li>
-                                </ul>
-                            </li>
+                            
+                            
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -158,6 +141,7 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">ToubleTicketingDetails</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -340,19 +324,36 @@
 
                                                                     <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="routes.BTPOSGroupId" class="form-control" /><span class="help-block"></span></div>
                                                                 </div>
+                                                                
                                                                 <div class="form-group">
+                                                                    <label for="selCountry" class="col-md-3 control-label">Source<span class='require'>*</span></label>
 
-                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Source <span class='require'>*</span></label>
+                                                                    <div class="col-md-4">
+                                                                        <select id="selRole" class="form-control" ng-model="routes.Source">
+                                                                            <option value="" selected disabled>All Stops</option>
+                                                                            <option value="Hyderabad">Hyderabad</option>
+                                                                            <option value="Vijayavada">Vijayavada</option>
+                                                                            <option value="Kammam">Kammam</option>
+                                                                            <option value="Nalgonda">Nalgonda</option>
 
-                                                                    <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="routes.Source" class="form-control" /><span class="help-block"></span></div>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
+                                                                
                                                                 <div class="form-group">
+                                                                    <label for="selCountry" class="col-md-3 control-label">Destination<span class='require'>*</span></label>
 
-                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Destination <span class='require'>*</span></label>
+                                                                    <div class="col-md-4">
+                                                                        <select id="selRole" class="form-control" ng-model="routes.Destination">
+                                                                            <option value="" selected disabled>All Stops</option>
+                                                                            <option value="Hyderabad">Hyderabad</option>
+                                                                            <option value="Vijayavada">Vijayavada</option>
+                                                                            <option value="Kammam">Kammam</option>
+                                                                            <option value="Nalgonda">Nalgonda</option>
 
-                                                                    <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="routes.Destination" class="form-control" /><span class="help-block"></span></div>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
-
 
 
 

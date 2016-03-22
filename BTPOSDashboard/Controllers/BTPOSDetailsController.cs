@@ -82,11 +82,7 @@ namespace POSDBAccess.Controllers
                 bd.Value = n.IMEI;
                 cmd.Parameters.Add(bd);
 
-                SqlParameter be = new SqlParameter();
-                be.ParameterName = "@Location";
-                be.SqlDbType = SqlDbType.VarChar;
-                be.Value = n.Location;
-                cmd.Parameters.Add(be);
+            
 
                
                 SqlParameter bf = new SqlParameter();

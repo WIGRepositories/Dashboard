@@ -2,7 +2,7 @@ var myapp1 = angular.module('myApp', [])
 var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http) {
    
     $scope.Signin = function () {
-        alert();
+       
         var u = $scope.UserName;
         var p = $scope.Password      
 

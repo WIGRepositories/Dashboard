@@ -41,7 +41,6 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,9 +66,6 @@
     <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.Cors">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -286,6 +282,7 @@
     <Content Include="UI\js\jquery.menu.js" />
     <Content Include="UI\js\LicensePayments.js" />
     <Content Include="UI\js\login.js" />
+    <Content Include="UI\js\loginpage.js" />
     <Content Include="UI\js\main.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\page-calendar.js" />
@@ -302,6 +299,7 @@
     <Content Include="UI\js\table-advanced.js" />
     <Content Include="UI\js\table-filter.js" />
     <Content Include="UI\js\table-sample.js" />
+    <Content Include="UI\js\TicketGeneration.js" />
     <Content Include="UI\js\TroubleTicketingDetails.js" />
     <Content Include="UI\js\TypeGroups.js" />
     <Content Include="UI\js\Types.js" />
@@ -1760,7 +1758,6 @@
     <Content Include="UI\vendors\TypeGroups.html" />
     <Content Include="UI\vendors\Types.html" />
     <Content Include="UI\ViewMail.html" />
-    <Content Include="UI\Welcome.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1785,7 +1782,9 @@
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\InventoryDetailsController.cs" />
     <Compile Include="Controllers\InventoryMasterController.cs" />
+    <Compile Include="Controllers\LicensePayment.cs" />
     <Compile Include="Controllers\LicensePaymentsController.cs" />
+    <Compile Include="Controllers\LicensePayment_2.cs" />
     <Compile Include="Controllers\LOGINController.cs" />
     <Compile Include="Controllers\loginpageController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
