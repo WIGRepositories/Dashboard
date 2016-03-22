@@ -2,7 +2,7 @@
 // JavaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/GetTroubleTicketingDetails').then(function (response, req) {
+    $http.get('http://localhost:1476/api/TroubleTicketingDetails/getTroubleTicketingDetails').then(function (response, req) {
         $scope.Group = response.data;
 
     });

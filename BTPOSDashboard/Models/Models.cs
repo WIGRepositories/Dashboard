@@ -110,10 +110,7 @@ namespace BTPOSDashboardAPI.Models
         public string Desc { get; set; }
 
     }
-   
-  
-   
-  
+     
     public class logins
     {
         public int Id { set; get; }

@@ -104,7 +104,9 @@
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
+    <Content Include="UI\AddNewRole.html" />
     <Content Include="UI\Addnewroute.html" />
+    <Content Include="UI\Addnewtype.html" />
     <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
@@ -1782,7 +1784,6 @@
     <Compile Include="Controllers\InventoryMasterController.cs" />
     <Compile Include="Controllers\LicensePayment.cs" />
     <Compile Include="Controllers\LicensePaymentsController.cs" />
-    <Compile Include="Controllers\LicensePayment_2.cs" />
     <Compile Include="Controllers\LOGINController.cs" />
     <Compile Include="Controllers\loginpageController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
@@ -1826,6 +1827,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\Dashboard.pubxml" />
     <Content Include="UI\vendors\bootstrap-clockface\.gitignore" />
     <Content Include="UI\vendors\bootstrap-clockface\.jshintignore" />
