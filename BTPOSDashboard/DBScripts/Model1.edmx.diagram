@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="706233593eb046cf8602a447960c98b8" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model1.Bookings" Width="1.5" PointX="0.5" PointY="0.5" FillColor="DarkGray" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.ExclusionList" Width="1.5" PointX="2.25" PointY="0.5" FillColor="DarkGray" />
+        <EntityTypeShape EntityType="Model1.PNRdetails" Width="1.5" PointX="3.875" PointY="0.5" FillColor="DarkGray" />
+        <EntityTypeShape EntityType="Model1.FleetOwnerRoutes" Width="1.5" PointX="3.875" PointY="2.375" FillColor="DarkGray" />
+        <EntityTypeShape EntityType="Model1.FleetOwnerVehicles" Width="1.5" PointX="7.375" PointY="3.125" FillColor="DarkGray" />
+        <EntityTypeShape EntityType="Model1.RouteSchedules" Width="1.5" PointX="2.25" PointY="2.75" FillColor="DarkGray" />
+        <EntityTypeShape EntityType="Model1.Stops" Width="1.5" PointX="5.625" PointY="0.5" FillColor="DarkGray" />
+        <EntityTypeShape EntityType="Model1.VehicleLayoutDetais" Width="1.5" PointX="7.375" PointY="0.5" FillColor="DarkGray" />
+        <EntityTypeShape EntityType="Model1.VehicleSchedules" Width="1.5" PointX="5.625" PointY="2.625" FillColor="DarkGray" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
