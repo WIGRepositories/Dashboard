@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace BTPOSDashboardAPI.Controllers
 {
-    public class RouteController : ApiController
+    public class RolesController : ApiController
     {
         [HttpGet]
         public DataTable getroles()

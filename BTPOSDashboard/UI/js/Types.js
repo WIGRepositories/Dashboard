@@ -13,7 +13,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
          Id:Types.Id,
             Name: Types.Name,
-            Desc: Types.Desc,
+            Description: Types.Description,
             Active: Types.Active,
             TypeGroup: Types.TypeGroup
         };

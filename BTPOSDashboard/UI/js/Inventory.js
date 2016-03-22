@@ -1,6 +1,6 @@
 // JavaScript source code
 // JavaScript source code
-var app = angular.module('myApp', [])
+var app = angular.module('myApp', []);
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $http.get('http://localhost:1476/api/Inventory/GetInventory').then(function (response, req) {
         $scope.Group = response.data;
@@ -26,12 +26,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
 
         var req = {
+            
             method: 'POST',
             url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: Group
         }
         $http(req).then(function (response) { });
-        alert("saved");
+       
       
     };
 });

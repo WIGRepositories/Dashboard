@@ -49,7 +49,7 @@ namespace BTPOSDashboardAPI.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_InsTypes";
+            cmd.CommandText = "InsUpdDelTypes";
             cmd.Connection = conn;
             conn.Open();
             SqlParameter Cid = new SqlParameter();
@@ -72,9 +72,9 @@ namespace BTPOSDashboardAPI.Controllers
            
 
             SqlParameter pDesc = new SqlParameter();
-            pDesc.ParameterName = "@Desc";
+            pDesc.ParameterName = "@Description";
             pDesc.SqlDbType = SqlDbType.VarChar;
-            pDesc.Value =b.Desc;
+            pDesc.Value = b.Description;
             cmd.Parameters.Add(pDesc);
 
             SqlParameter lAct = new SqlParameter();
