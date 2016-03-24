@@ -14,7 +14,7 @@ namespace BTPOSDashboardAPI.Controllers
     {
         [HttpGet]
    
-        public DataTable BTPOSDetails1()
+        public DataTable BTPOSDetails()
         {
             DataTable Tbl = new DataTable();
 
@@ -71,7 +71,7 @@ namespace BTPOSDashboardAPI.Controllers
 
                
                 SqlParameter bf = new SqlParameter("@POSID", SqlDbType.VarChar,20);
-                bf.Value = n.POSID;
+                bf.Value = (n.insupdflag == "I")? "POS"+ Guid.NewGuid().ToString().Replace("-",""): n.POSID;
                 cmd.Parameters.Add(bf);              
 
                 SqlParameter bh = new SqlParameter("@StatusId",SqlDbType.Int);
@@ -88,7 +88,7 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.Parameters.Add(active);              
 
                 SqlParameter fo = new SqlParameter("@fleetownerid",SqlDbType.Int);
-                fo.Value = n.StatusId;
+                fo.Value = n.fleetownerid;
                 cmd.Parameters.Add(fo);
 
                 SqlParameter insupdflag = new SqlParameter( "@insupdflag", SqlDbType.VarChar, 10);

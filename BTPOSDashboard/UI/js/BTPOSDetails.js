@@ -2,7 +2,7 @@
 // JavaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/GetBTPOSDetails').then(function (response, req) {
+    $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails').then(function (response, req) {
         $scope.Group = response.data;
 
     });
@@ -17,14 +17,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             StatusId: Group.StatusId,
             ipconfig:Group.ipconfig,
             active:1,//Group.ipconfig,
-            fleetownerid:Group.fleetownerid,
+            fleetownerid: Group.FleetOwnerId,
             insupdflag:flag
         }
 
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/BTPOSDetails/BTPOSDetails2',
+            url: 'http://localhost:1476/api/BTPOSDetails/SaveBTPOSDetails',
             data: Group
         }
         $http(req).then(function (response) {
