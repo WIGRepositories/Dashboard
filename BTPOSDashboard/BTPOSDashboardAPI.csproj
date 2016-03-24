@@ -190,7 +190,7 @@
     <Content Include="UI\extra-lock-screen.html" />
     <Content Include="UI\extra-pricing-table.html" />
     <Content Include="UI\extra-profile.html" />
-    <Content Include="UI\extra-signin.html" />
+    <Content Include="UI\Login.html" />
     <Content Include="UI\extra-signup.html" />
     <Content Include="UI\form-basic.html" />
     <Content Include="UI\form-components.html" />
@@ -336,7 +336,6 @@
     <Content Include="UI\page-timeline.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
-    <Content Include="UI\RegistrationBTPOS.html" />
     <Content Include="UI\Routes.html" />
     <Content Include="UI\table-action.html" />
     <Content Include="UI\table-advanced.html" />
@@ -1811,9 +1810,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\Models.cs" />
-    <Compile Include="Models\POS.cs" />
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\DAL\DataBase.cs" />
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\DAL\StatusQueries.cs" />
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\Domain\Models\Item.cs" />

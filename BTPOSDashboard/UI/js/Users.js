@@ -5,8 +5,6 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
     $http.get('http://localhost:1476/api/Users/GetUsers').then(function (res, data) {
         $scope.User = res.data;
-
-
     });
     $scope.save = function (User) {
      
@@ -14,16 +12,17 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             Id: User.Id,
             FirstName: User.FirstName,
             LastName: User.LastName,
-            UserType: User.UserType,
+            MiddleName:User.MiddleName,
+            UserTypeId: User.UserType,
             EmpNo: User.EmpNo,
             Email: User.Email,
             AdressId: User.AdressId,
             MobileNo: User.MobileNo,
-            Role: User.Role,
-            Active: User.Active,
+            RoleId: User.Role,
+            Active: (User.Active == true) ? 1 : 0,
             UserName: User.UserName,
-            Password: User.Password
-
+            Password: User.Password,
+            insupdflag:"I"
         }
 
         var req = {
