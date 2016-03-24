@@ -306,8 +306,8 @@
                             <div class="page-title">Type Groups</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
-                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Configuration</a>&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><i class="fa fa-home"></i><a href="index.html">Home</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="#">Configuration</a><i class="fa fa-angle-right"></i></li>
                            <a href="TypeGroups.html"><li class="active">Type Groups</li></a>
                         </ol>
                         <div class="clearfix"></div>
@@ -327,51 +327,57 @@
                                                     <div class="row mbm">
                                                         <div class="col-lg-6">
                                                            
+                                                            <div class="actions">
+                                                                <a href="AddTypeGroup.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New TypeGroup</button></a>
 
-                                                    <div id="modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">ADD NEW TYPE</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-model="Types">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td> Name:
-                                                                            <td>
-                                                                            <td> <input type="text" id="Name" ng-model="Types.Name" /></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td> Desc:
-                                                                            <td>
-                                                                            <td> <input type="text" id="Desc" ng-model="Types.Desc" /></td>
-                                                                        </tr>
+                                                            </div>
+                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header modal-header-primary">
+                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit TypeGroups</h4>
+                                                                        </div>
+                                                                        <div class="modal-body" ng-model="currGroup">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td> Name:</td>
+                                                                                    <td><input type="text" id="Name" ng-model="currGroup.Name"></td>
+                                                                                </tr>
 
-                                                                        <tr>
-                                                                            <td>Active:</td>
-                                                                            <td>
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" ng-checked="Types.Active" ng-model="Types.Active" />
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(Types);">Save changes</button>
+                                                                                   
+                                                                                <tr>
+                                                                                    <td> Description:</td>
+                                                                                    <td><input type="text" id="Description" ng-model="currGroup.Description"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>active:</td>
+                                                                                    <td>
+                                                                                        <label class="checkbox">
+                                                                                            <input type="checkbox" ng-model="currGroup.active" />
+                                                                                        </label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                            <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
+
+
+
+
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
 
                                                                 
                                                                 <th>Name</th>
-                                                                <th>Desc</th>
+                                                                <th>Description</th>
                                                                 <th>Active</th>
                                                                 <th>Update</th>
                                                             </tr>
@@ -381,12 +387,13 @@
                                                             <tr ng-repeat="T in TypeGroups" class="gradeA">
                                                                
                                                                 <td>{{T.Name}}</td>
-                                                                <td>{{T.Desc}}</td>
+                                                                <td>{{T.Description}}</td>
                                                                 <td><input type="checkbox" checked /></td>
 
 
                                                                 <td>
-                                                                    <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
+                                                                    {{T.Update}}
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(T);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
@@ -398,7 +405,7 @@
 
                                                         </thead>
                                                     </table>
-                                                    <div class="row">
+                                                    <!--<div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="pagination-panel">
                                                                 Page
@@ -426,7 +433,7 @@
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                 </div>
 
                                             </div>

@@ -8,18 +8,18 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     });
     $scope.save = function (roles) {
-        alert("ok");
+       
         var roles = {
             Id:roles.Id,
             Name: roles.Name,
             Description: roles.Description,
-            Active: roles.Active
+            Active: (roles.Active=true)?1:0
 
         };
       
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Roles/saveroles',
+            url: 'http://localhost:1476/api/roles/saveroles',
             //headers: {
             //    'Content-Type': undefined
 
@@ -28,6 +28,16 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
         }
         $http(req).then(function (response) { });
-        $scope.roles = null;
+
+        $scope.currGroup = null;
+
+    };
+
+    $scope.setCompany = function (grp) {
+        $scope.currGroup = grp;
+    };
+
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
     };
 });

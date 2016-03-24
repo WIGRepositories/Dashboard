@@ -280,203 +280,210 @@
                 </div>
                 <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                
-                    <div id="page-wrapper">
-                        <!--BEGIN TITLE & BREADCRUMB PAGE-->
-                        <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-                            <div class="page-header pull-left">
-                                <div class="page-title">Add New Type</div>
-                            </div>
-                            <ol class="breadcrumb page-breadcrumb pull-right">
-                                <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="#">Configuartion</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="Types.html">Types</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="Addnewtype.html">Add New Type</a></li>
-                            </ol>
-                            <div class="clearfix"></div>
+                <div id="page-wrapper">
+                    <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                    <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                        <div class="page-header pull-left">
+                            <div class="page-title">Add New Type</div>
                         </div>
-                        <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                        <div id="page-wrapper">
-                            <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                        <ol class="breadcrumb page-breadcrumb pull-right">
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Configuartion</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="Types.html">Types</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="Addnewtype.html">Add New Type</a></li>
+                        </ol>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                    <div class="page-content">
+                        <div id="form-layouts" class="row">
+                            <div class="col-lg-12">
 
-                           <div class="panel panel-violet" >
-                                <div class="panel-heading">Add New Type</div>
-                                <div class="panel-body pan">
-                                    <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                        <div class="form-body">
-                                            <div class="form-group">
-                                                <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+                                <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
+                                    <div id="tab-form-actions" class="tab-pane fade active in">
+                                        <div class="row">
 
-                                                <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="Types.Name" class="form-control" /><span class="help-block"></span></div>
+                                            <div class="col-lg-6">
+                                                <div class="panel panel-violet">
+                                                    <div class="panel-heading">Add New TypeGroup</div>
+                                                    <div class="panel-body pan">
+                                                        <form action="#" class="form-horizontal">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <div class="form-group">
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+
+                                                                        <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="Types.Name" class="form-control" /><span class="help-block"></span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="Description" class="col-md-3 control-label"> Description <span class='require'></span></label>
+
+
+                                                                    <div class="col-md-4"><input id="Description" type="text" ng-model="Types.Description" class="form-control" /><span class="help-block"></span></div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="selCountry" class="col-md-3 control-label">TypeGroup</label>
+
+                                                                    <div class="col-md-4">
+                                                                        <select id=" selusertype" class="form-control" ng-model="Types.TypeGroup">
+                                                                            <option value="" selected disabled>Select </option>
+                                                                            <option value="Admin">Admin</option>
+                                                                            <option value="FleetOwner">FleetOwner</option>
+                                                                            <option value="Staff">Staff</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <!--<div class="form-group">
+                                                        <label for="Address Id" class="col-md-3 control-label">Address Id<span class='require'>*</span></label>
+
+                                                        <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
+                                                    </div>-->
+
+                                                                <div class="form-group" ng-model="Types.Active">
+                                                                    <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
+
+                                                                    <label>
+                                                                        <input type="checkbox" checked />
+                                                                    </label>
+
+
+                                                                </div>
+
+
+
+                                                                <div class="form-actions">
+                                                                    <div class="col-md-offset-3 col-md-9">
+                                                                        <button type="submit" class="btn btn-primary" ng-click="save(Types);">Save</button>
+
+                                                                        <button type="reset" class="btn btn-green">Cancel</button>
+                                                                    </div>
+
+                                                        </form>
+
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <!--END CONTENT--><!--BEGIN FOOTER-->
+                                                <div id="footer">
+                                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                                </div>
+                                                <!--END FOOTER-->
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="Description" class="col-md-3 control-label"> Description <span class='require'>*</span></label>
 
 
-                                            <div class="col-md-4"><input id="Description" type="text" ng-model="Types.Description" class="form-control" /><span class="help-block"></span></div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="selCountry" class="col-md-3 control-label">TypeGroup</label>
-
-                                            <div class="col-md-4">
-                                                <select id=" selusertype" class="form-control" ng-model="Types.TypeGroup">
-                                                    <option value="" selected disabled>Select </option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="FleetOwner">FleetOwner</option>
-                                                    <option value="Staff">Staff</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-                                        <!--<div class="form-group">
-                                <label for="Address Id" class="col-md-3 control-label">Address Id<span class='require'>*</span></label>
-
-                                <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
-                            </div>-->
-
-                                        <div class="form-group" ng-model="Types.Active">
-                                            <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
-
-                                            <label>
-                                                <input type="checkbox" />
-                                            </label>
 
 
                                         </div>
 
 
-
-                                        <div class="form-actions">
-                                            <div class="col-md-offset-3 col-md-9">
-                                                <button type="submit" class="btn btn-primary" ng-click="save(Types);">Save</button>
-
-                                                <button type="reset" class="btn btn-green">Cancel</button>
-                                            </div>
-
-                                    </form>
+                                    </div>
 
 
+
+                                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                                    <div id="footer">
+                                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                    </div>
+                                    <!--END FOOTER-->
                                 </div>
+                                <!--END PAGE WRAPPER-->
 
+                                <script src="js/jquery-1.10.2.min.js"></script>
+                                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                                <script src="js/jquery-ui.js"></script>
+                                <!--loading bootstrap js-->
+                                <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                                <script src="js/html5shiv.js"></script>
+                                <script src="js/respond.min.js"></script>
+                                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                                <script src="vendors/iCheck/icheck.min.js"></script>
+                                <script src="vendors/iCheck/custom.min.js"></script>
+                                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                                <script src="js/jquery.menu.js"></script>
+                                <script src="vendors/jquery-pace/pace.min.js"></script>
+                                <script src="vendors/holder/holder.js"></script>
+                                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                                <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+                                <script src="js/main.js"></script>
+                                <script>
+                                    (function (i, s, o, g, r, a, m) {
+                                        i['GoogleAnalyticsObject'] = r;
+                                        i[r] = i[r] || function () {
+                                            (i[r].q = i[r].q || []).push(arguments)
+                                        }, i[r].l = 1 * new Date();
+                                        a = s.createElement(o),
+                                                m = s.getElementsByTagName(o)[0];
+                                        a.async = 1;
+                                        a.src = g;
+                                        m.parentNode.insertBefore(a, m)
+                                    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                                    ga('create', 'UA-145464-12', 'auto');
+                                    ga('send', 'pageview');
+
+                                </script>
+                                <script src="js/angular.js"></script>
+                                <script src="js/Users.js"></script>
+
+
+
+                                <!--END CONTENT--><!--BEGIN FOOTER-->
+                                <div id="footer">
+                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                </div>
+                                <!--END FOOTER-->
                             </div>
-
-                            
-
-                            <!--END CONTENT--><!--BEGIN FOOTER-->
-                            <div id="footer">
-                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                            </div>
-                            <!--END FOOTER-->
+                            <!--END PAGE WRAPPER-->
                         </div>
-
-
-
-
-
                     </div>
-                
+                    <script src="js/jquery-1.10.2.min.js"></script>
+                    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                    <script src="js/jquery-ui.js"></script>
+                    <!--loading bootstrap js-->
+                    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                    <script src="js/html5shiv.js"></script>
+                    <script src="js/respond.min.js"></script>
+                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                    <script src="vendors/iCheck/icheck.min.js"></script>
+                    <script src="vendors/iCheck/custom.min.js"></script>
+                    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                    <script src="js/jquery.menu.js"></script>
+                    <script src="vendors/jquery-pace/pace.min.js"></script>
+                    <script src="vendors/holder/holder.js"></script>
+                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+                    <script src="js/main.js"></script>
+                    <script>
+                        (function (i, s, o, g, r, a, m) {
+                            i['GoogleAnalyticsObject'] = r;
+                            i[r] = i[r] || function () {
+                                (i[r].q = i[r].q || []).push(arguments)
+                            }, i[r].l = 1 * new Date();
+                            a = s.createElement(o),
+                                    m = s.getElementsByTagName(o)[0];
+                            a.async = 1;
+                            a.src = g;
+                            m.parentNode.insertBefore(a, m)
+                        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                        ga('create', 'UA-145464-12', 'auto');
+                        ga('send', 'pageview');
 
-                            </div>
-
-
-
-                            <!--END CONTENT--><!--BEGIN FOOTER-->
-                            <div id="footer">
-                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                            </div>
-                            <!--END FOOTER-->
-                        </div>
-                        <!--END PAGE WRAPPER-->
-
-                        <script src="js/jquery-1.10.2.min.js"></script>
-                        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-                        <script src="js/jquery-ui.js"></script>
-                        <!--loading bootstrap js-->
-                        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-                        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                        <script src="js/html5shiv.js"></script>
-                        <script src="js/respond.min.js"></script>
-                        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                        <script src="vendors/iCheck/icheck.min.js"></script>
-                        <script src="vendors/iCheck/custom.min.js"></script>
-                        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-                        <script src="js/jquery.menu.js"></script>
-                        <script src="vendors/jquery-pace/pace.min.js"></script>
-                        <script src="vendors/holder/holder.js"></script>
-                        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                        <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-                        <script src="js/main.js"></script>
-                        <script>
-                            (function (i, s, o, g, r, a, m) {
-                                i['GoogleAnalyticsObject'] = r;
-                                i[r] = i[r] || function () {
-                                    (i[r].q = i[r].q || []).push(arguments)
-                                }, i[r].l = 1 * new Date();
-                                a = s.createElement(o),
-                                        m = s.getElementsByTagName(o)[0];
-                                a.async = 1;
-                                a.src = g;
-                                m.parentNode.insertBefore(a, m)
-                            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-                            ga('create', 'UA-145464-12', 'auto');
-                            ga('send', 'pageview');
-
-                        </script>
-                        <script src="js/angular.js"></script>
-                        <script src="js/Users.js"></script>
-
-
-
-                        <!--END CONTENT--><!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
-                    </div>
-            <!--END PAGE WRAPPER-->
-        </div>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-145464-12', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-    <script src="js/angular.js"></script>
-    <script src="js/Types.js"></script>
+                    </script>
+                    <script src="js/angular.js"></script>
+                    <script src="js/Types.js"></script>
 </body>
 </html>

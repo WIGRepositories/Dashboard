@@ -70,7 +70,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlParameter aa = new SqlParameter();
             aa.ParameterName = "@Active";
             aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = Convert.ToBoolean(b.Active)?"1":"0";
+            aa.Value = b.Active;
             cmd.Parameters.Add(aa);
 
 

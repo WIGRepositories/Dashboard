@@ -13,7 +13,7 @@ namespace POSDBAccess.Controllers
     public class BTPOSDetailsController : ApiController
     {
         [HttpGet]
-        [Route("api/GetBTPOSDetails")]
+   
         public DataTable BTPOSDetails1()
         {
             DataTable Tbl = new DataTable();
@@ -69,12 +69,6 @@ namespace POSDBAccess.Controllers
                 bb.SqlDbType = SqlDbType.VarChar;
                 bb.Value = n.GroupName;
                 cmd.Parameters.Add(bb);
-
-                SqlParameter bc = new SqlParameter();
-                bc.ParameterName = "@GroupId";
-                bc.SqlDbType = SqlDbType.Int;
-                bc.Value = Convert.ToString(n.GroupId);
-                cmd.Parameters.Add(bc);
 
                 SqlParameter bd = new SqlParameter();
                 bd.ParameterName = "@IMEI";

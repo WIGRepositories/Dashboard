@@ -14,7 +14,6 @@ namespace BTPOSDashboardAPI.Controllers
     {
         [HttpGet]
         public DataTable Type1()
-        
         {
             DataTable Tbl = new DataTable();
 
@@ -36,8 +35,8 @@ namespace BTPOSDashboardAPI.Controllers
             // int found = 0;
             return Tbl;
         }
-          [HttpPost]
-          public DataTable Type2(Types b)
+        [HttpPost]
+        public DataTable Type2(Types b)
         {
             DataTable Tbl = new DataTable();
 
@@ -46,16 +45,16 @@ namespace BTPOSDashboardAPI.Controllers
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-          
+
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelTypes";
+            cmd.CommandText = "Sp_InsTypes";
             cmd.Connection = conn;
             conn.Open();
             SqlParameter Cid = new SqlParameter();
             Cid.ParameterName = "@Id";
             Cid.SqlDbType = SqlDbType.Int;
-            Cid.Value =Convert.ToInt32( b.Id);
+            Cid.Value = Convert.ToInt32(b.Id);
             cmd.Parameters.Add(Cid);
 
             SqlParameter Gid = new SqlParameter();
@@ -69,7 +68,7 @@ namespace BTPOSDashboardAPI.Controllers
             lid.SqlDbType = SqlDbType.VarChar;
             lid.Value = b.TypeGroup;
             cmd.Parameters.Add(lid);
-           
+
 
             SqlParameter pDesc = new SqlParameter();
             pDesc.ParameterName = "@Description";
@@ -80,15 +79,15 @@ namespace BTPOSDashboardAPI.Controllers
             SqlParameter lAct = new SqlParameter();
             lAct.ParameterName = "@Active";
             lAct.SqlDbType = SqlDbType.VarChar;
-            lAct.Value =Convert.ToBoolean (b.Active)? "1" : "0";
+            lAct.Value = Convert.ToBoolean(b.Active) ? "1" : "0";
             //llid.Value = b.Active;
             cmd.Parameters.Add(lAct);
-           
-          
+
+
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
             //db.Fill(ds);
-           // Tbl = Tables[0];
+            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;
@@ -97,5 +96,5 @@ namespace BTPOSDashboardAPI.Controllers
         public void Options() { }
 
     }
-    }
+}
 
