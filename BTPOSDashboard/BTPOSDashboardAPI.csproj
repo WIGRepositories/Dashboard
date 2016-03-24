@@ -49,8 +49,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -106,7 +104,9 @@
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
+    <Content Include="UI\AddNewRole.html" />
     <Content Include="UI\Addnewroute.html" />
+    <Content Include="UI\Addnewtype.html" />
     <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
@@ -1784,7 +1784,6 @@
     <Compile Include="Controllers\InventoryMasterController.cs" />
     <Compile Include="Controllers\LicensePayment.cs" />
     <Compile Include="Controllers\LicensePaymentsController.cs" />
-    <Compile Include="Controllers\LicensePayment_2.cs" />
     <Compile Include="Controllers\LOGINController.cs" />
     <Compile Include="Controllers\loginpageController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
@@ -1809,11 +1808,6 @@
     <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
-    <Compile Include="DBScripts\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1833,13 +1827,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <EntityDeploy Include="DBScripts\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DBScripts\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\Dashboard.pubxml" />
     <Content Include="UI\vendors\bootstrap-clockface\.gitignore" />
     <Content Include="UI\vendors\bootstrap-clockface\.jshintignore" />

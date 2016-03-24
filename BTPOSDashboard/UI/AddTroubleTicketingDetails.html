@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    <title>Form Layouts | Forms</title>
+    <title>Home | Utilities & Tools | TroubleTicketingDetails | AddTroubleTicketingDetails</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -376,8 +376,9 @@
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><a href="#">Utilities & Tools</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li><a href="TroubleTicketingDetails.html">TroubleTicketingDetails</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Add New TroubleTicketingDetails</li>
+                        <li><a href="AddTroubleTicketingDetails.html">Add New TroubleTicketingDetails</a></li>
                     </ol>
                     <div class="clearfix"></div>
                 </div>
@@ -397,7 +398,7 @@
                                                     <form action="#" class="form-horizontal">
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                {{5+9}}
+                                                              
                                                                 <label for="ticketTypeId" class="col-md-3 control-label" style="color:red;"> ticketTypeId <span class='require'>*</span></label>
 
                                                                 <div class="col-md-4"><input id="ticketTypeId" type="text" ng-model="Group.ticketTypeId" class="form-control" /><span class="help-block"></span></div>
@@ -437,10 +438,16 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="status" class="col-md-3 control-label">status <span class='require'>*</span></label>
+                                                                <label for="selCountry" class="col-md-3 control-label">Status</label>
 
                                                                 <div class="col-md-4">
-                                                                    <div><input id="status" type="text" ng-model="Group.status" class="form-control" /></div>
+                                                                    <select id="status" class="form-control" ng-model="Group.status">
+                                                                        <option value="" selected disabled>Select</option>
+
+                                                                        <option value="Activated">Activated</option>
+                                                                        <option value="To Be Activated">To Be Activated</option>
+                                                                        <option value="Deactivated">Deactivated</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>

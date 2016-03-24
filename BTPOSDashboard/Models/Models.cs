@@ -110,10 +110,7 @@ namespace BTPOSDashboardAPI.Models
         public string Desc { get; set; }
 
     }
-   
-  
-   
-  
+     
     public class logins
     {
         public int Id { set; get; }
@@ -204,10 +201,11 @@ namespace BTPOSDashboardAPI.Models
     {
         public int Id { set; get; }
         public string Name { set; get; }
-        public string Desc { set; get; }
+        public string Description { set; get; }
        
         public string TypeGroup { get; set; }
         public string Active { set; get; }
+
     }
 
     public class Routes
