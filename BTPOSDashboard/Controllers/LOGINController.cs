@@ -1,6 +1,4 @@
-﻿
-using BTPOSDashboardAPI.Models;
-using POSDBAccess.Models;
+﻿using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,15 +8,18 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace Login.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class LOGINController : ApiController
     {
         [HttpPost]
 
-        public DataTable ValidateCredentials(string username, string pwd)
+        public DataTable ValidateCredentials(UserLogin u)
         {
             DataTable Tbl = new DataTable();
+
+            string username = u.LoginInfo;
+            string pwd = u.Passkey;
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -27,48 +28,27 @@ namespace Login.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "sp_login";
+            cmd.CommandText = "dbo.ValidateCredentials";
 
             cmd.Connection = conn;
-            conn.Open();
-            SqlParameter lUserName = new SqlParameter();
-            lUserName.ParameterName = "@UserName";
-            lUserName.SqlDbType = SqlDbType.VarChar;
+
+            SqlParameter lUserName = new SqlParameter("@logininfo", SqlDbType.VarChar, 50);           
             lUserName.Value = username;
+            lUserName.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(lUserName);
 
 
-            SqlParameter lPassword = new SqlParameter();
-            lPassword.ParameterName = "@Password";
-            lPassword.SqlDbType = SqlDbType.VarChar;
+            SqlParameter lPassword = new SqlParameter("@passkey", SqlDbType.VarChar, 50); 
             lPassword.Value = pwd;
+            lPassword.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(lPassword);
 
-            SqlParameter rresult = new SqlParameter();
-            rresult.ParameterName = "@result";
-            rresult.SqlDbType = SqlDbType.Int;
-            rresult.Value = 0;
-            rresult.Direction = ParameterDirection.Output;
-
-            cmd.Parameters.Add(rresult);            
-
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(Tbl);
             
-            cmd.ExecuteScalar();
-
-            string val = rresult.Value.ToString();
-
-            conn.Close();
-            // int found = 0;
-            Tbl.Columns.Add("result");
-            DataRow dr = Tbl.NewRow();
-            dr[0] = val;
-            Tbl.Rows.Add(dr);
-
             return Tbl;
 
         }
-
- 
   
        
          public void Options() { }

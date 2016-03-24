@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using POSDBAccess.Models;
+using BTPOSDashboardAPI.Models;
 
 namespace BTPOSDashboardAPI.Controllers
 {

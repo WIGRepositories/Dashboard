@@ -61,7 +61,7 @@
                                 <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                                <li><a href="extra-signin.html"><i class="fa fa-key"></i>Log Out</a></li>
+                                <li><a href="login.html"><i class="fa fa-key"></i>Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -81,7 +81,7 @@
                                         <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
-                                        <li><a href="extra-signin.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+                                        <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
@@ -296,9 +296,14 @@
                                         <div class="col-md-4"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputFirstName" class="col-md-3 control-label">Last Name <span class='require'>*</span></label>
+                                        <label for="inputLastName" class="col-md-3 control-label">Last Name <span class='require'>*</span></label>
 
                                         <div class="col-md-4"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputMiddleName" class="col-md-3 control-label">Middle Name</label>
+
+                                        <div class="col-md-4"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="selCountry" class="col-md-3 control-label">User Type</label>
@@ -307,9 +312,9 @@
                                             <select id=" selusertype" class="form-control" ng-model="User.UserType">
                                                 <option value="" selected disabled>Select Usertype</option>
 
-                                                <option value="supervisor">supervisor</option>
-                                                <option value="Manager">Manager</option>
-                                                <option value="driver">driver</option>
+                                                <option value="1">INTERBUS staff</option>                                                
+                                                <option value="2">Fleet owner staff</option>
+                                                <option value="3">Guest user</option>
                                             </select>
                                         </div>
                                     </div>
@@ -319,9 +324,12 @@
                                         <div class="col-md-4">
                                             <select id="selRole" class="form-control" ng-model="User.Role">
                                                 <option value="" selected disabled>Select Role</option>
-                                                <option value="Admin">Admin</option>
-                                                <option value="fleetowner staff">fleetowner staff</option>
-                                                <option value="fleetowner">fleetowner</option>
+                                                <option value="1">Admin</option>
+                                                <option value="2">fleet owner</option>
+                                                <option value="3">driver</option>
+                                                <option value="4">operator</option>
+                                                <option value="5">guest</option>
+                                                <option value="6">manager</option>
 
                                             </select>
                                         </div>
@@ -356,14 +364,14 @@
                                     <div class="form-group">
                                         <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
 
-                                        <label>
-                                            <input type="checkbox" />
-                                        </label>
+                                        <div class="col-md-4">
+                                            <input type="checkbox" checked />
+                                        </div>
 
 
                                     </div>
                                     <div class="panel panel-violet">
-                                        <div class="panel-heading">User Logins</div>
+                                        <div class="panel-heading">User Login</div>
                                         <div class="panel-body pan">
                                             <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                                 <div class="form-body">
@@ -376,6 +384,11 @@
                                                         <label for="inputPassword" class="col-md-3 control-label">Password <span class='require'>*</span></label>
 
                                                         <div class="col-md-4"><input type="password" type="text" placeholder="password" class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
+                                                    </div><br />
+                                                    <div class="form-group">
+                                                        <label for="inputPassword" class="col-md-3 control-label">re-enter Password <span class='require'>*</span></label>
+
+                                                        <div class="col-md-4"><input type="password" type="text" placeholder="password" class="form-control" /><span class="help-block"></span></div>
                                                     </div><br />
                                                 </div>
                                                 <div class="form-actions text-center pal">

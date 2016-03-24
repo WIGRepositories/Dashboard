@@ -36,7 +36,7 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable userlogins(logins b)
+        public DataTable userlogins(UserLogin b)
         {
             DataTable Tbl = new DataTable();
 
