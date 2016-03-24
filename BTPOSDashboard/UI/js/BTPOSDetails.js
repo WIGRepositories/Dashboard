@@ -6,19 +6,19 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
         $scope.Group = response.data;
 
     });
-    $scope.save = function (Group) {
+    $scope.save = function (Group, flag) {
 
         var Group = {
             Id: Group.Id,
             GroupName: Group.GroupName,
             GroupId: Group.GroupId,
-            IMEI: Group.IMEI,
-            
-            POSID: Group.POSID,
-          
-            Status: Group.Status
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
-
+            IMEI: Group.IMEI,            
+            POSID: Group.POSID,          
+            StatusId: Group.StatusId,
+            ipconfig:Group.ipconfig,
+            active:1,//Group.ipconfig,
+            fleetownerid:Group.fleetownerid,
+            insupdflag:flag
         }
 
 
@@ -27,7 +27,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             url: 'http://localhost:1476/api/BTPOSDetails/BTPOSDetails2',
             data: Group
         }
-        $http(req).then(function (response) { });
+        $http(req).then(function (response) {
+            alert('saved btpos details successfully');
+        });
 
       
         $scope.currGroup = null;

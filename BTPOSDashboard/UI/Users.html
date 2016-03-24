@@ -25,7 +25,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="User">
+<body ng-init="GetUsers" ng-model="User">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -104,7 +104,7 @@
                                     <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                                     <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                  
+
                                 </ul>
                             </li>
                             <li>
@@ -118,7 +118,7 @@
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                 </ul>
                             </li>
-                            
+
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -272,7 +272,7 @@
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="Users.html">Users</a></li>
-                            
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -280,24 +280,102 @@
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
-                                
+
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                      
+
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
-                                                        
+
                                                         <div class="actions">
                                                             <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New User</button></a>
 
+                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header modal-header-primary">
+                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Users</h4>
+                                                                        </div>
+                                                                        <div class="modal-body" ng-model="User1">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td> FirstName:</td>
+                                                                                    <td><input type="text" id="FirstName" ng-model="User1.FirstName"></td>
+                                                                                </tr>
+
+                                                                                <tr>
+                                                                                    <td> LastName:</td>
+                                                                                    <td><input type="text" id="LastName" ng-model="User1.LastName"></td>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> MiddleName:</td>
+                                                                                    <td><input type="text" id="MiddleName" ng-model="User1.MiddleName"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> EmpNo:</td>
+                                                                                    <td><input type="text" id="UserTypeId" ng-model="User1.EmpNo"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> UserTypeId:</td>
+                                                                                    <td><input type="text" id="EmpNo" ng-model="User1.UserTypeId"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Email:</td>
+                                                                                    <td><input type="text" id="Email" ng-model="User1.Email"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> MobileNo:</td>
+                                                                                    <td><input type="text" id="MobileNo" ng-model="User1.MobileNo"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Role:</td>
+                                                                                    <td><input type="text" id="Role" ng-model="User1.Role"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> User Name:</td>
+                                                                                    <td><input type="text" id="un" ng-model="User1.UserName"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Password:</td>
+                                                                                    <td><input type="password" id="passkey1" ng-model="User1.Password"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>re-enter Password:</td>
+                                                                                    <td><input type="password" id="passkey2" ng-model="User1.Password"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>Active:</td>
+                                                                                    <td>
+                                                                                        <label class="checkbox">
+                                                                                            <input type="checkbox" ng-model="User1.Active" />
+                                                                                        </label>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(User1, 'U');">Save</button>
+                                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
 
 
-                                                        
+
                                                     </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
@@ -314,6 +392,7 @@
                                                                 <th width="10%">MobileNo</th>
                                                                 <th width="10%">Role</th>
                                                                 <th width="9%">Active</th>
+                                                                <th width="9%">Update</th>
 
                                                             </tr>
                                                         <tbody>
@@ -329,8 +408,14 @@
 
                                                                 <td>{{U.MobileNo}}</td>
                                                                 <td>{{U.Role}}</td>
-                                                                <td><input type="checkbox" checked/></td>
-
+                                                                <td><input type="checkbox" checked /></td>
+                                                                <td>
+                                                                    {{U.Update}}
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(U);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
                                                             </tr>
 
 

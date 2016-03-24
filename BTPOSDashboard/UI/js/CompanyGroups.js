@@ -16,7 +16,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         });
     }
-    $scope.save = function (Group) {
+    $scope.save = function (Group, flag) {
         
         var Group = {
             Id: Group.Id,
@@ -24,8 +24,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             admin: Group.admin,
             code: Group.code,
             descr: Group.descr,
-            active: Group.active
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
+            active: (Group.active==true)?1:0,
+            insupdflag:flag 
 
         }
         

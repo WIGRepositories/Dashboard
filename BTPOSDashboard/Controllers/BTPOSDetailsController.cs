@@ -39,7 +39,7 @@ namespace BTPOSDashboardAPI.Controllers
 
         [HttpPost]
 
-        public DataTable BTPOSDetails2(BTPOSDetails n)
+        public DataTable SaveBTPOSDetails(BTPOSDetails n)
         {
             DataTable Tbl = new DataTable();
 
@@ -52,46 +52,48 @@ namespace BTPOSDashboardAPI.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelELBTPOSDetails";
-                cmd.Connection = conn;
+                cmd.CommandText = "InsUpdDelBTPOSDetails";
+                cmd.Connection = conn;          
 
                 conn.Open();
 
-                SqlParameter ba = new SqlParameter();
-                ba.ParameterName = "@Id";
-                ba.SqlDbType = SqlDbType.Int;
-                ba.Value = Convert.ToString(n.Id);
+                SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
+                ba.Value = n.Id;
                 cmd.Parameters.Add(ba);
-
-
-                SqlParameter bb = new SqlParameter();
-                bb.ParameterName = "@GroupName";
-                bb.SqlDbType = SqlDbType.VarChar;
-                bb.Value = n.GroupName;
+                
+                SqlParameter bb = new SqlParameter("@GroupId", SqlDbType.Int);
+                bb.Value = n.GroupId;
                 cmd.Parameters.Add(bb);
 
-                SqlParameter bd = new SqlParameter();
-                bd.ParameterName = "@IMEI";
-                bd.SqlDbType = SqlDbType.VarChar;
+                SqlParameter bd = new SqlParameter( "@IMEI", SqlDbType.VarChar, 20);
                 bd.Value = n.IMEI;
                 cmd.Parameters.Add(bd);
 
-            
+               
+                SqlParameter bf = new SqlParameter("@POSID", SqlDbType.VarChar,20);
+                bf.Value = n.POSID;
+                cmd.Parameters.Add(bf);              
+
+                SqlParameter bh = new SqlParameter("@StatusId",SqlDbType.Int);
+                bh.Value = n.StatusId;
+                cmd.Parameters.Add(bh);
+
+                SqlParameter ipconfig = new SqlParameter( "@ipconfig", SqlDbType.VarChar, 20);
+                ipconfig.Value = n.ipconfig;
+                cmd.Parameters.Add(ipconfig);
 
                
-                SqlParameter bf = new SqlParameter();
-                bf.ParameterName = "@POSID";
-                bf.SqlDbType = SqlDbType.Int;
-                bf.Value = Convert.ToString(n.POSID);
-                cmd.Parameters.Add(bf);
+                SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
+                active.Value = n.POSID;
+                cmd.Parameters.Add(active);              
 
-              
+                SqlParameter fo = new SqlParameter("@fleetownerid",SqlDbType.Int);
+                fo.Value = n.StatusId;
+                cmd.Parameters.Add(fo);
 
-                SqlParameter bh = new SqlParameter();
-                bh.ParameterName = "@Status";
-                bh.SqlDbType = SqlDbType.VarChar;
-                bh.Value = n.Status;
-                cmd.Parameters.Add(bh);
+                SqlParameter insupdflag = new SqlParameter( "@insupdflag", SqlDbType.VarChar, 10);
+                insupdflag.Value = n.insupdflag;
+                cmd.Parameters.Add(insupdflag);      
 
                 cmd.ExecuteScalar();
                 conn.Close();

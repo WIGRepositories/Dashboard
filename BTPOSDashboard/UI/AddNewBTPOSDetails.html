@@ -295,36 +295,55 @@
                                                         <form action="#" class="form-horizontal">
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <div class="form-group">
+                                                                    <!--<div class="form-group">
                                                                         <label for="POSID" class="col-md-3 control-label" style="color:red;">POSID <span class='require'>*</span></label>
 
                                                                         <div class="col-md-4"><input id="POSID" type="text" ng-model="Group.POSID" class="form-control" /><span class="help-block"></span></div>
+                                                                    </div>-->
+                                                                    <div class="form-group">
+                                                                        <label for="IMEI" class="col-md-4 control-label" style="color:red;">IMEI: <span class='require'>*</span></label>
+
+                                                                        <div class="col-md-6"><input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="IMEI" class="col-md-3 control-label" style="color:red;">IMEI <span class='require'>*</span></label>
+                                                                        <label for="IMEI" class="col-md-4 control-label" style="color:red;">IP Config: <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-4"><input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="ipconfig" type="text" ng-model="Group.ipconfig" class="form-control" /><span class="help-block"></span></div>
                                                                     </div>
-                                                                    <label for="GroupName" class="col-md-3 control-label" style="color:red;"> Group Name <span class='require'>*</span></label>
+                                                                    <div class="form-group">
+                                                                        <label for="selCountry" class="col-md-4 control-label">Company name:</label>
 
-                                                                    <div class="col-md-4"><input id="GroupName" type="text" ng-model="Group.GroupName" class="form-control" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6">
+                                                                            <select id="selcmp" class="form-control" ng-model="Group.groupid">
+                                                                                <option selected value="0">Select</option>
+                                                                                <option value="1">Cmp1</option>
+                                                                                <option value="5">cmp2</option>                                                                                
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="selCountry" class="col-md-4 control-label">Fleet Owner:</label>
+
+                                                                    <div class="col-md-6">
+                                                                        <select id="selusertype" class="form-control" ng-model="Group.FleetOwnerId">
+                                                                            <option selected value="0">Select</option>
+                                                                            <option  value="4">Admin Admin</option>
+                                                                            <option  value="5">Srujan simha</option>
+                                                                            <option  value="6">Naveen kumar</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
 
 
 
 
-
-
                                                                 <div class="form-group">
-                                                                    <label for="selCountry" class="col-md-3 control-label">Status</label>
+                                                                    <label for="selCountry" class="col-md-4 control-label">Status:</label>
 
-                                                                    <div class="col-md-4">
-                                                                        <select id="selusertype" class="form-control" ng-model="Group.Status">
-                                                                            <option value="" selected disabled>Select</option>
-
-                                                                            <option value="Activated">Activated</option>
-                                                                            <option value="To Be Activated">To Be Activated</option>
-                                                                            <option value="Deactivated">Deactivated</option>
+                                                                    <div class="col-md-6">
+                                                                        <select id="selstatus" class="form-control" ng-model="Group.Statusid">
+                                                                            <option selected value="To Be Activated">To Be Activated</option>                                                                            
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -333,7 +352,7 @@
                                                             </div>
                                                             <div class="form-actions">
                                                                 <div class="col-md-offset-3 col-md-9">
-                                                                    <button type="submit" class="btn btn-primary" ng-click="save(Group);">Save</button>
+                                                                    <button type="submit" class="btn btn-primary" ng-click="save(Group, 'I');">Save</button>
 
                                                                     <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
                                                                 </div>

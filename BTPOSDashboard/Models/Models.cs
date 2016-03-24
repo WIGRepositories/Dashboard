@@ -467,13 +467,16 @@ namespace BTPOSDashboardAPI.Models
 
         public string IMEI { get; set; }
 
-        public string Location { get; set; }
-
-        public int POSID { get; set; }
+        public string POSID { get; set; }
 
         public int StatusId { get; set; }
 
-        public string Status { get; set; }
+        public string ipconfig { get; set; }
+        public string fleetowner { get; set; }
+        public int fleetownerid { get; set; }
+        public int active { get; set; }
+
+        public string insupdflag { get; set; }
 
     }
     public class BusDetails
@@ -553,6 +556,7 @@ namespace BTPOSDashboardAPI.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+        public string insupdflag { get; set; }
 
     }
 

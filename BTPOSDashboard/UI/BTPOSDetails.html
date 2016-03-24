@@ -307,13 +307,9 @@
                                                                     <div class="modal-body" ng-model="currGroup">
                                                                         <table>
                                                                             <tr>
-                                                                                <td> GroupName:</td>
-                                                                                <td><input type="text" id="GroupName" ng-model="currGroup.GroupName"></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> GroupId:</td>
-                                                                                <td><input type="text" id="GroupId" ng-model="currGroup.GroupId"></td>
-                                                                            </tr>
+                                                                                <td>Company Name:</td>
+                                                                                <td><input type="text" id="GroupName" ng-model="currGroup.companyname"></td>
+                                                                            </tr>                                                                            
                                                                             <tr>
                                                                                 <td> IMEI:</td>
                                                                                 <td><input type="text" id="IMEI" ng-model="currGroup.IMEI"></td>
@@ -322,6 +318,22 @@
                                                                             <tr>
                                                                                 <td> POSID:</td>
                                                                                 <td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> IP Config:</td>
+                                                                                <td><input type="text" id="ip" ng-model="currGroup.POSID"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> Fleet Owner:</td>
+                                                                                <!--<td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>-->
+                                                                                <select id="admin" ng-model="currGroup.fleetowner">
+                                                                                    <option value="0" selected disabled>Select</option>
+
+                                                                                    <option value="4">Admin Admin</option>
+                                                                                    <option value="5">Srujan simha</option>
+                                                                                    <option value="6">Naveen kumar</option>
+                                                                                </select>
+
                                                                             </tr>
                                                                             <tr>
                                                                                 <td> Status:</td>
@@ -338,8 +350,9 @@
                                                                         </table>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                        <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
+                                                                        <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
+
+                                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -354,13 +367,10 @@
 
                                                                 <th>POSID</th>
                                                                 <th>IMEI</th>
-                                                                <th width="15%">Group Name</th>
-                                                                
-                                                            
-                                                              
-
+                                                                <th width="15%">Company Name</th>                                                                
+                                                                <th>IP Config</th>
+                                                                <th>Fleet Owner</th>
                                                                 <th>Status</th>
-
                                                                 <th>Update</th>
                                                             </tr>
                                                         </thead>
@@ -369,9 +379,9 @@
                                                             <tr ng-repeat="group in Group" class="gradeA">
                                                                 <td>{{group.POSID}}</td>
                                                                 <td>{{group.IMEI}} </td>
-                                                                <td>{{group.GroupName}}</td>
-                                                                                                                                
-                                                       
+                                                                <td>{{group.companyname}}</td>
+                                                                <td>{{group.ipconfig}}</td>                                                    
+                                                                <td>{{group.fleetowner}}</td>     
                                                                  <td>
                                                                     {{group.Status}}
                                                                 </td>
@@ -383,13 +393,6 @@
                                                                     </button>
                                                                 </td>
                                                             </tr>
-
-
-
-
-
-
-
 
                                                         </tbody>
 
