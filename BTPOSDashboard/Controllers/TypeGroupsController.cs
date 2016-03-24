@@ -13,7 +13,7 @@ namespace BTPOSDashboardAPI.Controllers
     public class TypeGroupsController : ApiController
     {
          [HttpGet]
-        public DataTable users()
+        public DataTable gettypegroups()
         {
             DataTable Tbl = new DataTable();
 
@@ -36,7 +36,7 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
           [HttpPost]
-          public DataTable pos(TypeGroups b)
+          public DataTable savetypegroups(TypeGroups b)
         {
             DataTable Tbl = new DataTable();
 
