@@ -25,7 +25,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetUsers" ng-model="User">
+<body ng-model="User">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -288,95 +288,101 @@
 
 
                                                 <div class="table-container">
+
                                                     <div class="row mbm">
+                                                        <div class="row">
+                                                            <!--<label style="float:left">SearchBy</label>-->
+                                                            <div class="col-md-3">
 
-                                                        <div class="actions">
-                                                            <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New User</button></a>
+                                                                <select id="selRole" class="form-control" style="height:35px;">
+                                                                    <option value="" selected disabled>Search by</option>
+                                                                    <option value="1">FirstName</option>
+                                                                    <option value="2">LastName</option>
+                                                                    <option value="3">Role</option>
+                                                                    <option value="4">UserType</option>
+                                                                </select>
+                                                            </div>
+                                                            <input type="text" id="Serch" class="col-md-2" style="height:30px;">   &nbsp;
+                                                            <button type="submit" class="btn btn-defualt col-md-2" style="height:30px;">Search</button>
+                                                            <div class="col-md-4" style="text-align:right">
+                                                                <a href="Fleetowner.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:inherit"> Add FleetOwner</button></a>
 
-                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header modal-header-primary">
-                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Users</h4>
+                                                                <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:inherit">Add New User</button></a>
+                                                            </div>
+                                                            </div>
+                                                            <div class="actions">
+
+
+
+                                                                <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header modal-header-primary">
+                                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                                <h4 id="modal-header-primary-label" class="modal-title">Edit Users</h4>
+                                                                            </div>
+                                                                            <div class="modal-body" ng-model="User1">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4">
+
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="First Name" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="Last Name" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="Middle Name" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="User Type" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="EmpNo" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="Email" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="MobileNo" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" value="Role" /></div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+
+                                                                                        <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="User1.FirstName" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="User1.LastName" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="User1.MiddleName" /></div>
+                                                                                        <div class="mbm">
+                                                                                            <select id=" selusertype" class="form-control" ng-model="User.UserType">
+                                                                                                <option value="" selected disabled>Select Usertype</option>
+
+                                                                                                <option value="1">INTERBUS staff</option>
+                                                                                                <option value="2">Fleet owner staff</option>
+                                                                                                <option value="3">Guest user</option>
+                                                                                            </select>
+                                                                                        </div>
+
+                                                                                        <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="User1.EmpNo" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="User1.Email" /></div>
+                                                                                        <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="User1.MobileNo" /></div>
+                                                                                        <div class="mbm">
+                                                                                            <select id="selRole" class="form-control" ng-model="User1.Role">
+                                                                                                <option value="" selected disabled>Select Role</option>
+                                                                                                <option value="1">Admin</option>
+                                                                                                <option value="2">fleet owner</option>
+                                                                                                <option value="3">driver</option>
+                                                                                                <option value="4">operator</option>
+                                                                                                <option value="5">guest</option>
+                                                                                                <option value="6">manager</option>
+
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="modal-footer">
+
+                                                                                <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(User1, 'U');">Save</button>
+                                                                                <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="modal-body" ng-model="User1">
-                                                                            <table>
-                                                                                <tr>
-                                                                                    <td> FirstName:</td>
-                                                                                    <td><input type="text" id="FirstName" ng-model="User1.FirstName"></td>
-                                                                                </tr>
 
-                                                                                <tr>
-                                                                                    <td> LastName:</td>
-                                                                                    <td><input type="text" id="LastName" ng-model="User1.LastName"></td>
-
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> MiddleName:</td>
-                                                                                    <td><input type="text" id="MiddleName" ng-model="User1.MiddleName"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> EmpNo:</td>
-                                                                                    <td><input type="text" id="UserTypeId" ng-model="User1.EmpNo"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> UserTypeId:</td>
-                                                                                    <td><input type="text" id="EmpNo" ng-model="User1.UserTypeId"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> Email:</td>
-                                                                                    <td><input type="text" id="Email" ng-model="User1.Email"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> MobileNo:</td>
-                                                                                    <td><input type="text" id="MobileNo" ng-model="User1.MobileNo"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> Role:</td>
-                                                                                    <td><input type="text" id="Role" ng-model="User1.Role"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> User Name:</td>
-                                                                                    <td><input type="text" id="un" ng-model="User1.UserName"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td> Password:</td>
-                                                                                    <td><input type="password" id="passkey1" ng-model="User1.Password"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>re-enter Password:</td>
-                                                                                    <td><input type="password" id="passkey2" ng-model="User1.Password"></td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>Active:</td>
-                                                                                    <td>
-                                                                                        <label class="checkbox">
-                                                                                            <input type="checkbox" ng-model="User1.Active" />
-                                                                                        </label>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-
-                                                                            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(User1, 'U');">Save</button>
-                                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+
+
+
                                                         </div>
-
-
-
-
-                                                    </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
@@ -385,13 +391,13 @@
                                                                 <th width="10%">First Name</th>
                                                                 <th width="10%">Last Name</th>
                                                                 <th width="10%">Middle Name</th>
-                                                                <th width="10%">User Type</th>
+                                                                <th width="13%">User Type</th>
                                                                 <th width="7%">EmpNo</th>
                                                                 <th width="12%">Email</th>
 
                                                                 <th width="10%">MobileNo</th>
                                                                 <th width="10%">Role</th>
-                                                                <th width="9%">Active</th>
+                                                                <th width="6%">Active</th>
                                                                 <th width="9%">Update</th>
 
                                                             </tr>
@@ -470,46 +476,49 @@
                     <!--END PAGE WRAPPER-->
                 </div>
             </div>
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <!--loading bootstrap js-->
-            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-            <script src="vendors/iCheck/icheck.min.js"></script>
-            <script src="vendors/iCheck/custom.min.js"></script>
-            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-            <script src="js/jquery.menu.js"></script>
-            <script src="vendors/jquery-pace/pace.min.js"></script>
-            <script src="vendors/holder/holder.js"></script>
-            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-            <!--LOADING SCRIPTS FOR PAGE-->
-            <script src="js/table-action.js"></script>
-            <!--CORE JAVASCRIPT-->
-            <script src="js/main.js"></script>
+        </div>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
 
-            <script>
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r;
-                    i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-                    a = s.createElement(o),
-                            m = s.getElementsByTagName(o)[0];
-                    a.async = 1;
-                    a.src = g;
-                    m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-                ga('create', 'UA-145464-12', 'auto');
-                ga('send', 'pageview');
-            </script>
-            <script src="js/angular.js"></script>
-            <script src="js/Users.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-145464-12', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script src="js/angular.js"></script>
+    <script src="js/Users.js"></script>
 
 </body>
+
 </html>

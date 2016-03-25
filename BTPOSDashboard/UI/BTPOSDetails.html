@@ -309,25 +309,50 @@
 
                                                                         <div class="row">
                                                                             <div class="col-md-4">
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                               
+                                                                                <div class="mbm"><input type="text" class="form-control"value="POSID" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" value="IMEI" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" value="IP Config" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" value="Company Name" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" value="Fleet Owner" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" value="Status" /></div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
-                                                                            </div>
+                                                                                
+                                                                                <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.POSID" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" id="POSID" ng-model="currGroup.IMEI" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" id="ip" ng-model="currGroup.ipconfig" /></div>
+                                                                                <div class="mbm">
+                                                                                    <select id="selcmp" class="form-control" ng-model="currGroup.companyname">
+                                                                                        <option value="" selected disabled>Select</option>
+                                                                                        <option selected value="1">Cmp1</option>
+                                                                                        <option value="5">cmp2</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="mbm">
+                                                                                    <select id="selusertype" class="form-control" ng-model="currGroup.FleetOwnerId">
+                                                                                        <option value="" selected disabled>Select</option>
+                                                                                        <option selected value="4">Admin Admin</option>
+                                                                                        <option value="5">Srujan simha</option>
+                                                                                        <option value="6">Naveen kumar</option>
+                                                                                    </select>
+                                                                                </div>  
+                                                                               
+                                                                                <div class="mbm">
+                                                                                    <select id="selstatus" class="form-control" ng-model="currGroup.StatusId">
+                                                                                        <option value="" selected disabled>Select</option>
+                                                                                        <option selected value="4">New</option>
+                                                                                    </select>
+                                                                                </div>
 
-                                                                            <table>
+                                                                                </div>
+
+
+                                                                                
+                                                                            </div>
+                                                                           
+
+                                                                            <!--<table>
                                                                                 <tr>
                                                                                     <td>Company Name:</td>
                                                                                     <td><input type="text" id="GroupName" ng-model="currGroup.companyname"></td>
@@ -347,15 +372,15 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td> Fleet Owner:</td>
-                                                                                    <!--<td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>-->
+                                                                                    <td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>
                                                                                     <select id="admin" ng-model="currGroup.fleetowner">
-                                                                                        <option value="0" selected disabled>Select</option>
+                                                                                        <option value="0" selected disabled style="width:50px;">Select</option>
 
                                                                                         <option value="4">Admin Admin</option>
                                                                                         <option value="5">Srujan simha</option>
                                                                                         <option value="6">Naveen kumar</option>
                                                                                     </select>
-
+                                                                                    
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td> Status:</td>
@@ -368,7 +393,7 @@
                                                                                         </select>
                                                                                     </td>
                                                                                 </tr>
-                                                                            </table>
+                                                                            </table>-->
                                                                         </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
@@ -519,6 +544,7 @@
                 </div>
                 <!--END PAGE WRAPPER-->
             </div>
+        </div>
         </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>

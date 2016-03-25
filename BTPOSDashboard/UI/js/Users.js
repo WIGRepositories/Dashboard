@@ -7,19 +7,19 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             $scope.User = res.data;
         });
     //}
-    $scope.save = function (User, flag) {
+    $scope.save = function (User, flag, role) {
      
         var User = {
             Id: User.Id,
             FirstName: User.FirstName,
             LastName: User.LastName,
             MiddleName:User.MiddleName,
-            UserTypeId: User.UserType,
+            UserTypeId: (role) ? 2 : User.UserType,
             EmpNo: User.EmpNo,
             Email: User.Email,
             AdressId: User.AdressId,
             MobileNo: User.MobileNo,
-            RoleId: User.Role,
+            RoleId: (role) ? 2 : User.Role,
             Active: (User.Active == true) ? 1 : 0,
             UserName: User.UserName,
             Password: User.Password,

@@ -99,6 +99,10 @@
     <Content Include="BTPOSImages\tps300 %282%29.html" />
     <Content Include="BTPOSImages\Welcome.html" />
     <Content Include="BTPOSImages\welcome.jpeg" />
+    <Content Include="CommercialSite\commercialsite1.jpeg" />
+    <Content Include="CommercialSite\CommercialSiteHome.html" />
+    <Content Include="CommercialSite\Request.html" />
+    <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
@@ -190,6 +194,7 @@
     <Content Include="UI\extra-lock-screen.html" />
     <Content Include="UI\extra-pricing-table.html" />
     <Content Include="UI\extra-profile.html" />
+    <Content Include="UI\Fleetowner.html" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\extra-signup.html" />
     <Content Include="UI\form-basic.html" />

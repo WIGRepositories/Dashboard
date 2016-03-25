@@ -26,7 +26,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelRegistrationBTPOS";
+                cmd.CommandText = "InsUpdDelBTPOSDetails";
                 cmd.Connection = conn;
 
                 conn.Open();

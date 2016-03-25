@@ -93,7 +93,7 @@ namespace POSDBAccess.Controllers
                 cmd.Parameters.Add(gid);
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,10);
-                insupdflag.Value = Convert.ToString(n.insupdflag);
+                insupdflag.Value = n.insupdflag;
                 cmd.Parameters.Add(insupdflag);
 
                 cmd.ExecuteScalar();
