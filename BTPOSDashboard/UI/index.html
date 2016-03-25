@@ -122,8 +122,8 @@
                                 </ul>
 
                             </li>
-                            
-                            
+
+
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -154,7 +154,7 @@
                                     </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li ><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
                                     <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
@@ -193,218 +193,118 @@
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
+
                         <div id="tab-general">
 
-                            <div class="actions">
-                                <a href="AddNewCompany.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" style="float:right;margin:10px;" class="btn btn-info btn-sm fa fa-plus" ng-click="toggle()">  Add New Company</button></a>
-
-                            </div>
-                            <div>
-                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                    <thead>
-                                        <tr>
-
-
-                                            <th>Name</th>
-                                            <th>admin</th>
-                                            <th>code</th>
-                                            <th>descr</th>
-                                            <th>active</th>
-
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr ng-repeat="c in Group" class="gradeA">
-
-                                            <td>{{c.Name}}</td>
-                                            <td>{{c.admin}}</td>
-                                            <td>{{c.code}}</td>
-                                            <td>{{c.descr}}</td>
-                                            <td>{{c.active}}</td>
-
-                                    </tbody>
-
-                                </table>
-
-                                <div style="padding-top:20px">
-                                    <div class="alert alert-danger"><a href="#" class="alert-link">No companies to Show</a></div>
+                            <div class="tab-content" style="width:50%;float:left; ">
+                                <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+                                <div style='overflow: hidden; height: 400px; width: 550px;'>
+                                    <div id='gmap_canvas' style='height: 400px; width: 530px;'></div>
+                                    <style>
+                                        #gmap_canvas img {
+                                            max-width: none !important;
+                                            background: none !important;
+                                        }
+                                    </style>
                                 </div>
-                            </div>
-                            <div class="actions">
-                                <a href="AddNewUser.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" style="float:right;margin:10px;" class="btn btn-info btn-sm fa fa-plus">  Add New User</button></a>
-
-                            </div>
-                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                <thead>
-                                    <tr>
-
-
-                                        <th>FirstName</th>
-                                        <th width="10%">LastName</th>
-                                        <th width="10%">UserType</th>
-                                        <th width="7%">EmpNo</th>
-                                        <th width="12%">Email</th>
-
-                                        <th width="10%">MobileNo</th>
-                                        <th width="10%">Role</th>
-                                        <th width="9%">Active</th>
-
-                                    </tr>
-                                <tbody>
-                                    <tr ng-repeat="u in User">
-
-                                        <td>{{u.FirstName}}</td>
-                                        <td>{{u.LastName}}</td>
-                                        <td>{{u.UserType}}</td>
-
-                                        <td>{{u.EmpNo}}</td>
-                                        <td>{{u.Email}}</td>
-
-                                        <td>{{u.MobileNo}}</td>
-                                        <td>{{u.Role1}}</td>
-                                        <td>{{u.Active}}</td>
-
-                                    </tr>
-
-
-                                </tbody>
-
-                            </table>
-
-                            <div style="padding-top:20px">
-                                <div class="alert alert-danger"><a href="#" class="alert-link">No Users to Show</a></div>
-                            </div>
-                            <div class="actions">
-                                <a href="AddNewBTPOS.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" style="float:right;margin:10px;" class="btn btn-info btn-sm fa fa-plus">  Add New BTPOS</button></a>
-
+                                <a href='https://www.add-map.net/'>BT POS tracking</a>
+                                <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
+                                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
                             </div>
 
-
-
-                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                <thead>
-                                    <tr>
-
-                                        <th>GroupName</th>
-                                        <th>IMEI</th>
-                                        <th>Location</th>
-                                        <th>POSID</th>
-                                        <th>Status</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr ng-repeat="t in BTPOS" class="gradeA">
-
-
-                                        <td>{{t.GroupName}}</td>
-                                        <td><a href="" ng-click="GotToBTPOSDetails(group.POSID);">{{t.IMEI}}</a> </td>
-                                        <td>{{t.Location}}</td>
-                                        <td>{{t.POSId}}</td>
-                                        <td>{{t.Status}}</td>
-
-
-                                    </tr>
-                                </tbody>
-
-                            </table>
-
-                            <div style="padding-top:30px;"><div class="alert alert-danger"><a href="#" class="alert-link">No BTPOS to Show</a></div></div>
-                            <div>
-                                <div class="tab-content" style="width:50%;float:left; ">
-                                    <h3><b>ALERTS</b></h3>
-                                    <div id="home" class="tab-pane fade in active">
-                                        <div class="list-group mail-box">
-                                            <a href="#" class="list-group-item">
-                                                <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                            </a><a href="#" class="list-group-item">
-                                                <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; -
-                                                &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                            </a><a href="#" class="list-group-item">
-                                                <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit ...</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                    <span class="glyphicon glyphicon-paperclip"></span>
-                                                </span>
-                                            </a>
-                                        </div>
+                            <div class="tab-content" style="width:50%;float:left; ">
+                                <h3><b>ALERTS</b></h3>
+                                <div id="home" class="tab-pane fade in active">
+                                    <div class="list-group mail-box">
+                                        <a href="#" class="list-group-item">
+                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                        </a><a href="#" class="list-group-item">
+                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; -
+                                            &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                        </a><a href="#" class="list-group-item">
+                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit ...</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
+                                                <span class="glyphicon glyphicon-paperclip"></span>
+                                            </span>
+                                        </a>
                                     </div>
-
                                 </div>
-                                <div class="tab-content" style="width:50%;float:left; ">
-                                    <h3><b>NOTIFICATIONS</b></h3>
-                                    <div id="home" class="tab-pane fade in active">
-                                        <div class="list-group mail-box">
-                                            <a href="#" class="list-group-item">
-                                                <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                            </a><a href="#" class="list-group-item">
-                                                <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; -
-                                                &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                            </a><a href="#" class="list-group-item">
-                                                <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit ...</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                    <span class="glyphicon glyphicon-paperclip"></span>
-                                                </span>
-                                            </a>
-                                        </div>
+
+                            </div>
+                            <div class="tab-content" style="width:50%;float:left; ">
+                                <h3><b>NOTIFICATIONS</b></h3>
+                                <div id="home" class="tab-pane fade in active">
+                                    <div class="list-group mail-box">
+                                        <a href="#" class="list-group-item">
+                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                        </a><a href="#" class="list-group-item">
+                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; -
+                                            &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                        </a><a href="#" class="list-group-item">
+                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; - &nbsp;<span style="font-size: 11px;" class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit ...</span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
+                                                <span class="glyphicon glyphicon-paperclip"></span>
+                                            </span>
+                                        </a>
                                     </div>
-
                                 </div>
-                            </div>
 
-                            <!--END CONTENT--><!--BEGIN FOOTER-->
-                            <div id="footer">
-                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                             </div>
-                            <!--END FOOTER-->
                         </div>
-                        <!--END PAGE WRAPPER-->
-                    </div>
-                </div>
 
+                                <!--END CONTENT--><!--BEGIN FOOTER-->
+                                <div id="footer">
+                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                </div>
+                                <!--END FOOTER-->
+                            </div>
+                            <!--END PAGE WRAPPER-->
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <!--loading bootstrap js-->
+        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+        <script src="vendors/iCheck/icheck.min.js"></script>
+        <script src="vendors/iCheck/custom.min.js"></script>
+        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+        <script src="js/jquery.menu.js"></script>
+        <script src="vendors/jquery-pace/pace.min.js"></script>
+        <script src="vendors/holder/holder.js"></script>
+        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+        <!--LOADING SCRIPTS FOR PAGE-->
+        <script src="js/table-action.js"></script>
+        <!--CORE JAVASCRIPT-->
+        <script src="js/main.js"></script>
 
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-145464-12', 'auto');
-        ga('send', 'pageview');
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-145464-12', 'auto');
+            ga('send', 'pageview');
 
 
-    </script>
+        </script>
+
+       
     <script src="js/angular.js"></script>
     <script src="js/source.js"></script>
 

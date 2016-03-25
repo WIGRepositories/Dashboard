@@ -110,6 +110,7 @@
     <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
+    <Content Include="UI\AddTypeGroup.html" />
     <Content Include="UI\Alerts.html" />
     <Content Include="UI\animations.html" />
     <Content Include="UI\BTPOSDetails.html" />
@@ -2180,7 +2181,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1537</DevelopmentServerPort>
+          <DevelopmentServerPort>1476</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1476/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>

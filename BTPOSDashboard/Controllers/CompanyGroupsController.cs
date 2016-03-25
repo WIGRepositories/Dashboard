@@ -61,12 +61,10 @@ namespace POSDBAccess.Controllers
                 SqlParameter gsa = new SqlParameter();
                 gsa.ParameterName = "@active";
                 gsa.SqlDbType = SqlDbType.Int;
-                gsa.Value = Convert.ToBoolean(n.active) ? "1" : "0";
+                gsa.Value = n.active;
                 cmd.Parameters.Add(gsa);
 
-                SqlParameter gs = new SqlParameter();
-                gs.ParameterName = "@admin";
-                gs.SqlDbType = SqlDbType.VarChar;
+                SqlParameter gs = new SqlParameter("@adminid",SqlDbType.Int);
                 gs.Value = n.admin;
                 cmd.Parameters.Add(gs);
 
@@ -84,10 +82,8 @@ namespace POSDBAccess.Controllers
                 gsab.Value = n.descr;
                 cmd.Parameters.Add(gsab);
 
-                SqlParameter gsac = new SqlParameter();
-                gsac.ParameterName = "@Id";
-                gsac.SqlDbType = SqlDbType.Int;
-                gsac.Value = Convert.ToString(n.Id);
+                SqlParameter gsac = new SqlParameter("@Id",SqlDbType.Int);
+                gsac.Value = n.Id;
                 cmd.Parameters.Add(gsac);
 
                 SqlParameter gid = new SqlParameter();
@@ -96,11 +92,9 @@ namespace POSDBAccess.Controllers
                 gid.Value = n.Name;
                 cmd.Parameters.Add(gid);
 
-                //SqlParameter ga = new SqlParameter();
-                //ga.ParameterName = "@Active";
-                //ga.SqlDbType = SqlDbType.Int;
-                //ga.Value = Convert.ToString(n.Active);
-                //cmd.Parameters.Add(ga);
+                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,10);
+                insupdflag.Value = Convert.ToString(n.insupdflag);
+                cmd.Parameters.Add(insupdflag);
 
                 cmd.ExecuteScalar();
                 conn.Close();

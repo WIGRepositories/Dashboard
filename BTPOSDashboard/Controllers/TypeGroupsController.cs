@@ -66,14 +66,15 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.Parameters.Add(Gim);
 
             SqlParameter pid = new SqlParameter();
-            pid.ParameterName = "@Desc ";
+            pid.ParameterName = "@Description";
             pid.SqlDbType = SqlDbType.VarChar;
             pid.Value =b.Desc;
             cmd.Parameters.Add(pid);
+
             SqlParameter llid = new SqlParameter();
             llid.ParameterName = "@Active";
             llid.SqlDbType = SqlDbType.Int;
-            llid.Value = Convert.ToBoolean(b.Active)? "1" : "0";
+            llid.Value = 1;// b.Active;
             //llid.Value = b.Active;
             cmd.Parameters.Add(llid);
            

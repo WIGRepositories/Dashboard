@@ -2,11 +2,12 @@
 // JavaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
-
-    $http.get('http://localhost:1476/api/Users/GetUsers').then(function (res, data) {
-        $scope.User = res.data;
-    });
-    $scope.save = function (User) {
+   // $scope.GetUsers = function () {
+        $http.get('http://localhost:1476/api/Users/GetUsers').then(function (res, data) {
+            $scope.User = res.data;
+        });
+    //}
+    $scope.save = function (User, flag) {
      
         var User = {
             Id: User.Id,
@@ -22,7 +23,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             Active: (User.Active == true) ? 1 : 0,
             UserName: User.UserName,
             Password: User.Password,
-            insupdflag:"I"
+            insupdflag: flag
         }
 
         var req = {
@@ -30,7 +31,9 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             url: 'http://localhost:1476/api/users/saveusers',
             data: User
         }
-        $http(req).then(function (response) { });
+        $http(req).then(function (response) {
+            alert('saved successfully.');
+        });
 
     
         $scope.User1 = null;
@@ -38,6 +41,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
     $scope.setUsers = function (usr) {
         $scope.User1 = usr;
+
     };
 
     $scope.clearUsers = function () {

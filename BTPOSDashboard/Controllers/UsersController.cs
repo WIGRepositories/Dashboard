@@ -19,10 +19,8 @@ namespace BTPOSDashboardAPI.Controllers
 
             DataTable Tbl = new DataTable();
             //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-            //conn.ConnectionString = "Data Source=localhost;Initial Catalog=MyAlerts;integrated security=sspi;";
+            SqlConnection conn = new SqlConnection();            
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();            
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;//Stored Procedure
             cmd.CommandText = "GetUsers";
@@ -57,7 +55,7 @@ namespace BTPOSDashboardAPI.Controllers
                 conn.Open();
 
 
-                SqlParameter UId = new SqlParameter("@Id", SqlDbType.Int);
+                SqlParameter UId = new SqlParameter("@userid", SqlDbType.Int);
                 UId.Value = U.Id;
                 cmd.Parameters.Add(UId);
 
