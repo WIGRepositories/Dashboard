@@ -17,7 +17,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             Active: Types.Active,
             TypeGroupId: Types.TypeGroupId,
             ListKey: Types.ListKey,
-            Listvalue:Types.ListValue
+            Listvalue: Types.Listvalue
         };
         $scope.save
         var req = {

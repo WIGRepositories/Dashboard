@@ -65,8 +65,8 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlParameter lid = new SqlParameter();
             lid.ParameterName = "@TypeGroupId";
-            lid.SqlDbType = SqlDbType.VarChar;
-            lid.Value = b.TypeGroupId;
+            lid.SqlDbType = SqlDbType.Int;
+            lid.Value = Convert.ToInt32(b.TypeGroupId);
             cmd.Parameters.Add(lid);
 
 
@@ -78,8 +78,8 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlParameter lAct = new SqlParameter();
             lAct.ParameterName = "@Active";
-            lAct.SqlDbType = SqlDbType.VarChar;
-            lAct.Value = b.Active;
+            lAct.SqlDbType = SqlDbType.Int;
+            lAct.Value = Convert.ToInt32(b.Active);
             //llid.Value = b.Active;
             cmd.Parameters.Add(lAct);
             SqlParameter pp = new SqlParameter();
