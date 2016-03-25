@@ -296,6 +296,7 @@
                                                             <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOSDetails</button></a>
 
                                                         </div>
+                                                                                                               
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -305,50 +306,70 @@
                                                                         <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
                                                                     </div>
                                                                     <div class="modal-body" ng-model="currGroup">
-                                                                        <table>
-                                                                            <tr>
-                                                                                <td>Company Name:</td>
-                                                                                <td><input type="text" id="GroupName" ng-model="currGroup.companyname"></td>
-                                                                            </tr>                                                                            
-                                                                            <tr>
-                                                                                <td> IMEI:</td>
-                                                                                <td><input type="text" id="IMEI" ng-model="currGroup.IMEI"></td>
-                                                                            </tr>
 
-                                                                            <tr>
-                                                                                <td> POSID:</td>
-                                                                                <td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> IP Config:</td>
-                                                                                <td><input type="text" id="ip" ng-model="currGroup.POSID"></td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> Fleet Owner:</td>
-                                                                                <!--<td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>-->
-                                                                                <select id="admin" ng-model="currGroup.fleetowner">
-                                                                                    <option value="0" selected disabled>Select</option>
+                                                                        <div class="row">
+                                                                            <div class="col-md-4">
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                                <div class="mbm"><input type="text" class="form-control" /></div>
+                                                                            </div>
 
-                                                                                    <option value="4">Admin Admin</option>
-                                                                                    <option value="5">Srujan simha</option>
-                                                                                    <option value="6">Naveen kumar</option>
-                                                                                </select>
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td>Company Name:</td>
+                                                                                    <td><input type="text" id="GroupName" ng-model="currGroup.companyname"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> IMEI:</td>
+                                                                                    <td><input type="text" id="IMEI" ng-model="currGroup.IMEI"></td>
+                                                                                </tr>
 
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td> Status:</td>
-                                                                                <td>
-                                                                                    <select id="admin" ng-model="currGroup.Status">
+                                                                                <tr>
+                                                                                    <td> POSID:</td>
+                                                                                    <td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> IP Config:</td>
+                                                                                    <td><input type="text" id="ip" ng-model="currGroup.POSID"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Fleet Owner:</td>
+                                                                                    <!--<td><input type="text" id="POSID" ng-model="currGroup.POSID"></td>-->
+                                                                                    <select id="admin" ng-model="currGroup.fleetowner">
                                                                                         <option value="0" selected disabled>Select</option>
 
-                                                                                        <option value="Activated">Activated</option>
-                                                                                        <option value="To Be Activated">To Be Activated</option>
-                                                                                        <option value="Deactivated">Deactivated</option>
+                                                                                        <option value="4">Admin Admin</option>
+                                                                                        <option value="5">Srujan simha</option>
+                                                                                        <option value="6">Naveen kumar</option>
                                                                                     </select>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </div>
+
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Status:</td>
+                                                                                    <td>
+                                                                                        <select id="admin" ng-model="currGroup.Status">
+                                                                                            <option value="0" selected disabled>Select</option>
+                                                                                            <option value="6">Activated</option>
+                                                                                            <option value="7">To Be Activated</option>
+                                                                                            <option value="5">Deactivated</option>
+                                                                                        </select>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
 
@@ -382,8 +403,19 @@
                                                                 <td>{{group.companyname}}</td>
                                                                 <td>{{group.ipconfig}}</td>                                                    
                                                                 <td>{{group.fleetowner}}</td>     
-                                                                 <td>
-                                                                    {{group.Status}}
+                                                                <td>
+                                                                    <span class="label label-sm label-success" ng-if="group.StatusId == 6">
+                                                                        {{group.status}}
+                                                                    </span>
+                                                                    <span class="label label-sm label-info" ng-if="group.StatusId == 5">
+                                                                        {{group.status}}
+                                                                    </span>
+                                                                    <span class="label label-sm label-warning" ng-if="group.StatusId == 4">
+                                                                        {{group.status}}
+                                                                    </span>
+                                                                    <span class="label label-sm label-danger" ng-if="group.StatusId == 7">
+                                                                        {{group.status}}
+                                                                    </span>
                                                                 </td>
                                                                 <td>
                                                                     {{group.Update}}
