@@ -989,6 +989,7 @@
     <Content Include="UI\vendors\GetInventory.html" />
     <Content Include="UI\vendors\gmaps\gmaps.js" />
     <Content Include="UI\vendors\holder\holder.js" />
+    <Content Include="UI\vendors\HtmlPage1.html" />
     <Content Include="UI\vendors\iCheck\custom.min.js" />
     <Content Include="UI\vendors\iCheck\demo\css\banner.jpg" />
     <Content Include="UI\vendors\iCheck\demo\css\custom.css" />

@@ -8,14 +8,16 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     });
     $scope.save = function (Types) {
-      
+        alert("ok");
         var Types = {
 
          Id:Types.Id,
             Name: Types.Name,
             Description: Types.Description,
             Active: Types.Active,
-            TypeGroup: Types.TypeGroup
+            TypeGroupId: Types.TypeGroupId,
+            ListKey: Types.ListKey,
+            Listvalue: Types.Listvalue
         };
         $scope.save
         var req = {

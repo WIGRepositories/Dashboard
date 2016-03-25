@@ -282,13 +282,13 @@ namespace BTPOSDashboardAPI.Models
 
         public string Active { get; set; }
 
-        public string IsVisible { get; set; }
+       
 
-        public string TypeGroup { get; set; }
+        public string TypeGroupId { get; set; }
 
-        public string Key { get; set; }
+        public string ListKey { get; set; }
 
-        public string Value { get; set; }
+        public string Listvalue { get; set; }
 
     }
 
