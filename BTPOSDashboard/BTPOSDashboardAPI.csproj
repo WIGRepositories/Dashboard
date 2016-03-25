@@ -93,7 +93,6 @@
     <Content Include="BTPOSImages\RegistrationBTPOS.js" />
     <Content Include="BTPOSImages\restart.html" />
     <Content Include="BTPOSImages\restart.jpg" />
-    <Content Include="BTPOSImages\TG.js" />
     <Content Include="BTPOSImages\TicketGeneration.html" />
     <Content Include="BTPOSImages\TicketGeneration.jpg" />
     <Content Include="BTPOSImages\TicketGeneration.js" />
@@ -285,7 +284,6 @@
     <Content Include="UI\js\login.js" />
     <Content Include="UI\js\loginpage.js" />
     <Content Include="UI\js\main.js" />
-    <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\page-calendar.js" />
     <Content Include="UI\js\page-contact.js" />
     <Content Include="UI\js\page-gallery.js" />
