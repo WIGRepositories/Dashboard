@@ -25,7 +25,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="User">
+<body ng-model="Stops">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -104,7 +104,7 @@
                                     <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                                     <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                  
+
                                 </ul>
                             </li>
                             <li>
@@ -118,7 +118,7 @@
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                 </ul>
                             </li>
-                            
+
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -272,7 +272,7 @@
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="Users.html">Users</a></li>
-                            
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -280,64 +280,46 @@
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
-                                
+
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                      
+
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
-                                                        
+
                                                         <div class="actions">
-                                                            <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New User</button></a>
+                                                            <a href="SaveStops.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New Stop</button></a>
 
                                                         </div>
 
 
 
-                                                        
+
                                                     </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
 
 
-                                                                <th width="10%">First Name</th>
-                                                                <th width="10%">Last Name</th>
-                                                                <th width="10%">Middle Name</th>
-                                                                <th width="10%">User Type</th>
-                                                                <th width="7%">EmpNo</th>
-                                                                <th width="12%">Email</th>
-
-                                                                <th width="10%">MobileNo</th>
-                                                                <th width="10%">Role</th>
+                                                                <th width="10%">Name</th>
+                                                                <th width="10%">Description</th>
+                                                                <th width="10%">Code</th>
+                                                                
                                                                 <th width="9%">Active</th>
-                                                                <th>Update</th>
+                                                              
 
                                                             </tr>
                                                         <tbody>
-                                                            <tr ng-repeat="U in User">
+                                                            <tr ng-repeat="St in Stops">
 
-                                                                <td>{{U.FirstName}}</td>
-                                                                <td>{{U.LastName}}</td>
-                                                                <td>{{U.MiddleName}}</td>
-                                                                <td>{{U.UserType}}</td>
-
-                                                                <td>{{U.EmpNo}}</td>
-                                                                <td>{{U.Email}}</td>
-
-                                                                <td>{{U.MobileNo}}</td>
-                                                                <td>{{U.Role}}</td>
-                                                                <td><input type="checkbox" checked/></td>
-                                                                <td>
-                                                                    {{U.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(User);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
+                                                                <td>{{U.Name}}</td>
+                                                                <td>{{U.Description}}</td>
+                                                                <td>{{U.Code}}</td>                         
+                                                                <td><input type="checkbox" checked /></td>
+                                                                
                                                             </tr>
 
 
@@ -381,41 +363,41 @@
 
                                     </div>
                                 </div>
-                        
-                        </div>
-                        <!--END CONTENT--><!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
-                    </div>
-                    <!--END PAGE WRAPPER-->
-                </div>
-            </div>
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <!--loading bootstrap js-->
-            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-            <script src="vendors/iCheck/icheck.min.js"></script>
-            <script src="vendors/iCheck/custom.min.js"></script>
-            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-            <script src="js/jquery.menu.js"></script>
-            <script src="vendors/jquery-pace/pace.min.js"></script>
-            <script src="vendors/holder/holder.js"></script>
-            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-            <!--LOADING SCRIPTS FOR PAGE-->
-            <script src="js/table-action.js"></script>
-            <!--CORE JAVASCRIPT-->
-            <script src="js/main.js"></script>
 
-            <script>
+                            </div>
+                            <!--END CONTENT--><!--BEGIN FOOTER-->
+                            <div id="footer">
+                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                            </div>
+                            <!--END FOOTER-->
+                        </div>
+                        <!--END PAGE WRAPPER-->
+                    </div>
+                </div>
+                <script src="js/jquery-1.10.2.min.js"></script>
+                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <!--loading bootstrap js-->
+                <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                <script src="js/html5shiv.js"></script>
+                <script src="js/respond.min.js"></script>
+                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                <script src="vendors/iCheck/icheck.min.js"></script>
+                <script src="vendors/iCheck/custom.min.js"></script>
+                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                <script src="js/jquery.menu.js"></script>
+                <script src="vendors/jquery-pace/pace.min.js"></script>
+                <script src="vendors/holder/holder.js"></script>
+                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <script src="js/table-action.js"></script>
+                <!--CORE JAVASCRIPT-->
+                <script src="js/main.js"></script>
+
+                <script>
                 (function (i, s, o, g, r, a, m) {
                     i['GoogleAnalyticsObject'] = r;
                     i[r] = i[r] || function () {
@@ -429,9 +411,9 @@
                 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
                 ga('create', 'UA-145464-12', 'auto');
                 ga('send', 'pageview');
-            </script>
-            <script src="js/angular.js"></script>
-            <script src="js/Users.js"></script>
+                </script>
+                <script src="js/angular.js"></script>
+                <script src="js/Stops.js"></script>
 
 </body>
 </html>
