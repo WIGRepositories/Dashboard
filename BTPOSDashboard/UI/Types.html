@@ -307,7 +307,7 @@
                                                                     <div class="modal-content">
                                                                         <div class="modal-header modal-header-primary">
                                                                             <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit TypeGroups</h4>
+                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Types</h4>
                                                                         </div>
                                                                         <div class="modal-body" ng-model="currGroup">
                                                                             <table>
@@ -343,11 +343,23 @@
                                                                                         </label>
                                                                                     </td>
                                                                                 </tr>
+                                                                                <tr>
+                                                                                    <td> Listkey:</td>
+                                                                                    <td><input type="text" id="ListKey" ng-model="currGroup.Listkey"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td> Listvalue:</td>
+                                                                                    <td><input type="text" id="Listvalue" ng-model="currGroup.Listvalue"></td>
+                                                                                </tr>
+
+
+
                                                                             </table>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                             <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
+                                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -358,14 +370,19 @@
                                                             <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                                 <thead>
                                                                     <tr>
-                                                                     
+
                                                                         <th>Name</th>
                                                                         <th>Description</th>
-                                                                        <th>TypeGroup</th>
+                                                                        <th>TypeGroupId</th>
                                                                         <th>Active</th>
+                                                                        <th>List Key</th>
+                                                                        <th>List value</th>
                                                                         <th>Update</th>
+
                                                                     </tr>
+                                                                </thead>
                                                                 <tbody>
+                                                                  
                                                                     <tr ng-repeat="T in Types">
                                                                         
                                                                      
@@ -373,6 +390,9 @@
                                                                         <td>{{T.Description}}</td>
                                                                         <td>{{T.TypeGroup}}</td>
                                                                         <td><input type="checkBox" checked /></td>
+                                                                 
+                                                                            <td>{{T.ListKey}}</td>
+                                                                        <td>{{T.Listvalue}}</td>
                                                                         <td>
                                                                             {{T.Update}}
                                                                             <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(T);">
@@ -380,8 +400,9 @@
                                                                                 Edit
                                                                             </button>
                                                                         </td>
-                                                                </tbody>
-                                                                </thead>
+                                                                        </tr>
+                                                                     </tbody> 
+                                                              
                                                             </table>
                                                             <!--<div class="row">
                                                                 <div class="col-lg-6">
