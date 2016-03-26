@@ -1,4 +1,4 @@
-﻿<html lang="en">
+﻿<html lang="en" ng-app>
 <head>
     <title>Form Layouts | Forms</title>
     <meta charset="utf-8">
@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/icons/favicon.ico">  
     <!--Loading bootstrap css-->    
-    <link type="text/css" rel="stylesheet" href="../ui/ui/vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -31,14 +31,32 @@
 
                     <div class="row">
 
-                        <div class="col-md-3">
-                            <div class="form-group has-success" style="text-align:right">
-                                <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                        <div class="panel panel-white">
+                            <div class="panel-heading">from:{{e}}</div>
+                            <div class="panel-body">
+                                <h3>
+                                    <p>Hi INTERBUS admin,</p>
+                                    
+                                        <p>I am interested in getting an INTERBUS fleet owner license. Below are the details</p><br />
+                                    
+                                    <p>
+                                        First Name: {{fn}}
+                                    </p>
+                                    <p>
+                                        Last Name: {{ln}}
+                                    </p>
+                                    <p>
+                                        email: {{e}}
+                                    </p>
+                                    <p>
+                                        Mobile: {{m}}
+                                    </p>
+                                    <p>
+                                        License Type: Professional
+                                    </p>
+                                    <br />
+                                    <p>Please help me in getting an INTERBUS fleet owner license.</p>
+                                </h3>
                             </div>
                         </div>
                     </div>                  
@@ -55,23 +73,23 @@
                     <div class="header-content"><h1>Interbus fleet owner request</h1></div>
                     <div class="body-content">
                         <div class="form-group">
-                            <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="First Name" name="First Name" class="form-control"></div>
+                            <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="fn" placeholder="First Name" name="First Name" class="form-control"></div>
                         </div>
                         <div class="form-group">
-                            <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="Last Name Name" name="Last Name" class="form-control"></div>
+                            <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="ln"  placeholder="Last Name Name" name="Last Name" class="form-control"></div>
                         </div>
                         <div class="form-group">
-                            <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" placeholder="email" name="email" class="form-control"></div>
+                            <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" ng-model="e"  placeholder="email" name="email" class="form-control"></div>
                         </div>
                         <div class="form-group">
-                            <div class="input-icon right"><i class="fa fa-key"></i><input id="Mbile No" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
+                            <div class="input-icon right"><i class="fa fa-key"></i><input id="Mbile No" ng-model="m"  type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
                         </div>
 
                 <div class="form-group">
 
 
                     <div class="col-md-14">
-                        <select id="selusertype" class="form-control">
+                        <select id="selusertype" class="form-control" ng-model="t">
                             <option value="" selected disabled>Select License Type</option>
                             <option value="4">Basic</option>
                             <option value="5">Professional</option>
@@ -81,7 +99,7 @@
                     </div>
                 </div>
                         <center>
-                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-medium btn-primary" ng-click="setCompany(group);">
+                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-medium btn-primary" onclick="validate();">
                                 Submit
                             </button>
                         </center>
@@ -112,6 +130,7 @@
     <script src="../ui/js/jquery.menu.js"></script>
             <script src="../ui/vendors/jquery-pace/pace.min.js"></script>
             <script src="../ui/vendors/holder/holder.js"></script>
-            <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script>  
+            <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script> 
+    <script src="angular.js"></script>  
         </body>
 </html>
