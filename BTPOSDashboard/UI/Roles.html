@@ -298,29 +298,48 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit TypeGroups</h4>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit Roles</h4>
                                                                 </div>
                                                                 <div class="modal-body" ng-model="currGroup">
-                                                                    <table>
-                                                                        <tr>
-                                                                            <td> Name:</td>
-                                                                            <td><input type="text" id="Name" ng-model="currGroup.Name"></td>
-                                                                        </tr>
+                                                                    <div class="row">
 
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
 
-                                                                        <tr>
-                                                                            <td> Description:</td>
-                                                                            <td><input type="text" id="Description" ng-model="currGroup.Description"></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>active:</td>
-                                                                            <td>
-                                                                                <label class="checkbox">
-                                                                                    <input type="checkbox" ng-model="currGroup.active" />
-                                                                                </label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">Description:</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Description" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup);">Save</button>
@@ -336,7 +355,7 @@
                                                             <tr>
 
                                                                 <th>Name</th>
-                                                                <th style="width:8px">Description</th>
+                                                                <th>Description</th>
                                                                 <th>Active</th>
                                                                 <th>Update</th>
 
