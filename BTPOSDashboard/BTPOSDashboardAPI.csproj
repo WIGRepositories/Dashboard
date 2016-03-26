@@ -101,6 +101,7 @@
     <Content Include="BTPOSImages\welcome.jpeg" />
     <Content Include="CommercialSite\commercialsite1.jpeg" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
+    <Content Include="CommercialSite\LicenseConfirmation.html" />
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />

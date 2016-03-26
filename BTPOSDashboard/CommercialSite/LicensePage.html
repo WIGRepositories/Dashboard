@@ -19,6 +19,17 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="../ui/css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
+    <script>
+        function GoToConfirmation()
+        {
+            if (document.getElementById('Text1').value.trim() == '') {
+                alert('please enter valid fleet owner code or contact administrator.');
+            }
+            else {
+                window.location.href = "http://localhost:1476/CommercialSite/LicenseConfirmation.html";
+            }
+        }
+    </script>
 </head>
 <body style="text-align:center">
 <div>
@@ -50,7 +61,7 @@
                                                 <li>No. of MySql database <strong>1</strong></li>
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
                                                 <li>Support Tickets per month <strong>1</strong></li>
-                                                <li class="text-center"><a href="#" class="btn btn-success">Buy Now</a></li> 
+                                                <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li> 
                                             </ul>
                                         </div>
                                     </div> 
@@ -70,7 +81,7 @@
                                                 <li>No. of MySql database <strong>10</strong></li>
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
                                                 <li>Support Tickets per month <strong>3</strong></li>
-                                                <li class="text-center"><a href="#" class="btn btn-success">Buy Now</a></li>
+                                                <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -90,7 +101,7 @@
                                                 <li>No. of MySql database <strong>50</strong></li>
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
                                                 <li>Support Tickets per month <strong>5</strong></li>
-                                                <li class="text-center"><a href="#" class="btn btn-success">Buy Now</a></li>
+                                                <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -110,7 +121,7 @@
                                                 <li>No. of MySql database <strong>80</strong></li>
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
                                                 <li>Support Tickets per month <strong>8</strong></li>
-                                                <li class="text-center"><a href="#" class="btn btn-success">Buy Now</a></li>
+                                                <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li>
                                             </ul>
                                         </div>
                                     </div>
