@@ -51,7 +51,7 @@
         </div>
     </div>
             <div class="page-form">
-                <form  class="form">
+        <form class="form">
                     <div class="header-content"><h1>Interbus fleet owner request</h1></div>
                     <div class="body-content">
                         <div class="form-group">
@@ -66,7 +66,21 @@
                         <div class="form-group">
                             <div class="input-icon right"><i class="fa fa-key"></i><input id="Mbile No" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
                         </div>
-                        <center>                            
+
+                <div class="form-group">
+
+
+                    <div class="col-md-14">
+                        <select id="selusertype" class="form-control">
+                            <option value="" selected disabled>Select License Type</option>
+                            <option value="4">Basic</option>
+                            <option value="5">Professional</option>
+                            <option value="6">Business</option>
+                            <option value="6">Unlimited</option>
+                        </select>
+                    </div>
+                </div>
+                        <center>
                             <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-medium btn-primary" ng-click="setCompany(group);">
                                 Submit
                             </button>
