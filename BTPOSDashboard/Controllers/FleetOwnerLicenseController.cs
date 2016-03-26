@@ -115,6 +115,75 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
 
+        [HttpGet]
+        public int validatefleetowner(string fleetownercode)
+        {
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "ValidateFleetOwnerCode";
+            cmd.Connection = conn;
+
+            conn.Open();
+            SqlParameter code = new SqlParameter("@fleetownercode", SqlDbType.VarChar, 10);
+            code.Value = fleetownercode;
+            cmd.Parameters.Add(code);
+
+            SqlParameter mm = new SqlParameter("@result", SqlDbType.Int);
+            mm.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(mm);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+
+            int result = -1;
+            result = Convert.ToInt32(mm.Value);
+            return result;
+
+        }
+
+
+        [HttpGet]
+        public int updatebtpos(string fleetownercode, string units)
+        {
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "updatebtpos";
+            cmd.Connection = conn;
+
+            conn.Open();
+            SqlParameter code = new SqlParameter("@fleetownercode", SqlDbType.VarChar, 10);
+            code.Value = fleetownercode;
+            cmd.Parameters.Add(code);
+
+            SqlParameter posunits = new SqlParameter("@units", SqlDbType.Int);
+            posunits.Value =  Convert.ToInt32(units);
+            cmd.Parameters.Add(posunits);
+
+
+            SqlParameter mm = new SqlParameter("@result", SqlDbType.Int);
+            mm.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(mm);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+
+            int result = -1;
+            result = Convert.ToInt32(mm.Value);
+            return result;
+
+        }
         public void Options()
         {
 

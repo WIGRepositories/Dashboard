@@ -76,6 +76,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BTPOSImages\adapter.jpeg" />
     <Content Include="BTPOSImages\angular.js" />
     <Content Include="BTPOSImages\busticket.html" />
     <Content Include="BTPOSImages\busticket.jpg" />
@@ -84,6 +85,7 @@
     <Content Include="BTPOSImages\loginpage.js" />
     <Content Include="BTPOSImages\menu.html" />
     <Content Include="BTPOSImages\menu.jpg" />
+    <Content Include="BTPOSImages\paper_rolls.jpeg" />
     <Content Include="BTPOSImages\Payment.html" />
     <Content Include="BTPOSImages\Payment.jpg" />
     <Content Include="BTPOSImages\poweroff.jpg" />
@@ -99,7 +101,11 @@
     <Content Include="BTPOSImages\tps300 %282%29.html" />
     <Content Include="BTPOSImages\Welcome.html" />
     <Content Include="BTPOSImages\welcome.jpeg" />
+    <Content Include="BTPOSImages\wires.jpeg" />
+    <Content Include="CommercialSite\angular.js" />
+    <Content Include="CommercialSite\BuyBTPOS.html" />
     <Content Include="CommercialSite\commercialsite1.jpeg" />
+    <Content Include="CommercialSite\commercialsitedemo.js" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
     <Content Include="CommercialSite\LicenseConfirmation.html" />
     <Content Include="CommercialSite\Request.html" />

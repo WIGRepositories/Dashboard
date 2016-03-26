@@ -17,12 +17,21 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="../ui/css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
+    <script>
+        function gotoBuyItems()
+        {
+            alert();
+            window.location.href = "http://localhost:1476/CommercialSite/BuyBTPOS.html";
+        }
+
+    </script>
+
 </head>
 <body>
 
 
     <div class="page-form" style="width:100%;text-align:center">
-        <form class="form">
+        <!--<form class="form">-->
             <div class="header-content"><h1>fleet owner license is approved</h1></div>
             <div class="body-content">
                 <div class="form-group">
@@ -38,7 +47,7 @@
                     <div class="input-icon right"><h4>Please use the above credentials to login into dashboard to active BT POS units.</h4></div>
                 </div>
                 <center>
-                    <button class="btn btn-medium btn-primary">Click to buy BT POS units</button>
+                    <button class="btn btn-medium btn-primary" onclick="gotoBuyItems();">Click to buy BT POS units</button>
                 </center>
                 <!--<div class="form-group">
                             <div class="input-icon right"><label for="inputPhone" class="control-label">Phone</label><input id="inputPhone" type="text" placeholder="" class="form-control" /></div>
@@ -47,7 +56,7 @@
 
 
             </div>
-        </form>
+        <!--</form>-->
     </div>
 
     <script src="js/jquery-1.10.2.min.js"></script>

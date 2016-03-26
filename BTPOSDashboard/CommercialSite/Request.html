@@ -20,7 +20,36 @@
 </head>
 <body>
 
+    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                    <h4 id="modal-header-primary-label" class="modal-title">Sample email that will be sent to INTERBUS administrator</h4>
+                </div>
+                <div class="modal-body" ng-model="currGroup">
 
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group has-success" style="text-align:right">
+                                <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                            </div>
+                        </div>
+                    </div>                  
+
+                </div>
+                <div class="modal-footer">                  
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
             <div class="page-form">
                 <form  class="form">
                     <div class="header-content"><h1>Interbus fleet owner request</h1></div>
@@ -37,8 +66,10 @@
                         <div class="form-group">
                             <div class="input-icon right"><i class="fa fa-key"></i><input id="Mbile No" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
                         </div>
-                        <center>
-                            <button class="btn btn-medium btn-primary">Submit</button>
+                        <center>                            
+                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-medium btn-primary" ng-click="setCompany(group);">
+                                Submit
+                            </button>
                         </center>
                             <!--<div class="form-group">
                     <div class="input-icon right"><label for="inputPhone" class="control-label">Phone</label><input id="inputPhone" type="text" placeholder="" class="form-control" /></div>
@@ -50,21 +81,21 @@
                 </form>
             </div>           
 
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
+    <script src="../ui/js/jquery-1.10.2.min.js"></script>
+    <script src="../ui/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../ui/js/jquery-ui.js"></script>
             <!--loading bootstrap js-->
             <script src="../ui/vendors/bootstrap/js/bootstrap.min.js"></script>
             <script src="../ui/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
+    <script src="../ui/js/html5shiv.js"></script>
+    <script src="../ui/js/respond.min.js"></script>
             <script src="../ui/vendors/metisMenu/jquery.metisMenu.js"></script>
             <script src="../ui/vendors/slimScroll/jquery.slimscroll.js"></script>
             <script src="../ui/vendors/jquery-cookie/jquery.cookie.js"></script>
             <script src="../ui/vendors/iCheck/icheck.min.js"></script>
             <script src="../ui/vendors/iCheck/custom.min.js"></script>
             <script src="../ui/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-            <script src="js/jquery.menu.js"></script>
+    <script src="../ui/js/jquery.menu.js"></script>
             <script src="../ui/vendors/jquery-pace/pace.min.js"></script>
             <script src="../ui/vendors/holder/holder.js"></script>
             <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script>  
