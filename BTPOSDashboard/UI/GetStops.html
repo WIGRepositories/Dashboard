@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Home | Users | Users</title>
+    <title>Home | BTPOS | Stops</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,7 +93,7 @@
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
@@ -101,13 +101,13 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                                    <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                    <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                                     <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
 
                                 </ul>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-desktop fa-fw">
                                         <div class="icon-bg bg-pink"></div>
@@ -116,6 +116,7 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                    <li class="active"><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                 </ul>
                             </li>
 
@@ -266,12 +267,12 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Users</div>
+                            <div class="page-title">Stops</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Users.html">Users</a></li>
+                            <li><a href="#">BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="GetStops.html">Stops</a></li>
 
                         </ol>
                         <div class="clearfix"></div>
@@ -295,7 +296,50 @@
 
                                                         </div>
 
+                                                        <div class="actions">
 
+
+
+                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header modal-header-primary">
+                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Stops</h4>
+                                                                        </div>
+                                                                        <div class="modal-body" ng-model="Stops1">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+
+                                                                                    <div class="mbm"><input type="text" class="form-control" value="Name" /></div>
+                                                                                    <div class="mbm"><input type="text" class="form-control" value="Description" /></div>
+                                                                                    <div class="mbm"><input type="text" class="form-control" value="Code" /></div>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+
+                                                                                    <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="Stops1.Name" /></div>
+                                                                                    <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="Stops1.Description" /></div>
+                                                                                    <div class="mbm"><input type="text" class="form-control" id="IMEI" ng-model="Stops1.Code" /></div>
+
+
+
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="modal-footer">
+
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(Stops1, 'U');">Save</button>
+                                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
 
                                                     </div>
@@ -309,17 +353,23 @@
                                                                 <th width="10%">Code</th>
                                                                 
                                                                 <th width="9%">Active</th>
-                                                              
+                                                                <th width="9%">Update</th>
 
                                                             </tr>
                                                         <tbody>
                                                             <tr ng-repeat="St in Stops">
 
-                                                                <td>{{U.Name}}</td>
-                                                                <td>{{U.Description}}</td>
-                                                                <td>{{U.Code}}</td>                         
+                                                                <td>{{St.Name}}</td>
+                                                                <td>{{St.Description}}</td>
+                                                                <td>{{St.Code}}</td>                         
                                                                 <td><input type="checkbox" checked /></td>
-                                                                
+                                                                <td>
+                                                                    {{St.Update}}
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setStops(St);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
                                                             </tr>
 
 

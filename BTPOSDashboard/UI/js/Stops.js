@@ -6,7 +6,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
     $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
         $scope.Stops = res.data;
     });
-    $scope.save = function (Stops) {
+    $scope.save = function (Stops,flag) {
 
         var Stops = {
             Id: Stops.Id,
@@ -22,9 +22,11 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/Stops/saveStops',
-            data: User
+            data: Stops
         }
-        $http(req).then(function (response) { });
+        $http(req).then(function (response) {
+            alert('saved successfully.');
+        });
 
 
         $scope.Stops1 = null;
@@ -38,5 +40,9 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
         $scope.Stops1 = null;
     }
 });
+
+   
+
+
 
 

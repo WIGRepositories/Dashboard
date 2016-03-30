@@ -2,11 +2,39 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/Types/Type1').then(function (res, data) {
+    $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=-1').then(function (res, data) {
         $scope.Types = res.data;
-
-
     });
+
+
+    $scope.sample = [{
+        id: '16',
+        name: 'Gender'
+    }, {
+        id: '12',
+        name: 'Status'
+    }, {
+        id: '13',
+        name: 'User Type'
+   
+        
+    }];
+    $scope.getselectval = function (seltype) {
+        var grpid = (seltype) ? seltype.id: -1;
+
+        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=' + grpid).then(function (res, data) {
+            $scope.Types = res.data;
+
+        });
+
+        $scope.selectedvalues = 'Name: ' + $scope.selitem.name + ' Id: ' + $scope.selitem.id;
+        
+    }
+
+
+
+
+
     $scope.save = function (Types) {
         alert("ok");
         var Types = {

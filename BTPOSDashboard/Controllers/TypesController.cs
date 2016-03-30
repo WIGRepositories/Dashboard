@@ -13,7 +13,7 @@ namespace BTPOSDashboardAPI.Controllers
     public class TypesController : ApiController
     {
         [HttpGet]
-        public DataTable Type1()
+        public DataTable TypesByGroupId(int groupid)
         {
             DataTable Tbl = new DataTable();
 
@@ -25,8 +25,15 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getTypes";
+            cmd.CommandText = "GetTypesByGroupId";
             cmd.Connection = conn;
+
+            SqlParameter Gid = new SqlParameter();
+            Gid.ParameterName = "@typegrpid";
+            Gid.SqlDbType = SqlDbType.Int;
+            Gid.Value = groupid;
+            cmd.Parameters.Add(Gid);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
@@ -35,6 +42,9 @@ namespace BTPOSDashboardAPI.Controllers
             // int found = 0;
             return Tbl;
         }
+
+
+
         [HttpPost]
         public DataTable Type2(Types b)
         {

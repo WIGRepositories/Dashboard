@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 <body ng-model="User">
@@ -116,6 +116,7 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                    <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                 </ul>
                             </li>
 
@@ -291,25 +292,41 @@
 
                                                     <div class="row mbm">
                                                         <div class="row">
-                                                            <!--<label style="float:left">SearchBy</label>-->
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-6 mbm">
+                                                                <div class="input-group">
+                                                                    <div class="input-group-btn">
+                                                                        <button type="button" data-toggle="dropdown" class="btn btn-green dropdown-toggle">Search by <i class="fa fa-angle-down"></i></button>
+                                                                        <ul class="dropdown-menu">
+                                                                            <li><a href="#">FirstName</a></li>
+                                                                            <li><a href="#">LastName</a></li>
+                                                                            <li><a href="#">Role</a></li>
+                                                                            <li><a href="#">UserType</a></li>
 
-                                                                <select id="selRole" class="form-control" style="height:35px;">
-                                                                    <option value="" selected disabled>Search by</option>
-                                                                    <option value="1">FirstName</option>
-                                                                    <option value="2">LastName</option>
-                                                                    <option value="3">Role</option>
-                                                                    <option value="4">UserType</option>
-                                                                </select>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <input type="text" class="form-control" style="width:300Px;" />
+
+                                                                    <!--<label style="float:left">SearchBy</label>-->
+                                                                    <!--<div class="col-md-3">
+
+                    <select id="selRole" class="form-control" style="height:35px;">
+                        <option value="" selected disabled>Search by</option>
+                        <option value="1">FirstName</option>
+                        <option value="2">LastName</option>
+                        <option value="3">Role</option>
+                        <option value="4">UserType</option>
+                    </select>
+                </div>
+                <input type="text" id="Serch" class="col-md-2" style="height:30px;">   &nbsp;-->
+                                                                &nbsp;&nbsp;    <button type="submit" class="btn btn-defualt col-md-2" style="height: 35px; width:100Px;">Search</button>
+                                                                </div>
                                                             </div>
-                                                            <input type="text" id="Serch" class="col-md-2" style="height:30px;">   &nbsp;
-                                                            <button type="submit" class="btn btn-defualt col-md-2" style="height:30px;">Search</button>
                                                             <div class="col-md-4" style="text-align:right">
                                                                 <a href="Fleetowner.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:inherit"> Add FleetOwner</button></a>
 
                                                                 <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:inherit">Add New User</button></a>
                                                             </div>
-                                                            </div>
+                                                        </div>
                                                             <div class="actions">
 
 
