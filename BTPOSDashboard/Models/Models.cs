@@ -110,7 +110,7 @@ namespace DAshboard.Models
         public string Desc { get; set; }
 
     }
-    public class Class1
+    public class login1
     {
         public int Id { set; get; }
         public DateTime Date { set; get; }
@@ -302,5 +302,15 @@ public class TypeGroups
     public string Desc { set; get; }
     public string Name { set; get; }
     public string Active { set; get; }
+}
+
+public class signin
+{
+    public string UserName { get; set; }
+    public string Password { get; set; }
+    public int result { get; set; }
+
+
+
 }
 }
