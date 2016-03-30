@@ -10,9 +10,7 @@
     <link rel="apple-touch-icon" href="images/icons/favicon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+    <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -22,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
@@ -118,6 +116,7 @@
                                 </ul>
                                 <ul class="nav nav-second-level">
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                    <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                 </ul>
 
                             </li>
@@ -176,95 +175,7 @@
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-                <div id="chat-form" class="fixed">
-                    <div class="chat-inner">
-                        <h2 class="chat-header">
-                            <a href="javascript:;" class="chat-form-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><i class="fa fa-user"></i>&nbsp;
-                            Chat
-                            &nbsp;<span class="badge badge-info">3</span>
-                        </h2>
-
-                        <div id="group-1" class="chat-group">
-                            <strong>Favorites</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Verna Morton</small>
-                                <span class="badge badge-info">2</span>
-                            </a><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Delores Blake</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Nathaniel Morris</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-idle"></span>
-                                <small>Boyd Bridges</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Meredith Houston</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                        <div id="group-2" class="chat-group">
-                            <strong>Office</strong><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Ann Scott</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Sherman Stokes</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Florence Pierce</small>
-                                <span class="badge badge-info">1</span>
-                            </a>
-                        </div>
-                        <div id="group-3" class="chat-group">
-                            <strong>Friends</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Willard Mckenzie</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Jenny Frazier</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Chris Stewart</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Olivia Green</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div id="chat-box" style="top:400px">
-                        <div class="chat-box-header">
-                            <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><span class="user-status is-online"></span><span class="display-name">Willard Mckenzie</span>
-                            <small>Online</small>
-                        </div>
-                        <div class="chat-content">
-                            <ul class="chat-box-body">
-                                <li>
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Admin</span><span class="time">09:33</span></p>
-
-                                    <p>Hi Swlabs, we have some comments for you.</p>
-                                </li>
-                                <li class="odd">
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Swlabs</span><span class="time">09:33</span></p>
-
-                                    <p>Hi, we're listening you...</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chat-textarea"><input placeholder="Type your message" class="form-control" /></div>
-                    </div>
-                </div><!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">

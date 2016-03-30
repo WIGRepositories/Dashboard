@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
-<head><title>Pricing Table | Extras</title>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+    <title>Pricing Table | Extras</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">   
@@ -9,38 +10,41 @@
     <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/bootstrap/css/bootstrap.min.css">
-    <!--LOADING STYLESHEET FOR PAGE-->
-    <link type="text/css" rel="stylesheet" href="undefined">
     <!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="../ui/vendors/animate.css/animate.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="../ui/css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="../ui/css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
-    <script>
-        function GoToConfirmation()
-        {
+    <!--<script>
+        function GoToConfirmation() {
             if (document.getElementById('Text1').value.trim() == '') {
                 alert('please enter valid fleet owner code or contact administrator.');
             }
             else {
+
+                var result = checkCode(document.getElementById('Text1').value);
+                if (result > 0)
                 window.location.href = "http://localhost:1476/CommercialSite/LicenseConfirmation.html";
+                else
+                    alert('invalid fleet owner code');
             }
         }
-    </script>
+    </script>-->
 </head>
 <body style="text-align:center">
 <div>
 
     <h1>Please choose below license options available:</h1>
-    <h3>Enter fleet owner code: <input id="Text1" type="text" /></h3>
+        <h3>Enter fleet owner code: <input id="Text1" type="text" ng-model="txt"/></h3>
     <br />
     <h4>Do not have a fleet owner code? please <a href="Request.html" style="color:red">click here</a> to contact INTERBUS administrator </h4>
 
     <!--BEGIN PAGE WRAPPER-->
-        <div id="page-wrapper"><!--BEGIN TITLE & BREADCRUMB PAGE-->
+        <div id="page-wrapper">
+            <!--BEGIN TITLE & BREADCRUMB PAGE-->
                         <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
             <div class="page-content">
                 <div id="page-pricing" class="row">   
@@ -50,18 +54,19 @@
                                     <div class="pricing-widget">
                                         <div class="pricing-head">Basic</div>
                                         <div class="pricing-body">
-                                            <div class="pricing-cost"><strong style="display: block">$19</strong>
+                                            <div class="pricing-cost">
+                                                <strong style="display: block">$19</strong>
                                                 <small>per month</small>
                                             </div>
                                             <ul class="pricing-list text-center">
-                                                <li><a class="btn btn-sm btn-default">Start your free trial!</a></li>
-                                                <li>Amount of space <strong>10 GB</strong></li>
-                                                <li>Bandwidth per month <strong>100 GB</strong></li>
-                                                <li>No. of email accounts <strong>1</strong></li>
-                                                <li>No. of MySql database <strong>1</strong></li>
+
+
+                                                <li>Tickets per month <strong>100</strong></li>
+
+
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
-                                                <li>Support Tickets per month <strong>1</strong></li>
-                                                <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li> 
+                                            <li>Support Tickets per month <strong>10</strong></li>
+                                            <li class="text-center"><a ng-click="GoToConfirmation(txt);" class="btn btn-success">Buy Now</a></li>
                                             </ul>
                                         </div>
                                     </div> 
@@ -70,17 +75,17 @@
                                     <div class="pricing-widget active">
                                         <div class="pricing-head">Professional</div>
                                         <div class="pricing-body">
-                                            <div class="pricing-cost"><strong style="display: block"><span>$</span>39</strong>
+                                        <div class="pricing-cost">
+                                            <strong style="display: block"><span>$</span>39</strong>
                                                 <small>per month</small>
                                             </div>
                                             <ul class="pricing-list text-center">
-                                                <li><a class="btn btn-sm btn-default">Start your free trial!</a></li>
-                                                <li>Amount of space <strong>30 GB</strong></li>
-                                                <li>Bandwidth per month <strong>200 GB</strong></li>
-                                                <li>No. of email accounts <strong>10</strong></li>
-                                                <li>No. of MySql database <strong>10</strong></li>
+                                              
+                                          
+                                                <li>Tickets per month <strong>200</strong></li>
+                                                
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
-                                                <li>Support Tickets per month <strong>3</strong></li>
+                                                <li>Support Tickets per month <strong>30</strong></li>
                                                 <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li>
                                             </ul>
                                         </div>
@@ -90,18 +95,17 @@
                                     <div class="pricing-widget">
                                         <div class="pricing-head">Business</div>
                                         <div class="pricing-body">
-                                            <div class="pricing-cost"><strong style="display: block">$59</strong>
+                                        <div class="pricing-cost">
+                                            <strong style="display: block">$59</strong>
                                                 <small>per month</small>
                                             </div>
                                             <ul class="pricing-list text-center">
-                                                <li><a class="btn btn-sm btn-default">Start your free trial!</a></li>
-                                                <li>Amount of space <strong>100 GB</strong></li>
-                                                <li>Bandwidth per month <strong>500 GB</strong></li>
-                                                <li>No. of email accounts <strong>50</strong></li>
-                                                <li>No. of MySql database <strong>50</strong></li>
+                                              
+                                                <li>Tickets per month <strong>500</strong></li>
+                                                
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
-                                                <li>Support Tickets per month <strong>5</strong></li>
-                                                <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li>
+                                            <li>Support Tickets per month <strong>50</strong></li>
+                                            <li class="text-center"><a ng-click="GoToConfirmation(txt);" class="btn btn-success">Buy Now</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -110,18 +114,17 @@
                                     <div class="pricing-widget">
                                         <div class="pricing-head">Unlimited</div>
                                         <div class="pricing-body">
-                                            <div class="pricing-cost"><strong style="display: block">$79</strong>
+                                        <div class="pricing-cost">
+                                            <strong style="display: block">$79</strong>
                                                 <small>per month</small>
                                             </div>
                                             <ul class="pricing-list text-center">
-                                                <li><a class="btn btn-sm btn-default">Start your free trial!</a></li>
-                                                <li>Amount of space <strong>200 GB</strong></li>
-                                                <li>Bandwidth per month <strong>800 GB</strong></li>
-                                                <li>No. of email accounts <strong>100</strong></li>
-                                                <li>No. of MySql database <strong>80</strong></li>
+                                                
+                                                <li>Tickets per month <strong>800</strong></li>
+                                                
                                                 <li>24/7 Unlimited Support <strong>YES</strong></li>
-                                                <li>Support Tickets per month <strong>8</strong></li>
-                                                <li class="text-center"><a onclick="GoToConfirmation();" class="btn btn-success">Buy Now</a></li>
+                                            <li>Support Tickets per month <strong>80</strong></li>
+                                            <li class="text-center"><a ng-click="GoToConfirmation(txt);" class="btn btn-success">Buy Now</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -133,12 +136,11 @@
                 </div>
             </div>
             
-            <!--END FOOTER--></div>
-        <!--END PAGE WRAPPER--></div>
+        <!--END FOOTER-->
+    </div>
+    <script src="angular.js"></script>
+    <script src="commercialsitedemo.js"></script>   
 
 
-
-
-<!--CORE JAVASCRIPT-->
 </body>
 </html>
