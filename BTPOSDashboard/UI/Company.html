@@ -217,7 +217,7 @@
                                                                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                         <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
                                                                     </div>
-                                                                    <div class="modal-body" ng-model="currGroup">                                                                          
+                                                                    <div class="modal-body" ng-model="currGroup">
 
                                                                         <div class="row">
 
@@ -247,24 +247,7 @@
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="row">
 
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Admin:</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <select id="selusertype" class="form-control" ng-model="Group.admin">
-                                                                                        <option value="" selected disabled>Select</option>
-                                                                                        <option value="4">Admin Admin</option>
-                                                                                        <option value="5">Srujan simha</option>
-                                                                                        <option value="6">naveen kumar</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
 
                                                                         <div class="row">
 
@@ -275,7 +258,7 @@
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.descr"/></div>
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.descr" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -289,18 +272,19 @@
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked/></div>
+                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="modal-footer">                                                                        
-                                                                        <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
-                                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                         </div>
 
 
@@ -313,7 +297,7 @@
                                                                 <th>Name</th>
                                                                 <th>Code</th>
 
-                                                                <th>Admin</th>
+                                                           
                                                                 <th>Description</th>
                                                                 <th>Active</th>
                                                                 <th>Update</th>
@@ -327,7 +311,7 @@
 
                                                                 <td>{{group.Name}}</td>
                                                                 <td>{{group.code}}</td>
-                                                                <td>{{group.admin}}</td>
+                                                         
                                                                 <td>{{group.descr}}</td>
                                                                 <td>
                                                                     <input type="checkbox" checked>
