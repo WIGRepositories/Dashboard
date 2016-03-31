@@ -1079,5 +1079,17 @@ namespace BTPOSDashboardAPI.Models
         public string Code { get; set; }
         public int Active { get; set; }
         public string insupdflag { get; set; }
+ 
     }
-}
+     public class CreateFleet
+     {
+         public int Id { get; set; }
+         public string FirstName { get; set; }
+         public string LastName  { get; set; }
+         public string Email { get; set; }
+         public string MobileNo { get; set; }
+         public string CompanyName { get; set; }
+         public string Description { get; set; }
+         public string insupdflag { get; set; }
+     }
+} 
