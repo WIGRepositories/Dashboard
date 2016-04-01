@@ -117,6 +117,7 @@
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewRole.html" />
     <Content Include="UI\Addnewroute.html" />
+    <Content Include="UI\AddNewStops.html" />
     <Content Include="UI\Addnewtype.html" />
     <Content Include="UI\AddNewUser.html" />
     <Content Include="UI\AddNewInv.html" />
@@ -192,7 +193,6 @@
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
-    <Content Include="UI\GetStops.html" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\GetInventory.html" />
@@ -257,7 +257,7 @@
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
     <Content Include="UI\Routes.html" />
-    <Content Include="UI\SaveStops.html" />
+    <Content Include="UI\Stops.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
@@ -1652,7 +1652,6 @@
     <Content Include="UI\vendors\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="UI\vendors\summernote\summernote.css" />
     <Content Include="UI\vendors\summernote\summernote.js" />
-    <Content Include="UI\ViewMail.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
