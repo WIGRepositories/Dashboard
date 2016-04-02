@@ -1,75 +1,95 @@
-﻿<html lang="en">
+﻿<html lang="en" ng-app>
 <head>
     <title>Form Layouts | Forms</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="../ui/ui/vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">  
+    <!--Loading bootstrap css-->    
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="../ui/vendors/animate.css/animate.css">
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/animate.css/animate.css"> 
     <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="../ui/css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="../ui/css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
 </head>
 <body>
+
     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-header-primary">
                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
+                    <h4 id="modal-header-primary-label" class="modal-title">Sample email that will be sent to INTERBUS administrator</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" ng-model="currGroup">
 
                     <div class="row">
 
-                        <div class="col-md-3">
-                            <div class="form-group has-success" style="text-align:right">
-                                <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                        <div class="panel panel-white">
+                            <div class="panel-heading">from:{{e}}</div>
+                            <div class="panel-body">
+                                <h3>
+                                    <p>Hi INTERBUS admin,</p>
+                                    
+                                        <p>I am interested in getting an INTERBUS fleet owner license. Below are the details</p><br />
+                                    
+                                    <p>
+                                        First Name: {{fn}}
+                                    </p>
+                                    <p>
+                                        Last Name: {{ln}}
+                                    </p>
+                                    <p>
+                                        email: {{e}}
+                                    </p>
+                                    <p>
+                                        Mobile: {{m}}
+                                    </p>
+                                    <p>
+                                        License Type: Professional
+                                    </p>
+                                    <br />
+                                    <p>Please help me in getting an INTERBUS fleet owner license.</p>
+                                </h3>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>                  
+
+                </div>
+                <div class="modal-footer">                  
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-    <div class="page-form">
+            <div class="page-form">
         <form class="form">
-            <div class="header-content"><h1>Interbus fleet owner request</h1></div>
-            <div class="body-content">
-                <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="First Name" name="First Name" class="form-control"></div>
-                </div>
-                <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="Last Name Name" name="Last Name" class="form-control"></div>
-                </div>
-                <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" placeholder="email" name="email" class="form-control"></div>
-                </div>
-                <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-key"></i><input id="Mbile No" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
-                </div>
+                    <div class="header-content"><h1>Interbus fleet owner request</h1></div>
+                    <div class="body-content">
+                        <div class="form-group">
+                            <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="fn" placeholder="First Name" name="First Name" class="form-control"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="ln"  placeholder="Last Name Name" name="Last Name" class="form-control"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" ng-model="e"  placeholder="email" name="email" class="form-control"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-icon right"><i class="fa fa-key"></i><input id="Mbile No" ng-model="m"  type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
+                        </div>
 
                 <div class="form-group">
 
 
                     <div class="col-md-14">
-                        <select id="selusertype" class="form-control">
+                        <select id="selusertype" class="form-control" ng-model="t">
                             <option value="" selected disabled>Select License Type</option>
                             <option value="4">Basic</option>
                             <option value="5">Professional</option>
@@ -78,48 +98,39 @@
                         </select>
                     </div>
                 </div>
-                <center>
-                    <button class="btn btn-medium btn-primary"  onclick="myFunction()">Submit</button>
-                </center>
-
-              
-
-                <script>
-                    function myFunction() {
-                        alert("Please Enter valid Fields");
-                    }
-                </script>
-
-
-                <!--<div class="form-group">
-                            <div class="input-icon right"><label for="inputPhone" class="control-label">Phone</label><input id="inputPhone" type="text" placeholder="" class="form-control" /></div>
-                    </div>
-                </div>-->
-
-
+                        <center>
+                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-medium btn-primary" onclick="validate();">
+                                Submit
+                            </button>
+                        </center>
+                            <!--<div class="form-group">
+                    <div class="input-icon right"><label for="inputPhone" class="control-label">Phone</label><input id="inputPhone" type="text" placeholder="" class="form-control" /></div>
             </div>
-        </form>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-   
-</body>
+        </div>-->
+
+
+</div>
+                </form>
+            </div>           
+
+    <script src="../ui/js/jquery-1.10.2.min.js"></script>
+    <script src="../ui/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../ui/js/jquery-ui.js"></script>
+            <!--loading bootstrap js-->
+            <script src="../ui/vendors/bootstrap/js/bootstrap.min.js"></script>
+            <script src="../ui/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="../ui/js/html5shiv.js"></script>
+    <script src="../ui/js/respond.min.js"></script>
+            <script src="../ui/vendors/metisMenu/jquery.metisMenu.js"></script>
+            <script src="../ui/vendors/slimScroll/jquery.slimscroll.js"></script>
+            <script src="../ui/vendors/jquery-cookie/jquery.cookie.js"></script>
+            <script src="../ui/vendors/iCheck/icheck.min.js"></script>
+            <script src="../ui/vendors/iCheck/custom.min.js"></script>
+            <script src="../ui/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="../ui/js/jquery.menu.js"></script>
+            <script src="../ui/vendors/jquery-pace/pace.min.js"></script>
+            <script src="../ui/vendors/holder/holder.js"></script>
+            <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script> 
+    <script src="angular.js"></script>  
+        </body>
 </html>

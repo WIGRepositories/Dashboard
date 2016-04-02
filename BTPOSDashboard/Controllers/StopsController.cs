@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class StopsController : ApiController
     {
         [HttpGet]
-        public DataTable GetUsers()//Main Method
+        public DataTable GetStops()//Main Method
         {
 
 
@@ -36,7 +36,7 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable SaveUsers(stops s)
+        public DataTable saveStops(stops s)
         {
             DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
@@ -64,7 +64,10 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(sName);
                 SqlParameter sDescription = new SqlParameter("@Description", SqlDbType.VarChar, 50);
                 sDescription.Value = s.Description;
-                cmd.Parameters.Add(sDescription);     
+                cmd.Parameters.Add(sDescription);
+                SqlParameter Code = new SqlParameter("@Code", SqlDbType.VarChar, 50);
+                Code.Value = s.Code;
+                cmd.Parameters.Add(Code);
                 SqlParameter sActive = new SqlParameter("@Active", SqlDbType.Int);
                 sActive.Value = s.Active;
                 cmd.Parameters.Add(sActive);

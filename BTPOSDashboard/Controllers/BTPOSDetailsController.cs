@@ -84,7 +84,7 @@ namespace BTPOSDashboardAPI.Controllers
 
                
                 SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
-                active.Value = n.POSID;
+                active.Value = 1;
                 cmd.Parameters.Add(active);              
 
                 SqlParameter fo = new SqlParameter("@fleetownerid",SqlDbType.Int);
