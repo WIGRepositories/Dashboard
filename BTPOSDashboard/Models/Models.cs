@@ -1080,4 +1080,15 @@ namespace BTPOSDashboardAPI.Models
         public int Active { get; set; }
         public string insupdflag { get; set; }
     }
+    public class Objects
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public string Path { get; set; }
+        public int Active { get; set; }
+
+    }
+         
 }

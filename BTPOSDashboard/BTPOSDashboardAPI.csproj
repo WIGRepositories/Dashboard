@@ -193,6 +193,7 @@
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
+    <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\GetInventory.html" />
@@ -254,6 +255,8 @@
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
     <Content Include="UI\newcompany.html" />
+    <Content Include="UI\NewObject.html" />
+    <Content Include="UI\Objects.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
     <Content Include="UI\Routes.html" />
@@ -1681,6 +1684,7 @@
     <Compile Include="Controllers\LicensePaymentsController.cs" />
     <Compile Include="Controllers\LOGINController.cs" />
     <Compile Include="Controllers\loginpageController.cs" />
+    <Compile Include="Controllers\ObjectsController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
     <Compile Include="Controllers\PayablesMasterController.cs" />
     <Compile Include="Controllers\PaymentDetailsController.cs" />
