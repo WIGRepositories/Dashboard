@@ -108,6 +108,9 @@
     <Content Include="CommercialSite\commercialsite1.jpeg" />
     <Content Include="CommercialSite\commercialsitedemo.js" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
+    <Content Include="CommercialSite\createfleet.html" />
+    <Content Include="CommercialSite\createfleet.js" />
+    <Content Include="CommercialSite\email.html" />
     <Content Include="CommercialSite\LicenseConfirmation.html" />
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
@@ -194,6 +197,7 @@
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
     <Content Include="UI\GetStops.html" />
+    <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\GetInventory.html" />
@@ -1699,6 +1703,7 @@
     <Compile Include="Controllers\STATEController.cs" />
     <Compile Include="Controllers\StopsController.cs" />
     <Compile Include="Controllers\TicketGenerationController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\TroubleTicketingDetailsController.cs" />
     <Compile Include="Controllers\TypeGroupsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />

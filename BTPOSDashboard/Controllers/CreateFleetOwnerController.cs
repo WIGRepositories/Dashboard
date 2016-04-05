@@ -12,6 +12,30 @@ namespace BTPOSDashboard.Controllers
 {
     public class CreateFleetOwnerController : ApiController
     {
+        [HttpGet]
+
+        public DataTable NewFleet()
+        {
+            DataTable Tbl = new DataTable();
+
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetUsers";
+            cmd.Connection = conn;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            Tbl = ds.Tables[0];
+
+            // int found = 0;
+            return Tbl;
+        }
         [HttpPost]
         public DataTable Savenewfleet(CreateFleet C)
         {

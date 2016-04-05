@@ -1,4 +1,5 @@
-﻿<html lang="en" ng-app>
+﻿
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
     <title>Form Layouts | Forms</title>
     <meta charset="utf-8">
@@ -18,75 +19,32 @@
     <link type="text/css" rel="stylesheet" href="../ui/css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
 </head>
-<body>
+<body ng-model="Fleet">
 
-    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header modal-header-primary">
-                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                    <h4 id="modal-header-primary-label" class="modal-title">Sample email that will be sent to INTERBUS administrator</h4>
-                </div>
-                <div class="modal-body" ng-model="currGroup">
-
-                    <div class="row">
-
-                        <div class="panel panel-white">
-                            <div class="panel-heading">from:{{e}}</div>
-                            <div class="panel-heading">To:{{e}}</div>
-                            <div class="panel-body">
-                                <h3>
-                                    <p>Hi INTERBUS admin,</p>
-
-                                    <p>I am interested in getting an INTERBUS fleet owner license. Below are the details</p><br />
-
-                                    <p>
-                                        First Name: {{fn}}
-                                    </p>
-                                    <p>
-                                        Last Name: {{ln}}
-                                    </p>
-                                    <p>
-                                        email: {{e}}
-                                    </p>
-                                    <p>
-                                        Mobile: {{m}}
-                                    </p>
-                                    <p>
-                                        License Type: Professional
-                                    </p>
-                                    <br />
-                                    <p>Please help me in getting an INTERBUS fleet owner license.</p>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Send</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="page-form">
         <form class="form">
             <div class="header-content"><h1>Interbus fleet owner request</h1></div>
             <div class="body-content">
                 <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="fn" placeholder="First Name" name="First Name" class="form-control"></div>
+                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="Fleet.FirstName" data-val="true" data-val-required="First name&#39; should not be empty."maxlength="12" placeholder="First Name" name="First Name" class="form-control">
+                       </div>
                 </div>
                 <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="ln" placeholder="Last Name Name" name="Last Name" class="form-control"></div>
+                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="Fleet.LastName" placeholder="Last Name Name" name="Last Name" data-val="true" data-val-required="&#39;Last name&#39; should not be empty." maxlength="12" class="form-control"></div>
                 </div>
                 <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" ng-model="e" placeholder="email" name="email" class="form-control"></div>
+                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="email" ng-model="Fleet.Email" placeholder="email" name="email"data-val-required="Please enter Valid EmailId" pattern="[^ @]*@[^ @]*" class="form-control"><p class="form-helper hidden" id="emailHint">Enter a valid email address</p></div>
                 </div>
                 <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-key"></i><input id="Mbile No" ng-model="m" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
+                    <div class="input-icon right"><i class="fa fa-mobilephone"></i><input id="Mbile No" ng-model="Fleet.MobileNo" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
                 </div>
-
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" ng-model="Fleet.CompanyName" placeholder="CompanyName" name="CompanyName" class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" ng-model="Fleet.Description" placeholder="Description " name="CompanyInfo " class="form-control"></div>
+                </div>
                 <div class="form-group">
 
 
@@ -101,10 +59,12 @@
                     </div>
                 </div>
                 <center>
-                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-medium btn-primary" ng-click="Fleet" onclick="validate();">
-                        Submit
-                    </button>
-                </center>
+                   
+                        <button type="submit" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-primary" ng-click="save(Fleet,'I')"onclick="validate();">
+                            Submit
+                        </button>
+
+</center>
                 <!--<div class="form-group">
                             <div class="input-icon right"><label for="inputPhone" class="control-label">Phone</label><input id="inputPhone" type="text" placeholder="" class="form-control" /></div>
                     </div>
@@ -133,6 +93,7 @@
     <script src="../ui/vendors/jquery-pace/pace.min.js"></script>
     <script src="../ui/vendors/holder/holder.js"></script>
     <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="angular.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/createfleet.js"></script>
 </body>
 </html>

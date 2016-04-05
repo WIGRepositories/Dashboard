@@ -738,13 +738,13 @@ namespace BTPOSDashboardAPI.Models
 
         public string ConductorName { get; set; }
 
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
 
         public string destination { get; set; }
 
         public string fare { get; set; }
 
-        public string greetingMssg { get; set; }
+        public string greetingMessage { get; set; }
 
         public string luggageType { get; set; }
 
@@ -774,15 +774,15 @@ namespace BTPOSDashboardAPI.Models
 
         public string ticketValidityPeriod { get; set; }
 
-        public int totalamt { get; set; }
+        public int totalamount { get; set; }
 
-        public int amtpaid { get; set; }
+        public int amountpaid { get; set; }
 
         public string TransactionCode { get; set; }
 
-        public string TransId { get; set; }
+        public string TransactionId { get; set; }
 
-        public string transType { get; set; }
+        public string transactionType { get; set; }
 
         public int userid { get; set; }
 
