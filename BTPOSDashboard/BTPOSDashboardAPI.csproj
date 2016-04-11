@@ -41,6 +41,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -113,7 +114,7 @@
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
-    <Content Include="UI\AddNewBus.html" />
+    <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewRole.html" />
     <Content Include="UI\Addnewroute.html" />
@@ -193,7 +194,9 @@
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
+    <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\Stops.js" />
+    <Content Include="UI\js\VehicleDetails.js" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\GetInventory.html" />
     <Content Include="UI\images\bg\1.jpg" />
@@ -254,6 +257,8 @@
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
     <Content Include="UI\newcompany.html" />
+    <Content Include="UI\NewObject.html" />
+    <Content Include="UI\Objects.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
     <Content Include="UI\Routes.html" />
@@ -262,6 +267,7 @@
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
     <Content Include="UI\Users.html" />
+    <Content Include="UI\VehicleDetails.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />
@@ -1667,11 +1673,12 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
-    <Compile Include="Controllers\busdetailsController.cs" />
+    <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
+    <Compile Include="Controllers\FleetOwnerController.cs" />
     <Compile Include="Controllers\FleetOwnerLicenseController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\InventoryDetailsController.cs" />
@@ -1680,6 +1687,8 @@
     <Compile Include="Controllers\LicensePaymentsController.cs" />
     <Compile Include="Controllers\LOGINController.cs" />
     <Compile Include="Controllers\loginpageController.cs" />
+    <Compile Include="Controllers\ObjectAccessController.cs" />
+    <Compile Include="Controllers\ObjectsController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
     <Compile Include="Controllers\PayablesMasterController.cs" />
     <Compile Include="Controllers\PaymentDetailsController.cs" />

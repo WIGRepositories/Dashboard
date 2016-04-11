@@ -10,11 +10,11 @@ using System.Web.Http;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class busdetailsController : ApiController
+    public class VehicleDetailsController : ApiController
     {
         [HttpGet]
     
-        public DataTable BusDetails1()
+        public DataTable getVehicleDetails()
         {
             DataTable Tbl = new DataTable();
 
@@ -26,7 +26,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getBusDetails";
+            cmd.CommandText = "getVehicleDetails";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -38,7 +38,7 @@ namespace BTPOSDashboard.Controllers
         }
         [HttpPost]
 
-        public DataTable BusDetails2(BusDetails n)
+        public DataTable saveVehicleDetails(VehicleDetails n)
         {
             DataTable Tbl = new DataTable();
 
@@ -51,7 +51,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelBusDetails";
+                cmd.CommandText = "InsUpdDelVehicleDetails";
                 cmd.Connection = conn;
 
                 conn.Open();
@@ -99,9 +99,9 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(gsabc);
 
                 SqlParameter gska = new SqlParameter();
-                gska.ParameterName = "@groupname";
+                gska.ParameterName = "@CompanyName";
                 gska.SqlDbType = SqlDbType.VarChar;
-                gska.Value = n.groupname;
+                gska.Value = n.CompanyName;
                 cmd.Parameters.Add(gska);
 
                 SqlParameter gsacd = new SqlParameter();
@@ -143,11 +143,15 @@ namespace BTPOSDashboard.Controllers
 
 
 
-                //SqlParameter ga = new SqlParameter();
-                //ga.ParameterName = "@Active";
-                //ga.SqlDbType = SqlDbType.Int;
-                //ga.Value = Convert.ToString(n.Active);
-                //cmd.Parameters.Add(ga);
+                SqlParameter ga = new SqlParameter();
+                ga.ParameterName = "@Active";
+                ga.SqlDbType = SqlDbType.Int;
+                ga.Value = Convert.ToString(n.Active);
+                cmd.Parameters.Add(ga);
+
+                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
+                insupdflag.Value = n.insupdflag;
+                cmd.Parameters.Add(insupdflag); 
 
                 cmd.ExecuteScalar();
                 conn.Close();

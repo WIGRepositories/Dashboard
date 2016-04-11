@@ -55,11 +55,11 @@ namespace BTPOSDashboardAPI.Models
     public class roledetails
     {
         public int Id { get; set; }
-        public int RoleId { get; set; }
-        public int ScreenId { get; set; }
-        public string Access { get; set; }
-        
 
+
+        public string ObjectName { get; set; }
+
+        public string Path { get; set; }
 
     }
     public class roles
@@ -463,7 +463,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string GroupName { get; set; }
 
-        public int GroupId { get; set; }
+        public string GroupId { get; set; }
 
         public string IMEI { get; set; }
 
@@ -479,7 +479,7 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
 
     }
-    public class BusDetails
+    public class VehicleDetails
     {
         public int busId { get; set; }
 
@@ -495,7 +495,7 @@ namespace BTPOSDashboardAPI.Models
 
         public int fleetOwnerId { get; set; }
 
-        public string groupname { get; set; }
+        public string CompanyName { get; set; }
 
         public int Id { get; set; }
 
@@ -508,7 +508,8 @@ namespace BTPOSDashboardAPI.Models
         public string Status { get; set; }
 
         public int statusid { get; set; }
-
+        public int Active { get; set; }
+        public string insupdflag { get; set; }
     }
 
     public class RouteFare
@@ -1080,4 +1081,23 @@ namespace BTPOSDashboardAPI.Models
         public int Active { get; set; }
         public string insupdflag { get; set; }
     }
+    public class Objects
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public string Path { get; set; }
+        public int Active { get; set; }
+
+    }
+    public class ObjectAccess
+    {
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public int ObjectId { get; set; }
+
+        public int AccessId { get; set; }
+    }
+         
 }
