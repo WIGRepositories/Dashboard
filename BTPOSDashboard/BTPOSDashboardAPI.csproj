@@ -114,7 +114,7 @@
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
-    <Content Include="UI\AddNewBus.html" />
+    <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewRole.html" />
     <Content Include="UI\Addnewroute.html" />
@@ -196,6 +196,7 @@
     <Content Include="UI\Fleetowner.html" />
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\Stops.js" />
+    <Content Include="UI\js\VehicleDetails.js" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\GetInventory.html" />
     <Content Include="UI\images\bg\1.jpg" />
@@ -266,6 +267,7 @@
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
     <Content Include="UI\Users.html" />
+    <Content Include="UI\VehicleDetails.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />
@@ -1671,7 +1673,7 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
-    <Compile Include="Controllers\busdetailsController.cs" />
+    <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />

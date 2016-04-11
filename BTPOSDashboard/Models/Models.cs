@@ -463,7 +463,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string GroupName { get; set; }
 
-        public int GroupId { get; set; }
+        public string GroupId { get; set; }
 
         public string IMEI { get; set; }
 
@@ -479,7 +479,7 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
 
     }
-    public class BusDetails
+    public class VehicleDetails
     {
         public int busId { get; set; }
 
@@ -495,7 +495,7 @@ namespace BTPOSDashboardAPI.Models
 
         public int fleetOwnerId { get; set; }
 
-        public string groupname { get; set; }
+        public string CompanyName { get; set; }
 
         public int Id { get; set; }
 
@@ -508,7 +508,8 @@ namespace BTPOSDashboardAPI.Models
         public string Status { get; set; }
 
         public int statusid { get; set; }
-
+        public int Active { get; set; }
+        public string insupdflag { get; set; }
     }
 
     public class RouteFare
