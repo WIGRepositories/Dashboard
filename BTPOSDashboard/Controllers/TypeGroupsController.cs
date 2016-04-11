@@ -68,7 +68,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlParameter pid = new SqlParameter();
             pid.ParameterName = "@Description";
             pid.SqlDbType = SqlDbType.VarChar;
-            pid.Value =b.Desc;
+            pid.Value = b.Description;
             cmd.Parameters.Add(pid);
 
             SqlParameter llid = new SqlParameter();

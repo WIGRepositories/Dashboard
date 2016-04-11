@@ -195,6 +195,8 @@
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
     <Content Include="UI\js\Objects.js" />
+    <Content Include="UI\js\Routedetails.html" />
+    <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\VehicleDetails.js" />
     <Content Include="UI\Login.html" />
@@ -259,6 +261,7 @@
     <Content Include="UI\newcompany.html" />
     <Content Include="UI\NewObject.html" />
     <Content Include="UI\Objects.html" />
+    <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
     <Content Include="UI\Routes.html" />
