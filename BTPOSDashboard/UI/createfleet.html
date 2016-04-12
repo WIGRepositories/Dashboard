@@ -1,0 +1,100 @@
+﻿
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<head>
+    <title>Form Layouts | Forms</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <!--Loading bootstrap css-->
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/bootstrap/css/bootstrap.min.css">
+    <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/animate.css/animate.css">
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-pace/pace.css">
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/iCheck/skins/all.css">
+    <link type="text/css" rel="stylesheet" href="../ui/vendors/jquery-news-ticker/jquery.news-ticker.css">
+    <!--Loading style-->
+    <link type="text/css" rel="stylesheet" href="../ui/css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
+</head>
+<body ng-model="Fleet">
+
+
+    <div class="page-form">
+        <form class="form">
+            <div class="header-content"><h1>Interbus fleet owner request</h1></div>
+            <div class="body-content">
+                <div class="form-group">
+                    <div class="input-icon right">
+                        <i class="fa fa-user"></i><input type="text" ng-model="Fleet.FirstName" data-val="true" data-val-required="First name&#39; should not be empty." maxlength="12" placeholder="First Name" name="First Name" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="Fleet.LastName" placeholder="Last Name Name" name="Last Name" data-val="true" data-val-required="&#39;Last name&#39; should not be empty." maxlength="12" class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="email" ng-model="Fleet.Email" placeholder="email" name="email" data-val-required="Please enter Valid EmailId" pattern="[^ @]*@[^ @]*" class="form-control"><p class="form-helper hidden" id="emailHint">Enter a valid email address</p></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-mobilephone"></i><input id="Mbile No" ng-model="Fleet.MobileNo" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" ng-model="Fleet.CompanyName" placeholder="CompanyName" name="CompanyName" class="form-control"></div>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="text" ng-model="Fleet.Description" placeholder="Description " name="CompanyInfo " class="form-control"></div>
+                </div>
+                <div class="form-group">
+
+
+                    <div class="col-md-14">
+                        <select id="selusertype" class="form-control" ng-model="t">
+                            <option value="" selected disabled>Select License Type</option>
+                            <option value="4">Basic</option>
+                            <option value="5">Professional</option>
+                            <option value="6">Business</option>
+                            <option value="6">Unlimited</option>
+                        </select>
+                    </div>
+                </div>
+                <center>
+
+                    <button type="submit" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-primary" ng-click="save(Fleet,'I')" onclick="validate();">
+                        Submit
+                    </button>
+
+                </center>
+                <!--<div class="form-group">
+                            <div class="input-icon right"><label for="inputPhone" class="control-label">Phone</label><input id="inputPhone" type="text" placeholder="" class="form-control" /></div>
+                    </div>
+                </div>-->
+
+
+            </div>
+        </form>
+    </div>
+
+    <script src="../ui/js/jquery-1.10.2.min.js"></script>
+    <script src="../ui/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../ui/js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="../ui/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../ui/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="../ui/js/html5shiv.js"></script>
+    <script src="../ui/js/respond.min.js"></script>
+    <script src="../ui/vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../ui/vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="../ui/vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="../ui/vendors/iCheck/icheck.min.js"></script>
+    <script src="../ui/vendors/iCheck/custom.min.js"></script>
+    <script src="../ui/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="../ui/js/jquery.menu.js"></script>
+    <script src="../ui/vendors/jquery-pace/pace.min.js"></script>
+    <script src="../ui/vendors/holder/holder.js"></script>
+    <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/createfleet.js"></script>
+</body>
+</html>

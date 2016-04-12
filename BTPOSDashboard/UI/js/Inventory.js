@@ -9,16 +9,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.save = function (Group) {
         
         var Group = {
-            Active: Group.Active,
-            availableQty: Group.availableQty,
-            category: Group.category,
-            code: Group.code,
-            desc: Group.desc,
-           InventoryId: Group.InventoryId,
-            name: Group.name,
+            Name: Group.Name,
+            Code: Group.Code,
+            Description: Group.Description,
+            AvailableQty: Group.AvailableQty,
+            Category: Group.Category,
+            SubCategory: Group.SubCategory,
             PerUnitPrice: Group.PerUnitPrice,
-            reorderpoint: Group.reorderpoint,
-            subcat: Group.subcat
+            ReorderPont: Group.ReorderPont,
+            Active: (Group.Active==true)?0:1
+          
 
             // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
 
@@ -31,7 +31,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: Group
         }
-        $http(req).then(function (response) { });
+        $http(req).then(function (response) {
+            alert('saved successfully.');
+        });
+
+
+        $scope.Inventory = null;
+    };
+
+    $scope.setInventory = function (usr) {
+        $scope.Inventory = usr;
+
+    };
+
+    $scope.clearInventory = function () {
+        $scope.Inventory = null;
+       
        
       
     };
