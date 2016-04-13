@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        input {
+            margin: 5px;
+        }
+
+        td {
+            background-color: white;
+            border: solid;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    
+  
+</head>
+<body ng-controller="Mycntrlr" ng-model="data">
+
+    <label for="setRows">Rows: </label>
+    <input type="text" id="setRows">
+    <br>
+    <label for="setCols">Cols: </label>
+    <input type="text" id="setCols">
+    <br>
+    <input type="button" id="submit" onclick="buildTable();" value="submit">
+    <hr>
+    <div id="tableHolder">
+    </div>
+    <input type="button" id="submit" ng-click="save()" value="save">
+
+    <script language="JavaScript"  ng-model="data">
+    function buildTable() {
+        var rows = document.getElementById("setRows").value;
+        var cols = document.getElementById("setCols").value;
+
+        var table = "<table>";
+        table += "<tbody>";
+
+        for (i = 1; i <= rows; i++) {
+            table += "<tr>";
+            for (j = 1; j <= cols; j++) {
+                table += "<td><input type='checkbox'ng-checked='getCheckedFalse()'/>" + i + j + "</td>"
+            }
+
+            table += "</tr>";
+        }
+
+        table += "</tbody>";
+        table += "</table>";
+
+        document.getElementById("tableHolder").innerHTML = table;
+        //var table = document.getElementById(tabelid);
+
+
+    }
+    </script>
+
+    <script src="angular.js"></script>
+    <script src="mulitiplication.js"></script>
+</body>
+</html>

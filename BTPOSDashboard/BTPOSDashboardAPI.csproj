@@ -109,6 +109,8 @@
     <Content Include="CommercialSite\commercialsitedemo.js" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
     <Content Include="CommercialSite\LicenseConfirmation.html" />
+    <Content Include="CommercialSite\mulitiplication.js" />
+    <Content Include="CommercialSite\multiplicationofcells.html" />
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
@@ -195,7 +197,6 @@
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
     <Content Include="UI\js\Objects.js" />
-    <Content Include="UI\js\Routedetails.html" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\VehicleDetails.js" />
@@ -264,6 +265,7 @@
     <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
+    <Content Include="UI\Routedetails.html" />
     <Content Include="UI\Routes.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
@@ -1667,6 +1669,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CommercialSite\Class1.cs" />
+    <Compile Include="CommercialSite\mulitiplicationsaveController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
@@ -1676,6 +1680,7 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
