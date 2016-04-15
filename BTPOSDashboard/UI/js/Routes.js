@@ -8,6 +8,10 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
 
     });
+    $scope.myVar = false;
+    $scope.toggle = function () {
+        $scope.myVar = !$scope.myVar;
+    };
     $scope.save = function (routes) {
         alert("ok");
         var routes = {
