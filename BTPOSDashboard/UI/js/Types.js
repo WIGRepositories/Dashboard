@@ -5,20 +5,19 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=-1').then(function (res, data) {
         $scope.Types = res.data;
     });
-
-
-    $scope.sample = [{
+    $scope.Sample = [{
         id: '16',
         name: 'Gender'
-    }, {
-        id: '12',
-        name: 'Status'
-    }, {
-        id: '13',
-        name: 'User Type'
-   
-        
-    }];
+    },
+    {
+    id:'12',
+    name:'Status'
+},
+{
+    id:'13',
+    name:'UserType'
+}];
+
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.id: -1;
 
