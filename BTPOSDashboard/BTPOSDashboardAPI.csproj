@@ -116,6 +116,7 @@
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
+    <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewRole.html" />
@@ -123,7 +124,6 @@
     <Content Include="UI\AddNewStops.html" />
     <Content Include="UI\Addnewtype.html" />
     <Content Include="UI\AddNewUser.html" />
-    <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
     <Content Include="UI\AddTypeGroup.html" />
     <Content Include="UI\Alerts.html" />
