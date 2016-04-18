@@ -48,7 +48,7 @@ namespace BTPOSDashboardAPI.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_InsTypeGroups";
+            cmd.CommandText = "InsUpdTypeGroups";
             cmd.Connection = conn;
             conn.Open();
          

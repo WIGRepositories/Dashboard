@@ -4,42 +4,33 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
-      
-           
-
     });
-    $scope.save = function (TypeGroups) {
+
+    $scope.save = function (TypeGroup) {
       
-        var TypeGroups = {
-
-
-            Name: TypeGroups.Name,
-            Description: TypeGroups.Description,
-            Active: TypeGroups.Active,
-            Update:TypeGroups.Update
-
-
+        var SelTypeGroup = {
+            Name: TypeGroup.Name,
+            Description: TypeGroup.Description,
+            Active: TypeGroup.Active,
+            Update: TypeGroup.Update,
+            Id: TypeGroup.Id
         };
-        $scope.save
+
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/typegroups/savetypegroups',
             //headers: {
             //    'Content-Type': undefined
-
-            data: TypeGroups
-
-
+            data: SelTypeGroup
         }
-        $http(req).then(function (res) { });
-
-
+        $http(req).then(function (res) {
+            alert('saved successfully');
+        });
 
         $scope.currGroup = null;
-
     };
 
-$scope.setCompany = function (grp) {
+    $scope.setTypeGroup = function (grp) {
     $scope.currGroup = grp;
 };
 

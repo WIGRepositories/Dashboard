@@ -23,14 +23,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
-    <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <link type="text/css" rel="stylesheet" href="css/style-responsive.css">  
 
 </head>
 <body ng-model="Types">
@@ -211,8 +204,8 @@
                                                     <div class="table-container">
                                                         <div class="row mbm">
                                                             <div class="col-md-5">
-                                                                Type Group: <select ng-options="s.name for s in sample" ng-model="seltype" ng-change="getselectval(seltype)">
-                                                                    <option value="">All</option>
+                                                                Type Group: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                               <option value="">All</option>
                                                                 </select>
                                                             </div>
 
@@ -232,7 +225,7 @@
 
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                                                                                        <label for="Name" class="control-label" style="color:red;">Name:<span class='require'>*</span></label>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-5">
@@ -246,7 +239,7 @@
 
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">description:<span class='require'>*</span></label>
+                                                                                        <label for="Description" class="control-label">Description:</label>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-5">
@@ -260,69 +253,30 @@
 
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">TypeGroup:<span class='require'>*</span></label>
+                                                                                        <label for="TypeGroup" class="control-label" style="color:red;"><span class='require'>*</span>Type Group:</label>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="currGroup.TypeGroupId" /></div>
+                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="currGroup.TypeGroup" readonly /></div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div>                                                                         
 
                                                                             <div class="row">
 
                                                                                 <div class="col-md-3">
                                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Description:</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Description" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="row">
-
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                                        <label for="Active" class="control-label">Active:<span class='require'></span></label>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-4">
                                                                                     <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                                        <div class="input-icon right">
+                                                                                        <input type="checkbox" class="form-control" id="cactive" ng-checked="currGroup.Active" /></div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row">
-
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Listkey:</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Listkey" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Listvalue:</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Listkey" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+                                                                            </div>                                                                          
 
                                                                         </div>
 
@@ -349,8 +303,8 @@
                                                                 <th>Description</th>
                                                                 <th>Type Group</th>
                                                                 <th>Active</th>
-                                                                <th>List Key</th>
-                                                                <th>List value</th>
+                                                                <!--<th>List Key</th>
+                                                                <th>List value</th>-->
                                                                 <th>Update</th>
 
                                                             </tr>
@@ -363,10 +317,10 @@
                                                                 <td>{{T.Name}}</td>
                                                                 <td>{{T.Description}}</td>
                                                                 <td>{{T.TypeGroup}}</td>
-                                                                <td><input type="checkBox" checked /></td>
+                                                                <td><input type="checkBox" ng-checked="T.Active" disabled/></td>
 
-                                                                <td>{{T.ListKey}}</td>
-                                                                <td>{{T.Listvalue}}</td>
+                                                                <!--<td>{{T.ListKey}}</td>
+                                                                <td>{{T.Listvalue}}</td>-->
                                                                 <td>
                                                                     {{T.Update}}
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(T);">
