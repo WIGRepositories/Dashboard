@@ -6,6 +6,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $scope.Types = res.data;
     });
     $scope.Sample = [{
+
         id: '16',
         name: 'Gender'
     },
