@@ -69,24 +69,24 @@ namespace BTPOSDashboard.Controllers
             acode.Value = r.Code;
             cmd.Parameters.Add(acode);
 
-            SqlParameter ddes = new SqlParameter();
-            ddes.ParameterName = "@Description";
-            ddes.SqlDbType = SqlDbType.VarChar;
-            ddes.Value = r.Description;
-            cmd.Parameters.Add(ddes);
+            //SqlParameter ddes = new SqlParameter();
+            //ddes.ParameterName = "@Description";
+            //ddes.SqlDbType = SqlDbType.VarChar;
+            //ddes.Value = r.Description;
+            //cmd.Parameters.Add(ddes);
 
            
-            SqlParameter gact = new SqlParameter();
-            gact.ParameterName = "@Active";
-            gact.SqlDbType = SqlDbType.Int;
-            gact.Value = Convert.ToBoolean(r.Active) ? "1" : "0";
-            cmd.Parameters.Add(gact);
+            //SqlParameter gact = new SqlParameter();
+            //gact.ParameterName = "@Active";
+            //gact.SqlDbType = SqlDbType.Int;
+            //gact.Value = r.Active;
+            //cmd.Parameters.Add(gact);
 
-            SqlParameter ii = new SqlParameter();
-            ii.ParameterName = "@BTPOSGroupId";
-            ii.SqlDbType = SqlDbType.VarChar;
-            ii.Value = r.BTPOSGroupId;
-            cmd.Parameters.Add(ii);
+            //SqlParameter ii = new SqlParameter();
+            //ii.ParameterName = "@BTPOSGroupId";
+            //ii.SqlDbType = SqlDbType.VarChar;
+            //ii.Value = r.BTPOSGroupId;
+            //cmd.Parameters.Add(ii);
 
             SqlParameter ff = new SqlParameter();
             ff.ParameterName = "@Source";

@@ -203,9 +203,9 @@ namespace BTPOSDashboardAPI.Models
         public int Id{set;get;}
      public string Route {set;get;}
        public string Code {set;get;}
-      public string Description {set;get;} 
-      public string Active {set;get;} 
-       public string BTPOSGroupId {set;get;}
+      //public string Description {set;get;} 
+      //public string Active {set;get;} 
+      // public string BTPOSGroupId {set;get;}
       public string Source {set;get;} 
       public string Destination {set;get;} 
     }
@@ -377,25 +377,20 @@ namespace BTPOSDashboardAPI.Models
     }
     public class Inventory1
     {
-        public int Active { get; set; }
-
-        public int availableQty { get; set; }
-
-        public string category { get; set; }
-
-        public string code { get; set; }
-
-        public string desc { get; set; }
 
         public int InventoryId { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
+        public int AvailableQty { get; set; }
 
-        public string name { get; set; }
-
+        public int Category { get; set; }
+        public int SubCategory { get; set; }
         public int PerUnitPrice { get; set; }
 
-        public int reorderpoint { get; set; }
-
-        public string subcat { get; set; }
+        public int ReorderPont { get; set; }
+        public int Active { get; set; }
+        public string insupdflag { get; set; }
 
     }
     public class Expenses
