@@ -15,7 +15,7 @@ namespace POSDBAccess.Controllers
 
         [HttpGet]
         [Route("api/GetCompanyGroups")]
-        public DataTable CompanyGroups1()
+        public DataTable GetCompanyGroups()
         {
             DataTable Tbl = new DataTable();
 
@@ -27,7 +27,40 @@ namespace POSDBAccess.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getCompanyGroups";
+            cmd.CommandText = "getCompanies";
+            cmd.Connection = conn;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            Tbl = ds.Tables[0];
+
+            // int found = 0;
+            return Tbl;
+        }
+
+        [HttpGet]
+        [Route("api/GetCompanyGroups")]
+        public DataTable GetCompanyGroups(int userid)
+        {
+            DataTable Tbl = new DataTable();
+
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "getCompanies";
+
+            SqlParameter uid = new SqlParameter();
+            uid.ParameterName = "@userid";
+            uid.SqlDbType = SqlDbType.Int;
+            uid.Value = userid;
+            cmd.Parameters.Add(uid);
+
+
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -40,7 +73,7 @@ namespace POSDBAccess.Controllers
 
         [HttpPost]
 
-        public DataTable CompanyGroups2(CompanyGroups n)
+        public DataTable SaveCompanyGroups(CompanyGroups n)
         {
             DataTable Tbl = new DataTable();
 
@@ -62,13 +95,7 @@ namespace POSDBAccess.Controllers
                 gsa.ParameterName = "@active";
                 gsa.SqlDbType = SqlDbType.Int;
                 gsa.Value = n.active;
-                cmd.Parameters.Add(gsa);
-
-                SqlParameter gs = new SqlParameter("@adminid",SqlDbType.Int);
-                gs.Value = n.admin;
-                cmd.Parameters.Add(gs);
-
-                
+                cmd.Parameters.Add(gsa);            
 
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@code";
@@ -77,7 +104,7 @@ namespace POSDBAccess.Controllers
                 cmd.Parameters.Add(gsn);
 
                 SqlParameter gsab = new SqlParameter();
-                gsab.ParameterName = "@descr";
+                gsab.ParameterName = "@desc";
                 gsab.SqlDbType = SqlDbType.VarChar;
                 gsab.Value = n.descr;
                 cmd.Parameters.Add(gsab);

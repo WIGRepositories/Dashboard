@@ -117,7 +117,8 @@
                                 </ul>
                                 <ul class="nav nav-second-level">
                                     <li class="active"><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                    <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
 
                             </li>
@@ -305,15 +306,11 @@
                                                             <thead>
                                                                 <tr>
 
-                                                                    <th>Route</th>
+                                                                    <th>Route Name</th>
                                                                     <th>Code</th>
-
-                                                                    <th>Description</th>
-
-                                                                    <th>Active</th>
-                                                                    <th>BTPOSGroupId</th>
                                                                     <th>Source</th>
                                                                     <th>Destination</th>
+                                                                    <th>Active</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -323,46 +320,15 @@
 
                                                                     <td>{{route.Route}}</td>
                                                                     <td>{{route.Code}}</td>
-                                                                    <td>{{route.Description}}</td>
-                                                                    <td> <input type="checkbox" checked></td>
-                                                                    <td>{{route.BTPOSGroupId}}</td>
                                                                     <td>{{route.Source}}</td>
                                                                     <td>{{route.Destination}}</td>
-
+                                                                    <td> <input type="checkbox" checked></td>
                                                                 </tr>
 
                                                             </tbody>
 
                                                         </table>
-                                                        <div class="row">
-                                                            <div class="col-lg-6">
-                                                                <div class="pagination-panel">
-                                                                    Page
-                                                                    &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                                    of 6 | View
-                                                                    &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                        <option value="20" selected="selected">20</option>
-                                                                        <option value="50">50</option>
-                                                                        <option value="100">100</option>
-                                                                        <option value="150">150</option>
-                                                                        <option value="-1">All</option>
-                                                                    </select>&nbsp;
-                                                                    records | Found total 58 records
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6 text-right">
-                                                                <div class="pagination-panel">
-                                                                    <ul class="pagination pagination-sm man">
-                                                                        <li><a href="#">&laquo;</a></li>
-                                                                        <li><a href="#">1</a></li>
-                                                                        <li><a href="#">2</a></li>
-                                                                        <li><a href="#">3</a></li>
-
-                                                                        <li><a href="#">&raquo;</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                      
                                                     </div>
 
 

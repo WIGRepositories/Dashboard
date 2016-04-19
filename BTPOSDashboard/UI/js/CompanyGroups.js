@@ -1,18 +1,11 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
-
-    $scope.GetUsers = function () {
-
-        $http.get('http://localhost:1476/api/Users/GetUsers').then(function (res, data) {
-            $scope.Users = res.data;
-        });
-    }
+var ctrl = app.controller('myCtrl', function ($scope, $http) {   
 
     $scope.GetCompanys = function () {
-        $http.get('http://localhost:1476/api/GetCompanyGroups').then(function (response, data) {
-            $scope.Group = response.data;
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+            $scope.Companies = response.data;
 
         });
     }
@@ -32,7 +25,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CompanyGroups/CompanyGroups2',
+            url: 'http://localhost:1476/api/CompanyGroups/SaveCompanyGroups',
             data: Group
         }
         $http(req).then(function (response) {
@@ -42,7 +35,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
      
         $scope.currGroup = null;
     };
-   
+      
 
     $scope.setCompany = function (grp) {
         $scope.currGroup = grp;

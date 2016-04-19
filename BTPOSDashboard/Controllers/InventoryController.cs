@@ -12,6 +12,7 @@ namespace BTPOSDashboardAPI.Controllers
 {
     public class InventoryController : ApiController
     {
+
         public DataTable GetInventory()
         {
             DataTable Tbl = new DataTable();
@@ -24,7 +25,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getInventory";
+            cmd.CommandText = "GetCategories";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -40,9 +41,9 @@ namespace BTPOSDashboardAPI.Controllers
         {
             DataTable Tbl = new DataTable();
 
-          
-                //connect to database
-                SqlConnection conn = new SqlConnection();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
             try
             {
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
@@ -85,14 +86,14 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.Parameters.Add(gb);
 
                 SqlParameter gid = new SqlParameter();
-                gid.ParameterName = "@Category";
-                gid.SqlDbType = SqlDbType.VarChar;
+                gid.ParameterName = "@CategoryId";
+                gid.SqlDbType = SqlDbType.Int;
                 gid.Value = n.Category;
                 cmd.Parameters.Add(gid);
 
                 SqlParameter gd = new SqlParameter();
-                gd.ParameterName = "@SubCategory";
-                gd.SqlDbType = SqlDbType.VarChar;
+                gd.ParameterName = "@SubCategoryId";
+                gd.SqlDbType = SqlDbType.Int;
                 gd.Value = n.SubCategory;
                 cmd.Parameters.Add(gd);
 

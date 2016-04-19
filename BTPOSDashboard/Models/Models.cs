@@ -55,11 +55,11 @@ namespace BTPOSDashboardAPI.Models
     public class roledetails
     {
         public int Id { get; set; }
-        public int RoleId { get; set; }
-        public int ScreenId { get; set; }
-        public string Access { get; set; }
-        
 
+
+        public string ObjectName { get; set; }
+
+        public string Path { get; set; }
 
     }
     public class roles
@@ -68,6 +68,8 @@ namespace BTPOSDashboardAPI.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Active { get; set; }
+        public string Company { get; set; }
+        public int CompanyId { get; set; }
 
     }
     public class Blocklist
@@ -201,9 +203,9 @@ namespace BTPOSDashboardAPI.Models
         public int Id{set;get;}
      public string Route {set;get;}
        public string Code {set;get;}
-      public string Description {set;get;} 
-      public string Active {set;get;} 
-       public string BTPOSGroupId {set;get;}
+      //public string Description {set;get;} 
+      //public string Active {set;get;} 
+      // public string BTPOSGroupId {set;get;}
       public string Source {set;get;} 
       public string Destination {set;get;} 
     }
@@ -266,7 +268,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string Name { get; set; }
 
-        public string Desc { get; set; }
+        public string Description { get; set; }
 
         public string Active { get; set; }
 
@@ -382,8 +384,8 @@ namespace BTPOSDashboardAPI.Models
         public string Description { get; set; }
         public int AvailableQty { get; set; }
 
-        public string Category { get; set; }
-        public string SubCategory { get; set; }
+        public int Category { get; set; }
+        public int SubCategory { get; set; }
         public int PerUnitPrice { get; set; }
 
         public int ReorderPont { get; set; }
@@ -458,7 +460,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string GroupName { get; set; }
 
-        public int GroupId { get; set; }
+        public string GroupId { get; set; }
 
         public string IMEI { get; set; }
 
@@ -474,7 +476,7 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
 
     }
-    public class BusDetails
+    public class VehicleDetails
     {
         public int busId { get; set; }
 
@@ -490,7 +492,7 @@ namespace BTPOSDashboardAPI.Models
 
         public int fleetOwnerId { get; set; }
 
-        public string groupname { get; set; }
+        public string CompanyName { get; set; }
 
         public int Id { get; set; }
 
@@ -503,7 +505,8 @@ namespace BTPOSDashboardAPI.Models
         public string Status { get; set; }
 
         public int statusid { get; set; }
-
+        public int Active { get; set; }
+        public string insupdflag { get; set; }
     }
 
     public class RouteFare
@@ -1074,17 +1077,37 @@ namespace BTPOSDashboardAPI.Models
         public string Code { get; set; }
         public int Active { get; set; }
         public string insupdflag { get; set; }
- 
     }
-     public class CreateFleet
-     {
-         public int Id { get; set; }
-         public string FirstName { get; set; }
-         public string LastName  { get; set; }
-         public string Email { get; set; }
-         public string MobileNo { get; set; }
-         public string CompanyName { get; set; }
-         public string Description { get; set; }
-         public string insupdflag { get; set; }
-     }
-} 
+    public class Objects
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public string Path { get; set; }
+        public int Active { get; set; }
+
+    }
+    public class ObjectAccess
+    {
+        public int Id { get; set; }
+        public String Name { get; set; }
+        public int ObjectId { get; set; }
+
+        public int AccessId { get; set; }
+    }
+    public class RouteDetails
+    {
+        public int Id { get; set; }
+        public String RouteId { get; set; }
+        public String stopname { get; set; }
+        public String Description { get; set; }
+
+        public String StopCode { get; set; }
+        public int DistanceFromSource { get; set; }
+        public int DistanceFromDestination { get; set; }
+        public int DistanceFromPreviousStop { get; set; }
+        public int DistanceFromNextStop { get; set; }
+
+    }
+}

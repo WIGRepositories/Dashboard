@@ -32,6 +32,7 @@ var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http) {
                 alert('invalid credentials');
             }
             else {
+                //if the user has role, then get the details and save in session
                     window.location.href = "index.html";                
             }
         });

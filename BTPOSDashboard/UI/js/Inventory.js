@@ -6,25 +6,108 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
         $scope.Group = response.data;
 
     });
-    $scope.save = function (Group) {
+    $scope.sample = [{
+        id: '29',
+        name: 'BTPOS'
+    }, {
+        id: '29',
+        name: 'Paper Rolls'
+    },{
+        id: '29',
+        name:'Aaptors'
+    }];
+    $scope.getselectval = function (seltype) {
+        var grpid = (seltype) ? seltype.id : -1;
+
+        $http.get('http://localhost:1476/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
+            $scope.Group = res.data;
+
+        });
+
+        $scope.selectedvalues = 'Name: ' + $scope.selitem.name + ' Id: ' + $scope.selitem.id;
+
+    }
+    $scope.sample1 = [{
+        id: '30',
+        name: 'POS8100'
+    }, {
+        id: '30',
+        name: 'Wireless Adaptor'
+    },{
+        id:'30',
+        name:'SoftpaperRolls'
+    
+    }];
+    $scope.getselectval1 = function (seltype1) {
+        var grpid = (seltype1) ? seltype1.id : -1;
+
+        $http.get('http://localhost:1476/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
+            $scope.Group = res.data;
+
+        });
+
+        $scope.selectedvalues = 'Name: ' + $scope.selitem.name + ' Id: ' + $scope.selitem.id;
+
+    }
+
+
+
+
+    $scope.save = function (Group, flag) {
         
+    //to save new inventory item
+    $scope.saveNewItem = function (Item)
+    {
+        var invItem = {
+            Active: Group.Active,
+            availableQty: Group.availableQty,
+            category: Group.category,
+            code: Group.code,
+            desc: Group.desc,
+            InventoryId: Group.InventoryId,
+            name: Group.name,
         var Group = {
             Name: Group.Name,
             Code: Group.Code,
             Description: Group.Description,
             AvailableQty: Group.AvailableQty,
-            Category: Group.Category,
-            SubCategory: Group.SubCategory,
+            Category: Group.CategoryId,
+            SubCategory: Group.SubCategoryId,
             PerUnitPrice: Group.PerUnitPrice,
             ReorderPont: Group.ReorderPont,
-            Active: (Group.Active==true)?0:1
-          
+            Active: (Group.Active == true) ? 0 : 1,
+            insupdflag: flag
 
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
-
+            reorderpoint: Group.reorderpoint,
+            subcat: Group.subcat
         }
 
+        var req = {
 
+            method: 'POST',
+            url: 'http://localhost:1476/api/Inventory/SaveInventoryItem',
+            data: invItem
+        }
+
+        $http(req).then(function (response) {
+            alert('saved successfully');
+        });
+    }
+
+    $scope.save = function (Group) {
+        
+        var Group = {
+            Active: Group.Active,
+            availableQty: Group.availableQty,
+            category: Group.category,
+            code: Group.code,
+            desc: Group.desc,
+           InventoryId: Group.InventoryId,
+            name: Group.name,
+            PerUnitPrice: Group.PerUnitPrice,
+            reorderpoint: Group.reorderpoint,
+            subcat: Group.subcat
+        }
         var req = {
             
             method: 'POST',
@@ -46,8 +129,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
     $scope.clearInventory = function () {
         $scope.Inventory = null;
+
        
-       
-      
     };
 });
