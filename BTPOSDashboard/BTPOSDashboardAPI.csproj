@@ -116,6 +116,7 @@
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
+    <Content Include="UI\AddNewInventoryItem.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewRole.html" />
@@ -123,7 +124,6 @@
     <Content Include="UI\AddNewStops.html" />
     <Content Include="UI\Addnewtype.html" />
     <Content Include="UI\AddNewUser.html" />
-    <Content Include="UI\AddNewInv.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
     <Content Include="UI\AddTypeGroup.html" />
     <Content Include="UI\Alerts.html" />
@@ -196,12 +196,15 @@
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
+    <Content Include="UI\InventoryItems.html" />
+    <Content Include="UI\InventoryPurchases.html" />
+    <Content Include="UI\InventorySales.html" />
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\VehicleDetails.js" />
     <Content Include="UI\Login.html" />
-    <Content Include="UI\GetInventory.html" />
+    <Content Include="UI\Inventory.html" />
     <Content Include="UI\images\bg\1.jpg" />
     <Content Include="UI\images\bg\2.jpg" />
     <Content Include="UI\images\bg\3.jpg" />

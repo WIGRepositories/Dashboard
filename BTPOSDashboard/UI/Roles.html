@@ -10,9 +10,7 @@
     <link rel="apple-touch-icon" href="images/icons/favicon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+    <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -174,96 +172,7 @@
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-                <div id="chat-form" class="fixed">
-                    <div class="chat-inner">
-                        <h2 class="chat-header">
-                            <a href="javascript:;" class="chat-form-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><i class="fa fa-user"></i>&nbsp;
-                            Chat
-                            &nbsp;<span class="badge badge-info">3</span>
-                        </h2>
-
-                        <div id="group-1" class="chat-group">
-                            <strong>Favorites</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Verna Morton</small>
-                                <span class="badge badge-info">2</span>
-                            </a><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Delores Blake</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Nathaniel Morris</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-idle"></span>
-                                <small>Boyd Bridges</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Meredith Houston</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                        <div id="group-2" class="chat-group">
-                            <strong>Office</strong><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Ann Scott</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Sherman Stokes</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Florence Pierce</small>
-                                <span class="badge badge-info">1</span>
-                            </a>
-                        </div>
-                        <div id="group-3" class="chat-group">
-                            <strong>Friends</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Willard Mckenzie</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Jenny Frazier</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Chris Stewart</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Olivia Green</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div id="chat-box" style="top:400px">
-                        <div class="chat-box-header">
-                            <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><span class="user-status is-online"></span><span class="display-name">Willard Mckenzie</span>
-                            <small>Online</small>
-                        </div>
-                        <div class="chat-content">
-                            <ul class="chat-box-body">
-                                <li>
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Admin</span><span class="time">09:33</span></p>
-
-                                    <p>Hi Swlabs, we have some comments for you.</p>
-                                </li>
-                                <li class="odd">
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Swlabs</span><span class="time">09:33</span></p>
-
-                                    <p>Hi, we're listening you...</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chat-textarea"><input placeholder="Type your message" class="form-control" /></div>
-                    </div>
-                </div>
-                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
@@ -290,9 +199,13 @@
 
 
                                                 <div class="table-container">
-                                                    
+                                                    <div class="col-md-5">
+                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getselectval(s)">
+    <option value="">All</option>
+</select>
+                                                    </div>
                                                     <div class="actions">
-                                                        <a href="AddNewRole.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New Role</button></a>
+                                                        <a href="AddNewRole.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Role</button></a>
 
                                                     </div>
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -302,7 +215,7 @@
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Edit Roles</h4>
                                                                 </div>
-                                                                <div class="modal-body" ng-model="currGroup">
+                                                                <div class="modal-body" ng-model="currRole">
                                                                     <div class="row">
 
                                                                         <div class="col-md-3">
@@ -312,7 +225,7 @@
                                                                         </div>
                                                                         <div class="col-md-5">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currRole.Name" /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -325,7 +238,7 @@
                                                                         </div>
                                                                         <div class="col-md-5">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Description" /></div>
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currRole.Description" /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -338,13 +251,13 @@
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currRole.Active" checked /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup);">Save</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveRoles(currRole);">Save</button>
                                                                     <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                     
                                                                 </div>
@@ -358,26 +271,23 @@
 
                                                                 <th>Name</th>
                                                                 <th>Description</th>
+                                                                <th>Company</th>
                                                                 <th>Active</th>
                                                                 <th>Update</th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
                                                             <tr ng-repeat=" role in roles" class="gradeA">
-
-
-
                                                                 <td>{{role.Name}}</td>
                                                                 <td>{{role.Description}}</td>
-
+                                                                <td>{{role.Company}}</td>
                                                                 <td>
-                                                                    <input type="checkbox" checked>
+                                                                    <input type="checkbox" ng-checked="role.Active" disabled>
                                                                 </td>
                                                                 <td>
                                                                     {{role.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(role);">
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(role);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
@@ -387,35 +297,7 @@
                                                         </tbody>
 
                                                     </table>
-                                                    <!--<div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="pagination-panel">
-                                                                Page
-                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                                of 6 | View
-                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                    <option value="20" selected="selected">20</option>
-                                                                    <option value="50">50</option>
-                                                                    <option value="100">100</option>
-                                                                    <option value="150">150</option>
-                                                                    <option value="-1">All</option>
-                                                                </select>&nbsp;
-                                                                records | Found total 58 records
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 text-right">
-                                                            <div class="pagination-panel">
-                                                                <ul class="pagination pagination-sm man">
-                                                                    <li><a href="#">&laquo;</a></li>
-                                                                    <li><a href="#">1</a></li>
-                                                                    <li><a href="#">2</a></li>
-                                                                    <li><a href="#">3</a></li>
-
-                                                                    <li><a href="#">&raquo;</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -434,6 +316,8 @@
                     <!--END PAGE WRAPPER-->
                 </div>
             </div>
+            </div>
+        </div>
             <script src="js/jquery-1.10.2.min.js"></script>
             <script src="js/jquery-migrate-1.2.1.min.js"></script>
             <script src="js/jquery-ui.js"></script>
@@ -456,22 +340,6 @@
             <script src="js/table-action.js"></script>
             <!--CORE JAVASCRIPT-->
             <script src="js/main.js"></script>
-
-            <script>
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r;
-                    i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-                    a = s.createElement(o),
-                            m = s.getElementsByTagName(o)[0];
-                    a.async = 1;
-                    a.src = g;
-                    m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-                ga('create', 'UA-145464-12', 'auto');
-                ga('send', 'pageview');
-            </script>
             <script src="js/angular.js"></script>
             <script src="js/roles.js"></script>
 

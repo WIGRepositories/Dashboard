@@ -1,9 +1,7 @@
-﻿
-
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Dashboard</title>
+    <title>Home | Users | Users | Add New User</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,8 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-
-<body ng-model="Group">
+<body>
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -85,7 +82,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -93,7 +90,7 @@
                                 </a>
                             </li>
 
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
@@ -101,10 +98,10 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                                    <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory Items</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                    <li><a href="Transactions.html"><i class="fa fa-align-left"></i><span class="submenu-title">Transactions</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -121,10 +118,7 @@
                                     <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                     <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
-
                             </li>
-
-
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -135,7 +129,6 @@
                                     <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
                                     <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
                                     <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                                    <li><a href="Objects.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Objects</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -179,116 +172,142 @@
                         </ul>
                     </div>
                 </nav>
-
-                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Dashboard</div>
+                            <div class="page-title">New Inventory Item</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
-                            <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="InventoryItems.html">Inventory Items</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="AddNewInventoryItem.html">Add Inventory Item</a></li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
-                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+
                     <div class="page-content">
+                        <div id="form-layouts" class="row">
+                            <div class="col-lg-12">
 
-                        <div id="tab-general">
+                        <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
+                            <div id="tab-form-actions" class="tab-pane fade active in">
+                                <div class="row">
+                            <div class="col-lg-6">
+                                <div class="panel panel-violet">
+                                    <div class="panel-heading">Add New Inventory Type</div>
+                                    <div class="panel-body pan">
+                                        <form action="#" class="form-horizontal">
+                                            <div class="modal-body">
+                                                <div class="form-group">                                                                   
 
-                            <div class="tab-content" style="width:50%;float:left; ">
-                                <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-                                <div style='overflow: hidden; height: 400px; width: 520px;'>
-                                    <div id='gmap_canvas' style='height: 400px; width: 470px;'></div>
-                                    <style>
-                                        #gmap_canvas img {
-                                            max-width: none !important;
-                                            background: none !important;
-                                        }
-                                    </style>
-                                </div>
-                                <a href='https://www.add-map.net/'>BT POS tracking</a>
-                                <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
-                            </div>
+                                                    <label class="col-md-3 control-label">Item Name: <span class='require'>*</span></label>
 
-                            <div class="tab-content" style="width:50%;float:left; ">
-                                <h3><b>ALERTS</b></h3>
-                                <div id="home" class="tab-pane fade in active">
-                                    <div class="list-group mail-box">
-                                        <a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; <span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                <span class="glyphicon glyphicon-paperclip"></span>
-                                            </span>
-                                        </a>
+                                                    <div class="col-md-4"><input id="itemName" type="text" placeholder="Item Name" class="form-control" ng-model="Item.Name" /><span class="help-block"></span></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3 control-label">Code: <span class='require'>*</span></label>
+
+                                                    <div class="col-md-4"><input id="itemcode" type="text" placeholder="Item Code" class="form-control" ng-model="Item.Code" /><span class="help-block"></span></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="itemDesc" class="col-md-3 control-label">Description:</label>
+
+                                                    <div class="col-md-4"><input id="itemDesc" type="text" placeholder="Item Description" class="form-control" ng-model="Item.Desc" /><span class="help-block"></span></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="category" class="col-md-3 control-label">Category:</label>
+
+                                                    <div class="col-md-4">
+                                                        <select id="itemCat" class="form-control" ng-model="Item.category">
+                                                            <option value="" selected disabled>Select Category</option>
+                                                            <option value="1">INTERBUS staff</option>
+                                                            <option value="2">Fleet owner staff</option>
+                                                            <option value="3">Guest user</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="selCountry" class="col-md-3 control-label">Sub Category:</label>
+
+                                                    <div class="col-md-4">
+                                                        <select id="sbcat" class="form-control" ng-model="Item.SubCat">
+                                                            <option value="" selected disabled>Select Role</option>
+                                                            <option value="1">Admin</option>
+                                                            <option value="2">fleet owner</option>
+                                                            <option value="3">driver</option>
+                                                            <option value="4">operator</option>
+                                                            <option value="5">guest</option>
+                                                            <option value="6">manager</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="" class="col-md-3 control-label">Re-order point:<span class='require'>*</span></label>
+
+                                                 <div class="col-md-4"><input id="reorderpoint" type="text" class="form-control" ng-model="Item.reorderpoint" /><span class="help-block"></span></div>
+                                                </div>                                                                
+
+                                                <div class="form-group">
+                                                    <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
+
+                                                    <div class="col-md-4">
+                                                        <input type="checkbox" ng-checked="Item.Active" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-actions">
+                                                    <div class="col-md-offset-3 col-md-9">
+                                                        <button type="submit" class="btn btn-primary" ng-click="saveNewItem(Item);">Save</button>
+                                                        <button type="reset" class="btn btn-green">Cancel</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="tab-content" style="width:50%;float:left; ">
-                                <h3><b>NOTIFICATIONS</b></h3>
-                                <div id="home" class="tab-pane fade in active">
-                                    <div class="list-group mail-box">
-                                        <a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; 
-                                            &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                <span class="glyphicon glyphicon-paperclip"></span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
+                            </div>  
+                                </div>  
+                           </div>
                         </div>
-
-                                <!--END CONTENT--><!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                </div>
-                                <!--END FOOTER-->
+                              </div>
                             </div>
-                            <!--END PAGE WRAPPER-->
+                            <!--END FOOTER-->
                         </div>
+                    <!--END PAGE WRAPPER-->
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                     </div>
-
                 </div>
             </div>
-  
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <!--loading bootstrap js-->
-        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-        <script src="vendors/iCheck/icheck.min.js"></script>
-        <script src="vendors/iCheck/custom.min.js"></script>
-        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-        <script src="js/jquery.menu.js"></script>
-        <script src="vendors/jquery-pace/pace.min.js"></script>
-        <script src="vendors/holder/holder.js"></script>
-        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-        <!--LOADING SCRIPTS FOR PAGE-->
-        <script src="js/table-action.js"></script>
-        <!--CORE JAVASCRIPT-->
-        <script src="js/main.js"></script>       
-    <script src="js/angular.js"></script>
-    <script src="js/source.js"></script>
-    
-</body>
+        </div>
+    </div>
 
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/Inventory.js"></script>
+
+</body>
 </html>
