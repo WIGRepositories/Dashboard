@@ -1110,4 +1110,15 @@ namespace BTPOSDashboardAPI.Models
         public int DistanceFromNextStop { get; set; }
 
     }
+    public class SubCategory
+    {
+        public int Id { get; set; }
+
+        public string  Category{ get; set; }
+
+        public String Name { get; set; }
+        public String Description { get; set; }
+        public int Active { get; set; }
+
+    }
 }

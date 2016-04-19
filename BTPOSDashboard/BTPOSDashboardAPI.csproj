@@ -124,6 +124,7 @@
     <Content Include="UI\AddNewStops.html" />
     <Content Include="UI\Addnewtype.html" />
     <Content Include="UI\AddNewUser.html" />
+    <Content Include="UI\AddSubcategory.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
     <Content Include="UI\AddTypeGroup.html" />
     <Content Include="UI\Alerts.html" />
@@ -202,6 +203,7 @@
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
+    <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleDetails.js" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\Inventory.html" />
@@ -271,6 +273,7 @@
     <Content Include="UI\Routedetails.html" />
     <Content Include="UI\Routes.html" />
     <Content Include="UI\Stops.html" />
+    <Content Include="UI\SubCategory.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
@@ -1684,6 +1687,7 @@
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
+    <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
