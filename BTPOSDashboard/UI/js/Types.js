@@ -1,11 +1,7 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
-
-    //$http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=-1').then(function (res, data) {
-    //    $scope.Types = res.data;
-    //});
-    
+        
     $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
         $scope.getselectval();
@@ -35,7 +31,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             alert('Please enter name.');
             return;
         }
-        if (isNewType == null && Types.TypeGroupId == null) {
+        if (Types.TypeGroupId == null) {
             alert('Please select a type group');
             return;
         }
@@ -79,7 +75,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             return;
         }
 
-        if (newType.group && newType.group.Id == null) {
+        if (newType.group ==null || newType.group.Id == null) {
             alert('Please select a type group');
             return;
         }       

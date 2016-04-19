@@ -54,7 +54,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
 
     $scope.save = function (Group, flag) {
-
+        
+    //to save new inventory item
+    $scope.saveNewItem = function (Item)
+    {
+        var invItem = {
+            Active: Group.Active,
+            availableQty: Group.availableQty,
+            category: Group.category,
+            code: Group.code,
+            desc: Group.desc,
+            InventoryId: Group.InventoryId,
+            name: Group.name,
         var Group = {
             Name: Group.Name,
             Code: Group.Code,
@@ -67,14 +78,38 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             Active: (Group.Active == true) ? 0 : 1,
             insupdflag: flag
 
-
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
-
+            reorderpoint: Group.reorderpoint,
+            subcat: Group.subcat
         }
-
 
         var req = {
 
+            method: 'POST',
+            url: 'http://localhost:1476/api/Inventory/SaveInventoryItem',
+            data: invItem
+        }
+
+        $http(req).then(function (response) {
+            alert('saved successfully');
+        });
+    }
+
+    $scope.save = function (Group) {
+        
+        var Group = {
+            Active: Group.Active,
+            availableQty: Group.availableQty,
+            category: Group.category,
+            code: Group.code,
+            desc: Group.desc,
+           InventoryId: Group.InventoryId,
+            name: Group.name,
+            PerUnitPrice: Group.PerUnitPrice,
+            reorderpoint: Group.reorderpoint,
+            subcat: Group.subcat
+        }
+        var req = {
+            
             method: 'POST',
             url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: Group
@@ -95,7 +130,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.clearInventory = function () {
         $scope.Inventory = null;
 
-
-
+       
     };
 });
