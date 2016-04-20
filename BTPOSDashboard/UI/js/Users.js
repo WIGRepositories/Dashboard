@@ -1,12 +1,20 @@
 // JavaScript source code
-// JavaScript source code
 var app = angular.module('myApp', [])
+
 var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
-   // $scope.GetUsers = function () {
+
+    $scope.GetCompanyRoles = function (){
+        $http.get('http://localhost:1476/api/Roles/getroles?companyId=-1').then(function (res, data) {
+            $scope.companies = res.data;
+        });
+    }    
+
+    $scope.GetUsers = function () {
         $http.get('http://localhost:1476/api/Users/GetUsers').then(function (res, data) {
             $scope.User = res.data;
         });
-    //}
+    }
+
     $scope.save = function (User, flag, role) {
      
         var User = {

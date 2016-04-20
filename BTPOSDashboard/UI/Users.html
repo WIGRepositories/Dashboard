@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="User">
+<body ng-init="GetUsers();" ng-model="User">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -203,7 +203,7 @@
 
                                                     <div class="row mbm">
                                                         <div class="row">
-                                                            <div class="col-md-6 mbm">
+                                                            <!--<div class="col-md-6 mbm">
                                                                 <div class="input-group">
                                                                     <div class="input-group-btn">
                                                                         <button type="button" data-toggle="dropdown" class="btn btn-green dropdown-toggle">Search by <i class="fa fa-angle-down"></i></button>
@@ -215,18 +215,16 @@
 
                                                                         </ul>
                                                                     </div>
-                                                                    <input type="text" class="form-control" style="width:300Px;" />  
-                                                                &nbsp;&nbsp;    <button type="submit" class="btn btn-defualt col-md-2" style="height: 35px; width:100Px;">Search</button>
+                                                                    <input type="text" class="col-md-4 mbm" />
+                                                                &nbsp;&nbsp;    <button type="submit" class="btn btn-defualt col-md-2" style="height: 35px;">Search</button>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-md-4" style="text-align:right">
-                                                                <a href="Fleetowner.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:inherit"> Add FleetOwner</button></a>
+                                                            </div>-->
 
-                                                                <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:inherit">Add New User</button></a>
-                                                            </div>
-                                                        </div>
                                                             <div class="actions">
 
+                                                                <a href="Fleetowner.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add FleetOwner</button></a>
+
+                                                                <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add User</button></a>
 
 
                                                                 <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -381,15 +379,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </div>
+
+                                                    </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
                                                                 <th width="10%">First Name</th>
                                                                 <th width="10%">Last Name</th>
-                                                                <th width="10%">Middle Name</th>                                                                
-                                                                <th width="12%">Email</th>                                                                
+                                                                <th width="10%">Middle Name</th>
+                                                                <th width="12%">Email</th>
                                                                 <th width="10%">Role</th>
                                                                 <th width="10%">Company</th>
                                                                 <th width="6%">Active</th>
@@ -401,11 +400,11 @@
 
                                                                 <td>{{U.FirstName}}</td>
                                                                 <td>{{U.LastName}}</td>
-                                                                <td>{{U.MiddleName}}</td>                                                                
+                                                                <td>{{U.MiddleName}}</td>
                                                                 <td>{{U.Email}}</td>
                                                                 <td>{{U.Role}}</td>
                                                                 <td>{{U.Company}}</td>
-                                                                <td><input type="checkbox" ng-checked="U.Active"/></td>
+                                                                <td><input type="checkbox" ng-checked="U.Active" /></td>
                                                                 <td>
                                                                     {{U.Update}}
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(U);">
@@ -415,7 +414,7 @@
                                                                 </td>
                                                             </tr>
                                                         </tbody>
-                                                    </table>                                                  
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>

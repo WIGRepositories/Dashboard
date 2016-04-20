@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp" ng-controller="Mycntrlr">
+<head>
+    <title>Home | Users | Company</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <!--Loading bootstrap css-->    
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
+    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
+    <!--Loading style-->
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
+</head>
+<body>
+
+
+    <style>
+        input {
+            margin: 5px;
+        }
+
+        td {
+            background-color: white;
+            border: solid;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+    <script language="JavaScript">
+
+        function buildTable(rows, cols) {
+
+            var table = "<table width='900'align='center'>";
+
+
+
+            table += "<tbody>";
+
+            for (i = 1; i <= rows; i++) {
+                table += "<tr align='center'>";
+                for (j = 1; j <= cols; j++) {
+                    table += "<td><input type='checkbox'ng-checked='getCheckedFalse()'/>" + i + j + "</td>"
+
+
+
+
+                }
+
+                table += "</tr>";
+            }
+
+            table += "</tbody>";
+            table += "</table>";
+
+            document.getElementById("tableHolder").innerHTML = table;
+            //var table = document.getElementById(tabelid);
+
+
+        }
+    </script>
+
+
+    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+    <div class="page-content">
+        <div id="table-action" class="row">
+            <div class="col-lg-12">
+
+                <div id="tableactionTabContent" class="tab-content">
+                    <div id="table-table-tab" class="tab-pane fade in active">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-container">
+                                    <div class="row mbm">
+                                        <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Travels</th>
+                                                <th>DepartArriveDuration</th>
+                                                <th>Seats</th>
+                                                <th>Rating</th>
+                                                <th>Fare</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+
+                                            <tr class="odd gradeX" ng-repeat="data in tr">
+
+                                                <td>{{data.Travels}}</td>
+                                                <td>{{data.DepartArriveDuration}}</td>
+                                                <td>{{data.Seats}}</td>
+
+                                                <td>{{data.Rating}}</td>
+                                                <td>{{data.Fare}}</td>
+
+                                                <td>
+
+                                                    <!----<input type="button" value="Show Hide DIV" ng-click="ShowHide()" />
+                                                    <!----  <button class="btn btn-medium btn-primary"/>view Details</button>-->
+                                                    <button class="btn btn-medium btn-primary" value="Show Hide DIV" ng-click="ShowHide()" onclick="buildTable(3, 9);" />view Details
+                                                </td>
+
+                                                <div ng-hide="IsHidden">
+
+                                                    <div id="tableHolder">
+                                                    </div>
+                                                    <input type="button" value="Save" />
+                                                </div>
+
+                                            <tr>
+                                                <td>CGRTravels</td>
+                                                <td>9.00pm-06:15Am</td>
+                                                <td>42</td>
+                                                <td>rating(10)</td>
+                                                <td>
+                                                    Startingfrom
+                                                    Rs 550
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-medium btn-primary">view Seats</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CGRTravels</td>
+                                                <td>9.00pm-06:15Am</td>
+                                                <td>42</td>
+                                                <td>rating(10)</td>
+                                                <td>
+                                                    Startingfrom
+                                                    Rs 550
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-medium btn-primary">view Seats</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Larry</td>
+                                                <td>30</td>
+                                                <td><span class="label label-sm label-warning">Suspended</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Lahm</td>
+                                                <td>15</td>
+                                                <td><span class="label label-sm label-danger">Blocked</span></td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                   
+                    <script src="angular.js"></script>
+                    <script src="Kesenenitable.js"></script>
+</body>
+
+</html>
