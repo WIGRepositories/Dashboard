@@ -1050,6 +1050,8 @@ namespace BTPOSDashboardAPI.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public string insupdflag { get; set; }
+        public int companyId { set; get; }
+        public int Company { set; get; }
     }
 
     public class Register
@@ -1110,4 +1112,25 @@ namespace BTPOSDashboardAPI.Models
         public int DistanceFromNextStop { get; set; }
 
     }
+    public class ISales
+    {
+        public int Id { get; set; }
+        public String ItemName { get; set; }
+        public int Quantity { get; set; }
+
+        public int PerUnitPrice { get; set; }
+        public String PurchaseDate { get; set; }
+        public int InVoiceNumber { get; set; }
+    }
+    public class IPurchases
+    {
+        public int Id { get; set; }
+        public String ItemName { get; set; }
+        public int Quantity { get; set; }
+
+        public int PerUnitPrice { get; set; }
+        public String PurchaseDate { get; set; }
+        public int PurchaseOrderNumber { get; set; }
+    }
+
 }
