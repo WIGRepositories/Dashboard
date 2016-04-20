@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getsubcategory";
+            cmd.CommandText = "GetInventorySubCategories";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -57,9 +57,9 @@ namespace BTPOSDashboard.Controllers
             cc.Value = Convert.ToString(b.Id);
             cmd.Parameters.Add(cc);
             SqlParameter ccd = new SqlParameter();
-            ccd.ParameterName = "@Category";
-            ccd.SqlDbType = SqlDbType.VarChar;
-            ccd.Value = b.Category;
+            ccd.ParameterName = "@CategoryId";
+            ccd.SqlDbType = SqlDbType.Int;
+            ccd.Value = Convert.ToString(b.CategoryId);
             cmd.Parameters.Add(ccd);
 
             SqlParameter cname = new SqlParameter();
