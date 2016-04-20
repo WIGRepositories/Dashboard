@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="User">
+<body ng-init="GetUsers();" ng-model="User">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -214,17 +214,17 @@
 
                                                                         </ul>
                                                                     </div>
-                                                                    <input type="text" class="col-md-4 mbm" />  
+                                                                    <input type="text" class="col-md-4 mbm" />
                                                                 &nbsp;&nbsp;    <button type="submit" class="btn btn-defualt col-md-2" style="height: 35px;">Search</button>
                                                                 </div>
                                                             </div>-->
-                                                           
+
                                                             <div class="actions">
 
                                                                 <a href="Fleetowner.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add FleetOwner</button></a>
 
                                                                 <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add User</button></a>
-                                                            
+
 
                                                                 <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                                     <div class="modal-dialog">
@@ -378,16 +378,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            </div>
-
                                                         </div>
+
+                                                    </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
                                                                 <th width="10%">First Name</th>
                                                                 <th width="10%">Last Name</th>
-                                                                <th width="10%">Middle Name</th>                                                                
-                                                                <th width="12%">Email</th>                                                                
+                                                                <th width="10%">Middle Name</th>
+                                                                <th width="12%">Email</th>
                                                                 <th width="10%">Role</th>
                                                                 <th width="10%">Company</th>
                                                                 <th width="6%">Active</th>
@@ -399,11 +399,11 @@
 
                                                                 <td>{{U.FirstName}}</td>
                                                                 <td>{{U.LastName}}</td>
-                                                                <td>{{U.MiddleName}}</td>                                                                
+                                                                <td>{{U.MiddleName}}</td>
                                                                 <td>{{U.Email}}</td>
                                                                 <td>{{U.Role}}</td>
                                                                 <td>{{U.Company}}</td>
-                                                                <td><input type="checkbox" ng-checked="U.Active"/></td>
+                                                                <td><input type="checkbox" ng-checked="U.Active" /></td>
                                                                 <td>
                                                                     {{U.Update}}
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(U);">
@@ -413,7 +413,7 @@
                                                                 </td>
                                                             </tr>
                                                         </tbody>
-                                                    </table>                                                  
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
