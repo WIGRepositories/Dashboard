@@ -99,7 +99,7 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                                 </ul>
                             </li>
@@ -269,19 +269,19 @@
                                             <div class="form-group" style="width:100%;">
                                                 <br />
                                                 <div style="width:30%;float:left">
-                                                    <label for="inputMiddleName" class="col-md-5" control-label">UserName<span class='require'>*</span></label>
+                                                    <label for="inputMiddleName" class="col-md-5" >UserName<span class='require'>*</span></label>
 
-                                                    <div class="col-md-7"><input type="password" type="text" class="form-control" ng-model="User.UserName" /><span class="help-block"></span></div>
+                                                    <div class="col-md-7"><input  type="text" class="form-control" ng-model="User.UserName" /><span class="help-block"></span></div>
                                                 </div>
                                                 <div style="width:30%;float:left">
-                                                    <label for="inputMiddleName" class="col-md-5" control-label">Password<span class='require'>*</span></label>
+                                                    <label for="inputMiddleName" class="col-md-5" >Password<span class='require'>*</span></label>
 
-                                                    <div class="col-md-7"><input type="password" type="text" class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
+                                                    <div class="col-md-7"><input type="password"  class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
                                                 </div>
                                                 <div style="width:30%;float:left">
-                                                    <label for="inputMiddleName" class="col-md-5" control-label">Re-Enter Password</label>
+                                                    <label for="inputMiddleName" class="col-md-5">Re-Enter Password</label>
 
-                                                    <div class="col-md-7"><input type="password" type="text" class="form-control" /><span class="help-block"></span></div>
+                                                    <div class="col-md-7"><input type="password"  class="form-control" /><span class="help-block"></span></div>
                                                 </div>
                                             </div>
 
@@ -325,12 +325,16 @@
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
     <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
     <script src="js/jquery.menu.js"></script>
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
     <script src="js/Users.js"></script>

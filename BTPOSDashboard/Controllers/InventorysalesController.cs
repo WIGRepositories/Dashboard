@@ -7,10 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BTPOSDashboardAPI.Controllers;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class InventorysalesController : ApiController
+    public class InventorySalesController : ApiController
     {
          public DataTable GetInventorySales()
         {
@@ -99,7 +100,32 @@ namespace BTPOSDashboard.Controllers
                  //cmd.Parameters.Add(ga);
 
                  cmd.ExecuteScalar();
-                 conn.Close();
+
+                 //if it is bt pos then insert the records as per the quantity 
+                #region enter BT POS records
+
+                 BTPOSDetailsController btposctrl = new BTPOSDetailsController();
+
+                 for (int count = 0; count < S.Quantity; count++ )
+                 {
+                     BTPOSDetails btposunit = new BTPOSDetails();
+                     btposunit.active = 0;
+                     btposunit.fleetownerid = -1;
+                     btposunit.Id = -1;
+                     btposunit.GroupId = "-1";
+                     btposunit.IMEI = "";
+                     btposunit.ipconfig = "";
+                     btposunit.POSID = "";
+                     btposunit.insupdflag = "I";
+                     btposunit.StatusId = -1;
+                     btposunit.active = 1;
+
+                     btposctrl.SaveBTPOSDetails(btposunit);
+                 }
+
+                #endregion
+
+                     conn.Close();
                 
                  //SqlDataAdapter db = new SqlDataAdapter(cmd);
                  //db.Fill(ds);

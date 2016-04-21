@@ -207,6 +207,8 @@
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />
+    <Content Include="UI\js\InventoryPurchases.js" />
+    <Content Include="UI\js\Inventorysales.js" />
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
@@ -272,6 +274,8 @@
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
     <Content Include="UI\newcompany.html" />
+    <Content Include="UI\NewInventoryPurchases.html" />
+    <Content Include="UI\NewInventorySales.html" />
     <Content Include="UI\NewObject.html" />
     <Content Include="UI\Objects.html" />
     <Content Include="UI\Roledetails.html" />
@@ -1692,6 +1696,8 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\InventoryPurchaseController.cs" />
+    <Compile Include="Controllers\InventorySalesController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />

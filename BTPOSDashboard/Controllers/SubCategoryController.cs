@@ -36,7 +36,7 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable savesubcategory(SubCategory b)
+        public DataTable savesubcategory(Types b)
         {
             DataTable Tbl = new DataTable();
 
@@ -59,7 +59,7 @@ namespace BTPOSDashboard.Controllers
             SqlParameter ccd = new SqlParameter();
             ccd.ParameterName = "@CategoryId";
             ccd.SqlDbType = SqlDbType.Int;
-            ccd.Value = Convert.ToString(b.CategoryId);
+            ccd.Value = Convert.ToString(b.TypeGroupId);
             cmd.Parameters.Add(ccd);
 
             SqlParameter cname = new SqlParameter();
