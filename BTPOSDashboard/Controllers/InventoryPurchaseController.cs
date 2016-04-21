@@ -99,6 +99,77 @@ namespace BTPOSDashboard.Controllers
                 //cmd.Parameters.Add(ga);
 
                 cmd.ExecuteScalar();
+
+                //if the code is for btpos then insert the no. of bt pos needed
+
+                #region create bt pos instances
+
+                switch (P.ItemName)
+                {
+                    case "BTPOS":
+                        for (int poscount = 0; poscount < P.Quantity; poscount++)
+                        {
+                            try
+                            {
+                                //connect to database
+                                cmd = new SqlCommand();
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.CommandText = "InsUpdDelBTPOSDetails";
+                                cmd.Connection = conn;
+
+                                SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
+                                ba.Value = -1;
+                                cmd.Parameters.Add(ba);
+
+                                SqlParameter bb = new SqlParameter("@GroupId", SqlDbType.Int);
+                                bb.Value = 1;
+                                cmd.Parameters.Add(bb);
+
+                                SqlParameter bd = new SqlParameter("@IMEI", SqlDbType.VarChar, 20);
+                                bd.Value = "";
+                                cmd.Parameters.Add(bd);
+
+
+                                SqlParameter bf = new SqlParameter("@POSID", SqlDbType.VarChar, 20);
+                                bf.Value = "POS" + Guid.NewGuid().ToString().Replace("-", "");
+                                cmd.Parameters.Add(bf);
+
+                                SqlParameter bh = new SqlParameter("@StatusId", SqlDbType.Int);
+                                bh.Value = 1;
+                                cmd.Parameters.Add(bh);
+
+                                SqlParameter ipconfig = new SqlParameter("@ipconfig", SqlDbType.VarChar, 20);
+                                ipconfig.Value = "";
+                                cmd.Parameters.Add(ipconfig);
+
+
+                                SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
+                                active.Value = 1;
+                                cmd.Parameters.Add(active);
+
+                                SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
+                                fo.Value = 1;
+                                cmd.Parameters.Add(fo);
+
+                                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
+                                insupdflag.Value = "I";
+                                cmd.Parameters.Add(insupdflag);
+
+                                cmd.ExecuteNonQuery();
+
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                           
+                        }
+
+                        break;
+                }
+                #endregion create bt pos instances
+
+                 
                 conn.Close();
 
                 //SqlDataAdapter db = new SqlDataAdapter(cmd);

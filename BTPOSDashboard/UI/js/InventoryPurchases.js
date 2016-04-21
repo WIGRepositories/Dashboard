@@ -14,9 +14,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             ItemName: Group.ItemName,
             Quantity: Group.Quantity,
             PerUnitPrice: Group.PerUnitPrice,
-
             PurchaseDate: Group.PurchaseDate,
-
             PurchaseOrderNumber: Group.PurchaseOrderNumber
         }
 

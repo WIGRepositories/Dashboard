@@ -13,7 +13,7 @@ namespace keseneni1.Controllers
     public class mulitiplicationsaveController : ApiController
     {
         [HttpPost]
-        public DataTable mulitiplication(mulitiplication b)
+        public DataTable Getmulitiplication(mulitiplication b)
         {
             DataTable Tb = new DataTable();
 
