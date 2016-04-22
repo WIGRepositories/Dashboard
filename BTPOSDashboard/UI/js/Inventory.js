@@ -6,6 +6,59 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
         $scope.Group = response.data;
 
     });
+   
+    $scope.getselectval = function (seltype) {
+        var grpid = (seltype) ? seltype.id : -1;
+
+        $http.get('http://localhost:1476/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
+            $scope.Group = res.data;
+
+        });
+
+        $scope.selectedvalues = 'Name: ' + $scope.selitem.name + ' Id: ' + $scope.selitem.id;
+
+    }
+   
+    $scope.getselectval1 = function (seltype1) {
+        var grpid = (seltype1) ? seltype1.id : -1;
+
+        $http.get('http://localhost:1476/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
+            $scope.Group = res.data;
+
+        });
+
+        $scope.selectedvalues = 'Name: ' + $scope.selitem.name + ' Id: ' + $scope.selitem.id;
+
+    }    
+        
+    //to save new inventory item
+    $scope.saveNewItem = function (Item)
+    {
+        var invItem = {
+            Active: Group.Active,
+            availableQty: Group.availableQty,
+            category: Group.category,
+            code: Group.code,
+            desc: Group.desc,
+            InventoryId: Group.InventoryId,
+            name: Group.name,        
+
+            reorderpoint: Group.reorderpoint,
+            subcat: Group.subcat
+        }
+
+        var req = {
+
+            method: 'POST',
+            url: 'http://localhost:1476/api/Inventory/SaveInventoryItem',
+            data: invItem
+        }
+
+        $http(req).then(function (response) {
+            alert('saved successfully');
+        });
+    }
+
     $scope.save = function (Group) {
         
         var Group = {
@@ -19,20 +72,29 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             PerUnitPrice: Group.PerUnitPrice,
             reorderpoint: Group.reorderpoint,
             subcat: Group.subcat
-
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
-
         }
-
-
         var req = {
             
             method: 'POST',
             url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: Group
         }
-        $http(req).then(function (response) { });
+        $http(req).then(function (response) {
+            alert('saved successfully.');
+        });
+
+
+        $scope.Inventory = null;
+    };
+
+    $scope.setInventory = function (usr) {
+        $scope.Inventory = usr;
+
+    };
+
+    $scope.clearInventory = function () {
+        $scope.Inventory = null;
+
        
-      
     };
 });

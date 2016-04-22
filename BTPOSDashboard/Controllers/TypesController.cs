@@ -46,7 +46,7 @@ namespace BTPOSDashboardAPI.Controllers
 
 
         [HttpPost]
-        public DataTable Type2(Types b)
+        public DataTable SaveType(Types b)
         {
             DataTable Tbl = new DataTable();
 
@@ -58,7 +58,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_InsTypes";
+            cmd.CommandText = "InsUpdDelTypes";
             cmd.Connection = conn;
             conn.Open();
             SqlParameter Cid = new SqlParameter();
@@ -79,7 +79,6 @@ namespace BTPOSDashboardAPI.Controllers
             lid.Value = Convert.ToInt32(b.TypeGroupId);
             cmd.Parameters.Add(lid);
 
-
             SqlParameter pDesc = new SqlParameter();
             pDesc.ParameterName = "@Description";
             pDesc.SqlDbType = SqlDbType.VarChar;
@@ -91,22 +90,8 @@ namespace BTPOSDashboardAPI.Controllers
             lAct.SqlDbType = SqlDbType.Int;
             lAct.Value = Convert.ToInt32(b.Active);
             //llid.Value = b.Active;
-            cmd.Parameters.Add(lAct);
-            SqlParameter pp = new SqlParameter();
-            pp.ParameterName = "@Listkey";
-            pp.SqlDbType = SqlDbType.VarChar;
-            pp.Value = b.ListKey;
-            cmd.Parameters.Add(pp);
-            SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Listvalue";
-            dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Listvalue;
-            cmd.Parameters.Add(dd);
-
-            //DataSet ds = new DataSet();
-            //SqlDataAdapter db = new SqlDataAdapter(cmd);
-            //db.Fill(ds);
-            // Tbl = Tables[0];
+            cmd.Parameters.Add(lAct);  
+            
             cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;

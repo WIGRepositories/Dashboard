@@ -8,14 +8,18 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
 
     });
+    $scope.myVar = false;
+    $scope.toggle = function () {
+        $scope.myVar = !$scope.myVar;
+    };
     $scope.save = function (routes) {
         alert("ok");
         var routes = {
             Route: routes.Route,
             Code: routes.Code,
-            Description: routes.Description,
-            Active: routes.Active,
-            BTPOSGroupId: routes.BTPOSGroupId,
+            //Description: routes.Description,
+            //Active:(routes.Active==true)?1:0,
+            //BTPOSGroupId: routes.BTPOSGroupId,
             Source: routes.Source,
             Destination:routes.Destination
         };

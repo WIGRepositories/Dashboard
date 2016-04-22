@@ -13,7 +13,7 @@ namespace BTPOSDashboardAPI.Controllers
     public class RolesController : ApiController
     {
         [HttpGet]
-        public DataTable getroles()
+        public DataTable getroles(int companyId)
         {
             DataTable Tbl = new DataTable();
 
@@ -26,7 +26,15 @@ namespace BTPOSDashboardAPI.Controllers
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetRoles";
+
+            SqlParameter cmpid = new SqlParameter();
+            cmpid.ParameterName = "@companyId";
+            cmpid.SqlDbType = SqlDbType.Int;
+            cmpid.Value = companyId;
+            cmd.Parameters.Add(cmpid);
+
             cmd.Connection = conn;
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
@@ -35,6 +43,8 @@ namespace BTPOSDashboardAPI.Controllers
             // int found = 0;
             return Tbl;
         }
+
+
         [HttpPost]
         public DataTable saveroles(roles b)
         {
@@ -56,11 +66,13 @@ namespace BTPOSDashboardAPI.Controllers
             cc.SqlDbType = SqlDbType.Int;
             cc.Value =Convert.ToString (b.Id);
             cmd.Parameters.Add(cc);
+
             SqlParameter cname = new SqlParameter();
             cname.ParameterName = "@Name";
             cname.SqlDbType = SqlDbType.VarChar;
             cname.Value = b.Name;
             cmd.Parameters.Add(cname);
+
             SqlParameter dd = new SqlParameter();
             dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
@@ -73,6 +85,11 @@ namespace BTPOSDashboardAPI.Controllers
             aa.Value = b.Active;
             cmd.Parameters.Add(aa);
 
+            SqlParameter cmpid = new SqlParameter();
+            cmpid.ParameterName = "@companyId";
+            cmpid.SqlDbType = SqlDbType.Int;
+            cmpid.Value = b.CompanyId;
+            cmd.Parameters.Add(cmpid);
 
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);

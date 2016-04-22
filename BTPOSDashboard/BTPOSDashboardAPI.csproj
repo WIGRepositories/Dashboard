@@ -40,15 +40,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Cors">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
@@ -62,13 +61,13 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -108,12 +107,23 @@
     <Content Include="CommercialSite\commercialsite1.jpeg" />
     <Content Include="CommercialSite\commercialsitedemo.js" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
+    <Content Include="CommercialSite\download.png" />
+    <Content Include="CommercialSite\download1.png" />
+    <Content Include="CommercialSite\download3.png" />
+    <Content Include="CommercialSite\download4.png" />
+    <Content Include="CommercialSite\keseneni.html" />
+    <Content Include="CommercialSite\kesenenitable.js" />
+    <Content Include="CommercialSite\kesinenitravelswebsite.html" />
     <Content Include="CommercialSite\LicenseConfirmation.html" />
+    <Content Include="CommercialSite\line.png" />
+    <Content Include="CommercialSite\mulitiplication.js" />
+    <Content Include="CommercialSite\multiplicationofcells.html" />
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
+    <Content Include="UI\AddNewInventoryItem.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewRole.html" />
@@ -121,7 +131,7 @@
     <Content Include="UI\AddNewStops.html" />
     <Content Include="UI\Addnewtype.html" />
     <Content Include="UI\AddNewUser.html" />
-    <Content Include="UI\AddNewInv.html" />
+    <Content Include="UI\AddSubcategory.html" />
     <Content Include="UI\AddTroubleTicketingDetails.html" />
     <Content Include="UI\AddTypeGroup.html" />
     <Content Include="UI\Alerts.html" />
@@ -194,11 +204,18 @@
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\Fleetowner.html" />
+    <Content Include="UI\InventoryItems.html" />
+    <Content Include="UI\InventoryPurchases.html" />
+    <Content Include="UI\InventorySales.html" />
+    <Content Include="UI\js\InventoryPurchases.js" />
+    <Content Include="UI\js\Inventorysales.js" />
     <Content Include="UI\js\Objects.js" />
+    <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
+    <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleDetails.js" />
     <Content Include="UI\Login.html" />
-    <Content Include="UI\GetInventory.html" />
+    <Content Include="UI\Inventory.html" />
     <Content Include="UI\images\bg\1.jpg" />
     <Content Include="UI\images\bg\2.jpg" />
     <Content Include="UI\images\bg\3.jpg" />
@@ -257,12 +274,17 @@
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
     <Content Include="UI\newcompany.html" />
+    <Content Include="UI\NewInventoryPurchases.html" />
+    <Content Include="UI\NewInventorySales.html" />
     <Content Include="UI\NewObject.html" />
     <Content Include="UI\Objects.html" />
+    <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
+    <Content Include="UI\Routedetails.html" />
     <Content Include="UI\Routes.html" />
     <Content Include="UI\Stops.html" />
+    <Content Include="UI\SubCategory.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
@@ -1664,6 +1686,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CommercialSite\Class1.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
@@ -1673,6 +1696,10 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\InventoryPurchaseController.cs" />
+    <Compile Include="Controllers\InventorySalesController.cs" />
+    <Compile Include="Controllers\RouteDetailsController.cs" />
+    <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />

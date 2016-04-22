@@ -68,6 +68,8 @@ namespace BTPOSDashboardAPI.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Active { get; set; }
+        public string Company { get; set; }
+        public int CompanyId { get; set; }
 
     }
     public class Blocklist
@@ -201,9 +203,9 @@ namespace BTPOSDashboardAPI.Models
         public int Id{set;get;}
      public string Route {set;get;}
        public string Code {set;get;}
-      public string Description {set;get;} 
-      public string Active {set;get;} 
-       public string BTPOSGroupId {set;get;}
+      //public string Description {set;get;} 
+      //public string Active {set;get;} 
+      // public string BTPOSGroupId {set;get;}
       public string Source {set;get;} 
       public string Destination {set;get;} 
     }
@@ -266,7 +268,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string Name { get; set; }
 
-        public string Desc { get; set; }
+        public string Description { get; set; }
 
         public string Active { get; set; }
 
@@ -375,25 +377,20 @@ namespace BTPOSDashboardAPI.Models
     }
     public class Inventory1
     {
-        public int Active { get; set; }
-
-        public int availableQty { get; set; }
-
-        public string category { get; set; }
-
-        public string code { get; set; }
-
-        public string desc { get; set; }
 
         public int InventoryId { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
+        public int AvailableQty { get; set; }
 
-        public string name { get; set; }
-
+        public int Category { get; set; }
+        public int SubCategory { get; set; }
         public int PerUnitPrice { get; set; }
 
-        public int reorderpoint { get; set; }
-
-        public string subcat { get; set; }
+        public int ReorderPont { get; set; }
+        public int Active { get; set; }
+        public string insupdflag { get; set; }
 
     }
     public class Expenses
@@ -1053,6 +1050,8 @@ namespace BTPOSDashboardAPI.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public string insupdflag { get; set; }
+        public int companyId { set; get; }
+        public int Company { set; get; }
     }
 
     public class Register
@@ -1099,5 +1098,40 @@ namespace BTPOSDashboardAPI.Models
 
         public int AccessId { get; set; }
     }
-         
+    public class RouteDetails
+    {
+        public int Id { get; set; }
+        public String RouteId { get; set; }
+        public String stopname { get; set; }
+        public String Description { get; set; }
+
+        public String StopCode { get; set; }
+        public int DistanceFromSource { get; set; }
+        public int DistanceFromDestination { get; set; }
+        public int DistanceFromPreviousStop { get; set; }
+        public int DistanceFromNextStop { get; set; }
+
+    }
+    public class ISales
+    {
+        public int Id { get; set; }
+        public String ItemName { get; set; }
+        public int Quantity { get; set; }
+
+        public int PerUnitPrice { get; set; }
+        public String PurchaseDate { get; set; }
+        public int InVoiceNumber { get; set; }
+    }
+    public class IPurchases
+    {
+        public int Id { get; set; }
+        public String ItemName { get; set; }
+        public String ItemCode { get; set; }
+        public int Quantity { get; set; }
+
+        public int PerUnitPrice { get; set; }
+        public String PurchaseDate { get; set; }
+        public int PurchaseOrderNumber { get; set; }
+    }
+
 }
