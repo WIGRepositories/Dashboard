@@ -1,6 +1,7 @@
 var app = angular.module('myApp', ['ngStorage'])
 
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.uname = $localStorage.uname;
     $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails').then(function (response, req) {
         $scope.BTPOS = response.data;
         $localStorage.BTPOSOld = response.data;
@@ -34,6 +35,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 }
                 $http(req).then(function (response) {
                     alert('saved btpos details successfully');
+                    $localStorage.uname = res.data[0].name;
                 });
             }
         }

@@ -1,7 +1,7 @@
 
-var app = angular.module('myApp', [])
-var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
-
+var app = angular.module('myApp', ['ngStorage'])
+var ctrl = app.controller('Mycntrlr', function ($scope, $http,$localStorage) {
+    $scope.uname = $localStorage.uname;
     $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem').then(function (res, data) {
         $scope.Item = res.data;
     });
@@ -29,6 +29,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
         }
         $http(req).then(function (res) {
             alert('saved successfully.');
+            $localStorage.uname=res.data[0].name
         });
 
 
