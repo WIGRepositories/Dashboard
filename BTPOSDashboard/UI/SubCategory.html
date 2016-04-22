@@ -1,8 +1,8 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Home | Users | Company</title>
+    <title>Home | Configuration | Roles</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-
-<body  ng-model="Group">
+<body ng-model="SubCategory">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -85,14 +84,14 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
@@ -101,11 +100,10 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li ><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                    <li class="active"><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
-                                  </ul>
+
+                                </ul>
                             </li>
                             <li>
                                 <a href="#">
@@ -115,14 +113,11 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                </ul>
-                                <ul class="nav nav-second-level">
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                     <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
-
                             </li>
-
 
                             <li>
                                 <a href="#">
@@ -133,7 +128,7 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
                                     <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                                    <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
+                                    <li class="active"><a href="Roles.html"> <i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -143,8 +138,9 @@
                                     </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                    <li><a href="form-layouts.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
                                     <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
+                                    <li class="active"><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -167,11 +163,11 @@
                                     </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                    <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                    <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                    <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                    <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                    <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -182,13 +178,13 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Inventory</div>
+                            <div class="page-title">SubCategory</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="InventorySales.html">InventorySales</a></li>
-                        
+                            <li><a href="#">Utililities&Tools</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="SubCategory.html">SubCategory</a></li>
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -196,68 +192,53 @@
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
-                                
+
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
+                                            <div class="col-md-5">
+                                                Category: <select ng-options="s.Name for s in Categories track by s.Id" ng-model="s" ng-change="getselectval(s)">
+    <option value="">All</option>
+</select>
+                                            </div>
                                             <div class="col-lg-12">
-                                              
+
 
                                                 <div class="table-container">
-                                                    <div class="row mbm">
-                                                        
-                                                        <div class="actions">
-                                                            <a href="newinventorysales.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;">  Add Inventory Sales</button></a>
 
-                                                        </div>
+                                                    <div class="actions">
+                                                        <a href="AddSubCategory.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Subcategory</button></a>
 
-                                                                         </div>
+                                                    </div>
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit InventorySales</h4>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit SubCategory</h4>
                                                                 </div>
-                                                                <div class="modal-body" ng-model="Sales1">
+                                                                <div class="modal-body" ng-model="currGroup">
                                                                     <div class="row">
-
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="Name" class="control-label" style="color:red;">Name:</label>
+                                                                                <label for="inputFirstName" class="control-label">Category:<span class='require'>*</span></label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Sales1.ItemName" /></div>
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Category" /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                     <div class="row">
-
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="Description" class="control-label">Quantity:</label>
+                                                                                <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.Quantity" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label" >PerUnitPrice:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.PerUnitPrice" /></div>
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -265,69 +246,69 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label" >PurchaseDate:</label>
+                                                                                <label for="inputFirstName" class="control-label">Description:</label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.PurchaseDate" /></div>
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Description" /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                     <div class="row">
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label">InVoiceNumber:</label>
+                                                                                <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-5">
+                                                                        <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.InVoiceNumber" /></div>
+                                                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.Active" checked /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(Sales1, 'U');">Save</button>
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup);">Save</button>
+                                                                    <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
+                                                                <th>Name</th>
+                                                                <th>Description</th>
+                                                                <th>Active</th>
+                                                                <th>update</th>
 
-                                                                <th>Item Name</th>
-                                                                <th>Quantity</th>
-                                                                <th>PerUnitPrice</th>
-                                                                <th>PurchaseDate</th>
-                                                                <th>InVoiceNumber</th>
-                                                                <th>Update</th>
-                                                                
                                                             </tr>
+                                                        </thead>
                                                         <tbody>
-                                                            <tr ng-repeat="G in Group">
 
-                                                                    <td>{{G.ItemName}}</td>
-                                                                    <td>{{G.Quantity}}</td>
-                                                                    <td>{{G.PerUnitPrice}}</td>
-                                                                    <td>{{G.PurchaseDate}}</td>
-                                                                    <td>{{G.InVoiceNumber}}</td>
+                                                            <tr ng-repeat=" Category in SubCategory" class="gradeA">
+                                                             
+                                                                <td>{{Category.Name}}</td>
+                                                                <td>{{Category.Description}}</td>
                                                                 <td>
-                                                                    {{G.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setSales(G);">
+                                                                    <input type="checkbox" ng-checked="Category.Active" checked>
+                                                                </td>
+                                                                <td>                                                                   
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(Category);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
                                                                 </td>
-                                                          
                                                             </tr>
+
                                                         </tbody>
+
                                                     </table>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -348,30 +329,29 @@
             </div>
         </div>
     </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/SubCategory.js"></script>
 
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <!--loading bootstrap js-->
-            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-            <script src="vendors/iCheck/icheck.min.js"></script>
-            <script src="vendors/iCheck/custom.min.js"></script>
-            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-            <script src="js/jquery.menu.js"></script>
-            <script src="vendors/jquery-pace/pace.min.js"></script>
-            <script src="vendors/holder/holder.js"></script>
-            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-            <!--LOADING SCRIPTS FOR PAGE-->
-          
-            <!--CORE JAVASCRIPT-->
-            <script src="js/main.js"></script>
-            <script src="js/angular.js"></script>
-    <script src="js/Inventorysales.js"></script>
 </body>
 </html>

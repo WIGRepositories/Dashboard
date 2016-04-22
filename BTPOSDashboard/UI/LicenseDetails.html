@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    <title>Home | Users | Company</title>
+    <title>Home | BT POS | Routes</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,8 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -24,7 +26,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body  ng-model="Group">
+<body ng-model="License">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -85,27 +87,25 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li class="active" >
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
                                     </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                    <li ><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li ><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                    <li class="active"><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
-                                  </ul>
+                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li class="active"><a href="LicenseDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">License Details</span></a></liclass>
+                                </ul>
                             </li>
                             <li>
                                 <a href="#">
@@ -117,8 +117,10 @@
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
                                 </ul>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                    <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li class="active"><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                    <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
+
                                 </ul>
 
                             </li>
@@ -144,7 +146,8 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
+                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">ToubleTicketingDetails</span></a></li>
+                                    <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -155,9 +158,9 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                    <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                    <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -177,18 +180,20 @@
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Inventory</div>
+                            <div class="page-title">License Details</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="InventorySales.html">InventorySales</a></li>
-                        
+                            <li><a href="licensedetails.html">License Details</a></li>
+
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -196,159 +201,156 @@
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
-                                
-                                <div id="tableactionTabContent" class="tab-content">
-                                    <div id="table-table-tab" class="tab-pane fade in active">
+
+                                <div id="tableadvancedTabContent" class="tab-content">
+                                    <div id="table-sorter-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                              
+                                                <h3 class="mtn">Basic Sorter</h3>
+                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="3%"><input type="checkbox" class="checkall" />Select</th>                                                            
+                                                            <th>FeatureName</th>
+                                                            <th>FeatureValue</th>
+                                                            <th>Description</th>
 
-                                                <div class="table-container">
-                                                    <div class="row mbm">
-                                                        
-                                                        <div class="actions">
-                                                            <a href="newinventorysales.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;">  Add Inventory Sales</button></a>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="L in License">
+                                                            <td><input type="checkbox" /> </td>
+                                                            <td>{{L.FeatureName}}</td>
+                                                            <td>{{L.FeatureValue}}</td>
+                                                            <td>{{L.Description}}</td>
+                                                        </tr>
+                                                      
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                    <div id="tableactionTabContent" class="tab-content">
+                                        <div id="table-table-tab" class="tab-pane fade in active">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+
+
+                                                    <div class="table-container">
+                                                        <div class="row mbm">
+                                                            <div class="col-md-5" style="margin:20px;">
+                                                                Category: <select ng-options="s.Name for s in Categories track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                                    <option value="">All</option>
+                                                                </select>
+                                                            </div>
+
+
+                                                            <table class="table table-striped table-bordered table-advanced tablesorter mbn">
+                                                                <thead>
+                                                                    <tr>
+
+                                                                        <th><input type="checkbox" class="checkall" />Select</th>
+                                                                        <th>FeatureName</th>
+                                                                        <th>FeatureValue</th>
+                                                                        <th>Description</th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <tr ng-repeat="L in License" class="gradeA">
+
+
+                                                                        <td><input type="checkbox" /> </td>
+                                                                        <td>{{L.FeatureName}}</td>
+                                                                        <td>{{L.FeatureValue}}</td>
+                                                                        <td>{{L.Description}}</td>
+
+                                                                    </tr>
+
+                                                                </tbody>
+
+                                                            </table>
 
                                                         </div>
 
-                                                                         </div>
-                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit InventorySales</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-model="Sales1">
-                                                                    <div class="row">
 
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="Name" class="control-label" style="color:red;">Name:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
+                                                    </div>
+
+
+                                                    <div class="panel-body pan">
+                                                        <form action="#" class="form-horizontal">
+                                                            <div class="modal-body">
+                                                                <div>
+                                                                    <center>
+                                                                        <div class="modal-body" ng-model="License">
+
+
+
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Sales1.ItemName" /></div>
+                                                                                <label for="Description" class="col-md-3 control-label"> Feature: <span class='require'></span></label>
+
+
+                                                                                <div class="col-md-4"><input id="value" type="text" class="form-control" /><span class="help-block" ng-model="License.FeatureName"></span></div>
                                                                             </div>
+                                                                            <div class="form-group">
+                                                                                <label for="Description" class="col-md-3 control-label"> value: <span class='require'></span></label>
+
+
+                                                                                <div class="col-md-4"><input id="value" type="text" class="form-control" /><span class="help-block" ng-model="License.FeatureValue"></span></div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="Description" class="col-md-3 control-label"> Description: <span class='require'></span></label>
+
+
+                                                                                <div class="col-md-4"><input id="value" type="text" class="form-control" /><span class="help-block" ng-model="License.Description"></span></div>
+                                                                            </div>
+
+
+
+                                                                            <div class="form-actions" style="float:right;width:50%">
+                                                                                <div class="col-md-offset-3 col-md-9">
+                                                                                    <button type="submit" class="btn btn-primary">Add</button>
+                                                                                    <button type="submit" class="btn btn-blue">update</button>
+                                                                                    <button type="submit" class="btn btn-orange">Delete</button>
+                                                                                    <button type="reset" class="btn btn-green">Cancel</button>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </center>
+
+
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="submit" class="btn btn-primary" ng-click="save(License);">Save</button>
+
+                                                                            <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
                                                                         </div>
                                                                     </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="Description" class="control-label">Quantity:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.Quantity" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label" >PerUnitPrice:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.PerUnitPrice" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label" >PurchaseDate:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.PurchaseDate" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label">InVoiceNumber:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.InVoiceNumber" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(Sales1, 'U');">Save</button>
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
 
-                                                                <th>Item Name</th>
-                                                                <th>Quantity</th>
-                                                                <th>PerUnitPrice</th>
-                                                                <th>PurchaseDate</th>
-                                                                <th>InVoiceNumber</th>
-                                                                <th>Update</th>
-                                                                
-                                                            </tr>
-                                                        <tbody>
-                                                            <tr ng-repeat="G in Group">
 
-                                                                    <td>{{G.ItemName}}</td>
-                                                                    <td>{{G.Quantity}}</td>
-                                                                    <td>{{G.PerUnitPrice}}</td>
-                                                                    <td>{{G.PurchaseDate}}</td>
-                                                                    <td>{{G.InVoiceNumber}}</td>
-                                                                <td>
-                                                                    {{G.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setSales(G);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                          
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
+
+                                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                                    <div id="footer">
+                                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                    </div>
+                                    <!--END FOOTER-->
                                 </div>
-                            </div>
-                        </div>
-                        <!--END CONTENT--><!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
-                    </div>
                     <!--END PAGE WRAPPER-->
                 </div>
             </div>
-        </div>
-    </div>
-
             <script src="js/jquery-1.10.2.min.js"></script>
             <script src="js/jquery-migrate-1.2.1.min.js"></script>
             <script src="js/jquery-ui.js"></script>
@@ -368,10 +370,16 @@
             <script src="vendors/holder/holder.js"></script>
             <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
             <!--LOADING SCRIPTS FOR PAGE-->
-          
+            <script src="js/table-action.js"></script>
+            <script src="js/table-advanced.js"></script>
             <!--CORE JAVASCRIPT-->
             <script src="js/main.js"></script>
             <script src="js/angular.js"></script>
-    <script src="js/Inventorysales.js"></script>
+            <script src="js/licensedetails.js"></script>
 </body>
 </html>
+
+
+
+
+

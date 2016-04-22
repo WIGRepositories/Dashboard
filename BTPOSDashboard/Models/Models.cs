@@ -1126,6 +1126,7 @@ namespace BTPOSDashboardAPI.Models
     {
         public int Id { get; set; }
         public String ItemName { get; set; }
+        public String ItemCode { get; set; }
         public int Quantity { get; set; }
 
         public int PerUnitPrice { get; set; }
@@ -1152,4 +1153,17 @@ namespace BTPOSDashboardAPI.Models
         public String labelclass { get; set; }
     }
 
+    public class InventoryItem
+    {
+        public int Id { get; set; }
+
+        public String ItemName { get; set; }
+        public String Code { get; set; }
+
+        public String Description { get; set; }
+        public String Category { get; set; }
+        public String SubCategory { get; set; }
+
+        public int ReOrderPoint { get; set; }
+    }
 }
