@@ -2,10 +2,10 @@
 // JavaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
-     $scope.GetUsers = function () {
-         $http.get('http://localhost:1476/api/CreateFleetOwner/NewFleet').then(function (res, data) {
-        $scope.User = res.data;
-    });
+    $scope.GetUsers = function () {
+        $http.get('http://localhost:1476/api/CreateFleetOwner/NewFleet').then(function (res, data) {
+            $scope.User = res.data;
+        });
     }
     app.controller('showHide', function ($scope) {
         $scope.toggle = function () {
@@ -20,14 +20,14 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             Id: Fleet.Id,
             FirstName: Fleet.FirstName,
             LastName: Fleet.LastName,
-           
+
             //UserTypeId: (role) ? 2 : User.UserType,
-         
+
             Email: Fleet.Email,
-            
+
             MobileNo: Fleet.MobileNo,
             //RoleId: (role) ? 2 : User.Role,
-           
+
             CompanyName: Fleet.CompanyName,
             Description: Fleet.Description,
             insupdflag: flag
