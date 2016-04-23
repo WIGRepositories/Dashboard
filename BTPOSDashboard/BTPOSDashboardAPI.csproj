@@ -108,8 +108,6 @@
     <Content Include="CommercialSite\commercialsite1.jpeg" />
     <Content Include="CommercialSite\commercialsitedemo.js" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
-    <Content Include="CommercialSite\FleetOwnerRequest.html" />
-    <Content Include="CommercialSite\FleetOwnerRequest.js" />
     <Content Include="CommercialSite\download.png" />
     <Content Include="CommercialSite\download1.png" />
     <Content Include="CommercialSite\download3.png" />
@@ -1701,9 +1699,6 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
-    <Compile Include="Controllers\CreateFleetOwnerController.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
     <Compile Include="Controllers\LicenseController.cs" />
