@@ -51,5 +51,5 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.clearGroup = function () {
         $scope.currGroup = null;
     }
-
+    $localStorage.uname = res.data[0].name;
 });
