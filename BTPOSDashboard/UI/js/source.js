@@ -5,6 +5,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     //$scope.userid = $localStorage.userdetails[0].userid;
 
     //now call GetDashboardDetails and pass userid as parameter
+    $http.get('http://localhost:1476/api/dashboard/getdashboard').then(function (res, data) {
+        $scope.Group = res.data;
+    });
 
     $scope.myVar = false;
     $scope.toggle = function () {
