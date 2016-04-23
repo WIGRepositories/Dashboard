@@ -1166,4 +1166,16 @@ namespace BTPOSDashboardAPI.Models
 
         public int ReOrderPoint { get; set; }
     }
+
+    public class FleetOwnerRequest
+    {
+        public int Id { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public String Email { get; set; }
+        public String MobileNo { get; set; }
+        public String CompanyName { get; set; }
+        public String Description { get; set; }
+        public string insupdflag { get; set; }
+    }
 }

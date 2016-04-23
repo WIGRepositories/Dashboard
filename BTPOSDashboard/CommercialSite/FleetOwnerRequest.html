@@ -21,20 +21,21 @@
 </head>
 <body ng-model="Fleet">
 
-    
+
     <div class="page-form">
         <form class="form">
             <div class="header-content"><h1>Interbus fleet owner request</h1></div>
             <div class="body-content">
                 <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="Fleet.FirstName" data-val="true" data-val-required="First name&#39; should not be empty."maxlength="12" placeholder="First Name" name="First Name" class="form-control">
-                       </div>
+                    <div class="input-icon right">
+                        <i class="fa fa-user"></i><input type="text" ng-model="Fleet.FirstName" data-val="true" data-val-required="First name&#39; should not be empty." maxlength="12" placeholder="First Name" name="First Name" class="form-control">
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="input-icon right"><i class="fa fa-user"></i><input type="text" ng-model="Fleet.LastName" placeholder="Last Name Name" name="Last Name" data-val="true" data-val-required="&#39;Last name&#39; should not be empty." maxlength="12" class="form-control"></div>
                 </div>
                 <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="email" ng-model="Fleet.Email" placeholder="email" name="email"data-val-required="Please enter Valid EmailId" pattern="[^ @]*@[^ @]*" class="form-control"><p class="form-helper hidden" id="emailHint">Enter a valid email address</p></div>
+                    <div class="input-icon right"><i class="fa fa-envelope"></i><input type="email" ng-model="Fleet.Email" placeholder="email" name="email" data-val-required="Please enter Valid EmailId" pattern="[^ @]*@[^ @]*" class="form-control"><p class="form-helper hidden" id="emailHint">Enter a valid email address</p></div>
                 </div>
                 <div class="form-group">
                     <div class="input-icon right"><i class="fa fa-mobilephone"></i><input id="Mbile No" ng-model="Fleet.MobileNo" type="tel" placeholder="Mobile No" name="Mobile No" class="form-control"></div>
@@ -59,12 +60,12 @@
                     </div>
                 </div>
                 <center>
-                   
-                        <button type="submit" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-primary" ng-click="save(Fleet,'I')"onclick="validate();">
-                            Submit
-                        </button>
 
-</center>
+                    <button type="submit" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-primary" ng-click="save(Fleet,'I')" onclick="validate();">
+                        Submit
+                    </button>
+
+                </center>
                 <!--<div class="form-group">
                             <div class="input-icon right"><label for="inputPhone" class="control-label">Phone</label><input id="inputPhone" type="text" placeholder="" class="form-control" /></div>
                     </div>
@@ -93,7 +94,7 @@
     <script src="../ui/vendors/jquery-pace/pace.min.js"></script>
     <script src="../ui/vendors/holder/holder.js"></script>
     <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/createfleet.js"></script>
+    <script src="angular.js"></script>
+    <script src="FleetOwnerRequest.js"></script>
 </body>
 </html>
