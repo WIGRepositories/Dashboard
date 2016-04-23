@@ -52,7 +52,7 @@
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">Admin</span>&nbsp;<span class="caret"></span></a>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
                                 <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -75,7 +75,7 @@
                             <li class="user-panel">
                                 <div class="thumb"><img src="images/user.jpg" alt="" class="img-circle" /></div>
                                 <div class="info">
-                                    <p>Admin</p>
+                                    <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
                                         <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
@@ -482,6 +482,7 @@
                 ga('send', 'pageview');
                 </script>
                 <script src="js/angular.js"></script>
+                    <script src="js/ngStorage.js"></script>
                 <script src="js/Stops.js"></script>
 
 </body>
