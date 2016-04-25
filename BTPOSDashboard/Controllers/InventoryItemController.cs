@@ -56,6 +56,7 @@ namespace BTPOSDashboard.Controllers
             cc.SqlDbType = SqlDbType.Int;
             cc.Value = Convert.ToString(b.Id);
             cmd.Parameters.Add(cc);
+
             SqlParameter ccd = new SqlParameter();
             ccd.ParameterName = "@ItemName";
             ccd.SqlDbType = SqlDbType.VarChar;
@@ -67,21 +68,25 @@ namespace BTPOSDashboard.Controllers
             cname.SqlDbType = SqlDbType.VarChar;
             cname.Value = b.Code;
             cmd.Parameters.Add(cname);
+
             SqlParameter dd = new SqlParameter();
             dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
             dd.Value = b.Description;
             cmd.Parameters.Add(dd);
+
             SqlParameter aa = new SqlParameter();
             aa.ParameterName = "@Category";
             aa.SqlDbType = SqlDbType.VarChar;
             aa.Value = b.Category;
             cmd.Parameters.Add(aa);
+
             SqlParameter aac = new SqlParameter();
             aac.ParameterName = "@SubCategory";
             aac.SqlDbType = SqlDbType.VarChar;
             aac.Value = b.SubCategory;
             cmd.Parameters.Add(aac);
+
             SqlParameter aacd = new SqlParameter();
             aacd.ParameterName = "@ReOrderPoint";
             aacd.SqlDbType = SqlDbType.Int;

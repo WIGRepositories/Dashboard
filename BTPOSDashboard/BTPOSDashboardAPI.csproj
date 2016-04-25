@@ -1703,6 +1703,7 @@
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\InventoryItemController.cs" />
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
     <Compile Include="Controllers\LicenseController.cs" />
