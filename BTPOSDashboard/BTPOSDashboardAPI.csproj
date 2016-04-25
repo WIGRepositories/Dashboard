@@ -2104,6 +2104,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DBScripts\Sprocs\" />
+    <Folder Include="DBScripts\Tables\" />
     <Folder Include="UI\images\avatar\" />
     <Folder Include="UI\vendors\bootstrap-datetimepicker\bootstrap\" />
     <Folder Include="UI\vendors\css3-treeview\" />
