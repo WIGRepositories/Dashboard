@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
     <title>Home | BT POS | Routes</title>
     <meta charset="utf-8">
@@ -94,14 +94,14 @@
                                 </a>
                             </li>
 
-                            <li class="active" >
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
                                     </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li ><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                    <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                                     <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li class="active"><a href="LicenseDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">License Details</span></a></liclass>
@@ -202,168 +202,168 @@
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
 
-                              
-
-                                    <div id="tableactionTabContent" class="tab-content">
-                                        <div id="table-table-tab" class="tab-pane fade in active">
-                                            <div class="row">
-                                                <div class="col-lg-12">
 
 
-                                                    <div class="table-container">
-                                                        <div class="row mbm">
-                                                            <div class="col-md-5" style="margin:20px;">
-                                                                Category: <select ng-options="s.Name for s in Categories track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                    <option value="">All</option>
-                                                                </select>
-                                                            </div>
+                                <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
 
-                                                            <div class="actions">
-                                                                <a href="AddLicense.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add License</button></a>
 
-                                                            </div>
-                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header modal-header-primary">
-                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit License</h4>
-                                                                        </div>
-                                                                        <div class="modal-body" ng-model="currRole">
-                                                                            <div class="row">
+                                                <div class="table-container">
+                                                    <div class="row mbm">
+                                                        <div class="col-md-5" style="margin:20px;">
+                                                            Category: <select ng-options="s.Name for s in SubCategories track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
 
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">FeatureName:<span class='require'>*</span></label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currRole.Name" /></div>
-                                                                                    </div>
+                                                        <div class="actions">
+                                                            <a href="AddLicense.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add License</button></a>
+
+                                                        </div>
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit License</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="currRole">
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">FeatureName:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row">
-
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">FeatureValue:</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currRole.Description" /></div>
-                                                                                    </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row">
+                                                                        </div>
+                                                                        <div class="row">
 
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Description:</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currRole.Description" /></div>
-                                                                                    </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">FeatureValue:</label>
                                                                                 </div>
                                                                             </div>
-                                                                    
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.FeatureValue" /></div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveRoles(currRole);">Save</button>
-                                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        <div class="row">
 
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Description:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Description" /></div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveRoles(currGroup);">Save</button>
+                                                                        <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
-                                                            <table class="table table-striped table-bordered table-advanced tablesorter mbn">
-                                                                <thead>
-                                                                    <tr>
-
-                                                                       
-                                                                        <th>FeatureName</th>
-                                                                        <th>FeatureValue</th>
-                                                                        <th>Description</th>
-                                                                        <th>Update</th>
-
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-
-                                                                    <tr ng-repeat="L in License" class="gradeA">
-
-
-                                                                      
-                                                                        <td>{{L.FeatureName}}</td>
-                                                                        <td>{{L.FeatureValue}}</td>
-                                                                        <td>{{L.Description}}</td>
-                                                                        <td>
-                                                                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(role);">
-                                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                                Edit
-                                                                            </button>
-                                                                        </td>
-
-                                                                    </tr>
-
-                                                                </tbody>
-
-                                                            </table>
-
                                                         </div>
 
+
+                                                        <table class="table table-striped table-bordered table-advanced tablesorter mbn">
+                                                            <thead>
+                                                                <tr>
+
+
+                                                                    <th>FeatureName</th>
+                                                                    <th>FeatureValue</th>
+                                                                    <th>Description</th>
+                                                                    <th>Update</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                <tr ng-repeat="L in License" class="gradeA">
+
+
+
+                                                                    <td>{{L.FeatureName}}</td>
+                                                                    <td>{{L.FeatureValue}}</td>
+                                                                    <td>{{L.Description}}</td>
+                                                                    <td>
+                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(role);">
+                                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                                            Edit
+                                                                        </button>
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </tbody>
+
+                                                        </table>
 
                                                     </div>
 
 
-                                        
-
-
                                                 </div>
+
+
+
+
+
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                                    <div id="footer">
-                                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                    </div>
-                                    <!--END FOOTER-->
                                 </div>
-                    <!--END PAGE WRAPPER-->
-                </div>
-            </div>
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <!--loading bootstrap js-->
-            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-            <script src="vendors/iCheck/icheck.min.js"></script>
-            <script src="vendors/iCheck/custom.min.js"></script>
-            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-            <script src="js/jquery.menu.js"></script>
-            <script src="vendors/jquery-pace/pace.min.js"></script>
-            <script src="vendors/holder/holder.js"></script>
-            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-            <!--LOADING SCRIPTS FOR PAGE-->
-            <script src="js/table-action.js"></script>
-            <script src="js/table-advanced.js"></script>
-            <!--CORE JAVASCRIPT-->
-            <script src="js/main.js"></script>
-            <script src="js/angular.js"></script>
+
+                                <!--END CONTENT--><!--BEGIN FOOTER-->
+                                <div id="footer">
+                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                </div>
+                                <!--END FOOTER-->
+                            </div>
+                            <!--END PAGE WRAPPER-->
+                        </div>
+                    </div>
+                    <script src="js/jquery-1.10.2.min.js"></script>
+                    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                    <script src="js/jquery-ui.js"></script>
+                    <!--loading bootstrap js-->
+                    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                    <script src="js/html5shiv.js"></script>
+                    <script src="js/respond.min.js"></script>
+                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                    <script src="vendors/iCheck/icheck.min.js"></script>
+                    <script src="vendors/iCheck/custom.min.js"></script>
+                    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                    <script src="js/jquery.menu.js"></script>
+                    <script src="vendors/jquery-pace/pace.min.js"></script>
+                    <script src="vendors/holder/holder.js"></script>
+                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                    <!--LOADING SCRIPTS FOR PAGE-->
+                    <script src="js/table-action.js"></script>
+                    <script src="js/table-advanced.js"></script>
+                    <!--CORE JAVASCRIPT-->
+                    <script src="js/main.js"></script>
+                    <script src="js/angular.js"></script>
                     <script src="js/ngStorage.js"></script>
-            <script src="js/licensedetails.js"></script>
+                    <script src="js/LicenseDetails.js"></script>
 </body>
 </html>
 

@@ -215,7 +215,7 @@
     <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
-    <Content Include="UI\js\licensedetails.js" />
+    <Content Include="UI\js\LicenseDetails.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RouteDetails.js" />
