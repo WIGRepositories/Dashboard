@@ -1,4 +1,4 @@
-﻿using DAshboard.Models;
+﻿using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,12 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DAshboard.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class TypesController : ApiController
     {
         [HttpGet]
-        public DataTable users()
+        public DataTable TypesByGroupId(int groupid)
         {
             DataTable Tbl = new DataTable();
 
@@ -21,12 +21,19 @@ namespace DAshboard.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getTypes";
+            cmd.CommandText = "GetTypesByGroupId";
             cmd.Connection = conn;
+
+            SqlParameter Gid = new SqlParameter();
+            Gid.ParameterName = "@typegrpid";
+            Gid.SqlDbType = SqlDbType.Int;
+            Gid.Value = groupid;
+            cmd.Parameters.Add(Gid);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
@@ -35,8 +42,11 @@ namespace DAshboard.Controllers
             // int found = 0;
             return Tbl;
         }
-          [HttpPost]
-          public DataTable pos(Types b)
+
+
+
+        [HttpPost]
+        public DataTable SaveType(Types b)
         {
             DataTable Tbl = new DataTable();
 
@@ -44,19 +54,18 @@ namespace DAshboard.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
-          
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_InsTypes";
+            cmd.CommandText = "InsUpdDelTypes";
             cmd.Connection = conn;
             conn.Open();
-            SqlParameter Aid = new SqlParameter();
-            Aid.ParameterName = "@Id";
-            Aid.SqlDbType = SqlDbType.Int;
-            Aid.Value = b.Id;
-            Aid.Value = Convert.ToString(b.Id);
-            cmd.Parameters.Add(Aid);
+            SqlParameter Cid = new SqlParameter();
+            Cid.ParameterName = "@Id";
+            Cid.SqlDbType = SqlDbType.Int;
+            Cid.Value = Convert.ToInt32(b.Id);
+            cmd.Parameters.Add(Cid);
 
             SqlParameter Gid = new SqlParameter();
             Gid.ParameterName = "@Name";
@@ -67,28 +76,22 @@ namespace DAshboard.Controllers
             SqlParameter lid = new SqlParameter();
             lid.ParameterName = "@TypeGroupId";
             lid.SqlDbType = SqlDbType.Int;
-            lid.Value = Convert.ToString(b.TypeGroupId);
-            lid.Value = b.TypeGroupId;
+            lid.Value = Convert.ToInt32(b.TypeGroupId);
             cmd.Parameters.Add(lid);
-           
 
-            SqlParameter pid = new SqlParameter();
-            pid.ParameterName = "@Desc ";
-            pid.SqlDbType = SqlDbType.VarChar;
-            pid.Value =b.Desc;
-            cmd.Parameters.Add(pid);
-            SqlParameter llid = new SqlParameter();
-            llid.ParameterName = "@Active";
-            llid.SqlDbType = SqlDbType.Int;
-            llid.Value = Convert.ToString(b.Active);
-            llid.Value = b.Active;
-            cmd.Parameters.Add(llid);
-           
-          
-            //DataSet ds = new DataSet();
-            //SqlDataAdapter db = new SqlDataAdapter(cmd);
-            //db.Fill(ds);
-           // Tbl = Tables[0];
+            SqlParameter pDesc = new SqlParameter();
+            pDesc.ParameterName = "@Description";
+            pDesc.SqlDbType = SqlDbType.VarChar;
+            pDesc.Value = b.Description;
+            cmd.Parameters.Add(pDesc);
+
+            SqlParameter lAct = new SqlParameter();
+            lAct.ParameterName = "@Active";
+            lAct.SqlDbType = SqlDbType.Int;
+            lAct.Value = Convert.ToInt32(b.Active);
+            //llid.Value = b.Active;
+            cmd.Parameters.Add(lAct);  
+            
             cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;
@@ -97,5 +100,5 @@ namespace DAshboard.Controllers
         public void Options() { }
 
     }
-    }
+}
 

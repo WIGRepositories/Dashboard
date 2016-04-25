@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BTPOSDashboardAPI.Models.Transaction" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAQAAAAAAAAACAAACAAAABBABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.EditHistory" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAQAAAABAAAQIAAAgAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.EditHistoryDetails" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAgAAAEAAAAAAAAAAAAEAAAAAAAAgAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.TypeGroups" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAAAQAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.Types" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAIAAAAAEAQAAAAAAAQAAAAAAAAgAAAgQAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.RouteFares" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAiAAABBgAAAAAAAEAgBAQIABgAAAAkBAAIAAAiAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.FleetOwner" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAAAAAAAAAAAAgAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.TroubleTicketingCategories" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAAAAAAAAAAAAAAAAABAABAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.TransactionType" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAAAAAACAAAAAAAAAAAAAAABAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.Inventory1" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAIIAEAARgAEQIAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.Expenses" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAGAAAAAAAAIAAAAAAAAAAAAgAAgABBAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.LicensePayments" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAACAAAAAAAAAAQgAAAAAAgAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.BTPOSInventorySales" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAABAIAAAIAAAAAAAAAAAIQAAgACAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.BTPOSDetails" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAMAAAEAAAAAAIAAAAAAAAAIAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.BusDetails" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAMEAAEAAAQAAAAICBAAAgAAEAAAEAAAAAABAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.RouteFare" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAQA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.RoutesConfiguration" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAQAQAAAAAQAAAAAAAAAAAEAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.CompanyGroups" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAAAAAAAAAAAAAAAAAQAIAEAAAAQAAAAIAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.PaymentReceivings" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAABAAAAAIAAAAAAABAAAIQAAgADAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.InventoryReceivings" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAABAAgAAIIAAAAAAAAAAJQAAgACAAAAAAQAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.TroubleTicketingDetails" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAQIgAAAAAAAAAABAAAAAAAAAAAAAAgAAAAQBAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.TroubleTicketingHandlers" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.TroubleTicketingDevice" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.SMSEmailSubscribers" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAAACAAAAAgAgAAAAAgAAAAAACAAAAAAAAAAAg=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.SMSEmailConfiguration" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBACBAAgAAAAAAAAAAAAAAEgAAIAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.PaymentGatewaySettings" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBACBAAAAAAAAAAAAIAAAAEgAAIAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.Transactions" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwHA0AAACAAIAIiAgACoAREGAQAAgAhIABEBABABAQ=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.RegistrationBTPOS" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAEAAAAAAAAAAIAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.loginpage" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BTPOSDashboardAPI.Models.TicketGeneration" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAACAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\POS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

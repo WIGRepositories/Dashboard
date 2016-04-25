@@ -40,8 +40,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -51,6 +62,14 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -58,33 +77,73 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.0\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="BTPOSImages\adapter.jpeg" />
+    <Content Include="BTPOSImages\angular.js" />
+    <Content Include="BTPOSImages\busticket.html" />
+    <Content Include="BTPOSImages\busticket.jpg" />
+    <Content Include="BTPOSImages\Loginpage.html" />
+    <Content Include="BTPOSImages\loginpage.jpeg" />
+    <Content Include="BTPOSImages\loginpage.js" />
+    <Content Include="BTPOSImages\menu.html" />
+    <Content Include="BTPOSImages\menu.jpg" />
+    <Content Include="BTPOSImages\paper_rolls.jpeg" />
+    <Content Include="BTPOSImages\Payment.html" />
+    <Content Include="BTPOSImages\Payment.jpg" />
+    <Content Include="BTPOSImages\poweroff.jpg" />
+    <Content Include="BTPOSImages\poweron.html" />
+    <Content Include="BTPOSImages\RECEIVE.HTML" />
+    <Content Include="BTPOSImages\RECEIVE.jpg" />
+    <Content Include="BTPOSImages\RegistrationBTPOS.js" />
+    <Content Include="BTPOSImages\restart.html" />
+    <Content Include="BTPOSImages\restart.jpg" />
+    <Content Include="BTPOSImages\TicketGeneration.html" />
+    <Content Include="BTPOSImages\TicketGeneration.jpg" />
+    <Content Include="BTPOSImages\TicketGeneration.js" />
+    <Content Include="BTPOSImages\tps300 %282%29.html" />
+    <Content Include="BTPOSImages\Welcome.html" />
+    <Content Include="BTPOSImages\welcome.jpeg" />
+    <Content Include="BTPOSImages\wires.jpeg" />
+    <Content Include="CommercialSite\angular.js" />
+    <Content Include="CommercialSite\BuyBTPOS.html" />
+    <Content Include="CommercialSite\commercialsite1.jpeg" />
+    <Content Include="CommercialSite\commercialsitedemo.js" />
+    <Content Include="CommercialSite\CommercialSiteHome.html" />
+    <Content Include="CommercialSite\FleetOwnerRequest.html" />
+    <Content Include="CommercialSite\FleetOwnerRequest.js" />
+    <Content Include="CommercialSite\download.png" />
+    <Content Include="CommercialSite\download1.png" />
+    <Content Include="CommercialSite\download3.png" />
+    <Content Include="CommercialSite\download4.png" />
+    <Content Include="CommercialSite\keseneni.html" />
+    <Content Include="CommercialSite\kesenenitable.js" />
+    <Content Include="CommercialSite\kesinenitravelswebsite.html" />
+    <Content Include="CommercialSite\LicenseConfirmation.html" />
+    <Content Include="CommercialSite\line.png" />
+    <Content Include="CommercialSite\mulitiplication.js" />
+    <Content Include="CommercialSite\multiplicationofcells.html" />
+    <Content Include="CommercialSite\Request.html" />
+    <Content Include="CommercialSite\LicensePage.html" />
+    <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="Global.asax" />
+    <Content Include="UI\AddNewBTPOSDetails.html" />
+    <Content Include="UI\AddNewInventoryItem.html" />
+    <Content Include="UI\AddNewVehicleDetails.html" />
+    <Content Include="UI\AddNewCompany.html" />
+    <Content Include="UI\AddNewRole.html" />
+    <Content Include="UI\Addnewroute.html" />
+    <Content Include="UI\AddNewStops.html" />
+    <Content Include="UI\Addnewtype.html" />
+    <Content Include="UI\AddNewUser.html" />
+    <Content Include="UI\AddSubcategory.html" />
+    <Content Include="UI\AddTroubleTicketingDetails.html" />
+    <Content Include="UI\AddTypeGroup.html" />
+    <Content Include="UI\Alerts.html" />
     <Content Include="UI\animations.html" />
-    <Content Include="UI\charts-chartjs.html" />
-    <Content Include="UI\charts-flotchart.html" />
-    <Content Include="UI\charts-highchart-area.html" />
-    <Content Include="UI\charts-highchart-column-bar.html" />
-    <Content Include="UI\charts-highchart-combinations.html" />
-    <Content Include="UI\charts-highchart-dynamic.html" />
-    <Content Include="UI\charts-highchart-line.html" />
-    <Content Include="UI\charts-highchart-more.html" />
-    <Content Include="UI\charts-highchart-pie.html" />
-    <Content Include="UI\charts-highchart-scatter-bubble.html" />
+    <Content Include="UI\BTPOSDetails.html" />
+    <Content Include="UI\BusDetails.html" />
     <Content Include="UI\Company.html" />
+    <Content Include="UI\ComposeMail.html" />
+    <Content Include="UI\ConfigureAlerts.html" />
     <Content Include="UI\css\style-responsive.css" />
     <Content Include="UI\css\themes\style1\blue-dark.css" />
     <Content Include="UI\css\themes\style1\blue-grey.css" />
@@ -146,44 +205,24 @@
     <Content Include="UI\css\themes\style3\yellow-dark.css" />
     <Content Include="UI\css\themes\style3\yellow-green.css" />
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
-    <Content Include="UI\email-compose-mail.html" />
-    <Content Include="UI\email-inbox.html" />
-    <Content Include="UI\email-view-mail.html" />
-    <Content Include="UI\extra-404.html" />
-    <Content Include="UI\extra-500.html" />
-    <Content Include="UI\extra-blank.html" />
-    <Content Include="UI\extra-faq.html" />
-    <Content Include="UI\extra-invoice.html" />
-    <Content Include="UI\extra-lock-screen.html" />
-    <Content Include="UI\extra-pricing-table.html" />
-    <Content Include="UI\extra-profile.html" />
-    <Content Include="UI\extra-signin.html" />
-    <Content Include="UI\extra-signup.html" />
-    <Content Include="UI\form-basic.html" />
-    <Content Include="UI\form-components.html" />
-    <Content Include="UI\form-dropzone-file-upload.html" />
-    <Content Include="UI\form-editors.html" />
-    <Content Include="UI\form-layouts.html" />
-    <Content Include="UI\form-multiple-file-upload.html" />
-    <Content Include="UI\form-validation.html" />
-    <Content Include="UI\form-wizard.html" />
-    <Content Include="UI\grid-datepicker.html" />
-    <Content Include="UI\grid-deep-linking.html" />
-    <Content Include="UI\grid-double-sort.html" />
-    <Content Include="UI\grid-filter-with-select.html" />
-    <Content Include="UI\grid-filter-with-ul-li.html" />
-    <Content Include="UI\grid-hidden-sort.html" />
-    <Content Include="UI\grid-layout-2-table.html" />
-    <Content Include="UI\grid-layout-div.html" />
-    <Content Include="UI\grid-layout-sticky-panel.html" />
-    <Content Include="UI\grid-layout-table-1.html" />
-    <Content Include="UI\grid-layout-table-2.html" />
-    <Content Include="UI\grid-layout-ul-li.html" />
-    <Content Include="UI\grid-layout-view-control.html" />
-    <Content Include="UI\grid-pagination-only.html" />
-    <Content Include="UI\grid-range-slider.html" />
-    <Content Include="UI\grid-without-item-per-page.html" />
-    <Content Include="UI\HtmlPage1.html" />
+    <Content Include="UI\EditHistory.html" />
+    <Content Include="UI\Fleetowner.html" />
+    <Content Include="UI\InventoryItems.html" />
+    <Content Include="UI\InventoryPurchases.html" />
+    <Content Include="UI\InventorySales.html" />
+    <Content Include="UI\js\InventoryItem.js" />
+    <Content Include="UI\js\InventoryPurchases.js" />
+    <Content Include="UI\js\Inventorysales.js" />
+    <Content Include="UI\js\licensedetails.js" />
+    <Content Include="UI\js\ngStorage.js" />
+    <Content Include="UI\js\Objects.js" />
+    <Content Include="UI\js\RouteDetails.js" />
+    <Content Include="UI\js\Stops.js" />
+    <Content Include="UI\js\SubCategory.js" />
+    <Content Include="UI\js\VehicleDetails.js" />
+    <Content Include="UI\LicenseDetails.html" />
+    <Content Include="UI\Login.html" />
+    <Content Include="UI\Inventory.html" />
     <Content Include="UI\images\bg\1.jpg" />
     <Content Include="UI\images\bg\2.jpg" />
     <Content Include="UI\images\bg\3.jpg" />
@@ -214,93 +253,49 @@
     <Content Include="UI\images\gallery\9.jpg" />
     <Content Include="UI\images\gallery\blog_item1.jpg" />
     <Content Include="UI\images\icons\loading.gif" />
+    <Content Include="UI\images\user.jpg" />
     <Content Include="UI\index.html" />
-    <Content Include="UI\js\animation.js" />
-    <Content Include="UI\js\charts-chartjs.js" />
-    <Content Include="UI\js\charts-flotchart.js" />
-    <Content Include="UI\js\charts-highchart-area.js" />
-    <Content Include="UI\js\charts-highchart-column-bar.js" />
-    <Content Include="UI\js\charts-highchart-combinations.js" />
-    <Content Include="UI\js\charts-highchart-dynamic.js" />
-    <Content Include="UI\js\charts-highchart-line.js" />
-    <Content Include="UI\js\charts-highchart-more.js" />
-    <Content Include="UI\js\charts-highchart-pie.js" />
-    <Content Include="UI\js\charts-highchart-scatter-bubble.js" />
-    <Content Include="UI\js\email-compose-mail.js" />
-    <Content Include="UI\js\email-inbox.js" />
-    <Content Include="UI\js\extra-signup.js" />
-    <Content Include="UI\js\form-components.js" />
-    <Content Include="UI\js\form-dropzone-file-upload.js" />
-    <Content Include="UI\js\form-multiple-file-upload.js" />
-    <Content Include="UI\js\form-validation.js" />
-    <Content Include="UI\js\form-wizard.js" />
-    <Content Include="UI\js\html5shiv.js" />
+    <Content Include="UI\js\angular.js" />
+    <Content Include="UI\js\BTPOSDetails.js" />
+    <Content Include="UI\js\CompanyGroups.js" />
     <Content Include="UI\js\index.js" />
+    <Content Include="UI\js\Inventory.js" />
     <Content Include="UI\js\jplist.js" />
     <Content Include="UI\js\jquery-1.10.2.min.js" />
     <Content Include="UI\js\jquery-migrate-1.2.1.min.js" />
     <Content Include="UI\js\jquery-ui.js" />
     <Content Include="UI\js\jquery.menu.js" />
+    <Content Include="UI\js\LicensePayments.js" />
+    <Content Include="UI\js\login.js" />
     <Content Include="UI\js\main.js" />
-    <Content Include="UI\js\page-calendar.js" />
-    <Content Include="UI\js\page-contact.js" />
-    <Content Include="UI\js\page-gallery.js" />
-    <Content Include="UI\js\raphael-min.js" />
-    <Content Include="UI\js\respond.min.js" />
-    <Content Include="UI\js\table-action.js" />
-    <Content Include="UI\js\table-advanced.js" />
-    <Content Include="UI\js\table-filter.js" />
-    <Content Include="UI\js\table-sample.js" />
-    <Content Include="UI\js\ui-checkbox-radio.js" />
-    <Content Include="UI\js\ui-editors.js" />
-    <Content Include="UI\js\ui-nestable-list.js" />
-    <Content Include="UI\js\ui-portlets.js" />
-    <Content Include="UI\js\ui-progressbars.js" />
-    <Content Include="UI\js\ui-sliders.js" />
-    <Content Include="UI\js\ui-tabs.js" />
-    <Content Include="UI\js\ui-toastr-notifications.js" />
-    <Content Include="UI\js\ui-treeview.js" />
-    <Content Include="UI\layout-boxed.html" />
-    <Content Include="UI\layout-fixed-topbar.html" />
-    <Content Include="UI\layout-header-topbar.html" />
-    <Content Include="UI\layout-hidden-footer.html" />
-    <Content Include="UI\layout-horizontal-menu-sidebar.html" />
-    <Content Include="UI\layout-horizontal-menu.html" />
-    <Content Include="UI\layout-left-sidebar-collapsed.html" />
-    <Content Include="UI\layout-left-sidebar.html" />
-    <Content Include="UI\layout-right-sidebar-collapsed.html" />
-    <Content Include="UI\layout-right-sidebar.html" />
-    <Content Include="UI\layout-title-breadcrumb.html" />
-    <Content Include="UI\page-about.html" />
-    <Content Include="UI\page-blog-item.html" />
-    <Content Include="UI\page-blog.html" />
-    <Content Include="UI\page-calendar.html" />
-    <Content Include="UI\page-contact.html" />
-    <Content Include="UI\page-gallery.html" />
-    <Content Include="UI\page-timeline.html" />
-    <Content Include="UI\table-action.html" />
-    <Content Include="UI\table-advanced.html" />
-    <Content Include="UI\table-basic.html" />
-    <Content Include="UI\table-filter.html" />
-    <Content Include="UI\table-responsive.html" />
-    <Content Include="UI\table-sample.html" />
-    <Content Include="UI\ui-buttons.html" />
-    <Content Include="UI\ui-checkbox-radio.html" />
-    <Content Include="UI\ui-editors.html" />
-    <Content Include="UI\ui-generals.html" />
-    <Content Include="UI\ui-icons.html" />
-    <Content Include="UI\ui-modals.html" />
-    <Content Include="UI\ui-nestable-list.html" />
-    <Content Include="UI\ui-notific8-notifications.html" />
-    <Content Include="UI\ui-panels.html" />
-    <Content Include="UI\ui-portlets.html" />
-    <Content Include="UI\ui-progressbars.html" />
-    <Content Include="UI\ui-sliders.html" />
-    <Content Include="UI\ui-tabs.html" />
-    <Content Include="UI\ui-toastr-notifications.html" />
-    <Content Include="UI\ui-treeview.html" />
-    <Content Include="UI\ui-typography.html" />
+    <Content Include="UI\js\registerform.js" />
+    <Content Include="UI\js\RegistrationBTPOS.js" />
+    <Content Include="UI\js\roles.js" />
+    <Content Include="UI\js\Routes.js" />
+    <Content Include="UI\js\source.js" />
+    <Content Include="UI\js\TicketGeneration.js" />
+    <Content Include="UI\js\TroubleTicketingDetails.js" />
+    <Content Include="UI\js\TypeGroups.js" />
+    <Content Include="UI\js\Types.js" />
+    <Content Include="UI\js\Users.js" />
+    <Content Include="UI\LicensePayments.html" />
+    <Content Include="UI\newBTPOS.html" />
+    <Content Include="UI\NewInventoryPurchases.html" />
+    <Content Include="UI\NewInventorySales.html" />
+    <Content Include="UI\NewObject.html" />
+    <Content Include="UI\Objects.html" />
+    <Content Include="UI\Roledetails.html" />
+    <Content Include="UI\Roles.html" />
+    <Content Include="UI\AddLicensepayments.html" />
+    <Content Include="UI\Routedetails.html" />
+    <Content Include="UI\Routes.html" />
+    <Content Include="UI\Stops.html" />
+    <Content Include="UI\SubCategory.html" />
+    <Content Include="UI\TroubleTicketingDetails.html" />
+    <Content Include="UI\TypeGroups.html" />
+    <Content Include="UI\Types.html" />
     <Content Include="UI\Users.html" />
+    <Content Include="UI\VehicleDetails.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />
@@ -1691,39 +1686,68 @@
     <Content Include="UI\vendors\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="UI\vendors\summernote\summernote.css" />
     <Content Include="UI\vendors\summernote\summernote.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="CommercialSite\Class1.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
     <Compile Include="Controllers\BTPOSController.cs" />
+    <Compile Include="Controllers\BTPOSDetailsController.cs" />
     <Compile Include="Controllers\BTPOSGroupsController.cs" />
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\InventoryPurchaseController.cs" />
+    <Compile Include="Controllers\InventorySalesController.cs" />
+    <Compile Include="Controllers\LicenseController.cs" />
+    <Compile Include="Controllers\RouteDetailsController.cs" />
+    <Compile Include="Controllers\SubCategoryController.cs" />
+    <Compile Include="Controllers\VehicleDetailsController.cs" />
+    <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
+    <Compile Include="Controllers\FleetOwnerController.cs" />
     <Compile Include="Controllers\FleetOwnerLicenseController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\InventoryDetailsController.cs" />
     <Compile Include="Controllers\InventoryMasterController.cs" />
-    <Compile Include="Controllers\loginController.cs" />
+    <Compile Include="Controllers\LicensePayment.cs" />
+    <Compile Include="Controllers\LicensePaymentsController.cs" />
+    <Compile Include="Controllers\LOGINController.cs" />
+    <Compile Include="Controllers\loginpageController.cs" />
+    <Compile Include="Controllers\ObjectAccessController.cs" />
+    <Compile Include="Controllers\ObjectsController.cs" />
     <Compile Include="Controllers\PayablesController.cs" />
     <Compile Include="Controllers\PayablesMasterController.cs" />
     <Compile Include="Controllers\PaymentDetailsController.cs" />
     <Compile Include="Controllers\PaymentgatewayController.cs" />
     <Compile Include="Controllers\ReceivingsController.cs" />
     <Compile Include="Controllers\ReceivingsMasterController.cs" />
+    <Compile Include="Controllers\RegisterFormController.cs" />
+    <Compile Include="Controllers\RegistrationBTPOSController.cs" />
     <Compile Include="Controllers\RoleDetailsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Controllers\SMSformatsController.cs" />
     <Compile Include="Controllers\SMSProviderConfigController.cs" />
     <Compile Include="Controllers\STATEController.cs" />
+    <Compile Include="Controllers\StopsController.cs" />
+    <Compile Include="Controllers\TicketGenerationController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Controllers\TroubleTicketingDetailsController.cs" />
     <Compile Include="Controllers\TypeGroupsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
     <Compile Include="Controllers\UserRolesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1739,7 +1763,10 @@
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\WEB\JPListHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\Dashboard.pubxml" />
     <Content Include="UI\vendors\bootstrap-clockface\.gitignore" />
     <Content Include="UI\vendors\bootstrap-clockface\.jshintignore" />
@@ -2095,9 +2122,11 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1537</DevelopmentServerPort>
+          <DevelopmentServerPort>1476</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1476/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:1476/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

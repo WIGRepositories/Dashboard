@@ -1,4 +1,4 @@
-﻿using DAshboard.Models;
+﻿using BTPOSDashboardAPI.Models;
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Web.Http;
 
 
-namespace WebApplication1.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class FleetOwnerLicenseController : ApiController
     {
@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI";
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
             //conn.ConnectionString = "Data Source=localhost;Initial Catalog=MyAlerts;integrated security=sspi;";
 
             SqlCommand cmd = new SqlCommand();
@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
                 //connect to database
                 SqlConnection conn = new SqlConnection();
                 //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-                conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI";
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
                 //conn.ConnectionString = "Data Source=localhost;Initial Catalog=MyAlerts;integrated security=sspi;";
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -115,6 +115,117 @@ namespace WebApplication1.Controllers
             return Tbl;
         }
 
+        [HttpGet]
+        public int validatefleetowner(string fleetownercode)
+        {
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "ValidateFleetOwnerCode";
+            cmd.Connection = conn;
+
+            conn.Open();
+            SqlParameter code = new SqlParameter("@fleetownercode", SqlDbType.VarChar, 10);
+            code.Value = fleetownercode;
+            cmd.Parameters.Add(code);
+
+            SqlParameter mm = new SqlParameter("@result", SqlDbType.Int);
+            mm.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(mm);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+
+            int result = -1;
+            result = Convert.ToInt32(mm.Value);
+            return result;
+
+        }
+
+
+        [HttpGet]
+        public int updatebtpos(string fleetownercode, string units)
+        {
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "updatebtpos";
+            cmd.Connection = conn;
+
+            conn.Open();
+            SqlParameter code = new SqlParameter("@fleetownercode", SqlDbType.VarChar, 10);
+            code.Value = fleetownercode;
+            cmd.Parameters.Add(code);
+
+            SqlParameter posunits = new SqlParameter("@units", SqlDbType.Int);
+            posunits.Value =  Convert.ToInt32(units);
+            cmd.Parameters.Add(posunits);
+
+
+            SqlParameter mm = new SqlParameter("@result", SqlDbType.Int);
+            mm.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(mm);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+
+            int result = -1;
+            result = Convert.ToInt32(mm.Value);
+            return result;
+
+        }
+
+        [HttpGet]
+        public int registerpos(string fleetownercode, string ipconfig)
+        {
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "registerbtpos";
+                cmd.Connection = conn;
+
+                conn.Open();
+                SqlParameter code = new SqlParameter("@fleetownercode", SqlDbType.VarChar, 10);
+                code.Value = fleetownercode.Trim();
+                cmd.Parameters.Add(code);
+
+                SqlParameter posunits = new SqlParameter("@ipconfig", SqlDbType.VarChar, 20);
+                posunits.Value = ipconfig.Trim();
+                cmd.Parameters.Add(posunits);
+
+
+                SqlParameter mm = new SqlParameter("@result", SqlDbType.Int);
+                mm.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(mm);
+
+                cmd.ExecuteNonQuery();
+
+                conn.Close();
+
+                int result = -1;
+                result = Convert.ToInt32(mm.Value);
+                return result;
+            }
+            catch {
+                return -1;
+            }
+        }
         public void Options()
         {
 

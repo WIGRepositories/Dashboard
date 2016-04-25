@@ -1,4 +1,4 @@
-﻿using DAshboard.Models;
+﻿using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,12 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DAshboard.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class TypeGroupsController : ApiController
     {
          [HttpGet]
-        public DataTable users()
+        public DataTable gettypegroups()
         {
             DataTable Tbl = new DataTable();
 
@@ -21,7 +21,7 @@ namespace DAshboard.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -36,7 +36,7 @@ namespace DAshboard.Controllers
             return Tbl;
         }
           [HttpPost]
-          public DataTable pos(TypeGroups b)
+          public DataTable savetypegroups(TypeGroups b)
         {
             DataTable Tbl = new DataTable();
 
@@ -44,7 +44,7 @@ namespace DAshboard.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -59,17 +59,22 @@ namespace DAshboard.Controllers
             Gid.Value = b.Name;
             cmd.Parameters.Add(Gid);
 
-            
+            SqlParameter Gim = new SqlParameter();
+            Gim.ParameterName = "@Id";
+            Gim.SqlDbType = SqlDbType.Int;
+            Gim.Value = Convert.ToString(b.Id);
+            cmd.Parameters.Add(Gim);
 
             SqlParameter pid = new SqlParameter();
-            pid.ParameterName = "@Desc ";
+            pid.ParameterName = "@Description";
             pid.SqlDbType = SqlDbType.VarChar;
-            pid.Value =b.Desc;
+            pid.Value = b.Description;
             cmd.Parameters.Add(pid);
+
             SqlParameter llid = new SqlParameter();
             llid.ParameterName = "@Active";
-            llid.SqlDbType = SqlDbType.VarChar;
-            llid.Value = Convert.ToBoolean(b.Active) ? "1" : "0";
+            llid.SqlDbType = SqlDbType.Int;
+            llid.Value = 1;// b.Active;
             //llid.Value = b.Active;
             cmd.Parameters.Add(llid);
            

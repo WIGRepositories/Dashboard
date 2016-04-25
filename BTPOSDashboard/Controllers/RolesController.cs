@@ -1,4 +1,4 @@
-﻿using DAshboard.Models;
+﻿using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,12 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace DAshboard.Controllers
+namespace BTPOSDashboardAPI.Controllers
 {
     public class RolesController : ApiController
     {
         [HttpGet]
-        public DataTable roles()
+        public DataTable getroles(int companyId)
         {
             DataTable Tbl = new DataTable();
 
@@ -21,12 +21,20 @@ namespace DAshboard.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetRoles";
+
+            SqlParameter cmpid = new SqlParameter();
+            cmpid.ParameterName = "@companyId";
+            cmpid.SqlDbType = SqlDbType.Int;
+            cmpid.Value = companyId;
+            cmd.Parameters.Add(cmpid);
+
             cmd.Connection = conn;
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
@@ -35,8 +43,10 @@ namespace DAshboard.Controllers
             // int found = 0;
             return Tbl;
         }
+
+
         [HttpPost]
-        public DataTable role(roles b)
+        public DataTable saveroles(roles b)
         {
             DataTable Tbl = new DataTable();
 
@@ -44,23 +54,29 @@ namespace DAshboard.Controllers
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = "Data Source=localhost;Initial Catalog=POSDashboard;Integrated Security=SSPI;";
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "InsUpdDelRoles";
             cmd.Connection = conn;
             conn.Open();
-           
-            SqlParameter bb = new SqlParameter();
-            bb.ParameterName = "@Name";
-            bb.SqlDbType = SqlDbType.VarChar;
-            bb.Value = b.Name;
-            cmd.Parameters.Add(bb);
+            SqlParameter cc = new SqlParameter();
+            cc.ParameterName = "@Id";
+            cc.SqlDbType = SqlDbType.Int;
+            cc.Value =Convert.ToString (b.Id);
+            cmd.Parameters.Add(cc);
+
+            SqlParameter cname = new SqlParameter();
+            cname.ParameterName = "@Name";
+            cname.SqlDbType = SqlDbType.VarChar;
+            cname.Value = b.Name;
+            cmd.Parameters.Add(cname);
+
             SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Desc";
+            dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Desc;
+            dd.Value = b.Description;
             cmd.Parameters.Add(dd);
        
             SqlParameter aa = new SqlParameter();
@@ -69,6 +85,11 @@ namespace DAshboard.Controllers
             aa.Value = b.Active;
             cmd.Parameters.Add(aa);
 
+            SqlParameter cmpid = new SqlParameter();
+            cmpid.ParameterName = "@companyId";
+            cmpid.SqlDbType = SqlDbType.Int;
+            cmpid.Value = b.CompanyId;
+            cmd.Parameters.Add(cmpid);
 
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);

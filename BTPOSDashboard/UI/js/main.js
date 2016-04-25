@@ -196,8 +196,8 @@ $(function () {
 
         var $obj = $(this);
         var $me = $obj.parent().parent().find('ul.chat-box-body');
-        var $my_avt = 'https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg';
-        var $your_avt = 'https://s3.amazonaws.com/uifaces/faces/twitter/alagoon/48.jpg';
+        var $my_avt = 'images/user.jpg';
+        var $your_avt = 'images/user.jpg';
         if (e.which == 13) {
             var $content = $obj.val();
 

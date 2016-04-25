@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myCtrl">
+<head>
+    <title>
+
+    </title>
+
+    <script type="text/javascript">
+        function btn1Click() {
+            alert();
+            document.getElementById('masterimg').src = 'loginpage.jpeg';
+
+        }
+
+        function btn1Click() {
+            alert();
+            document.getElementById('masterimg').src = 'poweroff.jpeg';
+
+
+        }
+
+        function payment() {
+
+            document.getElementById('masterimg').src = 'Payment.jpg';
+
+        }
+
+        function goToPayment()
+        {
+            window.location.href = "http://localhost:1476/BTPOSImages/payment.html";
+        }
+
+    </script>
+</head>
+<body ng-model="Group">
+    <table>
+        <tr>
+            <td>
+
+                <img id='masterimg' src="TicketGeneration.jpg" usemap="#planetmap" style="width:258px;height:552px;">
+
+                <map name="planetmap">
+
+
+
+                    <area shape="rect" style="background-color:red" coords="70,315,40,350" alt="Sun" href="#" onclick="alert('poweron');">
+                    <area shape="rect" style="background-color:red" coords=" 120,315,85,350" alt="sun" href="#" onclick="alert('functions');">
+                    <area shape="rect" style="background-color:red" coords="160,315,125,350" alt="Sun" href="#" onclick="alert('alpha');">
+                    <area shape="rect" style="background-color:red" coords="210,315,165,350" alt="Sun" href="#" onclick="alert('menu');">
+
+
+
+
+                    <area shape="rect" style="background-color:red" coords="75,360,40,380" alt="Sun" href="#" onclick="alert('1(QZ)');">
+                    <area shape="rect" style="background-color:red" coords="125,360,80,380" alt="Sun" href="#" onclick="alert('2(ABC)');">
+                    <area shape="rect" style="background-color:red" coords="175,360,125,380" alt="Sun" href="#" onclick="alert('3(DEF)');">
+                    <area shape="rect" style="background-color:red" coords="220,360,160,380" alt="Sun" href="#" onclick="alert('CANCEL');">
+
+
+
+
+
+                    <area shape="rect" style="background-color:red" coords="75,385,40,425" alt="Sun" href="#" onclick="alert('4(GHI)');">
+                    <area shape="rect" style="background-color:red" coords="125,385,80,425" alt="Sun" href="#" onclick="alert('5(JKL)');">
+                    <area shape="rect" style="background-color:red" coords="160,385,125,425" alt="Sun" href="#" onclick="alert('6(MNO)');">
+                    <area shape="rect" style="background-color:red" coords="210,385,160,425" alt="Sun" href="#" onclick="alert('UP');">
+
+
+
+
+
+                    <area shape="rect" style="background-color:red" coords="75,410,40,470" alt="Sun" href="#" onclick="alert('7(PRS)');">
+                    <area shape="rect" style="background-color:red" coords="125,410,80,470" alt="Sun" href="#" onclick="alert('8(TUV)');">
+                    <area shape="rect" style="background-color:red" coords="160,410,125,470" alt="Sun" href="#" onclick="alert('9(WXY)');">
+                    <area shape="rect" style="background-color:red" coords="210,410,160,470" alt="Sun" href="#" onclick="alert('DOWN');">
+
+
+
+                    <area shape="rect" style="background-color:red" coords="75,435,40,515" alt="Sun" href="#" onclick="alert('*#');">
+                    <area shape="rect" style="background-color:red" coords="125,435,80,515" alt="Sun" href="#" onclick="alert('0(,.)');">
+
+                    <area shape="rect" style="background-color:red" coords="160,435,125,515" alt="Sun" href="#" onclick="alert('CLEAR');">
+
+                    <area shape="rect" style="background-color:red" coords="210,435,160,515" alt="Sun" href="#" onclick="payment();">
+
+
+
+                </map>
+
+            </td>
+            <td align="left">
+
+                <table style="width:100%;">
+                    <tr>
+                        <td></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                </table>
+
+
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+
+    </table>
+
+    <table>
+        <tr>
+            <td>Source:</td>
+            <td><input type="text"/></td>
+          
+        </tr>
+        <tr>
+            <td>Target:</td>
+            <td><input type="text" /></td>
+           
+        </tr>
+        <tr>
+            <td>No.Of tickets:</td>
+            <td><input type="text" /></td>
+        </tr>
+        <tr>
+        <td><input type="button" value="submit" onclick="goToPayment()"></td>
+        <td></td>
+        </tr>
+        
+    </table>
+
+    <!--Source: <input type="text" ng-model="Group.Source"><br>
+    Target: <input type="text" ng-model="Group.Target"><br>
+    No.of tickets: <input type="text" ng-model="Group.NoOfTickets" /><br>{{7+5}}
+    <input type="button" value="save" ng-click="save(Group);">-->
+    <script src="angular.js"></script>
+    <script src="TicketGeneration.js"></script>
+
+</body>
+</html>
