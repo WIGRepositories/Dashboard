@@ -105,7 +105,7 @@ namespace BTPOSDashboard.Controllers
                 #region enter BT POS records
 
                  BTPOSDetailsController btposctrl = new BTPOSDetailsController();
-                 List<BTPOSDetails> btposlist = new List<BTPOSDetails>();
+
                  for (int count = 0; count < S.Quantity; count++ )
                  {
                      BTPOSDetails btposunit = new BTPOSDetails();
@@ -120,11 +120,7 @@ namespace BTPOSDashboard.Controllers
                      btposunit.StatusId = -1;
                      btposunit.active = 1;
 
-                     btposlist.Add(btposunit);                   
-                 }
-                 if (btposlist.Count() > 0)
-                 {
-                     btposctrl.SaveBTPOSDetails(btposlist);
+                     btposctrl.SaveBTPOSDetails(btposunit);
                  }
 
                 #endregion
