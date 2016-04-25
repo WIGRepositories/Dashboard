@@ -124,7 +124,9 @@
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
+    <Content Include="DBScripts\Tables\dbo.Blocklist.sql" />
     <Content Include="Global.asax" />
+    <Content Include="UI\AddLicense.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
@@ -2103,6 +2105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DBScripts\Sprocs\" />
     <Folder Include="UI\images\avatar\" />
     <Folder Include="UI\vendors\bootstrap-datetimepicker\bootstrap\" />
     <Folder Include="UI\vendors\css3-treeview\" />
