@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class SubCategoryController : ApiController
     {
         [HttpGet]
-        public DataTable getcategory()
+        public DataTable getsubcategory()
         {
             DataTable Tbl = new DataTable();
 
@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetCategories";
+            cmd.CommandText = "GetInventorySubCategories";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -35,40 +35,6 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
-
-
-        [HttpGet]
-        public DataTable getsubcategory(int catid)
-        {
-            DataTable Tbl = new DataTable();
-
-
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetSubCategories";
-            cmd.Connection = conn;
-
-            SqlParameter catidParam = new SqlParameter();
-            catidParam.ParameterName = "@catid";
-            catidParam.SqlDbType = SqlDbType.VarChar;
-            catidParam.Value = catid;
-            cmd.Parameters.Add(catidParam);
-
-
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
-
-            // int found = 0;
-            return Tbl;
-        }
-
         [HttpPost]
         public DataTable savesubcategory(Types b)
         {

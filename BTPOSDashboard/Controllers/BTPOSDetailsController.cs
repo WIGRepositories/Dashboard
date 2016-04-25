@@ -37,34 +37,12 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
 
-        //[HttpPost]
-        //public DataTable sBTPOSList(BTPOSDetails[] poslist)
-        //{
-        //    DataTable Tbl = new DataTable();
-
-        //     try
-        //    {
-        //         //foreach(BTPOSDetails pos in poslist)
-        //         //{
-        //         //    string str = pos.IMEI;
-                     
-        //         //}
-
-        //    }
-        //     catch (Exception ex)
-        //     {
-        //         string str = ex.Message;
-        //     }
-        //    return Tbl;
-        //}
-
         [HttpPost]
 
-        public DataTable SaveBTPOSDetails(IEnumerable<BTPOSDetails> posList)
+        public DataTable SaveBTPOSDetails(BTPOSDetails n)
         {
             DataTable Tbl = new DataTable();
 
-           // BTPOSDetails n = new BTPOSDetails();
             try
             {
                 //connect to database
@@ -75,54 +53,54 @@ namespace BTPOSDashboardAPI.Controllers
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "InsUpdDelBTPOSDetails";
-                cmd.Connection = conn;
+                cmd.Connection = conn;          
 
                 conn.Open();
 
-                foreach (BTPOSDetails n in posList)
-                {
-                    SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
-                    ba.Value = n.Id;
-                    cmd.Parameters.Add(ba);
+                SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
+                ba.Value = n.Id;
+                cmd.Parameters.Add(ba);
+                
+                SqlParameter bb = new SqlParameter("@GroupId", SqlDbType.Int);
+                bb.Value = n.GroupId;
+                cmd.Parameters.Add(bb);
 
-                    SqlParameter bb = new SqlParameter("@GroupId", SqlDbType.Int);
-                    bb.Value = n.GroupId;
-                    cmd.Parameters.Add(bb);
+                SqlParameter bd = new SqlParameter( "@IMEI", SqlDbType.VarChar, 20);
+                bd.Value = n.IMEI;
+                cmd.Parameters.Add(bd);
 
-                    SqlParameter bd = new SqlParameter("@IMEI", SqlDbType.VarChar, 20);
-                    bd.Value = n.IMEI;
-                    cmd.Parameters.Add(bd);
+               
+                SqlParameter bf = new SqlParameter("@POSID", SqlDbType.VarChar,20);
+                bf.Value = (n.insupdflag == "I")? "POS"+ Guid.NewGuid().ToString().Replace("-",""): n.POSID;
+                cmd.Parameters.Add(bf);              
 
+                SqlParameter bh = new SqlParameter("@StatusId",SqlDbType.Int);
+                bh.Value = n.StatusId;
+                cmd.Parameters.Add(bh);
 
-                    SqlParameter bf = new SqlParameter("@POSID", SqlDbType.VarChar, 20);
-                    bf.Value = (n.insupdflag == "I") ? "POS" + Guid.NewGuid().ToString().Replace("-", "") : n.POSID;
-                    cmd.Parameters.Add(bf);
+                SqlParameter ipconfig = new SqlParameter( "@ipconfig", SqlDbType.VarChar, 20);
+                ipconfig.Value = n.ipconfig;
+                cmd.Parameters.Add(ipconfig);
 
-                    SqlParameter bh = new SqlParameter("@StatusId", SqlDbType.Int);
-                    bh.Value = n.StatusId;
-                    cmd.Parameters.Add(bh);
+               
+                SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
+                active.Value = 1;
+                cmd.Parameters.Add(active);              
 
-                    SqlParameter ipconfig = new SqlParameter("@ipconfig", SqlDbType.VarChar, 20);
-                    ipconfig.Value = n.ipconfig;
-                    cmd.Parameters.Add(ipconfig);
+                SqlParameter fo = new SqlParameter("@fleetownerid",SqlDbType.Int);
+                fo.Value = n.fleetownerid;
+                cmd.Parameters.Add(fo);
 
+                SqlParameter insupdflag = new SqlParameter( "@insupdflag", SqlDbType.VarChar, 10);
+                insupdflag.Value = n.insupdflag;
+                cmd.Parameters.Add(insupdflag);      
 
-                    SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
-                    active.Value = 1;
-                    cmd.Parameters.Add(active);
-
-                    SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
-                    fo.Value = n.fleetownerid;
-                    cmd.Parameters.Add(fo);
-
-                    SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
-                    insupdflag.Value = n.insupdflag;
-                    cmd.Parameters.Add(insupdflag);
-
-                    cmd.ExecuteScalar();
-                }
+                cmd.ExecuteScalar();
                 conn.Close();
-              
+                DataSet ds = new DataSet();
+                //SqlDataAdapter db = new SqlDataAdapter(cmd);
+                //db.Fill(ds);
+                //Tbl = ds.Tables[0];
             }
             catch (Exception ex)
             {

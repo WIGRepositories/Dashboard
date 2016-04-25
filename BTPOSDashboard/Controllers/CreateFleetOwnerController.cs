@@ -37,7 +37,7 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable Savenewfleet(FleetOwnerRequest C)
+        public DataTable Savenewfleet(CreateFleet C)
         {
             DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
