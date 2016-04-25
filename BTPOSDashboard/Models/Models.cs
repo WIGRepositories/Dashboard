@@ -1133,5 +1133,49 @@ namespace BTPOSDashboardAPI.Models
         public String PurchaseDate { get; set; }
         public int PurchaseOrderNumber { get; set; }
     }
+    public class LicenseDetails
+    {
+        public int Id { get; set; }
 
+        public int LicenseTypeId { get; set; }
+        public string FeatureName { get; set; }
+        public String FeatureValue { get; set; }
+        public int FeatureType { get; set; }
+       
+        public String Description { get; set; }
+
+        public DateTime effectiveFrom { get; set; }
+
+        public DateTime effectiveTill { get; set; }
+
+        public String Label { get; set; }
+
+        public String labelclass { get; set; }
+    }
+
+    public class InventoryItem
+    {
+        public int Id { get; set; }
+
+        public String ItemName { get; set; }
+        public String Code { get; set; }
+
+        public String Description { get; set; }
+        public String Category { get; set; }
+        public String SubCategory { get; set; }
+
+        public int ReOrderPoint { get; set; }
+    }
+
+    public class FleetOwnerRequest
+    {
+        public int Id { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public String Email { get; set; }
+        public String MobileNo { get; set; }
+        public String CompanyName { get; set; }
+        public String Description { get; set; }
+        public string insupdflag { get; set; }
+    }
 }

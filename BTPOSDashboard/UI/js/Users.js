@@ -1,8 +1,8 @@
 // JavaScript source code
-var app = angular.module('myApp', [])
+var app = angular.module('myApp', ['ngStorage'])
 
-var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
-
+var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
+       $scope.uname = $localStorage.uname;
     $scope.GetCompanyRoles = function (){
         $http.get('http://localhost:1476/api/Roles/getroles?companyId=-1').then(function (res, data) {
             $scope.companies = res.data;
@@ -41,6 +41,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
         }
         $http(req).then(function (response) {
             alert('saved successfully.');
+                 $localStorage.uname = res.data[0].name;
         });
 
     

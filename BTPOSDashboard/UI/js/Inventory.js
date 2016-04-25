@@ -1,7 +1,8 @@
 // JavaScript source code
 // JavaScript source code
-var app = angular.module('myApp', []);
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
+var app = angular.module('myApp', ['ngStorage']);
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.uname = $localStorage.uname;
     $http.get('http://localhost:1476/api/Inventory/GetInventory').then(function (response, req) {
         $scope.Group = response.data;
 
@@ -50,11 +51,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
         var req = {
 
             method: 'POST',
-            url: 'http://localhost:1476/api/Inventory/SaveInventoryItem',
+            url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: invItem
         }
 
         $http(req).then(function (response) {
+            $localStorage.uname = res.data[0].name;
             alert('saved successfully');
         });
     }
@@ -81,6 +83,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
         }
         $http(req).then(function (response) {
             alert('saved successfully.');
+            $localStorage.uname = res.data[0].name;
         });
 
 

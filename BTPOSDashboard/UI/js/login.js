@@ -1,5 +1,6 @@
-var myapp1 = angular.module('myApp', [])
-var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http) {
+var myapp1 = angular.module('myApp', ['ngStorage'])
+
+var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http, $localStorage) {
    
     $scope.Signin = function () {
        
@@ -33,6 +34,8 @@ var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http) {
             }
             else {
                 //if the user has role, then get the details and save in session
+                $localStorage.uname = res.data[0].name;
+                $localStorage.userdetails = res.data;
                     window.location.href = "index.html";                
             }
         });

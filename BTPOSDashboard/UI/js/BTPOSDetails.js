@@ -1,47 +1,103 @@
-// JavaScript source code
-// JavaScript source code
-var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails').then(function (response, req) {
-        $scope.Group = response.data;
+var app = angular.module('myApp', ['ngStorage'])
 
-    });
-    $scope.save = function (Group, flag) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.uname = $localStorage.uname;
 
-        var Group = {
-            Id: Group.Id,
-            GroupName: Group.GroupName,
-            GroupId: Group.GroupId,
-            IMEI: Group.IMEI,            
-            POSID: Group.POSID,          
-            StatusId: Group.StatusId,
-            ipconfig:Group.ipconfig,
-            active:1,//Group.ipconfig,
-            fleetownerid: Group.FleetOwnerId,
-            insupdflag:flag
+    btposlist = [];
+
+    $scope.GetBTPOSList = function () {
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails').then(function (response, req) {
+            $scope.BTPOS1 = response.data;
+            //  $localStorage.BTPOSOld = response.data;
+        })
+    };
+
+    $scope.addpos = function (pos)
+    {       
+        var found = false;
+        for (var i = 0; i < btposlist.length ; i++)
+        {
+            if(btposlist[i].Id == pos.Id)
+            {
+                found = true;
+
+                btposlist[i].IMEI = pos.IMEI;
+                btposlist[i].ipconfig = pos.ipconfig;
+                btposlist[i].insupdflag = 'U';
+                break;
+            }
         }
+        if (!found)
+        {
+            var Group = {
+                Id: pos.Id,
+                GroupName: pos.GroupName,
+                GroupId: pos.GroupId,
+                IMEI: pos.IMEI,
+                POSID: pos.POSID,
+                StatusId: pos.StatusId,
+                ipconfig: pos.ipconfig,
+                active: 1,//Group.ipconfig,
+                fleetownerid: pos.FleetOwnerId,
+                insupdflag: 'U'
+            }
 
+            btposlist.push(Group);
+        }
+    }
 
-        var req = {
-            method: 'POST',
+    $scope.saveBTPOSList = function () {
+
+        $http({
             url: 'http://localhost:1476/api/BTPOSDetails/SaveBTPOSDetails',
-            data: Group
-        }
-        $http(req).then(function (response) {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: btposlist,
+
+        }).success(function (data, status, headers, config) {
             alert('saved btpos details successfully');
+        }).error(function (ata, status, headers, config) {
+            alert(ata);
         });
 
+   }
+        
+
+    $scope.save = function (Group, flag) {
+      
+                var newpos = {
+                    Id: Group.Id,
+                    GroupName: Group.GroupName,
+                    GroupId: Group.GroupId,
+                    IMEI: Group.IMEI,
+                    POSID: Group.POSID,
+                    StatusId: Group.StatusId,
+                    ipconfig: Group.ipconfig,
+                    active: 1,//Group.ipconfig,
+                    fleetownerid: Group.FleetOwnerId,
+                    insupdflag: flag
+                }
+                btposlist.push(newpos);
+
+                var req = {
+                    method: 'POST',
+                    url: 'http://localhost:1476/api/BTPOSDetails/SaveBTPOSDetails',
+                    data: btposlist 
+                }
+
+                $http(req).then(function (response) {
+                    alert('saved btpos details successfully');                    
+                });
       
         $scope.currGroup = null;
     };
 
 
-    $scope.setCompany = function (grp) {
+    $scope.setBTPOS = function (grp) {
         $scope.currGroup = grp;
     };
 
     $scope.clearGroup = function () {
         $scope.currGroup = null;
-    }
-
+    }   
 });

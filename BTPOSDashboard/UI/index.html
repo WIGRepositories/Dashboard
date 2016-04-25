@@ -52,7 +52,7 @@
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">Admin</span>&nbsp;<span class="caret"></span></a>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
                                 <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -75,7 +75,7 @@
                             <li class="user-panel">
                                 <div class="thumb"><img src="images/user.jpg" alt="" class="img-circle" /></div>
                                 <div class="info">
-                                    <p>Admin</p>
+                                    <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
                                         <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
@@ -102,10 +102,13 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li ><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                    <li><a href="Transactions.html"><i class="fa fa-align-left"></i><span class="submenu-title">Transactions</span></a></li>
+                                    <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
+                                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
                                 </ul>
+
                             </li>
                             <li>
                                 <a href="#">
@@ -115,13 +118,10 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                </ul>
-                                <ul class="nav nav-second-level">
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                     <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                     <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
-
                             </li>
 
 
@@ -135,7 +135,6 @@
                                     <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
                                     <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
                                     <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                                    <li><a href="Objects.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Objects</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -147,7 +146,6 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
                                     <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
-                                    <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -197,58 +195,174 @@
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
 
-                        <div id="tab-general">
+                     
+                        <div class="page-content">
+                            <div id="table-action" class="row">
+                                <div class="col-lg-12">
 
-                            <div class="tab-content" style="width:50%;float:left; ">
-                                <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-                                <div style='overflow: hidden; height: 400px; width: 520px;'>
-                                    <div id='gmap_canvas' style='height: 400px; width: 470px;'></div>
-                                    <style>
-                                        #gmap_canvas img {
-                                            max-width: none !important;
-                                            background: none !important;
-                                        }
-                                    </style>
-                                </div>
-                                <a href='https://www.add-map.net/'>BT POS tracking</a>
-                                <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
-                            </div>
+                                    <div id="tableadvancedTabContent" class="tab-content">
+                                        <div id="table-sorter-tab" class="tab-pane fade in active">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div id="tab-general">
+                                                        <h3 class="mtn">BTPOS Details</h3>
+                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                            <thead>
+                                                                <tr>
 
-                            <div class="tab-content" style="width:50%;float:left; ">
-                                <h3><b>ALERTS</b></h3>
-                                <div id="home" class="tab-pane fade in active">
-                                    <div class="list-group mail-box">
-                                        <a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; <span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                <span class="glyphicon glyphicon-paperclip"></span>
-                                            </span>
-                                        </a>
+                                                                    <th>POSID</th>
+                                                                    <th>IMEI</th>
+                                                                    <th width="15%">Company Name</th>
+                                                                    <th>IP Config</th>
+                                                                    <th>Fleet Owner</th>
+                                                                    <th>Status</th>
+                                                                    <th>Update</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+
+                                                                <tr ng-repeat="pos in BTPOS" class="gradeA">
+                                                                    <td>{{pos.POSID}}</td>
+                                                                    <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" /></td>
+
+                                                                    <td>{{pos.companyname}}</td>
+                                                                    <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" /></td>
+                                                                    <td>{{pos.fleetowner}}</td>
+                                                                    <td>
+                                                                        <span class="label label-sm label-success" ng-if="pos.StatusId == 6">
+                                                                            {{pos.status}}
+                                                                        </span>
+                                                                        <span class="label label-sm label-info" ng-if="pos.StatusId == 5">
+                                                                            {{pos.status}}
+                                                                        </span>
+                                                                        <span class="label label-sm label-warning" ng-if="pos.StatusId == 4">
+                                                                            {{pos.status}}
+                                                                        </span>
+                                                                        <span class="label label-sm label-danger" ng-if="pos.StatusId == 7">
+                                                                            {{pos.status}}
+                                                                        </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
+                                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                                            Edit
+                                                                        </button>
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </tbody>
+
+                                                        </table>
+                                                        <div class="alert alert-danger"> No BTPOS Details to show</div>
+
+                                                    </div>
+                                                    <h3 class="mtn">License Details</h3>
+                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <thead>
+                                                            <tr>
+                                                                <th width="3%"><input type="checkbox" class="checkall" />Select</th>
+                                                                <th>FeatureName</th>
+                                                                <th>FeatureValue</th>
+                                                                <th>Description</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="L in License">
+                                                                <td><input type="checkbox" /> </td>
+                                                                <td>{{L.FeatureName}}</td>
+                                                                <td>{{L.FeatureValue}}</td>
+                                                                <td>{{L.Description}}</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="alert alert-danger">No License Details to show</div>
+                                                    <div style="width:100%;">
+                                                    <div class="tab-content" style="width:48%;float:left; ">
+                                                        <h3><b>ALERTS</b></h3>
+                                                        <div id="home" class="tab-pane fade in active">
+                                                            <div class="list-group mail-box">
+                                                                <a href="#" class="list-group-item">
+                                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                                                </a><a href="#" class="list-group-item">
+                                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; <span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                                                </a><a href="#" class="list-group-item">
+                                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
+                                                                        <span class="glyphicon glyphicon-paperclip"></span>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="tab-content" style="width:48%;float:right; ">
+                                                        <h3><b>NOTIFICATIONS</b></h3>
+                                                        <div id="home" class="tab-pane fade in active">
+                                                            <div class="list-group mail-box">
+                                                                <a href="#" class="list-group-item">
+                                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                                                </a><a href="#" class="list-group-item">
+                                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
+                                                                    &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                                                </a><a href="#" class="list-group-item">
+                                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
+                                                                        <span class="glyphicon glyphicon-paperclip"></span>
+                                                                    </span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                        </div>
+
+
+                                                    <div >
+                                                        <div class="panel panel-violet">
+                                                            <div class="panel-heading">BTPOS Tracking:
+                                                      
+
+                                                                <div style="float:right;">
+                                                                    <button type="button" class="btn btn-primary" ng-click="toggle()">Hide</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div ng-hide="myVar">
+                                                        <div><h3> BT POS tracking</h3></div>
+                                                        <div class="tab-content">
+                                                            <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+                                                            <div style='overflow: hidden; height: 400px; width: 100%;'>
+                                                                <div id='gmap_canvas' style='height: 400px; width:100% ;'></div>
+                                                                <style>
+                                                                    #gmap_canvas img {
+                                                                        max-width: none !important;
+                                                                        background: none !important;
+                                                                    }
+                                                                </style>
+                                                            </div>
+                                                            <a href='https://www.add-map.net/'>BT POS tracking</a>
+                                                            <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
+                                                            <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+                                                        </div>
+                                                        
+
+                                                    </div>
+
+                                                        
+                                                    </div>
+                                                </div>
+                                       
+
+                                            </div>
+                                        </div>
                                     </div>
+                                   
                                 </div>
-
-                            </div>
-                            <div class="tab-content" style="width:50%;float:left; ">
-                                <h3><b>NOTIFICATIONS</b></h3>
-                                <div id="home" class="tab-pane fade in active">
-                                    <div class="list-group mail-box">
-                                        <a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp; 
-                                            &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                        </a><a href="#" class="list-group-item">
-                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                <span class="glyphicon glyphicon-paperclip"></span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-
+                                <!--END PAGE WRAPPER-->
                             </div>
                         </div>
 
@@ -263,8 +377,7 @@
                     </div>
 
                 </div>
-            </div>
-  
+           
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/jquery-migrate-1.2.1.min.js"></script>
         <script src="js/jquery-ui.js"></script>
@@ -286,10 +399,12 @@
         <!--LOADING SCRIPTS FOR PAGE-->
         <script src="js/table-action.js"></script>
         <!--CORE JAVASCRIPT-->
-        <script src="js/main.js"></script>       
+        <script src="js/main.js"></script>
+       
     <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
     <script src="js/source.js"></script>
-    
+
 </body>
 
 </html>

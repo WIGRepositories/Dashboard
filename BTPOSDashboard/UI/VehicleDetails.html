@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    <title>Home | Users | Company</title>
+    <title>Home | BT POS | Vehicle Details</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +11,6 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -22,11 +20,11 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetCompanys();" ng-model="Groups">
+<body ng-model="Groups">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -87,27 +85,27 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
                                     </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li class="active"><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                    <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                                 </ul>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-desktop fa-fw">
                                         <div class="icon-bg bg-pink"></div>
@@ -115,11 +113,10 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                </ul>
-                                <ul class="nav nav-second-level">
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                    <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li class="active"><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
-
                             </li>
 
 
@@ -155,9 +152,9 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                    <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                    <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -177,105 +174,17 @@
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-                <div id="chat-form" class="fixed">
-                    <div class="chat-inner">
-                        <h2 class="chat-header">
-                            <a href="javascript:;" class="chat-form-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><i class="fa fa-user"></i>&nbsp;
-                            Chat
-                            &nbsp;<span class="badge badge-info">3</span>
-                        </h2>
-
-                        <div id="group-1" class="chat-group">
-                            <strong>Favorites</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Verna Morton</small>
-                                <span class="badge badge-info">2</span>
-                            </a><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Delores Blake</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Nathaniel Morris</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-idle"></span>
-                                <small>Boyd Bridges</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Meredith Houston</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                        <div id="group-2" class="chat-group">
-                            <strong>Office</strong><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Ann Scott</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Sherman Stokes</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Florence Pierce</small>
-                                <span class="badge badge-info">1</span>
-                            </a>
-                        </div>
-                        <div id="group-3" class="chat-group">
-                            <strong>Friends</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Willard Mckenzie</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Jenny Frazier</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Chris Stewart</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Olivia Green</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div id="chat-box" style="top:400px">
-                        <div class="chat-box-header">
-                            <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><span class="user-status is-online"></span><span class="display-name">Willard Mckenzie</span>
-                            <small>Online</small>
-                        </div>
-                        <div class="chat-content">
-                            <ul class="chat-box-body">
-                                <li>
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Admin</span><span class="time">09:33</span></p>
-
-                                    <p>Hi Swlabs, we have some comments for you.</p>
-                                </li>
-                                <li class="odd">
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Swlabs</span><span class="time">09:33</span></p>
-
-                                    <p>Hi, we're listening you...</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chat-textarea"><input placeholder="Type your message" class="form-control" /></div>
-                    </div>
-                </div><!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Company</div>
+                            <div class="page-title">Vehicle Details</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Company.html">Company</a>
+                            <li><a href="#">BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="VehicleDetails.html">Vehicle Details</a>
 
                         </ol>
                         <div class="clearfix"></div>
@@ -293,9 +202,10 @@
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
+                                                      
 
                                                         <div class="actions">
-                                                            <a href="AddNewVehicleDetails.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New Bus</button></a>
+                                                            <a href="AddNewVehicleDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New Vehicle Details</button></a>
 
                                                         </div>
 
@@ -308,17 +218,16 @@
                                                                         <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
                                                                     </div>
                                                                     <div class="modal-body" ng-model="currGroup">
-
                                                                         <div class="row">
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                                                                                    <label for="busId" class="control-label">BusId:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="busId" ng-model="currGroup.busId" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -327,12 +236,12 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Code:<span class='require'>*</span></label>
+                                                                                    <label for="busTypeId" class="control-label">Bus TypeId:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="currGroup.code" /></div>
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="busTypeId" ng-model="currGroup.busTypeId" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -341,17 +250,12 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Admin:</label>
+                                                                                    <label for="conductorId" class="control-label">ConductorId:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <select id="selusertype" class="form-control" ng-model="Group.admin">
-                                                                                        <option value="" selected disabled>Select</option>
-                                                                                        <option value="4">Admin Admin</option>
-                                                                                        <option value="5">Srujan simha</option>
-                                                                                        <option value="6">naveen kumar</option>
-                                                                                    </select>
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="conductorId" ng-model="currGroup.conductorId" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -360,12 +264,12 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Description:</label>
+                                                                                    <label for="conductorName" class="control-label">Conductor Name:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.descr" /></div>
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="conductorName" ng-model="currGroup.conductorName" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -374,19 +278,170 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                                    <label for="driverName" class="control-label">driverName:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="driverName" ng-model="currGroup.driverName" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="driverId" class="control-label">driverId:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="driverId" ng-model="currGroup.driverId" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="fleetOwnerId" class="control-label">FleetOwnerId:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="fleetOwnerId" ng-model="currGroup.fleetOwnerId" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="CompanyName" class="control-label">CompanyName:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="CompanyName" ng-model="currGroup.CompanyName" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="POSID" class="control-label">POSID:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="POSID" ng-model="currGroup.POSID" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="RegNo" class="control-label">Registration No:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="RegNo" ng-model="currGroup.RegNo" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="route" class="control-label">Route:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="route" ng-model="currGroup.route" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="Status" class="control-label">Status:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="Status" ng-model="currGroup.Status" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="statusid" class="control-label">StatusId:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="statusid" ng-model="currGroup.statusid" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="Active" class="control-label">Active:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="Active" ng-model="currGroup.Active" checked /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
 
+                                                                        
+
+
+                                                                        <!--<div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Fleet Owner:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right">
+                                                                                        <select id="selusertype" class="form-control" ng-model="currGroup.FleetOwnerId">
+                                                                                            <option value="" selected disabled>Select</option>
+                                                                                            <option selected value="4">Admin Admin</option>
+                                                                                            <option value="5">Srujan simha</option>
+                                                                                            <option value="6">Naveen kumar</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
+
+                                                                      
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
+
                                                                         <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                     </div>
                                                                 </div>
@@ -400,34 +455,22 @@
                                                         <thead>
                                                             <tr>
 
-                                                                <th>Bus Id</th>
-                                                                <th>Bus TypeId</th>
-
-                                                                <th>Conductor Id</th>
-                                                                <th>Conductor Name</th>
-                                                                <th>Driver Id</th>
-                                                                <th>Driver Name</th>
-                                                                <th>fleetOwnerId</th>
-                                                                <th>Group Name</th>
-                                                                <th>POSID</th>
-                                                                <th>Register No</th>
-                                                                <th>Route</th>
-                                                                <th>Status</th>
-                                                                <th>Status Id</th>
+                                                                <th width="22%">Company Name</th>
+                                                                <th>Bus Number</th>
+                                                                <th>FleetOwner Id</th>
+                                                                
+                                                                <th>Active</th>
+                                                                <th>Update</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                            <!--<tr ng-repeat="group in Group" class="gradeA">
-
-
-                                                                <td>{{group.Name}}</td>
-                                                                <td>{{group.code}}</td>
-                                                                <td>{{group.admin}}</td>
-                                                                <td>{{group.descr}}</td>
-                                                                <td>
-                                                                    <input type="checkbox" checked>
-                                                                </td>
+                                                            <tr ng-repeat="group in Group" class="gradeA">
+                                                                <td>{{group.CompanyName}}</td>
+                                                                <td>{{group.busId}} </td>
+                                                                <td>{{group.fleetOwnerId}}</td>
+                                                                <td>{{group.Active}}</td>
+                                                                                                                                
                                                                 <td>
                                                                     {{group.Update}}
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
@@ -437,7 +480,7 @@
                                                                 </td>
                                                             </tr>
 
-                                                        </tbody>-->
+                                                        </tbody>
 
                                                     </table>
                                                     <!--<div class="row">
@@ -470,13 +513,54 @@
                                                         </div>
                                                     </div>-->
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
 
+                                    <div id="table-panel-tab" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="modal-body">
+                                                    <table>
+                                                        <tr>
+                                                            <td> GroupName:</td>
+                                                            <td><input type="text" id="GroupName" ng-model="Group.GroupName"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> GroupId:</td>
+                                                            <td><input type="text" id="admin" ng-model="Group.GroupId"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> IMEI:</td>
+                                                            <td><input type="text" id="IMEI" ng-model="Group.IMEI"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> Location:</td>
+                                                            <td><input type="text" id="Location" ng-model="Group.Location"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td> POSID:</td>
+                                                            <td><input type="text" id="POSID" ng-model="Group.POSID"></td>
+                                                        </tr>
 
+
+
+                                                        <tr>
+                                                            <td> Status:</td>
+                                                            <td><input type="text" id="Status" ng-model="Group.Status"></td>
+                                                        </tr>
+
+
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -490,47 +574,49 @@
                 <!--END PAGE WRAPPER-->
             </div>
         </div>
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <!--loading bootstrap js-->
-        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-        <script src="vendors/iCheck/icheck.min.js"></script>
-        <script src="vendors/iCheck/custom.min.js"></script>
-        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-        <script src="js/jquery.menu.js"></script>
-        <script src="vendors/jquery-pace/pace.min.js"></script>
-        <script src="vendors/holder/holder.js"></script>
-        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-        <!--LOADING SCRIPTS FOR PAGE-->
-        <script src="js/table-action.js"></script>
-        <!--CORE JAVASCRIPT-->
-        <script src="js/main.js"></script>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
 
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-145464-12', 'auto');
-            ga('send', 'pageview');
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-145464-12', 'auto');
+        ga('send', 'pageview');
 
 
-        </script>
-        <script src="js/angular.js"></script>
-        <script src="js/CompanyGroups.js"></script>
+    </script>
+    <script src="js/angular.js"></script>
+    <script src="js/VehicleDetails.js"></script>
+
 </body>
 </html>

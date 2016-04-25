@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
     <title>Home | BT POS | BTPOSDetails</title>
@@ -24,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-init="GetBTPOSList();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -51,7 +50,7 @@
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">Admin</span>&nbsp;<span class="caret"></span></a>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
                                 <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -74,12 +73,12 @@
                             <li class="user-panel">
                                 <div class="thumb"><img src="images/user.jpg" alt="" class="img-circle" /></div>
                                 <div class="info">
-                                    <p>Admin</p>
+                                    <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
                                         <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
-                                        <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+                                        <li><a href="Login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
@@ -118,8 +117,8 @@
                                     <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
                             </li>
-                            
-                            
+
+
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -151,7 +150,7 @@
                                     </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li ><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
                                     <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
@@ -184,8 +183,8 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="BTPOSDetails.html">BTPOSDetails</a> 
-                        
+                            <li><a href="BTPOSDetails.html">BTPOSDetails</a>
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -193,22 +192,22 @@
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
-                                
+
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                             
+
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
-                                                        
+
 
                                                         <div class="actions">
                                                             <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOSDetails</button></a>
 
                                                         </div>
-                                                                                                               
+
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -218,89 +217,89 @@
                                                                         <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
                                                                     </div>
                                                                     <div class="modal-body" ng-model="currGroup">
-                                                        <div class="row">
+                                                                        <div class="row">
 
-                                                            <div class="col-md-3">
-                                                                <div class="form-group has-success" style="text-align:right">
-                                                                    <label for="inputFirstName" class="control-label">POSID:<span class='require'>*</span></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="form-group">
-                                                                    <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.POSID" /></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">POSID:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.POSID" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
-                                                        <div class="row">
+                                                                        <div class="row">
 
-                                                            <div class="col-md-3">
-                                                                <div class="form-group has-success" style="text-align:right">
-                                                                    <label for="inputFirstName" class="control-label">IMEI:<span class='require'>*</span></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="form-group">
-                                                                    <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.IMEI"/></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">IMEI:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.IMEI" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
-                                                        <div class="row">
+                                                                        <div class="row">
 
-                                                            <div class="col-md-3">
-                                                                <div class="form-group has-success" style="text-align:right">
-                                                                    <label for="inputFirstName" class="control-label">IP Config:<span class='require'>*</span></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="form-group">
-                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.ipconfig" /></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">IP Config:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.ipconfig" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
-                                                        <div class="row">
+                                                                        <div class="row">
 
-                                                            <div class="col-md-3">
-                                                                <div class="form-group has-success" style="text-align:right">
-                                                                    <label for="inputFirstName" class="control-label">Company Name:<span class='require'>*</span></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="form-group">
-                                                                    <div class="input-icon right">  
-                                                                        <select id="selcmp" class="form-control" ng-model="currGroup.companyname">
-                                                                            <option value="" selected disabled>Select</option>
-                                                                            <option selected value="1">Cmp1</option>
-                                                                            <option value="5">cmp2</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Company Name:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right">
+                                                                                        <select id="selcmp" class="form-control" ng-model="currGroup.companyname">
+                                                                                            <option value="" selected disabled>Select</option>
+                                                                                            <option selected value="1">Cmp1</option>
+                                                                                            <option value="5">cmp2</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
 
-                                                        <div class="row">
+                                                                        <div class="row">
 
-                                                            <div class="col-md-3">
-                                                                <div class="form-group has-success" style="text-align:right">
-                                                                    <label for="inputFirstName" class="control-label">Fleet Owner:<span class='require'>*</span></label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <div class="form-group">
-                                                                    <div class="input-icon right">
-                                                                        <select id="selusertype" class="form-control" ng-model="currGroup.FleetOwnerId">
-                                                                            <option value="" selected disabled>Select</option>
-                                                                            <option selected value="4">Admin Admin</option>
-                                                                            <option value="5">Srujan simha</option>
-                                                                            <option value="6">Naveen kumar</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Fleet Owner:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right">
+                                                                                        <select id="selusertype" class="form-control" ng-model="currGroup.FleetOwnerId">
+                                                                                            <option value="" selected disabled>Select</option>
+                                                                                            <option selected value="4">Admin Admin</option>
+                                                                                            <option value="5">Srujan simha</option>
+                                                                                            <option value="6">Naveen kumar</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
                                                                         <div class="row">
 
@@ -312,27 +311,28 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                    <select id="selstatus" class="form-control" ng-model="currGroup.StatusId">
-                                                                                        <option value="" selected disabled>Select</option>
-                                                                                        <option selected value="4">New</option>
-                                                                                        <option selected value="6">Activate</option>
-                                                                                    </select></div>
+                                                                                        <select id="selstatus" class="form-control" ng-model="currGroup.StatusId">
+                                                                                            <option value="" selected disabled>Select</option>
+                                                                                            <option selected value="4">New</option>
+                                                                                            <option selected value="6">Activate</option>
+                                                                                        </select>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                       
+
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
+                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup, 'U');">Save</button>
 
                                                                         <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                              </div>
+                                                        </div>
 
 
-                                                        
+
                                                     </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
@@ -340,7 +340,7 @@
 
                                                                 <th>POSID</th>
                                                                 <th>IMEI</th>
-                                                                <th width="15%">Company Name</th>                                                                
+                                                                <th>Company Name</th>
                                                                 <th>IP Config</th>
                                                                 <th>Fleet Owner</th>
                                                                 <th>Status</th>
@@ -349,38 +349,44 @@
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat="group in Group" class="gradeA">
-                                                                <td>{{group.POSID}}</td>
-                                                                <td>{{group.IMEI}} </td>
-                                                                <td>{{group.companyname}}</td>
-                                                                <td>{{group.ipconfig}}</td>                                                    
-                                                                <td>{{group.fleetowner}}</td>     
+                                                            <tr ng-repeat="pos in BTPOS1" class="gradeA">
+                                                               <td>{{pos.POSID}}</td>
+                                                                <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);"/></td>
+
+                                                                <td>{{pos.companyname}}</td>
+                                                                <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" ng-change="addpos(pos);" /></td>
+                                                                <td>{{pos.fleetowner}}</td>
                                                                 <td>
-                                                                    <span class="label label-sm label-success" ng-if="group.StatusId == 6">
-                                                                        {{group.status}}
+                                                                    <span class="label label-sm label-success" ng-if="pos.StatusId == 6">
+                                                                        {{pos.status}}
                                                                     </span>
-                                                                    <span class="label label-sm label-info" ng-if="group.StatusId == 5">
-                                                                        {{group.status}}
+                                                                    <span class="label label-sm label-info" ng-if="pos.StatusId == 5">
+                                                                        {{pos.status}}
                                                                     </span>
-                                                                    <span class="label label-sm label-warning" ng-if="group.StatusId == 4">
-                                                                        {{group.status}}
+                                                                    <span class="label label-sm label-warning" ng-if="pos.StatusId == 4">
+                                                                        {{pos.status}}
                                                                     </span>
-                                                                    <span class="label label-sm label-danger" ng-if="group.StatusId == 7">
-                                                                        {{group.status}}
+                                                                    <span class="label label-sm label-danger" ng-if="pos.StatusId == 7">
+                                                                        {{pos.status}}
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    {{group.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
                                                                 </td>
+
                                                             </tr>
 
                                                         </tbody>
 
                                                     </table>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+
+                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                    </div>
                                                     <!--<div class="row">
                                                         <div class="col-lg-6">
                                                             <div class="pagination-panel">
@@ -404,7 +410,7 @@
                                                                     <li><a href="#">1</a></li>
                                                                     <li><a href="#">2</a></li>
                                                                     <li><a href="#">3</a></li>
-                                                                  
+
                                                                     <li><a href="#">&raquo;</a></li>
                                                                 </ul>
                                                             </div>
@@ -415,50 +421,6 @@
                                         </div>
                                     </div>
 
-                                    <div id="table-panel-tab" class="tab-pane fade">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="modal-body">
-                                                    <table>
-                                                        <tr>
-                                                            <td> GroupName:</td>
-                                                            <td><input type="text" id="GroupName" ng-model="Group.GroupName"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> GroupId:</td>
-                                                            <td><input type="text" id="admin" ng-model="Group.GroupId"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> IMEI:</td>
-                                                            <td><input type="text" id="IMEI" ng-model="Group.IMEI"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> Location:</td>
-                                                            <td><input type="text" id="Location" ng-model="Group.Location"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> POSID:</td>
-                                                            <td><input type="text" id="POSID" ng-model="Group.POSID"></td>
-                                                        </tr>
-
-
-
-                                                        <tr>
-                                                            <td> Status:</td>
-                                                            <td><input type="text" id="Status" ng-model="Group.Status"></td>
-                                                        </tr>
-
-
-                                                    </table>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Close</button>
-                                                    <button type="button" class="btn btn-primary" ng-click="save(Group);">Save</button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -472,7 +434,7 @@
                 <!--END PAGE WRAPPER-->
             </div>
         </div>
-        </div>
+    </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -495,26 +457,9 @@
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-145464-12', 'auto');
-        ga('send', 'pageview');
-
-
-    </script>
     <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
     <script src="js/BTPOSDetails.js"></script>
-    
+
 </body>
 </html>

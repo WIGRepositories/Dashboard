@@ -1,9 +1,8 @@
 ﻿
-
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Home | Users | Users | Add New User</title>
+    <title>Home | BTPOS | Stops</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,10 +22,10 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="User">
+<body ng-model="Stops">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -87,30 +86,28 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
-                                    </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                                    </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                                    <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                                    <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
+                                    <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                    <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
+
                                 </ul>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-desktop fa-fw">
                                         <div class="icon-bg bg-pink"></div>
@@ -118,14 +115,11 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                </ul>
-                                <ul class="nav nav-second-level">
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                    <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li class="active"><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
-
                             </li>
-
 
                             <li>
                                 <a href="#">
@@ -146,8 +140,9 @@
                                     </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                    <li><a href="form-layouts.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
                                     <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
+                                    <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -170,11 +165,11 @@
                                     </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                    <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                    <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                    <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                    <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                    <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -274,162 +269,221 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Users</div>
+                            <div class="page-title">Stops</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Users.html">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="AddNewUser.html">Add New User</a></li>
+                            <li><a href="#">BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="Stops.html">Stops</a></li>
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
-                </div>
-                <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                <div id="page-wrapper">
-                    <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                    <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div class="col-lg-12">
 
-                    <div class="panel panel-violet">
-                        <div class="panel-heading">Add NewFleet Owner</div>
-                        <div class="panel-body pan">
-                            <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                <div class="form-body">
-                                    <div class="form-group">
-                                        <label for="inputFirstName" class="col-md-3 control-label">First Name <span class='require'>*</span></label>
-
-                                        <div class="col-md-4"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputLastName" class="col-md-3 control-label">Last Name <span class='require'>*</span></label>
-
-                                        <div class="col-md-4"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputMiddleName" class="col-md-3 control-label">Middle Name</label>
-
-                                        <div class="col-md-4"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="selCountry" class="col-md-3 control-label">User Type</label>
-
-                                        <div class="col-md-4">
-                                            <select disabled id=" selusertype" class="form-control" ng-model="User.UserType">
-                                                <option value="">Fleet owner staff</option>
-                                                
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="selCountry" class="col-md-3 control-label">Roles</label>
-
-                                        <div class="col-md-4">
-                                            <select disabled id="selRole" class="form-control" ng-model="User.Role">
-                                                <option value="">fleet owner</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-md-3 control-label">Fleet Owner Code <span class='require'>*</span></label>
-
-                                        <div class="col-md-4"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail" class="col-md-3 control-label">Email <span class='require'>*</span></label>
-
-                                        <div class="col-md-4">
-                                            <div class="input-icon"><i class="fa fa-envelope"></i><input type="text" placeholder="Email Address" class="form-control" ng-model="User.Email" /></div>
-                                        </div>
-                                    </div>
+                                <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
 
 
-                                    <div class="form-group">
-                                        <label for="inputPhone" class="col-md-3 control-label">MobileNo</label>
+                                                <div class="table-container">
+                                                    <div class="row mbm">
 
-                                        <div class="col-md-4">
-                                            <div class="input-icon right"><i class="fa fa-mobilephone"></i><input type="text" placeholder="" class="form-control" ng-model="User.MobileNo" /></div>
-                                        </div>
-                                    </div>
-                                    <!--<div class="form-group">
-                                        <label for="Address Id" class="col-md-3 control-label">Address Id<span class='require'>*</span></label>
+                                                        <div class="actions">
+                                                            <a href="AddNewStops.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New Stop</button></a>
 
-                                        <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
-                                    </div>-->
+                                                        </div>
 
-                                    <div class="form-group">
-                                        <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
-
-                                        <div class="col-md-4">
-                                            <input type="checkbox" checked />
-                                        </div>
+                                                      
 
 
-                                    </div>
-                                    <div class="panel panel-violet">
-                                        <div class="panel-heading">User Login</div>
-                                        <div class="panel-body pan">
-                                            <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                <div class="form-body">
-                                                    <div class="form-group">
-                                                        <label for="inputUserName" class=" col-md-3 control-label">UserName: <span class='require'>*</span></label>
 
-                                                        <div class="col-md-4"><input id="inputFirstName" type="text" placeholder="EnterName" class="form-control" ng-model="User.UserName" /><span class="help-block"></span></div>
+                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header modal-header-primary">
+                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Stops</h4>
+                                                                        </div>
+                                                                        <div class="modal-body" ng-model="currGroup">
+
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-5">
+                                                                                    <div class="form-group">
+                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Stops1.Name" /></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">Description:</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-5">
+                                                                                    <div class="form-group">
+                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Stops1.Description" /></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">Code:<span class='require'>*</span></label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-5">
+                                                                                    <div class="form-group">
+                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Stops1.Code" /></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            </div>
+                                                                            <div class="form-actions">
+                                                                                <div class="col-md-offset-3 col-md-9">
+                                                                                    <button type="button" class="btn btn-primary" ng-click="save(Stops1, 'U');">Save</button>
+                                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                            </div>
+
+
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="inputPassword" class="col-md-3 control-label">Password <span class='require'>*</span></label>
+                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <thead>
+                                                            <tr>
 
-                                                        <div class="col-md-4"><input type="password" type="text" placeholder="password" class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
-                                                    </div><br />
-                                                    <div class="form-group">
-                                                        <label for="inputPassword" class="col-md-3 control-label">re-enter Password <span class='require'>*</span></label>
 
-                                                        <div class="col-md-4"><input type="password" type="text" placeholder="password" class="form-control" /><span class="help-block"></span></div>
-                                                    </div><br />
+                                                                <th width="10%">Name</th>
+                                                                <th width="10%">Description</th>
+                                                                <th width="10%">Code</th>
+                                                                
+                                                                <th width="9%">Active</th>
+                                                                <th width="9%">Update</th>
+
+                                                            </tr>
+                                                        <tbody>
+                                                            <tr ng-repeat="St in Stops">
+
+                                                                <td>{{St.Name}}</td>
+                                                                <td>{{St.Description}}</td>
+                                                                <td>{{St.Code}}</td>                         
+                                                                <td><input type="checkbox" checked /></td>
+                                                                <td>
+                                                                    {{St.Update}}
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setStops(St);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                    <!--<div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class="pagination-panel">
+                                                                Page
+                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
+                                                                of 6 | View
+                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline">
+                                                                    <option value="20" selected="selected">20</option>
+                                                                    <option value="50">50</option>
+                                                                    <option value="100">100</option>
+                                                                    <option value="150">150</option>
+                                                                    <option value="-1">All</option>
+                                                                </select>&nbsp;
+                                                                records | Found total 58 records
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 text-right">
+                                                            <div class="pagination-panel">
+                                                                <ul class="pagination pagination-sm man">
+                                                                    <li><a href="#">&laquo;</a></li>
+                                                                    <li><a href="#">1</a></li>
+                                                                    <li><a href="#">2</a></li>
+                                                                    <li><a href="#">3</a></li>
+
+                                                                    <li><a href="#">&raquo;</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
                                                 </div>
-                                                <div class="form-actions text-center pal">
-                                                    <button type="submit" class="btn btn-green" ng-click="save(User, 'I', 2)">Save</button>
-                                                    &nbsp;
-                                                    <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />
-                                                    <br />
-                                                </div>
-                                            </form>
+                                            </div>
                                         </div>
+
+
                                     </div>
                                 </div>
-                        </div>
 
-                        <!--END CONTENT--><!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                            </div>
+                            <!--END CONTENT--><!--BEGIN FOOTER-->
+                            <div id="footer">
+                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                            </div>
+                            <!--END FOOTER-->
                         </div>
-                        <!--END FOOTER-->
+                        <!--END PAGE WRAPPER-->
                     </div>
-                    <!--END PAGE WRAPPER-->
+                </div>
+                <script src="js/jquery-1.10.2.min.js"></script>
+                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <!--loading bootstrap js-->
+                <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                <script src="js/html5shiv.js"></script>
+                <script src="js/respond.min.js"></script>
+                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                <script src="vendors/iCheck/icheck.min.js"></script>
+                <script src="vendors/iCheck/custom.min.js"></script>
+                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                <script src="js/jquery.menu.js"></script>
+                <script src="vendors/jquery-pace/pace.min.js"></script>
+                <script src="vendors/holder/holder.js"></script>
+                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <script src="js/table-action.js"></script>
+                <!--CORE JAVASCRIPT-->
+                <script src="js/main.js"></script>
 
-                    <script src="js/jquery-1.10.2.min.js"></script>
-                    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-                    <script src="js/jquery-ui.js"></script>
-                    <!--loading bootstrap js-->
-                    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                    <script src="js/html5shiv.js"></script>
-                    <script src="js/respond.min.js"></script>
-                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                    <script src="vendors/iCheck/icheck.min.js"></script>
-                    <script src="vendors/iCheck/custom.min.js"></script>
-                    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-                    <script src="js/jquery.menu.js"></script>
-                    <script src="vendors/jquery-pace/pace.min.js"></script>
-                    <script src="vendors/holder/holder.js"></script>
-                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-                    <script src="js/main.js"></script>
-                 
-                    <script src="js/angular.js"></script>
-                    <script src="js/Users.js"></script>
+                <script>
+                (function (i, s, o, g, r, a, m) {
+                    i['GoogleAnalyticsObject'] = r;
+                    i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                    a = s.createElement(o),
+                            m = s.getElementsByTagName(o)[0];
+                    a.async = 1;
+                    a.src = g;
+                    m.parentNode.insertBefore(a, m)
+                })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-145464-12', 'auto');
+                ga('send', 'pageview');
+                </script>
+                <script src="js/angular.js"></script>
                     <script src="js/ngStorage.js"></script>
+                <script src="js/Stops.js"></script>
 
 </body>
 </html>

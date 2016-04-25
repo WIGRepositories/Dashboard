@@ -40,8 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -107,6 +108,8 @@
     <Content Include="CommercialSite\commercialsite1.jpeg" />
     <Content Include="CommercialSite\commercialsitedemo.js" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
+    <Content Include="CommercialSite\FleetOwnerRequest.html" />
+    <Content Include="CommercialSite\FleetOwnerRequest.js" />
     <Content Include="CommercialSite\download.png" />
     <Content Include="CommercialSite\download1.png" />
     <Content Include="CommercialSite\download3.png" />
@@ -207,13 +210,17 @@
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />
+    <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
+    <Content Include="UI\js\licensedetails.js" />
+    <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleDetails.js" />
+    <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\Inventory.html" />
     <Content Include="UI\images\bg\1.jpg" />
@@ -273,7 +280,6 @@
     <Content Include="UI\js\Users.js" />
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
-    <Content Include="UI\newcompany.html" />
     <Content Include="UI\NewInventoryPurchases.html" />
     <Content Include="UI\NewInventorySales.html" />
     <Content Include="UI\NewObject.html" />
@@ -1696,8 +1702,11 @@
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\InventoryItemController.cs" />
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
+    <Compile Include="Controllers\LicenseController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />

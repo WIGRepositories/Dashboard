@@ -1,22 +1,19 @@
+var app = angular.module('myApp', ['ngStorage']);
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.uname = $localStorage.uname;
+    //if ($localStorage.userdetails && $localStorage.userdetails.length > 0 && $localStorage.userdetails[0])
+    //$scope.userid = $localStorage.userdetails[0].userid;
 
-
-var app = angular.module('myApp', []);
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/Dashboard/getdashboard').then(function (response, data) {
-       
-        $scope.BTPOS = response.data.Table;
-        $scope.Group = response.data.Table1;
-        $scope.User = response.data.Table2;
-       // $scope.Group = response.data[0];
-      //  $scope.Group = response.data[0];
-       
-  
+    //now call GetDashboardDetails and pass userid as parameter
+    $http.get('http://localhost:1476/api/dashboard/getdashboard').then(function (res, data) {
+        $scope.Group = res.data;
     });
 
     $scope.myVar = false;
     $scope.toggle = function () {
         $scope.myVar = !$scope.myVar;
-    }
+      
+    };
 
 });
 
