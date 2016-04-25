@@ -25,7 +25,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetAlertNotification";
+            cmd.CommandText = "GetAlertsNotfications";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);

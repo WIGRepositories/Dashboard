@@ -460,7 +460,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string GroupName { get; set; }
 
-        public string GroupId { get; set; }
+        public string CompanyId { get; set; }
 
         public string IMEI { get; set; }
 

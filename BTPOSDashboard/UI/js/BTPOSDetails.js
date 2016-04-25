@@ -32,7 +32,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             var Group = {
                 Id: pos.Id,
                 GroupName: pos.GroupName,
-                GroupId: pos.GroupId,
+                CompanyId: pos.CompanyId,
                 IMEI: pos.IMEI,
                 POSID: pos.POSID,
                 StatusId: pos.StatusId,
@@ -67,7 +67,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
       
                 var newpos = {
                     Id: Group.Id,
-                    GroupName: Group.GroupName,
+                    CompanyId: Group.CompanyId,
                     GroupId: Group.GroupId,
                     IMEI: Group.IMEI,
                     POSID: Group.POSID,
