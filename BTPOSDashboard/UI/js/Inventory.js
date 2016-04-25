@@ -51,7 +51,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var req = {
 
             method: 'POST',
-            url: 'http://localhost:1476/api/Inventory/SaveInventoryItem',
+            url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: invItem
         }
 
