@@ -1,5 +1,6 @@
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentgateway]    Script Date: 04/25/2016 15:45:29 ******/
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentgateway]    Script Date: 04/25/2016 16:14:45 ******/
 SET ANSI_NULLS ON
 GO
 
