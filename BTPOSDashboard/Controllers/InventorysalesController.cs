@@ -106,22 +106,26 @@ namespace BTPOSDashboard.Controllers
 
                  BTPOSDetailsController btposctrl = new BTPOSDetailsController();
 
+                 List<BTPOSDetails> btposlist = new List<BTPOSDetails>();
+
                  for (int count = 0; count < S.Quantity; count++ )
                  {
                      BTPOSDetails btposunit = new BTPOSDetails();
                      btposunit.active = 0;
                      btposunit.fleetownerid = -1;
                      btposunit.Id = -1;
-                     btposunit.GroupId = "-1";
+                     btposunit.CompanyId = "-1";
                      btposunit.IMEI = "";
                      btposunit.ipconfig = "";
                      btposunit.POSID = "";
                      btposunit.insupdflag = "I";
                      btposunit.StatusId = -1;
                      btposunit.active = 1;
-
-                     btposctrl.SaveBTPOSDetails(btposunit);
+                     btposlist.Add(btposunit);
+                     
                  }
+
+                 btposctrl.SaveBTPOSDetails(btposlist);
 
                 #endregion
 

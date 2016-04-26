@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     {
 
         [HttpGet]
-        public DataSet getdashboard()
+        public DataSet getdashboard(int userid, int roleid)
         {
             DataTable Ds = new DataTable();
 
@@ -26,6 +26,20 @@ namespace BTPOSDashboard.Controllers
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetDashboardDetails";
+
+            SqlParameter uid = new SqlParameter();
+            uid.ParameterName = "@userid";
+            uid.SqlDbType = SqlDbType.Int;
+            uid.Value = userid;
+            cmd.Parameters.Add(uid);
+
+
+            SqlParameter rid = new SqlParameter();
+            rid.ParameterName = "@userid";
+            rid.SqlDbType = SqlDbType.Int;
+            rid.Value = roleid;
+            cmd.Parameters.Add(rid);
+
 
             cmd.Connection = conn;
             DataSet ds = new DataSet();
