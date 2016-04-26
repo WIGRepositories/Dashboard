@@ -41,7 +41,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         }
         $http(req).then(function (response) {
             alert('saved successfully.');
-                 $localStorage.uname = res.data[0].name;
+               
         });
 
     
