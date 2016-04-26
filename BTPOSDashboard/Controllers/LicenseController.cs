@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class LicenseController : ApiController
     {
        [HttpGet]
-        public DataTable getlicense()
+        public DataTable getlicense(int Subcatid )
         {
             DataTable Tbl = new DataTable();
 
@@ -28,7 +28,12 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "getLicensedetails";
             cmd.Connection = conn;
 
-           
+
+            SqlParameter catidParam = new SqlParameter();
+            catidParam.ParameterName = "@Subcatid";
+            catidParam.SqlDbType = SqlDbType.VarChar;
+            catidParam.Value = Subcatid;
+            cmd.Parameters.Add(catidParam);
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);

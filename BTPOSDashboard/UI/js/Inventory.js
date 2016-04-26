@@ -56,7 +56,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
 
         $http(req).then(function (response) {
-            $localStorage.uname = res.data[0].name;
+       
             alert('saved successfully');
         });
     }

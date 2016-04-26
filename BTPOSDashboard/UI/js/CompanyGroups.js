@@ -29,8 +29,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: Group
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
-            $localStorage.uname = res.data[0].name;
+            alert('saved successfully.');            
         });
 
      
