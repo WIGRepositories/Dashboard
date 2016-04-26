@@ -35,7 +35,7 @@ namespace BTPOSDashboard.Controllers
 
 
             SqlParameter rid = new SqlParameter();
-            rid.ParameterName = "@userid";
+            rid.ParameterName = "@roleid";
             rid.SqlDbType = SqlDbType.Int;
             rid.Value = roleid;
             cmd.Parameters.Add(rid);

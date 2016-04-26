@@ -104,16 +104,15 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         });
 
 
-        $scope.currLicense = null;
+        $scope.currRole = null;
 
     };
 
-    $scope.setLicense = function (grp) {
-        $scope.currLicense = grp;
+    $scope.setCurrRole = function (grp) {
+        $scope.currRole = grp;
     };
 
-    $scope.clearGroup = function () {
-        $scope.currLicense = null;
+    $scope.clearCurrRole = function () {
+        $scope.currRole = null;
     };
-
 });

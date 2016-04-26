@@ -86,7 +86,7 @@ namespace POSDBAccess.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelCompanyGroups";
+                cmd.CommandText = "InsUpdDelCompany";
                 cmd.Connection = conn;
 
                 conn.Open();

@@ -58,7 +58,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
 
         $http(req).then(function (res) {
             alert('Saved successfully');
-            $localStorage.uname = res.data[0].name;
+         
         });
 
         $scope.currGroup = null;
