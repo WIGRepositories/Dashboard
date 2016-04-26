@@ -546,6 +546,7 @@ GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
+
 GO
 SET ANSI_PADDING ON
 GO
@@ -4170,3 +4171,65 @@ select * from Blocklist
 end
 GO
 
+USE [POSDashboard]
+GO
+/****** Object:  Table [dbo].[InventoryItem]    Script Date: 04/26/2016 16:43:43 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[InventoryItem](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Code] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[Category] [varchar](50) NOT NULL,
+	[SubCategory] [varchar](50) NOT NULL,
+	[ReOrderPoint] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[InsupdDelInventoryItem]    Script Date: 04/26/2016 16:43:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsupdDelInventoryItem]
+(@Id int,
+@ItemName varchar(50),
+@Code varchar(50),
+@Description varchar(50),
+@Category varchar(50),
+@SubCategory varchar(50),
+@ReOrderPoint int)
+as 
+begin
+insert into InventoryItem
+(Id,ItemName,Code,[Description],Category,SubCategory,ReOrderPoint)values
+(@Id,@ItemName,@Code,@Description,@Category,@SubCategory,@ReOrderPoint)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetInventoryItem]    Script Date: 04/26/2016 16:43:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetInventoryItem]
+as 
+begin
+SELECT I.[Id]
+      ,[ItemName]
+      ,[Code]
+      ,I.[Description]
+      ,[Category]
+      ,[SubCategory]
+      ,[ReOrderPoint]
+  FROM [POSDashboard].[dbo].[InventoryItem]I
+
+ INNER JOIN SubCategory s  ON s.Name = I.SubCategory
+  
+end
+GO
