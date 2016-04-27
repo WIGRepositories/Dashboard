@@ -6,7 +6,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     //now call GetDashboardDetails and pass userid as parameter
     $http.get('http://localhost:1476/api/dashboard/getdashboard?userid=-1&roleid=-1').then(function (res, data) {
-        $scope.Group = res.data;
+        //$scope.Group = res.data;
+       
+        $scope.BTPOS = res.data.Table1;
+        $scope.License = res.data.Table2;
+      
+        //$scope.User = res.data.Table2;
+     
     });
 
     $scope.myVar = false;
@@ -38,6 +44,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
 //}]);
 
+//$scope.BTPOS = response.data.Table;
+//$scope.Group = response.data.Table1;
+//$scope.User = response.data.Table2;
+// $scope.Group = response.data[0];
+//  $scope.Group = response.data[0];
 
 
 

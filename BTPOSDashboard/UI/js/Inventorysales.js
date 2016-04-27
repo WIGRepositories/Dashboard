@@ -2,7 +2,8 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
-       $scope.uname= $localStorage.uname
+    $scope.uname = $localStorage.uname
+    getinventoryname();
     $http.get('http://localhost:1476/api/Inventorysales/GetInventorySales').then(function (res, data) {
         $scope.Group = res.data;
     });
