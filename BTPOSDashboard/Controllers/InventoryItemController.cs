@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class InventoryItemController : ApiController
     {
 
-        public DataTable GetInventory()
+        public DataTable GetInventoryItem()
         {
             DataTable Tbl = new DataTable();
 
@@ -64,9 +64,9 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(Gid);
 
             SqlParameter lid = new SqlParameter();
-            lid.ParameterName = "@TypeGroupId";
-            lid.SqlDbType = SqlDbType.Int;
-            lid.Value = Convert.ToInt32(b.TypeGroupId);
+            lid.ParameterName = "@Code";
+            lid.SqlDbType = SqlDbType.VarChar;
+            lid.Value = b.Code;
             cmd.Parameters.Add(lid);
 
             SqlParameter pDesc = new SqlParameter();
@@ -76,11 +76,22 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(pDesc);
 
             SqlParameter lAct = new SqlParameter();
-            lAct.ParameterName = "@Active";
-            lAct.SqlDbType = SqlDbType.Int;
-            lAct.Value = Convert.ToInt32(b.Active);
+            lAct.ParameterName = "@Category";
+            lAct.SqlDbType = SqlDbType.VarChar;
+            lAct.Value = b.Category;
             //llid.Value = b.Active;
             cmd.Parameters.Add(lAct);
+            SqlParameter psub = new SqlParameter();
+            psub.ParameterName = "@SubCategory";
+            psub.SqlDbType = SqlDbType.VarChar;
+            psub.Value = b.SubCategory;
+            cmd.Parameters.Add(psub);
+
+            SqlParameter prop = new SqlParameter();
+            prop.ParameterName = "@ReOrderPoint";
+            prop.SqlDbType = SqlDbType.VarChar;
+            prop.Value = Convert.ToInt32(b.ReOrderPoint);
+            cmd.Parameters.Add(prop);
 
             cmd.ExecuteScalar();
             conn.Close();

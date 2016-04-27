@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="Item">
+<body ng-init="GetSubCategories()" ng-model="Item">
     <div>
 
         <!--BEGIN THEME SETTINGS-->
@@ -228,19 +228,19 @@
                                                                         <label for="selCountry" class="col-md-3 control-label">Category</label>
 
                                                                         <div class="col-md-4">
-                                                                            <select id="selRole" class="form-control" ng-model="Item.Category"readonly>
-                                                                                <option value="">InventoryCategory</option>
+                                                                            <select id="selRole" class="form-control" ng-model="Item.Category" readonly>
+                                                                                <option value="10">Inventory Category</option>
 
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                  
-
-                                                                        <div class="col-md-5">
-                                                                            SubCategory <select ng-options="s.Name for s in SubCategory track by s.Id" ng-model="s" ng-change="getselectval(s)">
-    <option value="">All</option>
-</select>
+                                                                        <label for="selCountry" class="col-md-3 control-label">SubCategory</label>
+                                                                        <div class="col-md-4">
+                                                                            <select ng-options="s.Name for s in SubCategory track by s.Id" class="form-control" ng-model="Item.SubCategory">
+                                                                                <option value="">All</option>
+                                                                            </select>
                                                                         </div>
 
                                                                     </div>
@@ -251,7 +251,7 @@
 
                                                                         <div class="form-actions">
                                                                             <div class="col-md-offset-3 col-md-9">
-                                                                                <button type="submit" class="btn btn-primary" ng-click="save(Item);">Save</button>
+                                                                                <button type="submit" class="btn btn-primary" ng-click="saveNewItem(Item);">Save</button>
                                                                                 <button type="reset" class="btn btn-green">Cancel</button>
                                                                             </div>
 
@@ -302,9 +302,8 @@
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
-    <script src="js/InventoryItem.js"></script>
     <script src="js/ngStorage.js"></script>
-
+    <script src="js/InventoryItem.js"></script>
 
 </body>
 </html>

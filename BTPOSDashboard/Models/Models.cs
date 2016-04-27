@@ -1178,17 +1178,5 @@ namespace BTPOSDashboardAPI.Models
         public String Description { get; set; }
         public string insupdflag { get; set; }
     }
-    public class InventoryItem
-    {
-        public int Id { get; set; }
-
-        public String ItemName { get; set; }
-        public String Code { get; set; }
-
-        public String Description { get; set; }
-        public String Category { get; set; }
-        public String SubCategory { get; set; }
-
-        public int ReOrderPoint { get; set; }
-    }
+   
 }
