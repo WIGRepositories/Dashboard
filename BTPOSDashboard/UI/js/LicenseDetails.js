@@ -3,13 +3,22 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/license/getlicense?Subcatid=-1').then(function (response, data) {
-        $scope.SubCategories = response.data;
-        $scope.getselectval();
-    })
+    $scope.LicenseCategories = function () {
 
+        //$http.get('http://localhost:1476/api/SubCategory/GetSubCategories?catid=11').then(function (response, req) {
+        //    $scope.SubCategory = response.data;
+        //});
+
+        $http.get('http://localhost:1476/api/SubCategory/GetSubCategories?catid=11').then(function (response, data) {
+            $scope.SubCategories = response.data;
+            //$scope.getselectval();
+        })
+
+    }   
 
     $scope.getselectval = function (seltype) {
+        if (seltype == null) return;
+
         var grpid = (seltype) ? seltype.Id : -1;
 
         $http.get('http://localhost:1476/api/license/getlicense?Subcatid=' + grpid).then(function (res, data) {

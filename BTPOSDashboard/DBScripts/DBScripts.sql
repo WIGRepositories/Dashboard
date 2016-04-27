@@ -1,25 +1,6 @@
-USE [Dashboard]
+USE [POSDashboard]
 GO
-
-CREATE TABLE [dbo].[UserLogins](
-	[LoginInfo] [nvarchar](50) NOT NULL,
-	[PassKey] [nvarchar](50) NOT NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [int] NOT NULL,
-	[salt] [varchar](50) NULL,
-	[Active] [int] NOT NULL
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[UserLogins] ADD  CONSTRAINT [DF_UserLogins_Active]  DEFAULT ((1)) FOR [Active]
-GO
-
-
-/****** Object:  Table [dbo].[FleetOwnerRouteDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[FleetOwnerRouteDetails]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -36,7 +17,23 @@ CREATE TABLE [dbo].[FleetOwnerRouteDetails](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[FleetOwner]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[FleetownerDetails]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[FleetownerDetails](
+	[Id] [int] NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[RouteId] [varchar](50) NOT NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[FleetOwner]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -53,7 +50,7 @@ CREATE TABLE [dbo].[FleetOwner](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Fares]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Fares]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -72,7 +69,7 @@ CREATE TABLE [dbo].[Fares](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Expenses]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Expenses]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -92,7 +89,7 @@ CREATE TABLE [dbo].[Expenses](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[EditHistoryDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[EditHistoryDetails]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -110,7 +107,7 @@ CREATE TABLE [dbo].[EditHistoryDetails](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[EditHistory]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[EditHistory]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -128,7 +125,7 @@ CREATE TABLE [dbo].[EditHistory](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[COUNTRY]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[COUNTRY]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -140,7 +137,25 @@ CREATE TABLE [dbo].[COUNTRY](
 	[Active] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Company]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[CompanyGroups]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CompanyGroups](
+	[active] [int] NOT NULL,
+	[adminid] [int] NOT NULL,
+	[code] [varchar](50) NOT NULL,
+	[descr] [varchar](50) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Company]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -157,7 +172,7 @@ CREATE TABLE [dbo].[Company](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[BTPOSSheduleUploads]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSSheduleUploads]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -172,7 +187,7 @@ CREATE TABLE [dbo].[BTPOSSheduleUploads](
 	[Ipconfig] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BTPOSSecheduledUpdates]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSSecheduledUpdates]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -187,7 +202,7 @@ CREATE TABLE [dbo].[BTPOSSecheduledUpdates](
 	[IpConfig] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BTPOSRegistration]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSRegistration]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -205,7 +220,7 @@ CREATE TABLE [dbo].[BTPOSRegistration](
 	[ExpiryDate] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BTPOSRecords]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSRecords]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -217,7 +232,7 @@ CREATE TABLE [dbo].[BTPOSRecords](
 	[RecordData] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BTPOSPortSettings]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSPortSettings]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -228,7 +243,7 @@ CREATE TABLE [dbo].[BTPOSPortSettings](
 	[Ipconfig] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BTPOSInventorySales]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSInventorySales]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -249,7 +264,7 @@ CREATE TABLE [dbo].[BTPOSInventorySales](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[BTPOSFaultsCatageries]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSFaultsCatageries]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -262,7 +277,7 @@ CREATE TABLE [dbo].[BTPOSFaultsCatageries](
 	[TypeGrpid] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BTPOSDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSDetails]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -282,7 +297,7 @@ CREATE TABLE [dbo].[BTPOSDetails](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[BTPOSAuditDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[BTPOSAuditDetails]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -292,7 +307,7 @@ CREATE TABLE [dbo].[BTPOSAuditDetails](
 	[EditHistoryId] [numeric](18, 0) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Blocklist]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Blocklist]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -312,7 +327,24 @@ CREATE TABLE [dbo].[Blocklist](
 	[UnBlockedon] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  StoredProcedure [dbo].[GetMessages]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  Table [dbo].[AlertNotifications]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[AlertNotifications](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Message] [varchar](50) NOT NULL,
+	[MessageTypeId] [int] NOT NULL,
+	[Status] [varchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[GetMessages]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -332,19 +364,7 @@ SELECT [Id]
  RETURN
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetAuditDetails]    Script Date: 04/21/2016 09:02:32 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetAuditDetails]
-AS
-BEGIN
-	
-select * from AuditDetails
-end
-GO
-/****** Object:  Table [dbo].[register]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[register]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -358,7 +378,7 @@ CREATE TABLE [dbo].[register](
 	[LastName] [nvarchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ReceivingsMaster]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[ReceivingsMaster]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -370,7 +390,7 @@ CREATE TABLE [dbo].[ReceivingsMaster](
 	[Desc] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Receivings]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Receivings]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -382,7 +402,7 @@ CREATE TABLE [dbo].[Receivings](
 	[ReceivedBy] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[POSTerminal]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[POSTerminal]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -399,7 +419,7 @@ CREATE TABLE [dbo].[POSTerminal](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[PaymentReceivings]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[PaymentReceivings]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -421,7 +441,7 @@ CREATE TABLE [dbo].[PaymentReceivings](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[PaymentGatewayType]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[PaymentGatewayType]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -434,7 +454,7 @@ CREATE TABLE [dbo].[PaymentGatewayType](
 	[TypeGripId] [numeric](18, 0) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PaymentGatewaySettings]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[PaymentGatewaySettings]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -455,19 +475,7 @@ CREATE TABLE [dbo].[PaymentGatewaySettings](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  StoredProcedure [dbo].[GetPaymentgateway]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[GetPaymentgateway]
-AS
-BEGIN
-	
-select * from Paymentgateway
-end
-GO
-/****** Object:  Table [dbo].[PaymentCatergory]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[PaymentCatergory]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -480,7 +488,7 @@ CREATE TABLE [dbo].[PaymentCatergory](
 	[TypegripId] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Payment]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Payment]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -495,7 +503,7 @@ CREATE TABLE [dbo].[Payment](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[PayablesMaster]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[PayablesMaster]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -507,46 +515,10 @@ CREATE TABLE [dbo].[PayablesMaster](
 	[Desc] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELPayables]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  Table [dbo].[Objects]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPayables](@Id numeric(30),
-           @Amount VARCHAR(50),
-           @MasterId numeric(30),
-           @Paidby varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[Payables] VALUES
-           (@Id, 
-          @Amount,
-           @MasterId,
-           @Paidby)
-          
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[GetPayables]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[GetPayables]
-AS
-BEGIN
-	
-select * from Payables
-end
-GO
-/****** Object:  Table [dbo].[Objects]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-
 GO
 SET ANSI_PADDING ON
 GO
@@ -560,7 +532,7 @@ CREATE TABLE [dbo].[Objects](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[ObjectAccesses]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[ObjectAccesses]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -576,46 +548,7 @@ CREATE TABLE [dbo].[ObjectAccesses](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELNOCBTPOSTracking]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELNOCBTPOSTracking](@Id numeric(10),              
-           @BTPOSId numeric(10),
-           @Xcord varchar(50),
-           @Ycord Varchar(50),
-           @Time varchar(20),
-           @Date Datetime)
-AS
-BEGIN
-	
-
-INSERT INTO 
-[NOCBTPOSTracking] VALUES
-           (@Id,
-              
-           @BTPOSId,
-           @Xcord,
-           @Ycord,
-           @Time,
-           @Date)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[GetNOCBTPOSTracking]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetNOCBTPOSTracking]
-AS
-BEGIN
-	
-select * from NOCBTPOSTracking
-end
-GO
-/****** Object:  Table [dbo].[mulitiplicationsave]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[mulitiplicationsave]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -626,7 +559,7 @@ CREATE TABLE [dbo].[mulitiplicationsave](
 	[layoutId] [numeric](18, 0) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[menu]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[menu]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -641,7 +574,7 @@ CREATE TABLE [dbo].[menu](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[loginpage]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[loginpage]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -655,7 +588,7 @@ CREATE TABLE [dbo].[loginpage](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[LicensePayments]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[LicensePayments]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -675,7 +608,7 @@ CREATE TABLE [dbo].[LicensePayments](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[LicenseKeyFile]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[LicenseKeyFile]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -694,7 +627,29 @@ CREATE TABLE [dbo].[LicenseKeyFile](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[LicenceStatus]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[LicenseDetails]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[LicenseDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[LicenseTypeId] [int] NOT NULL,
+	[FeatureName] [varchar](50) NOT NULL,
+	[FeatureValue] [varchar](50) NOT NULL,
+	[FeatureType] [int] NOT NULL,
+	[Description] [varchar](250) NULL,
+	[effectiveFrom] [date] NULL,
+	[effectiveTill] [date] NULL,
+	[Label] [varchar](50) NULL,
+	[labelclass] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[LicenceStatus]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -707,7 +662,7 @@ CREATE TABLE [dbo].[LicenceStatus](
 	[TypeGripidId] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LicenceCatergories]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[LicenceCatergories]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -720,7 +675,7 @@ CREATE TABLE [dbo].[LicenceCatergories](
 	[TypegripId] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InventorySales]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[InventorySales]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -738,7 +693,7 @@ CREATE TABLE [dbo].[InventorySales](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[InventoryReceivings]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[InventoryReceivings]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -761,7 +716,7 @@ CREATE TABLE [dbo].[InventoryReceivings](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[InventoryPurchases]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[InventoryPurchases]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -779,7 +734,26 @@ CREATE TABLE [dbo].[InventoryPurchases](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Inventory]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[InventoryItem]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[InventoryItem](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Code] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[Category] [varchar](50) NOT NULL,
+	[SubCategory] [varchar](50) NOT NULL,
+	[ReOrderPoint] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Inventory]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -787,21 +761,404 @@ GO
 SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[Inventory](
-	[Active] [int] NOT NULL,
-	[availableQty] [int] NOT NULL,
-	[category] [varchar](50) NOT NULL,
-	[code] [varchar](50) NOT NULL,
-	[desc] [varchar](50) NOT NULL,
-	[InventoryId] [int] NOT NULL,
-	[name] [varchar](50) NOT NULL,
+	[InventoryId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Code] [varchar](30) NOT NULL,
+	[Description] [varchar](30) NULL,
+	[AvailableQty] [int] NOT NULL,
+	[CategoryId] [varchar](50) NOT NULL,
+	[SubCategoryId] [varchar](50) NOT NULL,
 	[PerUnitPrice] [int] NOT NULL,
-	[reorderpoint] [int] NOT NULL,
-	[subcat] [varchar](50) NOT NULL
+	[ReorderPont] [int] NOT NULL,
+	[Active] [int] NOT NULL
 ) ON [PRIMARY]
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Types]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  StoredProcedure [dbo].[GetAuditDetails]    Script Date: 04/27/2016 13:04:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetAuditDetails]
+AS
+BEGIN
+	
+select * from AuditDetails
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetNOCBTPOSTracking]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetNOCBTPOSTracking]
+AS
+BEGIN
+	
+select * from NOCBTPOSTracking
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetPayables]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetPayables]
+AS
+BEGIN
+	
+select * from Payables
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELAlertsNotifications]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELAlertsNotifications]
+@Id int
+
+           
+AS
+BEGIN
+	
+
+Delete from AlertsNotifications where Id=@Id
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELPayables]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELPayables](@Id numeric(30),
+           @Amount VARCHAR(50),
+           @MasterId numeric(30),
+           @Paidby varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Payables] VALUES
+           (@Id, 
+          @Amount,
+           @MasterId,
+           @Paidby)
+          
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELNOCBTPOSTracking]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELNOCBTPOSTracking](@Id numeric(10),
+              
+           @BTPOSId numeric(10),
+           @Xcord varchar(50),
+           @Ycord Varchar(50),
+           @Time varchar(20),
+           @Date date)
+AS
+BEGIN
+	
+
+INSERT INTO 
+[NOCBTPOSTracking] VALUES
+           (@Id,
+              
+           @BTPOSId,
+           @Xcord,
+           @Ycord,
+           @Time,
+           @Date)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[GetPaymentgateway]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetPaymentgateway]
+AS
+BEGIN
+	
+select * from Paymentgateway
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentgateway]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELPaymentgateway](@Id numeric(20),
+           @ProviderName varchar(20),
+           @BTPOSGRPID VARCHAR(20),
+           @Active numeric(20),
+           @userId numeric(20),
+           @Passkey varchar(20),
+           @Url varchar(20),
+           @Testurl varchar(20),
+           @Salt varchar(20),
+           @Hash varchar(20),
+           @PaymentGatwayTypeId varchar(20))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Paymentgateway] VALUES
+           (@Id,
+           @ProviderName,
+           @BTPOSGRPID,
+           @Active,
+           @UserId,
+           @Passkey,
+           @Url,
+           @Testurl,
+           @Salt,
+           @Hash,
+           @PaymentGatwayTypeId)
+   
+	END
+GO
+/****** Object:  Table [dbo].[SMSProviderConfig]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SMSProviderConfig](
+	[Id] [numeric](18, 0) NULL,
+	[ProviderName] [nchar](10) NULL,
+	[BTPOSGRPID] [nchar](10) NULL,
+	[Active] [nchar](10) NULL,
+	[UserId] [numeric](18, 0) NULL,
+	[Passkey] [nchar](10) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SMSEmailSubscribers]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[SMSEmailSubscribers](
+	[AlertId] [int] NOT NULL,
+	[emailid] [varchar](50) NOT NULL,
+	[enddate] [datetime] NOT NULL,
+	[frequency] [int] NOT NULL,
+	[Id] [int] NOT NULL,
+	[phNo] [varchar](50) NOT NULL,
+	[startdate] [datetime] NOT NULL,
+	[userid] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[SMSEmailConfiguration]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[SMSEmailConfiguration](
+	[AlertTypeId] [int] NOT NULL,
+	[enddate] [datetime] NOT NULL,
+	[hashkey] [datetime] NOT NULL,
+	[Id] [int] NOT NULL,
+	[providername] [varchar](50) NOT NULL,
+	[pwd] [varchar](50) NOT NULL,
+	[saltkey] [datetime] NOT NULL,
+	[startdate] [datetime] NOT NULL,
+	[username] [varchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RoutesVehicle]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoutesVehicle](
+	[Id] [int] NOT NULL,
+	[VehicleId] [nvarchar](50) NOT NULL,
+	[RouteId] [nvarchar](50) NOT NULL,
+	[EffectiveFrom] [nvarchar](50) NOT NULL,
+	[EffectiveTill] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[getRoutesFares]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getRoutesFares]
+as
+begin
+select * from RoutesFares
+end
+GO
+/****** Object:  Table [dbo].[RoutesConfiguration]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RoutesConfiguration](
+	[distanceFromDest] [int] NOT NULL,
+	[distanceFromLastStop] [int] NOT NULL,
+	[distanceFromPrevStop] [int] NOT NULL,
+	[distanceFromSource] [int] NOT NULL,
+	[Id] [int] NOT NULL,
+	[routeId] [int] NOT NULL,
+	[stops] [varchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Routes]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Routes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Route] [varchar](50) NOT NULL,
+	[Code] [varchar](50) NOT NULL,
+	[Source] [varchar](50) NOT NULL,
+	[Destination] [varchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RouteFares]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RouteFares](
+	[active] [int] NOT NULL,
+	[fareCodeId] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[routeId] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[RouteFareDetails]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RouteFareDetails](
+	[Id] [int] NOT NULL,
+	[RouteId] [varchar](50) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[Source] [varchar](50) NOT NULL,
+	[Destination] [nvarchar](50) NOT NULL,
+	[Stop] [nvarchar](50) NOT NULL,
+	[Kilometers] [int] NOT NULL,
+	[Fare] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RouteDetails]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RouteDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RouteId] [varchar](50) NOT NULL,
+	[stopname] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[StopCode] [varchar](50) NOT NULL,
+	[DistanceFromSource] [int] NOT NULL,
+	[DistanceFromDestination] [int] NOT NULL,
+	[DistanceFromPreviousStop] [int] NOT NULL,
+	[DistanceFromNextStop] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Description] [nvarchar](50) NULL,
+	[Active] [nvarchar](50) NOT NULL,
+	[CompanyId] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RoleObjectAccesses]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RoleObjectAccesses](
+	[Id] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[ObjectId] [int] NOT NULL,
+	[AccessId] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ReportsFields]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ReportsFields](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[ReportType] [varchar](50) NOT NULL,
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL,
+	[active] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[RegistrationBTPOS]    Script Date: 04/27/2016 13:04:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[RegistrationBTPOS](
+	[code] [varchar](50) NOT NULL,
+	[uniqueId] [varchar](50) NOT NULL,
+	[ipconfig] [varchar](50) NOT NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Types]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -811,7 +1168,7 @@ GO
 CREATE TABLE [dbo].[Types](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NULL,
+	[Description] [varchar](50) NOT NULL,
 	[Active] [int] NOT NULL,
 	[TypeGroupId] [int] NOT NULL,
 	[listkey] [varchar](10) NULL,
@@ -820,7 +1177,7 @@ CREATE TABLE [dbo].[Types](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[TypeGroups]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TypeGroups]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -836,7 +1193,7 @@ CREATE TABLE [dbo].[TypeGroups](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[TroubleTicketingStatus]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TroubleTicketingStatus]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -849,7 +1206,7 @@ CREATE TABLE [dbo].[TroubleTicketingStatus](
 	[TypeGripId] [numeric](18, 0) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TroubleTicketingSlaType]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TroubleTicketingSlaType]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -862,7 +1219,7 @@ CREATE TABLE [dbo].[TroubleTicketingSlaType](
 	[TypeGripId] [numeric](18, 0) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TroubleTicketingHandlers]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TroubleTicketingHandlers]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -875,7 +1232,7 @@ CREATE TABLE [dbo].[TroubleTicketingHandlers](
 	[userid] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TroubleTicketingDevice]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TroubleTicketingDevice]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -887,7 +1244,7 @@ CREATE TABLE [dbo].[TroubleTicketingDevice](
 	[TTId] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TroubleTicketingDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TroubleTicketingDetails]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -908,7 +1265,7 @@ CREATE TABLE [dbo].[TroubleTicketingDetails](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[TroubleTicketingCategories]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TroubleTicketingCategories]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -925,7 +1282,7 @@ CREATE TABLE [dbo].[TroubleTicketingCategories](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[TransactionTypes]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TransactionTypes]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -942,7 +1299,7 @@ CREATE TABLE [dbo].[TransactionTypes](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Transactions]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Transactions]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -989,7 +1346,7 @@ CREATE TABLE [dbo].[Transactions](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[TransactionMaster]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TransactionMaster]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1005,7 +1362,7 @@ CREATE TABLE [dbo].[TransactionMaster](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[TransactionDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TransactionDetails]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1022,7 +1379,7 @@ CREATE TABLE [dbo].[TransactionDetails](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[TicketGeneration]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[TicketGeneration]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1037,7 +1394,7 @@ CREATE TABLE [dbo].[TicketGeneration](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[table2]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[table2]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1050,7 +1407,7 @@ CREATE TABLE [dbo].[table2](
 	[Fare] [nvarchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SubCategory]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[SubCategory]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1067,7 +1424,7 @@ CREATE TABLE [dbo].[SubCategory](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Stops]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Stops]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1084,280 +1441,7 @@ CREATE TABLE [dbo].[Stops](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  StoredProcedure [dbo].[GetSTATE]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[GetSTATE]
-AS
-BEGIN
-	
-select * from STATE
-end
-GO
-/****** Object:  Table [dbo].[SMSProviderConfig]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[SMSProviderConfig](
-	[Id] [numeric](18, 0) NULL,
-	[ProviderName] [nchar](10) NULL,
-	[BTPOSGRPID] [nchar](10) NULL,
-	[Active] [nchar](10) NULL,
-	[UserId] [numeric](18, 0) NULL,
-	[Passkey] [nchar](10) NULL
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[SMSEmailSubscribers]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[SMSEmailSubscribers](
-	[AlertId] [int] NOT NULL,
-	[emailid] [varchar](50) NOT NULL,
-	[enddate] [datetime] NOT NULL,
-	[frequency] [int] NOT NULL,
-	[Id] [int] NOT NULL,
-	[phNo] [varchar](50) NOT NULL,
-	[startdate] [datetime] NOT NULL,
-	[userid] [int] NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[SMSEmailConfiguration]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[SMSEmailConfiguration](
-	[AlertTypeId] [int] NOT NULL,
-	[enddate] [datetime] NOT NULL,
-	[hashkey] [datetime] NOT NULL,
-	[Id] [int] NOT NULL,
-	[providername] [varchar](50) NOT NULL,
-	[pwd] [varchar](50) NOT NULL,
-	[saltkey] [datetime] NOT NULL,
-	[startdate] [datetime] NOT NULL,
-	[username] [varchar](50) NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[RoutesVehicle]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[RoutesVehicle](
-	[Id] [int] NOT NULL,
-	[VehicleId] [nvarchar](50) NOT NULL,
-	[RouteId] [nvarchar](50) NOT NULL,
-	[EffectiveFrom] [nvarchar](50) NOT NULL,
-	[EffectiveTill] [nvarchar](50) NOT NULL
-) ON [PRIMARY]
-GO
-/****** Object:  StoredProcedure [dbo].[getRoutesFares]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRoutesFares]
-as
-begin
-select * from RoutesFares
-end
-GO
-/****** Object:  Table [dbo].[RoutesConfiguration]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[RoutesConfiguration](
-	[distanceFromDest] [int] NOT NULL,
-	[distanceFromLastStop] [int] NOT NULL,
-	[distanceFromPrevStop] [int] NOT NULL,
-	[distanceFromSource] [int] NOT NULL,
-	[Id] [int] NOT NULL,
-	[routeId] [int] NOT NULL,
-	[stops] [varchar](50) NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Routes]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Routes](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Route] [varchar](50) NOT NULL,
-	[Code] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NOT NULL,
-	[Active] [varchar](50) NOT NULL,
-	[BTPOSGroupId] [varchar](50) NOT NULL,
-	[Source] [varchar](50) NOT NULL,
-	[Destination] [varchar](50) NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[RouteFares]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[RouteFares](
-	[active] [int] NOT NULL,
-	[fareCodeId] [int] NOT NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[routeId] [int] NOT NULL
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[RouteFareDetails]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[RouteFareDetails](
-	[Id] [int] NOT NULL,
-	[RouteId] [varchar](50) NOT NULL,
-	[FleetOwnerId] [int] NOT NULL,
-	[Source] [varchar](50) NOT NULL,
-	[Destination] [nvarchar](50) NOT NULL,
-	[Stop] [nvarchar](50) NOT NULL,
-	[Kilometers] [int] NOT NULL,
-	[Fare] [nvarchar](50) NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[RouteDetails]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[RouteDetails](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RouteId] [varchar](50) NOT NULL,
-	[stopname] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NOT NULL,
-	[StopCode] [varchar](50) NOT NULL,
-	[DistanceFromSource] [int] NOT NULL,
-	[DistanceFromDestination] [int] NOT NULL,
-	[DistanceFromPreviousStop] [int] NOT NULL,
-	[DistanceFromNextStop] [int] NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Roles](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](50) NOT NULL,
-	[Description] [nvarchar](50) NULL,
-	[Active] [varchar](50) NOT NULL,
-	[CompanyId] [int] NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[RoleObjectAccesses]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[RoleObjectAccesses](
-	[Id] [int] NOT NULL,
-	[RoleId] [int] NOT NULL,
-	[ObjectId] [int] NOT NULL,
-	[AccessId] [int] NOT NULL
-) ON [PRIMARY]
-GO
-/****** Object:  StoredProcedure [dbo].[getRoledetails]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRoledetails]
-as begin 
-select * from RoleDetails
-end
-GO
-/****** Object:  Table [dbo].[ReportsFields]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[ReportsFields](
-	[Id] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL,
-	[ReportType] [varchar](50) NOT NULL,
-	[FromDate] [datetime] NOT NULL,
-	[ToDate] [datetime] NOT NULL,
-	[active] [int] NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[RegistrationBTPOS]    Script Date: 04/21/2016 09:02:36 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[RegistrationBTPOS](
-	[code] [varchar](50) NOT NULL,
-	[uniqueId] [varchar](50) NOT NULL,
-	[ipconfig] [varchar](50) NOT NULL,
-	[Active] [int] NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELAlertsNotifications]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELAlertsNotifications]
-@Id int
-
-           
-AS
-BEGIN
-	
-
-Delete from AlertsNotifications where Id=@Id
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELSTATE]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELSTATE]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1380,7 +1464,19 @@ INSERT INTO
            @Active)
 	END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelObjects]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetSTATE]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetSTATE]
+AS
+BEGIN
+	
+select * from STATE
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelObjects]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1395,7 +1491,7 @@ begin
 insert into Object (Name,Description,Path ,Active) values(@Name,@Description, @Path, @Active)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelObjectAccess]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelObjectAccess]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1409,7 +1505,7 @@ begin
 insert into ObjectAccess (ObjectId,AccessId,Name) values(@ObjectId,@AccessId,@Name)
 end
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1420,20 +1516,20 @@ CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[FirstName] [varchar](40) NOT NULL,
 	[LastName] [varchar](40) NOT NULL,
-	[UserTypeId] [int] NOT NULL,
+	[UserTypeId] [int] NULL,
 	[EmpNo] [varchar](50) NOT NULL,
 	[Email] [varchar](40) NULL,
-	[AddressId] [int] NULL,
+	[AdressId] [int] NULL,
 	[MobileNo] [varchar](15) NULL,
 	[RoleId] [int] NULL,
 	[Active] [int] NOT NULL,
-	[MiddleName] [varchar](50) NULL,
+	[MiddleName] [varchar](50) NOT NULL,
 	[CompanyId] [int] NOT NULL
 ) ON [PRIMARY]
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1450,7 +1546,7 @@ CREATE TABLE [dbo].[UserRoles](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[ZipCode]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[ZipCode]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1461,7 +1557,7 @@ CREATE TABLE [dbo].[ZipCode](
 	[Active] [nchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[VehicleDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[VehicleDetails]    Script Date: 04/27/2016 13:04:13 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1488,7 +1584,7 @@ CREATE TABLE [dbo].[VehicleDetails](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRoledetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRoledetails]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1503,93 +1599,7 @@ begin
 insert into Object (ObjectName,Path) values(@ObjectName, @Path)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentgateway]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPaymentgateway](@Id numeric(20),
-           @ProviderName varchar(20),
-           @BTPOSGRPID VARCHAR(20),
-           @Active numeric(20),
-           @userId numeric(20),
-           @Passkey varchar(20),
-           @Url varchar(20),
-           @Testurl varchar(20),
-           @Salt varchar(20),
-           @Hash varchar(20),
-           @PaymentGatwayTypeId varchar(20))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[Paymentgateway] VALUES
-           (@Id,
-           @ProviderName,
-           @BTPOSGRPID,
-           @Active,
-           @UserId,
-           @Passkey,
-           @Url,
-           @Testurl,
-           @Salt,
-           @Hash,
-           @PaymentGatwayTypeId)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentCatergory]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelELPaymentCatergory](@Active NUMERIC(10),
-              
-           @Desc Varchar(30),
-           
-           @Id numeric(10),
-           @PaymentCatergory varchar(30),
-           @TypeGripId varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[PaymentGatewayType] VALUES
-           (@Active,
-              
-          
-           @Desc,
-           @Id,
-           @PaymentCatergory,
-           @TypeGripId )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELPayablesMaster]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPayablesMaster](@Id numeric,
-           @Date smalldatetime,
-           @PaidFor VARCHAR,
-           @Desc VARCHAR)
-AS
-BEGIN
-	
-
-INSERT INTO 
-[PayablesMaster] VALUES
-           (@Id
-           ,@Date
-           ,@PaidFor
-           ,@Desc)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRegistrationBTPOS]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRegistrationBTPOS]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1601,7 +1611,7 @@ begin
 insert into RegistrationBTPOS values (@code,@uniqueId,@ipconfig,@Active)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelPaymentReceivings]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPaymentReceivings]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1612,7 +1622,7 @@ begin
 insert into PaymentReceivings values(@amount,@code,@date,@desc,@Id,@inventoryId,@quantity,@receivedOn,@transactionId,@transactiontype)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelPaymentGatewaySettings]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPaymentGatewaySettings]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1623,7 +1633,7 @@ begin
 insert into PaymentGatewaySettings values(@enddate,@hashkey,@Id,@PaymentGatewayTypeId,@providername,@pwd,@saltkey,@startdate,@username)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelPayment]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPayment]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1634,7 +1644,7 @@ begin
 insert into Payment values(@Card,@MobilePayment,@Cash)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[ValidateFleetOwnerCode]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[ValidateFleetOwnerCode]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1653,7 +1663,7 @@ BEGIN
 	return @result
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ValidateCredentials]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[ValidateCredentials]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1676,7 +1686,7 @@ end
 
 --select * from UserRoles
 GO
-/****** Object:  StoredProcedure [dbo].[updatebtpos]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[updatebtpos]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1708,7 +1718,7 @@ BEGIN
 	return @result
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelMenu]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelMenu]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1719,7 +1729,18 @@ begin
 insert into menu values (@Ticketgeneration,@Settings,@Reports)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelLicensePayments]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelloginpage]    Script Date: 04/27/2016 13:04:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelloginpage](@userid varchar(50),@password varchar(50))
+as
+begin
+insert into  loginpage  values (@userid,@password)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicensePayments]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1730,7 +1751,40 @@ begin
 insert into LicensePayments (expiryOn,licenseFor,licenseId,licenseType,paidon,renewedon,transId) values(@expiryOn,@licenseFor,@licenseId,@licenseType,@paidon,@renewedon,@transId)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsupddelInventorySales]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[insupdDelLicensedetails]    Script Date: 04/27/2016 13:04:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[insupdDelLicensedetails]
+(@Id int,
+@LicenseTypeId Varchar(50),
+@FeatureName Varchar(50),
+@FeatureValue Varchar(50),
+@FeatureType int,
+@Description varchar(250)=null,
+@effectiveFrom datetime=null,
+@effectiveTill datetime=null,
+@Label Varchar(50)=null,
+@labelclass Varchar(50)=null
+ )
+as
+begin
+insert into LicenseDetails
+
+(LicenseTypeId ,
+FeatureName,
+FeatureValue,
+FeatureType,
+[Description],
+effectiveFrom,
+effectiveTill,
+Label,
+labelclass)values 
+(@LicenseTypeId,@FeatureName,@FeatureValue,@FeatureType,@Description,@effectiveFrom,@effectiveTill,@Label,@labelclass)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsupddelInventorySales]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1761,7 +1815,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelInventoryReceivings]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelInventoryReceivings]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1772,19 +1826,50 @@ begin
 insert into InventoryReceivings values(@amount,@code,@date,@Id,@inventoryId,@quantity,@reason,@refundamt,@returnedOn,@transactionId,@transactiontype)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelInventory]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsupdDelInventoryItem]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelInventory](@Active int,@availableQty int,@category varchar(50)
-,@code varchar(50),@desc varchar(50),@InventoryId int,@name varchar(50),@PerUnitPrice int,@reorderpoint int,@subcat varchar(50))
-as
+CREATE procedure [dbo].[InsupdDelInventoryItem]
+(@Id int,
+@ItemName varchar(50),
+@Code varchar(50),
+@Description varchar(50) = null,
+@Category varchar(50),
+@SubCategory varchar(50),
+@ReOrderPoint int  = 0)
+as 
 begin
-insert into Inventory values(@Active,@availableQty,@category,@code,@desc,@InventoryId,@name,@PerUnitPrice,@reorderpoint,@subcat)
+insert into InventoryItem
+(ItemName,Code,[Description],Category,SubCategory,ReOrderPoint)values
+(@ItemName,@Code,@Description,@Category,@SubCategory,@ReOrderPoint)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwner]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelInventory]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelInventory](@InventoryId int,@Name varchar(50),@Code varchar(30),@Description varchar(30),
+@AvailableQty int,@CategoryId int,@SubCategoryId int,@PerUnitPrice int,@ReorderPont int,@Active int,@insupdflag varchar(10)
+)
+as
+begin
+
+ insert into Inventory (Name,
+Code
+           ,[Description]
+           ,AvailableQty
+           ,CategoryId
+           ,SubCategoryId
+           ,PerUnitPrice
+           ,ReorderPont
+           ,Active) 
+      values(@Name,@Code,@Description,@AvailableQty,@CategoryId,@SubCategoryId,@PerUnitPrice,@ReorderPont,@Active)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwner]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1795,7 +1880,7 @@ begin
 insert into FleetOwner values(@Id,@UserId,@BTPOSgroupid,@Active)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelFares]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFares]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1806,7 +1891,7 @@ begin
 insert into Fares values(@Id,@FromStop,@ToStop,@Fare,@Active,@RouteId,@Name)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelExpenses]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelExpenses]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1817,7 +1902,7 @@ begin
 insert into Expenses values(@amount,@Date,@desc,@Id,@MasterId,@paidBy,@paidFor,@transactionId)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELZipCode]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELZipCode]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1838,7 +1923,7 @@ INSERT INTO
    
 	END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELTroubleTicketingStatus]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELTroubleTicketingStatus]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1866,7 +1951,7 @@ INSERT INTO
    
 	END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELTroubleTicketingSlaType]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELTroubleTicketingSlaType]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1894,281 +1979,29 @@ INSERT INTO
    
 	END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELSMSProviderConfig]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[Sp_InsTypes]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELSMSProviderConfig](@Id numeric(20),
-           @ProviderName varchar(20),
-           @BTPOSGRPID varchar(20),
-           @Active varchar(20),
-           @UserId numeric(20),
-           @Passkey varchar(20))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[SMSProviderConfig] VALUES
-           (@Id,
-           @ProviderName,
-           @BTPOSGRPID,
-           @Active,
-           @UserId,
-           @Passkey)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELregisterform]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelELregisterform](@UserName varchar(max),
-@Password varchar(max),@ConfirmPassword varchar(max),@Emailaddress varchar(max),
-@FirstName varchar(max),@LastName varchar(max))
+CREATE procedure [dbo].[Sp_InsTypes](@Id int,@Name varchar(50),@Description varchar(50),@TypeGroupId varchar(50),@Active varchar(30))
 as
 begin
-
-INSERT INTO 
-[register] VALUES
-           (@UserName,
-              
-          
-           @Password,
-		     @ConfirmPassword,
-			    @Emailaddress,
-           @FirstName,
-           @LastName
-         
-         )
-   
-
+insert into Types(Name,[Description],TypeGroupId,Active) values(@Name,@Description,@TypeGroupId,@Active)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELReceivingsMaster]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[Sp_InsTypeGroups]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELReceivingsMaster](@Id Numeric(20),
-           @Date smalldatetime,
-           @ReceivedFor varchar(20),
-           @Desc varchar(20))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[ReceivingsMaster] VALUES
-           (@Id, 
-           @Date, 
-           @ReceivedFor,
-           @Desc)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELReceivings]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELReceivings](@Id Numeric(10),
-           @Amount VARCHAR(20),
-           @MasterId numeric(10),
-           @ReceivedBy Varchar(20))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[Receivings] VALUES
-
-       (@Id,
-       @Amount,
-         @MasterId,
-           @ReceivedBy)  
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentGatewayType]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPaymentGatewayType](@Active NUMERIC(10),
-              
-           @Desc Varchar(30),
-           
-           @Id numeric(10),
-           @PaymentGatewayType varchar(30),
-           @TypeGripId numeric(20))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[PaymentGatewayType] VALUES
-           (@Active,
-              
-          
-           @Desc,
-           @Id,
-           @PaymentGatewayType,
-           @TypeGripId )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelEditHistoryDetails]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelEditHistoryDetails](@EditHistoryId int,@FromValue varchar(50),@ToValue varchar(50),@ChangeType varchar(50),@Field1 varchar(50),@Field2 varchar(50))
+CREATE procedure [dbo].[Sp_InsTypeGroups](@Id int,@Name varchar(50),@Description varchar(50) =null,@Active int)
 as
 begin
-insert into EditHistoryDetails values(@EditHistoryId,@FromValue,@ToValue,@ChangeType,@Field1,@Field2)
+insert into TypeGroups (Name,[Description],Active) values(@Name,@Description,@Active)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelEditHistory]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelEditHistory](@Field varchar(50),@SubItem varchar(50),@Comment varchar(50),@Date datetime,@ChangedBy varchar(50),@ChangedType varchar(50))
-as
-begin
-insert into EditHistory values(@Field,@SubItem,@Comment,@Date,@ChangedBy,@ChangedType)
-end
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelCompanyGroups]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelCompanyGroups](
-@active int,
-@code varchar(50),
-@desc varchar(50) = '',
-@Id int,
-@Name varchar(50),
-@insupdflag varchar(10)
-)
-as
-begin
-declare @cnt int
-set @cnt = 0
-
-declare @newCmpId int
-set @newCmpId = 0;
-
-
-
-if @insupdflag = 'I'
-	--check if already company exists
-	select @cnt = count(1) from company where upper(name) = upper(@name)
-
-	if @cnt = 0 
-	begin
-	insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
-	
-	SELECT @newCmpId = @@IDENTITY
-
-    --insert Fleet owner role by default
-		insert into Roles (Name,[Description],Active,companyid) 
-		values('Fleet Owner','Fleet owner role',1,@newCmpId)
-   
-	end
-
-else
-
-   if @insupdflag = 'U'
-
-		--check if already a company with the new name exists
-		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
-	    
-		if @cnt = 0 
-		begin
-		update Company
-		set Name = @Name, code = @code, [desc] = @desc, active = @active
-		where Id = @Id
-		end
-   else
-     delete from Company where Id = @Id
-end
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSInventorySales]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelBTPOSInventorySales](@amount int,@code varchar (50),@Id int,@inventoryId int,@perunit int,@quantity int,@soldon varchar (50),@transactionId int,@transactiontype varchar (50))
-as
-begin
-insert into BTPOSInventorySales values(@amount,@code,@Id,@inventoryId,@perunit,@quantity,@soldon,@transactionId,@transactiontype)
-end
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSDetails]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
-		  @Id int,
-           @GroupId int,   
-           @POSID varchar(20),
-           @StatusId int,
-           @IMEI varchar(20),
-           @ipconfig varchar(20),
-           @active int = 1,
-           @fleetownerid int,
-           @insupdflag varchar(10)
-           )
- 
-AS
-BEGIN	
-if @insupdflag = 'I' 
-INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
-           ([CompanyId]
-           ,[POSID]
-           ,[StatusId]
-           ,[IMEI]
-           ,[ipconfig]
-           ,[active]
-           ,[FleetOwnerId])
-     VALUES
-           --(--@GroupId
-           --@POSID
-           --,@StatusId
-           --,@IMEI
-           --,@ipconfig
-           --,@active
-           --,@FleetOwnerId)
-             (1,
-           @POSID
-           ,1
-           ,null
-           ,null
-           ,1
-           ,1)
-else
-  if @insupdflag = 'U' 
-UPDATE [POSDashboard].[dbo].[BTPOSDetails]
-   SET --[GroupId] = @GroupId
-      [POSID] = @POSID
-      ,[StatusId] = @StatusId
-      ,[IMEI] = @IMEI
-      ,[ipconfig] = @ipconfig
-      ,[active] = @active
-      ,[FleetOwnerId] = @fleetownerid
- WHERE Id = @Id
- 
- else
-   delete from BTPOSDetails where Id = @Id
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[registerbtpos]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[registerbtpos]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2199,7 +2032,885 @@ BEGIN
 	return @result
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdUsers]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELSMSProviderConfig]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELSMSProviderConfig](@Id numeric(20),
+           @ProviderName varchar(20),
+           @BTPOSGRPID varchar(20),
+           @Active varchar(20),
+           @UserId numeric(20),
+           @Passkey varchar(20))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[SMSProviderConfig] VALUES
+           (@Id,
+           @ProviderName,
+           @BTPOSGRPID,
+           @Active,
+           @UserId,
+           @Passkey)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELregisterform]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelELregisterform](@UserName varchar(max),
+@Password varchar(max),@ConfirmPassword varchar(max),@Emailaddress varchar(max),
+@FirstName varchar(max),@LastName varchar(max))
+as
+begin
+
+INSERT INTO 
+[register] VALUES
+           (@UserName,
+              
+          
+           @Password,
+		     @ConfirmPassword,
+			    @Emailaddress,
+           @FirstName,
+           @LastName
+         
+         )
+   
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELReceivingsMaster]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELReceivingsMaster](@Id Numeric(20),
+           @Date smalldatetime,
+           @ReceivedFor varchar(20),
+           @Desc varchar(20))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[ReceivingsMaster] VALUES
+           (@Id, 
+           @Date, 
+           @ReceivedFor,
+           @Desc)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELReceivings]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELReceivings](@Id Numeric(10),
+           @Amount VARCHAR(20),
+           @MasterId numeric(10),
+           @ReceivedBy Varchar(20))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Receivings] VALUES
+
+       (@Id,
+       @Amount,
+         @MasterId,
+           @ReceivedBy)  
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentGatewayType]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELPaymentGatewayType](@Active NUMERIC(10),
+              
+           @Desc Varchar(30),
+           
+           @Id numeric(10),
+           @PaymentGatewayType varchar(30),
+           @TypeGripId numeric(20))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[PaymentGatewayType] VALUES
+           (@Active,
+              
+          
+           @Desc,
+           @Id,
+           @PaymentGatewayType,
+           @TypeGripId )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELPaymentCatergory]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE[dbo].[InsUpdDelELPaymentCatergory](@Active NUMERIC(10),
+              
+           @Desc Varchar(30),
+           
+           @Id numeric(10),
+           @PaymentCatergory varchar(30),
+           @TypeGripId varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[PaymentGatewayType] VALUES
+           (@Active,
+              
+          
+           @Desc,
+           @Id,
+           @PaymentCatergory,
+           @TypeGripId )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELPayablesMaster]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELPayablesMaster](@Id numeric,
+           @Date smalldatetime,
+           @PaidFor VARCHAR,
+           @Desc VARCHAR)
+AS
+BEGIN
+	
+
+INSERT INTO 
+[PayablesMaster] VALUES
+           (@Id
+           ,@Date
+           ,@PaidFor
+           ,@Desc)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[GetPaymentCatergory]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetPaymentCatergory]
+AS
+BEGIN
+	
+select * from PaymentCatergory
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetPayablesMaster]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetPayablesMaster]
+AS
+BEGIN
+	
+select * from PayablesMaster
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELmulitiplicationsave]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELmulitiplicationsave](@rows int,@columns int, @layoutId int)
+AS
+BEGIN
+	
+
+INSERT INTO 
+[mulitiplicationsave] VALUES
+           (@rows,
+             @columns,
+             @layoutId)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELLicenceStatus]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELLicenceStatus](@Active NUMERIC(10),
+              
+           @Desc Varchar(30),
+           
+           @Id numeric(10),
+           @LicenseStatusType varchar(30),
+           @TypeGripId varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[LicenceStatus] VALUES
+           (@Active,
+           @Desc,
+           @Id,
+           @LicenseStatusType,
+           @TypeGripId )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELLicenceCatergories]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELLicenceCatergories](@Active NUMERIC(10),
+              
+           @Desc Varchar(30),
+           
+           @Id numeric(10),
+           @LicenseCategory varchar(30),
+           @TypeGripId varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[LicenceCatergories] VALUES
+           (@Active,
+              
+          
+           @Desc,
+           @Id,
+           @LicenseCategory,
+           @TypeGripId )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELCOUNTRY]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELCOUNTRY](@Id NUMERIC(10),
+           @Name VARCHAR(50),   
+           @Code VARCHAR(50),
+           @Active VARCHAR(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[COUNTRY] VALUES
+           (@Id,
+           @Name,
+           @Code
+           ,@Active)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSSheduleUploads]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSSheduleUploads](@Id NUMERIC(10),
+              
+           @POSID numeric(10),
+           @UploadOn varchar(50),
+           @UploadedOn varchar(50),
+           @Status varchar(50),
+           @UploadData varchar(50),
+           @Ipconfig varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[BTPOSSheduleUploads] VALUES
+           (@Id,
+              
+           @POSID,
+           @UploadOn,
+           @UploadedOn,
+           @Status,
+           @UploadData,
+           @Ipconfig )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSSecheduledUpdates]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE[dbo].[InsUpdDelELBTPOSSecheduledUpdates](@Id NUMERIC(10),
+              
+           @POSID numeric(10),
+           @UploadOn varchar(50),
+           @UploadedOn varchar(50),
+           @Status varchar(50),
+           @UploadData varchar(50),
+           @Ipconfig varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[BTPOSSecheduledUpdates] VALUES
+           (@Id,
+              
+           @POSID,
+           @UploadOn,
+           @UploadedOn,
+           @Status,
+           @UploadData,
+           @Ipconfig )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSRegistration]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSRegistration](@Id NUMERIC(10),
+              
+           @POSID numeric(10),
+           @Status VARCHAR(50),
+           @FleetOwenerId numeric(10),
+           @RegisteredOn Varchar(50),
+           @IpConfig varchar(50),
+           @RegStatus varchar(50),
+           @LincenseNo varchar(50),
+           @ActivedOn varchar(50),
+           @ExpiryDate varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[BTPOSRegistration] VALUES
+           (@Id,
+              
+           @POSID,
+           @Status,
+           @FleetOwenerId,
+           @RegisteredOn,
+           @IpConfig,
+           @RegStatus,
+           @LincenseNo,
+           @ActivedOn,
+           @ExpiryDate )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSRecords]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE[dbo].[InsUpdDelELBTPOSRecords](@Id NUMERIC(10),
+              
+           @BTPOSID numeric(10),
+           @IpConfig varchar(50),
+           @RecordData varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[BTPOSRecords] VALUES
+           (@Id,
+              
+           @BTPOSID,
+           @Ipconfig,
+           @RecordData)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSPortSettings]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE[dbo].[InsUpdDelELBTPOSPortSettings](@Id NUMERIC(10),
+              
+           @BTPOSId numeric(10),
+           @Ipconfig varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[BTPOSPortSettings] VALUES
+           (@Id,
+              
+           @BTPOSId,
+           @Ipconfig)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSFaultsCatageries]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE[dbo].[InsUpdDelELBTPOSFaultsCatageries](@Active NUMERIC(10),
+              
+           @BTPOSFaultCategory Varchar(30),
+           @Desc varchar(50),
+           @Id numeric(10),
+           @TypeGripId varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[BTPOSFaultsCatageries] VALUES
+           (@Active,
+              
+          @BTPOSFaultCategory,
+           @Desc,
+           @Id,
+           @TypeGripId )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSAuditDetails]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSAuditDetails](@BTPOSId NUMERIC(10),
+              
+           @EditHistoryId numeric(10))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[BTPOSAuditDetails] VALUES
+           (@BTPOSId,
+              
+           @EditHistoryId)
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBlocklist]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelELBlocklist](@Id numeric(20)
+,
+           @ItemId NUMERIC(20),
+           @ItemTypeId numeric(30),
+           @Formdate varchar(50),
+           @Todate varchar(50),
+           @Active numeric(30),
+           @Desc varchar(50),
+           @Reason varchar(50),
+           @Blockedby varchar(50),
+           @UnBlockedby varchar(50),
+           @Blockedon varchar(50),
+           @UnBlockedon varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Blocklist] VALUES
+           (@Id, 
+          @ItemId,
+           @ItemTypeId,
+           @Formdate,
+           @Todate,
+           @Active,
+           @Desc,
+           @Reason,
+           @Blockedby,
+           @UnBlockedby,
+           @Blockedon ,
+           @UnBlockedon )
+   
+	END
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelEditHistoryDetails]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelEditHistoryDetails](@EditHistoryId int,@FromValue varchar(50),@ToValue varchar(50),@ChangeType varchar(50),@Field1 varchar(50),@Field2 varchar(50))
+as
+begin
+insert into EditHistoryDetails values(@EditHistoryId,@FromValue,@ToValue,@ChangeType,@Field1,@Field2)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelEditHistory]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelEditHistory](@Field varchar(50),@SubItem varchar(50),@Comment varchar(50),@Date datetime,@ChangedBy varchar(50),@ChangedType varchar(50))
+as
+begin
+insert into EditHistory values(@Field,@SubItem,@Comment,@Date,@ChangedBy,@ChangedType)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelCompany](
+@active int,
+@code varchar(50),
+@desc varchar(50) = '',
+@Id int,
+@Name varchar(50),
+@insupdflag varchar(10)
+)
+as
+begin
+declare @cnt int
+set @cnt = 0
+
+declare @newCmpId int
+set @newCmpId = 0;
+
+
+
+if @insupdflag = 'I'
+	--check if already company exists
+	select @cnt = count(1) from company where upper(name) = upper(@name)
+
+	if @cnt = 0 
+	begin
+	insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
+	
+	SELECT @newCmpId = @@IDENTITY
+
+  --  --insert Fleet owner role by default
+		--insert into CompanyRoles (Name,[Description],Active,companyid) 
+		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
+   
+	end
+
+else
+
+   if @insupdflag = 'U'
+
+		--check if already a company with the new name exists
+		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
+	    
+		if @cnt = 0 
+		begin
+		update Company
+		set Name = @Name, code = @code, [desc] = @desc, active = @active
+		where Id = @Id
+		end
+   else
+     delete from Company where Id = @Id
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSInventorySales]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelBTPOSInventorySales](@amount int,@code varchar (50),@Id int,@inventoryId int,@perunit int,@quantity int,@soldon varchar (50),@transactionId int,@transactiontype varchar (50))
+as
+begin
+insert into BTPOSInventorySales values(@amount,@code,@Id,@inventoryId,@perunit,@quantity,@soldon,@transactionId,@transactiontype)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSDetails]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
+		  @Id int,
+           @CompanyId int,   
+           @POSID varchar(20),
+           @StatusId int,
+           @IMEI varchar(20),
+           @ipconfig varchar(20),
+           @active int = 1,
+           @fleetownerid int,
+           @insupdflag varchar(10)
+           )
+ 
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
+           (CompanyId
+           ,[POSID]
+           ,[StatusId]
+           ,[IMEI]
+           ,[ipconfig]
+           ,[active]
+           ,[FleetOwnerId])
+     VALUES
+           (@CompanyId
+           ,@POSID
+           ,@StatusId
+           ,@IMEI
+           ,@ipconfig
+           ,@active
+           ,@FleetOwnerId)
+else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[BTPOSDetails]
+   SET CompanyId = @CompanyId
+      ,[POSID] = @POSID
+      ,[StatusId] = @StatusId
+      ,[IMEI] = @IMEI
+      ,[ipconfig] = @ipconfig
+      ,[active] = @active
+      ,[FleetOwnerId] = @fleetownerid
+ WHERE Id = @Id
+ 
+ else
+   delete from BTPOSDetails where Id = @Id
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsupdCreateFleetOwner]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsupdCreateFleetOwner]
+	-- Add the parameters for the stored procedure here
+	(@Id int,
+           @FirstName varchar(30),
+           @LastName varchar(30)
+           ,@Email varchar(30)
+           ,@MobileNo varchar(30)
+           ,@CompanyName varchar(30)
+           ,@Description varchar(30) = null,
+           @insupdflag varchar(10),@CompanyGroupId int=-1)
+           
+AS 
+BEGIN
+declare @currid int
+ declare @cnt int = 0
+declare @cmpcnt int=0
+ declare @fleetcnt int=0
+ 
+ declare @fc varchar(10) 
+ set @fc = case when (select COUNT(*) from Users) = 0
+                           then '001' 
+                           else (select STR((max(Id)+1)) from Users ) 
+                           end  
+ 
+ 
+ select @cnt=COUNT (*) from Users where FirstName=@FirstName
+ select @cmpcnt=COUNT (*) from Company where UPPER (Name)=@CompanyName
+ select @fleetcnt=COUNT (*) from FleetOwner where UPPER (FleetOwnerCode)=@fc
+
+ 
+ 
+ 
+ if @insupdflag='I' and @cnt>0
+ begin
+ RAISERROR ('Already user exists',16,1);
+ end
+ 
+ if @cnt=0
+ begin
+ 
+   insert into Users (FirstName,
+   LastName,MiddleName, UserTypeId,EmpNo,Email,AdressId,MobileNo,[RoleId],Active)
+   values(@FirstName,@LastName,null,1,'FL00'+lTrim(rtrim(@fc)),@Email,null,@MobileNo,6,1) 
+          
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	
+	
+	SELECT @currid = @@IDENTITY
+end
+
+	
+	
+ if @cmpcnt=0
+ begin
+  insert into Company 
+           ([Name]
+           ,[Code]
+           ,[Desc]
+           ,[Active])      
+     VALUES
+           (@CompanyName,@CompanyName,@Description,1)
+ end
+           
+ if @insupdflag='I'and @fleetcnt>0
+ begin
+	RAISERROR ('Already FleetOwner exists',16,1);
+ end
+ 
+ if @fleetcnt=0
+ begin
+	insert into FleetOwner (UserId,GroupId,FleetOwnerCode,Active) values(@currid,'','FL00'+lTrim(rtrim(@fc)),1)
+ end
+
+ else
+ 
+ begin
+ update Users 
+ set FirstName = @FirstName,
+ LastName = @LastName,
+ Email = @Email,
+ MobileNo = @MobileNo
+ where id = @CompanyGroupId
+ 
+
+end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetSMSProviderConfig]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetSMSProviderConfig]
+AS
+BEGIN
+	
+select * from SMSProviderConfig
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getSMSEmailSubscribers]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getSMSEmailSubscribers]
+as
+begin
+select * from SMSEmailSubscribers
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getSMSEmailConfiguration]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getSMSEmailConfiguration]
+as
+begin
+select * from SMSEmailConfiguration
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getObjects]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getObjects](@objid int = -1)
+as
+begin
+declare @oid int = @objid
+
+select  o.Id, o.Name, o.Description, Path,active 
+from Objects o
+where o.Id = @objid or @objid = -1
+
+select t.name,t.ID from Types t
+inner join ObjectAccesses oa on oa.AccessId = t.Id
+inner join Objects o on o.Id = oa.ObjectId
+where  o.Id = @objid or @objid = -1
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetObjectAccesses]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetObjectAccesses] 	
+AS
+BEGIN
+	select t.name,t.ID accessid, o.Name as objname from Types t
+inner join ObjectAccesses oa on oa.AccessId = t.Id
+inner join Objects o on o.Id = oa.ObjectId
+END
+GO
+/****** Object:  StoredProcedure [dbo].[Getmulitiplicationsave]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Getmulitiplicationsave]
+AS
+BEGIN
+	
+select * from mulitiplicationsave
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetAlertsNotfications]    Script Date: 04/27/2016 13:04:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetAlertsNotfications]
+
+as begin 
+select Id,
+Date,
+Message,
+MessageTypeId,
+Status from AlertNotifications
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Get TroubleTicketingSlaType]    Script Date: 04/27/2016 13:04:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[Get TroubleTicketingSlaType]
+AS
+BEGIN
+	
+select * from TroubleTicketingSlaType
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Get LicenceCatergories]    Script Date: 04/27/2016 13:04:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[Get LicenceCatergories]
+AS
+BEGIN
+	
+select * from LicenceCatergories
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdUsers]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2214,7 +2925,6 @@ CREATE procedure [dbo].[InsUpdUsers](
 ,@AdressId int
 ,@MobileNo varchar(50) = ''
 ,@RoleId int
-,@cmpId int
 ,@Active int
 ,@UserName varchar(30)  = ''
 ,@Password varchar(30)  = ''
@@ -2223,9 +2933,9 @@ CREATE procedure [dbo].[InsUpdUsers](
  as begin
  
  declare @currid int
- declare @cnt int
- declare @logincnt int
- declare @ulogincnt int
+ declare @cnt int = 0
+ declare @logincnt int = 0
+ declare @ulogincnt int =0
  
  if @insupdflag = 'I'
  begin
@@ -2240,8 +2950,8 @@ CREATE procedure [dbo].[InsUpdUsers](
   
  if @cnt = 0 
  begin
-	insert into Users(FirstName,LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active,CompanyId)
-	values(@FirstName,@LastName,@MiddleName, @UserTypeId,@EmpNo,@Email,@AdressId,@MobileNo,@RoleId,@Active,@cmpId) 
+	insert into Users(FirstName,LastName,MiddleName, UserTypeId,EmpNo,Email,AdressId,MobileNo,[RoleId],Active)
+	values(@FirstName,@LastName,@MiddleName, @UserTypeId,@EmpNo,@Email,@AdressId,@MobileNo,@RoleId,@Active) 
   
  
     SELECT @currid = @@IDENTITY
@@ -2335,7 +3045,7 @@ else
 
 --select * from Roles
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdTypes]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdTypes]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2360,7 +3070,7 @@ end
 
 select * from types
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdTypeGroups]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdTypeGroups]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2383,7 +3093,7 @@ end
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsupdInventoryPurchases]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsupdInventoryPurchases]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2419,7 +3129,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpDelTroubleTicketingCategories]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpDelTroubleTicketingCategories]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2430,7 +3140,7 @@ begin
 insert into TroubleTicketingCategories values(@active,@desc,@Id,@TTCategory,@typegrpid)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdelStops]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdelStops]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2477,7 +3187,7 @@ else
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelVehicleDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelVehicleDetails]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2557,7 +3267,7 @@ else
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTypes]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTypes]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2568,7 +3278,7 @@ begin
 insert into [Types] (Name,[Description],TypeGroupId,Active) values (@Name,@Description,@TypeGroupId,@Active)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTroubleTicketingHandlers]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTroubleTicketingHandlers]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2579,7 +3289,7 @@ begin
 insert into TroubleTicketingHandlers values(@handledOn,@Id,@status,@TTId,@userid)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTroubleTicketingDevice]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTroubleTicketingDevice]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2590,7 +3300,7 @@ begin
 insert into TroubleTicketingDevice values(@deviceid,@Id,@ticketTypeId,@TTId)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTroubleTicketingDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTroubleTicketingDetails]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2601,7 +3311,7 @@ begin
 insert into TroubleTicketingDetails (addInfo,createdBy,createdOn,raisedBy,status,ticketinfo,ticketTypeId,TTId) values(@addInfo,@createdBy,@createdOn,@raisedBy,@status,@ticketinfo,@ticketTypeId,@TTId)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactionTypes]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactionTypes]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2612,7 +3322,7 @@ begin
 insert into TransactionTypes values(@active,@desc,@Id,@TransactionTypes,@typegrpid)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactions]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactions]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2671,7 +3381,7 @@ TransactionCode,TransactionId,transactionType,userid,ChangeRendered) values(@bar
 @TransactionCode,@TransactionId,@transactionType,@userid,@ChangeRendered)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactionMaster]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactionMaster]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2682,7 +3392,7 @@ begin
 insert into TransactionMaster values(@Id,@TransCode,@Date,@TransType)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactionDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTransactionDetails]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2693,7 +3403,7 @@ begin
 insert into TransactionDetails values(@Id,@TransId,@TotalAmt,@PaymentId,@BTPOSid)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelTicketGeneration]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTicketGeneration]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2704,7 +3414,27 @@ begin
 insert into TicketGeneration values (@Source,@Target,@NoOfTickets)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailSubscribers]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSubCategory]    Script Date: 04/27/2016 13:04:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelSubCategory]
+(@Id int,
+@CategoryId int,
+@Name varchar(50),
+@Description varchar(50) = null,
+@Active int
+)
+as 
+begin
+insert into Subcategory
+(CategoryId,Name,Description,Active)
+values
+(@CategoryId,@Name,@Description,@Active)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailSubscribers]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2715,7 +3445,7 @@ begin
 insert into SMSEmailSubscribers values(@AlertId,@emailid,@enddate,@frequency,@Id,@phNo,@startdate,@userid)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailConfiguration]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailConfiguration]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2726,7 +3456,7 @@ begin
 insert into SMSEmailConfiguration values(@AlertTypeId,@enddate,@hashkey,@Id,@providername,@pwd,@saltkey,@startdate,@username)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRoutesConfiguration]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRoutesConfiguration]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2737,18 +3467,18 @@ begin
 insert into RoutesConfiguration values(@distanceFromDest,@distanceFromLastStop,@distanceFromPrevStop,@distanceFromSource,@Id,@routeId,@stops)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRoutes]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRoutes]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelRoutes](@Id int,@Route varchar(50),@Description varchar(50),@Active varchar(50),@Code varchar(50),@BTPOSGroupId varchar(50),@Source varchar(50),@Destination varchar(50))
+CREATE procedure [dbo].[InsUpdDelRoutes](@Id int,@Route varchar(50),@Code varchar(50),@Source varchar(50),@Destination varchar(50))
 as
 begin
-insert into Routes ([Route],[Description],Active,Code,BTPOSGroupId,Source,Destination) values(@Route,@Description,@Active,@Code,@BTPOSGroupId,@Source,@Destination)
+insert into Routes ([Route],Code,[Source],Destination) values(@Route,@Code,@Source,@Destination)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteFares]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteFares]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2759,7 +3489,7 @@ begin
 insert into RouteFares (active,fareCodeId,routeId) values(@active,@fareCodeId,@routeId)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2767,14 +3497,14 @@ GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
 
-CREATE procedure [dbo].[InsUpdDelRouteDetails](@Id int,@RouteId varchar(50),@stopname varchar(50),@Description varchar(50),@StopCode varchar(50),@DistanceFromSource int,@DistanceFromDestination int,@DistanceFromPreviousStop int,@DistanceFromNextStop int)
+CREATE procedure [dbo].[InsUpdDelRouteDetails](@Id int,@RouteId varchar(50),@stopname varchar(50),@Description varchar(50)=null,@StopCode varchar(50),@DistanceFromSource int,@DistanceFromDestination int,@DistanceFromPreviousStop int,@DistanceFromNextStop int)
 as
 begin
 insert into RouteDetails (RouteId,stopname,[Description],StopCode,DistanceFromSource,DistanceFromDestination,DistanceFromPreviousStop,DistanceFromNextStop) values(@RouteId,@stopname,@Description,@StopCode,@DistanceFromSource,@DistanceFromDestination,@DistanceFromPreviousStop,@DistanceFromNextStop)
 end
 select * from RouteDetails
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRoles]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRoles]    Script Date: 04/27/2016 13:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2799,452 +3529,7 @@ end
 
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELmulitiplicationsave]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELmulitiplicationsave](@rows int,@columns int, @layoutId int)
-AS
-BEGIN
-	
-
-INSERT INTO 
-[mulitiplicationsave] VALUES
-           (@rows,
-             @columns,
-             @layoutId)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELLicenceStatus]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELLicenceStatus](@Active NUMERIC(10),
-              
-           @Desc Varchar(30),
-           
-           @Id numeric(10),
-           @LicenseStatusType varchar(30),
-           @TypeGripId varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[LicenceStatus] VALUES
-           (@Active,
-           @Desc,
-           @Id,
-           @LicenseStatusType,
-           @TypeGripId )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELLicenceCatergories]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELLicenceCatergories](@Active NUMERIC(10),
-              
-           @Desc Varchar(30),
-           
-           @Id numeric(10),
-           @LicenseCategory varchar(30),
-           @TypeGripId varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[LicenceCatergories] VALUES
-           (@Active,
-              
-          
-           @Desc,
-           @Id,
-           @LicenseCategory,
-           @TypeGripId )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELCOUNTRY]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELCOUNTRY](@Id NUMERIC(10),
-           @Name VARCHAR(50),   
-           @Code VARCHAR(50),
-           @Active VARCHAR(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[COUNTRY] VALUES
-           (@Id,
-           @Name,
-           @Code
-           ,@Active)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSSheduleUploads]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSSheduleUploads](@Id NUMERIC(10),
-              
-           @POSID numeric(10),
-           @UploadOn varchar(50),
-           @UploadedOn varchar(50),
-           @Status varchar(50),
-           @UploadData varchar(50),
-           @Ipconfig varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[BTPOSSheduleUploads] VALUES
-           (@Id,
-              
-           @POSID,
-           @UploadOn,
-           @UploadedOn,
-           @Status,
-           @UploadData,
-           @Ipconfig )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSSecheduledUpdates]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSSecheduledUpdates](@Id NUMERIC(10),
-              
-           @POSID numeric(10),
-           @UploadOn varchar(50),
-           @UploadedOn varchar(50),
-           @Status varchar(50),
-           @UploadData varchar(50),
-           @Ipconfig varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[BTPOSSecheduledUpdates] VALUES
-           (@Id,
-              
-           @POSID,
-           @UploadOn,
-           @UploadedOn,
-           @Status,
-           @UploadData,
-           @Ipconfig )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSRegistration]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSRegistration](@Id NUMERIC(10),
-              
-           @POSID numeric(10),
-           @Status VARCHAR(50),
-           @FleetOwenerId numeric(10),
-           @RegisteredOn Varchar(50),
-           @IpConfig varchar(50),
-           @RegStatus varchar(50),
-           @LincenseNo varchar(50),
-           @ActivedOn varchar(50),
-           @ExpiryDate varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[BTPOSRegistration] VALUES
-           (@Id,
-              
-           @POSID,
-           @Status,
-           @FleetOwenerId,
-           @RegisteredOn,
-           @IpConfig,
-           @RegStatus,
-           @LincenseNo,
-           @ActivedOn,
-           @ExpiryDate )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSRecords]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSRecords](@Id NUMERIC(10),
-              
-           @BTPOSID numeric(10),
-           @IpConfig varchar(50),
-           @RecordData varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[BTPOSRecords] VALUES
-           (@Id,
-              
-           @BTPOSID,
-           @Ipconfig,
-           @RecordData)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSPortSettings]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSPortSettings](@Id NUMERIC(10),
-              
-           @BTPOSId numeric(10),
-           @Ipconfig varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[BTPOSPortSettings] VALUES
-           (@Id,
-              
-           @BTPOSId,
-           @Ipconfig)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSFaultsCatageries]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSFaultsCatageries](@Active NUMERIC(10),
-              
-           @BTPOSFaultCategory Varchar(30),
-           @Desc varchar(50),
-           @Id numeric(10),
-           @TypeGripId varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[BTPOSFaultsCatageries] VALUES
-           (@Active,
-              
-          @BTPOSFaultCategory,
-           @Desc,
-           @Id,
-           @TypeGripId )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBTPOSAuditDetails]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSAuditDetails](@BTPOSId NUMERIC(10),
-              
-           @EditHistoryId numeric(10))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[BTPOSAuditDetails] VALUES
-           (@BTPOSId,
-              
-           @EditHistoryId)
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELBlocklist]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBlocklist](@Id numeric(20)
-,
-           @ItemId NUMERIC(20),
-           @ItemTypeId numeric(30),
-           @Formdate varchar(50),
-           @Todate varchar(50),
-           @Active numeric(30),
-           @Desc varchar(50),
-           @Reason varchar(50),
-           @Blockedby varchar(50),
-           @UnBlockedby varchar(50),
-           @Blockedon varchar(50),
-           @UnBlockedon varchar(50))
-AS
-BEGIN
-	
-
-INSERT INTO 
-[Blocklist] VALUES
-           (@Id, 
-          @ItemId,
-           @ItemTypeId,
-           @Formdate,
-           @Todate,
-           @Active,
-           @Desc,
-           @Reason,
-           @Blockedby,
-           @UnBlockedby,
-           @Blockedon ,
-           @UnBlockedon )
-   
-	END
-GO
-/****** Object:  StoredProcedure [dbo].[GetSMSProviderConfig]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetSMSProviderConfig]
-AS
-BEGIN
-	
-select * from SMSProviderConfig
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getSMSEmailSubscribers]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getSMSEmailSubscribers]
-as
-begin
-select * from SMSEmailSubscribers
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getSMSEmailConfiguration]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getSMSEmailConfiguration]
-as
-begin
-select * from SMSEmailConfiguration
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getRoutesConfiguration]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRoutesConfiguration]
-as
-begin
-select * from RoutesConfiguration
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getRoutes]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRoutes]
-as
-begin
-select * from Routes
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getRouteFares]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRouteFares]
-as
-begin
-select * from RouteFares
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getRouteDetails]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRouteDetails]
-as
-begin
-SELECT [Id]
-      ,[RouteId]
-      ,[stopname]
-      ,[Description]
-      ,[StopCode]
-      ,[DistanceFromSource]
-      ,[DistanceFromDestination]
-      ,[DistanceFromPreviousStop]
-      ,[DistanceFromNextStop]
-  FROM [POSDashboard].[dbo].[RouteDetails]
-end
-GO
-/****** Object:  StoredProcedure [dbo].[GetRoles]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE  procedure [dbo].[GetRoles]
-(@companyId int = -1)
-as
-begin
-select Roles.Id, Roles.Name, Description, Roles.Active, companyid,c.Name Company
-from Roles
-inner join company c on c.id = roles.companyid
-where (companyId = @companyId or @companyId = -1)
-end
-GO
-/****** Object:  StoredProcedure [dbo].[GetRoleObjectAccesses]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[GetRoleObjectAccesses] 	
-@roleid int = -1
-AS
-BEGIN
-	select t.name,t.ID accessid, o.Name  as objname, r.Name as rolename from Types t
-inner join RoleObjectAccesses roa on roa.AccessId = t.Id
-inner join Objects o on o.Id = roa.ObjectId
-inner join Roles r on r.Id = roa.RoleId
-where r.Id = @roleid or @roleid = -1
-
-END
-GO
-/****** Object:  StoredProcedure [dbo].[GetZipCode]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetZipCode]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3256,7 +3541,7 @@ BEGIN
 select * from ZipCode
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getVehicleDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getVehicleDetails]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3267,7 +3552,7 @@ begin
 select * from VehicleDetails
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetUsertypeId]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetUsertypeId]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3278,13 +3563,12 @@ select * from Users
 where UserTypeId=@UserTypeId or @UserTypeId=-1
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetUsers]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetUsers]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[GetUsers]
-(@cmpId int = -1)
 AS
 BEGIN
 
@@ -3294,7 +3578,7 @@ SELECT users.[Id]
       ,[UserTypeId]
       ,[EmpNo]
       ,[Email]
-      ,[AddressId]
+      ,[AdressId]
       ,[MobileNo]
       ,[RoleId]
       ,users.[Active]
@@ -3303,16 +3587,13 @@ SELECT users.[Id]
       ,ul.passkey as [Password]
       ,t.Name as UserType
       ,r.Name as [Role]
-      ,c.name as [Company]
   FROM [POSDashboard].[dbo].[Users] 
-  inner join company c on (users.companyid = c.id)
   left outer join dbo.userlogins ul on ul.userid = Users.id
   left outer join Roles r on r.Id = Users.RoleId
   left outer join Types t on t.Id = Users.UserTypeId
-  where (c.id = @cmpid or   @cmpid = -1)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3337,7 +3618,7 @@ BEGIN
 	  where (TypeGroupId = @typegrpid or @typegrpid = -1)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[getTypes]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTypes]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3352,7 +3633,7 @@ SELECT t.Id, t.Name, t.[Description],t.Active, tg.name as TypeGroup, TypeGroupId
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[getTypeGroups]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTypeGroups]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3363,7 +3644,7 @@ begin
 select * from TypeGroups
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetTroubleTicketingStatus]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetTroubleTicketingStatus]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3375,7 +3656,7 @@ BEGIN
 select * from TroubleTicketingStatus
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetTroubleTicketingSlaType]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetTroubleTicketingSlaType]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3387,7 +3668,7 @@ BEGIN
 select * from TroubleTicketingSlaType
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTroubleTicketingHandlers]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTroubleTicketingHandlers]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3398,7 +3679,7 @@ begin
 select * from TroubleTicketingHandlers
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTroubleTicketingDevice]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTroubleTicketingDevice]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3409,7 +3690,7 @@ begin
 select * from TroubleTicketingDevice
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTroubleTicketingDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTroubleTicketingDetails]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3420,7 +3701,7 @@ begin
 select * from TroubleTicketingDetails
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTroubleTicketingCategories]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTroubleTicketingCategories]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3431,7 +3712,7 @@ begin
 select * from TroubleTicketingCategories
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTransactionTypes]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTransactionTypes]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3442,7 +3723,7 @@ begin
 select * from TransactionTypes
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTransactions]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTransactions]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3453,7 +3734,7 @@ begin
 select * from Transactions
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTransactionMaster]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTransactionMaster]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3464,7 +3745,7 @@ begin
 select * from TransactionMaster
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTransactionDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTransactionDetails]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3475,7 +3756,7 @@ begin
 select * from TransactionDetails
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getTicketGeneration]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getTicketGeneration]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3486,7 +3767,7 @@ begin
 select * from TicketGeneration
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Gettable2]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[Gettable2]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3498,30 +3779,46 @@ BEGIN
 select * from table2
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetSubCategories]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getsubcategory]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[GetSubCategories] 
-(@catid int =-1)	
+CREATE procedure [dbo].[getsubcategory]
+
+As 
+begin
+select Id,Category ,Name,Description,Active from [SubCategory] 
+                                   
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetSubCategories]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetSubCategories] 	
+(@catid int =-1)
 AS
 BEGIN
 	
-	SELECT S.[Id]
-      ,S.[Name]
+	SELECT S.[Id],
+      S.[Name]
       ,S.[Description]
-      ,[CategoryId]
-      ,t.NAME CATEGORY
+      ,S.[CategoryId]
+      ,S.Name CATEGORY
       ,S.[Active]
   FROM [POSDashboard].[dbo].[SubCategory] S
-  INNER JOIN Types T ON T.ID = S.CATEGORYID
-  INNER JOIN TypeGroups TG ON TG.Id = T.TypeGroupId 
-  where (S.CATEGORYID = @catid or @catid = -1)
-   	
+  --INNER JOIN Types T ON T.ID = S.CategoryId  
+  where (@catid = -1 or S.CategoryId = @catid)
+  
+  	
 END
+--select * from SubCategory
+
+--[GetSubCategories] 11
 GO
-/****** Object:  StoredProcedure [dbo].[GetStops]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetStops]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3550,7 +3847,107 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[getRegistrationBTPOS]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getRoutesConfiguration]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getRoutesConfiguration]
+as
+begin
+select * from RoutesConfiguration
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getRoutes]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getRoutes]
+as
+begin
+select * from Routes
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getRouteFares]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getRouteFares]
+as
+begin
+select * from RouteFares
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getRouteDetails]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getRouteDetails]
+as
+begin
+SELECT [Id]
+      ,[RouteId]
+      ,[stopname]
+      ,[Description]
+      ,[StopCode]
+      ,[DistanceFromSource]
+      ,[DistanceFromDestination]
+      ,[DistanceFromPreviousStop]
+      ,[DistanceFromNextStop]
+  FROM [POSDashboard].[dbo].[RouteDetails]
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetRoles]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE  procedure [dbo].[GetRoles]
+(@companyId int = -1)
+as
+begin
+select Roles.Id, Roles.Name, Description, Roles.Active, companyid,c.Name Company
+from Roles
+inner join company c on c.id = roles.companyid
+where (companyId = @companyId or @companyId = -1)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetRoleObjectAccesses]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetRoleObjectAccesses] 	
+@roleid int = -1
+AS
+BEGIN
+	select t.name,t.ID accessid, o.Name  as objname, r.Name as rolename from Types t
+inner join RoleObjectAccesses roa on roa.AccessId = t.Id
+inner join Objects o on o.Id = roa.ObjectId
+inner join Roles r on r.Id = roa.RoleId
+where r.Id = @roleid or @roleid = -1
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[getRoledetails]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getRoledetails]
+as begin 
+select * from RoleDetails
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getRegistrationBTPOS]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3561,7 +3958,7 @@ begin
 select * from RegistrationBTPOS
 end
 GO
-/****** Object:  StoredProcedure [dbo].[Getregister]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[Getregister]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3571,7 +3968,7 @@ as begin
 select * from register
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetReceivingsMaster]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetReceivingsMaster]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3583,7 +3980,7 @@ BEGIN
 select * from ReceivingsMaster
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetReceivings]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetReceivings]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3595,7 +3992,7 @@ BEGIN
 select * from Receivings
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetPOSDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetPOSDetails]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3620,7 +4017,7 @@ SELECT t.[Id]
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[getPayments]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getPayments]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3631,7 +4028,7 @@ begin
 select * from Payment
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getPaymentReceivings]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getPaymentReceivings]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3642,7 +4039,7 @@ begin
 select * from PaymentReceivings
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetPaymentGatewayType]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetPaymentGatewayType]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3654,7 +4051,7 @@ BEGIN
 select * from PaymentGatewayType
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getPaymentGatewaySettings]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getPaymentGatewaySettings]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3665,106 +4062,7 @@ begin
 select * from PaymentGatewaySettings
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetPaymentCatergory]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetPaymentCatergory]
-AS
-BEGIN
-	
-select * from PaymentCatergory
-end
-GO
-/****** Object:  StoredProcedure [dbo].[GetPayablesMaster]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[GetPayablesMaster]
-AS
-BEGIN
-	
-select * from PayablesMaster
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getObjects]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getObjects](@objid int = -1)
-as
-begin
-declare @oid int
-set @oid = @objid
-
-select  o.Id, o.Name, o.Description, Path,active 
-from Objects o
-where o.Id = @objid or @objid = -1
-
-select t.name,t.ID from Types t
-inner join ObjectAccesses oa on oa.AccessId = t.Id
-inner join Objects o on o.Id = oa.ObjectId
-where  o.Id = @objid or @objid = -1
-end
-GO
-/****** Object:  StoredProcedure [dbo].[GetObjectAccesses]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[GetObjectAccesses] 	
-AS
-BEGIN
-	select t.name,t.ID accessid, o.Name as objname from Types t
-inner join ObjectAccesses oa on oa.AccessId = t.Id
-inner join Objects o on o.Id = oa.ObjectId
-END
-GO
-/****** Object:  StoredProcedure [dbo].[Getmulitiplicationsave]    Script Date: 04/21/2016 09:02:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[Getmulitiplicationsave]
-AS
-BEGIN
-	
-select * from mulitiplicationsave
-end
-GO
-/****** Object:  StoredProcedure [dbo].[Get TroubleTicketingSlaType]    Script Date: 04/21/2016 09:02:32 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[Get TroubleTicketingSlaType]
-AS
-BEGIN
-	
-select * from TroubleTicketingSlaType
-end
-GO
-/****** Object:  StoredProcedure [dbo].[Get LicenceCatergories]    Script Date: 04/21/2016 09:02:32 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[Get LicenceCatergories]
-AS
-BEGIN
-	
-select * from LicenceCatergories
-end
-GO
-/****** Object:  StoredProcedure [dbo].[getmenu]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getmenu]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3775,7 +4073,7 @@ begin
 select * from menu
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getloginpage]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getloginpage]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3786,7 +4084,7 @@ begin
 select * from loginpage	
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getLicensePayments]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getLicensePayments]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3797,7 +4095,34 @@ begin
 select * from LicensePayments
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetLicenceStatus]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[getLicensedetails]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getLicensedetails]
+(@Subcatid int =-1)
+as 
+begin 
+SELECT ld.[Id]
+      ,[LicenseTypeId]
+      ,[FeatureName]
+      ,[FeatureValue]
+      ,[FeatureType]
+      ,ld.[Description]
+      ,[effectiveFrom]
+      ,[effectiveTill]
+      ,[Label]
+      ,[labelclass]
+  FROM [POSDashboard].[dbo].[LicenseDetails] ld 
+  inner join SubCategory s on s.Id = ld.LicenseTypeId
+where (@Subcatid = -1 or ld.[LicenseTypeId] = @Subcatid)
+
+
+
+end
+GO
+/****** Object:  StoredProcedure [dbo].[GetLicenceStatus]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3809,7 +4134,7 @@ BEGIN
 select * from LicenceStatus
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetLicenceCatergories]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetLicenceCatergories]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3821,7 +4146,7 @@ BEGIN
 select * from LicenceCatergories
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetInventorySubCategories]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetInventorySubCategories]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3846,7 +4171,7 @@ BEGIN
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetInventorySales]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetInventorySales]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3874,7 +4199,7 @@ SELECT [Id]
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[getInventoryReceivings]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getInventoryReceivings]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3885,7 +4210,7 @@ begin
 select * from InventoryReceivings
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetInventoryPurchases]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetInventoryPurchases]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3915,7 +4240,31 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[getInventory]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetInventoryItem]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetInventoryItem]
+(@Subcatid int =-1)
+as 
+begin
+SELECT I.[Id],
+
+      [ItemName]
+      ,[Code]
+      ,I.[Description]
+      ,[Category]
+      ,S.Name as SubCategory 
+      ,[ReOrderPoint]
+  FROM [POSDashboard].[dbo].[InventoryItem]I
+ INNER JOIN SubCategory s  ON s.Id=I.Id 
+ where (@Subcatid = -1 or I.Id= @Subcatid)
+  
+  
+end
+GO
+/****** Object:  StoredProcedure [dbo].[getInventory]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3923,10 +4272,24 @@ GO
 CREATE procedure [dbo].[getInventory]
 as
 begin
-select * from Inventory
+SELECT I.InventoryId
+      ,I.Name
+      ,I.Code
+      ,I.[Description]
+      ,I.AvailableQty
+      ,T.Name as Types 
+      ,T.Name as Types
+      ,I.PerUnitPrice
+     , I.ReorderPont
+      ,I.Active
+  FROM [POSDashboard].[dbo].[Inventory] I inner join Types T on T.Id=I.CategoryId 
+inner join Types  on T.Id=I.SubCategoryId
+
+
+
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getFleetOwner]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getFleetOwner]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3937,7 +4300,7 @@ begin
 select * from FleetOwner
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getFares]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getFares]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3948,7 +4311,7 @@ begin
 select * from Fares
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getExpenses]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getExpenses]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3959,7 +4322,7 @@ begin
 select * from Expenses
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getEditHistoryDetails]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getEditHistoryDetails]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3970,7 +4333,7 @@ begin
 select * from EditHistoryDetails
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getEditHistory]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getEditHistory]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3981,25 +4344,57 @@ begin
 select * from EditHistory
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetDashboardDetails]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetDashboardDetails]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[GetDashboardDetails]
+CREATE procedure [dbo].[GetDashboardDetails](@userid int, @roleid int)
 as
 begin
---
---select p.Id ,Name as GroupName, POSId, IMEI 
---from BTPOSDetails p
---inner join CompanyGroups c on c.Id = p.GroupId
 
-select * from CompanyGroups
 
-select * from Users
+--pos details for the user
+SELECT b.[Id]
+      ,[CompanyId]
+      ,c.Name as companyname
+      ,[POSID]
+      ,[StatusId]
+      ,t.Name as [status]
+      ,[IMEI]
+      ,[ipconfig]
+      ,b.[active]
+      ,u.FirstName + ' '+ u.LastName as fleetowner
+      ,u.Id as fleetownerid
+  FROM [POSDashboard].[dbo].[BTPOSDetails] b
+  left outer join Types t on t.Id = statusid
+  left outer join Company c on c.Id = CompanyId
+  left outer join Users u on u.Id = @userid
+  
+  
+--license details for the user
+
+SELECT [Id]
+      ,[LicenseTypeId]
+      ,[FeatureName]
+      ,[FeatureValue]
+      ,[FeatureType]
+      ,[Description]
+      ,[effectiveFrom]
+      ,[effectiveTill]
+      ,[Label]
+      ,[labelclass]
+  FROM [POSDashboard].[dbo].[LicenseDetails]
+
+--notifications for the user
+
+--alerts for the user
+--btpos positions for the user
+
+
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetCOUNTRY]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetCOUNTRY]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4011,7 +4406,27 @@ BEGIN
 select * from COUNTRY
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getCompanies]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getCompanyGroups]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[getCompanyGroups]
+as
+begin
+SELECT c.[active]
+      ,u.FirstName + ' ' + u.LastName as [admin]
+      ,[code]
+      ,[descr]
+      ,c.[Id]
+      ,[Name]
+  FROM [POSDashboard].[dbo].[CompanyGroups] c
+  left outer join Users u on u.Id = c.adminid
+end
+
+--delete from CompanyGroups
+GO
+/****** Object:  StoredProcedure [dbo].[getCompanies]    Script Date: 04/27/2016 13:04:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4036,7 +4451,34 @@ end
 
 --[getCompanies] 1
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSSheduleUploads]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetCategories]    Script Date: 04/27/2016 13:04:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[GetCategories]
+@typegrpid int = -1
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT t.Id, t.Name, t.[Description],t.Active,  TypeGroupId, listkey, listvalue
+	 from [Types] t 
+	  where t.TypeGroupId = 34
+	  
+	 -- SELECT t.Id, t.Name, t.[Description],t.Active, tg.name as TypeGroup, TypeGroupId, listkey, listvalue
+	 --from [Types] t
+	 --inner join TypeGroups tg on tg.Id = t.TypeGroupId	 
+	 -- where tg.Id=30
+	 -- select I.InventoryId,I.Name,I.Code,I.
+	 -- [Description],I.AvailableQty,tg.Name as Category,t.TypeGroupId as SubCategoryId,I.PerUnitPrice,I.ReorderPont,I.Active from Inventory I inner join TypeGroups tg on tg.Id=I.InventoryId
+  --   inner join Types t on t.Id=I.InventoryId
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetBTPOSSheduleUploads]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4048,7 +4490,7 @@ BEGIN
 select * from [BTPOSSheduleUploads]
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSSecheduledUpdates]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSSecheduledUpdates]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4060,7 +4502,7 @@ BEGIN
 select * from BTPOSSecheduledUpdates
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSRegistration]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSRegistration]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4072,7 +4514,7 @@ BEGIN
 select * from BTPOSRegistration
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSRecords]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSRecords]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4084,7 +4526,7 @@ BEGIN
 select * from  BTPOSRecords
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSPortSettings]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSPortSettings]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4096,7 +4538,7 @@ BEGIN
 select * from BTPOSPortSettings
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getBTPOSInventorySales]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[getBTPOSInventorySales]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4107,7 +4549,7 @@ begin
 select * from BTPOSInventorySales
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSFaultsCatageries]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSFaultsCatageries]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4119,7 +4561,7 @@ BEGIN
 select * from BTPOSFaultsCatageries
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSDetails]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSDetails]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4129,8 +4571,8 @@ AS
 BEGIN
 	
 SELECT b.[Id]
-     -- ,[GroupId]
-    --  ,c.Name as companyname
+      ,b.[CompanyId]
+      ,c.Name as companyname
       ,[POSID]
       ,[StatusId]
       ,t.Name as [status]
@@ -4141,12 +4583,12 @@ SELECT b.[Id]
       ,u.Id as fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   left outer join Types t on t.Id = statusid
-  --left outer join CompanyGroups c on c.Id = GroupId
+  left outer join CompanyGroups c on c.Id = CompanyId
   left outer join Users u on u.Id = FleetOwnerId
   
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSAuditDetails]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSAuditDetails]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4158,7 +4600,7 @@ BEGIN
 select * from BTPOSAuditDetails
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetBlockList]    Script Date: 04/21/2016 09:02:32 ******/
+/****** Object:  StoredProcedure [dbo].[GetBlockList]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4170,66 +4612,35 @@ BEGIN
 select * from Blocklist
 end
 GO
-
-USE [POSDashboard]
-GO
-/****** Object:  Table [dbo].[InventoryItem]    Script Date: 04/26/2016 16:43:43 ******/
+/****** Object:  StoredProcedure [dbo].[ ]    Script Date: 04/27/2016 13:04:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[InventoryItem](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ItemName] [varchar](50) NOT NULL,
-	[Code] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NULL,
-	[Category] [varchar](50) NOT NULL,
-	[SubCategory] [varchar](50) NOT NULL,
-	[ReOrderPoint] [int] NOT NULL
-) ON [PRIMARY]
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  StoredProcedure [dbo].[InsupdDelInventoryItem]    Script Date: 04/26/2016 16:43:42 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsupdDelInventoryItem]
-(@Id int,
-@ItemName varchar(50),
-@Code varchar(50),
-@Description varchar(50),
-@Category varchar(50),
-@SubCategory varchar(50),
-@ReOrderPoint int)
-as 
+CREATE procedure [dbo].[ ](@Id int,@Name varchar(50),@Desc varchar(50),@TypeGroup varchar(50),@Active varchar(30))
+as
 begin
-insert into InventoryItem
-(Id,ItemName,Code,[Description],Category,SubCategory,ReOrderPoint)values
-(@Id,@ItemName,@Code,@Description,@Category,@SubCategory,@ReOrderPoint)
+insert into Types(Name,[Desc],TypeGroup,Active) values(@Name,@Desc,@TypeGroup,@Active)
 end
 GO
-/****** Object:  StoredProcedure [dbo].[GetInventoryItem]    Script Date: 04/26/2016 16:43:42 ******/
-SET ANSI_NULLS ON
+/****** Object:  Default [DF_LicenseDetails_FeatureType]    Script Date: 04/27/2016 13:04:13 ******/
+ALTER TABLE [dbo].[LicenseDetails] ADD  CONSTRAINT [DF_LicenseDetails_FeatureType]  DEFAULT ((1)) FOR [FeatureType]
 GO
-SET QUOTED_IDENTIFIER ON
+/****** Object:  Default [DF_SubCategory_Active]    Script Date: 04/27/2016 13:04:13 ******/
+ALTER TABLE [dbo].[SubCategory] ADD  CONSTRAINT [DF_SubCategory_Active]  DEFAULT ((1)) FOR [Active]
 GO
-CREATE procedure [dbo].[GetInventoryItem]
-as 
-begin
-SELECT I.[Id]
-      ,[ItemName]
-      ,[Code]
-      ,I.[Description]
-      ,[Category]
-      ,[SubCategory]
-      ,[ReOrderPoint]
-  FROM [POSDashboard].[dbo].[InventoryItem]I
-
- INNER JOIN SubCategory s  ON s.Name = I.SubCategory
-  
-end
+/****** Object:  Default [DF_Types_Active]    Script Date: 04/27/2016 13:04:13 ******/
+ALTER TABLE [dbo].[Types] ADD  CONSTRAINT [DF_Types_Active]  DEFAULT ((1)) FOR [Active]
+GO
+/****** Object:  Default [DF_UserLogins_Active]    Script Date: 04/27/2016 13:04:13 ******/
+ALTER TABLE [dbo].[UserLogins] ADD  CONSTRAINT [DF_UserLogins_Active]  DEFAULT ((1)) FOR [Active]
+GO
+/****** Object:  Default [DF_Users_UserTypeId]    Script Date: 04/27/2016 13:04:13 ******/
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_UserTypeId]  DEFAULT ((1)) FOR [UserTypeId]
+GO
+/****** Object:  Default [DF_Users_Active]    Script Date: 04/27/2016 13:04:13 ******/
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Active]  DEFAULT ((1)) FOR [Active]
+GO
+/****** Object:  Default [DF_Users_CompanyId]    Script Date: 04/27/2016 13:04:13 ******/
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_CompanyId]  DEFAULT ((1)) FOR [CompanyId]
 GO

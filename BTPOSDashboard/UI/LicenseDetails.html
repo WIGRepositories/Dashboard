@@ -26,7 +26,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="License">
+<body ng-init="LicenseCategories()" ng-model="License">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -104,7 +104,7 @@
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
                                     <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                                    <li class="active"><a href="LicenseDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">License Details</span></a></li class>
+                                    <li class="active"><a href="LicenseDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">License Details</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -197,7 +197,7 @@
                         </ol>
                         <div class="clearfix"></div>
                     </div>
-                  
+
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
                         <div id="table-action" class="row">
@@ -215,8 +215,8 @@
                                                     <div class="row mbm">
                                                         <div class="col-md-5" style="margin:20px;">
                                                             Category: <select ng-options="s.Name for s in SubCategories track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                <option value="">All</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
 
                                                         <div class="actions">
@@ -339,36 +339,37 @@
                             <!--END PAGE WRAPPER-->
                         </div>
                     </div>
-                    </div>
-                    <script src="js/jquery-1.10.2.min.js"></script>
-                    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-                    <script src="js/jquery-ui.js"></script>
-                    <!--loading bootstrap js-->
-                    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                    <script src="js/html5shiv.js"></script>
-                    <script src="js/respond.min.js"></script>
-                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                    <script src="vendors/iCheck/icheck.min.js"></script>
-                    <script src="vendors/iCheck/custom.min.js"></script>
-                    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-                    <script src="js/jquery.menu.js"></script>
-                    <script src="vendors/jquery-pace/pace.min.js"></script>
-                    <script src="vendors/holder/holder.js"></script>
-                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                    <!--LOADING SCRIPTS FOR PAGE-->
-                    <script src="js/table-action.js"></script>
-                    <script src="js/table-advanced.js"></script>
-                    <!--CORE JAVASCRIPT-->
-                    <script src="js/main.js"></script>
-                    <script src="js/angular.js"></script>
-                    <script src="js/ngStorage.js"></script>
-                    <script src="js/LicenseDetails.js"></script>
+                </div>
+                <script src="js/jquery-1.10.2.min.js"></script>
+                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <!--loading bootstrap js-->
+                <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                <script src="js/html5shiv.js"></script>
+                <script src="js/respond.min.js"></script>
+                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                <script src="vendors/iCheck/icheck.min.js"></script>
+                <script src="vendors/iCheck/custom.min.js"></script>
+                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                <script src="js/jquery.menu.js"></script>
+                <script src="vendors/jquery-pace/pace.min.js"></script>
+                <script src="vendors/holder/holder.js"></script>
+                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <script src="js/table-action.js"></script>
+                <script src="js/table-advanced.js"></script>
+                <!--CORE JAVASCRIPT-->
+                <script src="js/main.js"></script>
+                <script src="js/angular.js"></script>
+                <script src="js/ngStorage.js"></script>
+                <script src="js/LicenseDetails.js"></script>
 
-</div>
-</div></body>
+            </div>
+        </div>
+</body>
 </html>
 
 
