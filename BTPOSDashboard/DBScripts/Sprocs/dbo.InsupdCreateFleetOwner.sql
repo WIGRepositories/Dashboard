@@ -1,17 +1,11 @@
-
-/****** Object:  StoredProcedure [dbo].[InsupdCreateFleetOwner]    Script Date: 04/25/2016 16:04:25 ******/
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[InsupdCreateFleetOwner]    Script Date: 04/27/2016 12:09:49 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
-
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[InsupdCreateFleetOwner]
+ALTER PROCEDURE [dbo].[InsupdCreateFleetOwner]
 	-- Add the parameters for the stored procedure here
 	(@Id int,
            @FirstName varchar(30),
@@ -19,7 +13,7 @@ CREATE PROCEDURE [dbo].[InsupdCreateFleetOwner]
            ,@Email varchar(30)
            ,@MobileNo varchar(30)
            ,@CompanyName varchar(30)
-           ,@Description varchar(30),
+           ,@Description varchar(30) = null,
            @insupdflag varchar(10),@CompanyGroupId int=-1)
            
 AS 
@@ -53,7 +47,7 @@ declare @cmpcnt int=0
  
    insert into Users (FirstName,
    LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active)
-   values(@FirstName,@LastName,null,1,'FL00'+@fc,@Email,null,@MobileNo,6,1) 
+   values(@FirstName,@LastName,null,1,'FL00'+lTrim(rtrim(@fc)),@Email,null,@MobileNo,6,1) 
           
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
@@ -82,7 +76,7 @@ end
  
  if @fleetcnt=0
  begin
-	insert into FleetOwner (UserId,GroupId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
+	insert into FleetOwner (UserId,GroupId,FleetOwnerCode,Active) values(@currid,'','FL00'+lTrim(rtrim(@fc)),1)
  end
 
  else
@@ -98,7 +92,4 @@ end
 
 end
 END
-
-GO
-
 
