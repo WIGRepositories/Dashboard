@@ -3,7 +3,7 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/license/getlicense').then(function (response, data) {
+    $http.get('http://localhost:1476/api/license/getlicense?Subcatid=-1').then(function (response, data) {
         $scope.SubCategories = response.data;
         $scope.getselectval();
     })
@@ -12,7 +12,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.Id : -1;
 
-        $http.get('http://localhost:1476/api/license/getlicense?catid=' + grpid).then(function (res, data) {
+        $http.get('http://localhost:1476/api/license/getlicense?Subcatid=' + grpid).then(function (res, data) {
             $scope.License = res.data;
 
         });
@@ -104,16 +104,15 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         });
 
 
-        $scope.currGroup = null;
+        $scope.currRole = null;
 
     };
 
-    $scope.setCompany = function (grp) {
-        $scope.currGroup = grp;
+    $scope.setCurrRole = function (grp) {
+        $scope.currRole = grp;
     };
 
-    $scope.clearGroup = function () {
-        $scope.currGroup = null;
+    $scope.clearCurrRole = function () {
+        $scope.currRole = null;
     };
-
 });

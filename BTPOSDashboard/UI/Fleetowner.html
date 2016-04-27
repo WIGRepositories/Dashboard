@@ -295,58 +295,57 @@
                             <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label for="inputFirstName" class="col-md-3 control-label">First Name <span class='require'>*</span></label>
+                                        <label for="inputFirstName" class="col-md-2 control-label">First Name <span class='require'>*</span></label>
 
-                                        <div class="col-md-4"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
+                                        <div class="col-md-3"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
+
+
+                                        <label for="inputLastName" class="col-md-2 control-label">Last Name <span class='require'>*</span></label>
+
+                                        <div class="col-md-3"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputLastName" class="col-md-3 control-label">Last Name <span class='require'>*</span></label>
+                                        <label for="inputMiddleName" class="col-md-2 control-label">Middle Name</label>
 
-                                        <div class="col-md-4"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
+                                        <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
+
+                                        <label for="" class="col-md-2 control-label">Fleet Owner Code <span class='require'>*</span></label>
+
+                                        <div class="col-md-3"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputMiddleName" class="col-md-3 control-label">Middle Name</label>
 
-                                        <div class="col-md-4"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-                                    </div>
                                     <div class="form-group">
-                                        <label for="selCountry" class="col-md-3 control-label">User Type</label>
+                                        <label for="selCountry" class="col-md-2  control-label">User Type</label>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <select disabled id=" selusertype" class="form-control" ng-model="User.UserType">
                                                 <option value="">Fleet owner staff</option>
-                                                
+
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="selCountry" class="col-md-3 control-label">Roles</label>
 
-                                        <div class="col-md-4">
+
+                                        <label for="selCountry" class="col-md-2  control-label">Roles</label>
+
+                                        <div class="col-md-3">
                                             <select disabled id="selRole" class="form-control" ng-model="User.Role">
                                                 <option value="">fleet owner</option>
 
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-md-3 control-label">Fleet Owner Code <span class='require'>*</span></label>
 
-                                        <div class="col-md-4"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
-                                    </div>
                                     <div class="form-group">
-                                        <label for="inputEmail" class="col-md-3 control-label">Email <span class='require'>*</span></label>
+                                        <label for="inputEmail" class="col-md-2 control-label">Email <span class='require'>*</span></label>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="input-icon"><i class="fa fa-envelope"></i><input type="text" placeholder="Email Address" class="form-control" ng-model="User.Email" /></div>
                                         </div>
-                                    </div>
 
 
-                                    <div class="form-group">
-                                        <label for="inputPhone" class="col-md-3 control-label">MobileNo</label>
+                                        <label for="inputPhone" class="col-md-2 control-label">MobileNo</label>
 
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="input-icon right"><i class="fa fa-mobilephone"></i><input type="text" placeholder="" class="form-control" ng-model="User.MobileNo" /></div>
                                         </div>
                                     </div>
@@ -356,80 +355,93 @@
                                         <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
                                     </div>-->
 
-                                    <div class="form-group">
-                                        <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
+                                    <center>
+                                        <div class="form-group">
+                                            <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
 
-                                        <div class="col-md-4">
-                                            <input type="checkbox" checked />
+                                            <div class="col-md-4">
+                                                <input type="checkbox" checked />
+                                            </div>
                                         </div>
+                                    </center>
 
 
-                                    </div>
                                     <div class="panel panel-violet">
                                         <div class="panel-heading">User Login</div>
                                         <div class="panel-body pan">
-                                            <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                <div class="form-body">
-                                                    <div class="form-group">
-                                                        <label for="inputUserName" class=" col-md-3 control-label">UserName: <span class='require'>*</span></label>
 
-                                                        <div class="col-md-4"><input id="inputFirstName" type="text" placeholder="EnterName" class="form-control" ng-model="User.UserName" /><span class="help-block"></span></div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="inputPassword" class="col-md-3 control-label">Password <span class='require'>*</span></label>
+                                            <div class="form-group" style="width:100%;">
+                                                <br />
+                                                <div style="width:30%;float:left">
+                                                    <label for="inputMiddleName" class="col-md-5">UserName<span class='require'>*</span></label>
 
-                                                        <div class="col-md-4"><input type="password" type="text" placeholder="password" class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
-                                                    </div><br />
-                                                    <div class="form-group">
-                                                        <label for="inputPassword" class="col-md-3 control-label">re-enter Password <span class='require'>*</span></label>
-
-                                                        <div class="col-md-4"><input type="password" type="text" placeholder="password" class="form-control" /><span class="help-block"></span></div>
-                                                    </div><br />
+                                                    <div class="col-md-7"><input type="text" class="form-control" ng-model="User.UserName" /><span class="help-block"></span></div>
                                                 </div>
-                                                <div class="form-actions text-center pal">
-                                                    <button type="submit" class="btn btn-green" ng-click="save(User, 'I', 2)">Save</button>
-                                                    &nbsp;
-                                                    <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />
-                                                    <br />
+                                                <div style="width:30%;float:left">
+                                                    <label for="inputMiddleName" class="col-md-5">Password<span class='require'>*</span></label>
+
+                                                    <div class="col-md-7"><input type="password" class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
                                                 </div>
-                                            </form>
+                                                <div style="width:30%;float:left">
+                                                    <label for="inputMiddleName" class="col-md-5">Re-Enter Password</label>
+
+                                                    <div class="col-md-7"><input type="password" class="form-control" /><span class="help-block"></span></div>
+                                                </div>
+                                            </div>
+
+
                                         </div>
+
                                     </div>
+                                    <div class="form-actions text-center pal">
+                                        <button type="submit" class="btn btn-green" ng-click="save(User, 'I')">Save</button>
+                                        &nbsp;
+                                        <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />
+                                        <br />
+                                    </div>
+
+
                                 </div>
+                            </form>
                         </div>
 
                         <!--END CONTENT--><!--BEGIN FOOTER-->
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                         </div>
-                        <!--END FOOTER-->
+                        </div>
                     </div>
-                    <!--END PAGE WRAPPER-->
-
-                    <script src="js/jquery-1.10.2.min.js"></script>
-                    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-                    <script src="js/jquery-ui.js"></script>
-                    <!--loading bootstrap js-->
-                    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                    <script src="js/html5shiv.js"></script>
-                    <script src="js/respond.min.js"></script>
-                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                    <script src="vendors/iCheck/icheck.min.js"></script>
-                    <script src="vendors/iCheck/custom.min.js"></script>
-                    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-                    <script src="js/jquery.menu.js"></script>
-                    <script src="vendors/jquery-pace/pace.min.js"></script>
-                    <script src="vendors/holder/holder.js"></script>
-                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-                    <script src="js/main.js"></script>
+                        <!--END FOOTER-->
                  
-                    <script src="js/angular.js"></script>
-                    <script src="js/Users.js"></script>
-                    <script src="js/ngStorage.js"></script>
+                </div>
+
+            </div>
+        </div>
+        <!--END PAGE WRAPPER-->
+
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <!--loading bootstrap js-->
+        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+        <script src="vendors/iCheck/icheck.min.js"></script>
+        <script src="vendors/iCheck/custom.min.js"></script>
+        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+        <script src="js/jquery.menu.js"></script>
+        <script src="vendors/jquery-pace/pace.min.js"></script>
+        <script src="vendors/holder/holder.js"></script>
+        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+        <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+        <script src="js/main.js"></script>
+
+        <script src="js/angular.js"></script>
+        <script src="js/Users.js"></script>
+        <script src="js/ngStorage.js"></script>
 
 </body>
-</html>

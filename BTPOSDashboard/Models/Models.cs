@@ -1178,4 +1178,5 @@ namespace BTPOSDashboardAPI.Models
         public String Description { get; set; }
         public string insupdflag { get; set; }
     }
+   
 }
