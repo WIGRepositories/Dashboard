@@ -27,7 +27,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
             data: Group
         }
         $http(req).then(function (response) {
-         
+          
         });
     };
 });

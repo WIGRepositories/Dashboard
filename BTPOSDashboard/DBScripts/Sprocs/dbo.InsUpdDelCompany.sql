@@ -7,7 +7,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE procedure [dbo].[InsUpdDelCompanyGroups](
+CREATE procedure [dbo].[InsUpdDelCompany](
 @active int,
 @code varchar(50),
 @desc varchar(50) = '',
@@ -35,9 +35,9 @@ if @insupdflag = 'I'
 	
 	SELECT @newCmpId = @@IDENTITY
 
-    --insert Fleet owner role by default
-		insert into Roles (Name,[Description],Active,companyid) 
-		values('Fleet Owner','Fleet owner role',1,@newCmpId)
+    --  --insert Fleet owner role by default
+		--insert into CompanyRoles (Name,[Description],Active,companyid) 
+		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
    
 	end
 

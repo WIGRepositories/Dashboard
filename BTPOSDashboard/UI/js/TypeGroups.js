@@ -25,7 +25,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http,$localStorag
         }
         $http(req).then(function (res) {
             alert('saved successfully');
-        
+       
         });
 
         $scope.currGroup = null;

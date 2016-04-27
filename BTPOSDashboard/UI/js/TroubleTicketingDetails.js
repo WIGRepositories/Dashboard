@@ -32,7 +32,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
 
         $http(req).then(function (response) {
-         
+        
         });
     };
 });

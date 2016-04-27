@@ -5,8 +5,9 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     $http.get('http://localhost:1476/api/routedetails/getroutedetails').then(function (res, data) {
         $scope.RouteDetails = res.data;
-       
+
     });
+
  
    
         $scope.save = function (RouteDetails) {
@@ -44,4 +45,3 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
    
 
    
-})

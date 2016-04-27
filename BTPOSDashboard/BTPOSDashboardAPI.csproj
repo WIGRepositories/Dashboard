@@ -232,6 +232,53 @@
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELPayablesMaster.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELPaymentCatergory.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELPaymentgateway.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELPaymentGatewayType.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELReceivings.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELReceivingsMaster.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELregisterform.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELSMSProviderConfig.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELSTATE.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELTroubleTicketingSlaType.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELTroubleTicketingStatus.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelELZipCode.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelExpenses.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelFares.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelFleetOwner.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelInventory.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelInventoryReceivings.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsupddelInventorySales.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelLicensePayments.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelMenu.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelObjectAccess.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelObjects.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelPayment.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelPaymentGatewaySettings.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelPaymentReceivings.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelRegistrationBTPOS.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelRoledetails.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelRoles.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelRouteDetails.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelRouteFares.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelRoutes.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelRoutesConfiguration.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelSMSEmailConfiguration.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelSMSEmailSubscribers.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTicketGeneration.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTransactionDetails.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTransactionMaster.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTransactions.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTransactionTypes.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTroubleTicketingDetails.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTroubleTicketingDevice.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTroubleTicketingHandlers.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelTypes.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelVehicleDetails.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdelStops.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpDelTroubleTicketingCategories.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsupdInventoryPurchases.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdTypeGroups.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdTypes.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdUsers.sql" />
     <Content Include="DBScripts\Tables\dbo.Blocklist.sql" />
     <Content Include="DBScripts\Tables\dbo.BTPOSAuditDetails.sql" />
     <Content Include="DBScripts\Tables\dbo.BTPOSDetails.sql" />
@@ -309,9 +356,9 @@
     <Content Include="DBScripts\Tables\dbo.ZipCode.sql" />
     <Content Include="DBScripts\Tables\TypesGroups.sql" />
     <Content Include="Global.asax" />
-    <Content Include="UI\AddLicense.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
+    <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
     <Content Include="UI\AddNewRole.html" />
@@ -398,7 +445,7 @@
     <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
-    <Content Include="UI\js\LicenseDetails.js" />
+    <Content Include="UI\js\licensedetails.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RouteDetails.js" />
@@ -2306,7 +2353,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1476</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
