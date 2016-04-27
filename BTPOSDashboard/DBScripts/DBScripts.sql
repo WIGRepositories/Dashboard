@@ -4233,3 +4233,192 @@ SELECT I.[Id]
   
 end
 GO
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[InventorySales]    Script Date: 04/27/2016 17:46:32 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[InventorySales](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[PerUnitPrice] [int] NOT NULL,
+	[PurchaseDate] [varchar](50) NOT NULL,
+	[InVoiceNumber] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[InventoryPurchases]    Script Date: 04/27/2016 17:47:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[InventoryPurchases](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[PerUnitPrice] [int] NOT NULL,
+	[PurchaseDate] [varchar](50) NOT NULL,
+	[PurchaseOrderNumber] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[GetInventoryPurchases]    Script Date: 04/27/2016 17:48:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[GetInventoryPurchases]
+as
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT [Id]
+      ,[ItemName]
+      ,[Quantity]
+      ,[PerUnitPrice]
+      ,[PurchaseDate]
+      ,[PurchaseOrderNumber]
+  FROM [POSDashboard].[dbo].[InventoryPurchases]
+
+
+
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetInventorySales]    Script Date: 04/27/2016 17:48:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[GetInventorySales]
+As
+BEGIN
+SELECT sl.[Id]
+      ,sl. ItemName
+      ,sl.[Quantity]
+      ,sl.PerUnitPrice
+      ,sl.[PurchaseDate]
+      ,sl.[InVoiceNumber]
+  FROM [POSDashboard].[dbo].[InventorySales] sl
+  
+
+
+ 
+
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	
+END
+
+
+
+/****** Object:  StoredProcedure [dbo].[InsupddelInventorySales]    Script Date: 04/27/2016 17:49:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[InsupddelInventorySales] (@Id int,@ItemName varchar(50),@Quantity int,@PerUnitPrice int,@PurchaseDate varchar(50),@InVoiceNumber int)
+	-- Add the parameters for the stored procedure here
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	INSERT INTO [POSDashboard].[dbo].[InventorySales]
+           ([ItemName]
+           ,[Quantity]
+           ,[PerUnitPrice]
+           ,[PurchaseDate]
+           ,[InVoiceNumber])
+     VALUES
+    (@ItemName,@Quantity,@PerUnitPrice,@PurchaseDate,@InVoiceNumber)
+
+
+
+
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsupdInventoryPurchases]    Script Date: 04/27/2016 17:49:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[InsupdInventoryPurchases]  (@Id int,@ItemName varchar(50)
+           ,@Quantity int
+           ,@PerUnitPrice int 
+           ,@PurchaseDate varchar(50)
+           ,@PurchaseOrderNumber int)
+	-- Add the parameters for the stored procedure here
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	INSERT INTO [POSDashboard].[dbo].[InventoryPurchases]
+           ([ItemName]
+           ,[Quantity]
+           ,[PerUnitPrice]
+           ,[PurchaseDate]
+           ,[PurchaseOrderNumber])
+     VALUES
+           (@ItemName
+           ,@Quantity
+           ,@PerUnitPrice
+           ,@PurchaseDate
+           ,@PurchaseOrderNumber)
+
+END

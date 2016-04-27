@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body  ng-model="Group">
+<body ng-init="GetInventorySales()" ng-model="Sales">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -292,7 +292,7 @@
                                                                 </div>
 
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" ng-click="save(Sales1, 'U');">Save</button>
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(Sales1, 'U');">Save</button>
                                                                     <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                 </div>
                                                             </div>
@@ -311,7 +311,7 @@
                                                                 
                                                             </tr>
                                                         <tbody>
-                                                            <tr ng-repeat="G in Group">
+                                                            <tr ng-repeat="G in Sales">
 
                                                                     <td>{{G.ItemName}}</td>
                                                                     <td>{{G.Quantity}}</td>
