@@ -1,17 +1,11 @@
 
-/****** Object:  StoredProcedure [dbo].[InsupdCreateFleetOwner]    Script Date: 04/25/2016 16:04:25 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
 
 -- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[InsupdCreateFleetOwner]
+alter PROCEDURE [dbo].[InsupdCreateFleetOwner]
 	-- Add the parameters for the stored procedure here
 	(@Id int,
            @FirstName varchar(30),
@@ -19,20 +13,23 @@ CREATE PROCEDURE [dbo].[InsupdCreateFleetOwner]
            ,@Email varchar(30)
            ,@MobileNo varchar(30)
            ,@CompanyName varchar(30)
-           ,@Description varchar(30),
+           ,@Description varchar(30) = null,
            @insupdflag varchar(10),@CompanyGroupId int=-1)
            
 AS 
 BEGIN
 declare @currid int
- declare @cnt int = 0
-declare @cmpcnt int=0
- declare @fleetcnt int=0
+ declare @cnt int 
+set @cnt = 0
+declare @cmpcnt int
+set @cmpcnt = 0
+ declare @fleetcnt int
+set @fleetcnt = 0
  
  declare @fc varchar(10) 
  set @fc = case when (select COUNT(*) from Users) = 0
                            then '001' 
-                           else (select STR((max(Id)+1)) from Users ) 
+                           else (select ltrim(rtrim(STR((max(Id)+1)))) from Users ) 
                            end  
  
  
