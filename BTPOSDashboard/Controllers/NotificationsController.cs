@@ -8,12 +8,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace BTPOSDashboardAPI.Controllers
+namespace BTPOSDashboard.Controllers
 {
-    public class AlertController : ApiController
+    public class NotificationsController : ApiController
     {
         [HttpGet]
-        public DataTable GetAlert()
+        public DataTable Notification()
         {
             DataTable Tbl = new DataTable();
 
@@ -25,7 +25,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetAlerts";
+            cmd.CommandText = "GetNotifications";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -37,7 +37,7 @@ namespace BTPOSDashboardAPI.Controllers
    
 }
         [HttpPost]
-        public DataTable check(Alerts n)
+        public DataTable check(Notifications n)
         {
             DataTable Tbl = new DataTable();
 
@@ -49,7 +49,7 @@ namespace BTPOSDashboardAPI.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDeLAlerts";
+            cmd.CommandText = "InsUpdDeLNotifications";
             cmd.Connection = conn;
             conn.Open();
 
@@ -91,5 +91,10 @@ namespace BTPOSDashboardAPI.Controllers
            
     }
 }
+
+
+
+
+
 
 

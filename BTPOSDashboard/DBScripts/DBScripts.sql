@@ -317,20 +317,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[GetMessages]
-(@MessageType int)
-  
-AS
-BEGIN
 
-SELECT [Id]
-      ,[Date]
-      ,[Message]
-      ,[MessageType]
-  FROM [POSDashboard].[dbo].[AlertsNotifications]
-  WHERE MessageType =@MessageType
- RETURN
-END
 GO
 /****** Object:  StoredProcedure [dbo].[GetAuditDetails]    Script Date: 04/21/2016 09:02:32 ******/
 SET ANSI_NULLS ON
@@ -4422,3 +4409,84 @@ BEGIN
            ,@PurchaseOrderNumber)
 
 END
+/****** Object:  StoredProcedure [dbo].[Get Alerts]    Script Date: 04/28/2016 11:12:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetAlerts]
+AS
+BEGIN
+	
+select * from Alerts
+end
+GO
+/****** Object:  StoredProcedure [dbo].[Get Notifications]    Script Date: 04/28/2016 11:13:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetNotifications]
+AS
+BEGIN
+	
+select * from Notifications
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDLAlerts]    Script Date: 04/28/2016 11:14:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE[dbo].[InsUpdDLAlerts](@Id Numeric
+,
+           @Date varchar(50),
+           @Message VARCHAR(50),
+           @MessageType varchar(50),
+           @MessageTypeId varchar(50),
+           @Status varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Alerts] VALUES
+           (@Id, 
+          @Date,
+           @Message,
+           @MessageType,
+           @MessageTypeId,
+           @Status)
+   
+	END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDLNotifications]    Script Date: 04/28/2016 11:14:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE[dbo].[InsUpdDLNotifications](@Id Numeric
+,
+           @Date varchar(50),
+           @Message VARCHAR(50),
+           @MessageType varchar(50),
+           @MessageTypeId varchar(50),
+           @Status varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Notifications] VALUES
+           (@Id, 
+          @Date,
+           @Message,
+           @MessageType,
+           @MessageTypeId,
+           @Status)
+   
+	END
