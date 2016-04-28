@@ -40,9 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -448,11 +448,13 @@
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />
+    <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
     <Content Include="UI\js\licensedetails.js" />
     <Content Include="UI\js\ngStorage.js" />
+    <Content Include="UI\js\Notifications.js" />
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
@@ -1945,6 +1947,7 @@
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
     <Compile Include="Controllers\LicenseController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />

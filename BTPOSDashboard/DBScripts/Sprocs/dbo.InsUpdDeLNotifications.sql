@@ -1,5 +1,4 @@
-USE [POSDashboard]
-GO
+
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDLNotifications]    Script Date: 04/28/2016 10:44:00 ******/
 SET ANSI_NULLS ON

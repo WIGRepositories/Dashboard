@@ -1,5 +1,4 @@
-USE [POSDashboard]
-GO
+
 /****** Object:  StoredProcedure [dbo].[InsUpdDelELBlockList]    Script Date: 04/28/2016 10:25:38 ******/
 SET ANSI_NULLS ON
 GO

@@ -317,20 +317,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[GetMessages]
-(@MessageType int)
-  
-AS
-BEGIN
 
-SELECT [Id]
-      ,[Date]
-      ,[Message]
-      ,[MessageType]
-  FROM [POSDashboard].[dbo].[AlertsNotifications]
-  WHERE MessageType =@MessageType
- RETURN
-END
 GO
 /****** Object:  StoredProcedure [dbo].[GetAuditDetails]    Script Date: 04/21/2016 09:02:32 ******/
 SET ANSI_NULLS ON
@@ -4422,34 +4409,31 @@ BEGIN
            ,@PurchaseOrderNumber)
 
 END
-USE [POSDashboard]
-GO
 /****** Object:  StoredProcedure [dbo].[Get Alerts]    Script Date: 04/28/2016 11:12:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[Get Alerts]
+ALTER PROCEDURE [dbo].[GetAlerts]
 AS
 BEGIN
 	
 select * from Alerts
 end
-USE [POSDashboard]
 GO
 /****** Object:  StoredProcedure [dbo].[Get Notifications]    Script Date: 04/28/2016 11:13:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[Get Notifications]
+ALTER PROCEDURE [dbo].[GetNotifications]
 AS
 BEGIN
 	
 select * from Notifications
 end
 
-USE [POSDashboard]
+
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDLAlerts]    Script Date: 04/28/2016 11:14:51 ******/
 SET ANSI_NULLS ON
@@ -4478,7 +4462,7 @@ INSERT INTO
    
 	END
 
-	USE [POSDashboard]
+
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDLNotifications]    Script Date: 04/28/2016 11:14:53 ******/
 SET ANSI_NULLS ON
