@@ -124,7 +124,9 @@
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.Get Alerts.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get LicenceCatergories.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.Get Notifications.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get TroubleTicketingSlaType.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetAuditDetails.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetBlockList.sql" />
@@ -209,6 +211,7 @@
     <Content Include="DBScripts\Sprocs\dbo.getVehicleDetails.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetZipCode.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsupdCreateFleetOwner.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDeLAlerts.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelBTPOSDetails.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelBTPOSInventorySales.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelCompanyGroups.sql" />
@@ -249,6 +252,7 @@
     <Content Include="DBScripts\Sprocs\dbo.InsupddelInventorySales.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelLicensePayments.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelMenu.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDeLNotifications.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelObjectAccess.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelObjects.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelPayment.sql" />
@@ -297,6 +301,8 @@
     <Content Include="DBScripts\Tables\dbo.Fares.sql" />
     <Content Include="DBScripts\Tables\dbo.FleetOwner.sql" />
     <Content Include="DBScripts\Tables\dbo.FleetOwnerRouteDetails.sql" />
+    <Content Include="DBScripts\Tables\dbo.Get Alerts.sql" />
+    <Content Include="DBScripts\Tables\dbo.Get Notifications.sql" />
     <Content Include="DBScripts\Tables\dbo.Inventory.sql" />
     <Content Include="DBScripts\Tables\dbo.InventoryItem.sql" />
     <Content Include="DBScripts\Tables\dbo.InventoryPurchases.sql" />

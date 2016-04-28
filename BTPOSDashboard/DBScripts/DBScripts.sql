@@ -4422,3 +4422,87 @@ BEGIN
            ,@PurchaseOrderNumber)
 
 END
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[Get Alerts]    Script Date: 04/28/2016 11:12:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[Get Alerts]
+AS
+BEGIN
+	
+select * from Alerts
+end
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[Get Notifications]    Script Date: 04/28/2016 11:13:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[Get Notifications]
+AS
+BEGIN
+	
+select * from Notifications
+end
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDLAlerts]    Script Date: 04/28/2016 11:14:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE[dbo].[InsUpdDLAlerts](@Id Numeric
+,
+           @Date varchar(50),
+           @Message VARCHAR(50),
+           @MessageType varchar(50),
+           @MessageTypeId varchar(50),
+           @Status varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Alerts] VALUES
+           (@Id, 
+          @Date,
+           @Message,
+           @MessageType,
+           @MessageTypeId,
+           @Status)
+   
+	END
+
+	USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDLNotifications]    Script Date: 04/28/2016 11:14:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE[dbo].[InsUpdDLNotifications](@Id Numeric
+,
+           @Date varchar(50),
+           @Message VARCHAR(50),
+           @MessageType varchar(50),
+           @MessageTypeId varchar(50),
+           @Status varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[Notifications] VALUES
+           (@Id, 
+          @Date,
+           @Message,
+           @MessageType,
+           @MessageTypeId,
+           @Status)
+   
+	END
