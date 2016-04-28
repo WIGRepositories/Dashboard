@@ -5,7 +5,18 @@ using System.Web;
 
 namespace BTPOSDashboardAPI.Models
 {
-    public class Model
+    public class Alerts
+    {
+      public int Id { get; set; }
+      public DateTime Date {get;set;}
+      public string Message { get; set; }
+      public string MessageTypeId { get; set; }
+      public string Status { get; set; }
+    }
+
+
+    
+    public class Notifications
     {
       public int Id { get; set; }
       public DateTime Date {get;set;}
