@@ -79,6 +79,7 @@ namespace BTPOSDashboardAPI.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Active { get; set; }
+        public string IsPublic { get; set; }
         public string Company { get; set; }
         public int CompanyId { get; set; }
 
@@ -1091,7 +1092,7 @@ namespace BTPOSDashboardAPI.Models
         public int Active { get; set; }
         public string insupdflag { get; set; }
     }
-    public class Objects
+    public class Objects1
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -1189,5 +1190,14 @@ namespace BTPOSDashboardAPI.Models
         public String Description { get; set; }
         public string insupdflag { get; set; }
     }
-   
+
+    public class FleetStaff
+    {
+        public int Id { get; set; }
+        public String StaffRole { get; set; }
+        public int UserId { get; set; }
+        public String FromDate { get; set; }
+        public String ToDate { get; set; }
+       
+    }
 }

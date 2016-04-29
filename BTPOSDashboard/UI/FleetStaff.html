@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-model="FleetStaff">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -98,14 +98,14 @@
                                     </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li ><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                    <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
                                     <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                     <li class="active"><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                     <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
 
                                 </ul>
 
-                                </li>
+                            </li>
 
                             <li>
                                 <a href="#">
@@ -224,7 +224,7 @@
                                                         </div>
 
                                                         <div class="actions">
-                                                            <a href="NewFleetStaff.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New Fleet Staff</button></a>
+                                                            <a href="AddFleetStaff.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New Fleet Staff</button></a>
 
                                                         </div>
 
@@ -475,46 +475,20 @@
                                                             <tr>
 
                                                                 <th width="22%">Staff Role</th>
-                                                                <th>UserId</th>
+                                                                <th>UserName</th>
                                                                 <th>From </th>
                                                                 <th>To</th>
-                                                              
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat="group in Group" class="gradeA">
-                                                                <td>
-                                                                    <select class="form-control">
-                                                                        <option>Driver</option>
-                                                                        <option>Conductor</option>
-                                                                        <option>John</option>
-                                                                        <option>Larry</option>
-                                                                        <option>Lahm</option>
-                                                                    </select>
-                                                                </td>
-
-                                                                <td>
-                                                                    <select class="form-control">
-                                                                        <option>Srujan</option>
-                                                                        <option>Naveen</option>
-                                                                        <option>John</option>
-                                                                        <option>Larry</option>
-                                                                        <option>Lahm</option>
-                                                                    </select>
-                                                                </td>
-                                                                <td style="width:20%;">
-                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-
-                                                                </td>
-                                                                <td style="width:20%;">
-                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-
-                                                                </td>
-                                                                
-                                                               
+                                                            <tr ng-repeat="Fleet in FleetStaff " class="gradeA">
+                                                                <td>{{Fleet.StaffRole}}</td>
+                                                                <td>{{Fleet.UserName}}</td>
+                                                                <td>{{Fleet.From}}</td>
+                                                                <td>{{Fleet.To}}</td>
                                                             </tr>
-
                                                         </tbody>
 
                                                     </table>
