@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetInventoryItem()" ng-model="Sales">
+<body ng-init="GetFleetConfiguration()" ng-model="Fleet">
     <div>
         <!--BEGIN THEME SETTINGS-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -119,7 +119,7 @@
                                         <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                         <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                        <li ><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
+                                        <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
                                     </ul>
                                 </li>
@@ -222,14 +222,14 @@
                                                             <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                                                 <div class="form-body">
                                                                     <div class="form-group">
-                                                                        <label for="Description" class="col-md-3 control-label">Vehicle Id <span class='require'>*</span></label>
+                                                                        <label for="Description" class="col-md-3 control-label">VehicleReg No <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Sales.Quantity" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Fleet.VehicleRegNo" /><span class="help-block"></span></div>
                                                                     </div>
 
                                                                     <div class="form-group">
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">Type ID</label>
+                                                                        <label for="selCountry" class="col-md-3 control-label">VehicleType</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
                                                                                 <option value="">All</option>
@@ -239,18 +239,7 @@
                                                                     </div>
                                                                     <div class="form-group">
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">ServiceType ID</label>
-                                                                        <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
-                                                                                <option value="">All</option>
-                                                                            </select>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="form-group">
-
-                                                                        <label for="selCountry" class="col-md-3 control-label">Fleet ID</label>
+                                                                        <label for="selCountry" class="col-md-3 control-label">ServiceType</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
                                                                                 <option value="">All</option>
@@ -261,17 +250,25 @@
 
                                                                     <div class="form-group">
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">Company ID</label>
+                                                                        <label for="selCountry" class="col-md-3 control-label">FleetOwner Name</label>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
+                                                                            <select ng-options="F.UserName for s in User track by F.Id" ng-model="Fleet.FleetOwnerId" class="form-control">
                                                                                 <option value="">All</option>
                                                                             </select>
                                                                         </div>
 
                                                                     </div>
 
-                                                  
+                                                                    <div class="form-group">
 
+                                                                        <label for="selCountry" class="col-md-3 control-label">Company Name</label>
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="s.Name for s in Companies track by s.Id" class="form-control" ng-model="Fleet.CompanyId">
+                                                                                <option value="">All</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
 
                                                                 <div class="form-actions">
@@ -330,7 +327,7 @@
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/Inventorysales.js"></script>
+    <script src="js/FleetDetail.js"></script>
 
 </body>
 </html>

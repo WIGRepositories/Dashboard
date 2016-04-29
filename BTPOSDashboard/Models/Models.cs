@@ -1189,5 +1189,34 @@ namespace BTPOSDashboardAPI.Models
         public String Description { get; set; }
         public string insupdflag { get; set; }
     }
-   
+
+
+
+    public class FleetDetails
+    {
+        public int Id { get; set; }
+
+        public int VehicleRegNo{ get; set; }
+        public int   VehicleTypeId { get; set; }
+
+        public String FleetOwnerId { get; set; }
+        public String CompanyId { get; set; }
+        public String ServiceTypeId { get; set; }
+
+        public int Active { get; set; }
+    }
+    public class FleetRoutes
+    {
+        public int Id { get; set; }
+
+        public int VehicleId { get; set; }
+        public int RouteId { get; set; }
+
+        public DateTime EffectiveFrom { get; set; }
+        public DateTime EffectiveTill { get; set; }
+
+        public int Active { get; set; }
+    }
+
 }
+

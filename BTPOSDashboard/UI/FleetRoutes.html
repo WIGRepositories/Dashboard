@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
-
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -26,7 +26,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-model="FleetRoute">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -107,7 +107,7 @@
 
                                 </ul>
 
-                                </li>
+                            </li>
 
                             <li>
                                 <a href="#">
@@ -227,7 +227,7 @@
                                                         </div>
 
 
-                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header modal-header-primary">
@@ -433,7 +433,7 @@
 
 
 
-                                                                        <!--<div class="row">
+                                                                        <div class="row">
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
@@ -452,7 +452,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>-->
+                                                                        </div>
 
 
                                                                     </div>
@@ -463,7 +463,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div>-->
 
 
 
@@ -472,51 +472,35 @@
                                                         <thead>
                                                             <tr>
 
-                                                                <th width="22%">Vehicle Id</th>
-                                                                <th>Route Id</th>
+                                                                <th width="22%">Vehicle RegN.o</th>
+                                                                <th>Fleet Route</th>
                                                                 <th>Effective From</th>
-                                                                <th>Till</th>
+                                                                <th>Effective Till</th>
                                                                 <th>Update</th>
-                                                              
+                                                                <th>Delete</th>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat="group in Group" class="gradeA">
-                                                                <td>
-                                                                    <select class="form-control">
-                                                                        <option>Fleet</option>
-                                                                        <option>Henry</option>
-                                                                        <option>John</option>
-                                                                        <option>Larry</option>
-                                                                        <option>Lahm</option>
-                                                                    </select>
-                                                                </td>
+                                                            <tr ng-repeat="R in FleetRoute" class="gradeA">
+                                                                <td>{{R.VehicleId}}</td>
+                                                                <td>{{R.RouteId}}</td>
+                                                                <td>{{R.EffectiveFrom}}</td>
+                                                                <td>{{R.EffectiveTill}}</td>
 
                                                                 <td>
-                                                                    <select class="form-control">
-                                                                        <option>Fleet</option>
-                                                                        <option>Henry</option>
-                                                                        <option>John</option>
-                                                                        <option>Larry</option>
-                                                                        <option>Lahm</option>
-                                                                    </select>
-                                                                </td>
-                                                            
-                                                                <td style="width:20%;">
-                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
-                                                                </td>
-                                                                <td style="width:20%;">
-                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-
-                                                                </td>
-                                                              
-                                                                <td>
-                                                                   
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+
+                                                                    <button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                                        <i class="fa fa-times" t"></i>&nbsp;
+                                                                        Delete
                                                                     </button>
                                                                 </td>
                                                             </tr>
@@ -600,7 +584,7 @@
 
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/VehicleDetails.js"></script>
+    <script src="js/FleetRoutes.js"></script>
 
 </body>
 </html>

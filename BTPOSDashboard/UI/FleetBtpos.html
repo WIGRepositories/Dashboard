@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-model="FleetBtpos">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -98,14 +98,14 @@
                                     </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li ><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                    <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
                                     <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                     <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                     <li class="active"><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
 
                                 </ul>
 
-                                </li>
+                            </li>
 
                             <li>
                                 <a href="#">
@@ -220,7 +220,7 @@
 
 
                                                         <div class="actions">
-                                                            <a href="NewBtpos.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOS</button></a>
+                                                            <a href="NewFleetBtpos.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOS</button></a>
 
                                                         </div>
 
@@ -470,44 +470,37 @@
                                                         <thead>
                                                             <tr>
 
-                                                                <th width="22%">Vehicle Id</th>
-                                                                <th>BTPOS ID</th>
-                                                                <th>From</th>
-                                                                <th>To</th>
-                                                                
+                                                                <th width="22%">Vehicle Reg.No</th>
+                                                                <th>BTPOS Name</th>
+                                                                <th>From Date</th>
+                                                                <th>To Date</th>
+                                                                <th>Update</th>
+                                                                <th>Delete</th>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat="group in Group" class="gradeA">
-                                                                <td>
-                                                                    <select class="form-control">
-                                                                        <option>Vehicle 1</option>
-                                                                        <option>Vehicle 2</option>
-                                                                        <option>Vehicle 3</option>
-                                                                        <option>Vehicle 4</option>
-                                                                        <option>Vehicle 4</option>
-                                                                    </select>
-                                                                </td>
+                                                            <tr ng-repeat="R in FleetBtpos" class="gradeA">
+                                                                <td>{{R.VehicleId}}</td>
+                                                                <td>{{R.RouteId}}</td>
+                                                                <td>{{R.EffectiveFrom}}</td>
+                                                                <td>{{R.EffectiveTill}}</td>
 
                                                                 <td>
-                                                                    <select class="form-control">
-                                                                        <option>1</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                        <option>4</option>
-                                                                        <option>5</option>
-                                                                    </select>
-                                                                </td>
-                                                               
-                                                                <td style="width:20%;">
-                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
                                                                 </td>
-                                                                <td style="width:20%;">
-                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                <td>
+
+                                                                    <button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                                        <i class="fa fa-times" t"></i>&nbsp;
+                                                                        Delete
+                                                                    </button>
                                                                 </td>
-                                                             
                                                             </tr>
 
                                                         </tbody>
