@@ -4490,3 +4490,81 @@ INSERT INTO
            @Status)
    
 	END
+
+
+/****** Object:  Table [dbo].[FleetStaff]    Script Date: 04/29/2016 18:26:32 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetStaff](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[StaffRole] [varchar](50) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[GetFleetStaff]    Script Date: 04/29/2016 18:27:28 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetFleetStaff] 
+@staffId int=-1
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	
+
+    -- Insert statements for procedure here
+	SELECT f.[Id]
+      ,r.[Name] as StaffRole
+      ,u.FirstName as UserName
+      ,[FromDate]
+      ,[ToDate]
+  FROM [POSDashboard].[dbo].[FleetStaff] f
+  inner join Roles r on r.Id=f.Id
+  inner join Users u on  u.Id=f.Id
+  
+SET NOCOUNT ON;
+
+
+
+END
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetSatff]    Script Date: 04/29/2016 18:28:08 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[InsUpdDelFleetSatff]
+(@Id int,@StaffRole varchar(50),@UserId int,@FromDate datetime,@ToDate datetime)
+as begin
+insert into FleetSatff(StaffRole,UserId,FromDate,ToDate)values (@Id,@StaffRole,@UserId,@FromDate,@ToDate)
+end
+GO
