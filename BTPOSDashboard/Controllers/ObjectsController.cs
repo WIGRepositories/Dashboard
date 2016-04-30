@@ -36,7 +36,7 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable saveObjects(Objects b)
+        public DataTable saveObjects(Objects1 b)
         {
             DataTable Tbl = new DataTable();
 
@@ -54,7 +54,7 @@ namespace BTPOSDashboard.Controllers
             SqlParameter cc = new SqlParameter();
             cc.ParameterName = "@Id";
             cc.SqlDbType = SqlDbType.Int;
-            cc.Value = Convert.ToString(b.Id);
+            cc.Value = b.Id;
             cmd.Parameters.Add(cc);
             SqlParameter cname = new SqlParameter();
             cname.ParameterName = "@Name";

@@ -1,8 +1,7 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Home | Configuration | Types | Add New Type</title>
+    <title>Home | Users | Users | Add New User</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +10,11 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
     <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
@@ -25,12 +23,9 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="Objects">
+<body ng-init="GetFleetRoutes();" ng-model="FleetBtpos">
     <div>
-
-
-
-        <!--BEGIN THEME SETTINGS-->
+        <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
@@ -95,6 +90,21 @@
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
+                            <li class="active">
+                                <a href="#">
+                                    <i class="fa fa-send-o fa-fw">
+                                        <div class="icon-bg bg-green"></div>
+                                    </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                    <li class="active"><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
+                                    <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
+                                    <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+
+                                </ul>
+
+                            </li>
 
                             <li>
                                 <a href="#">
@@ -105,6 +115,8 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -115,30 +127,14 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                    <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
                                     <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                 </ul>
                             </li>
+
+
                             <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">License</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">ToubleTicketing</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">ToubleTicketingDetails</span></a></li>
-                                </ul>
-                            </li>
-                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
                                         <div class="icon-bg bg-green"></div>
@@ -146,7 +142,7 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                                    <li class="active"><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                                    <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
                                     <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
                                 </ul>
                             </li>
@@ -158,6 +154,7 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
                                     <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
                                 </ul>
                             </li>
@@ -168,7 +165,7 @@
                                     </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="table-basic.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
                                     <li><a href="table-responsive.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="table-action.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="table-filter.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
@@ -191,25 +188,25 @@
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-             
-                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
-
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Add New Object</div>
+                            <div class="page-title">New Routes</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Configuartion</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Objects.html">Objects</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="newObject.html">Add New Object</a></li>
+                            <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+
+                            <li><a href="NewFleetRoutes.html">Add New User</a></li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
+
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                    <!--BEGIN TITLE & BREADCRUMB PAGE-->
+
                     <div class="page-content">
                         <div id="form-layouts" class="row">
                             <div class="col-lg-12">
@@ -220,88 +217,80 @@
 
                                             <div class="col-lg-6">
                                                 <div class="panel panel-violet">
-                                                    <div class="panel-heading">Add New Object</div>
+                                                    <div class="panel-heading">Add New Fleet Route</div>
                                                     <div class="panel-body pan">
                                                         <form action="#" class="form-horizontal">
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <div class="form-group">
-                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>VehicleName:</label>
 
-                                                                        <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="NewObjects.Name" class="form-control" /><span class="help-block"></span></div>
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="s.Route for s in routes track by s.Id" class="form-control" ng-model="FleetRoute.VehicleId">
+                                                                            <option value="">Select</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
+
                                                                 <div class="form-group">
-                                                                    <label for="Description" class="col-md-3 control-label"> Description <span class='require'></span></label>
+                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>BTPOS Name:</label>
 
-
-                                                                    <div class="col-md-4"><input id="Description" type="text" ng-model="NewObjects.Description" class="form-control" /><span class="help-block"></span></div>
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="s.Name for s in TypeGroups track by s.Id" class="form-control" ng-model="FleetRoute.RouteId">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
 
+                                                                <div class="form-group">
+                                                                    <label for="Name" class="col-md-3 control-label">EffectiveFrom:<span class='require'></span></label>
+                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="Description" class="col-md-3 control-label"> EffectiveTill <span class='require'></span></label>
+
+                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+
+
+
+                                                                </div>
 
                                                                 <!--<div class="form-group">
-                                                                    <label for="Address Id" class="col-md-3 control-label">Address Id<span class='require'>*</span></label>
+                                                                    <div class="form-group">
+                                                                        <label for="ListKey" class="col-md-3 control-label" style="color:red;"> ListKey <span class='require'>*</span></label>
 
-                                                                    <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
-                                                                </div>-->
-
-
+                                                                        <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="Types.ListKey" class="form-control" /><span class="help-block"></span></div>
+                                                                    </div>
+                                                                </div>
 
                                                                 <div class="form-group">
                                                                     <div class="form-group">
-                                                                        <label for="ListKey" class="col-md-3 control-label" style="color:red;"> Path <span class='require'>*</span></label>
+                                                                        <label for="ListKey" class="col-md-3 control-label" style="color:red;"> Listvalue <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="NewObjects.Path" class="form-control" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="Types.Listvalue" class="form-control" /><span class="help-block"></span></div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="form-group" ng-model="Types.Active">
-                                                                    <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
-
-                                                                    <label>
-                                                                        <input type="checkbox" checked />
+                                                                </div>-->
+                                                                <div class="form-group">
+                                                                    <label for="Active" class="col-md-3 control-label">Active:<span class='require'></span></label>
+                                                                    <label class="col-md-6">
+                                                                        <input type="checkbox" ng-checked="Types.Active" />
                                                                     </label>
-
-
                                                                 </div>
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn btn-primary" ng-click="save(NewObjects);">Save</button>
+                                                                        <button type="submit" class="btn btn-primary" ng-click="saveNewType(Types);">Save</button>
 
                                                                         <button type="reset" class="btn btn-green">Cancel</button>
                                                                     </div>
-
-
-
+                                                                </div>
+                                                            </div>
                                                         </form>
-
-
                                                     </div>
-
                                                 </div>
-
-
-
-                                                <!--END CONTENT--><!--BEGIN FOOTER-->
-                                                <div id="footer">
-                                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                                </div>
-                                                <!--END FOOTER-->
+                                                <!--END CONTENT-->
                                             </div>
-
-
-
-
-
                                         </div>
-
-
                                     </div>
-
-
-
-
-
                                     <!--END CONTENT--><!--BEGIN FOOTER-->
                                     <div id="footer">
                                         <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
@@ -310,29 +299,39 @@
                                 </div>
                                 <!--END PAGE WRAPPER-->
                             </div>
+                            <!--END PAGE WRAPPER-->
                         </div>
-                        <script src="js/jquery-1.10.2.min.js"></script>
-                        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-                        <script src="js/jquery-ui.js"></script>
-                        <!--loading bootstrap js-->
-                        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-                        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                        <script src="js/html5shiv.js"></script>
-                        <script src="js/respond.min.js"></script>
-                        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                        <script src="vendors/iCheck/icheck.min.js"></script>
-                        <script src="vendors/iCheck/custom.min.js"></script>
-                        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-                        <script src="js/jquery.menu.js"></script>
-                        <script src="vendors/jquery-pace/pace.min.js"></script>
-                        <script src="vendors/holder/holder.js"></script>
-                        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                        <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-                        <script src="js/main.js"></script>
-                       
-                        <script src="js/angular.js"></script>
-                        <script src="js/Objects.js"></script>
+                    </div>
+
+                </div>
+
+            </div>
+            <script src="js/jquery-1.10.2.min.js"></script>
+            <script src="js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="js/jquery-ui.js"></script>
+            <!--loading bootstrap js-->
+            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+            <script src="js/html5shiv.js"></script>
+            <script src="js/respond.min.js"></script>
+            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+            <script src="vendors/iCheck/icheck.min.js"></script>
+            <script src="vendors/iCheck/custom.min.js"></script>
+            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+            <script src="js/jquery.menu.js"></script>
+            <script src="vendors/jquery-pace/pace.min.js"></script>
+            <script src="vendors/holder/holder.js"></script>
+            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+            <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+            <!--LOADING SCRIPTS FOR PAGE-->
+            <script src="js/table-action.js"></script>
+            <!--CORE JAVASCRIPT-->
+            <script src="js/main.js"></script>
+            <script src="js/angular.js"></script>
+            <script src="js/ngStorage.js"></script>
+            <script src="js/FleetBtpos.js"></script>
 </body>
 </html>

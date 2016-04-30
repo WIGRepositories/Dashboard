@@ -40,9 +40,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -362,8 +361,12 @@
     <Content Include="DBScripts\Tables\dbo.ZipCode.sql" />
     <Content Include="DBScripts\Tables\TypesGroups.sql" />
     <Content Include="Global.asax" />
+    <Content Include="UI\AddFleetDetails.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
+    <Content Include="UI\CompanyRoles.html" />
+    <Content Include="UI\createfleet.html" />
+    <Content Include="UI\CreateRole.html" />
     <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
@@ -444,11 +447,20 @@
     <Content Include="UI\css\themes\style3\yellow-green.css" />
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
+    <Content Include="UI\FleetBtpos.html" />
+    <Content Include="UI\FleetDetails.html" />
     <Content Include="UI\Fleetowner.html" />
+    <Content Include="UI\FleetRoutes.html" />
+    <Content Include="UI\FleetStaff.html" />
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\createfleet.js" />
+    <Content Include="UI\js\CreateRole.js" />
+    <Content Include="UI\js\FleetBtpos.js" />
+    <Content Include="UI\js\FleetDetail.js" />
+    <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
@@ -456,6 +468,7 @@
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Notifications.js" />
     <Content Include="UI\js\Objects.js" />
+    <Content Include="UI\js\RoleDetails.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
@@ -520,6 +533,8 @@
     <Content Include="UI\js\Users.js" />
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
+    <Content Include="UI\NewFleetBTPOS.html" />
+    <Content Include="UI\NewFleetRoutes.html" />
     <Content Include="UI\NewInventoryPurchases.html" />
     <Content Include="UI\NewInventorySales.html" />
     <Content Include="UI\NewObject.html" />
@@ -1943,6 +1958,8 @@
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\FleetController.cs" />
+    <Compile Include="Controllers\FleetRoutesController.cs" />
     <Compile Include="Controllers\InventoryItemController.cs" />
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
