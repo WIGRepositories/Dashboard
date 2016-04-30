@@ -4490,9 +4490,56 @@ INSERT INTO
            @Status)
    
 	END
+/****** Object:  Table [dbo].[FleetBtpos]    Script Date: 04/29/2016 18:31:39 ******/
+SET ANSI_NULLS ON
+GO
 
+SET QUOTED_IDENTIFIER ON
+GO
 
-/****** Object:  Table [dbo].[FleetStaff]    Script Date: 04/29/2016 18:26:32 ******/
+CREATE TABLE [dbo].[FleetBtpos](
+	[Id] [int] NOT NULL,
+	[VehicleId] [int] NOT NULL,
+	[From] [datetime] NOT NULL,
+	[To] [datetime] NOT NULL
+) ON [PRIMARY]
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleRegNo] [int] NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
+	[FleetOwnerId] [varchar](50) NOT NULL,
+	[CompanyId] [varchar](50) NOT NULL,
+	[ServiceTypeId] [varchar](50) NOT NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[FleetRoutes]    Script Date: 04/29/2016 18:32:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FleetRoutes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleId] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[EffectiveFrom] [datetime] NOT NULL,
+	[EffectiveTill] [datetime] NOT NULL
+) ON [PRIMARY]
+
+GO
 SET ANSI_NULLS ON
 GO
 
@@ -4506,17 +4553,15 @@ CREATE TABLE [dbo].[FleetStaff](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[StaffRole] [varchar](50) NOT NULL,
 	[UserId] [int] NOT NULL,
-	[FromDate] [datetime] NOT NULL,
-	[ToDate] [datetime] NOT NULL
+	[From] [datetime] NOT NULL,
+	[To] [datetime] NOT NULL
 ) ON [PRIMARY]
 
 GO
 
 SET ANSI_PADDING OFF
 GO
-
-
-/****** Object:  StoredProcedure [dbo].[GetFleetStaff]    Script Date: 04/29/2016 18:27:28 ******/
+/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 04/29/2016 18:33:47 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -4528,26 +4573,47 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[GetFleetStaff] 
-@staffId int=-1
+CREATE PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
+	(@vehicleId int=-1)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
-	
+	SET NOCOUNT ON;
 
+   SELECT v.[Id]
+      ,[VehicleRegNo]
+      ,t.[Name] as VehicleType,
+       t.Name as ServiceType,
+       f.Id as FleetOwnerName 
+      ,c.[Name] as CompanyName
+      ,v.[Active]
+     FROM [POSDashboard].[dbo].[FleetDetails]v
+    inner join Types t on t.Id=v.Id
+    inner join company c on c.Id=v.Id
+    inner join FleetOwner f on f.Id=v.Id
+	 where  (v.Id= @vehicleId or @vehicleId = -1)
+
+
+
+
+   
     -- Insert statements for procedure here
-	SELECT f.[Id]
-      ,r.[Name] as StaffRole
-      ,u.FirstName as UserName
-      ,[FromDate]
-      ,[ToDate]
-  FROM [POSDashboard].[dbo].[FleetStaff] f
-  inner join Roles r on r.Id=f.Id
-  inner join Users u on  u.Id=f.Id
-  
-SET NOCOUNT ON;
+    
+    
+--SELECT t.[Id]
+--      ,t.[Name] as VehicleType,
+--      t.[Name] as ServiceType
+--      ,t.[Active]
+      
+--      ,f.[Id] as FleetName 
+--         ,c.[Name] as CompanyName
+--  FROM [POSDashboard].[dbo].[Types]t   
+--	 inner join company c on c.Id=t.Id
+--	 inner join FleetOwner f on f.Id=t.Id
+--	 where  (t.Id= @vehicleId or @vehicleId = -1)
+
 
 
 
@@ -4555,16 +4621,165 @@ END
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetSatff]    Script Date: 04/29/2016 18:28:08 ******/
+
+/****** Object:  StoredProcedure [dbo].[GetFleetBtpos]    Script Date: 04/29/2016 18:34:38 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-create procedure [dbo].[InsUpdDelFleetSatff]
-(@Id int,@StaffRole varchar(50),@UserId int,@FromDate datetime,@ToDate datetime)
-as begin
-insert into FleetSatff(StaffRole,UserId,FromDate,ToDate)values (@Id,@StaffRole,@UserId,@FromDate,@ToDate)
-end
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetFleetBtpos] 
+	-- Add the parameters for the stored procedure here
+	
+AS
+BEGIN
+SELECT [Id]
+      ,[VehicleId]
+      ,[From]
+      ,[To]
+  FROM [POSDashboard].[dbo].[FleetBtpos]
+
+
+
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetfleetRoutes]    Script Date: 04/29/2016 18:40:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetfleetRoutes]
+(@RouteId int=-1)
+	-- Add the parameters for the stored procedure here
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+SELECT R.[Id]
+      ,F.[VehicleRegNo] as VehicleName
+      ,rt.[Route]  as RouteName
+      ,[EffectiveFrom]
+      ,[EffectiveTill]
+  FROM [POSDashboard].[dbo].[FleetRoutes] R
+  inner join  FleetDetails F on F.VehicleRegNo=R.Id
+  inner join Routes rt on rt.Id=R.Id
+
+
+
+
+    -- Insert statements for procedure here
+END
+
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[InsupdelFleetDetails]    Script Date: 04/29/2016 18:41:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
+ (@VehicleRegNo int
+           ,@VehicleTypeId int
+           ,@FleetOwnerId varchar(50)
+           ,@CompanyId varchar(50)
+           ,@ServiceTypeId varchar(50)
+           ,@Active int)
+	-- Add the parameters for the stored procedure here
+	
+AS
+BEGIN
+	INSERT INTO [POSDashboard].[dbo].[FleetDetails]
+           ([VehicleRegNo]
+           ,[VehicleTypeId]
+           ,[FleetOwnerId]
+           ,[CompanyId]
+           ,[ServiceTypeId]
+           ,[Active])
+     VALUES
+           (@VehicleRegNo 
+           ,@VehicleTypeId 
+           ,@FleetOwnerId 
+           ,@CompanyId 
+           ,@ServiceTypeId 
+           ,@Active )
+
+
+
+
+END
+
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[insupdelFleetRoutes]    Script Date: 04/29/2016 18:41:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[insupdelFleetRoutes]
+(@VehicleId int,@RouteId int,@EffectiveFrom datetime,@EffectiveTill datetime)
+	-- Add the parameters for the stored procedure here	
+AS
+BEGIN
+INSERT INTO [POSDashboard].[dbo].[FleetRoutes]
+           ([VehicleId]
+           ,[RouteId]
+           ,[EffectiveFrom]
+           ,[EffectiveTill])
+     VALUES
+           (@VehicleId
+           ,@RouteId
+           ,@EffectiveFrom
+           ,@EffectiveTill)
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+
+
+
+
+    -- Insert statements for procedure here
+END
+
 GO

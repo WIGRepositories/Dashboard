@@ -12,36 +12,6 @@ namespace BTPOSDashboardAPI.Controllers
 {
     public class RolesController : ApiController
     {
-
-        [HttpGet]
-        public DataTable getcreaterole()
-        {
-            DataTable Tbl = new DataTable();
-
-
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetRoles";
-            cmd.Connection = conn;
-
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
-
-            // int found = 0;
-            return Tbl;
-        }
-
-
-
-
-
         [HttpGet]
         public DataTable getroles(int companyId)
         {
@@ -114,12 +84,6 @@ namespace BTPOSDashboardAPI.Controllers
             aa.SqlDbType = SqlDbType.VarChar;
             aa.Value = b.Active;
             cmd.Parameters.Add(aa);
-            SqlParameter aab = new SqlParameter();
-            aab.ParameterName = "@IsPublic";
-            aab.SqlDbType = SqlDbType.VarChar;
-            aab.Value = b.IsPublic;
-            cmd.Parameters.Add(aab);
-
 
             SqlParameter cmpid = new SqlParameter();
             cmpid.ParameterName = "@companyId";

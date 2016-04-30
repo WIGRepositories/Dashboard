@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-model="Fleet">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -225,7 +225,7 @@
                                                         </div>
 
 
-                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header modal-header-primary">
@@ -431,7 +431,7 @@
 
 
 
-                                                                        <!--<div class="row">
+                                                                        <div class="row">
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
@@ -450,7 +450,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>-->
+                                                                        </div>
 
 
                                                                     </div>
@@ -461,7 +461,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div>-->
 
 
 
@@ -470,50 +470,36 @@
                                                         <thead>
                                                             <tr>
 
-                                                                <th width="22%">Vehicle Id</th>
-                                                                <th>Type Id</th>
-                                                                <th>ServiceType Id</th>
-                                                                <th>FleetOwner Id</th>
+                                                                <th width="22%">Vehicle Reg. No</th>
+                                                                <th>Vehicle Type</th>
+                                                                <th>Service Type </th>   
+                                                                <th>Compnay Name</th>                 
                                                                 <th>Active</th>
                                                                 <th>Update</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat="group in Group" class="gradeA">
-                                                                <td><input type="text" id="IMEI" ng-model="Group.IMEI"style="width:70%"></td>                                                              
+                                                            <tr ng-repeat="F in Fleet" class="gradeA">
+                                                                <td>
+                                                                    {{F.VehicleRegNo}}
 
-                                                                <td>
-                                                                    <select class="form-control">
-                                                                        <option>Fleet</option>
-                                                                        <option>Henry</option>
-                                                                        <option>John</option>
-                                                                        <option>Larry</option>
-                                                                        <option>Lahm</option>
-                                                                    </select>
                                                                 </td>
                                                                 <td>
-                                                                    <select class="form-control">
-                                                                        <option>Fleet</option>
-                                                                        <option>Henry</option>
-                                                                        <option>John</option>
-                                                                        <option>Larry</option>
-                                                                        <option>Lahm</option>
-                                                                    </select>
+                                                                    {{F.VehicleTypeId}}
                                                                 </td>
                                                                 <td>
-                                                                    <select class="form-control">
-                                                                        <option>Fleet</option>
-                                                                        <option>Henry</option>
-                                                                        <option>John</option>
-                                                                        <option>Larry</option>
-                                                                        <option>Lahm</option>
-                                                                    </select>
+                                                                    {{F.ServiceTypeId}}
                                                                 </td>
-                                                                <td><input type="checkbox" class="form-control" id="Active" ng-model="currGroup.Active" checked /></td>
+                                                               
                                                                 <td>
-                                                                    
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                                    {{F.CompanyId}}
+                                                                </td>
+                                                  
+                                                                <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
+                                                                <td>
+
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
@@ -597,7 +583,7 @@
 
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/VehicleDetails.js"></script>
+    <script src="js/FleetDetail.js"></script>
 
 </body>
 </html>
