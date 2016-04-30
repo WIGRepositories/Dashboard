@@ -10,10 +10,10 @@ using System.Web.Http;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class ObjectsController : ApiController
+    public class FleetAvailabilityController : ApiController
     {
         [HttpGet]
-        public DataTable getObjects()
+        public DataTable getFleetAvailability()
         {
             DataTable Tbl = new DataTable();
 
@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getObjects";
+            cmd.CommandText = "GetFleetAvailability";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -36,7 +36,7 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable saveObjects(Objects b)
+        public DataTable saveFleetAvailability(FleetAvailability b)
         {
             DataTable Tbl = new DataTable();
 
@@ -48,7 +48,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelObjects";
+            cmd.CommandText = "InsUpdDelFleetAvailability";
             cmd.Connection = conn;
             conn.Open();
             SqlParameter cc = new SqlParameter();
@@ -57,27 +57,26 @@ namespace BTPOSDashboard.Controllers
             cc.Value = b.Id;
             cmd.Parameters.Add(cc);
             SqlParameter cname = new SqlParameter();
-            cname.ParameterName = "@Name";
+            cname.ParameterName = "@Vehicle";
             cname.SqlDbType = SqlDbType.VarChar;
-            cname.Value = b.Name;
+            cname.Value = b.Vehicle;
             cmd.Parameters.Add(cname);
-            SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Description";
-            dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Description;
-            cmd.Parameters.Add(dd);
-            SqlParameter dda = new SqlParameter();
-            dda.ParameterName = "@Path";
-            dda.SqlDbType = SqlDbType.VarChar;
-            dda.Value = b.Path;
-            cmd.Parameters.Add(dda);
+
+            SqlParameter cType = new SqlParameter();
+            cType.ParameterName = "@ServiceType";
+            cType.SqlDbType = SqlDbType.VarChar;
+            cType.Value = b.ServiceType;
+            cmd.Parameters.Add(cType);
+            SqlParameter gsac = new SqlParameter("@FromDate", SqlDbType.DateTime);
+            gsac.Value = b.FromDate;
+            cmd.Parameters.Add(gsac);
 
 
-            SqlParameter aa = new SqlParameter();
-            aa.ParameterName = "@Active";
-            aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = b.Active;
-            cmd.Parameters.Add(aa);
+            SqlParameter gsacd = new SqlParameter("@ToDate", SqlDbType.DateTime);
+            gsacd.Value = b.ToDate;
+            cmd.Parameters.Add(gsacd);
+
+           
 
 
             //DataSet ds = new DataSet();
@@ -95,4 +94,3 @@ namespace BTPOSDashboard.Controllers
         }
     }
 }
-

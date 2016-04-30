@@ -4783,3 +4783,49 @@ INSERT INTO [POSDashboard].[dbo].[FleetRoutes]
 END
 
 GO
+/****** Object:  Table [dbo].[FleetAvailability]    Script Date: 04/30/2016 14:40:10 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FleetAvailability](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Vehicle] [nvarchar](50) NOT NULL,
+	[ServiceType] [nvarchar](50) NOT NULL,
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NULL
+) ON [PRIMARY]
+
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[GetFleetAvailability]    Script Date: 04/30/2016 14:40:51 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[GetFleetAvailability]
+as
+begin
+select * from FleetAvailability
+end
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetAvailability]    Script Date: 04/30/2016 14:41:17 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[InsUpdDelFleetAvailability]
+(@Id int,@Vehicle varchar(50),@ServiceType varchar(50),@FromDate datetime,@ToDate datetime=null)
+as
+begin
+Insert into FleetAvailability(Vehicle,ServiceType,FromDate,ToDate)values(@Vehicle,@ServiceType,@FromDate,@ToDate)
+end
+G

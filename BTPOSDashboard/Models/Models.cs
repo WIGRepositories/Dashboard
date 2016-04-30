@@ -79,8 +79,10 @@ namespace BTPOSDashboardAPI.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Active { get; set; }
+        public string IsPublic { get; set; }
         public string Company { get; set; }
         public int CompanyId { get; set; }
+
 
     }
     public class Blocklist
@@ -1216,6 +1218,15 @@ namespace BTPOSDashboardAPI.Models
         public DateTime EffectiveTill { get; set; }
 
         public int Active { get; set; }
+    }
+    public class FleetAvailability
+    {
+        public int Id { get; set; }
+        public string Vehicle { get; set; }
+        public string ServiceType { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+
     }
 
 }
