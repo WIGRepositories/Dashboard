@@ -1,17 +1,10 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
     <title>Dashboard</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-    <!--Loading bootstrap css-->    
+    <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -25,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Group">
+<body ng-model="dashboardDS">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -104,7 +97,7 @@
                                     <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                     <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                     <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
-                                   
+
                                 </ul>
 
                             </li>
@@ -118,7 +111,7 @@
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
                                     <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li ><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
                                     <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
                                     <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
@@ -139,7 +132,7 @@
                                     <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
                                     <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                     <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
-                                   
+
                                 </ul>
                             </li>
 
@@ -217,7 +210,7 @@
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
 
-                     
+
                         <div class="page-content">
                             <div id="table-action" class="row">
                                 <div class="col-lg-12">
@@ -228,7 +221,7 @@
                                                 <div class="col-lg-12">
                                                     <div id="tab-general">
                                                         <h3 class="mtn">BTPOS Details</h3>
-                                                        <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0">
                                                             <thead>
                                                                 <tr>
 
@@ -243,7 +236,7 @@
                                                             </thead>
                                                             <tbody>
 
-                                                                <tr ng-repeat="pos in BTPOS" class="gradeA">
+                                                                <tr ng-repeat="pos in dashboardDS.Table" class="gradeA">
                                                                     <td>{{pos.POSID}}</td>
                                                                     <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" /></td>
 
@@ -275,8 +268,8 @@
 
                                                             </tbody>
 
-                                                        </table>-->
-                                                        <div class="alert alert-danger"> No BTPOS Details to show</div>
+                                                        </table>
+                                                        <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
 
                                                     </div>
                                                     <h3 class="mtn">License Details</h3>
@@ -302,8 +295,8 @@
                                                     </table>-->
                                                     <div class="alert alert-danger">No License Details to show</div>
                                                     <div style="width:100%;">
-                                                        <div class="tab-content" style="width:48%;float:left; ">
-                                                            <h3><b>ALERTS</b></h3>
+                                                        <div class="tab-content" style="width:49%;float:left; ">
+                                                            <h3><b>Alerts</b></h3>
                                                             <!--<div id="home" class="tab-pane fade in active">
                                                                 <div class="list-group mail-box">
                                                                     <a href="#" class="list-group-item">
@@ -320,8 +313,8 @@
                                                             <div class="alert alert-danger">No Alerts to show</div>
                                                         </div>
 
-                                                        <div class="tab-content" style="width:48%;float:right; ">
-                                                            <h3><b>NOTIFICATIONS</b></h3>
+                                                        <div class="tab-content" style="width:49%;float:right; ">
+                                                            <h3><b>Notifications</b></h3>
                                                             <!--<div id="home" class="tab-pane fade in active">
                                                                 <div class="list-group mail-box">
                                                                     <a href="#" class="list-group-item">
@@ -339,35 +332,19 @@
                                                             <div class="alert alert-danger">No Notifications to show</div>
                                                         </div>
                                                     </div>
-
-
-                                                    <!--<div>
-                                <div class="panel panel-violet">
-                                    <div class="panel-heading">BTPOS Tracking:
-
-
-                                        <div style="float:right;">
-                                            <button type="button" class="btn btn-primary" ng-click="toggle()">Hide</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>-->
-
-
-
-
-                                                    <!--<div class="panel panel-violet">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-violet" ng-hide="dashboardDS.Table.length == 0">
                                                         <div class="panel-heading">
-                                                            BTPOS Tracking:
-
-
+                                                            BTPOS Tracking
                                                             <div style="float:right;">
-                                                                <button type="button" class="btn btn-primary" ng-click="toggle()">Hide</button>
+                                                                <a id="btposstatus" style="color:white" ng-click="toggle()">Show</a>
                                                             </div>
                                                         </div>
-                                                    </div>-->
-                                                    <!--<div ng-hide="myVar">
+                                                    </div>
+                                                    <div ng-show="myVar">
                                                         <div><h3> BT POS tracking</h3></div>
                                                         <div class="tab-content">
                                                             <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
@@ -386,59 +363,60 @@
                                                         </div>
 
 
-                                                    </div>-->
-
-                                                  
+                                                    </div>
 
                                                 </div>
-                                            </div>
+
+                                                </div>
+
 
 
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
 
 
-                                </div>
-                              
-    
-                                <!--END CONTENT--><!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                </div>
-                                <!--END FOOTER-->
-                            </div>
-                            <!--END PAGE WRAPPER-->
                         </div>
-                    </div>
 
+
+                        <!--END CONTENT-->
+                        <!--BEGIN FOOTER-->
+                        <div id="footer">
+                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        </div>
+                        <!--END FOOTER-->
+                    </div>
+                    <!--END PAGE WRAPPER-->
                 </div>
-           
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <!--loading bootstrap js-->
-        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-        <script src="vendors/iCheck/icheck.min.js"></script>
-        <script src="vendors/iCheck/custom.min.js"></script>
-        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-        <script src="js/jquery.menu.js"></script>
-        <script src="vendors/jquery-pace/pace.min.js"></script>
-        <script src="vendors/holder/holder.js"></script>
-        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-        <!--LOADING SCRIPTS FOR PAGE-->
-        <script src="js/table-action.js"></script>
-        <!--CORE JAVASCRIPT-->
-        <script src="js/main.js"></script>
-       
+            </div>
+
+        </div>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
     <script src="js/source.js"></script>
