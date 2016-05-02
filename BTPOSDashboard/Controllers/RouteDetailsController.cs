@@ -103,11 +103,18 @@ namespace BTPOSDashboard.Controllers
             ccwade.Value =b.DistanceFromPreviousStop;
             cmd.Parameters.Add(ccwade);
 
-               SqlParameter ccwadea = new SqlParameter();
-               ccwadea.ParameterName = "@DistanceFromNextStop";
-            ccwadea.SqlDbType = SqlDbType.Int;
-            ccwadea.Value = b.DistanceFromNextStop;
-            cmd.Parameters.Add(ccwadea);
+
+            SqlParameter ccwadep = new SqlParameter();
+            ccwadep.ParameterName = "@PreviousStopId";
+            ccwadep.SqlDbType = SqlDbType.Int;
+            ccwadep.Value = b.DistanceFromPreviousStop;
+            cmd.Parameters.Add(ccwadep);
+
+               SqlParameter ccwadeas = new SqlParameter();
+               ccwadeas.ParameterName = "@NextStopId";
+            ccwadeas.SqlDbType = SqlDbType.Int;
+            ccwadeas.Value = b.DistanceFromNextStop;
+            cmd.Parameters.Add(ccwadeas);
              cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;

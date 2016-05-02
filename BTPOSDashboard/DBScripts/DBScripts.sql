@@ -1199,20 +1199,30 @@ CREATE TABLE [dbo].[Routes](
 	[Destination] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[RouteFares]    Script Date: 04/21/2016 09:02:36 ******/
+
+/****** Object:  Table [dbo].[RouteFare]    Script Date: 05/02/2016 15:07:04 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[RouteFares](
-	[active] [int] NOT NULL,
-	[fareCodeId] [int] NOT NULL,
+
+CREATE TABLE [dbo].[RouteFare](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[routeId] [int] NOT NULL
+	[RouteId] [int] NOT NULL,
+	[VehicleType] [nvarchar](50) NOT NULL,
+	[SourceStopId] [int] NOT NULL,
+	[DestinationStopId] [int] NOT NULL,
+	[Distance] [nvarchar](50) NOT NULL,
+	[PerUnitPrice] [int] NOT NULL,
+	[Amount] [int] NOT NULL,
+	[FareType] [nvarchar](50) NOT NULL,
+	[Active] [int] NOT NULL
 ) ON [PRIMARY]
+
 GO
+
+
 /****** Object:  Table [dbo].[RouteFareDetails]    Script Date: 04/21/2016 09:02:36 ******/
 SET ANSI_NULLS ON
 GO
@@ -1233,27 +1243,35 @@ CREATE TABLE [dbo].[RouteFareDetails](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[RouteDetails]    Script Date: 04/21/2016 09:02:36 ******/
+/****** Object:  Table [dbo].[RouteDetails]    Script Date: 05/02/2016 17:04:09 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
 SET ANSI_PADDING ON
 GO
+
 CREATE TABLE [dbo].[RouteDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[RouteId] [varchar](50) NOT NULL,
 	[stopname] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
 	[StopCode] [varchar](50) NOT NULL,
 	[DistanceFromSource] [int] NOT NULL,
 	[DistanceFromDestination] [int] NOT NULL,
 	[DistanceFromPreviousStop] [int] NOT NULL,
-	[DistanceFromNextStop] [int] NOT NULL
+	[DistanceFromNextStop] [int] NOT NULL,
+	[PreviousStopId] [int] NOT NULL,
+	[NextStopId] [int] NOT NULL
 ) ON [PRIMARY]
+
 GO
+
 SET ANSI_PADDING OFF
 GO
+
 /****** Object:  Table [dbo].[Roles]    Script Date: 04/21/2016 09:02:36 ******/
 SET ANSI_NULLS ON
 GO
@@ -2728,38 +2746,75 @@ GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRoutes]    Script Date: 05/02/2016 15:21:20 ******/
+SET ANSI_NULLS ON
 GO
-CREATE procedure [dbo].[InsUpdDelRoutes](@Id int,@Route varchar(50),@Description varchar(50),@Active varchar(50),@Code varchar(50),@BTPOSGroupId varchar(50),@Source varchar(50),@Destination varchar(50))
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[InsUpdDelRoutes](@Id int,@Route varchar(50),@Code varchar(50),@Source varchar(50),@Destination varchar(50),@Distance varchar(50))
 as
 begin
-insert into Routes ([Route],[Description],Active,Code,BTPOSGroupId,Source,Destination) values(@Route,@Description,@Active,@Code,@BTPOSGroupId,@Source,@Destination)
+insert into Routes ([Route],Code,[Source],Destination,Distance) values(@Route,@Code,@Source,@Destination,@Distance)
 end
-GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRouteFares]    Script Date: 04/21/2016 09:02:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelRouteFares](@active int,@fareCodeId int,@Id int,@routeId int)
-as
-begin
-insert into RouteFares (active,fareCodeId,routeId) values(@active,@fareCodeId,@routeId)
-end
+USE [POSDashboard]
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELBlocklist]    Script Date: 05/02/2016 14:38:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+Create PROCEDURE[dbo].[InsUpdDelELRouteFare](@Id numeric(20)
+,
+          @RouteId numeric(30),
+          @VehicleType numeric(30),
+          @SourceStopId varchar(30),
+          @DestinationStopId numeric(30),
+          @Distance varchar(30),
+          @PerUnitPrice numeric(30),
+          @Amount numeric(30),
+          @FareType varchar(30),@Active int)
+          
+AS
+BEGIN
+	
+
+INSERT INTO 
+[RouteFare] VALUES
+           ( 
+            @RouteId,
+            @VehicleType,
+            @SourceStopId,
+            @DestinationStopId,
+            @Distance,
+            @PerUnitPrice,
+            @Amount,
+            @FareType,@Active)
+            
+   
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 05/02/2016 17:09:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
 
-CREATE procedure [dbo].[InsUpdDelRouteDetails](@Id int,@RouteId varchar(50),@stopname varchar(50),@Description varchar(50),@StopCode varchar(50),@DistanceFromSource int,@DistanceFromDestination int,@DistanceFromPreviousStop int,@DistanceFromNextStop int)
+CREATE procedure [dbo].[InsUpdDelRouteDetails](@Id int,@RouteId varchar(50),@stopname varchar(50),@Description varchar(50)=null,@StopCode varchar(50),@DistanceFromSource int,@DistanceFromDestination int,@DistanceFromPreviousStop int,@DistanceFromNextStop int,@PreviousStopId int,@NextStopId int)
 as
 begin
-insert into RouteDetails (RouteId,stopname,[Description],StopCode,DistanceFromSource,DistanceFromDestination,DistanceFromPreviousStop,DistanceFromNextStop) values(@RouteId,@stopname,@Description,@StopCode,@DistanceFromSource,@DistanceFromDestination,@DistanceFromPreviousStop,@DistanceFromNextStop)
+insert into RouteDetails (RouteId,stopname,[Description],StopCode,DistanceFromSource,DistanceFromDestination,DistanceFromPreviousStop,DistanceFromNextStop,PreviousStopId,NextStopId) values(@RouteId,@stopname,@Description,@StopCode,@DistanceFromSource,@DistanceFromDestination,@DistanceFromPreviousStop,@DistanceFromNextStop,@PreviousStopId,@NextStopId)
 end
 select * from RouteDetails
+GO
+
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRoles]    Script Date: 04/21/2016 09:02:33 ******/
 SET ANSI_NULLS ON
@@ -3163,22 +3218,40 @@ begin
 select * from Routes
 end
 GO
-/****** Object:  StoredProcedure [dbo].[getRouteFares]    Script Date: 04/21/2016 09:02:33 ******/
+/****** Object:  StoredProcedure [dbo].[GetRouteFare]    Script Date: 05/02/2016 14:46:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getRouteFares]
-as
-begin
-select * from RouteFares
+Create PROCEDURE [dbo].[GetRouteFare]
+AS
+BEGIN
+	
+SELECT 
+      [Id]
+      ,[RouteId]
+      ,[VehicleType]
+      ,[SourceStopId]
+      ,[DestinationStopId]
+      ,[Distance]
+      ,[PerUnitPrice]
+      ,[Amount]
+      ,[FareType]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[RouteFare]
+
+
+
+
 end
-GO
-/****** Object:  StoredProcedure [dbo].[getRouteDetails]    Script Date: 04/21/2016 09:02:33 ******/
+
+/****** Object:  StoredProcedure [dbo].[getRouteDetails]    Script Date: 05/02/2016 17:05:58 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE procedure [dbo].[getRouteDetails]
 as
 begin
@@ -3191,9 +3264,13 @@ SELECT [Id]
       ,[DistanceFromDestination]
       ,[DistanceFromPreviousStop]
       ,[DistanceFromNextStop]
+      ,[PreviousStopId]
+      ,[NextStopId]
   FROM [POSDashboard].[dbo].[RouteDetails]
 end
+
 GO
+
 /****** Object:  StoredProcedure [dbo].[GetRoles]    Script Date: 04/21/2016 09:02:33 ******/
 SET ANSI_NULLS ON
 GO
@@ -4828,4 +4905,249 @@ as
 begin
 Insert into FleetAvailability(Vehicle,ServiceType,FromDate,ToDate)values(@Vehicle,@ServiceType,@FromDate,@ToDate)
 end
-G
+
+/****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRouteStop](
+	[FleetOwnerId] [int] NOT NULL,
+	[RouteId] [int] NULL,
+	[StopId] [int] NULL,
+	[StopNo] [int] NULL,
+	[PreviousStop] [nvarchar](50) NULL,
+	[NextStop] [nvarchar](50) NULL,
+	[Active] [int] NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetOwnerRouteStop]    Script Date: 05/02/2016 16:32:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[GetFleetOwnerRouteStop]
+AS
+BEGIN
+	
+SELECT 
+      [Id],
+      [FleetOwnerId],
+      [RouteId],
+      [StopNo],
+      [PreviousStop],
+      [NextStop],
+      [Active],
+      [StopId]
+   
+      
+  FROM [POSDashboard].[dbo].[FleetOwnerRouteStop]
+
+
+
+
+end
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELRouteStops]    Script Date: 05/02/2016 16:31:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Alter PROCEDURE[dbo].[InsUpdDelELRouteStops](@Id numeric(30),
+           @RouteId numeric(30),
+           @StopId numeric(30),
+           @StopNo numeric(30),
+           @PreviousStop varchar(50),
+           @NextStop varchar(50),
+           @PreviousStopId numeric(30),
+           @NextStopId numeric(30),
+           @DistanceFromNextStop varchar(50),
+           @DistanceFromPrevoiusStop varchar(50),
+           @Active numeric(30))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[RouteStops] VALUES
+           ( 
+          @RouteId,
+           @StopId,
+         @StopNo,
+         @PreviousStop,
+         @NextStop,
+         @PreviousStopId,
+         @NextStopId,
+         @DistanceFromNextStop,
+         @DistanceFromPrevoiusStop,
+          @Active)
+   
+	END
+
+
+	
+/****** Object:  Table [dbo].[FleetOwnerRouteFare]    Script Date: 05/02/2016 16:33:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRouteFare](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[VehicleType] [nvarchar](50) NOT NULL,
+	[SourceStopId] [int] NOT NULL,
+	[DestinationStopId] [int] NOT NULL,
+	[Distance] [nvarchar](50) NOT NULL,
+	[PerUnitPrice] [int] NOT NULL,
+	[Amount] [int] NOT NULL,
+	[CompanyId] [int] NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[FareType] [nvarchar](50) NOT NULL,
+	[Active] [int] NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetOwnerRouteFare]    Script Date: 05/02/2016 16:34:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFleetOwnerRouteFare]
+AS
+BEGIN
+	
+SELECT 
+      [Id],
+      [RouteId],
+      [VehicleType],
+      [SourceStopId],
+      [DestinationStopId],
+      [Distance],
+      [PerUnitPrice],
+      [Amount],
+      [CompanyId],
+      [FleetOwnerId],
+      [FareType],
+      [Active]
+   
+      
+  FROM [POSDashboard].[dbo].[FleetOwnerRouteFare]
+
+
+
+
+end
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerRouteFare]    Script Date: 05/02/2016 16:34:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](@Id numeric(30),
+                        @RouteId numeric(30),
+                        @VehicleType varchar(30),
+                        @SourceStopId numeric(30),
+                        @DestinationStopId numeric(30),
+                        @Distance varchar(30),
+                        @PerUnitPrice numeric(30),
+                        @Amount numeric(30),
+                        @CompanyId numeric(30),
+                        @FleetOwnerId numeric(30),
+                        @FareType varchar(30),
+                        @Active numeric(30)
+                       )
+                        
+as
+begin
+insert into FleetOwnerRouteFare values(
+                          @RouteId,
+                          @VehicleType,
+                          @SourceStopId,
+                          @DestinationStopId,
+                          @Distance,
+                          @PerUnitPrice,
+                          @Amount,
+                         @CompanyId,
+                         @FleetOwnerId,
+                         @FareType,
+                         @Active)
+                        
+end
+/****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/02/2016 17:11:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRoute](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[CompanyId] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[From] [nvarchar](50) NOT NULL,
+	[To] [nvarchar](50) NOT NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetFleetOwnerRoute]    Script Date: 05/02/2016 17:11:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create PROCEDURE [dbo].[GetFleetOwnerRoute]
+AS
+BEGIN
+	
+SELECT 
+      [Id],
+      [FleetOwnerId],
+      [CompanyId],
+      [RouteId],
+      [From],
+      [To],
+      [Active]
+      
+  FROM [POSDashboard].[dbo].[FleetOwnerRoute]
+
+
+
+
+end
+GO
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelELFleetOwnerRoute]    Script Date: 05/02/2016 16:09:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE[dbo].[InsUpdDelELFleetOwnerRoute](@Active numeric(30),
+          @Id numeric(30),
+          @FleetOwnerId numeric(30),
+          @CompanyId numeric(30),
+          @RouteId numeric(30),
+          @From varchar(50),
+          @To varchar(50))
+AS
+BEGIN
+	
+
+INSERT INTO 
+[FleetOwnerRoute] VALUES
+           (@Active,
+          @FleetOwnerId,
+          @CompanyId,
+          @RouteId,
+          @From,
+          @To)
+          
+	END

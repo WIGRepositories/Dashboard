@@ -218,9 +218,10 @@ namespace BTPOSDashboardAPI.Models
        public string Code {set;get;}
       //public string Description {set;get;} 
       //public string Active {set;get;} 
-      // public string BTPOSGroupId {set;get;}
+        public string Distance {set;get;}
       public string Source {set;get;} 
       public string Destination {set;get;} 
+
     }
 
     public class Transaction
@@ -307,48 +308,7 @@ namespace BTPOSDashboardAPI.Models
 
     }
 
-    public class RouteFares
-    {
-        public int Id { get; set; }
-
-        public string RouteId { get; set; }
-
-        public string Stopname { get; set; }
-
-        public string Descr { get; set; }
-
-        public string StopCode { get; set; }
-
-        public object ToStop { get; set; }
-
-        public object FromStop { get; set; }
-
-        public object Fare { get; set; }
-
-        public string Route { get; set; }
-
-        public string Active { get; set; }
-
-        public string Source { get; set; }
-
-        public string Destination { get; set; }
-
-        public string Code { get; set; }
-
-        public string BTPOSGrpId { get; set; }
-
-        public string Name { get; set; }
-
-        public int DistFromSource { get; set; }
-
-        public int DistFromDestination { get; set; }
-
-        public int DistFromPrevStop { get; set; }
-
-        public int DistFromNextStop { get; set; }
-
-    }
-
+  
     public class FleetOwner
     {
         public int Id { get; set; }
@@ -522,18 +482,7 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
     }
 
-    public class RouteFare
-    {
-        public int active { get; set; }
-
-        public int fareCodeId { get; set; }
-
-        public int Id { get; set; }
-
-        public int routeId { get; set; }
-
-    }
-
+  
     public class RoutesConfiguration
     {
         public int distanceFromDest { get; set; }
@@ -1228,6 +1177,70 @@ namespace BTPOSDashboardAPI.Models
         public DateTime ToDate { get; set; }
 
     }
+    public class RouteFare
+    {
+        public int Id { get; set; }
 
+        public int RouteId { get; set; }
+        public string VehicleType { get; set; }
+
+   
+        public int SourceStopId { get; set; }
+        public int DestinationStopId { get; set; }
+         public string Distance { get; set; }
+         public int PerUnitPrice { get; set; }
+    
+         public int Amount { get; set; }
+   
+         public String FareType { get; set; }
+         public int Active { get; set; }
+    }
+    public class FleetownerRoute
+    {
+        public int Id { get; set; }
+        public int FleetOwnerId { get; set; }
+     
+        public int CompanyId { get; set; }
+
+        public int RouteId { get; set; }
+
+        public String From { get; set; }
+    
+        public String To { get; set; }
+        public int Active { get; set; }
+    }
+    public class FleetOwnerRouteStop
+    {
+        public int Id { get; set; }
+        public int RouteId { get; set; }
+        public int FleetOwnerId { get; set; }
+
+        public int StopId { get; set; }
+
+        public int StopNo { get; set; }
+        public String PreviousStop { get; set; }
+        public String NextStop { get; set; }
+
+        public int Active { get; set; }
+    }
+     public class FleetOwnerRouteFare
+     {
+         public int Id { get; set; }
+         public int FleetOwnerId { get; set; }
+         public int RouteId { get; set; }
+         public int CompanyId { get; set; }
+         public string VehicleType { get; set; }
+
+
+         public int SourceStopId { get; set; }
+         public int DestinationStopId { get; set; }
+         public string Distance { get; set; }
+         public int PerUnitPrice { get; set; }
+
+         public int Amount { get; set; }
+
+         public String FareType { get; set; }
+         public int Active { get; set; }
+     }
 }
 

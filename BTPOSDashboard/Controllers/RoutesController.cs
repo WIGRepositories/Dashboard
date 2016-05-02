@@ -69,11 +69,11 @@ namespace BTPOSDashboard.Controllers
             acode.Value = r.Code;
             cmd.Parameters.Add(acode);
 
-            //SqlParameter ddes = new SqlParameter();
-            //ddes.ParameterName = "@Description";
-            //ddes.SqlDbType = SqlDbType.VarChar;
-            //ddes.Value = r.Description;
-            //cmd.Parameters.Add(ddes);
+            SqlParameter ddes = new SqlParameter();
+            ddes.ParameterName = "@Distance";
+            ddes.SqlDbType = SqlDbType.VarChar;
+            ddes.Value = r.Distance;
+            cmd.Parameters.Add(ddes);
 
            
             //SqlParameter gact = new SqlParameter();

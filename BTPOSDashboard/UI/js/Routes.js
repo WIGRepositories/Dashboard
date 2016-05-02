@@ -22,7 +22,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             //Active:(routes.Active==true)?1:0,
             //BTPOSGroupId: routes.BTPOSGroupId,
             Source: routes.Source,
-            Destination:routes.Destination
+            Destination: routes.Destination,
+            Distance:routes.Distance
         };
 
         var req = {
