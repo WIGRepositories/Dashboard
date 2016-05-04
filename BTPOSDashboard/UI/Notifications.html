@@ -25,7 +25,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Alerts">
+<body ng-model="Notifications">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -285,13 +285,13 @@
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li><a href="#">Alerts&Notifications</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Alerts</li>
+                        <li class="active">Notifiactions</li>
                     </ol>
 
                     <div class="clearfix"></div>
-               
+
                     <div id="home" class="tab-pane fade in active">
-                        <div class="list-group mail-box" ng-repeat="A in Alerts">
+                        <div class="list-group mail-box" ng-repeat="A in Notifications">
                             <a href="#" class="list-group-item">
                                 <span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">{{A.Name}}</span><span>{{A.Message}}</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
                             </a>
@@ -333,7 +333,7 @@
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/Alerts.js"></script>
+    <script src="js/Notifications.js"></script>
 
 </body>
 </html>

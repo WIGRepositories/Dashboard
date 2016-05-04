@@ -10,10 +10,10 @@ using System.Web.Http;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class NotificationsController : ApiController
+    public class FleetOwnerRouteController : ApiController
     {
         [HttpGet]
-        public DataTable getNotification()
+        public DataTable getFleetOwnerRoute()
         {
             DataTable Tbl = new DataTable();
 
@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetNotifications";
+            cmd.CommandText = "GetFleetOwnerRoute";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -34,10 +34,9 @@ namespace BTPOSDashboard.Controllers
 
             // int found = 0;
             return Tbl;
-   
-}
+        }
         [HttpPost]
-        public DataTable saveNotifications(Notifications n)
+        public DataTable saveFleetOwnerRoute(FleetownerRoute b)
         {
             DataTable Tbl = new DataTable();
 
@@ -46,47 +45,52 @@ namespace BTPOSDashboard.Controllers
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-          
+
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelNotifications";
+            cmd.CommandText = "InsUpdDelELFleetOwnerRoute";
             cmd.Connection = conn;
             conn.Open();
+            SqlParameter cc = new SqlParameter();
+            cc.ParameterName = "@Id";
+            cc.SqlDbType = SqlDbType.Int;
+            cc.Value = b.Id;
+            SqlParameter ccd = new SqlParameter();
+            ccd.ParameterName = "@FleetOwnerId";
+            ccd.SqlDbType = SqlDbType.Int;
+            ccd.Value = Convert.ToString(b.FleetOwnerId);
+            cmd.Parameters.Add(ccd);
+         
+            SqlParameter ccds = new SqlParameter();
+            ccds.ParameterName = "@CompanyId";
+            ccds.SqlDbType = SqlDbType.Int;
+            ccds.Value = Convert.ToString(b.CompanyId);
+            cmd.Parameters.Add(ccds);
+            SqlParameter ccdsa = new SqlParameter();
+            ccdsa.ParameterName = "@RouteId";
+            ccdsa.SqlDbType = SqlDbType.Int;
+            ccdsa.Value = Convert.ToString(b.RouteId);
+            cmd.Parameters.Add(ccdsa);
 
-            SqlParameter Aid = new SqlParameter();
-            Aid.ParameterName = "@Id";
-            Aid.SqlDbType = SqlDbType.Int;
-            Aid.Value = Convert.ToString(n.Id);
-            SqlParameter gsac = new SqlParameter("@Date", SqlDbType.DateTime);
-            gsac.Value = n.Date;
-            cmd.Parameters.Add(gsac);
+            SqlParameter dd = new SqlParameter();
+            dd.ParameterName = "@From";
+            dd.SqlDbType = SqlDbType.VarChar;
+            dd.Value = b.From;
+            cmd.Parameters.Add(dd);
+            SqlParameter cname = new SqlParameter();
+            cname.ParameterName = "@To";
+            cname.SqlDbType = SqlDbType.VarChar;
+            cname.Value = b.To;
+            cmd.Parameters.Add(cname);
+            
 
-            SqlParameter mm = new SqlParameter();
-            mm.ParameterName = "@Message";
-            mm.SqlDbType = SqlDbType.VarChar;
-            mm.Value = n.Message;
-            cmd.Parameters.Add(mm);
-            SqlParameter md = new SqlParameter();
-            md.ParameterName = "@MessageTypeId";
-            md.SqlDbType = SqlDbType.Int;
-            md.Value = Convert.ToString(n.MessageTypeId);
-            cmd.Parameters.Add(md);
-            SqlParameter ss = new SqlParameter();
-            ss.ParameterName = "@StatusId";
-            ss.SqlDbType = SqlDbType.Int;
-            ss.Value = Convert.ToString(n.StatusId);
-            cmd.Parameters.Add(ss);
-            SqlParameter ssi = new SqlParameter();
-            ssi.ParameterName = "@UserId";
-            ssi.SqlDbType = SqlDbType.Int;
-            ssi.Value = Convert.ToString(n.UserId);
-            cmd.Parameters.Add(ssi);
+            SqlParameter aa = new SqlParameter();
+            aa.ParameterName = "@Active";
+            aa.SqlDbType = SqlDbType.VarChar;
+            aa.Value = b.Active;
+            cmd.Parameters.Add(aa);
 
-            SqlParameter nmm = new SqlParameter();
-            nmm.ParameterName = "@Name";
-            nmm.SqlDbType = SqlDbType.VarChar;
-            nmm.Value = n.Name;
-            cmd.Parameters.Add(nmm);
+
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
             //db.Fill(ds);
@@ -96,14 +100,9 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
-              public void Options(){}
-           
+        public void Options()
+        {
+
+        }
     }
 }
-
-
-
-
-
-
-
