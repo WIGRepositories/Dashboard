@@ -1,13 +1,19 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
-
-
-    $http.get('http://localhost:1476/api/Roles/getcreaterole').then(function (res, data) {
-        $scope.newrole = res.data;
-        
+    $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+        $scope.Companies = response.data;
+        $scope.getselectval();
     });
 
+    $scope.getselectval = function (seltype) {
+        var cmpId = (seltype) ? seltype.Id : -1;
+        $http.get('http://localhost:1476/api/Roles/getroles?companyId=' + cmpId).then(function (res, data) {
+            $scope.newrole = res.data;
+
+        });
+
+    }
 
     $scope.save = function (newrole) {
         if (newrole == null) {
@@ -23,9 +29,6 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             Description: newrole.Description,
             Active: 1, //newrole.Active,
             IsPublic: 1
-
-
-
         };
 
         var req = {

@@ -2,7 +2,7 @@
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
-    $http.get('http://localhost:1476/api/GetCompanyGroups').then(function (response, data) {
+    $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
         $scope.Companies = response.data;
         $scope.getselectval();
     });
@@ -19,8 +19,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
     $scope.saveNewRole = function (selectedRole) {
 
         if (selectedRole == null) {
-            alert('Please enter role .');
-
+            alert('Please enter role name.');
             return;
         }
 

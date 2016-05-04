@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="roles">
+<body ng-init="Companies();" ng-model="roles">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -206,7 +206,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="actions">
-                                                        <a href="AddNewRole.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Role</button></a>
+                                                        <a href="AssignRole.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Assign Role</button></a>
 
                                                     </div>
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -265,7 +265,7 @@
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currRole.IsPublic"  /></div>
+                                                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currRole.IsPublic" /></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -301,7 +301,7 @@
                                                                     <input type="checkbox" ng-checked="role.Active" checked>
                                                                 </td>
                                                                 <td>
-                                                                    <input type="checkbox" ng-checked="role.Active" >
+                                                                    <input type="checkbox" ng-checked="role.Active">
                                                                 </td>
                                                                 <td>
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(role);">

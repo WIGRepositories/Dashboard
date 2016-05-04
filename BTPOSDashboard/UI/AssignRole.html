@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="newrole">
+<body ng-init="Companies();" ng-model="newrole">
     <div>
 
         <!--BEGIN THEME SETTINGS-->
@@ -178,7 +178,7 @@
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                                 <li><a href="CompanyRoles.html">CompanyRoles</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="AddNewRole.html">AddNewRole</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                                <li><a href="AddNewRole.html">Assign Role</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
 
                             </ol>
                             <div class="clearfix"></div>
@@ -198,7 +198,7 @@
 
                                                 <div class="col-lg-6">
                                                     <div class="panel panel-violet">
-                                                        <div class="panel-heading">Add New Role</div>
+                                                        <div class="panel-heading">Assign Role</div>
                                                         <div class="panel-body pan">
                                                             <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                                                 <div class="form-body">
@@ -216,7 +216,7 @@
                                                                         <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in Companies track by s.Id" ng-model="newrole.company">
+                                                                            <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getselectval(s)">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -233,7 +233,7 @@
                                                                         <label for="Active" class="col-md-3 control-label" style="color:red;">IsPublic:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <input type="checkbox"  />
+                                                                            <input type="checkbox" />
 
                                                                         </div>
                                                                     </div>
@@ -246,56 +246,54 @@
 
                                                                         <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
                                                                     </div>
-                                                                </div>                                                      
-                                                        </form>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
+
                                                 </div>
 
                                             </div>
-
                                         </div>
                                     </div>
+
+
+                                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                                    <div id="footer">
+                                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                    </div>
+                                    <!--END FOOTER-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
+                    <!--END PAGE WRAPPER-->
 
-                <!--END CONTENT--><!--BEGIN FOOTER-->
-                <div id="footer">
-                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                </div>
-                <!--END FOOTER-->
-            </div>
-            </div>
-        </div>
-    </div>
-        <!--END PAGE WRAPPER-->
+                    <script src="js/jquery-1.10.2.min.js"></script>
+                    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                    <script src="js/jquery-ui.js"></script>
+                    <!--loading bootstrap js-->
+                    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                    <script src="js/html5shiv.js"></script>
+                    <script src="js/respond.min.js"></script>
+                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                    <script src="vendors/iCheck/icheck.min.js"></script>
+                    <script src="vendors/iCheck/custom.min.js"></script>
+                    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                    <script src="js/jquery.menu.js"></script>
+                    <script src="vendors/jquery-pace/pace.min.js"></script>
+                    <script src="vendors/holder/holder.js"></script>
+                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+                    <script src="js/main.js"></script>
+                    <script src="js/angular.js"></script>
+                    <script src="js/ngStorage.js"></script>
+                    <script src="js/CreateRole.js"></script>
 
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <!--loading bootstrap js-->
-        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-        <script src="vendors/iCheck/icheck.min.js"></script>
-        <script src="vendors/iCheck/custom.min.js"></script>
-        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-        <script src="js/jquery.menu.js"></script>
-        <script src="vendors/jquery-pace/pace.min.js"></script>
-        <script src="vendors/holder/holder.js"></script>
-        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-        <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-        <script src="js/main.js"></script>
-        <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-        <script src="js/CreateRole.js"></script>
- 
 
 </body>
 </html>
