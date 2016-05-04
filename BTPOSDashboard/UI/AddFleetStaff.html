@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Home | Fleet | Fleet Details | Add Fleet Details</title>
+    <title>Home | Configuration | Roles | Add New Role</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,8 +22,9 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetFleetConfiguration()" ng-model="Fleet">
+<body ng-model="newrole">
     <div>
+
         <!--BEGIN THEME SETTINGS-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
@@ -91,22 +92,6 @@
                                     </a>
                                 </li>
 
-                                <li class="active">
-                                    <a href="#">
-                                        <i class="fa fa-send-o fa-fw">
-                                            <div class="icon-bg bg-green"></div>
-                                        </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
-                                    </a>
-                                    <ul class="nav nav-second-level">
-                                        <li class="active"><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
-                                        <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
-                                        <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
-                                        <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
-
-                                    </ul>
-
-                                </li>
-
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-send-o fa-fw">
@@ -115,12 +100,8 @@
                                     </a>
                                     <ul class="nav nav-second-level">
                                         <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                                        <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                        <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                                        <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
-                                        <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                        <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                                        <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
+                                        <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+
                                     </ul>
                                 </li>
                                 <li>
@@ -135,7 +116,7 @@
                                         <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
                                     </ul>
                                 </li>
-                                <li>
+                                <li class="active">
                                     <a href="#">
                                         <i class="fa fa-send-o fa-fw">
                                             <div class="icon-bg bg-green"></div>
@@ -192,12 +173,12 @@
                         <!--BEGIN TITLE & BREADCRUMB PAGE-->
                         <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                             <div class="page-header pull-left">
-                                <div class="page-title">Fleet Details</div>
+                                <div class="page-title">Fleet Staff</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="InventorySales.html">Fleet Details</a></li>
+                                <li><a href="CompanyRoles.html">CompanyRoles</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                                <li><a href="AddNewRole.html">AddNewRole</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
 
                             </ol>
                             <div class="clearfix"></div>
@@ -217,63 +198,45 @@
 
                                                 <div class="col-lg-6">
                                                     <div class="panel panel-violet">
-                                                        <div class="panel-heading">Add Fleet Details</div>
+                                                        <div class="panel-heading">Add Fleet staff</div>
                                                         <div class="panel-body pan">
                                                             <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                                                 <div class="form-body">
+                                                                  
                                                                     <div class="form-group">
-                                                                        <label for="Description" class="col-md-3 control-label">VehicleReg No <span class='require'>*</span></label>
+                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">StaffRole:<span class='require'>*</span></label>
 
-                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Fleet.VehicleRegNo" /><span class="help-block"></span></div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-
-                                                                        <label for="selCountry" class="col-md-3 control-label">VehicleType</label>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
-                                                                                <option value="">All</option>
+                                                                            <select ng-options="s.Name for s in Companies track by s.Id" ng-model="FleetStaff.StaffRole">
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
-
                                                                     </div>
                                                                     <div class="form-group">
+                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">UserName:<span class='require'>*</span></label>
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">ServiceType</label>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
-                                                                                <option value="">All</option>
+                                                                            <select ng-options="s.Name for s in Companies track by s.Id" ng-model="FleetStaff.UserName">
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
-
                                                                     </div>
-
                                                                     <div class="form-group">
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> From Date<span class='require'>*</span></label>
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">FleetOwner Name</label>
-                                                                        <div class="col-md-6">
-                                                                            <select ng-options="F.UserName for s in User track by F.Id" ng-model="Fleet.FleetOwnerId" class="form-control">
-                                                                                <option value="">All</option>
-                                                                            </select>
-                                                                        </div>
-
+                                                                        <div class="col-md-6"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.FromDate" /><span class="help-block"></span></div>
                                                                     </div>
-
                                                                     <div class="form-group">
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> To Date <span class='require'>*</span></label>
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">Company Name</label>
-                                                                        <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in Companies track by s.Id" class="form-control" ng-model="Fleet.CompanyId">
-                                                                                <option value="">All</option>
-                                                                            </select>
-                                                                        </div>
-
+                                                                        <div class="col-md-6"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.ToDate" /><span class="help-block"></span></div>
                                                                     </div>
+
                                                                 </div>
 
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn btn-primary" ng-click="savenewfleetdetails(Sales);">Save</button>
+                                                                        <button type="submit" class="btn btn-primary" ng-click="save(FleetStaff);">Save</button>
 
                                                                         <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
                                                                     </div>
@@ -321,13 +284,11 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
+    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
+  
     <script src="js/ngStorage.js"></script>
-    <script src="js/FleetDetail.js"></script>
-
+    <script src="js/FleetStaff  .js"></script>
 </body>
 </html>
