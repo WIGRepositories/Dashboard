@@ -19,7 +19,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
     $scope.saveNewRole = function (selectedRole) {
 
         if (selectedRole == null) {
-            alert('Please enter role name.');
+            alert('Please enter role .');
+
             return;
         }
 

@@ -4589,3 +4589,17 @@ INSERT INTO [POSDashboard].[dbo].[UserLogins]
      VALUES
            ('admin','admin',1,null,1)
 
+/****** Object:  StoredProcedure [dbo].[Sp_InsTypeGroups]    Script Date: 05/04/2016 11:24:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[Sp_InsTypeGroups](@Id int,@Name varchar(50),@Description varchar(50) =null,@Active int)
+as
+begin
+insert into TypeGroups (Name,[Description],Active) values(@Name,@Description,@Active)
+end
+
+GO
