@@ -4603,3 +4603,18 @@ insert into TypeGroups (Name,[Description],Active) values(@Name,@Description,@Ac
 end
 
 GO
+/****** Object:  StoredProcedure [dbo].[getCompanyRoles]    Script Date: 05/04/2016 11:37:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[getCompanyRoles]
+as
+begin
+select Id.[Id],Id.[RoleId],Id.[CompanyId] from [CompanyRoles] [Id]
+inner join Roles R on R.Id=Id.RoleId
+inner join Company c on C.Id=Id.CompanyId
+end
+GO
