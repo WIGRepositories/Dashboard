@@ -283,7 +283,7 @@
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
-                                                                            <button type="button" class="btn btn-primary" ng-click="save(currGroup, 'U');">Save</button>
+                                                                            <button type="button" class="btn btn-primary" ng-click="saveCmpChanges(currGroup, 'U');">Save</button>
                                                                             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                         </div>
                                                                     </div>
@@ -316,12 +316,11 @@
 
                                                             <td>{{cmp.Name}}</td>
                                                             <td>{{cmp.code}}</td>
-                                                            <td>{{cmp.descr}}</td>
+                                                            <td>{{cmp.desc}}</td>
                                                             <td>
                                                                 <input type="checkbox" ng-checked="cmp.active" disabled>
                                                             </td>
                                                             <td>
-                                                                {{cmp.Update}}
                                                                 <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
                                                                     <i class="fa fa-edit"></i>&nbsp;
                                                                     Edit
