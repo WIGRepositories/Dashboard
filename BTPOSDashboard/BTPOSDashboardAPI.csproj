@@ -41,7 +41,8 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -105,6 +106,8 @@
     <Content Include="CommercialSite\angular.js" />
     <Content Include="CommercialSite\BuyBTPOS.html" />
     <Content Include="CommercialSite\commercialsite1.jpeg" />
+    <Content Include="CommercialSite\commercialsite2.jpg" />
+    <Content Include="CommercialSite\commercialsite3.jpg" />
     <Content Include="CommercialSite\commercialsitedemo.js" />
     <Content Include="CommercialSite\CommercialSiteHome.html" />
     <Content Include="CommercialSite\FleetOwnerRequest.html" />
@@ -123,6 +126,7 @@
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
+    <Content Include="DBScripts\Init.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get Alerts.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get LicenceCatergories.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get Notifications.sql" />
@@ -293,6 +297,7 @@
     <Content Include="DBScripts\Tables\dbo.BTPOSSecheduledUpdates.sql" />
     <Content Include="DBScripts\Tables\dbo.BTPOSSheduleUploads.sql" />
     <Content Include="DBScripts\Tables\dbo.Company.sql" />
+    <Content Include="DBScripts\Tables\dbo.CompanyRoles.sql" />
     <Content Include="DBScripts\Tables\dbo.COUNTRY.sql" />
     <Content Include="DBScripts\Tables\dbo.EditHistory.sql" />
     <Content Include="DBScripts\Tables\dbo.EditHistoryDetails.sql" />
@@ -363,9 +368,11 @@
     <Content Include="Global.asax" />
     <Content Include="UI\AddFleetAvailability.html" />
     <Content Include="UI\AddFleetDetails.html" />
-    <Content Include="UI\AddFleetStaff.html" />
+    <Content Include="UI\AddFleetowner.html" />
+    <Content Include="UI\AddLicense.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
+    <Content Include="UI\AssignRole.html" />
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
@@ -449,9 +456,9 @@
     <Content Include="UI\css\themes\style3\yellow-green.css" />
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
+    <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
-    <Content Include="UI\Fleetowner.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
     <Content Include="UI\InventoryItems.html" />
@@ -472,7 +479,6 @@
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Notifications.js" />
     <Content Include="UI\js\Objects.js" />
-    <Content Include="UI\js\plus.js" />
     <Content Include="UI\js\RoleDetails.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\Stops.js" />
@@ -538,9 +544,12 @@
     <Content Include="UI\js\Users.js" />
     <Content Include="UI\LicensePayments.html" />
     <Content Include="UI\newBTPOS.html" />
+    <Content Include="UI\NewFleetBTPOS.html" />
+    <Content Include="UI\NewFleetRoutes.html" />
     <Content Include="UI\NewInventoryPurchases.html" />
     <Content Include="UI\NewInventorySales.html" />
     <Content Include="UI\NewObject.html" />
+    <Content Include="UI\Notifications.html" />
     <Content Include="UI\Objects.html" />
     <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
@@ -549,7 +558,6 @@
     <Content Include="UI\Routes.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
-    <Content Include="UI\TimeLine.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
@@ -1962,7 +1970,9 @@
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\FleetAvailabilityController.cs" />
     <Compile Include="Controllers\FleetController.cs" />
+    <Compile Include="Controllers\FleetOwnerRouteController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteFareController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteStopController.cs" />
     <Compile Include="Controllers\FleetRoutesController.cs" />
@@ -2029,10 +2039,8 @@
     <Compile Include="UI\vendors\jplist\html\data-sources\asp-net-sql-server\asp-net-solution\JPList\WEB\JPListHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Dashboard.pubxml" />
     <Content Include="UI\vendors\bootstrap-clockface\.gitignore" />
     <Content Include="UI\vendors\bootstrap-clockface\.jshintignore" />

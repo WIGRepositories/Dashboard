@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class NotificationsController : ApiController
     {
         [HttpGet]
-        public DataTable Notification()
+        public DataTable getNotification()
         {
             DataTable Tbl = new DataTable();
 
@@ -37,7 +37,7 @@ namespace BTPOSDashboard.Controllers
    
 }
         [HttpPost]
-        public DataTable check(Notifications n)
+        public DataTable saveNotifications(Notifications n)
         {
             DataTable Tbl = new DataTable();
 
@@ -49,39 +49,48 @@ namespace BTPOSDashboard.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDeLNotifications";
+            cmd.CommandText = "InsUpdDelNotifications";
             cmd.Connection = conn;
             conn.Open();
 
-         
             SqlParameter Aid = new SqlParameter();
             Aid.ParameterName = "@Id";
             Aid.SqlDbType = SqlDbType.Int;
             Aid.Value = Convert.ToString(n.Id);
-            SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Date";
-            dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = n.Date;
-            cmd.Parameters.Add(dd);
+            SqlParameter gsac = new SqlParameter("@Date", SqlDbType.DateTime);
+            gsac.Value = n.Date;
+            cmd.Parameters.Add(gsac);
+
             SqlParameter mm = new SqlParameter();
-            mm.ParameterName = "@MessageType";
+            mm.ParameterName = "@Message";
             mm.SqlDbType = SqlDbType.VarChar;
             mm.Value = n.Message;
             cmd.Parameters.Add(mm);
             SqlParameter md = new SqlParameter();
             md.ParameterName = "@MessageTypeId";
-            md.SqlDbType = SqlDbType.VarChar;
-            md.Value = n.MessageTypeId;
+            md.SqlDbType = SqlDbType.Int;
+            md.Value = Convert.ToString(n.MessageTypeId);
             cmd.Parameters.Add(md);
             SqlParameter ss = new SqlParameter();
-            ss.ParameterName = "@Status";
-            ss.SqlDbType = SqlDbType.VarChar;
-            ss.Value = n.Status;
+            ss.ParameterName = "@StatusId";
+            ss.SqlDbType = SqlDbType.Int;
+            ss.Value = Convert.ToString(n.StatusId);
             cmd.Parameters.Add(ss);
+            SqlParameter ssi = new SqlParameter();
+            ssi.ParameterName = "@UserId";
+            ssi.SqlDbType = SqlDbType.Int;
+            ssi.Value = Convert.ToString(n.UserId);
+            cmd.Parameters.Add(ssi);
+
+            SqlParameter nmm = new SqlParameter();
+            nmm.ParameterName = "@Name";
+            nmm.SqlDbType = SqlDbType.VarChar;
+            nmm.Value = n.Name;
+            cmd.Parameters.Add(nmm);
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
             //db.Fill(ds);
-           // Tbl = Tables[0];
+            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;

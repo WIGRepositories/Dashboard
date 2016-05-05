@@ -13,7 +13,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     };
 
     $scope.addpos = function (pos)
-    {       
+    {
+        if (pos == null) {
+            alert('Please enter IMEI.');
+            return;
+        }
+
+        if (pos.IMEI == null) {
+            alert('Please enter IMEI.');
+            return;
+        }
         var found = false;
         for (var i = 0; i < btposlist.length ; i++)
         {

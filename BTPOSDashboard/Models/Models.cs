@@ -11,7 +11,9 @@ namespace BTPOSDashboardAPI.Models
       public DateTime Date {get;set;}
       public string Message { get; set; }
       public string MessageTypeId { get; set; }
-      public string Status { get; set; }
+      public string StatusId { get; set; }
+      public string UserId { get; set; }
+      public string Name { get; set; }
     }
 
 
@@ -22,7 +24,9 @@ namespace BTPOSDashboardAPI.Models
       public DateTime Date {get;set;}
       public string Message { get; set; }
       public string MessageTypeId { get; set; }
-      public string Status { get; set; }
+      public string StatusId { get; set; }
+      public string UserId { get; set; }
+      public string Name { get; set; }
     }
     public class Btpos
     {

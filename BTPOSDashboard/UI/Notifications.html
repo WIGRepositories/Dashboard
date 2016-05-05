@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
     <title>Action Tables | Tables</title>
     <meta charset="utf-8">
@@ -11,8 +11,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -26,7 +25,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Groups">
+<body ng-model="Notifications">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -311,14 +310,24 @@
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Compose Mail</div>
+                        <div class="page-title">Notifications</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Compose Mail</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Action Tables</li>
+                        <li><a href="#">Alerts&Notifications</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Notifiactions</li>
                     </ol>
+
                     <div class="clearfix"></div>
+
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="list-group mail-box" ng-repeat="A in Notifications">
+                            <a href="#" class="list-group-item">
+                                <span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">{{A.Name}}</span><span>{{A.Message}}</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                 <!--END CONTENT--><!--BEGIN FOOTER-->
@@ -352,26 +361,9 @@
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-145464-12', 'auto');
-        ga('send', 'pageview');
-
-
-    </script>
     <script src="js/angular.js"></script>
-    <script src="js/BTPOSDetails.js"></script>
     <script src="js/ngStorage.js"></script>
+    <script src="js/Notifications.js"></script>
+
 </body>
 </html>

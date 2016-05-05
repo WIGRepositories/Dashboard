@@ -2,7 +2,7 @@
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
-    $http.get('http://localhost:1476/api/GetCompanyGroups').then(function (response, data) {
+    $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
         $scope.Companies = response.data;
         $scope.getselectval();
     });
@@ -37,8 +37,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Name: selectedRole.Name,
             Description: selectedRole.Description,
             Active: 1,//selectedRole.Active,
-            IsPublic:1,
-            companyId: selectedRole.company.Id
+            IsPublic:1
         };
 
         var req = {
@@ -63,8 +62,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Name: selectedRole.Name,
             Description: selectedRole.Description,
             Active: selectedRole.Active,
-            IsPublic:selectedRole.IsPublic,
-            companyId:selectedRole.companyId
+            IsPublic:selectedRole.IsPublic
 
         };
       
