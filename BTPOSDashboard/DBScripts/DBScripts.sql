@@ -1,4 +1,62 @@
 USE [POSDashboard]
+
+/****** Object:  Table [dbo].[Alerts]    Script Date: 05/05/2016 18:38:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Alerts](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Message] [varchar](50) NOT NULL,
+	[MessageTypeId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Alerts] ADD  CONSTRAINT [DF_AlertNotifications_UserId]  DEFAULT ((1)) FOR [UserId]
+GO
+
+/****** Object:  Table [dbo].[Notifications]    Script Date: 05/05/2016 18:40:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Notifications](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Message] [varchar](500) NOT NULL,
+	[MessageTypeId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
+GO
+
+
 GO
 SET ANSI_NULLS ON
 GO
@@ -4685,3 +4743,40 @@ inner join Roles R on R.Id=Id.RoleId
 inner join Company c on C.Id=Id.CompanyId
 end
 GO
+
+/****** Object:  StoredProcedure [dbo].[GetNotifications]    Script Date: 05/05/2016 18:47:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetNotifications]
+
+as begin 
+select Id,
+Date,
+Message,
+MessageTypeId,
+StatusId,
+UserId,
+Name
+ from Notifications
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetAlerts]    Script Date: 05/05/2016 18:47:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetAlerts]
+
+as begin 
+select Id,
+Date,
+Message,
+MessageTypeId,
+StatusId,
+UserId,Name 
+ from Alerts
+end
