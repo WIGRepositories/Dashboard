@@ -10,7 +10,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
     $scope.save = function (Group, flag) {
-        
+
+        if (Group == null) {
+            alert('Please enter CompanyName.');
+            return;
+        }
+        if (Group.Name == null) {
+            alert('Please enter CompanyName.');
+            return;
+        }
+        if (flag == null) {
+            alert('Please enter code.');
+            return;
+        }
+        if (Group.code == null) {
+            alert('Please enter code.');
+            return;
+        }
         var Group = {
             Id: Group.Id,
             Name: Group.Name,

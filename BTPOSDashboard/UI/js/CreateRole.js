@@ -20,6 +20,10 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             alert('Please enter role name.');
             return;
         }
+        if (newrole.Name == null) {
+            alert('Please enter role name.');
+            return;
+        }
 
 
         var newrole = {
