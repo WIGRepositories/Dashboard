@@ -4618,3 +4618,231 @@ inner join Roles R on R.Id=Id.RoleId
 inner join Company c on C.Id=Id.CompanyId
 end
 GO
+/****** Object:  Table [dbo].[EditHistory]    Script Date: 05/04/2016 17:20:55 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[EditHistory](
+	[Field] [varchar](50) NOT NULL,
+	[SubItem] [varchar](50) NOT NULL,
+	[Comment] [varchar](50) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[ChangedBy] [varchar](50) NOT NULL,
+	[ChangedType] [varchar](50) NOT NULL,
+	[Task] [varchar](50) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[EditHistoryDetails]    Script Date: 05/04/2016 17:21:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[EditHistoryDetails](
+	[EditHistoryId] [int] NOT NULL,
+	[FromValue] [varchar](50) NULL,
+	[ToValue] [varchar](50) NULL,
+	[ChangeType] [varchar](50) NOT NULL,
+	[Field1] [varchar](50) NULL,
+	[Field2] [varchar](50) NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsEditHistory]    Script Date: 05/04/2016 17:21:33 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[InsEditHistory]
+(@Task varchar(50) =null,@Field varchar(50) =null
+           ,@SubItem varchar(50) =null
+           ,@Comment varchar(50) =null
+           ,@Date datetime
+           ,@ChangedBy varchar(50) =null
+           ,@ChangedType varchar(50) =null           
+           ,@edithistoryid int = -1 OUTPUT)
+as
+begin
+
+
+INSERT INTO [POSDashboard].[dbo].[EditHistory]
+           ([Field]
+           ,[SubItem]
+           ,[Comment]
+           ,[Date]
+           ,[ChangedBy]
+           ,[ChangedType]
+           ,[Task])
+     VALUES
+           (@Field
+           ,@SubItem
+           ,@Comment
+           ,@Date
+           ,@ChangedBy
+           ,@ChangedType
+           ,@Task)
+
+ SELECT @edithistoryid = @@IDENTITY
+
+
+
+end
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsEditHistoryDetails]    Script Date: 05/04/2016 17:21:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[InsEditHistoryDetails]
+(@EditHistoryId  int
+         ,@FromValue varchar(50) = null
+           ,@ToValue varchar(50)= null
+           ,@ChangeType varchar(50)
+           ,@Field1 varchar(50) = null
+           ,@Field2 varchar(50) = null)
+AS
+BEGIN
+	INSERT INTO [POSDashboard].[dbo].[EditHistoryDetails]
+           ([EditHistoryId]
+           ,[FromValue]
+           ,[ToValue]
+           ,[ChangeType]
+           ,[Field1]
+           ,[Field2])
+     VALUES
+           (@EditHistoryId
+           ,@FromValue
+           ,@ToValue
+           ,@ChangeType
+           ,@Field1
+           ,@Field2)
+
+
+
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE procedure [dbo].[InsUpdDelCompany](
+@active int,
+@code varchar(50),
+@desc varchar(50) = '',
+@Id int,
+@Name varchar(50),
+@insupdflag varchar(10),
+@userid int = -1
+)
+as
+begin
+declare @cnt int
+declare @edithistoryid int
+set @cnt = 0
+
+declare @newCmpId int
+set @newCmpId = 0;
+
+declare @dt datetime
+set @dt = GETDATE()
+
+declare @neweid int
+
+
+
+if @insupdflag = 'I'
+	--check if already company exists
+	select @cnt = count(1) from company where upper(name) = upper(@name)
+
+	if @cnt = 0 
+	begin
+	insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
+	
+	SELECT @newCmpId = @@IDENTITY
+	
+	--insert into edit history
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid
+           
+           set @neweid =  @edithistoryid
+           
+    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+
+  --  --insert Fleet owner role by default
+		--insert into CompanyRoles (Name,[Description],Active,companyid) 
+		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
+   
+	end
+
+else
+
+   if @insupdflag = 'U'
+
+		--check if already a company with the new name exists
+		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
+	    
+		if @cnt = 0 
+		begin
+		update Company
+		set Name = @Name, code = @code, [desc] = @desc, active = @active
+		where Id = @Id
+		
+		
+		--insert into edit history
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid
+           
+           set @neweid =  @edithistoryid
+           
+    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+		
+		end
+   else
+     delete from Company where Id = @Id
+end
+
+
+--[InsUpdDelCompany] 1,'test122w32',null,-1,'ext122','I',-1
+
+--select DATEtime
+
+--select GETDATE()
+
+select * from Company
+
+
+GO
