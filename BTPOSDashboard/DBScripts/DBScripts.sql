@@ -4749,7 +4749,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetNotifications]
+CREATE procedure [dbo].[GetNotifications]
 
 as begin 
 select Id,
@@ -4769,7 +4769,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetAlerts]
+CREATE procedure [dbo].[GetAlerts]
 
 as begin 
 select Id,
