@@ -542,7 +542,6 @@
     <Content Include="UI\NewInventorySales.html" />
     <Content Include="UI\NewObject.html" />
     <Content Include="UI\Objects.html" />
-    <Content Include="UI\plus.js" />
     <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />

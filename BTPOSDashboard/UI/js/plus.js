@@ -1,7 +1,7 @@
 // JavaScript source code
-var app = angular.module('MyApp', [])
-app.controller('MyController', function ($scope, $http) {
-    alert("hi");
+var app = angular.module('myApp', [])
+app.controller('Mycntrlr', function ($scope) {
+    
             //This will hide the DIV by default.
             $scope.IsHidden = true;
           
