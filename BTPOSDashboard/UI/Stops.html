@@ -5,14 +5,7 @@
     <title>Home | BTPOS | Stops</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+    <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -22,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 <body ng-model="Stops">
@@ -80,19 +73,34 @@
                                         <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
-                                        <li><a href="Login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+                                        <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li>
-                                <a href="index.html">
+                            <li class="active">
+                                <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-send-o fa-fw">
+                                        <div class="icon-bg bg-green"></div>
+                                    </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                    <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
+                                    <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
+                                    <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+                                    <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
 
+                                </ul>
+
+                            </li>
                             <li>
                                 <a href="#">
                                     <i class="fa fa-send-o fa-fw">
@@ -101,13 +109,18 @@
                                 </a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                    <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
                                     <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li><a href="GetInventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                    <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
+                                    <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-
+                                    <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
+                                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
                                 </ul>
+
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-desktop fa-fw">
                                         <div class="icon-bg bg-pink"></div>
@@ -116,10 +129,13 @@
                                 <ul class="nav nav-second-level">
                                     <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
                                     <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                    <li class="active"><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                    <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
+                                    <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                     <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
+
                                 </ul>
                             </li>
+
 
                             <li>
                                 <a href="#">
@@ -131,6 +147,8 @@
                                     <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
                                     <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
                                     <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
+                                    <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
+                                    <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
                                 </ul>
                             </li>
                             <li>
@@ -140,7 +158,7 @@
                                     </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="form-layouts.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                    <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
                                     <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
                                     <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
                                 </ul>
@@ -165,106 +183,18 @@
                                     </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                    <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                                    <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                    <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                    <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                    <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                    <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
+                                    <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-                <div id="chat-form" class="fixed">
-                    <div class="chat-inner">
-                        <h2 class="chat-header">
-                            <a href="javascript:;" class="chat-form-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><i class="fa fa-user"></i>&nbsp;
-                            Chat
-                            &nbsp;<span class="badge badge-info">3</span>
-                        </h2>
-
-                        <div id="group-1" class="chat-group">
-                            <strong>Favorites</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Verna Morton</small>
-                                <span class="badge badge-info">2</span>
-                            </a><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Delores Blake</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Nathaniel Morris</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-idle"></span>
-                                <small>Boyd Bridges</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Meredith Houston</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                        <div id="group-2" class="chat-group">
-                            <strong>Office</strong><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Ann Scott</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Sherman Stokes</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Florence Pierce</small>
-                                <span class="badge badge-info">1</span>
-                            </a>
-                        </div>
-                        <div id="group-3" class="chat-group">
-                            <strong>Friends</strong><a href="#">
-                                <span class="user-status is-online"></span>
-                                <small>Willard Mckenzie</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-busy"></span>
-                                <small>Jenny Frazier</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Chris Stewart</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a><a href="#">
-                                <span class="user-status is-offline"></span>
-                                <small>Olivia Green</small>
-                                <span class="badge badge-info is-hidden">0</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div id="chat-box" style="top:400px">
-                        <div class="chat-box-header">
-                            <a href="#" class="chat-box-close pull-right"><i class="glyphicon glyphicon-remove"></i></a><span class="user-status is-online"></span><span class="display-name">Willard Mckenzie</span>
-                            <small>Online</small>
-                        </div>
-                        <div class="chat-content">
-                            <ul class="chat-box-body">
-                                <li>
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Admin</span><span class="time">09:33</span></p>
-
-                                    <p>Hi Swlabs, we have some comments for you.</p>
-                                </li>
-                                <li class="odd">
-                                    <p><img src="images/user.jpg" class="avt" /><span class="user">Swlabs</span><span class="time">09:33</span></p>
-
-                                    <p>Hi, we're listening you...</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="chat-textarea"><input placeholder="Type your message" class="form-control" /></div>
-                    </div>
-                </div>
-                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
@@ -298,192 +228,183 @@
 
                                                         </div>
 
-                                                      
 
 
 
-                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header modal-header-primary">
-                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Stops</h4>
-                                                                        </div>
-                                                                        <div class="modal-body" ng-model="currGroup">
 
-                                                                            <div class="row">
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Stops</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="currGroup">
 
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Stops1.Name" /></div>
-                                                                                    </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row">
-
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Description:</label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Stops1.Description" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Code:<span class='require'>*</span></label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">
-                                                                                    <div class="form-group">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Stops1.Code" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            </div>
-                                                                            <div class="form-actions">
-                                                                                <div class="col-md-offset-3 col-md-9">
-                                                                                    <button type="button" class="btn btn-primary" ng-click="save(Stops1, 'U');">Save</button>
-                                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Stops1.Name" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Description:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Stops1.Description" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Code:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Stops1.Code" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="button" class="btn btn-primary" ng-click="save(Stops1, 'U');">Save</button>
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
 
 
+                                                        </div>
+                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                            <thead>
+                                                                <tr>
+
+
+                                                                    <th width="10%">Name</th>
+                                                                    <th width="10%">Description</th>
+                                                                    <th width="10%">Code</th>
+
+                                                                    <th width="9%">Active</th>
+                                                                    <th width="9%">Update</th>
+
+                                                                </tr>
+                                                            <tbody>
+                                                                <tr ng-repeat="St in Stops">
+
+                                                                    <td>{{St.Name}}</td>
+                                                                    <td>{{St.Description}}</td>
+                                                                    <td>{{St.Code}}</td>
+                                                                    <td><input type="checkbox" checked /></td>
+                                                                    <td>
+                                                                        {{St.Update}}
+                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setStops(St);">
+                                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                                            Edit
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                            </tbody>
+
+                                                        </table>
+
+                                                        <!--<div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="pagination-panel">
+                                                                    Page
+                                                                    &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
+                                                                    of 6 | View
+                                                                    &nbsp;<select class="form-control input-xsmall input-sm input-inline">
+                                                                        <option value="20" selected="selected">20</option>
+                                                                        <option value="50">50</option>
+                                                                        <option value="100">100</option>
+                                                                        <option value="150">150</option>
+                                                                        <option value="-1">All</option>
+                                                                    </select>&nbsp;
+                                                                    records | Found total 58 records
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 text-right">
+                                                                <div class="pagination-panel">
+                                                                    <ul class="pagination pagination-sm man">
+                                                                        <li><a href="#">&laquo;</a></li>
+                                                                        <li><a href="#">1</a></li>
+                                                                        <li><a href="#">2</a></li>
+                                                                        <li><a href="#">3</a></li>
+
+                                                                        <li><a href="#">&raquo;</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
                                                     </div>
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-
-
-                                                                <th width="10%">Name</th>
-                                                                <th width="10%">Description</th>
-                                                                <th width="10%">Code</th>
-                                                                
-                                                                <th width="9%">Active</th>
-                                                                <th width="9%">Update</th>
-
-                                                            </tr>
-                                                        <tbody>
-                                                            <tr ng-repeat="St in Stops">
-
-                                                                <td>{{St.Name}}</td>
-                                                                <td>{{St.Description}}</td>
-                                                                <td>{{St.Code}}</td>                         
-                                                                <td><input type="checkbox" checked /></td>
-                                                                <td>
-                                                                    {{St.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setStops(St);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-
-
-                                                        </tbody>
-
-                                                    </table>
-
-                                                    <!--<div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="pagination-panel">
-                                                                Page
-                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                                of 6 | View
-                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                    <option value="20" selected="selected">20</option>
-                                                                    <option value="50">50</option>
-                                                                    <option value="100">100</option>
-                                                                    <option value="150">150</option>
-                                                                    <option value="-1">All</option>
-                                                                </select>&nbsp;
-                                                                records | Found total 58 records
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 text-right">
-                                                            <div class="pagination-panel">
-                                                                <ul class="pagination pagination-sm man">
-                                                                    <li><a href="#">&laquo;</a></li>
-                                                                    <li><a href="#">1</a></li>
-                                                                    <li><a href="#">2</a></li>
-                                                                    <li><a href="#">3</a></li>
-
-                                                                    <li><a href="#">&raquo;</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                                                 </div>
                                             </div>
+
+
                                         </div>
-
-
                                     </div>
+
                                 </div>
-
+                                <!--END CONTENT-->
                             </div>
-                            <!--END CONTENT--><!--BEGIN FOOTER-->
-                            <div id="footer">
-                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                            </div>
-                            <!--END FOOTER-->
+                            <!--END PAGE WRAPPER-->
                         </div>
-                        <!--END PAGE WRAPPER-->
                     </div>
-                </div>
-                <script src="js/jquery-1.10.2.min.js"></script>
-                <script src="js/jquery-migrate-1.2.1.min.js"></script>
-                <script src="js/jquery-ui.js"></script>
-                <!--loading bootstrap js-->
-                <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                <script src="js/html5shiv.js"></script>
-                <script src="js/respond.min.js"></script>
-                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                <script src="vendors/iCheck/icheck.min.js"></script>
-                <script src="vendors/iCheck/custom.min.js"></script>
-                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-                <script src="js/jquery.menu.js"></script>
-                <script src="vendors/jquery-pace/pace.min.js"></script>
-                <script src="vendors/holder/holder.js"></script>
-                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                <!--LOADING SCRIPTS FOR PAGE-->
-                <script src="js/table-action.js"></script>
-                <!--CORE JAVASCRIPT-->
-                <script src="js/main.js"></script>
 
-                <script>
-                (function (i, s, o, g, r, a, m) {
-                    i['GoogleAnalyticsObject'] = r;
-                    i[r] = i[r] || function () {
-                        (i[r].q = i[r].q || []).push(arguments)
-                    }, i[r].l = 1 * new Date();
-                    a = s.createElement(o),
-                            m = s.getElementsByTagName(o)[0];
-                    a.async = 1;
-                    a.src = g;
-                    m.parentNode.insertBefore(a, m)
-                })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-                ga('create', 'UA-145464-12', 'auto');
-                ga('send', 'pageview');
-                </script>
-                <script src="js/angular.js"></script>
-                    <script src="js/ngStorage.js"></script>
-                <script src="js/Stops.js"></script>
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/Stops.js"></script>
 
 </body>
 </html>

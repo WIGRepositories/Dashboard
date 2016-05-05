@@ -16,38 +16,133 @@ CREATE TABLE [dbo].[Expenses](
 ) ON [PRIMARY]
 
 GO
+/****** Object:  Table [dbo].[EditHistory]    Script Date: 05/04/2016 17:20:55 ******/
 SET ANSI_NULLS ON
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[EditHistoryDetails](
-	[EditHistoryId] [int] NULL,
-	[FromValue] [varchar](50) NULL,
-	[ToValue] [varchar](50) NULL,
-	[ChangeType] [varchar](50) NULL,
-	[Field1] [varchar](50) NULL,
-	[Field2] [varchar](50) NULL
-) ON [PRIMARY]
 
-GO
-SET ANSI_NULLS ON
-GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
+
 CREATE TABLE [dbo].[EditHistory](
 	[Field] [varchar](50) NOT NULL,
 	[SubItem] [varchar](50) NOT NULL,
 	[Comment] [varchar](50) NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[ChangedBy] [varchar](50) NOT NULL,
-	[ChangedType] [varchar](50) NOT NULL
+	[ChangedType] [varchar](50) NOT NULL,
+	[Task] [varchar](50) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL
 ) ON [PRIMARY]
 
 GO
+
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[EditHistoryDetails]    Script Date: 05/04/2016 17:21:12 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[EditHistoryDetails](
+	[EditHistoryId] [int] NOT NULL,
+	[FromValue] [varchar](50) NULL,
+	[ToValue] [varchar](50) NULL,
+	[ChangeType] [varchar](50) NOT NULL,
+	[Field1] [varchar](50) NULL,
+	[Field2] [varchar](50) NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsEditHistory]    Script Date: 05/04/2016 17:21:33 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[InsEditHistory]
+(@Task varchar(50) =null,@Field varchar(50) =null
+           ,@SubItem varchar(50) =null
+           ,@Comment varchar(50) =null
+           ,@Date datetime
+           ,@ChangedBy varchar(50) =null
+           ,@ChangedType varchar(50) =null           
+           ,@edithistoryid int = -1 OUTPUT)
+as
+begin
+
+
+INSERT INTO [POSDashboard].[dbo].[EditHistory]
+           ([Field]
+           ,[SubItem]
+           ,[Comment]
+           ,[Date]
+           ,[ChangedBy]
+           ,[ChangedType]
+           ,[Task])
+     VALUES
+           (@Field
+           ,@SubItem
+           ,@Comment
+           ,@Date
+           ,@ChangedBy
+           ,@ChangedType
+           ,@Task)
+
+ SELECT @edithistoryid = @@IDENTITY
+
+
+
+end
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsEditHistoryDetails]    Script Date: 05/04/2016 17:21:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[InsEditHistoryDetails]
+(@EditHistoryId  int
+         ,@FromValue varchar(50) = null
+           ,@ToValue varchar(50)= null
+           ,@ChangeType varchar(50)
+           ,@Field1 varchar(50) = null
+           ,@Field2 varchar(50) = null)
+AS
+BEGIN
+	INSERT INTO [POSDashboard].[dbo].[EditHistoryDetails]
+           ([EditHistoryId]
+           ,[FromValue]
+           ,[ToValue]
+           ,[ChangeType]
+           ,[Field1]
+           ,[Field2])
+     VALUES
+           (@EditHistoryId
+           ,@FromValue
+           ,@ToValue
+           ,@ChangeType
+           ,@Field1
+           ,@Field2)
+
+END
+
+
 CREATE TABLE [dbo].[COUNTRY](
 	[ID] [numeric](18, 0) NULL,
 	[Name] [nchar](10) NULL,
@@ -69,6 +164,25 @@ CREATE TABLE [dbo].[Company](
 ) ON [PRIMARY]
 
 GO
+
+/****** Object:  Table [dbo].[CompanyRoles]    Script Date: 05/05/2016 10:16:38 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CompanyRoles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CompanyId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -390,7 +504,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPayables](@Id numeric(30),
+CREATE PROCEDURE[dbo].[InsUpdDelPayables](@Id numeric(30),
            @Amount VARCHAR(50),
            @MasterId numeric(30),
            @Paidby varchar(50))
@@ -450,7 +564,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELNOCBTPOSTracking](@Id numeric(10),              
+CREATE PROCEDURE[dbo].[InsUpdDelNOCBTPOSTracking](@Id numeric(10),              
            @BTPOSId numeric(10),
            @Xcord varchar(50),
            @Ycord Varchar(50),
@@ -1062,7 +1176,7 @@ CREATE TABLE [dbo].[Roles](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Description] [nvarchar](50) NULL,
-	[Active] [varchar](50) NOT NULL,
+	[Active] [int] NOT NULL,
 	[CompanyId] [int] NOT NULL,
 	[IsPublic] [int] NULL CONSTRAINT [DF_Roles_IsPublic]  DEFAULT ((1))
 ) ON [PRIMARY]
@@ -1120,7 +1234,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELAlertsNotifications]
+CREATE PROCEDURE[dbo].[InsUpdDelAlertsNotifications]
 @Id int
 
            
@@ -1137,7 +1251,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELSTATE](@Id NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelSTATE](@Id NUMERIC(10),
            @Name VARCHAR(20),
            @Count VARCHAR(20),
            @Code VARCHAR(20),
@@ -1271,7 +1385,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPaymentgateway](@Id numeric(20),
+CREATE PROCEDURE[dbo].[InsUpdDelPaymentgateway](@Id numeric(20),
            @ProviderName varchar(20),
            @BTPOSGRPID VARCHAR(20),
            @Active numeric(20),
@@ -1539,32 +1653,7 @@ select * from EditHistoryDetails
 end
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelEditHistoryDetails](@EditHistoryId int,@FromValue varchar(50),@ToValue varchar(50),@ChangeType varchar(50),@Field1 varchar(50),@Field2 varchar(50))
-as
-begin
-insert into EditHistoryDetails values(@EditHistoryId,@FromValue,@ToValue,@ChangeType,@Field1,@Field2)
-end
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelEditHistory](@Field varchar(50),@SubItem varchar(50),@Comment varchar(50),@Date datetime,@ChangedBy varchar(50),@ChangedType varchar(50))
-as
-begin
-insert into EditHistory values(@Field,@SubItem,@Comment,@Date,@ChangedBy,@ChangedType)
-end
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE procedure [dbo].[getEditHistory]
 as
 begin
@@ -1588,7 +1677,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELCOUNTRY](@Id NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelCOUNTRY](@Id NUMERIC(10),
            @Name VARCHAR(50),   
            @Code VARCHAR(50),
            @Active VARCHAR(50))
@@ -1648,11 +1737,13 @@ CREATE  procedure [dbo].[GetRoles]
 (@companyId int = -1)
 as
 begin
-select Roles.Id, Roles.Name, Description, Roles.Active, companyid,c.Name Company
+select Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
 from Roles
-inner join company c on c.id = roles.companyid
-where (companyId = @companyId or @companyId = -1)
+--inner join companyroles c on c.roleid = roles.id
+--where (companyId = @companyId or @companyId = -1)
 end
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -1683,37 +1774,56 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
+
 CREATE procedure [dbo].[InsUpdDelCompany](
 @active int,
 @code varchar(50),
 @desc varchar(50) = '',
 @Id int,
 @Name varchar(50),
-@insupdflag varchar(10)
+@insupdflag varchar(10),
+@userid int = -1
 )
 as
 begin
 declare @cnt int
+declare @edithistoryid int
 set @cnt = 0
 
 declare @newCmpId int
 set @newCmpId = 0;
 
+declare @dt datetime
+set @dt = GETDATE()
+
+declare @neweid int
+
 
 
 if @insupdflag = 'I'
 	--check if already company exists
-	select @cnt = count(1) from company where upper(name) = upper(@Name)
+	select @cnt = count(1) from company where upper(name) = upper(@name)
 
 	if @cnt = 0 
 	begin
 	insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
 	
 	SELECT @newCmpId = @@IDENTITY
+	
+	--insert into edit history
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid
+           
+           set @neweid =  @edithistoryid
+           
+    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 
---    --insert Fleet owner role by default
---		insert into Roles (Name,[Description],Active,companyid) 
---		values('Fleet Owner','Fleet owner role',1,@newCmpId)
+  --  --insert Fleet owner role by default
+		--insert into CompanyRoles (Name,[Description],Active,companyid) 
+		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
    
 	end
 
@@ -1729,15 +1839,24 @@ else
 		update Company
 		set Name = @Name, code = @code, [desc] = @desc, active = @active
 		where Id = @Id
+		
+		
+		--insert into edit history
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid
+           
+           set @neweid =  @edithistoryid
+           
+    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+		
 		end
    else
      delete from Company where Id = @Id
 end
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 -- =============================================
@@ -1809,7 +1928,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSSheduleUploads](@Id NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelBTPOSSheduleUploads](@Id NUMERIC(10),
               
            @POSID numeric(10),
            @UploadOn varchar(50),
@@ -1839,7 +1958,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSSecheduledUpdates](@Id NUMERIC(10),
+create PROCEDURE[dbo].[InsUpdDelBTPOSSecheduledUpdates](@Id NUMERIC(10),
               
            @POSID numeric(10),
            @UploadOn varchar(50),
@@ -1893,7 +2012,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSRegistration](@Id NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelBTPOSRegistration](@Id NUMERIC(10),
               
            @POSID numeric(10),
            @Status VARCHAR(50),
@@ -1929,7 +2048,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSRecords](@Id NUMERIC(10),
+create PROCEDURE[dbo].[InsUpdDelBTPOSRecords](@Id NUMERIC(10),
               
            @BTPOSID numeric(10),
            @IpConfig varchar(50),
@@ -1977,7 +2096,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSPortSettings](@Id NUMERIC(10),
+create PROCEDURE[dbo].[InsUpdDelBTPOSPortSettings](@Id NUMERIC(10),
               
            @BTPOSId numeric(10),
            @Ipconfig varchar(50))
@@ -2033,7 +2152,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InsUpdDelELBTPOSFaultsCatageries](@Active NUMERIC(10),
+create PROCEDURE[dbo].[InsUpdDelBTPOSFaultsCatageries](@Active NUMERIC(10),
               
            @BTPOSFaultCategory Varchar(30),
            @Desc varchar(50),
@@ -2301,7 +2420,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBTPOSAuditDetails](@BTPOSId NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelBTPOSAuditDetails](@BTPOSId NUMERIC(10),
               
            @EditHistoryId numeric(10))
 AS
@@ -2321,7 +2440,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELBlocklist](@Id numeric(20)
+CREATE PROCEDURE[dbo].[InsUpdDelBlocklist](@Id numeric(20)
 ,
            @ItemId NUMERIC(20),
            @ItemTypeId numeric(30),
@@ -2372,7 +2491,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelELregisterform](@UserName varchar(max),
+CREATE procedure [dbo].[InsUpdDelregisterform](@UserName varchar(max),
 @Password varchar(max),@ConfirmPassword varchar(max),@Emailaddress varchar(max),
 @FirstName varchar(max),@LastName varchar(max))
 as
@@ -2421,7 +2540,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELReceivingsMaster](@Id Numeric(20),
+CREATE PROCEDURE[dbo].[InsUpdDelReceivingsMaster](@Id Numeric(20),
            @Date smalldatetime,
            @ReceivedFor varchar(20),
            @Desc varchar(20))
@@ -2443,7 +2562,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELReceivings](@Id Numeric(10),
+CREATE PROCEDURE[dbo].[InsUpdDelReceivings](@Id Numeric(10),
            @Amount VARCHAR(20),
            @MasterId numeric(10),
            @ReceivedBy Varchar(20))
@@ -2499,7 +2618,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InsUpdDelELPaymentCatergory](@Active NUMERIC(10),
+create PROCEDURE[dbo].[InsUpdDelPaymentCatergory](@Active NUMERIC(10),
               
            @Desc Varchar(30),
            
@@ -2527,7 +2646,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPaymentGatewayType](@Active NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelPaymentGatewayType](@Active NUMERIC(10),
               
            @Desc Varchar(30),
            
@@ -2623,7 +2742,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELPayablesMaster](@Id numeric,
+CREATE PROCEDURE[dbo].[InsUpdDelPayablesMaster](@Id numeric,
            @Date smalldatetime,
            @PaidFor VARCHAR,
            @Desc VARCHAR)
@@ -2730,7 +2849,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELmulitiplicationsave](@rows int,@columns int, @layoutId int)
+CREATE PROCEDURE[dbo].[InsUpdDelmulitiplicationsave](@rows int,@columns int, @layoutId int)
 AS
 BEGIN
 	
@@ -2815,7 +2934,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELLicenceStatus](@Active NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelLicenceStatus](@Active NUMERIC(10),
               
            @Desc Varchar(30),
            
@@ -2841,7 +2960,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELLicenceCatergories](@Active NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelLicenceCatergories](@Active NUMERIC(10),
               
            @Desc Varchar(30),
            
@@ -3233,7 +3352,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InsUpdDelELTroubleTicketingStatus](@Active NUMERIC(10),
+create PROCEDURE[dbo].[InsUpdDelTroubleTicketingStatus](@Active NUMERIC(10),
               
            @Desc Varchar(30),
            
@@ -3285,7 +3404,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELTroubleTicketingSlaType](@Active NUMERIC(10),
+CREATE PROCEDURE[dbo].[InsUpdDelTroubleTicketingSlaType](@Active NUMERIC(10),
               
            @Desc Varchar(30),
            
@@ -3692,7 +3811,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELSMSProviderConfig](@Id numeric(20),
+CREATE PROCEDURE[dbo].[InsUpdDelSMSProviderConfig](@Id numeric(20),
            @ProviderName varchar(20),
            @BTPOSGRPID varchar(20),
            @Active varchar(20),
@@ -3855,21 +3974,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[InsUpdDelRoles](@Id int,@Name varchar(50)
-,@Description varchar(50) = null,@Active varchar(50)
-,@companyId int)
+,@Description varchar(50) = null,@Active int = 1
+,@IsPublic int = 1)
 as
 begin
 
 update roles 
 set Name = @name,
 Description = @Description,
-CompanyId = @companyId
+Active = @Active,
+IsPublic = @IsPublic
 where id = @Id
 
 if @@rowcount = 0
 begin
-insert into Roles (Name,[Description],Active,companyid) 
-values(@Name,@Description,@Active,@companyId)
+insert into Roles (Name,[Description],Active,IsPublic) 
+values(@Name,@Description,@Active,@IsPublic)
 end
 
 end
@@ -4106,7 +4226,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelELZipCode](@Id NUMERIC(20),
+CREATE PROCEDURE[dbo].[InsUpdDelZipCode](@Id NUMERIC(20),
            @Code varchar(30),
            @Active varchar(30))
            
@@ -4370,7 +4490,7 @@ SELECT
 
 
 end
-/****** Object:  StoredProcedure [dbo].[InsUpdDelELRouteStops]    Script Date: 05/02/2016 16:31:14 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteStops]    Script Date: 05/02/2016 16:31:14 ******/
 SET ANSI_NULLS ON
 
 GO
@@ -4534,60 +4654,7 @@ begin
 insert into Fares values(@Id,@FromStop,@ToStop,@Fare,@Active,@RouteId,@Name)
 end
 
-----insert default data
-INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Active])
-VALUES ('INTERBUS','INTERBUS','INTERBUS company',1)
 
-
-INSERT INTO [POSDashboard].[dbo].[Users]
-           ([FirstName]
-           ,[LastName]
-           ,[UserTypeId]
-           ,[EmpNo]
-           ,[Email]
-           ,[AddressId]
-           ,[MobileNo]
-           ,[RoleId]
-           ,[Active]
-           ,[MiddleName]
-           ,[CompanyId])
-     VALUES
-           ('Admin','Admin',null,'EMP001',null,null,null,1,1,null,1)
-
-INSERT INTO [POSDashboard].[dbo].[Roles]
-           ([Name]
-           ,[Description]
-           ,[Active]
-           ,[CompanyId]
-		   ,[IsPublic])
-     VALUES
-           ('Admin',null,1,1,0)
-
-INSERT INTO [POSDashboard].[dbo].[Roles]
-           ([Name]
-           ,[Description]
-           ,[Active]
-           ,[CompanyId]
-		   ,[IsPublic])
-     VALUES
-           ('Fleet Owner',null,1,1,1)
-
-INSERT INTO [POSDashboard].[dbo].[UserRoles]
-           ([UserId]
-           ,[RoleId]
-           ,[GroupId]
-           ,[RoleName])
-     VALUES
-           (1,1,1,'Admin')
-
-INSERT INTO [POSDashboard].[dbo].[UserLogins]
-           ([LoginInfo]
-           ,[PassKey]
-           ,[UserId]
-           ,[salt]
-           ,[Active])
-     VALUES
-           ('admin','admin',1,null,1)
 
 /****** Object:  StoredProcedure [dbo].[Sp_InsTypeGroups]    Script Date: 05/04/2016 11:24:12 ******/
 SET ANSI_NULLS ON
@@ -4617,232 +4684,4 @@ select Id.[Id],Id.[RoleId],Id.[CompanyId] from [CompanyRoles] [Id]
 inner join Roles R on R.Id=Id.RoleId
 inner join Company c on C.Id=Id.CompanyId
 end
-GO
-/****** Object:  Table [dbo].[EditHistory]    Script Date: 05/04/2016 17:20:55 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[EditHistory](
-	[Field] [varchar](50) NOT NULL,
-	[SubItem] [varchar](50) NOT NULL,
-	[Comment] [varchar](50) NOT NULL,
-	[Date] [datetime] NOT NULL,
-	[ChangedBy] [varchar](50) NOT NULL,
-	[ChangedType] [varchar](50) NOT NULL,
-	[Task] [varchar](50) NOT NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[EditHistoryDetails]    Script Date: 05/04/2016 17:21:12 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[EditHistoryDetails](
-	[EditHistoryId] [int] NOT NULL,
-	[FromValue] [varchar](50) NULL,
-	[ToValue] [varchar](50) NULL,
-	[ChangeType] [varchar](50) NOT NULL,
-	[Field1] [varchar](50) NULL,
-	[Field2] [varchar](50) NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL
-) ON [PRIMARY]
-
-GO
-
-/****** Object:  StoredProcedure [dbo].[InsEditHistory]    Script Date: 05/04/2016 17:21:33 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE procedure [dbo].[InsEditHistory]
-(@Task varchar(50) =null,@Field varchar(50) =null
-           ,@SubItem varchar(50) =null
-           ,@Comment varchar(50) =null
-           ,@Date datetime
-           ,@ChangedBy varchar(50) =null
-           ,@ChangedType varchar(50) =null           
-           ,@edithistoryid int = -1 OUTPUT)
-as
-begin
-
-
-INSERT INTO [POSDashboard].[dbo].[EditHistory]
-           ([Field]
-           ,[SubItem]
-           ,[Comment]
-           ,[Date]
-           ,[ChangedBy]
-           ,[ChangedType]
-           ,[Task])
-     VALUES
-           (@Field
-           ,@SubItem
-           ,@Comment
-           ,@Date
-           ,@ChangedBy
-           ,@ChangedType
-           ,@Task)
-
- SELECT @edithistoryid = @@IDENTITY
-
-
-
-end
-
-GO
-
-/****** Object:  StoredProcedure [dbo].[InsEditHistoryDetails]    Script Date: 05/04/2016 17:21:53 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-CREATE PROCEDURE [dbo].[InsEditHistoryDetails]
-(@EditHistoryId  int
-         ,@FromValue varchar(50) = null
-           ,@ToValue varchar(50)= null
-           ,@ChangeType varchar(50)
-           ,@Field1 varchar(50) = null
-           ,@Field2 varchar(50) = null)
-AS
-BEGIN
-	INSERT INTO [POSDashboard].[dbo].[EditHistoryDetails]
-           ([EditHistoryId]
-           ,[FromValue]
-           ,[ToValue]
-           ,[ChangeType]
-           ,[Field1]
-           ,[Field2])
-     VALUES
-           (@EditHistoryId
-           ,@FromValue
-           ,@ToValue
-           ,@ChangeType
-           ,@Field1
-           ,@Field2)
-
-
-
-END
-
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-
-CREATE procedure [dbo].[InsUpdDelCompany](
-@active int,
-@code varchar(50),
-@desc varchar(50) = '',
-@Id int,
-@Name varchar(50),
-@insupdflag varchar(10),
-@userid int = -1
-)
-as
-begin
-declare @cnt int
-declare @edithistoryid int
-set @cnt = 0
-
-declare @newCmpId int
-set @newCmpId = 0;
-
-declare @dt datetime
-set @dt = GETDATE()
-
-declare @neweid int
-
-
-
-if @insupdflag = 'I'
-	--check if already company exists
-	select @cnt = count(1) from company where upper(name) = upper(@name)
-
-	if @cnt = 0 
-	begin
-	insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
-	
-	SELECT @newCmpId = @@IDENTITY
-	
-	--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid
-           
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
-
-  --  --insert Fleet owner role by default
-		--insert into CompanyRoles (Name,[Description],Active,companyid) 
-		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
-   
-	end
-
-else
-
-   if @insupdflag = 'U'
-
-		--check if already a company with the new name exists
-		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
-	    
-		if @cnt = 0 
-		begin
-		update Company
-		set Name = @Name, code = @code, [desc] = @desc, active = @active
-		where Id = @Id
-		
-		
-		--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid
-           
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
-		
-		end
-   else
-     delete from Company where Id = @Id
-end
-
-
---[InsUpdDelCompany] 1,'test122w32',null,-1,'ext122','I',-1
-
---select DATEtime
-
---select GETDATE()
-
-select * from Company
-
-
 GO

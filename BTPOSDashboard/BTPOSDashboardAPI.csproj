@@ -126,6 +126,7 @@
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
+    <Content Include="DBScripts\Init.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get Alerts.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get LicenceCatergories.sql" />
     <Content Include="DBScripts\Sprocs\dbo.Get Notifications.sql" />
@@ -296,6 +297,7 @@
     <Content Include="DBScripts\Tables\dbo.BTPOSSecheduledUpdates.sql" />
     <Content Include="DBScripts\Tables\dbo.BTPOSSheduleUploads.sql" />
     <Content Include="DBScripts\Tables\dbo.Company.sql" />
+    <Content Include="DBScripts\Tables\dbo.CompanyRoles.sql" />
     <Content Include="DBScripts\Tables\dbo.COUNTRY.sql" />
     <Content Include="DBScripts\Tables\dbo.EditHistory.sql" />
     <Content Include="DBScripts\Tables\dbo.EditHistoryDetails.sql" />
@@ -370,6 +372,7 @@
     <Content Include="UI\AddLicense.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
+    <Content Include="UI\AssignRole.html" />
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
