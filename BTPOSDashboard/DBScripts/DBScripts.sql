@@ -165,9 +165,6 @@ CREATE TABLE [dbo].[Company](
 
 GO
 
-USE [POSDashboard1]
-GO
-
 /****** Object:  Table [dbo].[CompanyRoles]    Script Date: 05/05/2016 10:16:38 ******/
 SET ANSI_NULLS ON
 GO
@@ -1179,7 +1176,7 @@ CREATE TABLE [dbo].[Roles](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Description] [nvarchar](50) NULL,
-	[Active] [varchar](50) NOT NULL,
+	[Active] [int] NOT NULL,
 	[CompanyId] [int] NOT NULL,
 	[IsPublic] [int] NULL CONSTRAINT [DF_Roles_IsPublic]  DEFAULT ((1))
 ) ON [PRIMARY]
@@ -1656,32 +1653,7 @@ select * from EditHistoryDetails
 end
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelEditHistoryDetails](@EditHistoryId int,@FromValue varchar(50),@ToValue varchar(50),@ChangeType varchar(50),@Field1 varchar(50),@Field2 varchar(50))
-as
-begin
-insert into EditHistoryDetails values(@EditHistoryId,@FromValue,@ToValue,@ChangeType,@Field1,@Field2)
-end
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelEditHistory](@Field varchar(50),@SubItem varchar(50),@Comment varchar(50),@Date datetime,@ChangedBy varchar(50),@ChangedType varchar(50))
-as
-begin
-insert into EditHistory values(@Field,@SubItem,@Comment,@Date,@ChangedBy,@ChangedType)
-end
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE procedure [dbo].[getEditHistory]
 as
 begin
@@ -1765,11 +1737,13 @@ CREATE  procedure [dbo].[GetRoles]
 (@companyId int = -1)
 as
 begin
-select Roles.Id, Roles.Name, Description, Roles.Active, companyid,c.Name Company
+select Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
 from Roles
-inner join company c on c.id = roles.companyid
-where (companyId = @companyId or @companyId = -1)
+--inner join companyroles c on c.roleid = roles.id
+--where (companyId = @companyId or @companyId = -1)
 end
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -4000,21 +3974,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[InsUpdDelRoles](@Id int,@Name varchar(50)
-,@Description varchar(50) = null,@Active varchar(50)
-,@companyId int)
+,@Description varchar(50) = null,@Active int = 1
+,@IsPublic int = 1)
 as
 begin
 
 update roles 
 set Name = @name,
 Description = @Description,
-CompanyId = @companyId
+Active = @Active,
+IsPublic = @IsPublic
 where id = @Id
 
 if @@rowcount = 0
 begin
-insert into Roles (Name,[Description],Active,companyid) 
-values(@Name,@Description,@Active,@companyId)
+insert into Roles (Name,[Description],Active,IsPublic) 
+values(@Name,@Description,@Active,@IsPublic)
 end
 
 end

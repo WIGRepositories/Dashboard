@@ -37,8 +37,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Name: selectedRole.Name,
             Description: selectedRole.Description,
             Active: 1,//selectedRole.Active,
-            IsPublic:1,
-            companyId: selectedRole.company.Id
+            IsPublic:1
         };
 
         var req = {
@@ -63,8 +62,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Name: selectedRole.Name,
             Description: selectedRole.Description,
             Active: selectedRole.Active,
-            IsPublic:selectedRole.IsPublic,
-            companyId:selectedRole.companyId
+            IsPublic:selectedRole.IsPublic
 
         };
       

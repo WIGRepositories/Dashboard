@@ -111,21 +111,16 @@ namespace BTPOSDashboardAPI.Controllers
        
             SqlParameter aa = new SqlParameter();
             aa.ParameterName = "@Active";
-            aa.SqlDbType = SqlDbType.VarChar;
+            aa.SqlDbType = SqlDbType.Int;
             aa.Value = b.Active;
             cmd.Parameters.Add(aa);
+
             SqlParameter aab = new SqlParameter();
             aab.ParameterName = "@IsPublic";
-            aab.SqlDbType = SqlDbType.VarChar;
+            aab.SqlDbType = SqlDbType.Int;
             aab.Value = b.IsPublic;
             cmd.Parameters.Add(aab);
 
-
-            SqlParameter cmpid = new SqlParameter();
-            cmpid.ParameterName = "@companyId";
-            cmpid.SqlDbType = SqlDbType.Int;
-            cmpid.Value = b.CompanyId;
-            cmd.Parameters.Add(cmpid);
 
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
