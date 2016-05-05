@@ -305,8 +305,8 @@
     <Content Include="DBScripts\Tables\dbo.Fares.sql" />
     <Content Include="DBScripts\Tables\dbo.FleetOwner.sql" />
     <Content Include="DBScripts\Tables\dbo.FleetOwnerRouteDetails.sql" />
-    <Content Include="DBScripts\Tables\dbo.Get Alerts.sql" />
-    <Content Include="DBScripts\Tables\dbo.Get Notifications.sql" />
+    <Content Include="DBScripts\Tables\dbo.GetAlerts.sql" />
+    <Content Include="DBScripts\Tables\dbo.GetNotifications.sql" />
     <Content Include="DBScripts\Tables\dbo.Inventory.sql" />
     <Content Include="DBScripts\Tables\dbo.InventoryItem.sql" />
     <Content Include="DBScripts\Tables\dbo.InventoryPurchases.sql" />
