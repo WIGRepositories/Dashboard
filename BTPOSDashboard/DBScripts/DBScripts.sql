@@ -2248,9 +2248,9 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
+CREATE  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
 		  @Id int,
-           @GroupId int,   
+           @CompanyId int,   
            @POSID varchar(20),
            @StatusId int,
            @IMEI varchar(20),
@@ -2282,15 +2282,16 @@ INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
              (1,
            @POSID
            ,1
-           ,null
-           ,null
+           ,@IMEI
+           ,@ipconfig
            ,1
            ,1)
 else
   if @insupdflag = 'U' 
 UPDATE [POSDashboard].[dbo].[BTPOSDetails]
-   SET --[GroupId] = @GroupId
+   SET
       [POSID] = @POSID
+      ,[CompanyId] = @CompanyId
       ,[StatusId] = @StatusId
       ,[IMEI] = @IMEI
       ,[ipconfig] = @ipconfig
@@ -3280,18 +3281,7 @@ end
 
 end
 
-select * from types
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelTypes](@Id int,@Name varchar(50),@Description varchar(50),@TypeGroupId int,@Active varchar(50))
-as
-begin
-insert into [Types] (Name,[Description],TypeGroupId,Active) values (@Name,@Description,@TypeGroupId,@Active)
-end
 
 GO
 SET ANSI_NULLS ON
@@ -4734,7 +4724,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetNotifications]
+CREATE procedure [dbo].[GetNotifications]
 
 as begin 
 select Id,
@@ -4754,7 +4744,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetAlerts]
+CREATE procedure [dbo].[GetAlerts]
 
 as begin 
 select Id,
@@ -4764,4 +4754,45 @@ MessageTypeId,
 StatusId,
 UserId,Name 
  from Alerts
+end
+
+CREATE Procedure [dbo].[GetCategories]
+@typegrpid int = -1
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT t.Id, t.Name, t.[Description],t.Active,  TypeGroupId, listkey, listvalue
+	 from [Types] t 
+	  where t.TypeGroupId = 3
+	  
+	 -- SELECT t.Id, t.Name, t.[Description],t.Active, tg.name as TypeGroup, TypeGroupId, listkey, listvalue
+	 --from [Types] t
+	 --inner join TypeGroups tg on tg.Id = t.TypeGroupId	 
+	 -- where tg.Id=30
+	 -- select I.InventoryId,I.Name,I.Code,I.
+	 -- [Description],I.AvailableQty,tg.Name as Category,t.TypeGroupId as SubCategoryId,I.PerUnitPrice,I.ReorderPont,I.Active from Inventory I inner join TypeGroups tg on tg.Id=I.InventoryId
+  --   inner join Types t on t.Id=I.InventoryId
+END
+
+CREATE procedure [dbo].[InsUpdDelSubCategory]
+(@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
+as
+begin
+
+update subcategory 
+set name=@Name
+,Active = @Active
+,Description = @Description
+,CategoryId = @CategoryId
+where Id = @Id
+
+if @@rowcount = 0 
+begin
+insert into subcategory(Name,[Description],CategoryId,Active) values(@Name,@Description,@CategoryId,@Active)
+end
+
 end
