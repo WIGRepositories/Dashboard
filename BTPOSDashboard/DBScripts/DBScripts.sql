@@ -1235,7 +1235,7 @@ CREATE TABLE [dbo].[Roles](
 	[Name] [varchar](50) NOT NULL,
 	[Description] [nvarchar](50) NULL,
 	[Active] [int] NOT NULL,
-	[CompanyId] [int] NOT NULL,
+	[CompanyId] [int] NULL,
 	[IsPublic] [int] NULL CONSTRAINT [DF_Roles_IsPublic]  DEFAULT ((1))
 ) ON [PRIMARY]
 
@@ -1791,15 +1791,53 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  procedure [dbo].[GetRoles]
+CREATE procedure [dbo].[GetRoles]
 (@companyId int = -1)
 as
 begin
-select Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
-from Roles
---inner join companyroles c on c.roleid = roles.id
---where (companyId = @companyId or @companyId = -1)
+select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
+from Roles, companyroles c  
+where (((c.roleid = roles.id) and (c.companyId = @companyId)) or @companyId = -1)
+
 end
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
+
+CREATE procedure [dbo].[InsUpdDelCompanyRoles](
+@active int,
+@Id int,
+@roleid int,
+@CompanyId int
+)
+as
+begin
+
+update CompanyRoles 
+set Active = @active
+,RoleId = @roleid
+,CompanyId = @CompanyId
+where Id = @Id
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [CompanyRoles]
+           ([CompanyId]
+           ,[RoleId]
+           ,[Active])
+     VALUES
+           (@CompanyId,@roleid,@active)
+end
+
+
+end
+
+
+
 
 
 

@@ -113,6 +113,67 @@ namespace POSDBAccess.Controllers
             return Tbl;
 
         }
+
+        [HttpPost]
+        [Route("api/assignroles")]
+        public DataTable AssignRoles(CompanyRoles r)
+        {
+            DataTable Tbl = new DataTable();
+
+            try
+            {
+                //connect to database
+                SqlConnection conn = new SqlConnection();
+                // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelCompanyRoles";
+                cmd.Connection = conn;
+
+                conn.Open();
+
+                SqlParameter gsa = new SqlParameter();
+                gsa.ParameterName = "@active";
+                gsa.SqlDbType = SqlDbType.Int;
+                gsa.Value = r.Active;
+                cmd.Parameters.Add(gsa);
+
+                SqlParameter gsn = new SqlParameter();
+                gsn.ParameterName = "@roleid";
+                gsn.SqlDbType = SqlDbType.Int;
+                gsn.Value = r.RoleId;
+                cmd.Parameters.Add(gsn);
+
+                SqlParameter gsab = new SqlParameter();
+                gsab.ParameterName = "@companyid";
+                gsab.SqlDbType = SqlDbType.Int;
+                gsab.Value = r.CompanyId;
+                cmd.Parameters.Add(gsab);
+
+                SqlParameter gsac = new SqlParameter("@Id", SqlDbType.Int);
+                gsac.Value = r.Id;
+                gsac.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(gsac);
+
+
+
+                cmd.ExecuteScalar();
+                conn.Close();
+                DataSet ds = new DataSet();
+                //SqlDataAdapter db = new SqlDataAdapter(cmd);
+                //db.Fill(ds);
+                //Tbl = ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                string str = ex.Message;
+            }
+            // int found = 0;
+            return Tbl;
+
+        }
         public void Options()
         {
         }
