@@ -1290,22 +1290,7 @@ CREATE TABLE [dbo].[RegistrationBTPOS](
 GO
 SET ANSI_NULLS ON
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelAlertsNotifications]
-@Id int
 
-           
-AS
-BEGIN
-	
-
-Delete from AlertsNotifications where Id=@Id
-   
-	END
-
-GO
-SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -3221,7 +3206,7 @@ BEGIN
            ,@PurchaseOrderNumber)
 
 END
-/****** Object:  StoredProcedure [dbo].[Get Alerts]    Script Date: 04/28/2016 11:12:57 ******/
+/****** Object:  StoredProcedure [dbo].[GetAlerts]    Script Date: 04/28/2016 11:12:57 ******/
 SET ANSI_NULLS ON
 
 GO
