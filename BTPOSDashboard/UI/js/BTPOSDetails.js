@@ -41,13 +41,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             var Group = {
                 Id: pos.Id,
                 GroupName: pos.GroupName,
-                CompanyId: pos.CompanyId,
+                CompanyId: 1,//pos.CompanyId,
                 IMEI: pos.IMEI,
                 POSID: pos.POSID,
-                StatusId: pos.StatusId,
+                StatusId: 7,//pos.StatusId,
                 ipconfig: pos.ipconfig,
                 active: 1,//Group.ipconfig,
-                fleetownerid: pos.FleetOwnerId,
+                fleetownerid: 1,//pos.FleetOwnerId,
                 insupdflag: 'U'
             }
 
@@ -76,14 +76,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
       
                 var newpos = {
                     Id: Group.Id,
-                    CompanyId: Group.CompanyId,
+                    CompanyId: 1,//Group.CompanyId,
                     GroupId: Group.GroupId,
                     IMEI: Group.IMEI,
                     POSID: Group.POSID,
-                    StatusId: Group.StatusId,
+                    StatusId: 7,//Group.StatusId,
                     ipconfig: Group.ipconfig,
                     active: 1,//Group.ipconfig,
-                    fleetownerid: Group.FleetOwnerId,
+                    fleetownerid: 1,//Group.FleetOwnerId,
                     insupdflag: flag
                 }
                 btposlist.push(newpos);

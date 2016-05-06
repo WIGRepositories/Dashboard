@@ -36,7 +36,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
        }
       
                        
-        alert("ok");
+       
         var Fleet = {
             Id:Fleet.Id,
             VehicleRegNo: Fleet.VehicleRegNo,
