@@ -4080,7 +4080,31 @@ where (u.id = @userid or @userid = -1)
 
 --get license details
 --get alerts
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Alerts t1
+ inner join Users t2 on t2.Id=t1.UserId
+ 
 --get notifications
+
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Notifications t1
+ inner join Users t2 on t2.Id=t1.UserId
 
 end
 
@@ -4727,14 +4751,17 @@ GO
 CREATE procedure [dbo].[GetNotifications]
 
 as begin 
-select Id,
-Date,
-Message,
-MessageTypeId,
-StatusId,
-UserId,
-Name
- from Notifications
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Notifications t1
+ inner join Users t2 on t2.Id=t1.UserId
 end
 
 
@@ -4747,15 +4774,26 @@ GO
 CREATE procedure [dbo].[GetAlerts]
 
 as begin 
-select Id,
-Date,
-Message,
-MessageTypeId,
-StatusId,
-UserId,Name 
- from Alerts
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Alerts t1
+ inner join Users t2 on t2.Id=t1.UserId
+                        
+                         
+                     
 end
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE Procedure [dbo].[GetCategories]
 @typegrpid int = -1
 AS
@@ -4778,6 +4816,10 @@ BEGIN
   --   inner join Types t on t.Id=I.InventoryId
 END
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
