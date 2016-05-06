@@ -16,8 +16,26 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     }
 
     $scope.save = function (User, flag, role) {
-     
-        var User = {
+        if (User == null) {
+            alert('Please enter Email.');
+            return;
+           }
+
+          if (User.Email.Name == null) {
+            alert('Please enter Email.');
+            return;
+          }
+          if (User == null) {
+              alert('Please enter EmpNo.');
+              return;
+          }
+
+          if (User.EmpNo == null) {
+              alert('Please enter EmpNo.');
+              return;
+          }
+
+         var User = {
             Id: User.Id,
             FirstName: User.FirstName,
             LastName: User.LastName,

@@ -21,7 +21,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     });
 
     $scope.save = function (Fleet) {
-        alert("ok");
+        if (Fleet == null) {
+            alert('Please enter VehicleRegNo.');
+            return;
+        }
+
+       if(Fleet.VehicleRegNo == null) {
+            alert('Please enter VehicleRegNo.');
+            return;
+       }
+       if (Fleet.group == null || Fleet.VehicleTypeId.group.Id == null) {
+           alert('Please select a type group');
+           return;
+       }
+      
+                       
+       
         var Fleet = {
             Id:Fleet.Id,
             VehicleRegNo: Fleet.VehicleRegNo,
@@ -31,8 +46,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             ServiceTypeId: Fleet.ServiceTypeId,
             Active: Fleet.Active,
            
-
-
         };
      
         var req = {

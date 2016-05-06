@@ -23,7 +23,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     });
 
     $scope.save = function (FleetRoute) {
-        alert("ok");
+        if(FleetRoute == null || FleetRoute.VehicleId == null){
+            alert('Please select a type VehicleId');
+            return;
+        }
+        if(FleetRoute == null || FleetRoute.RouteId == null){
+            alert('Please select a type  RouteId ');
+            return;
+        }
+     
         var FleetRoute = {
             Id: FleetRoute.Id,
             VehicleId: FleetRoute.VehicleId,
@@ -31,8 +39,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             EffectiveFrom: FleetRoute.EffectiveFrom,
             EffectiveTill: FleetRoute.EffectiveTill,
             Active: FleetRoute.Active,
-
-
 
         };
 

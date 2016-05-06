@@ -28,6 +28,15 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
       }
 
       $scope.saveNewItem = function (Item) {
+          if (Item == null) {
+              alert('Please enter ItemName.');
+              return;
+          }
+
+          if (Item.ItemName == null) {
+              alert('Please enter ItemName.');
+              return;
+          }
 
           var Item = {
               Id: -1,

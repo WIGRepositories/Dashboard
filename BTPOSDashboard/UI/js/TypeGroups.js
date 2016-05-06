@@ -8,6 +8,16 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http,$localStorag
 
     $scope.save = function (TypeGroup) {
       
+        if (TypeGroup == null) {
+            alert('Please enter name.');
+            return;
+        }
+
+        if (TypeGroup.Name == null) {
+            alert('Please enter name.');
+            return;
+        }
+
         var SelTypeGroup = {
             Name: TypeGroup.Name,
             Description: TypeGroup.Description,
