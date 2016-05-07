@@ -11,42 +11,36 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         if (Group == null)
         {
             alert('Please enter ticketTypeId ');
+            return;
         }
         if (Group.ticketTypeId == null)
         {
             alert('Please enter ticketTypeId')
+            return;
         }
-        if(Group == null)
-        {
-            alert('Please enter   TTId ');
-        }
+       
         if (Group.TTId == null)
         {
             alert('please enter   TTId');
+            return;
         }
-        if (Group == null)
-        {
-            alert('Please enter createdBy ');
-        }
+        
         if (Group.createdBy == null)
         {
             alert('Please enter createdBy');
+            return;
         }
-        if (Group == null)
-        {
-            alert('please enter createdOn ')
-        }
+        
         if (Group.createdOn == null)
         {
             alert('Please enter createdOn')
+            return;
         }
-        if (Group == null)
-        {
-            alert('Please enter ticketinfo ');
-        }
+       
         if (Group.ticketinfo == null)
         {
             alert('Please enter ticketinfo');
+            return;
         }
         var Group = {
             addInfo: Group.addInfo,
