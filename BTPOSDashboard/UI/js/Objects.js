@@ -12,18 +12,18 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
         if (NewObjects == null)
         {
             alert('please enter Name');
+            return;
         }
         if (NewObjects.Name == null)
         {
             alert('Please Enter Nmae');
+            return;
         }
-        if (NewObjects == null)
-        {
-            alert('Please enter Path');
-        }
+       
         if (NewObjects.Path == null)
         {
             alert('Please Enter Path');
+            return;
         }
    
         var NewObjects = {
