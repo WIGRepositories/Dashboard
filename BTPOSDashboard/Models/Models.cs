@@ -524,6 +524,18 @@ namespace BTPOSDashboardAPI.Models
 
     }
 
+    public class CompanyRoles
+    {
+        public int Id { get; set; }
+        public string Role { get; set; }
+        public string RoleId { get; set; }
+        public string Active { get; set; }
+        public string IsPublic { get; set; }
+        public string Company { get; set; }
+        public int CompanyId { get; set; }
+
+
+    }
     public class PaymentReceivings
     {
         public int amount { get; set; }

@@ -1,4 +1,62 @@
 USE [POSDashboard]
+
+/****** Object:  Table [dbo].[Alerts]    Script Date: 05/05/2016 18:38:41 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Alerts](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Message] [varchar](50) NOT NULL,
+	[MessageTypeId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Alerts] ADD  CONSTRAINT [DF_AlertNotifications_UserId]  DEFAULT ((1)) FOR [UserId]
+GO
+
+/****** Object:  Table [dbo].[Notifications]    Script Date: 05/05/2016 18:40:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Notifications](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Message] [varchar](500) NOT NULL,
+	[MessageTypeId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL,
+	[UserId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
+GO
+
+
 GO
 SET ANSI_NULLS ON
 GO
@@ -1177,7 +1235,7 @@ CREATE TABLE [dbo].[Roles](
 	[Name] [varchar](50) NOT NULL,
 	[Description] [nvarchar](50) NULL,
 	[Active] [int] NOT NULL,
-	[CompanyId] [int] NOT NULL,
+	[CompanyId] [int] NULL,
 	[IsPublic] [int] NULL CONSTRAINT [DF_Roles_IsPublic]  DEFAULT ((1))
 ) ON [PRIMARY]
 
@@ -1232,22 +1290,7 @@ CREATE TABLE [dbo].[RegistrationBTPOS](
 GO
 SET ANSI_NULLS ON
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE[dbo].[InsUpdDelAlertsNotifications]
-@Id int
 
-           
-AS
-BEGIN
-	
-
-Delete from AlertsNotifications where Id=@Id
-   
-	END
-
-GO
-SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -1733,15 +1776,53 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE  procedure [dbo].[GetRoles]
+CREATE procedure [dbo].[GetRoles]
 (@companyId int = -1)
 as
 begin
-select Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
-from Roles
---inner join companyroles c on c.roleid = roles.id
---where (companyId = @companyId or @companyId = -1)
+select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
+from Roles, companyroles c  
+where (((c.roleid = roles.id) and (c.companyId = @companyId)) or @companyId = -1)
+
 end
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
+
+CREATE procedure [dbo].[InsUpdDelCompanyRoles](
+@active int,
+@Id int,
+@roleid int,
+@CompanyId int
+)
+as
+begin
+
+update CompanyRoles 
+set Active = @active
+,RoleId = @roleid
+,CompanyId = @CompanyId
+where Id = @Id
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [CompanyRoles]
+           ([CompanyId]
+           ,[RoleId]
+           ,[Active])
+     VALUES
+           (@CompanyId,@roleid,@active)
+end
+
+
+end
+
+
+
 
 
 
@@ -2205,9 +2286,9 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
+CREATE  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
 		  @Id int,
-           @GroupId int,   
+           @CompanyId int,   
            @POSID varchar(20),
            @StatusId int,
            @IMEI varchar(20),
@@ -2239,15 +2320,16 @@ INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
              (1,
            @POSID
            ,1
-           ,null
-           ,null
+           ,@IMEI
+           ,@ipconfig
            ,1
            ,1)
 else
   if @insupdflag = 'U' 
 UPDATE [POSDashboard].[dbo].[BTPOSDetails]
-   SET --[GroupId] = @GroupId
+   SET
       [POSID] = @POSID
+      ,[CompanyId] = @CompanyId
       ,[StatusId] = @StatusId
       ,[IMEI] = @IMEI
       ,[ipconfig] = @ipconfig
@@ -3163,7 +3245,7 @@ BEGIN
            ,@PurchaseOrderNumber)
 
 END
-/****** Object:  StoredProcedure [dbo].[Get Alerts]    Script Date: 04/28/2016 11:12:57 ******/
+/****** Object:  StoredProcedure [dbo].[GetAlerts]    Script Date: 04/28/2016 11:12:57 ******/
 SET ANSI_NULLS ON
 
 GO
@@ -3237,18 +3319,7 @@ end
 
 end
 
-select * from types
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelTypes](@Id int,@Name varchar(50),@Description varchar(50),@TypeGroupId int,@Active varchar(50))
-as
-begin
-insert into [Types] (Name,[Description],TypeGroupId,Active) values (@Name,@Description,@TypeGroupId,@Active)
-end
 
 GO
 SET ANSI_NULLS ON
@@ -4047,7 +4118,31 @@ where (u.id = @userid or @userid = -1)
 
 --get license details
 --get alerts
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Alerts t1
+ inner join Users t2 on t2.Id=t1.UserId
+ 
 --get notifications
+
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Notifications t1
+ inner join Users t2 on t2.Id=t1.UserId
 
 end
 
@@ -4685,3 +4780,99 @@ inner join Roles R on R.Id=Id.RoleId
 inner join Company c on C.Id=Id.CompanyId
 end
 GO
+
+/****** Object:  StoredProcedure [dbo].[GetNotifications]    Script Date: 05/05/2016 18:47:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetNotifications]
+
+as begin 
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Notifications t1
+ inner join Users t2 on t2.Id=t1.UserId
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetAlerts]    Script Date: 05/05/2016 18:47:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetAlerts]
+
+as begin 
+select t1.Id,
+t1.Date,
+t1.Message,
+t1.MessageTypeId,
+t1.StatusId,
+t1.UserId,
+t1.Name,
+t2.FirstName,
+t2.LastName
+ from Alerts t1
+ inner join Users t2 on t2.Id=t1.UserId
+                        
+                         
+                     
+end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[GetCategories]
+@typegrpid int = -1
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT t.Id, t.Name, t.[Description],t.Active,  TypeGroupId, listkey, listvalue
+	 from [Types] t 
+	  where t.TypeGroupId = 3
+	  
+	 -- SELECT t.Id, t.Name, t.[Description],t.Active, tg.name as TypeGroup, TypeGroupId, listkey, listvalue
+	 --from [Types] t
+	 --inner join TypeGroups tg on tg.Id = t.TypeGroupId	 
+	 -- where tg.Id=30
+	 -- select I.InventoryId,I.Name,I.Code,I.
+	 -- [Description],I.AvailableQty,tg.Name as Category,t.TypeGroupId as SubCategoryId,I.PerUnitPrice,I.ReorderPont,I.Active from Inventory I inner join TypeGroups tg on tg.Id=I.InventoryId
+  --   inner join Types t on t.Id=I.InventoryId
+END
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[InsUpdDelSubCategory]
+(@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
+as
+begin
+
+update subcategory 
+set name=@Name
+,Active = @Active
+,Description = @Description
+,CategoryId = @CategoryId
+where Id = @Id
+
+if @@rowcount = 0 
+begin
+insert into subcategory(Name,[Description],CategoryId,Active) values(@Name,@Description,@CategoryId,@Active)
+end
+
+end

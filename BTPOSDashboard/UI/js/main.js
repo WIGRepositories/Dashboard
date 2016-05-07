@@ -303,11 +303,11 @@ $(function () {
     });
     //END CHECKBOX TABLE
 
-    //BEGIN JQUERY NEWS UPDATE
-    $('#news-update').ticker({
-        controls: false,
-        titleText: ''
-    });
+    ////BEGIN JQUERY NEWS UPDATE
+    //$('#news-update').ticker({
+    //    controls: false,
+    //    titleText: ''
+    //});
     //END JQUERY NEWS UPDATE
 
     $('.option-demo').hover(function() {
