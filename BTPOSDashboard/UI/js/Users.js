@@ -34,6 +34,27 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
               alert('Please enter EmpNo.');
               return;
           }
+          if (user == null)
+          {
+              alert('Please enter Adress');
+          }
+          if (user.AdressId == null)
+          {
+              alert('Please enter AdressId');
+          }
+          if (RoleId.group == null || RoleId.group.Id == null)
+          {
+              alert('Please select a type group');
+              return;
+          }
+          if (User == null)
+          {
+              alert('Please enter Username');
+          }
+          if (User.UserName == null)
+          {
+              alert('Please enter Password');
+          }
 
          var User = {
             Id: User.Id,

@@ -8,7 +8,46 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     });
     $scope.save = function (Group) {
-       
+        if (Group == null)
+        {
+            alert('Please enter ticketTypeId ');
+        }
+        if (Group.ticketTypeId == null)
+        {
+            alert('Please enter ticketTypeId')
+        }
+        if(Group == null)
+        {
+            alert('Please enter   TTId ');
+        }
+        if (Group.TTId == null)
+        {
+            alert('please enter   TTId');
+        }
+        if (Group == null)
+        {
+            alert('Please enter createdBy ');
+        }
+        if (Group.createdBy == null)
+        {
+            alert('Please enter createdBy');
+        }
+        if (Group == null)
+        {
+            alert('please enter createdOn ')
+        }
+        if (Group.createdOn == null)
+        {
+            alert('Please enter createdOn')
+        }
+        if (Group == null)
+        {
+            alert('Please enter ticketinfo ');
+        }
+        if (Group.ticketinfo == null)
+        {
+            alert('Please enter ticketinfo');
+        }
         var Group = {
             addInfo: Group.addInfo,
             createdBy: Group.createdBy,

@@ -6,7 +6,23 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
         $scope.Stops = res.data;
     });
-    $scope.save = function (Stops,flag) {
+    $scope.save = function (Stops, flag) {
+        if (Stops == null)
+        {
+            alert('Please Enter Name');
+        }
+        if (Stops.Name == null)
+        {
+            alert('Please Enter Nmae');
+        }
+        if (Stops == null)
+        {
+            alert('Please enter Code');
+        }
+        if (Stops.Code == null)
+        {
+            alert('Please Enter Code');
+        }
 
         var Stops = {
             Id: Stops.Id,
