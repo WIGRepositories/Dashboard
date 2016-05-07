@@ -14,7 +14,46 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         $scope.myVar = !$scope.myVar;
     };
     $scope.save = function (routes) {
-        alert("ok");
+
+        if (routes == null)
+        {
+            alert('Please enter Route');
+        }
+        if (routes.Route == null)
+        {
+            alert('plaease enter Route');
+
+        }
+        if (routes == null)
+        {
+            alert('Please enter Code');
+        }
+        if (routes.Code == null)
+        {
+            alert('Please enter Code');
+        }
+        if (routes == null)
+        {
+            alert('Please enter Source');
+        }
+        if (routes.Source == null)
+        {
+            alert('Please enter Source');
+        }
+        if (routes == null) {
+            alert('Please enter Destination');
+        }
+        if (routes.Destination == null) {
+            alert('Please enter Destination');
+        }
+        if (routes == null) {
+            alert('Please enter Distance');
+        }
+        if (routes.Distance == null) {
+            alert('Please enter Distance');
+        }
+
+       
         var routes = {
             Route: routes.Route,
             Code: routes.Code,

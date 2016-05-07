@@ -23,6 +23,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             alert('Please enter IMEI.');
             return;
         }
+        if (pos == null)
+        {
+            alert('Please enter BtposName.');
+        }
+        if (pos.CompanyId == null)
+        {
+            alert('Please enter CompanyId')
+        }
         var found = false;
         for (var i = 0; i < btposlist.length ; i++)
         {
