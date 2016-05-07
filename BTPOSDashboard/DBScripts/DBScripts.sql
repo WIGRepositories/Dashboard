@@ -4966,9 +4966,7 @@ end
    
    --insert company role for company and fleet owner role
   exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2 
-   
-   
-           
+                 
  if @insupdflag='I'and @fleetcnt>0
  begin
 	RAISERROR ('Already FleetOwner exists',16,1);
@@ -4979,9 +4977,70 @@ end
 	insert into FleetOwner (UserId,GroupId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
  end
 
+--assign fleet owner role to user
+exec [InsUpdDelUserRoles] -1,2,@currid,@cmpid
 end
 
 
+
 GO
+
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 05/07/2016 11:08:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserRoles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[CompanyId] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[InsUpdDelUserRoles](
+@Id int,
+@roleid int,
+@UserId int,
+@CompanyId int = null
+)
+as
+begin
+
+
+UPDATE [POSDashboard].[dbo].[UserRoles]
+   SET [UserId] = @UserId
+      ,[RoleId] = @RoleId
+      ,[CompanyId] = @CompanyId
+ WHERE Id = @Id
+
+
+
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId]
+           ,[CompanyId])
+     VALUES
+           (@UserId
+           ,@RoleId
+           ,@CompanyId)
+end
+
+
+end
 
 
