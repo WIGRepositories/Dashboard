@@ -3808,7 +3808,7 @@ CREATE PROCEDURE [dbo].[InsUpdelStops]
 	-- Add the parameters for the stored procedure here
 (@Id int,
       @Name varchar(30),
-      @Description varchar(30),
+      @Description varchar(30) = null,
       @Code varchar(10),
       @Active int,
       @insupdflag varchar(10))
