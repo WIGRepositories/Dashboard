@@ -14,7 +14,42 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         $scope.myVar = !$scope.myVar;
     };
     $scope.save = function (routes) {
-        alert("ok");
+
+        if (routes == null)
+        {
+            alert('Please enter Route');
+            return;
+        }
+        if (routes.Route == null)
+        {
+            alert('plaease enter Route');
+            return;
+
+        }
+        
+        if (routes.Code == null)
+        {
+            alert('Please enter Code');
+            return;
+        }
+       
+        if (routes.Source == null)
+        {
+            alert('Please enter Source');
+            return;
+        }
+        
+        if (routes.Destination == null) {
+            alert('Please enter Destination');
+            return;
+        }
+       
+        if (routes.Distance == null) {
+            alert('Please enter Distance');
+            return;
+        }
+
+       
         var routes = {
             Route: routes.Route,
             Code: routes.Code,

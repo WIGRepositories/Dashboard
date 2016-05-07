@@ -1,11 +1,9 @@
-
-
 -- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-alter PROCEDURE [dbo].[InsupdCreateFleetOwner]
+Create PROCEDURE [dbo].[InsupdCreateFleetOwner]
 	-- Add the parameters for the stored procedure here
 	(@Id int,
            @FirstName varchar(30),
@@ -25,6 +23,9 @@ declare @cmpcnt int
 set @cmpcnt = 0
  declare @fleetcnt int
 set @fleetcnt = 0
+
+declare @cmpid int
+set @cmpid = 0
  
  declare @fc varchar(10) 
  set @fc = case when (select COUNT(*) from Users) = 0
@@ -37,7 +38,25 @@ set @fleetcnt = 0
  select @cmpcnt=COUNT (*) from Company where UPPER (Name)=@CompanyName
  select @fleetcnt=COUNT (*) from FleetOwner where UPPER (FleetOwnerCode)=@fc
 
- 
+ 	
+ if @cmpcnt=0
+ begin
+  insert into Company 
+           ([Name]
+           ,[Code]
+           ,[Desc]
+           ,[Active])      
+     VALUES
+           (@CompanyName,@CompanyName,@Description,1)
+           
+           SELECT @cmpid = @@IDENTITY
+ end
+ else
+ begin  
+   SELECT @cmpid = Id from Company where UPPER (Name)=@CompanyName
+   
+ end
+   
  
  
  if @insupdflag='I' and @cnt>0
@@ -49,8 +68,8 @@ set @fleetcnt = 0
  begin
  
    insert into Users (FirstName,
-   LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active)
-   values(@FirstName,@LastName,null,1,'FL00'+@fc,@Email,null,@MobileNo,6,1) 
+   LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active,CompanyId)
+   values(@FirstName,@LastName,null,1,'FL00'+@fc,@Email,null,@MobileNo,6,1,@cmpid) 
           
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
@@ -60,18 +79,11 @@ set @fleetcnt = 0
 end
 
 	
-	
- if @cmpcnt=0
- begin
-  insert into Company 
-           ([Name]
-           ,[Code]
-           ,[Desc]
-           ,[Active])      
-     VALUES
-           (@CompanyName,@CompanyName,@Description,1)
- end
-           
+
+   
+   --insert company role for company and fleet owner role
+  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2 
+                 
  if @insupdflag='I'and @fleetcnt>0
  begin
 	RAISERROR ('Already FleetOwner exists',16,1);
@@ -82,19 +94,10 @@ end
 	insert into FleetOwner (UserId,GroupId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
  end
 
- else
- 
- begin
- update Users 
- set FirstName = @FirstName,
- LastName = @LastName,
- Email = @Email,
- MobileNo = @MobileNo
- where id = @CompanyGroupId
- 
-
+--assign fleet owner role to user
+exec [InsUpdDelUserRoles] -1,2,@currid,@cmpid
 end
-END
+
 
 GO
 
