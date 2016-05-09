@@ -3,10 +3,14 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/license/getlicense?Subcatid=-1').then(function (response, data) {
-        $scope.SubCategories = response.data;
-        $scope.getselectval();
-    })
+    $scope.GetLicenseCategories = function () {
+
+        $http.get('http://localhost:1476/api/subcategory/getsubcategory?catid=' + 6).then(function (res, data) {
+            $scope.SubCategories = res.data;
+        });
+    }
+
+    
 
 
     $scope.getselectval = function (seltype) {
