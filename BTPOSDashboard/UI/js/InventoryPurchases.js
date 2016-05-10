@@ -1,6 +1,4 @@
 // JavaScript source code
-// JavaScript source code
-// JavaScript source code
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
     $scope.uname = $localStorage.uname
@@ -29,6 +27,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
         var Group = {
             Id:-1,
             ItemName: Group.ItemName.ItemName,
+            subCategoryId: Group.ItemName.SubCategoryId,
             Quantity: Group.Quantity,
             PerUnitPrice: Group.PerUnitPrice,
             PurchaseDate: Group.PurchaseDate,

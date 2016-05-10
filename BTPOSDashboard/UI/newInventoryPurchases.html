@@ -3,12 +3,7 @@
 <head>
     <title>Home | Configuration | Roles | Add New Role</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
@@ -215,9 +210,7 @@
                             </ol>
                             <div class="clearfix"></div>
                         </div>
-                    </div>
-                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <div id="page-wrapper">
+                  
                         <!--BEGIN TITLE & BREADCRUMB PAGE-->
 
                         <div class="page-content">
@@ -228,7 +221,7 @@
                                         <div id="tab-form-actions" class="tab-pane fade active in">
                                             <div class="row">
 
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-9">
                                                     <div class="panel panel-violet">
                                                         <div class="panel-heading">Add Inventory Purchases</div>
                                                         <div class="panel-body pan">
@@ -236,31 +229,41 @@
                                                                 <div class="form-body">
                                                                     <div class="form-group">
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">ItemName</label>
+                                                                        <label class="col-md-3 control-label">Item:</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="I.ItemName for I in InventoryItem track by I.Id" class="form-control" ng-model="Group.ItemName">
-                                                                                <option value="">All</option>
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="Description" class="col-md-3 control-label">Quantity <span class='require'>*</span></label>
+
+                                                                        <label for="selCountry" class="col-md-3 control-label">SubCategory</label>
+                                                                        <div class="col-md-4">
+                                                                            <select ng-options="s.SubCategory for s in InventoryItem track by s.subcategoryid" class="form-control" ng-model="Item.SubCategory">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="Description" class="col-md-3 control-label">Quantity: <span class='require'>*</span></label>
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.Quantity" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="selCompany" class="col-md-3 control-label">PerUnitPrice:<span class='require'>*</span></label>
+                                                                        <label for="selCompany" class="col-md-3 control-label">Per Unit Price:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PerUnitPrice" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="selCompany" class="col-md-3 control-label">PurchaseDate:<span class='require'>*</span></label>
+                                                                        <label for="selCompany" class="col-md-3 control-label">Purchase Date:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="selCompany" class="col-md-3 control-label">PurchaseOrderNumber:</label>
+                                                                        <label for="selCompany" class="col-md-3 control-label">Purchase Order Number:</label>
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseOrderNumber" /><span class="help-block"></span></div>
                                                                     </div>
@@ -286,16 +289,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="footer">
+                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        </div>
                     </div>
 
-                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
+                   
                     <!--END FOOTER-->
                 </div>
+              
             </div>
+           
         </div>
+        <!--END CONTENT--><!--BEGIN FOOTER-->
+       
     </div>
     <!--END PAGE WRAPPER-->
 

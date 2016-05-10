@@ -351,7 +351,7 @@ CREATE TABLE [dbo].[BTPOSDetails](
 	[CompanyId] [int] NULL,
 	[POSID] [varchar](20) NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[IMEI] [varchar](50) NOT NULL,
+	[IMEI] [varchar](50) NULL,
 	[ipconfig] [varchar](20) NULL,
 	[active] [int] NULL,
 	[FleetOwnerId] [int] NULL
@@ -801,14 +801,26 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+USE [POSDashboard]
+GO
+/****** Object:  Table [dbo].[InventoryPurchases]    Script Date: 05/06/2016 23:52:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
 CREATE TABLE [dbo].[InventoryPurchases](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ItemName] [varchar](50) NOT NULL,
 	[Quantity] [int] NOT NULL,
 	[PerUnitPrice] [int] NOT NULL,
-	[PurchaseDate] [varchar](50) NOT NULL,
-	[PurchaseOrderNumber] [int] NOT NULL
+	[PurchaseDate] [datetime] NOT NULL,
+	[PurchaseOrderNumber] [varchar](20) NOT NULL
 ) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
 
 GO
 SET ANSI_NULLS ON
@@ -1469,8 +1481,8 @@ CREATE TABLE [dbo].[InventoryItem](
 	[ItemName] [varchar](50) NOT NULL,
 	[Code] [varchar](50) NOT NULL,
 	[Description] [varchar](50) NULL,
-	[Category] [varchar](50) NOT NULL,
-	[SubCategory] [varchar](50) NOT NULL,
+	[CategoryId] [int] NOT NULL,
+	[SubCategoryId] [int] NOT NULL,
 	[ReOrderPoint] [int] NOT NULL
 ) ON [PRIMARY]
 
@@ -2264,8 +2276,8 @@ AS
 BEGIN
 	
 SELECT b.[Id]
-     -- ,[GroupId]
-    --  ,c.Name as companyname
+      ,c.[Id]
+      ,c.Name as companyname
       ,[POSID]
       ,[StatusId]
       ,t.Name as [status]
@@ -2276,10 +2288,11 @@ SELECT b.[Id]
       ,u.Id as fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   left outer join Types t on t.Id = statusid
-  --left outer join CompanyGroups c on c.Id = GroupId
+  left outer join Company c on c.Id = CompanyId
   left outer join Users u on u.Id = FleetOwnerId
   
 end
+
 
 GO
 SET ANSI_NULLS ON
@@ -3223,8 +3236,8 @@ GO
 CREATE PROCEDURE [dbo].[InsupdInventoryPurchases]  (@Id int,@ItemName varchar(50)
            ,@Quantity int
            ,@PerUnitPrice int 
-           ,@PurchaseDate varchar(50)
-           ,@PurchaseOrderNumber int)
+           ,@PurchaseDate datetime
+           ,@PurchaseOrderNumber varchar(20))
 	-- Add the parameters for the stored procedure here
 	
 AS
@@ -3780,12 +3793,14 @@ SELECT I.[Id]
       ,[ItemName]
       ,[Code]
       ,I.[Description]
-      ,[Category]
-      ,[SubCategory]
+      ,t.name as Category
+      ,t.id as categoryid
+      ,s.name as SubCategory
+      ,s.id as SubCategoryId
       ,[ReOrderPoint]
   FROM [POSDashboard].[dbo].[InventoryItem]I
-
- INNER JOIN SubCategory s  ON s.Name = I.SubCategory
+ inner join types t on t.id = i.categoryid
+ INNER JOIN SubCategory s  ON s.id = I.SubCategoryid
   
 end
 
@@ -4369,15 +4384,29 @@ CREATE procedure [dbo].[InsupdDelInventoryItem]
 (@Id int,
 @ItemName varchar(50),
 @Code varchar(50),
-@Description varchar(50),
-@Category varchar(50),
-@SubCategory varchar(50),
+@Description varchar(50) = null,
+@CategoryId int,
+@SubCategoryId int,
 @ReOrderPoint int)
 as 
 begin
+
+UPDATE [POSDashboard].[dbo].[InventoryItem]
+   SET [ItemName] = @ItemName
+      ,[Code] = @Code
+      ,[Description] = @Description
+      ,[CategoryId] = @CategoryId
+      ,[SubCategoryId] = @SubCategoryId
+      ,[ReOrderPoint] = @ReOrderPoint
+ WHERE Id = @Id
+
+if @@rowcount = 0 
+begin
 insert into InventoryItem
-(Id,ItemName,Code,[Description],Category,SubCategory,ReOrderPoint)values
-(@Id,@ItemName,@Code,@Description,@Category,@SubCategory,@ReOrderPoint)
+(ItemName,Code,[Description],CategoryId,SubCategoryId,ReOrderPoint)values
+(@ItemName,@Code,@Description,@CategoryId,@SubCategoryId,@ReOrderPoint)
+end
+
 end
 
 GO
@@ -4843,7 +4872,7 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT t.Id, t.Name, t.[Description],t.Active,  TypeGroupId, listkey, listvalue
 	 from [Types] t 
-	  where t.TypeGroupId = 3
+	  where t.TypeGroupId = 2
 	  
 	 -- SELECT t.Id, t.Name, t.[Description],t.Active, tg.name as TypeGroup, TypeGroupId, listkey, listvalue
 	 --from [Types] t

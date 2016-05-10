@@ -80,13 +80,13 @@ namespace BTPOSDashboard.Controllers
 
                 SqlParameter gb = new SqlParameter();
                 gb.ParameterName = "@PurchaseDate";
-                gb.SqlDbType = SqlDbType.VarChar;
+                gb.SqlDbType = SqlDbType.DateTime;
                 gb.Value = P.PurchaseDate;
                 cmd.Parameters.Add(gb);
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@PurchaseOrderNumber";
-                gid.SqlDbType = SqlDbType.Int;
+                gid.SqlDbType = SqlDbType.VarChar;
                 gid.Value = P.PurchaseOrderNumber;
                 cmd.Parameters.Add(gid);
 
@@ -104,9 +104,9 @@ namespace BTPOSDashboard.Controllers
 
                 #region create bt pos instances
 
-                switch (P.ItemName)
+                switch (P.subCategoryId)
                 {
-                    case "BTPOS":
+                    case 1:
                         for (int poscount = 0; poscount < P.Quantity; poscount++)
                         {
                             try

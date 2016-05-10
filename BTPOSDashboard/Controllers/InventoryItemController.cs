@@ -76,20 +76,20 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(pDesc);
 
             SqlParameter lAct = new SqlParameter();
-            lAct.ParameterName = "@Category";
-            lAct.SqlDbType = SqlDbType.VarChar;
+            lAct.ParameterName = "@CategoryId";
+            lAct.SqlDbType = SqlDbType.Int;
             lAct.Value = b.Category;
             //llid.Value = b.Active;
             cmd.Parameters.Add(lAct);
             SqlParameter psub = new SqlParameter();
-            psub.ParameterName = "@SubCategory";
-            psub.SqlDbType = SqlDbType.VarChar;
+            psub.ParameterName = "@SubCategoryId";
+            psub.SqlDbType = SqlDbType.Int;
             psub.Value = b.SubCategory;
             cmd.Parameters.Add(psub);
 
             SqlParameter prop = new SqlParameter();
             prop.ParameterName = "@ReOrderPoint";
-            prop.SqlDbType = SqlDbType.VarChar;
+            prop.SqlDbType = SqlDbType.Int;
             prop.Value = Convert.ToInt32(b.ReOrderPoint);
             cmd.Parameters.Add(prop);
 

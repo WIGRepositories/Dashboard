@@ -44,7 +44,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 CompanyId: 1,//pos.CompanyId,
                 IMEI: pos.IMEI,
                 POSID: pos.POSID,
-                StatusId: 7,//pos.StatusId,
+                StatusId: 4,//pos.StatusId,
                 ipconfig: pos.ipconfig,
                 active: 1,//Group.ipconfig,
                 fleetownerid: 1,//pos.FleetOwnerId,

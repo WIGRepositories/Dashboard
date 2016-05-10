@@ -6,7 +6,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
 
     $scope.GetSubCategories = function () {
 
-        $http.get('http://localhost:1476/api/SubCategory/GetSubCategories?catid=10').then(function (response, req) {
+        $http.get('http://localhost:1476/api/SubCategory/GetSubCategories?catid=5').then(function (response, req) {
             $scope.SubCategory = response.data;
         });
     }
@@ -14,7 +14,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.GetInventoryItems = function () {
 
         $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem').then(function (response, req) {
-            $scope.Item = response.data;
+            $scope.InventoryItems = response.data;
             $scope.getselectval();
 
         });
@@ -43,7 +43,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
               ItemName: Item.ItemName,
               Code: Item.Code,
               Description: Item.Description,
-              Category: 10,//Item.Category,
+              Category: 5,//Item.Category.Id,
               SubCategory: Item.SubCategory.Id,
               ReOrderPoint: Item.ReOrderPoint
           }

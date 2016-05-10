@@ -212,207 +212,189 @@
                             </ol>
                             <div class="clearfix"></div>
                         </div>
-                        <div style="margin-top:20px;">
-                            <div class="col-md-5">
-                                RouteCode: <select>
-                                    <option value="">11000kk</option>
-                                    <option value="1100000">11000bb</option>
-                                    <option value="">11000aa</option>
-                                    <option value="1100000">11000cc</option>
-                                </select>
-                            </div>
-                            Source: <input type="text" name="Source" value="" readonly>
-                            Destination: <input type="text" name="Destination" value="" readonly>
-                           
-                       
-                        <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+
                         <div class="page-content">
-                            <div class="row" style="width:100%">
-                                <div class=" col-md-12">
-                                <ul role="tablist" class="ul-edit nav nav-tabs"></ul>
-                                <div class="tab-content tab-edit">
-                                    <div id="non-responsive" class="tab-pane fade in active">
+                            <div id="table-action" class="row">
+                                <div class="col-lg-12">
 
-                                       
-                                       
-                                                    <div class="row">
+                                    <div id="tableactionTabContent" class="tab-content">
+                                        <div id="table-table-tab" class="tab-pane fade in active">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+
+
+                                                    <div class="table-container">
                                                         <div class="col-md-5">
-
-                                                            <div class="tab-edit">
-
-                                                                <div id="one-column" class="tab-pane fade in active">
-
-
-                                                                    <div class="message-item blue">
-
-
-                                                                        <div class="message-inner">
-
-                                                                            <div class="message-head clearfix">
-                                                                                <div class="user-detail">
-                                                                                    <h5 class="handle">Source</h5>
-
-                                                                                 
-                                                                     <button type="button" class="btn btn-primary btn-xs"</button>Add Next Stop</button>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="message-item red after">
-                                                                        <a href="#tab-account-setting" data-toggle="tab">
-                                                                            <div class="message-inner">
-
-                                                                                <div class="message-head clearfix">
-                                                                                    <div class="user-detail">
-                                                                                        <h5 class="handle">Stops</h5>
-                                                                                    </div>
-                                                                                       
-                                                                                        <button  class="btn btn-primary btn-xs">Add Next Stop</button>
-                                                                                        <button  class="btn btn-primary btn-xs">Add Previous Stop</button>
-                                                                                    <button  class="btn btn-primary btn-xs">Delete</button>
-                                                                                    </div>
-                                                                                </div>
-
-
-
-                                                                        </a>
-
-
-
-
-                                                                    </div>
-
-
-
-
-                                                                    <!--<div class="fa fa-plus-square" ng-click="ShowHide()">-->
-                                                                    <div class="message-item red after">
-                                                                        <a href="#tab-account-setting" data-toggle="tab">
-                                                                            <div class="message-inner">
-
-                                                                                <div class="message-head clearfix">
-                                                                                    <div class="user-detail">
-                                                                                        <h5 class="handle">Destination</h5>
-
-                                                                                    </div>
-                                                                                        <button type="button" class="btn btn-primary btn-xs">Add Previous Stop</button>
-                                                                                    </div>
-                                                                              
-
-                                                                            </div>
-
-
-                                                                        </a>
-
-
-
-
-                                                                    </div>
-
-
-
-                                                                </div>
-
-
-                                                            </div>
-
+                                                            RouteCode: <select>
+                                                                <option value="">11000kk</option>
+                                                                <option value="1100000">11000bb</option>
+                                                                <option value="">11000aa</option>
+                                                                <option value="1100000">11000cc</option>
+                                                            </select>
                                                         </div>
-                                                            <div style="float:right;width:70%;height:30%"ng-hide="IsHidden">
-                                                                <div class="panel panel-violet">
-                                                                    <div class="panel-heading">Add New RouteDetails</div>
-                                                                    <div class="panel-body pan">
-                                                                        <form action="#" class="form-horizontal form-seperated form-row-stripped" >
-                                                                            <div class="form-body">
-                                                                                <div class="form-group">
-                                                                                    <label for="inputFirstName" class="col-md-4 control-label">RouteId<span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-7"><input id="inputFirstName" type="text" class="form-control" ng-model="RouteDetails.RouteId" /><span class="help-block"></span></div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="inputLastName" class="col-md-4 control-label">Stopname <span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-7"><input id="inputLastName" type="text" class="form-control" ng-model="RouteDetails.stopname" /><span class="help-block"></span></div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="inputMiddleName" class="col-md-4 control-label">Description</label>
-
-                                                                                    <div class="col-md-7"><input id="inputMiddleName" type="text" class="form-control" ng-model="RouteDetails.Description" /><span class="help-block"></span></div>
-                                                                                </div>
-
-                                                                                <div class="form-group">
-                                                                                    <label for="" class="col-md-4 control-label">StopCode <span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-7"><input id="Employee no" type="text" class="form-control" ng-model="RouteDetails.StopCode" /><span class="help-block"></span></div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="inputEmail" class="col-md-4 control-label">DistanceFromSource <span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-7">
-                                                                                        <div class="input-icon"><input type="text" class="form-control" ng-model="RouteDetails.DistanceFromSource" /></div>
-                                                                                    </div>
-                                                                                </div>
+                                                        Source: <input type="text" name="Source" value="" readonly>
+                                                        Destination: <input type="text" name="Destination" value="" readonly>
 
 
-                                                                                <div class="form-group">
-                                                                                    <label for="inputPhone" class="col-md-4 control-label">DistanceFromDestination<span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-7">
-                                                                                        <div class="input-icon right"><input type="text" class="form-control" ng-model="RouteDetails.DistanceFromDestination" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="inputPhone" class="col-md-4 control-label">DistanceFromPreviousStop<span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-7">
-                                                                                        <div class="input-icon right"><i class="fa fa-mobilephone"></i><input type="text" placeholder="" class="form-control" ng-model="RouteDetails.DistanceFromPreviousStop" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="inputPhone" class="col-md-4 control-label">DistanceFromNextStop<span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-7">
-                                                                                        <div class="input-icon right"><i class="fa fa-mobilephone"></i><input type="text" placeholder="" class="form-control" ng-model="RouteDetails.DistanceFromNextStop" /></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </form>
-                                                                        <!--<div class="form-group">
-                                <label for="Address Id" class="col-md-3 control-label">Address Id<span class='require'>*</span></label>
-
-                                <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
-                            </div>-->
+                                                        <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                                                        <div class="page-content">
 
 
-                                                                        <div class="form-actions text-center pal">
-                                                                            <button type="button" class="btn btn-primary" ng-click="save(RouteDetails);">Save</button>
-                                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                            <div class="row">
+                                                                
+                                                                <div>
+                                                                    <div class="panel panel-violet">
+                                                                        <div class="panel-heading">Configure Route Details</div>
+                                                                        <div class="panel-body pan">
                                                                             <br />
-                                                                        </div>
-                                                                    </div>
+                                                                            <div class="col-md-5">
+
+                                                                                <div id="one-column" class="tab-pane">
+
+
+                                                                                    <div class="message-item blue">
+                                                                                        <a href="#tab-account-setting" data-toggle="tab">
+
+                                                                                            <div class="message-inner" style="background-color:aliceblue">
+
+                                                                                                <div class="message-head clearfix">
+                                                                                                    <div class="user-detail">
+                                                                                                        <h5 class="handle">Source</h5>
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <button type="button" class="btn btn-primary btn-xs"</button>Add Next Stop</button>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                    </div>
+
+                                                                                    <div class="message-item red after">
+                                                                                        <a href="#tab-account-setting" data-toggle="tab">
+                                                                                            <div class="message-inner">
+
+                                                                                                <div class="message-head clearfix">
+                                                                                                    <div class="user-detail">
+                                                                                                        <h5 class="handle">Stops</h5>
+                                                                                                    </div>
+
+
+                                                                                                </div>
+                                                                                                <button class="btn btn-primary btn-xs">Add Next Stop</button>
+                                                                                                <button class="btn btn-primary btn-xs">Add Previous Stop</button>
+                                                                                                <button class="btn btn-primary btn-xs">Delete</button>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                    </div>
+
+                                                                                    <!--<div class="fa fa-plus-square" ng-click="ShowHide()">-->
+                                                                                    <div class="message-item red after">
+                                                                                        <a href="#tab-account-setting" data-toggle="tab">
+                                                                                            <div class="message-inner">
+
+                                                                                                <div class="message-head clearfix">
+                                                                                                    <div class="user-detail">
+                                                                                                        <h5 class="handle">Destination</h5>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <button type="button" class="btn btn-primary btn-xs">Add Previous Stop</button>
+                                                                                            </div>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                            <div class="panel panel-violet  col-md-7">
+
+                                                                                <form action="#" class="form-horizontal form-seperated form-row-stripped">
+
+
+                                                                                    <div class="form-body">
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputFirstName" class="col-md-4 control-label">Route Id<span class='require'>*</span></label>
+
+                                                                                            <div class="col-md-7"><input id="inputFirstName" type="text" class="form-control" ng-model="RouteDetails.RouteId" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputLastName" class="col-md-4 control-label">Stop name <span class='require'>*</span></label>
+
+                                                                                            <div class="col-md-7"><input id="inputLastName" type="text" class="form-control" ng-model="RouteDetails.stopname" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputMiddleName" class="col-md-4 control-label">Description</label>
+
+                                                                                            <div class="col-md-7"><input id="inputMiddleName" type="text" class="form-control" ng-model="RouteDetails.Description" /><span class="help-block"></span></div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputPhone" class="col-md-4 control-label">DistanceFromDestination<span class='require'>*</span></label>
+
+                                                                                            <div class="col-md-7">
+                                                                                                <div class="input-icon right"><input type="text" class="form-control" ng-model="RouteDetails.DistanceFromDestination" /></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputPhone" class="col-md-4 control-label">DistanceFromPreviousStop<span class='require'>*</span></label>
+
+                                                                                            <div class="col-md-7">
+                                                                                                <div class="input-icon right"><i class="fa fa-mobilephone"></i><input type="text" placeholder="" class="form-control" ng-model="RouteDetails.DistanceFromPreviousStop" /></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputPhone" class="col-md-4 control-label">Distance From Next Stop<span class='require'>*</span></label>
+
+                                                                                            <div class="col-md-7">
+                                                                                                <div class="input-icon right"><i class="fa fa-mobilephone"></i><input type="text" placeholder="" class="form-control" ng-model="RouteDetails.DistanceFromNextStop" /></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!--<div class="form-group">
+                    <button type="button" class="btn btn-primary" ng-click="save(RouteDetails);">Save</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <br />
+                </div>-->
+                                                                                </form>
+
+                                                                            </div>
+
+                                                                        </div>  
                                                                 </div>
+                                                                   
+                                                                    
+                                                                 </div>
                                                             </div>
+
+
+
+
                                                         </div>
                                                     </div>
-
                                                 </div>
-                            </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
                                 </div>
+                            </div>
                         </div>
+                        <div class="table-container">
+                          
 
-
-                                <!--END CONTENT--><!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
-                                </div>
-                                <!--END FOOTER-->
                             </div>
+
+                            <!--END CONTENT--><!--BEGIN FOOTER-->
+                            <div id="footer">
+                                <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
+                            </div>
+                            <!--END FOOTER-->
+                        </div>
                             <!--END PAGE WRAPPER-->
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
                 <script src="js/jquery-1.10.2.min.js"></script>
                 <script src="js/jquery-migrate-1.2.1.min.js"></script>
                 <script src="js/jquery-ui.js"></script>
@@ -433,25 +415,9 @@
                 <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
                 <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
                 <script src="js/main.js"></script>
-                <script>
-                    (function (i, s, o, g, r, a, m) {
-                        i['GoogleAnalyticsObject'] = r;
-                        i[r] = i[r] || function () {
-                            (i[r].q = i[r].q || []).push(arguments)
-                        }, i[r].l = 1 * new Date();
-                        a = s.createElement(o),
-                                m = s.getElementsByTagName(o)[0];
-                        a.async = 1;
-                        a.src = g;
-                        m.parentNode.insertBefore(a, m)
-                    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-                    ga('create', 'UA-145464-12', 'auto');
-                    ga('send', 'pageview');
-
-
-                </script>
+               
                 <script src="js/angular.js"></script>
                 <script src="js/RouteDetails.js"></script>
-                <script src="js/plus.js"></script>
+                <!--<script src="js/plus.js"></script>-->
 </body>
 </html>

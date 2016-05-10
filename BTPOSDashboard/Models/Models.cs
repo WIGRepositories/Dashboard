@@ -1110,6 +1110,9 @@ namespace BTPOSDashboardAPI.Models
         public int PerUnitPrice { get; set; }
         public String PurchaseDate { get; set; }
         public int PurchaseOrderNumber { get; set; }
+        public int subCategoryId { get; set; }
+
+        public string subCategory { get; set; }
     }
     public class LicenseDetails
     {
