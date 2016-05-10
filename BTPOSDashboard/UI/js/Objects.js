@@ -8,6 +8,23 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
         $scope.NewObjects = res.data;
     });
     $scope.save = function (NewObjects) {
+        
+        if (NewObjects == null)
+        {
+            alert('please enter Name');
+            return;
+        }
+        if (NewObjects.Name == null)
+        {
+            alert('Please Enter Nmae');
+            return;
+        }
+       
+        if (NewObjects.Path == null)
+        {
+            alert('Please Enter Path');
+            return;
+        }
    
         var NewObjects = {
             Id:-1,

@@ -456,6 +456,7 @@
     <Content Include="UI\css\themes\style3\yellow-green.css" />
     <Content Include="UI\css\themes\style3\yellow-grey.css" />
     <Content Include="UI\EditHistory.html" />
+    <Content Include="UI\Empty.html" />
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />

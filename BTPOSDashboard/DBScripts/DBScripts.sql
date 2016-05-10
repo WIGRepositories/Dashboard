@@ -2481,14 +2481,18 @@ BEGIN
 	-- interfering with SELECT statements.
 	
 	declare @fleetownerid int
+	declare @cmpid int
 	
 	select @fleetownerid = userID from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
 	
+	select @cmpid = CompanyId from Users where Id = @fleetownerid
+	
 	UPDATE BTPOSDetails
         SET FleetOwnerId = @fleetownerid
+        ,CompanyId = @cmpid
     FROM BTPOSDetails
     INNER JOIN (
-        SELECT TOP(@units) ID FROM BTPOSDetails WHERE FleetOwnerId = 4
+        SELECT TOP(@units) ID FROM BTPOSDetails WHERE FleetOwnerId = 1
          ORDER BY ID
     ) AS InnerMyTable ON BTPOSDetails.ID = InnerMyTable.ID
 	
@@ -2497,6 +2501,7 @@ BEGIN
     -- Insert statements for procedure here
 	return @result
 END
+
 
 GO
 SET ANSI_NULLS ON
@@ -3818,7 +3823,7 @@ CREATE PROCEDURE [dbo].[InsUpdelStops]
 	-- Add the parameters for the stored procedure here
 (@Id int,
       @Name varchar(30),
-      @Description varchar(30),
+      @Description varchar(30) = null,
       @Code varchar(10),
       @Active int,
       @insupdflag varchar(10))
@@ -4905,3 +4910,166 @@ insert into subcategory(Name,[Description],CategoryId,Active) values(@Name,@Desc
 end
 
 end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[InsupdCreateFleetOwner]
+	-- Add the parameters for the stored procedure here
+	(@Id int,
+           @FirstName varchar(30),
+           @LastName varchar(30)
+           ,@Email varchar(30)
+           ,@MobileNo varchar(30)
+           ,@CompanyName varchar(30)
+           ,@Description varchar(30) = null,
+           @insupdflag varchar(10),@CompanyGroupId int=-1)
+           
+AS 
+BEGIN
+declare @currid int
+ declare @cnt int 
+set @cnt = 0
+declare @cmpcnt int
+set @cmpcnt = 0
+ declare @fleetcnt int
+set @fleetcnt = 0
+
+declare @cmpid int
+set @cmpid = 0
+ 
+ declare @fc varchar(10) 
+ set @fc = case when (select COUNT(*) from Users) = 0
+                           then '001' 
+                           else (select ltrim(rtrim(STR((max(Id)+1)))) from Users ) 
+                           end  
+ 
+ 
+ select @cnt=COUNT (*) from Users where FirstName=@FirstName
+ select @cmpcnt=COUNT (*) from Company where UPPER (Name)=@CompanyName
+ select @fleetcnt=COUNT (*) from FleetOwner where UPPER (FleetOwnerCode)=@fc
+
+ 	
+ if @cmpcnt=0
+ begin
+  insert into Company 
+           ([Name]
+           ,[Code]
+           ,[Desc]
+           ,[Active])      
+     VALUES
+           (@CompanyName,@CompanyName,@Description,1)
+           
+           SELECT @cmpid = @@IDENTITY
+ end
+ else
+ begin  
+   SELECT @cmpid = Id from Company where UPPER (Name)=@CompanyName
+   
+ end
+   
+ 
+ 
+ if @insupdflag='I' and @cnt>0
+ begin
+ RAISERROR ('Already user exists',16,1);
+ end
+ 
+ if @cnt=0
+ begin
+ 
+   insert into Users (FirstName,
+   LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active,CompanyId)
+   values(@FirstName,@LastName,null,1,'FL00'+@fc,@Email,null,@MobileNo,6,1,@cmpid) 
+          
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	
+	
+	SELECT @currid = @@IDENTITY
+end
+
+	
+
+   
+   --insert company role for company and fleet owner role
+  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2 
+                 
+ if @insupdflag='I'and @fleetcnt>0
+ begin
+	RAISERROR ('Already FleetOwner exists',16,1);
+ end
+ 
+ if @fleetcnt=0
+ begin
+	insert into FleetOwner (UserId,GroupId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
+ end
+
+--assign fleet owner role to user
+exec [InsUpdDelUserRoles] -1,2,@currid,@cmpid
+end
+
+
+
+GO
+
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 05/07/2016 11:08:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserRoles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[CompanyId] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[InsUpdDelUserRoles](
+@Id int,
+@roleid int,
+@UserId int,
+@CompanyId int = null
+)
+as
+begin
+
+
+UPDATE [POSDashboard].[dbo].[UserRoles]
+   SET [UserId] = @UserId
+      ,[RoleId] = @RoleId
+      ,[CompanyId] = @CompanyId
+ WHERE Id = @Id
+
+
+
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId]
+           ,[CompanyId])
+     VALUES
+           (@UserId
+           ,@RoleId
+           ,@CompanyId)
+end
+
+
+end
+
+
