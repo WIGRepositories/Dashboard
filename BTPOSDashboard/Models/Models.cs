@@ -1261,5 +1261,35 @@ namespace BTPOSDashboardAPI.Models
          public String FareType { get; set; }
          public int Active { get; set; }
      }
+
+
+public class LicenseDetails
+{
+
+
+    public int Id { get; set; }
+    public string FeatureName { get; set; }
+    public String FeatureLabel { get; set; }
+   
+     public String FeatureValue { get; set; }
+    
+    
+
 }
 
+
+public class  LicensePricing
+
+{
+        public int LicenseId   { get; set; }
+
+        public String TimePeriod { get; set; }
+        public String MinTimePeriods { get; set; }
+
+        public int UnitPrice { get; set; }
+        public int fromdate { get; set; }
+        public int todate { get; set; }
+
+        public int Id  { get; set; }
+       public int Active { get; set; }
+}

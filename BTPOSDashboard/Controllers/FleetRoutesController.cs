@@ -31,7 +31,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 
             db.Fill(ds);
-            // Tbl = ds.Tables[0];
+             Tbl = ds.Tables[0];
 
             // int found = 0;
             return ds;
