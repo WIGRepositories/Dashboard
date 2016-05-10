@@ -3,12 +3,19 @@
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
-    $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
-        $scope.routes = res.data;
-       
 
+    $scope.GetRoutes = function () {
+        $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
+            $scope.routes = res.data;
+        });
+    }
 
-    });
+    $scope.GetStops = function () {
+        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+            $scope.Stops = res.data;
+        });
+    }
+
     $scope.myVar = false;
     $scope.toggle = function () {
         $scope.myVar = !$scope.myVar;
@@ -51,13 +58,13 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
 
        
         var routes = {
-            Route: routes.Route,
+            RouteName: routes.Route,
             Code: routes.Code,
-            //Description: routes.Description,
-            //Active:(routes.Active==true)?1:0,
+            Description: routes.Description,
+            Active:1,//(routes.Active==true)?1:0,
             //BTPOSGroupId: routes.BTPOSGroupId,
-            Source: routes.Source,
-            Destination: routes.Destination,
+            SourceId: routes.Source.Id,
+            DestinationId: routes.Destination.Id,
             Distance:routes.Distance
         };
 
@@ -72,7 +79,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
 
         }
         $http(req).then(function (res) {
-    
+            alert('Route created successfully');
         });
 
     };

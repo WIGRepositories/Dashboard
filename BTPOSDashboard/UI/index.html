@@ -472,10 +472,10 @@
 
                                                                 <tr ng-repeat="pos in dashboardDS.Table" class="gradeA">
                                                                     <td>{{pos.POSID}}</td>
-                                                                    <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" /></td>
+                                                                    <td>{{pos.IMEI}}</td>
 
                                                                     <td>{{pos.companyname}}</td>
-                                                                    <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" /></td>
+                                                                    <td>{{pos.ipconfig}}</td>
                                                                     <td>{{pos.fleetowner}}</td>
                                                                     <td>
                                                                         <span class="label label-sm label-success" ng-if="pos.StatusId == 6">

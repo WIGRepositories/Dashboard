@@ -446,7 +446,19 @@ GO
 CREATE procedure [dbo].[getRoutes]
 as
 begin
-select * from Routes
+SELECT r.[Id]
+      ,[RouteName]
+      ,r.[Code]
+      ,r.[Description]
+      ,r.[Active]
+      ,src.name as Source
+      ,dest.name as Destination
+      ,[SourceId]
+      ,[DestinationId]
+      ,[Distance]
+  FROM [POSDashboard].[dbo].[Routes] r
+  inner join stops src on src.id = r.sourceid
+  inner join stops dest on dest.id = destinationid
 end
 
 GO
@@ -1374,19 +1386,8 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[UserRoles](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [int] NOT NULL,
-	[RoleId] [int] NOT NULL,
-	[GroupId] [int] NULL,
-	[RoleName] [varchar](20) NOT NULL
-) ON [PRIMARY]
 
-GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2276,7 +2277,7 @@ AS
 BEGIN
 	
 SELECT b.[Id]
-      ,c.[Id]
+      ,c.[Id] as CompanyId
       ,c.Name as companyname
       ,[POSID]
       ,[StatusId]
@@ -4892,6 +4893,46 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+Create procedure [dbo].[InsUpdDelUserRoles](
+@Id int,
+@roleid int,
+@UserId int,
+@CompanyId int = null
+)
+as
+begin
+
+
+UPDATE [POSDashboard].[dbo].[UserRoles]
+   SET [UserId] = @UserId
+      ,[RoleId] = @RoleId
+      ,[CompanyId] = @CompanyId
+ WHERE Id = @Id
+
+
+
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId]
+           ,[CompanyId])
+     VALUES
+           (@UserId
+           ,@RoleId
+           ,@CompanyId)
+end
+
+
+end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
@@ -5032,45 +5073,7 @@ GO
 
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
-Create procedure [dbo].[InsUpdDelUserRoles](
-@Id int,
-@roleid int,
-@UserId int,
-@CompanyId int = null
-)
-as
-begin
-
-
-UPDATE [POSDashboard].[dbo].[UserRoles]
-   SET [UserId] = @UserId
-      ,[RoleId] = @RoleId
-      ,[CompanyId] = @CompanyId
- WHERE Id = @Id
-
-
-
-
-if @@rowcount = 0 
-begin
-
-INSERT INTO [POSDashboard].[dbo].[UserRoles]
-           ([UserId]
-           ,[RoleId]
-           ,[CompanyId])
-     VALUES
-           (@UserId
-           ,@RoleId
-           ,@CompanyId)
-end
-
-
-end
 
 /****** Object:  Table [dbo].[LicensePricing]    Script Date: 05/10/2016 07:02:51 ******/
 SET ANSI_NULLS ON
@@ -5112,3 +5115,50 @@ CREATE TABLE [dbo].[LicenseDetails](
 
 GO
 
+CREATE procedure [dbo].[InsUpdDelRoutes](
+@Id int
+,@RouteName varchar(50)
+,@Description varchar(50) = null
+,@Active int
+,@Code varchar(10)
+,@SourceId int
+,@DestinationId int
+,@Distance decimal
+)
+as
+begin
+
+UPDATE [POSDashboard].[dbo].[Routes]
+   SET [RouteName] = @RouteName
+      ,[Code] = @Code
+      ,[Description] = @Description
+      ,[Active] = @Active
+      ,[SourceId] = @SourceId
+      ,[DestinationId] = @DestinationId
+      ,[Distance] = @Distance
+ WHERE Id = @Id
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Routes]
+           ([RouteName]
+           ,[Code]
+           ,[Description]
+           ,[Active]
+           ,[SourceId]
+           ,[DestinationId]
+           ,[Distance])
+     VALUES
+           (@RouteName
+           ,@Code
+           ,@Description
+           ,@Active
+           ,@SourceId
+           ,@DestinationId
+           ,@Distance)
+
+
+end
+
+END

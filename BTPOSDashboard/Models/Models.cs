@@ -218,14 +218,15 @@ namespace BTPOSDashboardAPI.Models
     public class Routes
     {
         public int Id{set;get;}
-     public string Route {set;get;}
+     public string RouteName {set;get;}
        public string Code {set;get;}
-      //public string Description {set;get;} 
-      //public string Active {set;get;} 
-        public string Distance {set;get;}
+      public string Description {set;get;} 
+      public int Active {set;get;} 
+        public decimal Distance {set;get;}
       public string Source {set;get;} 
-      public string Destination {set;get;} 
-
+      public string Destination {set;get;}
+      public int SourceId { set; get; }
+      public int DestinationId { set; get; } 
     }
 
     public class Transaction
