@@ -5,8 +5,6 @@
     <title>Form Components | Forms</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -24,49 +22,14 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
 <body ng-model="Groups">
 
     <div>
-        <!--BEGIN THEME SETTING-->
-        <div id="theme-setting">
-            <a href="#" data-toggle="dropdown" data-step="1" data-intro="&lt;b&gt;Many styles&lt;/b&gt; and &lt;b&gt;colors&lt;/b&gt; be created for you. Let choose one and enjoy it!" data-position="left" class="btn-theme-setting"><i class="fa fa-cog"></i></a>
-
-            <div class="content-theme-setting">
-                <h4 class="mtn">Theme Styles</h4><select id="list-style" class="form-control">
-                    <option value="style1">Flat Squared style</option>
-                    <option value="style2">Flat Rounded style</option>
-                    <option value="style3" selected="selected">Flat Border style</option>
-                </select><br /><h4 class="mtn">Theme Colors</h4>
-                <ul id="list-color" class="list-unstyled list-inline">
-                    <li data-color="green-dark" data-hover="tooltip" title="Green - Dark" class="green-dark"></li>
-                    <li data-color="red-dark" data-hover="tooltip" title="Red - Dark" class="red-dark"></li>
-                    <li data-color="pink-dark" data-hover="tooltip" title="Pink - Dark" class="pink-dark"></li>
-                    <li data-color="blue-dark" data-hover="tooltip" title="Blue - Dark" class="blue-dark"></li>
-                    <li data-color="yellow-dark" data-hover="tooltip" title="Yellow - Dark" class="yellow-dark"></li>
-                    <li data-color="green-grey" data-hover="tooltip" title="Green - Grey" class="green-grey"></li>
-                    <li data-color="red-grey" data-hover="tooltip" title="Red - Grey" class="red-grey"></li>
-                    <li data-color="pink-grey" data-hover="tooltip" title="Pink - Grey" class="pink-grey"></li>
-                    <li data-color="blue-grey" data-hover="tooltip" title="Blue - Grey" class="blue-grey"></li>
-                    <li data-color="yellow-grey" data-hover="tooltip" title="Yellow - Grey" class="yellow-grey"></li>
-                    <li data-color="yellow-green" data-hover="tooltip" title="Yellow - Green" class="yellow-green"></li>
-                    <li data-color="orange-grey" data-hover="tooltip" title="Orange - Grey" class="orange-grey"></li>
-                    <li data-color="pink-blue" data-hover="tooltip" title="Pink - Blue" class="pink-blue"></li>
-                    <li data-color="pink-violet" data-hover="tooltip" title="Pink - Violet" class="pink-violet active"></li>
-                    <li data-color="orange-violet" data-hover="tooltip" title="Orange - Violet" class="orange-violet"></li>
-                    <li data-color="pink-green" data-hover="tooltip" title="Pink - Green" class="pink-green"></li>
-                    <li data-color="pink-brown" data-hover="tooltip" title="Pink - Brown" class="pink-brown"></li>
-                    <li data-color="orange-blue" data-hover="tooltip" title="Orange - Blue" class="orange-blue"></li>
-                    <li data-color="yellow-blue" data-hover="tooltip" title="Yellow - Blue" class="yellow-blue"></li>
-                    <li data-color="green-blue" data-hover="tooltip" title="Green - Blue" class="green-blue"></li>
-                </ul>
-            </div>
-        </div>
-
-        <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
+                <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
@@ -640,6 +603,10 @@
                     <!--END PAGE WRAPPER-->
                 </div>
             </div>
+                </div>
+            </div>
+        </div>
+    
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -663,23 +630,7 @@
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
 
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-145464-12', 'auto');
-        ga('send', 'pageview');
-
-
-    </script>
+    
     <script src="js/angular.js"></script>
     <script src="js/BTPOSDetails.js"></script>
     <script src="js/ngStorage.js"></script>

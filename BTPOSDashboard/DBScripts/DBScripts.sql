@@ -5072,4 +5072,43 @@ end
 
 end
 
+/****** Object:  Table [dbo].[LicensePricing]    Script Date: 05/10/2016 07:02:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LicensePricing](
+	[Id] [int] NOT NULL,
+	[LicenseId] [int] NOT NULL,
+	[TimePeriod] [varchar](50) NULL,
+	[MinTimePeriods] [int] NULL,
+	[UnitPrice] [decimal](18, 0) NULL,
+	[fromdate] [datetime] NULL,
+	[todate] [datetime] NULL,
+	[Active] [int] NULL CONSTRAINT [DF_LicensePricing_Active]  DEFAULT ((1))
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[LicenseDetails]    Script Date: 05/10/2016 06:45:07 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[LicenseDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[LicenseCode] [varchar](10) NULL,
+	[LicenseName] [varchar](50) NULL,
+	[LicenseCatId] [int] NOT NULL,
+	[Feature] [varchar](50) NULL,
+	[FeatureLabel] [varchar](50) NULL,
+	[FeatureValue] [nchar](10) NULL,
+	[LabelClass] [varchar](50) NULL,
+	[Active] [int] NOT NULL CONSTRAINT [DF_LicenseDetails_Active]  DEFAULT ((1)),
+	[fromDate] [datetime] NULL,
+	[toDate] [datetime] NULL
+) ON [PRIMARY]
+
+GO
 
