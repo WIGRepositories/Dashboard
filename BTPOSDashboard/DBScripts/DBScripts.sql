@@ -5232,7 +5232,6 @@ ALTER procedure [dbo].[InsUpdDelLicensePricing](
 
 as
 begin
-
 UPDATE [POSDashboard].[dbo].[LicensePricing]
    SET 
       [LicenseId] = @LicenseId
