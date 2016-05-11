@@ -3,16 +3,36 @@ var myapp1 = angular.module('myApp', [])
 
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
+    stopsList = [];
+
     $scope.GetRoutes = function () {
         $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
             $scope.routes = res.data;
+           // GetRouteDetails($scope.routes[0].Id);
+        });
+        
+        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+            $scope.Stops = res.data;
+        });
+        
+    }
+
+    $scope.GetRouteDetails = function (route) {
+        if (route == null || route.Id == null)
+        {
+            alert('Please select a route.');
+            return;
+        }
+        $http.get('http://localhost:1476/api/routedetails/getroutedetails?routeid=' + route.Id).then(function (res, data) {
+            $scope.RouteDetails = res.data;
         });
     }
 
-    $scope.GetRouteDetails = function(){
-        $http.get('http://localhost:1476/api/routedetails/getroutedetails').then(function (res, data) {
-            $scope.RouteDetails = res.data;
-        });
+    $scope.SetCurrStop = function (currStop,indx)
+    {
+        //alert(currStop.StopName);
+        $scope.currStop = currStop;
+        $scope.currStopIndx = indx;
     }
     //This will hide the DIV by default.
     $scope.IsHidden = true;
@@ -51,6 +71,28 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             $http(req).then(function (res) { });
 
 
+        }
+
+        $scope.addPrevStop = function (stop) {
+            //  stopsList.splice(index, 0, stop);
+            var newStop = {
+                StopName: stop.Name
+            }
+
+            $scope.RouteDetails.splice($scope.currStopIndx+1, 0, newStop);
+        }
+
+        $scope.addNextStop = function (stop) {
+            //stopsList.splice(index, 0, stop);
+            var newStop = {
+                StopName: stop.Name
+            }
+
+            $scope.RouteDetails.splice($scope.currStopIndx, 0, newStop);
+        }
+
+        $scope.delStop = function (stop) {
+            stopsList.splice(index, 0, stop);
         }
     
     });
