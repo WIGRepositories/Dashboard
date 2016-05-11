@@ -156,7 +156,9 @@
     <Content Include="DBScripts\Sprocs\dbo.GetInventorySubCategories.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetLicenceCatergories.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetLicenceStatus.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.GetLicenseDetails.sql" />
     <Content Include="DBScripts\Sprocs\dbo.getLicensePayments.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.GetLicensePricing.sql" />
     <Content Include="DBScripts\Sprocs\dbo.getloginpage.sql" />
     <Content Include="DBScripts\Sprocs\dbo.getmenu.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetMessages.sql" />
@@ -251,7 +253,9 @@
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelInventory.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelInventoryReceivings.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsupddelInventorySales.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelLicenseDetails.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelLicensePayments.sql" />
+    <Content Include="DBScripts\Sprocs\dbo.InsUpdDelLicensePricing.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelMenu.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDeLNotifications.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdDelObjectAccess.sql" />
@@ -403,7 +407,6 @@
     <Content Include="UI\css\themes\style2\pink-grey.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
     <Content Include="UI\EditHistory.html" />
-    <Content Include="UI\Empty.html" />
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
@@ -435,6 +438,7 @@
     <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleDetails.js" />
     <Content Include="UI\LicenseDetails.html" />
+    <Content Include="UI\LicensePricing.html" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\Inventory.html" />
     <Content Include="UI\images\bg\1.jpg" />

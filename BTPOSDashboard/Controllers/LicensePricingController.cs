@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTPOSDashboardAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,9 +12,9 @@ namespace BTPOSDashboard.Controllers
 {
     public class LicensePricingController : ApiController
     {
-       
+
         [HttpGet]
-        public DataTable License()
+        public DataTable LicensePricing()
         {
             DataTable Tbl = new DataTable();
 
@@ -35,9 +36,10 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
+    
    
         [HttpPost]
-         public DataTable btpos( LicensePricing b)
+        public DataTable SaveLicensePricing(LicensePricing b)
         {
             DataTable Tbl = new DataTable();
 
@@ -57,15 +59,15 @@ namespace BTPOSDashboard.Controllers
             Aid.SqlDbType = SqlDbType.Int;
             Aid.Value = Convert.ToString(b.Id);
             cmd.Parameters.Add(Aid);
-            
+           
               SqlParameter lid = new SqlParameter();
-            lid.ParameterName = "@LicenseId ";
+              lid.ParameterName = "@LicenseId";
             lid.SqlDbType = SqlDbType.Int;
             lid.Value = Convert.ToString(b.LicenseId);
             cmd.Parameters.Add(lid);
 
             SqlParameter ss = new SqlParameter();
-            ss.ParameterName = "@TimePeriod ";
+            ss.ParameterName = "@TimePeriod";
             ss.SqlDbType = SqlDbType.VarChar;
             ss.Value = b.TimePeriod;
             cmd.Parameters.Add(ss);
@@ -82,17 +84,17 @@ namespace BTPOSDashboard.Controllers
             sid.Value = Convert.ToString(b.UnitPrice);
             cmd.Parameters.Add(sid);
 
-             SqlParameter gid = new SqlParameter();
-                gid.ParameterName = "@todate";
-                gid.SqlDbType = SqlDbType.DateTime;
-                gid.Value = b.todate;
-                cmd.Parameters.Add(gid);
+            //SqlParameter gid = new SqlParameter();
+            //gid.ParameterName = "@todate";
+            //gid.SqlDbType = SqlDbType.DateTime;
+            //gid.Value = DateTime.Now;
+            //cmd.Parameters.Add(gid);
 
-             SqlParameter fid = new SqlParameter();
-                fid.ParameterName = "@fromdate";
-                fid.SqlDbType = SqlDbType.DateTime;
-                fid.Value = b.fromdate;
-                cmd.Parameters.Add(fid);
+            //SqlParameter fid = new SqlParameter();
+            //fid.ParameterName = "@fromdate";
+            //fid.SqlDbType = SqlDbType.DateTime;
+            //fid.Value = b.fromdate;
+            //cmd.Parameters.Add(fid);
             
 
               SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
@@ -100,14 +102,7 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(nActive);
                 cmd.ExecuteScalar();
                 conn.Close();
-              SqlParameter gsac = new SqlParameter("@fromdate", SqlDbType.DateTime);
-            gsac.Value = b.fromdate;
-            cmd.Parameters.Add(gsac);
-
-
-            SqlParameter gsacd = new SqlParameter("@todate", SqlDbType.DateTime);
-            gsacd.Value = b.todate;
-            cmd.Parameters.Add(gsacd);
+             
 
 
             DataSet ds = new DataSet();

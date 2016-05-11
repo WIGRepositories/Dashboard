@@ -1,30 +1,36 @@
 ﻿var app = angular.module('myApp', [])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/LicenseDetails/License').then(function (res, data) {
-        $scope.License = res.data;
+    $http.get('http://localhost:1476/api/LicensePricing/LicensePricing').then(function (res, data) {
+        $scope.LicensePricing = res.data;
 
     })
 
-    $scope.Save = function (LicenseDetails) {
 
-        var LicenseDetails = {
+    $scope.Save = function (Licensepricing) {
 
-            FeatureName: LicenseDetails.FeatureName,
-            FeatureValue: LicenseDetails.FeatureValue,
-            FeatureLabel: LicenseDetails.FeatureLabel
+        var Licensepricing = {
 
+            LicenseId: Licensepricing.LicenseId,
+            TimePeriod: Licensepricing.TimePeriod,
+            UnitPrice: Licensepricing.UnitPrice,
+            fromdate: Licensepricing.fromdate,
+            todate: Licensepricing.todate,
+            Active : Licensepricing.Active ,
+            
+            MinTimePeriods:Licensepricing.MinTimePeriods
 
+          
 
         };
-
+        
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/LicenseDetails/btpos'),
+            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
             //headers: {
             //    'Content-Type': undefined
 
-            data: LicenseDetails
+            data: Licensepricing
 
 
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTPOSDashboardAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class LicenseDetailsController : ApiController
     {
         [HttpGet]
-        public DataTable License()
+        public DataTable LicenseDetails()
         {
             DataTable Tbl = new DataTable();
 
@@ -36,7 +37,7 @@ namespace BTPOSDashboard.Controllers
         }
    
         [HttpPost]
-         public DataTable btpos(LicenseDetails b)
+        public DataTable SaveLicenseDetails(LicenseDetails b)
         {
             DataTable Tbl = new DataTable();
 
@@ -57,28 +58,28 @@ namespace BTPOSDashboard.Controllers
             Aid.Value = Convert.ToString(b.Id);
             cmd.Parameters.Add(Aid);
 
-            //  SqlParameter lid = new SqlParameter();
-            //lid.ParameterName = "@LicenseCatId";
-            //lid.SqlDbType = SqlDbType.Int;
-            //lid.Value = Convert.ToString(b.LicenseCatId);
-            //cmd.Parameters.Add(lid);
+            SqlParameter lid = new SqlParameter();
+            lid.ParameterName = "@LicenseCatId";
+            lid.SqlDbType = SqlDbType.Int;
+            lid.Value = Convert.ToString(b.LicenseCatId);
+            cmd.Parameters.Add(lid);
 
-            //SqlParameter ss = new SqlParameter();
-            //ss.ParameterName = "@LicenseCode ";
-            //ss.SqlDbType = SqlDbType.VarChar;
-            //ss.Value = b.LicenseCode ;
-            //cmd.Parameters.Add(ss);
+            SqlParameter ss = new SqlParameter();
+            ss.ParameterName = "@LicenseCode";
+            ss.SqlDbType = SqlDbType.VarChar;
+            ss.Value = b.LicenseCode;
+            cmd.Parameters.Add(ss);
 
-            //SqlParameter ii = new SqlParameter();
-            //ii.ParameterName = "@LicenseName";
-            //ii.SqlDbType = SqlDbType.VarChar;
-            //ii.Value = b.LicenseName;
-            //cmd.Parameters.Add(ii);
-            //SqlParameter ll = new SqlParameter();
-            //ll.ParameterName = "@Active";
-            //ll.SqlDbType = SqlDbType.VarChar;
-            //ll.Value = b.Active;
-            //cmd.Parameters.Add(ll);
+            SqlParameter ii = new SqlParameter();
+            ii.ParameterName = "@LicenseName";
+            ii.SqlDbType = SqlDbType.VarChar;
+            ii.Value = b.LicenseName;
+            cmd.Parameters.Add(ii);
+            SqlParameter ll = new SqlParameter();
+            ll.ParameterName = "@Active";
+            ll.SqlDbType = SqlDbType.VarChar;
+            ll.Value = b.Active;
+            cmd.Parameters.Add(ll);
             SqlParameter nn = new SqlParameter();
             nn.ParameterName = "@FeatureName";
             nn.SqlDbType = SqlDbType.VarChar;
@@ -97,13 +98,13 @@ namespace BTPOSDashboard.Controllers
             mn.Value = b.FeatureValue;
             cmd.Parameters.Add(mn);
 
-            // SqlParameter ln = new SqlParameter();
-            //ln.ParameterName = "@LabelClass";
-            //ln.SqlDbType = SqlDbType.VarChar;
-            //ln.Value = b.LabelClass;
-            //cmd.Parameters.Add(ln);
+            SqlParameter ln = new SqlParameter();
+            ln.ParameterName = "@LabelClass";
+            ln.SqlDbType = SqlDbType.VarChar;
+            ln.Value = b.LabelClass;
+            cmd.Parameters.Add(ln);
 
-            //  SqlParameter gsac = new SqlParameter("@fromDate", SqlDbType.DateTime);
+            //SqlParameter gsac = new SqlParameter("@fromDate", SqlDbType.DateTime);
             //gsac.Value = b.fromDate;
             //cmd.Parameters.Add(gsac);
 
