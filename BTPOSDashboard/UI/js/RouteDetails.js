@@ -3,11 +3,17 @@ var myapp1 = angular.module('myApp', [])
 
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/routedetails/getroutedetails').then(function (res, data) {
-        $scope.RouteDetails = res.data;
+    $scope.GetRoutes = function () {
+        $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
+            $scope.routes = res.data;
+        });
+    }
 
-    });
-
+    $scope.GetRouteDetails = function(){
+        $http.get('http://localhost:1476/api/routedetails/getroutedetails').then(function (res, data) {
+            $scope.RouteDetails = res.data;
+        });
+    }
     //This will hide the DIV by default.
     $scope.IsHidden = true;
 
