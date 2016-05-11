@@ -446,19 +446,7 @@ GO
 CREATE procedure [dbo].[getRoutes]
 as
 begin
-SELECT r.[Id]
-      ,[RouteName]
-      ,r.[Code]
-      ,r.[Description]
-      ,r.[Active]
-      ,src.name as Source
-      ,dest.name as Destination
-      ,[SourceId]
-      ,[DestinationId]
-      ,[Distance]
-  FROM [POSDashboard].[dbo].[Routes] r
-  inner join stops src on src.id = r.sourceid
-  inner join stops dest on dest.id = destinationid
+select * from Routes
 end
 end
 
@@ -1386,8 +1374,19 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY]
 
 GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserRoles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[GroupId] [int] NULL,
+	[RoleName] [varchar](20) NOT NULL
+) ON [PRIMARY]
 
-
+GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2277,7 +2276,7 @@ AS
 BEGIN
 	
 SELECT b.[Id]
-      ,c.[Id] as CompanyId
+      ,c.[Id]
       ,c.Name as companyname
       ,[POSID]
       ,[StatusId]
@@ -4033,7 +4032,7 @@ begin
 SELECT rd.[Id]
       ,r.routename as routename
 	  ,r.code as routecode
-      ,[RouteId]      
+      ,[RouteId]
       ,stopid
       ,src.name StopName
 	  ,[PreviousStopId]
@@ -4041,7 +4040,7 @@ SELECT rd.[Id]
       ,[DistanceFromSource]
       ,[DistanceFromDestination]
       ,[DistanceFromPreviousStop]
-      ,[DistanceFromNextStop]     
+      ,[DistanceFromNextStop]
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
 inner join routes r on r.id = rd.routeid
@@ -4898,46 +4897,6 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-Create procedure [dbo].[InsUpdDelUserRoles](
-@Id int,
-@roleid int,
-@UserId int,
-@CompanyId int = null
-)
-as
-begin
-
-
-UPDATE [POSDashboard].[dbo].[UserRoles]
-   SET [UserId] = @UserId
-      ,[RoleId] = @RoleId
-      ,[CompanyId] = @CompanyId
- WHERE Id = @Id
-
-
-
-
-if @@rowcount = 0 
-begin
-
-INSERT INTO [POSDashboard].[dbo].[UserRoles]
-           ([UserId]
-           ,[RoleId]
-           ,[CompanyId])
-     VALUES
-           (@UserId
-           ,@RoleId
-           ,@CompanyId)
-end
-
-
-end
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
@@ -5078,7 +5037,45 @@ GO
 
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
+Create procedure [dbo].[InsUpdDelUserRoles](
+@Id int,
+@roleid int,
+@UserId int,
+@CompanyId int = null
+)
+as
+begin
+
+
+UPDATE [POSDashboard].[dbo].[UserRoles]
+   SET [UserId] = @UserId
+      ,[RoleId] = @RoleId
+      ,[CompanyId] = @CompanyId
+ WHERE Id = @Id
+
+
+
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId]
+           ,[CompanyId])
+     VALUES
+           (@UserId
+           ,@RoleId
+           ,@CompanyId)
+end
+
+
+end
 
 /****** Object:  Table [dbo].[LicensePricing]    Script Date: 05/10/2016 07:02:51 ******/
 SET ANSI_NULLS ON
@@ -5120,6 +5117,233 @@ CREATE TABLE [dbo].[LicenseDetails](
 
 GO
 
+
+
+/****** Object:  StoredProcedure [dbo].[GetLicenseDetails]    Script Date: 05/11/2016 08:42:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[GetLicenseDetails]
+
+as begin 
+select Id,
+LicenseCode,
+LicenseName,
+LicenseCatId,
+FeatureName,
+FeatureLabel,
+FeatureValue,
+LabelClass,
+Active,
+fromDate,
+toDate
+ from LicenseDetails
+end
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 05/11/2016 08:43:10 ******/
+--SET ANSI_NULLS ON
+--GO
+
+--SET QUOTED_IDENTIFIER ON
+--GO
+
+--CREATE procedure [dbo].[InsUpdDelLicenseDetails](@Id int,
+--@LicenseCode varchar(10),
+--@LicenseName Varchar(50),
+--@LicenseCatId int,
+--@FeatureName varchar(50),
+--@FeatureLabel varchar(30),
+--@FeatureValue varchar(10),
+--@LabelClass varchar(50),
+--@Active int,
+--@fromDate datetime,
+--@toDate datetime)
+
+--as
+--begin
+--insert into LicenseDetails values(
+--@LicenseCode,
+--@LicenseName,
+--@LicenseCatId,
+--@FeatureName,
+--@FeatureLabel,
+--@FeatureValue,
+--@LabelClass,
+--@Active,
+--@fromDate,
+--@toDate
+--)
+
+
+
+--end
+
+
+
+/****** Object:  StoredProcedure [dbo].[Sp_InsTypeGroups]    Script Date: 05/04/2016 11:24:12 ******/
+SET ANSI_NULLS ON
+
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[GetLicensePricing]    Script Date: 05/11/2016 09:34:44 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetLicensePricing]
+
+as begin 
+select Id,
+LicenseId,
+TimePeriod,
+MinTimePeriods,
+UnitPrice,
+fromdate,
+todate,
+Active
+
+ from LicensePricing
+end
+
+
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 05/11/2016 11:42:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[InsUpdDelLicensePricing](
+@Id int,
+@LicenseId varchar(10),
+@TimePeriod Varchar(50),
+@MinTimePeriods int,
+@UnitPrice decimal(18,0),
+@fromdate datetime,
+@todate datetime,
+
+@Active int
+)
+--@fromDate datetime=getdate(),
+--@toDate datetime=getdate())
+
+as
+begin
+UPDATE [POSDashboard].[dbo].[LicensePricing]
+   SET 
+      [LicenseId] = @LicenseId
+      ,[TimePeriod] = @TimePeriod
+      ,[MinTimePeriods] = @MinTimePeriods
+      ,[UnitPrice] = @UnitPrice
+      ,[fromdate] = @fromdate
+      ,[todate] = @todate
+      ,[Active] = @Active
+      --,[fromDate] = <fromDate, datetime,>
+      --,[toDate] = <toDate, datetime,>
+ WHERE Id = @Id
+
+if @@ROWCOUNT = 0
+begin
+INSERT INTO [POSDashboard].[dbo].[LicensePricing]
+           (
+           [LicenseId]
+           ,[TimePeriod]
+           ,[MinTimePeriods]
+           ,[UnitPrice]
+           ,[fromdate]
+           ,[todate]
+           ,[Active]
+           --,[fromDate]
+          -- ,[toDate]
+          )
+     VALUES
+           (
+
+@LicenseId,
+@TimePeriod,
+@MinTimePeriods,
+@UnitPrice,
+@fromdate,
+@todate,
+@Active
+--@fromDate,
+--@toDate
+)
+end
+
+
+end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[InsUpdDelLicenseDetails](
+@Id int,
+@LicenseCode varchar(10),
+@LicenseName Varchar(50),
+@LicenseCatId int,
+@FeatureName varchar(50),
+@FeatureLabel varchar(30),
+@FeatureValue varchar(10),
+@LabelClass varchar(50),
+@Active int
+)
+--@fromDate datetime=getdate(),
+--@toDate datetime=getdate())
+
+as
+begin
+
+UPDATE [POSDashboard].[dbo].[LicenseDetails]
+   SET [LicenseCode] = @LicenseCode
+      ,[LicenseName] = @LicenseName
+      ,[LicenseCatId] = @LicenseCatId
+      ,[FeatureName] = @FeatureName
+      ,[FeatureLabel] = @FeatureLabel
+      ,[FeatureValue] = @FeatureValue
+      ,[LabelClass] = @LabelClass
+declare @routeid int
+
+if @@rowcount = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[LicenseDetails]
+           ([LicenseCode]
+           ,[LicenseName]
+           ,[LicenseCatId]
+           ,[FeatureName]
+           ,[FeatureLabel]
+           ,[FeatureValue]
+           ,[LabelClass]
+           ,[Active]
+           --,[fromDate]
+          -- ,[toDate]
+          )
+     VALUES
+           (
+@LicenseCode,
+@LicenseName,
+@LicenseCatId,
+@FeatureName,
+@FeatureLabel,
+@FeatureValue,
+@LabelClass,
+@Active
+--@fromDate,
+--@toDate
+)
+end
+
+end
+
 CREATE procedure [dbo].[InsUpdDelRoutes](
 @Id int
 ,@RouteName varchar(50)
@@ -5145,8 +5369,6 @@ UPDATE [POSDashboard].[dbo].[Routes]
       ,[DestinationId] = @DestinationId
       ,[Distance] = @Distance
  WHERE Id = @Id
-
-
 
 if @@rowcount = 0 
 begin
@@ -5216,5 +5438,5 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
 
 
 end
+end
 
-END

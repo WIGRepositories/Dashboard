@@ -120,8 +120,6 @@ namespace BTPOSDashboardAPI.Controllers
                     cmd.Parameters.Add(insupdflag);
 
                     cmd.ExecuteScalar();
-
-                    cmd.Parameters.Clear();
                 }
                 conn.Close();
               

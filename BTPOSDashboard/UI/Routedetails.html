@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetRoutes();" ng-model="RouteDetails">
+<body ng-model="RouteDetails">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -80,20 +80,66 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </li>
-                                <li>
+                                <li >
                                     <a href="#">
                                         <i class="fa fa-tachometer fa-fw">
                                             <div class="icon-bg bg-orange"></div>
                                         </i><span class="menu-title">Dashboard</span>
                                     </a>
                                 </li>
+
+
+
+
+
+
                                 <li>
                                     <a href="#">
-                                        <i class="fa fa-send-o fa-fw">
+                                        <i class="fa fa-sitemap fa-fw">
+                                            <div class="icon-bg bg-dark"></div>
+                                        </i><span class="menu-title">Company and Users</span><span class="fa arrow"></span>
+                                    </a>
+                                    <ul class="nav nav-second-level">
+
+                                        <li>
+                                            <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Company</span><span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
+                                                <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                        <li>
+                                            <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
+                                            <ul class="nav nav-third-level">
+                                                <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                                <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                                <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                        <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
+
+                                </li>
+
+
+
+                            </ul>
+                            </li>
+
+
+
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-truck">
                                             <div class="icon-bg bg-green"></div>
                                         </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
                                     </a>
                                     <ul class="nav nav-second-level">
+
                                         <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
                                         <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                         <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
@@ -103,9 +149,187 @@
                                     </ul>
 
                                 </li>
+
                                 <li>
                                     <a href="#">
+                                    <i class="fa fa-mobile">
+                                        <div class="icon-bg bg-dark"></div>
+                                    </i><span class="menu-title">Inventory & BT POS</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                            <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory</span><span class="fa arrow"></span></a>
+
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="InventoryItems.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Items</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
+                                            <li><a href="InventorySales.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Sales</span></a></li>
+                                            <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+
+                                        </ul>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-gears">
+                                        <div class="icon-bg bg-dark"></div>
+                                    </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Master Data</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="TypeGroups.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Type Groups</span></a></li>
+                                            <li><a href="Types.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Types</span></a></li>
+                                            <li><a href="SubCategory.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title"> Sub Categories</span></a></li>
+                                            <li><a href="Stops.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Stops</span></a></li>
+                                            <li><a href="Roles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Roles</span></a></li>
+                                            <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
+                                            <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Routes</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
+                                            <li class="active"><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
+                                            <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
+
+
+                                        </ul>
+                                    </li>
+                                    <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
+
+
+                                </ul>
+                            </li>
+
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-gavel">
+                                        <div class="icon-bg bg-green"></div>
+                                    </i><span class="menu-title">Utilties & Tools</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+
+                                    <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
+                                    <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
+                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
+
+
+                                </ul>
+
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-th-list fa-fw">
+                                        <div class="icon-bg bg-blue"></div>
+                                    </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                </ul>
+                            </li>
+
+
+                            <li>
+                                <a href="#">
                                         <i class="fa fa-send-o fa-fw">
+                                        <div class="icon-bg bg-dark"></div>
+                                    </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
+                                            <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+
+                                        </ul>
+                                    </li>
+
+
+
+                                </ul>
+                            </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <!--<li>
+                <a href="#">
+                    <i class="fa fa-send-o fa-fw">
                                             <div class="icon-bg bg-green"></div>
                                         </i><span class="menu-title">Users</span><span class="fa arrow"></span>
                                     </a>
@@ -121,8 +345,8 @@
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
                                     </ul>
 
-                                </li>
-                                <li>
+            </li>-->
+                            <!--<li>
                                     <a href="#">
                                         <i class="fa fa-desktop fa-fw">
                                             <div class="icon-bg bg-pink"></div>
@@ -131,7 +355,7 @@
                                     <ul class="nav nav-second-level">
                                         <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
                                         <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                        <li class="active"><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
+                    <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
                                         <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
                                         <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
 
@@ -153,6 +377,17 @@
                                         <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
                                     </ul>
                                 </li>
+
+
+
+
+
+
+
+
+
+
+
                                 <li>
                                     <a href="#">
                                         <i class="fa fa-edit fa-fw">
@@ -192,11 +427,12 @@
                                         <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
                                         <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
                                     </ul>
-                                </li>
+            </li>-->
                             </ul>
                         </div>
                     </nav>
                     <!--END SIDEBAR MENU-->
+                    
                     <!--BEGIN PAGE WRAPPER-->
                     <div id="page-wrapper">
                         <!--BEGIN TITLE & BREADCRUMB PAGE-->
@@ -213,6 +449,8 @@
                         </div>
 
                         <div class="page-content">
+                            <div id="table-action" class="row">
+                                <div class="col-lg-12">
 
                             <div id="Modal-prev" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                 <div class="modal-dialog" ng-model="Stops">
@@ -223,29 +461,67 @@
                                         </div>
                                         <div class="modal-body" ng-model="currRole">
                                             <div class="row">
+                                                <div class="col-lg-12">
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group has-success" style="text-align:right">
-                                                        <label for="inputFirstName" class="control-label">Select Stop:<span class='require'>*</span></label>
-                                                    </div>
-                                                </div>
+
+                                                    <div class="table-container">
                                                 <div class="col-md-5">
                                                     <div class="form-group">
                                                         <select ng-options="stp.Name for stp in Stops track by stp.Id" ng-model="stp">
                                                             <option value="">Select</option>
                                                         </select>
                                                     </div>
+                                                        Source: <input type="text" name="Source" value="" readonly>
+                                                        Destination: <input type="text" name="Destination" value="" readonly>
+
+
+                                                        <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                                                        <div class="page-content">
+
+
+                                                            <div class="row">
+                                                                
+                                                                <div>
+                                                                    <div class="panel panel-violet">
+                                                                        <div class="panel-heading">Configure Route Details</div>
+                                                                        <div class="panel-body pan">
+                                                                            <br />
+                                                                            <div class="col-md-5">
+
+                                                                                <div id="one-column" class="tab-pane">
+
+
+                                                                                    <div class="message-item blue">
+                                                                                        <a href="#tab-account-setting" data-toggle="tab">
+
+                                                                                            <div class="message-inner" style="background-color:aliceblue">
+
+                                                                                                <div class="message-head clearfix">
+                                                                                                    <div class="user-detail">
+                                                                                                        <h5 class="handle">Source</h5>
                                                 </div>
                                             </div>
 
+                                                                                                <button type="button" class="btn btn-primary btn-xs"</button>Add Next Stop</button>
+                                                                                            </div>
+                                                                                        </a>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addPrevStop(stp);">Add Stop</button>
                                             <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
+                                                                                                <div class="message-head clearfix">
+                                                                                                    <div class="user-detail">
+                                                                                                        <h5 class="handle">Stops</h5>
                                         </div>
+
+
                                     </div>
+                                                                                                <button class="btn btn-primary btn-xs">Add Next Stop</button>
+                                                                                                <button class="btn btn-primary btn-xs">Add Previous Stop</button>
+                                                                                                <button class="btn btn-primary btn-xs">Delete</button>
                                 </div>
+                                                                                        </a>
                             </div>
 
                             <div id="Modal-next" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -315,23 +591,28 @@
                                                             <option value="">Select</option>
                                                         </select>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        </table>
 
                                     </div>
-                                </div>
                                
                                 <div class="panel-body pan" ng-model="RouteDetails">
+                                       
+                                                                                <form action="#" class="form-horizontal form-seperated form-row-stripped">
 
-                                    <div class="row">
+                                                                                            <div class="col-md-7"><input id="inputFirstName" type="text" class="form-control" ng-model="RouteDetails.RouteId" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputLastName" class="col-md-4 control-label">Stop name <span class='require'>*</span></label>
 
-                                        <div class="col-md-12">
+                                                                                            <div class="col-md-7"><input id="inputLastName" type="text" class="form-control" ng-model="RouteDetails.stopname" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputMiddleName" class="col-md-4 control-label">Description</label>
 
-                                            <div class="tab-content active">
-
-                                                <div class="row">
-
+                                                                                            <div class="col-md-7"><input id="inputMiddleName" type="text" class="form-control" ng-model="RouteDetails.Description" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                        
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputPhone" class="col-md-4 control-label">DistanceFromDestination<span class='require'>*</span></label>
 
                                                     <div class="col-md-3">
                                                         <ul class="nav nav-pills nav-stacked fade in">
@@ -342,9 +623,11 @@
                                                                 </a>
                                                             </li>                                                            
                                                         </ul>
-                                                    </div>
+                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label for="inputPhone" class="col-md-4 control-label">DistanceFromPreviousStop<span class='require'>*</span></label>
 
-                                                    <div class="col-md-7">
+                                                        <div class="col-md-7">
                                                         <div class="tab-content">
                                                             <div id="tab-account-setting" class="active">
                                                                 <form action="#" class="form-horizontal">
@@ -360,44 +643,54 @@
                                                                                 <button data-target="#Modal-prev" data-toggle="modal" class="btn btn-primary btn-xs">Add Next Stop</button>
                                                                                 <button data-target="#Modal-next" data-toggle="modal" class="btn btn-primary btn-xs">Add Previous Stop</button>
 
-                                                                                <button class="btn btn-primary btn-xs">Delete</button>
+                                                                                            <div class="col-md-7">
+                                                                                                <div class="input-icon right"><i class="fa fa-mobilephone"></i><input type="text" placeholder="" class="form-control" ng-model="RouteDetails.DistanceFromNextStop" /></div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </form>
+                                                                                    <!--<div class="form-group">
+                    <button type="button" class="btn btn-primary" ng-click="save(RouteDetails);">Save</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                    <br />
+                </div>-->
+                                                                    </form>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                </div>
                                                             </div>
 
-
                                                         </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                             <div class="col-md-12" style="text-align:center">
                                                 <button type="submit" class="btn btn-success">
                                                     <i class="fa fa-save"></i>&nbsp;
                                                     Save
                                                 </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
-                                        </div>
-
                                     </div>
-
-                                </div>
                                 </div><!--END CONTENT-->
                             </div><!--BEGIN FOOTER-->
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                         </div>
 
+                            <!--END CONTENT--><!--BEGIN FOOTER-->
+                            <div id="footer">
+                                <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
+                            </div>
+                            <!--END FOOTER-->
                     </div>
+                            <!--END PAGE WRAPPER-->
                 </div>
             </div>
         </div>
        
     </div>
-
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -421,6 +714,6 @@
 
     <script src="js/angular.js"></script>
     <script src="js/RouteDetails.js"></script>
-
+                <!--<script src="js/plus.js"></script>-->
 </body>
 </html>

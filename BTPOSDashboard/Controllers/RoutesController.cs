@@ -35,7 +35,6 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
-
         [HttpPost]
         public DataTable saveRoutes(Routes r)
         {
@@ -59,9 +58,9 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(cid);
 
             SqlParameter broute = new SqlParameter();
-            broute.ParameterName = "@RouteName";
+            broute.ParameterName = "@Route";
             broute.SqlDbType = SqlDbType.VarChar;
-            broute.Value = r.RouteName;
+            broute.Value = r.Route;
             cmd.Parameters.Add(broute);
 
             SqlParameter acode = new SqlParameter();
@@ -72,33 +71,33 @@ namespace BTPOSDashboard.Controllers
 
             SqlParameter ddes = new SqlParameter();
             ddes.ParameterName = "@Distance";
-            ddes.SqlDbType = SqlDbType.Decimal;
+            ddes.SqlDbType = SqlDbType.VarChar;
             ddes.Value = r.Distance;
             cmd.Parameters.Add(ddes);
 
+           
+            //SqlParameter gact = new SqlParameter();
+            //gact.ParameterName = "@Active";
+            //gact.SqlDbType = SqlDbType.Int;
+            //gact.Value = r.Active;
+            //cmd.Parameters.Add(gact);
 
-            SqlParameter gact = new SqlParameter();
-            gact.ParameterName = "@Active";
-            gact.SqlDbType = SqlDbType.Int;
-            gact.Value = r.Active;
-            cmd.Parameters.Add(gact);
-
-            SqlParameter ii = new SqlParameter();
-            ii.ParameterName = "@Description";
-            ii.SqlDbType = SqlDbType.VarChar;
-            ii.Value = r.Description;
-            cmd.Parameters.Add(ii);
+            //SqlParameter ii = new SqlParameter();
+            //ii.ParameterName = "@BTPOSGroupId";
+            //ii.SqlDbType = SqlDbType.VarChar;
+            //ii.Value = r.BTPOSGroupId;
+            //cmd.Parameters.Add(ii);
 
             SqlParameter ff = new SqlParameter();
-            ff.ParameterName = "@SourceId";
-            ff.SqlDbType = SqlDbType.Int;
-            ff.Value = r.SourceId;
+            ff.ParameterName = "@Source";
+            ff.SqlDbType = SqlDbType.VarChar;
+            ff.Value = r.Source;
             cmd.Parameters.Add(ff);
 
             SqlParameter hh = new SqlParameter();
-            hh.ParameterName = "@DestinationId";
-            hh.SqlDbType = SqlDbType.Int;
-            hh.Value = r.DestinationId;
+            hh.ParameterName = "@Destination";
+            hh.SqlDbType = SqlDbType.VarChar;
+            hh.Value = r.Destination;
             cmd.Parameters.Add(hh);
 
 
