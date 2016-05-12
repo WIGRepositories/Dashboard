@@ -84,17 +84,17 @@ namespace BTPOSDashboard.Controllers
             sid.Value = Convert.ToString(b.UnitPrice);
             cmd.Parameters.Add(sid);
 
-            SqlParameter gid = new SqlParameter();
-            gid.ParameterName = "@todate";
-            gid.SqlDbType = SqlDbType.DateTime;
-            gid.Value = DateTime.Now;
-            cmd.Parameters.Add(gid);
+            //SqlParameter gid = new SqlParameter();
+            //gid.ParameterName = "@todate";
+            //gid.SqlDbType = SqlDbType.DateTime;
+            //gid.Value = DateTime.Now;
+            //cmd.Parameters.Add(gid);
 
-            SqlParameter fid = new SqlParameter();
-            fid.ParameterName = "@fromdate";
-            fid.SqlDbType = SqlDbType.DateTime;
-            fid.Value = b.fromdate;
-            cmd.Parameters.Add(fid);
+            //SqlParameter fid = new SqlParameter();
+            //fid.ParameterName = "@fromdate";
+            //fid.SqlDbType = SqlDbType.DateTime;
+            //fid.Value = b.fromdate;
+            //cmd.Parameters.Add(fid);
             
 
               SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
