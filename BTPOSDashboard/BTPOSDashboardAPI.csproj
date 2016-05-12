@@ -434,6 +434,7 @@
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\RoleDetails.js" />
     <Content Include="UI\js\RouteDetails.js" />
+    <Content Include="UI\js\RouteFare.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleDetails.js" />
@@ -509,7 +510,7 @@
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
     <Content Include="UI\Routedetails.html" />
-    <Content Include="UI\Routedetails2.html" />
+    <Content Include="UI\RouteFare.html" />
     <Content Include="UI\Routes.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
