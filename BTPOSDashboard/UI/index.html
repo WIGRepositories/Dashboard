@@ -212,7 +212,7 @@
                                             <ul class="nav nav-third-level">
                                                 <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                                 <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
-                                                <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                                <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
 
                                             </ul>
                                         </li>
@@ -339,10 +339,10 @@
 
                                                                 <tr ng-repeat="pos in dashboardDS.Table" class="gradeA">
                                                                     <td>{{pos.POSID}}</td>
-                                                                    <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" /></td>
+                                                                    <td>{{pos.IMEI}}</td>
 
                                                                     <td>{{pos.companyname}}</td>
-                                                                    <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" /></td>
+                                                                    <td>{{pos.ipconfig}}</td>
                                                                     <td>{{pos.fleetowner}}</td>
                                                                     <td>
                                                                         <span class="label label-sm label-success" ng-if="pos.StatusId == 6">
@@ -402,12 +402,6 @@
                                                                 <div class="list-group mail-box" ng-repeat="A in dashboardDS.Table1" ng-hide="dashboardDS.Table1.length == 0">
                                                                     <a href="#" class="list-group-item">
                                                                         <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{A.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name"></span>{{A.LastName}}<span></span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span>{{A.Message}}<span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                                    </a><a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp; <span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                                    </a><a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>New BTPOS to be activated</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                                            <span class="glyphicon glyphicon-paperclip"></span>
-                                                                        </span>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -421,14 +415,7 @@
                                                                     <a href="#" class="list-group-item">
                                                                         <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{N.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name">{{N.LastName}}</span><span>{{N.Message}}</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">{{N.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
                                                                     </a>
-                                                                    <!---<a href="#" class="list-group-item">
-            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
-            &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-        </a><a href="#" class="list-group-item">
-            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                <span class="glyphicon glyphicon-paperclip"></span>
-            </span>
-        </a>---->
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div>
