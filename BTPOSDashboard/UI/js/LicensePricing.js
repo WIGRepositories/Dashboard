@@ -6,19 +6,22 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
     })
 
+    $scope.currLicense = function (L) {
+        $scope.currSelLicense = L;
+    }
 
-    $scope.Save = function (Licensepricing) {
+    $scope.Save = function (currSelLicense) {
 
-        var Licensepricing = {
+        var currSelLicense = {
 
-            LicenseId: Licensepricing.LicenseId,
-            TimePeriod: Licensepricing.TimePeriod,
-            UnitPrice: Licensepricing.UnitPrice,
-            fromdate: Licensepricing.fromdate,
-            todate: Licensepricing.todate,
-            Active: Licensepricing.Active,
+            LicenseId: currSelLicense.LicenseId,
+            TimePeriod: currSelLicense.TimePeriod,
+            UnitPrice: currSelLicense.UnitPrice,
+            fromdate: currSelLicense.fromdate,
+            todate: currSelLicense.todate,
+            Active: currSelLicense.Active,
 
-            MinTimePeriods: Licensepricing.MinTimePeriods
+            MinTimePeriods: currSelLicense.MinTimePeriods
 
 
 
@@ -30,7 +33,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             //headers: {
             //    'Content-Type': undefined
 
-            data: Licensepricing
+            data: currSelLicense
 
 
         }
