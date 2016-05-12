@@ -378,7 +378,10 @@
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
     <Content Include="UI\AssignRole.html" />
+    <Content Include="UI\BtposLicense.html" />
+    <Content Include="UI\BtposRoutes.html" />
     <Content Include="UI\CompanyRoles.html" />
+    <Content Include="UI\Configuration.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
     <Content Include="UI\CustomizeRoutes.html" />
@@ -410,6 +413,7 @@
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
+    <Content Include="UI\FleetOwners.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
     <Content Include="UI\InventoryItems.html" />
@@ -505,6 +509,7 @@
     <Content Include="UI\NewObject.html" />
     <Content Include="UI\Notifications.html" />
     <Content Include="UI\Objects.html" />
+    <Content Include="UI\ResetPassword.html" />
     <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
     <Content Include="UI\AddLicensepayments.html" />
@@ -516,6 +521,8 @@
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
+    <Content Include="UI\UserLicense.html" />
+    <Content Include="UI\UserRoles.html" />
     <Content Include="UI\Users.html" />
     <Content Include="UI\VehicleDetails.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
