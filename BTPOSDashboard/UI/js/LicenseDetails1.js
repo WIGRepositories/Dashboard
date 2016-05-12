@@ -6,36 +6,36 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
     })
 
-   
+
     $scope.Save = function (LicenseDetails) {
-       
+
         var LicenseDetails = {
 
             FeatureName: LicenseDetails.FeatureName,
             FeatureValue: LicenseDetails.FeatureValue,
             FeatureLabel: LicenseDetails.FeatureLabel,
-            LicenseCode:   LicenseDetails. LicenseCode,
-            LicenseName:   LicenseDetails.LicenseName,
-            LabelClass:    LicenseDetails.LabelClass,
-            Active  :    LicenseDetails.Active,
+            LicenseCode: LicenseDetails.LicenseCode,
+            LicenseName: LicenseDetails.LicenseName,
+            LabelClass: LicenseDetails.LabelClass,
+            Active: LicenseDetails.Active,
             fromDate: LicenseDetails.fromDate,
-            toDate:   LicenseDetails.toDate
+            toDate: LicenseDetails.toDate
 
 
-    };
-  
-    var req = {
-        method: 'POST',
-        url: ('http://localhost:1476/api/LicenseDetails/SaveLicenseDetails'),
-        //headers: {
-        //    'Content-Type': undefined
+        };
 
-        data: LicenseDetails
+        var req = {
+            method: 'POST',
+            url: ('http://localhost:1476/api/LicenseDetails/SaveLicenseDetails'),
+            //headers: {
+            //    'Content-Type': undefined
 
+            data: LicenseDetails
+
+
+        }
+        $http(req).then(function (response) { });
 
     }
-    $http(req).then(function (response) { });
-
-}
 
 });

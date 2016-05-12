@@ -446,8 +446,19 @@ GO
 CREATE procedure [dbo].[getRoutes]
 as
 begin
-select * from Routes
-end
+SELECT r.[Id]
+      ,[RouteName]
+      ,r.[Code]
+      ,r.[Description]
+      ,r.[Active]
+      ,src.name as Source
+      ,dest.name as Destination
+      ,[SourceId]
+      ,[DestinationId]
+      ,[Distance]
+  FROM [POSDashboard].[dbo].[Routes] r
+  inner join stops src on src.id = r.sourceid
+  inner join stops dest on dest.id = destinationid
 end
 
 GO
@@ -1220,19 +1231,20 @@ CREATE TABLE [dbo].[RouteFareDetails](
 ) ON [PRIMARY]
 
 GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[RouteDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RouteId] [int] NOT NULL,
-	[StopId] [int] NOT NULL,
-	[DistanceFromSource] [decimal](18, 0) NULL,
-	[DistanceFromDestination] [decimal](18, 0) NULL,
-	[DistanceFromPreviousStop] [decimal](18, 0) NULL,
-	[DistanceFromNextStop] [decimal](18, 0) NULL,
+	[RouteId] [varchar](50) NOT NULL,
+	[stopname] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[StopCode] [varchar](50) NOT NULL,
+	[DistanceFromSource] [int] NOT NULL,
+	[DistanceFromDestination] [int] NOT NULL,
+	[DistanceFromPreviousStop] [int] NOT NULL,
+	[DistanceFromNextStop] [int] NOT NULL,
 	[PreviousStopId] [int] NOT NULL,
 	[NextStopId] [int] NOT NULL
 ) ON [PRIMARY]
@@ -1374,19 +1386,8 @@ CREATE TABLE [dbo].[Users](
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[UserRoles](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [int] NOT NULL,
-	[RoleId] [int] NOT NULL,
-	[GroupId] [int] NULL,
-	[RoleName] [varchar](20) NOT NULL
-) ON [PRIMARY]
 
-GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2276,7 +2277,7 @@ AS
 BEGIN
 	
 SELECT b.[Id]
-      ,c.[Id]
+      ,c.[Id] as CompanyId
       ,c.Name as companyname
       ,[POSID]
       ,[StatusId]
@@ -4026,25 +4027,20 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE procedure [dbo].[getRouteDetails]
-(@routeid int = -1)
 as
 begin
-SELECT rd.[Id]
-      ,r.routename as routename
-	  ,r.code as routecode
+SELECT [Id]
       ,[RouteId]
-      ,stopid
-      ,src.name StopName
-	  ,[PreviousStopId]
-      ,[NextStopId]
+      ,[stopname]
+      ,[Description]
+      ,[StopCode]
       ,[DistanceFromSource]
       ,[DistanceFromDestination]
       ,[DistanceFromPreviousStop]
       ,[DistanceFromNextStop]
-  FROM [POSDashboard].[dbo].[RouteDetails] rd
-  inner join stops src on src.id = rd.stopid
-inner join routes r on r.id = rd.routeid
-  where (@routeid = -1 or routeid = @routeid)
+      ,[PreviousStopId]
+      ,[NextStopId]
+  FROM [POSDashboard].[dbo].[RouteDetails]
 end
 
 
@@ -4126,7 +4122,7 @@ begin
 --get btpos details
 SELECT b.[Id]
      -- ,[GroupId]
-      ,c.Name as companyname
+    --  ,c.Name as companyname
       ,[POSID]
       ,[StatusId]
       ,t.Name as [status]
@@ -4897,6 +4893,46 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+Create procedure [dbo].[InsUpdDelUserRoles](
+@Id int,
+@roleid int,
+@UserId int,
+@CompanyId int = null
+)
+as
+begin
+
+
+UPDATE [POSDashboard].[dbo].[UserRoles]
+   SET [UserId] = @UserId
+      ,[RoleId] = @RoleId
+      ,[CompanyId] = @CompanyId
+ WHERE Id = @Id
+
+
+
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId]
+           ,[CompanyId])
+     VALUES
+           (@UserId
+           ,@RoleId
+           ,@CompanyId)
+end
+
+
+end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 CREATE procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
@@ -5037,45 +5073,7 @@ GO
 
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
-Create procedure [dbo].[InsUpdDelUserRoles](
-@Id int,
-@roleid int,
-@UserId int,
-@CompanyId int = null
-)
-as
-begin
-
-
-UPDATE [POSDashboard].[dbo].[UserRoles]
-   SET [UserId] = @UserId
-      ,[RoleId] = @RoleId
-      ,[CompanyId] = @CompanyId
- WHERE Id = @Id
-
-
-
-
-if @@rowcount = 0 
-begin
-
-INSERT INTO [POSDashboard].[dbo].[UserRoles]
-           ([UserId]
-           ,[RoleId]
-           ,[CompanyId])
-     VALUES
-           (@UserId
-           ,@RoleId
-           ,@CompanyId)
-end
-
-
-end
 
 /****** Object:  Table [dbo].[LicensePricing]    Script Date: 05/10/2016 07:02:51 ******/
 SET ANSI_NULLS ON
@@ -5116,6 +5114,54 @@ CREATE TABLE [dbo].[LicenseDetails](
 ) ON [PRIMARY]
 
 GO
+
+CREATE procedure [dbo].[InsUpdDelRoutes](
+@Id int
+,@RouteName varchar(50)
+,@Description varchar(50) = null
+,@Active int
+,@Code varchar(10)
+,@SourceId int
+,@DestinationId int
+,@Distance decimal
+)
+as
+begin
+
+UPDATE [POSDashboard].[dbo].[Routes]
+   SET [RouteName] = @RouteName
+      ,[Code] = @Code
+      ,[Description] = @Description
+      ,[Active] = @Active
+      ,[SourceId] = @SourceId
+      ,[DestinationId] = @DestinationId
+      ,[Distance] = @Distance
+ WHERE Id = @Id
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Routes]
+           ([RouteName]
+           ,[Code]
+           ,[Description]
+           ,[Active]
+           ,[SourceId]
+           ,[DestinationId]
+           ,[Distance])
+     VALUES
+           (@RouteName
+           ,@Code
+           ,@Description
+           ,@Active
+           ,@SourceId
+           ,@DestinationId
+           ,@Distance)
+
+
+end
+
+END
 
 
 
@@ -5214,7 +5260,7 @@ Active
  from LicensePricing
 end
 
-
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicensePricing]    Script Date: 05/11/2016 11:19:59 ******/
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 05/11/2016 11:42:09 ******/
 SET ANSI_NULLS ON
@@ -5237,6 +5283,7 @@ ALTER procedure [dbo].[InsUpdDelLicensePricing](
 
 as
 begin
+
 UPDATE [POSDashboard].[dbo].[LicensePricing]
    SET 
       [LicenseId] = @LicenseId
@@ -5282,6 +5329,42 @@ end
 
 end
 
+
+
+/****** Object:  StoredProcedure [dbo].[Sp_InsTypeGroups]    Script Date: 05/04/2016 11:24:12 ******/
+SET ANSI_NULLS ON
+
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--ALTER procedure [dbo].[InsUpdDelLicensePricing](@Id int,
+--@LicenseId int,
+--@TimePeriod varchar(50),
+--@MinTimePeriods int,
+--@UnitPrice decimal(18,0),
+
+--@fromdate datetime,
+--@todate datetime,
+--@Active int)
+
+--as
+--begin
+--insert into LicensePricing values(
+--@LicenseId,
+--@TimePeriod,
+--@MinTimePeriods,
+--@UnitPrice,
+--@Active,
+--@fromdate,
+--@todate,
+--@Id
+--)
+
+
+
+--end
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5311,9 +5394,12 @@ UPDATE [POSDashboard].[dbo].[LicenseDetails]
       ,[FeatureLabel] = @FeatureLabel
       ,[FeatureValue] = @FeatureValue
       ,[LabelClass] = @LabelClass
-declare @routeid int
+      ,[Active] = @Active
+      --,[fromDate] = <fromDate, datetime,>
+      --,[toDate] = <toDate, datetime,>
+ WHERE Id = @Id
 
-if @@rowcount = 0 
+if @@ROWCOUNT = 0
 begin
 INSERT INTO [POSDashboard].[dbo].[LicenseDetails]
            ([LicenseCode]
@@ -5342,101 +5428,5 @@ INSERT INTO [POSDashboard].[dbo].[LicenseDetails]
 )
 end
 
-end
-
-CREATE procedure [dbo].[InsUpdDelRoutes](
-@Id int
-,@RouteName varchar(50)
-,@Description varchar(50) = null
-,@Active int
-,@Code varchar(10)
-,@SourceId int
-,@DestinationId int
-,@Distance decimal
-)
-as
-begin
-
-declare @routeid int
-
-
-UPDATE [POSDashboard].[dbo].[Routes]
-   SET [RouteName] = @RouteName
-      ,[Code] = @Code
-      ,[Description] = @Description
-      ,[Active] = @Active
-      ,[SourceId] = @SourceId
-      ,[DestinationId] = @DestinationId
-      ,[Distance] = @Distance
- WHERE Id = @Id
-
-if @@rowcount = 0 
-begin
-
-INSERT INTO [POSDashboard].[dbo].[Routes]
-           ([RouteName]
-           ,[Code]
-           ,[Description]
-           ,[Active]
-           ,[SourceId]
-           ,[DestinationId]
-           ,[Distance])
-     VALUES
-           (@RouteName
-           ,@Code
-           ,@Description
-           ,@Active
-           ,@SourceId
-           ,@DestinationId
-           ,@Distance)
-
-select @routeid = @@IDENTITY
-
---insert the source stop
-INSERT INTO [POSDashboard].[dbo].[RouteDetails]
-           ([RouteId]
-           ,[StopId]
-           ,[DistanceFromSource]
-           ,[DistanceFromDestination]
-           ,[DistanceFromPreviousStop]
-           ,[DistanceFromNextStop]
-           ,[PreviousStopId]
-           ,[NextStopId])
-     VALUES
-           (
-			@routeid
-           ,@SourceId
-           ,@Distance
-           ,@Distance
-           ,@Distance
-           ,@Distance
-           ,@SourceId
-           ,@DestinationId
-          )
-
---insert the destination stop
-INSERT INTO [POSDashboard].[dbo].[RouteDetails]
-           ([RouteId]
-           ,[StopId]
-           ,[DistanceFromSource]
-           ,[DistanceFromDestination]
-           ,[DistanceFromPreviousStop]
-           ,[DistanceFromNextStop]
-           ,[PreviousStopId]
-           ,[NextStopId])
-     VALUES
-           (
-			@routeid
-           ,@DestinationId
-           ,@Distance
-           ,@Distance
-           ,@Distance
-           ,@Distance
-           ,@SourceId
-           ,@DestinationId
-          )
-
 
 end
-end
-

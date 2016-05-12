@@ -121,7 +121,7 @@ namespace BTPOSDashboard.Controllers
                                 ba.Value = -1;
                                 cmd.Parameters.Add(ba);
 
-                                SqlParameter bb = new SqlParameter("@GroupId", SqlDbType.Int);
+                                SqlParameter bb = new SqlParameter("@CompanyId", SqlDbType.Int);
                                 bb.Value = 1;
                                 cmd.Parameters.Add(bb);
 

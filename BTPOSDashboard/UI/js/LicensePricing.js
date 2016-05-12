@@ -16,14 +16,14 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             UnitPrice: Licensepricing.UnitPrice,
             fromdate: Licensepricing.fromdate,
             todate: Licensepricing.todate,
-            Active : Licensepricing.Active ,
-            
-            MinTimePeriods:Licensepricing.MinTimePeriods
+            Active: Licensepricing.Active,
 
-          
+            MinTimePeriods: Licensepricing.MinTimePeriods
+
+
 
         };
-        
+
         var req = {
             method: 'POST',
             url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),

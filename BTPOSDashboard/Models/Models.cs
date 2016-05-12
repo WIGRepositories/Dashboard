@@ -15,9 +15,6 @@ namespace BTPOSDashboardAPI.Models
         public string UserId { get; set; }
         public string Name { get; set; }
     }
-
-
-
     public class Notifications
     {
         public int Id { get; set; }
@@ -218,14 +215,15 @@ namespace BTPOSDashboardAPI.Models
     public class Routes
     {
         public int Id { set; get; }
-        public string Route { set; get; }
+        public string RouteName { set; get; }
         public string Code { set; get; }
-        //public string Description {set;get;} 
-        //public string Active {set;get;} 
-        public string Distance { set; get; }
+        public string Description { set; get; }
+        public int Active { set; get; }
+        public decimal Distance { set; get; }
         public string Source { set; get; }
         public string Destination { set; get; }
-
+        public int SourceId { set; get; }
+        public int DestinationId { set; get; }
     }
 
     public class Transaction
@@ -1114,26 +1112,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string subCategory { get; set; }
     }
-    //public class LicenseDetails
-    //{
-    //    public int Id { get; set; }
-
-    //    public int LicenseTypeId { get; set; }
-    //    public string FeatureName { get; set; }
-    //    public String FeatureValue { get; set; }
-    //    public int FeatureType { get; set; }
-
-    //    public String Description { get; set; }
-
-    //    public DateTime effectiveFrom { get; set; }
-
-    //    public DateTime effectiveTill { get; set; }
-
-    //    public String Label { get; set; }
-
-    //    public String labelclass { get; set; }
-    //}
-
+    
     public class InventoryItem
     {
         public int Id { get; set; }
@@ -1159,9 +1138,7 @@ namespace BTPOSDashboardAPI.Models
         public String Description { get; set; }
         public string insupdflag { get; set; }
     }
-
-
-
+    
     public class FleetDetails
     {
         public int Id { get; set; }
@@ -1261,8 +1238,6 @@ namespace BTPOSDashboardAPI.Models
         public String FareType { get; set; }
         public int Active { get; set; }
     }
-
-
     public class LicenseDetails
     {
 
@@ -1283,14 +1258,12 @@ namespace BTPOSDashboardAPI.Models
 
 
     }
-
-
     public class LicensePricing
     {
         public int LicenseId { get; set; }
 
         public String TimePeriod { get; set; }
-        public int  MinTimePeriods { get; set; }
+        public int MinTimePeriods { get; set; }
 
         public decimal UnitPrice { get; set; }
         public DateTime fromdate { get; set; }

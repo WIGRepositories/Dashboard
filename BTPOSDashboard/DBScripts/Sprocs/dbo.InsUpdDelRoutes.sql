@@ -7,11 +7,53 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE procedure [dbo].[InsUpdDelRoutes](@Id int,@Route varchar(50),@Description varchar(50),@Active varchar(50),@Code varchar(50),@BTPOSGroupId varchar(50),@Source varchar(50),@Destination varchar(50))
+CREATE procedure [dbo].[InsUpdDelRoutes](
+@Id int
+,@RouteName varchar(50)
+,@Description varchar(50) = null
+,@Active int
+,@Code varchar(10)
+,@SourceId int
+,@DestinationId int
+,@Distance decimal
+)
 as
 begin
-insert into Routes ([Route],[Description],Active,Code,BTPOSGroupId,Source,Destination) values(@Route,@Description,@Active,@Code,@BTPOSGroupId,@Source,@Destination)
+
+UPDATE [POSDashboard].[dbo].[Routes]
+   SET [RouteName] = @RouteName
+      ,[Code] = @Code
+      ,[Description] = @Description
+      ,[Active] = @Active
+      ,[SourceId] = @SourceId
+      ,[DestinationId] = @DestinationId
+      ,[Distance] = @Distance
+ WHERE Id = @Id
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Routes]
+           ([RouteName]
+           ,[Code]
+           ,[Description]
+           ,[Active]
+           ,[SourceId]
+           ,[DestinationId]
+           ,[Distance])
+     VALUES
+           (@RouteName
+           ,@Code
+           ,@Description
+           ,@Active
+           ,@SourceId
+           ,@DestinationId
+           ,@Distance)
+
+
 end
+
+END
 
 GO
 
