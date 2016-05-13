@@ -378,6 +378,7 @@
     <Content Include="UI\AddLicenseFeature.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
+    <Content Include="UI\AddNewSeats.html" />
     <Content Include="UI\AssignRole.html" />
     <Content Include="UI\BlockList.html" />
     <Content Include="UI\BtposLicense.html" />
@@ -447,6 +448,7 @@
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleDetails.js" />
+    <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
     <Content Include="UI\Login.html" />
@@ -525,6 +527,8 @@
     <Content Include="UI\Routedetails.html" />
     <Content Include="UI\RouteFare.html" />
     <Content Include="UI\Routes.html" />
+    <Content Include="UI\Seating.html" />
+    <Content Include="UI\ShoppingCart.html" />
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
@@ -536,6 +540,7 @@
     <Content Include="UI\UserRoles.html" />
     <Content Include="UI\Users.html" />
     <Content Include="UI\VehicleDetails.html" />
+    <Content Include="UI\VehicleLayout.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />
