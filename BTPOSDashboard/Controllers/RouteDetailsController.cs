@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class RouteDetailsController : ApiController
     {
          [HttpGet]
-        public DataTable getroutedetails()
+        public DataTable getroutedetails(int routeid)
         {
             DataTable Tbl = new DataTable();
 
@@ -27,6 +27,12 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "getRouteDetails";
             cmd.Connection = conn;
+
+            SqlParameter cid = new SqlParameter();
+            cid.ParameterName = "@routeid";
+            cid.SqlDbType = SqlDbType.Int;
+            cid.Value = routeid;
+            cmd.Parameters.Add(cid);
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);

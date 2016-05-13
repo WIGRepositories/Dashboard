@@ -13,7 +13,7 @@ namespace BTPOSDashboardAPI.Controllers
     public class BTPOSDetailsController : ApiController
     {
         [HttpGet]
-   
+
         public DataTable BTPOSDetails()
         {
             DataTable Tbl = new DataTable();
@@ -47,7 +47,7 @@ namespace BTPOSDashboardAPI.Controllers
         //         //foreach(BTPOSDetails pos in poslist)
         //         //{
         //         //    string str = pos.IMEI;
-                     
+
         //         //}
 
         //    }
@@ -64,7 +64,7 @@ namespace BTPOSDashboardAPI.Controllers
         {
             DataTable Tbl = new DataTable();
 
-           // BTPOSDetails n = new BTPOSDetails();
+            // BTPOSDetails n = new BTPOSDetails();
             try
             {
                 //connect to database
@@ -124,7 +124,7 @@ namespace BTPOSDashboardAPI.Controllers
                     cmd.Parameters.Clear();
                 }
                 conn.Close();
-              
+
             }
             catch (Exception ex)
             {
@@ -137,6 +137,6 @@ namespace BTPOSDashboardAPI.Controllers
         public void Options()
         {
         }
-       
+
     }
 }

@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Fleet">
+<body ng-init="GetFleetDetails();" ng-model="Fleet">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -134,7 +134,7 @@
 
 
 
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-truck">
                                     <div class="icon-bg bg-green"></div>
@@ -142,7 +142,7 @@
                             </a>
                             <ul class="nav nav-second-level">
 
-                                <li class="active"><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                <li class="active"><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></>
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
@@ -731,14 +731,14 @@
 
                                                                 </td>
                                                                 <td>
-                                                                    {{F.VehicleTypeId}}
+                                                                    {{F.VehicleType}}
                                                                 </td>
                                                                 <td>
-                                                                    {{F.ServiceTypeId}}
+                                                                    {{F.ServiceType}}
                                                                 </td>
                                                                
                                                                 <td>
-                                                                    {{F.CompanyId}}
+                                                                    {{F.CompanyName}}
                                                                 </td>
                                                   
                                                                 <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
