@@ -332,9 +332,9 @@
                                                        
                                                         <div class="col-lg-8">
                                                             <div class="tb-group-actions pull-left">
-                                                                Category: <select ng-options="s.Name for s in SubCategories track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                    <option value="">Select</option>
-                                                                </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                Category: <select ng-options="s.Name for s in License track by s.Id" ng-model="s" ng-change="getselectval(s)">
+    <option value="">Select</option>
+</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                License Code: <select>
                                                                     <option value="0">111</option>
                                                                     <option value="1">112</option>
@@ -365,7 +365,7 @@
                                                                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                                 <h4 id="modal-header-primary-label" class="modal-title">Edit License</h4>
                                                                             </div>
-                                                                            <div class="modal-body" ng-model="LicenseDetails">
+                                                                            <div class="modal-body" ng-model="currSelLicense">
                                                                                 <div class="row">
 
                                                                                     <div class="col-md-3">
@@ -375,7 +375,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="LicenseDetails.FeatureName" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currSelLicense.FeatureName" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -388,7 +388,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="LicenseDetails.FeatureValue" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currSelLicense.FeatureValue" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -401,31 +401,31 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="LicenseDetails.FeatureLabel" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currSelLicense.FeatureLabel" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                               
-
-                                                                                        <div class="form-group">
-
-                                                                                            <label for="selCountry" class="col-md-3 control-label">License Catagory</label>
-                                                                                            <div class="col-md-5">
-                                                                                                <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
-                                                                                                    <option value="">All</option>
-                                                                                                </select>
-                                                                                            </div>
-
-                                                                                        </div>
 
 
-                                                                                   
-                                                                                </div>
+                                                                                <!----     <div class="form-group">
+
+                 <label for="selCountry" class="col-md-3 control-label">License Catagory</label>
+                 <div class="col-md-5">
+                     <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
+                         <option value="">All</option>
+                     </select>
+                 </div>
+
+             </div>---->
+
+
+
+                                                                            </div>
                                                                             
                                                                            
                                                                            
                                                                             <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="Save(LicenseDetails);">Save</button>
+                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="Save(currSelLicense);">Save</button>
                                                                                 <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
                                                                             </div>
@@ -446,7 +446,7 @@
                                                                     </thead>
                                                                     <tbody>
 
-                                                                        <tr ng-repeat="L in License" class="gradeA">
+                                                                        <tr ng-repeat="L in Licenses" class="gradeA">
 
 
 
@@ -454,7 +454,7 @@
                                                                             <td>{{L.FeatureValue}}</td>
                                                                             <td>{{L.FeatureLabel}}</td>
                                                                             <td>
-                                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="currLicense(License);">
+                                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="currLicense(L);">
                                                                                     <i class="fa fa-edit"></i>&nbsp;
                                                                                     Edit
                                                                                 </button>

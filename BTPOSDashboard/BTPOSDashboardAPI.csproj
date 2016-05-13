@@ -423,6 +423,7 @@
     <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\CreateRole.js" />
+    <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
@@ -1934,6 +1935,8 @@
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\EditHistoryController.cs" />
+    <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\FleetAvailabilityController.cs" />
     <Compile Include="Controllers\FleetController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteController.cs" />

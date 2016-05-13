@@ -1,25 +1,34 @@
 ﻿var app = angular.module('myApp', [])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
+    $scope.GetLicenseCategories = function () {
+        $http.get('http://localhost:1476/api/subcategory/getsubcategory?catid=6').then(function (res, data) {
+            $scope.License = res.data;
 
-    $http.get('http://localhost:1476/api/LicenseDetails/LicenseDetails').then(function (res, data) {
-        $scope.License = res.data;
+        })
 
-    })
+    }
+    $scope.getLicenseDetails = function () {
+        $http.get('http://localhost:1476/api/LicensePricing/LicensePricing').then(function (res, data) {
+            $scope.Licenses = res.data;
 
+        })
+    }
+    $scope.currLicense = function (L) {
+        $scope.currSelLicense = L;
+    }
+    $scope.Save = function (currSelLicense) {
 
-    $scope.Save = function (LicenseDetails) {
+        var currSelLicense = {
 
-        var LicenseDetails = {
-
-            FeatureName: LicenseDetails.FeatureName,
-            FeatureValue: LicenseDetails.FeatureValue,
-            FeatureLabel: LicenseDetails.FeatureLabel,
-            LicenseCode: LicenseDetails.LicenseCode,
-            LicenseName: LicenseDetails.LicenseName,
-            LabelClass: LicenseDetails.LabelClass,
-            Active: LicenseDetails.Active,
-            fromDate: LicenseDetails.fromDate,
-            toDate: LicenseDetails.toDate
+            FeatureName: currSelLicense.FeatureName,
+            FeatureValue: currSelLicense.FeatureValue,
+            FeatureLabel: currSelLicense.FeatureLabel,
+            LicenseCode: currSelLicense.LicenseCode,
+            LicenseName: currSelLicense.LicenseName,
+            LabelClass: currSelLicense.LabelClass,
+            Active: currSelLicense.Active,
+            fromDate: currSelLicense.fromDate,
+            toDate: currSelLicense.toDate
 
 
         };
@@ -30,7 +39,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
             //headers: {
             //    'Content-Type': undefined
 
-            data: LicenseDetails
+            data: currSelLicense
 
 
         }
