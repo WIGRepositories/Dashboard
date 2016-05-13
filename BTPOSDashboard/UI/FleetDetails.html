@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Fleet">
+<body ng-init="GetFleetDetails();" ng-model="Fleet">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -731,14 +731,14 @@
 
                                                                 </td>
                                                                 <td>
-                                                                    {{F.VehicleTypeId}}
+                                                                    {{F.VehicleType}}
                                                                 </td>
                                                                 <td>
-                                                                    {{F.ServiceTypeId}}
+                                                                    {{F.ServiceType}}
                                                                 </td>
                                                                
                                                                 <td>
-                                                                    {{F.CompanyId}}
+                                                                    {{F.CompanyName}}
                                                                 </td>
                                                   
                                                                 <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
