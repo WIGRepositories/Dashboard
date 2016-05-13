@@ -11,15 +11,15 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
     }
 
     $scope.GetStops = function () {
-        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {          
             $scope.Stops = res.data;
         });
     }
 
-    $scope.myVar = false;
-    $scope.toggle = function () {
-        $scope.myVar = !$scope.myVar;
-    };
+    //$scope.myVar = false;
+    //$scope.toggle = function () {
+    //    $scope.myVar = !$scope.myVar;
+    //};
     $scope.save = function (routes) {
 
         if (routes == null) {

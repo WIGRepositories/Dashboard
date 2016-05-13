@@ -202,21 +202,21 @@
                                                         <div class="panel-body pan">
                                                             <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                                                 <div class="form-body">
-                                                                  
+
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label" style="color:red;">StaffRole:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in Companies track by s.Id" ng-model="FleetStaff.StaffRole">
+                                                                            <select ng-options="g.StaffRole for g in FleetStaff track by g.Id"ng-model="g">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">UserName:<span class='require'>*</span></label>
+                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">UserId:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in Companies track by s.Id" ng-model="FleetStaff.UserName">
+                                                                            <select ng-options="s.UserID for s in FleetStaff track by s.Id" ng-model="s">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -224,19 +224,19 @@
                                                                     <div class="form-group">
                                                                         <label for="Name" class="col-md-3 control-label" style="color:red;"> From Date<span class='require'>*</span></label>
 
-                                                                        <div class="col-md-6"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.FromDate" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="Name" type="text" class="form-control" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="Name" class="col-md-3 control-label" style="color:red;"> To Date <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-6"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.ToDate" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="Name" type="text" class="form-control" /><span class="help-block"></span></div>
                                                                     </div>
 
                                                                 </div>
 
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn btn-primary" ng-click="save(FleetStaff);">Save</button>
+                                                                        <button type="submit" class="btn btn-primary">Save</button>
 
                                                                         <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
                                                                     </div>
@@ -287,8 +287,8 @@
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
-  
+
     <script src="js/ngStorage.js"></script>
-    <script src="js/FleetStaff  .js"></script>
+    <script src="js/FleetStaff.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jplist/html/css/jplist-custom.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -144,7 +145,7 @@
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
                                 <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
-                               
+
                             </ul>
 
                         </li>
@@ -305,184 +306,119 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Dashboard</div>
+                            <div class="page-title">Shopping Cart</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
-                            <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Inventory & BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Inventory</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li class="active">Shopping Cart</li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
-
-
-                        <div class="page-content">
-                            <div id="table-action" class="row">
-                                <div class="col-lg-12">
-
-                                    <div id="tableadvancedTabContent" class="tab-content">
-                                        <div id="table-sorter-tab" class="tab-pane fade in active">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div id="tab-general">
-                                                        <h3 class="mtn">BTPOS Details</h3>
-                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0">
-                                                            <thead>
-                                                                <tr>
-
-                                                                    <th>POSID</th>
-                                                                    <th>IMEI</th>
-                                                                    <th width="15%">Company Name</th>
-                                                                    <th>IP Config</th>
-                                                                    <th>Fleet Owner</th>
-                                                                    <th>Status</th>
-                                                                    <th>Update</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <tr ng-repeat="pos in dashboardDS.Table" class="gradeA">
-                                                                    <td>{{pos.POSID}}</td>
-                                                                    <td>{{pos.IMEI}}</td>
-
-                                                                    <td>{{pos.companyname}}</td>
-                                                                    <td>{{pos.ipconfig}}</td>
-                                                                    <td>{{pos.fleetowner}}</td>
-                                                                    <td>
-                                                                        <span class="label label-sm label-success" ng-if="pos.StatusId == 6">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                        <span class="label label-sm label-info" ng-if="pos.StatusId == 5">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                        <span class="label label-sm label-warning" ng-if="pos.StatusId == 4">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                        <span class="label label-sm label-danger" ng-if="pos.StatusId == 7">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
-                                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                                            Edit
-                                                                        </button>
-                                                                    </td>
-
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                        <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
-
-                                                    </div>
-                                                    <h3 class="mtn">License Details</h3>
-                                                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                <th>FeatureName</th>
-                                                                <th>FeatureValue</th>
-                                                                <th>Description</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="L in License">
-                                                                <td><input type="checkbox" /> </td>
-                                                                <td>{{L.FeatureName}}</td>
-                                                                <td>{{L.FeatureValue}}</td>
-                                                                <td>{{L.Description}}</td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    </table>-->
-                                                    <div class="alert alert-danger">No License Details to show</div>
-                                                    <div style="width:100%;">
-                                                        <div class="tab-content" style="width:49%;float:left; ">
-                                                            <h3><b>Alerts</b></h3>
-                                                            <div id="home" class="tab-pane fade in active">
-                                                                <div class="list-group mail-box" ng-repeat="A in dashboardDS.Table1" ng-hide="dashboardDS.Table1.length == 0">
-                                                                    <a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{A.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name"></span>{{A.LastName}}<span></span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span>{{A.Message}}<span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="alert alert-danger" ng-show="dashboardDS.Table1.length == 0">No Alerts to show</div>
-                                                        </div>
-
-                                                        <div class="tab-content" style="width:49%;float:right; ">
-                                                            <h3><b>Notifications</b></h3>
-                                                            <div id="home" class="tab-pane fade in active">
-                                                                <div class="list-group mail-box" ng-repeat="N in dashboardDS.Table2" ng-hide="dashboardDS.Table2.length == 0">
-                                                                    <a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{N.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name">{{N.LastName}}</span><span>{{N.Message}}</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">{{N.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                                    </a>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div>
-                                                        </div>
-                                                    </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div id="grid-layout-ul-li" class="box jplist">
+                                            <div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions</div>
+                                            <div class="jplist-panel box panel-top">
+                                              
+                                                
+                                                <div data-control-type="views" data-control-name="views" data-control-action="views" data-default="jplist-grid-view" class="jplist-views">
+                                                    <button type="button" data-type="jplist-list-view" class="jplist-view jplist-list-view btn btn-default"><i class="fa fa-th-list"></i></button>
+                                                    <button type="button" data-type="jplist-grid-view" class="jplist-view jplist-grid-view btn btn-default"><i class="fa fa-th"></i></button>
+                                                    <button type="button" data-type="jplist-thumbs-view" class="jplist-view jplist-thumbs-view btn btn-default"><i class="fa fa-reorder"></i></button>
                                                 </div>
+                                               
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="panel panel-violet">
-                                                        <div class="panel-heading">
-                                                            BTPOS Tracking
-                                                            <div style="float:right;">
-                                                                <a id="btposstatus" style="color:white" ng-click="toggle()">Show</a>
-                                                            </div>
+                                            <ul class="box text-shadow ul-li-list">
+                                                <!--<item>1</item>-->
+                                                <li class="list-item">
+                                                    <div class="list-box">
+                                                        <!--<img/>-->
+                                                        <div class="img"><img src="images/adapter.jpg" alt="" title="" /></div>
+                                                        <!--<data></data>-->
+                                                        <div class="block">
+                                                            <p class="date">03/15/2012</p>
+
+                                                            <p class="title">Arch</p>
+
+                                                            <p class="desc">An arch is a structure that spans a space and supports a load. Arches appeared as early as the 2nd millennium BC in Mesopotamian brick architecture and their systematic use started with the Ancient Romans who were the first to apply the technique to a wide range of structures.</p>
+
+                                                            <p class="like">5 Likes</p>
                                                         </div>
                                                     </div>
-                                                    <div ng-show="myVar">
-                                                        <div><h3> BTPOS tracking</h3></div>
-                                                        <div class="tab-content">
-                                                            <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-                                                            <div style='overflow: hidden; height: 400px; width: 100%;'>
-                                                                <div id='gmap_canvas' style='height: 400px; width:100% ;'></div>
-                                                                <style>
-                                                                    #gmap_canvas img {
-                                                                        max-width: none !important;
-                                                                        background: none !important;
-                                                                    }
-                                                                </style>
-                                                            </div>
-                                                            <a href='https://www.add-map.net/'>BT POS tracking</a>
-                                                            <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                                                            <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+                                                </li>
+                                                <!--<item>2</item>-->
+                                                <li class="list-item">
+                                                    <div class="list-box">
+                                                        <!--<img/>-->
+                                                        <div class="img"><img src="images/wires.jpg" alt="" title="" /></div>
+                                                        <!--<data></data>-->
+                                                        <div class="block">
+                                                            <p class="date">03/18/2012</p>
+
+                                                            <p class="title">Architecture</p>
+
+                                                            <p class="desc">Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.</p>
+
+                                                            <p class="like">25 Likes</p>
                                                         </div>
-
-
                                                     </div>
+                                                </li>
+                                                <!--<item>3</item>-->
+                                                <li class="list-item">
+                                                    <div class="list-box">
+                                                        <!--<img/>-->
+                                                        <div class="img"><img src="images/paper_rolls.jpg" alt="" title="" /></div>
+                                                        <!--<data></data>-->
+                                                        <div class="block">
+                                                            <p class="date">01/16/2011</p>
 
-                                                </div>
+                                                            <p class="title">Autumn</p>
 
-                                            </div>
+                                                            <p class="desc">
+                                                                Autumn or Fall is one of the four temperate seasons. Autumn marks the transition from summer into winter, in September (Northern Hemisphere) or March (Southern Hemisphere) when the arrival of night becomes noticeably earlier. The equinoxes might be expected to be in the middle of their respective seasons, but temperature lag
+                                                                (caused by the thermal latency of the ground and sea) means that seasons appear later than dates calculated from a purely astronomical perspective.
+                                                            </p>
 
+                                                            <p class="like">12 Likes</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-item">
+                                                    <div class="list-box">
+                                                        <div class="img"><img src="images/" alt="" title="" /></div>
+                                                        <div class="block">
+                                                            <p class="date">02/24/2000</p>
 
-                                        </div>
-                                    </div>
-                                </div>
+                                                            <p class="title">Boats</p>
 
+                                                            <p class="desc">
+                                                                A boat is a watercraft of any size designed to float or plane, to provide passage across water. Usually this water will be inland (lakes) or in protected coastal areas. However, boats such as the whaleboat were designed to be operated from a ship in an offshore environment. In naval terms, a boat is a vessel small enough to be
+                                                                carried aboard another vessel (a ship).
+                                                            </p>
+
+                                                            <p class="like">11 Likes</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                
+                                            </ul>
+                                        
                             </div>
-
-
                         </div>
-
-
-                        <!--END CONTENT-->
-                        <!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
                     </div>
-                    <!--END PAGE WRAPPER-->
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2014 © &mu;Admin - Responsive Multi-Style Admin Template</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
+                
             </div>
 
         </div>
@@ -506,6 +442,9 @@
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="vendors/jplist/html/js/vendor/modernizr.min.js"></script>
+    <script src="vendors/jplist/html/js/jplist.min.js"></script>
+    <script src="js/jplist.js"></script>
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
@@ -514,10 +453,8 @@
     <script src="js/ngStorage.js"></script>
 
     <script src="js/source.js"></script>
+   
 
-    <!--<script src="js/Alerts.js"></script>
-
-    <script src="js/Notifications.js"></script>-->
 </body>
 
 </html>
