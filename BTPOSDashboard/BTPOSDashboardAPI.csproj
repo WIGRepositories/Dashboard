@@ -416,6 +416,7 @@
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
+    <Content Include="UI\FleetOwnerRoutes.html" />
     <Content Include="UI\FleetOwners.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
