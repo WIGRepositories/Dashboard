@@ -7,13 +7,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetFleetRoutes = function () {
 
 
-        $http.get('http://localhost:1476/api/Routes/GetRoutess?RouteId=-1').then(function (res, data) {
+        $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
             $scope.routes = res.data;
         });
 
 
     }
-    $http.get('http://localhost:1476/api/Fleet/GetFleetConfigurations?vehicleId=-1').then(function (res, data) {
+    $http.get('http://localhost:1476/api/Fleet/GetFleetConfigurations').then(function (res, data) {
         $scope.User = res.data;
     });
 

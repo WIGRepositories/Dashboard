@@ -2,7 +2,7 @@
 var app = angular.module('myApp', [])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/fleetavailability/getfleetavailability').then(function (res, data) {
+    $http.get('http://localhost:1476/api/FleetAvailability/getFleetAvailability').then(function (res, data) {
         $scope.FleetAvailability = res.data;
     });
     $scope.save = function (FleetAvailability) {
