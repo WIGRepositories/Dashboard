@@ -26,7 +26,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">BTPOS Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -47,7 +47,7 @@
                         <li class="dropdown topbar-user">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
-                                <li><a href="UserProfile.html"><i class="fa fa-user"></i>My Profile</a></li>
+                                <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
                                 <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
@@ -70,7 +70,7 @@
                                 <div class="info">
                                     <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
-                                        <li><a href="UserProfile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                        <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
                                         <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
@@ -112,14 +112,14 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
                                             <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
-                                            <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
                                     </li>
                                     <li>
-                                    <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
+                                    <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
 
                             </li>
 
@@ -160,10 +160,12 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
-                                        <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
                                         <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
-                                        <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
-                                        <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
+
                                     </ul>
                                 </li>
 
@@ -178,7 +180,7 @@
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
                                         <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
                                         <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
-                                        <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                        <li><a href="PaymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
                                     </ul>
                             </ul>
@@ -223,13 +225,13 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
+                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
 
 
                                     </ul>
                                 </li>
-                                <li><a href="BlockList.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
+                                <li><a href="Block ist.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
 
 
                             </ul>
@@ -294,8 +296,113 @@
                                     </ul>
                                 </li>
 
+
+
                             </ul>
                         </li>
+
+
+                        <!--<li>
+                        <a href="#">
+                            <i class="fa fa-send-o fa-fw">
+                                <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">Users</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                            <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
+                            <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                            <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                            <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
+                            <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
+                            <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
+                            <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
+                            <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
+                        </ul>
+
+                    </li>-->
+                        <!--<li>
+                        <a href="#">
+                            <i class="fa fa-desktop fa-fw">
+                                <div class="icon-bg bg-pink"></div>
+                            </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                            <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                            <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
+                            <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                            <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
+
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-send-o fa-fw">
+                                <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
+                            <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                            <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
+                            <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
+                            <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
+                        </ul>
+                    </li>
+
+
+
+
+
+
+
+
+
+
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-edit fa-fw">
+                                <div class="icon-bg bg-violet"></div>
+                            </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                            <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
+                            <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th-list fa-fw">
+                                <div class="icon-bg bg-blue"></div>
+                            </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                            <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                            <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-envelope-o">
+                                <div class="icon-bg bg-primary"></div>
+                            </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                            <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                            <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                            <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                            <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
+                            <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                        </ul>
+                    </li>-->
                         </ul>
                     </div>
                 </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
@@ -312,79 +419,62 @@
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                                                                         
-                                                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                <th>FeatureName</th>
-                                                                <th>FeatureValue</th>
-                                                                <th>Description</th>
+                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                    <thead>
+                        <tr>
+                            <th width="3%"><input type="checkbox" class="checkall" />Select</th>
+                            <th>FeatureName</th>
+                            <th>FeatureValue</th>
+                            <th>Description</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="L in License">
-                                                                <td><input type="checkbox" /> </td>
-                                                                <td>{{L.FeatureName}}</td>
-                                                                <td>{{L.FeatureValue}}</td>
-                                                                <td>{{L.Description}}</td>
-                                                            </tr>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="L in License">
+                            <td><input type="checkbox" /> </td>
+                            <td>{{L.FeatureName}}</td>
+                            <td>{{L.FeatureValue}}</td>
+                            <td>{{L.Description}}</td>
+                        </tr>
 
-                                                        </tbody>
-                                                    </table>-->                                                   
-                                                           
-                                                           
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="panel panel-violet">
-                                                        <div class="panel-heading">
-                                                            BTPOS Tracking
-                                                            <div style="float:right;">
-                                                                <a id="btposstatus" style="color:white" ng-click="toggle()">Show</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div ng-show="myVar">
-                                                        <div>
-                                                        <h3> BTPOS tracking</h3>
-                                                        </div>
-                                                        <div class="tab-content">
-                                                            <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-                                                            <div style='overflow: hidden; height: 400px; width: 100%;'>
-                                                                <div id='gmap_canvas' style='height: 400px; width:100% ;'></div>
-                                                                <style>
-                                                                    #gmap_canvas img {
-                                                                        max-width: none !important;
-                                                                        background: none !important;
-                                                                    }
-                                                                </style>
-                                                            </div>
-                                                            <a href='https://www.add-map.net/'>BT POS tracking</a>
-                                                            <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                                                            <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
-                                                        </div>
+                    </tbody>
+                </table>-->
 
 
-                                                    </div>
+                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:600px;width:920px;'>
+                        <div id='gmap_canvas' style='height:800px;width:1020px;'></div>
+                        <style>
+                            #gmap_canvas img {
+                                max-width: none !important;
+                                background: none !important;
+                            }
+                        </style>
+                    </div> <a href='https://mapswebsite.org/'>google maps embedded</a>
+                    <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=b6e1f3babccae3b3971fdedb363d11ccbf288563'></script>
+                    <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(23.0040631, 72.5607804), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(23.0040631, 72.5607804) }); infowindow = new google.maps.InfoWindow({ content: '<strong>India</strong><br>Telangana<br> <br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+                   
+                </div>
+                <a href='https://www.add-map.net/'>BT POS tracking</a>
+                <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
+                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+            </div>
 
-                                                </div>
-
-                                            </div>
 
 
-                                        </div>
+
+            <!-- Do not change code! -->
+            <!-- Do not change code! -->
+
+        </div>
+
+                    </div>
+
+
+
+                </div>
+
                                     </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
+                             
 
 
                         <!--END CONTENT-->
@@ -416,6 +506,7 @@
     <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
     <script src="js/jquery.menu.js"></script>
     <script src="vendors/jquery-pace/pace.min.js"></script>
+
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
@@ -426,7 +517,7 @@
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
     
-    <script src="js/source.js"></script>
+<script src="js/source.js"></script>
 
     <!--<script src="js/Alerts.js"></script>
 

@@ -1,13 +1,11 @@
 ﻿
+
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Home | BT POS | Routes</title>
+    <title>Home | Configuration | Types</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">  
-    <!--Loading bootstrap css-->    
+    <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -19,9 +17,9 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
-</head>
 
-<body ng-init="GetLicenseCategories();" ng-model="License">
+</head>
+<body ng-model="Types">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -63,6 +61,7 @@
                 </div>
             </nav>
             <!--END TOPBAR-->
+            <!--END TOPBAR-->
             <div id="wrapper">
                 <!--BEGIN SIDEBAR MENU-->
                 <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
@@ -88,6 +87,11 @@
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
+
+
+
+
+
 
                             <li>
                                 <a href="#">
@@ -194,7 +198,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Master Data</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="TypeGroups.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Type Groups</span></a></li>
-                                        <li><a href="Types.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Types</span></a></li>
+                                        <li class="active"><a href="Types.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Types</span></a></li>
                                         <li><a href="SubCategory.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title"> Sub Categories</span></a></li>
                                         <li><a href="Stops.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Stops</span></a></li>
                                         <li><a href="Roles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Roles</span></a></li>
@@ -217,7 +221,7 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li class="active"><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
                                         <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
 
@@ -293,237 +297,237 @@
 
                             </ul>
                         </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <!--<li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Users</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
+                                <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
+                                <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
+                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
+                                <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
+                                <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
+                            </ul>
+
+                        </li>-->
+                        <!--<li>
+                            <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
+                                <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
+
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
+                                <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                                <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
+                                <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
+                                <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
+                            </ul>
+                        </li>
+
+
+
+
+
+
+
+
+
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-edit fa-fw">
+                                    <div class="icon-bg bg-violet"></div>
+                                </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
+                                <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-th-list fa-fw">
+                                    <div class="icon-bg bg-blue"></div>
+                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-envelope-o">
+                                    <div class="icon-bg bg-primary"></div>
+                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
+                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                            </ul>
+                        </li>-->
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">License Details</div>
+                            <div class="page-title">Vehicle Layout</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="licensedetails.html">License Details</a></li>
-
+                            <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="VehicleLayout.html">Vehicle Layout</a></li>
 
                         </ol>
                         <div class="clearfix"></div>
                     </div>
-
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
 
-
-
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
-                                            <div class="col-lg-12">
 
+                                            <div class="col-lg-12">
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
-                                                       
-                                                        <div class="col-lg-8">
-                                                            <div class="tb-group-actions pull-left">
-                                                                Category: <select ng-options="s.Name for s in License track by s.Id" ng-model="s" ng-change="getselectval(s)">
-    <option value="">Select</option>
-</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                               License Code: <select>
-                                                                    <option value="0">111</option>
-                                                                    <option value="1">112</option>
-
-
-                                                                </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                                Name: <select>
-                                                                    <option value="0">BTPOS</option>
-                                                                    <option value="1">Support</option>
-                                                                    <option value="1">Vehicle</option>
-
-                                                                </select>
-
-                                                                </div>
-                                                            </div>
+                                                        <div class="col-md-3">
+                                                            Vehicle Layout: <select ng-options="s.Name for s in Types track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                                <option value="">All</option>
+                                                            </select>
                                                         </div>
-                                                    </div>
-
-                                                                <div class="actions">
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Feature</button>
-
-                                                                </div>
-                                                                <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header modal-header-primary">
-                                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                                <h4 id="modal-header-primary-label" class="modal-title">Edit License</h4>
-                                                                            </div>
-                                                                            <div class="modal-body" ng-model="currSelLicense">
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">FeatureName:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currSelLicense.FeatureName" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">FeatureValue:</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currSelLicense.FeatureValue" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">FeatureLabel:</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currSelLicense.FeatureLabel" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-
-                                                                                <!----     <div class="form-group">
-
-                 <label for="selCountry" class="col-md-3 control-label">License Catagory</label>
-                 <div class="col-md-5">
-                     <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
-                         <option value="">All</option>
-                     </select>
-                 </div>
-
-             </div>---->
-
-
-
-                                                                            </div>
-                                                                            
-                                                                           
-                                                                           
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="Save(currSelLicense);">Save</button>
-                                                                                <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
-
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <table class="table table-striped table-bordered table-advanced tablesorter mbn">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Feature Name</th>
-                                                                            <th>Feature Value</th>
-                                                                            <th>Feature Label</th>
-                                                                            <th>Update</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-
-                                                                        <tr ng-repeat="L in Licenses" class="gradeA">
-
-
-
-                                                                            <td>{{L.FeatureName}}</td>
-                                                                            <td>{{L.FeatureValue}}</td>
-                                                                            <td>{{L.FeatureLabel}}</td>
-                                                                            <td>
-                                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="currLicense(L);">
-                                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                                    Edit
-                                                                                </button>
-                                                                            </td>
-
-                                                                        </tr>
-
-                                                                    </tbody>
-
-                                                                </table>
-
-                                                            </div>
-
-
+                                                        <div class="col-md-3">
+                                                            Rows: <input type="text" />
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            Columns: <input type="text" />
                                                         </div>
 
-
-
-
-
+                                                        <div class="col-md-3">
+                                                           <input type="button" value="Display"/>
+                                                        </div>
                                                     </div>
+                                                </div>
+
+
+
+                                                
+
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </div>
 
-                                <!--END CONTENT--><!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                </div>
-                                <!--END FOOTER-->
                             </div>
-                            <!--END PAGE WRAPPER-->
                         </div>
                     </div>
+
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
+
             </div>
+            <!--END PAGE WRAPPER-->
         </div>
-        </div>
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <!--loading bootstrap js-->
-        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-       
-        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-        <script src="vendors/iCheck/icheck.min.js"></script>
-        <script src="vendors/iCheck/custom.min.js"></script>
-        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-        <script src="js/jquery.menu.js"></script>
-        <script src="vendors/jquery-pace/pace.min.js"></script>
-        <script src="vendors/holder/holder.js"></script>
-        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-        <!--LOADING SCRIPTS FOR PAGE-->
-        <!-----<script src="js/table-action.js"></script>
-        <script src="js/table-advanced.js"></script>
-        <!--CORE JAVASCRIPT-->
-        <!----<script src="js/main.js"></script>--->
-        <script src="js/angular.js"></script>
-       <!----<script src="js/ngStorage.js"></script>--->
-        <script src="js/LicenseDetails1.js"></script>
-
-
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>   
+    <script src="js/ngStorage.js"></script>
+    <script src="js/VehicleLayout.js"></script>
 </body>
 </html>
-
-
-
-
-

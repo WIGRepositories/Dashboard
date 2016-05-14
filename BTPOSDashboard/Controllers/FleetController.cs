@@ -12,7 +12,8 @@ namespace BTPOSDashboard.Controllers
     public class FleetController : ApiController
     {
         [HttpGet]
-        public DataSet GetFleetConfiguration()
+  [Route("api/fleet/getFleetList")]
+        public DataSet List()
         {
             DataTable Tbl = new DataTable();
 
@@ -27,13 +28,15 @@ namespace BTPOSDashboard.Controllers
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
-           
+
             db.Fill(ds);
             // Tbl = ds.Tables[0];
 
             // int found = 0;
-            return ds;        
+            return ds;
         }
+
+        [HttpPost]
         public DataTable NewFleetDetails(FleetDetails n)
         {
             DataTable Tbl = new DataTable();
@@ -60,7 +63,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@VehicleRegNo";
-                gsn.SqlDbType = SqlDbType.Int;
+                gsn.SqlDbType = SqlDbType.VarChar;
                 gsn.Value = n.VehicleRegNo;
                 cmd.Parameters.Add(gsn);
 
@@ -89,7 +92,7 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(nActive);
                 cmd.ExecuteScalar();
                 conn.Close();
-                DataSet ds = new DataSet();
+               // DataSet ds = new DataSet();
                 //SqlDataAdapter db = new SqlDataAdapter(cmd);
                 //db.Fill(ds);
                 //Tbl = ds.Tables[0];
@@ -101,6 +104,28 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
 
+        }
+
+        [HttpGet]
+        public DataSet VehicleConfiguration()
+        {
+            DataSet ds = new DataSet();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "VehicleConfiguration";
+            cmd.Connection = conn;
+            
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+
+            db.Fill(ds);
+
+            return ds;
         }
         public void Options()
         {

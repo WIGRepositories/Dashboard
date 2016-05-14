@@ -1143,7 +1143,7 @@ namespace BTPOSDashboardAPI.Models
     {
         public int Id { get; set; }
 
-        public int VehicleRegNo { get; set; }
+        public string VehicleRegNo { get; set; }
         public int VehicleTypeId { get; set; }
 
         public String FleetOwnerId { get; set; }

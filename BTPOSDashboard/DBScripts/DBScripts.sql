@@ -1500,17 +1500,27 @@ CREATE TABLE [dbo].[FleetBtpos](
 GO
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[FleetDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[VehicleRegNo] [int] NOT NULL,
+	[VehicleRegNo] [varchar](10) NOT NULL,
 	[VehicleTypeId] [int] NOT NULL,
 	[FleetOwnerId] [varchar](50) NOT NULL,
 	[CompanyId] [varchar](50) NOT NULL,
 	[ServiceTypeId] [varchar](50) NOT NULL,
 	[Active] [int] NOT NULL
 ) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
 
 GO
 SET ANSI_NULLS ON
@@ -1956,7 +1966,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[GetFleetDetails] 
+CREATE  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
 	(@vehicleId int=-1)
 AS
@@ -1967,20 +1977,18 @@ BEGIN
 
    SELECT v.[Id]
       ,[VehicleRegNo]
-      ,t.[Name] as VehicleType,
-       t.Name as ServiceType,
-       f.Id as FleetOwnerName 
+      ,vt.[Name] as VehicleType,
+       st.Name as ServiceType,
+       u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
       ,v.[Active]
      FROM [POSDashboard].[dbo].[FleetDetails]v
-    inner join Types t on t.Id=v.Id
-    inner join company c on c.Id=v.Id
-    inner join FleetOwner f on f.Id=v.Id
+    inner join Types vt on vt.Id=v.VehicleTypeId
+    inner join Types st on st.Id=v.ServiceTypeId
+    inner join company c on c.Id=v.CompanyId
+    inner join FleetOwner f on f.UserId=v.FleetOwnerId
+    inner join Users u on u.Id = f.UserId
 	 where  (v.Id= @vehicleId or @vehicleId = -1)
-
-
-
-
    
     -- Insert statements for procedure here
     
@@ -1996,8 +2004,6 @@ BEGIN
 --	 inner join company c on c.Id=t.Id
 --	 inner join FleetOwner f on f.Id=t.Id
 --	 where  (t.Id= @vehicleId or @vehicleId = -1)
-
-
 
 
 END
@@ -4500,8 +4506,9 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
- (@VehicleRegNo int
-           ,@VehicleTypeId int
+ (@Id int,
+ @VehicleRegNo int
+           ,@VehicleTypeId varchar(10)
            ,@FleetOwnerId varchar(50)
            ,@CompanyId varchar(50)
            ,@ServiceTypeId varchar(50)
@@ -5482,3 +5489,26 @@ end
 
 
 end
+
+Go
+
+Create PROCEDURE VehicleConfiguration
+AS
+BEGIN
+	--vehicle type data
+	select Name, Id from Types where TypeGroupId = 2
+	--service type data
+	select Name, Id from Types where TypeGroupId = 3
+	--fleet owners
+	select u.FirstName + ' '+u.lastname as Name, u.Id from FleetOwner f
+	inner join Users u on u.Id = f.UserId
+	--companys
+	select Name,Id from Company
+	--vehicle layout type
+	select Name, Id from Types where TypeGroupId = 4
+	
+	
+END
+GO
+
+
