@@ -10,10 +10,10 @@ using System.Web.Http;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class FleetAvailabilityController : ApiController
+    public class FleetBtpos1Controller : ApiController
     {
         [HttpGet]
-        public DataTable getFleetAvailability()
+        public DataTable getFleetBtpos1()
         {
             DataTable Tbl = new DataTable();
 
@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFleetAvailability";
+            cmd.CommandText = "GetFleetBtpos1";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -34,9 +34,9 @@ namespace BTPOSDashboard.Controllers
 
             // int found = 0;
             return Tbl;
-        }
-        [HttpPost]
-        public DataTable saveFleetAvailability(FleetAvailability b)
+        }}
+       [HttpPost]
+        public DataTable saveFleet(FleetBtpos b)
         {
             DataTable Tbl = new DataTable();
 
