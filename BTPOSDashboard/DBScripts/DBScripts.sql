@@ -1244,7 +1244,8 @@ CREATE TABLE [dbo].[RouteDetails](
 	[DistanceFromPreviousStop] [decimal](18, 0) NULL,
 	[DistanceFromNextStop] [decimal](18, 0) NULL,
 	[PreviousStopId] [int] NOT NULL,
-	[NextStopId] [int] NOT NULL
+	[NextStopId] [int] NOT NULL,
+	[StopNo] [int] null
 ) ON [PRIMARY]
 
 GO
