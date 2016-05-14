@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
+
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
     <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
@@ -442,20 +441,22 @@
                                                                     </div>
 
                                                                 </div>
+                                                                
+
+
+
                                                                 <div class="form-group">
+                                                                    <label for="Name" class="col-md-3 control-label">From Date<span class='require'></span></label>
+                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
-                                                                    <label for="selCountry" class="col-md-3 control-label">FromDate</label>
-
-                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="FleetAvailability.FromDate" /><span class="help-block"></span></div>
                                                                 </div>
-
-
-
                                                                 <div class="form-group">
+                                                                    <label for="Description" class="col-md-3 control-label">To Date<span class='require'></span></label>
 
-                                                                    <label for="selCountry" class="col-md-3 control-label">ToDate</label>
+                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
-                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="FleetAvailability.ToDate" /><span class="help-block"></span></div>
+
+
                                                                 </div>
 
 
@@ -511,8 +512,15 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
+                <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+                <script>
+                    $('.datepicker-filter').datepicker({
+                        autoclose: true
+                    });
+                </script>
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <script src="js/table-action.js"></script>
+   
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>

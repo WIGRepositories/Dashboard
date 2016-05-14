@@ -2,7 +2,7 @@
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/alert/getalert').then(function (res, data) {
+    $http.get('http://localhost:1476/api/Alert/GetAlert').then(function (res, data) {
         $scope.Alerts = res.data;
     })
     });

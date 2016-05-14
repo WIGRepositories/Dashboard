@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class FleetBtpos1Controller : ApiController
+    public class FleetAvailabilityController : ApiController
     {
         [HttpGet]
         public DataTable getFleetBtpos1()
@@ -34,9 +34,9 @@ namespace BTPOSDashboard.Controllers
 
             // int found = 0;
             return Tbl;
-        }}
+        }
        [HttpPost]
-        public DataTable saveFleet(FleetBtpos b)
+        public DataTable saveFleet(FleetDetails b)
         {
             DataTable Tbl = new DataTable();
 
@@ -56,25 +56,25 @@ namespace BTPOSDashboard.Controllers
             cc.SqlDbType = SqlDbType.Int;
             cc.Value = b.Id;
             cmd.Parameters.Add(cc);
-            SqlParameter cname = new SqlParameter();
-            cname.ParameterName = "@Vehicle";
-            cname.SqlDbType = SqlDbType.VarChar;
-            cname.Value = b.Vehicle;
-            cmd.Parameters.Add(cname);
+            //SqlParameter cname = new SqlParameter();
+            //cname.ParameterName = "@Vehicle";
+            //cname.SqlDbType = SqlDbType.VarChar;
+            //cname.Value = b.Vehicle;
+            //cmd.Parameters.Add(cname);
 
-            SqlParameter cType = new SqlParameter();
-            cType.ParameterName = "@ServiceType";
-            cType.SqlDbType = SqlDbType.VarChar;
-            cType.Value = b.ServiceType;
-            cmd.Parameters.Add(cType);
-            SqlParameter gsac = new SqlParameter("@FromDate", SqlDbType.DateTime);
-            gsac.Value = b.FromDate;
-            cmd.Parameters.Add(gsac);
+            //SqlParameter cType = new SqlParameter();
+            //cType.ParameterName = "@ServiceType";
+            //cType.SqlDbType = SqlDbType.VarChar;
+            //cType.Value = b.ServiceType;
+            //cmd.Parameters.Add(cType);
+            //SqlParameter gsac = new SqlParameter("@FromDate", SqlDbType.DateTime);
+            //gsac.Value = b.FromDate;
+            //cmd.Parameters.Add(gsac);
 
 
-            SqlParameter gsacd = new SqlParameter("@ToDate", SqlDbType.DateTime);
-            gsacd.Value = b.ToDate;
-            cmd.Parameters.Add(gsacd);
+            //SqlParameter gsacd = new SqlParameter("@ToDate", SqlDbType.DateTime);
+            //gsacd.Value = b.ToDate;
+            //cmd.Parameters.Add(gsacd);
 
            
 

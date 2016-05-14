@@ -1971,6 +1971,7 @@
     <Compile Include="Controllers\InventorySalesController.cs" />
     <Compile Include="Controllers\LicenseDetailsController.cs" />
     <Compile Include="Controllers\LicensePricingController.cs" />
+    <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
