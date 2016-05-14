@@ -303,7 +303,7 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Dashboard</div>
+                            <div class="page-title">BTPOS Tracking</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -312,71 +312,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <div class="page-content">
-
-
-                        <div class="page-content">
-                            <div id="table-action" class="row">
-                                <div class="col-lg-12">
-
-                                    <div id="tableadvancedTabContent" class="tab-content">
-                                        <div id="table-sorter-tab" class="tab-pane fade in active">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div id="tab-general">
-                                                        <h3 class="mtn">BTPOS Details</h3>
-                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0">
-                                                            <thead>
-                                                                <tr>
-
-                                                                    <th>POSID</th>
-                                                                    <th>IMEI</th>
-                                                                    <th width="15%">Company Name</th>
-                                                                    <th>IP Config</th>
-                                                                    <th>Fleet Owner</th>
-                                                                    <th>Status</th>
-                                                                    <th>Update</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <tr ng-repeat="pos in dashboardDS.Table" class="gradeA">
-                                                                    <td>{{pos.POSID}}</td>
-                                                                    <td>{{pos.IMEI}}</td>
-
-                                                                    <td>{{pos.companyname}}</td>
-                                                                    <td>{{pos.ipconfig}}</td>
-                                                                    <td>{{pos.fleetowner}}</td>
-                                                                    <td>
-                                                                        <span class="label label-sm label-success" ng-if="pos.StatusId == 6">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                        <span class="label label-sm label-info" ng-if="pos.StatusId == 5">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                        <span class="label label-sm label-warning" ng-if="pos.StatusId == 4">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                        <span class="label label-sm label-danger" ng-if="pos.StatusId == 7">
-                                                                            {{pos.status}}
-                                                                        </span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
-                                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                                            Edit
-                                                                        </button>
-                                                                    </td>
-
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                        <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
-
-                                                    </div>
-                                                    <h3 class="mtn">License Details</h3>
+                                                                         
                                                     <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
@@ -396,32 +332,9 @@
                                                             </tr>
 
                                                         </tbody>
-                                                    </table>-->
-                                                    <div class="alert alert-danger">No License Details to show</div>
-                                                    <div style="width:100%;">
-                                                        <div class="tab-content" style="width:49%;float:left; ">
-                                                            <h3><b>Alerts</b></h3>
-                                                            <div id="home" class="tab-pane fade in active">
-                                                                <div class="list-group mail-box" ng-repeat="A in dashboardDS.Table1" ng-hide="dashboardDS.Table1.length == 0">
-                                                                    <a href="#" class="list-group-item">
-                                             <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{A.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name"></span><span>{{A.LastName}}</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span>{{A.Message}}<span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="alert alert-danger" ng-show="dashboardDS.Table1.length == 0">No Alerts to show</div>
-                                                        </div>
-
-                                                        <div class="tab-content" style="width:49%;float:right; ">
-                                                            <h3><b>Notifications</b></h3>
-                                                            <div id="home" class="tab-pane fade in active">
-                                                                <div class="list-group mail-box" ng-repeat="N in dashboardDS.Table2" ng-hide="dashboardDS.Table2.length == 0">
-                                                                    <a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{N.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name">{{N.LastName}}</span><span>{{N.Message}}</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">{{N.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                                    </a>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div>
+                                                    </table>-->                                                   
+                                                           
+                                                           
                                                         </div>
                                                     </div>
                                                 </div>
@@ -437,7 +350,9 @@
                                                         </div>
                                                     </div>
                                                     <div ng-show="myVar">
-                                                        <div><h3> BTPOS tracking</h3></div>
+                                                        <div>
+                                                        <h3> BTPOS tracking</h3>
+                                                        </div>
                                                         <div class="tab-content">
                                                             <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
                                                             <div style='overflow: hidden; height: 400px; width: 100%;'>
@@ -510,7 +425,7 @@
 
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-
+    
     <script src="js/source.js"></script>
 
     <!--<script src="js/Alerts.js"></script>

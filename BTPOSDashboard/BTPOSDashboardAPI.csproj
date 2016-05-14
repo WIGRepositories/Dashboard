@@ -381,6 +381,7 @@
     <Content Include="UI\AssignRole.html" />
     <Content Include="UI\BlockList.html" />
     <Content Include="UI\BtposLicense.html" />
+    <Content Include="UI\BTPOSMonitoringPage.html" />
     <Content Include="UI\BtposRoutes.html" />
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\Configuration.html" />
