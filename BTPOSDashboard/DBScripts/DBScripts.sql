@@ -1556,8 +1556,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[FleetAvailability](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Vehicle] [nvarchar](50) NOT NULL,
-	[ServiceType] [nvarchar](50) NOT NULL,
+	[VehicleId] [int] NOT NULL,
+	[ServiceTypeId] [int] NOT NULL,
 	[FromDate] [datetime] NOT NULL,
 	[ToDate] [datetime] NULL
 ) ON [PRIMARY]
@@ -4470,30 +4470,31 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[GetfleetRoutes]
-(@RouteId int=-1)
-	-- Add the parameters for the stored procedure here
-	
+CREATE PROCEDURE [dbo].[GetfleetRoutes] 	
+(@routeid int =-1)
 AS
+
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-SELECT R.[Id]
-      ,F.[VehicleRegNo] as VehicleName
-      ,rt.[RouteName]  as RouteName
+
+SELECT fr.[Id]
+      ,fr.[VehicleId]
+      ,fr.[RouteId]
+      ,fd.VehicleRegNo
+      ,r.Route as RouteName
       ,[EffectiveFrom]
       ,[EffectiveTill]
-  FROM [POSDashboard].[dbo].[FleetRoutes] R
-  inner join  FleetDetails F on F.VehicleRegNo=R.Id
-  inner join Routes rt on rt.Id=R.Id
+      ,[VehicleName]
+      ,[RouteName]
+  FROM [POSDashboard].[dbo].[FleetRoutes] fr
+  inner join FleetDetails fd on fd.Id = fr.VehicleId
+  inner join Routes r on r.Id = fr.RouteId
+  where (@routeid = -1 or fr.RouteId = @routeid)
 
 
-
-
-    -- Insert statements for procedure here
 END
-
 
 GO
 SET ANSI_NULLS ON

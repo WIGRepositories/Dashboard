@@ -180,10 +180,13 @@
                                         <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
                                         <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
                                         <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
-                                        <li><a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span></a></li>
+                                        
 
                                     </ul>
-                            </ul>
+                                <li>
+                                    <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                    </li>
+</ul>
                         </li>
 
                         <li>
@@ -218,6 +221,9 @@
                                         <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                         <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="FleetOwnerRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                        <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>                                        
+                                        <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
 
                                     </ul>
                                 </li>
@@ -406,7 +412,7 @@
                                                             <div id="home" class="tab-pane fade in active">
                                                                 <div class="list-group mail-box" ng-repeat="A in dashboardDS.Table1" ng-hide="dashboardDS.Table1.length == 0">
                                                                     <a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{A.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name"></span>{{A.LastName}}<span></span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span>{{A.Message}}<span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                             <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{A.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name"></span><span>{{A.LastName}}</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span>{{A.Message}}<span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
                                                                     </a>
                                                                 </div>
                                                             </div>

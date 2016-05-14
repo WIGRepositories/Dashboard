@@ -1,12 +1,10 @@
-﻿
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    <title>Home | BT POS | Routes</title>
+    <title>Dashboard</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
@@ -20,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetRoutes();" ng-model="routes">
+<body ng-model="dashboardDS">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -49,13 +47,13 @@
                         <li class="dropdown topbar-user">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
-                                <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
+                                <li><a href="UserProfile.html"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
                                 <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                                <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
+                                <li><a href="login.html"><i class="fa fa-key"></i>Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -72,7 +70,7 @@
                                 <div class="info">
                                     <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
-                                        <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                        <li><a href="UserProfile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
                                         <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
@@ -80,7 +78,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -114,14 +112,14 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
                                             <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+                                            <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
                                     </li>
                                     <li>
-                                    <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
+                                    <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
 
                             </li>
 
@@ -162,10 +160,10 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                        <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
                                         <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                        <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
                                     </ul>
                                 </li>
 
@@ -175,18 +173,18 @@
 
                                     <ul class="nav nav-third-level">
                                         <li><a href="InventoryItems.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Items</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
+                                        <li><a href="InventoryStatus.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
                                         <li><a href="InventorySales.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Sales</span></a></li>
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                        <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
+                                        <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                        <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
                                     </ul>
                             </ul>
                         </li>
 
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-gears">
                                     <div class="icon-bg bg-dark"></div>
@@ -204,18 +202,20 @@
                                         <li><a href="Roles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Roles</span></a></li>
                                         <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                         <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">SmsGatewayConfiguration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">EmailGatewayConfiguration</span></a></li>
+
                                     </ul>
                                 </li>
 
 
-                                <li class="active">
+                                <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Routes</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li class="active"><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
+                                        <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
-                                        <li><a href="FleetOwnerRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">FleetOwnerRoutes</span></a></li>
+                                        <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
 
                                     </ul>
                                 </li>
@@ -223,13 +223,13 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
+                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
 
 
                                     </ul>
                                 </li>
-                                <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
+                                <li><a href="BlockList.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
 
 
                             </ul>
@@ -294,253 +294,132 @@
                                     </ul>
                                 </li>
 
-
-
                             </ul>
+
                         </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <!--<li>
-                            <a href="#">
-                                <i class="fa fa-send-o fa-fw">
-                                    <div class="icon-bg bg-green"></div>
-                                </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                                <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
-                                <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                                <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
-                                <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
-                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                                <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
-                            </ul>
-
-                        </li>-->
-                        <!--<li>
-                            <a href="#">
-                                <i class="fa fa-desktop fa-fw">
-                                    <div class="icon-bg bg-pink"></div>
-                                </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
-                                <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
-                                <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
-
-                            </ul>
-                        </li>
-
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
-                                    <div class="icon-bg bg-green"></div>
-                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title">Payment Confirmation</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                                <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                                <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                                <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
-                                <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment Confirmation</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="PaymentConfirmation.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Confirmation</span></a></li>
+
+                                    </ul>
+                                </li>
+
                             </ul>
+
                         </li>
 
-
-
-
-
-
-
-
-
-
-
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-edit fa-fw">
-                                    <div class="icon-bg bg-violet"></div>
-                                </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
-                                <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-th-list fa-fw">
-                                    <div class="icon-bg bg-blue"></div>
-                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-envelope-o">
-                                    <div class="icon-bg bg-primary"></div>
-                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
-                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
-                            </ul>
-                        </li>-->
                         </ul>
+
                     </div>
+
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
+
                 <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Routes</div>
+                            <div class="page-title">Dashboard</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
-                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Routes.html">Routes</a></li>
-
-
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                    <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                        <div class="page-header pull-left">
+                            <div class="page-title">Payment Confirmation</div>
+                        </div>
+
+                        <ol class="breadcrumb page-breadcrumb pull-right">
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        </ol>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+
                     <div class="page-content">
-                        <div id="table-action" class="row">
+                        <div id="form-layouts" class="row">
                             <div class="col-lg-12">
 
-                                <div id="tableactionTabContent" class="tab-content">
-                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
+                                    <div id="tab-form-actions" class="tab-pane fade active in">
                                         <div class="row">
-                                            <div class="col-lg-12">
 
+                                            <div class="col-lg-6">
+                                                <div class="panel panel-violet">
+                                                    <div class="panel-heading">Payment Confirmation</div>
+                                                    <div class="panel-body pan">
+                                                        <form action="#" class="form-horizontal form-seperated form-row-stripped">
+                                                            <div class="form-body">
 
-                                                <div class="table-container">
-                                                    <div class="row mbm">
+                                                                <div class="form-group">
+                                                                    <label for="Name" class="col-md-3 control-label" style="color:darkblue;">Transaction Id<span class='require'>*</span></label>
 
-                                                        <div class="actions">
-                                                            <a href="Addnewroute.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Fleet Owner Routes</button></a>
+                                                                    <div class="col-md-5"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.FromDate" /><span class="help-block"></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
 
-                                                        </div>
+                                                                <div class="form-group">
+                                                                    <label for="Name" class="col-md-3 control-label" style="color:darkblue;">Payment Id<span class='require'>*</span></label>
 
+                                                                    <div class="col-md-5"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.FromDate" /><span class="help-block"></span></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="Name" class="col-md-3 control-label" style="color:darkblue;">Amount<span class='require'>*</span></label>
 
+                                                                <div class="col-md-5"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.FromDate" /><span class="help-block"></span></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="Name" class="col-md-3 control-label" style="color:darkblue;">Date<span class='require'>*</span></label>
 
-                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                    <th>Route Name</th>
-                                                                    <th>Code</th>
-                                                                    <th>Source</th>
-                                                                    <th>Destination</th>
-                                                                    <th>Distance</th>
-                                                                    <th>from</th>
-                                                                    <th>to</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><input type="checkbox" /></td>
-                                                                    <td>1</td>
-                                                                    <td>Henry</td>
-                                                                    <td>United States</td>
-                                                                    <td>Male</td>
-                                                                    <td>32</td>
-                                                                    <td> <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></td>
-                                                                    <td>
-                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-                                                                    </td>
+                                                                <div class="col-md-5"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.ToDate" /><span class="help-block"></span></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="Name" class="col-md-3 control-label" style="color:darkblue;">Payment Mode<span class='require'>*</span></label>
 
-                                                                </tr>
-                                                                <tr ng-repeat="route in routes" class="gradeA">
-                                                                    <td><input type="checkbox" /></td>
-                                                                    <td>{{route.RouteName}}</td>
-                                                                    <td>{{route.Code}}</td>
-                                                                    <td>{{route.Source}}</td>
-                                                                    <td>{{route.Destination}}</td>
-                                                                    <td>{{route.Distance}}</td>
-
-                                                                    <td> <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></td>
-                                                                    <td>
-                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-                                                                    </td>
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
+                                                                <div class="col-md-5"><input id="Name" type="text" class="form-control" ng-model="FleetStaff.ToDate" /><span class="help-block"></span></div>
+                                                            </div>
 
                                                     </div>
 
-
+                                                    <div class="form-actions">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <button type="submit" class="btn btn-primary" ng-click="save(FleetStaff);">Save</button>
+                                                        </div>
+                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <!--END PAGE WRAPPER-->
-                    <!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
-                    <!--END FOOTER-->
                 </div>
-                <!--END CONTENT-->
             </div>
 
         </div>
 
+        </div>
     </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
@@ -560,19 +439,19 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-
     <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-sample.js"></script>
+    <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-    <script>
-        $('.datepicker-filter').datepicker({
-            autoclose: true
-        });
-    </script>
+
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/Routes.js"></script>
+
+    <script src="js/source.js"></script>
+
+    <!--<script src="js/Alerts.js"></script>
+
+    <script src="js/Notifications.js"></script>-->
 </body>
+
 </html>
