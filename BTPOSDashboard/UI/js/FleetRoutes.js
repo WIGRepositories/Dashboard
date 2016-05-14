@@ -26,7 +26,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.FleetRouteinit = res
         });
 
-        
     }
     $scope.save = function (FleetRoute) {
         if(FleetRoute == null || FleetRoute.VehicleId == null){
