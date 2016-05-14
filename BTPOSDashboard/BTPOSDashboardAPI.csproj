@@ -515,6 +515,7 @@
     <Content Include="UI\NewObject.html" />
     <Content Include="UI\Notifications.html" />
     <Content Include="UI\Objects.html" />
+    <Content Include="UI\PaymentConfirmation.html" />
     <Content Include="UI\PaymentGatewayConfiguration.html" />
     <Content Include="UI\paymentHistory.html" />
     <Content Include="UI\PurchaseOrders.html" />
