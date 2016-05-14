@@ -14,7 +14,8 @@ namespace BTPOSDashboard.Controllers
     {
 
         [HttpGet]
-        public DataSet GetFleetRoutes()
+        [Route("api/FleetRoutes/getFleetRoutesList")]
+        public DataTable List()
         {
             DataTable Tbl = new DataTable();
 
@@ -31,12 +32,10 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 
             db.Fill(ds);
-             Tbl = ds.Tables[0];
+             return ds.Tables[0];
 
-            // int found = 0;
-            return ds;
         }
-
+        [HttpPost]
         public DataTable NewFleetRoutes(FleetRoutes f)
         {
             DataTable Tbl = new DataTable();
@@ -50,7 +49,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "insupdelFleetRoutes";
+                cmd.CommandText = "InsupdelFleetDetails";
                 cmd.Connection = conn;
 
                 conn.Open();
@@ -101,9 +100,31 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
 
         }
+        [HttpGet]
+        public DataSet VehicleConfiguration()
+        {
+            DataSet ds = new DataSet();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "VehicleConfiguration";
+            cmd.Connection = conn;
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+
+            db.Fill(ds);
+
+            return ds;
+        }
         public void Options()
         {
         }
+
 
     }
 }

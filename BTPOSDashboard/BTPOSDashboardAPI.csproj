@@ -1944,7 +1944,6 @@
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
     <Compile Include="Controllers\FleetAvailabilityController.cs" />
-    <Compile Include="Controllers\FleetBtpos1Controller.cs" />
     <Compile Include="Controllers\FleetBtposController.cs" />
     <Compile Include="Controllers\FleetController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteController.cs" />
@@ -1957,6 +1956,7 @@
     <Compile Include="Controllers\InventorySalesController.cs" />
     <Compile Include="Controllers\LicenseDetailsController.cs" />
     <Compile Include="Controllers\LicensePricingController.cs" />
+    <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
