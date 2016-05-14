@@ -194,10 +194,6 @@
                         </li>
 
 
-
-
-
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-sitemap fa-fw">
@@ -398,39 +394,8 @@
                                 </ul>
                             </li>
 
-
-
                         </ul>
                     </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                     <!--<li>
                 <a href="#">
@@ -482,15 +447,6 @@
                     <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
                 </ul>
             </li>
-
-
-
-
-
-
-
-
-
 
 
             <li>
@@ -549,18 +505,44 @@
                         <li><a href="#">Alerts&Notifications</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li class="active">Notifiactions</li>
                     </ol>
-
                     <div class="clearfix"></div>
 
                     <div id="home" class="tab-pane fade in active">
-                        <div class="list-group mail-box" ng-repeat="N in Notifications">
-                            <a href="#" class="list-group-item">
-                                <span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">{{N.FirstName}}</span><span>{{N.LastName}}</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">{{N.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                            </a>
+                        <div class="list-group mail-box" ng-repeat="A in Notifications">
+
                         </div>
                     </div>
 
+                    <div>
+                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                            <thead>
+                                <tr>
+
+                                    <th>Name</th>
+                                    <th>Message</th>
+
+                                    <th>Date</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="R in Notifications" class="gradeA">
+                                    <td>{{R.Name}}</td>
+                                    <td>{{R.Message}}</td>
+
+                                    <td>{{R.Date}}</td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+
                 </div>
+
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                 <!--END CONTENT--><!--BEGIN FOOTER-->
                 <div id="footer">
