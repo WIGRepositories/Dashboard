@@ -413,6 +413,8 @@
     <Content Include="UI\css\themes\style2\pink-green.css" />
     <Content Include="UI\css\themes\style2\pink-grey.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
+    <Content Include="UI\DefaultPricing.html" />
+    <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
     <Content Include="UI\FleetAvailability.html" />
