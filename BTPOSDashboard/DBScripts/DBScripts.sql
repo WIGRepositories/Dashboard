@@ -1244,7 +1244,8 @@ CREATE TABLE [dbo].[RouteDetails](
 	[DistanceFromPreviousStop] [decimal](18, 0) NULL,
 	[DistanceFromNextStop] [decimal](18, 0) NULL,
 	[PreviousStopId] [int] NOT NULL,
-	[NextStopId] [int] NOT NULL
+	[NextStopId] [int] NOT NULL,
+	[StopNo] [int] null
 ) ON [PRIMARY]
 
 GO
@@ -4287,7 +4288,7 @@ else
 			 if @fcnt = 0 
 				INSERT INTO [POSDashboard].[dbo].[FleetOwner]
 					   ([UserId]
-					   ,[GroupId]
+					   ,[Company]
 					   ,[Active]
 					   ,[FleetOwnerCode])
 				 VALUES
@@ -4766,7 +4767,17 @@ GO
 CREATE procedure [dbo].[getFleetOwner]
 as
 begin
-select * from FleetOwner
+select u.FirstName+' '+u.LastName as Name,
+c.Name as CompanyName
+,FO.FleetOwnerCode
+,FO.CompanyId
+,U.Id
+ from FleetOwner FO
+inner join Users u on  u.Id = FO.UserId
+inner join Company c on c.Id = FO.companyId
+
+
+
 end
 
 GO
@@ -5508,4 +5519,19 @@ BEGIN
 END
 GO
 
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[getFleetOwner]    Script Date: 05/16/2016 14:40:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getFleetOwner]
+as
+begin
+select * from FleetOwner fid
+ inner join Users u1 on fid.UserId =u1.FirstName
+select * from FleetOwner
+end
 
