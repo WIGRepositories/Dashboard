@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class LicenseDetailsController : ApiController
     {
         [HttpGet]
-        public DataTable LicenseDetails()
+        public DataTable getLicenseDetails(int groupid)
         {
             DataTable Tbl = new DataTable();
 
@@ -25,8 +25,14 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetLicenseDetails";
+            cmd.CommandText = "GetLicenseDetailsGrpid";
             cmd.Connection = conn;
+
+            SqlParameter Gid = new SqlParameter();
+            Gid.ParameterName = "@LicenseDetailsid";
+            Gid.SqlDbType = SqlDbType.Int;
+            Gid.Value = groupid;
+            cmd.Parameters.Add(Gid);
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
