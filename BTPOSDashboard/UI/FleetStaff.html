@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrl">
 <head>
     <title>Home | BT POS | Vehicle Details</title>
     <meta charset="utf-8">
@@ -21,8 +21,9 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
+<body ng-init="GetFleetStaff();" ng-model="FleetStaff">
 
-<body ng-model="FleetStaff">
+
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -300,35 +301,6 @@
                             </ul>
                         </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <!--<li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
@@ -461,96 +433,106 @@
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
+
                                                         <div class="col-md-5">
-                                                            Vehicle: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
 
+                                                        <div class="col-md-5">
+                                                            Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
                                                         <div class="actions">
                                                             <a href="AddFleetStaff.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New Fleet Staff</button></a>
 
                                                         </div>
 
 
-                                                       
-                                                        </div>
-
-
 
                                                     </div>
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
 
-                                                                
-                                                                <th>UserName</th>
-                                                                <th>From </th>
-                                                                <th>To</th>
-                                                                <th>Delete</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
 
-                                                            <tr ng-repeat="Fleet in FleetStaff " class="gradeA">
-                                                                <td>{{Fleet.StaffRole}}</td>
-                                                                <td>{{Fleet.UserName}}</td>
-                                                                <td>{{Fleet.From}}</td>
-                                                                <td>{{Fleet.To}}</td>
-                                                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
-                                                            </tr>
-                                                        </tbody>
-
-                                                    </table>
-                                                    <!--<div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="pagination-panel">
-                                                                Page
-                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                                of 6 | View
-                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                    <option value="20" selected="selected">20</option>
-                                                                    <option value="50">50</option>
-                                                                    <option value="100">100</option>
-                                                                    <option value="150">150</option>
-                                                                    <option value="-1">All</option>
-                                                                </select>&nbsp;
-                                                                records | Found total 58 records
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 text-right">
-                                                            <div class="pagination-panel">
-                                                                <ul class="pagination pagination-sm man">
-                                                                    <li><a href="#">&laquo;</a></li>
-                                                                    <li><a href="#">1</a></li>
-                                                                    <li><a href="#">2</a></li>
-                                                                    <li><a href="#">3</a></li>
-
-                                                                    <li><a href="#">&raquo;</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                                                 </div>
+                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+
+                                                        <tr>
+                                                            <th>Vehicle Reg.No</th>
+                                                            <th>User Name</th>
+                                                            <th>Staff Role</th>
+                                                            <th>From </th>
+                                                            <th>To</th>
+                                                            <th>Delete</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat="Fleet in FleetStaff " class="gradeA">
+                                                            <td>{{Fleet.VehicleRegNo}}</td>                                                            
+                                                            <td>{{Fleet.UserName}}</td>
+                                                            <td>{{Fleet.rolename}}</td>
+                                                            <td>{{Fleet.FromDate}}</td>
+                                                            <td>{{Fleet.ToDate}}</td>
+                                                            <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+                                                <!--<div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="pagination-panel">
+                                                            Page
+                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
+                                                            of 6 | View
+                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
+                                                                <option value="20" selected="selected">20</option>
+                                                                <option value="50">50</option>
+                                                                <option value="100">100</option>
+                                                                <option value="150">150</option>
+                                                                <option value="-1">All</option>
+                                                            </select>&nbsp;
+                                                            records | Found total 58 records
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 text-right">
+                                                        <div class="pagination-panel">
+                                                            <ul class="pagination pagination-sm man">
+                                                                <li><a href="#">&laquo;</a></li>
+                                                                <li><a href="#">1</a></li>
+                                                                <li><a href="#">2</a></li>
+                                                                <li><a href="#">3</a></li>
+
+                                                                <li><a href="#">&raquo;</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
-                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
-                    <!--END FOOTER-->
                 </div>
-                <!--END PAGE WRAPPER-->
+                <!--END CONTENT--><!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                </div>
+                <!--END FOOTER-->
             </div>
+            <!--END PAGE WRAPPER-->
         </div>
+    </div>
     </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>

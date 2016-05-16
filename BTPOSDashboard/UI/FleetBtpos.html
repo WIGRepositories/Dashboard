@@ -460,7 +460,19 @@
 
 
                                                 <div class="table-container">
-                                                    <div class="row mbm">
+                                                    <div class="row mbm"><div class="col-md-5">
+                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                      <option value="">All</option>
+                                                       </select>
+                                                       </div>
+
+                                               <div class="col-md-5">
+                                      Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                         <option value="">All</option>
+                                  </select>
+                                            </div>
 
 
                                                         <div class="actions">

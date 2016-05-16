@@ -1542,11 +1542,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[FleetStaff](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[StaffRole] [varchar](50) NOT NULL,
+	[RoleId] int NOT NULL,
 	[UserId] [int] NOT NULL,
-	[From] [datetime] NOT NULL,
-	[To] [datetime] NOT NULL
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL,
+	[VehicleId] int NOT NULL
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -5509,3 +5511,115 @@ END
 GO
 
 
+ALTER PROCEDURE [dbo].[GetFleetStaff]
+	-- Add the parameters for the stored procedure here
+	(@fleetowner int = -1)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT fs.[Id]
+      ,fs.[RoleId]
+      ,[UserId]
+      ,[FromDate]
+      ,[ToDate]
+      ,[VehicleId]
+      ,FD.VehicleRegNo
+      ,u.FirstName + ' ' +u.LastName as UserName
+      ,r.Name as rolename
+  FROM [POSDashboard].[dbo].[FleetStaff] FS
+      inner join FleetDetails FD on FD.Id = FS.vehicleId
+      inner join Users u on fs.UserId=u.id
+inner join Roles r on r.Id = FS.roleid
+where (FD.FleetOwnerId = @fleetowner or @fleetowner = -1)
+
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+ALTER PROCEDURE [dbo].[GetFleebtDetails] 
+	-- Add the parameters for the stored procedure here
+	(@vehicleId int=-1)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   SELECT vd.[Id]
+      ,[RegNo]
+      
+      ,[BTPOSNAME]
+      ,[From]
+      ,[To]
+      
+      
+       
+     
+      ,vd.[Active]
+     FROM [POSDashboard].[dbo].[FleetBtpos]fbt
+    
+  
+    
+    inner join VehicleDetails vd on vd.Id=fbt.Id
+   
+	 where  (vd.Id= @vehicleId or @vehicleId = -1)
+
+
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetFleetstDetails] 
+	-- Add the parameters for the stored procedure here
+	(@vehicleId int=-1)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   SELECT vd.[Id]
+      ,[RegNo]
+      ,[UserId]
+      ,[StaffRole]
+      ,[From]
+      ,[To]
+      
+     ,vd.[Active]
+     FROM [POSDashboard].[dbo].[FleetStaff]fs    
+    inner join VehicleDetails vd on vd.Id=fs.Id   
+	 where  (vd.Id= @vehicleId or @vehicleId = -1)
+
+
+
+END
+   
+    
+   
+    

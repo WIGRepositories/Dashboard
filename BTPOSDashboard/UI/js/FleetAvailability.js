@@ -1,22 +1,33 @@
 
-var app = angular.module('myApp', [])
-var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
+var app = angular.module('myApp', ['ngStorage'])
+var ctrl = app.controller('Mycntrlr', function ($scope, $http,$localStorage) {
+    $scope.uname = $localStorage.uname
 
-    $http.get('http://localhost:1476/api/FleetAvailability/GetFleetAvailability').then(function (res, data) {
-        $scope.FleetAvailability = res.data;
+    $http.get('http://localhost:1476/api/FleetAvailability/FleetAvailability').then(function (res, data) {
+        $scope.initdata= res.data;
     });
+
+}
+
+ $scope.GetFleetAvailability = function () {
+
+    $http.get('http://localhost:1476/api/FleetAvailability/getFleetList').then(function (res, data) {
+        $scope.FleetAvailability = res.data.Table;
+        
+    });
+
     $scope.save = function (FleetAvailability) {
         if (FleetAvailability == null) {
-            alert('Please values.');
+            alert('Please  enter values:');
             return;
         }
 
         if (FleetAvailability.Vehicle == null) {
-            alert('Please enter Vehicle name.');
+            alert('Please enter Vehicle name:');
             return;
         }
         if (FleetAvailability.ServiceType == null) {
-            alert('Please enter ServiceType.');
+            alert('Please enter ServiceType:');
             return;
         }
         var FleetAvailability = {
@@ -29,10 +40,14 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/fleetavailability/savefleetavailability',
+            url: 'http://localhost:1476/api/fleetavailability/AddFleetAvailability',
+
             data: FleetAvailability
         }
-        $http(req).then(function (response) {
+
+
+        $http(req).then(function (res) {
+
             alert('saved successfully.');
 
         });
