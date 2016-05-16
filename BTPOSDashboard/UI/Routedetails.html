@@ -386,59 +386,51 @@
 
                             <div class="panel panel-violet">
 
-
-
-
-
                                 <div class="panel-heading">Route configuration</div>
                                 <div class="col-md-12">
                                     <div class="row">
-                                       
-                                            <table class="table table-hover table-striped table-advanced tablesorter">
-                                              
-                                                    <td>
-                                                        <div>
-                                                            Route Name: <select ng-options="s.RouteName for s in routes track by s.Id" ng-model="s" ng-change="GetRouteDetails(s)">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div>
-                                                            Route Code: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div>
-                                                            Source: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div>
-                                                            Destination: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                </table>
-                                        
-                                        </div>
-                                  
 
+                                        <table class="table table-hover table-striped table-advanced tablesorter">
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        Route Name: <select ng-options="s.RouteName for s in routes track by s.Id" ng-model="s" ng-change="GetRouteDetails(s)">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        Route Code: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        Source: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        Destination: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
                                 </div>
-                                
-                                <div class="panel-body pan" ng-model="RouteDetails">
-                                
-
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <div class="col-md-3" style="display:table-cell;">
-                                                    <ul class=" nav nav-pills nav-stacked fade in">
+                                <div class="portlet-body" ng-model="RouteDetails">
+                                    <form role="form" class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="col-md-12" style="display:table-cell;">
+                                                    <ul class="nav nav-pills nav-stacked fade in">
                                                         <li class="btn-default" ng-repeat="stop in RouteDetails">
                                                             <a ng-click="SetCurrStop(stop,$index);" data-toggle="tab">
                                                                 <i class="fa fa-cogs"></i>&nbsp;
@@ -447,127 +439,116 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="panel panel-violet">
+                                                    <div class="panel-heading">Stop Details</div>
 
-                                                    <table class="col-lg-12" align="left">
-                    <tr style="height: 100px;">
-                        <td width="30%" style="height: 40px;"></td>
-                        <td style="height: 100px;" rowspan="2">
-                            <div>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="panel-body pan">
 
-
-                                <div>
-
-                                                    <div id="tab-account-setting" class="active">
-                                                        <form action="#" class="form-horizontal">
-                                                            <div class="form-body">
-
-
-                                                                <div class="col-lg-9">
-                                                                    <div class="panel panel-violet">
-                                                                        <div class="panel-heading">Stop Details</div>
-                                                                        <div class="panel-body pan">
-                                                                            <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                                                <div class="form-body">
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="col-sm-3 control-label">Stop Name:</label>
-                                                                                        <div class="col-sm-9 controls">
-                                                                                            <input type="text" class="form-control" ng-model="currStop.StopName" />
-                                                                                        </div>
-                                                                                    </div>
-
-
-                                                                                    <label for="inputFirstName" class="col-md-3 control-label">Stop Code</label>
-
-                                                                                    <div class="col-md-5"><input id="inputMiddleName" type="text" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-
-
-                                                                                    <label for="inputFirstName" class="col-md-3 control-label">Distance From Source</label>
-
-                                                                                    <div class="col-md-5"><input id="inputMiddleName" type="text" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-                                                                                    <label for="inputFirstName" class="col-md-3 control-label">Distance From Destination</label>
-
-                                                                                    <div class="col-md-5"><input id="inputMiddleName" type="text" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-                                                                                    <label for="inputFirstName" class="col-md-3 control-label">Distance From Previous Stop</label>
-
-                                                                                    <div class="col-md-5"><input id="inputMiddleName" type="text" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-                                                                                    <label for="inputFirstName">Distance From Next Stop</label>
-
-                                                                                    <div class="col-md-5"><input id="inputMiddleName" type="text" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-                                                                                    <label for="inputFirstName" class="col-md-3 control-label">Previous Stop</label>
-
-                                                                                    <div class="col-md-5"><input id="inputMiddleName" type="text" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-                                                                                    <label for="inputFirstName" class="col-md-3 control-label">Next Stop</label>
-
-                                                                                    <div class="col-md-5"><input id="inputMiddleName" type="text" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-
-                                                                                </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <div class="col-sm-12 controls">
-                                                                                <button data-target="#Modal-prev" data-toggle="modal" class="btn btn-primary btn-xs">Add Next Stop</button>
-                                                                                <button data-target="#Modal-next" data-toggle="modal" class="btn btn-primary btn-xs">Add Previous Stop</button>
-                                                                                <button class="btn btn-primary btn-xs">Delete</button>
-                                                                            </div>
-                                                                        </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Stop name:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
                                                                     </div>
+
+
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Stop Code:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                    </div>
+
+
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Next stop:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Previous stop:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                    </div>
+
                                                                 </div>
 
+                                                            </td>
+                                                            <td>
+                                                                <div class="panel-body pan">
 
-                                                            </div>
-                                                        </form>
-                                                    </div>
+
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Distance from previous stop:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Distance from next stop:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Distance from destination:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Distance from source:</label>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-12 controls" style="text-align:center">
+                                                                        <button data-target="#Modal-prev" data-toggle="modal" class="btn btn-primary btn-xs">Add Next Stop</button>
+                                                                        <button data-target="#Modal-next" data-toggle="modal" class="btn btn-primary btn-xs">Add Previous Stop</button>
+                                                                        <button class="btn btn-primary btn-xs">Delete</button>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
 
 
 
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="col-md-12" style="text-align:center">
                                                     <button type="submit" class="btn btn-success">
                                                         <i class="fa fa-save"></i>&nbsp;
                                                         Save
                                                     </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
                                                 </div>
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    
-
-
-
-
-
-
-                                    </div>
-                               
-                            </div>
-
-                        </div>
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
+                                                <br />
+                                            </div>
                                         </div>
-                        
-                   
-                                </div>
-                            </div><!--END CONTENT-->
-                        </div><!--BEGIN FOOTER-->
-                       
-     
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    </form>
 
+
+                                </div>
+                                
+
+                            </div>
+                            <div id="footer">
+                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div><!--END CONTENT-->
+            </div><!--BEGIN FOOTER-->
+
+
+        </div>
     </div>
+ 
 
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
