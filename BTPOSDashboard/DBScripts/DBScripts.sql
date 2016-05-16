@@ -4321,19 +4321,15 @@ CREATE procedure [dbo].[ValidateCredentials](@logininfo varchar(50) = null, @pas
 as
 begin
 
-select logininfo,firstname, lastname,u.Id ,ur.RoleName,ur.roleid
+select logininfo,firstname, lastname,u.Id ,r.Name as RoleName,ur.roleid
 from userlogins ul 
 inner join users u on 
 u.id = ul.userid
 left outer join UserRoles ur on ur.UserId=u.Id
+left outer join roles r on r.id = ur.roleid
 where LoginInfo=@logininfo and [PassKey]=@passkey
 
 end
-
---select count(*)  from login where UserName='pavani' and Password='pavani'
---[ValidateCredentials] 'FL002', 'FL002'
-
---select * from UserRoles
 
 GO
 SET ANSI_NULLS ON
