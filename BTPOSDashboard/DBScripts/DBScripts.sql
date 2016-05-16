@@ -4298,7 +4298,7 @@ else
 			 if @fcnt = 0 
 				INSERT INTO [POSDashboard].[dbo].[FleetOwner]
 					   ([UserId]
-					   ,[GroupId]
+					   ,[Company]
 					   ,[Active]
 					   ,[FleetOwnerCode])
 				 VALUES
@@ -4777,7 +4777,17 @@ GO
 CREATE procedure [dbo].[getFleetOwner]
 as
 begin
-select * from FleetOwner
+select u.FirstName+' '+u.LastName as Name,
+c.Name as CompanyName
+,FO.FleetOwnerCode
+,FO.CompanyId
+,U.Id
+ from FleetOwner FO
+inner join Users u on  u.Id = FO.UserId
+inner join Company c on c.Id = FO.companyId
+
+
+
 end
 
 GO
@@ -5539,4 +5549,19 @@ BEGIN
 	 inner join SubCategory S on S.Id = L.LicenseCatId	 
 	  where (LicenseCatId = @LicenseDetailsid or @LicenseDetailsid = -1)
 END
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[getFleetOwner]    Script Date: 05/16/2016 14:40:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getFleetOwner]
+as
+begin
+select * from FleetOwner fid
+ inner join Users u1 on fid.UserId =u1.FirstName
+select * from FleetOwner
+end
 
