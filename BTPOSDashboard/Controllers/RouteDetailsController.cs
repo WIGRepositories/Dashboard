@@ -61,11 +61,11 @@ namespace BTPOSDashboard.Controllers
              cmd.CommandText = "InsUpdDelRouteDetails";
              cmd.Connection = conn;
              conn.Open();
-             //SqlParameter cc = new SqlParameter();
-             //cc.ParameterName = "@Id";
-             //cc.SqlDbType = SqlDbType.Int;
-             //cc.Value = Convert.ToString(b.Id);
-             //cmd.Parameters.Add(cc);
+             SqlParameter cc = new SqlParameter();
+             cc.ParameterName = "@Id";
+             cc.SqlDbType = SqlDbType.Int;
+             cc.Value = Convert.ToString(b.Id);
+             cmd.Parameters.Add(cc);
 
              SqlParameter ccw = new SqlParameter();
              ccw.ParameterName = "@RouteId";
@@ -115,6 +115,11 @@ namespace BTPOSDashboard.Controllers
              ccwadep.SqlDbType = SqlDbType.Int;
              ccwadep.Value = b.PrevousStopId;
              cmd.Parameters.Add(ccwadep);
+             SqlParameter jj = new SqlParameter();
+          jj.ParameterName = "@DistanceFromNextStop";
+            jj.SqlDbType = SqlDbType.Int;
+            jj.Value = b.DistanceFromNextStop;
+             cmd.Parameters.Add(jj);
 
              SqlParameter ccwadeas = new SqlParameter();
              ccwadeas.ParameterName = "@NextStopId";

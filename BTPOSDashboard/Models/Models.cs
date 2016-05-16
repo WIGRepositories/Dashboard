@@ -1076,7 +1076,7 @@ namespace BTPOSDashboardAPI.Models
     }
     public class RouteDetails
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         public String RouteId { get; set; }
         //public String stopname { get; set; }
         //public String Description { get; set; }
