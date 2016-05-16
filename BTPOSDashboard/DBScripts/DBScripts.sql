@@ -1714,9 +1714,19 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[getEditHistoryDetails]
+(@edithistoryid int =-1)
 as
 begin
-select * from EditHistoryDetails
+SELECT [EditHistoryId]
+      ,[FromValue]
+      ,[ToValue]
+      ,[ChangeType]
+      ,e.Task
+      ,e.SubItem
+  FROM [POSDashboard].[dbo].[EditHistoryDetails] ed
+  inner join EditHistory e on e.Id = ed.EditHistoryId
+  WHERE EditHistoryId = @edithistoryid
+  
 end
 
 GO
@@ -5519,6 +5529,26 @@ BEGIN
 END
 GO
 
+/****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[GetLicenseDetailsGrpid]
+@LicenseDetailsid int = -1
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    
+	SELECT L.Id,L.LicenseCatId,L.FeatureName,
+	L.FeatureLabel,L.FeatureValue,L.Active, S.name as SubCategory
+	From [LicenseDetails] L
+	 inner join SubCategory S on S.Id = L.LicenseCatId	 
+	  where (LicenseCatId = @LicenseDetailsid or @LicenseDetailsid = -1)
+END
 
 ALTER PROCEDURE [dbo].[GetFleetStaff]
 	-- Add the parameters for the stored procedure here

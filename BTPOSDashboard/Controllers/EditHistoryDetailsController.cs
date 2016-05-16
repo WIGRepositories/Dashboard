@@ -12,7 +12,7 @@ namespace BTPOSDashboard.Controllers
     public class EditHistoryDetailsController : ApiController
     {
            [HttpGet]
-        public DataTable GetEditHistoryDetails()
+        public DataTable GetEditHistoryDetails(int edithistoryid)
         {
             DataTable Tbl = new DataTable();
 
@@ -26,6 +26,15 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "getEditHistoryDetails";
             cmd.Connection = conn;
+
+
+            SqlParameter gsa = new SqlParameter();
+            gsa.ParameterName = "@edithistoryid";
+            gsa.SqlDbType = SqlDbType.Int;
+            gsa.Value = edithistoryid;
+            cmd.Parameters.Add(gsa);
+
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
