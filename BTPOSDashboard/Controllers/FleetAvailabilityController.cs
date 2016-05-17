@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class FleetAvailabilityController : ApiController
     {
         [HttpGet]
-        [Route("api/FleetAvailability/getFleetlist")]
+        [Route("api/FleetAvailability/GetFleetAvailability")]
         public DataSet List()
         {
             DataTable Tbl = new DataTable();

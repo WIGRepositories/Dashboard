@@ -5549,8 +5549,7 @@ BEGIN
 	 inner join SubCategory S on S.Id = L.LicenseCatId	 
 	  where (LicenseCatId = @LicenseDetailsid or @LicenseDetailsid = -1)
 END
-
-ALTER PROCEDURE [dbo].[GetFleetStaff]
+CREATE PROCEDURE [dbo].[GetFleetStaff]
 	-- Add the parameters for the stored procedure here
 	(@fleetowner int = -1)
 AS
@@ -5605,10 +5604,6 @@ BEGIN
       ,[BTPOSNAME]
       ,[From]
       ,[To]
-      
-      
-       
-     
       ,vd.[Active]
      FROM [POSDashboard].[dbo].[FleetBtpos]fbt
     
