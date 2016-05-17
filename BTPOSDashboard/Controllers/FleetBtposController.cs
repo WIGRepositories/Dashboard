@@ -12,7 +12,7 @@ namespace BTPOSDashboard.Controllers
     public class FleetBtposController : ApiController
     {
         [HttpGet]
-        public DataTable getFleetBtpos()
+        public DataTable GetFleebtDetails()
         {
             DataTable Tbl = new DataTable();
 
@@ -24,7 +24,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFleetAvailability";
+            cmd.CommandText = "GetFleebtDetails";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);

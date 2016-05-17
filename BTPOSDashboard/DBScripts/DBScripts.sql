@@ -4502,7 +4502,7 @@ SELECT fr.[Id]
       ,fd.VehicleRegNo
       ,r.RouteName
       ,[EffectiveFrom]
-      ,[EffectiveTill]      
+      ,[EffectiveTill]
       ,[RouteName]
   FROM [POSDashboard].[dbo].[FleetRoutes] fr
   inner join FleetDetails fd on fd.Id = fr.VehicleId
@@ -5631,10 +5631,6 @@ BEGIN
       ,[POSID]
       ,[From]
       ,[To]
-      
-      
-       
-     
       ,vd.[Active]
      FROM [POSDashboard].[dbo].[FleetBtpos]fbt
     

@@ -38,13 +38,37 @@ namespace BTPOSDashboard.Controllers
 
                 // int found = 0;
                 return ds;
-            }
-
-
-
-           public void Options()
+            }  
+            [HttpPost]
+            public class FleetStaff:ApiController
             {
-           }
+                public DataSet AddFleetStaff(FleetStaff fs)
+                {
+                    DataTable tb1 = new DataTable();
+                    try
+                    {
+                        SqlConnection con = new SqlConnection();
+                        con.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                        SqlCommand cmd = new SqlCommand();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "InsupdelFleetDetails";
+                        cmd.Connection = con;
 
+                        con.Open();
+                    }
+                    return;
+                }
+
+
+            }
+        
+                      
        }
+     
+
+     
+       
+
+      
+
     }

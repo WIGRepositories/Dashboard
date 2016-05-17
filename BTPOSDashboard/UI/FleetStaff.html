@@ -468,6 +468,7 @@
                                                             <th>Staff Role</th>
                                                             <th>From </th>
                                                             <th>To</th>
+                                                            <th>Edit</th>
                                                             <th>Delete</th>
 
                                                         </tr>
@@ -480,8 +481,20 @@
                                                             <td>{{Fleet.rolename}}</td>
                                                             <td>{{Fleet.FromDate}}</td>
                                                             <td>{{Fleet.ToDate}}</td>
+                                                           
+                                                     
+                                                            <td>
+
+                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
                                                             <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
-                                                        </tr>
+                                                            </td>
+
+
+                                                        
+                                                           </tr>
                                                     </tbody>
 
                                                 </table>
