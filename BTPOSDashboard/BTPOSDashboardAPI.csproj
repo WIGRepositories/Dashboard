@@ -380,7 +380,7 @@
     <Content Include="UI\AddNewBTPOSDetails.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
     <Content Include="UI\AddNewSeats.html" />
-    <Content Include="UI\AdminReport.html" />
+    <Content Include="UI\AdminReports.html" />
     <Content Include="UI\AssignRole.html" />
     <Content Include="UI\BlockList.html" />
     <Content Include="UI\BtposLicense.html" />
@@ -422,7 +422,7 @@
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
-    <Content Include="UI\FleetOwnerReport.html" />
+    <Content Include="UI\FleetOwnerReports.html" />
     <Content Include="UI\FleetOwnerRouteFare.html" />
     <Content Include="UI\FleetOwnerRoutesDetails.html" />
     <Content Include="UI\FleetOwnerRoutes.html" />
@@ -544,7 +544,7 @@
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
-    <Content Include="UI\TroubleTicketReport.html" />
+    <Content Include="UI\TroubleTicketReports.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
     <Content Include="UI\UserLicense.html" />
