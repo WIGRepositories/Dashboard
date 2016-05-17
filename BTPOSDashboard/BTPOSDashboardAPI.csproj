@@ -316,7 +316,6 @@
     <Content Include="DBScripts\Tables\dbo.InventoryPurchases.sql" />
     <Content Include="DBScripts\Tables\dbo.InventoryReceivings.sql" />
     <Content Include="DBScripts\Tables\dbo.InventorySales.sql" />
-    <Content Include="DBScripts\Tables\dbo.LicenceDetails.sql" />
     <Content Include="DBScripts\Tables\dbo.LicencePricing.sql" />
     <Content Include="DBScripts\Tables\dbo.LicenceStatus.sql" />
     <Content Include="DBScripts\Tables\dbo.LicenseKeyFile.sql" />
