@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrl">
 <head>
     <title>Home | Configuration | Roles | Add New Role</title>
     <meta charset="utf-8">
@@ -176,8 +176,8 @@
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="CompanyRoles.html">CompanyRoles</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="AddNewRole.html">AddNewRole</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                                <li><a href="CompanyRoles.html">Company Roles</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                                <li><a href="AddNewRole.html">Add  NewRole</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
 
                             </ol>
                             <div class="clearfix"></div>
@@ -203,7 +203,7 @@
                                                                 <div class="form-body">
 
                                                                     <div class="form-group">
-                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">StaffRole:<span class='require'>*</span></label>
+                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">Staff Role:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
                                                                             <select ng-options="g.StaffRole for g in FleetStaff track by g.Id"ng-model="g">
@@ -212,7 +212,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">UserId:<span class='require'>*</span></label>
+                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">User Id:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
                                                                             <select ng-options="s.UserID for s in FleetStaff track by s.Id" ng-model="s">

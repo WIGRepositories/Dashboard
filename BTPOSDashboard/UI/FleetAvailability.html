@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrl">
 <head>
     <title>Home | BT POS | Vehicle Details</title>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="FleetAvailability">
+<body ng-init="GetFleetAvailability();" ng-model="FleetAvailability">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -307,7 +307,7 @@
 
 
 
-                                                
+
                         </ul>
                     </div>
                 </nav>
@@ -441,11 +441,11 @@
                                                             <tr>
 
 
-                                                                <th>Vehicle</th>
-                                                                <th>ServiceType</th>
-                                                                <th>FromDate</th>
+                                                                <th>Vehicle Reg No</th>
+                                                                <th>Service Type</th>
+                                                                <th>From Date</th>
 
-                                                                <th>ToDate</th>
+                                                                <th>To Date</th>
                                                                 <th>Update</th>
                                                                 <th>Delete</th>
 
@@ -478,7 +478,7 @@
                                                         </tbody>
 
                                                     </table>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
