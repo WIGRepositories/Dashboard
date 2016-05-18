@@ -4056,14 +4056,28 @@ CREATE procedure [dbo].[getRouteDetails]
 (@routeid int = -1)
 as
 begin
+
+SELECT r.[Id]
+      ,r.routename as routename
+	  ,r.code as routecode      
+      ,src.name source
+      , dest.name dest
+  FROM [POSDashboard].[dbo].[Routes] r
+inner join stops src on src.id = r.sourceid
+inner join stops dest on dest.id = r.destinationid
+where r.Id = @routeid or @routeid = -1
+
 SELECT rd.[Id]
       ,r.routename as routename
 	  ,r.code as routecode
       ,[RouteId]      
       ,stopid
       ,src.name StopName
+      ,src.code StopCode
 	  ,[PreviousStopId]
       ,[NextStopId]
+      ,prevstops.name prevstop
+      ,nextstops.name nextstop
       ,[DistanceFromSource]
       ,[DistanceFromDestination]
       ,[DistanceFromPreviousStop]
@@ -4071,6 +4085,8 @@ SELECT rd.[Id]
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
 inner join routes r on r.id = rd.routeid
+inner join stops prevstops on prevstops.id =previousstopid
+inner join stops nextstops on nextstops.id = nextstopid
   where (@routeid = -1 or routeid = @routeid)
 end
 

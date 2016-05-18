@@ -13,9 +13,9 @@ namespace BTPOSDashboard.Controllers
     public class RouteDetailsController : ApiController
     {
          [HttpGet]
-        public DataTable getroutedetails(int routeid)
+        public DataSet getroutedetails(int routeid)
         {
-            DataTable Tbl = new DataTable();
+           // DataTable Tbl = new DataTable();
 
 
             //connect to database
@@ -37,10 +37,10 @@ namespace BTPOSDashboard.Controllers
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
-            Tbl = ds.Tables[0];
+           // Tbl = ds.Tables[0];
 
             // int found = 0;
-            return Tbl;
+            return ds;
         }
 
 

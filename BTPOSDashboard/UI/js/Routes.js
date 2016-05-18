@@ -69,14 +69,37 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             url: 'http://localhost:1476/api/Routes/SaveRoutes',
             //headers: {
             //    'Content-Type': undefined
-
             data: routes
-
-
         }
+
         $http(req).then(function (res) {
-            alert('Route created successfully');
+           // alert('Route created successfully');
         });
 
+        //insert the return route details if provided
+        if (routes.ReturnRoute == true) {
+            var retroutes = {
+                RouteName: routes.ReturnRouteName,
+                Code: routes.ReturnCode,
+                Description: routes.Description,
+                Active: 1,//(routes.Active==true)?1:0,
+                //BTPOSGroupId: routes.BTPOSGroupId,
+                SourceId: routes.Destination.Id,
+                DestinationId: routes.Source.Id,
+                Distance: routes.Distance
+            };
+
+            var req = {
+                method: 'POST',
+                url: 'http://localhost:1476/api/Routes/SaveRoutes',
+                //headers: {
+                //    'Content-Type': undefined
+                data: retroutes
+            }
+
+            $http(req).then(function (res) {
+                // alert('Route created successfully');
+            });
+        }
     };
 });
