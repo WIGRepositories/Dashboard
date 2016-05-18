@@ -1280,5 +1280,21 @@ namespace BTPOSDashboardAPI.Models
     { 
 
 
+ 
+    }
+
+    public class VehicleConfig { 
+    public int?  needFleetDetails  { get; set; }
+	public int? needRoutes  { get; set; }
+	public int? needRoles   { get; set; }
+	public int? needusers  { get; set; }
+	public int? needfleetowners   { get; set; }
+    public int? needvehicleType { get; set; }
+    public int? needvehicleRegno { get; set; }
+    public int? needServiceType { get; set; }
+    public int? needCompanyName { get; set; }
+    public int? needVehicleLayout { get; set; }
+    public int? needFleetRoute { get; set; } 
+
     }
 }

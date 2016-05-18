@@ -2,14 +2,40 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
 
-    $scope.GetFleetConfiguration = function () {
+    //$scope.GetFleetConfiguration = function () {
 
 
-        $http.get('http://localhost:1476/api/Fleet/VehicleConfiguration').then(function (res, data) {
+    //    $http.get('http://localhost:1476/api/Fleet/VehicleConfiguration').then(function (res, data) {
+    //        $scope.initdata = res.data;
+    //    });
+
+        
+    //}
+
+    $scope.GetVehicleConfig = function () {
+
+        var VehicleConfig = {
+            needfleetowners:1,
+            needvehicleType: 1,
+            needServiceType:1,
+            needvehiclelayout:1,
+            needCompanyName: 1
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: VehicleConfig
+
+
+        }
+        $http(req).then(function (res) {
             $scope.initdata = res.data;
         });
 
-        
     }
 
     $scope.GetFleetDetails = function () {

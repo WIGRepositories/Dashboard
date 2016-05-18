@@ -1529,6 +1529,19 @@ GO
 SET ANSI_PADDING ON
 GO
 
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[FleetDetails]    Script Date: 05/18/2016 15:42:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[FleetDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[VehicleRegNo] [varchar](10) NOT NULL,
@@ -1536,8 +1549,16 @@ CREATE TABLE [dbo].[FleetDetails](
 	[FleetOwnerId] [varchar](50) NOT NULL,
 	[CompanyId] [varchar](50) NOT NULL,
 	[ServiceTypeId] [varchar](50) NOT NULL,
-	[Active] [int] NOT NULL
+	[Active] [int] NOT NULL,
+	[LayoutTypeId] [int] NOT NULL
 ) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
 
 GO
 
@@ -1999,6 +2020,7 @@ BEGIN
    SELECT v.[Id]
       ,[VehicleRegNo]
       ,vt.[Name] as VehicleType,
+      lt.Name AS vehiclelayout,
        st.Name as ServiceType,
        u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
@@ -2006,6 +2028,7 @@ BEGIN
      FROM [POSDashboard].[dbo].[FleetDetails]v
     inner join Types vt on vt.Id=v.VehicleTypeId
     inner join Types st on st.Id=v.ServiceTypeId
+    inner join Types lt on lt.Id = v.layouttypeid
     inner join company c on c.Id=v.CompanyId
     inner join FleetOwner f on f.UserId=v.FleetOwnerId
     inner join Users u on u.Id = f.UserId
