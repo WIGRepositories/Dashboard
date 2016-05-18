@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrl">
 <head>
     <title>Home | BT POS | Vehicle Details</title>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="FleetAvailability">
+<body ng-init="GetFleetAvailability();" ng-model="FleetAvailability">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -307,98 +307,7 @@
 
 
 
-                        <!--<li>
-                <a href="#">
-                    <i class="fa fa-send-o fa-fw">
-                        <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                    <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
-                    <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                    <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
-                    <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
-                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                    <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
-                </ul>
 
-            </li>-->
-                        <!--<li>
-                <a href="#">
-                    <i class="fa fa-desktop fa-fw">
-                        <div class="icon-bg bg-pink"></div>
-                    </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                    <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                    <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
-                    <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
-                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
-
-                </ul>
-            </li>
-
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-send-o fa-fw">
-                        <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                    <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                    <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                    <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
-                    <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
-                </ul>
-            </li>
-
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-edit fa-fw">
-                        <div class="icon-bg bg-violet"></div>
-                    </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
-                    <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-th-list fa-fw">
-                        <div class="icon-bg bg-blue"></div>
-                    </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-envelope-o">
-                        <div class="icon-bg bg-primary"></div>
-                    </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                    <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                    <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                    <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                    <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
-                    <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
-                </ul>
-            </li>-->
                         </ul>
                     </div>
                 </nav>
@@ -431,6 +340,19 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
+                                                        <div class="col-md-5">
+                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
 
                                                         <div class="actions">
                                                             <a href="AddFleetAvailability.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add Fleet Availability</button></a>
@@ -519,11 +441,11 @@
                                                             <tr>
 
 
-                                                                <th>Vehicle</th>
-                                                                <th>ServiceType</th>
-                                                                <th>FromDate</th>
+                                                                <th>Vehicle Reg No</th>
+                                                                <th>Service Type</th>
+                                                                <th>From Date</th>
 
-                                                                <th>ToDate</th>
+                                                                <th>To Date</th>
                                                                 <th>Update</th>
                                                                 <th>Delete</th>
 
@@ -556,35 +478,7 @@
                                                         </tbody>
 
                                                     </table>
-                                                    <!--<div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="pagination-panel">
-                                                                Page
-                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                                of 6 | View
-                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                    <option value="20" selected="selected">20</option>
-                                                                    <option value="50">50</option>
-                                                                    <option value="100">100</option>
-                                                                    <option value="150">150</option>
-                                                                    <option value="-1">All</option>
-                                                                </select>&nbsp;
-                                                                records | Found total 58 records
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 text-right">
-                                                            <div class="pagination-panel">
-                                                                <ul class="pagination pagination-sm man">
-                                                                    <li><a href="#">&laquo;</a></li>
-                                                                    <li><a href="#">1</a></li>
-                                                                    <li><a href="#">2</a></li>
-                                                                    <li><a href="#">3</a></li>
 
-                                                                    <li><a href="#">&raquo;</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>

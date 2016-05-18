@@ -299,36 +299,6 @@
 
                             </ul>
                         </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         
                         
                         </ul>
@@ -362,22 +332,31 @@
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
+                                                      <div class="col-md-5">
+                                                Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                                    
+                                                                    <option value="">All</option>
+                                                                </select>
+                                                            </div>
+                                                         <div class="col-md-5">
+                                                                Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                                    
+                                                                    <option value="">All</option>
+                                                                </select>
+                                                            </div>
 
 
-                                                        <div class="actions">
-                                                            <a href="AddFleetDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add Fleet Details</button></a>
+                                                            <div class="actions">
+                                                                <a href="AddFleetDetails.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add Fleet Details</button></a>
 
-                                                        </div>
-
-
-
-                                                    </div>
+                                                            </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
 
                                                                 <th width="22%">Vehicle Reg. No</th>
                                                                 <th>Vehicle Type</th>
+                                                                <th>Vehicle Layout</th> 
                                                                 <th>Service Type </th>   
                                                                 <th>Compnay Name</th>                 
                                                                 <th>Active</th>
@@ -394,6 +373,9 @@
                                                                 </td>
                                                                 <td>
                                                                     {{F.VehicleType}}
+                                                                </td>
+                                                                <td>
+                                                                    {{F.VehicleLayout}}
                                                                 </td>
                                                                 <td>
                                                                     {{F.ServiceType}}

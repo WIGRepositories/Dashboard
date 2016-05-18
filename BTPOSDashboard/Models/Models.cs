@@ -1142,6 +1142,8 @@ namespace BTPOSDashboardAPI.Models
     
     public class FleetDetails
     {
+        public int VehicleLayoutId;
+        public string VehicleLayout;
         public int Id { get; set; }
 
         public string VehicleRegNo { get; set; }
@@ -1272,5 +1274,11 @@ namespace BTPOSDashboardAPI.Models
 
         public int Id { get; set; }
         public int Active { get; set; }
+    }
+
+    public class FleetStaff
+    { 
+
+
     }
 }

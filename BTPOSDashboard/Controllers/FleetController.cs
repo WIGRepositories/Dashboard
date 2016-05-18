@@ -73,6 +73,12 @@ namespace BTPOSDashboard.Controllers
                 gsab.Value = n.VehicleTypeId;
                 cmd.Parameters.Add(gsab);
 
+                SqlParameter gsab1 = new SqlParameter();
+                gsab1.ParameterName = "@VehicleLayout";
+                gsab1.SqlDbType = SqlDbType.VarChar;
+                gsab1.Value = n.VehicleLayout;
+                cmd.Parameters.Add(gsab1);
+
                 SqlParameter gsac = new SqlParameter("@FleetOwnerId", SqlDbType.VarChar);
                 gsac.Value = n.FleetOwnerId;
                 cmd.Parameters.Add(gsac);

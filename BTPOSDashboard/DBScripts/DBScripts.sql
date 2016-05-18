@@ -439,8 +439,26 @@ CREATE TABLE [dbo].[POSTerminal](
 ) ON [PRIMARY]
 
 GO
+
 SET ANSI_NULLS ON
 GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Routes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RouteName] [varchar](50) NOT NULL,
+	[Code] [varchar](10) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[Active] [int] NOT NULL CONSTRAINT [DF_Routes_Active]  DEFAULT ((1)),
+	[SourceId] [int] NOT NULL,
+	[DestinationId] [int] NOT NULL,
+	[Distance] [decimal](18, 0) NULL
+) ON [PRIMARY]
+
+SET ANSI_NULLS ON
+GO
+
+
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[getRoutes]
@@ -1086,19 +1104,7 @@ CREATE TABLE [dbo].[SubCategory](
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Stops](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [varchar](30) NOT NULL,
-	[Description] [varchar](30) NULL,
-	[Code] [varchar](10) NOT NULL,
-	[Active] [int] NULL
-) ON [PRIMARY]
 
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1171,6 +1177,21 @@ CREATE TABLE [dbo].[RoutesVehicle](
 ) ON [PRIMARY]
 
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Stops](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](30) NOT NULL,
+	[Description] [varchar](30) NULL,
+	[Code] [varchar](10) NOT NULL,
+	[Active] [int] NULL
+) ON [PRIMARY]
+
+GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1543,11 +1564,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[FleetStaff](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[StaffRole] [varchar](50) NOT NULL,
+	[RoleId] int NOT NULL,
 	[UserId] [int] NOT NULL,
-	[From] [datetime] NOT NULL,
-	[To] [datetime] NOT NULL
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL,
+	[VehicleId] int NOT NULL
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -1613,21 +1636,8 @@ CREATE TABLE [dbo].[FleetOwnerRoute](
 	[Active] [int] NOT NULL
 ) ON [PRIMARY]
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[Routes](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RouteName] [varchar](50) NOT NULL,
-	[Code] [varchar](10) NOT NULL,
-	[Description] [varchar](50) NULL,
-	[Active] [int] NOT NULL CONSTRAINT [DF_Routes_Active]  DEFAULT ((1)),
-	[SourceId] [int] NOT NULL,
-	[DestinationId] [int] NOT NULL,
-	[Distance] [decimal](18, 0) NULL
-) ON [PRIMARY]
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -1664,7 +1674,7 @@ GO
 CREATE TABLE [dbo].[FleetOwner](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[UserId] [int] NOT NULL,
-	[GroupId] [int] NULL,
+	[CompanyId] [int] NULL,
 	[Active] [int] NOT NULL,
 	[FleetOwnerCode] [varchar](10) NULL
 ) ON [PRIMARY]
@@ -1712,9 +1722,19 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[getEditHistoryDetails]
+(@edithistoryid int =-1)
 as
 begin
-select * from EditHistoryDetails
+SELECT [EditHistoryId]
+      ,[FromValue]
+      ,[ToValue]
+      ,[ChangeType]
+      ,e.Task
+      ,e.SubItem
+  FROM [POSDashboard].[dbo].[EditHistoryDetails] ed
+  inner join EditHistory e on e.Id = ed.EditHistoryId
+  WHERE EditHistoryId = @edithistoryid
+  
 end
 
 GO
@@ -3863,6 +3883,7 @@ else
 END
 
 GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4035,14 +4056,28 @@ CREATE procedure [dbo].[getRouteDetails]
 (@routeid int = -1)
 as
 begin
+
+SELECT r.[Id]
+      ,r.routename as routename
+	  ,r.code as routecode      
+      ,src.name source
+      , dest.name dest
+  FROM [POSDashboard].[dbo].[Routes] r
+inner join stops src on src.id = r.sourceid
+inner join stops dest on dest.id = r.destinationid
+where r.Id = @routeid or @routeid = -1
+
 SELECT rd.[Id]
       ,r.routename as routename
 	  ,r.code as routecode
       ,[RouteId]      
       ,stopid
       ,src.name StopName
+      ,src.code StopCode
 	  ,[PreviousStopId]
       ,[NextStopId]
+      ,prevstops.name prevstop
+      ,nextstops.name nextstop
       ,[DistanceFromSource]
       ,[DistanceFromDestination]
       ,[DistanceFromPreviousStop]
@@ -4050,6 +4085,8 @@ SELECT rd.[Id]
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
 inner join routes r on r.id = rd.routeid
+inner join stops prevstops on prevstops.id =previousstopid
+inner join stops nextstops on nextstops.id = nextstopid
   where (@routeid = -1 or routeid = @routeid)
 end
 
@@ -4063,10 +4100,10 @@ GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
 
-CREATE procedure [dbo].[InsUpdDelRouteDetails](@Id int,@RouteId varchar(50),@stopname varchar(50),@Description varchar(50)=null,@StopCode varchar(50),@DistanceFromSource int,@DistanceFromDestination int,@DistanceFromPreviousStop int,@DistanceFromNextStop int,@PreviousStopId int,@NextStopId int)
+CREATE procedure [dbo].[InsUpdDelRouteDetails](@Id int,@RouteId int,@stopId int ,@DistanceFromSource int,@DistanceFromDestination int,@DistanceFromPreviousStop int,@DistanceFromNextStop int,@PreviousStopId int,@NextStopId int)
 as
 begin
-insert into RouteDetails (RouteId,stopname,[Description],StopCode,DistanceFromSource,DistanceFromDestination,DistanceFromPreviousStop,DistanceFromNextStop,PreviousStopId,NextStopId) values(@RouteId,@stopname,@Description,@StopCode,@DistanceFromSource,@DistanceFromDestination,@DistanceFromPreviousStop,@DistanceFromNextStop,@PreviousStopId,@NextStopId)
+insert into RouteDetails (RouteId,StopId,DistanceFromSource,DistanceFromDestination,DistanceFromPreviousStop,DistanceFromNextStop,PreviousStopId,NextStopId) values(@RouteId,@stopId,@DistanceFromSource,@DistanceFromDestination,@DistanceFromPreviousStop,@DistanceFromNextStop,@PreviousStopId,@NextStopId)
 end
 select * from RouteDetails
 
@@ -4288,7 +4325,7 @@ else
 			 if @fcnt = 0 
 				INSERT INTO [POSDashboard].[dbo].[FleetOwner]
 					   ([UserId]
-					   ,[GroupId]
+					   ,[CompanyId]
 					   ,[Active]
 					   ,[FleetOwnerCode])
 				 VALUES
@@ -4299,7 +4336,7 @@ else
 				else
 					UPDATE [POSDashboard].[dbo].[FleetOwner]
 						SET 
-						[GroupId] = 1
+						[CompanyId] = 1
 						,[Active] = 1
 						,[FleetOwnerCode] = @EmpNo
 					 WHERE [UserId] = @currid
@@ -4479,10 +4516,9 @@ SELECT fr.[Id]
       ,fr.[VehicleId]
       ,fr.[RouteId]
       ,fd.VehicleRegNo
-      ,r.Route as RouteName
+      ,r.RouteName
       ,[EffectiveFrom]
       ,[EffectiveTill]
-      ,[VehicleName]
       ,[RouteName]
   FROM [POSDashboard].[dbo].[FleetRoutes] fr
   inner join FleetDetails fd on fd.Id = fr.VehicleId
@@ -4581,10 +4617,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE procedure [dbo].[InsUpdDelFleetAvailability]
-(@Id int,@Vehicle varchar(50),@ServiceType varchar(50),@FromDate datetime,@ToDate datetime=null)
+(@Id int,@VehicleId int,@ServiceTypeId int,@FromDate datetime,@ToDate datetime=null)
 as
 begin
-Insert into FleetAvailability(Vehicle,ServiceType,FromDate,ToDate)values(@Vehicle,@ServiceType,@FromDate,@ToDate)
+Insert into FleetAvailability(VehicleId,ServiceTypeId,FromDate,ToDate)values(@VehicleId,@ServiceTypeId,@FromDate,@ToDate)
 end
 
 /****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
@@ -4699,6 +4735,22 @@ SELECT
 
 
 end
+GO
+/****** Object:  Table [dbo].[UserRoles]    Script Date: 05/07/2016 11:08:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserRoles](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[CompanyId] [int] NULL
+) ON [PRIMARY]
+
+GO
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerRouteFare]    Script Date: 05/02/2016 16:34:55 ******/
 SET ANSI_NULLS ON
@@ -4767,7 +4819,15 @@ GO
 CREATE procedure [dbo].[getFleetOwner]
 as
 begin
-select * from FleetOwner
+select u.FirstName+' '+u.LastName as Name,
+c.Name as CompanyName
+,FO.FleetOwnerCode
+,FO.CompanyId
+,U.Id
+ from FleetOwner FO
+inner join Users u on  u.Id = FO.UserId
+inner join Company c on c.Id = FO.companyId
+
 end
 
 GO
@@ -5052,7 +5112,7 @@ end
  
  if @fleetcnt=0
  begin
-	insert into FleetOwner (UserId,GroupId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
+	insert into FleetOwner (UserId,CompanyId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
  end
 
 --assign fleet owner role to user
@@ -5063,21 +5123,6 @@ end
 
 GO
 
-/****** Object:  Table [dbo].[UserRoles]    Script Date: 05/07/2016 11:08:04 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[UserRoles](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [int] NOT NULL,
-	[RoleId] [int] NOT NULL,
-	[CompanyId] [int] NULL
-) ON [PRIMARY]
-
-GO
 
 
 
@@ -5112,7 +5157,7 @@ CREATE TABLE [dbo].[LicenseDetails](
 	[LicenseCode] [varchar](10) NULL,
 	[LicenseName] [varchar](50) NULL,
 	[LicenseCatId] [int] NOT NULL,
-	[Feature] [varchar](50) NULL,
+	[FeatureName] [varchar](50) NULL,
 	[FeatureLabel] [varchar](50) NULL,
 	[FeatureValue] [nchar](10) NULL,
 	[LabelClass] [varchar](50) NULL,
@@ -5123,6 +5168,21 @@ CREATE TABLE [dbo].[LicenseDetails](
 
 GO
 
+
+/****** Object:  Table [dbo].[RouteStops]    Script Date: 05/16/2016 22:05:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RouteStops](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[FromStopId] [int] NOT NULL,
+	[ToStopId] [int] NOT NULL
+) ON [PRIMARY]
+
+
+GO
 
 CREATE procedure [dbo].[InsUpdDelRoutes](
 @Id int
@@ -5216,7 +5276,15 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
            ,@DestinationId
           )
 
-
+          INSERT INTO [POSDashboard].[dbo].[RouteStops]
+           ([RouteId]
+           ,[FromStopId]
+           ,[ToStopId])
+     VALUES
+           (@routeid
+           ,@SourceId
+           ,@DestinationId)
+     
 end
 end
 
@@ -5302,7 +5370,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetLicensePricing]
+create procedure [dbo].[GetLicensePricing]
 
 as begin 
 select Id,
@@ -5324,7 +5392,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelLicensePricing](
+create procedure [dbo].[InsUpdDelLicensePricing](
 @Id int,
 @LicenseId varchar(10),
 @TimePeriod Varchar(50),
@@ -5426,7 +5494,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelLicenseDetails](
+Create procedure [dbo].[InsUpdDelLicenseDetails](
 @Id int,
 @LicenseCode varchar(10),
 @LicenseName Varchar(50),
@@ -5509,4 +5577,134 @@ BEGIN
 END
 GO
 
+/****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
+create PROCEDURE [dbo].[GetLicenseDetailsGrpid]
+@LicenseDetailsid int = -1
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+    
+	SELECT L.Id,L.LicenseCatId,L.FeatureName,
+	L.FeatureLabel,L.FeatureValue,L.Active, S.name as SubCategory
+	From [LicenseDetails] L
+	 inner join SubCategory S on S.Id = L.LicenseCatId	 
+	  where (LicenseCatId = @LicenseDetailsid or @LicenseDetailsid = -1)
+END
+
+GO 
+
+CREATE PROCEDURE [dbo].[GetFleetStaff]
+	-- Add the parameters for the stored procedure here
+	(@fleetowner int = -1)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT fs.[Id]
+      ,fs.[RoleId]
+      ,[UserId]
+      ,[FromDate]
+      ,[ToDate]
+      ,[VehicleId]
+      ,FD.VehicleRegNo
+      ,u.FirstName + ' ' +u.LastName as UserName
+      ,r.Name as rolename
+  FROM [POSDashboard].[dbo].[FleetStaff] FS
+      inner join FleetDetails FD on FD.Id = FS.vehicleId
+      inner join Users u on fs.UserId=u.id
+inner join Roles r on r.Id = FS.roleid
+where (FD.FleetOwnerId = @fleetowner or @fleetowner = -1)
+
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetFleebtDetails] 
+	-- Add the parameters for the stored procedure here
+	(@vehicleId int=-1)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   SELECT vd.[Id]
+      ,[RegNo]
+      
+      ,[POSID]
+      ,[From]
+      ,[To]
+      ,vd.[Active]
+     FROM [POSDashboard].[dbo].[FleetBtpos]fbt
+    
+  
+    
+    inner join VehicleDetails vd on vd.Id=fbt.Id
+   
+	 where  (vd.Id= @vehicleId or @vehicleId = -1)
+
+
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetFleetstDetails] 
+	-- Add the parameters for the stored procedure here
+	(@vehicleId int=-1)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   SELECT vd.[Id]
+      ,[RegNo]
+      ,[UserId]
+      ,[RoleId]
+      ,[FromDate]
+      ,[ToDate]
+      
+     ,vd.[Active]
+     FROM [POSDashboard].[dbo].[FleetStaff]fs    
+    inner join VehicleDetails vd on vd.Id=fs.Id   
+	 where  (vd.Id= @vehicleId or @vehicleId = -1)
+
+
+
+END
+   
+    
+   
+    

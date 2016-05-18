@@ -363,7 +363,21 @@
 
 
                                                 <div class="table-container">
+
                                                     <div class="row mbm">
+                                                        <div class="col-md-5">
+                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                     </div>
+                                                        <div class="col-md-5">
+                                                            Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+
 
 
                                                         <div class="actions">
@@ -377,12 +391,13 @@
                                                         <thead>
                                                             <tr>
 
-                                                                <th width="22%">Vehicle RegN.o</th>
+                                                                <th width="22%">Vehicle Reg No</th>
                                                                 <th>Fleet Route</th>
                                                                 <th>Effective From</th>
                                                                 <th>Effective Till</th>
-                                                                <th>Update</th>
                                                                 <th>Delete</th>
+                                                                <th>Edit</th>
+                                                                
 
                                                             </tr>
                                                         </thead>
@@ -395,20 +410,17 @@
                                                                 <td>{{R.EffectiveTill}}</td>
                                                                 <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
 
-                                                                <td>
-
-                                                                    <button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
-                                                                        <i class="fa fa-times" t"></i>&nbsp;
-                                                                        Delete
-                                                                    </button>
-                                                                </td>                                                                
-                                                                <td>
+                                                               
+                                                                                                                      
+                                                               <td>
 
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
+                                                                    Edit
                                                                     </button>
                                                                 </td>
+                                                              
+                                                                
                                                                
                                                             </tr>
 
