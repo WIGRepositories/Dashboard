@@ -5581,23 +5581,55 @@ end
 
 Go
 
-Create PROCEDURE VehicleConfiguration
+Create PROCEDURE [dbo].[VehicleConfiguration]	
+	@needRoutes int =0,
+	@needRoles int =0,		
+	@needvehicleRegno int = 0,
+	@needvehicleType int = 0,    
+    @needServiceType int = 0,
+    @needfleetowners int =0,
+    @needCompanyName int = 0,
+    @needVehicleLayout int = 0    
+    	
 AS
 BEGIN
+
+	
+	if @needRoutes  = 1
+	select route,ID,Code from routes	
+	
+	if @needRoles  = 1 
+	select name,ID from Roles
+	
+	if @needvehicleRegno  = 1
+    select VehicleRegNo,Id from FleetDetails
+    
 	--vehicle type data
+	if @needvehicleType = 1
 	select Name, Id from Types where TypeGroupId = 2
+	
 	--service type data
+	if @needServiceType = 1
 	select Name, Id from Types where TypeGroupId = 3
+	
 	--fleet owners
+	if @needfleetowners = 1
 	select u.FirstName + ' '+u.lastname as Name, u.Id from FleetOwner f
 	inner join Users u on u.Id = f.UserId
+	
 	--companys
+	if @needCompanyName = 1
 	select Name,Id from Company
+	
 	--vehicle layout type
+	if @needVehicleLayout = 1
 	select Name, Id from Types where TypeGroupId = 4
 	
 	
 END
+
+
+--[VehicleConfiguration] 0,0,1,0,0,0,0,1
 GO
 
 /****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/
