@@ -5276,7 +5276,15 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
            ,@DestinationId
           )
 
-
+          INSERT INTO [POSDashboard].[dbo].[RouteStops]
+           ([RouteId]
+           ,[FromStopId]
+           ,[ToStopId])
+     VALUES
+           (@routeid
+           ,@SourceId
+           ,@DestinationId)
+     
 end
 end
 
