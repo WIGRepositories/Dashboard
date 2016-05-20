@@ -1296,5 +1296,7 @@ namespace BTPOSDashboardAPI.Models
     public int? needVehicleLayout { get; set; }
     public int? needFleetRoute { get; set; } 
 
+
+
     }
 }

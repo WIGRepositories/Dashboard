@@ -14,12 +14,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetVehicleConfig = function () {
 
-        var VehicleConfig = {
-            needfleetowners:1,
-            needvehicleType: 1,
-            needServiceType:1,
-            needvehiclelayout:1,
-            needCompanyName: 1
+        var vc = {
+            needfleetowners:'1',
+            needvehicleType: '1',
+            needServiceType: '1',
+            needvehiclelayout: '1',
+            needCompanyName: '1'
         };
 
         var req = {
@@ -28,7 +28,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             //headers: {
             //    'Content-Type': undefined
 
-            data: VehicleConfig
+            data: vc
 
 
         }
