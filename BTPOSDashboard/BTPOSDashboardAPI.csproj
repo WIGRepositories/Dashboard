@@ -128,6 +128,7 @@
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="DBScripts\Init.sql" />
+    <Content Include="DBScripts\RolesInit.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetAlerts.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetAuditDetails.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetBlockList.sql" />
