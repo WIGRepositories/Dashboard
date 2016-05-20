@@ -17,9 +17,9 @@ namespace BTPOSDashboard.Controllers
 
         [HttpGet]
         [Route("api/FleetRoutes/getFleetRoutesList")]
-        public DataTable List()
+        public DataTable List(int routeid)
         {
-            DataTable Tbl = new DataTable();
+            DataTable Tb1 = new DataTable();
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -30,11 +30,18 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetfleetRoutes";
             cmd.Connection = conn;
+
+            SqlParameter gsa = new SqlParameter();
+            gsa.ParameterName = "@routeid";
+            gsa.SqlDbType = SqlDbType.Int;
+            gsa.Value = routeid;
+            cmd.Parameters.Add(gsa);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 
-            db.Fill(ds);
-             return ds.Tables[0];
+            db.Fill(Tb1);
+            return Tb1;
 
         }
         [HttpPost]
@@ -83,23 +90,25 @@ namespace BTPOSDashboard.Controllers
                 gid.SqlDbType = SqlDbType.DateTime;
                 gid.Value = f.EffectiveTill;
                 cmd.Parameters.Add(gid);
-            
+
                 SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
                 nActive.Value = f.Active;
                 cmd.Parameters.Add(nActive);
                 cmd.ExecuteScalar();
                 conn.Close();
-                DataSet ds = new DataSet();
+             
+               // DataSet ds = new DataSet();
                 //SqlDataAdapter db = new SqlDataAdapter(cmd);
                 //db.Fill(ds);
                 //Tbl = ds.Tables[0];
+
             }
             catch (Exception ex)
             {
                 string str = ex.Message;
             }
             // int found = 0;
-            return Tbl;
+           return Tbl;
 
         }
         [HttpGet]

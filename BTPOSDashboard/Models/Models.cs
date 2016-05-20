@@ -1277,10 +1277,21 @@ namespace BTPOSDashboardAPI.Models
     }
 
     public class FleetStaff
-    { 
+    {
 
 
- 
+
+        public object Id { get; set; }
+
+        public object StaffRole { get; set; }
+
+        public object UserId { get; set; }
+
+        public object FromDate { get; set; }
+
+        public object ToDate { get; set; }
+
+        public object Active { get; set; }
     }
 
     public class VehicleConfig { 
@@ -1294,7 +1305,9 @@ namespace BTPOSDashboardAPI.Models
     public int? needServiceType { get; set; }
     public int? needCompanyName { get; set; }
     public int? needVehicleLayout { get; set; }
-    public int? needFleetRoute { get; set; } 
+    public int? needFleetRoute { get; set; }
+    public int? needRouteName { get; set; }
+
 
 
 

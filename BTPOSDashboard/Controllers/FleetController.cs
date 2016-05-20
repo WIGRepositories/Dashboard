@@ -74,33 +74,27 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(gsab);
 
                 SqlParameter gsab1 = new SqlParameter();
-                gsab1.ParameterName = "@VehicleLayout";
-                gsab1.SqlDbType = SqlDbType.VarChar;
-                gsab1.Value = n.VehicleLayout;
+                gsab1.ParameterName = "@VehicleLayoutId";
+                gsab1.SqlDbType = SqlDbType.Int;
+                gsab1.Value = n.VehicleLayoutId;
                 cmd.Parameters.Add(gsab1);
 
                 SqlParameter gsac = new SqlParameter("@FleetOwnerId", SqlDbType.VarChar);
                 gsac.Value = n.FleetOwnerId;
+                gsac.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(gsac);
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@CompanyId";
-                gid.SqlDbType = SqlDbType.VarChar;
+                gid.SqlDbType = SqlDbType.Int;
                 gid.Value = n.CompanyId;
                 cmd.Parameters.Add(gid);
 
                 SqlParameter nser = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
+                nser.SqlDbType = SqlDbType.Int;
                 nser.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                cmd.Parameters.Add(nser);               
                
-                SqlParameter nser1 = new SqlParameter("@FleetRoute", SqlDbType.VarChar);
-                nser1.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser1);
-
-                SqlParameter nser2= new SqlParameter("@StaffRole", SqlDbType.VarChar);
-                nser2.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser2);
-
                 SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
                 nActive.Value = n.Active;
                 cmd.Parameters.Add(nActive);

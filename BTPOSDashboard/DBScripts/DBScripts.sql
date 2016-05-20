@@ -1529,10 +1529,7 @@ GO
 SET ANSI_PADDING ON
 GO
 
-USE [POSDashboard]
-GO
-
-/****** Object:  Table [dbo].[FleetDetails]    Script Date: 05/18/2016 15:42:25 ******/
+/****** Object:  Table [dbo].[FleetDetails]    Script Date: 05/20/2016 12:07:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -1544,16 +1541,21 @@ GO
 
 CREATE TABLE [dbo].[FleetDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[VehicleRegNo] [varchar](10) NOT NULL,
+	[VehicleRegNo] [varchar](15) NOT NULL,
 	[VehicleTypeId] [int] NOT NULL,
-	[FleetOwnerId] [varchar](50) NOT NULL,
-	[CompanyId] [varchar](50) NOT NULL,
-	[ServiceTypeId] [varchar](50) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[CompanyId] [int] NOT NULL,
+	[ServiceTypeId] [int] NOT NULL,
 	[Active] [int] NOT NULL,
 	[LayoutTypeId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
+
+SET ANSI_PADDING OFF
+GO
+
+
 
 SET ANSI_PADDING OFF
 GO
@@ -4606,31 +4608,56 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[insupdelFleetRoutes]
-(@VehicleId int,@RouteId int,@EffectiveFrom datetime,@EffectiveTill datetime)
-	-- Add the parameters for the stored procedure here	
+CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
+ (@Id int,
+ @VehicleRegNo varchar(15)
+           ,@VehicleTypeId int
+           ,@FleetOwnerId int
+           ,@CompanyId int
+           ,@ServiceTypeId int
+           ,@VehicleLayoutId int
+           ,@Active int
+           )
+	-- Add the parameters for the stored procedure here
+	
 AS
 BEGIN
-INSERT INTO [POSDashboard].[dbo].[FleetRoutes]
-           ([VehicleId]
-           ,[RouteId]
-           ,[EffectiveFrom]
-           ,[EffectiveTill])
+
+update [POSDashboard].[dbo].[FleetDetails]
+set
+[VehicleRegNo] = @VehicleRegNo 
+,[VehicleTypeId] = @VehicleTypeId 
+,[FleetOwnerId] = @FleetOwnerId 
+,[CompanyId] = @CompanyId 
+,[ServiceTypeId] = @ServiceTypeId
+,[LayoutTypeId] = @VehicleLayoutId
+,[Active] = @Active
+where Id = @Id
+
+if @@ROWCOUNT = 0
+begin
+	INSERT INTO [POSDashboard].[dbo].[FleetDetails]
+           ([VehicleRegNo]
+           ,[VehicleTypeId]
+           ,[FleetOwnerId]
+           ,[CompanyId]
+           ,[ServiceTypeId]
+           ,[LayoutTypeId]
+           ,[Active])
      VALUES
-           (@VehicleId
-           ,@RouteId
-           ,@EffectiveFrom
-           ,@EffectiveTill)
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
+           (@VehicleRegNo 
+           ,@VehicleTypeId 
+           ,@FleetOwnerId 
+           ,@CompanyId 
+           ,@ServiceTypeId 
+           ,@VehicleLayoutId
+           ,@Active )
+
+end
 
 
-
-
-
-    -- Insert statements for procedure here
 END
+
 
 
 GO
@@ -5629,7 +5656,7 @@ BEGIN
 END
 
 
---[VehicleConfiguration] 0,0,1,0,0,0,0,1
+--[VehicleConfiguration] 0,1,0,0,0,1,0,0
 GO
 
 /****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/

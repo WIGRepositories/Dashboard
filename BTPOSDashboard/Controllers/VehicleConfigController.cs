@@ -16,9 +16,9 @@ namespace BTPOSDashboardAPI.Controllers
     
         [HttpPost]
 
-        public DataTable VConfig(VehicleConfig vc)
+        public DataSet VConfig(VehicleConfig vc)
         {
-            DataTable Tbl = new DataTable();
+            //DataTable Tbl = new DataTable();
 
 
             //connect to database
@@ -83,10 +83,10 @@ namespace BTPOSDashboardAPI.Controllers
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
-            Tbl = ds.Tables[0];
+           // Tbl = ds.Tables[0];
 
             // int found = 0;
-            return Tbl;		
+            return ds;		
 
         }
 

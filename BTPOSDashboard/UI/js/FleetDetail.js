@@ -1,16 +1,13 @@
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
+    $scope.GetFleetDetails= function () {
 
-    //$scope.GetFleetConfiguration = function () {
-
-
-    //    $http.get('http://localhost:1476/api/Fleet/VehicleConfiguration').then(function (res, data) {
-    //        $scope.initdata = res.data;
-    //    });
-
-        
-    //}
+        $http.get('http://localhost:1476/api/Fleet/GetFleetDetails').then(function (res, data) {
+            $scope.FleetDetails = res.data.Table;
+        });
+    }
+   
 
     $scope.GetVehicleConfig = function () {
 
@@ -44,15 +41,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.Fleet = res.data.Table;
         });
     }
-   /* $http.get('http://localhost:1476/api/Users/GetUsers?vehicleId=-1').then(function (res, data) {
-        $scope.Companies = res.data;
-    });
-
-    $http.get('http://localhost:1476/api/Fleet/GetFleetConfiguration').then(function (res, data) {
-        $scope.Fleet = res.data;
-
-    });
-    */
+   
     $scope.save = function (Fleet) {
         if (Fleet == null) {
             alert('Please enter VehicleRegNo.');
@@ -119,7 +108,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Id: -1,
             VehicleRegNo: newVD.VehicleRegNo,
             VehicleTypeId: newVD.vt.Id,
-            VehicleLayout: newVD.VehicleLayout,
+            VehicleLayoutId: newVD.vl.Id,
             FleetOwnerId: newVD.fo.Id,
             CompanyId: newVD.c.Id,
             ServiceTypeId: newVD.st.Id,
@@ -139,8 +128,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res) {
             alert('Sucessfully saved!');
         });
-
-
     }
 });
    

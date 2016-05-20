@@ -5,16 +5,27 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetVehicleConfig = function () {
 
+        var vc = {
+            needvehicleRegno: '1',
+            needRoutes: '1'
+        };
 
-        $http.get('http://localhost:1476/api/FleetRoutes/GetVehicleConfig(VehicleConfig vc)').then(function (res, data) {
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
             $scope.initdata = res.data;
         });
 
-
     }
+
     $scope.GetFleetRoutes = function () {      
 
-        $http.get('http://localhost:1476/api/FleetRoutes/getFleetRoutesList').then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetRoutes/getFleetRoutesList?routeid=-1').then(function (res, data) {
             $scope.FleetRoute = res.data;
 
         });
@@ -27,23 +38,24 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
 
     }
+
     $scope.save = function (FleetRoute) {
-        if(FleetRoute == null || FleetRoute.VehicleId == null){
+        if(FleetRoute == null || FleetRoutes.VehicleId == null){
             alert('Please select a type VehicleId');
             return;
         }
-        if(FleetRoute == null || FleetRoute.RouteId == null){
+        if(FleetRoute == null || FleetRoutes.RouteId == null){
             alert('Please select a type  RouteId ');
             return;
         }
      
         var FleetRoute = {
-            Id: FleetRoute.Id,
-            VehicleId: FleetRoute.VehicleId,
-            RouteId: FleetRoute.RouteId,
-            EffectiveFrom: FleetRoute.EffectiveFrom,
-            EffectiveTill: FleetRoute.EffectiveTill,
-            Active: FleetRoute.Active,
+            Id: FleetRoutes.Id,
+            VehicleId: FleetRoutes.VehicleId,
+            RouteId: FleetRoutes.RouteId,
+            EffectiveFrom: FleetRoutes.EffectiveFrom,
+            EffectiveTill: FleetRoutes.EffectiveTill,
+            Active: FleetRoutes.Active,
 
         };
 
@@ -79,20 +91,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
          }
          */
 
-
-
-
         var FleetRouters = {
             Id:-1 ,
-            VehicleId: newFR.VehicleId,
-            VehicleRegNo:newFR.VehicleRegNo,
-
-            RouteId: newFR.RouteId,
+            VehicleId: newFR.v.Id,          
+            RouteId: newFR.r.ID,
             EffectiveFrom: newFR.EffectiveFrom,
             EffectiveTill: newFR.EffectiveTill,
             Active: 1,
-
-
         };
 
         var req = {

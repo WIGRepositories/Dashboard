@@ -21,7 +21,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="newrole">
+<body ng-init="GetVehicleConfig();" ng-model="initdata">
     <div>
 
         <!--BEGIN THEME SETTINGS-->
@@ -206,18 +206,19 @@
                                                                         <label for="selCompany" class="col-md-3 control-label" style="color:red;">Staff Role:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="g.StaffRole for g in FleetStaff track by g.Id"ng-model="g">
-                                                                                <option value="">Select</option>
-                                                                            </select>
+                                                                            <div class="col-md-6">
+                                                                                <select ng-options="s.StaffRole for s in initdata.Table track by s.Id" class="form-control" ng-model="initdata.newfleet.s">
+                                                                                 
+                                                                                    <option value="">Select</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label" style="color:red;">User Id:<span class='require'>*</span></label>
 
-                                                                        <div class="col-md-6">
-                                                                            <select ng-options="s.UserID for s in FleetStaff track by s.Id" ng-model="s">
-                                                                                <option value="">Select</option>
-                                                                            </select>
+                                                                        <div class="col-md-6"><select ng-options="u.UserId for u in initdata.Table1 track by u.Id" class="form-control" ng-model="initdata.newfleet.u">
+                                                                              <option value="">Select</option>
+                                                                                    </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -234,17 +235,17 @@
 
                                                                     </div>
 
-                                                                <div class="form-actions">
-                                                                    <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn btn-primary">Save</button>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="submit" class="btn btn-primary">Save</button>
 
-                                                                        <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                                                            <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="text-filter-box">
-                                                                    <div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input data-path=".title" type="text" value="" placeholder="Filter by Title" data-control-type="textbox" data-control-name="title-filter" data-control-action="filter" class="form-control" /></div>
-                                                                </div>
-                                                               
+                                                                    <div class="text-filter-box">
+                                                                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input data-path=".title" type="text" value="" placeholder="Filter by Title" data-control-type="textbox" data-control-name="title-filter" data-control-action="filter" class="form-control" /></div>
+                                                                    </div>
+
                                                             </form>
                                                         </div>
                                                     </div>
