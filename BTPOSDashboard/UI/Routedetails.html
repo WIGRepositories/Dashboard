@@ -308,7 +308,8 @@
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="#">BTPOS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                                <li><a href="#">Configuration</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                                <li><a href="Routes.html">Routes</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                                 <li class="active">Route Details</li>
                             </ol>
                             <div class="clearfix"></div>
@@ -401,23 +402,16 @@
                                                 </td>
                                                 <td>
                                                     <div>
-                                                        Route Code: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                            <option value="">Select</option>
-                                                        </select>
+                                                        Route Code: <input type="text" disabled ng-model="RouteDetails.Table[0].routecode"/></div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        Source: <input type="text" disabled ng-model="RouteDetails.Table[0].source" />
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div>
-                                                        Source: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div>
-                                                        Destination: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                            <option value="">Select</option>
-                                                        </select>
+                                                        Destination: <input type="text" disabled ng-model="RouteDetails.Table[0].dest" />
                                                     </div>
                                                 </td>
                                             </tr>
@@ -425,13 +419,13 @@
 
                                     </div>
                                 </div>
-                                <div class="portlet-body" ng-model="RouteDetails">
+                                <div class="portlet-body" ng-model="RouteDetails.Table1">
                                     <form role="form" class="form-horizontal">
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="col-md-12" style="display:table-cell;">
                                                     <ul class="nav nav-pills nav-stacked fade in">
-                                                        <li class="btn-default" ng-repeat="stop in RouteDetails">
+                                                        <li class="btn-default" ng-repeat="stop in RouteDetails.Table1">
                                                             <a ng-click="SetCurrStop(stop,$index);" data-toggle="tab">
                                                                 <i class="fa fa-cogs"></i>&nbsp;
                                                                 {{stop.StopName}}
@@ -440,7 +434,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="col-md-8">
+                                            <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0">
                                                 <div class="panel panel-violet">
                                                     <div class="panel-heading">Stop Details</div>
 
@@ -458,18 +452,18 @@
 
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Stop Code:</label>
-                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopCode" /></div>
                                                                     </div>
 
 
 
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Next stop:</label>
-                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.prevstop" /></div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Previous stop:</label>
-                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.nextstop" /></div>
                                                                     </div>
 
                                                                 </div>
@@ -482,20 +476,20 @@
 
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Distance from previous stop:</label>
-                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromPreviousStop" /></div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Distance from next stop:</label>
-                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromNextStop" /></div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Distance from destination:</label>
-                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromDestination" /></div>
                                                                     </div>
 
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Distance from source:</label>
-                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
+                                                                        <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromSource" /></div>
                                                                     </div>
 
                                                                 </div>
@@ -518,7 +512,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
                                                 <div class="col-md-12" style="text-align:center">
                                                     <button type="submit" class="btn btn-success">
                                                         <i class="fa fa-save"></i>&nbsp;

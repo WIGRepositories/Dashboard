@@ -3,10 +3,10 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
 
-    $scope.GetFleetConfiguration = function () {
+    $scope.GetVehicleConfig = function () {
 
 
-        $http.get('http://localhost:1476/api/FleetRoutes/VehicleConfiguration').then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetRoutes/GetVehicleConfig(VehicleConfig vc)').then(function (res, data) {
             $scope.initdata = res.data;
         });
 
@@ -23,7 +23,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetFleetRouteInit = function () {
 
         $http.get('http://localhost:1476/api/FleetRoutes/GetFleetList').then(function (res, data) {
-            $scope.FleetRouteinit = res
+            $scope.FleetRouteinit = res.data.Table;
         });
 
     }
@@ -53,7 +53,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             //headers: {
             //    'Content-Type': undefined
 
-            data: FleetRoutes
+            data: FleetRoute
 
 
         }
@@ -63,7 +63,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
     $scope.saveNewFleetRoutes = function (initdata) {
-        var newFR = initdata.NewFleetRoutes;
+        var newFR = initdata.newfleet;
         /* if (newVD == null) {
              alert('Please enter VehicleRegNo.');
              return;
@@ -80,12 +80,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
          */
 
 
+
+
         var FleetRouters = {
             Id:-1 ,
-            VehicleId: newFR .VehicleId,
-            RouteId: newFR .RouteId,
-            EffectiveFrom: newFR .EffectiveFrom,
-            EffectiveTill: newFR .EffectiveTill,
+            VehicleId: newFR.VehicleId,
+            VehicleRegNo:newFR.VehicleRegNo,
+
+            RouteId: newFR.RouteId,
+            EffectiveFrom: newFR.EffectiveFrom,
+            EffectiveTill: newFR.EffectiveTill,
             Active: 1,
 
 

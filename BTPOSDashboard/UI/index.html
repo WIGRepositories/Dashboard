@@ -263,41 +263,11 @@
                                 </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <script src="vendors/tableExport/tableExport.js"></script>
-                                <script src="vendors/tableExport/jquery.base64.js"></script>
-                                <script src="vendors/tableExport/html2canvas.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
-                                <script src="vendors/tableExport/jspdf/jspdf.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
-
-                                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <script src="vendors/tableExport/tableExport.js"></script>
-                                <script src="vendors/tableExport/jquery.base64.js"></script>
-                                <script src="vendors/tableExport/html2canvas.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
-                                <script src="vendors/tableExport/jspdf/jspdf.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
-
-                                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <script src="vendors/tableExport/tableExport.js"></script>
-                                <script src="vendors/tableExport/jquery.base64.js"></script>
-                                <script src="vendors/tableExport/html2canvas.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
-                                <script src="vendors/tableExport/jspdf/jspdf.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
-
-                                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <script src="vendors/tableExport/tableExport.js"></script>
-                                <script src="vendors/tableExport/jquery.base64.js"></script>
-                                <script src="vendors/tableExport/html2canvas.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
-                                <script src="vendors/tableExport/jspdf/jspdf.js"></script>
-                                <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
-
+                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>                             
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>                               
+                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>                                
+                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                               
                                 </ul>
                             </li>
 
@@ -461,41 +431,41 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-violet">
-                <div class="panel-heading">
-                    BTPOS Tracking
-                    <div style="float:right;">
-                        <a id="btposstatus" style="color:white" ng-click="toggle()">Show</a>
-                    </div>
-                </div>
-            </div>
-            <div ng-show="myVar">
-                <div><h3> BTPOS tracking</h3></div>
-                <div class="tab-content">
-                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-
-                                                            <div style='overflow: hidden; height: 400px; width: 100%;'>
-                                                                <div id='gmap_canvas' style='height: 400px; width:100% ;'></div>
-                                                                <style>
-                                                                    #gmap_canvas img {
-                                                                        max-width: none !important;
-                                                                        background: none !important;
-                                                                    }
-                                                                </style>
+                                                <div class="row" ng-hide="dashboardDS.Table.length == 0">
+                                                    <div class="col-lg-12">
+                                                        <div class="panel panel-violet">
+                                                            <div class="panel-heading">
+                                                                BTPOS Tracking
+                                                                <div style="float:right;">
+                                                                    <a id="btposstatus" style="color:white" ng-click="toggle()">Show</a>
+                                                                </div>
                                                             </div>
-                                                            <a href='https://www.add-map.net/'>BT POS tracking</a>
-                                                            <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                                                            <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
                                                         </div>
+                                                        <div ng-show="myVar">
+                                                            <div><h3> BTPOS tracking</h3></div>
+                                                            <div class="tab-content">
+                                                                <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
 
+                                                                <div style='overflow: hidden; height: 400px; width: 100%;'>
+                                                                    <div id='gmap_canvas' style='height: 400px; width:100% ;'></div>
+                                                                    <style>
+                                                                        #gmap_canvas img {
+                                                                            max-width: none !important;
+                                                                            background: none !important;
+                                                                        }
+                                                                    </style>
+                                                                </div>
+                                                                <a href='https://www.add-map.net/'>BT POS tracking</a>
+                                                                <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
+                                                                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+                                                            </div>
+
+
+                                                        </div>
 
                                                     </div>
 
                                                 </div>
-
-                                            </div>
 
 
                                         </div>

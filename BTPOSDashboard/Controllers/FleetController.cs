@@ -92,6 +92,14 @@ namespace BTPOSDashboard.Controllers
                 SqlParameter nser = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
                 nser.Value = n.ServiceTypeId;
                 cmd.Parameters.Add(nser);
+               
+                SqlParameter nser1 = new SqlParameter("@FleetRoute", SqlDbType.VarChar);
+                nser1.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser1);
+
+                SqlParameter nser2= new SqlParameter("@StaffRole", SqlDbType.VarChar);
+                nser2.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser2);
 
                 SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
                 nActive.Value = n.Active;

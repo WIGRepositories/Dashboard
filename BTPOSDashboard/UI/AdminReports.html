@@ -308,13 +308,13 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Company Reports</div>
+                            <div class="page-title">Admin Reports</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                           <!-- <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>-->
+                            <!-- <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>-->
                             <li><a href="#">Reports</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Company Reports</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Admin Reports</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -372,272 +372,270 @@
                             <div id="wrapper">
                             </div>
                             <div class="page-content">
-                                <div class="row">                                   
-                                        <div class="portlet box">
-                                            <div class="portlet-header pam mbn"><div class="caption">Table Export</div></div><div class="portlet-body">
-                                                <div class="btn-group mtm mbm">
-                                                    <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
-                                                        <i class="fa fa-wrench"></i>&nbsp;
-                                                        Export
+                                <div class="row">
+                                    <div class="portlet box">
+                                        <div class="portlet-header pam mbn"><div class="caption">Table Export</div></div><div class="portlet-body">
+                                            <div class="btn-group mtm mbm">
+                                                <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
+                                                    <i class="fa fa-wrench"></i>&nbsp;
+                                                    Export
 
-                                                    </a><ul class="dropdown-menu">
-                                                       
-                                                        <li>
-                                                            <a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});">
-                                                                <img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel
-                                                            </a>
-                                                            <a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});">
-                                                                <img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf
-                                                            </a>
-                                                            <a href="#" onclick="$('#example-export').tableExport({type:'csv'});">
-                                                                <img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv
-                                                            </a>
-                                                            <a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});">
-                                                                <img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml
-                                                            </a>
-
-
-                                                    </ul>
-                                                    <!--</a><ul class="dropdown-menu"><li><a href="#" onclick="$('#example-export').tableExport({type:'json',escape:'false'});"><img src="vendors/tableExport/icon/json.png" width="24px" class="mrx" />Export to Json</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});"><img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'sql'});"><img src="vendors/tableExport/icon/sql.png" width="24px" class="mrx" />Export to Sql</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'csv'});"><img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'txt',escape:'false'});"><img src="vendors/tableExport/icon/txt.png" width="24px" class="mrx" />Export to TXT</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});"><img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'doc',escape:'false'});"><img src="vendors/tableExport/icon/word.png" width="24px" class="mrx" />Export to word </a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'powerpoint',escape:'false'});"><img src="vendors/tableExport/icon/ppt.png" width="24px" class="mrx" />Export to powerpoint</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});"><img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf</a></li></ul>-->
-                                                </div><table id="example-export" class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
-                                                    <thead><tr><th width="9%">Record #</th><th width="10%">Username</th><th width="10%">Country</th><th width="10%">Gender</th><th width="7%">Order</th><th width="12%">Date</th><th width="10%">Price</th><th width="9%">Status</th><th width="12%">Actions</th></tr></thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Henry</td>
-                                                            <td>United States</td>
-                                                            <td>Male</td>
-                                                            <td>32</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-success">Approved</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>John</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>45</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-info">Pending</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Larry</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>40</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Lahm</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>15</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>Henry</td>
-                                                            <td>United States</td>
-                                                            <td>Male</td>
-                                                            <td>32</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-success">Approved</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>John</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>45</td>
-                                                             <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-info">Pending</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Larry</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>40</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Lahm</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>15</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Larry</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>40</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-warning">Suspended</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Lahm</td>
-                                                            <td>United States</td>
-                                                            <td>Female</td>
-                                                            <td>15</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-danger">Blocked</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>Henry</td>
-                                                            <td>United States</td>
-                                                            <td>Male</td>
-                                                            <td>32</td>
-                                                            <td>20-05-2014</td>
-                                                            <td>$240.50</td>
-                                                            <td><span class="label label-sm label-success">Approved</span></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-default btn-xs">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-    
-                                        </div>
+                                                </a><ul class="dropdown-menu">                                                   
+                                                    <li>
+                                                        <a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});">
+                                                            <img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel
+                                                        </a>
+                                                        <a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});">
+                                                            <img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf
+                                                        </a>
+                                                        <a href="#" onclick="$('#example-export').tableExport({type:'csv'});">
+                                                            <img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv
+                                                        </a>
+                                                        <a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});">
+                                                            <img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml
+                                                        </a>
+                                                   </li> 
+                                                </ul>                                              
+                                            </div>
+                                               <table id="example-export" class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
+                                                <thead><tr><th width="9%">Record #</th><th width="10%">Username</th><th width="10%">Country</th><th width="10%">Gender</th><th width="7%">Order</th><th width="12%">Date</th><th width="10%">Price</th><th width="9%">Status</th><th width="12%">Actions</th></tr></thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Henry</td>
+                                                        <td>United States</td>
+                                                        <td>Male</td>
+                                                        <td>32</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-success">Approved</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>John</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>45</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-info">Pending</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Larry</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>40</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-warning">Suspended</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Lahm</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>15</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-danger">Blocked</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>Henry</td>
+                                                        <td>United States</td>
+                                                        <td>Male</td>
+                                                        <td>32</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-success">Approved</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>John</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>45</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-info">Pending</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Larry</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>40</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-warning">Suspended</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Lahm</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>15</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-danger">Blocked</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Larry</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>40</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-warning">Suspended</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Lahm</td>
+                                                        <td>United States</td>
+                                                        <td>Female</td>
+                                                        <td>15</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-danger">Blocked</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>Henry</td>
+                                                        <td>United States</td>
+                                                        <td>Male</td>
+                                                        <td>32</td>
+                                                        <td>20-05-2014</td>
+                                                        <td>$240.50</td>
+                                                        <td><span class="label label-sm label-success">Approved</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                          </table>
                                     </div>
                                 </div>
-
-
-
-                                <!--END CONTENT-->
-                                <!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                </div>
-                                <!--END FOOTER-->
                             </div>
-                            <!--END PAGE WRAPPER-->
+
+
+
+                            <!--END CONTENT-->
+                            <!--BEGIN FOOTER-->
+                            <div id="footer">
+                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                            </div>
+                            <!--END FOOTER-->
                         </div>
+                        <!--END PAGE WRAPPER-->
                 </div>
-
             </div>
+
         </div>
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <!--loading bootstrap js-->
-        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-        <script src="vendors/iCheck/icheck.min.js"></script>
-        <script src="vendors/iCheck/custom.min.js"></script>
-        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-        <script src="js/jquery.menu.js"></script>
-        <script src="vendors/jquery-pace/pace.min.js"></script>
-        <script src="vendors/holder/holder.js"></script>
-        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-        <!--LOADING SCRIPTS FOR PAGE-->
-        <script src="js/table-action.js"></script>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
 
-        <!--CORE JAVASCRIPT-->
-        <script src="js/main.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
 
-        <script src="js/angular.js"></script>
-        <script src="vendors/tableExport/tableExport.js"></script>
-        <script src="vendors/tableExport/jquery.base64.js"></script>
-        <script src="vendors/tableExport/html2canvas.js"></script>
-        <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
-        <script src="vendors/tableExport/jspdf/jspdf.js"></script>
-        <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="vendors/tableExport/tableExport.js"></script>
+    <script src="vendors/tableExport/jquery.base64.js"></script>
+    <script src="vendors/tableExport/html2canvas.js"></script>
+    <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
+    <script src="vendors/tableExport/jspdf/jspdf.js"></script>
+    <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
 
-        <script src="js/ngStorage.js"></script>
+    <script src="js/ngStorage.js"></script>
 
-        <script src="js/source.js"></script>
+    <script src="js/source.js"></script>
 
-        <!--<script src="js/Alerts.js"></script>
+    <!--<script src="js/Alerts.js"></script>
 
-        <script src="js/Notifications.js"></script>-->
+    <script src="js/Notifications.js"></script>-->
 </body>
 
 </html>
