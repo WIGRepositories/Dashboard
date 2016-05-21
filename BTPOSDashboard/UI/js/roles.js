@@ -8,6 +8,12 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
     });
 
     $scope.getselectval = function (seltype) {
+        if (seltype == null)
+        {
+            $scope.roles = null;
+            return;
+        }
+
         var cmpId = (seltype) ? seltype.Id : -1;
 
         $http.get('http://localhost:1476/api/Roles/getroles?companyId=' + cmpId).then(function (res, data) {

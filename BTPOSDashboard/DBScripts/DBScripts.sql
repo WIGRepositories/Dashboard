@@ -1270,18 +1270,24 @@ CREATE TABLE [dbo].[RouteDetails](
 ) ON [PRIMARY]
 
 GO
+
+/****** Object:  Table [dbo].[Roles]    Script Date: 05/20/2016 21:36:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING OFF
+GO
 CREATE TABLE [dbo].[Roles](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
-	[Description] [nvarchar](50) NULL,
+	[Description] [varchar](500) NULL,
 	[Active] [int] NOT NULL,
-	[CompanyId] [int] NULL,
 	[IsPublic] [int] NULL CONSTRAINT [DF_Roles_IsPublic]  DEFAULT ((1))
 ) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
 
 GO
 SET ANSI_NULLS ON
@@ -4559,49 +4565,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
- (@Id int,
- @VehicleRegNo int
-           ,@VehicleTypeId varchar(10)
-           ,@FleetOwnerId varchar(50)
-           ,@CompanyId varchar(50)
-           ,@ServiceTypeId varchar(50)
-           ,@Active int)
-	-- Add the parameters for the stored procedure here
-	
-AS
-BEGIN
-	INSERT INTO [POSDashboard].[dbo].[FleetDetails]
-           ([VehicleRegNo]
-           ,[VehicleTypeId]
-           ,[FleetOwnerId]
-           ,[CompanyId]
-           ,[ServiceTypeId]
-           ,[Active])
-     VALUES
-           (@VehicleRegNo 
-           ,@VehicleTypeId 
-           ,@FleetOwnerId 
-           ,@CompanyId 
-           ,@ServiceTypeId 
-           ,@Active )
-
-
-
-
-END
-
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 
 -- =============================================
 -- Author:		<Author,,Name>
