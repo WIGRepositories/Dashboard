@@ -17,9 +17,9 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
-
+    <link rel="stylesheet" type="text/css" href="css/handsontable.full.min.css" />
 </head>
-<body ng-model="Types">
+<body ng-init="GetVehicleConfig();" ng-model="vlConfig">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -114,9 +114,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
                                             <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+                                            <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
                                     </li>
@@ -460,26 +460,52 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-3">
-                                                            Vehicle Layout: <select ng-options="s.Name for s in Types track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                <option value="">All</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            Rows: <input type="text" />
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            Columns: <input type="text" />
+                                                            Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
+    <option value="">Select</option>
+</select>
                                                         </div>
 
                                                         <div class="col-md-3">
-                                                           <input type="button" value="Display"/>
+                                                            Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
+    <option value="">Select</option>
+</select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            Rows: <input type="text" style="width:30px"ng-model="rows" />
+                                                       
+                                                            Columns: <input type="text" style="width:30px" ng-model="cols"/>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                           <button ng-click="displayLayout();">Show</button>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel-body">
+                                                    <div class="responsive-table">
+                                                        <div id="basic_example" style="height: 40px; overflow: hidden;" data-originalstyle="height: 40px; overflow: hidden;" class="handsontable htRowHeaders htColumnHeaders">
+                                                            <!--<div class="ht_master handsontable innerBorderTop" style="position: relative;">
+                                                                <div class="wtHolder" style="position: relative; width: 557px; height: 396px;">
+                                                                    <div class="wtHider" style="width: 690px; height: 2788px;">
+                                                                        <div class="wtSpreader" style="position: relative; top: 0px; left: 0px;">
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>-->
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
 
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+
+                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                                </div>
 
 
-                                                
 
                                             </div>
 
@@ -525,8 +551,11 @@
     <!--LOADING SCRIPTS FOR PAGE-->
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
+    <script src="js/mainTbl.js"></script>
+    <script src="js/handsontable.full.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>   
+   
+    <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
     <script src="js/VehicleLayout.js"></script>
 </body>

@@ -135,6 +135,38 @@ namespace BTPOSDashboard.Controllers
 
             return ds;
         }
+
+
+        [HttpGet]
+        public DataSet VehicleLayoutConfiguration(int vehicleLayoutTypeId)
+        {
+            DataSet ds = new DataSet();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetVehicleLayoutConfiguration";
+            cmd.Connection = conn;
+
+
+            SqlParameter gsa = new SqlParameter();
+            gsa.ParameterName = "@vlTypeId";
+            gsa.SqlDbType = SqlDbType.Int;
+            gsa.Value = vehicleLayoutTypeId;
+            cmd.Parameters.Add(gsa);
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+
+            db.Fill(ds);
+
+            return ds;
+        }
+        
+        
         public void Options()
         {
         }

@@ -2,7 +2,8 @@
 var app = angular.module('myApp', ['ngStorage'])
 
 var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
-       $scope.uname = $localStorage.uname;
+    $scope.uname = $localStorage.uname;
+
     $scope.GetCompanyRoles = function (){
         $http.get('http://localhost:1476/api/Roles/getroles?companyId=-1').then(function (res, data) {
             $scope.companies = res.data;

@@ -1848,17 +1848,29 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[GetRoles]
-(@companyId int = -1)
+(@companyId int = -1
+,@rolesFilter int = 0)
 as
 begin
+
+if @rolesFilter = 0
+
 select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
 from Roles, companyroles c  
 where (((c.roleid = roles.id) and (c.companyId = @companyId)) or @companyId = -1)
 
-end
+else
+ 
+select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
+from Roles, companyroles c  
+where (((c.roleid = roles.id) and (c.companyId = @companyId)) or @companyId = -1)
+and
+(( roles.ispublic = 0 and @rolesFilter =0)
+or (roles.ispublic = 1 and @rolesFilter <> 0)
+)
 
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
+end 
+
 go
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
@@ -5596,11 +5608,11 @@ BEGIN
     
 	--vehicle type data
 	if @needvehicleType = 1
-	select Name, Id from Types where TypeGroupId = 2
+	select Name, Id from Types where TypeGroupId = 4
 	
 	--service type data
 	if @needServiceType = 1
-	select Name, Id from Types where TypeGroupId = 3
+	select Name, Id from Types where TypeGroupId = 5
 	
 	--fleet owners
 	if @needfleetowners = 1
@@ -5613,13 +5625,15 @@ BEGIN
 	
 	--vehicle layout type
 	if @needVehicleLayout = 1
-	select Name, Id from Types where TypeGroupId = 4
+	select Name, Id from Types where TypeGroupId = 6
 	
 	
 END
 
 
 --[VehicleConfiguration] 0,1,0,0,0,1,0,0
+
+
 GO
 
 /****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/

@@ -113,9 +113,9 @@
                                         <li>
                                             <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                             <ul class="nav nav-third-level">
-                                                <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
                                                 <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
-                                                <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+                                                <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                             </ul>
                                         </li>
@@ -463,25 +463,28 @@
                                                         <div class="panel-heading">Assign Role</div>
                                                         <div class="panel-body pan">
                                                             <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                                <div class="form-body">
-                                                                    <div class="form-group">
-                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Role <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6">
-                                                                        <select ng-options="r.Name for r in newrole track by r.Id" ng-model="r" >
-                                                                                <option value="">Select</option>
-                                                                        </select></div>
-                                                                    </div>
+                                                                <div class="form-body">                                                                  
                                                                     
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s">
+                                                                            <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getselectval()">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Role <span class='require'>*</span></label>
+
+                                                                        <div class="col-md-6">
+                                                                            <select style="width:260px" ng-options="r.Name for r in newrole track by r.Id" ng-model="r">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
                                                                     <div class="form-group">
                                                                         <label for="Active" class="col-md-3 control-label" style="color:red;">Active:<span class='require'>*</span></label>
 

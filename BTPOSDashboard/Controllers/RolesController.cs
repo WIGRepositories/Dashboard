@@ -13,37 +13,37 @@ namespace BTPOSDashboardAPI.Controllers
     public class RolesController : ApiController
     {
 
+        //[HttpGet]
+        //public DataTable getcreaterole()
+        //{
+        //    DataTable Tbl = new DataTable();
+
+
+        //    //connect to database
+        //    SqlConnection conn = new SqlConnection();
+        //    //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+        //    conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.CommandText = "GetRoles";
+        //    cmd.Connection = conn;
+
+        //    DataSet ds = new DataSet();
+        //    SqlDataAdapter db = new SqlDataAdapter(cmd);
+        //    db.Fill(ds);
+        //    Tbl = ds.Tables[0];
+
+        //    // int found = 0;
+        //    return Tbl;
+        //}
+
+
+
+
+
         [HttpGet]
-        public DataTable getcreaterole()
-        {
-            DataTable Tbl = new DataTable();
-
-
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetRoles";
-            cmd.Connection = conn;
-
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
-
-            // int found = 0;
-            return Tbl;
-        }
-
-
-
-
-
-        [HttpGet]
-        public DataTable getroles(int companyId)
+        public DataTable getroles(int companyId, int rolesFilter)
         {
             DataTable Tbl = new DataTable();
 
@@ -62,6 +62,12 @@ namespace BTPOSDashboardAPI.Controllers
             cmpid.SqlDbType = SqlDbType.Int;
             cmpid.Value = companyId;
             cmd.Parameters.Add(cmpid);
+
+            SqlParameter rolesFlag = new SqlParameter();
+            rolesFlag.ParameterName = "@rolesFilter";
+            rolesFlag.SqlDbType = SqlDbType.Int;
+            rolesFlag.Value = rolesFilter;
+            cmd.Parameters.Add(rolesFlag);
 
             cmd.Connection = conn;
 

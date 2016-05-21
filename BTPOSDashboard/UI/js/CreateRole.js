@@ -1,14 +1,27 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
-    $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
-        $scope.Companies = response.data;
-        $scope.getselectval();
-    });
+
+    $scope.GetRoles = function () {
+        //get the roles as per the company that user has permission to 
+        $http.get('http://localhost:1476/api/Roles/getroles?companyId=-1').then(function (res, data) {
+            $scope.newrole = res.data;
+        });
+    }
 
     $scope.getselectval = function (seltype) {
-        var cmpId = (seltype) ? seltype.Id : -1;
-        $http.get('http://localhost:1476/api/Roles/getroles?companyId=' + cmpId).then(function (res, data) {
+
+        if (seltype == null) {
+            $scope.newrole = null;
+            return;
+        }
+
+
+        //var cmpId = (seltype) ? seltype.Id : -1;
+
+        //var filterFlag = (cmpId == 1) ? 0 : 1;
+
+        $http.get('http://localhost:1476/api/Roles/getroles?companyId=-1&rolesFilter='+filterFlag).then(function (res, data) {
             $scope.newrole = res.data;
 
         });

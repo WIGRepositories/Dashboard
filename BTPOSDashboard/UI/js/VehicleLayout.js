@@ -3,106 +3,52 @@ var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
 
-   
+    $scope.GetVehicleConfig = function () {
 
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
-            $scope.Types = res.data;
-
-        });
-
-        // $scope.selectedvalues = 'Name: ' + $scope.selitem.name + ' Id: ' + $scope.selitem.Id;
-
-
-
-    $scope.save = function (Types) {
-
-        if (Types == null) {
-            alert('Please enter name.');
-            return;
-        }
-
-        if (Types.Name == null) {
-            alert('Please enter name.');
-            return;
-        }
-        if (Types.TypeGroupId == null) {
-            alert('Please select a type group');
-            return;
-        }
-
-        var Types = {
-
-            Id: Types.Id,
-            Name: Types.Name,
-            Description: Types.Description,
-            Active: Types.Active,
-            TypeGroupId: Types.TypeGroupId,
-            ListKey: Types.ListKey,
-            Listvalue: Types.Listvalue
+        var vc = {
+            needvehicleType: '1',
+            needvehiclelayout: '1',
         };
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Types/SaveType',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
-            data: Types
+
+            data: vc
         }
-
         $http(req).then(function (res) {
-            alert('Saved successfully');
-
+            $scope.initdata = res.data;
         });
 
-        $scope.currGroup = null;
+    }
 
-    };
 
-    $scope.saveNewType = function (newType) {
-
-        if (newType == null) {
-            alert('Please enter name.');
+    $scope.getselectval = function (vlType) {
+        if (vlType == null) {
+            $scope.vlConfig = null;
             return;
-        }
+        }     
+    }
 
-        if (newType.Name == null) {
-            alert('Please enter name.');
-            return;
-        }
+    $scope.displayLayout = function () {
+        var container = document.getElementById('basic_example');
 
-        if (newType.group == null || newType.group.Id == null) {
-            alert('Please select a type group');
-            return;
-        }
-
-        var newTypeData = {
-
-            Id: '-1',
-            Name: newType.Name,
-            Description: newType.Description,
-            Active: 1,//newType.Active,
-            TypeGroupId: newType.group.Id,
-            ListKey: newType.ListKey,
-            Listvalue: newType.Listvalue
+        var data = function () {
+            return Handsontable.helper.createSpreadsheetData(eval($scope.rows), eval($scope.cols));
         };
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/Types/SaveType',
-            data: newTypeData
-        }
-
-        $http(req).then(function (res) {
-            alert('Saved successfully');
-            newType = null;
+        var hot = new Handsontable(container, {
+            data: data(),
+            height: 396,
+            colHeaders: false,
+            rowHeaders: false,
+            stretchH: 'all',
+            columnSorting: true,
+            contextMenu: true
         });
-    };
+    }
 
-    $scope.setCompany = function (grp) {
-        $scope.currGroup = grp;
-    };
 
-    $scope.clearGroup = function () {
-        $scope.currGroup = null;
-    };
 });

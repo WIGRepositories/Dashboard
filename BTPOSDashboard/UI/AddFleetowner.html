@@ -111,7 +111,7 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
                                             <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
@@ -439,7 +439,7 @@
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="Users.html">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="AddNewUser.html">Add New User</a></li>
+                            <li><a href="AddFleetowner.html">Add Fleet Owner</a></li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -457,7 +457,7 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="panel panel-violet">
-                                                    <div class="panel-heading">Add NewFleet Owner</div>
+                                                    <div class="panel-heading">Add Fleet Owner</div>
                                                     <div class="panel-body pan">
                                                         <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                                             <div class="form-body">
@@ -481,11 +481,11 @@
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="inputMiddleName" class="col-md-2 control-label">MobileNumber</label>
+                                                                    <label for="inputMiddleName" class="col-md-2 control-label">Mobile Number</label>
 
                                                                     <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="" class="form-control" ng-model="User.MobileNo" /><span class="help-block"></span></div>
 
-                                                                    <label for="" class="col-md-2 control-label">Employee NO <span class='require'>*</span></label>
+                                                                    <label for="" class="col-md-2 control-label">Fleet Owner Code <span class='require'>*</span></label>
 
                                                                     <div class="col-md-3"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
 
@@ -493,9 +493,9 @@
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="Address Id" class="col-md-2 control-label">Address<span class='require'>*</span></label>
+                                                                    <label for="Address Id" class="col-md-2 control-label">Address</label>
 
-                                                                    <div class="col-md-9"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
+                                                                    <div class="col-md-9"><textarea rows="3" class="form-control" ng-model="User.AdressId" /></textarea></div>
                                                                 </div>
                                                                 <div class="panel panel-violet">
                                                                     <div class="panel-heading">User Role</div><br />
@@ -609,8 +609,9 @@
     <script src="js/main.js"></script>
 
     <script src="js/angular.js"></script>
-    <script src="js/Users.js"></script>
     <script src="js/ngStorage.js"></script>
+    <script src="js/Users.js"></script>
+    
 
 </body>
 </html>

@@ -15,8 +15,9 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         }
 
         var cmpId = (seltype) ? seltype.Id : -1;
+        var filterFlag = (cmpId == 1) ? 0 : 1;
 
-        $http.get('http://localhost:1476/api/Roles/getroles?companyId=' + cmpId).then(function (res, data) {
+        $http.get('http://localhost:1476/api/Roles/getroles?companyId=' + cmpId + '&rolesFilter=' + filterFlag).then(function (res, data) {
             $scope.roles = res.data;
         });
 
