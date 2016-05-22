@@ -532,6 +532,7 @@ namespace BTPOSDashboardAPI.Models
         public string Company { get; set; }
         public int CompanyId { get; set; }
 
+        public int insdelflag { get; set; }
 
     }
     public class PaymentReceivings

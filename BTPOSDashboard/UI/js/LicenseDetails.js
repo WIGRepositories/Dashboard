@@ -13,7 +13,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
         if (selCat == null)
         {
-            alert('Please select a license category');
+            $scope.LicenseTypes = null;
+            return;
         }
 
         $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {

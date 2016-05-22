@@ -1848,26 +1848,28 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[GetRoles]
-(@companyId int = -1
-,@rolesFilter int = 0)
+(@allroles int = -1)
 as
 begin
 
-if @rolesFilter = 0
+if @allroles = -1
 
 select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
-from Roles, companyroles c  
-where (((c.roleid = roles.id) and (c.companyId = @companyId)) or @companyId = -1)
+from Roles
+
+else
+
+if @allroles = 0
+
+select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
+from Roles 
+where ispublic = 0
 
 else
  
 select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
-from Roles, companyroles c  
-where (((c.roleid = roles.id) and (c.companyId = @companyId)) or @companyId = -1)
-and
-(( roles.ispublic = 0 and @rolesFilter =0)
-or (roles.ispublic = 1 and @rolesFilter <> 0)
-)
+from Roles 
+where ispublic = 1
 
 end 
 
@@ -1879,18 +1881,13 @@ CREATE procedure [dbo].[InsUpdDelCompanyRoles](
 @active int,
 @Id int,
 @roleid int,
-@CompanyId int
+@CompanyId int,
+@insupdflag int = 0
 )
 as
 begin
 
-update CompanyRoles 
-set Active = @active
-,RoleId = @roleid
-,CompanyId = @CompanyId
-where Id = @Id
-
-if @@rowcount = 0 
+if @insupdflag = 0
 begin
 
 INSERT INTO [CompanyRoles]
@@ -1901,13 +1898,12 @@ INSERT INTO [CompanyRoles]
            (@CompanyId,@roleid,@active)
 end
 
-
+else
+begin
+ delete from [CompanyRoles] where [CompanyId] = @CompanyId and RoleId = @roleid
 end
 
-
-
-
-
+end
 
 GO
 SET ANSI_NULLS ON
@@ -4901,11 +4897,19 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE procedure [dbo].[getCompanyRoles]
+(@cmpId int)
 as
 begin
-select Id.[Id],Id.[RoleId],Id.[CompanyId] from [CompanyRoles] [Id]
-inner join Roles R on R.Id=Id.RoleId
-inner join Company c on C.Id=Id.CompanyId
+select cr.[Id]
+,cr.[RoleId]
+,cr.[CompanyId] 
+,c.Name company
+,r.name as rolename
+from [CompanyRoles] cr
+inner join Roles R on R.Id=cr.RoleId
+inner join Company c on c.Id=cr.CompanyId
+where cr.CompanyId = @cmpId
+
 end
 GO
 
@@ -5128,7 +5132,7 @@ end
 
    
    --insert company role for company and fleet owner role
-  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2 
+  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2,0 
                  
  if @insupdflag='I'and @fleetcnt>0
  begin

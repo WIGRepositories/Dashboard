@@ -5,8 +5,7 @@
     <title>Home | Configuration | Roles</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -15,10 +14,10 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetRoles();" ng-model="newrole">
+<body ng-init="GetRoles();" ng-model="roles">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -535,7 +534,7 @@
                                                         <thead>
                                                             <tr>
 
-                                                                <th>Name</th>
+                                                                <th>Role Name</th>
                                                                 <th>Description</th>
                                                                 <th>Active</th>
                                                                 <th>IsPublic</th>
@@ -544,7 +543,7 @@
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat=" role in newrole" class="gradeA">
+                                                            <tr ng-repeat="role in roles" class="gradeA">
                                                                 <td>{{role.Name}}</td>
                                                                 <td>{{role.Description}}</td>
 
@@ -610,7 +609,7 @@
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/CreateRole.js"></script>
+    <script src="js/roles.js"></script>
 
 </body>
 </html>

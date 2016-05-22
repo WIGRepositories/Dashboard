@@ -438,7 +438,6 @@
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\createfleet.js" />
-    <Content Include="UI\js\CreateRole.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />

@@ -14,10 +14,10 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="Companies();" ng-model="roles">
+<body ng-init="GetCompanies();" ng-model="roles">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -326,9 +326,9 @@
 
                                                 <div class="table-container">
                                                     <div class="col-md-5">
-                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                            <option value="">Select</option>
-                                                        </select>
+                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getRolesForCompany(s)">
+    <option value="">Select</option>
+</select>
                                                     </div>
                                                     <div class="actions">
                                                         <a href="AssignRole.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Assign Role</button></a>
@@ -395,17 +395,17 @@
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>                                                               
-                                                                <th>Name</th>
+                                                                <th>Role Name</th>
                                                                 <th>Description</th> 
                                                                 <th>Delete</th> 
                                                             </tr>
                                                         </thead>
                                                         <tbody>                                                           
-                                                            <tr ng-repeat=" role in roles">
-                                                                
-                                                                <td>{{role.Name}}</td>
-                                                                <td>{{role.Description}}</td> 
-                                                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+                                                            <tr ng-repeat=" role in cmproles">
+
+                                                                <td>{{role.rolename}}</td>
+                                                                <td>{{role.description}}</td>
+                                                                <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>
                                                             </tr>
 
                                                         </tbody>

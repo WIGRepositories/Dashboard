@@ -2,26 +2,13 @@
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
-    $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
-        $scope.Companies = response.data;
-        $scope.getselectval();
-    });
 
-    $scope.getselectval = function (seltype) {
-        if (seltype == null)
-        {
-            $scope.roles = null;
-            return;
-        }
-
-        var cmpId = (seltype) ? seltype.Id : -1;
-        var filterFlag = (cmpId == 1) ? 0 : 1;
-
-        $http.get('http://localhost:1476/api/Roles/getroles?companyId=' + cmpId + '&rolesFilter=' + filterFlag).then(function (res, data) {
-            $scope.roles = res.data;
+    $scope.GetRoles = function()
+    {
+        $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=-1').then(function (response, data) {
+            $scope.roles = response.data;            
         });
-
-    }
+    }    
 
     $scope.saveNewRole = function (selectedRole) {
 
@@ -29,15 +16,11 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             alert('Please enter role name.');
             return;
         }
-
         if (selectedRole.Name == null) {
             alert('Please enter role name.');
             return;
         }
-        if (selectedRole.company ==null || selectedRole.company.Id == null) {
-            alert('Please select a company');
-            return;
-        }
+
 
         var selRole = {
             Id: -1,
@@ -60,19 +43,27 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         $scope.currRole = null;
 
     };
+    
+    $scope.saveRole = function (currRole) {
+        if (currRole == null) {
+            alert('Please enter role name.');
+            return;
+        }
+        if (currRole.Name == null) {
+            alert('Please enter role name.');
+            return;
+        }
 
-    $scope.saveRoles = function (selectedRole) {
-       
+
         var selRole = {
 
-            Id:selectedRole.Id,
-            Name: selectedRole.Name,
-            Description: selectedRole.Description,
-            Active: selectedRole.Active,
-            IsPublic:selectedRole.IsPublic
-
+            Id: currRole.Id,
+            Name: currRole.Name,
+            Description: currRole.Description,
+            Active: (currRole.Active == true) ? "1" : "0",
+            IsPublic: (currRole.IsPublic == true) ? "1" : "0"
         };
-      
+
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/roles/saveroles',
@@ -80,9 +71,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         }
         $http(req).then(function (response) {
             alert('saved successfully.');
-       
-        });
 
+        });
         $scope.currRole = null;
 
     };
@@ -94,4 +84,102 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
     $scope.clearCurrRole = function () {
         $scope.currRole = null;
     };
+    
+    $scope.GetCompanies = function () {
+
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+            $scope.Companies = res.data;
+        });
+    }
+
+
+    $scope.getRolesForCompany = function (seltype) {
+        if (seltype == null) {
+            $scope.cmproles = null;
+            return;
+        }
+        var cmpId = (seltype) ? seltype.Id : -1;        
+
+        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+            $scope.cmproles = res.data;
+        });
+    }
+
+    $scope.GetRolesToAssign = function (seltype) {
+        if (seltype == null) {
+            $scope.roles = null;
+            return;
+        }
+        var cmpId = (seltype.Id == 1) ? 0:1;
+
+        $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=' + cmpId).then(function (response, data) {
+            $scope.roles = response.data;
+        });
+    }
+
+    $scope.AssignRole = function () {
+        if ($scope.r == null) {
+            alert('Please select role name.');
+            return;
+        }
+        if ($scope.r.Id == null) {
+            alert('Please select role name.');
+            return;
+        }
+
+        if ($scope.s == null) {
+            alert('Please select company.');
+            return;
+        }
+        if ($scope.s.Id == null) {
+            alert('Please select company.');
+            return;
+        }
+
+        var cmprole = {
+
+            RoleId: $scope.r.Id,
+            CompanyId: $scope.s.Id,
+            Active: 1,
+            insdelflag: 0
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/AssignDelRoles',
+            data: cmprole
+        }
+        $http(req).then(function (response) {
+            alert('saved successfully.');
+
+        });
+        $scope.currRole = null;
+
+    };
+
+    $scope.testdel = function (role)
+    {       
+        var cmprole = {
+
+            RoleId: role.RoleId,
+            CompanyId: role.CompanyId,
+            Active: 1,
+            insdelflag: 1
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/AssignDelRoles',
+            data: cmprole
+        }
+        $http(req).then(function (response) {
+            alert('Removed successfully.');
+            
+            $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + role.CompanyId).then(function (res, data) {
+                $scope.cmproles = res.data;
+            });
+
+        });
+        $scope.currRole = null;
+    }
 });
