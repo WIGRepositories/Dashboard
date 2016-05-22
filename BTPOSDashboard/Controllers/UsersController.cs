@@ -13,10 +13,8 @@ namespace BTPOSDashboardAPI.Controllers
     public class UsersController : ApiController
     {
         [HttpGet]
-        public DataTable GetUsers()//Main Method
+        public DataTable GetUsers(int cmpId)//Main Method
         {
-
-
             DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();            
@@ -25,12 +23,14 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.CommandType = CommandType.StoredProcedure;//Stored Procedure
             cmd.CommandText = "GetUsers";
             cmd.Connection = conn;
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
 
-            // int found = 0;
+            SqlParameter cmpid = new SqlParameter("@cmpId", SqlDbType.Int);
+            cmpid.Value = cmpId;
+            cmd.Parameters.Add(cmpid);
+          
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+            
             return Tbl;
         }
 
@@ -71,8 +71,8 @@ namespace BTPOSDashboardAPI.Controllers
                 MiddleName.Value = U.MiddleName;
                 cmd.Parameters.Add(MiddleName);
 
-                SqlParameter UUserType = new SqlParameter("@UserTypeId", SqlDbType.Int);
-                UUserType.Value = U.UserTypeId;
+                SqlParameter UUserType = new SqlParameter("@cmpId", SqlDbType.Int);
+                UUserType.Value = U.companyId;
                 cmd.Parameters.Add(UUserType);
 
                 SqlParameter uEmpNo = new SqlParameter("@EmpNo",SqlDbType.VarChar,15);
@@ -129,7 +129,7 @@ namespace BTPOSDashboardAPI.Controllers
 
         [HttpGet]
         [Route("api/Users/GetUserRoles")]
-        public DataTable GetUserRoles() {
+        public DataTable GetUserRoles(int cmpId) {
             DataTable tbl = new DataTable();
 
             SqlConnection conn = new SqlConnection();
@@ -138,12 +138,66 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.CommandType = CommandType.StoredProcedure;//Stored Procedure
             cmd.CommandText = "GetUserRoles";
             cmd.Connection = conn;
+
+            SqlParameter UUserType = new SqlParameter("@companyId", SqlDbType.Int);
+            UUserType.Value = cmpId;
+            cmd.Parameters.Add(UUserType);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(tbl);
             
             return tbl;
         }
+
+        [HttpPost]
+        [Route("api/Users/SaveUserRoles")]
+        public DataTable SaveUserRoles(userroles U)
+        {
+            DataTable Tbl = new DataTable();
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                //conn.ConnectionString = "Data Source=localhost;Initial Catalog=MyAlerts;integrated security=sspi;";
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelUserRoles";
+                cmd.Connection = conn;
+                conn.Open();
+
+
+                SqlParameter UId = new SqlParameter("@Id", SqlDbType.Int);
+                UId.Value = U.Id;
+                cmd.Parameters.Add(UId);              
+               
+                SqlParameter URole = new SqlParameter("@UserId", SqlDbType.Int);
+                URole.Value = U.UserId;
+                cmd.Parameters.Add(URole);
+
+                SqlParameter UUser = new SqlParameter("@roleid", SqlDbType.Int);
+                UUser.Value = U.RoleId;
+                cmd.Parameters.Add(UUser);
+
+                SqlParameter UCmp = new SqlParameter("@CompanyId", SqlDbType.Int);
+                UCmp.Value = U.CompanyId;
+                cmd.Parameters.Add(UCmp);
+
+                cmd.ExecuteScalar();
+
+                conn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                string str = ex.Message;
+            }
+            // int found = 0;
+            return Tbl;
+        }
+
         public void Options()
         {
 

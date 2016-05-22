@@ -2023,7 +2023,6 @@
     <Compile Include="Controllers\TypeGroupsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
-    <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />

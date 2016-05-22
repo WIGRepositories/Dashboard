@@ -317,124 +317,103 @@
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
-                        <div id="form-layouts" class="row">
-                            <div class="col-lg-12">
 
-                                <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
-                                    <div id="tab-form-actions" class="tab-pane fade active in">
-                                        <div class="row">
+                        <div class="col-lg-6">
+                            <div class="panel panel-violet">
+                                <div class="panel-heading">Add New Routes</div>
+                                <div class="panel-body pan">
+                                    <form action="#" class="form-horizontal">
+                                        <div class="modal-body">
+                                            <div>
+                                                <div class="form-group">
 
-                                            <div class="col-lg-6">
-                                                <div class="panel panel-violet">
-                                                    <div class="panel-heading">Add New Routes</div>
-                                                    <div class="panel-body pan">
-                                                        <form action="#" class="form-horizontal">
-                                                            <div class="modal-body">
-                                                                <div>
-                                                                    <div class="form-group">
+                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Route Name: <span class='require'>*</span></label>
 
-                                                                        <label for="Name" class="col-md-5 control-label" style="color:red;"> Route Name: <span class='require'>*</span></label>
+                                                    <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="routes.RouteName" class="form-control" /><span class="help-block"></span></div>
+                                                </div>
+                                                <div class="form-group">
 
-                                                                        <div class="col-md-6"><input id="inputFirstName" type="text" ng-model="routes.Route" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="form-group">
+                                                    <label for="Name" class="col-md-3  control-label" style="color:red;"> Code: <span class='require'>*</span></label>
 
-                                                                        <label for="Name" class="col-md-5  control-label" style="color:red;"> Code: <span class='require'>*</span></label>
+                                                    <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="routes.Code" class="form-control" /><span class="help-block"></span></div>
+                                                </div>
 
-                                                                        <div class="col-md-6"><input id="inputFirstName" type="text" ng-model="routes.Code" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="selCountry" class="col-md-3 control-label">Source:<span class='require'>*</span></label>
 
-                                                                    <div class="form-group">
-                                                                        <label for="selCountry" class="col-md-5 control-label">Source:<span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6 ">
-                                                                            <select ng-options="s.Name for s in Stops track by s.Id" ng-model="routes.Source">
-                                                                                <option value="">Select</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-                                                                        <label for="selCountry" class="col-md-5 control-label">Destination:<span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6">
-                                                                            <select ng-options="d.Name for d in Stops track by d.Id" ng-model="routes.Destination">
-                                                                                <option value="">Select</option>
-                                                                            </select>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="form-group">
-
-                                                                        <label for="Name" class="col-md-5  control-label" style="color:red;"> Distance: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6"><input id="inputFirstName" type="text" ng-model="routes.Distance" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-
-                                                                        <label for="Name" class="col-md-5  control-label" style="color:red;">Return route?</label>
-
-                                                                        <div class="col-md-6"><input id="rtn" type="checkbox" ng-true-value="true" ng-false-value="false" ng-model="routes.ReturnRoute" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-
-                                                                        <label for="Name" class="col-md-5 control-label" style="color:red;"> Return Route Name: <span class='require'></span></label>
-
-                                                                        <div class="col-md-6"><input id="rtnName" type="text" ng-model="routes.ReturnRouteName" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="form-group">
-
-                                                                        <label for="Name" class="col-md-5  control-label" style="color:red;"> Return route Code: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6"><input id="rtnCode" type="text" ng-model="routes.ReturnCode" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-
-
-                                                            <div class="form-actions">
-                                                                <div class="col-md-offset-3 col-md-9">
-                                                                    <button type="submit" class="btn btn-primary" ng-click="save(routes);">Save</button>
-
-                                                                    <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                    <div class="col-md-4 ">
+                                                        <select ng-options="s.Name for s in Stops track by s.Id" ng-model="routes.Source" style="width:100%">
+                                                            <option value="">Select</option>
+                                                        </select>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="selCountry" class="col-md-3 control-label">Destination:<span class='require'>*</span></label>
+
+                                                    <div class="col-md-4">
+                                                        <select ng-options="d.Name for d in Stops track by d.Id" ng-model="routes.Destination" style="width:100%">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label for="Name" class="col-md-3  control-label" style="color:red;"> Distance: <span class='require'>*</span></label>
+
+                                                    <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="routes.Distance" class="form-control" /><span class="help-block"></span></div>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="Name" class="col-md-3  control-label" style="color:red;">Return route?</label>
+                                                    <div class="col-md-4"><input id="rtn" type="checkbox" class="form-control" /></div>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Return Route Name: <span class='require'></span></label>
+
+                                                    <div class="col-md-4"><input id="rtnName" type="text" ng-model="routes.ReturnRouteName" class="form-control" /><span class="help-block"></span></div>
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label for="Name" class="col-md-3  control-label" style="color:red;"> Return route Code: <span class='require'>*</span></label>
+
+                                                    <div class="col-md-4"><input id="rtnCode" type="text" ng-model="routes.ReturnCode" class="form-control" /><span class="help-block"></span></div>
+                                                </div>
+
                                             </div>
+
                                         </div>
 
 
+                                        <div class="form-actions">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="submit" class="btn btn-primary" ng-click="save(routes);">Save</button>
 
-
-                                    </div>
+                                                <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-
-
-
-
                         </div>
-
-
+                        
                     </div>
 
-
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
 
                 </div>
             </div>
         </div>
 
-        <!--END CONTENT--><!--BEGIN FOOTER-->
-        <div id="footer">
-            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-        </div>
-        <!--END FOOTER-->
+       
     </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>

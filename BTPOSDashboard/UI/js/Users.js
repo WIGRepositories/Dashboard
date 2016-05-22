@@ -4,14 +4,8 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
 
-    $scope.GetCompanyRoles = function (){
-        $http.get('http://localhost:1476/api/Roles/getroles?companyId=-1').then(function (res, data) {
-            $scope.companies = res.data;
-        });
-    }    
-
     $scope.GetUsers = function () {
-        $http.get('http://localhost:1476/api/Users/GetUsers').then(function (res, data) {
+        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=-1').then(function (res, data) {
             $scope.User = res.data;
         });
     }
@@ -22,53 +16,43 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             return;
            }
 
-          if (User.Email.Name == null) {
+        if (User.FirstName == null)
+        {
+            alert('Please enter first name.');
+        }
+
+        if (User.LastName == null) {
+            alert('Please enter first name.');
+        }
+
+          if (User.Email == null) {
             alert('Please enter Email.');
             return;
-          }
-          if (User == null) {
-              alert('Please enter EmpNo.');
-              return;
-          }
+          }          
 
           if (User.EmpNo == null) {
               alert('Please enter EmpNo.');
               return;
-          }
-          if (user == null)
+          }        
+         
+          if (User.Password != $scope.reenteredPwd)
           {
-              alert('Please enter Adress');
-          }
-          if (user.AdressId == null)
-          {
-              alert('Please enter AdressId');
-          }
-          if (RoleId.group == null || RoleId.group.Id == null)
-          {
-              alert('Please select a type group');
+              alert('The passwords do not match.');
               return;
-          }
-          if (User == null)
-          {
-              alert('Please enter Username');
-          }
-          if (User.UserName == null)
-          {
-              alert('Please enter Password');
           }
 
          var User = {
             Id: User.Id,
             FirstName: User.FirstName,
             LastName: User.LastName,
-            MiddleName:User.MiddleName,
-            UserTypeId: (role) ? 2 : User.UserType,
+            MiddleName:User.MiddleName,            
             EmpNo: User.EmpNo,
             Email: User.Email,
             AdressId: User.AdressId,
             MobileNo: User.MobileNo,
-            RoleId: (role) ? 2 : User.Role,
-            Active: (User.Active == true) ? 1 : 0,
+            RoleId: (role == -1) ? $scope.r.Id : 6,
+            companyId: $scope.cmp.Id,
+            Active: 1,
             UserName: User.UserName,
             Password: User.Password,
             insupdflag: flag
@@ -97,11 +81,99 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         $scope.User1 = null;
     }
 
-    $scope.GetUserRoles = function () {
+    $scope.getUserRolesForCompany = function (cmp) {
 
-        $http.get('http://localhost:1476/api/Users/GetUserRoles').then(function (res, data) {
+        if (cmp == null)
+        {
+            $scope.userRoles = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.userRoles = res.data;
         });
+    }
+
+    $scope.GetUsersinitData = function () {
+        //get companies list   
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+            $scope.Companies = response.data;
+        });
+
+        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=-1').then(function (res, data) {
+            $scope.MgrUsers = res.data;
+        });
+        //get users for the company or all users based on company
+    }
+
+    $scope.getRolesForCompany = function (seltype) {
+        if (seltype == null) {
+            $scope.cmproles = null;
+            return;
+        }
+        var cmpId = (seltype) ? seltype.Id : -1;
+
+        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+            $scope.cmproles = res.data;
+        });
+    }
+
+    $scope.getUsersnRoles = function () {
+        if ($scope.s == null)
+        {
+            $scope.cmproles1 = null;
+            $scope.cmpUsers1 = null;
+            return;
+        }
+        var cmpId = ($scope.s == null) ? -1 : $scope.s.Id;
+
+        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+            $scope.cmproles1 = res.data;
+        });
+
+        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+            $scope.cmpUsers1 = res.data;
+        });
+    }
+
+    $scope.saveUserRoles = function (flag) {
+
+        if ($scope.s.Id == null) {
+            alert('Please select company.');
+            return;
+        }
+
+        if ($scope.ur.Id == null) {
+            alert('Please select role.');
+            return;
+        }
+        if ($scope.uu.Id == null) {
+            alert('Please select user.');
+            return;
+        }
+        var userrole = {
+            Id: -1,
+            UserId: $scope.uu.Id,
+            CompanyId: $scope.s.Id,
+            RoleId: $scope.ur.Id,
+            flag:flag
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/Users/SaveUserRoles',
+            //headers: {
+            //    'Content-Type': undefined
+            data: userrole
+        }
+
+        $http(req).then(function (res) {
+            alert('Saved successfully');
+            $scope.s = null;
+            $scope.ur = null;
+            $scope.uu = null;
+        });
+        
     }
 });
 

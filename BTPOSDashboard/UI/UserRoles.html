@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetUserRoles();" ng-model="userRoles">
+<body ng-init="GetUsersinitData();" ng-model="userRoles">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -321,9 +321,9 @@
                                             <div class="col-lg-12">
                                                 <div class="table-container">
                                                     <div class="col-md-5">
-                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                            <option value="">Select</option>
-                                                        </select>
+                                                        Company: <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getUserRolesForCompany(cmp)" width="100%">
+                                                        <option value="">Select Company</option>
+                                                    </select>
                                                     </div>
                                                     <div class="actions">
                                                         <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Assign Role</button>
@@ -343,27 +343,29 @@
                                                                             <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
 
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getselectval()">
+                                                                                <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getUsersnRoles()">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group">
-                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> User <span class='require'>*</span></label>
+                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
 
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="r.Name for r in newrole track by r.Id" ng-model="r">
+                                                                                <select ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="uu" style="width:100%">
                                                                                     <option value="">Select</option>
                                                                                 </select>
+
+                                                                                
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group">
-                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Role <span class='require'>*</span></label>
+                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
 
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="r.Name for r in newrole track by r.Id" ng-model="r">
+                                                                                <select ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="ur" width="100%">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -373,7 +375,7 @@
 
                                                                 </form>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveRoles(currRole);">Save</button>
+                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveUserRoles(1);">Save</button>
                                                                     <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
                                                                 </div>

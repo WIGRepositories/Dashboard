@@ -1392,26 +1392,29 @@ insert into ObjectAccess (ObjectId,AccessId,Name) values(@ObjectId,@AccessId,@Na
 end
 
 GO
+/****** Object:  Table [dbo].[Users]    Script Date: 05/22/2016 12:38:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING OFF
+GO
 CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[FirstName] [varchar](40) NOT NULL,
-	[LastName] [varchar](40) NOT NULL,
-	[UserTypeId] [int] NULL,
-	[EmpNo] [varchar](50) NOT NULL,
-	[Email] [varchar](40) NULL,
+	[FirstName] [varchar](40)  NOT NULL,
+	[LastName] [varchar](40)  NOT NULL,
+	[EmpNo] [varchar](50)  NOT NULL,
+	[Email] [varchar](40)  NULL,
 	[AddressId] [int] NULL,
 	[MobileNo] [varchar](15) NULL,
-	[RoleId] [int] NULL,
 	[Active] [int] NOT NULL,
 	[MiddleName] [varchar](50) NULL,
-	[CompanyId] [int] NOT NULL
+	[CompanyId] [int] NOT NULL,
+	[ManagerId] [int] NULL
 ) ON [PRIMARY]
 
 GO
+SET ANSI_PADDING OFF
 
 
 SET ANSI_NULLS ON
@@ -1818,27 +1821,24 @@ CREATE PROCEDURE [dbo].[GetUsers]
 AS
 BEGIN
 
-SELECT users.[Id]
-      ,[FirstName]
-      ,[LastName]
-      ,[UserTypeId]
-      ,[EmpNo]
-      ,[Email]
-      ,[AddressId]
-      ,[MobileNo]
-      ,[RoleId]
-      ,users.[Active]
-      ,[MiddleName]
+SELECT U.[Id]
+      ,U.[FirstName]
+      ,U.[LastName]      
+      ,U.[EmpNo]
+      ,U.[Email]
+      ,U.[AddressId]
+      ,U.[MobileNo]    
+      ,U.[Active]
+      ,U.[MiddleName]
+      ,mgr.Firstname + ' ' +mgr.LastName as mgrName
+      ,mgr.Id
       ,ul.logininfo as UserName
-      ,ul.passkey as [Password]
-      ,t.Name as UserType
-      ,r.Name as [Role]
+      ,ul.passkey as [Password]            
       ,c.name as [Company]
-  FROM [POSDashboard].[dbo].[Users] 
-  inner join company c on (users.companyid = c.id)
-  left outer join dbo.userlogins ul on ul.userid = Users.id
-  left outer join Roles r on r.Id = Users.RoleId
-  left outer join Types t on t.Id = Users.UserTypeId
+  FROM [POSDashboard].[dbo].[Users] U
+  inner join company c on (U.companyid = c.id)
+  left outer join Users mgr on mgr.id = U.managerid
+  left outer join dbo.userlogins ul on ul.userid = U.id    
   where (c.id = @cmpid or   @cmpid = -1)
 end
 
@@ -4905,6 +4905,7 @@ select cr.[Id]
 ,cr.[CompanyId] 
 ,c.Name company
 ,r.name as rolename
+,r.description
 from [CompanyRoles] cr
 inner join Roles R on R.Id=cr.RoleId
 inner join Company c on c.Id=cr.CompanyId
@@ -5798,23 +5799,26 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE GetUserRoles	
+CREATE PROCEDURE [dbo].[GetUserRoles]	
 (@companyId int = -1)
 AS
 BEGIN
 	
-SELECT users.[Id]
+SELECT distinct users.[Id]
       ,[FirstName]+ ' '+[LastName] username
       ,[RoleId]
       ,r.Name as rolename
       ,c.name as [companyname]
-      ,c.Id as companyId
-  FROM [POSDashboard].[dbo].[Users] 
-  inner join company c on (users.companyid = c.id)  
-  inner join Roles r on r.Id = Users.RoleId  
-  where (c.id = @companyId or   @companyId = -1)
+     ,c.Id as companyId
+  FROM [POSDashboard].[dbo].[Users]  
+  inner join userroles ur on ur.userid = users.id 
+  inner join Roles r on r.Id = Ur.RoleId 
+  inner join company c on c.id = ur.companyid
+  where (c.id = @companyId or   @companyId = -1)    
 
 END
+
+
 GO
 
 /****** Object:  Table [dbo].[LicenseTypes]    Script Date: 05/22/2016 06:52:38 ******/

@@ -141,8 +141,9 @@ namespace BTPOSDashboardAPI.Models
     {
         public int Id { set; get; }
         public int UserId { set; get; }
-        public int GroupId { set; get; }
+        public int CompanyId { set; get; }
         public int RoleId { set; get; }
+        public int flag { set; get; }
         public string Passkey { set; get; }
 
     }

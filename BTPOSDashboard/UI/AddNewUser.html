@@ -4,9 +4,7 @@
     <title>Home | Users | Users | Add New User</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -18,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetCompanyRoles();" ng-model="User">
+<body ng-init="GetUsersinitData();" ng-model="User">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -495,7 +493,7 @@
                                                                     <label for="" class="col-md-2 control-label">Supervisor:</label>
 
                                                                     <div class="col-md-3">
-                                                                        <select ng-options="r.Name for r in companies track by r.Id" ng-model="r" style="width:100%">
+                                                                        <select ng-options="mgr.FirstName+' '+mgr.LastName  for mgr in MgrUsers track by mgr.Id" ng-model="mgr" style="width:100%">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -509,14 +507,14 @@
                                                                         <label for="inputMiddleName" class="col-md-2 control-label">Company:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-3">
-                                                                            <select ng-options="s.Company for s in companies track by s.companyid" ng-model="s" ng-change="getselectval(s)">
+                                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
                                                                                 <option value="">Select Company</option>
                                                                             </select>
                                                                         </div>
 
                                                                         <label for="inputMiddleName" class="col-md-2 control-label">Role:<span class='require'>*</span></label>
                                                                         <div class="col-md-3">
-                                                                            <select ng-options="r.Name for r in companies track by r.Id" ng-model="r">
+                                                                            <select ng-options="r.rolename for r in cmproles track by r.Id" ng-model="r" width="100%">
                                                                                 <option value="">Select Role</option>
                                                                             </select>
                                                                         </div>
@@ -544,7 +542,7 @@
                                                                             <div style="width:30%;float:left">
                                                                                 <label for="inputMiddleName" class="col-md-5">Re-Enter Password:</label>
 
-                                                                                <div class="col-md-7"><input type="password" class="form-control" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="reenteredPwd"/><span class="help-block"></span></div>
                                                                             </div>
                                                                         </div>
 
@@ -552,7 +550,7 @@
                                                                    
                                                                 </div>
                                                                 <div class="form-actions text-center">
-                                                                    <button type="submit" class="btn btn-green" ng-click="save(User, 'I')">Save</button>
+                                                                    <button class="btn btn-green" ng-click="save(User, 'I',-1)">Save</button>
                                                                     &nbsp;
                                                                     <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />                                                                   
                                                                 </div>
