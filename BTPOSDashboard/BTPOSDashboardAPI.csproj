@@ -466,6 +466,7 @@
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
+    <Content Include="UI\LicenseTypes.html" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\Inventory.html" />
     <Content Include="UI\images\bg\1.jpg" />

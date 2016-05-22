@@ -129,6 +129,87 @@ namespace BTPOSDashboard.Controllers
              //int found = 0;
             return Tbl;
         }
+
+        [HttpGet]
+        [Route("api/License/GetLicenseTypes")]
+        public DataTable GetLicenseTypes(int catid)
+        {
+            DataTable Tbl = new DataTable();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetLicenseTypes";
+            cmd.Connection = conn;
+
+            SqlParameter Gid = new SqlParameter();
+            Gid.ParameterName = "@licenseCategoryId";
+            Gid.SqlDbType = SqlDbType.Int;
+            Gid.Value = catid;
+            cmd.Parameters.Add(Gid);
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);            
+
+            // int found = 0;
+            return Tbl;
+        }
+        
+
+        [HttpPost]
+        [Route("api/License/SaveLicenseType")]
+        public DataTable SaveLicenseTypes(LicenseTypes b)
+        {
+            DataTable Tbl = new DataTable();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "InsUpdLicenseTypes";
+            cmd.Connection = conn;
+            conn.Open();
+            SqlParameter Aid = new SqlParameter();
+            Aid.ParameterName = "@Id";
+            Aid.SqlDbType = SqlDbType.Int;
+            Aid.Value = Convert.ToString(b.Id);
+            cmd.Parameters.Add(Aid);
+
+            SqlParameter lid = new SqlParameter();
+            lid.ParameterName = "@LicenseCatId";
+            lid.SqlDbType = SqlDbType.Int;
+            lid.Value = Convert.ToString(b.LicenseCategoryId);
+            cmd.Parameters.Add(lid);
+
+            SqlParameter ss = new SqlParameter();
+            ss.ParameterName = "@LicenseType";
+            ss.SqlDbType = SqlDbType.VarChar;
+            ss.Value = b.LicenseType;
+            cmd.Parameters.Add(ss);
+
+            SqlParameter ii = new SqlParameter();
+            ii.ParameterName = "@Description";
+            ii.SqlDbType = SqlDbType.VarChar;
+            ii.Value = b.Desc;
+
+            cmd.Parameters.Add(ii);
+            SqlParameter ll = new SqlParameter();
+            ll.ParameterName = "@Active";
+            ll.SqlDbType = SqlDbType.VarChar;
+            ll.Value = b.Active;
+           
+            cmd.ExecuteScalar();
+            conn.Close();
+           
+            return Tbl;
+        }
         public void Options() { }
     }
 }

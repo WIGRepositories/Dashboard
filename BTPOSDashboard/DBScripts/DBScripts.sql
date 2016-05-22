@@ -5763,7 +5763,127 @@ BEGIN
 
 
 END
-   
+       
+GO
+/****** Object:  Table [dbo].[VehicleLayout]    Script Date: 05/21/2016 23:31:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[VehicleLayout](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleLayoutTypeId] [int] NOT NULL,
+	[RowNo] [int] NOT NULL,
+	[ColNo] [int] NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
+	[label] [varchar](10)  NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF   
     
-   
-    
+
+	SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE GetUserRoles	
+(@companyId int = -1)
+AS
+BEGIN
+	
+SELECT users.[Id]
+      ,[FirstName]+ ' '+[LastName] username
+      ,[RoleId]
+      ,r.Name as rolename
+      ,c.name as [companyname]
+      ,c.Id as companyId
+  FROM [POSDashboard].[dbo].[Users] 
+  inner join company c on (users.companyid = c.id)  
+  inner join Roles r on r.Id = Users.RoleId  
+  where (c.id = @companyId or   @companyId = -1)
+
+END
+GO
+
+/****** Object:  Table [dbo].[LicenseTypes]    Script Date: 05/22/2016 06:52:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[LicenseTypes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[LicenseCatId] [int] NOT NULL,
+	[LicenseType] [varchar](50)  NOT NULL,
+	[Description] [varchar](500)  NULL,
+	[Active] [int] NOT NULL CONSTRAINT [DF_LicenseTypes_Active]  DEFAULT ((1)),
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+
+Create PROCEDURE [dbo].[GetLicenseTypes]
+(@licenseCategoryId int =-1)
+AS
+BEGIN
+	SELECT lt.[Id]
+      ,[LicenseCatId]
+      ,[LicenseType]
+      ,lt.[Description]
+      ,t.name as licenseCategory
+	  ,lt.[Active]
+  FROM [POSDashboard].[dbo].[LicenseTypes] lt
+inner join Types t on t.id = licensecatid
+  where ([LicenseCatId] = @licenseCategoryId or @licenseCategoryId = -1)
+END
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE InsUpdLicenseTypes 
+(@Id int = -1
+,@LicenseCatId int
+,@LicenseType varchar(50)
+,@Description varchar(500) = null
+,@Active int = 1)	
+AS
+BEGIN
+	UPDATE [POSDashboard].[dbo].[LicenseTypes]
+   SET [LicenseCatId] = @LicenseCatId
+      ,[LicenseType] = @LicenseType
+      ,[Description] = @Description
+      ,[Active] = @Active
+	WHERE Id = @Id
+
+if @@rowcount = 0
+
+INSERT INTO [POSDashboard].[dbo].[LicenseTypes]
+           ([LicenseCatId]
+           ,[LicenseType]
+           ,[Description]
+           ,[Active])
+     VALUES
+           (@LicenseCatId
+           ,@LicenseType
+           ,@Description
+           ,@Active)
+
+END
+GO

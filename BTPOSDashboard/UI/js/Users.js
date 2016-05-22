@@ -96,6 +96,13 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.clearUsers = function () {
         $scope.User1 = null;
     }
+
+    $scope.GetUserRoles = function () {
+
+        $http.get('http://localhost:1476/api/Users/GetUserRoles').then(function (res, data) {
+            $scope.userRoles = res.data;
+        });
+    }
 });
 
 

@@ -127,6 +127,23 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
 
+        [HttpGet]
+        [Route("api/Users/GetUserRoles")]
+        public DataTable GetUserRoles() {
+            DataTable tbl = new DataTable();
+
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;//Stored Procedure
+            cmd.CommandText = "GetUserRoles";
+            cmd.Connection = conn;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(tbl);
+            
+            return tbl;
+        }
         public void Options()
         {
 

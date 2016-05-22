@@ -1307,9 +1307,15 @@ namespace BTPOSDashboardAPI.Models
     public int? needVehicleLayout { get; set; }
     public int? needFleetRoute { get; set; }
     public int? needRouteName { get; set; }
+    }
 
-
-
-
+    public class LicenseTypes {
+        public int Id { set; get; }
+        public int Active { set; get; }
+        public string LicenseType { set; get; }
+        public string Desc { set; get; }       
+        public string LicenseCategory { set; get; }
+        public int LicenseCategoryId { set; get; }
+        
     }
 }

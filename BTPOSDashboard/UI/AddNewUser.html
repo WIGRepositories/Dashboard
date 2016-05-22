@@ -434,7 +434,7 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Users</div>
+                            <div class="page-title">Add User</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -449,24 +449,22 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
 
                     <div class="page-content">
-                        <div id="form-layouts" class="row">
-                            <div class="col-lg-12">
-
-                                <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
+                   
                                     <div id="tab-form-actions" class="tab-pane fade active in">
                                         <div class="row">
+
                                             <div class="col-lg-12">
                                                 <div class="panel panel-violet">
                                                     <div class="panel-heading">Add New User</div>
                                                     <div class="panel-body pan">
-                                                        <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                            <div class="form-body">
+                                                        <form action="#" class="form-horizontal">
+                                                            <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <label for="inputFirstName" class="col-md-2 control-label">First Name:</label>
+                                                                    <label for="inputFirstName" class="col-md-2 control-label">First Name:<span class='require'>*</span></label>
 
                                                                     <div class="col-md-3"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
 
-                                                                    <label for="inputLastName" class="col-md-2 control-label">Last Name:</label>
+                                                                    <label for="inputLastName" class="col-md-2 control-label">Last Name:<span class='require'>*</span></label>
 
                                                                     <div class="col-md-3"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
                                                                 </div>
@@ -475,37 +473,39 @@
 
                                                                     <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
 
-                                                                    <label for="inputLastName" class="col-md-2 control-label">Email <span class='require'>*</span></label>
+                                                                    <label for="inputLastName" class="col-md-2 control-label">Email:<span class='require'>*</span></label>
 
                                                                     <div class="col-md-3"><input id="inputLastName" type="text" placeholder="" class="form-control" ng-model="User.Email" /><span class="help-block"></span></div>
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="inputMiddleName" class="col-md-2 control-label">MobileNumber</label>
+                                                                    <label for="inputMiddleName" class="col-md-2 control-label">Mobile Number:</label>
 
                                                                     <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="" class="form-control" ng-model="User.MobileNo" /><span class="help-block"></span></div>
 
-                                                                    <label for="" class="col-md-2 control-label">Employee NO <span class='require'>*</span></label>
+                                                                    <label for="" class="col-md-2 control-label">Employee No:<span class='require'>*</span></label>
 
                                                                     <div class="col-md-3"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
 
-
-
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="Address Id" class="col-md-2 control-label">Address<span class='require'>*</span></label>
+                                                                    <label for="Address Id" class="col-md-2 control-label">Address:</label>
 
-                                                                    <div class="col-md-9"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
+                                                                    <div class="col-md-3"><textarea rows="3" class="form-control" ng-model="User.AdressId"></textarea></div>
+                                                                    <label for="" class="col-md-2 control-label">Supervisor:</label>
+
+                                                                    <div class="col-md-3">
+                                                                        <select ng-options="r.Name for r in companies track by r.Id" ng-model="r" style="width:100%">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </div>
+
                                                                 </div>
                                                                 <div class="panel panel-violet">
                                                                     <div class="panel-heading">User Role</div><br />
-                                                                    <!--<div class="form-group">
-                                    <label for="Address Id" class="col-md-3 control-label">Address Id<span class='require'>*</span></label>
-
-                                    <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
-                                </div>-->
+                                                                   
                                                                     <div class="form-group">
-                                                                        <br />
+                                                                   
                                                                         <label for="inputMiddleName" class="col-md-2 control-label">Company:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-3">
@@ -514,7 +514,7 @@
                                                                             </select>
                                                                         </div>
 
-                                                                        <label for="inputMiddleName" class="col-md-2 control-label">Roles:<span class='require'>*</span></label>
+                                                                        <label for="inputMiddleName" class="col-md-2 control-label">Role:<span class='require'>*</span></label>
                                                                         <div class="col-md-3">
                                                                             <select ng-options="r.Name for r in companies track by r.Id" ng-model="r">
                                                                                 <option value="">Select Role</option>
@@ -522,40 +522,39 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <br />
+                                                   
                                                                 </div>
 
                                                                 <div class="panel panel-violet">
                                                                     <div class="panel-heading">User Login</div>
-                                                                    <div class="panel-body pan">
-
-                                                                        <div class="form-group" style="width:100%;">
-                                                                            <br />
+                                                                    
+                                                                    <br />
+                                                                        <div class="form-group">
+                                                                          
                                                                             <div style="width:30%;float:left">
-                                                                                <label for="inputMiddleName" class="col-md-5">UserName<span class='require'>*</span></label>
+                                                                                <label for="inputMiddleName" class="col-md-5">User Name:</label>
 
-                                                                                <div class="col-md-7"><input type="text" class="form-control" ng-model="User.UserName" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-7"><input type="text" class="form-control" ng-model="User.UserName" /></div>
                                                                             </div>
                                                                             <div style="width:30%;float:left">
-                                                                                <label for="inputMiddleName" class="col-md-5">Password<span class='require'>*</span></label>
+                                                                                <label for="inputMiddleName" class="col-md-5">Password:</label>
 
-                                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="User.Password" /></div>
                                                                             </div>
                                                                             <div style="width:30%;float:left">
-                                                                                <label for="inputMiddleName" class="col-md-5">Re-Enter Password</label>
+                                                                                <label for="inputMiddleName" class="col-md-5">Re-Enter Password:</label>
 
                                                                                 <div class="col-md-7"><input type="password" class="form-control" /><span class="help-block"></span></div>
                                                                             </div>
                                                                         </div>
 
 
-                                                                    </div>
+                                                                   
                                                                 </div>
-                                                                <div class="form-actions text-center pal">
+                                                                <div class="form-actions text-center">
                                                                     <button type="submit" class="btn btn-green" ng-click="save(User, 'I')">Save</button>
                                                                     &nbsp;
-                                                                    <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />
-                                                                    <br />
+                                                                    <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />                                                                   
                                                                 </div>
 
 
@@ -565,21 +564,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                                    <!--END PAGE WRAPPER-->
-                                                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                                                    <div id="footer">
-                                                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                                    </div>
+                                                
+                                   </div>
+                       
+                      </div>
+                                          
 
-                                                </div>
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
 
-                                            </div>
-                                            <!--END FOOTER-->
-                                        </div>
-
-                                    </div>
-                                    
-                                </div>
                     </div>
                 </div>
             </div>
