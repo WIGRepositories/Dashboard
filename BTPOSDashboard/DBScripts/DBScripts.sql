@@ -4262,7 +4262,6 @@ CREATE procedure [dbo].[InsUpdUsers](
 @FirstName varchar(40)
 ,@LastName varchar(40)
 ,@MiddleName varchar(40) = ''
-,@UserTypeId int
 ,@EmpNo varchar(15)
 ,@Email varchar(40) = ''
 ,@AdressId int
@@ -4354,7 +4353,7 @@ else
  
  declare @fcnt int
  
- if @RoleId = 2 
+ if @RoleId = 6
  begin
  
  select @fcnt = COUNT(*) from FleetOwner where UserId = @currid
