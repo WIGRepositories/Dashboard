@@ -14,7 +14,7 @@ namespace BTPOSDashboardAPI.Controllers
     {
 
         [HttpGet]
-        public DataTable getcreaterole()
+        public DataTable GetCompanyRoles(int companyId)
         {
             DataTable Tbl = new DataTable();
 
@@ -26,24 +26,26 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetRoles";
+            cmd.CommandText = "getCompanyRoles";
             cmd.Connection = conn;
 
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
+            SqlParameter rolesFlag = new SqlParameter();
+            rolesFlag.ParameterName = "@cmpId";
+            rolesFlag.SqlDbType = SqlDbType.Int;
+            rolesFlag.Value = companyId;
+            cmd.Parameters.Add(rolesFlag);
 
+         
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+           
             // int found = 0;
             return Tbl;
         }
 
-
-
-
-
         [HttpGet]
-        public DataTable getroles(int companyId)
+        [Route("api/Roles/GetRoles")]
+        public DataTable GetRoles(int allroles)
         {
             DataTable Tbl = new DataTable();
 
@@ -56,21 +58,19 @@ namespace BTPOSDashboardAPI.Controllers
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetRoles";
+         
 
-            SqlParameter cmpid = new SqlParameter();
-            cmpid.ParameterName = "@companyId";
-            cmpid.SqlDbType = SqlDbType.Int;
-            cmpid.Value = companyId;
-            cmd.Parameters.Add(cmpid);
+            SqlParameter rolesFlag = new SqlParameter();
+            rolesFlag.ParameterName = "@allroles";
+            rolesFlag.SqlDbType = SqlDbType.Int;
+            rolesFlag.Value = allroles;
+            cmd.Parameters.Add(rolesFlag);
 
             cmd.Connection = conn;
-
-            DataSet ds = new DataSet();
+                       
             SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
-
-            // int found = 0;
+            db.Fill(Tbl);
+            
             return Tbl;
         }
 

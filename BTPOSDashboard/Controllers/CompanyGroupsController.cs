@@ -100,10 +100,7 @@ namespace POSDBAccess.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
-                DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+               
             }
             catch (Exception ex)
             {
@@ -115,8 +112,8 @@ namespace POSDBAccess.Controllers
         }
 
         [HttpPost]
-        [Route("api/assignroles")]
-        public DataTable AssignRoles(CompanyRoles r)
+        [Route("api/AssignDelRoles")]
+        public DataTable AssignDelRoles(CompanyRoles r)
         {
             DataTable Tbl = new DataTable();
 
@@ -152,19 +149,20 @@ namespace POSDBAccess.Controllers
                 gsab.Value = r.CompanyId;
                 cmd.Parameters.Add(gsab);
 
+                SqlParameter f = new SqlParameter();
+                f.ParameterName = "@insupdflag";
+                f.SqlDbType = SqlDbType.Int;
+                f.Value = r.insdelflag;
+                cmd.Parameters.Add(f);
+
                 SqlParameter gsac = new SqlParameter("@Id", SqlDbType.Int);
                 gsac.Value = r.Id;
                 gsac.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(gsac);
-
-
-
+                
                 cmd.ExecuteScalar();
                 conn.Close();
-                DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+               
             }
             catch (Exception ex)
             {

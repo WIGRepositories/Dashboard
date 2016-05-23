@@ -1270,18 +1270,24 @@ CREATE TABLE [dbo].[RouteDetails](
 ) ON [PRIMARY]
 
 GO
+
+/****** Object:  Table [dbo].[Roles]    Script Date: 05/20/2016 21:36:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING OFF
+GO
 CREATE TABLE [dbo].[Roles](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
-	[Description] [nvarchar](50) NULL,
+	[Description] [varchar](500) NULL,
 	[Active] [int] NOT NULL,
-	[CompanyId] [int] NULL,
 	[IsPublic] [int] NULL CONSTRAINT [DF_Roles_IsPublic]  DEFAULT ((1))
 ) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
 
 GO
 SET ANSI_NULLS ON
@@ -1386,26 +1392,29 @@ insert into ObjectAccess (ObjectId,AccessId,Name) values(@ObjectId,@AccessId,@Na
 end
 
 GO
+/****** Object:  Table [dbo].[Users]    Script Date: 05/22/2016 12:38:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING OFF
+GO
 CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[FirstName] [varchar](40) NOT NULL,
-	[LastName] [varchar](40) NOT NULL,
-	[UserTypeId] [int] NULL,
-	[EmpNo] [varchar](50) NOT NULL,
-	[Email] [varchar](40) NULL,
+	[FirstName] [varchar](40)  NOT NULL,
+	[LastName] [varchar](40)  NOT NULL,
+	[EmpNo] [varchar](50)  NOT NULL,
+	[Email] [varchar](40)  NULL,
 	[AddressId] [int] NULL,
 	[MobileNo] [varchar](15) NULL,
-	[RoleId] [int] NULL,
 	[Active] [int] NOT NULL,
 	[MiddleName] [varchar](50) NULL,
-	[CompanyId] [int] NOT NULL
+	[CompanyId] [int] NOT NULL,
+	[ManagerId] [int] NULL
 ) ON [PRIMARY]
 
 GO
+SET ANSI_PADDING OFF
 
 
 SET ANSI_NULLS ON
@@ -1529,15 +1538,38 @@ GO
 SET ANSI_PADDING ON
 GO
 
+/****** Object:  Table [dbo].[FleetDetails]    Script Date: 05/20/2016 12:07:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[FleetDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[VehicleRegNo] [varchar](10) NOT NULL,
+	[VehicleRegNo] [varchar](15) NOT NULL,
 	[VehicleTypeId] [int] NOT NULL,
-	[FleetOwnerId] [varchar](50) NOT NULL,
-	[CompanyId] [varchar](50) NOT NULL,
-	[ServiceTypeId] [varchar](50) NOT NULL,
-	[Active] [int] NOT NULL
+	[FleetOwnerId] [int] NOT NULL,
+	[CompanyId] [int] NOT NULL,
+	[ServiceTypeId] [int] NOT NULL,
+	[Active] [int] NOT NULL,
+	[LayoutTypeId] [int] NOT NULL
 ) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+SET ANSI_PADDING OFF
+GO
+
+
 
 GO
 
@@ -1789,27 +1821,24 @@ CREATE PROCEDURE [dbo].[GetUsers]
 AS
 BEGIN
 
-SELECT users.[Id]
-      ,[FirstName]
-      ,[LastName]
-      ,[UserTypeId]
-      ,[EmpNo]
-      ,[Email]
-      ,[AddressId]
-      ,[MobileNo]
-      ,[RoleId]
-      ,users.[Active]
-      ,[MiddleName]
+SELECT U.[Id]
+      ,U.[FirstName]
+      ,U.[LastName]      
+      ,U.[EmpNo]
+      ,U.[Email]
+      ,U.[AddressId]
+      ,U.[MobileNo]    
+      ,U.[Active]
+      ,U.[MiddleName]
+      ,mgr.Firstname + ' ' +mgr.LastName as mgrName
+      ,mgr.Id
       ,ul.logininfo as UserName
-      ,ul.passkey as [Password]
-      ,t.Name as UserType
-      ,r.Name as [Role]
+      ,ul.passkey as [Password]            
       ,c.name as [Company]
-  FROM [POSDashboard].[dbo].[Users] 
-  inner join company c on (users.companyid = c.id)
-  left outer join dbo.userlogins ul on ul.userid = Users.id
-  left outer join Roles r on r.Id = Users.RoleId
-  left outer join Types t on t.Id = Users.UserTypeId
+  FROM [POSDashboard].[dbo].[Users] U
+  inner join company c on (U.companyid = c.id)
+  left outer join Users mgr on mgr.id = U.managerid
+  left outer join dbo.userlogins ul on ul.userid = U.id    
   where (c.id = @cmpid or   @cmpid = -1)
 end
 
@@ -1819,17 +1848,31 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[GetRoles]
-(@companyId int = -1)
+(@allroles int = -1)
 as
 begin
+
+if @allroles = -1
+
 select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
-from Roles, companyroles c  
-where (((c.roleid = roles.id) and (c.companyId = @companyId)) or @companyId = -1)
+from Roles
 
-end
+else
 
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
+if @allroles = 0
+
+select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
+from Roles 
+where ispublic = 0
+
+else
+ 
+select distinct Roles.Id, Roles.Name, Description, Roles.Active,IsPublic
+from Roles 
+where ispublic = 1
+
+end 
+
 go
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
@@ -1838,18 +1881,13 @@ CREATE procedure [dbo].[InsUpdDelCompanyRoles](
 @active int,
 @Id int,
 @roleid int,
-@CompanyId int
+@CompanyId int,
+@insupdflag int = 0
 )
 as
 begin
 
-update CompanyRoles 
-set Active = @active
-,RoleId = @roleid
-,CompanyId = @CompanyId
-where Id = @Id
-
-if @@rowcount = 0 
+if @insupdflag = 0
 begin
 
 INSERT INTO [CompanyRoles]
@@ -1860,13 +1898,12 @@ INSERT INTO [CompanyRoles]
            (@CompanyId,@roleid,@active)
 end
 
-
+else
+begin
+ delete from [CompanyRoles] where [CompanyId] = @CompanyId and RoleId = @roleid
 end
 
-
-
-
-
+end
 
 GO
 SET ANSI_NULLS ON
@@ -1999,6 +2036,7 @@ BEGIN
    SELECT v.[Id]
       ,[VehicleRegNo]
       ,vt.[Name] as VehicleType,
+      lt.Name AS vehiclelayout,
        st.Name as ServiceType,
        u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
@@ -2006,6 +2044,7 @@ BEGIN
      FROM [POSDashboard].[dbo].[FleetDetails]v
     inner join Types vt on vt.Id=v.VehicleTypeId
     inner join Types st on st.Id=v.ServiceTypeId
+    inner join Types lt on lt.Id = v.layouttypeid
     inner join company c on c.Id=v.CompanyId
     inner join FleetOwner f on f.UserId=v.FleetOwnerId
     inner join Users u on u.Id = f.UserId
@@ -4255,8 +4294,8 @@ CREATE procedure [dbo].[InsUpdUsers](
   
  if @cnt = 0 
  begin
-	insert into Users(FirstName,LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active,CompanyId)
-	values(@FirstName,@LastName,@MiddleName, @UserTypeId,@EmpNo,@Email,@AdressId,@MobileNo,@RoleId,@Active,@cmpId) 
+	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
+	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
   
  
     SELECT @currid = @@IDENTITY
@@ -4281,9 +4320,7 @@ end
  LastName = @LastName,
  MiddleName = @MiddleName,
  Email = @Email,
- MobileNo = @MobileNo,
- RoleId = @RoleId,
- UserTypeId=@UserTypeId,
+ MobileNo = @MobileNo, 
  Active = @Active 
  where id = @userid
  
@@ -4369,16 +4406,7 @@ where LoginInfo=@logininfo and [PassKey]=@passkey
 
 end
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE Procedure [dbo].[GetUsertypeId] (@UserTypeId int=-1)
-as begin 
-select * from Users
-where UserTypeId=@UserTypeId or @UserTypeId=-1
-end
+
 
 GO
 SET ANSI_NULLS ON
@@ -4534,6 +4562,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+
 -- =============================================
 -- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
@@ -4541,22 +4570,39 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
  (@Id int,
- @VehicleRegNo int
-           ,@VehicleTypeId varchar(10)
-           ,@FleetOwnerId varchar(50)
-           ,@CompanyId varchar(50)
-           ,@ServiceTypeId varchar(50)
-           ,@Active int)
+ @VehicleRegNo varchar(15)
+           ,@VehicleTypeId int
+           ,@FleetOwnerId int
+           ,@CompanyId int
+           ,@ServiceTypeId int
+           ,@VehicleLayoutId int
+           ,@Active int
+           )
 	-- Add the parameters for the stored procedure here
 	
 AS
 BEGIN
+
+update [POSDashboard].[dbo].[FleetDetails]
+set
+[VehicleRegNo] = @VehicleRegNo 
+,[VehicleTypeId] = @VehicleTypeId 
+,[FleetOwnerId] = @FleetOwnerId 
+,[CompanyId] = @CompanyId 
+,[ServiceTypeId] = @ServiceTypeId
+,[LayoutTypeId] = @VehicleLayoutId
+,[Active] = @Active
+where Id = @Id
+
+if @@ROWCOUNT = 0
+begin
 	INSERT INTO [POSDashboard].[dbo].[FleetDetails]
            ([VehicleRegNo]
            ,[VehicleTypeId]
            ,[FleetOwnerId]
            ,[CompanyId]
            ,[ServiceTypeId]
+           ,[LayoutTypeId]
            ,[Active])
      VALUES
            (@VehicleRegNo 
@@ -4564,50 +4610,14 @@ BEGIN
            ,@FleetOwnerId 
            ,@CompanyId 
            ,@ServiceTypeId 
+           ,@VehicleLayoutId
            ,@Active )
 
-
+end
 
 
 END
 
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[insupdelFleetRoutes]
-(@VehicleId int,@RouteId int,@EffectiveFrom datetime,@EffectiveTill datetime)
-	-- Add the parameters for the stored procedure here	
-AS
-BEGIN
-INSERT INTO [POSDashboard].[dbo].[FleetRoutes]
-           ([VehicleId]
-           ,[RouteId]
-           ,[EffectiveFrom]
-           ,[EffectiveTill])
-     VALUES
-           (@VehicleId
-           ,@RouteId
-           ,@EffectiveFrom
-           ,@EffectiveTill)
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-
-
-
-
-    -- Insert statements for procedure here
-END
 
 
 GO
@@ -4876,11 +4886,20 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE procedure [dbo].[getCompanyRoles]
+(@cmpId int)
 as
 begin
-select Id.[Id],Id.[RoleId],Id.[CompanyId] from [CompanyRoles] [Id]
-inner join Roles R on R.Id=Id.RoleId
-inner join Company c on C.Id=Id.CompanyId
+select cr.[Id]
+,cr.[RoleId]
+,cr.[CompanyId] 
+,c.Name company
+,r.name as rolename
+,r.description
+from [CompanyRoles] cr
+inner join Roles R on R.Id=cr.RoleId
+inner join Company c on c.Id=cr.CompanyId
+where cr.CompanyId = @cmpId
+
 end
 GO
 
@@ -5089,8 +5108,8 @@ set @cmpid = 0
  begin
  
    insert into Users (FirstName,
-   LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active,CompanyId)
-   values(@FirstName,@LastName,null,1,'FL00'+@fc,@Email,null,@MobileNo,6,1,@cmpid) 
+   LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
+   values(@FirstName,@LastName,null,'FL00'+@fc,@Email,null,@MobileNo,1,@cmpid) 
           
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
@@ -5103,7 +5122,7 @@ end
 
    
    --insert company role for company and fleet owner role
-  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2 
+  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2,0 
                  
  if @insupdflag='I'and @fleetcnt>0
  begin
@@ -5558,23 +5577,57 @@ end
 
 Go
 
-Create PROCEDURE VehicleConfiguration
+Create PROCEDURE [dbo].[VehicleConfiguration]	
+	@needRoutes int =0,
+	@needRoles int =0,		
+	@needvehicleRegno int = 0,
+	@needvehicleType int = 0,    
+    @needServiceType int = 0,
+    @needfleetowners int =0,
+    @needCompanyName int = 0,
+    @needVehicleLayout int = 0    
+    	
 AS
 BEGIN
+
+	
+	if @needRoutes  = 1
+	select routename,ID,Code from routes	
+	
+	if @needRoles  = 1 
+	select name,ID from Roles
+	
+	if @needvehicleRegno  = 1
+    select VehicleRegNo,Id from FleetDetails
+    
 	--vehicle type data
-	select Name, Id from Types where TypeGroupId = 2
+	if @needvehicleType = 1
+	select Name, Id from Types where TypeGroupId = 4
+	
 	--service type data
-	select Name, Id from Types where TypeGroupId = 3
+	if @needServiceType = 1
+	select Name, Id from Types where TypeGroupId = 5
+	
 	--fleet owners
+	if @needfleetowners = 1
 	select u.FirstName + ' '+u.lastname as Name, u.Id from FleetOwner f
 	inner join Users u on u.Id = f.UserId
+	
 	--companys
+	if @needCompanyName = 1
 	select Name,Id from Company
+	
 	--vehicle layout type
-	select Name, Id from Types where TypeGroupId = 4
+	if @needVehicleLayout = 1
+	select Name, Id from Types where TypeGroupId = 6
 	
 	
 END
+
+
+--[VehicleConfiguration] 0,1,0,0,0,1,0,0
+
+
 GO
 
 /****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/
@@ -5704,7 +5757,130 @@ BEGIN
 
 
 END
-   
+       
+GO
+/****** Object:  Table [dbo].[VehicleLayout]    Script Date: 05/21/2016 23:31:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[VehicleLayout](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleLayoutTypeId] [int] NOT NULL,
+	[RowNo] [int] NOT NULL,
+	[ColNo] [int] NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
+	[label] [varchar](10)  NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF   
     
-   
-    
+
+	SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetUserRoles]	
+(@companyId int = -1)
+AS
+BEGIN
+	
+SELECT distinct users.[Id]
+      ,[FirstName]+ ' '+[LastName] username
+      ,[RoleId]
+      ,r.Name as rolename
+      ,c.name as [companyname]
+     ,c.Id as companyId
+  FROM [POSDashboard].[dbo].[Users]  
+  inner join userroles ur on ur.userid = users.id 
+  inner join Roles r on r.Id = Ur.RoleId 
+  inner join company c on c.id = ur.companyid
+  where (c.id = @companyId or   @companyId = -1)    
+
+END
+
+
+GO
+
+/****** Object:  Table [dbo].[LicenseTypes]    Script Date: 05/22/2016 06:52:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[LicenseTypes](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[LicenseCatId] [int] NOT NULL,
+	[LicenseType] [varchar](50)  NOT NULL,
+	[Description] [varchar](500)  NULL,
+	[Active] [int] NOT NULL CONSTRAINT [DF_LicenseTypes_Active]  DEFAULT ((1)),
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+
+Create PROCEDURE [dbo].[GetLicenseTypes]
+(@licenseCategoryId int =-1)
+AS
+BEGIN
+	SELECT lt.[Id]
+      ,[LicenseCatId]
+      ,[LicenseType]
+      ,lt.[Description]
+      ,t.name as licenseCategory
+	  ,lt.[Active]
+  FROM [POSDashboard].[dbo].[LicenseTypes] lt
+inner join Types t on t.id = licensecatid
+  where ([LicenseCatId] = @licenseCategoryId or @licenseCategoryId = -1)
+END
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE InsUpdLicenseTypes 
+(@Id int = -1
+,@LicenseCatId int
+,@LicenseType varchar(50)
+,@Description varchar(500) = null
+,@Active int = 1)	
+AS
+BEGIN
+	UPDATE [POSDashboard].[dbo].[LicenseTypes]
+   SET [LicenseCatId] = @LicenseCatId
+      ,[LicenseType] = @LicenseType
+      ,[Description] = @Description
+      ,[Active] = @Active
+	WHERE Id = @Id
+
+if @@rowcount = 0
+
+INSERT INTO [POSDashboard].[dbo].[LicenseTypes]
+           ([LicenseCatId]
+           ,[LicenseType]
+           ,[Description]
+           ,[Active])
+     VALUES
+           (@LicenseCatId
+           ,@LicenseType
+           ,@Description
+           ,@Active)
+
+END
+GO

@@ -14,10 +14,10 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetFleetConfiguration()" ng-model="initdata">
+<body ng-init="GetVehicleConfig()" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTINGS-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -31,7 +31,7 @@
                     <div class="topbar-main">
                         <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
 
-                        
+
                     </div>
                 </nav>
                 <!--END TOPBAR-->
@@ -83,14 +83,14 @@
                                         <li>
                                             <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                             <ul class="nav nav-third-level">
-                                                <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
                                                 <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
-                                                <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+                                                <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                             </ul>
                                         </li>
                                         <li>
-                                        <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
+                                        <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
 
                                 </li>
 
@@ -129,10 +129,10 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                            <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
                                             <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                            <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                            <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
                                         </ul>
                                     </li>
 
@@ -142,12 +142,12 @@
 
                                         <ul class="nav nav-third-level">
                                             <li><a href="InventoryItems.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Items</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
+                                            <li><a href="InventoryStatus.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
                                             <li><a href="InventorySales.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Sales</span></a></li>
                                             <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                            <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
+                                            <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                            <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
                                         </ul>
                                 </ul>
@@ -171,7 +171,7 @@
                                             <li><a href="Roles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Roles</span></a></li>
                                             <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                             <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                            <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
                                         </ul>
                                     </li>
 
@@ -181,21 +181,21 @@
                                         <ul class="nav nav-third-level">
                                             <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                             <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                            <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
 
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
+                                            <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
+                                            <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
                                             <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
 
 
                                         </ul>
                                     </li>
-                                    <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
+                                    <li><a href="BlockList.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
 
 
                                 </ul>
@@ -252,10 +252,10 @@
 
 
                                     <li>
-                                        <a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                            <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
 
                                         </ul>
                                     </li>
@@ -313,7 +313,7 @@
                                                                         <label for="selCountry" class="col-md-3 control-label">Vehicle Type</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="initdata.newfleet.vt" class="form-control">
-                                                                                <option value="">All</option>
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 
@@ -323,7 +323,7 @@
                                                                         <label for="selCountry" class="col-md-3 control-label">Service Type</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="st.Name for st in initdata.Table1 track by st.Id" ng-model="initdata.newfleet.st" class="form-control">
-                                                                                <option value="">All</option>
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 
@@ -334,7 +334,7 @@
                                                                         <label for="selCountry" class="col-md-3 control-label">Fleet Owner Name</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="fo.Name for fo in initdata.Table2 track by fo.Id" ng-model="initdata.newfleet.fo" class="form-control">
-                                                                                <option value="">All</option>
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 
@@ -345,7 +345,7 @@
                                                                         <label for="selCountry" class="col-md-3 control-label">Company Name</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="c.Name for c in initdata.Table3 track by c.Id" ng-model="initdata.newfleet.c" class="form-control">
-                                                                                <option value="">All</option>
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 
@@ -358,7 +358,7 @@
                                                                         <label for="selCountry" class="col-md-3 control-label">Vehicle Layout</label>
                                                                         <div class="col-md-6">
                                                                             <select ng-options="vl.Name for vl in initdata.Table4 track by vl.Id" ng-model="initdata.newfleet.vl" class="form-control">
-                                                                                <option value="">All</option>
+                                                                                <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 
@@ -377,28 +377,28 @@
                                                         </div>
 
                                                     </div>
-                                                       
-                                                    </div>
-                                                    </div>
 
                                                 </div>
-
                                             </div>
+
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
-                    <!--END FOOTER-->
                 </div>
             </div>
-       
+
+            <!--END CONTENT--><!--BEGIN FOOTER-->
+            <div id="footer">
+                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+            </div>
+            <!--END FOOTER-->
+        </div>
+    </div>
+
     <!--END PAGE WRAPPER-->
 
     <script src="js/jquery-1.10.2.min.js"></script>
@@ -419,8 +419,7 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->    
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>

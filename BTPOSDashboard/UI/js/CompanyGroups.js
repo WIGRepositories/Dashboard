@@ -32,7 +32,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Name: Group.Name,
             admin: Group.admin,
             code: Group.code,
-            descr: Group.descr,
+            descr: Group.desc,
             active: (Group.active==true)?1:0,
             insupdflag:flag 
 
@@ -59,7 +59,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Name: Group.Name,
             admin: Group.admin,
             code: Group.code,
-            descr: Group.descr,
+            descr: Group.desc,
             active: (Group.active == true) ? 1 : 0,
             insupdflag: flag
 

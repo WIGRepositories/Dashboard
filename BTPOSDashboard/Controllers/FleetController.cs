@@ -74,25 +74,27 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(gsab);
 
                 SqlParameter gsab1 = new SqlParameter();
-                gsab1.ParameterName = "@VehicleLayout";
-                gsab1.SqlDbType = SqlDbType.VarChar;
-                gsab1.Value = n.VehicleLayout;
+                gsab1.ParameterName = "@VehicleLayoutId";
+                gsab1.SqlDbType = SqlDbType.Int;
+                gsab1.Value = n.VehicleLayoutId;
                 cmd.Parameters.Add(gsab1);
 
                 SqlParameter gsac = new SqlParameter("@FleetOwnerId", SqlDbType.VarChar);
                 gsac.Value = n.FleetOwnerId;
+                gsac.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(gsac);
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@CompanyId";
-                gid.SqlDbType = SqlDbType.VarChar;
+                gid.SqlDbType = SqlDbType.Int;
                 gid.Value = n.CompanyId;
                 cmd.Parameters.Add(gid);
 
                 SqlParameter nser = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
+                nser.SqlDbType = SqlDbType.Int;
                 nser.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
-
+                cmd.Parameters.Add(nser);               
+               
                 SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
                 nActive.Value = n.Active;
                 cmd.Parameters.Add(nActive);
@@ -133,6 +135,38 @@ namespace BTPOSDashboard.Controllers
 
             return ds;
         }
+
+
+        [HttpGet]
+        public DataSet VehicleLayoutConfiguration(int vehicleLayoutTypeId)
+        {
+            DataSet ds = new DataSet();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetVehicleLayoutConfiguration";
+            cmd.Connection = conn;
+
+
+            SqlParameter gsa = new SqlParameter();
+            gsa.ParameterName = "@vlTypeId";
+            gsa.SqlDbType = SqlDbType.Int;
+            gsa.Value = vehicleLayoutTypeId;
+            cmd.Parameters.Add(gsa);
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+
+            db.Fill(ds);
+
+            return ds;
+        }
+        
+        
         public void Options()
         {
         }

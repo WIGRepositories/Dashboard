@@ -1,11 +1,10 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Home | Users | Users | Add New User</title>
+    <title>Home | Users | Users | Add New Fleet Owner</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <!--Loading bootstrap css-->    
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -14,10 +13,10 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="User">
+<body ng-init="GetUsersinitData();" ng-model="User">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -111,14 +110,14 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
                                             <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
                                     </li>
                                     <li>
-                                    <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
+                                    <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
 
                             </li>
 
@@ -159,10 +158,10 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                        <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
                                         <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                        <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
                                     </ul>
                                 </li>
 
@@ -172,12 +171,12 @@
 
                                     <ul class="nav nav-third-level">
                                         <li><a href="InventoryItems.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Items</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
+                                        <li><a href="InventoryStatus.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
                                         <li><a href="InventorySales.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Sales</span></a></li>
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                        <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
+                                        <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                        <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
                                     </ul>
                             </ul>
@@ -201,7 +200,7 @@
                                         <li><a href="Roles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Roles</span></a></li>
                                         <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                         <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
                                     </ul>
                                 </li>
 
@@ -211,21 +210,21 @@
                                     <ul class="nav nav-third-level">
                                         <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
 
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
+                                        <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
 
 
                                     </ul>
                                 </li>
-                                <li><a href="Empty.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
+                                <li><a href="BlockList.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
 
 
                             </ul>
@@ -282,10 +281,10 @@
 
 
                                 <li>
-                                    <a href="Empty.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
 
                                     </ul>
                                 </li>
@@ -325,57 +324,55 @@
 
 
                         <!--<li>
-                <a href="#">
-                    <i class="fa fa-send-o fa-fw">
-                        <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                    <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
-                    <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                    <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
-                    <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
-                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                    <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
-                </ul>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Users</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
+                                <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
+                                <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
+                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
+                                <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
+                                <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
+                            </ul>
 
-            </li>-->
+                        </li>-->
                         <!--<li>
-                <a href="#">
-                    <i class="fa fa-desktop fa-fw">
-                        <div class="icon-bg bg-pink"></div>
-                    </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                    <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                    <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
-                    <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
-                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
+                            <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
+                                <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
 
-                </ul>
-            </li>
-
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-send-o fa-fw">
-                        <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                    <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                    <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                    <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
-                    <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
-                </ul>
-            </li>
+                            </ul>
+                        </li>
 
 
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
+                                <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                                <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
+                                <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
+                                <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
+                            </ul>
+                        </li>
 
 
 
@@ -385,46 +382,48 @@
 
 
 
-            <li>
-                <a href="#">
-                    <i class="fa fa-edit fa-fw">
-                        <div class="icon-bg bg-violet"></div>
-                    </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
-                    <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-th-list fa-fw">
-                        <div class="icon-bg bg-blue"></div>
-                    </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-envelope-o">
-                        <div class="icon-bg bg-primary"></div>
-                    </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                    <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                    <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                    <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                    <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
-                    <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
-                </ul>
-            </li>-->
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-edit fa-fw">
+                                    <div class="icon-bg bg-violet"></div>
+                                </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
+                                <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-th-list fa-fw">
+                                    <div class="icon-bg bg-blue"></div>
+                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-envelope-o">
+                                    <div class="icon-bg bg-primary"></div>
+                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
+                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                            </ul>
+                        </li>-->
                         </ul>
                     </div>
                 </nav>
@@ -433,160 +432,151 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Users</div>
+                            <div class="page-title">Add User</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="Users.html">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="AddNewUser.html">Add New User</a></li>
+                            <li><a href="AddFleetowner.html">Add New Fleet Owner</a></li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
-                </div>
-                <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                <div id="page-wrapper">
+
+                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
 
                     <div class="page-content">
-                        <div id="form-layouts" class="row">
-                            <div class="col-lg-12">
 
-                                <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
-                                    <div id="tab-form-actions" class="tab-pane fade active in">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="panel panel-violet">
-                                                    <div class="panel-heading">Add NewFleet Owner</div>
-                                                    <div class="panel-body pan">
-                                                        <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                            <div class="form-body">
-                                                                <div class="form-group">
-                                                                    <label for="inputFirstName" class="col-md-2 control-label">First Name:</label>
+                        <div id="tab-form-actions" class="tab-pane fade active in">
+                            <div class="row">
 
-                                                                    <div class="col-md-3"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
+                                <div class="col-lg-12">
+                                    <div class="panel panel-violet">
+                                        <div class="panel-heading">Add New Fleet Owner</div>
+                                        <div class="panel-body pan">
+                                            <form action="#" class="form-horizontal">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="inputFirstName" class="col-md-2 control-label">First Name:<span class='require'>*</span></label>
 
-                                                                    <label for="inputLastName" class="col-md-2 control-label">Last Name:</label>
+                                                        <div class="col-md-3"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
 
-                                                                    <div class="col-md-3"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="inputMiddleName" class="col-md-2 control-label">Middle Name</label>
+                                                        <label for="inputLastName" class="col-md-2 control-label">Last Name:<span class='require'>*</span></label>
 
-                                                                    <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
+                                                        <div class="col-md-3"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputMiddleName" class="col-md-2 control-label">Middle Name</label>
 
-                                                                    <label for="inputLastName" class="col-md-2 control-label">Email <span class='require'>*</span></label>
+                                                        <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
 
-                                                                    <div class="col-md-3"><input id="inputLastName" type="text" placeholder="" class="form-control" ng-model="User.Email" /><span class="help-block"></span></div>
+                                                        <label for="inputLastName" class="col-md-2 control-label">Email:<span class='require'>*</span></label>
 
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="inputMiddleName" class="col-md-2 control-label">MobileNumber</label>
+                                                        <div class="col-md-3"><input id="inputLastName" type="text" placeholder="" class="form-control" ng-model="User.Email" /><span class="help-block"></span></div>
 
-                                                                    <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="" class="form-control" ng-model="User.MobileNo" /><span class="help-block"></span></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputMiddleName" class="col-md-2 control-label">Mobile Number:</label>
 
-                                                                    <label for="" class="col-md-2 control-label">Employee NO <span class='require'>*</span></label>
+                                                        <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="" class="form-control" ng-model="User.MobileNo" /><span class="help-block"></span></div>
 
-                                                                    <div class="col-md-3"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
+                                                        <label for="" class="col-md-2 control-label">Employee No:<span class='require'>*</span></label>
 
+                                                        <div class="col-md-3"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
 
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Address Id" class="col-md-2 control-label">Address:</label>
 
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="Address Id" class="col-md-2 control-label">Address<span class='require'>*</span></label>
+                                                        <div class="col-md-3"><textarea rows="3" class="form-control" ng-model="User.AdressId"></textarea></div>
+                                                        <label for="" class="col-md-2 control-label">Supervisor:</label>
 
-                                                                    <div class="col-md-9"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
-                                                                </div>
-                                                                <div class="panel panel-violet">
-                                                                    <div class="panel-heading">User Role</div><br />
-                                                                    <!--<div class="form-group">
-                    <label for="Address Id" class="col-md-3 control-label">Address Id<span class='require'>*</span></label>
+                                                        <div class="col-md-3">
+                                                            <select ng-options="mgr.FirstName+' '+mgr.LastName  for mgr in MgrUsers track by mgr.Id" ng-model="mgr" style="width:100%">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
 
-                    <div class="col-md-4"><input id="Address Id" type="text" class="form-control" ng-model="User.AdressId" /><span class="help-block"></span></div>
-                </div>-->
-                                                                    <div class="form-group">
-                                                                        <br />
-                                                                        <label for="inputMiddleName" class="col-md-2 control-label">Company:<span class='require'>*</span></label>
+                                                    </div>
+                                                    <div class="panel panel-violet">
+                                                        <div class="panel-heading">User Role</div><br />
 
-                                                                        <div class="col-md-3">
-                                                                            <select ng-options="s.Company for s in companies track by s.companyid" ng-model="s" ng-change="getselectval(s)">
-                                                                                <option value="">Select Company</option>
-                                                                            </select>
-                                                                        </div>
+                                                        <div class="form-group">
 
-                                                                        <label for="inputMiddleName" class="col-md-2 control-label">Roles:<span class='require'>*</span></label>
-                                                                        <div class="col-md-3">
-                                                                            <select ng-options="r.Name for r in companies track by r.Id" ng-model="r" readonly>
-                                                                                <option value="">Fleet Owner</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
+                                                            <label for="inputMiddleName" class="col-md-2 control-label">Company:<span class='require'>*</span></label>
 
-                                                                    <br />
-                                                                </div>
-
-                                                                <div class="panel panel-violet">
-                                                                    <div class="panel-heading">User Login</div>
-                                                                    <div class="panel-body pan">
-
-                                                                        <div class="form-group" style="width:100%;">
-                                                                            <br />
-                                                                            <div style="width:30%;float:left">
-                                                                                <label for="inputMiddleName" class="col-md-5">UserName<span class='require'>*</span></label>
-
-                                                                                <div class="col-md-7"><input type="text" class="form-control" ng-model="User.UserName" /><span class="help-block"></span></div>
-                                                                            </div>
-                                                                            <div style="width:30%;float:left">
-                                                                                <label for="inputMiddleName" class="col-md-5">Password<span class='require'>*</span></label>
-
-                                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="User.Password" /><span class="help-block"></span></div>
-                                                                            </div>
-                                                                            <div style="width:30%;float:left">
-                                                                                <label for="inputMiddleName" class="col-md-5">Re-Enter Password</label>
-
-                                                                                <div class="col-md-7"><input type="password" class="form-control" /><span class="help-block"></span></div>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-actions text-center pal">
-                                                                    <button type="submit" class="btn btn-green" ng-click="save(User, 'I')">Save</button>
-                                                                    &nbsp;
-                                                                    <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />
-                                                                    <br />
-                                                                </div>
-
-
+                                                            <div class="col-md-3">
+                                                                <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
+                                                                    <option value="">Select Company</option>
+                                                                </select>
                                                             </div>
-                                                        </form>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                   
-                                                </div>
-                                            </div>
-                                            <!--END FOOTER-->
 
+                                                            <label for="inputMiddleName" class="col-md-2 control-label">Role:<span class='require'>*</span></label>
+                                                            <div class="col-md-3">
+                                                                <select width="100%" disabled>
+                                                                    <option value="">Fleet Owner</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="panel panel-violet">
+                                                        <div class="panel-heading">User Login</div>
+
+                                                        <br />
+                                                        <div class="form-group">
+
+                                                            <div style="width:30%;float:left">
+                                                                <label for="inputMiddleName" class="col-md-5">User Name:</label>
+
+                                                                <div class="col-md-7"><input type="text" class="form-control" ng-model="User.UserName" /></div>
+                                                            </div>
+                                                            <div style="width:30%;float:left">
+                                                                <label for="inputMiddleName" class="col-md-5">Password:</label>
+
+                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="User.Password" /></div>
+                                                            </div>
+                                                            <div style="width:30%;float:left">
+                                                                <label for="inputMiddleName" class="col-md-5">Re-Enter Password:</label>
+
+                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="reenteredPwd" /><span class="help-block"></span></div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <div class="form-actions text-center">
+                                                        <button class="btn btn-green" ng-click="save(User, 'I',2)">Save</button>
+                                                        &nbsp;
+                                                        <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />
+                                                    </div>
+
+
+                                                </div>
+                                            </form>
                                         </div>
-
                                     </div>
                                 </div>
-                       
+                            </div>
+
+                        </div>
+
                     </div>
-                <!--END CONTENT--><!--BEGIN FOOTER-->
-               
+
+
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+
                 </div>
             </div>
-        <div id="footer">
-            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
         </div>
-        </div>
-    
-    <!--END PAGE WRAPPER-->
-
+    </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -605,12 +595,13 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
     <script src="js/angular.js"></script>
-    <script src="js/Users.js"></script>
     <script src="js/ngStorage.js"></script>
+    <script src="js/Users.js"></script>
 
 </body>
 </html>

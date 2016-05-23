@@ -141,8 +141,9 @@ namespace BTPOSDashboardAPI.Models
     {
         public int Id { set; get; }
         public int UserId { set; get; }
-        public int GroupId { set; get; }
+        public int CompanyId { set; get; }
         public int RoleId { set; get; }
+        public int flag { set; get; }
         public string Passkey { set; get; }
 
     }
@@ -532,6 +533,7 @@ namespace BTPOSDashboardAPI.Models
         public string Company { get; set; }
         public int CompanyId { get; set; }
 
+        public int insdelflag { get; set; }
 
     }
     public class PaymentReceivings
@@ -1277,8 +1279,45 @@ namespace BTPOSDashboardAPI.Models
     }
 
     public class FleetStaff
-    { 
+    {
 
 
+
+        public object Id { get; set; }
+
+        public object StaffRole { get; set; }
+
+        public object UserId { get; set; }
+
+        public object FromDate { get; set; }
+
+        public object ToDate { get; set; }
+
+        public object Active { get; set; }
+    }
+
+    public class VehicleConfig { 
+    public int?  needFleetDetails  { get; set; }
+	public int? needRoutes  { get; set; }
+	public int? needRoles   { get; set; }
+	public int? needusers  { get; set; }
+	public int? needfleetowners   { get; set; }
+    public int? needvehicleType { get; set; }
+    public int? needvehicleRegno { get; set; }
+    public int? needServiceType { get; set; }
+    public int? needCompanyName { get; set; }
+    public int? needVehicleLayout { get; set; }
+    public int? needFleetRoute { get; set; }
+    public int? needRouteName { get; set; }
+    }
+
+    public class LicenseTypes {
+        public int Id { set; get; }
+        public int Active { set; get; }
+        public string LicenseType { set; get; }
+        public string Desc { set; get; }       
+        public string LicenseCategory { set; get; }
+        public int LicenseCategoryId { set; get; }
+        
     }
 }

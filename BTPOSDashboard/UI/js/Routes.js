@@ -26,7 +26,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             alert('Please enter Route');
             return;
         }
-        if (routes.Route == null) {
+        if (routes.RouteName == null) {
             alert('plaease enter Route');
             return;
 
@@ -53,8 +53,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         }
 
 
-        var routes = {
-            RouteName: routes.Route,
+        var newroute = {
+            RouteName: routes.RouteName,
             Code: routes.Code,
             Description: routes.Description,
             Active: 1,//(routes.Active==true)?1:0,
@@ -69,7 +69,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             url: 'http://localhost:1476/api/Routes/SaveRoutes',
             //headers: {
             //    'Content-Type': undefined
-            data: routes
+            data: newroute
         }
 
         $http(req).then(function (res) {
@@ -77,7 +77,9 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         });
 
         //insert the return route details if provided
-        if (routes.ReturnRoute == true) {
+        var needReturnRoute = document.getElementById('rtn').checked;
+
+        if (needReturnRoute) {
             var retroutes = {
                 RouteName: routes.ReturnRouteName,
                 Code: routes.ReturnCode,
@@ -101,5 +103,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
                 // alert('Route created successfully');
             });
         }
+        alert('saved successfully.');
+        $scope.routes = null;
     };
 });
