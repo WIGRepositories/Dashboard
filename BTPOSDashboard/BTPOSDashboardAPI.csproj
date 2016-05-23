@@ -390,6 +390,7 @@
     <Content Include="UI\CompanyReports.html" />
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\Configuration.html" />
+    <Content Include="UI\ConfigureNotifications.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
     <Content Include="UI\css\handsontable.full.min.css" />
@@ -417,7 +418,6 @@
     <Content Include="UI\css\themes\style2\pink-green.css" />
     <Content Include="UI\css\themes\style2\pink-grey.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
-    <Content Include="UI\DefaultPricing.html" />
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
@@ -444,7 +444,6 @@
     <Content Include="UI\js\FleetDetail.js" />
     <Content Include="UI\js\FleetOwners.js" />
     <Content Include="UI\js\FleetRoutes.js" />
-    <Content Include="UI\js\Fleetrs1.js" />
     <Content Include="UI\js\FleetStaff.js" />
     <Content Include="UI\js\handsontable.full.min.js" />
     <Content Include="UI\js\InventoryItem.js" />

@@ -4294,8 +4294,8 @@ CREATE procedure [dbo].[InsUpdUsers](
   
  if @cnt = 0 
  begin
-	insert into Users(FirstName,LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active,CompanyId)
-	values(@FirstName,@LastName,@MiddleName, @UserTypeId,@EmpNo,@Email,@AdressId,@MobileNo,@RoleId,@Active,@cmpId) 
+	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
+	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
   
  
     SELECT @currid = @@IDENTITY
@@ -4320,9 +4320,7 @@ end
  LastName = @LastName,
  MiddleName = @MiddleName,
  Email = @Email,
- MobileNo = @MobileNo,
- RoleId = @RoleId,
- UserTypeId=@UserTypeId,
+ MobileNo = @MobileNo, 
  Active = @Active 
  where id = @userid
  
@@ -4408,16 +4406,7 @@ where LoginInfo=@logininfo and [PassKey]=@passkey
 
 end
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE Procedure [dbo].[GetUsertypeId] (@UserTypeId int=-1)
-as begin 
-select * from Users
-where UserTypeId=@UserTypeId or @UserTypeId=-1
-end
+
 
 GO
 SET ANSI_NULLS ON
@@ -5119,8 +5108,8 @@ set @cmpid = 0
  begin
  
    insert into Users (FirstName,
-   LastName,MiddleName, UserTypeId,EmpNo,Email,AddressId,MobileNo,[RoleId],Active,CompanyId)
-   values(@FirstName,@LastName,null,1,'FL00'+@fc,@Email,null,@MobileNo,6,1,@cmpid) 
+   LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
+   values(@FirstName,@LastName,null,'FL00'+@fc,@Email,null,@MobileNo,1,@cmpid) 
           
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
