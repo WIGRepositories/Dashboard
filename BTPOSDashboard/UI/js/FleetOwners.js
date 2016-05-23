@@ -8,7 +8,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.FleetOwner = res.data;
         });
     }
-
+   
     $scope.save = function (Fleet) {
         if (Fleet == null) {
             alert('Please enter VehicleRegNo.');
@@ -32,7 +32,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Company: Fleet.Company,
             FleetOwnerCode: Fleet.FleetOwnerCode,
             Active: Fleet.Active,
-
+           
 
         };
 

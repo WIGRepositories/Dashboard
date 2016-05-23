@@ -128,7 +128,6 @@
     <Content Include="CommercialSite\LicensePage.html" />
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="DBScripts\Init.sql" />
-    <Content Include="DBScripts\RolesInit.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetAlerts.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetAuditDetails.sql" />
     <Content Include="DBScripts\Sprocs\dbo.GetBlockList.sql" />
@@ -385,15 +384,12 @@
     <Content Include="UI\BlockList.html" />
     <Content Include="UI\BtposLicense.html" />
     <Content Include="UI\BTPOSMonitoringPage.html" />
-    <Content Include="UI\BtPosPics.html" />
     <Content Include="UI\BtposRoutes.html" />
     <Content Include="UI\CompanyReports.html" />
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\Configuration.html" />
-    <Content Include="UI\ConfigureNotifications.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
-    <Content Include="UI\css\handsontable.full.min.css" />
     <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
@@ -418,6 +414,7 @@
     <Content Include="UI\css\themes\style2\pink-green.css" />
     <Content Include="UI\css\themes\style2\pink-grey.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
+    <Content Include="UI\DefaultPricing.html" />
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
@@ -438,6 +435,7 @@
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\createfleet.js" />
+    <Content Include="UI\js\CreateRole.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
@@ -445,14 +443,12 @@
     <Content Include="UI\js\FleetOwners.js" />
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
-    <Content Include="UI\js\handsontable.full.min.js" />
     <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
     <Content Include="UI\js\licensedetails.js" />
     <Content Include="UI\js\LicenseDetails1.js" />
     <Content Include="UI\js\LicensePricing.js" />
-    <Content Include="UI\js\mainTbl.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Notifications.js" />
     <Content Include="UI\js\Objects.js" />
@@ -464,7 +460,6 @@
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
-    <Content Include="UI\LicenseTypes.html" />
     <Content Include="UI\Login.html" />
     <Content Include="UI\Inventory.html" />
     <Content Include="UI\images\bg\1.jpg" />
@@ -1984,7 +1979,6 @@
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
-    <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
     <Compile Include="Controllers\countryController.cs" />
@@ -2022,6 +2016,7 @@
     <Compile Include="Controllers\TypeGroupsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\UserLoginsController.cs" />
+    <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
