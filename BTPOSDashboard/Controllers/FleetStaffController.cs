@@ -17,7 +17,7 @@ namespace BTPOSDashboard.Controllers
         {
             [HttpGet]
             [Route("api/FleetStaff/GetFleetStaff")]
-            public DataSet GetFleetStaff()
+            public DataSet GetFleetStaff(int foId, int cmpid)
             {
                 DataTable Tbl = new DataTable();
 
@@ -30,6 +30,19 @@ namespace BTPOSDashboard.Controllers
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GetFleetStaff";
                 cmd.Connection = conn;
+
+                SqlParameter fo = new SqlParameter();
+                fo.ParameterName = "@fleetowner";
+                fo.SqlDbType = SqlDbType.Int;
+                fo.Value = foId;
+                cmd.Parameters.Add(fo);
+
+                SqlParameter fsc = new SqlParameter();
+                fsc.ParameterName = "@cmpId";
+                fsc.SqlDbType = SqlDbType.Int;
+                fsc.Value = cmpid;
+                cmd.Parameters.Add(fsc);
+
                 DataSet ds = new DataSet();
                 SqlDataAdapter db = new SqlDataAdapter(cmd);
 
@@ -54,7 +67,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsupdelFleetStaff";
+                cmd.CommandText = "InsUpdDelFleetStaff";
                 cmd.Connection = conn;
 
                 conn.Open();
@@ -65,10 +78,16 @@ namespace BTPOSDashboard.Controllers
                 gsa.Value = f.Id;
                 cmd.Parameters.Add(gsa);
 
+                SqlParameter vid = new SqlParameter();
+                vid.ParameterName = "@VehicleId";
+                vid.SqlDbType = SqlDbType.Int;
+                vid.Value = f.vehicleId;
+                cmd.Parameters.Add(vid);
+
                 SqlParameter gsn = new SqlParameter();
-                gsn.ParameterName = "@StaffRole";
+                gsn.ParameterName = "@RoleId";
                 gsn.SqlDbType = SqlDbType.Int;
-                gsn.Value = f.StaffRole;
+                gsn.Value = f.roleId;
                 cmd.Parameters.Add(gsn);
 
                 SqlParameter gsab = new SqlParameter();
@@ -77,26 +96,28 @@ namespace BTPOSDashboard.Controllers
                 gsab.Value = f.UserId;
                 cmd.Parameters.Add(gsab);
 
+                SqlParameter fsc = new SqlParameter();
+                fsc.ParameterName = "@cmpId";
+                fsc.SqlDbType = SqlDbType.Int;
+                fsc.Value = f.cmpId;
+                cmd.Parameters.Add(fsc);
+
                 SqlParameter gsac = new SqlParameter("@FromDate", SqlDbType.DateTime);
-                gsac.Value = f.FromDate;
+                gsac.Value =  f.FromDate;
                 cmd.Parameters.Add(gsac);
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@ToDate";
                 gid.SqlDbType = SqlDbType.DateTime;
-                gid.Value = f.ToDate;
+                gid.Value =  f.ToDate;
                 cmd.Parameters.Add(gid);
 
-                SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
-                nActive.Value = f.Active;
-                cmd.Parameters.Add(nActive);
+                SqlParameter flag = new SqlParameter("@insupddelflag", SqlDbType.Char);
+                flag.Value = f.insupddelflag;
+                cmd.Parameters.Add(flag);
+
                 cmd.ExecuteScalar();
                 conn.Close();
-             
-               // DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
 
             }
             catch (Exception ex)

@@ -118,7 +118,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Fleet/NewFleetDetails',
+            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
             //headers: {
             //    'Content-Type': undefined
 

@@ -1594,14 +1594,17 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE TABLE [dbo].[FleetStaff](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RoleId] int NOT NULL,
+	[RoleId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
-	[FromDate] [datetime] NOT NULL,
-	[ToDate] [datetime] NOT NULL,
-	[VehicleId] int NOT NULL
+	[FromDate] [datetime]  NULL,
+	[ToDate] [datetime]  NULL,
+	[VehicleId] [int] NOT NULL,
+	[CompanyId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 
 GO
@@ -5679,7 +5682,7 @@ GO
 
 CREATE PROCEDURE [dbo].[GetFleetStaff]
 	-- Add the parameters for the stored procedure here
-	(@fleetowner int = -1)
+	(@fleetowner int = -1, @cmpId int = -1)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -5700,11 +5703,73 @@ BEGIN
       inner join FleetDetails FD on FD.Id = FS.vehicleId
       inner join Users u on fs.UserId=u.id
 inner join Roles r on r.Id = FS.roleid
-where (FD.FleetOwnerId = @fleetowner or @fleetowner = -1)
+where ((FD.FleetOwnerId = @fleetowner or @fleetowner = -1)
+ and (FD.CompanyId = @cmpId or @cmpId  = -1))
 
 END
 
+GO 
 
+CREATE PROCEDURE [dbo].[InsUpdDelFleetStaff]
+@Id int = -1,
+@RoleId int,
+@UserId int,
+@VehicleId int,
+@cmpId int,
+@FromDate datetime = null,
+@ToDate datetime = null,
+@insupddelflag varchar
+as
+begin
+
+declare @cnt  int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].[FleetStaff] 
+where vehicleid = @vehicleid 
+and userid = @userid 
+and companyid = @cmpid
+and roleid = @roleid
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[FleetStaff]
+           ([RoleId]
+           ,[UserId]
+           ,[FromDate]
+           ,[ToDate]
+           ,[VehicleId]
+           ,[CompanyId])
+     VALUES
+           (@RoleId
+           ,@UserId
+           ,@FromDate
+           ,@ToDate
+           ,@VehicleId
+           ,@cmpid)
+end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[FleetStaff]
+   SET [RoleId] = @RoleId
+      ,[UserId] = @UserId
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+      ,[VehicleId] = @VehicleId
+      ,[CompanyId] = @cmpid
+ WHERE Id = @Id
+
+else
+  delete from [POSDashboard].[dbo].[FleetStaff]
+where vehicleid = @vehicleid 
+and userid = @userid 
+and companyid = @cmpid
+and roleid = @roleid
+
+End
 
 GO
 /****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/

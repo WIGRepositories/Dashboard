@@ -1280,20 +1280,23 @@ namespace BTPOSDashboardAPI.Models
 
     public class FleetStaff
     {
+        public int Id { get; set; }
+        public int cmpId { get; set; }
+        public int roleId { get; set; }
+        public int vehicleId { get; set; }
+       
+        public int UserId { get; set; }
 
+        public int RoleName { get; set; }
+        public int Company { get; set; }
 
+        public string VechileRegNo { get; set; }
+        public DateTime? FromDate { get; set; }
 
-        public object Id { get; set; }
+        public DateTime? ToDate { get; set; }
 
-        public object StaffRole { get; set; }
-
-        public object UserId { get; set; }
-
-        public object FromDate { get; set; }
-
-        public object ToDate { get; set; }
-
-        public object Active { get; set; }
+        public int Active { get; set; }
+        public char insupddelflag { get; set; }
     }
 
     public class VehicleConfig
