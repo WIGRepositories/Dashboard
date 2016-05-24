@@ -62,9 +62,9 @@ namespace BTPOSDashboardAPI.Controllers
             iid.Value = Convert.ToString(b.UserId);
             cmd.Parameters.Add(iid);
             SqlParameter ii = new SqlParameter();
-            ii.ParameterName = "@GroupId";
+            ii.ParameterName = "@CompanyId";
             ii.SqlDbType = SqlDbType.Int;
-            ii.Value = Convert.ToString(b.GroupId);
+            ii.Value = Convert.ToString(b.CompanyId);
             cmd.Parameters.Add(ii);
             SqlParameter rr = new SqlParameter();
             rr.ParameterName = "@RoleId";

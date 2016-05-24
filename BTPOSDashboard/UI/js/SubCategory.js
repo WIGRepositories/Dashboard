@@ -2,10 +2,12 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
-        $scope.Categories = response.data;
-        $scope.getselectval();
-    })
+    $scope.GetCategories = function () {
+        $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
+            $scope.Categories = response.data;
+           // $scope.getselectval();
+        });
+    }
 
 
     $scope.getselectval = function (seltype) {

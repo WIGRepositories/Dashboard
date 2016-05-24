@@ -13,6 +13,7 @@ namespace BTPOSDashboardAPI.Controllers
     public class InventoryController : ApiController
     {
 
+        [HttpGet]
         public DataTable GetInventory()
         {
             DataTable Tbl = new DataTable();

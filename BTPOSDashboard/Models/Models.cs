@@ -1320,4 +1320,19 @@ namespace BTPOSDashboardAPI.Models
         public int LicenseCategoryId { set; get; }
         
     }
-}
+    public class GetInventory
+    {
+        public int Active { set; get; }
+        public int availableQty { set; get; }
+        public string category {set; get;}
+        public string code { set; get; }
+        public string desc { set; get; }
+        public int InventoryId { set; get; }
+        public  string name { set; get; }
+        public  int PerUnitPrice{set;get;}
+        public int reorderpoint{set;get;}
+        public string subcat{set;get;}
+    }
+}                     
+        
+
