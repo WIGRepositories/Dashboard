@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrl">
 <head>
-    <title>Home | BT POS | Vehicle Details</title>
+    <title>Home | Fleet | Fleet Staff</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="images/icons/favicon.ico">
 
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -422,20 +422,19 @@
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
-                        <div id="table-action" class="row">
-                            <div class="col-lg-12">
+                        <!--<div id="table-action" class="row">
+                            <div class="col-lg-12">-->
 
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
 
-
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
                                                         <div class="col-md-5">
-                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            Company:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
 
                                                                 <option value="">All</option>
                                                             </select>
@@ -448,12 +447,9 @@
                                                             </select>
                                                         </div>
                                                         <div class="actions">
-                                                            <a href="AddFleetStaff.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New Fleet Staff</button></a>
+                                                            <a href="AddFleetStaff.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add Fleet Staff</button></a>
 
                                                         </div>
-
-
-
                                                     </div>
 
 
@@ -490,51 +486,20 @@
                                                                     Edit
                                                                 </button>
                                                             <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
-                                                            </td>
-
-
                                                         
                                                            </tr>
                                                     </tbody>
 
                                                 </table>
-                                                <!--<div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="pagination-panel">
-                                                            Page
-                                                            &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                            of 6 | View
-                                                            &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                <option value="20" selected="selected">20</option>
-                                                                <option value="50">50</option>
-                                                                <option value="100">100</option>
-                                                                <option value="150">150</option>
-                                                                <option value="-1">All</option>
-                                                            </select>&nbsp;
-                                                            records | Found total 58 records
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 text-right">
-                                                        <div class="pagination-panel">
-                                                            <ul class="pagination pagination-sm man">
-                                                                <li><a href="#">&laquo;</a></li>
-                                                                <li><a href="#">1</a></li>
-                                                                <li><a href="#">2</a></li>
-                                                                <li><a href="#">3</a></li>
-
-                                                                <li><a href="#">&raquo;</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>-->
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
 
-                            </div>
-                        </div>
+                            <!--</div>
+                        </div>-->
                     </div>
                 </div>
                 <!--END CONTENT--><!--BEGIN FOOTER-->

@@ -7,20 +7,16 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Configuration;
 
-namespace BTPOSDashboardAPI.Controllers
+namespace BTPOSDashboard.Controllers
 {
     public class VehicleConfigController : ApiController
     {
     
         [HttpPost]
-
         public DataSet VConfig(VehicleConfig vc)
         {
             //DataTable Tbl = new DataTable();
-
-
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -30,7 +26,6 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "VehicleConfiguration";
             cmd.Connection = conn;
-                    
 
             SqlParameter gsaa = new SqlParameter();
             gsaa.ParameterName = "@needRoutes";
@@ -78,11 +73,41 @@ namespace BTPOSDashboardAPI.Controllers
             gsk.ParameterName = "@needvehicleType";
             gsk.SqlDbType = SqlDbType.Int;
             gsk.Value = (vc.needvehicleType == null) ? 0 : 1; 
-            cmd.Parameters.Add(gsk);               
+            cmd.Parameters.Add(gsk);    
+           
+            //@needHireVehicle
+             SqlParameter nhv = new SqlParameter();
+             nhv.ParameterName = "@needHireVehicle";
+             nhv.SqlDbType = SqlDbType.Int;
+             nhv.Value = (vc.needHireVehicle == null) ? 0 : 1;
+             cmd.Parameters.Add(nhv);
+
+            //@needbtpos
+            SqlParameter nbtpos = new SqlParameter();
+            nbtpos.ParameterName = "@needbtpos";
+            nbtpos.SqlDbType = SqlDbType.Int;
+            nbtpos.Value = (vc.needbtpos == null) ? 0 : 1;
+            cmd.Parameters.Add(nbtpos); 
+
+            //@cmpId
+            SqlParameter cmpId = new SqlParameter();
+            cmpId.ParameterName = "@cmpId";
+            cmpId.SqlDbType = SqlDbType.Int;
+            cmpId.Value = (vc.cmpId == null) ? 0 : 1;
+            cmd.Parameters.Add(cmpId);
+
+            //@fleetownerId
+            SqlParameter foid = new SqlParameter();
+            foid.ParameterName = "@fleetownerId";
+            foid.SqlDbType = SqlDbType.Int;
+            foid.Value = (vc.fleetownerId == null) ? 0 : 1;
+            cmd.Parameters.Add(foid);    
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
+
+
            // Tbl = ds.Tables[0];
 
             // int found = 0;
