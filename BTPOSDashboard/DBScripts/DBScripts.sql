@@ -5584,8 +5584,11 @@ Create PROCEDURE [dbo].[VehicleConfiguration]
     @needServiceType int = 0,
     @needfleetowners int =0,
     @needCompanyName int = 0,
-    @needVehicleLayout int = 0    
-    	
+    @needVehicleLayout int = 0, 
+    @needHireVehicle int =0,   
+    @needbtpos int = 0,
+    @cmpId int = -1,
+    @fleetownerId int = -1
 AS
 BEGIN
 
@@ -5598,6 +5601,7 @@ BEGIN
 	
 	if @needvehicleRegno  = 1
     select VehicleRegNo,Id from FleetDetails
+    where (fleetownerid = @fleetownerId or @fleetownerid =-1)
     
 	--vehicle type data
 	if @needvehicleType = 1
@@ -5609,8 +5613,15 @@ BEGIN
 	
 	--fleet owners
 	if @needfleetowners = 1
-	select u.FirstName + ' '+u.lastname as Name, u.Id from FleetOwner f
-	inner join Users u on u.Id = f.UserId
+	select u.FirstName+' '+u.LastName as Name,
+	c.Name as CompanyName
+	,FO.FleetOwnerCode
+	,FO.CompanyId
+	,U.Id
+	 from FleetOwner FO
+	inner join Users u on  u.Id = FO.UserId
+	inner join Company c on c.Id = FO.companyId
+    where (FO.companyId = @cmpId or @cmpId =-1)
 	
 	--companys
 	if @needCompanyName = 1
@@ -5620,11 +5631,25 @@ BEGIN
 	if @needVehicleLayout = 1
 	select Name, Id from Types where TypeGroupId = 6
 	
+	if @needbtpos = 1		
+SELECT b.[Id]
+      ,b.POSID            
+      ,[IMEI]
+      ,[ipconfig]
+      ,b.[active]
+      ,fleetownerid
+  FROM [POSDashboard].[dbo].[BTPOSDetails] b
+  where (fleetownerid = @fleetownerId or @fleetownerid =-1)
+
+if @needHireVehicle = 1
+select VehicleRegNo,Id from FleetDetails
+    where ((fleetownerid = @fleetownerId or @fleetownerid =-1) 
+    and (vehicletypeId = 11))
 	
 END
 
 
---[VehicleConfiguration] 0,1,0,0,0,1,0,0
+--[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,0,-1,0
 
 
 GO

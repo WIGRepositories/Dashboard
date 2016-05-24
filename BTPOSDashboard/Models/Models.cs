@@ -1296,19 +1296,25 @@ namespace BTPOSDashboardAPI.Models
         public object Active { get; set; }
     }
 
-    public class VehicleConfig { 
-    public int?  needFleetDetails  { get; set; }
-	public int? needRoutes  { get; set; }
-	public int? needRoles   { get; set; }
-	public int? needusers  { get; set; }
-	public int? needfleetowners   { get; set; }
-    public int? needvehicleType { get; set; }
-    public int? needvehicleRegno { get; set; }
-    public int? needServiceType { get; set; }
-    public int? needCompanyName { get; set; }
-    public int? needVehicleLayout { get; set; }
-    public int? needFleetRoute { get; set; }
-    public int? needRouteName { get; set; }
+    public class VehicleConfig
+    {
+        public int? needFleetDetails { get; set; }
+        public int? needRoutes { get; set; }
+        public int? needRoles { get; set; }
+        public int? needusers { get; set; }
+        public int? needfleetowners { get; set; }
+        public int? needvehicleType { get; set; }
+        public int? needvehicleRegno { get; set; }
+        public int? needServiceType { get; set; }
+        public int? needCompanyName { get; set; }
+        public int? needVehicleLayout { get; set; }
+        public int? needFleetRoute { get; set; }
+        public int? needRouteName { get; set; }
+        public int? needHireVehicle { get; set; }
+        public int? needbtpos { get; set; }
+        public int? cmpId { get; set; }
+        public int? fleetownerId { get; set; }
+
     }
 
     public class LicenseTypes {

@@ -9,7 +9,7 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
 
         var vc = {           
             needCompanyName: '1',
-            needvehicleRegno: '1',            
+            needvehicleRegno: '1'            
         };
 
         var req = {
