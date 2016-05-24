@@ -11,8 +11,8 @@ namespace BTPOSDashboard.Controllers
 {
     public class InventoryStatusController : ApiController
     {
-         [HttpGet]
-        public DataTable GetInventory()
+        [HttpGet]
+        public DataTable getInventory()
         {
             DataTable Tbl = new DataTable();
 
@@ -32,9 +32,8 @@ namespace BTPOSDashboard.Controllers
             Tbl = ds.Tables[0];
 
             // int found = 0;
-            return Tbl;
+            return ds;
         }
     }
 }
-  
-       
+
