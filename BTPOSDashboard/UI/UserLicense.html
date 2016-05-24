@@ -300,64 +300,132 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Dashboard</div>
+                            <div class="page-title">User License</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
-                            <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li>  <a href="LicensePayments.html">LicensePayments</a>
+                            <li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Active</th>
-                                <th>Update</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="T in TypeGroups" class="gradeA">
+                    <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div class="col-lg-12">
+                                <ul id="tableactiondTab" class="nav nav-tabs"></ul>
+                                <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
 
-                                <td>{{lok}}</td>
 
-                                <td>{{lok}}</td>
-                                <td><input type="checkbox" checked /></td>
-                                <td>
-                                    {{T.lk}}
-                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setTypeGroup(T);">
-                                        <i class="fa fa-edit"></i>&nbsp;
+                                                <div class="table-container">
+                                                    <div class="row mbm">                                            
+                                                                                                               
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="currGroup">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <td> Name:</td>
+                                                                                <td><input type="text" id="Name" ng-model="currGroup.Name"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> admin:</td>
+                                                                                <td><input type="text" id="admin" ng-model="currGroup.admin"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> adminId:</td>
+                                                                                <td><input type="text" id="adminId" ng-model="currGroup.adminId"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> code:</td>
+                                                                                <td><input type="text" id="code" ng-model="currGroup.code"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> descr:</td>
+                                                                                <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>active:</td>
+                                                                                <td>
+                                                                                    <label class="checkbox">
+                                                                                        <input type="checkbox" ng-model="currGroup.active" />
+                                                                                    </label>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <h3 class="mtn">License Details</h3>
 
+
+                                                    </div>
+                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>expiryOn</th>
+                                                                <th>licenseFor</th>
+                                                                <th>licenseId</th>
+                                                                <th>licenseType</th>
+                                                                <th>paidon</th>
+                                                                <th>renewedon</th>
+                                                                <th>transId</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <tr ng-repeat="group in Group" class="gradeA">
+
+                                                                <td>{{group.expiryOn}}</td>
+                                                                <td>{{group.licenseFor}}</td>
+                                                                <td>{{group.licenseId}}</td>
+                                                                <td>{{group.licenseType}}</td>
+                                                                <td>{{group.paidon}}</td>
+                                                                <td>{{group.renewedon}}</td>
+                                                                <td>{{group.transId}}</td>
+                                                            </tr>
+
+                                                        </tbody>
+
+                                                    </table>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--END CONTENT-->
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
-
-
-
-            </div>
-        </div>
-    </div>
-
-    </div>
-
-
-    </div>
-
-
-    <!--END CONTENT-->
-    <!--BEGIN FOOTER-->
-    <div id="footer">
-        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-    </div>
-    <!--END FOOTER-->
-    </div>
     <!--END PAGE WRAPPER-->
     </div>
     </div>
