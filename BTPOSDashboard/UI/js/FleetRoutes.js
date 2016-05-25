@@ -3,10 +3,10 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
 
-    $scope.GetVehicleConfig = function () {
+    $scope.GetCompanies = function () {
 
         var vc = {
-            needvehicleRegno: '1',
+            needCompanyName: '1',
             needRoutes: '1'
         };
 
@@ -23,11 +23,61 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
+    $scope.getVehiclesForCmp = function () {
+
+        $scope.vehicles = null;
+
+        var selCmp = $scope.cmp;
+
+        if (selCmp == null) {            
+            return;
+        }
+
+        var cmpId = (selCmp == null) ? -1 : selCmp.Id;
+
+        var vc = {
+            needvehicleRegno: '1',
+            cmpId: selCmp.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
+            $scope.vehicles = res.data;
+        });
+
+    }
+
     $scope.GetFleetRoutes = function () {      
 
-        $http.get('http://localhost:1476/api/FleetRoutes/getFleetRoutesList?routeid=-1').then(function (res, data) {
-            $scope.FleetRoute = res.data;
+        var selCmp = $scope.cmp;
 
+        if (selCmp == null) {
+            $scope.FleetRoute = null;          
+            return;
+        }
+        var cmpId = (selCmp == null) ? -1 : selCmp.Id;
+
+        var fr = {
+            cmpId: selCmp.Id,
+            routeid: '-1',
+            fleetownerId:'-1'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetRoutes/getFleetRoutesList',
+            //headers: {
+            //    'Content-Type': undefined
+            data: fr
+        }
+        $http(req).then(function (res) {
+            $scope.FleetRoute = res.data;
         });
     }
 
@@ -37,6 +87,32 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.FleetRouteinit = res.data.Table;
         });
 
+    }
+
+    $scope.GetFleetOwners = function () {
+        if ($scope.cmp == null) {
+            $scope.FleetOwners = null;
+            return;
+        }
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.FleetOwners = res.data;
+            GetFleetRoutes();
+        });
     }
 
     $scope.save = function (FleetRoute) {
@@ -75,21 +151,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
     $scope.saveNewFleetRoutes = function (initdata) {
+              
         var newFR = initdata.newfleet;
-        /* if (newVD == null) {
-             alert('Please enter VehicleRegNo.');
-             return;
-         }
- 
-         if (newVD.VehicleRegNo == null) {
-             alert('Please enter VehicleRegNo.');
-             return;
-         }
-         if (Fleet.group == null || Fleet.VehicleTypeId.group.Id == null) {
-             alert('Please select a type group');
-             return;
-         }
-         */
+
+        if (newFR == null || newFR.v == null) {
+            alert('Please select VehicleRegNo.');
+            return;
+        }
+
+        if (newFR.v.Id == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+        if (newFR.r.ID == null) {
+            alert('Please select route.');
+            return;
+        }
 
         var FleetRouters = {
             Id:-1 ,
@@ -97,7 +175,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             RouteId: newFR.r.ID,
             EffectiveFrom: newFR.EffectiveFrom,
             EffectiveTill: newFR.EffectiveTill,
-            Active: 1,
+            insupddelflag:'I'            
         };
 
         var req = {

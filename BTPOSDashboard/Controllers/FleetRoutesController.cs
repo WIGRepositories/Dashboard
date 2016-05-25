@@ -15,9 +15,9 @@ namespace BTPOSDashboard.Controllers
     public class FleetRoutesController : ApiController
     {
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/FleetRoutes/getFleetRoutesList")]
-        public DataTable List(int routeid)
+        public DataTable List(FleetRoutes fr)
         {
             DataTable Tb1 = new DataTable();
 
@@ -34,8 +34,20 @@ namespace BTPOSDashboard.Controllers
             SqlParameter gsa = new SqlParameter();
             gsa.ParameterName = "@routeid";
             gsa.SqlDbType = SqlDbType.Int;
-            gsa.Value = routeid;
+            gsa.Value = fr.RouteId;
             cmd.Parameters.Add(gsa);
+
+            SqlParameter cmpid = new SqlParameter();
+            cmpid.ParameterName = "@cmpId";
+            cmpid.SqlDbType = SqlDbType.Int;
+            cmpid.Value = fr.cmpId;
+            cmd.Parameters.Add(cmpid);
+
+            SqlParameter foid = new SqlParameter();
+            foid.ParameterName = "@fleetownerId";
+            foid.SqlDbType = SqlDbType.Int;
+            foid.Value = fr.fleetownerId;
+            cmd.Parameters.Add(foid);
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -58,7 +70,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsupdelFleetDetails";
+                cmd.CommandText = "InsUpdDelFleetRoutes";
                 cmd.Connection = conn;
 
                 conn.Open();
@@ -81,26 +93,23 @@ namespace BTPOSDashboard.Controllers
                 gsab.Value = f.RouteId;
                 cmd.Parameters.Add(gsab);
 
-                SqlParameter gsac = new SqlParameter("@EffectiveFrom", SqlDbType.DateTime);
+                SqlParameter gsac = new SqlParameter("@FromDate", SqlDbType.DateTime);
                 gsac.Value = f.EffectiveFrom;
                 cmd.Parameters.Add(gsac);
 
                 SqlParameter gid = new SqlParameter();
-                gid.ParameterName = "@EffectiveTill";
+                gid.ParameterName = "@ToDate";
                 gid.SqlDbType = SqlDbType.DateTime;
                 gid.Value = f.EffectiveTill;
                 cmd.Parameters.Add(gid);
 
-                SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
-                nActive.Value = f.Active;
-                cmd.Parameters.Add(nActive);
+                SqlParameter flag = new SqlParameter("@insupddelflag", SqlDbType.Char);
+                flag.Value = f.insupddelflag;
+                cmd.Parameters.Add(flag);
+
+
                 cmd.ExecuteScalar();
-                conn.Close();
-             
-               // DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+                conn.Close();                     
 
             }
             catch (Exception ex)
@@ -111,27 +120,7 @@ namespace BTPOSDashboard.Controllers
            return Tbl;
 
         }
-        [HttpGet]
-        public DataSet VehicleConfiguration()
-        {
-            DataSet ds = new DataSet();
-
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "VehicleConfiguration";
-            cmd.Connection = conn;
-
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-
-            db.Fill(ds);
-
-            return ds;
-        }
+       
         public void Options()
         {
         }

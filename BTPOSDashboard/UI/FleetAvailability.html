@@ -5,11 +5,9 @@
     <title>Home | BT POS | Vehicle Details</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-  
+      
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
@@ -24,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetFleetAvailability();" ng-model="FleetAvailability">
+<body ng-init="GetCompanies();" ng-model="FleetAvailability">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -76,7 +74,7 @@
                                 <div class="info">
                                     <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
-                                        <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                        <li><a href="UserProfile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
                                         <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
@@ -84,7 +82,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -92,13 +90,8 @@
                                 </a>
                             </li>
 
-
-
-
-
-
                             <li>
-                                <a href="#">
+                                <a href="Company.html">
                                     <i class="fa fa-sitemap fa-fw">
                                         <div class="icon-bg bg-dark"></div>
                                     </i><span class="menu-title">Company and Users</span><span class="fa arrow"></span>
@@ -148,7 +141,8 @@
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
-                                <li class="active"><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
+                                <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
 
                             </ul>
 
@@ -170,6 +164,7 @@
                                         <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                         <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
                                         <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
                                     </ul>
                                 </li>
 
@@ -186,7 +181,11 @@
                                         <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
                                         <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
+
                                     </ul>
+                                <li>
+                                    <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                </li>
                             </ul>
                         </li>
 
@@ -209,6 +208,9 @@
                                         <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                         <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
                                         <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">SmsGatewayConfiguration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">EmailGatewayConfiguration</span></a></li>
+
                                     </ul>
                                 </li>
 
@@ -219,6 +221,9 @@
                                         <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                         <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="FleetOwnerRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                        <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                        <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
 
                                     </ul>
                                 </li>
@@ -226,8 +231,9 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
+                                        <li><a href="LicenseCongiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
 
 
                                     </ul>
@@ -263,9 +269,10 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+
                             </ul>
                         </li>
 
@@ -297,17 +304,8 @@
                                     </ul>
                                 </li>
 
-
-
                             </ul>
                         </li>
-
-
-
-
-
-
-
                         </ul>
                     </div>
                 </nav>
@@ -321,7 +319,7 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="FleetRoutes.html">Fleet Availability</a>
+                            <li><a href="FleetAvailability.html">Fleet Availability</a>
 
                         </ol>
                         <div class="clearfix"></div>
@@ -340,19 +338,18 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
-                                                        <div class="col-md-5">
-                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-
-                                                                <option value="">All</option>
+                                                        <div class="col-md-4">
+                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleeAvailabilty()">
+                                                                <option value="">Select</option>
                                                             </select>
                                                         </div>
 
-                                                        <div class="col-md-5">
+                                                        <!--<div class="col-md-5">
                                                             Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-
                                                                 <option value="">All</option>
                                                             </select>
-                                                        </div>
+                                                        </div>-->
+
 
                                                         <div class="actions">
                                                             <a href="AddFleetAvailability.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add Fleet Availability</button></a>
@@ -442,7 +439,7 @@
 
 
                                                                 <th>Vehicle Reg No</th>
-                                                                <th>Service Type</th>
+                                                                <th>Fleet Owner</th>
                                                                 <th>From Date</th>
 
                                                                 <th>To Date</th>
@@ -454,8 +451,8 @@
                                                         <tbody>
 
                                                             <tr ng-repeat="R in FleetAvailability" class="gradeA">
-                                                                <td>{{R.Vehicle}}</td>
-                                                                <td>{{R.ServiceType}}</td>
+                                                                <td>{{R.VehicleRegNo}}</td>
+                                                                <td>{{R.FleetOwner}}</td>
                                                                 <td>{{R.FromDate}}</td>
                                                                 <td>{{R.ToDate}}</td>
 

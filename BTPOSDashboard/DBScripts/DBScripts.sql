@@ -1517,16 +1517,20 @@ CREATE TABLE [dbo].[InventoryItem](
 ) ON [PRIMARY]
 
 GO
+
+/****** Object:  Table [dbo].[FleetBtpos]    Script Date: 05/25/2016 08:33:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[FleetBtpos](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[VehicleId] [int] NOT NULL,
-	[From] [datetime] NOT NULL,
-	[To] [datetime] NOT NULL
+	[FromDate] [datetime] NULL,
+	[ToDate] [datetime] NULL,
+	[BTPOSId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -1585,8 +1589,8 @@ CREATE TABLE [dbo].[FleetRoutes](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[VehicleId] [int] NOT NULL,
 	[RouteId] [int] NOT NULL,
-	[EffectiveFrom] [datetime] NOT NULL,
-	[EffectiveTill] [datetime] NOT NULL
+	[EffectiveFrom] [datetime] NULL,
+	[EffectiveTill] [datetime] NULL
 ) ON [PRIMARY]
 
 GO
@@ -1608,6 +1612,8 @@ CREATE TABLE [dbo].[FleetStaff](
 
 
 GO
+
+/****** Object:  Table [dbo].[FleetAvailability]    Script Date: 05/25/2016 10:29:14 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1615,10 +1621,10 @@ GO
 CREATE TABLE [dbo].[FleetAvailability](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[VehicleId] [int] NOT NULL,
-	[ServiceTypeId] [int] NOT NULL,
-	[FromDate] [datetime] NOT NULL,
+	[FromDate] [datetime] NULL,
 	[ToDate] [datetime] NULL
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -4501,24 +4507,23 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[GetFleetBtpos] 
 	-- Add the parameters for the stored procedure here
-	
+	(@cmpId int=-1, @fleetOwnerId int = -1)
 AS
 BEGIN
-SELECT [Id]
+SELECT fb.[Id]
       ,[VehicleId]
-      ,[From]
-      ,[To]
-  FROM [POSDashboard].[dbo].[FleetBtpos]
+      ,[FromDate]
+      ,[ToDate]
+      ,[BTPOSId]
+      ,bt.POSID
+      ,fd.VehicleRegNo
+  FROM [POSDashboard].[dbo].[FleetBtpos] fb
+  inner join fleetdetails fd on fd.id = fb.vehicleid
+  inner join BTPOSDetails bt on bt.id = fb.btposid
+ where ((fd.companyid = @cmpId or @cmpId = -1)
+  and (fd.fleetownerid = @fleetOwnerId or @fleetOwnerId = -1))
 
 
-
-
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-    -- Insert statements for procedure here
-	
 END
 
 
@@ -4534,7 +4539,7 @@ GO
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[GetfleetRoutes] 	
-(@routeid int =-1)
+(@routeid int =-1, @fleetownerId int = -1, @cmpId int = -1)
 AS
 
 BEGIN
@@ -4553,7 +4558,9 @@ SELECT fr.[Id]
   FROM [POSDashboard].[dbo].[FleetRoutes] fr
   inner join FleetDetails fd on fd.Id = fr.VehicleId
   inner join Routes r on r.Id = fr.RouteId
-  where (@routeid = -1 or fr.RouteId = @routeid)
+  where ((@routeid = -1 or fr.RouteId = @routeid)
+and (fd.CompanyId = @cmpid or @cmpId = -1)
+and (fd.fleetownerid = @fleetownerId or @fleetownerId = -1))
 
 
 END
@@ -4628,12 +4635,51 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE procedure [dbo].[InsUpdDelFleetAvailability]
-(@Id int,@VehicleId int,@ServiceTypeId int,@FromDate datetime,@ToDate datetime=null)
+CREATE PROCEDURE [dbo].[InsUpdDelFleetStaff]
+@Id int = -1,
+@RoleId int,
+@UserId int,
+@VehicleId int,
+@cmpId int,
+@FromDate datetime = null,
+@ToDate datetime = null,
+@insupddelflag varchar
 as
 begin
-Insert into FleetAvailability(VehicleId,ServiceTypeId,FromDate,ToDate)values(@VehicleId,@ServiceTypeId,@FromDate,@ToDate)
+
+declare @cnt  int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].FleetAvailability 
+where vehicleid = @vehicleid 
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[FleetAvailability]
+           ([VehicleId]
+           ,[FromDate]
+           ,[ToDate])
+     VALUES
+           (@VehicleId
+           ,@FromDate
+           ,@ToDate)
 end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[FleetAvailability]
+   SET [FromDate] = @FromDate
+      ,[ToDate] = @ToDate      
+ WHERE [VehicleId] = @VehicleId
+
+else
+  delete from [POSDashboard].[dbo].[FleetAvailability]
+where vehicleid = @vehicleid 
+
+
+End
 
 /****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
 SET ANSI_NULLS ON
@@ -4645,9 +4691,21 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE procedure [dbo].[GetFleetAvailability]
+(@cmpId int=-1, @fleetOwnerId int = -1)
 as
 begin
-select * from FleetAvailability
+SELECT fa.[Id]
+      ,fd.VehicleRegNo
+      ,[VehicleId]
+      ,[FromDate]
+      ,[ToDate]
+      ,u.firstname + ' ' + u.lastname as FleetOwner
+  FROM [POSDashboard].[dbo].[FleetAvailability] FA
+  inner join fleetdetails fd on fd.id = FA.vehicleid
+  inner join users u on u.id = fd.fleetownerid
+ where ((fd.companyid = @cmpId or @cmpId = -1)
+  and (fd.fleetownerid = @fleetOwnerId or @fleetOwnerId = -1))
+
 end
 
 GO
@@ -5604,7 +5662,8 @@ BEGIN
 	
 	if @needvehicleRegno  = 1
     select VehicleRegNo,Id from FleetDetails
-    where (fleetownerid = @fleetownerId or @fleetownerid =-1)
+    where ((fleetownerid = @fleetownerId or @fleetownerid =-1)
+    and (CompanyId = @cmpId or @cmpId = -1))
     
 	--vehicle type data
 	if @needvehicleType = 1
@@ -5647,7 +5706,7 @@ SELECT b.[Id]
 if @needHireVehicle = 1
 select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1) 
-    and (vehicletypeId = 11))
+    and (servicetypeId = 11))
 	
 END
 
@@ -5972,4 +6031,103 @@ INSERT INTO [POSDashboard].[dbo].[LicenseTypes]
            ,@Active)
 
 END
+GO
+
+Create PROCEDURE [dbo].[InsUpdDelFleetRoutes]
+@Id int = -1,
+@VehicleId int,
+@routeid int,
+@FromDate datetime = null,
+@ToDate datetime = null,
+@insupddelflag varchar
+as
+begin
+
+declare @cnt  int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].[FleetRoutes] 
+where vehicleid = @vehicleid 
+and routeid = @routeid
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[FleetRoutes]
+           ([VehicleId]
+           ,[RouteId]
+           ,[EffectiveFrom]
+           ,[EffectiveTill])
+     VALUES
+           (@vehicleid
+           ,@routeid
+           ,@FromDate
+           ,@ToDate)
+end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[FleetRoutes]
+   SET [RouteId] = @routeid      
+      ,[EffectiveFrom] = @FromDate
+      ,[EffectiveTill] = @ToDate      
+ WHERE vehicleid = @vehicleid
+
+else
+  delete from [POSDashboard].[dbo].[FleetRoutes]
+where vehicleid = @vehicleid and routeid = @routeid
+
+End
+
+GO
+
+CREATE PROCEDURE [dbo].[InsUpdDelFleetBTPOS]
+@Id int = -1,
+@VehicleId int,
+@btposId int,
+@FromDate datetime = null,
+@ToDate datetime = null,
+@insupddelflag varchar
+as
+begin
+
+declare @cnt  int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].[FleetBTPOS] 
+where vehicleid = @vehicleid 
+and  BTPOSId = @btposId
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[FleetBtpos]
+           ([VehicleId]
+           ,[FromDate]
+           ,[ToDate]
+           ,[BTPOSId])
+     VALUES
+           (@VehicleId
+           ,@FromDate
+           ,@ToDate
+           ,@btposId)
+end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[FleetBtpos]
+   SET [BTPOSId] = @btposId      
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+     WHERE [VehicleId] = @VehicleId
+      
+else
+  delete from [POSDashboard].[dbo].[FleetBtpos]
+where vehicleid = @vehicleid 
+and [BTPOSId] = @btposId
+
+End
+
 GO

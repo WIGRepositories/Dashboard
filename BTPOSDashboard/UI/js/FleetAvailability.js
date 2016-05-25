@@ -3,67 +3,128 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     $scope.uname = $localStorage.uname
 
-    $scope.GetFleetAvailability = function () {
 
-        $http.get('http://localhost:1476/api/FleetAvailability/GetFleetAvailability').then(function (res, data) {
-            $scope.FleetAvailability = res.data.Table;
+    $scope.GetCompanies = function () {
+
+        var vc = {
+            needCompanyName: '1'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
+            $scope.initdata = res.data;
+        });
+
+    }
+
+    $scope.GetFleeAvailabilty = function () {
+
+        if ($scope.cmp == null) {
+            $scope.FleetAvailability = null;
+            return;
+        }
+       
+        $http.get('http://localhost:1476/api/FleetAvailability/GetFleetAvailability?foid=-1&cmpId='+$scope.cmp.Id).then(function (res, data) {
+            $scope.FleetAvailability = res.data;
+
+        });
+
+    }
+
+    $scope.GetFleetOwners = function () {
+        if ($scope.cmp == null) {
+            $scope.FleetOwners = null;
+            return;
+        }
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.cmpdata = res.data;
+        });
+    }
+
+    $scope.GetFleetForFO = function () {
+
+        if ($scope.fo == null) {
+            $scope.FleetForFO = null;
+            return;
+        }
+        var vc = {
+            needHireVehicle: '1',
+            fleetownerId: $scope.fo.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.FleetForFO = res.data;
+        });
+    }
+
+
+    $scope.saveFleetAvailability = function (FleetAvailability) {
+
+        if (FleetAvailability == null || FleetAvailability.v == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+        if (FleetAvailability.v.Id == null) {
+            alert('Please select Vehicle.');
+            return;
+        }      
+
+        var newFleetAvail = {
+            Id: -1,
+            VehicleId: FleetAvailability.v.Id,           
+            FromDate: FleetAvailability.fd,
+            ToDate: FleetAvailability.td,
+            insupddelflag: 'I'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetAvailability/SetFleetAvailability',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: newFleetAvail
+        }
+
+        $http(req).then(function (res) {
+            alert('Sucessfully saved!');
+        });
+    }
         
-    });
+});
 
-}
-
- 
-        
-    });
-
-//    $scope.save = function (FleetAvailability) {
-//        if (FleetAvailability == null) {
-//            alert('Please  enter values:');
-//            return;
-//        }
-
-//        if (FleetAvailability.Vehicle == null) {
-//            alert('Please enter Vehicle name:');
-//            return;
-//        }
-//        if (FleetAvailability.ServiceType == null) {
-//            alert('Please enter ServiceType:');
-//            return;
-//        }
-//        var FleetAvailability = {
-//            Id: -1,
-//            Vehicle: FleetAvailability.Vehicle,
-//            ServiceType: FleetAvailability.ServiceType,
-//            FromDate: FleetAvailability.FromDate,
-//            ToDate: FleetAvailability.ToDate
-//        }
-
-//        var req = {
-//            method: 'POST',
-//            url: 'http://localhost:1476/api/fleetavailability/AddFleetAvailability',
-
-//            data: FleetAvailability
-//        }
-
-
-//        $http(req).then(function (res) {
-
-//            alert('saved successfully.');
-
-//        });
-
-//        $scope.currRole = null;
-
-//    };
-
-//    $scope.setCurrRole = function (grp) {
-//        $scope.currRole = grp;
-//    };
-
-//    $scope.clearCurrRole = function () {
-//        $scope.currRole = null;
-//    };
-//});
 
 
 
