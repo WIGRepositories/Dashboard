@@ -6,7 +6,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
 
     $scope.GetSubCategories = function () {
 
-        $http.get('http://localhost:1476/api/SubCategory/GetSubCategories?catid=5').then(function (response, req) {
+        $http.get('http://localhost:1476/api/SubCategory/getsubcategory?catid=6').then(function (response, req) {
             $scope.SubCategory = response.data;
         });
     }
@@ -85,8 +85,8 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         $scope.Items1 = null;
     };
 
-    $scope.setItems1 = function (usr) {
-        $scope.Items1 = usr;
+    $scope.setItem = function (item) {
+        $scope.CurrItem = item;        
     };
 
     $scope.clearItems1 = function () {
