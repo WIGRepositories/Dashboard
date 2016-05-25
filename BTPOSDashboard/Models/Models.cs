@@ -1335,9 +1335,9 @@ namespace BTPOSDashboardAPI.Models
         public string desc { set; get; }
         public int InventoryId { set; get; }
         public  string name { set; get; }
-        public  int PerUnitPrice{set;get;}
-        public int reorderpoint{set;get;}
-        public string subcat{set;get;}
+        public  int PerUnitPrice{set; get;}
+        public int reorderpoint{set; get;}
+        public string subcat{set; get;}
     }
 }                     
         
