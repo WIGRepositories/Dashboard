@@ -5,11 +5,9 @@
     <title>Home | BT POS | Vehicle Details</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
  
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
@@ -24,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetFleetRoutes();" ng-model="FleetRoute">
+<body ng-init="GetCompanies();" ng-model="FleetRoute">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -333,23 +331,27 @@
                                                 <div class="table-container">
 
                                                     <div class="row mbm">
-                                                        <div class="col-md-5">
-                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-
-                                                                <option value="">All</option>
-                                                            </select>
+                                                        <div class="col-md-4">
+                                                            Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetRoutes()">
+                                                            <option value="">Select</option>
+                                                        </select>
                                                      </div>
-                                                        <div class="col-md-5">
+                                                        <!--<div class="col-md-4">
                                                             Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
 
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
+                                                        <div class="col-md-4">
+                                                            Route: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
 
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>-->
 
 
                                                         <div class="actions">
-                                                            <a href="NewFleetRoutes.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New Vehicle Details</button></a>
+                                                            <a href="NewFleetRoutes.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">Assign Route to fleet</button></a>
 
                                                         </div>
 
@@ -362,10 +364,9 @@
                                                                 <th width="22%">Vehicle Reg No</th>
                                                                 <th>Fleet Route</th>
                                                                 <th>Effective From</th>
-                                                                <th>Effective Till</th>
-                                                                <th>Delete</th>
+                                                                <th>Effective Till</th>                                                               
                                                                 <th>Edit</th>
-                                                                
+                                                                <th>Delete</th>
 
                                                             </tr>
                                                         </thead>
@@ -375,11 +376,7 @@
                                                                 <td>{{R.VehicleRegNo}}</td>
                                                                 <td>{{R.RouteName}}</td>
                                                                 <td>{{R.EffectiveFrom}}</td>
-                                                                <td>{{R.EffectiveTill}}</td>
-                                                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
-
-                                                               
-                                                                                                                      
+                                                                <td>{{R.EffectiveTill}}</td>                          
                                                                <td>
 
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
@@ -387,7 +384,7 @@
                                                                     Edit
                                                                     </button>
                                                                 </td>
-                                                              
+                                                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
                                                                 
                                                                
                                                             </tr>

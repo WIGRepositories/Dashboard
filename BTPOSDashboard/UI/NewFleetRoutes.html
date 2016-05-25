@@ -3,12 +3,8 @@
 <head>
     <title>Home | Users | Users | Add New User</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-
-    <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+    <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -21,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetVehicleConfig();" ng-model="initdata">
+<body ng-init="GetCompanies();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -312,8 +308,8 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-
-                            <li><a href="NewFleetRoutes.html">Add New User</a></li>
+                            <li><a href="FleetRoutes.html">Fleet Routes</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="NewFleetRoutes.html">Assign Route</a></li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -331,15 +327,26 @@
 
                                             <div class="col-lg-6">
                                                 <div class="panel panel-violet">
-                                                    <div class="panel-heading">Add New Fleet Route</div>
+                                                    <div class="panel-heading">Assign Fleet Route</div>
                                                     <div class="panel-body pan">
                                                         <form action="#" class="form-horizontal">
                                                             <div class="modal-body">
+
+                                                                <div class="form-group">
+                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Company:</label>
+
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" ng-model="cmp" ng-change="getVehiclesForCmp()" width="100%">
+                                                                            <option value="">Select Company</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
                                                                 <div class="form-group">
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Vehicle Reg No:</label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="v.VehicleRegNo for v in initdata.Table1 track by v.Id" class="form-control" ng-model="initdata.newfleet.v">
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="initdata.newfleet.v">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -356,27 +363,17 @@
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="Name" class="col-md-3 control-label">EffectiveFrom:<span class='require'></span></label>
-                                                                  
-                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                    <label for="Name" class="col-md-3 control-label">Effective From:<span class='require'></span></label>
+
+                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="Description" class="col-md-3 control-label"> EffectiveTill <span class='require'></span></label>
+                                                                    <label for="Description" class="col-md-3 control-label"> Effective Till <span class='require'></span></label>
 
-                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-
-
-
+                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
                                                                 </div>
 
-                                                                
-                                                                <div class="form-group">
-                                                                    <label for="Active" class="col-md-3 control-label">Active:<span class='require'></span></label>
-                                                                    <label class="col-md-6">
-                                                                        <input type="checkbox" ng-checked="Types.Active" />
-                                                                    </label>
-                                                                </div>
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
                                                                         <button type="submit" class="btn btn-primary" ng-click="saveNewFleetRoutes(initdata);">Save</button>

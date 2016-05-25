@@ -1142,42 +1142,7 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
     }
     
-    public class FleetDetails
-    {
-        public int VehicleLayoutId;
-        public string VehicleLayout;
-        public int Id { get; set; }
-
-        public string VehicleRegNo { get; set; }
-        public int VehicleTypeId { get; set; }
-
-        public String FleetOwnerId { get; set; }
-        public String CompanyId { get; set; }
-        public String ServiceTypeId { get; set; }
-
-        public int Active { get; set; }
-    }
-    public class FleetRoutes
-    {
-        public int Id { get; set; }
-
-        public int VehicleId { get; set; }
-        public int RouteId { get; set; }
-
-        public DateTime EffectiveFrom { get; set; }
-        public DateTime EffectiveTill { get; set; }
-
-        public int Active { get; set; }
-    }
-    public class FleetAvailability
-    {
-        public int Id { get; set; }
-        public string Vehicle { get; set; }
-        public string ServiceType { get; set; }
-        public DateTime FromDate { get; set; }
-        public DateTime ToDate { get; set; }
-
-    }
+   
     public class RouteFare
     {
         public int Id { get; set; }
@@ -1278,22 +1243,86 @@ namespace BTPOSDashboardAPI.Models
         public int Active { get; set; }
     }
 
+    public class FleetDetails
+    {
+        public int VehicleLayoutId;
+        public string VehicleLayout;
+        public int Id { get; set; }
+
+        public string VehicleRegNo { get; set; }
+        public int VehicleTypeId { get; set; }
+
+        public String FleetOwnerId { get; set; }
+        public String CompanyId { get; set; }
+        public String ServiceTypeId { get; set; }
+
+        public int Active { get; set; }
+    }
+    public class FleetRoutes
+    {
+        public int Id { get; set; }
+        public string VehicleRegNo { get; set; }
+        public string RouteName { get; set; }
+        public string RouteCode { get; set; }
+        public int VehicleId { get; set; }
+        public int RouteId { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTill { get; set; }
+        public int Active { get; set; }
+        public int cmpId { get; set; }
+        public int fleetownerId { get; set; }
+        public char insupddelflag { get; set; }
+    }
+    public class FleetAvailability
+    {
+        public int Id { get; set; }
+        public string VehicleRegNo { get; set; }
+        public int VehicleId { get; set; }
+        public string FleetOwner { get; set; }
+        public int fleetOwnerId { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public char insupddelflag { get; set; }
+    }
+
     public class FleetStaff
     {
+        public int Id { get; set; }
+        public int cmpId { get; set; }
+        public int roleId { get; set; }
+        public int vehicleId { get; set; }
+       
+        public int UserId { get; set; }
 
+        public int RoleName { get; set; }
+        public int Company { get; set; }
 
+        public string VechileRegNo { get; set; }
+        public DateTime? FromDate { get; set; }
 
-        public object Id { get; set; }
+        public DateTime? ToDate { get; set; }
 
-        public object StaffRole { get; set; }
+        public int Active { get; set; }
+        public char insupddelflag { get; set; }
+    }
 
-        public object UserId { get; set; }
+    public class FleetBTPOS
+    {
+        public int Id { get; set; }
+        public int cmpId { get; set; }
+        public int posId { get; set; }
+        public int vehicleId { get; set; }
 
-        public object FromDate { get; set; }
+        public int fleetOwnerId { get; set; }
 
-        public object ToDate { get; set; }
+        public string BTPOSId { get; set; }        
 
-        public object Active { get; set; }
+        public string VechileRegNo { get; set; }
+        public DateTime? FromDate { get; set; }
+
+        public DateTime? ToDate { get; set; }
+               
+        public char insupddelflag { get; set; }
     }
 
     public class VehicleConfig

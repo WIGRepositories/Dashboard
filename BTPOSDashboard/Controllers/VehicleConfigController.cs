@@ -93,14 +93,14 @@ namespace BTPOSDashboard.Controllers
             SqlParameter cmpId = new SqlParameter();
             cmpId.ParameterName = "@cmpId";
             cmpId.SqlDbType = SqlDbType.Int;
-            cmpId.Value = (vc.cmpId == null) ? 0 : 1;
+            cmpId.Value = (vc.cmpId == null) ? -1 : vc.cmpId;
             cmd.Parameters.Add(cmpId);
 
             //@fleetownerId
             SqlParameter foid = new SqlParameter();
             foid.ParameterName = "@fleetownerId";
             foid.SqlDbType = SqlDbType.Int;
-            foid.Value = (vc.fleetownerId == null) ? 0 : 1;
+            foid.Value = (vc.fleetownerId == null) ? -1 : vc.fleetownerId;
             cmd.Parameters.Add(foid);    
 
             DataSet ds = new DataSet();

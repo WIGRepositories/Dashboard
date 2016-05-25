@@ -353,7 +353,7 @@
                                                                         <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" ng-model="cmp" ng-change="getUsersnRoles()">
+                                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" ng-model="initdata.newfleet.cmp" ng-change="getUsersnRoles()">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -363,7 +363,7 @@
                                                                         <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="uu">
+                                                                            <select ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="initdata.newfleet.uu">
                                                                                 <option value="">Select</option>
                                                                             </select>
 
@@ -375,7 +375,7 @@
                                                                         <label for="Name" class="col-md-3 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="ur">
+                                                                            <select ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="initdata.newfleet.ur">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -385,28 +385,28 @@
                                                                     <div class="form-group">
                                                                         <label for="Name" class="col-md-3 control-label">EffectiveFrom:<span class='require'></span></label>
 
-                                                                        <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                        <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="Description" class="col-md-3 control-label"> EffectiveTill <span class='require'></span></label>
 
-                                                                        <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                        <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
 
 
                                                                     </div>
 
 
-                                                                    <div class="form-group">
+                                                                    <!--<div class="form-group">
                                                                         <label for="Active" class="col-md-3 control-label">Active:<span class='require'></span></label>
                                                                         <label class="col-md-6">
-                                                                            <input type="checkbox" ng-checked="Types.Active" />
+                                                                            <input type="checkbox" ng-checked="initdata.newfleet.Active" checked/>
                                                                         </label>
-                                                                    </div>
+                                                                    </div>-->
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
-                                                                            <button type="submit" class="btn btn-primary" ng-click="saveNewFleetRoutes(initdata);">Save</button>
+                                                                            <button type="submit" class="btn btn-primary" ng-click="savenewfleetStaffdetails(initdata.newfleet);">Save</button>
 
                                                                             <button type="reset" class="btn btn-green">Cancel</button>
                                                                         </div>
