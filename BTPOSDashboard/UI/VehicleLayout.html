@@ -301,32 +301,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <!--<li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
@@ -441,7 +415,7 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="VehicleLayout.html">Vehicle Layout</a></li>
+                            <li class="active"><a href="VehicleLayout.html">Vehicle Layout</a></li>
 
                         </ol>
                         <div class="clearfix"></div>
@@ -461,14 +435,14 @@
                                                     <div class="row mbm">
                                                         <div class="col-md-3">
                                                             Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
-    <option value="">Select</option>
-</select>
+                                               <option value="">Select</option>
+                                                </select>
                                                         </div>
 
                                                         <div class="col-md-3">
                                                             Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
-    <option value="">Select</option>
-</select>
+                                                     <option value="">Select</option>
+                                                             </select>
                                                         </div>
                                                         <div class="col-md-3">
                                                             Rows: <input type="text" style="width:30px"ng-model="rows" />
