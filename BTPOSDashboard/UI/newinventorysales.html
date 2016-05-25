@@ -298,36 +298,6 @@
 
                                 </ul>
                             </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <!--<li>
                 <a href="#">
                     <i class="fa fa-send-o fa-fw">
@@ -378,17 +348,6 @@
                     <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
                 </ul>
             </li>
-
-
-
-
-
-
-
-
-
-
-
             <li>
                 <a href="#">
                     <i class="fa fa-edit fa-fw">
@@ -486,21 +445,19 @@
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Sales.PerUnitPrice" /><span class="help-block"></span></div>
                                                                     </div>
-                                                                    <div class="form-group">
+                                                                    
                                                                         <div class="form-group">
-                                                                            <label for="Name" class="col-md-3 control-label">DateFrom:<span class='require'></span></label>
+                                                                            <label for="Name" class="col-md-3 control-label">Date:<span class='require'></span></label>
 
-                                                                            <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                            <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
-                                                                        </div>                                                                 
+                                                                        </div>                                                              
                                                                                                                                                 
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label">InVoiceNumber:</label>
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Sales.InVoiceNumber" /><span class="help-block"></span></div>
-                                                                    </div>
-
-                                                                </div>
+                                                                    </div>                                                            
 
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
@@ -552,6 +509,12 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('.datepicker-filter').datepicker({
+            autoclose: true
+        });
+    </script>
     <!--LOADING SCRIPTS FOR PAGE-->
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->

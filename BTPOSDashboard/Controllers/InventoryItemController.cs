@@ -54,7 +54,7 @@ namespace BTPOSDashboard.Controllers
             SqlParameter Cid = new SqlParameter();
             Cid.ParameterName = "@Id";
             Cid.SqlDbType = SqlDbType.Int;
-            Cid.Value = Convert.ToInt32(b.Id);
+            Cid.Value = b.Id;
             cmd.Parameters.Add(Cid);
 
             SqlParameter Gid = new SqlParameter();
@@ -90,7 +90,7 @@ namespace BTPOSDashboard.Controllers
             SqlParameter prop = new SqlParameter();
             prop.ParameterName = "@ReOrderPoint";
             prop.SqlDbType = SqlDbType.Int;
-            prop.Value = Convert.ToInt32(b.ReOrderPoint);
+            prop.Value = b.ReOrderPoint;
             cmd.Parameters.Add(prop);
 
             cmd.ExecuteScalar();
@@ -98,6 +98,7 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
+       
         public void Options() { }
     }
 }
