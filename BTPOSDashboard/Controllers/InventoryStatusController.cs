@@ -12,7 +12,7 @@ namespace BTPOSDashboard.Controllers
     public class InventoryStatusController : ApiController
     {
         [HttpGet]
-        public DataTable getInventory()
+        public DataTable GetInventory()
         {
             DataTable Tbl = new DataTable();
 
