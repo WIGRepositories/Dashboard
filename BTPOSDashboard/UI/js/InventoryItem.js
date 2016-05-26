@@ -19,13 +19,22 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
 
         });
     }
+
       $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.Id : -1;
     //to save new inventory item
-        $http.get('http://localhost:1476/api/Inventory/getsubcategory?subcatid=' + grpid).then(function (res, data) {
+        $http.get('http://localhost:1476/api/Inventory/getsubcategory?subcatid=1' + grpid).then(function (res, data) {
             $scope.Item = res.data;
         });
       }
+      $scope.getselectval = function (seltype) {
+          var grpid = (seltype) ? seltype.Id : -1;
+          //to save new inventory item
+          $http.get('http://localhost:1476/api/Inventory/getsubcategory?catid=6' + grpid).then(function (res, data) {
+              $scope.Item = res.data;
+          });
+      }
+
 
       $scope.saveNewItem = function (Item) {
           if (Item == null) {
@@ -43,7 +52,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
               ItemName: Item.ItemName,
               Code: Item.Code,
               Description: Item.Description,
-              Category: 5,//Item.Category.Id,
+              Category: Item.Category.Id,
               SubCategory: Item.SubCategory.Id,
               ReOrderPoint: Item.ReOrderPoint
           }
