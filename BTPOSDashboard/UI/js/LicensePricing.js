@@ -1,13 +1,29 @@
 ﻿var app = angular.module('myApp', [])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
-    $scope.GetLicenseCategories = function () {
-       
 
-        $http.get('http://localhost:1476/api/subcategory/getsubcategory?catid=6').then(function (res, data) {
-            $scope.LicenseType = res.data;
+    $scope.GetLicenseCategories = function ()
+    {
+        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+            $scope.lcat = res.data;
+        });
+    }
+
+    $scope.getLicensePricing = function () {
+
+        var selCat = $scope.s;
+
+        if (selCat == null) {
+            $scope.lpricing = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/LicensePricing/LicensePricing?categoryid=' + selCat.Id).then(function (res, data) {
+            $scope.lpricing = res.data;
 
         });
     }
+
+
     $scope.getLicenseDetails = function () {
         $http.get('http://localhost:1476/api/LicensePricing/LicensePricing').then(function (res, data) {
             $scope.LicensePricing = res.data;

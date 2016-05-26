@@ -5218,26 +5218,26 @@ end
 
 GO
 
-
-
-
-
-
-/****** Object:  Table [dbo].[LicensePricing]    Script Date: 05/10/2016 07:02:51 ******/
+/****** Object:  Table [dbo].[LicensePricing]    Script Date: 05/25/2016 19:40:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+SET ANSI_PADDING ON
+GO
 CREATE TABLE [dbo].[LicensePricing](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[LicenseId] [int] NOT NULL,
-	[TimePeriod] [varchar](50) NULL,
-	[MinTimePeriods] [int] NULL,
-	[UnitPrice] [decimal](18, 0) NULL,
+	[RenewalFreqTypeId] [int] NOT NULL,
+	[RenewalFreq] [int] NOT NULL,
+	[UnitPrice] [decimal](18, 0) NOT NULL,
 	[fromdate] [datetime] NULL,
 	[todate] [datetime] NULL,
 	[Active] [int] NULL CONSTRAINT [DF_LicensePricing_Active]  DEFAULT ((1))
 ) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
 
 GO
 
@@ -5247,19 +5247,22 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+SET ANSI_PADDING OFF
+GO
 CREATE TABLE [dbo].[LicenseDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[LicenseCode] [varchar](10) NULL,
-	[LicenseName] [varchar](50) NULL,
-	[LicenseCatId] [int] NOT NULL,
+	[LicenseTypeId] [int] NOT NULL,
 	[FeatureName] [varchar](50) NULL,
-	[FeatureLabel] [varchar](50) NULL,
-	[FeatureValue] [nchar](10) NULL,
-	[LabelClass] [varchar](50) NULL,
+	[FeatureLabel] [varchar](50)  NULL,
+	[FeatureValue] [nchar](10)  NULL,
+	[LabelClass] [varchar](50)  NULL,
 	[Active] [int] NOT NULL CONSTRAINT [DF_LicenseDetails_Active]  DEFAULT ((1)),
 	[fromDate] [datetime] NULL,
 	[toDate] [datetime] NULL
 ) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
 
 GO
 
@@ -5393,20 +5396,19 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE procedure [dbo].[GetLicenseDetails]
-
+@ltypeId int = -1
 as begin 
-select Id,
-LicenseCode,
-LicenseName,
-LicenseCatId,
-FeatureName,
-FeatureLabel,
-FeatureValue,
-LabelClass,
-Active,
-fromDate,
-toDate
- from LicenseDetails
+SELECT [Id]
+      ,[LicenseTypeId]
+      ,[FeatureName]
+      ,[FeatureLabel]
+      ,[FeatureValue]
+      ,[LabelClass]
+      ,[Active]
+      ,[fromDate]
+      ,[toDate]
+  FROM [POSDashboard].[dbo].[LicenseDetails]
+  where ([LicenseTypeId] = @ltypeId or @ltypeId = -1)
 end
 GO
 
@@ -5450,37 +5452,39 @@ GO
 
 --end
 
-
-
-/****** Object:  StoredProcedure [dbo].[Sp_InsTypeGroups]    Script Date: 05/04/2016 11:24:12 ******/
-SET ANSI_NULLS ON
-
-GO
-
-
-
-
 /****** Object:  StoredProcedure [dbo].[GetLicensePricing]    Script Date: 05/11/2016 09:34:44 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 create procedure [dbo].[GetLicensePricing]
+(@categoryid int = -1)
+as 
+begin 
 
-as begin 
-select Id,
-LicenseId,
-TimePeriod,
-MinTimePeriods,
-UnitPrice,
-fromdate,
-todate,
-Active
+SELECT lp.[Id]
+      ,[LicenseId]
+	  ,LicenseType
+      ,[RenewalFreqTypeId]
+      ,[RenewalFreq]
+      ,[UnitPrice]
+      ,[fromdate]
+      ,[todate]
+      ,t.Name as licensefreq
+      , case when t.id = 15 then 'Every' +str(lp.renewalfreq)+ ' Week(s)'
+		 when t.id = 16 then 'Every' +str(lp.renewalfreq)+ ' Month(s)'
+		 when t.id = 17 then 'Every' +str(lp.renewalfreq)+ ' Quarter(s)'
+		 when t.id = 18 then 'Every' +str(lp.renewalfreq)+ ' Half Year(s)'
+        else 'Every'+str(lp.renewalfreq)+' year(s)'
+       end as freq
+  FROM [POSDashboard].[dbo].[LicensePricing] lp
+inner join types t on t.id = lp.renewalfreqtypeid
+ inner join licensetypes lt on lt.id = lp.licenseid
+ where (lt.LicenseCatId = @categoryid or @categoryid = -1)
 
- from LicensePricing
+
 end
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelLicensePricing]    Script Date: 05/11/2016 11:19:59 ******/
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 05/11/2016 11:42:09 ******/
 SET ANSI_NULLS ON
@@ -5488,166 +5492,106 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 create procedure [dbo].[InsUpdDelLicensePricing](
-@Id int,
-@LicenseId varchar(10),
-@TimePeriod Varchar(50),
-@MinTimePeriods int,
+@Id int = -1,
+@LicenseId int,
+@RenewalFreqTypeId int,
+@RenewalFreq int,
 @UnitPrice decimal(18,0),
 @fromdate datetime,
 @todate datetime,
-
-@Active int
+@insupddelflag char
 )
---@fromDate datetime=getdate(),
---@toDate datetime=getdate())
-
 as
 begin
 
+if @insupddelflag = 'I'
+INSERT INTO [POSDashboard].[dbo].[LicensePricing]
+           ([LicenseId]
+           ,[RenewalFreqTypeId]
+           ,[RenewalFreq]
+           ,[UnitPrice]
+           ,[fromdate]
+           ,[todate])
+     VALUES
+           (@LicenseId
+           ,@RenewalFreqTypeId
+           ,@RenewalFreq
+           ,@UnitPrice
+           ,@fromdate
+           ,@todate
+          )
+else
+if @insupddelflag = 'U'
+
 UPDATE [POSDashboard].[dbo].[LicensePricing]
-   SET 
-      [LicenseId] = @LicenseId
-      ,[TimePeriod] = @TimePeriod
-      ,[MinTimePeriods] = @MinTimePeriods
+   SET [RenewalFreqTypeId] = @RenewalFreqTypeId
+      ,[RenewalFreq] = @RenewalFreq
       ,[UnitPrice] = @UnitPrice
       ,[fromdate] = @fromdate
       ,[todate] = @todate
-      ,[Active] = @Active
-      --,[fromDate] = <fromDate, datetime,>
-      --,[toDate] = <toDate, datetime,>
- WHERE Id = @Id
+      --,[Active] = @Active
+ WHERE licenseId = @LicenseId
 
-if @@ROWCOUNT = 0
-begin
-INSERT INTO [POSDashboard].[dbo].[LicensePricing]
-           (
-           [LicenseId]
-           ,[TimePeriod]
-           ,[MinTimePeriods]
-           ,[UnitPrice]
-           ,[fromdate]
-           ,[todate]
-           ,[Active]
-           --,[fromDate]
-          -- ,[toDate]
-          )
-     VALUES
-           (
+else
 
-@LicenseId,
-@TimePeriod,
-@MinTimePeriods,
-@UnitPrice,
-@fromdate,
-@todate,
-@Active
---@fromDate,
---@toDate
-)
-end
-
+DELETE FROM [POSDashboard].[dbo].[LicensePricing]
+      WHERE licenseId = @LicenseId
 
 end
-
-
-
-/****** Object:  StoredProcedure [dbo].[Sp_InsTypeGroups]    Script Date: 05/04/2016 11:24:12 ******/
-SET ANSI_NULLS ON
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---ALTER procedure [dbo].[InsUpdDelLicensePricing](@Id int,
---@LicenseId int,
---@TimePeriod varchar(50),
---@MinTimePeriods int,
---@UnitPrice decimal(18,0),
-
---@fromdate datetime,
---@todate datetime,
---@Active int)
-
---as
---begin
---insert into LicensePricing values(
---@LicenseId,
---@TimePeriod,
---@MinTimePeriods,
---@UnitPrice,
---@Active,
---@fromdate,
---@todate,
---@Id
---)
-
-
-
---end
+Go
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 Create procedure [dbo].[InsUpdDelLicenseDetails](
-@Id int,
-@LicenseCode varchar(10),
-@LicenseName Varchar(50),
-@LicenseCatId int,
+@Id int = -1,
+@LicenseTypeId int,
 @FeatureName varchar(50),
 @FeatureLabel varchar(30),
 @FeatureValue varchar(10),
-@LabelClass varchar(50),
-@Active int
+@LabelClass varchar(50) = null,
+@fromdate datetime = null,
+@todate datetime = null,
+@insupddelflag char
 )
---@fromDate datetime=getdate(),
---@toDate datetime=getdate())
-
 as
 begin
 
-UPDATE [POSDashboard].[dbo].[LicenseDetails]
-   SET [LicenseCode] = @LicenseCode
-      ,[LicenseName] = @LicenseName
-      ,[LicenseCatId] = @LicenseCatId
-      ,[FeatureName] = @FeatureName
-      ,[FeatureLabel] = @FeatureLabel
-      ,[FeatureValue] = @FeatureValue
-      ,[LabelClass] = @LabelClass
-      ,[Active] = @Active
-      --,[fromDate] = <fromDate, datetime,>
-      --,[toDate] = <toDate, datetime,>
- WHERE Id = @Id
-
-if @@ROWCOUNT = 0
-begin
+if @insupddelflag = 'I'
 INSERT INTO [POSDashboard].[dbo].[LicenseDetails]
-           ([LicenseCode]
-           ,[LicenseName]
-           ,[LicenseCatId]
+           ([LicenseTypeId]
            ,[FeatureName]
            ,[FeatureLabel]
            ,[FeatureValue]
-           ,[LabelClass]
-           ,[Active]
-           --,[fromDate]
-          -- ,[toDate]
-          )
+           ,[LabelClass]           
+           ,[fromDate]
+           ,[toDate])
      VALUES
-           (
-@LicenseCode,
-@LicenseName,
-@LicenseCatId,
-@FeatureName,
-@FeatureLabel,
-@FeatureValue,
-@LabelClass,
-@Active
---@fromDate,
---@toDate
-)
-end
+           (@LicenseTypeId
+           ,@FeatureName
+           ,@FeatureLabel
+           ,@FeatureValue
+           ,@LabelClass           
+           ,@fromDate
+           ,@toDate
+          )
+else
+if @insupddelflag = 'U'
 
+UPDATE [POSDashboard].[dbo].[LicenseDetails]
+   SET [FeatureName] = @FeatureName
+      ,[FeatureLabel] = @FeatureLabel
+      ,[FeatureValue] = @FeatureValue
+      ,[LabelClass] = @LabelClass
+      ,[fromDate] = @fromDate
+      ,[toDate] = @toDate
+ WHERE [LicenseTypeId] = @LicenseTypeId
+
+else
+
+DELETE FROM [POSDashboard].[dbo].[LicenseDetails]
+      WHERE [LicenseTypeId] = @LicenseTypeId
 
 end
 

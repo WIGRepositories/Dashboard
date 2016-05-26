@@ -126,7 +126,6 @@ namespace BTPOSDashboardAPI.Models
         public string Desc { get; set; }
 
     }
-
     public class UserLogin
     {
         public int Id { set; get; }
@@ -310,8 +309,7 @@ namespace BTPOSDashboardAPI.Models
         public string Listvalue { get; set; }
 
     }
-
-
+    
     public class FleetOwner
     {
         public int Id { get; set; }
@@ -484,8 +482,7 @@ namespace BTPOSDashboardAPI.Models
         public int Active { get; set; }
         public string insupdflag { get; set; }
     }
-
-
+    
     public class RoutesConfiguration
     {
         public int distanceFromDest { get; set; }
@@ -1115,7 +1112,6 @@ namespace BTPOSDashboardAPI.Models
 
         public string subCategory { get; set; }
     }
-    
     public class InventoryItem
     {
         public int Id { get; set; }
@@ -1141,8 +1137,7 @@ namespace BTPOSDashboardAPI.Models
         public String Description { get; set; }
         public string insupdflag { get; set; }
     }
-    
-   
+       
     public class RouteFare
     {
         public int Id { get; set; }
@@ -1222,25 +1217,27 @@ namespace BTPOSDashboardAPI.Models
 
         public int Active { get; set; }
         public int LicenseCatId { get; set; }
-        public DateTime fromDate { get; set; }
-        public DateTime toDate { get; set; }
+        public DateTime? fromDate { get; set; }
+        public DateTime? toDate { get; set; }
 
-
-
+        public char insupddelflag { get; set; }
     }
+
     public class LicensePricing
     {
         public int LicenseId { get; set; }
-
-        public String TimePeriod { get; set; }
-        public int MinTimePeriods { get; set; }
-
+        public String RenewalFreqType { get; set; }
+        public int RenewalFreqTypeId { get; set; }
+        public int RenewalFreqUnit { get; set; }
+        public string RenewalFreq { get; set; }
         public decimal UnitPrice { get; set; }
-        public DateTime fromdate { get; set; }
-        public DateTime todate { get; set; }
-
+        public DateTime? fromdate { get; set; }
+        public DateTime? todate { get; set; }
         public int Id { get; set; }
+
+        public int categoryid { get; set; }
         public int Active { get; set; }
+        public char insupddelflag { get; set; }
     }
 
     public class FleetDetails

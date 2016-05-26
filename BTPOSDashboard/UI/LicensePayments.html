@@ -5,12 +5,9 @@
     <title>Home | Users | LicensePayments</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
    
-    <!--Loading bootstrap css-->
- 
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <!--Loading bootstrap css--> 
+    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -225,7 +222,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="Empty.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Configuration</span></a></li>
+                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
                                         <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
 
@@ -465,11 +462,31 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
+                                                        
+                                                        <div class="btn-group mtm mbm pull-right" style="margin:10px">
+                                                            <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
+                                                                <i class="fa fa-wrench"></i>&nbsp;
+                                                                Export
 
+                                                            </a><ul class="dropdown-menu">
 
-                                                        <div class="actions">
-                                                            <a href="AddLicensePayments.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">  Add New License Payments</button></a>
+                                                                <li>
+                                                                    <a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});">
+                                                                        <img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel
+                                                                    </a>
+                                                                    <a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});">
+                                                                        <img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf
+                                                                    </a>
+                                                                    <a href="#" onclick="$('#example-export').tableExport({type:'csv'});">
+                                                                        <img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv
+                                                                    </a>
+                                                                    <a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});">
+                                                                        <img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
 
+                                                            <!--</a><ul class="dropdown-menu"><li><a href="#" onclick="$('#example-export').tableExport({type:'json',escape:'false'});"><img src="vendors/tableExport/icon/json.png" width="24px" class="mrx" />Export to Json</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});"><img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'sql'});"><img src="vendors/tableExport/icon/sql.png" width="24px" class="mrx" />Export to Sql</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'csv'});"><img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'txt',escape:'false'});"><img src="vendors/tableExport/icon/txt.png" width="24px" class="mrx" />Export to TXT</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});"><img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'doc',escape:'false'});"><img src="vendors/tableExport/icon/word.png" width="24px" class="mrx" />Export to word </a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'powerpoint',escape:'false'});"><img src="vendors/tableExport/icon/ppt.png" width="24px" class="mrx" />Export to powerpoint</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});"><img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf</a></li></ul>-->
                                                         </div>
 
 
@@ -526,28 +543,28 @@
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
-
+                                                                <th>transId</th>
                                                                 <th>expiryOn</th>
                                                                 <th>licenseFor</th>
                                                                 <th>licenseId</th>
                                                                 <th>licenseType</th>
                                                                 <th>paidon</th>
                                                                 <th>renewedon</th>
-                                                                <th>transId</th>
+                                                               
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
                                                             <tr ng-repeat="group in Group" class="gradeA">
-
+                                                                <td>{{group.transId}}</td>
                                                                 <td>{{group.expiryOn}}</td>
                                                                 <td>{{group.licenseFor}}</td>
                                                                 <td>{{group.licenseId}}</td>
                                                                 <td>{{group.licenseType}}</td>
                                                                 <td>{{group.paidon}}</td>
                                                                 <td>{{group.renewedon}}</td>
-                                                                <td>{{group.transId}}</td>
+                                                                
                                                             </tr>
 
                                                         </tbody>
@@ -575,6 +592,7 @@
                 <!--END PAGE WRAPPER-->
             </div>
         </div>
+        </div>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/jquery-migrate-1.2.1.min.js"></script>
         <script src="js/jquery-ui.js"></script>
@@ -597,24 +615,7 @@
         <script src="js/table-action.js"></script>
         <!--CORE JAVASCRIPT-->
         <script src="js/main.js"></script>
-
-        <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-145464-12', 'auto');
-        ga('send', 'pageview');
-
-
-        </script>
+       
         <script src="js/angular.js"></script>
         <script src="js/ngStorage.js"></script>
         <script src="js/LicensePayments.js"></script>
