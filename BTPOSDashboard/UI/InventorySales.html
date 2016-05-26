@@ -458,98 +458,7 @@
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
-                                                        
-                                                        <div class="actions">
-                                                            <a href="newinventorysales.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;">  Add Inventory Sales</button></a>
-
-                                                        </div>
-
-                                                                         </div>
-                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit InventorySales</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-model="Sales1">
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="Name" class="control-label" style="color:red;">Name:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Sales1.ItemName" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="Description" class="control-label">Quantity:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.Quantity" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label" >PerUnitPrice:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.PerUnitPrice" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label" >PurchaseDate:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.PurchaseDate" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="TypeGroup" class="control-label">InVoiceNumber:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Sales1.InVoiceNumber" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(Sales1, 'U');">Save</button>
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                       
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
@@ -559,7 +468,7 @@
                                                                 <th>PerUnitPrice</th>
                                                                 <th>PurchaseDate</th>
                                                                 <th>InVoiceNumber</th>
-                                                                <th>Update</th>
+                                                                
                                                                 
                                                             </tr>
                                                         <tbody>
@@ -570,13 +479,13 @@
                                                                     <td>{{G.PerUnitPrice}}</td>
                                                                     <td>{{G.PurchaseDate}}</td>
                                                                     <td>{{G.InVoiceNumber}}</td>
-                                                                <td>
+                                                                <!--<td>
                                                                     {{G.Update}}
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setSales(G);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
-                                                                </td>
+                                                                </td>-->
                                                           
                                                             </tr>
                                                         </tbody>

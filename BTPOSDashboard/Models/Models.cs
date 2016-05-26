@@ -1365,6 +1365,17 @@ namespace BTPOSDashboardAPI.Models
         public int reorderpoint{set; get;}
         public string subcat{set; get;}
     }
+    public class GetPurchaseOrder
+    {
+        public int Id { set; get; }
+        public string PONum { set; get; }
+        public int TranscationId { set; get; }
+        public DateTime? Date { set; get; }
+        public decimal amount { set; get; }
+        public int itemId { set; get; }
+        public decimal Quantity { set; get; }
+        public int StatusId { set; get; }
+    }
 }                     
         
 
