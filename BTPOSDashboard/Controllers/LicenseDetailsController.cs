@@ -68,7 +68,7 @@ namespace BTPOSDashboard.Controllers
             SqlParameter lid = new SqlParameter();
             lid.ParameterName = "@LicenseTypeId";
             lid.SqlDbType = SqlDbType.Int;
-            lid.Value = Convert.ToString(b.LicenseCatId);
+            lid.Value = Convert.ToString(b.LicenseTypeId);
             cmd.Parameters.Add(lid);           
            
             SqlParameter nn = new SqlParameter();

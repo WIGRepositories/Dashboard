@@ -1216,11 +1216,11 @@ namespace BTPOSDashboardAPI.Models
         public String LabelClass { get; set; }
 
         public int Active { get; set; }
+        public int LicenseTypeId { get; set; }
         public int LicenseCatId { get; set; }
         public DateTime? fromDate { get; set; }
         public DateTime? toDate { get; set; }
-
-        public char insupddelflag { get; set; }
+        public string insupddelflag { get; set; }
     }
 
     public class LicensePricing
@@ -1237,7 +1237,7 @@ namespace BTPOSDashboardAPI.Models
 
         public int categoryid { get; set; }
         public int Active { get; set; }
-        public char insupddelflag { get; set; }
+        public string insupddelflag { get; set; }
     }
 
     public class FleetDetails
@@ -1268,7 +1268,7 @@ namespace BTPOSDashboardAPI.Models
         public int Active { get; set; }
         public int cmpId { get; set; }
         public int fleetownerId { get; set; }
-        public char insupddelflag { get; set; }
+        public string insupddelflag { get; set; }
     }
     public class FleetAvailability
     {
@@ -1279,7 +1279,7 @@ namespace BTPOSDashboardAPI.Models
         public int fleetOwnerId { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
-        public char insupddelflag { get; set; }
+        public string insupddelflag { get; set; }
     }
 
     public class FleetStaff
@@ -1300,7 +1300,7 @@ namespace BTPOSDashboardAPI.Models
         public DateTime? ToDate { get; set; }
 
         public int Active { get; set; }
-        public char insupddelflag { get; set; }
+        public string insupddelflag { get; set; }
     }
 
     public class FleetBTPOS
@@ -1319,7 +1319,7 @@ namespace BTPOSDashboardAPI.Models
 
         public DateTime? ToDate { get; set; }
                
-        public char insupddelflag { get; set; }
+        public string insupddelflag { get; set; }
     }
 
     public class VehicleConfig

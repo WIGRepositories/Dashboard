@@ -38,21 +38,53 @@
         $scope.currLicense = function (L) {
             $scope.currSelLicense = L;
         }
-        $scope.Save = function (currSelLicense) {
+        $scope.Save = function (currSelLicense,flag) {
 
             var currSelLicense = {
+                LicenseTypeId: currSelLicense.LicenseTypeId,
+                FeatureName: currSelLicense.FeatureName,
+                FeatureValue: currSelLicense.FeatureValue,
+                FeatureLabel: currSelLicense.FeatureLabel,               
+                //LabelClass: currSelLicense.LabelClass,                
+                //fromDate: currSelLicense.fromDate,
+                //toDate: currSelLicense.toDate
+                insupddelflag:flag
+              };
 
+            var req = {
+                method: 'POST',
+                url: ('http://localhost:1476/api/LicenseDetails/SaveLicenseDetails'),
+                //headers: {
+                //    'Content-Type': undefined
+
+                data: currSelLicense
+
+
+            }
+            $http(req).then(function (response) {
+                alert('saved successfully');
+            });
+
+        }
+
+        $scope.SaveNewFeature = function (currSelLicense, flag) {
+
+            var selCat = $scope.l;
+
+            if (selCat == null) {
+                alert('Please select license type.');
+                return;
+            }
+
+            var currSelLicense = {
+                LicenseTypeId: selCat.Id,
                 FeatureName: currSelLicense.FeatureName,
                 FeatureValue: currSelLicense.FeatureValue,
                 FeatureLabel: currSelLicense.FeatureLabel,
-                LicenseCode: currSelLicense.LicenseCode,
-                LicenseName: currSelLicense.LicenseName,
-                LabelClass: currSelLicense.LabelClass,
-                Active: currSelLicense.Active,
-                fromDate: currSelLicense.fromDate,
-                toDate: currSelLicense.toDate
-
-
+                //LabelClass: currSelLicense.LabelClass,                
+                //fromDate: currSelLicense.fromDate,
+                //toDate: currSelLicense.toDate
+                insupddelflag: flag
             };
 
             var req = {
@@ -65,8 +97,9 @@
 
 
             }
-            $http(req).then(function (response) { });
+            $http(req).then(function (response) {
+                alert('saved successfully');
+            });
 
         }
-
     });

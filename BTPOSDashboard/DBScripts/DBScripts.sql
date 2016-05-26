@@ -5414,43 +5414,6 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 05/11/2016 08:43:10 ******/
---SET ANSI_NULLS ON
---GO
-
---SET QUOTED_IDENTIFIER ON
---GO
-
---CREATE procedure [dbo].[InsUpdDelLicenseDetails](@Id int,
---@LicenseCode varchar(10),
---@LicenseName Varchar(50),
---@LicenseCatId int,
---@FeatureName varchar(50),
---@FeatureLabel varchar(30),
---@FeatureValue varchar(10),
---@LabelClass varchar(50),
---@Active int,
---@fromDate datetime,
---@toDate datetime)
-
---as
---begin
---insert into LicenseDetails values(
---@LicenseCode,
---@LicenseName,
---@LicenseCatId,
---@FeatureName,
---@FeatureLabel,
---@FeatureValue,
---@LabelClass,
---@Active,
---@fromDate,
---@toDate
---)
-
-
-
---end
 
 /****** Object:  StoredProcedure [dbo].[GetLicensePricing]    Script Date: 05/11/2016 09:34:44 ******/
 SET ANSI_NULLS ON
@@ -5497,8 +5460,8 @@ create procedure [dbo].[InsUpdDelLicensePricing](
 @RenewalFreqTypeId int,
 @RenewalFreq int,
 @UnitPrice decimal(18,0),
-@fromdate datetime,
-@todate datetime,
+@fromdate datetime = null,
+@todate datetime = null,
 @insupddelflag char
 )
 as
@@ -5533,11 +5496,12 @@ UPDATE [POSDashboard].[dbo].[LicensePricing]
  WHERE licenseId = @LicenseId
 
 else
-
+if @insupddelflag = 'D'
 DELETE FROM [POSDashboard].[dbo].[LicensePricing]
       WHERE licenseId = @LicenseId
 
 end
+
 Go
 
 SET ANSI_NULLS ON
