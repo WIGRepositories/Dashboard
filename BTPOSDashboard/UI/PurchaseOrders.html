@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="mycntrlr">
 <head>
     <title>Dashboard</title>
     <meta charset="utf-8">
@@ -18,7 +18,8 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="dashboardDS">
+<
+<body ng-init="GetPurchaseOrder();" ng-model="PurchaseOrder">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -78,18 +79,13 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
-
-
-
-
-
 
                             <li>
                                 <a href="#">
@@ -181,7 +177,7 @@
                                         <li><a href="Payment history"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
                                     </ul>
-</ul>
+                            </ul>
                         </li>
 
                         <li>
@@ -297,34 +293,6 @@
                         </li>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <!--<li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
@@ -376,16 +344,6 @@
                             </ul>
                         </li>
 
-
-
-
-
-
-
-
-
-
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-edit fa-fw">
@@ -435,49 +393,91 @@
                         <div class="page-header pull-left">
                             <div class="page-title">PurchaseOrders</div>
                         </div>
-                        <ol class="breadcrumb page-breadcrumb pull-right">
-                            
-                        </ol>
+                        <ol class="breadcrumb page-breadcrumb pull-right"></ol>
                         <div class="clearfix"></div>
                     </div>
-                    
+
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                   
+                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                        <thead>
+                            <tr>
+
+                                <th> Id</th>
+                                <th>PONum</th>
+                                <th>TransactionId</th>
+                                <th>Date</th>
+                                <th>amount</th>
+                                <th>itemId</th>
+                                <th>Quantity</th>
+                                <th>StatusId</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr ng-repeat="R in purchaseOrder" class="gradeA">
+                                <td>{{R. Id}}</td>
+                                <td>{{R.PONum}}</td>
+                                <td>{{R.TransactionId}}</td>
+                                <td>{{R.Date}}</td>
+                                <td>{{R.amount}}</td>
+                                <td>{{R.itemId}}</td>
+                                <td>{{R.Quantity}}</td>
+                                <td>{{R.StatusId}}</td>
+                                <td>
+
+                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                        <i class="fa fa-edit"></i>&nbsp;
+                                        Edit
+                                    </button>
+                                </td>
+                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
 
 
-                        </div>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
+                            </tr>
 
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
+                        </tbody>
 
-    <script src="js/source.js"></script>
+                    </table>
 
-    <!--<script src="js/Alerts.js"></script>
 
-    <script src="js/Notifications.js"></script>-->
+
+
+                </div>
+            </div>
+            <script src="js/jquery-1.10.2.min.js"></script>
+            <script src="js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="js/jquery-ui.js"></script>
+            <!--loading bootstrap js-->
+            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+            <script src="js/html5shiv.js"></script>
+            <script src="js/respond.min.js"></script>
+            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+            <script src="vendors/iCheck/icheck.min.js"></script>
+            <script src="vendors/iCheck/custom.min.js"></script>
+            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+            <script src="js/jquery.menu.js"></script>
+            <script src="vendors/jquery-pace/pace.min.js"></script>
+            <script src="vendors/holder/holder.js"></script>
+            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+            <!--LOADING SCRIPTS FOR PAGE-->
+            <script src="js/table-action.js"></script>
+            <!--CORE JAVASCRIPT-->
+            <script src="js/main.js"></script>
+
+            <script src="js/angular.js"></script>
+            <script src="js/ngStorage.js"></script>
+
+            <script src="js/source.js"></script>
+            <script src="js/PurchaseOrder.js"></script>
+
+
+            <!--<script src="js/Alerts.js"></script>
+
+            <script src="js/Notifications.js"></script>-->
 </body>
 
 </html>
