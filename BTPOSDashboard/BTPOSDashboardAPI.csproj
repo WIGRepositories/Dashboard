@@ -440,6 +440,7 @@
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
+    <Content Include="UI\js\FleetOwnerRoutes.js" />
     <Content Include="UI\js\FleetOwners.js" />
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
@@ -458,6 +459,7 @@
     <Content Include="UI\js\RoleDetails.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\RouteFare.js" />
+    <Content Include="UI\js\SalesOrder.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleLayout.js" />
@@ -541,6 +543,7 @@
     <Content Include="UI\Routedetails.html" />
     <Content Include="UI\RouteFare.html" />
     <Content Include="UI\Routes.html" />
+    <Content Include="UI\SalesOrder.html" />
     <Content Include="UI\Seating.html" />
     <Content Include="UI\ShoppingCart.html" />
     <Content Include="UI\SmsGatewayConfiguration.html" />
@@ -1984,6 +1987,7 @@
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
+    <Compile Include="Controllers\SalesOrderController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
