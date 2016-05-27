@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en" ng-app="myApp" ng-controller="mycntrlr">
 <head>
     <title>Home | BT POS | Routes</title>
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetRoutes();" ng-model="routes">
+<body ng-init="getFleetOwnerRoute();" ng-model="FleetOwnerRoutes">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -141,6 +141,7 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
@@ -301,33 +302,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <!--<li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
@@ -379,16 +353,6 @@
                             </ul>
                         </li>
 
-
-
-
-
-
-
-
-
-
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-edit fa-fw">
@@ -438,12 +402,12 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Routes</div>
+                            <div class="page-title">Fleet Owner Routes</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Routes.html">Routes</a></li>
+                            <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="Routes.html">Fleet Owner Routes</a></li>
 
 
                         </ol>
@@ -463,10 +427,18 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
-                                                        <div class="actions">
-                                                            <a href="Addnewroute.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Fleet Owner Routes</button></a>
+                                                        <div class="col-md-5">
+                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
 
+                                                                <option value="">All</option>
+                                                            </select>
                                                         </div>
+                                                        <div class="col-md-5">
+                                                            Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div> <br><br />
 
 
 
@@ -474,51 +446,46 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                    <th>Route Name</th>
-                                                                    <th>Code</th>
-                                                                    <th>Source</th>
-                                                                    <th>Destination</th>
-                                                                    <th>Distance</th>
-                                                                    <th>from</th>
-                                                                    <th>to</th>
+                                                                    <th>Fleet-Owner Id</th>
+                                                                    <th>Company Id</th>
+                                                                    <th>Route Id</th>
+                                                                   
+
+                                                                    <th>From</th>
+                                                                    <th>To</th>
+                                                                    <th>Active</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
+                                                               
+                                                                <tr ng-repeat="route in FleetOwnerRoute" class="gradeA">
+                                                     
                                                                     <td><input type="checkbox" /></td>
-                                                                    <td>1</td>
-                                                                    <td>Henry</td>
-                                                                    <td>United States</td>
-                                                                    <td>Male</td>
-                                                                    <td>32</td>
-                                                                    <td> <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></td>
-                                                                    <td>
-                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-                                                                    </td>
-
+                                                                    <td>{{route.FleetOwnerId}}</td>
+                                                                    <td>{{route.CompanyId}}</td>
+                                                                    <td>{{route.RouteId}}</td>
+                                                                    <td>{{route.From}}</td>
+                                                                    <td>{{route.To}}</td>
+                                                                    <td>{{route.Active}}</td>
+ 
                                                                 </tr>
-                                                                <tr ng-repeat="route in routes" class="gradeA">
-                                                                    <td><input type="checkbox" /></td>
-                                                                    <td>{{route.RouteName}}</td>
-                                                                    <td>{{route.Code}}</td>
-                                                                    <td>{{route.Source}}</td>
-                                                                    <td>{{route.Destination}}</td>
-                                                                    <td>{{route.Distance}}</td>
 
-                                                                    <td> <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div></td>
-                                                                    <td>
-                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm mbs"><input type="text" readonly="" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-                                                                    </td>
-                                                                </tr>
 
                                                             </tbody>
 
+
                                                         </table>
+
 
                                                     </div>
 
 
-                                                </div>
+                                                </div><div class="form-actions">
+                                              <div class="col-md-offset-3 col-md-9">
+                                              <button class="btn btn-primary" ng-click="savenewfleetdetails(initdata);">Save</button>
+
+                                            <button class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                             </div>
                                             </div>
                                         </div>
 
@@ -529,14 +496,16 @@
                         </div>
 
                     </div>
+
                     <!--END PAGE WRAPPER-->
-                    <!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
-                    <!--END FOOTER-->
-                </div>
+    <!--BEGIN FOOTER-->
+    <div id="footer">
+        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+    </div>
+    <!--END FOOTER-->
+</div>
                 <!--END CONTENT-->
+
             </div>
 
         </div>
@@ -563,7 +532,7 @@
     <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
     <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-sample.js"></script>
+    <script src="js/tablesample.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script>
@@ -573,6 +542,7 @@
     </script>
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/Routes.js"></script>
+
+    <script src="js/FleetOwnerRoutes.js"></script>
 </body>
 </html>

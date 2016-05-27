@@ -439,6 +439,7 @@
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
+    <Content Include="UI\js\FleetOwnerRoutes.js" />
     <Content Include="UI\js\FleetOwners.js" />
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
