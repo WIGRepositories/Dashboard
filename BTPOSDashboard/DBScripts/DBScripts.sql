@@ -5596,7 +5596,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
+	
 
 CREATE PROCEDURE [dbo].[GetFleetStaff]
 	-- Add the parameters for the stored procedure here
@@ -5956,48 +5956,51 @@ and [BTPOSId] = @btposId
 End
 
 GO
-create PROCEDURE [dbo].[GetFleetOwnerRouterss] 
-	-- Add the parameters for the stored procedure here
-	(@vehicleId int=-1)
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
 
-   SELECT v.[Id]
-      --,[VehicleRegNo]
-     --,vt.[Name] as VehicleType,
-     -- lt.Name AS vehiclelayout,
-       --st.Name as ServiceType,
-       ,u.FirstName +' '+u.LastName as FleetOwnerName 
-      ,c.[Name] as CompanyName
-      ,v.[Active]
-     FROM [POSDashboard].[dbo].[FleetDetails]v
-   -- inner join Types vt on vt.Id=v.VehicleTypeId
-   -- inner join Types st on st.Id=v.ServiceTypeId
-   -- inner join Types lt on lt.Id = v.layouttypeid
-    inner join company c on c.Id=v.CompanyId
-    inner join FleetOwner f on f.UserId=v.FleetOwnerId
-    inner join Users u on u.Id = f.UserId
-	 where  (v.Id= @vehicleId or @vehicleId = -1)
-   
-    -- Insert statements for procedure here
-    
-    
---SELECT t.[Id]
---      ,t.[Name] as VehicleType,
---      t.[Name] as ServiceType
---      ,t.[Active]
-      
---      ,f.[Id] as FleetName 
---         ,c.[Name] as CompanyName
---  FROM [POSDashboard].[dbo].[Types]t   
---	 inner join company c on c.Id=t.Id
---	 inner join FleetOwner f on f.Id=t.Id
---	 where  (t.Id= @vehicleId or @vehicleId = -1)
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetPurchaseOrder]
+
+as begin 
+SELECT po.[Id]
+      ,[PONum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[itemId]
+      ,[Quantity]
+      ,t.name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[PurchaseOrder] po
+  inner join Types t on t.Id = po.StatusId
+  inner join InventoryItem i on i.Id = po.itemId
 
 
-END
+       
+end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetSalesOrder]
+
+as begin 
+SELECT so.[Id]
+      ,[SalesOrderNum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[item]
+      ,[Quantity]
+      ,t.name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[SalesOrder] so
+  inner join Types t on t.Id = so.Status
+  inner join InventoryItem i on i.Id = so.item
 
 
+       
+end
