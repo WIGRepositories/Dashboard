@@ -6055,3 +6055,51 @@ and [BTPOSId] = @btposId
 End
 
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetPurchaseOrder]
+
+as begin 
+SELECT po.[Id]
+      ,[PONum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[itemId]
+      ,[Quantity]
+      ,t.name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[PurchaseOrder] po
+  inner join Types t on t.Id = po.StatusId
+  inner join InventoryItem i on i.Id = po.itemId
+
+
+       
+end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetSalesOrder]
+
+as begin 
+SELECT so.[Id]
+      ,[SalesOrderNum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[item]
+      ,[Quantity]
+      ,t.name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[SalesOrder] so
+  inner join Types t on t.Id = so.Status
+  inner join InventoryItem i on i.Id = so.item
+
+
+       
+end

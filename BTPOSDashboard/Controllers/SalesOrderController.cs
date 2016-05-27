@@ -9,15 +9,15 @@ using System.Web.Http;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class PurchaseOrderController : ApiController
-    {     
-   
+    public class SalesOrderController : ApiController
+    {
+
         [HttpGet]
-        public DataTable GetPurchaseOrder()
+        public DataTable GetSalesOrder()
         {
-            
-            
-          DataTable Tbl = new DataTable();
+
+
+            DataTable Tbl = new DataTable();
 
 
             //connect to database
@@ -27,12 +27,12 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetPurchaseOrder";
+            cmd.CommandText = "GetSalesOrder";
             cmd.Connection = conn;
-            
+
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-           // Tbl = ds.Tables[0];
+            // Tbl = ds.Tables[0];
 
             // int found = 0;
             return Tbl;
