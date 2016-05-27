@@ -433,12 +433,7 @@
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-5">
-                                                            Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-
-                                                                <option value="">All</option>
-                                                            </select>
-                                                        </div> <br><br />
+                                                        <br><br/>
 
 
 
@@ -446,9 +441,9 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                    <th>Fleet-Owner Id</th>
-                                                                    <th>Company Id</th>
-                                                                    <th>Route Id</th>
+                                                                    <th>Fleet-Owner</th>
+                                                                   
+                                                                    <th>Route</th>
                                                                    
 
                                                                     <th>From</th>
@@ -462,7 +457,7 @@
                                                      
                                                                     <td><input type="checkbox" /></td>
                                                                     <td>{{route.FleetOwnerId}}</td>
-                                                                    <td>{{route.CompanyId}}</td>
+                                                                    
                                                                     <td>{{route.RouteId}}</td>
                                                                     <td>{{route.From}}</td>
                                                                     <td>{{route.To}}</td>
