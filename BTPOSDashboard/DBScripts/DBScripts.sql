@@ -1233,7 +1233,9 @@ begin
 select * from RoutesFares
 end
 
+
 GO
+/****** Object:  Table [dbo].[RouteFare]    Script Date: 05/27/2016 08:58:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1241,15 +1243,15 @@ GO
 CREATE TABLE [dbo].[RouteFare](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[RouteId] [int] NOT NULL,
-	[VehicleType] [nvarchar](50) NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
 	[SourceStopId] [int] NOT NULL,
 	[DestinationStopId] [int] NOT NULL,
-	[Distance] [nvarchar](50) NOT NULL,
-	[PerUnitPrice] [int] NOT NULL,
-	[Amount] [int] NOT NULL,
-	[FareType] [nvarchar](50) NOT NULL,
-	[Active] [int] NOT NULL
+	[Distance] [decimal](18, 0) NOT NULL,
+	[PerUnitPrice] [decimal](18, 0) NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
+	[FareTypeId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -1659,6 +1661,7 @@ CREATE TABLE [dbo].[FleetOwnerRouteStop](
 ) ON [PRIMARY]
 
 GO
+/****** Object:  Table [dbo].[FleetOwnerRouteFare]    Script Date: 05/27/2016 09:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1666,17 +1669,18 @@ GO
 CREATE TABLE [dbo].[FleetOwnerRouteFare](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[RouteId] [int] NOT NULL,
-	[VehicleType] [nvarchar](50) NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
 	[SourceStopId] [int] NOT NULL,
 	[DestinationStopId] [int] NOT NULL,
-	[Distance] [nvarchar](50) NOT NULL,
-	[PerUnitPrice] [int] NOT NULL,
-	[Amount] [int] NOT NULL,
+	[Distance] [decimal](18, 0) NOT NULL,
+	[PerUnitPrice] [decimal](18, 0) NOT NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
 	[CompanyId] [int] NOT NULL,
 	[FleetOwnerId] [int] NOT NULL,
-	[FareType] [nvarchar](50) NOT NULL,
-	[Active] [int] NULL
+	[FareTypeId] [int] NOT NULL,
+	[Active] [int] NULL CONSTRAINT [DF_FleetOwnerRouteFare_Active]  DEFAULT ((1))
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -4651,52 +4655,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[InsUpdDelFleetStaff]
-@Id int = -1,
-@RoleId int,
-@UserId int,
-@VehicleId int,
-@cmpId int,
-@FromDate datetime = null,
-@ToDate datetime = null,
-@insupddelflag varchar
-as
-begin
-
-declare @cnt  int
-set @cnt = -1
-
-if @insupddelflag = 'I'
-
-select @cnt = count(1) from [POSDashboard].[dbo].FleetAvailability 
-where vehicleid = @vehicleid 
-
-if @cnt = 0 
-begin
-INSERT INTO [POSDashboard].[dbo].[FleetAvailability]
-           ([VehicleId]
-           ,[FromDate]
-           ,[ToDate])
-     VALUES
-           (@VehicleId
-           ,@FromDate
-           ,@ToDate)
-end
-else
-  if @insupddelflag = 'U'
-
-UPDATE [POSDashboard].[dbo].[FleetAvailability]
-   SET [FromDate] = @FromDate
-      ,[ToDate] = @ToDate      
- WHERE [VehicleId] = @VehicleId
-
-else
-  delete from [POSDashboard].[dbo].[FleetAvailability]
-where vehicleid = @vehicleid 
-
-
-End
-
 /****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
 SET ANSI_NULLS ON
 
@@ -5640,28 +5598,6 @@ END
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-create PROCEDURE [dbo].[GetLicenseDetailsGrpid]
-@LicenseDetailsid int = -1
-AS
-BEGIN
-	
-	SET NOCOUNT ON;
-
-    
-	SELECT L.Id,L.LicenseCatId,L.FeatureName,
-	L.FeatureLabel,L.FeatureValue,L.Active, S.name as SubCategory
-	From [LicenseDetails] L
-	 inner join SubCategory S on S.Id = L.LicenseCatId	 
-	  where (LicenseCatId = @LicenseDetailsid or @LicenseDetailsid = -1)
-END
-
-GO 
 
 CREATE PROCEDURE [dbo].[GetFleetStaff]
 	-- Add the parameters for the stored procedure here
@@ -5755,46 +5691,7 @@ and roleid = @roleid
 End
 
 GO
-/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[GetFleebtDetails] 
-	-- Add the parameters for the stored procedure here
-	(@vehicleId int=-1)
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
 
-   SELECT vd.[Id]
-      ,[RegNo]
-      
-      ,[POSID]
-      ,[From]
-      ,[To]
-      ,vd.[Active]
-     FROM [POSDashboard].[dbo].[FleetBtpos]fbt
-    
-  
-    
-    inner join VehicleDetails vd on vd.Id=fbt.Id
-   
-	 where  (vd.Id= @vehicleId or @vehicleId = -1)
-
-
-
-END
-
-
-GO
 /****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
 SET ANSI_NULLS ON
 GO

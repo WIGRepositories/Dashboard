@@ -391,6 +391,7 @@
     <Content Include="UI\Configuration.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
+    <Content Include="UI\css\handsontable.full.min.css" />
     <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
@@ -449,6 +450,7 @@
     <Content Include="UI\js\LicenseDetails.js" />
     <Content Include="UI\js\LicensePricing.js" />
     <Content Include="UI\js\LicenseTypes.js" />
+    <Content Include="UI\js\ngHandsontable.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Notifications.js" />
     <Content Include="UI\js\Objects.js" />
