@@ -1,11 +1,16 @@
+var app = angular.module('myApp', ['ngStorage'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.uname = $localStorage.uname
 
-var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
+    $scope.GetAlert = function () {
 
-    $http.get('http://localhost:1476/api/Alert/GetAlert').then(function (res, data) {
-        $scope.Alerts = res.data;
-    })
-    });
+        $http.get('http://localhost:1476/api/Alert/GetAlert').then(function (response, req) {
+            $scope.Alert = response.data;
+
+        });
+    }
+
+});
     //$scope.save = function (A) {
 
     //    var Alerts = {

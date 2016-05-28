@@ -1255,7 +1255,9 @@ begin
 select * from RoutesFares
 end
 
+
 GO
+/****** Object:  Table [dbo].[RouteFare]    Script Date: 05/27/2016 08:58:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1263,15 +1265,15 @@ GO
 CREATE TABLE [dbo].[RouteFare](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[RouteId] [int] NOT NULL,
-	[VehicleType] [nvarchar](50) NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
 	[SourceStopId] [int] NOT NULL,
 	[DestinationStopId] [int] NOT NULL,
-	[Distance] [nvarchar](50) NOT NULL,
-	[PerUnitPrice] [int] NOT NULL,
-	[Amount] [int] NOT NULL,
-	[FareType] [nvarchar](50) NOT NULL,
-	[Active] [int] NOT NULL
+	[Distance] [decimal](18, 0) NOT NULL,
+	[PerUnitPrice] [decimal](18, 0) NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
+	[FareTypeId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -1681,6 +1683,7 @@ CREATE TABLE [dbo].[FleetOwnerRouteStop](
 ) ON [PRIMARY]
 
 GO
+/****** Object:  Table [dbo].[FleetOwnerRouteFare]    Script Date: 05/27/2016 09:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1688,17 +1691,18 @@ GO
 CREATE TABLE [dbo].[FleetOwnerRouteFare](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[RouteId] [int] NOT NULL,
-	[VehicleType] [nvarchar](50) NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
 	[SourceStopId] [int] NOT NULL,
 	[DestinationStopId] [int] NOT NULL,
-	[Distance] [nvarchar](50) NOT NULL,
-	[PerUnitPrice] [int] NOT NULL,
-	[Amount] [int] NOT NULL,
+	[Distance] [decimal](18, 0) NOT NULL,
+	[PerUnitPrice] [decimal](18, 0) NOT NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
 	[CompanyId] [int] NOT NULL,
 	[FleetOwnerId] [int] NOT NULL,
-	[FareType] [nvarchar](50) NOT NULL,
-	[Active] [int] NULL
+	[FareTypeId] [int] NOT NULL,
+	[Active] [int] NULL CONSTRAINT [DF_FleetOwnerRouteFare_Active]  DEFAULT ((1))
 ) ON [PRIMARY]
+
 
 GO
 SET ANSI_NULLS ON
@@ -4668,7 +4672,6 @@ END
 
 
 
-
 /****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
 SET ANSI_NULLS ON
 
@@ -4966,12 +4969,10 @@ t1.MessageTypeId,
 t1.StatusId,
 t1.UserId,
 t1.Name,
-t2.FirstName,
-t2.LastName
+t2.FirstName+' '+t2.LastName as Name
  from Notifications t1
  inner join Users t2 on t2.Id=t1.UserId
 end
-
 
 GO
 /****** Object:  StoredProcedure [dbo].[GetAlerts]    Script Date: 05/05/2016 18:47:07 ******/
@@ -4979,7 +4980,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[GetAlerts]
+Create procedure [dbo].[GetAlerts]
 
 as begin 
 select t1.Id,
@@ -4989,8 +4990,8 @@ t1.MessageTypeId,
 t1.StatusId,
 t1.UserId,
 t1.Name,
-t2.FirstName,
-t2.LastName
+t2.FirstName+' '+t2.LastName as Username
+
  from Alerts t1
  inner join Users t2 on t2.Id=t1.UserId
                         
@@ -5612,13 +5613,6 @@ END
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[GetTypesByGroupId]    Script Date: 05/16/2016 14:56:24 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-	
 
 CREATE PROCEDURE [dbo].[GetFleetStaff]
 	-- Add the parameters for the stored procedure here
@@ -5711,11 +5705,6 @@ and roleid = @roleid
 
 End
 
-GO
-/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 /****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/

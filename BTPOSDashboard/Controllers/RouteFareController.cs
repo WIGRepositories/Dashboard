@@ -13,10 +13,9 @@ namespace BTPOSDashboard.Controllers
     public class RouteFareController : ApiController
     {
         [HttpGet]
-        public DataTable getRouteFare()
+        public DataSet getRouteFare(int routeId, int fleetownerId)
         {
-            DataTable Tbl = new DataTable();
-
+            DataSet rs = new DataSet();
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -27,13 +26,49 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetRouteFare";
             cmd.Connection = conn;
+
+            SqlParameter ccd = new SqlParameter();
+            ccd.ParameterName = "@RouteId";
+            ccd.SqlDbType = SqlDbType.Int;
+            ccd.Value = routeId;
+            cmd.Parameters.Add(ccd);
+
+            SqlParameter foid = new SqlParameter();
+            foid.ParameterName = "@fleetownerId";
+            foid.SqlDbType = SqlDbType.Int;
+            foid.Value = fleetownerId;
+            cmd.Parameters.Add(foid);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
-            Tbl = ds.Tables[0];
+           
+            //prepare the table and sent it to client side
+
+            DataTable result = new DataTable();
+            result.Columns.Add("Destination/Rows");
+
+            //add the stops as the columns
+            DataTable stops = ds.Tables[1];
+            for (int row = 0; row < stops.Rows.Count; row++) {
+                result.Columns.Add(stops.Rows[row][0].ToString());
+            }
+
+            for (int row = 0; row < stops.Rows.Count; row++)
+            {
+                DataRow dr = result.NewRow();
+                dr[0] = stops.Rows[row][0].ToString();
+                result.Rows.Add(dr);
+            }
+            //for each column (stop) iterate and prepare rows
+            //the rows will be equal to the columns count
 
             // int found = 0;
-            return Tbl;
+            DataTable dt = stops.Copy();
+            rs.Tables.Add(result);
+            rs.Tables.Add(dt);
+                
+            return rs;
         }
         [HttpPost]
         public DataTable saveRouteFare(RouteFare b)
