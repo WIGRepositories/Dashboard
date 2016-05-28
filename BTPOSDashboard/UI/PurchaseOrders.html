@@ -1,9 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="mycntrlr">
 <head>
-    <title>Dashboard</title>
+    <title>Home | Users | Company</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
@@ -17,6 +19,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
+>
 
 <
 <body ng-init="GetPurchaseOrder();" ng-model="PurchaseOrder">
@@ -386,10 +389,11 @@
                         </li>-->
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>               
+                 <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
-                    
+
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
                             <div class="page-title">Purchase Orders</div>
@@ -404,89 +408,215 @@
 
 
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    
-                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                        <thead>
-                            <tr>
-                                <th>PONum</th>
-                                <th>TransactionId</th>
-                                <th>Date</th>
-                                <th>amount</th>
-                                <th>item</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
-                        <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
+                    <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div class="col-lg-12">
 
-                            <tr ng-repeat="R in PurchaseOrder" class="gradeA">                                
-                                <td>{{R.PONum}}</td>
-                                <td>{{R.TransactionId}}</td>
-                                <td>{{R.Date}}</td>
-                                <td>{{R.amount}}</td>
-                                <td>{{R.ItemName}}</td>
-                                <td>{{R.Quantity}}</td>
-                                <td>{{R.Status}}</td>
-
-                                <td>
-
-                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
-                                        <i class="fa fa-edit"></i>&nbsp;
-                                        Edit
-                                    </button>
-                                </td>
-                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+                                <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
 
 
-                            </tr>
+                                                <div class="table-container">
+                                                    <div class="row mbm">
 
-                        </tbody>
 
-                    </table>
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+
+                                                    </div>
+                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">PONum</h4>
+                                                                </div>
+                                                                <div class="modal-body" ng-model="Purchase1">
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="Name" class="control-label" style="color:red;">TransactionId</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Purchase1.TransactionId" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="Description" class="control-label">Date</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.Date" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="TypeGroup" class="control-label">amount</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.amount" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="TypeGroup" class="control-label">item</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.item" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="TypeGroup" class="control-label">Quantity</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.Quantity" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                div class="row">
+
+                                                                <div class="col-md-3">
+                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                        <label for="TypeGroup" class="control-label">Status</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <div class="form-group">
+                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.Status" /></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(Purchase1, 'U');">Save</button>
+                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <thead>
+                                                    <tr>
+                                                        <th>PONum</th>
+                                                        <th>TransactionId</th>
+                                                        <th>Date</th>
+                                                        <th>amount</th>
+                                                        <th>item</th>
+                                                        <th>Quantity</th>
+                                                        <th>Status</th>
+                                                        <th>Update</th>
+                                                        <th>Delete</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+
+                                                    <tr ng-repeat="R in PurchaseOrder" class="gradeA">
+                                                        <td>{{R.PONum}}</td>
+                                                        <td>{{R.TransactionId}}</td>
+                                                        <td>{{R.Date}}</td>
+                                                        <td>{{R.amount}}</td>
+                                                        <td>{{R.ItemName}}</td>
+                                                        <td>{{R.Quantity}}</td>
+                                                        <td>{{R.Status}}</td>
+
+                                                        <td>
+
+                                                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                        <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+
+
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
                     </div>
-
-
-
                 </div>
+                <!--END CONTENT--><!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                </div>
+                <!--END FOOTER-->
             </div>
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <!--loading bootstrap js-->
-            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-            <script src="js/html5shiv.js"></script>
-            <script src="js/respond.min.js"></script>
-            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-            <script src="vendors/iCheck/icheck.min.js"></script>
-            <script src="vendors/iCheck/custom.min.js"></script>
-            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-            <script src="js/jquery.menu.js"></script>
-            <script src="vendors/jquery-pace/pace.min.js"></script>
-            <script src="vendors/holder/holder.js"></script>
-            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-            <!--LOADING SCRIPTS FOR PAGE-->
-            <script src="js/table-action.js"></script>
-            <!--CORE JAVASCRIPT-->
-            <script src="js/main.js"></script>
+            <!--END PAGE WRAPPER-->
+        </div>
+    </div>
+   
 
-            <script src="js/angular.js"></script>
-            <script src="js/ngStorage.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
 
-            <script src="js/source.js"></script>
-            <script src="js/PurchaseOrder.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+
+    <script src="js/source.js"></script>
+    <script src="js/PurchaseOrder.js"></script>
 
 
-            <!--<script src="js/Alerts.js"></script>
+    <!--<script src="js/Alerts.js"></script>
 
-            <script src="js/Notifications.js"></script>-->
+    <script src="js/Notifications.js"></script>-->
 </body>
 
 </html>

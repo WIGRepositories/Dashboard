@@ -6004,3 +6004,28 @@ SELECT so.[Id]
 
        
 end
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetInvoices]
+
+as begin 
+SELECT I.[Id]
+      ,[Invoices]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[item]
+      ,[Quantity]
+      ,t.name Status
+      ,i.Item
+  FROM [POSDashboard].[dbo].[Invoices] I
+  inner join Types t on t.Id = I.Status
+  inner join InventoryItem I1 on I1.Id =  I.item
+
+
+       
+end
