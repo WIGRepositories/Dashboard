@@ -449,6 +449,7 @@
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
     <Content Include="UI\js\InventoryStatus.js" />
+    <Content Include="UI\js\Invoices.js" />
     <Content Include="UI\js\LicenseDetails.js" />
     <Content Include="UI\js\LicensePricing.js" />
     <Content Include="UI\js\LicenseTypes.js" />
@@ -1981,6 +1982,7 @@
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
     <Compile Include="Controllers\InventoryStatusController.cs" />
+    <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\LicenseDetailsController.cs" />
     <Compile Include="Controllers\LicensePricingController.cs" />
     <Compile Include="Controllers\List.cs" />
