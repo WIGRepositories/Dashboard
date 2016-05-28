@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Notifications">
+<body ng-init="getNotification();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -38,9 +38,12 @@
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
                             <ul class="dropdown-menu dropdown-alerts">
-                                <li><p>You have 0 new notifications</p></li>
+                                <li><p>You have 3 new notifications</p></li>
+                                <li>
+
+                                </li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -317,7 +320,7 @@
 
                         </ul>
                     </li>
-                    
+
                     </ul>
                 </div>
             </nav>
@@ -349,7 +352,6 @@
 
                                     <th>Name</th>
                                     <th>Message</th>
-
                                     <th>Date</th>
 
                                 </tr>
@@ -359,7 +361,6 @@
                                 <tr ng-repeat="R in Notifications" class="gradeA">
                                     <td>{{R.Name}}</td>
                                     <td>{{R.Message}}</td>
-
                                     <td>{{R.Date}}</td>
 
                                 </tr>
@@ -368,10 +369,10 @@
 
                         </table>
                     </div>
-                 </div>
+                </div>
 
 
-                
+
 
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                 <!--END CONTENT--><!--BEGIN FOOTER-->

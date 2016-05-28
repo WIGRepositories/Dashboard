@@ -4947,12 +4947,10 @@ t1.MessageTypeId,
 t1.StatusId,
 t1.UserId,
 t1.Name,
-t2.FirstName,
-t2.LastName
+t2.FirstName+' '+t2.LastName as Name
  from Notifications t1
  inner join Users t2 on t2.Id=t1.UserId
 end
-
 
 GO
 /****** Object:  StoredProcedure [dbo].[GetAlerts]    Script Date: 05/05/2016 18:47:07 ******/
@@ -4960,7 +4958,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[GetAlerts]
+Create procedure [dbo].[GetAlerts]
 
 as begin 
 select t1.Id,
@@ -4970,8 +4968,8 @@ t1.MessageTypeId,
 t1.StatusId,
 t1.UserId,
 t1.Name,
-t2.FirstName,
-t2.LastName
+t2.FirstName+' '+t2.LastName as Username
+
  from Alerts t1
  inner join Users t2 on t2.Id=t1.UserId
                         
