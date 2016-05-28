@@ -21,7 +21,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="Alerts">
+<body ng-init="GetAlert();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -40,6 +40,9 @@
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
                             <ul class="dropdown-menu dropdown-alerts">
                                 <li><p>You have 0 new notifications</p></li>
+                                <li>
+
+                                </li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -432,46 +435,43 @@
                     </ol>
 
                     <div class="clearfix"></div>
-                 </div>
+                </div>
                 <div>
                     <div id="home" class="tab-pane fade in active">
-                        <div class="list-group mail-box" ng-repeat="A in Alerts">
+                        <div class="list-group mail-box" ng-repeat="A in Alert">
 
                         </div>
                     </div>
                     <div>
-                    <div style="margin-top:10px">
-                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                            <thead>
-                                <tr>
+                        <div style="margin-top:10px">
+                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                <thead>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Message</th>
+                                        <th>Date</th>
 
-                                    <th>UserName</th>
-                                    <th>Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                    <th>Date</th>
+                                    <tr ng-repeat="R in Alert" class="gradeA">
+                                        <td>{{R.Username}}</td>
+                                        <td>{{R.Message}}</td>
+                                        <td>{{R.Date}}</td>
 
-                                </tr>
-                            </thead>
-                            <tbody>
+                                        <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
+                                            <i class="fa fa-times-circle"></i>&nbsp;
+                                            Delete
+                                        </button>-->
 
-                                <tr ng-repeat="R in Alerts" class="gradeA">
-                                    <td>{{R.Name}}</td>
-                                    <td>{{R.Message}}</td>
+                                    </tr>
 
-                                    <td>{{R.Date}}</td>
+                                </tbody>
 
-                                    <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
-                                        <i class="fa fa-times-circle"></i>&nbsp;
-                                        Delete
-                                    </button>-->
-
-                                </tr>
-
-                            </tbody>
-
-                        </table>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->

@@ -6,13 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
     <!--Loading bootstrap css-->    
-    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
@@ -46,7 +44,7 @@
                         <li class="dropdown topbar-user">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
-                                <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
+                                <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
                                 <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
@@ -322,17 +320,16 @@
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
 
-                                        
-
                                             <div class="col-lg-12">
 
 
                                                 <div class="table-container">
-                                                    <div class="col-md-5">
-                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getRolesForCompany(s)">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
+                                                
+                                            <div class="col-md-5">
+                                                Company: <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getRolesForCompany(s)">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
 
                                                     <div class="actions">
                                                         <a href="AssignRole.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Assign Role</button></a>
@@ -449,13 +446,11 @@
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
     <script src="vendors/iCheck/icheck.js"></script>
     <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
     <script src="js/jquery.menu.js"></script>
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
     <script src="vendors/ckeditor/ckeditor.js"></script>
 <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
