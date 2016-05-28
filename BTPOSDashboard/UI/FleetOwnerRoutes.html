@@ -433,6 +433,12 @@
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
+                                                        <div class="col-md-5">
+                                                            Fleet Owner:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
                                                         <br><br/>
 
 
@@ -441,7 +447,7 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                    <th>Fleet-Owner</th>
+                                                                    
                                                                    
                                                                     <th>Route</th>
                                                                    
@@ -455,14 +461,14 @@
                                                                
                                                                 <tr ng-repeat="route in FleetOwnerRoute" class="gradeA">
                                                      
-                                                                    <td><input type="checkbox" /></td>
-                                                                    <td>{{route.FleetOwnerId}}</td>
+                                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
                                                                     
-                                                                    <td>{{route.RouteId}}</td>
+                                                                   
+                                                                    
+                                                                    <td>{{route.RouteName}}</td>
                                                                     <td>{{route.From}}</td>
                                                                     <td>{{route.To}}</td>
-                                                                    <td>{{route.Active}}</td>
- 
+                                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
                                                                 </tr>
 
 

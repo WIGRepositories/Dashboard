@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace BTPOSDashboardAPI.Controllers
 {
-    public class BTPOSController : ApiController
+    public class BTPOSRoutesController : ApiController
     {
         [HttpGet]
         public DataTable Btpos()
@@ -94,6 +94,33 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
               public void Options(){}
+
+              [HttpGet]
+              [Route("api/BtposRoutes/getBtposRoutes")]
+              public DataTable getBtposRoutes()
+              {
+                  DataTable Tb1 = new DataTable();
+
+
+                  //connect to database
+                  SqlConnection conn = new SqlConnection();
+                  //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                  conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                  SqlCommand cmd = new SqlCommand();
+                  cmd.CommandType = CommandType.StoredProcedure;
+                  cmd.CommandText = "GetBTposRoutes";
+                  cmd.Connection = conn;
+                  DataSet ds = new DataSet();
+                  SqlDataAdapter db = new SqlDataAdapter(cmd);
+                  db.Fill(ds);
+                  Tb1 = ds.Tables[0];
+
+                  // int found = 0;
+                  return Tb1;
+
+
+              }
            
     }
 }

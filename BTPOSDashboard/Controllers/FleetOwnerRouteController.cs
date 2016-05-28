@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFleetOwnerRoute";
+            cmd.CommandText = "GetFleetOwnerRouterss";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -35,6 +35,7 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
+
         [HttpPost]
         public DataTable saveFleetOwnerRoute(FleetownerRoute b)
         {
@@ -51,52 +52,14 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "GetFleetOwnerRouterss";
             cmd.Connection = conn;
             conn.Open();
-            SqlParameter cc = new SqlParameter();
-            cc.ParameterName = "@Id";
-            cc.SqlDbType = SqlDbType.Int;
-            cc.Value = b.Id;
-            SqlParameter ccd = new SqlParameter();
-            ccd.ParameterName = "@FleetOwnerId";
-            ccd.SqlDbType = SqlDbType.Int;
-            ccd.Value = Convert.ToString(b.FleetOwnerId);
-            cmd.Parameters.Add(ccd);
-         
-            SqlParameter ccds = new SqlParameter();
-            ccds.ParameterName = "@CompanyId";
-            ccds.SqlDbType = SqlDbType.Int;
-            ccds.Value = Convert.ToString(b.CompanyId);
-            cmd.Parameters.Add(ccds);
+           
             SqlParameter ccdsa = new SqlParameter();
             ccdsa.ParameterName = "@CompanyName";
             ccdsa.SqlDbType = SqlDbType.Int;
             ccdsa.Value = Convert.ToString(b.RouteId);
             cmd.Parameters.Add(ccdsa);
 
-            SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@FleetOwnerName ";
-            dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.From;
-            cmd.Parameters.Add(dd);
-
-            SqlParameter d1 = new SqlParameter();
-            d1.ParameterName = "@From ";
-            d1.SqlDbType = SqlDbType.VarChar;
-            d1.Value = b.From;
-            cmd.Parameters.Add(d1);
-
-            SqlParameter d2 = new SqlParameter();
-            d2.ParameterName = "@To ";
-            d2.SqlDbType = SqlDbType.VarChar;
-            d2.Value = b.From;
-            cmd.Parameters.Add(d2);
-           
-            SqlParameter aa = new SqlParameter();
-            aa.ParameterName = "@Active";
-            aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = b.Active;
-            cmd.Parameters.Add(aa);
-
-
+         
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
             //db.Fill(ds);

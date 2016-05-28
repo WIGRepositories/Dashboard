@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="myctrl">
 <head>
     <title>Dashboard</title>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="dashboardDS">
+<body ng-init="getBtposRoutes();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -78,18 +78,13 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
-
-
-
-
-
 
                             <li>
                                 <a href="#">
@@ -123,12 +118,8 @@
 
                             </li>
 
-
-
                         </ul>
                         </li>
-
-
 
                         <li>
                             <a href="#">
@@ -300,11 +291,13 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Dashboard</div>
+                            <div class="page-title">BT POS Routes</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">BT POS</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">BT POS Routes</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -312,21 +305,25 @@
                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
+                                <th>Reg No</th>
+                                <th>POSId</th>
+                                <th>Route Name</th>
                                 <th>Active</th>
                                 <th>Update</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="T in TypeGroups" class="gradeA">
+                            <tr ng-repeat="B in BtposRoutes" class="gradeA">
 
-                                <td>{{lok}}</td>
+                                <td>{{B.VehicleRegNo}}</td>
 
-                                <td>{{lok}}</td>
+                                <td>{{B.POSID}}</td>
+
+                                <td>{{B.RouteName}}</td>
+
                                 <td><input type="checkbox" checked /></td>
                                 <td>
-                                    {{T.lk}}
+                                    {{B.lk}}
                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setTypeGroup(T);">
                                         <i class="fa fa-edit"></i>&nbsp;
 
@@ -335,70 +332,56 @@
                             </tr>
                         </tbody>
                     </table>
-                                                   
-                                                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                <th>FeatureName</th>
-                                                                <th>FeatureValue</th>
-                                                                <th>Description</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="L in License">
-                                                                <td><input type="checkbox" /> </td>
-                                                                <td>{{L.FeatureName}}</td>
-                                                                <td>{{L.FeatureValue}}</td>
-                                                                <td>{{L.Description}}</td>
-                                                            </tr>
+                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                        <thead>
+                            <tr>
+                                <th width="3%"><input type="checkbox" class="checkall" />Select</th>
+                                <th>FeatureName</th>
+                                <th>FeatureValue</th>
+                                <th>Description</th>
 
-                                                        </tbody>
-                                                    </table>-->
-                                                   
-                                                                    <!---<a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
-                                                                        &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                                    </a><a href="#" class="list-group-item">
-                                                                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                                            <span class="glyphicon glyphicon-paperclip"></span>
-                                                                        </span>
-                                                                    </a>---->
-                                                               
-                                         
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="L in License">
+                                <td><input type="checkbox" /> </td>
+                                <td>{{L.FeatureName}}</td>
+                                <td>{{L.FeatureValue}}</td>
+                                <td>{{L.Description}}</td>
+                            </tr>
 
+                        </tbody>
+                    </table>-->
+                    <!---<a href="#" class="list-group-item">
+                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
+                        &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                    </a><a href="#" class="list-group-item">
+                        <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
+                            <span class="glyphicon glyphicon-paperclip"></span>
+                        </span>
+                    </a>---->
 
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-
-                        <!--END CONTENT-->
-                        <!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                     </div>
-                    <!--END PAGE WRAPPER-->
+                    <!--END FOOTER-->
+
+
                 </div>
+
             </div>
 
         </div>
+
+
     </div>
+  
+
+    <!--END CONTENT-->
+    
+   
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -426,7 +409,7 @@
     <script src="js/ngStorage.js"></script>
 
     <script src="js/source.js"></script>
-
+    <script src="js/BTPOSRoute.js"></script>
     <!--<script src="js/Alerts.js"></script>
 
     <script src="js/Notifications.js"></script>-->

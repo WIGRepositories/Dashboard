@@ -289,16 +289,38 @@ CREATE TABLE [dbo].[BTPOSRegistration](
 ) ON [PRIMARY]
 
 GO
+
+/****** Object:  Table [dbo].[BTPOSRecords]    Script Date: 05/28/2016 15:02:51 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[BTPOSRecords](
-	[Id] [numeric](18, 0) NULL,
-	[BTPOSId] [numeric](18, 0) NULL,
-	[IpConfig] [nchar](10) NULL,
-	[RecordData] [nchar](10) NULL
+	[Id] [int] NOT NULL,
+	[BTPOSId] [int] NOT NULL,
+	[RecordData] [binary](2000) NULL,
+	[FileName] [varchar](50) NULL,
+	[Description] [varchar](500) NULL,
+	[CreatedDate] [datetime] NULL,
+	[Downloaded] [datetime] NULL,
+	[LastDownloadtime] [datetime] NULL,
+	[IsDirty] [int] NULL
 ) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[BTPOSRecords] ADD  CONSTRAINT [DF_BTPOSRecords_IsDirty]  DEFAULT ((1)) FOR [IsDirty]
+GO
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -6004,3 +6026,109 @@ SELECT so.[Id]
 
        
 end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[VehicleConfiguration]    Script Date: 05/28/2016 12:24:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[VehicleConfiguration]	
+	@needRoutes int =0,
+	@needRoles int =0,		
+	@needvehicleRegno int = 0,
+	@needvehicleType int = 0,    
+    @needServiceType int = 0,
+    @needfleetowners int =0,
+    @needCompanyName int = 0,
+    @needVehicleLayout int = 0,
+    @needPOSID int=0
+        
+    	
+AS
+
+BEGIN
+
+	
+	if @needRoutes  = 1
+	select routename,ID,Code from routes	
+	
+	if @needRoles  = 1 
+	select name,ID from Roles
+	
+	if @needvehicleRegno  = 1
+    select VehicleRegNo,Id from FleetDetails
+    
+	--vehicle type data
+	if @needvehicleType = 1
+	select Name, Id from Types where TypeGroupId = 4
+	
+	--service type data
+	if @needServiceType = 1
+	select Name, Id from Types where TypeGroupId = 5
+	
+	--fleet owners
+	if @needfleetowners = 1
+	select u.FirstName + ' '+u.lastname as Name, u.Id from FleetOwner f
+	inner join Users u on u.Id = f.UserId
+	
+	--companys
+	if @needCompanyName = 1
+	select Name,Id from Company
+	
+	--vehicle layout type
+	if @needVehicleLayout = 1
+	select Name, Id from Types where TypeGroupId = 6
+	 --btpos details
+	 if @needPOSID=1
+	 select POSID,Id from BTPOSDetails 
+	
+	
+END
+
+
+--[VehicleConfiguration] 0,1,1,0,0,1,1,0,1
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetBTposRoutes] 
+	-- Add the parameters for the stored procedure here
+	(@vehicleId int=-1)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   SELECT v.[Id]
+     ,[VehicleRegNo]
+    -- ,vt.[Name] as VehicleType,
+      --lt.Name AS vehiclelayout,
+      -- st.Name as ServiceType,
+     --  ,u.FirstName +' '+u.LastName as FleetOwnerName 
+     -- ,c.[Name] as CompanyName
+      ,r.[RouteName] as RouteName
+      ,bt.[Id]
+      ,bt.[POSID]
+      
+      ,v.[Active]
+      
+      
+     FROM [POSDashboard].[dbo].[FleetDetails]v
+  inner join BTPOSDetails bt on bt.Id=v.FleetOwnerId
+    inner join Routes r on r.Id=v.FleetOwnerId 
+   -- inner join Users u on u.Id = f.UserId
+   -- inner join FleetOwnerRoute fo on fo.Id=f.Id 
+	 where  (v.Id= @vehicleId or @vehicleId = -1)
+   
+    -- Insert statements for procedure here
+    
+    
+
+
+END
