@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class FleetOwnerRouteController : ApiController
     {
         [HttpGet]
-        public DataTable getFleetOwnerRoute()
+        public DataTable getFleetOwnerRoute(int cmpId, int fleetownerId)
         {
             DataTable Tbl = new DataTable();
 
@@ -25,8 +25,21 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFleetOwnerRouterss";
+            cmd.CommandText = "GetFleetOwnerRoute";
             cmd.Connection = conn;
+
+            SqlParameter cmpid = new SqlParameter();
+            cmpid.ParameterName = "@cmpId";
+            cmpid.SqlDbType = SqlDbType.Int;
+            cmpid.Value = cmpId;
+            cmd.Parameters.Add(cmpid);
+
+            SqlParameter foid = new SqlParameter();
+            foid.ParameterName = "@fleetownerId";
+            foid.SqlDbType = SqlDbType.Int;
+            foid.Value = fleetownerId;
+            cmd.Parameters.Add(foid);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);

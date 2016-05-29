@@ -1705,6 +1705,8 @@ CREATE TABLE [dbo].[FleetOwnerRouteFare](
 
 
 GO
+
+/****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/29/2016 06:19:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1714,12 +1716,10 @@ CREATE TABLE [dbo].[FleetOwnerRoute](
 	[FleetOwnerId] [int] NOT NULL,
 	[CompanyId] [int] NOT NULL,
 	[RouteId] [int] NOT NULL,
-	[From] [nvarchar](50) NOT NULL,
-	[To] [nvarchar](50) NOT NULL,
-	[Active] [int] NOT NULL
+	[FromDate] [datetime] NULL,
+	[ToDate] [datetime] NULL,
+	[Active] [int] NULL CONSTRAINT [DF_FleetOwnerRoute_Active]  DEFAULT ((1))
 ) ON [PRIMARY]
-
-
 
 
 GO
@@ -4823,20 +4823,26 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 Create PROCEDURE [dbo].[GetFleetOwnerRoute]
+(@cmpId int = -1, @fleetownerId int = -1)
 AS
 BEGIN
 	
 SELECT 
-      [Id],
-      [FleetOwnerId],
-      [CompanyId],
-      [RouteId],
-      [From],
-      [To],
-      [Active]
-      
-  FROM [POSDashboard].[dbo].[FleetOwnerRoute]
-
+      fr.[Id],
+      fr.[FleetOwnerId],
+      fr.[CompanyId],
+      r.routename,
+      r.code,
+      r.[Id],
+      [FromDate],
+      [ToDate],
+      fr.[Active]
+      ,case when u.id is null then 0 else 1 end assigned
+      --,0 assigned
+  FROM routes r
+left outer join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+  left outer join fleetowner f on f.id = fr.fleetownerid 
+  left outer join users u on f.userid = u.id and (u.id = @fleetownerId or @fleetownerId = -1)
 
 
 
@@ -6016,70 +6022,7 @@ SELECT so.[Id]
        
 end
 
-
 GO
-/****** Object:  StoredProcedure [dbo].[VehicleConfiguration]    Script Date: 05/28/2016 12:24:53 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-ALTER PROCEDURE [dbo].[VehicleConfiguration]	
-	@needRoutes int =0,
-	@needRoles int =0,		
-	@needvehicleRegno int = 0,
-	@needvehicleType int = 0,    
-    @needServiceType int = 0,
-    @needfleetowners int =0,
-    @needCompanyName int = 0,
-    @needVehicleLayout int = 0,
-    @needPOSID int=0
-        
-    	
-AS
-
-BEGIN
-
-	
-	if @needRoutes  = 1
-	select routename,ID,Code from routes	
-	
-	if @needRoles  = 1 
-	select name,ID from Roles
-	
-	if @needvehicleRegno  = 1
-    select VehicleRegNo,Id from FleetDetails
-    
-	--vehicle type data
-	if @needvehicleType = 1
-	select Name, Id from Types where TypeGroupId = 4
-	
-	--service type data
-	if @needServiceType = 1
-	select Name, Id from Types where TypeGroupId = 5
-	
-	--fleet owners
-	if @needfleetowners = 1
-	select u.FirstName + ' '+u.lastname as Name, u.Id from FleetOwner f
-	inner join Users u on u.Id = f.UserId
-	
-	--companys
-	if @needCompanyName = 1
-	select Name,Id from Company
-	
-	--vehicle layout type
-	if @needVehicleLayout = 1
-	select Name, Id from Types where TypeGroupId = 6
-	 --btpos details
-	 if @needPOSID=1
-	 select POSID,Id from BTPOSDetails 
-	
-	
-END
-
-
---[VehicleConfiguration] 0,1,1,0,0,1,1,0,1
-
 
 SET ANSI_NULLS ON
 GO

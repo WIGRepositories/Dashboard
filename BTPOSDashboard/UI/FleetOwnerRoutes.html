@@ -6,21 +6,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
-    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
+    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">    
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="getFleetOwnerRoute();" ng-model="FleetOwnerRoutes">
+<body ng-init="GetCompanies();" ng-model="FleetOwnerRoutes">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -49,7 +46,7 @@
                         <li class="dropdown topbar-user">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
-                                <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
+                                <li><a href="UserPofile.html"><i class="fa fa-user"></i>My Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
                                 <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
@@ -129,7 +126,6 @@
 
                         </ul>
                         </li>
-
 
 
                         <li>
@@ -299,100 +295,6 @@
 
                             </ul>
                         </li>
-
-
-
-                        <!--<li>
-                            <a href="#">
-                                <i class="fa fa-send-o fa-fw">
-                                    <div class="icon-bg bg-green"></div>
-                                </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                                <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
-                                <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                                <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
-                                <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
-                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                                <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                                <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
-                            </ul>
-
-                        </li>-->
-                        <!--<li>
-                            <a href="#">
-                                <i class="fa fa-desktop fa-fw">
-                                    <div class="icon-bg bg-pink"></div>
-                                </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
-                                <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
-                                <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
-
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-send-o fa-fw">
-                                    <div class="icon-bg bg-green"></div>
-                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                                <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                                <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                                <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
-                                <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-edit fa-fw">
-                                    <div class="icon-bg bg-violet"></div>
-                                </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
-                                <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-th-list fa-fw">
-                                    <div class="icon-bg bg-blue"></div>
-                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-envelope-o">
-                                    <div class="icon-bg bg-primary"></div>
-                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
-                            </a>
-                            <ul class="nav nav-second-level">
-                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
-                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
-                            </ul>
-                        </li>-->
                         </ul>
                     </div>
                 </nav>
@@ -407,7 +309,7 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Routes.html">Fleet Owner Routes</a></li>
+                            <li><a href="FleetOwmerRoutes.html">Fleet Owner Routes</a></li>
 
 
                         </ol>
@@ -428,119 +330,145 @@
                                                     <div class="row mbm">
 
                                                         <div class="col-md-5">
-                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-
-                                                                <option value="">All</option>
+                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                <option value="">Select</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-5">
-                                                            Fleet Owner:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()">
 
-                                                                <option value="">All</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
-                                                        <br><br/>
+                                                        <br><br />
+
+
+                                                        <div id="tableadvancedTabContent" class="tab-content">
+                                                            <div id="table-sorter-tab" class="tab-pane fade in active">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+
+
+                                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
+                                                                                    <!--<th><input type="checkbox"
+                                                                                    ng-checked="checkedArr.length == FORoutes.length"
+                                                                                    ng-click="toggleAll()">Select</th>-->
+
+                                                                                    <th>Route Name</th>
+                                                                                    <th>Route Code</th>
+
+                                                                                    <th>From</th>
+                                                                                    <th>To</th>
+                                                                                    <!--<th>Active</th>-->
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+
+                                                                                <tr ng-repeat="route in FORoutes" ng-on-finish-render>
+
+                                                                                    <!--<td>
+                                                                                    <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="route.assigned.toString() == '1'" ng-click="toggle(route, checkedArr);" /></td>-->
+                                                                                    <td>
+                                                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(route, checkedArr)" ng-click="toggle(route, checkedArr);" />
+                                                                                    </td>
 
 
 
-                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                    
-                                                                   
-                                                                    <th>Route</th>
-                                                                   
-
-                                                                    <th>From</th>
-                                                                    <th>To</th>
-                                                                    <th>Active</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                               
-                                                                <tr ng-repeat="route in FleetOwnerRoute" class="gradeA">
-                                                     
-                                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
-                                                                    
-                                                                   
-                                                                    
-                                                                    <td>{{route.RouteName}}</td>
-                                                                    <td>{{route.From}}</td>
-                                                                    <td>{{route.To}}</td>
-                                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
-                                                                </tr>
+                                                                                    <td>{{route.routename}}</td>
+                                                                                    <td>{{route.code}}</td>
+                                                                                    <td class="col-lg-2">
+                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter  input-group-sm mbs"><input type="text" id="{{route.routename}}FDate" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
 
-                                                            </tbody>
+                                                                                    </td>
+                                                                                    <td class="col-lg-2">
+
+                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="text" id="{{route.routename}}TDate" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                    </td>
+                                                                                    <!--<td>{{route.FromDate}}</td>
+                                                                                    <td>{{route.ToDate}}</td>-->
+                                                                                    <!--<td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>-->
+                                                                                </tr>
 
 
-                                                        </table>
 
 
+                                                                            </tbody>
+
+
+                                                                        </table>
+
+                                                                        <!--checked: {{checkedArr | json}}
+                                                                         <br />
+                                                                         unchecked: {{uncheckedArr | json}}-->
+                                                                    </div>
+
+
+                                                                </div><div class="form-actions">
+                                                                    <div style="text-align:center">
+                                                                        <button class="btn btn-primary" ng-click="saveFORoutes();">Save</button>
+
+                                                                        <button class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
                                                     </div>
-
-
-                                                </div><div class="form-actions">
-                                              <div class="col-md-offset-3 col-md-9">
-                                              <button class="btn btn-primary" ng-click="savenewfleetdetails(initdata);">Save</button>
-
-                                            <button class="btn btn-green" ng-click="clearGroup()">Cancel</button>
-                                             </div>
+                                                </div>
                                             </div>
+
                                         </div>
 
+                                        <!--END PAGE WRAPPER-->
 
                                     </div>
+                                    <!--END CONTENT-->
+
                                 </div>
+
                             </div>
+
                         </div>
+                        <!--BEGIN FOOTER-->
 
                     </div>
-
-                    <!--END PAGE WRAPPER-->
-    <!--BEGIN FOOTER-->
-    <div id="footer">
-        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-    </div>
-    <!--END FOOTER-->
-</div>
-                <!--END CONTENT-->
-
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
+                </div>
             </div>
-
         </div>
-
     </div>
+
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
     <script src="vendors/iCheck/icheck.min.js"></script>
     <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+
     <script src="js/jquery.menu.js"></script>
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+
     <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
+
     <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/tablesample.js"></script>
-    <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-    <script>
-        $('.datepicker-filter').datepicker({
-            autoclose: true
-        });
-    </script>
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
 
