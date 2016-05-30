@@ -5966,6 +5966,7 @@ UPDATE [POSDashboard].[dbo].[FleetBtpos]
      WHERE [VehicleId] = @VehicleId
       
 else
+  if @insupddelflag = 'D'
   delete from [POSDashboard].[dbo].[FleetBtpos]
 where vehicleid = @vehicleid 
 and [BTPOSId] = @btposId
@@ -6059,8 +6060,70 @@ BEGIN
 	 where  (v.Id= @vehicleId or @vehicleId = -1)
    
     -- Insert statements for procedure here
-    
-    
-
 
 END
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE InsUpdDelFleetOwnerRoutes
+@Id int = -1,
+@RouteId int,
+@cmpId int,
+@fleetOwnerId int,
+@FromDate datetime = null,
+@ToDate datetime = null,
+@insupddelflag varchar
+as
+begin
+
+declare @cnt  int
+set @cnt = -1
+
+declare @foid  int
+set @foid = -1
+
+select @foid = id from fleetowner where userid = @fleetOwnerId
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].[FleetOwnerRoute] 
+where [FleetOwnerId] = @foid
+and  [RouteId] = @RouteId
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerRoute]
+           ([FleetOwnerId]
+           ,[CompanyId]
+           ,[RouteId]
+           ,[FromDate]
+           ,[ToDate])
+     VALUES
+           (@foid
+           ,@cmpId
+           ,@RouteId
+           ,@FromDate
+           ,@ToDate)
+end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[FleetOwnerRoute]
+   SET [FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+ WHERE [FleetOwnerId] = @foid
+and  [RouteId] = @RouteId
+      
+else
+if @insupddelflag = 'D'
+  delete from [POSDashboard].[dbo].[FleetOwnerRoute]
+where [FleetOwnerId] = @foid
+and  [RouteId] = @RouteId
+
+End
+GO

@@ -1165,10 +1165,11 @@ namespace BTPOSDashboardAPI.Models
 
         public int RouteId { get; set; }
 
-        public String From { get; set; }
+        public DateTime? From { get; set; }
 
-        public String To { get; set; }
+        public DateTime? To { get; set; }
         public int Active { get; set; }
+        public string insupddelflag { get; set; }
     }
     public class FleetOwnerRouteStop
     {

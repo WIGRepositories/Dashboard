@@ -26,8 +26,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             return;
         }
         $http.get('http://localhost:1476/api/routedetails/getroutedetails?routeid=' + route.Id).then(function (res, data) {
-            $scope.RouteDetails = res.data;
-
+            $scope.RouteDetails = res.data;      
         });
     }
 

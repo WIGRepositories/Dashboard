@@ -50,7 +50,7 @@ namespace BTPOSDashboard.Controllers
         }
 
         [HttpPost]
-        public DataTable saveFleetOwnerRoute(FleetownerRoute b)
+        public DataTable saveFleetOwnerRoute(IEnumerable<FleetownerRoute> foRoutes)
         {
             DataTable Tbl = new DataTable();
 
@@ -62,22 +62,56 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFleetOwnerRouterss";
+            cmd.CommandText = "InsUpdDelFleetOwnerRoutes";
             cmd.Connection = conn;
             conn.Open();
-           
-            SqlParameter ccdsa = new SqlParameter();
-            ccdsa.ParameterName = "@CompanyName";
-            ccdsa.SqlDbType = SqlDbType.Int;
-            ccdsa.Value = Convert.ToString(b.RouteId);
-            cmd.Parameters.Add(ccdsa);
 
-         
-            //DataSet ds = new DataSet();
-            //SqlDataAdapter db = new SqlDataAdapter(cmd);
-            //db.Fill(ds);
-            // Tbl = Tables[0];
-            cmd.ExecuteScalar();
+            foreach (FleetownerRoute b  in foRoutes)
+            {
+
+                SqlParameter rid = new SqlParameter();
+                rid.ParameterName = "@RouteId";
+                rid.SqlDbType = SqlDbType.Int;
+                rid.Value = b.RouteId;
+                cmd.Parameters.Add(rid);
+
+                SqlParameter cmpid = new SqlParameter();
+                cmpid.ParameterName = "@cmpId";
+                cmpid.SqlDbType = SqlDbType.Int;
+                cmpid.Value = b.CompanyId;
+                cmd.Parameters.Add(cmpid);
+
+
+                SqlParameter fid = new SqlParameter();
+                fid.ParameterName = "@fleetOwnerId";
+                fid.SqlDbType = SqlDbType.Int;
+                fid.Value = b.FleetOwnerId;
+                cmd.Parameters.Add(fid);
+
+
+                SqlParameter fdt = new SqlParameter();
+                fdt.ParameterName = "@FromDate";
+                fdt.SqlDbType = SqlDbType.DateTime;
+                fdt.Value = b.From;
+                cmd.Parameters.Add(fdt);
+
+                SqlParameter tdt = new SqlParameter();
+                tdt.ParameterName = "@ToDate";
+                tdt.SqlDbType = SqlDbType.DateTime;
+                tdt.Value = b.To;
+                cmd.Parameters.Add(tdt);
+
+                SqlParameter flag = new SqlParameter();
+                flag.ParameterName = "@insupddelflag";
+                flag.SqlDbType = SqlDbType.Char;
+                flag.Value = b.insupddelflag;
+                cmd.Parameters.Add(flag);
+
+                cmd.ExecuteScalar();
+
+                cmd.Parameters.Clear();
+            }
+
             conn.Close();
             // int found = 0;
             return Tbl;
