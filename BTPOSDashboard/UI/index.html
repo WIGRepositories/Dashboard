@@ -32,15 +32,17 @@
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                            <ul class="dropdown-menu dropdown-alerts" ng-repeat="A in dashboardDS.Table1">
-                                <li><p>You have 0 new notifications</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li ng-hide="dashboardDS.Table2.length==0"><p>You have 0 new messages</p></li>
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
                             <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
-                                <li><p>You have 0 new messages</p></li>
+                                <li ng-hide="dashboardDS.Table1.length==0"><p>You have 0 new messages</p></li>
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
@@ -252,7 +254,7 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
-                                <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
+                                <li><a href="paymentHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
                                 <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
 
 
@@ -372,6 +374,7 @@
 
                                             </table>
                                             <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
+
 
                                         </div>
                                         <h3 class="mtn">License Details</h3>
