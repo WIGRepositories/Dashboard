@@ -435,6 +435,7 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\BTPOSCONFIG.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\EditHistory.js" />
@@ -457,6 +458,7 @@
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Notifications.js" />
     <Content Include="UI\js\Objects.js" />
+    <Content Include="UI\js\PaymentHistory.js" />
     <Content Include="UI\js\PurchaseOrder.js" />
     <Content Include="UI\js\RoleDetails.js" />
     <Content Include="UI\js\RouteDetails.js" />
@@ -555,6 +557,7 @@
     <Content Include="UI\TroubleTicketReports.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
+    <Content Include="UI\UserDetails.html" />
     <Content Include="UI\UserLicense.html" />
     <Content Include="UI\UserProfile.html" />
     <Content Include="UI\UserRoles.html" />
@@ -1987,6 +1990,7 @@
     <Compile Include="Controllers\LicensePricingController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\PaymentHistoryController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />

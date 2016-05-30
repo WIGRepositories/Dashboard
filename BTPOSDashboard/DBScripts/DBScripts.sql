@@ -5663,7 +5663,7 @@ Create PROCEDURE [dbo].[VehicleConfiguration]
     @needCompanyName int = 0,
     @needVehicleLayout int = 0, 
     @needHireVehicle int =0,   
-    @needbtpos int = 0,
+    @needbtpos int = -1,
     @cmpId int = -1,
     @fleetownerId int = -1
 AS
@@ -5727,7 +5727,7 @@ select VehicleRegNo,Id from FleetDetails
 END
 
 
---[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,0,-1,0
+--[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,-1,-1,-1
 
 
 GO
@@ -6240,3 +6240,19 @@ and  [RouteId] = @RouteId
 
 End
 GO
+
+
+
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getpaymentHistory]
+as
+begin
+select * from PaymentHistory
+end
+

@@ -434,12 +434,8 @@
                                                                                     </div>
 
                                                                                     <div class="col-md-5">
-                                                                                        <select id=" selusertype" class="form-control" ng-model="User1.Role">
-                                                                                            <option value="" selected disabled>Select Usertype</option>
-
-                                                                                            <option value="1">INTERBUS staff</option>
-                                                                                            <option value="2">Fleet owner staff</option>
-                                                                                            <option value="3">Guest user</option>
+                                                                                        <select id="selCompany" class="form-control" ng-model="User1.Role">
+                                                                                            <option value="" selected disabled>Select Company</option>                                                                                           
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -472,11 +468,9 @@
                                                                                 </div>
 
                                                                                 <div class="col-md-5">
-                                                                                    <select id="selusertype " class="form-control" ng-model="selusertype">
-                                                                                        <option value="" selected disabled>Select Company</option>
-                                                                                        <option value="1">INTERBUS staff</option>
-                                                                                        <option value="2">Fleet owner staff</option>
-                                                                                        <option value="3">Guest user</option>
+                                                                                    <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
+                                                                                        <option value="">Select Company</option>
+
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -489,19 +483,61 @@
                                                                                 </div>
 
                                                                                 <div class="col-md-5">
-                                                                                    <select id="selusertype" class="form-control" ng-model="selusertype">
-                                                                                        <option value="" selected disabled>Slect Roles</option>
-                                                                                        <option value="1">INTERBUS staff</option>
-                                                                                        <option value="2">Fleet owner staff</option>
-                                                                                        <option value="3">Guest user</option>
+                                                                                    <select ng-options="r.rolename for r in cmproles track by r.Id" ng-model="role" width="100%">
+                                                                                        <option value="">Select Role</option>
                                                                                     </select>
                                                                                 </div>
-                                                                            </div>                                                                                                                                                            
+                                                                            </div> 
+                                                                            <div class="modal-header modal-header-primary">
+                                                                                <h4 id="modal-header-primary-label" class="modal-title">Login</h4>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">User Name:<span class='require'>*</span></label>
+                                                                                        
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-5">
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-md-7"><input type="text" class="form-control" ng-model="User.UserName" /></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">Password:<span class='require'>*</span></label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-5">
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-md-7"><input type="password" class="form-control" ng-model="User.Password" /></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">Re Password:<span class='require'>*</span></label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-5">
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-md-7"><input type="password" class="form-control" ng-model="reenteredPwd" /><span class="help-block"></span></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                           
+                                                                                                                                                                                                                                                                                                          
                                                                             <div class="modal-footer">
                                                                                 <button data-dismiss="modal" class="btn btn-primary" ng-click="save(User1, 'U');">Save</button>
                                                                                 <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
                                                                             </div>
-                                                                        </div>
+                                                                            
                                                                             
                                                                         </div>
 

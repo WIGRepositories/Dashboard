@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en" ng-app="myApp" ng-controller="myctrl">
 <head>
     <title>Dashboard</title>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="dashboardDS">
+<body ng-init="GetPaymentHistory();" ng-model="paymentHistory">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -85,8 +85,6 @@
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
-
-
 
 
 
@@ -181,7 +179,7 @@
                                         <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
                                     </ul>
-</ul>
+                            </ul>
                         </li>
 
                         <li>
@@ -295,7 +293,9 @@
                         </li>
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>
+                <!--END CHAT FORM-->
+                <!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
@@ -304,86 +304,244 @@
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">paymentHistory</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+
+                            <li><a href="#">Inventory & BTPOS</a><i class="fa fa-angle-right"></i></li>
+                            <li><a href="TypeGroup.html">paymentHistory</a></li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div class="col-lg-12">
+
+                                <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
 
 
-                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Active</th>
-                                    <th>Update</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="T in TypeGroups" class="gradeA">
-
-                                    <td>jay </td>
-
-                                    <td>kiran  </td>
-                                    <td><input type="checkbox" checked /></td>
-                                    <td>
-                                        raj
-                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setTypeGroup(T);">
-                                            <i class="fa fa-edit"></i>&nbsp;
-                                            fun
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                                <div class="table-container">
+                                                    <div class="row mbm">
+                                                        <!--END CONTENT-->
+                                                        <!--BEGIN FOOTER-->
+                                                        <div id="footer">
+                                                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                                        </div>
+                                                        <!--END FOOTER-->
+                                                        
 
 
-                        <!--END CONTENT-->
-                        <!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                                    </div>
+                                                    <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Id</h4>
+                                                                </div>
+                                                                <div class="modal-body" ng-model="Purchase1">
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="Name" class="control-label" style="color:red;">Amount</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="Purchase.Amount" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="Description" class="control-label">Code</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.Code" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="TypeGroup" class="control-label">[Desc]</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.[Desc]" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="TypeGroup" class="control-label">InventoryId</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.InventoryId" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="TypeGroup" class="control-label">Quantity</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.Quantity" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="TypeGroup" class="control-label">ReceivedOn</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.ReceivedOn" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                div class="row">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="TypeGroup" class="control-label">TransactionId</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.TransactionId" /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="TypeGroup" class="control-label">TransactionType</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="Purchase1.TransactionType" /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(Purchase1, 'U');">Save</button>
+                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+
+
+
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Amount</th>
+                                                        <th>Code</th>
+                                                        <th>Desc</th>
+                                                        <th>InventoryId</th>
+                                                        <th>Quantity</th>
+                                                        <th>ReceivedOn</th>
+                                                        <th>TransactionId</th>
+                                                        <th>TransactionType</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="R in PaymentHistory" class="gradeA">
+
+                                                        <td>{{R.Amount}}</td>
+                                                        <td>{{R.Code}}</td>
+                                                        <td>{{R.Desc}}</td>
+                                                        <td>{{R.InventoryId}}</td>
+                                                        <td>{{R.Quantity}}</td>
+                                                        <td>{{R.ReceivedOn}}</td>
+                                                        <td>{{R.TransactionId}}</td>
+                                                        <td>{{R.TransactionType}}</td>
+
+                                                    </tr>                                                   
+                                             
+                                                </tbody>
+                                            </table>
+
+
+                                           
+                                           
+                                        </div>
+                                        <!--END PAGE WRAPPER-->
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <!--END FOOTER-->
-                    </div>
-                    <!--END PAGE WRAPPER-->
-                </div>
-            </div>
+                        <script src="js/jquery-1.10.2.min.js"></script>
+                        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                        <script src="js/jquery-ui.js"></script>
+                        <!--loading bootstrap js-->
+                        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                       <script src="js/html5shiv.js"></script>
+                        <script src="js/respond.min.js"></script>
+                        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                        <script src="vendors/iCheck/icheck.min.js"></script>
+                        <script src="vendors/iCheck/custom.min.js"></script>
+                        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                        <script src="js/jquery.menu.js"></script>
+                        <script src="vendors/jquery-pace/pace.min.js"></script>
+                        <script src="vendors/holder/holder.js"></script>
+                        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                        <!--LOADING SCRIPTS FOR PAGE-->
+                        <script src="js/table-action.js"></script>
+                        <!--CORE JAVASCRIPT-->
+                        <script src="js/main.js"></script>
 
-        </div>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
+                        <script src="js/angular.js"></script>
+                        <script src="js/ngStorage.js"></script>
 
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
+                        <script src="js/PaymentHistory.js"></script>
 
-    <script src="js/source.js"></script>
+                        
 
-    <!--<script src="js/Alerts.js"></script>
+                        <!--<script src="js/Alerts.js"></script>
 
-    <script src="js/Notifications.js"></script>-->
+                        <script src="js/Notifications.js"></script>-->
 </body>
 
 </html>
