@@ -5550,7 +5550,7 @@ Create PROCEDURE [dbo].[VehicleConfiguration]
     @needCompanyName int = 0,
     @needVehicleLayout int = 0, 
     @needHireVehicle int =0,   
-    @needbtpos int = 0,
+    @needbtpos int = -1,
     @cmpId int = -1,
     @fleetownerId int = -1
 AS
@@ -5614,7 +5614,7 @@ select VehicleRegNo,Id from FleetDetails
 END
 
 
---[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,0,-1,0
+--[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,-1,-1,-1
 
 
 GO
