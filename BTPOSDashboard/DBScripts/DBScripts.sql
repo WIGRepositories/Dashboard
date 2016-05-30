@@ -4171,13 +4171,16 @@ SELECT rd.[Id]
       ,[DistanceFromSource]
       ,[DistanceFromDestination]
       ,[DistanceFromPreviousStop]
-      ,[DistanceFromNextStop]     
+      ,[DistanceFromNextStop]   
+	  ,[StopNo]   
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
 inner join routes r on r.id = rd.routeid
 inner join stops prevstops on prevstops.id =previousstopid
 inner join stops nextstops on nextstops.id = nextstopid
   where (@routeid = -1 or routeid = @routeid)
+  order by stopno
+
 end
 
 
@@ -4190,12 +4193,123 @@ GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
 
-CREATE procedure [dbo].[InsUpdDelRouteDetails](@Id int,@RouteId int,@stopId int ,@DistanceFromSource int,@DistanceFromDestination int,@DistanceFromPreviousStop int,@DistanceFromNextStop int,@PreviousStopId int,@NextStopId int)
+CREATE procedure [dbo].[InsUpdDelRouteDetails]
+(           @RouteId int
+           ,@StopId int
+           ,@DistanceFromSource decimal(18,0)
+           ,@DistanceFromDestination decimal(18,0)
+           ,@DistanceFromPreviousStop decimal(18,0)
+           ,@DistanceFromNextStop decimal(18,0)
+           ,@PreviousStopId int
+           ,@NextStopId int
+           ,@StopNo int
+           ,@insupddelflag varchar
+)
 as
 begin
-insert into RouteDetails (RouteId,StopId,DistanceFromSource,DistanceFromDestination,DistanceFromPreviousStop,DistanceFromNextStop,PreviousStopId,NextStopId) values(@RouteId,@stopId,@DistanceFromSource,@DistanceFromDestination,@DistanceFromPreviousStop,@DistanceFromNextStop,@PreviousStopId,@NextStopId)
+
+declare @cnt int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+INSERT INTO [POSDashboard].[dbo].[RouteDetails]
+           ([RouteId]
+           ,[StopId]
+           ,[DistanceFromSource]
+           ,[DistanceFromDestination]
+           ,[DistanceFromPreviousStop]
+           ,[DistanceFromNextStop]
+           ,[PreviousStopId]
+           ,[NextStopId]
+           ,[StopNo])
+     VALUES
+           (@RouteId
+           ,@StopId
+           ,@DistanceFromSource
+           ,@DistanceFromDestination
+           ,@DistanceFromPreviousStop
+           ,@DistanceFromNextStop
+           ,@PreviousStopId
+           ,@NextStopId
+           ,@StopNo)
+
+else
+  if @insupddelflag = 'U'
+UPDATE [POSDashboard].[dbo].[RouteDetails]
+   SET [DistanceFromSource] = @DistanceFromSource
+      ,[DistanceFromDestination] = @DistanceFromDestination
+      ,[DistanceFromPreviousStop] = @DistanceFromPreviousStop
+      ,[DistanceFromNextStop] = @DistanceFromNextStop
+      ,[PreviousStopId] = @PreviousStopId
+      ,[NextStopId] = @NextStopId
+      ,[StopNo] = @StopNo
+ WHERE [RouteId] = @RouteId and [StopId] = @StopId
+
+else
+  if @insupddelflag = 'D'
+  delete from [POSDashboard].[dbo].[RouteDetails] where routeid = @RouteId and StopId = @StopId  
+
+
+declare @sid int
+declare @Var2 int
+declare @sstopno int
+declare @Vstopno2 int
+
+DECLARE db_cursor CURSOR FOR  
+SELECT distinct stopid,stopno from [POSDashboard].[dbo].[RouteDetails] where routeid = @RouteId order by stopno
+
+
+OPEN db_cursor  
+FETCH NEXT FROM db_cursor INTO @sid,@sstopno  
+
+WHILE @@FETCH_STATUS = 0  
+BEGIN  
+
+ declare Cursor2 CURSOR for 
+    SELECT distinct stopid,stopno from [POSDashboard].[dbo].[RouteDetails] where routeid = @RouteId order by stopno
+
+	OPEN Cursor2 
+     Fetch Next From Cursor2 into @Var2,@Vstopno2;
+
+     While @@Fetch_Status=0
+
+				Begin
+					if @Vstopno2 > @sstopno 
+                    begin
+--					begin
+--					Fetch Next From Cursor2 into @Var2;
+--					continue;
+--					end
+
+					select @cnt = count(1) from [POSDashboard].[dbo].[RouteStops] where fromstopid = @sid and tostopid = @Var2 and RouteId = @RouteId           
+
+					if @cnt = 0 
+					INSERT INTO [POSDashboard].[dbo].[RouteStops]
+						   ([RouteId]
+						   ,[FromStopId]
+						   ,[ToStopId])
+					 VALUES
+						   (@RouteId
+						   ,@sid
+						   ,@Var2)
+					end
+						   Fetch Next From Cursor2 into @Var2,@Vstopno2;
+					
+				End
+
+			Close Cursor2;
+
+		DeAllocate Cursor2;
+       
+
+       FETCH NEXT FROM db_cursor INTO @sid,@sstopno  
+END  
+
+CLOSE db_cursor  
+DEALLOCATE db_cursor 
+
 end
-select * from RouteDetails
 
 GO
 SET ANSI_NULLS ON
@@ -5318,7 +5432,8 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
            ,[DistanceFromPreviousStop]
            ,[DistanceFromNextStop]
            ,[PreviousStopId]
-           ,[NextStopId])
+           ,[NextStopId]
+           ,[StopNo])
      VALUES
            (
 			@routeid
@@ -5329,6 +5444,7 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
            ,@Distance
            ,@SourceId
            ,@DestinationId
+           ,1
           )
 
 --insert the destination stop
@@ -5340,7 +5456,8 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
            ,[DistanceFromPreviousStop]
            ,[DistanceFromNextStop]
            ,[PreviousStopId]
-           ,[NextStopId])
+           ,[NextStopId]
+		   ,[StopNo])
      VALUES
            (
 			@routeid
@@ -5351,6 +5468,7 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
            ,@Distance
            ,@SourceId
            ,@DestinationId
+           ,2
           )
 
           INSERT INTO [POSDashboard].[dbo].[RouteStops]
@@ -5364,11 +5482,6 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
      
 end
 end
-
-
-
-/****** Object:  StoredProcedure [dbo].[GetLicenseDetails]    Script Date: 05/11/2016 08:42:19 ******/
-SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON

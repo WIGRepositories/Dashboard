@@ -1076,17 +1076,21 @@ namespace BTPOSDashboardAPI.Models
     public class RouteDetails
     {
         public int Id { get; set; }
-        public String RouteId { get; set; }
-        //public String stopname { get; set; }
-        //public String Description { get; set; }
-
-        //public String StopCode { get; set; }
-        public int DistanceFromSource { get; set; }
-        public int DistanceFromDestination { get; set; }
-        public int DistanceFromPreviousStop { get; set; }
-        public int DistanceFromNextStop { get; set; }
-        public int PrevousStopId { get; set; }
+        public int RouteId { get; set; }
+        public decimal DistanceFromSource { get; set; }
+        public decimal DistanceFromDestination { get; set; }
+        public decimal DistanceFromPreviousStop { get; set; }
+        public decimal DistanceFromNextStop { get; set; }
+        public int PreviousStopId { get; set; }
         public int NextStopId { get; set; }
+        public String StopName { get; set; }
+        public String StopCode { get; set; }
+        public int stopId { get; set; }
+        public String prevstop { get; set; }
+        public String nextstop { get; set; }
+        public int StopNo { get; set; }
+        public String insupddelflag { get; set; }
+
     }
     public class ISales
     {

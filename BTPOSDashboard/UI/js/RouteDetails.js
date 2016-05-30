@@ -36,6 +36,11 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $scope.currStop = currStop;
         $scope.currStopIndx = indx;
     }
+
+    $scope.setNewStopCode = function (stp) {
+        $scope.newNextStop.StopCode = stp.Code;
+    }
+
     //This will hide the DIV by default.
     $scope.IsHidden = true;
 
@@ -46,18 +51,18 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
    
         $scope.save = function (RouteDetails) {
             
-            var RouteDetails = {
-                Id:RouteDetails.Id,
-                RouteId: RouteDetails.RouteId,
-                stopname: RouteDetails.stopname,
-                Description: RouteDetails.Description,
-                StopCode: RouteDetails.StopCode,
-                DistanceFromSource: RouteDetails.DistanceFromSource,
-                DistanceFromDestination: RouteDetails.DistanceFromDestination,
-                DistanceFromPreviousStop: RouteDetails.DistanceFromPreviousStop,
-                DistanceFromNextStop: RouteDetails.DistanceFromNextStop
+            //var RouteDetails = {
+            //    Id:RouteDetails.Id,
+            //    RouteId: route.Id,
+            //    stopname: RouteDetails.stopname,
+            //    Description: RouteDetails.Description,
+            //    StopCode: RouteDetails.StopCode,
+            //    DistanceFromSource: RouteDetails.DistanceFromSource,
+            //    DistanceFromDestination: RouteDetails.DistanceFromDestination,
+            //    DistanceFromPreviousStop: RouteDetails.DistanceFromPreviousStop,
+            //    DistanceFromNextStop: RouteDetails.DistanceFromNextStop
 
-            };
+            //};
      
             var req = {
                 method: 'POST',
@@ -65,30 +70,87 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
                 //headers: {
                 //    'Content-Type': undefined
 
-                data: RouteDetails
+                data: RouteDetails.Table1
             }
-            $http(req).then(function (res) { });
+            $http(req).then(function (res) {
+                alert('saved successfully.');
+            });
 
         }
 
         $scope.addPrevStop = function (stop) {
             //  stopsList.splice(index, 0, stop);
             var newStop = {
-                StopName: stop.Name,
-                StopCode: stop.Code
+                StopName: stop.stp.Name,
+                StopCode: stop.StopCode,
+                RouteId: $scope.s.Id,
+                stopid: stop.stp.Id,
+                PreviousStopId: $scope.currStop.PreviousStopId,
+                prevstop: $scope.currStop.prevstop,
+                nextstop: $scope.currStop.StopName,
+                NextStopId: $scope.currStop.stopid,
+                DistanceFromSource: stop.DistanceFromSource,
+                DistanceFromDestination: stop.DistanceFromDestination,
+                DistanceFromPreviousStop: stop.DistanceFromPreviousStop,
+                DistanceFromNextStop: stop.DistanceFromNextStop,
+                StopNo: $scope.currStop.StopNo,
+                insupddelflag:'I'
             }
 
-            $scope.RouteDetails.Table1.splice($scope.currStopIndx + 1, 0, newStop);
+            $scope.RouteDetails.Table1.splice($scope.currStopIndx, 0, newStop);
+
+            for (var cnt = 0; cnt < $scope.RouteDetails.Table1.length; cnt++)
+            {
+                if ($scope.RouteDetails.Table1[cnt].insupddelflag == null || $scope.RouteDetails.Table1[cnt].insupddelflag != 'I') {
+                
+                    $scope.RouteDetails.Table1[cnt].insupddelflag = 'U';
+                }
+                $scope.RouteDetails.Table1[cnt].StopNo = cnt+1;
+            }
+            $scope.currStop.PreviousStopId = stop.stp.Id;            
+            $scope.currStop.prevstop = stop.stp.Name;
+
+            var prvStop = $scope.RouteDetails.Table1[$scope.currStopIndx-1];
+            prvStop.NextStopId = stop.stp.Id;
+            prvStop.nextstop = stop.stp.Name;            
+
         }
 
         $scope.addNextStop = function (stop) {
             //stopsList.splice(index, 0, stop);
             var newStop = {
-                StopName: stop.Name,
-                StopCode: stop.Code
+            StopName: stop.stp.Name,
+            StopCode: stop.StopCode,
+            RouteId: $scope.s.Id,
+            stopid:stop.stp.Id,
+            PreviousStopId: $scope.currStop.stopid,
+            prevstop: $scope.currStop.StopName,
+            nextstop: $scope.currStop.nextstop,
+            NextStopId:$scope.currStop.NextStopId,
+            DistanceFromSource: stop.DistanceFromSource,
+            DistanceFromDestination: stop.DistanceFromDestination,
+            DistanceFromPreviousStop: stop.DistanceFromPreviousStop,
+            DistanceFromNextStop: stop.DistanceFromNextStop,
+            StopNo: $scope.currStop.StopNo + 1,
+                insupddelflag:'I'
+            }
+            $scope.currStop.NextStopId = stop.stp.Id;
+            $scope.currStop.nextstop = stop.stp.Name;
+
+            $scope.RouteDetails.Table1.splice($scope.currStopIndx + 1, 0, newStop);
+
+            var nxtStop = $scope.RouteDetails.Table1[$scope.currStopIndx + 2];
+            nxtStop.PreviousStopId = stop.stp.Id;
+            nxtStop.prevstop = stop.stp.Name;
+
+            
+            for (var cnt = 0; cnt < $scope.RouteDetails.Table1.length; cnt++) {
+                if ($scope.RouteDetails.Table1[cnt].insupddelflag == null || $scope.RouteDetails.Table1[cnt].insupddelflag != 'I') {
+                    $scope.RouteDetails.Table1[cnt].insupddelflag = 'U';
+                }
+                $scope.RouteDetails.Table1[cnt].StopNo = cnt + 1;
             }
 
-            $scope.RouteDetails.Table1.splice($scope.currStopIndx, 0, newStop);
         }
 
         $scope.delStop = function (stop) {
