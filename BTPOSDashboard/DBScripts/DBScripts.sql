@@ -6127,3 +6127,19 @@ and  [RouteId] = @RouteId
 
 End
 GO
+
+
+
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getpaymentHistory]
+as
+begin
+select * from PaymentHistory
+end
+
