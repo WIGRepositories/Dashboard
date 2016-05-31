@@ -2253,28 +2253,28 @@ INSERT INTO
 	END
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelBTPOSRecords](@Id NUMERIC(10),
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--create PROCEDURE[dbo].[InsUpdDelBTPOSRecords](@Id NUMERIC(10),
               
-           @BTPOSID numeric(10),
-           @IpConfig varchar(50),
-           @RecordData varchar(50))
-AS
-BEGIN
+--           @BTPOSID numeric(10),
+--           @IpConfig varchar(50),
+--           @RecordData varchar(50))
+--AS
+--BEGIN
 	
 
-INSERT INTO 
-[BTPOSRecords] VALUES
-           (@Id,
+----INSERT INTO 
+----[BTPOSRecords] VALUES
+----           (@Id,
               
-           @BTPOSID,
-           @Ipconfig,
-           @RecordData)
-   
-	END
+----           @BTPOSID,
+----           @Ipconfig,
+----           @RecordData)
+  
+--	END
 
 GO
 SET ANSI_NULLS ON
@@ -4117,15 +4117,12 @@ BEGIN
 	
 SELECT 
       [Id]
-      ,[RouteId]
-      ,[VehicleType]
+      ,[RouteId]     
       ,[SourceStopId]
       ,[DestinationStopId]
       ,[Distance]
       ,[PerUnitPrice]
-      ,[Amount]
-      ,[FareType]
-      ,[Active]
+      ,[Amount]     
   FROM [POSDashboard].[dbo].[RouteFare]
 
 
@@ -4892,7 +4889,7 @@ BEGIN
 SELECT 
       [Id],
       [RouteId],
-      [VehicleType],
+    
       [SourceStopId],
       [DestinationStopId],
       [Distance],
@@ -4900,7 +4897,7 @@ SELECT
       [Amount],
       [CompanyId],
       [FleetOwnerId],
-      [FareType],
+    
       [Active]
    
       
@@ -6112,31 +6109,31 @@ SELECT po.[Id]
        
 end
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER procedure [dbo].[GetSalesOrder]
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--ALTER procedure [dbo].[GetSalesOrder]
 
-as begin 
-SELECT so.[Id]
-      ,[SalesOrderNum]
-      ,[TransactionId]
-      ,[Date]
-      ,[amount]
-      ,[item]
-      ,[Quantity]
-      ,t.name Status
-      ,i.ItemName
-  FROM [POSDashboard].[dbo].[SalesOrder] so
-  inner join Types t on t.Id = so.Status
-  inner join InventoryItem i on i.Id = so.item
+--as begin 
+--SELECT so.[Id]
+--      ,[SalesOrderNum]
+--      ,[TransactionId]
+--      ,[Date]
+--      ,[amount]
+--      ,[item]
+--      ,[Quantity]
+--      ,t.name Status
+--      ,i.ItemName
+--  FROM [POSDashboard].[dbo].[SalesOrder] so
+--  inner join Types t on t.Id = so.Status
+--  inner join InventoryItem i on i.Id = so.item
 
 
        
-end
+--end
 
-GO
+--GO
 
 SET ANSI_NULLS ON
 GO
@@ -6246,13 +6243,13 @@ GO
 
 GO
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER procedure [dbo].[getpaymentHistory]
-as
-begin
-select * from PaymentHistory
-end
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
+--ALTER procedure [dbo].[getpaymentHistory]
+--as
+--begin
+--select * from PaymentHistory
+--end
 
