@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class FleetOwnerRouteFareController : ApiController
     {
         [HttpGet]
-        public DataTable getFleetOwnerRoutefare()
+        public DataTable GetFOVehicleFareConfig(int vehicleId)
         {
             DataTable Tbl = new DataTable();
 
@@ -25,12 +25,17 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFleetOwnerRouteFare";
+            cmd.CommandText = "GetFOVehicleFareConfig";
             cmd.Connection = conn;
-            DataSet ds = new DataSet();
+
+            SqlParameter ccd = new SqlParameter();
+            ccd.ParameterName = "@vehicleid";
+            ccd.SqlDbType = SqlDbType.Int;
+            ccd.Value = vehicleId;
+            cmd.Parameters.Add(ccd);
+            
             SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
+            db.Fill(Tbl);
 
             // int found = 0;
             return Tbl;
@@ -52,10 +57,7 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsUpdDelELRouteFare";
             cmd.Connection = conn;
             conn.Open();
-            SqlParameter cc = new SqlParameter();
-            cc.ParameterName = "@Id";
-            cc.SqlDbType = SqlDbType.Int;
-            cc.Value = b.Id;
+           
             SqlParameter ccd = new SqlParameter();
             ccd.ParameterName = "@RouteId";
             ccd.SqlDbType = SqlDbType.Int;

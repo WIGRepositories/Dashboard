@@ -422,6 +422,7 @@
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
+    <Content Include="UI\FleetOwnerDefaultRoutePricing.html" />
     <Content Include="UI\FleetOwnerReports.html" />
     <Content Include="UI\FleetOwnerRouteFare.html" />
     <Content Include="UI\FleetOwnerRoutesDetails.html" />
@@ -442,6 +443,7 @@
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
+    <Content Include="UI\js\FleetOwnerRouteFare.js" />
     <Content Include="UI\js\FleetOwnerRoutes.js" />
     <Content Include="UI\js\FleetOwners.js" />
     <Content Include="UI\js\FleetRoutes.js" />

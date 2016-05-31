@@ -1671,37 +1671,35 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE TABLE [dbo].[FleetOwnerRouteStop](
 	[FleetOwnerId] [int] NOT NULL,
-	[RouteId] [int] NULL,
-	[StopId] [int] NULL,
-	[StopNo] [int] NULL,
-	[PreviousStop] [nvarchar](50) NULL,
-	[NextStop] [nvarchar](50) NULL,
-	[Active] [int] NULL,
+	[RouteStopId] [int] NOT NULL,
 	[Id] [int] IDENTITY(1,1) NOT NULL
 ) ON [PRIMARY]
 
+
 GO
-/****** Object:  Table [dbo].[FleetOwnerRouteFare]    Script Date: 05/27/2016 09:46:48 ******/
+
+/****** Object:  Table [dbo].[FleetOwnerRouteFare]    Script Date: 05/31/2016 08:16:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[FleetOwnerRouteFare](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RouteId] [int] NOT NULL,
+	[FORouteStopId] [int] NOT NULL,
 	[VehicleTypeId] [int] NOT NULL,
-	[SourceStopId] [int] NOT NULL,
-	[DestinationStopId] [int] NOT NULL,
 	[Distance] [decimal](18, 0) NOT NULL,
 	[PerUnitPrice] [decimal](18, 0) NOT NULL,
 	[Amount] [decimal](18, 0) NOT NULL,
-	[CompanyId] [int] NOT NULL,
-	[FleetOwnerId] [int] NOT NULL,
 	[FareTypeId] [int] NOT NULL,
-	[Active] [int] NULL CONSTRAINT [DF_FleetOwnerRouteFare_Active]  DEFAULT ((1))
+	[Active] [int] NULL CONSTRAINT [DF_FleetOwnerRouteFare_Active]  DEFAULT ((1)),
+	[FromDate] [datetime] NULL,
+	[ToDate] [datetime] NULL,
+	[VehicleId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 
 GO
@@ -4707,6 +4705,7 @@ SELECT fr.[Id]
       ,fr.[VehicleId]
       ,fr.[RouteId]
       ,fd.VehicleRegNo
+      ,t.name vehicleType
       ,r.RouteName
       ,[EffectiveFrom]
       ,[EffectiveTill]
@@ -4714,10 +4713,10 @@ SELECT fr.[Id]
   FROM [POSDashboard].[dbo].[FleetRoutes] fr
   inner join FleetDetails fd on fd.Id = fr.VehicleId
   inner join Routes r on r.Id = fr.RouteId
+  inner join types t on t.id = fd.vehicletypeid
   where ((@routeid = -1 or fr.RouteId = @routeid)
 and (fd.CompanyId = @cmpid or @cmpId = -1)
 and (fd.fleetownerid = @fleetownerId or @fleetownerId = -1))
-
 
 END
 
@@ -5359,8 +5358,7 @@ SET ANSI_PADDING OFF
 
 GO
 
-
-/****** Object:  Table [dbo].[RouteStops]    Script Date: 05/16/2016 22:05:42 ******/
+/****** Object:  Table [dbo].[RouteStops]    Script Date: 05/31/2016 08:34:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5369,8 +5367,10 @@ CREATE TABLE [dbo].[RouteStops](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[RouteId] [int] NOT NULL,
 	[FromStopId] [int] NOT NULL,
-	[ToStopId] [int] NOT NULL
+	[ToStopId] [int] NOT NULL,
+	[distance] [decimal](18, 0) NOT NULL CONSTRAINT [DF_RouteStops_distance]  DEFAULT ((0))
 ) ON [PRIMARY]
+
 
 
 GO
@@ -5695,7 +5695,7 @@ BEGIN
 	c.Name as CompanyName
 	,FO.FleetOwnerCode
 	,FO.CompanyId
-	,U.Id
+	,FO.Id
 	 from FleetOwner FO
 	inner join Users u on  u.Id = FO.UserId
 	inner join Company c on c.Id = FO.companyId
@@ -6256,3 +6256,31 @@ begin
 select * from PaymentHistory
 end
 
+Go
+create procedure GetFOVehicleFareConfig
+(@vehicleid int)
+as
+begin
+SELECT 
+      dest.name Dest
+      ,src.name Src
+	  ,fs.Id [FORouteStopId]
+      ,[VehicleTypeId]
+      ,f.[Distance]
+      ,[PerUnitPrice]
+      ,[Amount]
+      ,[FareTypeId]
+      --,[Active]
+      ,[FromDate]
+      ,[ToDate]
+      ,[VehicleId]
+     
+  FROM [POSDashboard].[dbo].fleetownerroutestop fs  
+  --inner join fleetownerroutestop fs 
+  inner join routestops r on r.id = fs.routestopid
+  left outer join stops src on src.id =r.fromstopid
+left outer join stops dest on dest.id =r.tostopid
+left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
+order by src 
+
+end
