@@ -8,6 +8,10 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=-1').then(function (res, data) {
             $scope.User = res.data;
         });
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+            $scope.Companies = response.data;
+        });
+   
     }
 
     $scope.save = function (User, flag, role) {
