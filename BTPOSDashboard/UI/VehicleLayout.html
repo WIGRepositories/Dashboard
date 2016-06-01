@@ -18,6 +18,16 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <link rel="stylesheet" type="text/css" href="css/handsontable.full.min.css" />
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body ng-init="GetVehicleConfig();" ng-model="vlConfig">
     <div>
@@ -421,89 +431,156 @@
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <div class="page-content">
-                        <div id="table-action" class="row">
-                            <div class="col-lg-12">
+                    
+                        <div class="page-content">
+                            <div id="table-action" class="row">
+                                <div class="col-lg-12">
 
-                                <div id="tableactionTabContent" class="tab-content">
-                                    <div id="table-table-tab" class="tab-pane fade in active">
-                                        <div class="row">
+                                    <div id="tableactionTabContent" class="tab-content">
+                                        <div id="table-table-tab" class="tab-pane fade in active">
+                                            <div class="row">
 
-                                            <div class="col-lg-12">
+                                                <div class="col-lg-12">
 
-                                                <div class="table-container">
-                                                    <div class="row mbm">
-                                                        <div class="col-md-3">
-                                                            Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
-                                               <option value="">Select</option>
-                                                </select>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                            Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
-                                                     <option value="">Select</option>
-                                                             </select>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            Rows: <input type="text" style="width:30px"ng-model="rows" />
+                                                    <div class="table-container">
                                                        
-                                                            Columns: <input type="text" style="width:30px" ng-model="cols"/>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                           <button ng-click="displayLayout();">Show</button>
-                                                        </div>
-                                                       
-                                                    </div>
-                                                </div>
+                                                        <div class="row mbm">
+                                                            <div class="col-md-3">
+                                                                Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
 
-                                                <div class="panel-body">
-                                                    <div class="responsive-table">
-                                                        <div id="basic_example" style="height: 40px; overflow: hidden;" data-originalstyle="height: 40px; overflow: hidden;" class="handsontable htRowHeaders htColumnHeaders">
-                                                            <!--<div class="ht_master handsontable innerBorderTop" style="position: relative;">
-                                                                <div class="wtHolder" style="position: relative; width: 557px; height: 396px;">
-                                                                    <div class="wtHider" style="width: 690px; height: 2788px;">
-                                                                        <div class="wtSpreader" style="position: relative; top: 0px; left: 0px;">
+                                                            <div class="col-md-3">
+                                                                Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+
+
+                                                        
+                                                  
+
+
+                                                                <div class="col-md-3">
+                                                                  Rows: <select class="form-control text-center" id="rowSelected"></select>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                   Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
+
+                                                                </div>
+                                                                    <button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>
+                                                           
+                                                                <div class="bg-primary">
+                                                                    <div class="col-lg-5"></div>
+
+                                                                    <div class="row text-center">
+                                                                        <div class="col-lg-3"></div>
+                                                                        <div class="col-lg-6">
+                                                                            <div class="buttonContainer"></div>
                                                                             
                                                                         </div>
+                                                                        <div class="col-lg-3"></div>
                                                                     </div>
                                                                 </div>
-                                                            </div>-->
-                                                            
+                                                          
+
+                                                                    </div>
+
+                                                                </div>
+                                                                
                                                         </div>
                                                     </div>
-                                                </div>
+                                                
+                                                 
+                                                                <!--<div class="ht_master handsontable innerBorderTop" style="position: relative;">
+                                                    <div class="wtHolder" style="position: relative; width: 557px; height: 396px;">
+                                                        <div class="wtHider" style="width: 690px; height: 2788px;">
+                                                            <div class="wtSpreader" style="position: relative; top: 0px; left: 0px;">
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
 
-                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+
+                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                                    </div>
+
+
+
                                                 </div>
 
 
 
                                             </div>
-
-
-
                                         </div>
                                     </div>
+
                                 </div>
-
                             </div>
+              
+                    
+                        <!--END CONTENT--><!--BEGIN FOOTER-->
+                        <div id="footer">
+                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                         </div>
-                    </div>
+                        <!--END FOOTER-->
 
-                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
-                    <!--END FOOTER-->
-                </div>
+    <!-- Custom Theme JavaScript -->
+    <script type="text/javascript">
 
-            </div>
-            <!--END PAGE WRAPPER-->
-        </div>
-    </div>
+        $(document).ready(function () {
+            var colSelectedDiv = $('#colSelected');
+            colSelectedDiv = colSelectedDiv.append('<option>Columns</option>')
+            for (var i = 1; i <= 20; i++) {
+                colSelectedDiv = colSelectedDiv.append('<option>' + i + '</option>')
+            }
+            var rowSelectedDiv = $('#rowSelected');
+            rowSelectedDiv = rowSelectedDiv.append('<option>Rows</option>')
+            for (var i = 1; i <= 20; i++) {
+                rowSelectedDiv = rowSelectedDiv.append('<option>' + i + '</option>')
+            }
+        });
+
+      var buttonContainerDiv = $('.buttonContainer');
+
+        $('#getTable').click(function () {
+            var x = $('#rowSelected').val();
+            var y = $('#colSelected').val();
+            if (isNaN(x)) {
+                alert("select number of Rows");
+                return false;
+            }
+            else if (isNaN(y)) {
+                alert("select number of Columns");
+                return false;
+            }
+            else {
+                buttonContainerDiv.empty();
+                for (var i = 1; i <= $('#rowSelected').val() ; i++) {
+                    for (var j = 1; j <= $('#colSelected').val() ; j++) {
+                        buttonContainerDiv = buttonContainerDiv.append(  "<input type=checkbox>"+ i + j + '</li>');
+                    }
+                    buttonContainerDiv = buttonContainerDiv.append('<br>');
+                    if (i % 2 == 0) {
+                        buttonContainerDiv = buttonContainerDiv.append('<br>');
+                    }
+                }
+            }
+
+        });
+
+        //buttonContainerDiv=buttonContainerDiv.append('<li class="parent_li"></li>');
+    </script>
+
+   
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
