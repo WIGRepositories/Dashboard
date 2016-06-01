@@ -14,10 +14,9 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         if (User == null) {
             alert('Please enter Email.');
             return;
-           }
+        }
 
-        if (User.FirstName == null)
-        {
+        if (User.FirstName == null) {
             alert('Please enter first name.');
         }
 
@@ -25,27 +24,26 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             alert('Please enter first name.');
         }
 
-          if (User.Email == null) {
+        if (User.Email == null) {
             alert('Please enter Email.');
             return;
-          }          
+        }
 
-          if (User.EmpNo == null) {
-              alert('Please enter EmpNo.');
-              return;
-          }        
-         
-          if (User.Password != $scope.reenteredPwd)
-          {
-              alert('The passwords do not match.');
-              return;
-          }
+        if (User.EmpNo == null) {
+            alert('Please enter EmpNo.');
+            return;
+        }
 
-         var User = {
+        if (User.Password != $scope.reenteredPwd) {
+            alert('The passwords do not match.');
+            return;
+        }
+
+        var User = {
             Id: User.Id,
             FirstName: User.FirstName,
             LastName: User.LastName,
-            MiddleName:User.MiddleName,            
+            MiddleName: User.MiddleName,
             EmpNo: User.EmpNo,
             Email: User.Email,
             AdressId: User.AdressId,
@@ -65,10 +63,10 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         }
         $http(req).then(function (response) {
             alert('saved successfully.');
-              
+
         });
 
-    
+
         $scope.User1 = null;
     };
 
@@ -83,8 +81,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
 
     $scope.getUserRolesForCompany = function (cmp) {
 
-        if (cmp == null)
-        {
+        if (cmp == null) {
             $scope.userRoles = null;
             return;
         }
@@ -119,8 +116,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     }
 
     $scope.getUsersnRoles = function () {
-        if ($scope.s == null)
-        {
+        if ($scope.s == null) {
             $scope.cmproles1 = null;
             $scope.cmpUsers1 = null;
             return;
@@ -135,7 +131,6 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             $scope.cmpUsers1 = res.data;
         });
     }
-
     $scope.saveUserRoles = function (flag) {
 
         if ($scope.s.Id == null) {
@@ -156,7 +151,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             UserId: $scope.uu.Id,
             CompanyId: $scope.s.Id,
             RoleId: $scope.ur.Id,
-            flag:flag
+            flag: flag
         };
 
         var req = {
@@ -173,8 +168,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             $scope.ur = null;
             $scope.uu = null;
         });
-        
+
     }
+    
 });
-
-

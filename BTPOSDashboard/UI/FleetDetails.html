@@ -5,7 +5,7 @@
     <title>Home |Fleet | Vehicle Details</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetFleetDetails();" ng-model="Fleet">
+<body ng-init="GetCompanies();" ng-model="Fleet">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -329,15 +329,14 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                       <div class="col-md-5">
-                                                Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                                    
-                                                                    <option value="">All</option>
+                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                <option value="">Select</option>
                                                                 </select>
                                                             </div>
                                                          <div class="col-md-5">
-                                                                Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
                                                                     
-                                                                    <option value="">All</option>
+                                                                <option value="">Select</option>
                                                                 </select>
                                                             </div>
 
@@ -417,7 +416,7 @@
             </div>
         </div>
     </div>
-        </div>
+    </div>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
