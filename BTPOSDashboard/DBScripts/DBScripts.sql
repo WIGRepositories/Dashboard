@@ -1949,6 +1949,7 @@ end
 
 else
 begin
+if @insupdflag = 1
  delete from [CompanyRoles] where [CompanyId] = @CompanyId and RoleId = @roleid
 end
 
@@ -5242,8 +5243,8 @@ set @cmpid = 0
                            end  
  
  
- select @cnt=COUNT (*) from Users where FirstName=@FirstName
- select @cmpcnt=COUNT (*) from Company where UPPER (Name)=@CompanyName
+ select @cnt=COUNT (*) from Users where upper(FirstName)=upper(@FirstName) and upper(lastname) = upper(@LastName)
+ select @cmpcnt=COUNT (*) from Company where UPPER (Name)=upper(@CompanyName)
  select @fleetcnt=COUNT (*) from FleetOwner where UPPER (FleetOwnerCode)=@fc
 
  	
@@ -5257,7 +5258,7 @@ set @cmpid = 0
      VALUES
            (@CompanyName,@CompanyName,@Description,1)
            
-           SELECT @cmpid = @@IDENTITY
+           set @cmpid = SCOPE_IDENTITY()
  end
  else
  begin  
@@ -5283,14 +5284,14 @@ set @cmpid = 0
 	-- interfering with SELECT statements.
 	
 	
-	SELECT @currid = @@IDENTITY
+	SELECT @currid = SCOPE_IDENTITY()
 end
 
 	
 
    
    --insert company role for company and fleet owner role
-  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2,0 
+  exec  InsUpdDelCompanyRoles 1,-1,6,@cmpid,0 
                  
  if @insupdflag='I'and @fleetcnt>0
  begin
@@ -5299,13 +5300,12 @@ end
  
  if @fleetcnt=0
  begin
-	insert into FleetOwner (UserId,CompanyId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
+	insert into FleetOwner (UserId,CompanyId,FleetOwnerCode,Active) values(@currid,@cmpid,'FL00'+@fc,1)
  end
 
 --assign fleet owner role to user
-exec [InsUpdDelUserRoles] -1,2,@currid,@cmpid
+exec [InsUpdDelUserRoles] -1,6,@currid,@cmpid
 end
-
 
 
 GO
