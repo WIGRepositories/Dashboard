@@ -479,6 +479,7 @@
                                                                         <div class="col-lg-6">
                                                                             <div class="buttonContainer"></div>
                                                                             
+
                                                                         </div>
                                                                         <div class="col-lg-3"></div>
                                                                     </div>
@@ -565,13 +566,16 @@
             else {
                 buttonContainerDiv.empty();
                 for (var i = 1; i <= $('#rowSelected').val() ; i++) {
+                    buttonContainerDiv.append("<div style='width:10px;height:10px'>");
                     for (var j = 1; j <= $('#colSelected').val() ; j++) {
+
                         buttonContainerDiv = buttonContainerDiv.append(  "<input type=checkbox>"+ i + j + '</li>');
                     }
                     buttonContainerDiv = buttonContainerDiv.append('<br>');
                     if (i % 2 == 0) {
                         buttonContainerDiv = buttonContainerDiv.append('<br>');
                     }
+                    //buttonContainerDiv.append("ffdgsdfgsdfgsdf</div>");
                 }
             }
 
