@@ -2038,7 +2038,7 @@ begin
 
   --  --insert Fleet owner role by default
 		 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
-		 
+   
 		 declare @m varchar(500)
 	set @m = 'Company '+@Name+' created successfully.'
 	exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
@@ -3545,50 +3545,59 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[InsUpdTypeGroups](@Id int,@Name varchar(50)
-,@Description varchar(50) = null,@Active int)
+,@Description varchar(50) = null,@Active int, @insupdflag varchar(1))
 as
 begin
 
-update typegroups 
-set name=@Name
-,Active = @Active
-,Description = @Description
-where Id = @Id
+declare @cnt int
 
-if @@rowcount = 0 
+if @insupdflag = 'I'
 begin
-insert into TypeGroups (Name,[Description],Active) values(@Name,@Description,@Active)
-end
+
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+
+INSERT INTO [POSDashboard].[dbo].[TypeGroups]
+           ([Name]
+           ,[Description]
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@Active)
+
+
 
 end
+else
+if @insupdflag = 'U'
+begin
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelTroubleTicketingStatus](@Active NUMERIC(10),
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
               
-           @Desc Varchar(30),
            
-           @Id numeric(10),
-           @TtStatusType varchar(30),
-           @TypeGripId varchar(50))
-AS
-BEGIN
+UPDATE [POSDashboard].[dbo].[TypeGroups]
+   SET [Name] = @Name
+      ,[Description] = @Description
+      ,[Active] = @Active
+ WHERE Id = @Id
 	
 
-INSERT INTO 
-[TroubleTicketingStatus] VALUES
-           (@Active,
               
           
-           @Desc,
-           @Id,
-           @TtStatusType,
-           @TypeGripId )
+end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[TypeGroups]
+      WHERE Id = @Id
+end
+end
    
-	END
+
 
 GO
 SET ANSI_NULLS ON
@@ -4454,7 +4463,7 @@ CREATE procedure [dbo].[InsUpdUsers](
  declare @edithistoryid int
  declare @dt datetime
 set @dt = GETDATE()
-
+ 
  if @insupdflag = 'I'
  begin
  
@@ -5305,7 +5314,7 @@ set @dt = GETDATE()
 	-- interfering with SELECT statements.
 	--insert into edit history
 	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
-           
+	
     exec InsEditHistoryDetails @edithistoryid,null,@FirstName,'Insertion','First Name',null
     exec InsEditHistoryDetails @edithistoryid,null,@LastName,'Insertion','Last Name',null
     exec InsEditHistoryDetails @edithistoryid,null,@cmpid,'Insertion','cmpid',null
@@ -5343,7 +5352,7 @@ select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
 	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
    end
    --insert into edit history
-	
+
 end
 
 
@@ -6323,35 +6332,51 @@ left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehi
 order by src 
 
 end
+
+
+/****** Object:  StoredProcedure [dbo].[GetLicensePageDetails]    Script Date: 06/03/2016 10:09:29 ******/
+SET ANSI_NULLS ON
 GO
 
-create procedure InsUpdDelNotification
-(@Date datetime = getdate
-           ,@Message varchar(500) = null
-           ,@MessageTypeId int = -1           
-           ,@StatusId int = -1
-           ,@UserId int = -1
-           ,@Name varchar(50) = null
-           ,@Source varchar(50) = null)
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[GetLicensePageDetails]
 as
 begin
 
-INSERT INTO [POSDashboard].[dbo].[Notifications]
-           ([Date]
-           ,[Message]
-           ,[MessageTypeId]
-           ,[StatusId]
-           ,[UserId]
-           ,[Name]
-           ,[Source])
-     VALUES
-           (@Date
-           ,@Message
-           ,@MessageTypeId
-           ,@StatusId
-           ,@UserId
-           ,@Name
-           ,@Source)
-end
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseCatId]
+      ,[LicenseType]
+      ,[Description]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicenseTypes]
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseTypeId]
+      ,[FeatureName]
+      ,[FeatureLabel]
+      ,[FeatureValue]
+      ,[LabelClass]
+      ,[Active]
+      ,[fromDate]
+      ,[toDate]
+  FROM [POSDashboard].[dbo].[LicenseDetails]
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseId]
+      ,[RenewalFreqTypeId]
+      ,[RenewalFreq]
+      ,[UnitPrice]
+      ,[fromdate]
+      ,[todate]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicensePricing]
+  
+  end
+GO
 
-Go
+
