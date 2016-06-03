@@ -3530,50 +3530,59 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[InsUpdTypeGroups](@Id int,@Name varchar(50)
-,@Description varchar(50) = null,@Active int)
+,@Description varchar(50) = null,@Active int, @insupdflag varchar(1))
 as
 begin
 
-update typegroups 
-set name=@Name
-,Active = @Active
-,Description = @Description
-where Id = @Id
+declare @cnt int
 
-if @@rowcount = 0 
+if @insupdflag = 'I'
 begin
-insert into TypeGroups (Name,[Description],Active) values(@Name,@Description,@Active)
-end
+
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+
+INSERT INTO [POSDashboard].[dbo].[TypeGroups]
+           ([Name]
+           ,[Description]
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@Active)
+
+
 
 end
+else
+if @insupdflag = 'U'
+begin
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelTroubleTicketingStatus](@Active NUMERIC(10),
-              
-           @Desc Varchar(30),
-           
-           @Id numeric(10),
-           @TtStatusType varchar(30),
-           @TypeGripId varchar(50))
-AS
-BEGIN
-	
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
 
-INSERT INTO 
-[TroubleTicketingStatus] VALUES
-           (@Active,
-              
-          
-           @Desc,
-           @Id,
-           @TtStatusType,
-           @TypeGripId )
-   
-	END
+if @cnt =0
+
+
+UPDATE [POSDashboard].[dbo].[TypeGroups]
+   SET [Name] = @Name
+      ,[Description] = @Description
+      ,[Active] = @Active
+ WHERE Id = @Id
+
+
+
+
+end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[TypeGroups]
+      WHERE Id = @Id
+end
+end
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -6279,3 +6288,51 @@ left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehi
 order by src 
 
 end
+
+
+/****** Object:  StoredProcedure [dbo].[GetLicensePageDetails]    Script Date: 06/03/2016 10:09:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[GetLicensePageDetails]
+as
+begin
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseCatId]
+      ,[LicenseType]
+      ,[Description]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicenseTypes]
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseTypeId]
+      ,[FeatureName]
+      ,[FeatureLabel]
+      ,[FeatureValue]
+      ,[LabelClass]
+      ,[Active]
+      ,[fromDate]
+      ,[toDate]
+  FROM [POSDashboard].[dbo].[LicenseDetails]
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseId]
+      ,[RenewalFreqTypeId]
+      ,[RenewalFreq]
+      ,[UnitPrice]
+      ,[fromdate]
+      ,[todate]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicensePricing]
+  
+  end
+GO
+
+
