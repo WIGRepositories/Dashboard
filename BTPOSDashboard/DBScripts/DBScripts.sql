@@ -158,9 +158,7 @@ INSERT INTO [POSDashboard].[dbo].[EditHistory]
            ,@ChangedType
            ,@Task)
 
- SELECT @edithistoryid = @@IDENTITY
-
-
+ select @edithistoryid = SCOPE_IDENTITY()
 
 end
 
@@ -201,12 +199,6 @@ BEGIN
 END
 
 
-CREATE TABLE [dbo].[COUNTRY](
-	[ID] [numeric](18, 0) NULL,
-	[Name] [nchar](10) NULL,
-	[Code] [nchar](10) NULL,
-	[Active] [nchar](10) NULL
-) ON [PRIMARY]
 
 GO
 SET ANSI_NULLS ON
@@ -1671,37 +1663,35 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
 CREATE TABLE [dbo].[FleetOwnerRouteStop](
 	[FleetOwnerId] [int] NOT NULL,
-	[RouteId] [int] NULL,
-	[StopId] [int] NULL,
-	[StopNo] [int] NULL,
-	[PreviousStop] [nvarchar](50) NULL,
-	[NextStop] [nvarchar](50) NULL,
-	[Active] [int] NULL,
+	[RouteStopId] [int] NOT NULL,
 	[Id] [int] IDENTITY(1,1) NOT NULL
 ) ON [PRIMARY]
 
+
 GO
-/****** Object:  Table [dbo].[FleetOwnerRouteFare]    Script Date: 05/27/2016 09:46:48 ******/
+
+/****** Object:  Table [dbo].[FleetOwnerRouteFare]    Script Date: 05/31/2016 08:16:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[FleetOwnerRouteFare](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RouteId] [int] NOT NULL,
+	[FORouteStopId] [int] NOT NULL,
 	[VehicleTypeId] [int] NOT NULL,
-	[SourceStopId] [int] NOT NULL,
-	[DestinationStopId] [int] NOT NULL,
 	[Distance] [decimal](18, 0) NOT NULL,
 	[PerUnitPrice] [decimal](18, 0) NOT NULL,
 	[Amount] [decimal](18, 0) NOT NULL,
-	[CompanyId] [int] NOT NULL,
-	[FleetOwnerId] [int] NOT NULL,
 	[FareTypeId] [int] NOT NULL,
-	[Active] [int] NULL CONSTRAINT [DF_FleetOwnerRouteFare_Active]  DEFAULT ((1))
+	[Active] [int] NULL CONSTRAINT [DF_FleetOwnerRouteFare_Active]  DEFAULT ((1)),
+	[FromDate] [datetime] NULL,
+	[ToDate] [datetime] NULL,
+	[VehicleId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 
 GO
@@ -1938,9 +1928,13 @@ CREATE procedure [dbo].[InsUpdDelCompanyRoles](
 as
 begin
 
+declare @cnt int
+
+select @cnt = count(*) from companyroles where [CompanyId] = @CompanyId and [RoleId] = @roleid
+
 if @insupdflag = 0
 begin
-
+if @cnt = 0
 INSERT INTO [CompanyRoles]
            ([CompanyId]
            ,[RoleId]
@@ -1951,6 +1945,7 @@ end
 
 else
 begin
+if @insupdflag = 1
  delete from [CompanyRoles] where [CompanyId] = @CompanyId and RoleId = @roleid
 end
 
@@ -1993,7 +1988,7 @@ CREATE procedure [dbo].[InsUpdDelCompany](
 @desc varchar(50) = '',
 @Id int,
 @Name varchar(50),
-@insupdflag varchar(10),
+@insupdflag varchar(1),
 @userid int = -1
 )
 as
@@ -2013,6 +2008,7 @@ declare @neweid int
 
 
 if @insupdflag = 'I'
+begin
 	--check if already company exists
 	select @cnt = count(1) from company where upper(name) = upper(@name)
 
@@ -2023,25 +2019,22 @@ if @insupdflag = 'I'
 	SELECT @newCmpId = @@IDENTITY
 	
 	--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
            
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 
   --  --insert Fleet owner role by default
-		--insert into CompanyRoles (Name,[Description],Active,companyid) 
-		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
+		 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
    
 	end
-
+end
 else
 
    if @insupdflag = 'U'
-
+begin
 		--check if already a company with the new name exists
 		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
 	    
@@ -2053,20 +2046,22 @@ else
 		
 		
 		--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
+                     
            
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 		
 		end
+		else
+			RAISERROR ('Company already exists',16,1);
+end
    else
+if @insupdflag = 'D'
      delete from Company where Id = @Id
 end
-
 
 GO
 
@@ -4704,6 +4699,7 @@ SELECT fr.[Id]
       ,fr.[VehicleId]
       ,fr.[RouteId]
       ,fd.VehicleRegNo
+      ,t.name vehicleType
       ,r.RouteName
       ,[EffectiveFrom]
       ,[EffectiveTill]
@@ -4711,10 +4707,10 @@ SELECT fr.[Id]
   FROM [POSDashboard].[dbo].[FleetRoutes] fr
   inner join FleetDetails fd on fd.Id = fr.VehicleId
   inner join Routes r on r.Id = fr.RouteId
+  inner join types t on t.id = fd.vehicletypeid
   where ((@routeid = -1 or fr.RouteId = @routeid)
 and (fd.CompanyId = @cmpid or @cmpId = -1)
 and (fd.fleetownerid = @fleetownerId or @fleetownerId = -1))
-
 
 END
 
@@ -4818,22 +4814,11 @@ GO
 Create PROCEDURE [dbo].[GetFleetOwnerRouteStop]
 AS
 BEGIN
-	
-SELECT 
-      [Id],
-      [FleetOwnerId],
-      [RouteId],
-      [StopNo],
-      [PreviousStop],
-      [NextStop],
-      [Active],
-      [StopId]
-   
-      
+		
+SELECT [FleetOwnerId]
+      ,[RouteStopId]
+      ,[Id]
   FROM [POSDashboard].[dbo].[FleetOwnerRouteStop]
-
-
-
 
 end
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRouteStops]    Script Date: 05/02/2016 16:31:14 ******/
@@ -4844,35 +4829,43 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](@Id numeric(30),
-                        @RouteId numeric(30),
-                        @VehicleType varchar(30),
-                        @SourceStopId numeric(30),
-                        @DestinationStopId numeric(30),
-                        @Distance varchar(30),
-                        @PerUnitPrice numeric(30),
-                        @Amount numeric(30),
-                        @CompanyId numeric(30),
-                        @FleetOwnerId numeric(30),
-                        @FareType varchar(30),
-                        @Active numeric(30)
+create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
+@FORouteStopId int
+           ,@VehicleTypeId int
+           ,@Distance decimal
+           ,@PerUnitPrice decimal
+           ,@Amount decimal
+           ,@FareTypeId int
+           ,@Active int
+           ,@FromDate datetime
+           ,@ToDate datetime
+           ,@VehicleId int
                        )
                         
 as
 begin
-insert into FleetOwnerRouteFare values(
-                          @RouteId,
-                          @VehicleType,
-                          @SourceStopId,
-                          @DestinationStopId,
-                          @Distance,
-                          @PerUnitPrice,
-                          @Amount,
-                         @CompanyId,
-                         @FleetOwnerId,
-                         @FareType,
-                         @Active)
-                        
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
+           ([FORouteStopId]
+           ,[VehicleTypeId]
+           ,[Distance]
+           ,[PerUnitPrice]
+           ,[Amount]
+           ,[FareTypeId]
+           ,[Active]
+           ,[FromDate]
+           ,[ToDate]
+           ,[VehicleId])
+     VALUES
+           (@FORouteStopId
+           ,@VehicleTypeId
+           ,@Distance
+           ,@PerUnitPrice
+           ,@Amount
+           ,@FareTypeId
+           ,@Active
+           ,@FromDate
+           ,@ToDate
+           ,@VehicleId)
 end
 /****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/02/2016 17:11:26 ******/
 SET ANSI_NULLS ON
@@ -4886,24 +4879,18 @@ create PROCEDURE [dbo].[GetFleetOwnerRouteFare]
 AS
 BEGIN
 	
-SELECT 
-      [Id],
-      [RouteId],
-    
-      [SourceStopId],
-      [DestinationStopId],
-      [Distance],
-      [PerUnitPrice],
-      [Amount],
-      [CompanyId],
-      [FleetOwnerId],
-    
-      [Active]
-   
-      
+SELECT [Id]
+      ,[FORouteStopId]
+      ,[VehicleTypeId]
+      ,[Distance]
+      ,[PerUnitPrice]
+      ,[Amount]
+      ,[FareTypeId]
+      ,[Active]
+      ,[FromDate]
+      ,[ToDate]
+      ,[VehicleId]
   FROM [POSDashboard].[dbo].[FleetOwnerRouteFare]
-
-
 
 
 end
@@ -5234,14 +5221,14 @@ declare @cmpid int
 set @cmpid = 0
  
  declare @fc varchar(10) 
- set @fc = case when (select COUNT(*) from Users) = 0
-                           then '001' 
-                           else (select ltrim(rtrim(STR((max(Id)+1)))) from Users ) 
+ set @fc = case when (select COUNT(*) from fleetowner) = 0
+                           then '1' 
+                           else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
                            end  
  
  
- select @cnt=COUNT (*) from Users where FirstName=@FirstName
- select @cmpcnt=COUNT (*) from Company where UPPER (Name)=@CompanyName
+ select @cnt=COUNT (*) from Users where upper(FirstName)=upper(@FirstName) and upper(lastname) = upper(@LastName)
+ select @cmpcnt=COUNT (*) from Company where UPPER (Name)=upper(@CompanyName)
  select @fleetcnt=COUNT (*) from FleetOwner where UPPER (FleetOwnerCode)=@fc
 
  	
@@ -5255,7 +5242,7 @@ set @cmpid = 0
      VALUES
            (@CompanyName,@CompanyName,@Description,1)
            
-           SELECT @cmpid = @@IDENTITY
+           set @cmpid = SCOPE_IDENTITY()
  end
  else
  begin  
@@ -5281,14 +5268,14 @@ set @cmpid = 0
 	-- interfering with SELECT statements.
 	
 	
-	SELECT @currid = @@IDENTITY
+	SELECT @currid = SCOPE_IDENTITY()
 end
 
 	
 
    
    --insert company role for company and fleet owner role
-  exec  InsUpdDelCompanyRoles 1,-1,@cmpid,2,0 
+  exec  InsUpdDelCompanyRoles 1,-1,6,@cmpid,0 
                  
  if @insupdflag='I'and @fleetcnt>0
  begin
@@ -5297,13 +5284,23 @@ end
  
  if @fleetcnt=0
  begin
-	insert into FleetOwner (UserId,CompanyId,FleetOwnerCode,Active) values(@currid,'','FL00'+@fc,1)
+	insert into FleetOwner (UserId,CompanyId,FleetOwnerCode,Active) values(@currid,@cmpid,'FL00'+@fc,1)
  end
 
 --assign fleet owner role to user
-exec [InsUpdDelUserRoles] -1,2,@currid,@cmpid
-end
+exec [InsUpdDelUserRoles] -1,6,@currid,@cmpid
 
+declare @logincnt int
+
+--the login will be assigned once the user buys the license. this is for testing
+select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+
+ if @logincnt = 0
+   begin
+	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+   end
+
+end
 
 
 GO
@@ -5356,8 +5353,7 @@ SET ANSI_PADDING OFF
 
 GO
 
-
-/****** Object:  Table [dbo].[RouteStops]    Script Date: 05/16/2016 22:05:42 ******/
+/****** Object:  Table [dbo].[RouteStops]    Script Date: 05/31/2016 08:34:24 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5366,8 +5362,10 @@ CREATE TABLE [dbo].[RouteStops](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[RouteId] [int] NOT NULL,
 	[FromStopId] [int] NOT NULL,
-	[ToStopId] [int] NOT NULL
+	[ToStopId] [int] NOT NULL,
+	[distance] [decimal](18, 0) NOT NULL CONSTRAINT [DF_RouteStops_distance]  DEFAULT ((0))
 ) ON [PRIMARY]
+
 
 
 GO
@@ -5692,7 +5690,7 @@ BEGIN
 	c.Name as CompanyName
 	,FO.FleetOwnerCode
 	,FO.CompanyId
-	,U.Id
+	,FO.Id
 	 from FleetOwner FO
 	inner join Users u on  u.Id = FO.UserId
 	inner join Company c on c.Id = FO.companyId
@@ -6253,3 +6251,31 @@ GO
 --select * from PaymentHistory
 --end
 
+Go
+create procedure GetFOVehicleFareConfig
+(@vehicleid int)
+as
+begin
+SELECT 
+      dest.name Dest
+      ,src.name Src
+	  ,fs.Id [FORouteStopId]
+      ,[VehicleTypeId]
+      ,f.[Distance]
+      ,[PerUnitPrice]
+      ,[Amount]
+      ,[FareTypeId]
+      --,[Active]
+      ,[FromDate]
+      ,[ToDate]
+      ,[VehicleId]
+     
+  FROM [POSDashboard].[dbo].fleetownerroutestop fs  
+  --inner join fleetownerroutestop fs 
+  inner join routestops r on r.id = fs.routestopid
+  left outer join stops src on src.id =r.fromstopid
+left outer join stops dest on dest.id =r.tostopid
+left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
+order by src 
+
+end

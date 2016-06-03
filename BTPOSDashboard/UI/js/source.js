@@ -5,10 +5,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     //$scope.userid = $localStorage.userdetails[0].userid;
 
     //now call GetDashboardDetails and pass userid as parameter
-    $http.get('http://localhost:1476/api/dashboard/getdashboard?userid=-1&roleid=-1').then(function (res, data) {
-        $scope.dashboardDS = res.data;
-    });
-
+    $scope.GetDashboardDS = function ()
+    {
+        $http.get('http://localhost:1476/api/dashboard/getdashboard?userid=-1&roleid=-1').then(function (res, data)
+        {
+            $scope.dashboardDS = res.data;
+        });
+    }
     $scope.myVar = false;
     $scope.toggle = function () {
         $scope.myVar = !$scope.myVar;
@@ -19,6 +22,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
 });
+
+
 
 
 
