@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     {
         [HttpGet]
   [Route("api/fleet/getFleetList")]
-        public DataSet List()
+        public DataSet List(int cmpId, int fleetOwnerId)
         {
             DataTable Tbl = new DataTable();
 
@@ -26,6 +26,20 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetFleetDetails";
             cmd.Connection = conn;
+
+            SqlParameter gid = new SqlParameter();
+            gid.ParameterName = "@cmpId";
+            gid.SqlDbType = SqlDbType.Int;
+            gid.Value = cmpId;
+            cmd.Parameters.Add(gid);
+
+            SqlParameter fid = new SqlParameter();
+            fid.ParameterName = "@fleetOwnerId";
+            fid.SqlDbType = SqlDbType.Int;
+            fid.Value = fleetOwnerId;
+            cmd.Parameters.Add(fid);
+
+            
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 

@@ -28,7 +28,7 @@ GO
 ALTER TABLE [dbo].[Alerts] ADD  CONSTRAINT [DF_AlertNotifications_UserId]  DEFAULT ((1)) FOR [UserId]
 GO
 
-/****** Object:  Table [dbo].[Notifications]    Script Date: 05/05/2016 18:40:53 ******/
+/****** Object:  Table [dbo].[Notifications]    Script Date: 06/03/2016 17:10:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -45,8 +45,18 @@ CREATE TABLE [dbo].[Notifications](
 	[MessageTypeId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL
+	[Name] [varchar](50) NOT NULL,
+	[Source] [varchar](50) NULL
 ) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
+GO
+
 
 GO
 
@@ -1982,7 +1992,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
 
-CREATE procedure [dbo].[InsUpdDelCompany](
+ALTER procedure [dbo].[InsUpdDelCompany](
 @active int,
 @code varchar(50),
 @desc varchar(50) = '',
@@ -2029,6 +2039,10 @@ begin
   --  --insert Fleet owner role by default
 		 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
    
+		 declare @m varchar(500)
+	set @m = 'Company '+@Name+' created successfully.'
+	exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
+   
 	end
 end
 else
@@ -2063,6 +2077,7 @@ if @insupdflag = 'D'
      delete from Company where Id = @Id
 end
 
+
 GO
 
 -- =============================================
@@ -2072,7 +2087,7 @@ GO
 -- =============================================
 CREATE  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
-	(@vehicleId int=-1)
+	(@cmpId int = -1, @fleetOwnerId int = -1, @vehicleId int=-1)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -2083,8 +2098,8 @@ BEGIN
       ,[VehicleRegNo]
       ,vt.[Name] as VehicleType,
       lt.Name AS vehiclelayout,
-       st.Name as ServiceType,
-       u.FirstName +' '+u.LastName as FleetOwnerName 
+       st.Name as ServiceType
+      , u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
       ,v.[Active]
      FROM [POSDashboard].[dbo].[FleetDetails]v
@@ -2092,26 +2107,15 @@ BEGIN
     inner join Types st on st.Id=v.ServiceTypeId
     inner join Types lt on lt.Id = v.layouttypeid
     inner join company c on c.Id=v.CompanyId
-    inner join FleetOwner f on f.UserId=v.FleetOwnerId
+    inner join FleetOwner f on f.id=v.FleetOwnerId
     inner join Users u on u.Id = f.UserId
-	 where  (v.Id= @vehicleId or @vehicleId = -1)
+	 where  ((v.Id= @vehicleId or @vehicleId = -1)
+	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
+	 and (v.CompanyId = @cmpId or @cmpId = -1))
    
     -- Insert statements for procedure here
     
     
---SELECT t.[Id]
---      ,t.[Name] as VehicleType,
---      t.[Name] as ServiceType
---      ,t.[Active]
-      
---      ,f.[Id] as FleetName 
---         ,c.[Name] as CompanyName
---  FROM [POSDashboard].[dbo].[Types]t   
---	 inner join company c on c.Id=t.Id
---	 inner join FleetOwner f on f.Id=t.Id
---	 where  (t.Id= @vehicleId or @vehicleId = -1)
-
-
 END
 
 
@@ -3530,50 +3534,59 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[InsUpdTypeGroups](@Id int,@Name varchar(50)
-,@Description varchar(50) = null,@Active int)
+,@Description varchar(50) = null,@Active int, @insupdflag varchar(1))
 as
 begin
 
-update typegroups 
-set name=@Name
-,Active = @Active
-,Description = @Description
-where Id = @Id
+declare @cnt int
 
-if @@rowcount = 0 
+if @insupdflag = 'I'
 begin
-insert into TypeGroups (Name,[Description],Active) values(@Name,@Description,@Active)
-end
+
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+
+INSERT INTO [POSDashboard].[dbo].[TypeGroups]
+           ([Name]
+           ,[Description]
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@Active)
+
+
 
 end
+else
+if @insupdflag = 'U'
+begin
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelTroubleTicketingStatus](@Active NUMERIC(10),
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
               
-           @Desc Varchar(30),
+if @cnt =0
            
-           @Id numeric(10),
-           @TtStatusType varchar(30),
-           @TypeGripId varchar(50))
-AS
-BEGIN
+           
+UPDATE [POSDashboard].[dbo].[TypeGroups]
+   SET [Name] = @Name
+      ,[Description] = @Description
+      ,[Active] = @Active
+ WHERE Id = @Id
+	
 	
 
-INSERT INTO 
-[TroubleTicketingStatus] VALUES
-           (@Active,
               
+end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[TypeGroups]
+      WHERE Id = @Id
+end
+end
           
-           @Desc,
-           @Id,
-           @TtStatusType,
-           @TypeGripId )
    
-	END
 
 GO
 SET ANSI_NULLS ON
@@ -4432,36 +4445,47 @@ CREATE procedure [dbo].[InsUpdUsers](
 ,@userid int = -1)
  as begin
  
-	 declare @currid int
-	 declare @cnt int
-	 declare @logincnt int
-	 declare @ulogincnt int
+ declare @currid int
+ declare @cnt int
+ declare @logincnt int
+ declare @ulogincnt int
+ declare @edithistoryid int
+ declare @dt datetime
+set @dt = GETDATE()
  
-	 if @insupdflag = 'I'
-	 begin
+ if @insupdflag = 'I'
+ begin
  
-			select @cnt = COUNT(*)  from Users where UPPER(EmpNo) = @EmpNo
+ select @cnt = COUNT(*)  from Users where UPPER(EmpNo) = @EmpNo
  
-			select @logincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) 
+ select @logincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) 
  
-			 if @cnt > 0
-			 RAISERROR ('Already user exists',16,1);
+ if @cnt > 0
+ RAISERROR ('Already user exists',16,1);
  
   
-			 if @cnt = 0 
-			 begin
-				insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
-				values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
+ if @cnt = 0 
+ begin
+	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
+	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
   
+  --insert into edit history
+	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+           
+    exec InsEditHistoryDetails @edithistoryid,null,@FirstName,'Insertion','First Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@LastName,'Insertion','Last Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@EmpNo,'Insertion','EmpNo',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Email,'Insertion','Email',null
+
  
-				SELECT @currid = @@IDENTITY
-			 end
+    SELECT @currid = @@IDENTITY
+ end
   
-			  if @logincnt > 0
-				RAISERROR ('Already user login exists',16,1);
+  if @logincnt > 0
+	RAISERROR ('Already user login exists',16,1);
  
-			   if @logincnt = 0 and @UserName is not null
-			   begin
+   if @logincnt = 0 and @UserName is not null
+   begin
 
 			   --check if it is normal user or fleet owner. for fleet owner we have different logic
 			   if @RoleId = 6 
@@ -4483,84 +4507,84 @@ CREATE procedure [dbo].[InsUpdUsers](
 							   end
 			   end
 			   else
-				insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
+	insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
 			   
-			   end
-	end
-	 else
+   end
+end
+ else
  
-	 begin
+ begin
  
-	 SELECT @currid = @userid
+ SELECT @currid = @userid
  
-	 update Users 
-	 set FirstName = @FirstName,
-	 LastName = @LastName,
-	 MiddleName = @MiddleName,
-	 Email = @Email,
-	 MobileNo = @MobileNo, 
-	 Active = @Active 
-	 where id = @userid
+ update Users 
+ set FirstName = @FirstName,
+ LastName = @LastName,
+ MiddleName = @MiddleName,
+ Email = @Email,
+ MobileNo = @MobileNo, 
+ Active = @Active 
+ where id = @userid
  
-	 select @logincnt = COUNT(*) from userlogins where  userid = @userid
+ select @logincnt = COUNT(*) from userlogins where  userid = @userid
  
  
-	 if @logincnt = 0
-	  --login is not existing hence insert 
-	 if @UserName is not null
-	 insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@userid)
+ if @logincnt = 0
+  --login is not existing hence insert 
+ if @UserName is not null
+ insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@userid)
  
-	 else
-	 begin
-	 --check if updation causes duplicates
-	 select @ulogincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) and userid <> @userid
+ else
+ begin
+ --check if updation causes duplicates
+ select @ulogincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) and userid <> @userid
  
-	 if @ulogincnt = 0
- 		update userlogins
-		set logininfo = @UserName
-		,PassKey = @Password
-		,active = @active
-		where userid = @currid
-	else
-	 RAISERROR ('User login already exists',16,1);
-	 end
+ if @ulogincnt = 0
+ 	update userlogins
+	set logininfo = @UserName
+	,PassKey = @Password
+	,active = @active
+	where userid = @currid
+else
+ RAISERROR ('User login already exists',16,1);
+ end
 
  
-	 end --end of 'i' check
+ end --end of 'i' check
  
-	 --if role is fleet owner then insert the code into fleet owner table
+ --if role is fleet owner then insert the code into fleet owner table
  
-	 declare @fcnt int
+ declare @fcnt int
  
-	 if @RoleId = 6
-	 begin
-
-	 select @fcnt = COUNT(*) from FleetOwner where UserId = @currid
+ if @RoleId = 6
+ begin
  
-				 if @fcnt = 0 					 
-					INSERT INTO [POSDashboard].[dbo].[FleetOwner]
-						   ([UserId]
-						   ,[CompanyId]
-						   ,[Active]
-						   ,[FleetOwnerCode])
-					 VALUES
-						   (@currid
+ select @fcnt = COUNT(*) from FleetOwner where UserId = @currid
+ 
+			 if @fcnt = 0 
+				INSERT INTO [POSDashboard].[dbo].[FleetOwner]
+					   ([UserId]
+					   ,[CompanyId]
+					   ,[Active]
+					   ,[FleetOwnerCode])
+				 VALUES
+					   (@currid
 						   ,@cmpId
-						   ,1
-						   ,@EmpNo)							
+					   ,1
+					   ,@EmpNo)
 								
-					else
-						UPDATE [POSDashboard].[dbo].[FleetOwner]
-							SET 
+				else
+					UPDATE [POSDashboard].[dbo].[FleetOwner]
+						SET 
 							[CompanyId] = @cmpId
-							,[Active] = 1
-							,[FleetOwnerCode] = @EmpNo
-						 WHERE [UserId] = @currid
+						,[Active] = 1
+						,[FleetOwnerCode] = @EmpNo
+					 WHERE [UserId] = @currid
  
-	 end
+ end
  
  
-	 end
+ end
  
 --select * from FleetOwner
 
@@ -5239,9 +5263,12 @@ declare @cmpcnt int
 set @cmpcnt = 0
  declare @fleetcnt int
 set @fleetcnt = 0
+ declare @edithistoryid int
 
 declare @cmpid int
 set @cmpid = 0
+declare @dt datetime
+set @dt = GETDATE()
  
  declare @fc varchar(10) 
  set @fc = case when (select COUNT(*) from fleetowner) = 0
@@ -5264,6 +5291,14 @@ set @cmpid = 0
            ,[Active])      
      VALUES
            (@CompanyName,@CompanyName,@Description,1)
+           
+     --insert into edit history
+	exec InsEditHistory 'Company', 'Name',@FirstName,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+           
+    exec InsEditHistoryDetails @edithistoryid,null,@CompanyName,'Insertion','CompanyName',null
+    exec InsEditHistoryDetails @edithistoryid,null,@cnt,'Insertion','cnt',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+          
            
            set @cmpid = SCOPE_IDENTITY()
  end
@@ -5289,7 +5324,13 @@ set @cmpid = 0
           
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
+	--insert into edit history
+	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
 	
+    exec InsEditHistoryDetails @edithistoryid,null,@FirstName,'Insertion','First Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@LastName,'Insertion','Last Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@cmpid,'Insertion','cmpid',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Email,'Insertion','Email',null
 	
 	SELECT @currid = SCOPE_IDENTITY()
 end
@@ -5322,6 +5363,7 @@ select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
    begin
 	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
    end
+   --insert into edit history
 
 end
 
@@ -6302,3 +6344,51 @@ left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehi
 order by src 
 
 end
+
+
+/****** Object:  StoredProcedure [dbo].[GetLicensePageDetails]    Script Date: 06/03/2016 10:09:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[GetLicensePageDetails]
+as
+begin
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseCatId]
+      ,[LicenseType]
+      ,[Description]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicenseTypes]
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseTypeId]
+      ,[FeatureName]
+      ,[FeatureLabel]
+      ,[FeatureValue]
+      ,[LabelClass]
+      ,[Active]
+      ,[fromDate]
+      ,[toDate]
+  FROM [POSDashboard].[dbo].[LicenseDetails]
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseId]
+      ,[RenewalFreqTypeId]
+      ,[RenewalFreq]
+      ,[UnitPrice]
+      ,[fromdate]
+      ,[todate]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicensePricing]
+  
+  end
+GO
+
+

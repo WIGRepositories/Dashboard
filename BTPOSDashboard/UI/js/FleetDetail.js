@@ -2,12 +2,12 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
 
-    //$scope.GetFleetDetails= function () {
+    $scope.GetFleetDetails= function () {
 
-    //    $http.get('http://localhost:1476/api/Fleet/GetFleetDetails').then(function (res, data) {
-    //        $scope.FleetDetails = res.data.Table;
-    //    });
-    //}
+      $http.get('http://localhost:1476/api/Fleet/GetFleetDetails').then(function (res, data) {
+            $scope.Fleet = res.data.Table;
+      });
+    }
    
     $scope.GetCompanies = function ()
     {
@@ -86,7 +86,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetFleetDetails = function () {
 
-        $http.get('http://localhost:1476/api/Fleet/getFleetList').then(function (res, data) {
+        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.Fleet = res.data.Table;
         });
     }

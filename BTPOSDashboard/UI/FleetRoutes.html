@@ -10,8 +10,7 @@
     <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">    
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -21,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetCompanies();" ng-model="FleetRoute">
+<body ng-init="GetCompanies();" ng-model="GetfleetRoutes">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -298,7 +297,7 @@
 
                             </ul>
                         </li>
-                      </ul>
+                        </ul>
                     </div>
                 </nav>
                 <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
@@ -330,25 +329,18 @@
                                                 <div class="table-container">
 
                                                     <div class="row mbm">
-                                                        <div class="form-group">
-                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Company:</label>
+                                                        <div class="col-md-5">
+                                                            Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            Fleet Owner:<select ng-options="s.Name for s in FleetOwners.Table track by s.Id" ng-model="s" ng-change="GetfleetRoutes()">
 
-                                                            <div class="col-md-6">
-                                                                <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                            </div>
+    <option value="">Select</option>
+</select>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Fleet Owner:</label>
-
-                                                            <div class="col-md-6">
-                                                                <select ng-options="f.Name for f in cmpdata.Table track by f.Id" ng-model="fo" ng-change="GetFleetRoutes();" width="100%">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
 
 
                                                         <div class="actions">
@@ -365,7 +357,7 @@
                                                                 <th width="22%">Vehicle Reg No</th>
                                                                 <th>Fleet Route</th>
                                                                 <th>Effective From</th>
-                                                                <th>Effective Till</th>                                                               
+                                                                <th>Effective Till</th>
                                                                 <th>Edit</th>
                                                                 <th>Delete</th>
 
@@ -377,17 +369,17 @@
                                                                 <td>{{R.VehicleRegNo}}</td>
                                                                 <td>{{R.RouteName}}</td>
                                                                 <td>{{R.EffectiveFrom}}</td>
-                                                                <td>{{R.EffectiveTill}}</td>                          
-                                                               <td>
+                                                                <td>{{R.EffectiveTill}}</td>
+                                                                <td>
 
                                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
+                                                                        Edit
                                                                     </button>
                                                                 </td>
                                                                 <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
-                                                                
-                                                               
+
+
                                                             </tr>
 
                                                         </tbody>
@@ -421,8 +413,8 @@
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
+
+
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
@@ -442,7 +434,7 @@
 
     <script src="js/angular.js"></script>
     <script src="js/ngStorage.js"></script>
-    <script src="js/FleetRoutes.js"></script>    
+    <script src="js/FleetRoutes.js"></script>
 
 </body>
 </html>

@@ -287,7 +287,7 @@ namespace BTPOSDashboardAPI.Models
         public string Description { get; set; }
 
         public string Active { get; set; }
-
+        public string insupddelflag { get; set; }
     }
 
     public class Types
