@@ -386,6 +386,7 @@
     <Content Include="UI\BtposLicense.html" />
     <Content Include="UI\BTPOSMonitoringPage.html" />
     <Content Include="UI\BtposRoutes.html" />
+    <Content Include="UI\CompanyHierarchy.html" />
     <Content Include="UI\CompanyReports.html" />
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\Configuration.html" />
@@ -553,7 +554,6 @@
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
-    <Content Include="UI\CompanyHierarchy.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TroubleTicketReports.html" />
     <Content Include="UI\TypeGroups.html" />
