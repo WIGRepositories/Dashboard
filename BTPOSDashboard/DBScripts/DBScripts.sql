@@ -4432,112 +4432,135 @@ CREATE procedure [dbo].[InsUpdUsers](
 ,@userid int = -1)
  as begin
  
- declare @currid int
- declare @cnt int
- declare @logincnt int
- declare @ulogincnt int
+	 declare @currid int
+	 declare @cnt int
+	 declare @logincnt int
+	 declare @ulogincnt int
  
- if @insupdflag = 'I'
- begin
+	 if @insupdflag = 'I'
+	 begin
  
- select @cnt = COUNT(*)  from Users where UPPER(EmpNo) = @EmpNo
+			select @cnt = COUNT(*)  from Users where UPPER(EmpNo) = @EmpNo
  
- select @logincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) 
+			select @logincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) 
  
- if @cnt > 0
- RAISERROR ('Already user exists',16,1);
+			 if @cnt > 0
+			 RAISERROR ('Already user exists',16,1);
  
   
- if @cnt = 0 
- begin
-	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
-	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
+			 if @cnt = 0 
+			 begin
+				insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
+				values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
   
  
-    SELECT @currid = @@IDENTITY
- end
+				SELECT @currid = @@IDENTITY
+			 end
   
-  if @logincnt > 0
-	RAISERROR ('Already user login exists',16,1);
+			  if @logincnt > 0
+				RAISERROR ('Already user login exists',16,1);
  
-   if @logincnt = 0 and @UserName is not null
-   begin
-	insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
-   end
-end
- else
+			   if @logincnt = 0 and @UserName is not null
+			   begin
+
+			   --check if it is normal user or fleet owner. for fleet owner we have different logic
+			   if @RoleId = 6 
+			   begin
+			     declare @fc varchar(10) 
+							 set @fc = case when (select COUNT(*) from fleetowner) = 0
+													   then '1' 
+													   else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
+													   end  
+
+				declare @flogincnt int
+
+							--the login will be assigned once the user buys the license. this is for testing
+							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+
+							 if @flogincnt = 0
+							   begin
+								insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+							   end
+			   end
+			   else
+				insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
+			   
+			   end
+	end
+	 else
  
- begin
+	 begin
  
- SELECT @currid = @userid
+	 SELECT @currid = @userid
  
- update Users 
- set FirstName = @FirstName,
- LastName = @LastName,
- MiddleName = @MiddleName,
- Email = @Email,
- MobileNo = @MobileNo, 
- Active = @Active 
- where id = @userid
+	 update Users 
+	 set FirstName = @FirstName,
+	 LastName = @LastName,
+	 MiddleName = @MiddleName,
+	 Email = @Email,
+	 MobileNo = @MobileNo, 
+	 Active = @Active 
+	 where id = @userid
  
- select @logincnt = COUNT(*) from userlogins where  userid = @userid
+	 select @logincnt = COUNT(*) from userlogins where  userid = @userid
  
  
- if @logincnt = 0
-  --login is not existing hence insert 
- if @UserName is not null
- insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@userid)
+	 if @logincnt = 0
+	  --login is not existing hence insert 
+	 if @UserName is not null
+	 insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@userid)
  
- else
- begin
- --check if updation causes duplicates
- select @ulogincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) and userid <> @userid
+	 else
+	 begin
+	 --check if updation causes duplicates
+	 select @ulogincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) and userid <> @userid
  
- if @ulogincnt = 0
- 	update userlogins
-	set logininfo = @UserName
-	,PassKey = @Password
-	,active = @active
-	where userid = @currid
-else
- RAISERROR ('User login already exists',16,1);
- end
+	 if @ulogincnt = 0
+ 		update userlogins
+		set logininfo = @UserName
+		,PassKey = @Password
+		,active = @active
+		where userid = @currid
+	else
+	 RAISERROR ('User login already exists',16,1);
+	 end
 
  
- end --end of 'i' check
+	 end --end of 'i' check
  
- --if role is fleet owner then insert the code into fleet owner table
+	 --if role is fleet owner then insert the code into fleet owner table
  
- declare @fcnt int
+	 declare @fcnt int
  
- if @RoleId = 6
- begin
+	 if @RoleId = 6
+	 begin
+
+	 select @fcnt = COUNT(*) from FleetOwner where UserId = @currid
  
- select @fcnt = COUNT(*) from FleetOwner where UserId = @currid
+				 if @fcnt = 0 					 
+					INSERT INTO [POSDashboard].[dbo].[FleetOwner]
+						   ([UserId]
+						   ,[CompanyId]
+						   ,[Active]
+						   ,[FleetOwnerCode])
+					 VALUES
+						   (@currid
+						   ,@cmpId
+						   ,1
+						   ,@EmpNo)							
+								
+					else
+						UPDATE [POSDashboard].[dbo].[FleetOwner]
+							SET 
+							[CompanyId] = @cmpId
+							,[Active] = 1
+							,[FleetOwnerCode] = @EmpNo
+						 WHERE [UserId] = @currid
  
-			 if @fcnt = 0 
-				INSERT INTO [POSDashboard].[dbo].[FleetOwner]
-					   ([UserId]
-					   ,[CompanyId]
-					   ,[Active]
-					   ,[FleetOwnerCode])
-				 VALUES
-					   (@currid
-					   ,1
-					   ,1
-					   ,@EmpNo)
-				else
-					UPDATE [POSDashboard].[dbo].[FleetOwner]
-						SET 
-						[CompanyId] = 1
-						,[Active] = 1
-						,[FleetOwnerCode] = @EmpNo
-					 WHERE [UserId] = @currid
- 
- end
+	 end
  
  
- end
+	 end
  
 --select * from FleetOwner
 
