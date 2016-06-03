@@ -9,6 +9,13 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         });
     }
 
+    $scope.GetCategoriesList = function () {
+        $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
+            $scope.Categories = response.data;
+             $scope.getselectval();
+        });
+    }
+
 
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.Id : -1;
@@ -30,7 +37,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             alert('Please enter name.');
             return;
         }
-        if (SubCategory.Category == null) {
+        if (SubCategory.CATEGORY == null) {
             alert('Please enter Category.');
             return;
         }
@@ -42,7 +49,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             Name: SubCategory.Name,
             Description: SubCategory.Description,
             Active:  SubCategory.Active,
-            TypeGroupId: SubCategory.Category.Id
+            TypeGroupId: SubCategory.CategoryId
 
         };
 
@@ -51,7 +58,9 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             url: 'http://localhost:1476/api/subcategory/savesubcategory',
             data: currSubCategory
         }
-        $http(req).then(function (response) { });
+        $http(req).then(function (response) {
+            alert('saved successfully.');
+        });
 
 
         $scope.currGroup = null;

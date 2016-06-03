@@ -158,9 +158,7 @@ INSERT INTO [POSDashboard].[dbo].[EditHistory]
            ,@ChangedType
            ,@Task)
 
- SELECT @edithistoryid = @@IDENTITY
-
-
+ select @edithistoryid = SCOPE_IDENTITY()
 
 end
 
@@ -201,12 +199,6 @@ BEGIN
 END
 
 
-CREATE TABLE [dbo].[COUNTRY](
-	[ID] [numeric](18, 0) NULL,
-	[Name] [nchar](10) NULL,
-	[Code] [nchar](10) NULL,
-	[Active] [nchar](10) NULL
-) ON [PRIMARY]
 
 GO
 SET ANSI_NULLS ON
@@ -1953,7 +1945,7 @@ end
 
 else
 begin
-if @insupdflag = 0
+if @insupdflag = 1
  delete from [CompanyRoles] where [CompanyId] = @CompanyId and RoleId = @roleid
 end
 
@@ -1996,7 +1988,7 @@ CREATE procedure [dbo].[InsUpdDelCompany](
 @desc varchar(50) = '',
 @Id int,
 @Name varchar(50),
-@insupdflag varchar(10),
+@insupdflag varchar(1),
 @userid int = -1
 )
 as
@@ -2016,6 +2008,7 @@ declare @neweid int
 
 
 if @insupdflag = 'I'
+begin
 	--check if already company exists
 	select @cnt = count(1) from company where upper(name) = upper(@name)
 
@@ -2026,25 +2019,22 @@ if @insupdflag = 'I'
 	SELECT @newCmpId = @@IDENTITY
 	
 	--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
            
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 
   --  --insert Fleet owner role by default
-		--insert into CompanyRoles (Name,[Description],Active,companyid) 
-		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
+		 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
    
 	end
-
+end
 else
 
    if @insupdflag = 'U'
-
+begin
 		--check if already a company with the new name exists
 		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
 	    
@@ -2056,20 +2046,22 @@ else
 		
 		
 		--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid
+	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
+                     
            
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+    exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+    exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 		
 		end
+		else
+			RAISERROR ('Company already exists',16,1);
+end
    else
+if @insupdflag = 'D'
      delete from Company where Id = @Id
 end
-
 
 GO
 
@@ -5230,7 +5222,7 @@ set @cmpid = 0
  
  declare @fc varchar(10) 
  set @fc = case when (select COUNT(*) from fleetowner) = 0
-                           then '001' 
+                           then '1' 
                            else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
                            end  
  

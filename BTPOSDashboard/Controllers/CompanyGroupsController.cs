@@ -94,7 +94,7 @@ namespace POSDBAccess.Controllers
                 gid.Value = n.Name;
                 cmd.Parameters.Add(gid);
 
-                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,10);
+                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,1);
                 insupdflag.Value = n.insupdflag;
                 cmd.Parameters.Add(insupdflag);
 

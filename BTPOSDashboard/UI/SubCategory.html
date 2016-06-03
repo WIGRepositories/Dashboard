@@ -7,14 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetCategories();" ng-model="SubCategory">
+<body ng-init="GetCategoriesList();" ng-model="SubCategory">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -304,7 +304,8 @@
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Utililities&Tools</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Configuration</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Master Data</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="SubCategory.html">SubCategory</a></li>
 
                         </ol>
@@ -319,21 +320,19 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="table-container">
-                                            <div class="row mbm">
-                                                <div class="col-md-5">
-                                                    Category: <select ng-options="s.Name for s in Categories track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                        <option value="">All</option>
-                                                    </select>
-                                                </div>
-
-
-                                                <div class="actions">
-                                                    <a href="AddSubCategory.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Subcategory</button></a>
-
-                                                </div>
-                                                </div>
+                                            
                                                 <div class="col-lg-12">
+                                                    <div class="col-md-5">
+                                                        Category: <select ng-options="s.Name for s in Categories track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                            <option value="">All</option>
+                                                        </select>
+                                                    </div>
 
+
+                                                    <div class="actions">
+                                                        <a href="AddSubCategory.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Subcategory</button></a>
+
+                                                    </div>
 
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
@@ -351,7 +350,7 @@
                                                                         </div>
                                                                         <div class="col-md-5">
                                                                             <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Category" /></div>
+                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.CATEGORY" readonly/></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -408,6 +407,7 @@
                                                             <tr>
                                                                 <th>Name</th>
                                                                 <th>Description</th>
+                                                                <th>Category</th>
                                                                 <th>Active</th>
                                                                 <th>update</th>
 
@@ -419,6 +419,7 @@
 
                                                                 <td>{{Category.Name}}</td>
                                                                 <td>{{Category.Description}}</td>
+                                                                <td>{{Category.CATEGORY}}</td>
                                                                 <td>
                                                                     <input type="checkbox" ng-checked="Category.Active" checked>
                                                                 </td>

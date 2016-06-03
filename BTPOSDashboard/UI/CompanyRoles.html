@@ -8,7 +8,7 @@
     <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     <!--Loading style-->
@@ -67,7 +67,7 @@
                                 <div class="info">
                                     <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
-                                        <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                        <li><a href="UserProfile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
                                         <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -83,24 +83,19 @@
                                 </a>
                             </li>
 
-
-
-
-
-
-                            <li class="active">
-                                <a href="#">
+                            <li>
+                                <a href="Company.html">
                                     <i class="fa fa-sitemap fa-fw">
                                         <div class="icon-bg bg-dark"></div>
                                     </i><span class="menu-title">Company and Users</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
 
-                                    <li class="active">
+                                    <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Company</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
-                                            <li class="active"><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
+                                            <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
 
                                         </ul>
                                     </li>
@@ -136,10 +131,12 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
 
                             </ul>
 
@@ -161,6 +158,7 @@
                                         <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                         <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
                                         <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
                                     </ul>
                                 </li>
 
@@ -175,9 +173,14 @@
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
                                         <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
                                         <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                        <li><a href="SalesOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Sales orders</span></a></li>
                                         <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
 
+
                                     </ul>
+                                <li>
+                                    <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                </li>
                             </ul>
                         </li>
 
@@ -200,6 +203,9 @@
                                         <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                         <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
                                         <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">SmsGatewayConfiguration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">EmailGatewayConfiguration</span></a></li>
+
                                     </ul>
                                 </li>
 
@@ -210,6 +216,10 @@
                                         <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                         <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+
+
+                                        <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
 
                                     </ul>
                                 </li>
@@ -219,6 +229,7 @@
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
                                         <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
 
 
                                     </ul>
@@ -239,7 +250,7 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
-                                <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
+                                <li><a href="paymentHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
                                 <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
 
 
@@ -254,9 +265,10 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+
                             </ul>
                         </li>
 
@@ -288,11 +300,8 @@
                                     </ul>
                                 </li>
 
-
-
                             </ul>
                         </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -422,13 +431,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!--END CONTENT--><!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
+                       
                     </div>
                     <!--END PAGE WRAPPER-->
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
             </div>
         </div>
@@ -439,8 +449,8 @@
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    
+    
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
