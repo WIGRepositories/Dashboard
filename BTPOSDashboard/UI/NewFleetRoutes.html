@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
@@ -331,16 +331,26 @@
                                                     <div class="panel-body pan">
                                                         <form action="#" class="form-horizontal">
                                                             <div class="modal-body">
-
+                                                                
                                                                 <div class="form-group">
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Company:</label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" ng-model="cmp" ng-change="getVehiclesForCmp()" width="100%">
-                                                                            <option value="">Select Company</option>
+                                                                        <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
+                                                                            <option value="">Select</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Fleet Owner:</label>
+
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="f.Name for f in FleetOwners track by f.Id" ng-model="fo" ng-change="GetFleetBTPosForFO();" width="100%">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>                                                              
 
                                                                 <div class="form-group">
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Vehicle Reg No:</label>

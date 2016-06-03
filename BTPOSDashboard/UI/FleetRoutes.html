@@ -13,7 +13,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">    
     <!--Loading style-->
@@ -330,23 +330,25 @@
                                                 <div class="table-container">
 
                                                     <div class="row mbm">
-                                                        <div class="col-md-4">
-                                                            Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetRoutes()">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                     </div>
-                                                        <!--<div class="col-md-4">
-                                                            Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                        <div class="form-group">
+                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Company:</label>
 
-                                                                <option value="">All</option>
-                                                            </select>
+                                                            <div class="col-md-6">
+                                                                <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            Route: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
 
-                                                                <option value="">All</option>
-                                                            </select>
-                                                        </div>-->
+                                                        <div class="form-group">
+                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Fleet Owner:</label>
+
+                                                            <div class="col-md-6">
+                                                                <select ng-options="f.Name for f in cmpdata.Table track by f.Id" ng-model="fo" ng-change="GetFleetRoutes();" width="100%">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
 
 
                                                         <div class="actions">
@@ -419,8 +421,8 @@
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    
+    
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>

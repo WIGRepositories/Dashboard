@@ -1,10 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="mycntrlr">
+<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title>Route Fare Details </title>
+    <title>Default Route Pricing</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
@@ -16,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetCompanies();" ng-model="RouteDetails">
+<body ng-model="RouteDetails">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -214,7 +213,6 @@
                                             <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                             <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                             <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
-                                            <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">FleetOwnerRouteFare</span></a></li>
 
                                         </ul>
                                     </li>
@@ -304,7 +302,7 @@
                         <!--BEGIN TITLE & BREADCRUMB PAGE-->
                         <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                             <div class="page-header pull-left">
-                                <div class="page-title">Route Fare Configuration</div>
+                                <div class="page-title">Default Route Pricing</div>
                             </div>
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -326,145 +324,305 @@
                                                 <div class="col-lg-12">
 
                                                     <div class="table-container">
+
                                                         <div class="row mbm">
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Company: <select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                            <div class="col-md-5">
+                                                                Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
+                                                            <div class="col-md-5">
                                                                 Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()">
 
-    <option value="">Select</option>
-</select>
-                                                            </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Route Name: <select ng-options="r.routename for r in FORoutes track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
-    <option value="">Select</option>
-</select>
-                                                            </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Code: <input type="text" readonly style="width:100px" value="{{r.Code}}"/>
-                                                            </div>
-
-
-                                                        </div>
-                                                        <div class="row mbm">
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Vehicle Type: <input type="text" readonly style="width:100px" />
-                                                            </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Vehicle Reg No.: <select ng-options="v.VehicleRegNo for v in fleet track by v.VehicleId" ng-model="v" ng-change="getVehicleFareConfig()" style="width:100px">
-    <option value="">Select</option>
-</select>
-                                                            </div>
-
-                                                           
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Source: <input type="text" readonly style="width:100px" />
-                                                            </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Destination: <input type="text" readonly style="width:100px" />
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="row mbm" style="text-align:right">
-                                                            <div class="col-md-3">
-                                                                Pricing Type: <select ng-model="prc">
                                                                     <option value="">Select</option>
-                                                                    <option value="1">Per unit pricing</option>
-                                                                    <option value="2">Stage to Stage</option>
                                                                 </select>
                                                             </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Per KM price: <input type="text" style="width:100px" />
-                                                            </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                distance: <input type="text" readonly style="width:100px" />
-                                                            </div>
-
-                                                            <div class="col-md-3" style="text-align:right">
-                                                                Total: <input type="text" readonly style="width:100px" />
-                                                            </div>
-
                                                         </div>
-                                                    </div>
 
-
-
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-
-                                                                <th>Source stop</th>
-                                                                <th>target stop</th>
-                                                                <th>Pricing Type</th>
-                                                                <th>Amount</th>
-                                                                <!--<th>List Key</th>
-                                                                <th>List value</th>-->
-                                                                <th>Effective from</th>
-                                                                <th>Effective Till</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <tr ng-repeat="T in FOVFareConfig">
-
-
-                                                                <td>{{T.Src}}</td>
-                                                                <td>{{T.Dest}}</td>
-                                                                <td>
-                                                                    <select ng-model="prc">
-                                                                        <option value="">Select</option>
-                                                                        <option value="1">Per unit pricing</option>
-                                                                        <option value="2">Adhoc pricing</option>
-                                                                    </select>
-                                                                </td>
-                                                                <td><input type="text" class="form-control" style="width:100px" id="amt" ng-model="T.Amount" /></td>
-                                                                <td>{{T.From}}</td>
-                                                                <td>{{T.To}}</td>
-                                                            </tr>
-                                                        </tbody>
-
-                                                    </table>
-
-                                                    <div style="text-align:center">
-                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
-
-                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                     </div>
                                                 </div>
 
-
-
                                             </div>
+                                        </div>
+
+
+
+                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Route</th>
+                                                    <th>Vehicle Type</th>
+                                                    <th>Pricing Type</th>
+                                                    <th>Amount</th>
+                                                    <!--<th>List Key</th>
+                                                    <th>List value</th>-->
+                                                    <th>From </th>
+                                                    <th>To</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr role="row" class="filter">
+                                                    <td><select class="form-control input-sm">
+    <option value="">Select...</option>
+    <option value="pending">Pending</option>
+    <option value="closed">Closed</option>
+    <option value="hold">On Hold</option>
+</select></td>
+                                                    <td><select class="form-control input-sm">
+    <option value="">Select...</option>
+    <option value="pending">Pending</option>
+    <option value="closed">Closed</option>
+    <option value="hold">On Hold</option>
+</select></td>
+                                                    <td><select class="form-control input-sm">
+    <option value="">Select...</option>
+    <option value="pending">Pending</option>
+    <option value="closed">Closed</option>
+    <option value="hold">On Hold</option>
+</select>
+                                                      
+                                                        
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <div class="mbs"><input type="text" class="form-control input-sm" /></div>
+                                                        
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                </tr>
+                                                <tr role="row" class="filter">
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+
+
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="mbs"><input type="text" class="form-control input-sm" /></div>
+
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                </tr>
+                                                <tr role="row" class="filter">
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+
+
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="mbs"><input type="text" class="form-control input-sm" /></div>
+
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                </tr>
+                                                <tr role="row" class="filter">
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+
+
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="mbs"><input type="text" class="form-control input-sm" /></div>
+
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                </tr>
+                                                <tr role="row" class="filter">
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+
+
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="mbs"><input type="text" class="form-control input-sm" /></div>
+
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                </tr>
+                                                <tr role="row" class="filter">
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+
+
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="mbs"><input type="text" class="form-control input-sm" /></div>
+
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                    <td class="cd-md-2">
+                                                        <input type="text" class="form-control input-sm" />
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+
+                                        <div style="text-align:center">
+                                            <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+
+                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                         </div>
                                     </div>
 
+
+
                                 </div>
                             </div>
-
-                            <!--END CONTENT-->
-
-                        </div><!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                         </div>
 
                     </div>
                 </div>
+
+                <!--END CONTENT-->
+
+            </div><!--BEGIN FOOTER-->
+            <div id="footer">
+                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
             </div>
+
         </div>
+    </div>
+    </div>
+    </div>
 
     </div>
 
@@ -488,9 +646,9 @@
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
+
     <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/FleetOwnerRouteFare.js"></script>
+    <script src="js/RouteFare.js"></script>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">    
     <!--Loading style-->
@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-model="dashboardDS">
+<body ng-init="GetDashboardDS();" ng-model="dashboardDS">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -221,7 +221,7 @@
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                         <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
                                         <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
-                                        
+
 
                                         <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
 
@@ -378,26 +378,7 @@
 
                                         </div>
                                         <h3 class="mtn">License Details</h3>
-                                        <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                        <thead>
-                                        <tr>
-                                        <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                        <th>FeatureName</th>
-                                        <th>FeatureValue</th>
-                                        <th>Description</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr ng-repeat="L in License">
-                                        <td><input type="checkbox" /> </td>
-                                        <td>{{L.FeatureName}}</td>
-                                        <td>{{L.FeatureValue}}</td>
-                                        <td>{{L.Description}}</td>
-                                        </tr>
-
-                                        </tbody>
-                                        </table>-->
+                                        
                                         <div class="alert alert-danger">No License Details to show</div>
                                         <div style="width:100%;">
                                             <div class="tab-content" style="width:49%;float:left; ">
@@ -453,7 +434,90 @@
                                                 </div>
                                                 <a href='https://www.add-map.net/'>BT POS tracking</a>
                                                 <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                                                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+                                                <script type='text/javascript'>
+                                                    /*function init_map()
+                                                    {
+                                                        var locations = [
+                                                           ['Bondi Beach', -33.890542, 151.274856, 4],
+                                                           ['Coogee Beach', -33.923036, 151.259052, 5],
+                                                           ['Cronulla Beach', -34.028249, 151.157507, 3],
+                                                           ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+                                                           ['Maroubra Beach', -33.950198, 151.259302, 1]
+                                                         ];
+
+
+                                                        var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP };
+                                                        map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+
+
+                                                      //  marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) });
+                                                        infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' });
+                                                        google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); });
+
+
+                                                        var marker, i;
+                                                        for (i = 0; i < locations.length; i++)
+                                                        {
+                                                            marker = new google.maps.Marker({
+                                                                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                                                map: map
+                                                            });
+
+                                                            google.maps.event.addListener(marker, 'click', (function (marker, i)
+                                                            {
+                                                                return function ()
+                                                                {
+                                                                    infowindow.setContent(locations[i][0]);
+                                                                    infowindow.open(map, marker);
+                                                                }
+                                                            })(marker, i));
+                                                        }
+
+
+                                                        infowindow.open(map, marker);
+
+
+                                                    } google.maps.event.addDomListener(window, 'load', init_map);
+                                                                                                            */
+
+                                                    var locations = [
+                                                           ['Bondi Beach', -17.8295, 31.0337, 4],
+                                                           ['Coogee Beach', -17.8295, 31.0358, 5],
+                                                           ['Cronulla Beach', -17.8295, 31.0345, 3],
+                                                           ['Manly Beach', -17.8295, 31.0331, 2],
+                                                           ['Maroubra Beach', -17.8295, 31.0331, 1]
+                                                    ];
+
+
+                                                    var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
+                                                        zoom: 15,
+                                                        center: new google.maps.LatLng(-17.8252, 31.0335), //17.8252° S, 31.0335° E
+                                                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                    });
+
+
+                                                    var infowindow = new google.maps.InfoWindow();
+
+
+                                                    var marker, i;
+
+
+                                                    for (i = 0; i < locations.length; i++) {
+                                                        marker = new google.maps.Marker({
+                                                            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                                            map: map
+                                                        });
+
+
+                                                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                                            return function () {
+                                                                infowindow.setContent(locations[i][0]);
+                                                                infowindow.open(map, marker);
+                                                            }
+                                                        })(marker, i));
+                                                    }
+
+                                                </script>
                                             </div>
 
 
@@ -469,13 +533,14 @@
 
 
                         <!--END CONTENT-->
-                        <!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
+                       
                     </div>
                     <!--END PAGE WRAPPER-->
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
             </div>
 
@@ -487,8 +552,8 @@
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    
+    
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
@@ -517,9 +582,6 @@
 
     <script src="js/source.js"></script>
 
-    <!--<script src="js/Alerts.js"></script>
-
-    <script src="js/Notifications.js"></script>-->
 </body>
 
 </html>
