@@ -1,13 +1,23 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname
+    $scope.initdata= $localStorage.initdata
+
+
+    $scope.GetFleeBTPosDetails = function () {
+
+        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?foId=-1&cmpid=-1&initdata.newfleet.fdid=-1').then(function (res, data) {
+            $scope.FleetBtposList = res.data;
+        });
+    }
+   
 
     $scope.GetCompanies = function () {
 
         var vc = {
             needCompanyName: '1',
-            needRoutes: '1'
+            needRoutes: '1',
+            needRegNo:'1',
         };
 
         var req = {
@@ -66,7 +76,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var fr = {
             cmpId: selCmp.Id,
             routeid: '-1',
-            fleetownerId:'-1'
+            fleetownerId: $scope.s.Id,
+            regno: '-1'
         };
 
         var req = {
@@ -111,7 +122,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
         $http(req).then(function (res) {
             $scope.FleetOwners = res.data;
-            GetFleetRoutes();
+            $scope.GetFleetRoutes();
         });
     }
 

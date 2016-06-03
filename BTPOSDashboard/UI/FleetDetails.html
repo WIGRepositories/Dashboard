@@ -328,6 +328,118 @@
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
+                                                        <div class="row">
+
+
+                                                            <div class="actions">
+
+                                                              
+
+                                                                <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header modal-header-primary">
+                                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                                <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+
+                                                                                <div class="row">
+
+                                                                                    <div class="col-md-3">
+                                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                                            <label for="inputFirstName" class="control-label">Vehicle Reg No:<span class='require'>*</span></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-5">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+
+                                                                                    <div class="col-md-3">
+                                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                                            <label for="inputFirstName" class="control-label">Vehicle Type:</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-5">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+
+                                                                                    <div class="col-md-3">
+                                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                                            <label for="inputFirstName" class="control-label">Vehicle Layout:</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-5">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="row">
+
+                                                                                    <div class="col-md-3">
+                                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                                            <label for="inputFirstName" class="control-label">Service Type:<span class='require'>*</span></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-5">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" /></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row">
+
+                                                                                    <div class="col-md-3">
+                                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                                            <label for="inputFirstName" class="control-label">Company Name:</label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-5">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" /></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                               
+                                                                            
+                                                                                <div class="row">
+
+                                                                                    <div class="col-md-3">
+                                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                                            <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                          
+
+                                                                        </div>
+
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                       <div class="col-md-5">
                                                             Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
                                                                 <option value="">Select</option>
@@ -343,8 +455,9 @@
 
                                                             <div class="actions">
                                                                 <a href="AddFleetDetails.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add Fleet Details</button></a>
+                                                                </div>
+</div>
 
-                                                            </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
@@ -353,7 +466,7 @@
                                                                 <th>Vehicle Type</th>
                                                                 <th>Vehicle Layout</th> 
                                                                 <th>Service Type </th>   
-                                                                <th>Compnay Name</th>                 
+                                                                <th>Company Name</th>                 
                                                                 <th>Active</th>
                                                                 <th>Update</th>
                                                                 <th>Delete</th>

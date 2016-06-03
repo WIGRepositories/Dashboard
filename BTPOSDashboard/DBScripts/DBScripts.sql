@@ -2072,7 +2072,7 @@ GO
 -- =============================================
 CREATE  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
-	(@vehicleId int=-1)
+	(@cmpId int = -1, @fleetOwnerId int = -1, @vehicleId int=-1)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -2083,8 +2083,8 @@ BEGIN
       ,[VehicleRegNo]
       ,vt.[Name] as VehicleType,
       lt.Name AS vehiclelayout,
-       st.Name as ServiceType,
-       u.FirstName +' '+u.LastName as FleetOwnerName 
+       st.Name as ServiceType
+      , u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
       ,v.[Active]
      FROM [POSDashboard].[dbo].[FleetDetails]v
@@ -2092,25 +2092,14 @@ BEGIN
     inner join Types st on st.Id=v.ServiceTypeId
     inner join Types lt on lt.Id = v.layouttypeid
     inner join company c on c.Id=v.CompanyId
-    inner join FleetOwner f on f.UserId=v.FleetOwnerId
+    inner join FleetOwner f on f.id=v.FleetOwnerId
     inner join Users u on u.Id = f.UserId
-	 where  (v.Id= @vehicleId or @vehicleId = -1)
+	 where  ((v.Id= @vehicleId or @vehicleId = -1)
+	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
+	 and (v.CompanyId = @cmpId or @cmpId = -1))
    
     -- Insert statements for procedure here
-    
-    
---SELECT t.[Id]
---      ,t.[Name] as VehicleType,
---      t.[Name] as ServiceType
---      ,t.[Active]
-      
---      ,f.[Id] as FleetName 
---         ,c.[Name] as CompanyName
---  FROM [POSDashboard].[dbo].[Types]t   
---	 inner join company c on c.Id=t.Id
---	 inner join FleetOwner f on f.Id=t.Id
---	 where  (t.Id= @vehicleId or @vehicleId = -1)
-
+  
 
 END
 
