@@ -28,7 +28,7 @@ GO
 ALTER TABLE [dbo].[Alerts] ADD  CONSTRAINT [DF_AlertNotifications_UserId]  DEFAULT ((1)) FOR [UserId]
 GO
 
-/****** Object:  Table [dbo].[Notifications]    Script Date: 05/05/2016 18:40:53 ******/
+/****** Object:  Table [dbo].[Notifications]    Script Date: 06/03/2016 17:10:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -45,8 +45,18 @@ CREATE TABLE [dbo].[Notifications](
 	[MessageTypeId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL
+	[Name] [varchar](50) NOT NULL,
+	[Source] [varchar](50) NULL
 ) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
+GO
+
 
 GO
 
@@ -1982,7 +1992,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
 
-CREATE procedure [dbo].[InsUpdDelCompany](
+ALTER procedure [dbo].[InsUpdDelCompany](
 @active int,
 @code varchar(50),
 @desc varchar(50) = '',
@@ -2028,6 +2038,10 @@ begin
 
   --  --insert Fleet owner role by default
 		 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
+		 
+		 declare @m varchar(500)
+	set @m = 'Company '+@Name+' created successfully.'
+	exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
    
 	end
 end
@@ -2062,6 +2076,7 @@ end
 if @insupdflag = 'D'
      delete from Company where Id = @Id
 end
+
 
 GO
 
@@ -4436,7 +4451,10 @@ CREATE procedure [dbo].[InsUpdUsers](
  declare @cnt int
  declare @logincnt int
  declare @ulogincnt int
- 
+ declare @edithistoryid int
+ declare @dt datetime
+set @dt = GETDATE()
+
  if @insupdflag = 'I'
  begin
  
@@ -4453,6 +4471,14 @@ CREATE procedure [dbo].[InsUpdUsers](
 	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
 	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
   
+  --insert into edit history
+	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+           
+    exec InsEditHistoryDetails @edithistoryid,null,@FirstName,'Insertion','First Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@LastName,'Insertion','Last Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@EmpNo,'Insertion','EmpNo',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Email,'Insertion','Email',null
+
  
     SELECT @currid = @@IDENTITY
  end
@@ -5216,9 +5242,12 @@ declare @cmpcnt int
 set @cmpcnt = 0
  declare @fleetcnt int
 set @fleetcnt = 0
+ declare @edithistoryid int
 
 declare @cmpid int
 set @cmpid = 0
+declare @dt datetime
+set @dt = GETDATE()
  
  declare @fc varchar(10) 
  set @fc = case when (select COUNT(*) from fleetowner) = 0
@@ -5241,6 +5270,14 @@ set @cmpid = 0
            ,[Active])      
      VALUES
            (@CompanyName,@CompanyName,@Description,1)
+           
+     --insert into edit history
+	exec InsEditHistory 'Company', 'Name',@FirstName,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+           
+    exec InsEditHistoryDetails @edithistoryid,null,@CompanyName,'Insertion','CompanyName',null
+    exec InsEditHistoryDetails @edithistoryid,null,@cnt,'Insertion','cnt',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+          
            
            set @cmpid = SCOPE_IDENTITY()
  end
@@ -5266,7 +5303,13 @@ set @cmpid = 0
           
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
-	
+	--insert into edit history
+	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+           
+    exec InsEditHistoryDetails @edithistoryid,null,@FirstName,'Insertion','First Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@LastName,'Insertion','Last Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@cmpid,'Insertion','cmpid',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Email,'Insertion','Email',null
 	
 	SELECT @currid = SCOPE_IDENTITY()
 end
@@ -5299,7 +5342,8 @@ select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
    begin
 	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
    end
-
+   --insert into edit history
+	
 end
 
 
@@ -6279,3 +6323,35 @@ left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehi
 order by src 
 
 end
+GO
+
+create procedure InsUpdDelNotification
+(@Date datetime = getdate
+           ,@Message varchar(500) = null
+           ,@MessageTypeId int = -1           
+           ,@StatusId int = -1
+           ,@UserId int = -1
+           ,@Name varchar(50) = null
+           ,@Source varchar(50) = null)
+as
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Notifications]
+           ([Date]
+           ,[Message]
+           ,[MessageTypeId]
+           ,[StatusId]
+           ,[UserId]
+           ,[Name]
+           ,[Source])
+     VALUES
+           (@Date
+           ,@Message
+           ,@MessageTypeId
+           ,@StatusId
+           ,@UserId
+           ,@Name
+           ,@Source)
+end
+
+Go
