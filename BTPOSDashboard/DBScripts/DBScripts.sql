@@ -6505,6 +6505,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 create procedure [dbo].[GetLicensePageDetails]
+(@catId int = -1)
 as
 begin
 
@@ -6515,6 +6516,7 @@ SELECT TOP 1000 [Id]
       ,[Description]
       ,[Active]
   FROM [POSDashboard].[dbo].[LicenseTypes]
+  where (LicenseCatId = @catId or @catId = -1)
   
   /****** Script for SelectTopNRows command from SSMS  ******/
 SELECT TOP 1000 [Id]
@@ -6540,7 +6542,9 @@ SELECT TOP 1000 [Id]
   FROM [POSDashboard].[dbo].[LicensePricing]
   
   end
-GO
+
+
+Go
 
 
 Create PROCEDURE [dbo].[GetFleetOwnerRouteAssigned]
