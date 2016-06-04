@@ -342,7 +342,7 @@
                                                                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                                 <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h4>
                                                                             </div>
-                                                                            <div class="modal-body">
+                                                                            <div class="modal-body" ng-model="currVD">
 
                                                                                 <div class="row">
 
@@ -353,7 +353,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currVD.VehicleRegNo" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -366,7 +366,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currVD.VehicleType"  /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -379,7 +379,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currVD.vehiclelayout"  /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -394,26 +394,14 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="currVD.ServiceType" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Company:</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
                                                                                
-                                                                            
+
+
                                                                                 <div class="row">
 
                                                                                     <div class="col-md-3">
@@ -429,9 +417,14 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                          
+                                                                            <div class="form-actions">
+                                                                                <div class="col-md-offset-3 col-md-9">
+                                                                                    <button class="btn btn-primary" ng-click="savenewfleetdetails(initdata);">Save</button>
 
-                                                                        </div>
+                                                                                    <button class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                                                                </div>
+
+                                                                            </div>
 
 
 
@@ -468,8 +461,7 @@
                                                                 <th>Service Type </th>   
                                                                 <th>Company Name</th>                 
                                                                 <th>Active</th>
-                                                                <th>Update</th>
-                                                                <th>Delete</th>
+                                                                <th>Update</th>                                                              
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -502,7 +494,7 @@
                                                                         Edit
                                                                     </button>
                                                                 </td>
-                                                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+                                                             
                                                             </tr>
 
                                                         </tbody>

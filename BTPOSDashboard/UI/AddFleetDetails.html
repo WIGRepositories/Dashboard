@@ -278,7 +278,7 @@
                             <ol class="breadcrumb page-breadcrumb pull-right">
                                 <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                                 <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                                <li><a href="InventorySales.html">Fleet Details</a></li>
+                                <li><a href="FleetDetails.html">Fleet Details</a></li>
 
                             </ol>
                             <div class="clearfix"></div>
@@ -331,9 +331,9 @@
 
                                                                     <div class="form-group">
 
-                                                                        <label for="selCountry" class="col-md-3 control-label">Company Name</label>
+                                                                        <label for="selCountry" class="col-md-3 control-label">Company:</label>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="c.Name for c in initdata.Table3 track by c.Id" ng-model="initdata.newfleet.c" class="form-control">
+                                                                            <select ng-options="c.Name for c in initdata.Table3 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -342,9 +342,9 @@
 
                                                                         <div class="form-group">
 
-                                                                            <label for="selCountry" class="col-md-3 control-label">Fleet Owner Name</label>
+                                                                            <label for="selCountry" class="col-md-3 control-label">Fleet Owner:</label>
                                                                             <div class="col-md-6">
-                                                                                <select ng-options="fo.Name for fo in initdata.Table2 track by fo.Id" ng-model="initdata.newfleet.fo" class="form-control">
+                                                                                <select ng-options="fo.Name for fo in cmpdata.Table track by fo.Id" ng-model="initdata.newfleet.fo" class="form-control">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -388,17 +388,18 @@
                                 </div>
                             </div>
                      </div>
-                      
-      
-
-            <!--END CONTENT--><!--BEGIN FOOTER-->
-            <div id="footer">
-                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-            </div>
+          
             <!--END FOOTER-->
       
     </div>
-
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!--END PAGE WRAPPER-->
 
     <script src="js/jquery-1.10.2.min.js"></script>

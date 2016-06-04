@@ -33,21 +33,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
-    $scope.getVehiclesForCmp = function () {
+    $scope.GetFleetForFO = function () {
 
         $scope.vehicles = null;
 
-        var selCmp = $scope.cmp;
+        var fleetowner = $scope.s;
 
-        if (selCmp == null) {            
+        if (fleetowner == null) {
             return;
         }
 
-        var cmpId = (selCmp == null) ? -1 : selCmp.Id;
-
+      
         var vc = {
             needvehicleRegno: '1',
-            cmpId: selCmp.Id
+            fleetownerId: fleetowner.Id
         };
 
         var req = {
@@ -60,7 +59,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res) {
             $scope.vehicles = res.data;
         });
-
+        $scope.GetFleetRoutes();
     }
 
     $scope.GetFleetRoutes = function () {      
@@ -92,13 +91,35 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
-    $scope.GetFleetRouteInit = function () {
+//    $scope.GetFleetRouteInit = function () {
+//        if ($scope.initdata.newfleet.fd == null) {
+//            $scope.route = null;
+//            return;
+//        }
+//        var vc = {
+//            needroute: '1',
+//            initdata.newfleet.fdId: $scope.initdata.newfleet.fd.Id
+//    };
+//    var req = {
+//        method: 'POST',
+//        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+//        //headers: {
+//        //    'Content-Type': undefined
 
-        $http.get('http://localhost:1476/api/FleetRoutes/GetFleetList').then(function (res, data) {
+//        data: vc
+
+
+//    }
+//    $http(req).then(function (res) {
+//        $scope.FleetOwners = res.data;          
+//    });
+//}
+   $scope.GetFleetRouteInit = function () {
+       $http.get('http://localhost:1476/api/FleetRoutes/GetFleetRoutesList').then(function (res, data) {
             $scope.FleetRouteinit = res.data.Table;
         });
 
-    }
+}
 
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
@@ -121,8 +142,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         }
         $http(req).then(function (res) {
-            $scope.FleetOwners = res.data;
-            $scope.GetFleetRoutes();
+            $scope.FleetOwners = res.data;          
         });
     }
 

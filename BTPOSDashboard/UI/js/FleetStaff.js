@@ -1,9 +1,14 @@
-
 // JavaScript source code
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
+    $scope.GetFleetStaffDetails = function () {
+
+        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sid=-1&cmpid=-1').then(function (res, data) {
+            $scope.FleetStaff = res.data;
+        });
+    }
 
     $scope.GetVehicleConfig = function () {
 
@@ -20,6 +25,24 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
 
             data: vc
 
+
+        }
+        $scope.GetCompanies = function () {
+
+            var vc = {
+                needCompanyName: '1'
+            };
+
+            var req = {
+                method: 'POST',
+                url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+                //headers: {
+                //    'Content-Type': undefined
+                data: vc
+            }
+            $http(req).then(function (res) {
+                $scope.initdata = res.data;
+            });
 
         }
         $http(req).then(function (res) {
@@ -49,8 +72,7 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
 
         }
         $http(req).then(function (res) {
-            $scope.FleetOwners = res.data;
-            getFleetStaff();
+            $scope.cmpdata = res.data;
         });
     }
     
