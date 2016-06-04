@@ -307,7 +307,7 @@ namespace BTPOSDashboardAPI.Models
         public string ListKey { get; set; }
 
         public string Listvalue { get; set; }
-
+        public string insupddelflag { get; set; }
     }
     
     public class FleetOwner
