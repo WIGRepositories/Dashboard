@@ -304,7 +304,7 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">New Routes</div>
+                            <div class="page-title">New Fleet BT POS</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -357,7 +357,7 @@
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Vehicle Reg No:</label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="v.VehicleRegNo for v in FleetnBTPos.Table track by v.Id" class="form-control" ng-model="FleetBtpos.v">
+                                                                        <select ng-options="v.VehicleRegNo for v in FleetnBTPos.Table track by v.Id" class="form-control" ng-model="fo" ng-change="GetFleetBTPosForFO();">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -367,7 +367,7 @@
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>BT POS ID:</label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="b.POSID for b in FleetnBTPos.Table1 track by b.Id" class="form-control" ng-model="FleetBtpos.b">
+                                                                        <select ng-options="b.POSID for b in FleetnBTPos.Table1 track by b.Id" class="form-control" ng-model="FleetBtpos.b" ng-model="fo" ng-change="GetFleetBTPosForFO();">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -401,20 +401,20 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                  
                                 </div>
                                 <!--END PAGE WRAPPER-->
                             </div>
                             <!--END PAGE WRAPPER-->
                         </div>
-                        <!--END CONTENT--><!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
+                      
                     </div>
-
-
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
+                    <!--END PAGE WRAPPER-->
                 </div>
 
             </div>

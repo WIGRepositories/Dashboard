@@ -102,6 +102,13 @@ namespace BTPOSDashboard.Controllers
             foid.SqlDbType = SqlDbType.Int;
             foid.Value = (vc.fleetownerId == null) ? -1 : vc.fleetownerId;
             cmd.Parameters.Add(foid);    
+            
+            //needfleetownerroutes
+            SqlParameter forid = new SqlParameter();
+            forid.ParameterName = "@needFleetOwnerRoutes";
+            forid.SqlDbType = SqlDbType.Int;
+            forid.Value = (vc.needfleetownerroutes == null) ? -1 : vc.needfleetownerroutes;
+            cmd.Parameters.Add(forid);  
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);

@@ -33,21 +33,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
-    $scope.getVehiclesForCmp = function () {
+    $scope.GetRoutesForFO = function () {
 
         $scope.vehicles = null;
 
-        var selCmp = $scope.cmp;
+        var fleetowner = $scope.s;
 
-        if (selCmp == null) {            
+        if (fleetowner == null) {
             return;
         }
 
-        var cmpId = (selCmp == null) ? -1 : selCmp.Id;
-
+      
         var vc = {
             needvehicleRegno: '1',
-            cmpId: selCmp.Id
+            fleetownerId: fleetowner.Id,
+            needfleetownerroutes:'1'
         };
 
         var req = {
@@ -60,7 +60,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res) {
             $scope.vehicles = res.data;
         });
-
+      
     }
 
     $scope.GetFleetRoutes = function () {      
@@ -92,13 +92,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
-    $scope.GetFleetRouteInit = function () {
 
-        $http.get('http://localhost:1476/api/FleetRoutes/GetFleetList').then(function (res, data) {
-            $scope.FleetRouteinit = res.data.Table;
-        });
-
-    }
+   
 
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
@@ -121,8 +116,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         }
         $http(req).then(function (res) {
-            $scope.FleetOwners = res.data;
-            $scope.GetFleetRoutes();
+            $scope.FleetOwners = res.data;          
         });
     }
 

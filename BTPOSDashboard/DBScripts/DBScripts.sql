@@ -1395,6 +1395,7 @@ INSERT INTO
 	END
 
 GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1403,11 +1404,61 @@ CREATE procedure [dbo].[InsUpdDelObjects](@Id int,
 @Name varchar(50),
 @Description varchar(100) = '',
 @Path Varchar(500),
+@insupdflag varchar(1),
 @Active int = 1)
 as
 begin
-insert into Object (Name,Description,Path ,Active) values(@Name,@Description, @Path, @Active)
+declare @cnt int
+
+if @insupdflag = 'I'
+begin
+
+select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+
+
+INSERT INTO [POSDashboard].[dbo].[Objects]
+           ([Name]
+           ,[Description]
+           ,[Path] 
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@Path 
+           ,@Active)
+           
+           end
+else
+if @insupdflag = 'U'
+begin
+
+select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
+
+
+update Objects 
+set 
+[Name]=@Name
+,[Active] = @Active
+,[Description] = @Description
+,[Path]=@Path
+where Id = @Id
+
+
+
+
 end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[Objects]
+      WHERE Id = @Id
+end
+end
+
 
 GO
 SET ANSI_NULLS ON
@@ -2091,7 +2142,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE  PROCEDURE [dbo].[GetFleetDetails] 
+ALTER  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
 	(@cmpId int = -1, @fleetOwnerId int = -1, @vehicleId int=-1)
 AS
@@ -2107,6 +2158,7 @@ BEGIN
        st.Name as ServiceType
       , u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
+      ,bd.[POSID ]
       ,v.[Active]
      FROM [POSDashboard].[dbo].[FleetDetails]v
     inner join Types vt on vt.Id=v.VehicleTypeId
@@ -2115,6 +2167,8 @@ BEGIN
     inner join company c on c.Id=v.CompanyId
     inner join FleetOwner f on f.id=v.FleetOwnerId
     inner join Users u on u.Id = f.UserId
+    inner join BTPOSDetails bd on bd.FleetOwnerId=f.Id
+    
 	 where  ((v.Id= @vehicleId or @vehicleId = -1)
 	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
 	 and (v.CompanyId = @cmpId or @cmpId = -1))
@@ -2123,6 +2177,9 @@ BEGIN
     
     
 END
+
+
+
 
 
 GO
@@ -3440,22 +3497,58 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30))
+CREATE procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30),@insupdflag varchar(1))
 as
 begin
 
+
+declare @cnt int
+
+if @insupdflag = 'I'
+begin
+
+select @cnt = COUNT(*) from Types where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+INSERT INTO [POSDashboard].[dbo].[Types]
+           ([Name]
+           ,[Description]
+           ,[TypeGroupId] 
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@TypeGroupId 
+           ,@Active)
+           
+           end
+else
+if @insupdflag = 'U'
+begin
+
+select @cnt = COUNT(*) from Types where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
+
+
 update types 
-set name=@Name
-,Active = @Active
-,Description = @Description
-,TypeGroupId = @TypeGroupId
+set 
+[Name]=@Name
+,[Active] = @Active
+,[Description] = @Description
+
 where Id = @Id
 
-if @@rowcount = 0 
-begin
-insert into Types(Name,[Description],TypeGroupId,Active) values(@Name,@Description,@TypeGroupId,@Active)
-end
 
+
+
+end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[Types]
+      WHERE Id = @Id
+end
 end
 
 
@@ -3956,24 +4049,36 @@ CREATE PROCEDURE [dbo].[InsUpdelStops]
       @Description varchar(30) = null,
       @Code varchar(10),
       @Active int,
-      @insupdflag varchar(10))
+     @insupdflag varchar(1))
 AS
 BEGIN
+declare @cnt int
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	if @insupdflag='I'
+	begin
+
+select @cnt = COUNT(*) from Stops where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
 INSERT INTO Stops
            (Name,
            [Description],
            Code,
            Active)
-           values(@Name,
+           values
+           (@Name,
            @Description,
            @Code,
            @Active)
-     
+           end
 else
+if @insupdflag = 'U'
+begin
 
-  if @insupdflag = 'U'
+select @cnt = COUNT(*) from Stops where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
 UPDATE Stops
    SET Name = @Name ,
       [Description] = @Description  ,
@@ -3981,10 +4086,13 @@ UPDATE Stops
       Active = @Active 
  WHERE id=@id
 
-else
+
+ if @insupdflag = 'D'
   delete from stops where id = @id
 
 END
+end
+
 
 GO
 
@@ -5011,7 +5119,7 @@ SELECT
       fr.[CompanyId],
       r.routename,
       r.code,
-      r.[Id],
+      r.[Id] RouteId,
       [FromDate],
       [ToDate],
       fr.[Active]
@@ -5771,16 +5879,17 @@ Create PROCEDURE [dbo].[VehicleConfiguration]
     @needCompanyName int = 0,
     @needVehicleLayout int = 0, 
     @needHireVehicle int =0,   
-    @needbtpos int = -1,
+    @needbtpos int = 0,
     @cmpId int = -1,
-    @fleetownerId int = -1
+    @fleetownerId int = -1,
+    @needFleetOwnerRoutes int = -1
 AS
 BEGIN
 
 	
 	if @needRoutes  = 1
-	select routename,ID,Code from routes	
-	
+	select routename,ID,Code from routes
+		
 	if @needRoles  = 1 
 	select name,ID from Roles
 	
@@ -5831,6 +5940,23 @@ if @needHireVehicle = 1
 select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1) 
     and (servicetypeId = 11))
+	
+	if @needFleetOwnerRoutes = 1
+	SELECT 
+      fr.[Id],
+      fr.[FleetOwnerId],
+      fr.[CompanyId],
+      r.routename,
+      r.code,
+      r.[Id] RouteId,
+      [FromDate],
+      [ToDate],
+      fr.[Active]     
+  FROM routes r
+inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+ inner join fleetowner f on f.id = fr.fleetownerid 
+  inner join users u on f.userid = u.id 
+  where f.Id = @fleetownerId
 	
 END
 
@@ -6291,7 +6417,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE InsUpdDelFleetOwnerRoutes
+CREATE PROCEDURE [dbo].[InsUpdDelFleetOwnerRoutes]
 @Id int = -1,
 @RouteId int,
 @cmpId int,
@@ -6305,15 +6431,15 @@ begin
 declare @cnt  int
 set @cnt = -1
 
-declare @foid  int
-set @foid = -1
+--declare @foid  int
+--set @foid = -1
 
-select @foid = id from fleetowner where userid = @fleetOwnerId
+--select @foid = id from fleetowner where id = @fleetOwnerId
 
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetOwnerRoute] 
-where [FleetOwnerId] = @foid
+where [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
 
 if @cnt = 0 
@@ -6325,7 +6451,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRoute]
            ,[FromDate]
            ,[ToDate])
      VALUES
-           (@foid
+           (@fleetOwnerId
            ,@cmpId
            ,@RouteId
            ,@FromDate
@@ -6337,16 +6463,17 @@ else
 UPDATE [POSDashboard].[dbo].[FleetOwnerRoute]
    SET [FromDate] = @FromDate
       ,[ToDate] = @ToDate
- WHERE [FleetOwnerId] = @foid
+ WHERE [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
       
 else
 if @insupddelflag = 'D'
   delete from [POSDashboard].[dbo].[FleetOwnerRoute]
-where [FleetOwnerId] = @foid
+where [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
 
 End
+
 GO
 
 
@@ -6402,6 +6529,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 create procedure [dbo].[GetLicensePageDetails]
+(@catId int = -1)
 as
 begin
 
@@ -6412,6 +6540,7 @@ SELECT TOP 1000 [Id]
       ,[Description]
       ,[Active]
   FROM [POSDashboard].[dbo].[LicenseTypes]
+  where (LicenseCatId = @catId or @catId = -1)
   
   /****** Script for SelectTopNRows command from SSMS  ******/
 SELECT TOP 1000 [Id]
@@ -6437,6 +6566,35 @@ SELECT TOP 1000 [Id]
   FROM [POSDashboard].[dbo].[LicensePricing]
   
   end
-GO
 
 
+Go
+
+
+Create PROCEDURE [dbo].[GetFleetOwnerRouteAssigned]
+(@fleetownerId int)
+AS
+BEGIN
+	
+SELECT 
+      fr.[Id],
+      fr.[FleetOwnerId],
+      fr.[CompanyId],
+      r.routename,
+      r.code,
+      r.[Id] RouteId,
+      [FromDate],
+      [ToDate],
+      fr.[Active]
+      ,case when u.id is null then 0 else 1 end assigned
+      --,0 assigned
+  FROM routes r
+inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+ inner join fleetowner f on f.id = fr.fleetownerid 
+  inner join users u on f.userid = u.id 
+  where f.Id = @fleetownerId
+
+
+
+end
+Go
