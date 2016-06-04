@@ -45,7 +45,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Active: Types.Active,
             TypeGroupId: Types.TypeGroupId,
             ListKey: Types.ListKey,
-            Listvalue: Types.Listvalue
+            Listvalue: Types.Listvalue,
+            insupddelflag: 'U'
         };
 
         var req = {
@@ -90,7 +91,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Active: 1,//newType.Active,
             TypeGroupId: newType.group.Id,
             ListKey: newType.ListKey,
-            Listvalue: newType.Listvalue
+            Listvalue: newType.Listvalue,
+            insupddelflag: 'I'
         };
 
         var req = {

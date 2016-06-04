@@ -7,32 +7,32 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
     $http.get('http://localhost:1476/api/objects/getobjects').then(function (res, data) {
         $scope.NewObjects = res.data;
     });
-    $scope.save = function (NewObjects) {
+    $scope.save = function (NewObject) {
         
-        if (NewObjects == null)
+        if (NewObject == null)
         {
             alert('please enter Name');
             return;
         }
-        if (NewObjects.Name == null)
+        if (NewObject.Name == null)
         {
             alert('Please Enter Nmae');
             return;
         }
        
-        if (NewObjects.Path == null)
+        if (NewObject.Path == null)
         {
             alert('Please Enter Path');
             return;
         }
    
-        var NewObjects = {
+        var SelNewObjects = {
             Id:-1,
-            Name: NewObjects.Name,
-            Description: NewObjects.Description,
-            Path: NewObjects.Path,
-            Access: NewObjects.Access,
-
+            Name: NewObject.Name,
+            Description: NewObject.Description,
+            Path: NewObject.Path,
+            Access: NewObject.Access,
+            insupddelflag:'U',
             Active:1,
 
 
@@ -41,16 +41,59 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/objects/saveobjects',
-            data: NewObjects
+            url: 'http://localhost:1476/api/objects/saveObjects',
+            data: SelNewObjects
         }
         $http(req).then(function (response) {
             alert('saved successfully.');
 
         });
 
+
+
+       
+
         $scope.currRole = null;
 
+    };
+
+
+    $scope.saveNewObjects = function (NewObject) {
+
+        if (NewObject == null) {
+            alert('Please enter name.');
+            return;
+        }
+
+        if (NewObject.Name == null) {
+            alert('Please enter name.');
+            return;
+        }
+
+
+
+
+        var SelNewObjects = {
+
+
+            Id: -1,
+            Name: NewObject.Name,
+            Description: NewObject.Description,
+            Path: NewObject.Path,
+
+            Active: 1,
+            insupddelflag: 'I'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/Objects/saveObjects',
+            data: SelNewObjects
+        }
+
+        $http(req).then(function (res) {
+            alert('saved successfully');
+        });
     };
 
     $scope.setCurrRole = function (grp) {
@@ -59,8 +102,8 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
 
     $scope.clearCurrRole = function () {
         $scope.currRole = null;
-    
-    }
+
+    };
 });
 
 
