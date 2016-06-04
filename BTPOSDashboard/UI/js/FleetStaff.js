@@ -1,8 +1,74 @@
+
 // JavaScript source code
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
+
+    $scope.GetFleetDetails = function () {
+
+        if ($scope.cmp == null) {
+            $scope.cmpdata = null;
+            return;
+        }
+
+        if ($scope.s == null) {
+            $scope.Fleet = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+            $scope.Fleet = res.data.Table;
+        });
+    }
+
+    $scope.GetCompanies = function () {
+
+        var vc = {
+            needCompanyName: '1'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
+            $scope.initdata = res.data;
+        });
+
+    }
+
+    $scope.GetFleetOwners = function () {
+        if ($scope.cmp == null) {
+            $scope.cmpdata = null;
+            $scope.Fleet = null;
+            return;
+        }
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.cmpdata = res.data;
+        });
+    }
+
+
+
     $scope.GetFleetStaffDetails = function () {
 
         $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sid=-1&cmpid=-1').then(function (res, data) {
