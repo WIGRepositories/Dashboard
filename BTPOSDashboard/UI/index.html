@@ -323,9 +323,10 @@
                             <div id="table-sorter-tab" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-lg-12">
+                                        <div>
                                         <div id="tab-general">                                       
                                            <h3 class="mtn">BTPOS Details</h3>
-                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0" id="internalActivities">
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0">
                                                 <thead>
                                                     <tr>
 
@@ -363,18 +364,24 @@
                                                             </span>
                                                         </td>
                                                     </tr>
+                                                   
                                                 </tbody>
-                                            </table>
-                                            
+                                                <tfoot><tr><td colspan="6" align="right"><span class="label label-sm label-info"><a style="color:white" href="BTPOSDetails.html" class="button">More...</a></span></td></tr></tfoot>
+                                            </table>                                                                                                            
                                                 <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
+                                           
+                                            </div>
+                                         </div><br />
 
-                                            </div> 
-                                                                               
+                                            <div>                                   
                                         <h3 class="mtn">License Details</h3>
                                         
-                                        <div class="alert alert-danger">No License Details to show</div>
+                                        <div class="alert alert-danger" style="grid-row-align:end">No License Details to show</div>
+
+                                                <span class="label label-sm label-info"><a style="color:white"  href="LicenseDetails.html">More...</a></span>
+</div>
                                         <div style="width:100%;">
-                                            <div class="tab-content" style="width:49%;float:left; ">
+                                            <div class="tab-content" style="width:49%;float:left; ">                                                
                                                 <h3><b>Alerts</b></h3>
                                                 <div id="home" class="tab-pane fade in active">
                                                     <div class="list-group mail-box" ng-repeat="A in dashboardDS.Table1" ng-hide="dashboardDS.Table1.length == 0">
@@ -383,10 +390,13 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="alert alert-danger" ng-show="dashboardDS.Table1.length == 0">No Alerts to show</div>
-                                            </div>
-
-                                            <div class="tab-content" style="width:49%;float:right; ">
+                                                <div class="alert alert-danger" ng-show="dashboardDS.Table1.length == 0">No Alerts to show</div>  
+                                                </br>
+                                                <span class="label label-sm label-info"><a style="color:white"href="Alerts.html">More...</a></span>                                              
+                                            </div> 
+                                             
+                                            </div>                                                                                
+                                            <div class="tab-content" style="width:49%;float:right; ">                                                                                                                                            
                                                 <h3><b>Notifications</b></h3>
                                                 <div id="home" class="tab-pane fade in active">
                                                     <div class="list-group mail-box" ng-repeat="N in dashboardDS.Table2" ng-hide="dashboardDS.Table2.length == 0">
@@ -396,11 +406,17 @@
 
                                                     </div>
                                                 </div>                                                
-                                                <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div>
+                                                <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div><br />
+                                                <!--<a style="float:right" href="Notifications.html" class="button" ng-click="label label-sm label-success">More...</a>-->
+                                                <span class="label label-sm label-info"><a style= "color:white" href="Notifications.html">More...</a></span> 
+
                                             </div>
+                                        
                                         </div>
                                     </div>
+                               
                                 </div>
+                          
                                 <div class="row" ng-hide="dashboardDS.Table.length == 0">
                                     <div class="col-lg-12">
                                         <div class="panel panel-violet">
@@ -522,7 +538,7 @@
 
 
                             </div>
-                        </div>
+                     
 
 
                         <!--END CONTENT-->
@@ -538,43 +554,43 @@
             </div>
 
         </div>
-    </div>
    
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <!--loading bootstrap js-->
-        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+   
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-        <script src="vendors/iCheck/icheck.min.js"></script>
-        <script src="vendors/iCheck/custom.min.js"></script>
-        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-        <script src="js/jquery.menu.js"></script>
-        <script src="vendors/jquery-pace/pace.min.js"></script>
-        <script src="vendors/holder/holder.js"></script>
-        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-        <!--LOADING SCRIPTS FOR PAGE-->
-        <script src="js/table-action.js"></script>
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<script src="js/table-action.js"></script>
 
-        <!--CORE JAVASCRIPT-->
-        <script src="js/main.js"></script>
+<!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
 
-        <script src="js/angular.js"></script>
-        <script src="vendors/tableExport/tableExport.js"></script>
-        <script src="vendors/tableExport/jquery.base64.js"></script>
-        <script src="vendors/tableExport/html2canvas.js"></script>
-        <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
-        <script src="vendors/tableExport/jspdf/jspdf.js"></script>
-        <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
+<script src="js/angular.js"></script>
+<script src="vendors/tableExport/tableExport.js"></script>
+<script src="vendors/tableExport/jquery.base64.js"></script>
+<script src="vendors/tableExport/html2canvas.js"></script>
+<script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
+<script src="vendors/tableExport/jspdf/jspdf.js"></script>
+<script src="vendors/tableExport/jspdf/libs/base64.js"></script>
 
-        <script src="js/ngStorage.js"></script>
+<script src="js/ngStorage.js"></script>
 
-        <script src="js/source.js"></script>
+<script src="js/source.js"></script>
 
 </body>
 
