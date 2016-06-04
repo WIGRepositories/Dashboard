@@ -34,14 +34,14 @@
                         <li class="dropdown">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
                             <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">                               
-                                <li ng-hide="dashboardDS.Table2.length==0"><p>You have 0 new messages</p></li>
+                                <li ng-show="dashboardDS.Table2.length==0"><p>You have 0 new messages</p></li>
                                 <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
                             <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
-                                <li ng-hide="dashboardDS.Table1.length==0"><p>You have 0 new messages</p></li>
+                                <li ng-show="dashboardDS.Table1.length==0"><p>You have 0 new messages</p></li>
                                 <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
