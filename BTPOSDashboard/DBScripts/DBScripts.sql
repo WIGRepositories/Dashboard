@@ -57,16 +57,6 @@ GO
 ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
 GO
 
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
-GO
-
-
 GO
 SET ANSI_NULLS ON
 GO
@@ -1977,7 +1967,7 @@ SELECT distinct c.[active]
       ,[Name]
   FROM [POSDashboard].[dbo].[Company] c
   inner join Users u on  (u.companyId = c.id or  @userid = -1)
-  
+  order by [Name]
 end
 
 --delete from CompanyGroups
@@ -1992,7 +1982,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
 
-ALTER procedure [dbo].[InsUpdDelCompany](
+CREATE procedure [dbo].[InsUpdDelCompany](
 @active int,
 @code varchar(50),
 @desc varchar(50) = '',
@@ -2018,62 +2008,75 @@ declare @neweid int
 
 
 if @insupdflag = 'I'
-begin
-	--check if already company exists
-	select @cnt = count(1) from company where upper(name) = upper(@name)
+		begin
+			--check if already company exists
+			select @cnt = count(1) from company where upper(name) = upper(@name)
 
-	if @cnt = 0 
-	begin
-	insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
-	
-	SELECT @newCmpId = @@IDENTITY
-	
-	--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
-           
-    exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
-    exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+			if @cnt = 0 
+			begin
+			insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
+			
+			SELECT @newCmpId = SCOPE_IDENTITY()
+			
+			--insert into edit history
+			exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		           
+			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+			exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+			exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+			exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 
-  --  --insert Fleet owner role by default
-		 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
-   
-		 declare @m varchar(500)
-	set @m = 'Company '+@Name+' created successfully.'
-	exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
-   
-	end
-end
+		  --  --insert Fleet owner role by default
+				--insert Fleet owner role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
+				--insert Supervisor role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,7,@newCmpId,0 
+				--insert Manager role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,8,@newCmpId,0 
+				--insert Fleet Conductor role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,9,@newCmpId,0 
+				--insert Fleet Ticket Salesperson Front Office by default
+				 exec  InsUpdDelCompanyRoles 1,-1,10,@newCmpId,0 
+				--insert Guest User role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,12,@newCmpId,0 
+				--insert Fleet driver role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,13,@newCmpId,0 
+		   
+				 declare @m varchar(500)
+			set @m = 'Company '+@Name+' created successfully.'
+			--exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
+		   
+			end
+		end
 else
 
    if @insupdflag = 'U'
-begin
-		--check if already a company with the new name exists
-		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
-	    
-		if @cnt = 0 
 		begin
-		update Company
-		set Name = @Name, code = @code, [desc] = @desc, active = @active
-		where Id = @Id
-		
-		
-		--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
-                     
-           
-    exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
-    exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
-		
+				--check if already a company with the new name exists
+				select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
+			    
+				if @cnt = 0 
+				begin
+				update Company
+				set Name = @Name, code = @code, [desc] = @desc, active = @active
+				where Id = @Id
+				
+				
+				--insert into edit history
+			exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
+		                     
+		           
+			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+			exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+			exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+			exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+				
+				end
+				else
+					RAISERROR ('Company already exists',16,1);
 		end
-		else
-			RAISERROR ('Company already exists',16,1);
-end
    else
-if @insupdflag = 'D'
+	if @insupdflag = 'D'
      delete from Company where Id = @Id
 end
 
@@ -4452,7 +4455,9 @@ CREATE procedure [dbo].[InsUpdUsers](
  declare @edithistoryid int
  declare @dt datetime
 set @dt = GETDATE()
- 
+declare @fc varchar(10)
+ declare @flogincnt int
+
  if @insupdflag = 'I'
  begin
  
@@ -4461,7 +4466,7 @@ set @dt = GETDATE()
  select @logincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) 
  
  if @cnt > 0
- RAISERROR ('Already user exists',16,1);
+ RAISERROR ('User already exists',16,1);
  
   
  if @cnt = 0 
@@ -4478,25 +4483,25 @@ set @dt = GETDATE()
     exec InsEditHistoryDetails @edithistoryid,null,@Email,'Insertion','Email',null
 
  
-    SELECT @currid = @@IDENTITY
+   SELECT @currid = SCOPE_IDENTITY()
  end
   
   if @logincnt > 0
 	RAISERROR ('Already user login exists',16,1);
  
-   if @logincnt = 0 and @UserName is not null
+   if @logincnt = 0 
    begin
 
 			   --check if it is normal user or fleet owner. for fleet owner we have different logic
 			   if @RoleId = 6 
 			   begin
-			     declare @fc varchar(10) 
+			     
 							 set @fc = case when (select COUNT(*) from fleetowner) = 0
 													   then '1' 
 													   else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
 													   end  
 
-				declare @flogincnt int
+							
 
 							--the login will be assigned once the user buys the license. this is for testing
 							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
@@ -4507,9 +4512,10 @@ set @dt = GETDATE()
 							   end
 			   end
 			   else
-	insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
+			    if  @UserName is not null
+				insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
 			   
-   end
+      end
 end
  else
  
@@ -4529,10 +4535,33 @@ end
  select @logincnt = COUNT(*) from userlogins where  userid = @userid
  
  
- if @logincnt = 0
-  --login is not existing hence insert 
- if @UserName is not null
- insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@userid)
+ if @logincnt = 0 
+   begin
+
+			   --check if it is normal user or fleet owner. for fleet owner we have different logic
+			   if @RoleId = 6 
+			   begin
+			      
+							 set @fc = case when (select COUNT(*) from fleetowner) = 0
+													   then '1' 
+													   else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
+													   end  
+
+							
+
+							--the login will be assigned once the user buys the license. this is for testing
+							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+
+							 if @flogincnt = 0
+							   begin
+								insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+							   end
+			   end
+			   else
+			    if @UserName is not null
+				insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
+			   
+      end
  
  else
  begin
@@ -4547,6 +4576,7 @@ end
 	where userid = @currid
 else
  RAISERROR ('User login already exists',16,1);
+
  end
 
  
@@ -4569,14 +4599,14 @@ else
 					   ,[FleetOwnerCode])
 				 VALUES
 					   (@currid
-						   ,@cmpId
+						,@cmpId
 					   ,1
 					   ,@EmpNo)
 								
 				else
 					UPDATE [POSDashboard].[dbo].[FleetOwner]
 						SET 
-							[CompanyId] = @cmpId
+						[CompanyId] = @cmpId
 						,[Active] = 1
 						,[FleetOwnerCode] = @EmpNo
 					 WHERE [UserId] = @currid
@@ -5031,14 +5061,29 @@ GO
 CREATE procedure [dbo].[getFleetOwner]
 as
 begin
-select u.FirstName+' '+u.LastName as Name,
-c.Name as CompanyName
-,FO.FleetOwnerCode
-,FO.CompanyId
-,U.Id
- from FleetOwner FO
-inner join Users u on  u.Id = FO.UserId
-inner join Company c on c.Id = FO.companyId
+
+SELECT U.[Id]
+      ,U.[FirstName]
+      ,U.[LastName]      
+      ,U.[EmpNo]
+      ,U.[Email]
+      ,U.[AddressId]
+      ,U.[MobileNo]    
+      ,U.[Active]
+      ,U.[MiddleName]
+      ,mgr.Firstname + ' ' +mgr.LastName as mgrName
+      ,mgr.Id
+      ,ul.logininfo as UserName
+      ,ul.passkey as [Password]            
+      ,c.name as [Company]
+	  ,u.FirstName+' '+u.LastName as Name
+	  ,FO.FleetOwnerCode
+      ,FO.CompanyId     
+  FROM [POSDashboard].[dbo].[Users] U
+  inner join FleetOwner FO on U.Id = FO.UserId
+  inner join company c on (U.companyid = c.id)
+  left outer join Users mgr on mgr.id = U.managerid
+  left outer join dbo.userlogins ul on ul.userid = U.id      
 
 end
 

@@ -9,6 +9,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
    
+    $scope.setUsers = function (usr) {
+        $scope.User1 = usr;
+    };
+
+    $scope.clearUsers = function () {
+        $scope.User1 = null;
+    }
+
+
     $scope.save = function (Fleet) {
         if (Fleet == null) {
             alert('Please enter VehicleRegNo.');

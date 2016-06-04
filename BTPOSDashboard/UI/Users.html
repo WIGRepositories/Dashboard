@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetUsers();" ng-model="User1"> 
+<body ng-init="GetCompanies();"> 
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -325,7 +325,11 @@
 
                                                     <div class="row mbm">
                                                         <div class="row">
-                                                            
+                                                            <div class="col-md-5">
+                                                                Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetUsersForCmp()">
+    <option value="">Select</option>
+</select>
+                                                            </div>
 
                                                             <div class="actions">
 
@@ -352,7 +356,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.FirstName" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -365,7 +369,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.LastName" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -378,7 +382,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User.MiddleName" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -393,7 +397,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="User1.EmpNo" disabled /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -407,7 +411,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.Email" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -420,26 +424,10 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.MobileNo" /></div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Company:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-md-5">
-                                                                                        <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
-                                                                                            
-                                                                                            <option value="">select company</option>
-
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
+                                                                                </div>                                                                               
                                                                                 <div class="row">
 
                                                                                     <div class="col-md-3">
@@ -449,7 +437,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-4">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="User1.Active" checked /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -469,7 +457,7 @@
                                                                                 </div>
 
                                                                                 <div class="col-md-5">
-                                                                                    <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
+                                                                                    <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%" disabled>
                                                                                         <option value="">Select Company</option>
 
                                                                                     </select>
@@ -502,7 +490,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div class="col-md-12"><input type="text" class="form-control" ng-model="User.UserName" /></div>
+                                                                                        <div class="col-md-12"><input type="text" class="form-control" ng-model="User1.UserName" /></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -515,7 +503,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="User.Password" /></div>
+                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="User1.Password" /></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -528,7 +516,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="reenteredPwd" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="reenteredPwd" value="{{User1.Password}}" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
