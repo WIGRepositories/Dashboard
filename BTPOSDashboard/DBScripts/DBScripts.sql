@@ -2091,7 +2091,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE  PROCEDURE [dbo].[GetFleetDetails] 
+ALTER  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
 	(@cmpId int = -1, @fleetOwnerId int = -1, @vehicleId int=-1)
 AS
@@ -2107,6 +2107,7 @@ BEGIN
        st.Name as ServiceType
       , u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
+      ,bd.[POSID ]
       ,v.[Active]
      FROM [POSDashboard].[dbo].[FleetDetails]v
     inner join Types vt on vt.Id=v.VehicleTypeId
@@ -2115,6 +2116,8 @@ BEGIN
     inner join company c on c.Id=v.CompanyId
     inner join FleetOwner f on f.id=v.FleetOwnerId
     inner join Users u on u.Id = f.UserId
+    inner join BTPOSDetails bd on bd.FleetOwnerId=f.Id
+    
 	 where  ((v.Id= @vehicleId or @vehicleId = -1)
 	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
 	 and (v.CompanyId = @cmpId or @cmpId = -1))
@@ -2123,6 +2126,9 @@ BEGIN
     
     
 END
+
+
+
 
 
 GO
