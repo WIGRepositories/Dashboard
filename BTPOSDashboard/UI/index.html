@@ -118,14 +118,8 @@
                                     <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
 
                             </li>
-
-
-
                         </ul>
                         </li>
-
-
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -329,9 +323,9 @@
                             <div id="table-sorter-tab" class="tab-pane fade in active">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div id="tab-general">
-                                            <h3 class="mtn">BTPOS Details</h3>
-                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0">
+                                        <div id="tab-general">                                       
+                                           <h3 class="mtn">BTPOS Details</h3>
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0" id="internalActivities">
                                                 <thead>
                                                     <tr>
 
@@ -343,6 +337,8 @@
                                                         <th>Status</th>
                                                     </tr>
                                                 </thead>
+
+
                                                 <tbody>
 
                                                     <tr ng-repeat="pos in dashboardDS.Table" class="gradeA">
@@ -366,17 +362,14 @@
                                                                 {{pos.status}}
                                                             </span>
                                                         </td>
-
-
                                                     </tr>
-
                                                 </tbody>
-
                                             </table>
-                                            <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
+                                            
+                                                <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
 
-
-                                        </div>
+                                            </div> 
+                                                                               
                                         <h3 class="mtn">License Details</h3>
                                         
                                         <div class="alert alert-danger">No License Details to show</div>
@@ -402,7 +395,7 @@
                                                         </a>
 
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                                 <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div>
                                             </div>
                                         </div>
@@ -546,41 +539,42 @@
 
         </div>
     </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
+   
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <!--loading bootstrap js-->
+        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
 
-    <script src="js/angular.js"></script>
-    <script src="vendors/tableExport/tableExport.js"></script>
-    <script src="vendors/tableExport/jquery.base64.js"></script>
-    <script src="vendors/tableExport/html2canvas.js"></script>
-    <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
-    <script src="vendors/tableExport/jspdf/jspdf.js"></script>
-    <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
+        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+        <script src="vendors/iCheck/icheck.min.js"></script>
+        <script src="vendors/iCheck/custom.min.js"></script>
+        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+        <script src="js/jquery.menu.js"></script>
+        <script src="vendors/jquery-pace/pace.min.js"></script>
+        <script src="vendors/holder/holder.js"></script>
+        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+        <!--LOADING SCRIPTS FOR PAGE-->
+        <script src="js/table-action.js"></script>
 
-    <script src="js/ngStorage.js"></script>
+        <!--CORE JAVASCRIPT-->
+        <script src="js/main.js"></script>
 
-    <script src="js/source.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="vendors/tableExport/tableExport.js"></script>
+        <script src="vendors/tableExport/jquery.base64.js"></script>
+        <script src="vendors/tableExport/html2canvas.js"></script>
+        <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
+        <script src="vendors/tableExport/jspdf/jspdf.js"></script>
+        <script src="vendors/tableExport/jspdf/libs/base64.js"></script>
+
+        <script src="js/ngStorage.js"></script>
+
+        <script src="js/source.js"></script>
 
 </body>
 

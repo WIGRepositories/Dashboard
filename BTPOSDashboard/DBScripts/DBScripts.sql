@@ -2045,6 +2045,9 @@ if @insupdflag = 'I'
 				 declare @m varchar(500)
 			set @m = 'Company '+@Name+' created successfully.'
 			--exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
+			declare @m varchar(500)
+	        set @m = 'fleet owner '+'FL00'+@fc+' created successfully.'
+	        exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
 		   
 			end
 		end
