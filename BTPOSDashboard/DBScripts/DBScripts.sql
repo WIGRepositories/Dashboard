@@ -5113,7 +5113,7 @@ SELECT
       fr.[CompanyId],
       r.routename,
       r.code,
-      r.[Id],
+      r.[Id] RouteId,
       [FromDate],
       [ToDate],
       fr.[Active]
@@ -6393,7 +6393,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE InsUpdDelFleetOwnerRoutes
+CREATE PROCEDURE [dbo].[InsUpdDelFleetOwnerRoutes]
 @Id int = -1,
 @RouteId int,
 @cmpId int,
@@ -6407,15 +6407,15 @@ begin
 declare @cnt  int
 set @cnt = -1
 
-declare @foid  int
-set @foid = -1
+--declare @foid  int
+--set @foid = -1
 
-select @foid = id from fleetowner where userid = @fleetOwnerId
+--select @foid = id from fleetowner where id = @fleetOwnerId
 
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetOwnerRoute] 
-where [FleetOwnerId] = @foid
+where [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
 
 if @cnt = 0 
@@ -6427,7 +6427,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRoute]
            ,[FromDate]
            ,[ToDate])
      VALUES
-           (@foid
+           (@fleetOwnerId
            ,@cmpId
            ,@RouteId
            ,@FromDate
@@ -6439,16 +6439,17 @@ else
 UPDATE [POSDashboard].[dbo].[FleetOwnerRoute]
    SET [FromDate] = @FromDate
       ,[ToDate] = @ToDate
- WHERE [FleetOwnerId] = @foid
+ WHERE [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
       
 else
 if @insupddelflag = 'D'
   delete from [POSDashboard].[dbo].[FleetOwnerRoute]
-where [FleetOwnerId] = @foid
+where [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
 
 End
+
 GO
 
 
@@ -6542,3 +6543,30 @@ SELECT TOP 1000 [Id]
 GO
 
 
+Create PROCEDURE [dbo].[GetFleetOwnerRouteAssigned]
+(@fleetownerId int)
+AS
+BEGIN
+	
+SELECT 
+      fr.[Id],
+      fr.[FleetOwnerId],
+      fr.[CompanyId],
+      r.routename,
+      r.code,
+      r.[Id] RouteId,
+      [FromDate],
+      [ToDate],
+      fr.[Active]
+      ,case when u.id is null then 0 else 1 end assigned
+      --,0 assigned
+  FROM routes r
+inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+ inner join fleetowner f on f.id = fr.fleetownerid 
+  inner join users u on f.userid = u.id 
+  where f.Id = @fleetownerId
+
+
+
+end
+Go

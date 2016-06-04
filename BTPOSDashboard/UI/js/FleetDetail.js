@@ -4,7 +4,19 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetFleetDetails= function () {
 
-      $http.get('http://localhost:1476/api/Fleet/GetFleetDetails').then(function (res, data) {
+         if ($scope.cmp == null)
+        {
+            $scope.cmpdata = null;
+            return;
+        }
+
+        if ($scope.s == null)
+        {
+          $scope.Fleet = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId='+ $scope.cmp.Id+ '&fleetOwnerId=' + $scope.s.Id).then(function(res, data) {
             $scope.Fleet = res.data.Table;
       });
     }
@@ -34,7 +46,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     {
         if ($scope.cmp == null)
         {
-            $scope.FleetOwners = null;
+            $scope.cmpdata = null;
+            $scope.Fleet = null;
             return;
         }
         var vc = {
@@ -84,12 +97,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
-    $scope.GetFleetDetails = function () {
+   /* $scope.GetFleetDetails = function () {
 
         $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.Fleet = res.data.Table;
         });
-    }
+    }*/
    
     $scope.save = function (Fleet) {
         if (Fleet == null) {
@@ -159,7 +172,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             VehicleTypeId: newVD.vt.Id,
             VehicleLayoutId: newVD.vl.Id,
             FleetOwnerId: newVD.fo.Id,
-            CompanyId: newVD.c.Id,
+            CompanyId: $scope.cmp.Id,
             ServiceTypeId: newVD.st.Id,
             Active:1,
 
@@ -177,6 +190,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res) {
             alert('Sucessfully saved!');
         });
+}
+ 
+    $scope.setFleet = function (F) {
+        $scope.currVD = F;
     }
 });
    
