@@ -1395,6 +1395,7 @@ INSERT INTO
 	END
 
 GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1403,11 +1404,61 @@ CREATE procedure [dbo].[InsUpdDelObjects](@Id int,
 @Name varchar(50),
 @Description varchar(100) = '',
 @Path Varchar(500),
+@insupdflag varchar(1),
 @Active int = 1)
 as
 begin
-insert into Object (Name,Description,Path ,Active) values(@Name,@Description, @Path, @Active)
+declare @cnt int
+
+if @insupdflag = 'I'
+begin
+
+select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+
+
+INSERT INTO [POSDashboard].[dbo].[Objects]
+           ([Name]
+           ,[Description]
+           ,[Path] 
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@Path 
+           ,@Active)
+           
+           end
+else
+if @insupdflag = 'U'
+begin
+
+select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
+
+
+update Objects 
+set 
+[Name]=@Name
+,[Active] = @Active
+,[Description] = @Description
+,[Path]=@Path
+where Id = @Id
+
+
+
+
 end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[Objects]
+      WHERE Id = @Id
+end
+end
+
 
 GO
 SET ANSI_NULLS ON
@@ -3440,22 +3491,58 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30))
+CREATE procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30),@insupdflag varchar(1))
 as
 begin
 
+
+declare @cnt int
+
+if @insupdflag = 'I'
+begin
+
+select @cnt = COUNT(*) from Types where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+INSERT INTO [POSDashboard].[dbo].[Types]
+           ([Name]
+           ,[Description]
+           ,[TypeGroupId] 
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@TypeGroupId 
+           ,@Active)
+           
+           end
+else
+if @insupdflag = 'U'
+begin
+
+select @cnt = COUNT(*) from Types where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
+
+
 update types 
-set name=@Name
-,Active = @Active
-,Description = @Description
-,TypeGroupId = @TypeGroupId
+set 
+[Name]=@Name
+,[Active] = @Active
+,[Description] = @Description
+
 where Id = @Id
 
-if @@rowcount = 0 
-begin
-insert into Types(Name,[Description],TypeGroupId,Active) values(@Name,@Description,@TypeGroupId,@Active)
-end
 
+
+
+end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[Types]
+      WHERE Id = @Id
+end
 end
 
 
@@ -3956,24 +4043,36 @@ CREATE PROCEDURE [dbo].[InsUpdelStops]
       @Description varchar(30) = null,
       @Code varchar(10),
       @Active int,
-      @insupdflag varchar(10))
+     @insupdflag varchar(1))
 AS
 BEGIN
+declare @cnt int
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	if @insupdflag='I'
+	begin
+
+select @cnt = COUNT(*) from Stops where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
 INSERT INTO Stops
            (Name,
            [Description],
            Code,
            Active)
-           values(@Name,
+           values
+           (@Name,
            @Description,
            @Code,
            @Active)
-     
+           end
 else
+if @insupdflag = 'U'
+begin
 
-  if @insupdflag = 'U'
+select @cnt = COUNT(*) from Stops where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
 UPDATE Stops
    SET Name = @Name ,
       [Description] = @Description  ,
@@ -3981,10 +4080,13 @@ UPDATE Stops
       Active = @Active 
  WHERE id=@id
 
-else
+
+ if @insupdflag = 'D'
   delete from stops where id = @id
 
 END
+end
+
 
 GO
 
