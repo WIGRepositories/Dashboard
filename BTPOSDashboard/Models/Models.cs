@@ -1346,6 +1346,7 @@ namespace BTPOSDashboardAPI.Models
         public int? needbtpos { get; set; }
         public int? cmpId { get; set; }
         public int? fleetownerId { get; set; }
+        public int? needfleetownerroutes { get; set; }
 
     }
 

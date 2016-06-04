@@ -5879,16 +5879,17 @@ Create PROCEDURE [dbo].[VehicleConfiguration]
     @needCompanyName int = 0,
     @needVehicleLayout int = 0, 
     @needHireVehicle int =0,   
-    @needbtpos int = -1,
+    @needbtpos int = 0,
     @cmpId int = -1,
-    @fleetownerId int = -1
+    @fleetownerId int = -1,
+    @needFleetOwnerRoutes int = -1
 AS
 BEGIN
 
 	
 	if @needRoutes  = 1
-	select routename,ID,Code from routes	
-	
+	select routename,ID,Code from routes
+		
 	if @needRoles  = 1 
 	select name,ID from Roles
 	
@@ -5939,6 +5940,23 @@ if @needHireVehicle = 1
 select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1) 
     and (servicetypeId = 11))
+	
+	if @needFleetOwnerRoutes = 1
+	SELECT 
+      fr.[Id],
+      fr.[FleetOwnerId],
+      fr.[CompanyId],
+      r.routename,
+      r.code,
+      r.[Id] RouteId,
+      [FromDate],
+      [ToDate],
+      fr.[Active]     
+  FROM routes r
+inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+ inner join fleetowner f on f.id = fr.fleetownerid 
+  inner join users u on f.userid = u.id 
+  where f.Id = @fleetownerId
 	
 END
 

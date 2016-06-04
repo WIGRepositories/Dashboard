@@ -33,7 +33,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
-    $scope.GetFleetForFO = function () {
+    $scope.GetRoutesForFO = function () {
 
         $scope.vehicles = null;
 
@@ -46,7 +46,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
       
         var vc = {
             needvehicleRegno: '1',
-            fleetownerId: fleetowner.Id
+            fleetownerId: fleetowner.Id,
+            needfleetownerroutes:'1'
         };
 
         var req = {
@@ -59,7 +60,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res) {
             $scope.vehicles = res.data;
         });
-        $scope.GetFleetRoutes();
+      
     }
 
     $scope.GetFleetRoutes = function () {      
@@ -91,35 +92,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
-//    $scope.GetFleetRouteInit = function () {
-//        if ($scope.initdata.newfleet.fd == null) {
-//            $scope.route = null;
-//            return;
-//        }
-//        var vc = {
-//            needroute: '1',
-//            initdata.newfleet.fdId: $scope.initdata.newfleet.fd.Id
-//    };
-//    var req = {
-//        method: 'POST',
-//        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-//        //headers: {
-//        //    'Content-Type': undefined
 
-//        data: vc
-
-
-//    }
-//    $http(req).then(function (res) {
-//        $scope.FleetOwners = res.data;          
-//    });
-//}
-   $scope.GetFleetRouteInit = function () {
-       $http.get('http://localhost:1476/api/FleetRoutes/GetFleetRoutesList').then(function (res, data) {
-            $scope.FleetRouteinit = res.data.Table;
-        });
-
-}
+   
 
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
