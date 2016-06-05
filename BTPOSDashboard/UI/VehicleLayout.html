@@ -19,14 +19,14 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <link rel="stylesheet" type="text/css" href="css/handsontable.full.min.css" />
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
+    <!--<script src="js/jquery.js"></script>-->
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body ng-init="GetVehicleConfig();" ng-model="vlConfig">
@@ -354,12 +354,6 @@
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
-
-
-                                                        
-                                                  
-
-
                                                                 <div class="col-md-3">
                                                                   Rows: <select class="form-control text-center" id="rowSelected"></select>
                                                                 </div>
@@ -369,7 +363,7 @@
                                                                 </div>
                                                                     <button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>
                                                            
-                                                                <div class="bg-primary">
+                                                                <div>
                                                                     <div class="col-lg-5"></div>
 
                                                                     <div class="row text-center">
@@ -464,14 +458,18 @@
             else {
                 buttonContainerDiv.empty();
                 for (var i = 1; i <= $('#rowSelected').val() ; i++) {
-                    buttonContainerDiv.append("<div style='width:10px;height:10px'>");
-                    for (var j = 1; j <= $('#colSelected').val() ; j++) {
+                    buttonContainerDiv.append("<div style='width:100px;height:10px'>");
+                    for (var j = 1; j <= $('#colSelected').val(); j++) {
 
                         buttonContainerDiv = buttonContainerDiv.append(  "<input type=checkbox>"+ i + j + '</li>');
                     }
                     buttonContainerDiv = buttonContainerDiv.append('<br>');
                     if (i % 2 == 0) {
                         buttonContainerDiv = buttonContainerDiv.append('<br>');
+                        //if (j == $('#colSelected').val())
+                        //    buttonContainerDiv = buttonContainerDiv.append("<div><input type=checkbox>" + i + j + "</li></div>");
+                        //else
+                        //    buttonContainerDiv = buttonContainerDiv.append("<div style='width:2px;height:2px;'></div>");
                     }
                     //buttonContainerDiv.append("ffdgsdfgsdfgsdf</div>");
                 }
@@ -483,9 +481,7 @@
     </script>
 
    
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
+
 <!--loading bootstrap js-->
 <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
 <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>

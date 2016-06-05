@@ -33,15 +33,19 @@
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
-                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">                               
-                                <li ng-show="dashboardDS.Table2.length==0"><p>You have 0 new messages</p></li>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new alerts</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">                                                               
                                 <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
-                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
-                                <li ng-show="dashboardDS.Table1.length==0"><p>You have 0 new messages</p></li>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                <li><p>You have 0 new notifications</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">                                
                                 <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
@@ -366,7 +370,11 @@
                                                     </tr>
                                                    
                                                 </tbody>
-                                                <tfoot><tr><td colspan="6" align="right"><span class="label label-sm label-info"><a style="color:white" href="BTPOSDetails.html" class="button">More...</a></span></td></tr></tfoot>
+                                                <tfoot ng-show="dashboardDS.Table.length > 5">
+                                                    <tr>
+                                                        <td colspan="6" align="right"><span class="label label-sm label-info"><a style="color:white" href="BTPOSDetails.html" class="button">More...</a></span></td>
+                                                    </tr>
+                                                </tfoot>
                                             </table>                                                                                                            
                                                 <div class="alert alert-danger" ng-show="dashboardDS.Table.length == 0"> No BTPOS Details to show</div>
                                            
@@ -378,7 +386,7 @@
                                         
                                         <div class="alert alert-danger" style="grid-row-align:end">No License Details to show</div>
 
-                                                <span class="label label-sm label-info"><a style="color:white"  href="LicenseDetails.html">More...</a></span>
+                                                <span class="label label-sm label-info" ng-show="dashboardDS.Table3.length > 5"><a style=" color:white" href="LicenseDetails.html">More...</a></span>
 </div>
                                         <div style="width:100%;">
                                             <div class="tab-content" style="width:49%;float:left; ">                                                
@@ -392,7 +400,7 @@
                                                 </div>
                                                 <div class="alert alert-danger" ng-show="dashboardDS.Table1.length == 0">No Alerts to show</div>  
                                                 </br>
-                                                <span class="label label-sm label-info"><a style="color:white"href="Alerts.html">More...</a></span>                                              
+                                                <span class="label label-sm label-info" ng-show="dashboardDS.Table1.length > 5"><a style=" color:white"href="Alerts.html">More...</a></span>                                              
                                             </div> 
                                              
                                             </div>                                                                                
@@ -408,7 +416,7 @@
                                                 </div>                                                
                                                 <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div><br />
                                                 <!--<a style="float:right" href="Notifications.html" class="button" ng-click="label label-sm label-success">More...</a>-->
-                                                <span class="label label-sm label-info"><a style= "color:white" href="Notifications.html">More...</a></span> 
+                                                <span class="label label-sm label-info" ng-show="dashboardDS.Table2.length > 5"><a style="color:white" href="Notifications.html">More...</a></span> 
 
                                             </div>
                                         
@@ -554,7 +562,7 @@
             </div>
 
         </div>
-   
+   </div>
    
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>

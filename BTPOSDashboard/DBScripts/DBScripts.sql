@@ -4490,7 +4490,7 @@ as
 begin
 --
 --get btpos details
-SELECT  distinct b.[Id]
+SELECT distinct top 5  b.[Id]
      -- ,[GroupId]
       ,c.Name as company
       ,[POSID]
@@ -4503,13 +4503,13 @@ SELECT  distinct b.[Id]
       ,u.Id as fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
  left outer join Types t on t.Id = b.StatusId
- left outer  join Company c on c.Id = b.CompanyId
-  left outer  join Users u on u.CompanyId = c.id
+ left outer  join Company c on b.CompanyId = c.Id  
+  left outer  join Users u on u.id = b.FleetOwnerId
 where (u.id = @userid or @userid = -1)
 
 --get license details
 --get alerts
-select t1.Id,
+select top 5 t1.Id,
 t1.Date,
 t1.Message,
 t1.MessageTypeId,
@@ -4523,7 +4523,7 @@ t2.LastName
  
 --get notifications
 
-select t1.Id,
+select top 5 t1.Id,
 t1.Date,
 t1.Message,
 t1.MessageTypeId,
@@ -4536,8 +4536,6 @@ t2.LastName
  inner join Users t2 on t2.Id=t1.UserId
 
 end
-
-
 
 GO
 SET ANSI_NULLS ON
