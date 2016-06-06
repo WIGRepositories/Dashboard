@@ -4484,15 +4484,15 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[GetDashboardDetails]
+ALTER procedure [dbo].[GetDashboardDetails]
 (@userid int = -1, @roleid int = -1)
 as
 begin
 --
 --get btpos details
-SELECT b.[Id]
+SELECT distinct top 5  b.[Id]
      -- ,[GroupId]
-    --  ,c.Name as companyname
+      ,c.Name as company
       ,[POSID]
       ,[StatusId]
       ,t.Name as [status]
@@ -4502,14 +4502,14 @@ SELECT b.[Id]
       ,u.FirstName + ' '+ u.LastName as fleetowner
       ,u.Id as fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
-  left outer join Types t on t.Id = statusid
-  left outer join Company c on c.Id = CompanyId
-  left outer join Users u on u.Id = u.companyid
+ left outer join Types t on t.Id = b.StatusId
+ left outer  join Company c on b.CompanyId = c.Id  
+  left outer  join Users u on u.id = b.FleetOwnerId
 where (u.id = @userid or @userid = -1)
 
 --get license details
 --get alerts
-select t1.Id,
+select top 5 t1.Id,
 t1.Date,
 t1.Message,
 t1.MessageTypeId,
@@ -4523,7 +4523,7 @@ t2.LastName
  
 --get notifications
 
-select t1.Id,
+select top 5 t1.Id,
 t1.Date,
 t1.Message,
 t1.MessageTypeId,

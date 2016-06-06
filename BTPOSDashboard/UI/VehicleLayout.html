@@ -23,7 +23,7 @@
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
+    <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
     <!--loading bootstrap js-->
@@ -31,8 +31,6 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <!-- Custom Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/styles.css" type="text/css">
 </head>
 <body ng-init="GetVehicleConfig();" ng-model="vlConfig">
@@ -360,12 +358,6 @@
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
-
-
-                                                        
-                                                  
-
-
                                                                 <div class="col-md-3">
                                                                   Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
                                                                 </div>
@@ -376,7 +368,7 @@
                                                             <div class="col-md-3">
                                                                 <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
                                                                 <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
-
+                                                           
                                                             </div>
 
                                                             
@@ -396,9 +388,9 @@
                                                                             <td ng-repeat="dr in r">
                                                                                 <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" style="border:none" ng-model="dr.selected" ng-checked="{{dr.selected==true}}">{{dr.Id}}</input>
                                                                             </td>
+                                                                            
 
-
-
+                                                          
                                                                         </tr>
                                                                     </tbody>
 
@@ -484,14 +476,18 @@
             else {
                 buttonContainerDiv.empty();
                 for (var i = 1; i <= $('#rowSelected').val() ; i++) {
-                    buttonContainerDiv.append("<div style='width:10px;height:10px'>");
-                    for (var j = 1; j <= $('#colSelected').val() ; j++) {
+                    buttonContainerDiv.append("<div style='width:100px;height:10px'>");
+                    for (var j = 1; j <= $('#colSelected').val(); j++) {
 
                         buttonContainerDiv = buttonContainerDiv.append(  "<input type=checkbox>"+ i + j + '</li>');
                     }
                     buttonContainerDiv = buttonContainerDiv.append('<br>');
                     if (i % 2 == 0) {
                         buttonContainerDiv = buttonContainerDiv.append('<br>');
+                        //if (j == $('#colSelected').val())
+                        //    buttonContainerDiv = buttonContainerDiv.append("<div><input type=checkbox>" + i + j + "</li></div>");
+                        //else
+                        //    buttonContainerDiv = buttonContainerDiv.append("<div style='width:2px;height:2px;'></div>");
                     }
                     //buttonContainerDiv.append("ffdgsdfgsdfgsdf</div>");
                 }
