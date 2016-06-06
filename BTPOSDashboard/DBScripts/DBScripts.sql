@@ -6346,6 +6346,28 @@ SELECT po.[Id]
        
 end
 
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SalesOrder](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SalesOrderNum] [nvarchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+
+
 --SET ANSI_NULLS ON
 --GO
 --SET QUOTED_IDENTIFIER ON
@@ -6479,6 +6501,17 @@ End
 GO
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetPaymentHistory]
+
+as begin 
+SELECT * from PaymentHistory
+
+       
+end
 
 
 GO
@@ -6628,8 +6661,31 @@ SELECT * from PaymentHistory
 
        
 end
-GO
 
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetPurchaseOrder]
+
+as begin 
+SELECT po.[Id]
+      ,[PONum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[item]
+      ,[Quantity]
+      ,t.Name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[PurchaseOrder] po
+  inner join Types t on t.Id = po.Id
+  inner join InventoryItem i on i.Id = po.Id
+
+
+       
+end
 
 SET ANSI_NULLS ON
 GO
@@ -6673,3 +6729,71 @@ SELECT Io.[Id]
 
        
 end
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Invoices](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Invoices] [varchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+Go
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ShippingOrder](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ShippingOrderNum] [nvarchar](50) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL,
+	[SalesOrderId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetShippingOrder]
+
+as begin 
+SELECT * from ShippingOrder
+
+       
+end
+
+
+
+
+
