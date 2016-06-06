@@ -37,8 +37,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
         $http(req).then(function (res)
         {
-            $scope.initdata = res.data;
-          //  $scope.companies = res.data.Table;
+            //$scope.initdata = res.data;
+            $scope.companies = res.data;
         });
 
     }
@@ -75,7 +75,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetVehicleConfig = function () {
 
         var vc = {
-            needfleetowners:'1',
+           // needfleetowners:'1',
             needvehicleType: '1',
             needServiceType: '1',
             needvehiclelayout: '1',
@@ -195,6 +195,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
  
     $scope.setFleet = function (F) {
         $scope.currVD = F;
+             $scope.currVD.VehicleTypeId = 9;
     }
 });
    

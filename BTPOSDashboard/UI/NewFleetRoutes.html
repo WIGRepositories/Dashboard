@@ -356,7 +356,7 @@
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Vehicle Reg No:</label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetOwners();" width="100%" ng-model="initdata.newfleet.fd">
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetOwners();" width="100%" ng-model="initdata.newfleet.fd1">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -366,20 +366,20 @@
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Route:</label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="r.routename for r in vehicles.Table1 track by r.RouteId" class="form-control" ng-model="fr">
+                                                                        <select ng-options="r.routename for r in vehicles.Table1 track by r.RouteId" class="form-control"  ng-model="fr">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="Name" class="col-md-3 control-label">Effective From:<span class='require'></span></label>
+                                                                    <label for="Description" class="col-md-3 control-label">Effective From:<span class='require'></span></label>
 
                                                                     <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="Description" class="col-md-3 control-label"> Effective Till <span class='require'></span></label>
+                                                                    <label for="Description" class="col-md-3 control-label"> Effective Till:<span class='require'></span></label>
 
                                                                     <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
                                                                 </div>

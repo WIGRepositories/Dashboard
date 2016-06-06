@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class RouteDetailsController : ApiController
+    public class FleetOwnerRouteDetailsController : ApiController
     {
         [HttpGet]
         public DataSet getroutedetails(int routeid)
