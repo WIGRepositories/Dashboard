@@ -2093,12 +2093,12 @@ if @insupdflag = 'I'
 				--insert Fleet driver role by default
 				 exec  InsUpdDelCompanyRoles 1,-1,13,@newCmpId,0 
 		   
-				 declare @m varchar(500)
-			set @m = 'Company '+@Name+' created successfully.'
+				 --declare @m varchar(500)
+			--set @m = 'Company '+@Name+' created successfully.'
 			--exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
-			declare @m varchar(500)
-	        set @m = 'fleet owner '+'FL00'+@fc+' created successfully.'
-	        exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
+			
+	        --set @m = 'fleet owner '+'FL00'+@fc+' created successfully.'
+	       -- exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
 		   
 			end
 		end
@@ -2142,7 +2142,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-ALTER  PROCEDURE [dbo].[GetFleetDetails] 
+CREATE  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
 	(@cmpId int = -1, @fleetOwnerId int = -1, @vehicleId int=-1)
 AS
@@ -4484,7 +4484,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetDashboardDetails]
+CREATE procedure [dbo].[GetDashboardDetails]
 (@userid int = -1, @roleid int = -1)
 as
 begin
