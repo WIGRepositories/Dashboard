@@ -991,15 +991,15 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[TroubleTicketingDetails](
-	[addInfo] [varchar](50) NOT NULL,
+	[Type] [varchar](50) NOT NULL,
 	[createdBy] [varchar](50) NOT NULL,
-	[createdOn] [int] NOT NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[raisedBy] [varchar](50) NOT NULL,
-	[status] [varchar](50) NOT NULL,
-	[ticketinfo] [varchar](50) NOT NULL,
-	[ticketTypeId] [int] NOT NULL,
-	[TTId] [int] NOT NULL
+	[Raised] [int] NOT NULL,
+	[TicketTitle] [int] IDENTITY(1,1) NOT NULL,
+	[IssueDetails] [varchar](50) NOT NULL,
+	[AddInfo] [varchar](50) NOT NULL,
+	[Status] [varchar](50) NOT NULL,
+	[Asign] [int] NOT NULL,
+	[Id] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -3800,22 +3800,26 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelTroubleTicketingDetails](@addInfo varchar(50),@createdBy varchar(50),@createdOn int,@Id int,@raisedBy varchar(50),@status int,@ticketinfo varchar(50),@ticketTypeId int,@TTId int)
+CREATE procedure [dbo].[InsUpdDelTroubleTicketingDetails](@RefId Int,@Type varchar(50),@createdBy Varchar(50),@Id int,@raised varchar(50),@status int,@TicketTitle varchar(50),@IssueDetails Varchar(50),@AddInfo Varchar(50),@Asign varchar(50))
 as
 begin
-insert into TroubleTicketingDetails (addInfo,createdBy,createdOn,raisedBy,status,ticketinfo,ticketTypeId,TTId) values(@addInfo,@createdBy,@createdOn,@raisedBy,@status,@ticketinfo,@ticketTypeId,@TTId)
+insert into TroubleTicketingDetails(RefId,Type,createdBy,Id ,raised,status ,TicketTitle,IssueDetails,AddInfo ,Asign ) values(@RefId, @Id,@Type ,@createdBy,@raised ,@status ,@TicketTitle ,@IssueDetails ,@AddInfo ,@Asign)
 end
+
+
 
 GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getTroubleTicketingDetails]
+CREATE  procedure [dbo].[getTroubleTicketingDetails]
 as
 begin
 select * from TroubleTicketingDetails
 end
+
+
 
 GO
 SET ANSI_NULLS ON
