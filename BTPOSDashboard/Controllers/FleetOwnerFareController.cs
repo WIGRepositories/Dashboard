@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
+using BTPOSDashboardAPI.Models;
 
 namespace BTPOSDashboard.Controllers
 {
