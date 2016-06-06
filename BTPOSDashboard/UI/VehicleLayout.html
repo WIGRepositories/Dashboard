@@ -19,10 +19,16 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <link rel="stylesheet" type="text/css" href="css/handsontable.full.min.css" />
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
+<!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -361,29 +367,43 @@
 
 
                                                                 <div class="col-md-3">
-                                                                  Rows: <select class="form-control text-center" id="rowSelected"></select>
+                                                                  Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                    Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
 
                                                                 </div>
-                                                                    <button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>
-                                                           
-                                                                <div class="bg-primary">
-                                                                    <div class="col-lg-5"></div>
+                                                            <div class="col-md-3">
+                                                                <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
+                                                                <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
 
-                                                                    <div class="row text-center">
-                                                                        <div class="col-lg-3"></div>
-                                                                        <div class="col-lg-6">
-                                                                            <div class="buttonContainer"></div>
-                                                                            
+                                                            </div>
 
-                                                                        </div>
-                                                                        <div class="col-lg-3"></div>
-                                                                    </div>
-                                                                </div>
-                                                          
+                                                            
+                                                            
+                                                               
+                                                            <div class="col-lg-12">
+                                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                                    <thead>
+                                                                        <!--<tr>
+                    <th>Destination/Source</th>
+                    <th ng-repeat="s in Stops">{{s.Name}}</th>
+                </tr>-->
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr ng-repeat="r in datarows">
+                                                                            <!--<td ng-repeat="dr in r" ng-if="$index == 0 || r==$parent.$index">{{dr}}</td>-->
+                                                                            <td ng-repeat="dr in r">
+                                                                                <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" style="border:none" ng-model="dr.selected" ng-checked="{{dr.selected==true}}">{{dr.Id}}</input>
+                                                                            </td>
 
+
+
+                                                                        </tr>
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </div>
                                                                     </div>
 
                                                                 </div>
@@ -401,13 +421,13 @@
                                                         </div>
                                                     </div>
                                                 </div>-->
-
+                                            <div class="col-lg-12" id="basic_example"></div>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveVehicleLayout();">Save</button>
 
                                                         <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                                                     </div>
@@ -483,11 +503,7 @@
     </script>
 
    
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+
 <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
     
     
@@ -505,7 +521,7 @@
 <script src="js/table-action.js"></script>
 <!--CORE JAVASCRIPT-->
 <script src="js/mainTbl.js"></script>
-<script src="js/handsontable.full.min.js"></script>
+<script src="js/handsontable.full.js"></script>
 <script src="js/main.js"></script>
    
 <script src="js/angular.js"></script>

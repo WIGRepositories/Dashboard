@@ -387,7 +387,7 @@
 
                                                                 <td ng-repeat="dr in r" ng-if="$index == 0 || r==$parent.$index">{{dr}}</td>
                                                                 <td ng-repeat="dr in r" ng-if="$index != 0">
-                                                                    <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }" ng-change="test(dr)" ng-model="dr" />
+                                                                    <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }" ng-change="test(dr)" ng-model="dr"  />
                                                                 </td>
 
                                                                
@@ -397,7 +397,7 @@
 
                                                     </table>
 
-                                                    
+                                                    <div id="basic_example"></div>
                                                     
 
                                                     <div style="text-align:center">
@@ -446,10 +446,10 @@
 <script src="vendors/holder/holder.js"></script>
 <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
 <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-<!--<script src="js/mainTbl.js"></script>-->
-<!--<script src="js/handsontable.full.min.js"></script>-->
+<script src="js/mainTbl.js"></script>
+<script src="js/handsontable.full.min.js"></script>
 <script src="js/main.js"></script>
-<!--<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
 
         var container = document.getElementById('basic_example');
@@ -469,7 +469,7 @@
         });
 
     });
-</script>-->
+</script>
 <script src="js/angular.js"></script>
 <script src="js/RouteFare.js"></script>
 
