@@ -38,6 +38,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res)
         {
             $scope.initdata = res.data;
+          //  $scope.companies = res.data.Table;
         });
 
     }

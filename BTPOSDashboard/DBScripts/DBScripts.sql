@@ -5961,7 +5961,7 @@ inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
 END
 
 
---[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,-1,-1,-1
+--[VehicleConfiguration] 1,0,1,0,0,1,0,0,1,-1,-1,-1
 
 
 GO
