@@ -1361,7 +1361,7 @@ namespace BTPOSDashboardAPI.Models
         public int LicenseCategoryId { set; get; }
         
     }
-    public class GetInventory
+    public class Inventory
     {
         public int Active { set; get; }
         public int availableQty { set; get; }
@@ -1374,7 +1374,7 @@ namespace BTPOSDashboardAPI.Models
         public int reorderpoint{set; get;}
         public string subcat{set; get;}
     }
-    public class GetPurchaseOrder
+    public class PurchaseOrder
     {
         public int Id { set; get; }
         public string PONum { set; get; }

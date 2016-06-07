@@ -1387,7 +1387,7 @@ BEGIN
 
 INSERT INTO 
 [STATE] VALUES
-           (@ID,
+           (@Id,
            @Name,
            @Count,
            @Code,
@@ -1574,7 +1574,7 @@ INSERT INTO
            @ProviderName,
            @BTPOSGRPID,
            @Active,
-           @UserId,
+           @userId,
            @Passkey,
            @Url,
            @Testurl,
@@ -1931,7 +1931,7 @@ SELECT U.[Id]
   inner join company c on (U.companyid = c.id)
   left outer join Users mgr on mgr.id = U.managerid
   left outer join dbo.userlogins ul on ul.userid = U.id    
-  where (c.id = @cmpid or   @cmpid = -1)
+  where (c.id = @cmpId or   @cmpId = -1)
 end
 
 GO
@@ -2153,21 +2153,26 @@ BEGIN
 
    SELECT v.[Id]
       ,[VehicleRegNo]
-      ,vt.[Name] as VehicleType,
-      lt.Name AS vehiclelayout,
-       st.Name as ServiceType
+      ,vt.[Name] as VehicleType
+      ,vt.Id AS VehicleTypeId
+      ,lt.Name AS vehiclelayout
+      ,lt.Id as vehiclelayoutId
+      ,st.Name as ServiceType
+      ,st.Id as ServiceTypeId
       , u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
-      ,bd.[POSID ]
+      ,bd.[POSID]
+      ,vd.[route]
       ,v.[Active]
      FROM [POSDashboard].[dbo].[FleetDetails]v
     inner join Types vt on vt.Id=v.VehicleTypeId
     inner join Types st on st.Id=v.ServiceTypeId
-    inner join Types lt on lt.Id = v.layouttypeid
+   inner join Types lt on lt.Id = v.layouttypeid
     inner join company c on c.Id=v.CompanyId
     inner join FleetOwner f on f.id=v.FleetOwnerId
-    inner join Users u on u.Id = f.UserId
+   inner join Users u on u.Id = f.UserId
     inner join BTPOSDetails bd on bd.FleetOwnerId=f.Id
+    inner join VehicleDetails vd on vd.fleetOwnerId=f.Id
     
 	 where  ((v.Id= @vehicleId or @vehicleId = -1)
 	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
@@ -4508,8 +4513,8 @@ SELECT distinct top 5  b.[Id]
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
  left outer join Types t on t.Id = b.StatusId
  left outer  join Company c on b.CompanyId = c.Id  
-  left outer  join Users u on u.id = b.FleetOwnerId
-where (u.id = @userid or @userid = -1)
+  left outer  join Users u on u.Id = b.FleetOwnerId
+where (u.Id = @userid or @userid = -1)
 
 --get license details
 --get alerts
@@ -5965,7 +5970,7 @@ inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
 END
 
 
---[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,-1,-1,-1
+--[VehicleConfiguration] 1,0,1,0,0,1,0,0,1,-1,-1,-1
 
 
 GO
@@ -5993,7 +5998,7 @@ BEGIN
   FROM [POSDashboard].[dbo].[FleetStaff] FS
       inner join FleetDetails FD on FD.Id = FS.vehicleId
       inner join Users u on fs.UserId=u.id
-inner join Roles r on r.Id = FS.roleid
+inner join Roles r on r.Id = FS.Roleid
 where ((FD.FleetOwnerId = @fleetowner or @fleetowner = -1)
  and (FD.CompanyId = @cmpId or @cmpId  = -1))
 
@@ -6021,7 +6026,7 @@ if @insupddelflag = 'I'
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetStaff] 
 where vehicleid = @vehicleid 
 and userid = @userid 
-and companyid = @cmpid
+and companyid = @cmpId
 and roleid = @roleid
 
 if @cnt = 0 
@@ -6039,7 +6044,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetStaff]
            ,@FromDate
            ,@ToDate
            ,@VehicleId
-           ,@cmpid)
+           ,@cmpId)
 end
 else
   if @insupddelflag = 'U'
@@ -6050,13 +6055,13 @@ UPDATE [POSDashboard].[dbo].[FleetStaff]
       ,[FromDate] = @FromDate
       ,[ToDate] = @ToDate
       ,[VehicleId] = @VehicleId
-      ,[CompanyId] = @cmpid
+      ,[CompanyId] = @cmpId
  WHERE Id = @Id
 
 else
   delete from [POSDashboard].[dbo].[FleetStaff]
-where vehicleid = @vehicleid 
-and userid = @userid 
+where vehicleid = @VehicleId 
+and userid = @UserId 
 and companyid = @cmpid
 and roleid = @roleid
 
@@ -6074,30 +6079,45 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[GetFleetstDetails] 
+ALTER  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
-	(@vehicleId int=-1)
+	(@cmpId int = -1, @fleetOwnerId int = -1, @vehicleId int=-1)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-   SELECT vd.[Id]
-      ,[RegNo]
-      ,[UserId]
-      ,[RoleId]
-      ,[FromDate]
-      ,[ToDate]
-      
-     ,vd.[Active]
-     FROM [POSDashboard].[dbo].[FleetStaff]fs    
-    inner join VehicleDetails vd on vd.Id=fs.Id   
-	 where  (vd.Id= @vehicleId or @vehicleId = -1)
-
-
-
+   SELECT v.[Id]
+      ,[VehicleRegNo]
+      ,vt.[Name] as VehicleType,
+      lt.Name AS vehiclelayout,
+       st.Name as ServiceType
+      , u.FirstName +' '+u.LastName as FleetOwnerName 
+      ,c.[Name] as CompanyName
+      ,bd.[POSID]
+      ,vd.[route]
+      ,v.[Active]
+     FROM [POSDashboard].[dbo].[FleetDetails]v
+    inner join Types vt on vt.Id=v.VehicleTypeId
+    inner join Types st on st.Id=v.ServiceTypeId
+   inner join Types lt on lt.Id = v.layouttypeid
+    inner join company c on c.Id=v.CompanyId
+    inner join FleetOwner f on f.id=v.FleetOwnerId
+   inner join Users u on u.Id = f.UserId
+    inner join BTPOSDetails bd on bd.FleetOwnerId=f.Id
+    inner join VehicleDetails vd on vd.fleetOwnerId=f.Id
+    
+	 where  ((v.Id= @vehicleId or @vehicleId = -1)
+	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
+	 and (v.CompanyId = @cmpId or @cmpId = -1))
+   
+    -- Insert statements for procedure here
+    
+    
 END
+
+
        
 GO
 /****** Object:  Table [dbo].[VehicleLayout]    Script Date: 05/21/2016 23:31:02 ******/
@@ -6182,10 +6202,10 @@ BEGIN
       ,[LicenseCatId]
       ,[LicenseType]
       ,lt.[Description]
-      ,t.name as licenseCategory
+      ,t.Name as licenseCategory
 	  ,lt.[Active]
   FROM [POSDashboard].[dbo].[LicenseTypes] lt
-inner join Types t on t.id = licensecatid
+inner join Types t on t.Id = licensecatid
   where ([LicenseCatId] = @licenseCategoryId or @licenseCategoryId = -1)
 END
 
@@ -6242,7 +6262,7 @@ set @cnt = -1
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetRoutes] 
-where vehicleid = @vehicleid 
+where vehicleid = @VehicleId 
 and routeid = @routeid
 
 if @cnt = 0 
@@ -6253,7 +6273,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetRoutes]
            ,[EffectiveFrom]
            ,[EffectiveTill])
      VALUES
-           (@vehicleid
+           (@VehicleId
            ,@routeid
            ,@FromDate
            ,@ToDate)
@@ -6265,11 +6285,11 @@ UPDATE [POSDashboard].[dbo].[FleetRoutes]
    SET [RouteId] = @routeid      
       ,[EffectiveFrom] = @FromDate
       ,[EffectiveTill] = @ToDate      
- WHERE vehicleid = @vehicleid
+ WHERE vehicleid = @VehicleId
 
 else
   delete from [POSDashboard].[dbo].[FleetRoutes]
-where vehicleid = @vehicleid and routeid = @routeid
+where vehicleid = @VehicleId and routeid = @routeid
 
 End
 
@@ -6291,7 +6311,7 @@ set @cnt = -1
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetBTPOS] 
-where vehicleid = @vehicleid 
+where vehicleid = @VehicleId 
 and  BTPOSId = @btposId
 
 if @cnt = 0 
@@ -6319,7 +6339,7 @@ UPDATE [POSDashboard].[dbo].[FleetBtpos]
 else
   if @insupddelflag = 'D'
   delete from [POSDashboard].[dbo].[FleetBtpos]
-where vehicleid = @vehicleid 
+where vehicleid = @VehicleId 
 and [BTPOSId] = @btposId
 
 End
@@ -6350,6 +6370,28 @@ SELECT po.[Id]
        
 end
 
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SalesOrder](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SalesOrderNum] [nvarchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+
+
 --SET ANSI_NULLS ON
 --GO
 --SET QUOTED_IDENTIFIER ON
@@ -6373,6 +6415,8 @@ end
 
        
 --end
+
+
 
 --GO
 
@@ -6481,6 +6525,17 @@ End
 GO
 
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetPaymentHistory]
+
+as begin 
+SELECT * from PaymentHistory
+
+       
+end
 
 
 GO
@@ -6489,11 +6544,22 @@ GO
 --GO
 --SET QUOTED_IDENTIFIER ON
 --GO
---ALTER procedure [dbo].[getpaymentHistory]
---as
---begin
---select * from PaymentHistory
---end
+--USE [POSDashboard]
+GO
+
+CREATE TABLE [dbo].[PaymentHistory](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Amount] [int] NOT NULL,
+	[Code] [nvarchar](50) NOT NULL,
+	[Desc] [int] NOT NULL,
+	[InventoryId] [int] NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[ReceivedOn] [datetime] NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[TransactionType] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
 
 Go
 create procedure GetFOVehicleFareConfig
@@ -6602,3 +6668,156 @@ inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
 
 end
 Go
+USE [POSDashboard]
+GO
+
+create  Procedure [dbo].[GetPaymentHistory]   
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+Create procedure [dbo].[GetPaymentHistory]
+
+as begin 
+SELECT * from PaymentHistory
+
+       
+end
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetPurchaseOrder]
+
+as begin 
+SELECT po.[Id]
+      ,[PONum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[item]
+      ,[Quantity]
+      ,t.Name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[PurchaseOrder] po
+  inner join Types t on t.Id = po.Id
+  inner join InventoryItem i on i.Id = po.Id
+
+
+       
+end
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PurchaseOrder](
+	[Id] [int] NOT NULL,
+	[PONum] [nvarchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetInvoices]
+
+as begin 
+SELECT Io.[Id]
+      ,[Invoices]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[item]
+      ,[Quantity]
+      ,t.Name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[Invoices] Io
+  inner join Types t on t.Id =Io.Id
+  inner join InventoryItem i on i.Id = Io.Id
+
+
+       
+end
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Invoices](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Invoices] [varchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+Go
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ShippingOrder](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ShippingOrderNum] [nvarchar](50) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL,
+	[SalesOrderId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetShippingOrder]
+
+as begin 
+SELECT * from ShippingOrder
+
+       
+end
+
+
+
+
+
