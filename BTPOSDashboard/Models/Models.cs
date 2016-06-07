@@ -584,23 +584,25 @@ namespace BTPOSDashboardAPI.Models
 
     public class TroubleTicketingDetails
     {
-        public string addInfo { get; set; }
+        public int RefId { get; set; }
+
+        public string Type { get; set; }
 
         public string createdBy { get; set; }
 
-        public int createdOn { get; set; }
+        public string Raised { get; set; }
 
-        public int Id { get; set; }
+        public string TicketTitle { get; set; }
 
-        public string raisedBy { get; set; }
+        public string IssueDetails { get; set; }
 
-        public int status { get; set; }
+        public string AddInfo { get; set; }
 
-        public string ticketinfo { get; set; }
+        public int Status { get; set; }
 
-        public int ticketTypeId { get; set; }
+        public string Asign { get; set; }  	
 
-        public int TTId { get; set; }
+        public int Id{get;set;}
 
     }
     public class TroubleTicketingHandlers
