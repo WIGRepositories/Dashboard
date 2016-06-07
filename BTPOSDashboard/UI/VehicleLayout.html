@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
     <title>Home | Configuration | Types</title>
@@ -31,7 +29,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <!-- Custom Fonts -->
-    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <!--<link rel="stylesheet" href="css/styles.css" type="text/css">-->
 </head>
 <body ng-init="GetVehicleConfig();" ng-model="vlConfig">
     <div>
@@ -346,41 +344,43 @@
 
                                                     <div class="table-container">
                                                        
-                                                        <div class="row mbm">
-                                                            <div class="col-md-3">
-                                                                Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="col-md-3">
-                                                                Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                            </div>
-                                                                <div class="col-md-3">
-                                                                  Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                   Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
-
-                                                                </div>
-                                                            <div class="col-md-3">
-                                                                <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
-                                                                <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
-                                                           
-                                                            </div>
+                                                        <div class="row mbm">                                                      
 
                                                             
                                                             
                                                                
                                                             <div class="col-lg-12">
+
+                                                                <div class="col-md-3">
+                                                                    Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
+                                                                        <option value="">Select</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
+                                                                        <option value="">Select</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
+
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
+                                                                    <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
+
+                                                                </div>
+
                                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                                     <thead>
                                                                         <!--<tr>
-                    <th>Destination/Source</th>
-                    <th ng-repeat="s in Stops">{{s.Name}}</th>
-                </tr>-->
+                                                               <th>Destination/Source</th>
+                                                                  <th ng-repeat="s in Stops">{{s.Name}}</th>
+                                                                               </tr>-->
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr ng-repeat="r in datarows">
@@ -425,7 +425,7 @@
                                                     </div>
 
 
-
+                                
                                                 </div>
 
 
@@ -508,16 +508,16 @@
 <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
 <script src="vendors/iCheck/icheck.min.js"></script>
 <script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+
 <script src="js/jquery.menu.js"></script>
 <script src="vendors/jquery-pace/pace.min.js"></script>
 <script src="vendors/holder/holder.js"></script>
 <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
 <!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
+<!--<script src="js/table-action.js"></script>-->
 <!--CORE JAVASCRIPT-->
-<script src="js/mainTbl.js"></script>
-<script src="js/handsontable.full.js"></script>
+<!--<script src="js/mainTbl.js"></script>
+<script src="js/handsontable.full.js"></script>-->
 <script src="js/main.js"></script>
    
 <script src="js/angular.js"></script>

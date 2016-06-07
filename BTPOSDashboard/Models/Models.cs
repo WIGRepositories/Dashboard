@@ -1385,6 +1385,15 @@ namespace BTPOSDashboardAPI.Models
         public decimal Quantity { set; get; }
         public int StatusId { set; get; }
     }
+    public class VehicleLayout
+    {
+        public int Id { get; set; }
+        public int VehicleLayoutTypeId { get; set; }
+        public int RowNo { get; set; }
+        public int ColNo { get; set; }
+        public int VehicleTypeId { get; set; }
+        public String label { get; set; }
+    }
 }                     
         
 

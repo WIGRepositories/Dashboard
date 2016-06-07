@@ -6816,6 +6816,55 @@ SELECT * from ShippingOrder
 
        
 end
+Go
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[InsUpdDelVehicleLayout](
+	@Id int,
+	@VehicleLayoutTypeId int,
+	@RowNo int,
+	@ColNo varchar(50),
+	@VehicleTypeId int,
+	@label varchar(10)
+
+)
+AS
+BEGIN
+
+INSERT INTO [dbo].[VehicleLayout]
+           ([Id]
+           ,[VehicleLayoutTypeId]
+           ,[RowNo]
+           ,[ColNo]
+           ,[VehicleTypeId]
+           ,[label]
+           )
+     VALUES
+          -- (@Id
+         --  ,@VehicleLayoutTypeId
+        --   ,@RowNo
+         --  ,@ColNo
+         --  ,@VehicleTypeId
+          -- ,@label)
+             (1,
+             2,
+             3,
+             4,
+             5,
+             6)
+             
+ -- delete from VehicleLayout 
+
+END
+
+
+
+
+
+
+
 
 
 

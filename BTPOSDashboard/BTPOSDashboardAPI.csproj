@@ -394,6 +394,7 @@
     <Content Include="UI\Configuration.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
+    <Content Include="UI\css\bootstrap.min.css" />
     <Content Include="UI\css\handsontable.full.min.css" />
     <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
@@ -442,6 +443,7 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSCONFIG.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\createfleet.js" />
@@ -561,7 +563,6 @@
     <Content Include="UI\Routes.html" />
     <Content Include="UI\SalesOrder.html" />
     <Content Include="UI\Seating.html" />
-    <Content Include="UI\ShippingOrder.html" />
     <Content Include="UI\ShoppingCart.html" />
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
@@ -2054,6 +2055,7 @@
     <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
+    <Compile Include="Controllers\VehicleLayoutController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
