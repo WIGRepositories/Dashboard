@@ -432,6 +432,7 @@
     <Content Include="UI\FleetOwnerRoutes.html" />
     <Content Include="UI\FleetOwners.html" />
     <Content Include="UI\FleetOwnerVehicleLayOut.html" />
+    <Content Include="UI\FleetOwnerVehicleSchedule.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
     <Content Include="UI\InventoryItems.html" />
@@ -448,11 +449,13 @@
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
     <Content Include="UI\js\FleetOwnerFare.js" />
+    <Content Include="UI\js\FleetOwnerRouteDetails.js" />
     <Content Include="UI\js\FleetOwnerRouteFare.js" />
     <Content Include="UI\js\FleetownerRoutenw.js" />
     <Content Include="UI\js\FleetOwnerRoutes.js" />
     <Content Include="UI\js\FleetOwners.js" />
     <Content Include="UI\js\FleetOwnerVehicleLayout.js" />
+    <Content Include="UI\js\FleetOwnerVehicleSchedule.js" />
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
     <Content Include="UI\js\handsontable.full.js" />
@@ -1994,6 +1997,7 @@
     <Compile Include="Controllers\FleetOwnerRouteFareController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteStopController.cs" />
     <Compile Include="Controllers\FleetOwnerVehicleLayoutController.cs" />
+    <Compile Include="Controllers\FleetOwnerVehicleScheduleController.cs" />
     <Compile Include="Controllers\FleetRoutesController.cs" />
     <Compile Include="Controllers\FleetRoutesDetailsController.cs" />
     <Compile Include="Controllers\FleetStaffController.cs" />

@@ -12,48 +12,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         {
             alert('Please enter ticketTypeId ');
             return;
-        }
-        if (Group.ticketTypeId == null)
-        {
-            alert('Please enter ticketTypeId')
-            return;
-        }
-       
-        if (Group.TTId == null)
-        {
-            alert('please enter   TTId');
-            return;
-        }
-        
-        if (Group.createdBy == null)
-        {
-            alert('Please enter createdBy');
-            return;
-        }
-        
-        if (Group.createdOn == null)
-        {
-            alert('Please enter createdOn')
-            return;
-        }
-       
-        if (Group.ticketinfo == null)
-        {
-            alert('Please enter ticketinfo');
-            return;
-        }
+        }        
         var Group = {
-            addInfo: Group.addInfo,
+            RefId: Group.RefId,
+            Type: Group.Type,
             createdBy: Group.createdBy,
-            createdOn: Group.createdOn,
             Id: Group.Id,
-            raisedBy: Group.raisedBy,
-            status: Group.status,
-            ticketinfo: Group.ticketinfo,
-            ticketTypeId: Group.ticketTypeId,
-            TTId: Group.TTId
-            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
+            Raised: Group.Raised,
+            TicketTitle: Group.TicketTitle,
+            IssueDetails: Group.IssueDetails,
+            AddInfo: Group.AddInfo,
+            Status: Group.Status,
+            Asign: Group.Asign,
 
+            // "Id": 1, "Name": "hyioj", "Records": "bfdfsg",
         }
 
         var req = {
@@ -67,5 +39,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (response) {
         
         });
-    };
+    };   
+
 });
