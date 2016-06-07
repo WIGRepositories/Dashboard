@@ -6782,7 +6782,7 @@ GO
 
 Go
 
-
+/****** Object:  Table [dbo].[ShippingOrder]    Script Date: 06/07/2016 19:34:17 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -6795,8 +6795,6 @@ CREATE TABLE [dbo].[ShippingOrder](
 	[TransactionId] [int] NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[amount] [decimal](18, 0) NOT NULL,
-	[item] [int] NOT NULL,
-	[Quantity] [decimal](18, 0) NOT NULL,
 	[Status] [int] NOT NULL,
 	[SalesOrderId] [int] NOT NULL
 ) ON [PRIMARY]
@@ -6804,17 +6802,23 @@ CREATE TABLE [dbo].[ShippingOrder](
 GO
 
 
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetShippingOrder]
+CREATE procedure [dbo].[GetShippingOrder]
 
 as begin 
-SELECT * from ShippingOrder
+SELECT [Id]
+      ,[ShippingOrderNum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[Status]
+      ,[SalesOrderId]
+  FROM [POSDashboard].[dbo].[ShippingOrder]
 
-       
+         
 end
 Go
 SET ANSI_NULLS ON
@@ -6858,6 +6862,7 @@ INSERT INTO [dbo].[VehicleLayout]
  -- delete from VehicleLayout 
 
 END
+
 
 
 
