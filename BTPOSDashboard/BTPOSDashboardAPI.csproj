@@ -371,8 +371,6 @@
     <Content Include="DBScripts\Tables\dbo.VehicleDetails.sql" />
     <Content Include="DBScripts\Tables\dbo.ZipCode.sql" />
     <Content Include="DBScripts\Tables\TypesGroups.sql" />
-    <Content Include="FleetOwnerVehicleLayOut.html" />
-    <Content Include="FleetOwnerVehicleLoyOut.html" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddFleetAvailability.html" />
     <Content Include="UI\AddFleetDetails.html" />
@@ -476,6 +474,7 @@
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\RouteFare.js" />
     <Content Include="UI\js\SalesOrder.js" />
+    <Content Include="UI\js\ShippingOrder.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleLayout.js" />
@@ -2012,6 +2011,7 @@
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
+    <Compile Include="Controllers\ShippingOrderController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
