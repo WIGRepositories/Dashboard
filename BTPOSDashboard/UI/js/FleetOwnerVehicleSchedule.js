@@ -50,8 +50,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             $scope.Routes = null;
             return;
         }
-        // $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/GetRouteDetails?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
-        //   $scope.Routes = res.data;
+      //  $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/GetRouteDetails?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
+      //     $scope.Routes = res.data;
 
         // });
 
@@ -74,5 +74,6 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $http(req).then(function (res) {
             $scope.sdata = res.data;
         });
+
     }
 });
