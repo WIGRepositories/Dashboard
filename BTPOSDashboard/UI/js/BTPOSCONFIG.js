@@ -55,16 +55,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
-    $scope.GetFleetBTPosForFO = function () {
+    $scope.GetBTPosForFO = function () {
 
-        if ($scope.fo == null) {
-            $scope.FleetnBTPos = null;
+        if ($scope.s == null) {
+            $scope.BTPos = null;
             return;
         }
         var vc = {
-            needvehicleRegno: '1',
-            needbtpos: '1',
-            fleetownerId: $scope.fo.Id
+            needBTPos: '1',
+           
+            sId: $scope.s.Id
         };
 
         var req = {
@@ -78,7 +78,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         }
         $http(req).then(function (res) {
-            $scope.FleetnBTPos = res.data;
+            $scope.sdata = res.data;
         });
     }
 
