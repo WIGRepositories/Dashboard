@@ -627,7 +627,7 @@
                                             <div>
                                                 <div class="col-md-4">
 
-                                                    Route Name:<select ng-options="r.routename for r in sdata.Table track by r.Id" ng-model="r">
+                                                    Route Name:<select ng-options="r.routename for r in sdata.Table track by r.Id" ng-model="r" ng-change="GetRouteDetails1(s)" >
                                                         <option value="">Select</option>
                                                     </select>
                                                 </div>
@@ -673,7 +673,7 @@
                                                     </div>
                                                     <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0">
                                                         <div class="panel panel-violet">
-                                                            <div class="panel-heading">Stop Details</div>
+                                                            <div class="panel-heading" ng-hide="S">Stop Details</div>
 
                                                             <table>
                                                                 <tr>

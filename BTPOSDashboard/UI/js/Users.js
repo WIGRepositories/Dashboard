@@ -74,7 +74,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             Email: User.Email,
             AdressId: User.AdressId,
             MobileNo: User.MobileNo,
-            RoleId: (role == -1) ? $scope.r.Id : 6,
+            RoleId: (role == -1) ? $scope.r.RoleId : 6,
             companyId: $scope.cmp.Id,
             Active: 1,
             UserName: User.UserName,
@@ -166,7 +166,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             return;
         }
 
-        if ($scope.ur.Id == null) {
+        if ($scope.ur.RoleId == null) {
             alert('Please select role.');
             return;
         }
@@ -178,7 +178,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             Id: -1,
             UserId: $scope.uu.Id,
             CompanyId: $scope.s.Id,
-            RoleId: $scope.ur.Id,
+            RoleId: $scope.ur.RoleId,
             flag: flag
         };
 
