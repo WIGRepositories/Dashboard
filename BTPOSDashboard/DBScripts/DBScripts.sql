@@ -1651,7 +1651,13 @@ CREATE TABLE [dbo].[FleetDetails](
 	[CompanyId] [int] NOT NULL,
 	[ServiceTypeId] [int] NOT NULL,
 	[Active] [int] NOT NULL,
-	[LayoutTypeId] [int] NOT NULL
+	[LayoutTypeId] [int] NOT NULL,
+	[EngineNo] [nvarchar](20) NULL,
+	[FuelUsed] [nvarchar](20) NULL,
+	[MonthAndYrOfMfr] [datetime] NULL,
+	[ChasisNo] [nvarchar](20) NULL,
+	[SeatingCapacity] [nvarchar](20) NULL,
+	[DateOfRegistration] [datetime] NULL
 ) ON [PRIMARY]
 
 GO
@@ -2169,9 +2175,14 @@ BEGIN
       ,st.Id as ServiceTypeId
       , u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
-     -- ,bd.[POSID]
-    --  ,vd.[route]
-    --  ,v.[Active]
+      ,v.[Active]
+      ,[LayoutTypeId]
+      ,[EngineNo]
+      ,[FuelUsed]
+      ,[MonthAndYrOfMfr]
+      ,[ChasisNo]
+      ,[SeatingCapacity]
+      ,[DateOfRegistration]
      FROM [POSDashboard].[dbo].[FleetDetails]v
     inner join Types vt on vt.Id=v.VehicleTypeId
     inner join Types st on st.Id=v.ServiceTypeId
@@ -2179,8 +2190,8 @@ BEGIN
     inner join company c on c.Id=v.CompanyId
     inner join FleetOwner f on f.id=v.FleetOwnerId
    inner join Users u on u.Id = f.UserId
-  --  inner join BTPOSDetails bd on bd.FleetOwnerId=f.Id
-  --  inner join VehicleDetails vd on vd.fleetOwnerId=f.Id
+ --   inner join BTPOSDetails bd on bd.FleetOwnerId=f.Id
+ --   inner join VehicleDetails vd on vd.fleetOwnerId=f.Id
     
 	 where  ((v.Id= @vehicleId or @vehicleId = -1)
 	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
@@ -2190,15 +2201,6 @@ BEGIN
     
     
 END
-
-    -- Insert statements for procedure here
-
-
-
-
-
-
-
 
 GO
 SET ANSI_NULLS ON
@@ -4964,6 +4966,12 @@ CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
            ,@ServiceTypeId int
            ,@VehicleLayoutId int
            ,@Active int
+           ,@EngineNo nvarchar
+           ,@FuelUsed nvarchar
+           ,@MonthAndYrOfMfr datetime
+           ,@ChasisNo nvarchar
+           ,@SeatingCapacity nvarchar
+           ,@DateOfRegistration datetime
            )
 	-- Add the parameters for the stored procedure here
 	
@@ -4979,9 +4987,18 @@ set
 ,[ServiceTypeId] = @ServiceTypeId
 ,[LayoutTypeId] = @VehicleLayoutId
 ,[Active] = @Active
+,[EngineNo] = @EngineNo
+,[FuelUsed] = @FuelUsed
+,[MonthAndYrOfMfr] = @MonthAndYrOfMfr
+,[ChasisNo] = @ChasisNo
+,[SeatingCapacity] = @SeatingCapacity 
+,[DateOfRegistration] = @DateOfRegistration
 where Id = @Id
+end
+
 
 if @@ROWCOUNT = 0
+
 begin
 	INSERT INTO [POSDashboard].[dbo].[FleetDetails]
            ([VehicleRegNo]
@@ -4990,7 +5007,14 @@ begin
            ,[CompanyId]
            ,[ServiceTypeId]
            ,[LayoutTypeId]
-           ,[Active])
+           ,[Active]
+           ,[EngineNo]
+           ,[FuelUsed]
+           ,[MonthAndYrOfMfr]
+           ,[ChasisNo]
+           ,[SeatingCapacity]
+           ,[DateOfRegistration])
+           
      VALUES
            (@VehicleRegNo 
            ,@VehicleTypeId 
@@ -4998,11 +5022,13 @@ begin
            ,@CompanyId 
            ,@ServiceTypeId 
            ,@VehicleLayoutId
-           ,@Active )
-
-end
-
-
+           ,@Active 
+           ,@EngineNo
+           ,@FuelUsed
+           ,@MonthAndYrOfMfr
+           ,@ChasisNo
+           ,@SeatingCapacity 
+           ,@DateOfRegistration)
 END
 
 
@@ -6757,6 +6783,48 @@ SELECT [Id]
          
 end
 Go
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+alter PROCEDURE [dbo].[InsUpdDelVehicleLayout](	
+	@VehicleLayoutTypeId int,
+	@RowNo int,
+	@ColNo varchar(50),
+	@VehicleTypeId int,
+	@label varchar(10),
+	@insupddelflag varchar   
+)
+AS
+BEGIN
+INSERT INTO [dbo].[VehicleLayout]
+           ([VehicleLayoutTypeId]
+           ,[RowNo]
+           ,[ColNo]
+           ,[VehicleTypeId]
+           ,[label]
+           )
+     VALUES
+           (@VehicleLayoutTypeId
+           ,@RowNo
+           ,@ColNo
+           ,@VehicleTypeId
+           ,@label)
+           
+       
+   
+--if @insupddelflag = 'D'
+ -- delete from [POSDashboard].[dbo].[VehicleLayout]
+--where [RowNo] = 0
+--or  [ColNo] = 0
+
+End
+--Delete from  VehicleLayout where RowNo = 0 or ColNo = 0
+
+
+
+
+
 
 /****** Object:  Table [dbo].[UserInfo]    Script Date: 06/07/2016 12:29:24 ******/
 SET ANSI_NULLS ON

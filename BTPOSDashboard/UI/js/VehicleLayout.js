@@ -95,30 +95,67 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         //});
     }
 
-    $scope.saveVehicleLayout = function () {   
-     
+    $scope.saveVehicleLayout = function () {
 
-        var savedata = $scope.datarows;        
-        int[0][1];
-        //var checkedArr = []
-        //var uncheckedArr = [];
-        for (i = 0; i <= 20; i++)
+        var savedata = $scope.datarows;
+        //var Vl = {
+        //    Id: -1,
+        //    RowNo: $scope.Id,
+        //    VehicleId: $scope.V.Id,
+        //    VehicleITypeId: $scope.checkedArr[cnt].VehicleITypeId,
+        //    ColNo: $scope.checkedArr[cnt].ColNo,
+        //    label: $scope.checkedArr[cnt].lbl,
+            
+        //    insupddelflag: 'I'
+            
+        //}
+
+        //rowCount = document.getElementById('rowSelected').value;
+        //colCount = document.getElementById('colSelected').value;
+      
+        ////var checkedArr = []
+        ////var uncheckedArr = [];
+        var checkedArr = new Array();
+        var uncheckedArr = new Array();
+        //var rows = [];
+        //i;      
+        //var col = [];
+        //j;
+        for (i = 0; i < savedata.length; i++)
         {
-            for(j=0; j <= 20; j++)
-            {
-                if (a[i][j].checked)
-                {
-                    chkdarr[i][j] = a[i][j];
-                }
-                else
-                {
-                    unchkdarr[i][j] = a[i][j];
-                }
+            for(j=0; j < savedata[i].length; j++)
+            {                
 
+                var item = {
+                    "label": savedata[i][j].Id, 
+                    "RowNo": i,
+                    "ColNo": j,
+                    "VehicleLayoutTypeId": $scope.layout.vl.Id,
+                    "VehicleTypeId": $scope.layout.vt.Id,                    
+                }                
+                    item.insupdflag = (savedata[i][j].selected == true) ? "I" : "D";
+                    checkedArr.push(item)                
             }
         }
-   
+       
+        //write the post logic and test
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleLayout/saveVehicleLayout',
+            data: checkedArr
+
+        }
+        $http(req).then(function (res) {
+            alert('saved successfully.');
+        });
     }
 
 
 });
+
+
+
+
+
+
+
