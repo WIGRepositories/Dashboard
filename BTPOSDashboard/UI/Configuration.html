@@ -333,7 +333,7 @@
                                                             </select>
                                                         </div>                
                                                                   <div class="col-md-3">
-                                                            BT POS: <select ng-options="b.BTPOSId for b in sdata.Table by b.Id" ng-model="b" ng-change="getselectval(s)">
+                                                            BT POS: <select ng-options="b.POSID for b in sdata.Table track by b.Id" ng-model="b" ng-change="GetFleeBTPosDetails(b)">
 
                                                                 <option value="">All</option>
                                                             </select>
@@ -351,19 +351,24 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr ng-repeat="R in FleetBtposList" class="gradeA">
+                                                                <tr ng-repeat="R in Btpos" class="gradeA">
                                                                   <td>{{R.FileName}}</td>
 
                                                                     <td>{{R.Description}}</td>
 
-                                                                    <td>{{LastDownloadtime}}</td>
+                                                                    <td>{{R.LastDownloadtime}}</td>
 
+                                                                 
                                                                     <td>
-                                                                        {{<input id="Button1" type="button" value="button" />}}
 
-
-
+                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBtposRoutes();">
+                                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                                            preview
+                                                                        </button>
                                                                     </td>
+
+
+                                                                   
                                                                 </tr>
                                                             </tbody>
                                                         </table>

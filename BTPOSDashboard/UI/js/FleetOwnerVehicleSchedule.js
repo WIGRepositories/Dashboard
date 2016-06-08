@@ -80,7 +80,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         if (route == null || route.Id == null) {
             //alert('Please select a route.');
             $scope.RouteDetails = [];
-            $scope.StopCount = [];
+         //   $scope.StopCount = [];
             return;
         }
         $http.get('http://localhost:1476/api/routedetails/getroutedetails1?routeid=' + route.Id).then(function (res, data) {

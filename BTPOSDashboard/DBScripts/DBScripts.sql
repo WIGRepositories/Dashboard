@@ -282,7 +282,7 @@ CREATE TABLE [dbo].[BTPOSRegistration](
 
 GO
 
-/****** Object:  Table [dbo].[BTPOSRecords]    Script Date: 05/28/2016 15:02:51 ******/
+/****** Object:  Table [dbo].[BTPOSRecords]    Script Date: 06/08/2016 18:57:52 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -294,7 +294,7 @@ GO
 
 CREATE TABLE [dbo].[BTPOSRecords](
 	[Id] [int] NOT NULL,
-	[BTPOSId] [int] NOT NULL,
+	[POSID] [int] NOT NULL,
 	[RecordData] [binary](2000) NULL,
 	[FileName] [varchar](50) NULL,
 	[Description] [varchar](500) NULL,
@@ -311,6 +311,7 @@ GO
 
 ALTER TABLE [dbo].[BTPOSRecords] ADD  CONSTRAINT [DF_BTPOSRecords_IsDirty]  DEFAULT ((1)) FOR [IsDirty]
 GO
+
 
 
 
@@ -2353,12 +2354,29 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE [dbo].[GetBTPOSRecords]
+ALTER PROCEDURE [dbo].[GetBTPOSRecords]
+
+(@cmpId int = -1, @fleetOwnerId int = -1, @POSId int=-1)
 AS
 BEGIN
 	
-select * from  BTPOSRecords
+select br.[Id],
+       br.[FileName],
+       br.[Description],
+       br.[LastDownloadtime]
+       from  BTPOSRecords br
+    inner join FleetDetails fd on fd.Id=br.Id
+     inner join Company c on c.Id=br.Id
+     
+     
+  
+
+where  
+	  (fd.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
+	 and (c.Id = @cmpId or @cmpId = -1)
 end
+
+
 
 GO
 SET ANSI_NULLS ON
