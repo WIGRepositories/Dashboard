@@ -2194,7 +2194,7 @@ END
     -- Insert statements for procedure here
 
 
-END
+
 
 
 
@@ -2361,7 +2361,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[GetBTPOSRecords]
+CREATE PROCEDURE [dbo].[GetBTPOSRecords]
 
 (@cmpId int = -1, @fleetOwnerId int = -1, @POSId int=-1)
 AS
@@ -5346,6 +5346,8 @@ t2.FirstName+' '+t2.LastName as Username
                          
                      
 end
+GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -5372,7 +5374,7 @@ BEGIN
 	 -- [Description],I.AvailableQty,tg.Name as Category,t.TypeGroupId as SubCategoryId,I.PerUnitPrice,I.ReorderPont,I.Active from Inventory I inner join TypeGroups tg on tg.Id=I.InventoryId
   --   inner join Types t on t.Id=I.InventoryId
 END
-
+GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5394,9 +5396,6 @@ UPDATE [POSDashboard].[dbo].[UserRoles]
       ,[CompanyId] = @CompanyId
  WHERE Id = @Id
 
-
-
-
 if @@rowcount = 0 
 begin
 
@@ -5412,6 +5411,7 @@ end
 
 
 end
+GO
 
 SET ANSI_NULLS ON
 GO
@@ -5435,6 +5435,7 @@ insert into subcategory(Name,[Description],CategoryId,Active) values(@Name,@Desc
 end
 
 end
+GO
 
 SET ANSI_NULLS ON
 GO
@@ -6624,11 +6625,6 @@ SET ANSI_NULLS ON
 GO
 
 
-
-
-       
-end
-
 SET ANSI_NULLS ON
 GO
 
@@ -6762,6 +6758,263 @@ SELECT [Id]
 end
 Go
 
+/****** Object:  Table [dbo].[UserInfo]    Script Date: 06/07/2016 12:29:24 ******/
+SET ANSI_NULLS ON
+GO
 
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WebsiteUserInfo](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [nvarchar](50) NULL,
+	[UserName] [nvarchar](50) NULL,
+	[EmailAddress] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL,
+	[ConfirmPassword] [nvarchar](50) NULL,
+	[Gender] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+/****** Object:  Table [dbo].[WebsiteUserLogin]    Script Date: 06/08/2016 16:10:38 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[websiteUserLogin](
+	[LoginInfo] [nvarchar](50) NOT NULL,
+	[PassKey] [nvarchar](50) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nchar](10) NOT NULL,
+	[salt] [varchar](50) NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[WebsiteUserInfo]    Script Date: 06/08/2016 16:09:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetWebsiteUserInfo]
+
+AS
+BEGIN
+
+SELECT U.[Id]
+      ,U.[FirstName]
+      ,U.[LastName]      
+      
+      ,U.[EmailAddress]
+     
+      ,ul.logininfo as UserName
+      ,ul.passkey as [Password]            
+      
+  FROM [POSDashboard].[dbo].[WebsiteUserInfo] U
+  
+ 
+left OUTER join dbo.websiteUserLogin ul on ul.userid = U.id    
+ left OUTER join dbo.WebsiteUserInfo u2 on ul.userid = U.id   
+end
+
+/****** Object:  StoredProcedure [dbo].[GetinterbusUserLogin]    Script Date: 06/08/2016 16:08:17 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetwebsiteUserLogin]
+
+AS
+BEGIN
+
+SELECT U.[Id]
+        
+      ,U.[Active]
+      
+      ,UserName as logininfo
+      ,[Password] as passkey            
+      
+  FROM [POSDashboard].[dbo].[websiteUserLogin] U
+  
+  left outer join dbo.WebsiteUserInfo u1 on u.userid = U.id    
+  
+end
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[InsUpdWebsiteUserInfo]    Script Date: 06/08/2016 16:06:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdWebsiteUserInfo](
+@FirstName varchar(50)
+,@LastName varchar(50)
+,@UserName varchar(50)  
+,@Password varchar(50)  
+,@EmailAddress varchar(50)
+,@ConfirmPassword varchar(50)
+,@Gender varchar(50),@salt varchar(50)=null,@Active int=1,@userid int = -1)
+
+ AS
+BEGIN
+DECLARE @LASTID int
+	
+INSERT INTO [POSDashboard].[dbo].[WebsiteUserInfo]
+           ([FirstName]
+           ,[LastName]
+           ,[UserName]
+           ,[EmailAddress]
+           ,[Password]
+           ,[ConfirmPassword]
+           ,[Gender])
+     VALUES
+           (@FirstName
+           ,@LastName
+           ,@UserName
+           ,@EmailAddress
+           ,@Password
+           ,@ConfirmPassword
+           ,@Gender
+       )
+           
+ set @LASTID=SCOPE_IDENTITY();
+           
+           INSERT INTO [POSDashboard].[dbo].[WebsiteUserLogin]
+           ([LoginInfo]
+           ,[PassKey]
+       
+           ,[UserId]
+           ,[salt]
+           ,[Active])
+     VALUES
+           (@UserName
+           ,@Password
+           ,@LASTID
+           ,@salt
+           ,@Active
+           )
+           
+
+
+END
+
+
+/****** Object:  StoredProcedure [dbo].[ValidateCredentials]    Script Date: 06/08/2016 16:05:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[WebsiteValidateCredentials](@logininfo varchar(50) = null, @passkey varchar(50) = null)
+as
+begin
+
+select logininfo,FirstName, Lastname,u.Id 
+from WebsiteUserlogin ul 
+inner join WebsiteuserInfo u on 
+u.id = ul.UserId
+
+where LoginInfo=@logininfo and [PassKey]=@passkey
+
+end
+
+
+
+/****** Object:  Table [dbo].[ResetPassword]    Script Date: 06/07/2016 19:40:00 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WebsiteResetPassword](
+	[UserName] [varchar](50) NULL,
+	[OldPassword] [varchar](50) NULL,
+	[NewPassword] [varchar](50) NULL,
+	[ReenterNewPassword] [varchar](50) NULL,
+	[Id] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsUpdwebsiteresetpassword]    Script Date: 06/07/2016 19:40:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[InsUpdwebsiteresetpassword]
+	-- Add the parameters for the stored procedure here
+
+	@UserName varchar(50)
+,@OldPassword varchar(50)
+,@NewPassword varchar(50)  
+,@ReenterNewPassword varchar(50)  
+
+AS
+BEGIN
+	UPDATE WebsiteUserInfo
+SET Password=@NewPassword where UserName = @UserName
+and Password = @OldPassword
+
+
+END
+
+
+GO
+
+/****** Object:  Table [dbo].[WebsiteUserregister]    Script Date: 06/08/2016 16:11:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WebsiteUserregister](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [nvarchar](50) NULL,
+	[UserName] [nvarchar](50) NULL,
+	[EmailAddress] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL,
+	[ConfirmPassword] [nvarchar](50) NULL,
+	[Gender] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
 
 
