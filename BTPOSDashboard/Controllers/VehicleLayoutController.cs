@@ -14,8 +14,10 @@ namespace BTPOSDashboard.Controllers
     {
 
         [HttpPost]
-        public DataSet saveVehicleLayout(VehicleLayout vc)
+        [Route("api/VehicleLayout/saveVehicleLayout")]
+        public DataSet saveVehicleLayout(IEnumerable<VehicleLayout> vcList)
         {
+
             //DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -26,47 +28,67 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "InsUpdDelVehicleLayout";
             cmd.Connection = conn;
+            conn.Open();
 
-            SqlParameter gsaa = new SqlParameter();                    
-	        gsaa.ParameterName = "@Id";
-            gsaa.SqlDbType = SqlDbType.Int;         
-            cmd.Parameters.Add(gsaa);
+            //  SqlParameter gsaa = new SqlParameter();                    
+            //  gsaa.ParameterName = "@Id";
+            //  gsaa.SqlDbType = SqlDbType.Int;         
+            //  cmd.Parameters.Add(gsaa);
+            try
+            {
+                foreach (VehicleLayout vc in vcList)
+                {
+                    SqlParameter gsab = new SqlParameter();
+                    gsab.ParameterName = "@VehicleLayoutTypeId";
+                    gsab.SqlDbType = SqlDbType.Int;
+                    gsab.Value = vc.VehicleLayoutTypeId;
+                    cmd.Parameters.Add(gsab);
 
-            SqlParameter gsab = new SqlParameter();
-            gsab.ParameterName = "@VehicleLayoutTypeId";
-            gsab.SqlDbType = SqlDbType.Int;           
-            cmd.Parameters.Add(gsab);
+                    SqlParameter gsac = new SqlParameter();
+                    gsac.ParameterName = "@RowNo";
+                    gsac.SqlDbType = SqlDbType.Int;
+                    gsac.Value = vc.RowNo;
+                    cmd.Parameters.Add(gsac);
 
-            SqlParameter gsac = new SqlParameter();
-            gsac.ParameterName = "@RowNo";
-            gsac.SqlDbType = SqlDbType.Int;         
-            cmd.Parameters.Add(gsac);
+                    SqlParameter nvr = new SqlParameter();
+                    nvr.ParameterName = "@ColNo";
+                    nvr.SqlDbType = SqlDbType.Int;
+                    nvr.Value = vc.ColNo;
+                    cmd.Parameters.Add(nvr);
 
-            SqlParameter nvr = new SqlParameter();
-            nvr.ParameterName = "@ColNo";
-            nvr.SqlDbType = SqlDbType.Int;          
-            cmd.Parameters.Add(nvr);
+                    SqlParameter gsk = new SqlParameter();
+                    gsk.ParameterName = "@VehicleTypeId";
+                    gsk.SqlDbType = SqlDbType.Int;
+                    gsk.Value = vc.VehicleTypeId;
+                    cmd.Parameters.Add(gsk);
 
-            SqlParameter gsk = new SqlParameter();
-            gsk.ParameterName = "@VehicleTypeId";
-            gsk.SqlDbType = SqlDbType.Int;          
-            cmd.Parameters.Add(gsk);
-
-            //@needHireVehicle
-            SqlParameter nhv = new SqlParameter();
-            nhv.ParameterName = "@label";
-            nhv.SqlDbType = SqlDbType.VarChar;          
-            cmd.Parameters.Add(nhv);
+                    //@needHireVehicle
+                    SqlParameter nhv = new SqlParameter();
+                    nhv.ParameterName = "@label";
+                    nhv.SqlDbType = SqlDbType.VarChar;
+                    nhv.Value = vc.label;
+                    cmd.Parameters.Add(nhv);
 
 
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            // Tbl = ds.Tables[0];
 
+
+                    cmd.ExecuteScalar();
+
+                    cmd.Parameters.Clear();
+                }
+
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
             // int found = 0;
-             return ds;
 
+            return null;
         }
     }
 }

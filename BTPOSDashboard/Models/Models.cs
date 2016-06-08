@@ -1387,7 +1387,7 @@ namespace BTPOSDashboardAPI.Models
     }
     public class VehicleLayout
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public int VehicleLayoutTypeId { get; set; }
         public int RowNo { get; set; }
         public int ColNo { get; set; }
