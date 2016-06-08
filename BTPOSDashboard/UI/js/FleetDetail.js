@@ -68,7 +68,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
         $http(req).then(function (res)
         {
-            $scope.cmpdata = res.data;
+            $scope.cmpdata = res.data.Table;
         });
     }
 
