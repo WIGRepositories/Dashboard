@@ -457,64 +457,64 @@
                             <div class="col-lg-12">
 
                                 <div id="tableactionTabContent" class="tab-content">
-                                    <div id="table-table-actions" class="tab-pane fade in active">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
 
 
                                                 <div class="table-container">
-                                                    <div class="row">
+                                                    <div class="row mbm">
 
                                                         <div class="actions">
                                                             <a href="Addnewroute.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New Route</button></a>
 
                                                         </div>
-
-
-
-                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                            <thead>
-                                                                <tr>
-
-                                                                    <th>Route Name</th>
-                                                                    <th>Code</th>
-                                                                    <th>Source</th>
-                                                                    <th>Destination</th>
-                                                                    <th>Distance</th>
-                                                                    <th>Active</th>
-                                                                    <th>Customize</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <tr ng-repeat="route in routes" class="gradeA">
-
-
-                                                                    <td>{{route.RouteName}}</td>
-                                                                    <td>{{route.Code}}</td>
-                                                                    <td>{{route.Source}}</td>
-                                                                    <td>{{route.Destination}}</td>
-                                                                    <td>{{route.Distance}}</td>
-
-                                                                    <td> <input type="checkbox" checked></td>
-                                                                    <td>
-                                                                        <a href="RouteDetails.html">
-                                                                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
-                                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                                Customize
-                                                                            </button>
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
-
                                                     </div>
 
 
                                                 </div>
+
+
+                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th>Route Name</th>
+                                                            <th>Code</th>
+                                                            <th>Source</th>
+                                                            <th>Destination</th>
+                                                            <th>Distance</th>
+                                                            <th>Active</th>
+                                                            <th>Customize</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat="route in routes" class="gradeA">
+
+
+                                                            <td>{{route.RouteName}}</td>
+                                                            <td>{{route.Code}}</td>
+                                                            <td>{{route.Source}}</td>
+                                                            <td>{{route.Destination}}</td>
+                                                            <td>{{route.Distance}}</td>
+
+                                                            <td> <input type="checkbox" checked></td>
+                                                            <td>
+                                                                <a href="RouteDetails.html">
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Customize
+                                                                    </button>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+
+                                                </table>
+
+
                                             </div>
                                         </div>
 
