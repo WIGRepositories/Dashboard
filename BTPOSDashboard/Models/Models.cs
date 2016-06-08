@@ -1262,6 +1262,18 @@ namespace BTPOSDashboardAPI.Models
         public String ServiceTypeId { get; set; }
 
         public int Active { get; set; }
+
+        public String EngineNo { get; set; }
+
+        public String FuelUsed { get; set; }
+
+        public DateTime? MonthAndYrOfMfr { get; set; }
+
+        public string ChasisNo { get; set; }
+
+        public string SeatingCapacity { get; set; }
+
+        public DateTime? DateOfRegistration { get; set; }
     }
     public class FleetRoutes
     {

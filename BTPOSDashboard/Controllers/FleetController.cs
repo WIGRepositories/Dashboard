@@ -107,12 +107,48 @@ namespace BTPOSDashboard.Controllers
                 SqlParameter nser = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
                 nser.SqlDbType = SqlDbType.Int;
                 nser.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);               
+                cmd.Parameters.Add(nser);
+
+
+                SqlParameter engg = new SqlParameter("@EngineNo", SqlDbType.VarChar);
+                engg.SqlDbType = SqlDbType.Int;
+                engg.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser);
+
+                SqlParameter fuel = new SqlParameter("@FuelUsed", SqlDbType.VarChar);
+                fuel.SqlDbType = SqlDbType.Int;
+                fuel.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser);
+
+                SqlParameter mntt = new SqlParameter("@MonthAndYrOfMfr", SqlDbType.VarChar);
+                mntt.SqlDbType = SqlDbType.Int;
+                mntt.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser);
+
+                SqlParameter chss = new SqlParameter("@ChasisNo", SqlDbType.VarChar);
+                chss.SqlDbType = SqlDbType.Int;
+                chss.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser);
+
+
+                SqlParameter seatc = new SqlParameter("@SeatingCapacity", SqlDbType.VarChar);
+                seatc.SqlDbType = SqlDbType.Int;
+                seatc.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser);
+
+
+                SqlParameter deat = new SqlParameter("@DateOfRegistration", SqlDbType.VarChar);
+                deat.SqlDbType = SqlDbType.Int;
+                deat.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(nser);
                
+
+
                 SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
                 nActive.Value = n.Active;
                 cmd.Parameters.Add(nActive);
                 cmd.ExecuteScalar();
+
                 conn.Close();
                // DataSet ds = new DataSet();
                 //SqlDataAdapter db = new SqlDataAdapter(cmd);
