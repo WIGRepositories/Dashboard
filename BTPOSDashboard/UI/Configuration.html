@@ -321,20 +321,19 @@
                                             <div class="col-lg-12">
                                                 <div class="table-container">
                                                     <div class="row mbm">
-                                                        <div class="col-md-3">
-                                                            Company Name:<select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
-
-                                                                <option value="">All</option>
+                                                        <div class="col-md-4">
+                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                <option value="">Select</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            Fleet Owner: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="GetFleeBTPosDetails()">
+                                                        <div class="col-md-4" style="text-align:right">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPosForFO ()">
 
-                                                                <option value="">All</option>
+                                                                <option value="">Select</option>
                                                             </select>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            BT POS: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                        </div>                
+                                                                  <div class="col-md-3">
+                                                            BT POS: <select ng-options="b.POSID for b in sdata.Table track by b.Id" ng-model="b" ng-change="GetFleeBTPosDetails(b)">
 
                                                                 <option value="">All</option>
                                                             </select>
@@ -346,22 +345,30 @@
                                                                 <tr>
                                                                     <th>File Name</th>
                                                                     <th>Description</th>
+                                                                    <th>LastDownloadedDt</th>
                                                                     <th>Preview</th>
 
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr ng-repeat="R in FleetBtposList" class="gradeA">
+                                                                <tr ng-repeat="R in Btpos" class="gradeA">
                                                                   <td>{{R.FileName}}</td>
 
                                                                     <td>{{R.Description}}</td>
 
+                                                                    <td>{{R.LastDownloadtime}}</td>
+
+                                                                 
                                                                     <td>
-                                                                        {{<input id="Button1" type="button" value="button" />}}
 
-
-
+                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBtposRoutes();">
+                                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                                            preview
+                                                                        </button>
                                                                     </td>
+
+
+                                                                   
                                                                 </tr>
                                                             </tbody>
                                                         </table>

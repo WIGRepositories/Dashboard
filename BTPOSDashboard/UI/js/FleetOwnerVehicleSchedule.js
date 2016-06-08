@@ -1,6 +1,7 @@
 ﻿var myapp1 = angular.module('myApp', [])
 
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
+    $scope.StopCount = [];
 
     $scope.GetCompanies = function () {
 
@@ -50,11 +51,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             $scope.Routes = null;
             return;
         }
-      //  $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/GetRouteDetails?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
-      //     $scope.Routes = res.data;
-
-        // });
-
+      
 
         var vc = {
             needroutes: '1',
@@ -73,7 +70,25 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         }
         $http(req).then(function (res) {
             $scope.sdata = res.data;
+            GetRouteDetails1();
+            $scope.StopCount = StopCount.array.Length;
         });
 
     }
+
+    $scope.GetRouteDetails1 = function (route) {
+        if (route == null || route.Id == null) {
+            //alert('Please select a route.');
+            $scope.RouteDetails = [];
+         //   $scope.StopCount = [];
+            return;
+        }
+        $http.get('http://localhost:1476/api/routedetails/getroutedetails1?routeid=' + route.Id).then(function (res, data) {
+            $scope.RouteDetails = res.data;
+        });
+    }
+
 });
+
+
+
