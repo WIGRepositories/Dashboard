@@ -985,25 +985,32 @@ SELECT t.[Id]
 
 END
 
-GO
+/****** Object:  Table [dbo].[TroubleTicketingDetails]    Script Date: 06/08/2016 17:03:12 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[TroubleTicketingDetails](
 	[Type] [varchar](50) NOT NULL,
 	[createdBy] [varchar](50) NOT NULL,
 	[Raised] [int] NOT NULL,
-	[TicketTitle] [int] IDENTITY(1,1) NOT NULL,
+	[TicketTitle] [int] NOT NULL,
 	[IssueDetails] [varchar](50) NOT NULL,
 	[AddInfo] [varchar](50) NOT NULL,
 	[Status] [varchar](50) NOT NULL,
 	[Asign] [int] NOT NULL,
-	[Id] [int] NOT NULL
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RefId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
+
+SET ANSI_PADDING OFF
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -6525,26 +6532,8 @@ End
 GO
 
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER procedure [dbo].[GetPaymentHistory]
-
-as begin 
-SELECT * from PaymentHistory
-
-       
-end
 
 
-GO
-
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---USE [POSDashboard]
 GO
 
 CREATE TABLE [dbo].[PaymentHistory](
@@ -6561,6 +6550,20 @@ CREATE TABLE [dbo].[PaymentHistory](
 
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetPaymentHistory]
+
+as begin 
+SELECT * from PaymentHistory
+
+       
+end
+
+
+GO
 Go
 create procedure GetFOVehicleFareConfig
 (@vehicleid int)
@@ -6668,23 +6671,8 @@ inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
 
 end
 Go
-USE [POSDashboard]
-GO
 
-create  Procedure [dbo].[GetPaymentHistory]   
-SET ANSI_NULLS ON
-GO
 
-SET QUOTED_IDENTIFIER ON
-GO
-
-Create procedure [dbo].[GetPaymentHistory]
-
-as begin 
-SELECT * from PaymentHistory
-
-       
-end
 
 
 SET ANSI_NULLS ON
@@ -6734,7 +6722,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetInvoices]
+create procedure [dbo].[GetInvoices]
 
 as begin 
 SELECT Io.[Id]
@@ -6821,47 +6809,9 @@ SELECT [Id]
          
 end
 Go
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER PROCEDURE [dbo].[InsUpdDelVehicleLayout](
-	@Id int,
-	@VehicleLayoutTypeId int,
-	@RowNo int,
-	@ColNo varchar(50),
-	@VehicleTypeId int,
-	@label varchar(10)
 
-)
-AS
-BEGIN
 
-INSERT INTO [dbo].[VehicleLayout]
-           ([Id]
-           ,[VehicleLayoutTypeId]
-           ,[RowNo]
-           ,[ColNo]
-           ,[VehicleTypeId]
-           ,[label]
-           )
-     VALUES
-          -- (@Id
-         --  ,@VehicleLayoutTypeId
-        --   ,@RowNo
-         --  ,@ColNo
-         --  ,@VehicleTypeId
-          -- ,@label)
-             (1,
-             2,
-             3,
-             4,
-             5,
-             6)
-             
- -- delete from VehicleLayout 
 
-END
 
 
 
