@@ -6791,43 +6791,44 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[InsUpdDelVehicleLayout](
-	@Id int,
+alter PROCEDURE [dbo].[InsUpdDelVehicleLayout](	
 	@VehicleLayoutTypeId int,
 	@RowNo int,
 	@ColNo varchar(50),
 	@VehicleTypeId int,
-	@label varchar(10)
-
+	@label varchar(10),
+	@insupddelflag varchar   
 )
 AS
 BEGIN
-
 INSERT INTO [dbo].[VehicleLayout]
-           ([Id]
-           ,[VehicleLayoutTypeId]
+           ([VehicleLayoutTypeId]
            ,[RowNo]
            ,[ColNo]
            ,[VehicleTypeId]
            ,[label]
            )
      VALUES
-          -- (@Id
-         --  ,@VehicleLayoutTypeId
-        --   ,@RowNo
-         --  ,@ColNo
-         --  ,@VehicleTypeId
-          -- ,@label)
-             (1,
-             2,
-             3,
-             4,
-             5,
-             6)
-             
- -- delete from VehicleLayout 
+           (@VehicleLayoutTypeId
+           ,@RowNo
+           ,@ColNo
+           ,@VehicleTypeId
+           ,@label)
+           
+       
+   
+--if @insupddelflag = 'D'
+ -- delete from [POSDashboard].[dbo].[VehicleLayout]
+--where [RowNo] = 0
+--or  [ColNo] = 0
 
-END
+End
+--Delete from  VehicleLayout where RowNo = 0 or ColNo = 0
+
+
+
+
+
 
 
 
