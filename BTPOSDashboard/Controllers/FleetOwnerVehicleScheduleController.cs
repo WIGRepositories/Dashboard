@@ -11,6 +11,8 @@ namespace BTPOSDashboard.Controllers
 {
     public class FleetOwnerVehicleScheduleController : ApiController
     {
+        [HttpGet]
+        [Route("api/FleetOwnerVehicleSchedule/getfleetroutelist")]
        public DataTable getroutedetails(int sId, int cmpid, int routeid)
         {
             DataTable Tbl = new DataTable();
@@ -23,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getRouteDetails";
+            cmd.CommandText = "getRoutes";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);

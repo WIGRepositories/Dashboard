@@ -14,7 +14,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetCompanies();" ng-model="RouteDetails">
+<body ng-init="GetCompanies();StopCount=0" ng-model="RouteDetails" >
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -617,197 +617,199 @@
                                             <div class="col-md-4" style="text-align:right">
                                                 Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetRouteDetails()">
 
-    <option value="">Select</option>
-</select>
+                                                    <option value="">Select</option>
+                                                </select>
                                             </div>
 
                                             <div class="col-md-4" style="text-align:right">
-                                                Route Name: <select ng-options="r.routename for r in sdata.Table track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
-                                                    <option value="">Select</option></select>
+                                                Route Name: <select ng-options="r.routename for r in sdata.Table track by r.Id" ng-model="route" ng-change="GetRouteDetails1(s)" style="width:100px">
+                                                    <option value="">Select</option>
+                                                </select>
                                             </div>
 
 
-                                                <table class="table table-hover table-striped table-advanced tablesorter">
-                                                    <tr>
-                                                        <td></td>
-                                                        <td>
-                                                            <div>
-                                                                Route Code: <input type="text" disabled ng-model="RouteDetails.Table[0].routecode" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div>
-                                                                Source: <input type="text" disabled ng-model="RouteDetails.Table[0].source" />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div>
-                                                                Destination: <input type="text" disabled ng-model="RouteDetails.Table[0].dest" />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                            <table class="table table-hover table-striped table-advanced tablesorter">
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <div>
+                                                            Route Code: <input type="text" disabled ng-model="RouteDetails.Table[0].routecode" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            Source: <input type="text" disabled ng-model="RouteDetails.Table[0].source" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                            Destination: <input type="text" disabled ng-model="RouteDetails.Table[0].dest" ng-click="ShowHide()" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
 
-                                            </div>
                                         </div>
-                                        <div class="portlet-body" ng-model="RouteDetails.Table1">
-                                            <form role="form" class="form-horizontal">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="col-md-12" style="display:table-cell;">
-                                                            <ul class="nav nav-pills nav-stacked fade in">
-                                                                <li class="btn-default" ng-repeat="stop in RouteDetails.Table1">
-                                                                    <a ng-click="SetCurrStop(stop,$index);" data-toggle="tab">
-                                                                        <i class="fa fa-cogs"></i>&nbsp;
-                                                                        {{stop.StopName}}
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                    </div>
+
+                                    <div class="portlet-body" ng-model="RouteDetails.Table1">
+                                        <form role="form" class="form-horizontal">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="col-md-12" style="display:table-cell;">
+                                                        <ul class="nav nav-pills nav-stacked fade in">
+                                                            <li class="btn-default" ng-repeat="stop in RouteDetails.Table1">
+                                                                <a ng-click="SetCurrStop(stop,$index);" data-toggle="tab">
+                                                                    <i class="fa fa-cogs"></i>&nbsp;
+                                                                    {{stop.StopName}}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
                                                     </div>
-                                                    <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0">
-                                                        <div class="panel panel-violet">
-                                                            <div class="panel-heading">Stop Details</div>
+                                                </div>
+                                                <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0" >
+                                                    <div class="panel panel-violet">
+                                                        <div class="panel-heading" ng-hide=""  >Stop Details</div>
 
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div class="panel-body pan">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="panel-body pan">
 
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Stop name:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
-                                                                            </div>
-
-
-
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Stop Code:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopCode" /></div>
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Previous stop:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.prevstop" /></div>
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Next stop:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.nextstop" /></div>
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Stop no:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopNo" /></div>
-                                                                            </div>
-
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-5 control-label">Stop name:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopName" /></div>
                                                                         </div>
 
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="panel-body pan">
+
+
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-5 control-label">Stop Code:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopCode" /></div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-5 control-label">Previous stop:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.prevstop" /></div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-5 control-label">Next stop:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.nextstop" /></div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-5 control-label">Stop no:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopNo" /></div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </td>
+                                                                <td>
+                                                                    <div class="panel-body pan">
 
 
 
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Distance from previous stop:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromPreviousStop" /></div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Distance from next stop:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromNextStop" /></div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Distance from destination:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromDestination" /></div>
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label class="col-md-5 control-label">Distance from source:</label>
-                                                                                <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromSource" /></div>
-                                                                            </div>
-
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-5 control-label">Distance from previous stop:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromPreviousStop" /></div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label class="col-md-5 control-label">Arrival Time:</label>
-                                                                            <div class="col-md-5"><input id="demo3" type="text" size="5"><a href="javascript:NewCal('demo3','ddmmmyyyy',true,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a></div>
+                                                                            <label class="col-md-5 control-label">Distance from next stop:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromNextStop" /></div>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label class="col-md-5 control-label">Departure Time:</label>
-                                                                            <div class="col-md-5"><input id="demo4" type="text" size="5"><a href="javascript:NewCal('demo4','ddmmmyyyy',true,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a></div>
+                                                                            <label class="col-md-5 control-label">Distance from destination:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromDestination" /></div>
                                                                         </div>
 
-                                                        </div>
-                                                     
+                                                                        <div class="form-group">
+                                                                            <label class="col-md-5 control-label">Distance from source:</label>
+                                                                            <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.DistanceFromSource" /></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Arrival Time:</label>
+                                                                        <div class="col-md-5"><input id="demo3" type="text" size="5"><a href="javascript:NewCal('demo3','ddmmmyyyy',true,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a></div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-5 control-label">Departure Time:</label>
+                                                                        <div class="col-md-5"><input id="demo4" type="text" size="5"><a href="javascript:NewCal('demo4','ddmmmyyyy',true,24)"><img src="images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a></div>
+                                                                    </div>
+
                                                         </table>
 
-
-
-                                                    </div>
-                                                    </div>
-                                                    <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
-                                                        <div class="col-md-12" style="text-align:center">
-                                                            <button ng-click="save(RouteDetails);" class="btn btn-success">
-                                                                <i class="fa fa-save"></i>&nbsp;
-                                                                Save
-                                                            </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
-                                                        </div>
-                                                        <br />
                                                     </div>
 
                                                 </div>
-                                            </form>
-
-
-                                        </div>
-
+                                            </div>
+                                            <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
+                                                <div class="col-md-12" style="text-align:center">
+                                                    <button ng-click="save(RouteDetails);" class="btn btn-success">
+                                                        <i class="fa fa-save"></i>&nbsp;
+                                                        Save
+                                                    </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
+                                                </div>
+                                                <br />
+                                            </div>
 
                                     </div>
+                                    </form>
 
                                 </div>
-
-                                
-                            </div><!--END CONTENT-->
-                            <div id="footer">
-                                <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                             </div>
 
-                        </div><!--BEGIN FOOTER-->
-                    </div>
+
+                        </div><!--END CONTENT-->
+                        <div id="footer">
+                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        </div>
+
+                    </div><!--BEGIN FOOTER-->
 
                 </div>
+
             </div>
 
+        </div>
 
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <!--loading bootstrap js-->
-            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    </div>
+
+    </div>
 
 
-            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-            <script src="vendors/iCheck/icheck.min.js"></script>
-            <script src="vendors/iCheck/custom.min.js"></script>
-            <script src="js/jquery.menu.js"></script>
-            <script src="vendors/jquery-pace/pace.min.js"></script>
-            <script src="vendors/holder/holder.js"></script>
-            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-            <script language="javascript" type="text/javascript" src="datetimepicker.js">
 
-    //Date Time Picker script- by TengYong Ng of http://www.rainforestnet.com
-    //Script featured on JavaScript Kit (http://www.javascriptkit.com)
-    //For this script, visit http://www.javascriptkit.com
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-            </script>
-            <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-            <script src="js/main.js"></script>
-            <script src="js/angular.js"></script>
-            <script src="js/ngStorage.js"></script>
-            <script src="js/FleetOwnerVehicleSchedule.js"></script>
+
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <script language="javascript" type="text/javascript" src="datetimepicker.js">
+
+        //Date Time Picker script- by TengYong Ng of http://www.rainforestnet.com
+        //Script featured on JavaScript Kit (http://www.javascriptkit.com)
+        //For this script, visit http://www.javascriptkit.com
+
+    </script>
+    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/FleetOwnerVehicleSchedule.js"></script>
 
 </body>
 </html>
