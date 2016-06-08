@@ -95,13 +95,29 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         //});
     }
 
-    $scope.saveVehicleLayout = function () {
+    $scope.saveVehicleLayout = function () {   
+     
 
-        var savedate = $scope.datarows;
-        $scope.checkedArr = $scope.datarows.filter(function (person) {
+        var savedata = $scope.datarows;        
+        int[0][1];
+        //var checkedArr = []
+        //var uncheckedArr = [];
+        for (i = 0; i <= 20; i++)
+        {
+            for(j=0; j <= 20; j++)
+            {
+                if (a[i][j].checked)
+                {
+                    chkdarr[i][j] = a[i][j];
+                }
+                else
+                {
+                    unchkdarr[i][j] = a[i][j];
+                }
 
-            return (function (p) { return p.Id == "A1" });
-        });
+            }
+        }
+   
     }
 
 

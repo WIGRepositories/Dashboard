@@ -371,8 +371,6 @@
     <Content Include="DBScripts\Tables\dbo.VehicleDetails.sql" />
     <Content Include="DBScripts\Tables\dbo.ZipCode.sql" />
     <Content Include="DBScripts\Tables\TypesGroups.sql" />
-    <Content Include="FleetOwnerVehicleLayOut.html" />
-    <Content Include="FleetOwnerVehicleLoyOut.html" />
     <Content Include="Global.asax" />
     <Content Include="UI\AddFleetAvailability.html" />
     <Content Include="UI\AddFleetDetails.html" />
@@ -394,6 +392,7 @@
     <Content Include="UI\Configuration.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
+    <Content Include="UI\css\bootstrap.min.css" />
     <Content Include="UI\css\handsontable.full.min.css" />
     <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
@@ -434,6 +433,7 @@
     <Content Include="UI\FleetOwnerRoutes.html" />
     <Content Include="UI\FleetOwners.html" />
     <Content Include="UI\FleetOwnerVehicleLayOut.html" />
+    <Content Include="UI\FleetOwnerVehicleSchedule.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
     <Content Include="UI\InventoryItems.html" />
@@ -442,6 +442,7 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSCONFIG.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\createfleet.js" />
@@ -450,11 +451,13 @@
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
     <Content Include="UI\js\FleetOwnerFare.js" />
+    <Content Include="UI\js\FleetOwnerRouteDetails.js" />
     <Content Include="UI\js\FleetOwnerRouteFare.js" />
     <Content Include="UI\js\FleetownerRoutenw.js" />
     <Content Include="UI\js\FleetOwnerRoutes.js" />
     <Content Include="UI\js\FleetOwners.js" />
     <Content Include="UI\js\FleetOwnerVehicleLayout.js" />
+    <Content Include="UI\js\FleetOwnerVehicleSchedule.js" />
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
     <Content Include="UI\js\handsontable.full.js" />
@@ -476,6 +479,7 @@
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\RouteFare.js" />
     <Content Include="UI\js\SalesOrder.js" />
+    <Content Include="UI\js\ShippingOrder.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
     <Content Include="UI\js\VehicleLayout.js" />
@@ -561,7 +565,6 @@
     <Content Include="UI\Routes.html" />
     <Content Include="UI\SalesOrder.html" />
     <Content Include="UI\Seating.html" />
-    <Content Include="UI\ShippingOrder.html" />
     <Content Include="UI\ShoppingCart.html" />
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
@@ -1995,6 +1998,7 @@
     <Compile Include="Controllers\FleetOwnerRouteFareController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteStopController.cs" />
     <Compile Include="Controllers\FleetOwnerVehicleLayoutController.cs" />
+    <Compile Include="Controllers\FleetOwnerVehicleScheduleController.cs" />
     <Compile Include="Controllers\FleetRoutesController.cs" />
     <Compile Include="Controllers\FleetRoutesDetailsController.cs" />
     <Compile Include="Controllers\FleetStaffController.cs" />
@@ -2012,6 +2016,7 @@
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
+    <Compile Include="Controllers\ShippingOrderController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
@@ -2054,6 +2059,7 @@
     <Compile Include="Controllers\UserRolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\UserTypeController.cs" />
+    <Compile Include="Controllers\VehicleLayoutController.cs" />
     <Compile Include="Controllers\ZipCodeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
