@@ -132,10 +132,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             ServiceTypeId: Fleet.ServiceTypeId,
             EngineNo: Fleet.EngineNo,
             FuelUsed: Fleet.FuelUsed,       
-            MonthAndYrOfMfr: Fleet.MonthAndYrOfMfr,
+            MonthAndYrOfMfr: Fleet.Mfr,
             ChasisNo: Fleet.ChasisNo,
             SeatingCapacity: Fleet.SeatingCapacity,
-            DateOfRegistration: Fleet.DateOfRegistration,
+            DateOfRegistration: Fleet.dor,
             
 
 
