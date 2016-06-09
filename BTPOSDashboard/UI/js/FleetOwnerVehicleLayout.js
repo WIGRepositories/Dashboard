@@ -1,4 +1,5 @@
 ﻿
+// JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage, $filter) {
     $scope.uname = $localStorage.uname;
@@ -22,44 +23,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             $scope.initdata = res.data;
         });
 
-        GetCompanies();       
     }
-    $scope.GetCompanies = function () {
-
-        var vc = {
-            needCompanyName: '1'
-        };
-
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-            data: vc
-        }
-        $http(req).then(function (res) {
-            //$scope.initdata = res.data;
-            $scope.companies = res.data;
-        });
-
-    }
-    $scope.GetFleetDetails = function () {
-
-        if ($scope.cmp == null) {
-            $scope.cmpdata = null;
-            return;
-        }
-
-        if ($scope.s == null) {
-            $scope.Fleet = null;
-            return;
-        }
-
-        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
-            $scope.Fleet = res.data.Table;
-        });
-    }
-   
 
 
     $scope.getselectval = function (vlType) {
@@ -68,6 +32,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             return;
         }
     }
+
 
     $scope.displayLayout = function () {
         var container = document.getElementById('basic_example');
