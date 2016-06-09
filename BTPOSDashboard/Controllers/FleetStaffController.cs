@@ -17,7 +17,7 @@ namespace BTPOSDashboard.Controllers
         {
             [HttpGet]
             [Route("api/FleetStaff/GetFleetStaff")]
-            public DataSet GetFleetStaff(int foId, int cmpid)
+            public DataTable GetFleetStaff(int foId, int cmpid)
             {
                 DataTable Tbl = new DataTable();
 
@@ -43,14 +43,14 @@ namespace BTPOSDashboard.Controllers
                 fsc.Value = cmpid;
                 cmd.Parameters.Add(fsc);
 
-                DataSet ds = new DataSet();
+              //  DataSet ds = new DataSet();
                 SqlDataAdapter db = new SqlDataAdapter(cmd);
 
-                db.Fill(ds);
+                db.Fill(Tbl);
                 // Tbl = ds.Tables[0];
 
-                // int found = 0;
-                return ds;
+               // int found = 0;
+                return Tbl;
             }  
            
              [HttpPost]

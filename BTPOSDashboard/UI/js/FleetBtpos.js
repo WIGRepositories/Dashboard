@@ -6,7 +6,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetFleeBTPosDetails = function () {
 
-        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?foId=-1&cmpid=-1').then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
             $scope.FleetBtposList = res.data;
         });
     }

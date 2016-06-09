@@ -345,17 +345,30 @@
                                                                     <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="initdata.newfleet.cmp" ng-change="getUsersnRoles()">
+                                                                        <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="cmp" ng-change="GetFleetOwners()" width="100%">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="selCompany" class="col-md-3 control-label" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
+
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="selCmp" ng-change="getUsersnRoles()">
+
+
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
 
+
+
                                                                 <div class="form-group">
                                                                     <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="initdata.newfleet.uu">
+                                                                        <select ng-options="u.FirstName+' '+u.LastName  for u in initdata track by u.Id" ng-model=" initdata.newfleet.uu" ng-change="getUsersnRoles()">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -367,17 +380,18 @@
                                                                     <label for="Name" class="col-md-3 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="initdata.newfleet.ur">
+                                                                        <select ng-options="r.rolename for r in initdata.Table track by r.Id" ng-model="initdata.newfleet.ur" ng-change="getvehicleconfig()">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
 
+
                                                                 <div class="form-group">
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Vehicle Reg No:</label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="v.VehicleRegNo for v in initdata.Table track by v.Id" class="form-control" ng-model="initdata.newfleet.v">
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="initdata.newfleet.v" >
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -468,7 +482,7 @@
         });
     </script>
 
-    <script src="js/table-action.js"></script>
+ <!--   <script src="js/table-action.js"></script>-->
 
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>

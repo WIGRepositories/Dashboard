@@ -1,4 +1,4 @@
-﻿// JavaScript source code
+﻿
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage, $filter) {
     $scope.uname = $localStorage.uname;
@@ -22,7 +22,44 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             $scope.initdata = res.data;
         });
 
+        GetCompanies();       
     }
+    $scope.GetCompanies = function () {
+
+        var vc = {
+            needCompanyName: '1'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
+            //$scope.initdata = res.data;
+            $scope.companies = res.data;
+        });
+
+    }
+    $scope.GetFleetDetails = function () {
+
+        if ($scope.cmp == null) {
+            $scope.cmpdata = null;
+            return;
+        }
+
+        if ($scope.s == null) {
+            $scope.Fleet = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+            $scope.Fleet = res.data.Table;
+        });
+    }
+   
 
 
     $scope.getselectval = function (vlType) {
@@ -94,15 +131,59 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
         //    contextMenu: true           
         //});
     }
+      
+    $scope.SaveFleetOwnerVehicleLayout = function () {
 
-    $scope.saveVehicleLayout = function () {
+            var savedata = $scope.datarows;
+            //var Vl = {
+            //    Id: -1,
+            //    RowNo: $scope.Id,
+            //    VehicleId: $scope.V.Id,
+            //    VehicleITypeId: $scope.checkedArr[cnt].VehicleITypeId,
+            //    ColNo: $scope.checkedArr[cnt].ColNo,
+            //    label: $scope.checkedArr[cnt].lbl,
+            
+            //    insupddelflag: 'I'
+            
+            //}
 
-        var savedate = $scope.datarows;
-        $scope.checkedArr = $scope.datarows.filter(function (person) {
+            //rowCount = document.getElementById('rowSelected').value;
+            //colCount = document.getElementById('colSelected').value;
+      
+            ////var checkedArr = []
+            ////var uncheckedArr = [];
+            var checkedArr = new Array();
+            var uncheckedArr = new Array();
+            //var rows = [];
+            //i;      
+            //var col = [];
+            //j;
+            for (i = 0; i < savedata.length; i++)
+            {
+                for(j=0; j < savedata[i].length; j++)
+                {                
 
-            return (function (p) { return p.Id == "A1" });
-        });
+                    var item = {
+                        "label": savedata[i][j].Id, 
+                        "RowNo": i,
+                        "ColNo": j,
+                        "VehicleLayoutTypeId": $scope.layout.vl.Id,
+                        "VehicleTypeId": $scope.layout.vt.Id,                    
+                    }                
+                    item.insupdflag = (savedata[i][j].selected == true) ? "I" : "D";
+                    checkedArr.push(item)                
+                }
+            }
+       
+            //write the post logic and test
+            var req = {
+                method: 'POST',
+                url: 'http://localhost:1476/api/VehicleLayout/SaveFleetOwnerVehicleLayout',
+                data: checkedArr
+
+            }
+            $http(req).then(function (res) {
+                alert('saved successfully.');
+            });
     }
-
-
 });

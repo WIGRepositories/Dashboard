@@ -71,7 +71,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $http(req).then(function (res) {
             $scope.sdata = res.data;
             GetRouteDetails1();
-            $scope.StopCount = StopCount.array.Length;
+           // GetshowDivstops();
+            //$scope.StopCount = StopCount.array.Length;
         });
 
     }
@@ -86,6 +87,17 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $http.get('http://localhost:1476/api/routedetails/getroutedetails1?routeid=' + route.Id).then(function (res, data) {
             $scope.RouteDetails = res.data;
         });
+    }
+
+    $scope.GetshowDivStopDetails= function () {
+
+        if (StopCount > 0) {
+
+            document.getElementById("Stopdetails").style.display = 'inline';
+        }
+        else {
+            document.getElementById("StopDetails").style.display = 'none';
+        }
     }
 
 });
