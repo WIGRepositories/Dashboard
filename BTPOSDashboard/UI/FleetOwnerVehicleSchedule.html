@@ -662,7 +662,7 @@
                                                     </td>
                                                     <td>
                                                        
-                                                            Destination: <input type="text" disabled ng-model="RouteDetails.Table[0].dest" ng-click="ShowHide()" />
+                                                            Destination: <input type="text" disabled ng-model="RouteDetails.Table[0].dest" ng-change=" GetshowDivstops()" />
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -686,11 +686,13 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0" >
-                                                    <div class="panel panel-violet">
-                                                        <div class="panel-heading" ng-hide=""  >Stop Details</div>
+                                                <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0" id="StopDetails" style="display:none;">
+                                                    <div class="panel panel-violet" ng-hide="StopCount.Table1.length == 0" ng-change=" GetshowDivstops()">
+
+                                                        <div class="panel-heading">Stop Details</div>
 
                                                         <table>
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="panel-body pan">
@@ -824,6 +826,21 @@
         //For this script, visit http://www.javascriptkit.com
 
     </script>
+    <script>
+    function showDivstops(){
+
+        if(StopCount>0) {
+
+            document.getElementById("StopCount").style.display = 'inline';
+        }
+    else
+    {
+            document.getElementById("StopCount").style.display = 'none';
+    }
+    }
+
+    </script>
+
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
