@@ -1,9 +1,8 @@
 ﻿<!DOCTYPE html>
-
 <html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
 <head>
-    <title></title>
-    <meta charset="utf-8" />
+    <title>Home | Configuration | Types</title>
+    <meta charset="utf-8">
     <!--Loading bootstrap css-->
 
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
@@ -30,9 +29,9 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <!-- Custom Fonts -->
-    <link rel="stylesheet" href="css/styles.css" type="text/css">
+    <!--<link rel="stylesheet" href="css/styles.css" type="text/css">-->
 </head>
-<body ng-init="GetVehicleConfig();" ng-model="vlConfig">
+<body ng-init="GetVehicleConfig();" ng-model="savedata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -64,7 +63,7 @@
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
+                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success">7</span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                                 <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
@@ -100,12 +99,6 @@
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
-
-
-
-
-
-
                             <li>
                                 <a href="#">
                                     <i class="fa fa-sitemap fa-fw">
@@ -158,8 +151,7 @@
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
-                                <li><a href="VehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Vehicle Layout</span></a></li>
-                                <li><a href="FleetOwnerVehicleLoyOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+
                             </ul>
 
                         </li>
@@ -327,7 +319,7 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Fleet</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li class="active"><a href="VehicleLayout.html">Fleet Owner Vehicle Layout</a></li>
+                            <li class="active"><a href="FleetOwnerVehicleLayout.html">Fleet Owner Vehicle Layout</a></li>
 
                         </ol>
                         <div class="clearfix"></div>
@@ -347,40 +339,52 @@
                                                 <div class="table-container">
 
                                                     <div class="row mbm">
-                                                        <div class="col-md-3">
-                                                            Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                            Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
-
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
-                                                            <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
-
-                                                        </div>
-
-
-
 
                                                         <div class="col-lg-12">
+                                                            <div class="col-md-3">
+                                                                Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                            <br />
+                                                            <br />
+
+                                                            <div class="col-md-3">
+                                                                Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="col-md-3">
+                                                                Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
+
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
+                                                                <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
+
+                                                            </div>
+
                                                             <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                                 <thead>
                                                                     <!--<tr>
-                                                                        <th>Destination/Source</th>
-                                                                        <th ng-repeat="s in Stops">{{s.Name}}</th>
-                                                                    </tr>-->
+                                                                    <th>Destination/Source</th>
+                                                                       <th ng-repeat="s in Stops">{{s.Name}}</th>
+                                                                                    </tr>-->
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr ng-repeat="r in datarows">
@@ -388,7 +392,6 @@
                                                                         <td ng-repeat="dr in r">
                                                                             <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" style="border:none" ng-model="dr.selected" ng-checked="{{dr.selected==true}}">{{dr.Id}}</input>
                                                                         </td>
-
 
 
                                                                     </tr>
@@ -419,7 +422,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveVehicleLayout();">Save</button>
+                                <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="SaveFleetOwnerVehicleLayout();">Save</button>
 
                                 <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                             </div>
@@ -471,10 +474,35 @@
             else if (isNaN(y)) {
                 alert("select number of Columns");
                 return false;
-            }`
+            }
+            else {
+                buttonContainerDiv.empty();
+                for (var i = 1; i <= $('#rowSelected').val() ; i++) {
+                    buttonContainerDiv.append("<div style='width:100px;height:10px'>");
+                    for (var j = 1; j <= $('#colSelected').val() ; j++) {
+
+                        buttonContainerDiv = buttonContainerDiv.append("<input type=checkbox>" + i + j + '</li>');
+                    }
+                    buttonContainerDiv = buttonContainerDiv.append('<br>');
+                    if (i % 2 == 0) {
+                        buttonContainerDiv = buttonContainerDiv.append('<br>');
+                        //if (j == $('#colSelected').val())
+                        //    buttonContainerDiv = buttonContainerDiv.append("<div><input type=checkbox>" + i + j + "</li></div>");
+                        //else
+                        //    buttonContainerDiv = buttonContainerDiv.append("<div style='width:2px;height:2px;'></div>");
+                    }
+                    //buttonContainerDiv.append("ffdgsdfgsdfgsdf</div>");
+                }
+            }
+
+        });
+
+        //buttonContainerDiv=buttonContainerDiv.append('<li class="parent_li"></li>');
+    </script>
 
 
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
@@ -482,20 +510,23 @@
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
     <script src="vendors/iCheck/icheck.min.js"></script>
     <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+
     <script src="js/jquery.menu.js"></script>
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
+    <!--<script src="js/table-action.js"></script>-->
     <!--CORE JAVASCRIPT-->
-    <script src="js/mainTbl.js"></script>
-    <script src="js/handsontable.full.js"></script>
+    <!--<script src="js/mainTbl.js"></script>
+    <script src="js/handsontable.full.js"></script>-->
     <script src="js/main.js"></script>
 
+   
     <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
+
     <script src="js/FleetOwnerVehicleLayout.js"></script>
+    <script src="js/ngStorage.js"></script>
+   
 </body>
 </html>

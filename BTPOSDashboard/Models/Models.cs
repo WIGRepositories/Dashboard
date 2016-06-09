@@ -1405,7 +1405,10 @@ namespace BTPOSDashboardAPI.Models
         public int ColNo { get; set; }
         public int VehicleTypeId { get; set; }
         public String label { get; set; }
+        public string insupdflag { get; set; }
+        public int FleetOwnerId { get; set; }
     }
+    
 }                     
         
 
