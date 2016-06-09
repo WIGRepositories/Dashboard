@@ -1859,6 +1859,8 @@ SELECT [EditHistoryId]
       ,[FromValue]
       ,[ToValue]
       ,[ChangeType]
+      ,[Field1]
+      ,[Field2]
       ,e.Task
       ,e.SubItem
   FROM [POSDashboard].[dbo].[EditHistoryDetails] ed
@@ -1872,7 +1874,15 @@ GO
 CREATE procedure [dbo].[getEditHistory]
 as
 begin
-select * from EditHistory
+SELECT [Field]
+      ,[SubItem]
+      ,[Comment]
+      ,[Date]
+      ,[ChangedBy]
+      ,[ChangedType]
+      ,[Task]
+      ,[Id]
+  FROM [POSDashboard].[dbo].[EditHistory]
 end
 
 GO
@@ -2514,7 +2524,7 @@ CREATE  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
            @IMEI varchar(20),
            @ipconfig varchar(20),
            @active int = 1,
-           @fleetownerid int,
+           @fleetownerid int = null,
            @insupdflag varchar(10)
            )
  
@@ -2543,7 +2553,7 @@ INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
            ,@IMEI
            ,@ipconfig
            ,1
-           ,1)
+           ,null)
 else
   if @insupdflag = 'U' 
 UPDATE [POSDashboard].[dbo].[BTPOSDetails]

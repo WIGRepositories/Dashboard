@@ -64,9 +64,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var vc = {
             needvehicleRegno:'1',
             needbtpos:'1',
-            fleetownerId: $scope.fo.Id
-        
-
+            fleetownerId: $scope.fo.Id 
         };
 
         var req = {
