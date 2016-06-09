@@ -3,22 +3,22 @@
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $http.get('http://localhost:1476/api/RegisterForm/logindb').then(function (res, data) {
-        $scope.type = res.data;
+    //$http.get('http://localhost:1476/api/RegisterForm/logindb').then(function (res, data) {
+    //    $scope.type = res.data;
 
-        //alerts("hi");
-    });
+    //    //alerts("hi");
+    //});
     $scope.save = function (type) {
        
         var type = {
 
-            UserName: type.UserName,
+            UserName: type.username,
             Password: type.Password,
             ConfirmPassword: type.ConfirmPassword,
             Emailaddress: type.Emailaddress,
-            FirstName: type.FirstName,
-            LastName: type.LastName,
-
+            FirstName: type.firstname,
+            LastName: type.lastname,
+            Gender:type.Gender,
 
 
 
@@ -26,7 +26,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/RegisterForm/pos'),
+            url: 'http://localhost:1476/api/RegisterForm/pos',
             //headers: {
             //    'Content-Type': undefined
 

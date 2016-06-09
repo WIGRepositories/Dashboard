@@ -13,30 +13,30 @@ namespace registerform.Controllers
     public class RegisterFormController : ApiController
     {
 
-        [HttpGet]
+        //[HttpGet]
 
-        public DataTable logindb()
-        {
-            DataTable Tbl = new DataTable();
+        //public DataTable logindb()
+        //{
+        //    DataTable Tbl = new DataTable();
 
 
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+        //    //connect to database
+        //    SqlConnection conn = new SqlConnection();
+        //    //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+        //    conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Getregister";
-            cmd.Connection = conn;
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.CommandText = "Getregister";
+        //    cmd.Connection = conn;
+        //    DataSet ds = new DataSet();
+        //    SqlDataAdapter db = new SqlDataAdapter(cmd);
+        //    db.Fill(ds);
+        //    Tbl = ds.Tables[0];
 
-            // int found = 0;
-            return Tbl;
-        }
+        //    // int found = 0;
+        //    return Tbl;
+        //}
     
 
 
@@ -54,7 +54,7 @@ namespace registerform.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelELregisterform";
+            cmd.CommandText = "InsUpdDelregisterform";
             cmd.Connection = conn;
             conn.Open();
             //string insertquery = "insert into login(UserName,Password,FirstName,LastName,MobileNo) values (@UserName,@Password,@FirstName,@lastName,@MobileNo)";
@@ -104,6 +104,11 @@ namespace registerform.Controllers
             aa.Value = b.LastName;
             cmd.Parameters.Add(aa);
 
+            SqlParameter aa1 = new SqlParameter();
+            aa1.ParameterName = "@Gender";
+            aa1.SqlDbType = SqlDbType.VarChar;
+            aa1.Value = b.Gender;
+            cmd.Parameters.Add(aa1);
 
           
 

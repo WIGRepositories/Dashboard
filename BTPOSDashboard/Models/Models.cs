@@ -1039,7 +1039,7 @@ namespace BTPOSDashboardAPI.Models
         public string LastName { get; set; }
         public string Emailaddress { get; set; }
         public string ConfirmPassword { get; set; }
-
+        public string Gender { get; set; }
     }
 
     public class login
@@ -1406,6 +1406,18 @@ namespace BTPOSDashboardAPI.Models
         public int VehicleTypeId { get; set; }
         public String label { get; set; }
     }
+    
+    public class reset
+    {
+
+        public string UserName { set; get; }
+        public string OldPassword { set; get; }
+        public string NewPassword { set; get; }
+        public string ReenterNewPassword { set; get; }
+
+    }
+
+
 }                     
         
 
