@@ -121,7 +121,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
        }
       
                        
-       
+        
         var Fleet = {
             Id:Fleet.Id,
             VehicleRegNo: Fleet.VehicleRegNo,
@@ -130,8 +130,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             FleetOwnerId: Fleet.FleetOwnerId,
             CompanyId: Fleet.CompanyId,
             ServiceTypeId: Fleet.ServiceTypeId,
-            Active: Fleet.Active,
-           
+            EngineNo: Fleet.EngineNo,
+            FuelUsed: Fleet.FuelUsed,       
+            MonthAndYrOfMfr: Fleet.MonthAndYrOfMfr,
+            ChasisNo: Fleet.ChasisNo,
+            SeatingCapacity: Fleet.SeatingCapacity,
+            DateOfRegistration: Fleet.DateOfRegistration,
+            
+
+
         };
      
         var req = {
