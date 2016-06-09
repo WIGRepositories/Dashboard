@@ -164,12 +164,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             return;
         }
 
-        if (newFR.v.Id == null) {
+        if (newFR.v == null) {
             alert('Please select Vehicle.');
             return;
         }
 
-        if (newFR.r.ID == null) {
+        if (newFR.r == null) {
             alert('Please select route.');
             return;
         }
@@ -177,9 +177,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var FleetRouters = {
             Id:-1 ,
             VehicleId: newFR.v.Id,          
-            RouteId: newFR.r.ID,
-            EffectiveFrom: newFR.EffectiveFrom,
-            EffectiveTill: newFR.EffectiveTill,
+            RouteId: newFR.r.RouteId,
+            EffectiveFrom: newFR.fd,
+            EffectiveTill: newFR.td,
             insupddelflag:'I'            
         };
 

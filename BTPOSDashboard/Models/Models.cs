@@ -1271,7 +1271,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string ChasisNo { get; set; }
 
-        public string SeatingCapacity { get; set; }
+        public int SeatingCapacity { get; set; }
 
         public DateTime? DateOfRegistration { get; set; }
     }
