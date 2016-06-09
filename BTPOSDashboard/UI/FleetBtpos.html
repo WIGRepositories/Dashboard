@@ -341,16 +341,16 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-md-5">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetBtpos()">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeBTPosDetails()">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+                                                  <option value="">Select</option>
+                                                                 </select>
                                                         </div>
 
 
 
                                                         <div class="actions">
-                                                            <a href="NewFleetBtpos.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOS</button></a>
+                                                            <a href="NewFleetBtpos.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOS</button></a>
 
                                                         </div>
 
@@ -360,7 +360,7 @@
                                                             <tr>
 
                                                                 <th>Vehicle Reg No</th>
-                                                                <th>BTPOS NAME</th>
+                                                                <th>BTPOS</th>
                                                                 <th>From Date </th>
                                                                 <th>To Date</th>
                                                                 <th>Update</th>
@@ -386,9 +386,9 @@
                                                                 <td>
                                                                     <div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div>
                                                                     <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
-                <i class="fa fa-trash-o"></i>&nbsp;
+                                                                     <i class="fa fa-trash-o"></i>&nbsp;
 
-            </button>-->
+                                                                                </button>-->
                                                                 </td>
                                                             </tr>
 

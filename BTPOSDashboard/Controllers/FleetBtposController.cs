@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class FleetBtposController : ApiController
     {
         [HttpGet]
-        public DataTable GetFleebtDetails(int foId, int cmpid)
+        public DataTable GetFleebtDetails(int sId, int cmpid)
         {
             DataTable Tbl = new DataTable();
 
@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getRouteDetails";
+            cmd.CommandText = "GetFleetBtpos";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -33,7 +33,7 @@ namespace BTPOSDashboard.Controllers
             SqlParameter fo = new SqlParameter();
             fo.ParameterName = "@fleetownerId";
             fo.SqlDbType = SqlDbType.Int;
-            fo.Value = foId;
+            fo.Value = sId;
             cmd.Parameters.Add(fo);
 
             SqlParameter fsc = new SqlParameter();
@@ -87,6 +87,8 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(gsab);
 
                 SqlParameter gsac = new SqlParameter("@FromDate", SqlDbType.DateTime);
+                gsac.ParameterName = "@FromDate";
+                gsac.SqlDbType = SqlDbType.DateTime;
                 gsac.Value = fb.FromDate;
                 cmd.Parameters.Add(gsac);
 
