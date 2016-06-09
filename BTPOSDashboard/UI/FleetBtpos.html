@@ -148,6 +148,25 @@
 
                         <li>
                             <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            </ul>
+
+                        </li>
+
+                        <li>
+                            <a href="#">
                                 <i class="fa fa-mobile">
                                     <div class="icon-bg bg-dark"></div>
                                 </i><span class="menu-title">Inventory & BT POS</span><span class="fa arrow"></span>
@@ -341,16 +360,16 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-md-5">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetBtpos()">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeBTPosDetails()">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+                                                  <option value="">Select</option>
+                                                                 </select>
                                                         </div>
 
 
 
                                                         <div class="actions">
-                                                            <a href="NewFleetBtpos.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOS</button></a>
+                                                            <a href="NewFleetBtpos.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add New BTPOS</button></a>
 
                                                         </div>
 
@@ -360,7 +379,7 @@
                                                             <tr>
 
                                                                 <th>Vehicle Reg No</th>
-                                                                <th>BTPOS NAME</th>
+                                                                <th>BTPOS</th>
                                                                 <th>From Date </th>
                                                                 <th>To Date</th>
                                                                 <th>Update</th>
@@ -386,9 +405,9 @@
                                                                 <td>
                                                                     <div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div>
                                                                     <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
-                <i class="fa fa-trash-o"></i>&nbsp;
+                                                                     <i class="fa fa-trash-o"></i>&nbsp;
 
-            </button>-->
+                                                                                </button>-->
                                                                 </td>
                                                             </tr>
 

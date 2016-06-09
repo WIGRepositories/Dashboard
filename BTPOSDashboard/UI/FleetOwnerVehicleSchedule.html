@@ -145,6 +145,25 @@
 
                             <li>
                                 <a href="#">
+                                    <i class="fa fa-truck">
+                                        <div class="icon-bg bg-green"></div>
+                                    </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                    <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                    <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                    <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                    <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                    <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                    <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                    <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                </ul>
+
+                            </li>
+
+                            <li>
+                                <a href="#">
                                     <i class="fa fa-mobile">
                                         <div class="icon-bg bg-dark"></div>
                                     </i><span class="menu-title">Inventory & BT POS</span><span class="fa arrow"></span>
@@ -643,7 +662,7 @@
                                                     </td>
                                                     <td>
                                                        
-                                                            Destination: <input type="text" disabled ng-model="RouteDetails.Table[0].dest" ng-click="ShowHide()" />
+                                                            Destination: <input type="text" disabled ng-model="RouteDetails.Table[0].dest" ng-change=" GetshowDivstops()" />
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -667,11 +686,13 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0" >
-                                                    <div class="panel panel-violet">
-                                                        <div class="panel-heading" ng-hide=""  >Stop Details</div>
+                                                <div class="col-md-8" ng-hide="RouteDetails.Table1.length == 0" id="StopDetails" style="display:none;">
+                                                    <div class="panel panel-violet" ng-hide="StopCount.Table1.length == 0" ng-change=" GetshowDivstops()">
+
+                                                        <div class="panel-heading">Stop Details</div>
 
                                                         <table>
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="panel-body pan">
@@ -805,6 +826,21 @@
         //For this script, visit http://www.javascriptkit.com
 
     </script>
+    <script>
+    function showDivstops(){
+
+        if(StopCount>0) {
+
+            document.getElementById("StopCount").style.display = 'inline';
+        }
+    else
+    {
+            document.getElementById("StopCount").style.display = 'none';
+    }
+    }
+
+    </script>
+
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>

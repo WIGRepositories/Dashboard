@@ -389,7 +389,7 @@
     <Content Include="UI\CompanyHierarchy.html" />
     <Content Include="UI\CompanyReports.html" />
     <Content Include="UI\CompanyRoles.html" />
-    <Content Include="UI\Configuration.html" />
+    <Content Include="UI\BTPOSConfiguration.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\CreateRole.html" />
     <Content Include="UI\css\bootstrap.min.css" />
@@ -443,7 +443,7 @@
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\bootstrap.min.js" />
-    <Content Include="UI\js\BTPOSCONFIG.js" />
+    <Content Include="UI\js\BTPOSConfig.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\EditHistory.js" />

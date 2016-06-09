@@ -64,7 +64,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsupdelFleetDetails";
+                cmd.CommandText = "InsupddelFleetDetails";
                 cmd.Connection = conn;
 
                 conn.Open();
@@ -104,43 +104,43 @@ namespace BTPOSDashboard.Controllers
                 gid.Value = n.CompanyId;
                 cmd.Parameters.Add(gid);
 
-                SqlParameter nser = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
-                nser.SqlDbType = SqlDbType.Int;
-                nser.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                SqlParameter stid = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
+                stid.SqlDbType = SqlDbType.Int;
+                stid.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(stid);
 
 
                 SqlParameter engg = new SqlParameter("@EngineNo", SqlDbType.VarChar);
-                engg.SqlDbType = SqlDbType.Int;
-                engg.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                engg.SqlDbType = SqlDbType.VarChar;
+                engg.Value = n.EngineNo;
+                cmd.Parameters.Add(engg);
 
                 SqlParameter fuel = new SqlParameter("@FuelUsed", SqlDbType.VarChar);
-                fuel.SqlDbType = SqlDbType.Int;
-                fuel.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                fuel.SqlDbType = SqlDbType.VarChar;
+                fuel.Value = n.FuelUsed;
+                cmd.Parameters.Add(fuel);
 
                 SqlParameter mntt = new SqlParameter("@MonthAndYrOfMfr", SqlDbType.VarChar);
-                mntt.SqlDbType = SqlDbType.Int;
-                mntt.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                mntt.SqlDbType = SqlDbType.DateTime;
+                mntt.Value = n.MonthAndYrOfMfr;
+                cmd.Parameters.Add(mntt);
 
                 SqlParameter chss = new SqlParameter("@ChasisNo", SqlDbType.VarChar);
-                chss.SqlDbType = SqlDbType.Int;
-                chss.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                chss.SqlDbType = SqlDbType.VarChar;
+                chss.Value = n.ChasisNo;
+                cmd.Parameters.Add(chss);
 
 
                 SqlParameter seatc = new SqlParameter("@SeatingCapacity", SqlDbType.VarChar);
                 seatc.SqlDbType = SqlDbType.Int;
-                seatc.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                seatc.Value = n.SeatingCapacity;
+                cmd.Parameters.Add(seatc);
 
 
                 SqlParameter deat = new SqlParameter("@DateOfRegistration", SqlDbType.VarChar);
-                deat.SqlDbType = SqlDbType.Int;
-                deat.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);
+                deat.SqlDbType = SqlDbType.DateTime;
+                deat.Value = n.DateOfRegistration;
+                cmd.Parameters.Add(deat);
                
 
 
@@ -150,10 +150,7 @@ namespace BTPOSDashboard.Controllers
                 cmd.ExecuteScalar();
 
                 conn.Close();
-               // DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+       
             }
             catch (Exception ex)
             {

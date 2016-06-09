@@ -1271,7 +1271,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string ChasisNo { get; set; }
 
-        public string SeatingCapacity { get; set; }
+        public int SeatingCapacity { get; set; }
 
         public DateTime? DateOfRegistration { get; set; }
     }
@@ -1405,6 +1405,8 @@ namespace BTPOSDashboardAPI.Models
         public int ColNo { get; set; }
         public int VehicleTypeId { get; set; }
         public String label { get; set; }
+        public string insupdflag { get; set; }
+        public int FleetOwnerId { get; set; }
     }
     
     public class reset
