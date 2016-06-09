@@ -7052,6 +7052,9 @@ BEGIN
 	UPDATE WebsiteUserInfo
 SET Password=@NewPassword where UserName = @UserName
 and Password = @OldPassword
+UPDATE WebsiteUserlogin
+SET Passkey=@NewPassword where Logininfo = @UserName
+and Passkey = @OldPassword
 
 
 END

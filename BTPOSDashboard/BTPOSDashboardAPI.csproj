@@ -556,6 +556,7 @@
     <Content Include="UI\PaymentGatewayConfiguration.html" />
     <Content Include="UI\paymentHistory.html" />
     <Content Include="UI\PurchaseOrders.html" />
+    <Content Include="UI\register.html" />
     <Content Include="UI\ResetPassword.html" />
     <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
