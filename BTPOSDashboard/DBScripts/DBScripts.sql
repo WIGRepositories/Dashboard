@@ -7145,3 +7145,26 @@ INSERT INTO [dbo].[FleetOwnerVehicleLayout]
 
 
 End
+/****** Object:  StoredProcedure [dbo].[getresetpassword]    Script Date: 06/10/2016 11:20:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[getresetpassword]
+	-- Add the parameters for the stored procedure here
+
+ @UserName varchar(50)
+,@OldPassword varchar(50)
+,@NewPassword varchar(50)  
+,@ReenterNewPassword varchar(50)  
+
+AS
+BEGIN
+	
+UPDATE UserLogins
+SET PassKey=@NewPassword where LoginInfo = @UserName
+and PassKey = @OldPassword
+
+
+END
