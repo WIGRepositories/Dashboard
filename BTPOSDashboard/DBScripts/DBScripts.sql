@@ -6815,20 +6815,9 @@ INSERT INTO [dbo].[VehicleLayout]
            ,@VehicleTypeId
            ,@label)
            
-       
    
---if @insupddelflag = 'D'
- -- delete from [POSDashboard].[dbo].[VehicleLayout]
---where [RowNo] = 0
---or  [ColNo] = 0
 
 End
---Delete from  VehicleLayout where RowNo = 0 or ColNo = 0
-
-
-
-
-
 
 /****** Object:  Table [dbo].[UserInfo]    Script Date: 06/07/2016 12:29:24 ******/
 SET ANSI_NULLS ON
@@ -7093,3 +7082,68 @@ SET ANSI_PADDING OFF
 GO
 
 
+
+GO
+
+/****** Object:  Table [dbo].[FleetOwnerVehicleLayOut]    Script Date: 06/10/2016 09:17:52 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerVehicleLayOut](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleLayoutTypeId] [int] NOT NULL,
+	[RowNo] [int] NOT NULL,
+	[ColNo] [int] NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
+	[label] [varchar](10) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerVehicleLayout]    Script Date: 06/10/2016 09:12:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
+	@VehicleLayoutTypeId int,
+	@RowNo int,
+	@ColNo varchar(50),
+	@VehicleTypeId int,
+	@label varchar(10),
+	@FleetOwnerId int,
+	@insupdflag varchar (10)   
+)
+AS
+BEGIN
+if @insupdflag = 'I'
+INSERT INTO [dbo].[FleetOwnerVehicleLayout]
+           ([VehicleLayoutTypeId]
+           ,[RowNo]
+           ,[ColNo]
+           ,[VehicleTypeId]
+           ,[label]
+           ,[FleetOwnerId]
+           )
+     VALUES
+           (@VehicleLayoutTypeId
+           ,@RowNo
+           ,@ColNo
+           ,@VehicleTypeId
+           ,@label
+           ,@FleetOwnerId)
+           
+
+
+End
