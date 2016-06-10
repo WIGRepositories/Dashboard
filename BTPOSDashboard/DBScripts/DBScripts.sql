@@ -1777,19 +1777,8 @@ CREATE TABLE [dbo].[UserLogins](
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[FleetOwnerRouteDetails](
-	[FleetOwnerId] [int] NOT NULL,
-	[RouteId] [varchar](50) NOT NULL,
-	[Stop1] [nvarchar](50) NOT NULL,
-	[PreviousStop] [nvarchar](50) NOT NULL,
-	[NextStop] [nvarchar](50) NOT NULL
-) ON [PRIMARY]
 
-GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6463,10 +6452,7 @@ begin
 declare @cnt  int
 set @cnt = -1
 
---declare @foid  int
---set @foid = -1
-
---select @foid = id from fleetowner where id = @fleetOwnerId
+declare @rsId int
 
 if @insupddelflag = 'I'
 
@@ -6488,6 +6474,24 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRoute]
            ,@RouteId
            ,@FromDate
            ,@ToDate)
+
+--insert record into FleetOwnerRouteStop
+ SELECT @rsId = rs.[Id]
+  FROM [POSDashboard].[dbo].[RouteStops] rs
+  inner join routes r on (rs.routeid = r.id
+  and rs.fromstopid = r.[SourceId]
+      and rs.tostopid = [DestinationId])
+  where r.[Id] = @routeid
+
+if @rsId is not null 
+ begin
+   INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteStop]
+           ([FleetOwnerId]
+           ,[RouteStopId])
+     VALUES
+           (@fleetOwnerId,@rsId) 
+end
+
 end
 else
   if @insupddelflag = 'U'
@@ -6500,16 +6504,25 @@ and  [RouteId] = @RouteId
       
 else
 if @insupddelflag = 'D'
+begin
   delete from [POSDashboard].[dbo].[FleetOwnerRoute]
 where [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
 
+--remove all the FleetOwnerRouteStop references for the route
+
+delete from [POSDashboard].[dbo].[FleetOwnerRouteStop] 
+where id in (
+select fs.id from [POSDashboard].[dbo].[FleetOwnerRouteStop] fs
+inner join [RouteStops] rs on rs.id = fs.RouteStopId
+where [FleetOwnerId] = @fleetOwnerId
+and rs.RouteId = @RouteId
+)
+
+end
+
+
 End
-
-GO
-
-       
-
 
 GO
 
@@ -7145,3 +7158,93 @@ INSERT INTO [dbo].[FleetOwnerVehicleLayout]
 
 
 End
+
+
+
+GO
+
+/****** Object:  Table [dbo].[FleetOwnerDetails]    Script Date: 06/10/2016 18:38:00 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Company] [varchar](50) NOT NULL,
+	[Title] [varchar](10) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[Gender] [varchar](10) NOT NULL,
+	[FleetOwnerSize] [int] NOT NULL,
+	[Address] [varchar](50) NOT NULL,
+	[EmpId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerDetails]    Script Date: 06/10/2016 18:39:05 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER  PROCEDURE[dbo].[InsUpdDelFleetOwnerDetails](
+		  @Id int,
+           @Company varchar(50),   
+           @Title varchar(10),
+           @FleetOwnerId int,
+           @Gender varchar(10),
+           @FleetOwnerSize int,
+           @Address varchar(50),
+           @EmpId int,
+           @insupdflag varchar(10)
+           )
+ 
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerDetails]
+           ([Company]
+           ,[Title]
+           ,[FleetOwnerId]
+           ,[Gender]
+           ,[FleetOwnerSize]
+           ,[Address]
+           ,[EmpId])
+     VALUES
+           (@Company
+           ,@Title
+           ,@FleetOwnerId
+           ,@Gender
+           ,@FleetOwnerSize
+           ,@Address
+            ,@EmpId)
+             
+           
+else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerDetails]
+   SET
+      [Company] = @Company
+      ,[Title] = @Title
+      ,[FleetOwnerId] = @FleetOwnerId
+      ,[Gender] = @Gender
+      ,[FleetOwnerSize] = @FleetOwnerSize
+      ,[Address] = @Address
+      ,[EmpId] = @EmpId 
+      
+   --   WHERE Company = @Company
+ 
+ --else
+  -- delete from FleetOwnerDetails where Company = @Company
+      
+END
+
