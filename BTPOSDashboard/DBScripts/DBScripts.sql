@@ -1246,19 +1246,10 @@ CREATE TABLE [dbo].[RoutesConfiguration](
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRoutesFares]
-as
-begin
-select * from RoutesFares
-end
 
 
 GO
-/****** Object:  Table [dbo].[RouteFare]    Script Date: 05/27/2016 08:58:23 ******/
+/****** Object:  Table [dbo].[RouteFare]    Script Date: 06/10/2016 08:52:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1272,8 +1263,10 @@ CREATE TABLE [dbo].[RouteFare](
 	[Distance] [decimal](18, 0) NOT NULL,
 	[PerUnitPrice] [decimal](18, 0) NULL,
 	[Amount] [decimal](18, 0) NOT NULL,
-	[FareTypeId] [int] NOT NULL
+	[FareTypeId] [int] NOT NULL,
+	[RouteStopId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 
 GO
@@ -4277,26 +4270,31 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 Create PROCEDURE [dbo].[GetRouteFare]
+(@RouteId int)
 AS
 BEGIN
 	
 SELECT 
-      [Id]
-      ,[RouteId]     
-      ,[SourceStopId]
-      ,[DestinationStopId]
-      ,[Distance]
-      ,[PerUnitPrice]
-      ,[Amount]     
-  FROM [POSDashboard].[dbo].[RouteFare]
+      rs.[Id]
+      ,rs.[RouteId]     
+      ,rs.[FromStopId]
+      ,rs.[ToStopId]
+      ,rs.[Distance]     
+      ,case when rf.perunitprice is null then 0 else rf.perunitprice 
+end as PerUnitPrice
+          ,case when rf.Amount is null then 0 else rf.Amount 
+end as Amount
+  FROM [POSDashboard].[dbo].[RouteStops] rs
+left outer join [POSDashboard].[dbo].[RouteFare] rf
+on rf.routestopid = rs.id
+  where rs.RouteId = @RouteId
 
-
-
+select S.Name,S.Id from routedetails rd
+inner join stops S on rd.StopId = S.Id 
+where rd.RouteId = @RouteId
 
 end
 
-/****** Object:  StoredProcedure [dbo].[getRouteDetails]    Script Date: 05/02/2016 17:05:58 ******/
-SET ANSI_NULLS ON
 
 GO
 SET ANSI_NULLS ON

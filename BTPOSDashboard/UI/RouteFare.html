@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <link rel="stylesheet" type="text/css" href="css/handsontable.full.min.css" />
 </head>
-<body ng-init="GetStops();" ng-model="RouteDetails">
+<body ng-init="GetRoutes();" ng-model="RouteDetails">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -346,7 +346,7 @@
 
                                                         <div class="row mbm">
                                                             <div class="col-md-3">
-                                                                Route Name: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)" style="width:100px">
+                                                                Route Name: <select ng-options="s.RouteName for s in routes track by s.Id" ng-model="s" ng-change="GetRouteFareDetails()">
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
@@ -393,31 +393,30 @@
 
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
-                                                            <tr >
+                                                            <tr>
                                                                 <th>Destination/Source</th>
-                                                                <th ng-repeat="s in Stops">{{s.Name}}</th>
+                                                                <th ng-repeat="s in routefares.Stops">{{s.Name}}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr ng-repeat="r in routefares">
+                                                            <tr ng-repeat="r in routefares.Table1">
                                                                 <!--<td ng-repeat="dr in r" ng-if="$index == 0 || r.$index==1">{{dr}}</td>
                                                                 <td ng-repeat="dr in r" ng-if="$index != 0">
                                                                     <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }"  ng-change="test(dr)" ng-model="dr" /></td>-->
-
+                                                              
                                                                 <td ng-repeat="dr in r" ng-if="$index == 0 || r==$parent.$index">{{dr}}</td>
                                                                 <td ng-repeat="dr in r" ng-if="$index != 0">
-                                                                    <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }" ng-change="test(dr)" ng-model="dr"  />
+                                                                    <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }" ng-change="test(r, dr)" ng-model="dr" />
                                                                 </td>
 
-                                                               
-                                                                
+
+
                                                             </tr>
                                                         </tbody>
 
                                                     </table>
+                                                    <!--<div id="basic_example"></div>-->
 
-                                                    <div id="basic_example"></div>
-                                                    
 
                                                     <div style="text-align:center">
                                                         <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
@@ -449,48 +448,48 @@
 
     </div>
 
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-<script src="js/mainTbl.js"></script>
-<script src="js/handsontable.full.min.js"></script>
-<script src="js/main.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+    <script src="js/mainTbl.js"></script>
+    <script src="js/handsontable.full.js"></script>
+    <script src="js/main.js"></script>
+    <!--<script type="text/javascript">
+        $(document).ready(function () {
 
-        var container = document.getElementById('basic_example');
+            var container = document.getElementById('basic_example');
 
-        var data = function () {
-            return Handsontable.helper.createSpreadsheetData(100, 12);
-        };
+            var data = function () {
+                return Handsontable.helper.createSpreadsheetData(100, 12);
+            };
 
-        var hot = new Handsontable(container, {
-            data: data(),
-            height: 396,
-            colHeaders: true,
-            rowHeaders: true,
-            stretchH: 'all',
-            columnSorting: true,
-            contextMenu: true
+            var hot = new Handsontable(container, {
+                data: data(),
+                height: 396,
+                colHeaders: true,
+                rowHeaders: true,
+                stretchH: 'all',
+                columnSorting: true,
+                contextMenu: true
+            });
+
         });
-
-    });
-</script>
-<script src="js/angular.js"></script>
-<script src="js/FleetOwnerFare.js"></script>
+    </script>-->
+    <script src="js/angular.js"></script>
+    <script src="js/RouteFare.js"></script>
 
 </body>
 </html>

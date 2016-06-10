@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class RouteFareController : ApiController
     {
         [HttpGet]
-        public DataSet getRouteFare(int routeId, int fleetownerId)
+        public DataSet getRouteFare(int routeId)
         {
             DataSet rs = new DataSet();
 
@@ -33,11 +33,11 @@ namespace BTPOSDashboard.Controllers
             ccd.Value = routeId;
             cmd.Parameters.Add(ccd);
 
-            SqlParameter foid = new SqlParameter();
-            foid.ParameterName = "@fleetownerId";
-            foid.SqlDbType = SqlDbType.Int;
-            foid.Value = fleetownerId;
-            cmd.Parameters.Add(foid);
+            //SqlParameter foid = new SqlParameter();
+            //foid.ParameterName = "@fleetownerId";
+            //foid.SqlDbType = SqlDbType.Int;
+            //foid.Value = fleetownerId;
+            //cmd.Parameters.Add(foid);
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -46,27 +46,30 @@ namespace BTPOSDashboard.Controllers
             //prepare the table and sent it to client side
 
             DataTable result = new DataTable();
-            result.Columns.Add("Destination/Rows");
+            result.Columns.Add("Destination");
 
             //add the stops as the columns
-            DataTable stops = ds.Tables[1];
+            DataTable stops = ds.Tables[1].Copy();
+            stops.TableName = "Stops";
+
             for (int row = 0; row < stops.Rows.Count; row++) {
-                result.Columns.Add(stops.Rows[row][0].ToString());
+                result.Columns.Add(stops.Rows[row][0].ToString(),typeof(Decimal));
             }
 
             for (int row = 0; row < stops.Rows.Count; row++)
             {
                 DataRow dr = result.NewRow();
                 dr[0] = stops.Rows[row][0].ToString();
+               
                 result.Rows.Add(dr);
             }
             //for each column (stop) iterate and prepare rows
             //the rows will be equal to the columns count
 
             // int found = 0;
-            DataTable dt = stops.Copy();
+           // DataTable dt = stops.Copy();
             rs.Tables.Add(result);
-            rs.Tables.Add(dt);
+            rs.Tables.Add(stops);
                 
             return rs;
         }
