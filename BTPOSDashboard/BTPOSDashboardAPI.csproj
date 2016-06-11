@@ -483,6 +483,12 @@
     <Content Include="UI\js\ShippingOrder.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
+    <Content Include="UI\js\tableexport1.js" />
+    <Content Include="UI\js\tableexportbase64.js" />
+    <Content Include="UI\js\tableexportbase64two.js" />
+    <Content Include="UI\js\tableexportcanvas.js" />
+    <Content Include="UI\js\tableexportjspdf.js" />
+    <Content Include="UI\js\tableexportsprintf.js" />
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
@@ -567,7 +573,9 @@
     <Content Include="UI\Routes.html" />
     <Content Include="UI\SalesOrder.html" />
     <Content Include="UI\Seating.html" />
-    <Content Include="UI\ShoppingCart.html" />
+    <Content Include="UI\ShoppingCart.html">
+      <BrowseToURL>ShoppingCart.html</BrowseToURL>
+    </Content>
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />

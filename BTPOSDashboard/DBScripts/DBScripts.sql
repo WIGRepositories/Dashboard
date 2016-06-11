@@ -6488,14 +6488,14 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRoute]
       and rs.tostopid = [DestinationId])
   where r.[Id] = @routeid
 
-	if @rsId is not null 
-	 begin
-	   INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteStop]
-			   ([FleetOwnerId]
-			   ,[RouteStopId])
-		 VALUES
-			   (@fleetOwnerId,@rsId) 
-	end
+if @rsId is not null 
+ begin
+   INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteStop]
+           ([FleetOwnerId]
+           ,[RouteStopId])
+     VALUES
+           (@fleetOwnerId,@rsId) 
+end
 
 declare @stopscnt int
 declare @srcstopid int

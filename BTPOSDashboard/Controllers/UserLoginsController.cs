@@ -113,7 +113,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdresetpassword";
+            cmd.CommandText = "getresetpassword";
             cmd.Connection = conn;
             conn.Open();
 
