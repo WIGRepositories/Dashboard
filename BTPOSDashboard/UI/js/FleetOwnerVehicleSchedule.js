@@ -1,4 +1,18 @@
-﻿var myapp1 = angular.module('myApp', [])
+﻿//var myapp1 = angular.module('myApp', ['timepicker'])
+var myapp1 = angular.module('myApp', [])
+
+angular.module('myApp').directive('ngOnFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit(attr.broadcastEventName ? attr.broadcastEventName : 'ngRepeatFinished');
+                });
+            }
+        }
+    };
+});
 
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     $scope.StopCount = [];
@@ -111,7 +125,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             $scope.RouteVehicleSchedule = [];
             return;
         }
-        $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/getVehicleSchedule?fleetownerid=' + $scope.s.Id + '&routeid='
+        $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/getFORVehicleSchedule?fleetownerid=' + $scope.s.Id + '&routeid='
             + $scope.r.RouteId+'&vehicleId='+$scope.v.Id).then(function (res, data) {
             $scope.RouteVehicleSchedule = res.data;
         });
@@ -134,6 +148,23 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             document.getElementById("StopDetails").style.display = 'none';
         }
     }
+
+    $scope.save = function () {
+        var test = $scope.RouteVehicleSchedule;
+    }
+
+    $scope.test = function (a) {
+        alert(a);
+    }
+
+    $scope.$on('ngRepeatFinished', function () {
+
+        $("input[id*='Date']").datetimepicker({
+            pickDate: false
+        });
+
+       
+    });
 
 });
 

@@ -12,8 +12,8 @@ namespace BTPOSDashboard.Controllers
     public class FleetOwnerVehicleScheduleController : ApiController
     {
         [HttpGet]
-        [Route("api/FleetOwnerVehicleSchedule/getVehicleSchedule")]
-        public DataTable getroutedetails(int fleetownerid, int routeid, int vehicleId)
+        [Route("api/FleetOwnerVehicleSchedule/getFORVehicleSchedule")]
+        public DataTable getFORVehicleSchedule(int fleetownerid, int routeid, int vehicleId)
         {
             DataTable Tbl = new DataTable();
 
@@ -48,10 +48,8 @@ namespace BTPOSDashboard.Controllers
             cid.Value = routeid;
             cmd.Parameters.Add(cid);
 
-            db.Fill(ds);
-           Tbl = ds.Tables[0];
-
-           // int found = 0;
+            db.Fill(Tbl);
+          
             return Tbl;
        }
            

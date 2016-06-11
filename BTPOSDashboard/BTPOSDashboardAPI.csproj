@@ -442,6 +442,7 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\angular-animate.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
     <Content Include="UI\js\BTPOSRoute.js" />

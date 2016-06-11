@@ -7310,44 +7310,24 @@ create procedure [dbo].[getFORVehicleSchedule]
 as
 begin
 
-SELECT r.[Id]
-      ,r.routename as routename
-	  ,r.code as routecode      
-      ,src.name source
-      , dest.name dest
-  FROM [POSDashboard].[dbo].[Routes] r
-inner join stops src on src.id = r.sourceid
-inner join stops dest on dest.id = r.destinationid
-where r.Id = @routeid 
-
-SELECT distinct rd.[Id]
-      ,r.routename as routename
-	  ,r.code as routecode
-      ,rd.[RouteId]      
-      ,rd.stopid
+SELECT distinct 
+      rd.stopid
       ,src.name StopName
-      ,src.code StopCode
-	  ,[PreviousStopId]
-      ,[NextStopId]
-      ,prevstops.name prevstop
-      ,nextstops.name nextstop
-      ,[DistanceFromSource]
-      ,[DistanceFromDestination]
-      ,[DistanceFromPreviousStop]
-      ,[DistanceFromNextStop]   
+      ,src.code StopCode	 
 	  ,[StopNo]
-      ,fos.arrivalhr
-      ,fos.arrivalmin
-      ,fos.departurehr
-      ,fos.departuremin
+      ,fs.arrivalhr
+      ,fs.arrivalmin
+      ,fs.arrivalampm
+      ,fs.departurehr
+      ,fs.departuremin
+      ,fs.departureampm
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
-inner join routes r on r.id = rd.routeid
-inner join stops prevstops on prevstops.id =previousstopid
-inner join stops nextstops on nextstops.id = nextstopid
-left outer join FORouteFleetSchedule fos 
-on fos.stopid = rd.stopid and (fos.fleetownerid = @fleetownerid and fos.routeid = @routeid
-and fos.vehicleId = @vehicleId)
+  inner join fleetownerstops fos 
+on (fos.stopid = rd.stopid and fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
+left outer join FORouteFleetSchedule fs 
+on fs.stopid = fos.stopid and (fs.fleetownerid = @fleetownerid and fs.routeid = @routeid
+and fs.vehicleId = @vehicleId)
   where  (rd.routeid = @routeid )
   order by stopno
 
