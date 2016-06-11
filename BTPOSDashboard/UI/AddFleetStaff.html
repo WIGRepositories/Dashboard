@@ -354,7 +354,7 @@
                                                                     <label for="selCompany" class="col-md-3 control-label" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="selCmp" ng-change="getUsersnRoles()">
+                                                                        <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getUsersnRoles()">
 
 
                                                                             <option value="">Select</option>
@@ -368,7 +368,7 @@
                                                                     <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="u.FirstName+' '+u.LastName  for u in initdata.Table track by u.Id" ng-model=" initdata.newfleet.uu" ng-change="getUsersnRoles()">
+                                                                        <select ng-options="u.FirstName+' '+u.LastName  for u in initdata.Table track by u.Id" ng-model=" uu" ng-change="getUsersnRoles()">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -380,7 +380,7 @@
                                                                     <label for="Name" class="col-md-3 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="r.rolename for r in initdata.Table track by r.Id" ng-model="initdata.newfleet.ur" ng-change="getvehicleconfig()">
+                                                                        <select ng-options="r.rolename for r in initdata.Table track by r.Id" ng-model="initdata.newfleet.ur" ng-change="GetVehicleConfig()">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
