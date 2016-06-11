@@ -92,12 +92,12 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
         }
         var cmpId = (selCmp == null) ? -1 : selCmp.Id;
 
-        $http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?companyId=' + cmpId).then(function (res, data) {
-            $scope.initdata = res.data;
+        $http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?companyId=' + cmpId + '&UserId=' + UserId).then(function (res, data) {
+            $scope.cmpUsers1 = res.data;
         });
 
-        $http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?cmpId=' + cmpId).then(function (res, data) {
-            $scope.initdata = res.data;
+        $http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?cmpId=' + cmpId + '&RoleId=' + RoleId).then(function (res, data) {
+            $scope.cmproles1 = res.data;
         });
     }
 
