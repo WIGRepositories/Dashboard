@@ -466,6 +466,9 @@
     <Content Include="UI\js\Inventorysales.js" />
     <Content Include="UI\js\InventoryStatus.js" />
     <Content Include="UI\js\Invoices.js" />
+    <Content Include="UI\js\JavaScript1.js" />
+    <Content Include="UI\js\treetable.js" />
+    <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
     <Content Include="UI\js\LicensePricing.js" />
     <Content Include="UI\js\LicenseTypes.js" />
@@ -482,6 +485,7 @@
     <Content Include="UI\js\ShippingOrder.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
+    <Content Include="UI\js\treeview.js" />
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
