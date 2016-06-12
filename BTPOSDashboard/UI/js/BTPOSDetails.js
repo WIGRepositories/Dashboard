@@ -10,6 +10,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.BTPOS1 = response.data;
             //  $localStorage.BTPOSOld = response.data;
         })
+
+        var vc = {
+            needCompanyName: '1'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
+            //$scope.initdata = res.data;
+            $scope.companies = res.data;
+        });
     };
 
     $scope.addpos = function (pos)
@@ -53,7 +69,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 StatusId: 4,//pos.StatusId,
                 ipconfig: pos.ipconfig,
                 active: 1,//Group.ipconfig,
-                fleetownerid: 1,//pos.FleetOwnerId,
+                fleetownerid: null,//pos.FleetOwnerId,
                 insupdflag: 'U'
             }
 
@@ -82,7 +98,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
       
                 var newpos = {
                     Id: Group.Id,
-                    CompanyId: 1,//Group.CompanyId,
+                    CompanyId: Group.CompanyId,
                     GroupId: Group.GroupId,
                     IMEI: Group.IMEI,
                     POSID: Group.POSID,

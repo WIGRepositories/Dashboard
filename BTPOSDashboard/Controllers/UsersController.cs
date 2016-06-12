@@ -102,11 +102,14 @@ namespace BTPOSDashboardAPI.Controllers
                 SqlParameter UUserName = new SqlParameter("@UserName",SqlDbType.VarChar,15);
                 UUserName.Value = U.UserName;
                 cmd.Parameters.Add(UUserName);
-
-
+                
                 SqlParameter UPassword = new SqlParameter("@Password",SqlDbType.VarChar,15);
                 UPassword.Value = U.Password;
                 cmd.Parameters.Add(UPassword);
+
+                SqlParameter MgrId = new SqlParameter("@ManagerId", SqlDbType.Int);
+                MgrId.Value = U.mgrId;
+                cmd.Parameters.Add(MgrId);
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                 insupdflag.Value = U.insupdflag;

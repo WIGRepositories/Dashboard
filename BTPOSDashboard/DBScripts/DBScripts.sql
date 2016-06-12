@@ -4625,6 +4625,7 @@ create procedure [dbo].[InsUpdUsers](
 ,@UserName varchar(30)  = null
 ,@Password varchar(30)  = ''
 ,@insupdflag varchar(10)
+,@ManagerId int = null
 ,@userid int = -1)
  as begin
  
@@ -4651,8 +4652,8 @@ declare @fc varchar(10)
   
  if @cnt = 0 
  begin
-	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
-	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
+	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId,ManagerId)
+	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId,@ManagerId) 
   
   --insert into edit history
 	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
@@ -4712,7 +4713,8 @@ end
  MiddleName = @MiddleName,
  Email = @Email,
  MobileNo = @MobileNo, 
- Active = @Active 
+ Active = @Active
+ --ManagerId = @ManagerId 
  where id = @userid
  
 -- insert user role
@@ -5947,23 +5949,24 @@ BEGIN
 
 	
 	if @needRoutes  = 1
-	select routename,ID,Code from routes
+	select routename,ID,Code from routes order by routename
 		
 	if @needRoles  = 1 
-	select name,ID from Roles
+	select name,ID from Roles order by name
 	
 	if @needvehicleRegno  = 1
     select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1)
     and (CompanyId = @cmpId or @cmpId = -1))
+    order by VehicleRegNo
     
 	--vehicle type data
 	if @needvehicleType = 1
-	select Name, Id from Types where TypeGroupId = 4
+	select Name, Id from Types where TypeGroupId = 4 order by Name
 	
 	--service type data
 	if @needServiceType = 1
-	select Name, Id from Types where TypeGroupId = 5
+	select Name, Id from Types where TypeGroupId = 5 order by Name
 	
 	--fleet owners
 	if @needfleetowners = 1
@@ -5976,14 +5979,15 @@ BEGIN
 	inner join Users u on  u.Id = FO.UserId
 	inner join Company c on c.Id = FO.companyId
     where (FO.companyId = @cmpId or @cmpId =-1)
-	
+	order by u.FirstName,u.LastName
+
 	--companys
 	if @needCompanyName = 1
-	select Name,Id from Company
+	select Name,Id from Company order by Name
 	
 	--vehicle layout type
 	if @needVehicleLayout = 1
-	select Name, Id from Types where TypeGroupId = 6
+	select Name, Id from Types where TypeGroupId = 6 order by Name
 	
 	if @needbtpos = 1		
 SELECT b.[Id]
@@ -5994,12 +5998,14 @@ SELECT b.[Id]
       ,fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   where (fleetownerid = @fleetownerId or @fleetownerid =-1)
+order by POSID
 
 if @needHireVehicle = 1
 select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1) 
     and (servicetypeId = 11))
-	
+	order by VehicleRegNo
+
 	if @needFleetOwnerRoutes = 1
 	SELECT 
       fr.[Id]
@@ -6023,9 +6029,6 @@ inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
 order by routename
 	
 END
-
-
---[VehicleConfiguration] 1,0,1,0,0,1,0,0,1,-1,-1,-1
 
 
 GO
@@ -7173,7 +7176,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
+create PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
 	@VehicleLayoutTypeId int,
 	@RowNo int,
 	@ColNo varchar(50),
