@@ -1982,6 +1982,13 @@
     <Content Include="UI\vendors\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="UI\vendors\summernote\summernote.css" />
     <Content Include="UI\vendors\summernote\summernote.js" />
+    <Content Include="Views\init.s" />
+    <Content Include="Views\main.c" />
+    <Content Include="Views\main.h" />
+    <Content Include="Views\public.c" />
+    <Content Include="Views\public.h" />
+    <Content Include="Views\Tools.c" />
+    <Content Include="Views\Tools.h" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2430,7 +2437,6 @@
     <Folder Include="UI\vendors\bootstrap-datetimepicker\bootstrap\" />
     <Folder Include="UI\vendors\css3-treeview\" />
     <Folder Include="UI\vendors\jquery-ui-1.10.4.custom\jquery-ui-1.10.4.custom\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

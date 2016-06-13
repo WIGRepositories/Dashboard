@@ -28,7 +28,8 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
             $scope.cmpdata = null;
-            $scope.Fleet = null;
+            $scope.userRoles = null;
+            $scope.vehicles = null;
             return;
         }
         var vc = {
@@ -49,7 +50,10 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
         $http(req).then(function (res) {
             $scope.cmpdata = res.data;
         });
-        getUsersnRoles();
+        
+        $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+            $scope.userRoles = res.data;
+        });
     }    
 
     $scope.GetVehicleConfig = function () {
@@ -65,7 +69,7 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
 
         var vc = {
             needvehicleRegno: '1',
-            sId: fleet.Id,
+            fleetownerId: fleetowner.Id,
            
         };
 
@@ -83,32 +87,35 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
     }
     
     $scope.getUsersnRoles = function () {
-        var s = $scope.initdata.newfleet.cmp;
+        var s = $scope.cmp;
 
         if (s == null) {
-            $scope.cmproles1 = null;
-            $scope.cmpUsers1 = null;
+            $scope.userRoles = null;           
             return;
         }
-        var cmpId = (selCmp == null) ? -1 : selCmp.Id;
+        var cmpId = (s == null) ? -1 : s.Id;
 
-        $http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?companyId=' + cmpId + '&UserId=' + UserId).then(function (res, data) {
-            $scope.cmpUsers1 = res.data;
-        });
+        //$http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?companyId=' + cmpId + '&UserId=' + UserId).then(function (res, data) {
+        //    $scope.cmpUsers1 = res.data;
+        //});
 
-        $http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?cmpId=' + cmpId + '&RoleId=' + RoleId).then(function (res, data) {
-            $scope.cmproles1 = res.data;
+        //$http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?cmpId=' + cmpId + '&RoleId=' + RoleId).then(function (res, data) {
+        //    $scope.cmproles1 = res.data;
+        //});
+
+        $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+            $scope.userRoles = res.data;
         });
     }
 
-    $scope.savenewfleetStaffdetails = function (initdata) {
-        var newVD = $scope.initdata.newfleet;
-        if (newVD == null || newVD.v == null) {
+    $scope.savenewfleetStaffdetails = function () {
+        var newVD = $scope.f;
+        if (newVD == null) {
              alert('Please select VehicleRegNo.');
              return;
          }
  
-        if (newVD.v.Id == null) {
+        if (newVD.Id == null) {
              alert('Please select VehicleRegNo.');
              return;
          }
@@ -117,10 +124,10 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
 
         var Fleet = {
             Id: -1,
-            vehicleId:newVD.v.Id,
-            roleId:newVD.ur.Id,
+            vehicleId:newVD.Id,
+            roleId:newVD.uu.RoleId,
             UserId:newVD.uu.Id,
-            cmpId:newVD.cmp.Id,
+            cmpId: $scope.cmp.Id,
             FromDate:newVD.fd,
             ToDate:newVD.td,
            // Active:1,
@@ -143,15 +150,17 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
     }
 
     $scope.GetFleetStaff = function () {
-        if ($scope.cmp == null) {
+        if ($scope.cmp == null || $scope.cmp.Id == null) {
             $scope.FleetStaff = null;
             return;
         }
 
-        //var foId = ($scope.fo == null) ? -1 : $scope.fo.Id;
-        var cmpid = ($scope.cmp == null) ? -1 : $scope.cmp.Id;
+        if ($scope.s == null || $scope.s.Id == null) {
+            $scope.FleetStaff = null;
+            return;
+        }       
 
-        $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?foId=-1&cmpId=' + cmpid).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?foId=' + $scope.s.Id + '&cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.FleetStaff = res.data;
         });
     }

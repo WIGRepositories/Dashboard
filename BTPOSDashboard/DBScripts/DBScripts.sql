@@ -2471,6 +2471,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[GetBTPOSDetails]
+(@cmpId int = -1, @fleetownerId int =-1)
 AS
 BEGIN
 	
@@ -2488,7 +2489,10 @@ SELECT b.[Id]
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   left outer join Types t on t.Id = statusid
   left outer join Company c on c.Id = CompanyId
-  left outer join Users u on u.Id = FleetOwnerId
+  left outer join fleetowner f on f.id = FleetOwnerId 
+  left outer join Users u on u.Id = f.Id 
+where (c.Id = @cmpId or @cmpId = -1)
+and(f.Id = @fleetownerId or @fleetownerId = -1)
   
 end
 
@@ -7334,6 +7338,57 @@ and fs.vehicleId = @vehicleId)
   where  (rd.routeid = @routeid )
   order by stopno
 
+end
+
+GO
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+
+Create procedure [dbo].[InsUpdDelFleetAvailability](
+@Id int,
+@VehicleId int,
+@FromDate datetime = null,
+@ToDate datetime = null,
+@insupddelflag varchar(1)
+)
+as
+begin
+declare @cnt int
+set @cnt = 0
+
+if @insupddelflag = 'I'
+		begin
+			--check if already company exists
+			select @cnt = count(1) from FleetAvailability where VehicleId = @VehicleId
+
+			if @cnt = 0 
+			begin
+
+			INSERT INTO [POSDashboard].[dbo].[FleetAvailability]
+           ([VehicleId]
+           ,[FromDate]
+           ,[ToDate])
+			VALUES
+           (@VehicleId,@FromDate,@ToDate)			
+		   
+			end
+	 end
+else
+
+   if @insupddelflag = 'U'
+		begin
+				UPDATE [POSDashboard].[dbo].[FleetAvailability]
+				SET [FromDate] = @FromDate
+					,[ToDate] = @ToDate
+				 WHERE VehicleId = @VehicleId
+		end
+   else
+	if @insupddelflag = 'D'
+     delete from [POSDashboard].[dbo].[FleetAvailability]
+	 where VehicleId = @VehicleId
 end
 
 GO
