@@ -51,19 +51,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
    
         $scope.save = function (RouteDetails) {
             
-            //var RouteDetails = {
-            //    Id:RouteDetails.Id,
-            //    RouteId: route.Id,
-            //    stopname: RouteDetails.stopname,
-            //    Description: RouteDetails.Description,
-            //    StopCode: RouteDetails.StopCode,
-            //    DistanceFromSource: RouteDetails.DistanceFromSource,
-            //    DistanceFromDestination: RouteDetails.DistanceFromDestination,
-            //    DistanceFromPreviousStop: RouteDetails.DistanceFromPreviousStop,
-            //    DistanceFromNextStop: RouteDetails.DistanceFromNextStop
-
-            //};
-     
+            
             var req = {
                 method: 'POST',
                 url: 'http://localhost:1476/api/routedetails/saveroutedetails',

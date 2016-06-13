@@ -66,7 +66,7 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
         var vc = {
             needvehicleRegno: '1',
             sId: fleet.Id,
-            needfleetownerroutes: '1'
+           
         };
 
         var req = {
@@ -83,9 +83,9 @@ var mycrtl1 = myapp1.controller('Mycntrl', function ($scope, $http, $localStorag
     }
     
     $scope.getUsersnRoles = function () {
-        var selCmp = $scope.initdata.newfleet.cmp;
+        var s = $scope.initdata.newfleet.cmp;
 
-        if (selCmp == null) {
+        if (s == null) {
             $scope.cmproles1 = null;
             $scope.cmpUsers1 = null;
             return;

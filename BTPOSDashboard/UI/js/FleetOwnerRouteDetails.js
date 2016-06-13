@@ -61,7 +61,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         });
     }
   
-    $scope.GetRouteDetails = function () {
+    $scope.GetFORoutes = function () {
 
 
         if ($scope.s == null) {
@@ -70,8 +70,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         }
        
         var vc = {
-            needroutes: '1',
-            sId: $scope.s.Id
+            needFleetOwnerRoutes: '1',
+            fleetownerId: $scope.s.Id
         };
 
         var req = {
@@ -86,19 +86,60 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         }
         $http(req).then(function (res) {
             $scope.sdata = res.data;
-            GetRouteDetails1();
+           // GetRouteDetails1();
         });
     }
 
-    $scope.GetRouteDetails1 = function (route) {
-        if (route == null || route.Id == null) {
+    $scope.GetRouteDetails = function () {
+        $scope.RouteDetails = [];
+        if ($scope.r == null || $scope.r.RouteId == null) {
             //alert('Please select a route.');
             $scope.RouteDetails = [];
             return;
         }
-        $http.get('http://localhost:1476/api/routedetails/getroutedetails1?routeid=' + route.Id).then(function (res, data) {
+        $http.get('http://localhost:1476/api/routedetails/getroutedetails?fleetownerid=' + $scope.s.Id + '&routeid=' + $scope.r.RouteId).then(function (res, data) {
             $scope.RouteDetails = res.data;
         });
+    }
+
+    $scope.SetCurrStop = function (currStop, indx) {
+        //alert(currStop.StopName);
+        $scope.currStop = currStop;
+        $scope.currStopIndx = indx;
+    }
+
+    $scope.save = function () {
+        var stops = $scope.RouteDetails.Table1;
+
+        var fleetownerstops = new Array();
+        for (i = 0; i < stops.length; i++)
+        {
+            if(stops[i].assigned != stops[i].newassigned)
+            {               
+                var item = {
+                    "label": savedata[i][j].Id,
+                    "RowNo": i,
+                    "ColNo": j,
+                    "VehicleLayoutTypeId": $scope.layout.vl.Id,
+                    "VehicleTypeId": $scope.layout.vt.Id,
+                    "insupdflag": (stops[i].newassigned == "1") ? "I" : "D"
+                }
+                fleetownerstops.push(item)                
+            }
+        
+       
+        //write the post logic and test
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleLayout/saveVehicleLayout',
+            data: checkedArr
+
+        }
+        $http(req).then(function (res) {
+            alert('saved successfully.');
+        });
+    }
+
     }
 
 });

@@ -1,4 +1,18 @@
-﻿var myapp1 = angular.module('myApp', [])
+﻿//var myapp1 = angular.module('myApp', ['timepicker'])
+var myapp1 = angular.module('myApp', [])
+
+angular.module('myApp').directive('ngOnFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit(attr.broadcastEventName ? attr.broadcastEventName : 'ngRepeatFinished');
+                });
+            }
+        }
+    };
+});
 
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     $scope.StopCount = [];
@@ -46,16 +60,18 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             $scope.cmpdata = res.data;
         });
     }
-    $scope.GetRouteDetails = function () {
+
+    $scope.GetFORoutes = function () {
+
+
         if ($scope.s == null) {
-            $scope.Routes = null;
+            $scope.routes = null;
             return;
         }
-      
 
         var vc = {
-            needroutes: '1',
-            sId: $scope.s.Id
+            needFleetOwnerRoutes: '1',
+            fleetownerId: $scope.s.Id
         };
 
         var req = {
@@ -70,24 +86,57 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         }
         $http(req).then(function (res) {
             $scope.sdata = res.data;
-            GetRouteDetails1();
-           // GetshowDivstops();
-            //$scope.StopCount = StopCount.array.Length;
+            // GetRouteDetails1();
         });
-
     }
 
-    $scope.GetRouteDetails1 = function (route) {
-        if (route == null || route.Id == null) {
-            //alert('Please select a route.');
-            $scope.RouteDetails = [];
-         //   $scope.StopCount = [];
+    $scope.GetRouteFleet = function () {
+
+        var selCmp = $scope.cmp;
+
+        if (selCmp == null) {
+            $scope.FleetRoute = null;
             return;
         }
-        $http.get('http://localhost:1476/api/routedetails/getroutedetails1?routeid=' + route.Id).then(function (res, data) {
-            $scope.RouteDetails = res.data;
+        var cmpId = (selCmp == null) ? -1 : selCmp.Id;
+
+        var fr = {
+            cmpId: selCmp.Id,
+            routeid: $scope.r.RouteId,
+            fleetownerId: $scope.s.Id,           
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetRoutes/getFleetRoutesList',
+            //headers: {
+            //    'Content-Type': undefined
+            data: fr
+        }
+        $http(req).then(function (res) {
+            $scope.RouteFleet = res.data;
         });
     }
+
+    $scope.GetVehicleSchedule = function () {
+        $scope.RouteVehicleSchedule = [];
+        if ($scope.r == null || $scope.r.RouteId == null) {
+            //alert('Please select a route.');
+            $scope.RouteVehicleSchedule = [];
+            return;
+        }
+        $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/getFORVehicleSchedule?fleetownerid=' + $scope.s.Id + '&routeid='
+            + $scope.r.RouteId+'&vehicleId='+$scope.v.Id).then(function (res, data) {
+            $scope.RouteVehicleSchedule = res.data;
+        });
+    }
+
+    $scope.SetCurrStop = function (currStop, indx) {
+        //alert(currStop.StopName);
+        $scope.currStop = currStop;
+        $scope.currStopIndx = indx;
+    }
+
 
     $scope.GetshowDivStopDetails= function () {
 
@@ -99,6 +148,23 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             document.getElementById("StopDetails").style.display = 'none';
         }
     }
+
+    $scope.save = function () {
+        var test = $scope.RouteVehicleSchedule;
+    }
+
+    $scope.test = function (a) {
+        alert(a);
+    }
+
+    $scope.$on('ngRepeatFinished', function () {
+
+        $("input[id*='Date']").datetimepicker({
+            pickDate: false
+        });
+
+       
+    });
 
 });
 

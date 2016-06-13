@@ -6002,20 +6002,25 @@ select VehicleRegNo,Id from FleetDetails
 	
 	if @needFleetOwnerRoutes = 1
 	SELECT 
-      fr.[Id],
-      fr.[FleetOwnerId],
-      fr.[CompanyId],
-      r.routename,
-      r.code,
-      r.[Id] RouteId,
-      [FromDate],
-      [ToDate],
-      fr.[Active]     
+      fr.[Id]
+      ,fr.[FleetOwnerId]
+      ,fr.[CompanyId]
+      ,r.routename
+      ,r.code
+      ,r.[Id] RouteId
+      ,src.name Source
+      ,dest.name Destination
+      ,[FromDate]
+      ,[ToDate]
+      ,fr.[Active]     
   FROM routes r
+inner join stops src on src.id = r.sourceid
+inner join stops dest on dest.id = r.destinationid
 inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
  inner join fleetowner f on f.id = fr.fleetownerid 
   inner join users u on f.userid = u.id 
   where f.Id = @fleetownerId
+order by routename
 	
 END
 
@@ -6492,6 +6497,42 @@ if @rsId is not null
            (@fleetOwnerId,@rsId) 
 end
 
+declare @stopscnt int
+declare @srcstopid int
+declare @deststopid int
+
+  select @srcstopid = sourceid from routes where id = @routeid
+select @deststopid = destinationid from routes where id = @routeid
+
+select @stopscnt = count(*) from fleetownerstops where fleetownerid = @fleetOwnerId
+and routeid = @routeid and stopid = @srcstopid
+
+if @stopscnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerStops]
+           ([FleetOwnerId]
+           ,[RouteId]
+           ,[StopId])
+     VALUES
+           (@fleetOwnerId
+           ,@RouteId
+           ,@srcstopid)
+
+end
+
+select @stopscnt = count(*) from fleetownerstops where fleetownerid = @fleetOwnerId
+and routeid = @routeid and stopid = @deststopid
+
+if @stopscnt = 0 
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerStops]
+           ([FleetOwnerId]
+           ,[RouteId]
+           ,[StopId])
+     VALUES
+           (@fleetOwnerId
+           ,@RouteId
+           ,@deststopid)
+
 end
 else
   if @insupddelflag = 'U'
@@ -6519,8 +6560,13 @@ where [FleetOwnerId] = @fleetOwnerId
 and rs.RouteId = @RouteId
 )
 
+
+delete from fleetownerstops where routeid = @routeid and fleetownerid = @fleetOwnerId
+
+delete from FORouteFleetSchedule where routeid = @routeid  and fleetownerid = @fleetOwnerId
+
 end
-       
+
 
 End
 
@@ -7158,26 +7204,133 @@ INSERT INTO [dbo].[FleetOwnerVehicleLayout]
 
 
 End
-/****** Object:  StoredProcedure [dbo].[getresetpassword]    Script Date: 06/10/2016 11:20:19 ******/
+Go
+
+/****** Object:  Table [dbo].[FleetOwnerStops]    Script Date: 06/10/2016 22:21:15 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+CREATE TABLE [dbo].[FleetOwnerStops](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[StopId] [int] NOT NULL
+) ON [PRIMARY]
 
-create PROCEDURE [dbo].[getresetpassword]
-	-- Add the parameters for the stored procedure here
+GO
 
- @UserName varchar(50)
-,@OldPassword varchar(50)
-,@NewPassword varchar(50)  
-,@ReenterNewPassword varchar(50)  
-
-AS
-BEGIN
-	
-UPDATE UserLogins
-SET PassKey=@NewPassword where LoginInfo = @UserName
-and PassKey = @OldPassword
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
 
 
-END
+create procedure [dbo].[GetFleetOwnerRouteDetails]
+(@fleetOwnerId int, @routeid int)
+as
+begin
+
+SELECT r.[Id]
+      ,r.routename as routename
+	  ,r.code as routecode      
+      ,src.name source
+      , dest.name dest
+  FROM [POSDashboard].[dbo].[Routes] r
+inner join stops src on src.id = r.sourceid
+inner join stops dest on dest.id = r.destinationid
+where r.Id = @routeid 
+
+SELECT distinct rd.[Id]
+      ,r.routename as routename
+	  ,r.code as routecode
+      ,rd.[RouteId]      
+      ,rd.stopid
+      ,src.name StopName
+      ,src.code StopCode
+	  ,[PreviousStopId]
+      ,[NextStopId]
+      ,prevstops.name prevstop
+      ,nextstops.name nextstop
+      ,[DistanceFromSource]
+      ,[DistanceFromDestination]
+      ,[DistanceFromPreviousStop]
+      ,[DistanceFromNextStop]   
+	  ,[StopNo]
+      ,case 
+when fos.stopid is null then 0
+ else 1 end assigned
+  FROM [POSDashboard].[dbo].[RouteDetails] rd
+  inner join stops src on src.id = rd.stopid
+inner join routes r on r.id = rd.routeid
+inner join stops prevstops on prevstops.id =previousstopid
+inner join stops nextstops on nextstops.id = nextstopid
+left outer join fleetownerstops fos 
+on fos.stopid = rd.stopid and (fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
+  where  (rd.routeid = @routeid )
+  order by stopno
+
+end
+
+GO
+
+
+/****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/11/2016 05:35:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[FORouteFleetSchedule](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleId] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[StopId] [int] NOT NULL,
+	[ArrivalHr] [int] NULL,
+	[DepartureHr] [int] NULL,
+	[Duration] [decimal](18, 0) NULL,
+	[ArrivalMin] [int] NULL,
+	[DepartureMin] [int] NULL,
+	[ArrivalAMPM] [varchar](2) NULL,
+	[DepartureAMPM] [varchar](2) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+
+Go
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+create procedure [dbo].[getFORVehicleSchedule]
+(@fleetOwnerId int, @routeid int, @vehicleId int)
+as
+begin
+
+SELECT distinct 
+      rd.stopid
+      ,src.name StopName
+      ,src.code StopCode	 
+	  ,[StopNo]
+      ,fs.arrivalhr
+      ,fs.arrivalmin
+      ,fs.arrivalampm
+      ,fs.departurehr
+      ,fs.departuremin
+      ,fs.departureampm
+  FROM [POSDashboard].[dbo].[RouteDetails] rd
+  inner join stops src on src.id = rd.stopid
+  inner join fleetownerstops fos 
+on (fos.stopid = rd.stopid and fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
+left outer join FORouteFleetSchedule fs 
+on fs.stopid = fos.stopid and (fs.fleetownerid = @fleetownerid and fs.routeid = @routeid
+and fs.vehicleId = @vehicleId)
+  where  (rd.routeid = @routeid )
+  order by stopno
+
+end
+
+GO

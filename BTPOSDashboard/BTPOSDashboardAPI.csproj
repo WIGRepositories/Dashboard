@@ -442,6 +442,7 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\angular-animate.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
@@ -482,6 +483,12 @@
     <Content Include="UI\js\ShippingOrder.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
+    <Content Include="UI\js\tableexport1.js" />
+    <Content Include="UI\js\tableexportbase64.js" />
+    <Content Include="UI\js\tableexportbase64two.js" />
+    <Content Include="UI\js\tableexportcanvas.js" />
+    <Content Include="UI\js\tableexportjspdf.js" />
+    <Content Include="UI\js\tableexportsprintf.js" />
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />

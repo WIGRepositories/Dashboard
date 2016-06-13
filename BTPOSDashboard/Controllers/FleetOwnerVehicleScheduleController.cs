@@ -12,8 +12,8 @@ namespace BTPOSDashboard.Controllers
     public class FleetOwnerVehicleScheduleController : ApiController
     {
         [HttpGet]
-        [Route("api/FleetOwnerVehicleSchedule/getfleetroutelist")]
-       public DataTable getroutedetails(int sId, int cmpid, int routeid)
+        [Route("api/FleetOwnerVehicleSchedule/getFORVehicleSchedule")]
+        public DataTable getFORVehicleSchedule(int fleetownerid, int routeid, int vehicleId)
         {
             DataTable Tbl = new DataTable();
 
@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getRoutes";
+            cmd.CommandText = "getFORVehicleSchedule";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -33,13 +33,13 @@ namespace BTPOSDashboard.Controllers
             SqlParameter fo = new SqlParameter();
             fo.ParameterName = "@fleetownerId";
             fo.SqlDbType = SqlDbType.Int;
-            fo.Value = sId;
+            fo.Value = fleetownerid;
             cmd.Parameters.Add(fo);
 
             SqlParameter fsc = new SqlParameter();
-            fsc.ParameterName = "@cmpId";
+            fsc.ParameterName = "@vehicleId";
             fsc.SqlDbType = SqlDbType.Int;
-            fsc.Value = cmpid;
+            fsc.Value = vehicleId;
             cmd.Parameters.Add(fsc);
 
             SqlParameter cid = new SqlParameter();
@@ -48,10 +48,8 @@ namespace BTPOSDashboard.Controllers
             cid.Value = routeid;
             cmd.Parameters.Add(cid);
 
-            db.Fill(ds);
-           Tbl = ds.Tables[0];
-
-           // int found = 0;
+            db.Fill(Tbl);
+          
             return Tbl;
        }
            
