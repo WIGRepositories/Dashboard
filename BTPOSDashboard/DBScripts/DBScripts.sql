@@ -7127,7 +7127,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
+create PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
 	@VehicleLayoutTypeId int,
 	@RowNo int,
 	@ColNo varchar(50),
