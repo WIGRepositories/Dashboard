@@ -4717,7 +4717,7 @@ end
  MiddleName = @MiddleName,
  Email = @Email,
  MobileNo = @MobileNo, 
- Active = @Active
+ Active = @Active 
  --ManagerId = @ManagerId 
  where id = @userid
  
@@ -5984,7 +5984,7 @@ BEGIN
 	inner join Company c on c.Id = FO.companyId
     where (FO.companyId = @cmpId or @cmpId =-1)
 	order by u.FirstName,u.LastName
-
+	
 	--companys
 	if @needCompanyName = 1
 	select Name,Id from Company order by Name
@@ -6009,7 +6009,7 @@ select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1) 
     and (servicetypeId = 11))
 	order by VehicleRegNo
-
+	
 	if @needFleetOwnerRoutes = 1
 	SELECT 
       fr.[Id]
