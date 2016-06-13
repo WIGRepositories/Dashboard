@@ -346,6 +346,7 @@
 
                                                 <div class="table-container">
 
+
                                                     <div class="row mbm">
                                                         <div class="col-md-5">
                                                             Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
@@ -355,14 +356,95 @@
                                                         <div class="col-md-5">
                                                             Fleet Owner:<select ng-options="s.Name for s in FleetOwners.Table track by s.Id" ng-model="s" ng-change="GetFleetRoutes()">
 
-    <option value="">Select</option>
-</select>
+                                                                     <option value="">Select</option>
+                                                                       </select>
                                                         </div>
 
 
 
                                                         <div class="actions">
                                                             <a href="NewFleetRoutes.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">Assign Route to fleet</button></a>
+
+                                                        </div>
+
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Routes</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="currGroup">
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Vehicle Reg No:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Fleet Route:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="currGroup.code" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Effective From:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.desc" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Effective Till:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" ng-checked="cmp.active" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="button" class="btn btn-primary" ng-click="saveCmpChanges(currGroup, 'U');">Save</button>
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
 
                                                         </div>
 

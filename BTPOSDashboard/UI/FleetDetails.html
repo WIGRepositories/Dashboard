@@ -366,7 +366,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
-                                                                                        <label for="Description" class="col-md-6 control-label">Vehicle Reg No <span class='require'>*</span></label>
+                                                                                        <label for="Description" class="col-md-6 control-label">Vehicle Reg No<span class='require'>*</span></label>
 
                                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.VehicleRegNo}}" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
                                                                                     </div>
@@ -406,8 +406,8 @@
                                                                                     </div>
                                                                                 </div>
 
-                                                                                <div class="col-md-4">
-                                                                                    <label for="Name" class="col-md-8 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Name" class="col-md-10 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
 
 
                                                                                     <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
@@ -440,6 +440,27 @@
 
 
 
+                                                              
+
+
+                                                                            <div class="col-md-12">
+
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Name" class="col-md-10 control-label">Date Of Registration:<span class='require'></span></label>
+
+                                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                                        <input type="text" class="form-control" value="{{currVD.DateOfRegistration}}" ng-model="initdata.newfleet.dor" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                                    </div>
+
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Description" class="col-md-5 control-label">Seating Capacity<span class='require'>*</span></label>
+
+                                                                                    <div class="col-md-6"><input id="Description" type="text" value="{{currVD.SeatingCapacity}}" cl class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
+
+                                                                                </div>
+                                                                            </div>
                                                                         <div class="row">
 
 
@@ -449,27 +470,11 @@
                                                                                     <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-4">
-                                                                                <label for="Name" class="col-md-8 control-label">Date Of Registration:<span class='require'></span></label>
-
-                                                                                <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
-                                                                                    <input type="text" class="form-control" value="{{currVD.DateOfRegistration}}" ng-model="initdata.newfleet.dor" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                                </div>
-
-
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <label for="Description" class="col-md-5 control-label">Seating Capacity<span class='require'>*</span></label>
-
-                                                                                <div class="col-md-7"><input id="Description" type="text" value="{{currVD.SeatingCapacity}}" cl class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
-
+                                                                            <div class="col-md-6 col-md-offset-2">
+                                                                                <button class="btn btn-primary" type="button">Save</button>
+                                                                                <button class="btn btn-primary" type="button">Cancel</button>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-6 col-md-offset-2">
-                                                                            <button class="btn btn-primary" type="button">Save</button>
-                                                                            <button class="btn btn-primary" type="button">Cancel</button>
-                                                                        </div>
-                                                                    </div>
                                                                 </div>
 
                                                                 <div>
