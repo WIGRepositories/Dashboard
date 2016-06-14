@@ -442,6 +442,7 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\angular-animate.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
@@ -461,6 +462,7 @@
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
     <Content Include="UI\js\handsontable.full.js" />
+    <Content Include="UI\js\html5shiv.js" />
     <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
@@ -475,6 +477,7 @@
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\PaymentHistory.js" />
     <Content Include="UI\js\PurchaseOrder.js" />
+    <Content Include="UI\js\respond.min.js" />
     <Content Include="UI\js\RoleDetails.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\RouteFare.js" />
@@ -482,6 +485,12 @@
     <Content Include="UI\js\ShippingOrder.js" />
     <Content Include="UI\js\Stops.js" />
     <Content Include="UI\js\SubCategory.js" />
+    <Content Include="UI\js\tableexport1.js" />
+    <Content Include="UI\js\tableexportbase64.js" />
+    <Content Include="UI\js\tableexportbase64two.js" />
+    <Content Include="UI\js\tableexportcanvas.js" />
+    <Content Include="UI\js\tableexportjspdf.js" />
+    <Content Include="UI\js\tableexportsprintf.js" />
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
@@ -566,7 +575,9 @@
     <Content Include="UI\Routes.html" />
     <Content Include="UI\SalesOrder.html" />
     <Content Include="UI\Seating.html" />
-    <Content Include="UI\ShoppingCart.html" />
+    <Content Include="UI\ShoppingCart.html">
+      <BrowseToURL>ShoppingCart.html</BrowseToURL>
+    </Content>
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
@@ -1971,6 +1982,13 @@
     <Content Include="UI\vendors\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="UI\vendors\summernote\summernote.css" />
     <Content Include="UI\vendors\summernote\summernote.js" />
+    <Content Include="Views\init.s" />
+    <Content Include="Views\main.c" />
+    <Content Include="Views\main.h" />
+    <Content Include="Views\public.c" />
+    <Content Include="Views\public.h" />
+    <Content Include="Views\Tools.c" />
+    <Content Include="Views\Tools.h" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2419,7 +2437,6 @@
     <Folder Include="UI\vendors\bootstrap-datetimepicker\bootstrap\" />
     <Folder Include="UI\vendors\css3-treeview\" />
     <Folder Include="UI\vendors\jquery-ui-1.10.4.custom\jquery-ui-1.10.4.custom\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

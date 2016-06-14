@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetBTPOSList();">
+<body ng-init="GetCompanies();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -340,7 +340,19 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
+                                                            <div class="col-md-5">
+                                                                Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()">
+    <option value="">All</option>
+</select>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()">
 
+    <option value="">All</option>
+</select>
+                                                            </div>
+                                                           
+                                                       
                                                         <div class="actions">
                                                             <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button></a>
 
@@ -407,10 +419,8 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <select id="selcmp" class="form-control" ng-model="currGroup.companyname">
-                                                                                            <option value="" selected disabled>Select</option>
-                                                                                            <option selected value="1">Cmp1</option>
-                                                                                            <option value="5">cmp2</option>
+                                                                                        <select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" value="{{currGroup.companyname}}" ng-change="">
+                                                                                            <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -428,11 +438,9 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <select id="selusertype" class="form-control" ng-model="currGroup.FleetOwnerId">
-                                                                                            <option value="" selected disabled>Select</option>
-                                                                                            <option selected value="4">Admin Admin</option>
-                                                                                            <option value="5">Srujan simha</option>
-                                                                                            <option value="6">Naveen kumar</option>
+                                                                                        <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" value="{{currGroup.fleetowner}}">
+
+                                                                                            <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
@@ -449,12 +457,11 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <select id="selstatus" class="form-control" ng-model="currGroup.StatusId">
-                                                                                            <option value="" selected disabled>Select</option>
-                                                                                            <option selected value="4">New</option>
-                                                                                            <option selected value="6">Activate</option>
+                                                                                        <select ng-options="t.Name for t in Types track by t.Id" ng-model="currGroup.StatusId" value="{{currGroup.StatusId}}">
+
+                                                                                            <option value="{{currGroup.StatusId}}">{{currGroup.Status}}</option>
                                                                                         </select>
-                                                                                    </div>
+</div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -488,8 +495,8 @@
                                                         <tbody>
 
                                                             <tr ng-repeat="pos in BTPOS1" class="gradeA">
-                                                               <td>{{pos.POSID}}</td>
-                                                                <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);"/></td>
+                                                                <td>{{pos.POSID}}</td>
+                                                                <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);" /></td>
 
                                                                 <td>{{pos.companyname}}</td>
                                                                 <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" ng-change="addpos(pos);" /></td>
@@ -523,9 +530,9 @@
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
 
-                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -551,8 +558,8 @@
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
+
+
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>

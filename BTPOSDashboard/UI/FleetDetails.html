@@ -351,191 +351,187 @@
 
 
                                                         <div class="actions">
+                                                            <div class="col-md-5">
+                                                                Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div>
+                                                                <a href="AddFleetDetails.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add Fleet Details</button></a>
+                                                            </div>
 
 
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h4>
+                                                                </div>
+                                                                <div class="modal-body">
 
-                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header modal-header-primary">
-                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h4>
-                                                                        </div>
-                                                                        <div class="modal-body">
-
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                    <div class="col-md-6">
-                                                                                        <label for="Description" class="col-md-6 control-label">Vehicle Reg No <span class='require'>*</span></label>
-
-                                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.VehicleRegNo}}" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                        <label for="Description" class="col-md-6 control-label">Engine No<span class='require'>*</span></label>
-
-                                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.EngineNo}}" ng- ng-model="initdata.newfleet.EngineNo" /><span class="help-block"></span></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-12">
-                                                                                <div class="col-md-6">
-
-                                                                                    <label for="selCountry" class="col-md-6 control-label">Vehicle Type</label>
-                                                                                    <div class="col-md-6">
-                                                                                        <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" value="{{currVD.VehicleTypeId}}" ng-model="initdata.newfleet.vt" class="form-control">
-                                                                                            <option value="">Select</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Fuel Used <span class='require'>*</span></label>
-
-                                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.FuelUsed}}" ng-m ng-model="initdata.newfleet.FuelUsed" /><span class="help-block"></span></div>
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                            <div class="col-md-12">
-                                                                                <div class="col-md-6">
-                                                                                    <label for="selCountry" class="col-md-6 control-label">Service Type</label>
-                                                                                    <div class="col-md-6">
-                                                                                        <select ng-options="st.Name for st in initdata.Table track by st.Id" value="{{currVD.ServiceTypeId}}" ng-model="initdata.newfleet.st" class="form-control">
-                                                                                            <option value="">Select</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="col-md-4">
-                                                                                    <label for="Name" class="col-md-8 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
-
-
-                                                                                    <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
-                                                                                        <input type="text" class="form-control" value="{{currVD.MonthAndYrOfMfr}}" ng-model="initdata.newfleet.Mfr" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                                    </div>
-
-                                                                                </div>
-
-                                                                            </div>
-
-                                                                        </div>
-
-
-
+                                                                    <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="selCountry" class="col-md-6 control-label">Vehicle Layout</label>
-                                                                                <div class="col-md-6">
-                                                                                    <select ng-options="vl.Name for vl in initdata.Table track by vl.Id" value="{{currVD.vehiclelayoutId}}" ng-model="initdata.newfleet.vl" class="form-control">
-                                                                                        <option value="">Select</option>
-                                                                                    </select>
-                                                                                </div>
+                                                                                <label for="Description" class="col-md-6 control-label">Vehicle Reg No <span class='require'>*</span></label>
+
+                                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.VehicleRegNo}}" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Chasis No <span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-6 control-label">Engine No<span class='require'>*</span></label>
 
-                                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.ChasisNo}}" ng-m ng-model="initdata.newfleet.ChasisNo" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.EngineNo}}" ng- ng-model="initdata.newfleet.EngineNo" /><span class="help-block"></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-6">
+
+                                                                            <label for="selCountry" class="col-md-6 control-label">Vehicle Type</label>
+                                                                            <div class="col-md-6">
+                                                                                <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" value="{{currVD.VehicleTypeId}}" ng-model="initdata.newfleet.vt" class="form-control">
+                                                                                    <option value="">Select</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <label for="Description" class="col-md-6 control-label">Fuel Used <span class='require'>*</span></label>
+
+                                                                            <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.FuelUsed}}" ng-m ng-model="initdata.newfleet.FuelUsed" /><span class="help-block"></span></div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-6">
+                                                                            <label for="selCountry" class="col-md-6 control-label">Service Type</label>
+                                                                            <div class="col-md-6">
+                                                                                <select ng-options="st.Name for st in initdata.Table track by st.Id" value="{{currVD.ServiceTypeId}}" ng-model="initdata.newfleet.st" class="form-control">
+                                                                                    <option value="">Select</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
 
+                                                                        <div class="col-md-4">
+                                                                            <label for="Name" class="col-md-8 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
 
 
-                                                                        <div class="row">
-
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
-                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
-                                                                                </div>
+                                                                            <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                                <input type="text" class="form-control" value="{{currVD.MonthAndYrOfMfr}}" ng-model="initdata.newfleet.Mfr" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                                             </div>
-                                                                            <div class="col-md-4">
-                                                                                <label for="Name" class="col-md-8 control-label">Date Of Registration:<span class='require'></span></label>
 
-                                                                                <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
-                                                                                    <input type="text" class="form-control" value="{{currVD.DateOfRegistration}}" ng-model="initdata.newfleet.dor" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                                                </div>
-
-
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <label for="Description" class="col-md-5 control-label">Seating Capacity<span class='require'>*</span></label>
-
-                                                                                <div class="col-md-7"><input id="Description" type="text" value="{{currVD.SeatingCapacity}}" cl class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
-
-                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-6 col-md-offset-2">
-                                                                            <button class="btn btn-primary" type="button">Save</button>
-                                                                            <button class="btn btn-primary" type="button">Cancel</button>
+
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-6">
+                                                                        <label for="selCountry" class="col-md-6 control-label">Vehicle Layout</label>
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="vl.Name for vl in initdata.Table track by vl.Id" value="{{currVD.vehiclelayoutId}}" ng-model="initdata.newfleet.vl" class="form-control">
+                                                                                <option value="">Select</option>
+                                                                            </select>
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <label for="Description" class="col-md-6 control-label">Chasis No <span class='require'>*</span></label>
+
+                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.ChasisNo}}" ng-m ng-model="initdata.newfleet.ChasisNo" /><span class="help-block"></span></div>
                                                                     </div>
                                                                 </div>
 
-                                                                <div>
 
 
+                                                                <div class="row">
+
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label for="Name" class="col-md-8 control-label">Date Of Registration:<span class='require'></span></label>
+
+                                                                        <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                            <input type="text" class="form-control" value="{{currVD.DateOfRegistration}}" ng-model="initdata.newfleet.dor" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <label for="Description" class="col-md-5 control-label">Seating Capacity<span class='require'>*</span></label>
+
+                                                                        <div class="col-md-7"><input id="Description" type="text" value="{{currVD.SeatingCapacity}}" cl class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
+
+                                                                    </div>
                                                                 </div>
-
+                                                                <div class="col-md-6 col-md-offset-2">
+                                                                    <button class="btn btn-primary" type="button">Save</button>
+                                                                    <button class="btn btn-primary" type="button">Cancel</button>
+                                                                </div>
                                                             </div>
                                                         </div>
+
+                                                        <div>
+
+
+                                                        </div>
+
                                                     </div>
-                                                    <div class="container-fluid">
-    <div class="col-md-5">
-        Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-            <option value="">Select</option>
-        </select>
-    </div>
-    <div class="col-md-5">
-        Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                            <thead>
+                                                                <tr>
 
-            <option value="">Select</option>
-        </select>
-    </div>
-
-
-    <div class="actions">
-        <a href="AddFleetDetails.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right"> Add Fleet Details</button></a>
-    </div>
-
-
-    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-        <thead>
-            <tr>
-
-                <th width="22%">Vehicle Reg. No</th>
-                <th>Vehicle Type</th>
-                <th>Vehicle Layout</th>
-                <th>Service Type </th>
-                <th>Engine No </th>
+                                                                    <th width="22%">Vehicle Reg. No</th>
+                                                                    <th>Vehicle Type</th>
+                                                                    <th>Vehicle Layout</th>
+                                                                    <th>Service Type </th>
+                                                                    <!--<th>Engine No </th>
                 <th>Fuel Used </th>
                 <th>Month And Yr. Of Mfr </th>
                 <th>Chasis No </th>
                 <th>Date Of Registration </th>
-                <th>Seating Capacity </th>
+                <th>Seating Capacity </th>-->
 
 
-                <th>Active</th>
-                <th>Update</th>
-            </tr>
-        </thead>
-        <tbody>
+                                                                    <th>Active</th>
+                                                                    <th>Update</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
 
-            <tr ng-repeat="F in Fleet" class="gradeA">
-                <td>
-                    {{F.VehicleRegNo}}
+                                                                <tr ng-repeat="F in Fleet" class="gradeA">
+                                                                    <td>
+                                                                        {{F.VehicleRegNo}}
 
-                </td>
-                <td>
-                    {{F.VehicleType}}
-                </td>
-                <td>
-                    {{F.vehiclelayout}}
-                </td>
-                <td>
-                    {{F.ServiceType}}
-                </td>
-                <td>
+                                                                    </td>
+                                                                    <td>
+                                                                        {{F.VehicleType}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{F.vehiclelayout}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{F.ServiceType}}
+                                                                    </td>
+                                                                    <!--<td>
                     {{F.EngineNo }}
                 </td>
                 <td>
@@ -553,29 +549,24 @@
 
                 <td>
                     {{F.SeatingCapacity}}
-                </td>
+                </td>-->
+
+                                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
+                                                                    <td>
+
+                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                                            Edit
+                                                                        </button>
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </tbody>
+
+                                                        </table>
 
 
-
-
-
-
-                <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
-                <td>
-
-                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
-                        <i class="fa fa-edit"></i>&nbsp;
-                        Edit
-                    </button>
-                </td>
-
-            </tr>
-
-        </tbody>
-
-    </table>
-
-</div>
                                                 </div>
                                                 
                                             </div>
