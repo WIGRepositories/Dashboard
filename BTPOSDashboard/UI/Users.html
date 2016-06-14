@@ -86,9 +86,6 @@
 
 
 
-
-
-
                             <li>
                                 <a href="#">
                                     <i class="fa fa-sitemap fa-fw">
@@ -146,6 +143,7 @@
 
                         </li>
 
+
                         <li>
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -156,13 +154,11 @@
                                 <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
                                 <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                                 <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
-                                <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
                                 <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
                                 <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
                                 <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                             </ul>
-
                         </li>
 
                         <li>
@@ -451,12 +447,12 @@
 
                                                                                     <div class="col-md-3">
                                                                                         <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                                            <label for="inputFirstName" class="control-label">Manager:<span class='require'>*</span></label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-md-4">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="User1.Active" checked /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cactive" value="{{User1.mgrName}}" readonly /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

@@ -467,7 +467,7 @@
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label">Purchase Date:<span class='require'>*</span></label>
                                                                         <div style="width:50%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
-                                                                            <input type="text" class="form-control" ng-model="initdata.newfleet.dor" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                                         </div>
 
                                                                     </div>
@@ -485,8 +485,8 @@
                                                                     <div class="col-md-offset-3 col-md-9">
                                                                         <button  class="btn btn-primary" ng-click="savepurchases(Group);">Save</button>
 
-                                                                        <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
-                                                                    </div>
+                                                                        <a href="InventoryPurchases.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+</div>
                                                                 </div>
                                                             </form>
                                                         </div>

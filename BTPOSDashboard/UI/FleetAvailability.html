@@ -10,8 +10,7 @@
     
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">    
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -148,6 +147,7 @@
 
                         </li>
 
+
                         <li>
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -158,13 +158,11 @@
                                 <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
                                 <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                                 <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
-                                <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
                                 <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
                                 <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
                                 <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                             </ul>
-
                         </li>
 
                         <li>
@@ -365,10 +363,10 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeAvailabilty();">
 
-                                                                    <option value="">Select</option>
-                                                                </select>
+    <option value="">Select</option>
+</select>
                                                             </div>
 
                                                             <div class="actions">
@@ -516,6 +514,7 @@
             </div>
         </div>
     </div>
+        </div>
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>

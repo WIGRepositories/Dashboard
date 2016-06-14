@@ -13,9 +13,9 @@ namespace BTPOSDashboard.Controllers
     public class FleetOwnerRouteDetailsController : ApiController
     {
         [HttpGet]
-        public DataTable getroutedetails(int sId, int cmpid, int routeid)
+        public DataSet GetFleetOwnerRouteDetails(int fleetOwnerId, int routeid)
         {
-            DataTable Tbl = new DataTable();
+            // DataTable Tbl = new DataTable();
 
 
             //connect to database
@@ -25,22 +25,8 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getRouteDetails";
+            cmd.CommandText = "GetFleetownerRouteDetails";
             cmd.Connection = conn;
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-
-            SqlParameter fo = new SqlParameter();
-            fo.ParameterName = "@fleetownerId";
-            fo.SqlDbType = SqlDbType.Int;
-            fo.Value = sId;
-            cmd.Parameters.Add(fo);
-
-            SqlParameter fsc = new SqlParameter();
-            fsc.ParameterName = "@cmpId";
-            fsc.SqlDbType = SqlDbType.Int;
-            fsc.Value = cmpid;
-            cmd.Parameters.Add(fsc);
 
             SqlParameter cid = new SqlParameter();
             cid.ParameterName = "@routeid";
@@ -48,17 +34,24 @@ namespace BTPOSDashboard.Controllers
             cid.Value = routeid;
             cmd.Parameters.Add(cid);
 
-            db.Fill(ds);
-           Tbl = ds.Tables[0];
+            SqlParameter fid = new SqlParameter();
+            fid.ParameterName = "@fleetOwnerId";
+            fid.SqlDbType = SqlDbType.Int;
+            fid.Value = fleetOwnerId;
+            cmd.Parameters.Add(fid);
 
-           // int found = 0;
-            return Tbl;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            // Tbl = ds.Tables[0];
+
+            // int found = 0;
+            return ds;
         }
 
 
-
         [HttpPost]
-        public DataTable saveroutedetails(IEnumerable<RouteDetails> routestops)
+        public DataTable SaveFleetOwnerRouteDetails(IEnumerable<RouteDetails> routestops)
         {
             DataTable Tbl = new DataTable();
 
@@ -70,7 +63,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelRouteDetails";
+            cmd.CommandText = "InsUpdDelFleetOwnerRouteStops";
             cmd.Connection = conn;
             conn.Open();
 
@@ -85,37 +78,11 @@ namespace BTPOSDashboard.Controllers
                 bb.Value = s.stopId;
                 cmd.Parameters.Add(bb);
 
-                SqlParameter bd = new SqlParameter("@DistanceFromSource", SqlDbType.VarChar, 20);
-                bd.Value = s.DistanceFromSource;
-                cmd.Parameters.Add(bd);
-
-
-                SqlParameter bf = new SqlParameter("@DistanceFromDestination", SqlDbType.VarChar, 20);
-                bf.Value = s.DistanceFromDestination;
-                cmd.Parameters.Add(bf);
-
-                SqlParameter bh = new SqlParameter("@DistanceFromPreviousStop", SqlDbType.Int);
-                bh.Value = s.DistanceFromPreviousStop;
-                cmd.Parameters.Add(bh);
-
-                SqlParameter ipconfig = new SqlParameter("@DistanceFromNextStop", SqlDbType.VarChar, 20);
-                ipconfig.Value = s.DistanceFromNextStop;
-                cmd.Parameters.Add(ipconfig);
-
-
-                SqlParameter active = new SqlParameter("@PreviousStopId", SqlDbType.Int);
-                active.Value = s.PreviousStopId;
-                cmd.Parameters.Add(active);
-
-                SqlParameter fo = new SqlParameter("@NextStopId", SqlDbType.Int);
-                fo.Value = s.NextStopId;
+                SqlParameter fo = new SqlParameter("@FleetOwnerId", SqlDbType.Int);
+                fo.Value = s.FleetOwnerId;
                 cmd.Parameters.Add(fo);
 
-                SqlParameter sn = new SqlParameter("@StopNo", SqlDbType.Int);
-                sn.Value = s.StopNo;
-                cmd.Parameters.Add(sn);
-
-                SqlParameter insupdflag = new SqlParameter("@insupddelflag", SqlDbType.VarChar, 10);
+                SqlParameter insupdflag = new SqlParameter("@insupddelflag", SqlDbType.VarChar, 1);
                 insupdflag.Value = s.insupddelflag;
                 cmd.Parameters.Add(insupdflag);
 

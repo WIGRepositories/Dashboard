@@ -86,7 +86,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@PurchaseOrderNumber";
-                gid.SqlDbType = SqlDbType.VarChar;
+                gid.SqlDbType = SqlDbType.VarChar;               
                 gid.Value = P.PurchaseOrderNumber;
                 cmd.Parameters.Add(gid);
 

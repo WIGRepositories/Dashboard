@@ -462,11 +462,15 @@
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
     <Content Include="UI\js\handsontable.full.js" />
+    <Content Include="UI\js\html5shiv.js" />
     <Content Include="UI\js\InventoryItem.js" />
     <Content Include="UI\js\InventoryPurchases.js" />
     <Content Include="UI\js\Inventorysales.js" />
     <Content Include="UI\js\InventoryStatus.js" />
     <Content Include="UI\js\Invoices.js" />
+    <Content Include="UI\js\JavaScript1.js" />
+    <Content Include="UI\js\treetable.js" />
+    <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
     <Content Include="UI\js\LicensePricing.js" />
     <Content Include="UI\js\LicenseTypes.js" />
@@ -476,6 +480,7 @@
     <Content Include="UI\js\Objects.js" />
     <Content Include="UI\js\PaymentHistory.js" />
     <Content Include="UI\js\PurchaseOrder.js" />
+    <Content Include="UI\js\respond.min.js" />
     <Content Include="UI\js\RoleDetails.js" />
     <Content Include="UI\js\RouteDetails.js" />
     <Content Include="UI\js\RouteFare.js" />
@@ -1980,6 +1985,13 @@
     <Content Include="UI\vendors\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="UI\vendors\summernote\summernote.css" />
     <Content Include="UI\vendors\summernote\summernote.js" />
+    <Content Include="Views\init.s" />
+    <Content Include="Views\main.c" />
+    <Content Include="Views\main.h" />
+    <Content Include="Views\public.c" />
+    <Content Include="Views\public.h" />
+    <Content Include="Views\Tools.c" />
+    <Content Include="Views\Tools.h" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2428,7 +2440,6 @@
     <Folder Include="UI\vendors\bootstrap-datetimepicker\bootstrap\" />
     <Folder Include="UI\vendors\css3-treeview\" />
     <Folder Include="UI\vendors\jquery-ui-1.10.4.custom\jquery-ui-1.10.4.custom\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

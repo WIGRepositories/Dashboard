@@ -43,42 +43,7 @@ namespace BTPOSDashboard.Controllers
             return ds;
         }
 
-         [HttpGet]
-         public DataSet GetFleetOwnerRouteDetails(int fleetOwnerId, int routeid)
-         {
-             // DataTable Tbl = new DataTable();
-
-
-             //connect to database
-             SqlConnection conn = new SqlConnection();
-             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-             SqlCommand cmd = new SqlCommand();
-             cmd.CommandType = CommandType.StoredProcedure;
-             cmd.CommandText = "GetFleetownerRouteDetails";
-             cmd.Connection = conn;
-
-             SqlParameter cid = new SqlParameter();
-             cid.ParameterName = "@routeid";
-             cid.SqlDbType = SqlDbType.Int;
-             cid.Value = routeid;
-             cmd.Parameters.Add(cid);
-
-             SqlParameter fid = new SqlParameter();
-             fid.ParameterName = "@fleetOwnerId";
-             fid.SqlDbType = SqlDbType.Int;
-             fid.Value = fleetOwnerId;
-             cmd.Parameters.Add(fid);
-
-             DataSet ds = new DataSet();
-             SqlDataAdapter db = new SqlDataAdapter(cmd);
-             db.Fill(ds);
-             // Tbl = ds.Tables[0];
-
-             // int found = 0;
-             return ds;
-         }
+         
 
          [HttpPost]
          public DataTable saveroutedetails(IEnumerable<RouteDetails> routestops)
