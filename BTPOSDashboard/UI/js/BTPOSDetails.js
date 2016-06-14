@@ -5,12 +5,73 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     btposlist = [];
 
+    $scope.GetCompanies = function () {
+
+        var vc = {
+            needCompanyName: '1'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
+            $scope.initdata = res.data;
+        });
+        $scope.GetBTPOSList();
+
+    } 
+
+
     $scope.GetBTPOSList = function () {
-        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails').then(function (response, req) {
+
+        $scope.cmpdata = null;
+        $scope.BTPOS1 = null;
+
+        var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1').then(function (response, req) {
             $scope.BTPOS1 = response.data;
             //  $localStorage.BTPOSOld = response.data;
         })
+
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.cmpdata = res.data;
+        });
+
     };
+
+    $scope.GetBTPOSListByFleetOwner = function () {
+               
+        $scope.BTPOS1 = null;
+
+        var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=' + fId).then(function (response, req) {
+            $scope.BTPOS1 = response.data;
+            //  $localStorage.BTPOSOld = response.data;
+        })
+    }
 
     $scope.addpos = function (pos)
     {
@@ -53,7 +114,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 StatusId: 4,//pos.StatusId,
                 ipconfig: pos.ipconfig,
                 active: 1,//Group.ipconfig,
-                fleetownerid: 1,//pos.FleetOwnerId,
+                fleetownerid: null,//pos.FleetOwnerId,
                 insupdflag: 'U'
             }
 
@@ -82,14 +143,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
       
                 var newpos = {
                     Id: Group.Id,
-                    CompanyId: 1,//Group.CompanyId,
+                    CompanyId: $scope.cmp.Id,
                     GroupId: Group.GroupId,
                     IMEI: Group.IMEI,
                     POSID: Group.POSID,
-                    StatusId: 7,//Group.StatusId,
+                    StatusId: Group.StatusId,
                     ipconfig: Group.ipconfig,
                     active: 1,//Group.ipconfig,
-                    fleetownerid: 1,//Group.FleetOwnerId,
+                    fleetownerid: $scope.s.Id,
                     insupdflag: flag
                 }
                 btposlist.push(newpos);
@@ -110,6 +171,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.setBTPOS = function (grp) {
         $scope.currGroup = grp;
+
+        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=1').then(function (res, data) {
+            $scope.Types = res.data;
+        });
     };
 
     $scope.clearGroup = function () {

@@ -444,7 +444,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string ipconfig { get; set; }
         public string fleetowner { get; set; }
-        public int fleetownerid { get; set; }
+        public int? fleetownerid { get; set; }
         public int active { get; set; }
 
         public string insupdflag { get; set; }
@@ -1029,6 +1029,8 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
         public int companyId { set; get; }
         public int Company { set; get; }
+        public int? mgrId { set; get; }
+        public int ManagerName { set; get; }
     }
 
     public class Register
@@ -1093,6 +1095,7 @@ namespace BTPOSDashboardAPI.Models
         public String nextstop { get; set; }
         public int StopNo { get; set; }
         public String insupddelflag { get; set; }
+        public int FleetOwnerId { get; set; }
 
     }
     public class ISales
@@ -1113,8 +1116,8 @@ namespace BTPOSDashboardAPI.Models
         public int Quantity { get; set; }
 
         public int PerUnitPrice { get; set; }
-        public String PurchaseDate { get; set; }
-        public int PurchaseOrderNumber { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        public string PurchaseOrderNumber { get; set; }
         public int subCategoryId { get; set; }
 
         public string subCategory { get; set; }

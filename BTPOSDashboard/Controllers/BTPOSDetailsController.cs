@@ -14,7 +14,7 @@ namespace BTPOSDashboardAPI.Controllers
     {
         [HttpGet]
 
-        public DataTable BTPOSDetails()
+        public DataTable GetBTPOSDetails(int cmpId, int fId)
         {
             DataTable Tbl = new DataTable();
 
@@ -28,35 +28,22 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "getBTPOSDetails";
             cmd.Connection = conn;
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
 
-            // int found = 0;
+            SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);
+            cmp.Value = cmpId;
+            cmd.Parameters.Add(cmp);
+
+            SqlParameter fo = new SqlParameter("@fleetownerId", SqlDbType.Int);
+            fo.Value = fId;
+            cmd.Parameters.Add(fo);
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);            
+            db.Fill(Tbl);
+            
             return Tbl;
         }
 
-        //[HttpPost]
-        //public DataTable sBTPOSList(BTPOSDetails[] poslist)
-        //{
-        //    DataTable Tbl = new DataTable();
-
-        //     try
-        //    {
-        //         //foreach(BTPOSDetails pos in poslist)
-        //         //{
-        //         //    string str = pos.IMEI;
-
-        //         //}
-
-        //    }
-        //     catch (Exception ex)
-        //     {
-        //         string str = ex.Message;
-        //     }
-        //    return Tbl;
-        //}
+        
 
         [HttpPost]
 

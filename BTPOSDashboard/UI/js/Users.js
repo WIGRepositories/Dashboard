@@ -79,6 +79,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             Active: 1,
             UserName: User.UserName,
             Password: User.Password,
+            mgrId: ($scope.mgr == null )? null: $scope.mgr.Id,
             insupdflag: flag
         }
 

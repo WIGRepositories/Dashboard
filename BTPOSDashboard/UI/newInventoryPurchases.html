@@ -298,34 +298,6 @@
                             </li>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <!--<li>
                 <a href="#">
                     <i class="fa fa-send-o fa-fw">
@@ -475,7 +447,7 @@
                                                                     <div class="form-group">
 
                                                                         <label for="selCountry" class="col-md-3 control-label">SubCategory</label>
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-6">
                                                                             <select ng-options="s.SubCategory for s in InventoryItem track by s.subcategoryid" class="form-control" ng-model="Item.SubCategory">
                                                                                 <option value="">Select</option>
                                                                             </select>
@@ -494,23 +466,27 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label">Purchase Date:<span class='require'>*</span></label>
+                                                                        <div style="width:50%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                            <input type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                        </div>
 
-                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="help-block"></span></div>
                                                                     </div>
+                                                                       <!----- <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="help-block"></span></div>
+                                                                    </div>----->
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label">Purchase Order Number:</label>
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseOrderNumber" /><span class="help-block"></span></div>
                                                                     </div>
-
+                                                                   
                                                                 </div>
 
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
                                                                         <button  class="btn btn-primary" ng-click="savepurchases(Group);">Save</button>
 
-                                                                        <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
-                                                                    </div>
+                                                                        <a href="InventoryPurchases.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+</div>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -559,6 +535,12 @@
 <script src="vendors/jquery-pace/pace.min.js"></script>
 <script src="vendors/holder/holder.js"></script>
 <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('.datepicker-filter').datepicker({
+            autoclose: true
+        });
+    </script>
 <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
 <script src="js/main.js"></script>
 <script src="js/angular.js"></script>

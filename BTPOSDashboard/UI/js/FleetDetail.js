@@ -158,11 +158,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     
     $scope.savenewfleetdetails = function (initdata) {
         var newVD = initdata.newfleet;
-       /* if (newVD == null) {
+      if (newVD == null) {
             alert('Please enter VehicleRegNo.');
             return;
         }
-
+        /* 
         if (newVD.VehicleRegNo == null) {
             alert('Please enter VehicleRegNo.');
             return;

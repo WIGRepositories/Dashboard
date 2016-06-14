@@ -378,16 +378,17 @@
                                                                     </div>                                                   
 
                                                                 </div> 
-                                                                <div class="col-md-3">
-                                                                    <label for="inputMiddleName" class="col-md-2 control-label">Role:<span class='require'>*</span></label>
-                                                                    <div class="col-md-3">
-                                                                        <select ng-options="r.rolename for r in cmproles track by r.Id" ng-model="r" width="100%">
-                                                                            <option value="">Select Role</option>
-                                                                        </select>
-                                                                    </div>
-                                                                 </div>
-                                                                <br/>
-                                                                <br/>
+                                                                <div class="form-group">
+                                                                   
+                                                                        <label for="inputMiddleName" class="col-md-2 control-label">Role:<span class='require'>*</span></label>
+                                                                        <div class="col-md-3">
+                                                                            <select ng-options="r.rolename for r in cmproles track by r.Id" ng-model="r" width="100%">
+                                                                                <option value="">Select Role</option>
+                                                                            </select>
+                                                                        </div>
+                                                                   
+                                                                   </div>
+                                                                    
                                                                     <div class="panel panel-violet">
                                                                         <div class="panel-heading">User Login</div>
 
@@ -414,8 +415,8 @@
                                                                     <div class="form-actions text-center">
                                                                         <button class="btn btn-green" ng-click="save(User, 'I',-1)">Save</button>
                                                                         &nbsp;
-                                                                        <button type="reset" class="btn btn-primary" ng-click="clearUser()">Cancel</button><br />
-                                                                    </div>
+                                                                        <a href="Users.html" class="btn btn-primary" ng-click="clearUser()">Cancel</a><br />
+</div>
 
 
                                                                 </div>

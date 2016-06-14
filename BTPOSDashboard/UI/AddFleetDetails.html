@@ -283,11 +283,7 @@
                             </ol>
                             <div class="clearfix"></div>
                         </div>
-                    </div>
-                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <div id="page-wrapper">
-                        <!--BEGIN TITLE & BREADCRUMB PAGE-->
-
+                    
                         <div class="page-content">
                             <div id="form-layouts" class="row">
                                 <div class="col-lg-12">
@@ -296,7 +292,7 @@
                                         <div id="tab-form-actions" class="tab-pane fade active in">
                                             <div class="row">
 
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-9">
                                                     <div class="panel panel-violet">
                                                         <div class="panel-heading">Add Fleet Details</div>
                                                         <div class="panel-body pan">
@@ -336,7 +332,7 @@
                                                                        <label for="Name" class="col-md-3 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
 
 
-                                                                            <div style="width:20%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                            <div style="width:25%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
                                                                             <input type="text" class="form-control" ng-model="initdata.newfleet.Mfr" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
                                                                         </div>
@@ -386,16 +382,16 @@
                                                                         </div>
                                                                         <label for="Name" class="col-md-3 control-label">Date Of Registration:<span class='require'></span></label>
 
-                                                                        <div style="width:20%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                        <div style="width:25%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
                                                                         <input type="text" class="form-control" ng-model="initdata.newfleet.dor" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-actions">
-                                                                    <div class="col-md-offset-3 col-md-9">
+                                                                    <div class="col-md-offset-5 col-md-9">
                                                                         <button class="btn btn-primary" ng-click="savenewfleetdetails(initdata);">Save</button>
 
-                                                                        <button class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                                                        <a href="FleetDetails.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -417,12 +413,12 @@
                      </div>
           
             <!--END FOOTER-->
-      
+                        <div id="footer">
+                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        </div>
     </div>
                     <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
+                    
                     </div>
                 </div>
             </div>
@@ -461,4 +457,6 @@
     <script src="js/FleetDetail.js"></script>
 
 </body>
+
+
 </html>

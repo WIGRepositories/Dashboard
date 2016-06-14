@@ -10,8 +10,7 @@
     
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">    
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -364,10 +363,10 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeAvailabilty();">
 
-                                                                    <option value="">Select</option>
-                                                                </select>
+    <option value="">Select</option>
+</select>
                                                             </div>
 
                                                             <div class="actions">
@@ -515,6 +514,7 @@
             </div>
         </div>
     </div>
+        </div>
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>
