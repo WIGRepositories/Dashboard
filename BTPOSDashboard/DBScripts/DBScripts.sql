@@ -7792,28 +7792,23 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE PROCEDURE [dbo].[sp_InsPaymentDetails] 
-	 
+	 (
       @Transaction_Number varchar(30)=null
       ,@Amount int=null,
-      @Paymentmode int=null,@dateandtime datetime=null,@Gateway_transId varchar(20)=null,@Pnr_Id 
-int=null,@Pnr_No varchar(20)=null, @TransactionStatus int
+      @Paymentmode int=null,@dateandtime datetime=null,@Gateway_transId varchar(20)=null,@Pnr_Id int=null
+      ,@Pnr_No varchar(20)=null, @TransactionStatus int
+      )
 AS
 BEGIN
 	
 	SET NOCOUNT ON;
 INSERT INTO PaymentDetails
-          
 (Transaction_Number,Amount,Paymentmode,dateandtime,Pnr_Id,Pnr_No,Gateway_transId,TransactionStatus) 
      VALUES 
-          
-(@Transaction_Number,@Amount,@Paymentmode,@dateandtime,@Pnr_Id,@Pnr_No,@Gateway_transId,@Transaction
-Status)  	
+(@Transaction_Number,@Amount,@Paymentmode,@dateandtime,@Pnr_Id,@Pnr_No,@Gateway_transId,@TransactionStatus)  	
 END
 
 GO
-
-
-
 
 
 /****** Object:  StoredProcedure [dbo].[sp_InsPnrDetails]    Script Date: 06/14/2016 11:17:29 
