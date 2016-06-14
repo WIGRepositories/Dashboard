@@ -112,7 +112,8 @@ namespace BTPOSDashboard.Controllers
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
+            x
+                db.Fill(ds);
 
 
            // Tbl = ds.Tables[0];
