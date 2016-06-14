@@ -116,7 +116,7 @@ var ctrl = app.controller('mycntrlr', function ($scope, $http, $localStorage, $f
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRouteFare/GetFOVehicleFareConfig?vehicleId=' + $scope.v.VehicleId).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetOwnerRouteFare/GetFOVehicleFareConfig?vehicleId=' + $scope.v.VehicleId+'&routeId='+$scope.r.RouteId).then(function (res, data) {
             $scope.FOVFareConfig = res.data;
 
         });

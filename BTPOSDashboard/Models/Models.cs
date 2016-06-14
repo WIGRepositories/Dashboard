@@ -1095,6 +1095,7 @@ namespace BTPOSDashboardAPI.Models
         public String nextstop { get; set; }
         public int StopNo { get; set; }
         public String insupddelflag { get; set; }
+        public int FleetOwnerId { get; set; }
 
     }
     public class ISales

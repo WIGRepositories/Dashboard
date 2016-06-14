@@ -6,17 +6,17 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     stopsList = [];
     $scope.RouteDetails = [];
 
-    $scope.GetRoutes = function () {
-        $http.get('http://localhost:1476/api/FleetOwnerRouteDetails/GetRoutes').then(function (res, data) {
-            $scope.routes = res.data;
-            // GetRouteDetails($scope.routes[0].Id);
-        });
+    //$scope.GetRoutes = function () {
+    //    $http.get('http://localhost:1476/api/FleetOwnerRouteDetails/GetRoutes').then(function (res, data) {
+    //        $scope.routes = res.data;
+    //        // GetRouteDetails($scope.routes[0].Id);
+    //    });
 
-        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
-            $scope.Stops = res.data;
-        });
+    //    $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+    //        $scope.Stops = res.data;
+    //    });
 
-    }
+    //}
     $scope.GetCompanies = function () {
 
         var vc = {
@@ -97,7 +97,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             $scope.RouteDetails = [];
             return;
         }
-        $http.get('http://localhost:1476/api/routedetails/getroutedetails?fleetownerid=' + $scope.s.Id + '&routeid=' + $scope.r.RouteId).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetOwnerRouteDetails/GetFleetOwnerRouteDetails?fleetownerid=' + $scope.s.Id + '&routeid=' + $scope.r.RouteId).then(function (res, data) {
             $scope.RouteDetails = res.data;
         });
     }
@@ -105,40 +105,43 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     $scope.SetCurrStop = function (currStop, indx) {
         //alert(currStop.StopName);
         $scope.currStop = currStop;
+        currStop.newassigned = currStop.assigned;
         $scope.currStopIndx = indx;
     }
 
     $scope.save = function () {
+
+        if ($scope.s == null) {         
+            return;
+        }       
+
         var stops = $scope.RouteDetails.Table1;
 
         var fleetownerstops = new Array();
-        for (i = 0; i < stops.length; i++)
-        {
-            if(stops[i].assigned != stops[i].newassigned)
-            {               
+        for (i = 0; i < stops.length; i++) {
+            if (stops[i].newassigned != null  && stops[i].assigned != stops[i].newassigned) {
                 var item = {
-                    "label": savedata[i][j].Id,
-                    "RowNo": i,
-                    "ColNo": j,
-                    "VehicleLayoutTypeId": $scope.layout.vl.Id,
-                    "VehicleTypeId": $scope.layout.vt.Id,
-                    "insupdflag": (stops[i].newassigned == "1") ? "I" : "D"
+                    "FleetOwnerId": $scope.s.Id,
+                    "RouteId": $scope.r.RouteId,
+                    "StopId": stops[i].stopid,
+                    "insupddelflag": (stops[i].newassigned == "1") ? "I" : "D"
                 }
-                fleetownerstops.push(item)                
+                fleetownerstops.push(item)
             }
-        
+        }
        
+        if (fleetownerstops.length == 0) return;
         //write the post logic and test
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleLayout/saveVehicleLayout',
-            data: checkedArr
+            url: 'http://localhost:1476/api/FleetOwnerRouteDetails/SaveFleetOwnerRouteDetails',
+            data: fleetownerstops
 
         }
         $http(req).then(function (res) {
             alert('saved successfully.');
         });
-    }
+    
 
     }
 

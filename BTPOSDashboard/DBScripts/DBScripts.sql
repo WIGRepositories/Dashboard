@@ -5119,7 +5119,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
-@FORouteStopId int
+           @routeId int
+		   ,@FromStopId int
+		   ,@ToStopId int
            ,@VehicleTypeId int
            ,@Distance decimal
            ,@PerUnitPrice decimal
@@ -5129,10 +5131,21 @@ create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
            ,@FromDate datetime
            ,@ToDate datetime
            ,@VehicleId int
-                       )
-                        
+           ,@InsUpdDelFlag varchar(1)
+)                        
 as
 begin
+declare @fsId int
+set @fsId = 0
+
+select @fsId = Id from RouteStops 
+where fromstopid = @FromStopId 
+and tostopid = @ToStopid
+and routeId = @routeId
+
+if @InsUpdDelFlag = 'I' 
+begin
+if @fsId = 0 
 INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
            ([FORouteStopId]
            ,[VehicleTypeId]
@@ -5145,7 +5158,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
            ,[ToDate]
            ,[VehicleId])
      VALUES
-           (@FORouteStopId
+           (@fsId
            ,@VehicleTypeId
            ,@Distance
            ,@PerUnitPrice
@@ -5155,6 +5168,28 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
            ,@FromDate
            ,@ToDate
            ,@VehicleId)
+
+end
+else
+if @InsUpdDelFlag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
+   SET [VehicleTypeId] = @VehicleTypeId
+      ,[Distance] = @Distance
+      ,[PerUnitPrice] = @PerUnitPrice
+      ,[Amount] = @Amount
+      ,[FareTypeId] = @FareTypeId
+      ,[Active] = @Active
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+      ,[VehicleId] = @VehicleId
+ WHERE [FORouteStopId] = @fsId
+
+else
+if @InsUpdDelFlag = 'U' 
+DELETE FROM [POSDashboard].[dbo].[FleetOwnerRouteFare]
+      WHERE [FORouteStopId] = @fsId
+
+
 end
 /****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/02/2016 17:11:26 ******/
 SET ANSI_NULLS ON
@@ -6608,13 +6643,13 @@ end
 
 GO
 Go
-create procedure GetFOVehicleFareConfig
-(@vehicleid int)
+create procedure [dbo].[GetFOVehicleFareConfig]
+(@vehicleid int, @routeId int)
 as
 begin
-SELECT 
-      dest.name Dest
-      ,src.name Src
+SELECT
+      src.name Src
+	  ,dest.name Dest
 	  ,fs.Id [FORouteStopId]
       ,[VehicleTypeId]
       ,f.[Distance]
@@ -6627,11 +6662,11 @@ SELECT
       ,[VehicleId]
      
   FROM [POSDashboard].[dbo].fleetownerroutestop fs  
-  --inner join fleetownerroutestop fs 
+left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
   inner join routestops r on r.id = fs.routestopid
   left outer join stops src on src.id =r.fromstopid
 left outer join stops dest on dest.id =r.tostopid
-left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
+where r.Id = @routeId
 order by src 
 
 end
@@ -7391,4 +7426,98 @@ else
 	 where VehicleId = @VehicleId
 end
 
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[InsUpdDelFleetOwnerRouteStops]
+	-- Add the parameters for the stored procedure here
+	@FleetOwnerId int,
+	@RouteId int,
+	@StopId int,
+    @insupddelflag varchar(1)
+AS
+BEGIN
+declare @cnt int
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	if @insupddelflag = 'I'
+	begin
+
+	  select @cnt = count(*) 
+	  FROM  [POSDashboard].[dbo].[FleetOwnerStops]
+	  WHERE FleetOwnerId = @FleetOwnerId 
+		  and RouteId = @RouteId 
+		  and StopId = @StopId
+
+			if @cnt = 0 
+			begin
+				INSERT INTO [POSDashboard].[dbo].[FleetOwnerStops]
+					   ([FleetOwnerId]
+					   ,[RouteId]
+					   ,[StopId])
+				 VALUES
+					   (@FleetOwnerId
+					   ,@RouteId
+					   ,@StopId)
+
+						--insert the fleet owner stops id also
+						--for this get all the records with stopid as src for given route and insert the same
+						--get all the records with stopid as dest and insert
+						declare @sid int
+						declare @scnt int
+
+						DECLARE db_cursor CURSOR FOR
+						select Id from routestops 
+						where  routeid = @RouteId
+						and (fromstopid = @StopId or tostopid = @StopId)
+
+						OPEN db_cursor  
+						FETCH NEXT FROM db_cursor INTO @sid 
+
+						WHILE @@FETCH_STATUS = 0  
+						BEGIN  
+						 
+								select @scnt = count(1) from [POSDashboard].[dbo].[FleetOwnerRouteStop]
+								where RouteStopId = @sid      
+
+								if @scnt = 0 
+								INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteStop]
+									  ([FleetOwnerId]
+										,[RouteStopId])
+								 VALUES
+									   (@FleetOwnerId
+									   ,@sid)
+								
+
+							   FETCH NEXT FROM db_cursor INTO @sid
+						END  
+
+						CLOSE db_cursor  
+						DEALLOCATE db_cursor 
+
+			end
+
+	end
+else
+	if @insupddelflag = 'D'
+	begin
+		DELETE FROM [POSDashboard].[dbo].[FleetOwnerStops]
+			  WHERE FleetOwnerId = @FleetOwnerId 
+			  and RouteId = @RouteId 
+			  and StopId = @StopId
+
+		delete from [POSDashboard].[dbo].[FleetOwnerRouteStop]
+		where FleetOwnerId = @FleetOwnerId 
+		and RouteStopId in (select Id from routestops 
+		where  routeid = @RouteId
+		and (fromstopid = @StopId or tostopid = @StopId))
+	end
+
+END
 GO
