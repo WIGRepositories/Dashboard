@@ -7521,3 +7521,365 @@ else
 
 END
 GO
+
+
+
+
+
+/****** Object:  Table [dbo].[Ex_Availableseats]    Script Date: 06/14/2016 11:15:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Ex_Availableseats](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Bus_Id] [int] NOT NULL,
+	[Bustype] [varchar](50) NOT NULL,
+	[From_Time] [varchar](50) NOT NULL,
+	[To_Time] [varchar](50) NOT NULL,
+	[Availableseats] [int] NOT NULL,
+	[Cost] [float] NOT NULL,
+	[Sourcename] [varchar](50) NOT NULL,
+	[Destinationname] [nvarchar](50) NOT NULL,
+	[SourceId] [int] NOT NULL,
+	[DestinationId] [int] NOT NULL,
+	[Travelsname] [varchar](30) NULL,
+	[Duration] [varchar](10) NULL,
+ CONSTRAINT [PK_Ex_Availableseats] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+/****** Object:  Table [dbo].[PassengerDetails]    Script Date: 06/14/2016 11:13:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PassengerDetails](
+	[PassengerId] [int] IDENTITY(1,1) NOT NULL,
+	[Fname] [varchar](30) NOT NULL,
+	[Lname] [varchar](30) NOT NULL,
+	[Age] [int] NOT NULL,
+	[Sex] [int] NOT NULL,
+	[datetime] [varchar](30) NOT NULL,
+	[Pnr_Id] [int] NOT NULL,
+	[Pnr_No] [varchar](20) NOT NULL,
+	[Identityproof] [varchar](30) NOT NULL,
+ CONSTRAINT [PK__Passenge__88915FB01D7B6025] PRIMARY KEY CLUSTERED 
+(
+	[PassengerId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+/****** Object:  Table [dbo].[PaymentDetails]    Script Date: 06/14/2016 11:14:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PaymentDetails](
+	[TransactionId] [int] IDENTITY(1,1) NOT NULL,
+	[Transaction_Number] [varchar](30) NULL,
+	[Amount] [bigint] NULL,
+	[Paymentmode] [int] NULL,
+	[dateandtime] [datetime] NULL,
+	[Pnr_Id] [int] NULL,
+	[Pnr_No] [varchar](20) NULL,
+	[Gateway_transId] [varchar](20) NULL,
+	[TransactionStatus] [int] NULL,
+ CONSTRAINT [PK__Transact__55433A6B214BF109] PRIMARY KEY CLUSTERED 
+(
+	[TransactionId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+/****** Object:  Table [dbo].[PnrDetails]    Script Date: 06/14/2016 11:14:32 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PnrDetails](
+	[Pnr_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Pnr_No] [varchar](20) NOT NULL,
+	[No_Seats] [int] NOT NULL,
+	[cost] [int] NOT NULL,
+	[dateandtime] [varchar](30) NOT NULL,
+	[src] [varchar](30) NULL,
+	[dest] [varchar](30) NULL,
+	[vehicle_No] [varchar](20) NULL,
+	[JourneyDate] [varchar](30) NOT NULL,
+	[ArrivalTime] [varchar](30) NOT NULL,
+	[DeptTime] [varchar](30) NOT NULL,
+	[fleetOwnerId] [int] NULL,
+	[RouteId] [int] NULL,
+	[JourneyType] [int] NOT NULL,
+	[AuthCode] [varchar](10) NOT NULL,
+ CONSTRAINT [PK__Pnr_Deta__0A9420FF19AACF41] PRIMARY KEY CLUSTERED 
+(
+	[Pnr_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+/****** Object:  Table [dbo].[PnrToSeats]    Script Date: 06/14/2016 11:14:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PnrToSeats](
+	[PnrSeatsID] [int] IDENTITY(1,1) NOT NULL,
+	[Pnr_ID] [int] NOT NULL,
+	[Pnr_No] [varchar](20) NOT NULL,
+	[SeatNo] [varchar](5) NOT NULL,
+	[VehicleNo] [varchar](20) NULL,
+	[Date] [datetime] NOT NULL,
+	[SeatId] [int] NULL,
+ CONSTRAINT [PK_OnrToSeats] PRIMARY KEY CLUSTERED 
+(
+	[PnrSeatsID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[Getsp_Availableseats]    Script Date: 06/14/2016 11:19:23 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[Getsp_Availableseats]
+@Src_Id int,
+@Des_Id int
+AS
+BEGIN
+SELECT  [Id]
+      ,[Bus_Id]
+      ,[Bustype]
+      ,[From_Time]
+      ,[To_Time]
+      ,[Availableseats]
+      ,[Cost]
+      ,[Sourcename]
+      ,[Destinationname]
+      ,[SourceId]
+      ,[DestinationId]
+      ,[Travelsname]
+      ,[Duration]
+  FROM [POSDashboard].[dbo].[Ex_Availableseats] where SourceId=@Src_Id and DestinationId=@Des_Id
+END
+
+GO
+
+
+
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPassengerDetails]    Script Date: 06/14/2016 11:16:59 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPassengerDetails] 
+	 
+     @Pnr_No varchar(20),@Pnr_Id int,
+     @Fname varchar(30),@Lname varchar(30), @Age int, @Sex int,@datetime varchar(30), @Identityproof 
+varchar(30)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+INSERT INTO PassengerDetails
+          (Fname,Lname,Age,Sex,datetime,Pnr_Id,Pnr_No,Identityproof) 
+     VALUES 
+          (@Fname,@Lname,@Age,@Sex,@datetime,@Pnr_Id,@Pnr_No,@Identityproof) 
+END
+
+GO
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPaymentDetails]    Script Date: 06/14/2016 11:17:19 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPaymentDetails] 
+	 
+      @Transaction_Number varchar(30)=null
+      ,@Amount int=null,
+      @Paymentmode int=null,@dateandtime datetime=null,@Gateway_transId varchar(20)=null,@Pnr_Id 
+int=null,@Pnr_No varchar(20)=null, @TransactionStatus int
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+INSERT INTO PaymentDetails
+          
+(Transaction_Number,Amount,Paymentmode,dateandtime,Pnr_Id,Pnr_No,Gateway_transId,TransactionStatus) 
+     VALUES 
+          
+(@Transaction_Number,@Amount,@Paymentmode,@dateandtime,@Pnr_Id,@Pnr_No,@Gateway_transId,@Transaction
+Status)  	
+END
+
+GO
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrDetails]    Script Date: 06/14/2016 11:17:29 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPnrDetails] 
+	 
+      @Pnr_No varchar(20) = null,
+      @No_Seats int  = null,
+      @cost int  = null,
+      @dateandtime varchar(30)=null,
+      @src varchar(30)= null,
+      @dest varchar(30) = null,
+      @vehicle_No varchar(20) = null,
+      @JourneyDate varchar(30)=null,
+      @ArrivalTime varchar(30)=null,
+      @DeptTime varchar(30)=null,
+      @RouteId int=null,
+      @fleetOwnerId int=null,
+      @JourneyType int,
+      @AuthCode varchar(10),
+      @LastInsPnrID INT OUTPUT
+AS
+BEGIN
+declare @startId int
+	SET NOCOUNT ON
+INSERT INTO PnrDetails
+          (Pnr_No,No_Seats,cost,dateandtime,src,dest,vehicle_No,JourneyDate, ArrivalTime, 
+DeptTime,fleetOwnerId,RouteId,JourneyType,AuthCode) 
+     VALUES 
+          (@Pnr_No,@No_Seats,@cost,@dateandtime,@src,@dest,@vehicle_No,@JourneyDate, @ArrivalTime, 
+@DeptTime,@fleetOwnerId,@RouteId,@JourneyType,@AuthCode) 
+          
+          SELECT @LastInsPnrID = SCOPE_IDENTITY()
+         	
+END
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrToSeats]    Script Date: 06/14/2016 11:17:46 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPnrToSeats]
+      @Pnr_ID int,
+      @Pnr_No varchar(20),@SeatNo varchar(20), @Date varchar(20),@VehicleNo int=null, @SeatId int
+      AS
+BEGIN
+	
+	SET NOCOUNT ON;
+INSERT INTO PnrToSeats
+          (Pnr_ID,Pnr_No,SeatNo,VehicleNo,Date,SeatId) 
+     VALUES 
+          (@Pnr_ID,@Pnr_No,@SeatNo,@VehicleNo,@Date,@SeatId)
+END
+
+GO
+

@@ -20,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetCompanies();" ng-model="GetfleetRoutes">
+<body ng-init="GetCompanies();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -346,6 +346,7 @@
 
                                                 <div class="table-container">
 
+
                                                     <div class="row mbm">
                                                         <div class="col-md-5">
                                                             Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
@@ -355,14 +356,99 @@
                                                         <div class="col-md-5">
                                                             Fleet Owner:<select ng-options="s.Name for s in FleetOwners.Table track by s.Id" ng-model="s" ng-change="GetFleetRoutes()">
 
-    <option value="">Select</option>
-</select>
+                                                                     <option value="">Select</option>
+                                                                       </select>
                                                         </div>
 
 
 
                                                         <div class="actions">
                                                             <a href="NewFleetRoutes.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">Assign Route to fleet</button></a>
+
+                                                        </div>
+
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Routes</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="currGroup">
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Vehicle Reg No:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="col-md-6">
+                                                                                    <select ng-options="v.VehicleRegNo for v in initdata.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" width="100%" ng-model="initdata.newfleet.v">
+                                                                                        <option value="">Select</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Fleet Route:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="col-md-6">
+                                                                                    <select ng-options="r.routename for r in initdata.Table track by r.Id" class="form-control" ng-model="initdata.newfleet.r">
+                                                                                        <option value="">Select</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+
+
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">Effective From:<span class='require'>*</span></label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group">
+                                                                                        <div style="width:30%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Effective Till:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group">
+                                                                                    <div style="width:30%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="button" class="btn btn-primary" >Save</button>
+                                                                            <button type="button" class="btn btn-default">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
 
                                                         </div>
 
@@ -390,7 +476,7 @@
                                                                 <td>{{R.EffectiveTill}}</td>
                                                                 <td>
 
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setRoute(R);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>

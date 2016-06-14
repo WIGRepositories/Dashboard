@@ -201,8 +201,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 }
  
     $scope.setFleet = function (F) {
-        $scope.currVD = F;
-             $scope.currVD.VehicleTypeId = 9;
+        $scope.currVD = F;            
     }
 });
    
