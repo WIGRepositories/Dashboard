@@ -7521,3 +7521,122 @@ else
 
 END
 GO
+
+/****** Object:  Table [dbo].[FleetOwnerRequest]    Script Date: 06/15/2016 19:36:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRequest](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[PhoneNo] [varchar](50) NOT NULL,
+	[EmailAddress] [varchar](50) NOT NULL,
+	[CompanyName] [varchar](20) NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[Title] [varchar](20) NOT NULL,
+	[FleetSize] [int] NOT NULL,
+	[CompanyEmployeSize] [int] NOT NULL,
+	[CurrentSystemInUse] [varchar](50) NOT NULL,
+	[Gender] [varchar](20) NOT NULL,
+	[howdidyouhearaboutus] [varchar](50) NOT NULL,
+	[Address] [varchar](50) NOT NULL,
+	[SentNewProductsEmails] [bit] NULL,
+	[Agreetotermsandconditions] [bit] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[InSupdFleetOwnerRequest1]    Script Date: 06/15/2016 19:37:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE[dbo].[InSupdFleetOwnerRequest1](
+		   @FirstName varchar(50),   
+           @LastName varchar(50),
+           @PhoneNo  varchar(50),
+           @EmailAddress varchar(20),
+           @CompanyName varchar(20),
+           @Description varchar(50) ,
+           @Title varchar(20),
+           @CompanyEmployeSize int,
+           @FleetSize int,
+           @CurrentSystemInUse varchar(50),
+           @SentNewProductsEmails bit,
+           @Gender varchar(20),
+           @howdidyouhearaboutus varchar(50),
+           @Agreetotermsandconditions bit,
+           @Address varchar(50),
+           @insupdflag varchar(10)
+           )
+ 
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[FleetOwnerRequest]
+           ([FirstName]
+           ,[LastName]
+           ,[PhoneNo]
+           ,[EmailAddress]
+           ,[CompanyName]
+           ,[Description]
+           ,[Title]
+           ,[CompanyEmployeSize]
+             ,[FleetSize]
+             ,[CurrentSystemInUse]
+              ,[SentNewProductsEmails] 
+              ,[Gender] 
+            ,[howdidyouhearaboutus] 
+            ,[Agreetotermsandconditions]
+              ,[Address] )
+     VALUES
+          (@FirstName    
+           ,@LastName
+          , @PhoneNo
+           ,@EmailAddress
+           ,@CompanyName
+           ,@Description 
+           ,@Title
+           ,@CompanyEmployeSize 
+           ,@FleetSize
+           ,@CurrentSystemInUse
+         , @SentNewProductsEmails 
+          , @Gender 
+           ,@howdidyouhearaboutus
+          ,@Agreetotermsandconditions
+          , @Address )
+          
+  
+          else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRequest]
+   SET
+      [FirstName] = @FirstName
+      ,[LastName] = @LastName
+      ,[PhoneNo] = @PhoneNo
+      ,[EmailAddress] = @EmailAddress
+      ,[CompanyName] = @CompanyName
+      ,[Description] = @Description
+      ,[Title] = @Title
+      ,[CompanyEmployeSize] = @CompanyEmployeSize 
+      ,[FleetSize] = @FleetSize
+      ,[CurrentSystemInUse] = @CurrentSystemInUse
+      ,[SentNewProductsEmails]=@SentNewProductsEmails 
+       ,[Gender] = @Gender 
+       ,[howdidyouhearaboutus]=@howdidyouhearaboutus
+       ,[Agreetotermsandconditions]=@Agreetotermsandconditions
+       ,[Address]= @Address
+
+END
+
+
+
