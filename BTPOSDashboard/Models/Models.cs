@@ -287,7 +287,7 @@ namespace BTPOSDashboardAPI.Models
         public string Description { get; set; }
 
         public string Active { get; set; }
-
+        public string insupddelflag { get; set; }
     }
 
     public class Types
@@ -307,7 +307,7 @@ namespace BTPOSDashboardAPI.Models
         public string ListKey { get; set; }
 
         public string Listvalue { get; set; }
-
+        public string insupddelflag { get; set; }
     }
     
     public class FleetOwner
@@ -444,7 +444,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string ipconfig { get; set; }
         public string fleetowner { get; set; }
-        public int fleetownerid { get; set; }
+        public int? fleetownerid { get; set; }
         public int active { get; set; }
 
         public string insupdflag { get; set; }
@@ -584,23 +584,25 @@ namespace BTPOSDashboardAPI.Models
 
     public class TroubleTicketingDetails
     {
-        public string addInfo { get; set; }
+        public int RefId { get; set; }
+
+        public string Type { get; set; }
 
         public string createdBy { get; set; }
 
-        public int createdOn { get; set; }
+        public string Raised { get; set; }
 
-        public int Id { get; set; }
+        public string TicketTitle { get; set; }
 
-        public string raisedBy { get; set; }
+        public string IssueDetails { get; set; }
 
-        public int status { get; set; }
+        public string AddInfo { get; set; }
 
-        public string ticketinfo { get; set; }
+        public int Status { get; set; }
 
-        public int ticketTypeId { get; set; }
+        public string Asign { get; set; }  	
 
-        public int TTId { get; set; }
+        public int Id{get;set;}
 
     }
     public class TroubleTicketingHandlers
@@ -1027,6 +1029,8 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
         public int companyId { set; get; }
         public int Company { set; get; }
+        public int? mgrId { set; get; }
+        public int ManagerName { set; get; }
     }
 
     public class Register
@@ -1037,7 +1041,7 @@ namespace BTPOSDashboardAPI.Models
         public string LastName { get; set; }
         public string Emailaddress { get; set; }
         public string ConfirmPassword { get; set; }
-
+        public string Gender { get; set; }
     }
 
     public class login
@@ -1063,6 +1067,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string Path { get; set; }
         public int Active { get; set; }
+        public string insupddelflag { get; set; }
 
     }
     public class ObjectAccess
@@ -1090,6 +1095,7 @@ namespace BTPOSDashboardAPI.Models
         public String nextstop { get; set; }
         public int StopNo { get; set; }
         public String insupddelflag { get; set; }
+        public int FleetOwnerId { get; set; }
 
     }
     public class ISales
@@ -1110,8 +1116,8 @@ namespace BTPOSDashboardAPI.Models
         public int Quantity { get; set; }
 
         public int PerUnitPrice { get; set; }
-        public String PurchaseDate { get; set; }
-        public int PurchaseOrderNumber { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        public string PurchaseOrderNumber { get; set; }
         public int subCategoryId { get; set; }
 
         public string subCategory { get; set; }
@@ -1259,6 +1265,18 @@ namespace BTPOSDashboardAPI.Models
         public String ServiceTypeId { get; set; }
 
         public int Active { get; set; }
+
+        public String EngineNo { get; set; }
+
+        public String FuelUsed { get; set; }
+
+        public DateTime? MonthAndYrOfMfr { get; set; }
+
+        public string ChasisNo { get; set; }
+
+        public int SeatingCapacity { get; set; }
+
+        public DateTime? DateOfRegistration { get; set; }
     }
     public class FleetRoutes
     {
@@ -1345,6 +1363,7 @@ namespace BTPOSDashboardAPI.Models
         public int? needbtpos { get; set; }
         public int? cmpId { get; set; }
         public int? fleetownerId { get; set; }
+        public int? needfleetownerroutes { get; set; }
 
     }
 
@@ -1357,7 +1376,7 @@ namespace BTPOSDashboardAPI.Models
         public int LicenseCategoryId { set; get; }
         
     }
-    public class GetInventory
+    public class Inventory
     {
         public int Active { set; get; }
         public int availableQty { set; get; }
@@ -1370,7 +1389,7 @@ namespace BTPOSDashboardAPI.Models
         public int reorderpoint{set; get;}
         public string subcat{set; get;}
     }
-    public class GetPurchaseOrder
+    public class PurchaseOrder
     {
         public int Id { set; get; }
         public string PONum { set; get; }
@@ -1381,6 +1400,29 @@ namespace BTPOSDashboardAPI.Models
         public decimal Quantity { set; get; }
         public int StatusId { set; get; }
     }
+    public class VehicleLayout
+    {
+        //public int Id { get; set; }
+        public int VehicleLayoutTypeId { get; set; }
+        public int RowNo { get; set; }
+        public int ColNo { get; set; }
+        public int VehicleTypeId { get; set; }
+        public String label { get; set; }
+        public string insupdflag { get; set; }
+        public int FleetOwnerId { get; set; }
+    }
+    
+    public class reset
+    {
+
+        public string UserName { set; get; }
+        public string OldPassword { set; get; }
+        public string NewPassword { set; get; }
+        public string ReenterNewPassword { set; get; }
+
+    }
+
+
 }                     
         
 

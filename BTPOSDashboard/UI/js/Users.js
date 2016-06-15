@@ -4,9 +4,29 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
 
-    $scope.GetUsers = function () {
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=-1').then(function (res, data) {
+    /* user details functions */
+    $scope.GetCompanies = function () {    
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+            $scope.Companies = response.data;
+        });
+    }
+
+    $scope.GetUsersForCmp = function () {
+
+        if ($scope.cmp == null) {
+            $scope.User = null;
+            $scope.MgrUsers = null;
+            $scope.cmproles = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.User = res.data;
+            $scope.MgrUsers = res.data;
+        });
+
+        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + $scope.cmp.Id).then(function (res, data) {
+            $scope.cmproles = res.data;
         });
     }
 
@@ -39,6 +59,12 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             return;
         }
 
+        if ($scope.cmp == null)
+        {
+            alert('Please select a company.');
+            return;
+        }
+
         var User = {
             Id: User.Id,
             FirstName: User.FirstName,
@@ -48,11 +74,12 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             Email: User.Email,
             AdressId: User.AdressId,
             MobileNo: User.MobileNo,
-            RoleId: (role == -1) ? $scope.r.Id : 6,
+            RoleId: (role == -1) ? $scope.r.RoleId : 6,
             companyId: $scope.cmp.Id,
             Active: 1,
             UserName: User.UserName,
             Password: User.Password,
+            mgrId: ($scope.mgr == null )? null: $scope.mgr.Id,
             insupdflag: flag
         }
 
@@ -72,12 +99,13 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
 
     $scope.setUsers = function (usr) {
         $scope.User1 = usr;
-
     };
 
     $scope.clearUsers = function () {
         $scope.User1 = null;
     }
+
+    /*end of user details functions */
 
     $scope.getUserRolesForCompany = function (cmp) {
 
@@ -96,16 +124,12 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
         });
-
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=-1').then(function (res, data) {
-            $scope.MgrUsers = res.data;
-        });
-        //get users for the company or all users based on company
     }
 
     $scope.getRolesForCompany = function (seltype) {
         if (seltype == null) {
             $scope.cmproles = null;
+            $scope.MgrUsers = null;
             return;
         }
         var cmpId = (seltype) ? seltype.Id : -1;
@@ -113,6 +137,11 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
         $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
         });
+
+        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+            $scope.MgrUsers = res.data;
+        });
+        //get users for the company or all users based on company
     }
 
     $scope.getUsersnRoles = function () {
@@ -138,7 +167,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             return;
         }
 
-        if ($scope.ur.Id == null) {
+        if ($scope.ur.RoleId == null) {
             alert('Please select role.');
             return;
         }
@@ -150,7 +179,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
             Id: -1,
             UserId: $scope.uu.Id,
             CompanyId: $scope.s.Id,
-            RoleId: $scope.ur.Id,
+            RoleId: $scope.ur.RoleId,
             flag: flag
         };
 

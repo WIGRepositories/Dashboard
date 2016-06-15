@@ -8,11 +8,11 @@
   
     <!--Loading bootstrap css-->
 
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
@@ -170,6 +170,25 @@
 
                         </ul>
 
+                    </li>
+
+
+
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-truck">
+                                <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                            <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                            <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                            <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                            <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                            <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                            <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                        </ul>
                     </li>
 
                     <li>
@@ -418,7 +437,6 @@
                     </ul>
                 </div>
             </nav>
-            <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
             <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
             <div id="page-wrapper">
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
@@ -426,89 +444,95 @@
                     <div class="page-header pull-left">
                         <div class="page-title">Alerts</div>
                     </div>
-
-
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Alerts&Notifications</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Alerts</li>
+                        <li><a href="#">Alerts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                     </ol>
-
                     <div class="clearfix"></div>
                 </div>
-                <div>
-                    <div id="home" class="tab-pane fade in active">
-                        <div class="list-group mail-box" ng-repeat="A in Alert">
+                <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
+                <div class="page-content">
 
-                        </div>
-                    </div>
-                    <div>
-                        <div style="margin-top:10px">
-                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                <thead>
-                                    <tr>
-                                        <th>User Name</th>
-                                        <th>Message</th>
-                                        <th>Date</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    <div id="tableadvancedTabContent" class="tab-content">
+                        <div id="table-sorter-tab" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div>
+                                        <div id="tab-general">
 
-                                    <tr ng-repeat="R in Alert" class="gradeA">
-                                        <td>{{R.Username}}</td>
-                                        <td>{{R.Message}}</td>
-                                        <td>{{R.Date}}</td>
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <thead>
+                                                    <tr>
+                                                        <th>User Name</th>
+                                                        <th>Message</th>
+                                                        <th>Date</th>
 
-                                        <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
-                                            <i class="fa fa-times-circle"></i>&nbsp;
-                                            Delete
-                                        </button>-->
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                    </tr>
+                                                    <tr ng-repeat="R in Alert" class="gradeA">
+                                                        <td>{{R.Username}}</td>
+                                                        <td>{{R.Message}}</td>
+                                                        <td>{{R.Date}}</td>
 
-                                </tbody>
+                                                        <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
+                                    <i class="fa fa-times-circle"></i>&nbsp;
+                                    Delete
+                                </button>-->
 
-                            </table>
-                        </div>
-                    </div>
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>        
+
+                                </div>
+                            </div>
+
+                                                              
+                    <!--END CONTENT-->
 
                 </div>
-                <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                <!--END CONTENT--><!--BEGIN FOOTER-->
+                <!--END PAGE WRAPPER-->
+                <!--BEGIN FOOTER-->
                 <div id="footer">
                     <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                 </div>
                 <!--END FOOTER-->
-            </div>
-            <!--END PAGE WRAPPER-->
-        </div>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/Alerts.js"></script>
+            </div>   
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    
+    
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<script src="js/table-action.js"></script>
+<!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/Alerts.js"></script>
 
 </body>
 </html>

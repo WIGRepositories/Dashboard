@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     {
         [HttpGet]
   [Route("api/fleet/getFleetList")]
-        public DataSet List()
+        public DataSet List(int cmpId, int fleetOwnerId)
         {
             DataTable Tbl = new DataTable();
 
@@ -26,6 +26,20 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetFleetDetails";
             cmd.Connection = conn;
+
+            SqlParameter gid = new SqlParameter();
+            gid.ParameterName = "@cmpId";
+            gid.SqlDbType = SqlDbType.Int;
+            gid.Value = cmpId;
+            cmd.Parameters.Add(gid);
+
+            SqlParameter fid = new SqlParameter();
+            fid.ParameterName = "@fleetOwnerId";
+            fid.SqlDbType = SqlDbType.Int;
+            fid.Value = fleetOwnerId;
+            cmd.Parameters.Add(fid);
+
+            
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 
@@ -50,7 +64,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsupdelFleetDetails";
+                cmd.CommandText = "InsupddelFleetDetails";
                 cmd.Connection = conn;
 
                 conn.Open();
@@ -90,20 +104,53 @@ namespace BTPOSDashboard.Controllers
                 gid.Value = n.CompanyId;
                 cmd.Parameters.Add(gid);
 
-                SqlParameter nser = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
-                nser.SqlDbType = SqlDbType.Int;
-                nser.Value = n.ServiceTypeId;
-                cmd.Parameters.Add(nser);               
+                SqlParameter stid = new SqlParameter("@ServiceTypeId", SqlDbType.VarChar);
+                stid.SqlDbType = SqlDbType.Int;
+                stid.Value = n.ServiceTypeId;
+                cmd.Parameters.Add(stid);
+
+
+                SqlParameter engg = new SqlParameter("@EngineNo", SqlDbType.VarChar);
+                engg.SqlDbType = SqlDbType.VarChar;
+                engg.Value = n.EngineNo;
+                cmd.Parameters.Add(engg);
+
+                SqlParameter fuel = new SqlParameter("@FuelUsed", SqlDbType.VarChar);
+                fuel.SqlDbType = SqlDbType.VarChar;
+                fuel.Value = n.FuelUsed;
+                cmd.Parameters.Add(fuel);
+
+                SqlParameter mntt = new SqlParameter("@MonthAndYrOfMfr", SqlDbType.VarChar);
+                mntt.SqlDbType = SqlDbType.DateTime;
+                mntt.Value = n.MonthAndYrOfMfr;
+                cmd.Parameters.Add(mntt);
+
+                SqlParameter chss = new SqlParameter("@ChasisNo", SqlDbType.VarChar);
+                chss.SqlDbType = SqlDbType.VarChar;
+                chss.Value = n.ChasisNo;
+                cmd.Parameters.Add(chss);
+
+
+                SqlParameter seatc = new SqlParameter("@SeatingCapacity", SqlDbType.VarChar);
+                seatc.SqlDbType = SqlDbType.Int;
+                seatc.Value = n.SeatingCapacity;
+                cmd.Parameters.Add(seatc);
+
+
+                SqlParameter deat = new SqlParameter("@DateOfRegistration", SqlDbType.VarChar);
+                deat.SqlDbType = SqlDbType.DateTime;
+                deat.Value = n.DateOfRegistration;
+                cmd.Parameters.Add(deat);
                
+
+
                 SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
                 nActive.Value = n.Active;
                 cmd.Parameters.Add(nActive);
                 cmd.ExecuteScalar();
+
                 conn.Close();
-               // DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+       
             }
             catch (Exception ex)
             {

@@ -27,7 +27,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             alert('Please enter code.');
             return;
         }
-        var Group = {
+        var newCmp = {
             Id: Group.Id,
             Name: Group.Name,
             admin: Group.admin,
@@ -42,10 +42,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/CompanyGroups/SaveCompanyGroups',
-            data: Group
+            data: newCmp
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');            
+            alert('saved successfully.');
+            $scope.Group = null;
         });
 
      

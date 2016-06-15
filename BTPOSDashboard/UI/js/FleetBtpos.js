@@ -6,7 +6,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetFleeBTPosDetails = function () {
 
-        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?foId=-1&cmpid=-1').then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
             $scope.FleetBtposList = res.data;
         });
     }
@@ -64,7 +64,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var vc = {
             needvehicleRegno:'1',
             needbtpos:'1',
-            fleetownerId: $scope.fo.Id
+            fleetownerId: $scope.fo.Id 
         };
 
         var req = {
@@ -81,7 +81,32 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.FleetnBTPos = res.data;
         });
     }
-    
+    //$scope.GetFleetBTPosForreg() = function () {
+
+    //    if ($scope.vr == null) {
+    //        $scope.FleetnBTPos = null;
+    //        return;
+    //    }
+    //    var vc = {
+    //        needvehicleRegno: '1',
+    //        needbtpos: '1',
+    //        fleetownerId: $scope.fo.Id
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+
+    //        data: vc
+
+
+    //    }
+    //    $http(req).then(function (res) {
+    //        $scope.FleetnBTPos = res.data;
+    //    });
+    //}
 
     $scope.saveFleetBTPOS = function (FleetBtpos) {
         

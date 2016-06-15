@@ -8,7 +8,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetUsers();" ng-model="User1">
+<body ng-init="GetCompanies();"> 
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -48,7 +48,7 @@
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
+                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success">7</span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                                 <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
@@ -83,9 +83,6 @@
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
-
-
-
 
 
 
@@ -144,6 +141,24 @@
 
                             </ul>
 
+                        </li>
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            </ul>
                         </li>
 
                         <li>
@@ -325,7 +340,11 @@
 
                                                     <div class="row mbm">
                                                         <div class="row">
-                                                            
+                                                            <div class="col-md-5">
+                                                                Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetUsersForCmp()">
+    <option value="">Select</option>
+</select>
+                                                            </div>
 
                                                             <div class="actions">
 
@@ -352,7 +371,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.FirstName" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -365,7 +384,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.LastName" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -378,7 +397,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User.MiddleName" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -393,7 +412,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="User1.EmpNo" disabled /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -407,7 +426,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.Email" /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -420,36 +439,20 @@
                                                                                     </div>
                                                                                     <div class="col-md-5">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip"  /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.MobileNo" /></div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
+                                                                                </div>                                                                               
                                                                                 <div class="row">
 
                                                                                     <div class="col-md-3">
                                                                                         <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Company:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-md-5">
-                                                                                        <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
-                                                                                            
-                                                                                            <option value="">select company</option>
-
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                                            <label for="inputFirstName" class="control-label">Manager:<span class='require'>*</span></label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-md-4">
                                                                                         <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cactive" value="{{User1.mgrName}}" readonly /></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -469,7 +472,7 @@
                                                                                 </div>
 
                                                                                 <div class="col-md-5">
-                                                                                    <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
+                                                                                    <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%" disabled>
                                                                                         <option value="">Select Company</option>
 
                                                                                     </select>
@@ -502,7 +505,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div class="col-md-12"><input type="text" class="form-control" ng-model="User.UserName" /></div>
+                                                                                        <div class="col-md-12"><input type="text" class="form-control" ng-model="User1.UserName" /></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -515,7 +518,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="User.Password" /></div>
+                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="User1.Password" /></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -528,7 +531,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="reenteredPwd" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-12"><input type="password" class="form-control" ng-model="reenteredPwd" value="{{User1.Password}}" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -599,31 +602,31 @@
             </div>
         </div>
     </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/Users.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    
+    
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<script src="js/table-action.js"></script>
+<!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/Users.js"></script>
 
 </body>
 

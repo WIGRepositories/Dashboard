@@ -102,10 +102,17 @@ namespace BTPOSDashboard.Controllers
             foid.SqlDbType = SqlDbType.Int;
             foid.Value = (vc.fleetownerId == null) ? -1 : vc.fleetownerId;
             cmd.Parameters.Add(foid);    
+            
+            //needfleetownerroutes
+            SqlParameter forid = new SqlParameter();
+            forid.ParameterName = "@needFleetOwnerRoutes";
+            forid.SqlDbType = SqlDbType.Int;
+            forid.Value = (vc.needfleetownerroutes == null) ? -1 : vc.needfleetownerroutes;
+            cmd.Parameters.Add(forid);  
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
+                   db.Fill(ds);
 
 
            // Tbl = ds.Tables[0];
@@ -114,6 +121,7 @@ namespace BTPOSDashboard.Controllers
             return ds;		
 
         }
+       
 
         //[HttpPost]
         //public DataTable sBTPOSList(BTPOSDetails[] poslist)

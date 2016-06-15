@@ -52,7 +52,7 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
               ItemName: Item.ItemName,
               Code: Item.Code,
               Description: Item.Description,
-              Category: Item.Category.Id,
+              Category: 6,// Item.Category.Id,
               SubCategory: Item.SubCategory.Id,
               ReOrderPoint: Item.ReOrderPoint
           }

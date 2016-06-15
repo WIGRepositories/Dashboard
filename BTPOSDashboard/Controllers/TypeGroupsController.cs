@@ -48,7 +48,7 @@ namespace BTPOSDashboardAPI.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_InsTypeGroups";
+            cmd.CommandText = "InsUpdTypeGroups";
             cmd.Connection = conn;
             conn.Open();
          
@@ -77,6 +77,13 @@ namespace BTPOSDashboardAPI.Controllers
             llid.Value = 1;// b.Active;
             //llid.Value = b.Active;
             cmd.Parameters.Add(llid);
+
+            SqlParameter flag = new SqlParameter();
+            flag.ParameterName = "@insupdflag";
+            flag.SqlDbType = SqlDbType.VarChar;
+            flag.Value = b.insupddelflag;
+            cmd.Parameters.Add(flag);
+           
            
           
             //DataSet ds = new DataSet();

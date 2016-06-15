@@ -1,13 +1,23 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname
+    $scope.initdata= $localStorage.initdata
+
+
+    $scope.GetFleeBTPosDetails = function () {
+
+        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?foId=-1&cmpid=-1&initdata.newfleet.fdid=-1').then(function (res, data) {
+            $scope.FleetBtposList = res.data;
+        });
+    }
+   
 
     $scope.GetCompanies = function () {
 
         var vc = {
             needCompanyName: '1',
-            needRoutes: '1'
+            needRoutes: '1',
+            needRegNo:'1',
         };
 
         var req = {
@@ -23,21 +33,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
-    $scope.getVehiclesForCmp = function () {
+    $scope.GetRoutesForFO = function () {
 
         $scope.vehicles = null;
 
-        var selCmp = $scope.cmp;
+        var fleetowner = $scope.s;
 
-        if (selCmp == null) {            
+        if (fleetowner == null) {
             return;
         }
 
-        var cmpId = (selCmp == null) ? -1 : selCmp.Id;
-
+      
         var vc = {
             needvehicleRegno: '1',
-            cmpId: selCmp.Id
+            fleetownerId: fleetowner.Id,
+            needfleetownerroutes:'1'
         };
 
         var req = {
@@ -50,7 +60,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res) {
             $scope.vehicles = res.data;
         });
-
+      
     }
 
     $scope.GetFleetRoutes = function () {      
@@ -66,7 +76,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var fr = {
             cmpId: selCmp.Id,
             routeid: '-1',
-            fleetownerId:'-1'
+            fleetownerId: $scope.s.Id,
+            regno: '-1'
         };
 
         var req = {
@@ -81,13 +92,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
-    $scope.GetFleetRouteInit = function () {
 
-        $http.get('http://localhost:1476/api/FleetRoutes/GetFleetList').then(function (res, data) {
-            $scope.FleetRouteinit = res.data.Table;
-        });
-
-    }
+   
 
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
@@ -110,8 +116,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         }
         $http(req).then(function (res) {
-            $scope.FleetOwners = res.data;
-            GetFleetRoutes();
+            $scope.FleetOwners = res.data;          
         });
     }
 
@@ -159,12 +164,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             return;
         }
 
-        if (newFR.v.Id == null) {
+        if (newFR.v == null) {
             alert('Please select Vehicle.');
             return;
         }
 
-        if (newFR.r.ID == null) {
+        if (newFR.r == null) {
             alert('Please select route.');
             return;
         }
@@ -172,9 +177,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var FleetRouters = {
             Id:-1 ,
             VehicleId: newFR.v.Id,          
-            RouteId: newFR.r.ID,
-            EffectiveFrom: newFR.EffectiveFrom,
-            EffectiveTill: newFR.EffectiveTill,
+            RouteId: newFR.r.RouteId,
+            EffectiveFrom: newFR.fd,
+            EffectiveTill: newFR.td,
             insupddelflag:'I'            
         };
 
@@ -192,6 +197,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
 
 
+    }
+
+    $scope.set = function (R) {
+        $scope.currFR = R;
+        $scope.currFR.VehicleTypeId = 9;
     }
 });
 

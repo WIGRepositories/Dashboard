@@ -2,12 +2,30 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname
+
+  //  $scope.FleeBTPosDetails = [];
+  
 
     $scope.GetFleeBTPosDetails = function () {
 
-        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?foId=-1&cmpid=-1').then(function (res, data) {
-            $scope.FleetBtposList = res.data;
+        if ($scope.cmp == null) {
+            $scope.cmpdata = null;
+            $scope.FleetOwners = null;
+        
+            return;
+        }
+
+        if ($scope.s == null) {
+            $scope.sdata = null;
+            $scope.BTPos = null;
+            return;
+        }
+        if ($scope.b == null) {
+            $scope.BTPos = null;
+        }
+
+        $http.get('http://localhost:1476/api/BTPOSConfig/GetFleeBTPosDetails?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id + '&BTPosId=' + $scope.b.Id).then(function (res, data) {
+            $scope.Btpos = res.data;
         });
     }
 
@@ -55,16 +73,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
-    $scope.GetFleetBTPosForFO = function () {
+    $scope.GetBTPosForFO = function () {
 
-        if ($scope.fo == null) {
-            $scope.FleetnBTPos = null;
+        if ($scope.s == null) {
+            $scope.BTPos = null;
             return;
         }
         var vc = {
-            needvehicleRegno: '1',
-            needbtpos: '1',
-            fleetownerId: $scope.fo.Id
+            needBTPos: '1',
+           
+            sId: $scope.s.Id
         };
 
         var req = {
@@ -78,7 +96,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         }
         $http(req).then(function (res) {
-            $scope.FleetnBTPos = res.data;
+            $scope.sdata = res.data;
         });
     }
 

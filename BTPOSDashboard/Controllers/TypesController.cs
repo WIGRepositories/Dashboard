@@ -85,12 +85,21 @@ namespace BTPOSDashboardAPI.Controllers
             pDesc.Value = b.Description;
             cmd.Parameters.Add(pDesc);
 
-            SqlParameter lAct = new SqlParameter();
-            lAct.ParameterName = "@Active";
-            lAct.SqlDbType = SqlDbType.Int;
-            lAct.Value = Convert.ToInt32(b.Active);
+
+            SqlParameter llid = new SqlParameter();
+            llid.ParameterName = "@Active";
+            llid.SqlDbType = SqlDbType.Int;
+            llid.Value = 1;// b.Active;
             //llid.Value = b.Active;
-            cmd.Parameters.Add(lAct);  
+            cmd.Parameters.Add(llid);
+
+            SqlParameter flag = new SqlParameter();
+            flag.ParameterName = "@insupdflag";
+            flag.SqlDbType = SqlDbType.VarChar;
+            flag.Value = b.insupddelflag;
+            //llid.Value = b.Active;
+            cmd.Parameters.Add(flag);
+           
             
             cmd.ExecuteScalar();
             conn.Close();

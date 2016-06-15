@@ -86,7 +86,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@PurchaseOrderNumber";
-                gid.SqlDbType = SqlDbType.VarChar;
+                gid.SqlDbType = SqlDbType.VarChar;               
                 gid.Value = P.PurchaseOrderNumber;
                 cmd.Parameters.Add(gid);
 
@@ -147,9 +147,9 @@ namespace BTPOSDashboard.Controllers
                                 active.Value = 1;
                                 cmd.Parameters.Add(active);
 
-                                SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
-                                fo.Value = 1;
-                                cmd.Parameters.Add(fo);
+                                //SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
+                                //fo.Value = 1;
+                                //cmd.Parameters.Add(fo);
 
                                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                                 insupdflag.Value = "I";

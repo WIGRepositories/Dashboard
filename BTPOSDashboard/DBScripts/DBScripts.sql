@@ -28,7 +28,7 @@ GO
 ALTER TABLE [dbo].[Alerts] ADD  CONSTRAINT [DF_AlertNotifications_UserId]  DEFAULT ((1)) FOR [UserId]
 GO
 
-/****** Object:  Table [dbo].[Notifications]    Script Date: 05/05/2016 18:40:53 ******/
+/****** Object:  Table [dbo].[Notifications]    Script Date: 06/03/2016 17:10:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -45,7 +45,8 @@ CREATE TABLE [dbo].[Notifications](
 	[MessageTypeId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
-	[Name] [varchar](50) NOT NULL
+	[Name] [varchar](50) NOT NULL,
+	[Source] [varchar](50) NULL
 ) ON [PRIMARY]
 
 GO
@@ -55,7 +56,6 @@ GO
 
 ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
 GO
-
 
 GO
 SET ANSI_NULLS ON
@@ -158,9 +158,7 @@ INSERT INTO [POSDashboard].[dbo].[EditHistory]
            ,@ChangedType
            ,@Task)
 
- SELECT @edithistoryid = @@IDENTITY
-
-
+ select @edithistoryid = SCOPE_IDENTITY()
 
 end
 
@@ -201,12 +199,6 @@ BEGIN
 END
 
 
-CREATE TABLE [dbo].[COUNTRY](
-	[ID] [numeric](18, 0) NULL,
-	[Name] [nchar](10) NULL,
-	[Code] [nchar](10) NULL,
-	[Active] [nchar](10) NULL
-) ON [PRIMARY]
 
 GO
 SET ANSI_NULLS ON
@@ -290,7 +282,7 @@ CREATE TABLE [dbo].[BTPOSRegistration](
 
 GO
 
-/****** Object:  Table [dbo].[BTPOSRecords]    Script Date: 05/28/2016 15:02:51 ******/
+/****** Object:  Table [dbo].[BTPOSRecords]    Script Date: 06/08/2016 18:57:52 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -302,7 +294,7 @@ GO
 
 CREATE TABLE [dbo].[BTPOSRecords](
 	[Id] [int] NOT NULL,
-	[BTPOSId] [int] NOT NULL,
+	[POSID] [int] NOT NULL,
 	[RecordData] [binary](2000) NULL,
 	[FileName] [varchar](50) NULL,
 	[Description] [varchar](500) NULL,
@@ -319,6 +311,7 @@ GO
 
 ALTER TABLE [dbo].[BTPOSRecords] ADD  CONSTRAINT [DF_BTPOSRecords_IsDirty]  DEFAULT ((1)) FOR [IsDirty]
 GO
+
 
 
 
@@ -499,6 +492,7 @@ SELECT r.[Id]
   FROM [POSDashboard].[dbo].[Routes] r
   inner join stops src on src.id = r.sourceid
   inner join stops dest on dest.id = destinationid
+  order by RouteName
 end
 
 GO
@@ -993,25 +987,32 @@ SELECT t.[Id]
 
 END
 
-GO
+/****** Object:  Table [dbo].[TroubleTicketingDetails]    Script Date: 06/08/2016 17:03:12 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[TroubleTicketingDetails](
-	[addInfo] [varchar](50) NOT NULL,
+	[Type] [varchar](50) NOT NULL,
 	[createdBy] [varchar](50) NOT NULL,
-	[createdOn] [int] NOT NULL,
+	[Raised] [int] NOT NULL,
+	[TicketTitle] [int] NOT NULL,
+	[IssueDetails] [varchar](50) NOT NULL,
+	[AddInfo] [varchar](50) NOT NULL,
+	[Status] [varchar](50) NOT NULL,
+	[Asign] [int] NOT NULL,
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[raisedBy] [varchar](50) NOT NULL,
-	[status] [varchar](50) NOT NULL,
-	[ticketinfo] [varchar](50) NOT NULL,
-	[ticketTypeId] [int] NOT NULL,
-	[TTId] [int] NOT NULL
+	[RefId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
+
+SET ANSI_PADDING OFF
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -1245,19 +1246,10 @@ CREATE TABLE [dbo].[RoutesConfiguration](
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[getRoutesFares]
-as
-begin
-select * from RoutesFares
-end
 
 
 GO
-/****** Object:  Table [dbo].[RouteFare]    Script Date: 05/27/2016 08:58:23 ******/
+/****** Object:  Table [dbo].[RouteFare]    Script Date: 06/10/2016 08:52:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1271,8 +1263,10 @@ CREATE TABLE [dbo].[RouteFare](
 	[Distance] [decimal](18, 0) NOT NULL,
 	[PerUnitPrice] [decimal](18, 0) NULL,
 	[Amount] [decimal](18, 0) NOT NULL,
-	[FareTypeId] [int] NOT NULL
+	[FareTypeId] [int] NOT NULL,
+	[RouteStopId] [int] NOT NULL
 ) ON [PRIMARY]
+
 
 
 GO
@@ -1395,7 +1389,7 @@ BEGIN
 
 INSERT INTO 
 [STATE] VALUES
-           (@ID,
+           (@Id,
            @Name,
            @Count,
            @Code,
@@ -1403,6 +1397,7 @@ INSERT INTO
 	END
 
 GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1411,11 +1406,61 @@ CREATE procedure [dbo].[InsUpdDelObjects](@Id int,
 @Name varchar(50),
 @Description varchar(100) = '',
 @Path Varchar(500),
+@insupdflag varchar(1),
 @Active int = 1)
 as
 begin
-insert into Object (Name,Description,Path ,Active) values(@Name,@Description, @Path, @Active)
+declare @cnt int
+
+if @insupdflag = 'I'
+begin
+
+select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+
+
+INSERT INTO [POSDashboard].[dbo].[Objects]
+           ([Name]
+           ,[Description]
+           ,[Path] 
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@Path 
+           ,@Active)
+           
+           end
+else
+if @insupdflag = 'U'
+begin
+
+select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
+
+
+update Objects 
+set 
+[Name]=@Name
+,[Active] = @Active
+,[Description] = @Description
+,[Path]=@Path
+where Id = @Id
+
+
+
+
 end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[Objects]
+      WHERE Id = @Id
+end
+end
+
 
 GO
 SET ANSI_NULLS ON
@@ -1531,7 +1576,7 @@ INSERT INTO
            @ProviderName,
            @BTPOSGRPID,
            @Active,
-           @UserId,
+           @userId,
            @Passkey,
            @Url,
            @Testurl,
@@ -1573,37 +1618,34 @@ CREATE TABLE [dbo].[FleetBtpos](
 
 
 GO
+USE [POSDashboard]
+GO
+/****** Object:  Table [dbo].[FleetDetails]    Script Date: 06/08/2016 22:52:57 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
-
 SET ANSI_PADDING ON
 GO
-
-/****** Object:  Table [dbo].[FleetDetails]    Script Date: 05/20/2016 12:07:29 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
 CREATE TABLE [dbo].[FleetDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[VehicleRegNo] [varchar](15) NOT NULL,
+	[VehicleRegNo] [varchar](15)  NOT NULL,
 	[VehicleTypeId] [int] NOT NULL,
 	[FleetOwnerId] [int] NOT NULL,
 	[CompanyId] [int] NOT NULL,
 	[ServiceTypeId] [int] NOT NULL,
 	[Active] [int] NOT NULL,
-	[LayoutTypeId] [int] NOT NULL
+	[LayoutTypeId] [int] NOT NULL,
+	[EngineNo] [varchar](50) NULL,
+	[FuelUsed] [varchar](50)  NULL,
+	[MonthAndYrOfMfr] [datetime] NULL,
+	[ChasisNo] [varchar](50)  NULL,
+	[SeatingCapacity] [int] NULL,
+	[DateOfRegistration] [datetime] NULL
 ) ON [PRIMARY]
 
 GO
+
 
 SET ANSI_PADDING OFF
 GO
@@ -1735,19 +1777,8 @@ CREATE TABLE [dbo].[UserLogins](
 ) ON [PRIMARY]
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[FleetOwnerRouteDetails](
-	[FleetOwnerId] [int] NOT NULL,
-	[RouteId] [varchar](50) NOT NULL,
-	[Stop1] [nvarchar](50) NOT NULL,
-	[PreviousStop] [nvarchar](50) NOT NULL,
-	[NextStop] [nvarchar](50) NOT NULL
-) ON [PRIMARY]
 
-GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1810,6 +1841,8 @@ SELECT [EditHistoryId]
       ,[FromValue]
       ,[ToValue]
       ,[ChangeType]
+      ,[Field1]
+      ,[Field2]
       ,e.Task
       ,e.SubItem
   FROM [POSDashboard].[dbo].[EditHistoryDetails] ed
@@ -1823,7 +1856,15 @@ GO
 CREATE procedure [dbo].[getEditHistory]
 as
 begin
-select * from EditHistory
+SELECT [Field]
+      ,[SubItem]
+      ,[Comment]
+      ,[Date]
+      ,[ChangedBy]
+      ,[ChangedType]
+      ,[Task]
+      ,[Id]
+  FROM [POSDashboard].[dbo].[EditHistory]
 end
 
 GO
@@ -1888,7 +1929,7 @@ SELECT U.[Id]
   inner join company c on (U.companyid = c.id)
   left outer join Users mgr on mgr.id = U.managerid
   left outer join dbo.userlogins ul on ul.userid = U.id    
-  where (c.id = @cmpid or   @cmpid = -1)
+  where (c.id = @cmpId or   @cmpId = -1)
 end
 
 GO
@@ -1953,7 +1994,7 @@ end
 
 else
 begin
-if @insupdflag = 0
+if @insupdflag = 1
  delete from [CompanyRoles] where [CompanyId] = @CompanyId and RoleId = @roleid
 end
 
@@ -1975,7 +2016,7 @@ SELECT distinct c.[active]
       ,[Name]
   FROM [POSDashboard].[dbo].[Company] c
   inner join Users u on  (u.companyId = c.id or  @userid = -1)
-  
+  order by [Name]
 end
 
 --delete from CompanyGroups
@@ -1996,7 +2037,7 @@ CREATE procedure [dbo].[InsUpdDelCompany](
 @desc varchar(50) = '',
 @Id int,
 @Name varchar(50),
-@insupdflag varchar(10),
+@insupdflag varchar(1),
 @userid int = -1
 )
 as
@@ -2016,57 +2057,78 @@ declare @neweid int
 
 
 if @insupdflag = 'I'
-	--check if already company exists
-	select @cnt = count(1) from company where upper(name) = upper(@name)
+		begin
+			--check if already company exists
+			select @cnt = count(1) from company where upper(name) = upper(@name)
 
-	if @cnt = 0 
-	begin
-	insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
-	
-	SELECT @newCmpId = @@IDENTITY
-	
-	--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid
-           
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+			if @cnt = 0 
+			begin
+			insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
+			
+			SELECT @newCmpId = SCOPE_IDENTITY()
+			
+			--insert into edit history
+			exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		           
+			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+			exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+			exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+			exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 
-  --  --insert Fleet owner role by default
-		--insert into CompanyRoles (Name,[Description],Active,companyid) 
-		--values('Fleet Owner','Fleet owner role',1,@newCmpId)
-   
-	end
-
+		  --  --insert Fleet owner role by default
+				--insert Fleet owner role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,6,@newCmpId,0 
+				--insert Supervisor role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,7,@newCmpId,0 
+				--insert Manager role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,8,@newCmpId,0 
+				--insert Fleet Conductor role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,9,@newCmpId,0 
+				--insert Fleet Ticket Salesperson Front Office by default
+				 exec  InsUpdDelCompanyRoles 1,-1,10,@newCmpId,0 
+				--insert Guest User role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,12,@newCmpId,0 
+				--insert Fleet driver role by default
+				 exec  InsUpdDelCompanyRoles 1,-1,13,@newCmpId,0 
+		   
+				 --declare @m varchar(500)
+			--set @m = 'Company '+@Name+' created successfully.'
+			--exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
+			
+	        --set @m = 'fleet owner '+'FL00'+@fc+' created successfully.'
+	       -- exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
+		   
+			end
+		end
 else
 
    if @insupdflag = 'U'
-
-		--check if already a company with the new name exists
-		select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
-	    
-		if @cnt = 0 
 		begin
-		update Company
-		set Name = @Name, code = @code, [desc] = @desc, active = @active
-		where Id = @Id
-		
-		
-		--insert into edit history
-	exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid
-           
-           set @neweid =  @edithistoryid
-           
-    --exec InsEditHistoryDetails @neweid,null,@Name,'Insertion','Name',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-    --exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
-		
+				--check if already a company with the new name exists
+				select @cnt = count(1) from company where upper(name) = upper(@name) and id <> @id
+			    
+				if @cnt = 0 
+				begin
+				update Company
+				set Name = @Name, code = @code, [desc] = @desc, active = @active
+				where Id = @Id
+				
+				
+				--insert into edit history
+			exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
+		                     
+		           
+			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+			exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+			exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+			exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+				
+				end
+				else
+					RAISERROR ('Company already exists',16,1);
 		end
    else
+	if @insupdflag = 'D'
      delete from Company where Id = @Id
 end
 
@@ -2080,7 +2142,7 @@ GO
 -- =============================================
 CREATE  PROCEDURE [dbo].[GetFleetDetails] 
 	-- Add the parameters for the stored procedure here
-	(@vehicleId int=-1)
+	(@cmpId int = -1, @fleetOwnerId int = -1, @vehicleId int=-1)
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -2089,39 +2151,40 @@ BEGIN
 
    SELECT v.[Id]
       ,[VehicleRegNo]
-      ,vt.[Name] as VehicleType,
-      lt.Name AS vehiclelayout,
-       st.Name as ServiceType,
-       u.FirstName +' '+u.LastName as FleetOwnerName 
+      ,vt.[Name] as VehicleType
+      ,vt.Id AS VehicleTypeId
+      ,lt.Name AS vehiclelayout
+      ,lt.Id as vehiclelayoutId
+      ,st.Name as ServiceType
+      ,st.Id as ServiceTypeId
+      , u.FirstName +' '+u.LastName as FleetOwnerName 
       ,c.[Name] as CompanyName
       ,v.[Active]
+      ,[LayoutTypeId]
+      ,[EngineNo]
+      ,[FuelUsed]
+      ,[MonthAndYrOfMfr]
+      ,[ChasisNo]
+      ,[SeatingCapacity]
+      ,[DateOfRegistration]
      FROM [POSDashboard].[dbo].[FleetDetails]v
     inner join Types vt on vt.Id=v.VehicleTypeId
     inner join Types st on st.Id=v.ServiceTypeId
-    inner join Types lt on lt.Id = v.layouttypeid
+   inner join Types lt on lt.Id = v.layouttypeid
     inner join company c on c.Id=v.CompanyId
-    inner join FleetOwner f on f.UserId=v.FleetOwnerId
-    inner join Users u on u.Id = f.UserId
-	 where  (v.Id= @vehicleId or @vehicleId = -1)
+    inner join FleetOwner f on f.id=v.FleetOwnerId
+   inner join Users u on u.Id = f.UserId
+ --   inner join BTPOSDetails bd on bd.FleetOwnerId=f.Id
+ --   inner join VehicleDetails vd on vd.fleetOwnerId=f.Id
+    
+	 where  ((v.Id= @vehicleId or @vehicleId = -1)
+	 and (v.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
+	 and (v.CompanyId = @cmpId or @cmpId = -1))
    
     -- Insert statements for procedure here
     
     
---SELECT t.[Id]
---      ,t.[Name] as VehicleType,
---      t.[Name] as ServiceType
---      ,t.[Active]
-      
---      ,f.[Id] as FleetName 
---         ,c.[Name] as CompanyName
---  FROM [POSDashboard].[dbo].[Types]t   
---	 inner join company c on c.Id=t.Id
---	 inner join FleetOwner f on f.Id=t.Id
---	 where  (t.Id= @vehicleId or @vehicleId = -1)
-
-
 END
-
 
 GO
 SET ANSI_NULLS ON
@@ -2284,12 +2347,29 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE [dbo].[GetBTPOSRecords]
+CREATE PROCEDURE [dbo].[GetBTPOSRecords]
+
+(@cmpId int = -1, @fleetOwnerId int = -1, @POSId int=-1)
 AS
 BEGIN
 	
-select * from  BTPOSRecords
+select br.[Id],
+       br.[FileName],
+       br.[Description],
+       br.[LastDownloadtime]
+       from  BTPOSRecords br
+    inner join FleetDetails fd on fd.Id=br.Id
+     inner join Company c on c.Id=br.Id
+     
+     
+  
+
+where  
+	  (fd.FleetOwnerId = @fleetOwnerId or @fleetOwnerId = -1)
+	 and (c.Id = @cmpId or @cmpId = -1)
 end
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -2391,6 +2471,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[GetBTPOSDetails]
+(@cmpId int = -1, @fleetownerId int =-1)
 AS
 BEGIN
 	
@@ -2408,7 +2489,10 @@ SELECT b.[Id]
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   left outer join Types t on t.Id = statusid
   left outer join Company c on c.Id = CompanyId
-  left outer join Users u on u.Id = FleetOwnerId
+  left outer join fleetowner f on f.id = FleetOwnerId 
+  left outer join Users u on u.Id = f.Id 
+where (c.Id = @cmpId or @cmpId = -1)
+and(f.Id = @fleetownerId or @fleetownerId = -1)
   
 end
 
@@ -2426,7 +2510,7 @@ CREATE  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
            @IMEI varchar(20),
            @ipconfig varchar(20),
            @active int = 1,
-           @fleetownerid int,
+           @fleetownerid int = null,
            @insupdflag varchar(10)
            )
  
@@ -2455,7 +2539,7 @@ INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
            ,@IMEI
            ,@ipconfig
            ,1
-           ,1)
+           ,null)
 else
   if @insupdflag = 'U' 
 UPDATE [POSDashboard].[dbo].[BTPOSDetails]
@@ -3438,22 +3522,58 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30))
+CREATE procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30),@insupdflag varchar(1))
 as
 begin
 
+
+declare @cnt int
+
+if @insupdflag = 'I'
+begin
+
+select @cnt = COUNT(*) from Types where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+INSERT INTO [POSDashboard].[dbo].[Types]
+           ([Name]
+           ,[Description]
+           ,[TypeGroupId] 
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@TypeGroupId 
+           ,@Active)
+           
+           end
+else
+if @insupdflag = 'U'
+begin
+
+select @cnt = COUNT(*) from Types where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
+
+
 update types 
-set name=@Name
-,Active = @Active
-,Description = @Description
-,TypeGroupId = @TypeGroupId
+set 
+[Name]=@Name
+,[Active] = @Active
+,[Description] = @Description
+
 where Id = @Id
 
-if @@rowcount = 0 
-begin
-insert into Types(Name,[Description],TypeGroupId,Active) values(@Name,@Description,@TypeGroupId,@Active)
-end
 
+
+
+end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[Types]
+      WHERE Id = @Id
+end
 end
 
 
@@ -3538,50 +3658,59 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE procedure [dbo].[InsUpdTypeGroups](@Id int,@Name varchar(50)
-,@Description varchar(50) = null,@Active int)
+,@Description varchar(50) = null,@Active int, @insupdflag varchar(1))
 as
 begin
 
-update typegroups 
-set name=@Name
-,Active = @Active
-,Description = @Description
-where Id = @Id
+declare @cnt int
 
-if @@rowcount = 0 
+if @insupdflag = 'I'
 begin
-insert into TypeGroups (Name,[Description],Active) values(@Name,@Description,@Active)
-end
+
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
+
+INSERT INTO [POSDashboard].[dbo].[TypeGroups]
+           ([Name]
+           ,[Description]
+           ,[Active])
+     VALUES
+           (@Name
+           ,@Description
+           ,@Active)
+
+
 
 end
+else
+if @insupdflag = 'U'
+begin
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InsUpdDelTroubleTicketingStatus](@Active NUMERIC(10),
+select @cnt = COUNT(*) from TypeGroups where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
               
-           @Desc Varchar(30),
+if @cnt =0
            
-           @Id numeric(10),
-           @TtStatusType varchar(30),
-           @TypeGripId varchar(50))
-AS
-BEGIN
+           
+UPDATE [POSDashboard].[dbo].[TypeGroups]
+   SET [Name] = @Name
+      ,[Description] = @Description
+      ,[Active] = @Active
+ WHERE Id = @Id
+	
 	
 
-INSERT INTO 
-[TroubleTicketingStatus] VALUES
-           (@Active,
               
+end
+if @insupdflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[TypeGroups]
+      WHERE Id = @Id
+end
+end
           
-           @Desc,
-           @Id,
-           @TtStatusType,
-           @TypeGripId )
    
-	END
 
 GO
 SET ANSI_NULLS ON
@@ -3696,22 +3825,26 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelTroubleTicketingDetails](@addInfo varchar(50),@createdBy varchar(50),@createdOn int,@Id int,@raisedBy varchar(50),@status int,@ticketinfo varchar(50),@ticketTypeId int,@TTId int)
+CREATE procedure [dbo].[InsUpdDelTroubleTicketingDetails](@RefId Int,@Type varchar(50),@createdBy Varchar(50),@Id int,@raised varchar(50),@status int,@TicketTitle varchar(50),@IssueDetails Varchar(50),@AddInfo Varchar(50),@Asign varchar(50))
 as
 begin
-insert into TroubleTicketingDetails (addInfo,createdBy,createdOn,raisedBy,status,ticketinfo,ticketTypeId,TTId) values(@addInfo,@createdBy,@createdOn,@raisedBy,@status,@ticketinfo,@ticketTypeId,@TTId)
+insert into TroubleTicketingDetails(Type,createdBy,Id ,raised,status ,TicketTitle,IssueDetails,AddInfo ,Asign ) values( @Id,@Type ,@createdBy,@raised ,@status ,@TicketTitle ,@IssueDetails ,@AddInfo ,@Asign)
 end
+
+
 
 GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getTroubleTicketingDetails]
+CREATE  procedure [dbo].[getTroubleTicketingDetails]
 as
 begin
 select * from TroubleTicketingDetails
 end
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -3945,24 +4078,36 @@ CREATE PROCEDURE [dbo].[InsUpdelStops]
       @Description varchar(30) = null,
       @Code varchar(10),
       @Active int,
-      @insupdflag varchar(10))
+     @insupdflag varchar(1))
 AS
 BEGIN
+declare @cnt int
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	if @insupdflag='I'
+	begin
+
+select @cnt = COUNT(*) from Stops where UPPER(name) = UPPER(@Name)
+
+if @cnt =0
 INSERT INTO Stops
            (Name,
            [Description],
            Code,
            Active)
-           values(@Name,
+           values
+           (@Name,
            @Description,
            @Code,
            @Active)
-     
+           end
 else
+if @insupdflag = 'U'
+begin
 
-  if @insupdflag = 'U'
+select @cnt = COUNT(*) from Stops where UPPER(name) = UPPER(@Name) 
+and Id <> @Id
+
+if @cnt =0
 UPDATE Stops
    SET Name = @Name ,
       [Description] = @Description  ,
@@ -3970,10 +4115,13 @@ UPDATE Stops
       Active = @Active 
  WHERE id=@id
 
-else
+
+ if @insupdflag = 'D'
   delete from stops where id = @id
 
 END
+end
+
 
 GO
 
@@ -4115,26 +4263,31 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 Create PROCEDURE [dbo].[GetRouteFare]
+(@RouteId int)
 AS
 BEGIN
 	
 SELECT 
-      [Id]
-      ,[RouteId]     
-      ,[SourceStopId]
-      ,[DestinationStopId]
-      ,[Distance]
-      ,[PerUnitPrice]
-      ,[Amount]     
-  FROM [POSDashboard].[dbo].[RouteFare]
+      rs.[Id]
+      ,rs.[RouteId]     
+      ,rs.[FromStopId]
+      ,rs.[ToStopId]
+      ,rs.[Distance]     
+      ,case when rf.perunitprice is null then 0 else rf.perunitprice 
+end as PerUnitPrice
+          ,case when rf.Amount is null then 0 else rf.Amount 
+end as Amount
+  FROM [POSDashboard].[dbo].[RouteStops] rs
+left outer join [POSDashboard].[dbo].[RouteFare] rf
+on rf.routestopid = rs.id
+  where rs.RouteId = @RouteId
 
-
-
+select S.Name,S.Id from routedetails rd
+inner join stops S on rd.StopId = S.Id 
+where rd.RouteId = @RouteId
 
 end
 
-/****** Object:  StoredProcedure [dbo].[getRouteDetails]    Script Date: 05/02/2016 17:05:58 ******/
-SET ANSI_NULLS ON
 
 GO
 SET ANSI_NULLS ON
@@ -4371,9 +4524,9 @@ as
 begin
 --
 --get btpos details
-SELECT b.[Id]
+SELECT distinct top 6  b.[Id]
      -- ,[GroupId]
-    --  ,c.Name as companyname
+      ,c.Name as company
       ,[POSID]
       ,[StatusId]
       ,t.Name as [status]
@@ -4383,14 +4536,14 @@ SELECT b.[Id]
       ,u.FirstName + ' '+ u.LastName as fleetowner
       ,u.Id as fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
-  left outer join Types t on t.Id = statusid
-  left outer join Company c on c.Id = CompanyId
-  left outer join Users u on u.Id = u.companyid
-where (u.id = @userid or @userid = -1)
+ left outer join Types t on t.Id = b.StatusId
+ left outer  join Company c on b.CompanyId = c.Id  
+  left outer  join Users u on u.Id = b.FleetOwnerId
+where (u.Id = @userid or @userid = -1)
 
 --get license details
 --get alerts
-select t1.Id,
+select top 6 t1.Id,
 t1.Date,
 t1.Message,
 t1.MessageTypeId,
@@ -4404,7 +4557,7 @@ t2.LastName
  
 --get notifications
 
-select t1.Id,
+select top 6 t1.Id,
 t1.Date,
 t1.Message,
 t1.MessageTypeId,
@@ -4419,11 +4572,50 @@ t2.LastName
 end
 
 GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdUsers](
+
+Create procedure [dbo].[InsUpdDelUserRoles](
+@Id int,
+@roleid int,
+@UserId int,
+@CompanyId int = null
+)
+as
+begin
+
+
+UPDATE [POSDashboard].[dbo].[UserRoles]
+   SET [UserId] = @UserId
+      ,[RoleId] = @RoleId
+      ,[CompanyId] = @CompanyId
+ WHERE Id = @Id
+
+if @@rowcount = 0 
+begin
+
+INSERT INTO [POSDashboard].[dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId]
+           ,[CompanyId])
+     VALUES
+           (@UserId
+           ,@RoleId
+           ,@CompanyId)
+end
+
+
+end
+GO
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+create procedure [dbo].[InsUpdUsers](
 @FirstName varchar(40)
 ,@LastName varchar(40)
 ,@MiddleName varchar(40) = ''
@@ -4434,9 +4626,10 @@ CREATE procedure [dbo].[InsUpdUsers](
 ,@RoleId int
 ,@cmpId int
 ,@Active int
-,@UserName varchar(30)  = ''
+,@UserName varchar(30)  = null
 ,@Password varchar(30)  = ''
 ,@insupdflag varchar(10)
+,@ManagerId int = null
 ,@userid int = -1)
  as begin
  
@@ -4444,7 +4637,12 @@ CREATE procedure [dbo].[InsUpdUsers](
  declare @cnt int
  declare @logincnt int
  declare @ulogincnt int
- 
+ declare @edithistoryid int
+ declare @dt datetime
+set @dt = GETDATE()
+declare @fc varchar(10)
+ declare @flogincnt int
+
  if @insupdflag = 'I'
  begin
  
@@ -4453,25 +4651,59 @@ CREATE procedure [dbo].[InsUpdUsers](
  select @logincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) 
  
  if @cnt > 0
- RAISERROR ('Already user exists',16,1);
+ RAISERROR ('User already exists',16,1);
  
   
  if @cnt = 0 
  begin
-	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId)
-	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId) 
+	insert into Users(FirstName,LastName,MiddleName, EmpNo,Email,AddressId,MobileNo,Active,CompanyId,ManagerId)
+	values(@FirstName,@LastName,@MiddleName, @EmpNo,@Email,@AdressId,@MobileNo,@Active,@cmpId,@ManagerId) 
   
+  --insert into edit history
+	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+           
+    exec InsEditHistoryDetails @edithistoryid,null,@FirstName,'Insertion','First Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@LastName,'Insertion','Last Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@EmpNo,'Insertion','EmpNo',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Email,'Insertion','Email',null
+
  
-    SELECT @currid = @@IDENTITY
+   SELECT @currid = SCOPE_IDENTITY()
  end
   
   if @logincnt > 0
 	RAISERROR ('Already user login exists',16,1);
  
-   if @logincnt = 0 and @UserName is not null
+		-- insert user role
+		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId 
+   if @logincnt = 0 
    begin
-	insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
-   end
+
+			   --check if it is normal user or fleet owner. for fleet owner we have different logic
+			   if @RoleId = 6 
+			   begin
+			     
+							 set @fc = case when (select COUNT(*) from fleetowner) = 0
+													   then '1' 
+													   else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
+													   end  
+
+							
+
+							--the login will be assigned once the user buys the license. this is for testing
+							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+
+							 if @flogincnt = 0
+							   begin
+								insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+							   end
+			   end
+			   else
+			    if  @UserName is not null
+				insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
+			   
+      end
+    
 end
  else
  
@@ -4486,15 +4718,42 @@ end
  Email = @Email,
  MobileNo = @MobileNo, 
  Active = @Active 
+ --ManagerId = @ManagerId 
  where id = @userid
+ 
+-- insert user role
+		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId
  
  select @logincnt = COUNT(*) from userlogins where  userid = @userid
  
  
- if @logincnt = 0
-  --login is not existing hence insert 
- if @UserName is not null
- insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@userid)
+ if @logincnt = 0 
+   begin
+
+			   --check if it is normal user or fleet owner. for fleet owner we have different logic
+			   if @RoleId = 6 
+			   begin
+			      
+							 set @fc = case when (select COUNT(*) from fleetowner) = 0
+													   then '1' 
+													   else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
+													   end  
+
+							
+
+							--the login will be assigned once the user buys the license. this is for testing
+							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+
+							 if @flogincnt = 0
+							   begin
+								insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+							   end
+			   end
+			   else
+			    if @UserName is not null
+				insert into userlogins(logininfo,PassKey,active,userid)values(@UserName,@Password,1,@currid)
+			   
+      end
  
  else
  begin
@@ -4509,6 +4768,7 @@ end
 	where userid = @currid
 else
  RAISERROR ('User login already exists',16,1);
+
  end
 
  
@@ -4531,13 +4791,14 @@ else
 					   ,[FleetOwnerCode])
 				 VALUES
 					   (@currid
-					   ,1
+						,@cmpId
 					   ,1
 					   ,@EmpNo)
+								
 				else
 					UPDATE [POSDashboard].[dbo].[FleetOwner]
 						SET 
-						[CompanyId] = 1
+						[CompanyId] = @cmpId
 						,[Active] = 1
 						,[FleetOwnerCode] = @EmpNo
 					 WHERE [UserId] = @currid
@@ -4547,10 +4808,6 @@ else
  
  end
  
---select * from FleetOwner
-
---select * from Roles
-
 GO
 SET ANSI_NULLS ON
 GO
@@ -4734,7 +4991,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
+CREATE PROCEDURE [dbo].[InsupddelFleetDetails]
  (@Id int,
  @VehicleRegNo varchar(15)
            ,@VehicleTypeId int
@@ -4743,6 +5000,12 @@ CREATE PROCEDURE [dbo].[InsupdelFleetDetails]
            ,@ServiceTypeId int
            ,@VehicleLayoutId int
            ,@Active int
+           ,@EngineNo varchar = null
+           ,@FuelUsed varchar = null
+           ,@MonthAndYrOfMfr datetime = null
+           ,@ChasisNo varchar = null
+           ,@SeatingCapacity int = 0
+           ,@DateOfRegistration datetime = null
            )
 	-- Add the parameters for the stored procedure here
 	
@@ -4758,9 +5021,18 @@ set
 ,[ServiceTypeId] = @ServiceTypeId
 ,[LayoutTypeId] = @VehicleLayoutId
 ,[Active] = @Active
+,[EngineNo] = @EngineNo
+,[FuelUsed] = @FuelUsed
+,[MonthAndYrOfMfr] = @MonthAndYrOfMfr
+,[ChasisNo] = @ChasisNo
+,[SeatingCapacity] = @SeatingCapacity 
+,[DateOfRegistration] = @DateOfRegistration
 where Id = @Id
+end
+
 
 if @@ROWCOUNT = 0
+
 begin
 	INSERT INTO [POSDashboard].[dbo].[FleetDetails]
            ([VehicleRegNo]
@@ -4769,7 +5041,14 @@ begin
            ,[CompanyId]
            ,[ServiceTypeId]
            ,[LayoutTypeId]
-           ,[Active])
+           ,[Active]
+           ,[EngineNo]
+           ,[FuelUsed]
+           ,[MonthAndYrOfMfr]
+           ,[ChasisNo]
+           ,[SeatingCapacity]
+           ,[DateOfRegistration])
+           
      VALUES
            (@VehicleRegNo 
            ,@VehicleTypeId 
@@ -4777,11 +5056,13 @@ begin
            ,@CompanyId 
            ,@ServiceTypeId 
            ,@VehicleLayoutId
-           ,@Active )
-
-end
-
-
+           ,@Active 
+           ,@EngineNo
+           ,@FuelUsed
+           ,@MonthAndYrOfMfr
+           ,@ChasisNo
+           ,@SeatingCapacity 
+           ,@DateOfRegistration)
 END
 
 
@@ -4838,7 +5119,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
-@FORouteStopId int
+           @routeId int
+		   ,@FromStopId int
+		   ,@ToStopId int
            ,@VehicleTypeId int
            ,@Distance decimal
            ,@PerUnitPrice decimal
@@ -4848,10 +5131,21 @@ create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
            ,@FromDate datetime
            ,@ToDate datetime
            ,@VehicleId int
-                       )
-                        
+           ,@InsUpdDelFlag varchar(1)
+)                        
 as
 begin
+declare @fsId int
+set @fsId = 0
+
+select @fsId = Id from RouteStops 
+where fromstopid = @FromStopId 
+and tostopid = @ToStopid
+and routeId = @routeId
+
+if @InsUpdDelFlag = 'I' 
+begin
+if @fsId = 0 
 INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
            ([FORouteStopId]
            ,[VehicleTypeId]
@@ -4864,7 +5158,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
            ,[ToDate]
            ,[VehicleId])
      VALUES
-           (@FORouteStopId
+           (@fsId
            ,@VehicleTypeId
            ,@Distance
            ,@PerUnitPrice
@@ -4874,6 +5168,28 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
            ,@FromDate
            ,@ToDate
            ,@VehicleId)
+
+end
+else
+if @InsUpdDelFlag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
+   SET [VehicleTypeId] = @VehicleTypeId
+      ,[Distance] = @Distance
+      ,[PerUnitPrice] = @PerUnitPrice
+      ,[Amount] = @Amount
+      ,[FareTypeId] = @FareTypeId
+      ,[Active] = @Active
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+      ,[VehicleId] = @VehicleId
+ WHERE [FORouteStopId] = @fsId
+
+else
+if @InsUpdDelFlag = 'U' 
+DELETE FROM [POSDashboard].[dbo].[FleetOwnerRouteFare]
+      WHERE [FORouteStopId] = @fsId
+
+
 end
 /****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/02/2016 17:11:26 ******/
 SET ANSI_NULLS ON
@@ -4933,23 +5249,22 @@ Create PROCEDURE [dbo].[GetFleetOwnerRoute]
 AS
 BEGIN
 	
-SELECT 
+SELECT distinct
       fr.[Id],
       fr.[FleetOwnerId],
       fr.[CompanyId],
       r.routename,
       r.code,
-      r.[Id],
+      r.[Id] RouteId,
       [FromDate],
       [ToDate],
       fr.[Active]
-      ,case when u.id is null then 0 else 1 end assigned
+      ,case when fr.FleetOwnerId is null then 0 else 1 end assigned
       --,0 assigned
-  FROM routes r
-left outer join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
-  left outer join fleetowner f on f.id = fr.fleetownerid 
-  left outer join users u on f.userid = u.id and (u.id = @fleetownerId or @fleetownerId = -1)
-
+  FROM [routes] r
+left outer join [POSDashboard].[dbo].[FleetOwnerRoute] fr 
+on r.id = fr.routeid and  (fr.fleetownerid = @fleetownerId or @fleetownerId = -1)
+order by RouteName
 
 
 end
@@ -4992,14 +5307,29 @@ GO
 CREATE procedure [dbo].[getFleetOwner]
 as
 begin
-select u.FirstName+' '+u.LastName as Name,
-c.Name as CompanyName
-,FO.FleetOwnerCode
-,FO.CompanyId
-,U.Id
- from FleetOwner FO
-inner join Users u on  u.Id = FO.UserId
-inner join Company c on c.Id = FO.companyId
+
+SELECT U.[Id]
+      ,U.[FirstName]
+      ,U.[LastName]      
+      ,U.[EmpNo]
+      ,U.[Email]
+      ,U.[AddressId]
+      ,U.[MobileNo]    
+      ,U.[Active]
+      ,U.[MiddleName]
+      ,mgr.Firstname + ' ' +mgr.LastName as mgrName
+      ,mgr.Id
+      ,ul.logininfo as UserName
+      ,ul.passkey as [Password]            
+      ,c.name as [Company]
+	  ,u.FirstName+' '+u.LastName as Name
+	  ,FO.FleetOwnerCode
+      ,FO.CompanyId     
+  FROM [POSDashboard].[dbo].[Users] U
+  inner join FleetOwner FO on U.Id = FO.UserId
+  inner join company c on (U.companyid = c.id)
+  left outer join Users mgr on mgr.id = U.managerid
+  left outer join dbo.userlogins ul on ul.userid = U.id      
 
 end
 
@@ -5110,6 +5440,8 @@ t2.FirstName+' '+t2.LastName as Username
                          
                      
 end
+GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -5136,46 +5468,8 @@ BEGIN
 	 -- [Description],I.AvailableQty,tg.Name as Category,t.TypeGroupId as SubCategoryId,I.PerUnitPrice,I.ReorderPont,I.Active from Inventory I inner join TypeGroups tg on tg.Id=I.InventoryId
   --   inner join Types t on t.Id=I.InventoryId
 END
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
-Create procedure [dbo].[InsUpdDelUserRoles](
-@Id int,
-@roleid int,
-@UserId int,
-@CompanyId int = null
-)
-as
-begin
-
-
-UPDATE [POSDashboard].[dbo].[UserRoles]
-   SET [UserId] = @UserId
-      ,[RoleId] = @RoleId
-      ,[CompanyId] = @CompanyId
- WHERE Id = @Id
-
-
-
-
-if @@rowcount = 0 
-begin
-
-INSERT INTO [POSDashboard].[dbo].[UserRoles]
-           ([UserId]
-           ,[RoleId]
-           ,[CompanyId])
-     VALUES
-           (@UserId
-           ,@RoleId
-           ,@CompanyId)
-end
-
-
-end
 
 SET ANSI_NULLS ON
 GO
@@ -5199,6 +5493,7 @@ insert into subcategory(Name,[Description],CategoryId,Active) values(@Name,@Desc
 end
 
 end
+GO
 
 SET ANSI_NULLS ON
 GO
@@ -5224,13 +5519,16 @@ declare @cmpcnt int
 set @cmpcnt = 0
  declare @fleetcnt int
 set @fleetcnt = 0
+ declare @edithistoryid int
 
 declare @cmpid int
 set @cmpid = 0
+declare @dt datetime
+set @dt = GETDATE()
  
  declare @fc varchar(10) 
  set @fc = case when (select COUNT(*) from fleetowner) = 0
-                           then '001' 
+                           then '1' 
                            else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
                            end  
  
@@ -5249,6 +5547,14 @@ set @cmpid = 0
            ,[Active])      
      VALUES
            (@CompanyName,@CompanyName,@Description,1)
+           
+     --insert into edit history
+	exec InsEditHistory 'Company', 'Name',@FirstName,'Company creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+           
+    exec InsEditHistoryDetails @edithistoryid,null,@CompanyName,'Insertion','CompanyName',null
+    exec InsEditHistoryDetails @edithistoryid,null,@cnt,'Insertion','cnt',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+          
            
            set @cmpid = SCOPE_IDENTITY()
  end
@@ -5274,7 +5580,13 @@ set @cmpid = 0
           
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
+	--insert into edit history
+	exec InsEditHistory 'Users', 'Name',@FirstName,'User creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
 	
+    exec InsEditHistoryDetails @edithistoryid,null,@FirstName,'Insertion','First Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@LastName,'Insertion','Last Name',null
+    exec InsEditHistoryDetails @edithistoryid,null,@cmpid,'Insertion','cmpid',null
+    exec InsEditHistoryDetails @edithistoryid,null,@Email,'Insertion','Email',null
 	
 	SELECT @currid = SCOPE_IDENTITY()
 end
@@ -5307,6 +5619,7 @@ select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
    begin
 	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
    end
+   --insert into edit history
 
 end
 
@@ -5666,31 +5979,33 @@ Create PROCEDURE [dbo].[VehicleConfiguration]
     @needCompanyName int = 0,
     @needVehicleLayout int = 0, 
     @needHireVehicle int =0,   
-    @needbtpos int = -1,
+    @needbtpos int = 0,
     @cmpId int = -1,
-    @fleetownerId int = -1
+    @fleetownerId int = -1,
+    @needFleetOwnerRoutes int = -1
 AS
 BEGIN
 
 	
 	if @needRoutes  = 1
-	select routename,ID,Code from routes	
-	
+	select routename,ID,Code from routes order by routename
+		
 	if @needRoles  = 1 
-	select name,ID from Roles
+	select name,ID from Roles order by name
 	
 	if @needvehicleRegno  = 1
     select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1)
     and (CompanyId = @cmpId or @cmpId = -1))
+    order by VehicleRegNo
     
 	--vehicle type data
 	if @needvehicleType = 1
-	select Name, Id from Types where TypeGroupId = 4
+	select Name, Id from Types where TypeGroupId = 4 order by Name
 	
 	--service type data
 	if @needServiceType = 1
-	select Name, Id from Types where TypeGroupId = 5
+	select Name, Id from Types where TypeGroupId = 5 order by Name
 	
 	--fleet owners
 	if @needfleetowners = 1
@@ -5703,14 +6018,15 @@ BEGIN
 	inner join Users u on  u.Id = FO.UserId
 	inner join Company c on c.Id = FO.companyId
     where (FO.companyId = @cmpId or @cmpId =-1)
+	order by u.FirstName,u.LastName
 	
 	--companys
 	if @needCompanyName = 1
-	select Name,Id from Company
+	select Name,Id from Company order by Name
 	
 	--vehicle layout type
 	if @needVehicleLayout = 1
-	select Name, Id from Types where TypeGroupId = 6
+	select Name, Id from Types where TypeGroupId = 6 order by Name
 	
 	if @needbtpos = 1		
 SELECT b.[Id]
@@ -5721,16 +6037,37 @@ SELECT b.[Id]
       ,fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   where (fleetownerid = @fleetownerId or @fleetownerid =-1)
+order by POSID
 
 if @needHireVehicle = 1
 select VehicleRegNo,Id from FleetDetails
     where ((fleetownerid = @fleetownerId or @fleetownerid =-1) 
     and (servicetypeId = 11))
+	order by VehicleRegNo
+	
+	if @needFleetOwnerRoutes = 1
+	SELECT 
+      fr.[Id]
+      ,fr.[FleetOwnerId]
+      ,fr.[CompanyId]
+      ,r.routename
+      ,r.code
+      ,r.[Id] RouteId
+      ,src.name Source
+      ,dest.name Destination
+      ,[FromDate]
+      ,[ToDate]
+      ,fr.[Active]     
+  FROM routes r
+inner join stops src on src.id = r.sourceid
+inner join stops dest on dest.id = r.destinationid
+inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+ inner join fleetowner f on f.id = fr.fleetownerid 
+  inner join users u on f.userid = u.id 
+  where f.Id = @fleetownerId
+order by routename
 	
 END
-
-
---[VehicleConfiguration] 0,1,0,0,0,1,0,0,0,-1,-1,-1
 
 
 GO
@@ -5758,7 +6095,7 @@ BEGIN
   FROM [POSDashboard].[dbo].[FleetStaff] FS
       inner join FleetDetails FD on FD.Id = FS.vehicleId
       inner join Users u on fs.UserId=u.id
-inner join Roles r on r.Id = FS.roleid
+inner join Roles r on r.Id = FS.Roleid
 where ((FD.FleetOwnerId = @fleetowner or @fleetowner = -1)
  and (FD.CompanyId = @cmpId or @cmpId  = -1))
 
@@ -5786,7 +6123,7 @@ if @insupddelflag = 'I'
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetStaff] 
 where vehicleid = @vehicleid 
 and userid = @userid 
-and companyid = @cmpid
+and companyid = @cmpId
 and roleid = @roleid
 
 if @cnt = 0 
@@ -5804,7 +6141,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetStaff]
            ,@FromDate
            ,@ToDate
            ,@VehicleId
-           ,@cmpid)
+           ,@cmpId)
 end
 else
   if @insupddelflag = 'U'
@@ -5815,55 +6152,18 @@ UPDATE [POSDashboard].[dbo].[FleetStaff]
       ,[FromDate] = @FromDate
       ,[ToDate] = @ToDate
       ,[VehicleId] = @VehicleId
-      ,[CompanyId] = @cmpid
+      ,[CompanyId] = @cmpId
  WHERE Id = @Id
 
 else
   delete from [POSDashboard].[dbo].[FleetStaff]
-where vehicleid = @vehicleid 
-and userid = @userid 
+where vehicleid = @VehicleId 
+and userid = @UserId 
 and companyid = @cmpid
 and roleid = @roleid
 
 End
 
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetFleetDetails]    Script Date: 05/16/2016 16:59:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE [dbo].[GetFleetstDetails] 
-	-- Add the parameters for the stored procedure here
-	(@vehicleId int=-1)
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-   SELECT vd.[Id]
-      ,[RegNo]
-      ,[UserId]
-      ,[RoleId]
-      ,[FromDate]
-      ,[ToDate]
-      
-     ,vd.[Active]
-     FROM [POSDashboard].[dbo].[FleetStaff]fs    
-    inner join VehicleDetails vd on vd.Id=fs.Id   
-	 where  (vd.Id= @vehicleId or @vehicleId = -1)
-
-
-
-END
-       
 GO
 /****** Object:  Table [dbo].[VehicleLayout]    Script Date: 05/21/2016 23:31:02 ******/
 SET ANSI_NULLS ON
@@ -5947,10 +6247,10 @@ BEGIN
       ,[LicenseCatId]
       ,[LicenseType]
       ,lt.[Description]
-      ,t.name as licenseCategory
+      ,t.Name as licenseCategory
 	  ,lt.[Active]
   FROM [POSDashboard].[dbo].[LicenseTypes] lt
-inner join Types t on t.id = licensecatid
+inner join Types t on t.Id = licensecatid
   where ([LicenseCatId] = @licenseCategoryId or @licenseCategoryId = -1)
 END
 
@@ -6007,7 +6307,7 @@ set @cnt = -1
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetRoutes] 
-where vehicleid = @vehicleid 
+where vehicleid = @VehicleId 
 and routeid = @routeid
 
 if @cnt = 0 
@@ -6018,7 +6318,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetRoutes]
            ,[EffectiveFrom]
            ,[EffectiveTill])
      VALUES
-           (@vehicleid
+           (@VehicleId
            ,@routeid
            ,@FromDate
            ,@ToDate)
@@ -6030,11 +6330,11 @@ UPDATE [POSDashboard].[dbo].[FleetRoutes]
    SET [RouteId] = @routeid      
       ,[EffectiveFrom] = @FromDate
       ,[EffectiveTill] = @ToDate      
- WHERE vehicleid = @vehicleid
+ WHERE vehicleid = @VehicleId
 
 else
   delete from [POSDashboard].[dbo].[FleetRoutes]
-where vehicleid = @vehicleid and routeid = @routeid
+where vehicleid = @VehicleId and routeid = @routeid
 
 End
 
@@ -6056,7 +6356,7 @@ set @cnt = -1
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetBTPOS] 
-where vehicleid = @vehicleid 
+where vehicleid = @VehicleId 
 and  BTPOSId = @btposId
 
 if @cnt = 0 
@@ -6084,7 +6384,7 @@ UPDATE [POSDashboard].[dbo].[FleetBtpos]
 else
   if @insupddelflag = 'D'
   delete from [POSDashboard].[dbo].[FleetBtpos]
-where vehicleid = @vehicleid 
+where vehicleid = @VehicleId 
 and [BTPOSId] = @btposId
 
 End
@@ -6093,33 +6393,30 @@ GO
 
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[GetPurchaseOrder]
 
-as begin 
-SELECT po.[Id]
-      ,[PONum]
-      ,[TransactionId]
-      ,[Date]
-      ,[amount]
-      ,[itemId]
-      ,[Quantity]
-      ,t.name Status
-      ,i.ItemName
-  FROM [POSDashboard].[dbo].[PurchaseOrder] po
-  inner join Types t on t.Id = po.StatusId
-  inner join InventoryItem i on i.Id = po.itemId
+CREATE TABLE [dbo].[SalesOrder](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SalesOrderNum] [nvarchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
 
 
-       
-end
 
 --SET ANSI_NULLS ON
 --GO
 --SET QUOTED_IDENTIFIER ON
 --GO
---ALTER procedure [dbo].[GetSalesOrder]
+--CREATE procedure [dbo].[GetSalesOrder]
 
 --as begin 
 --SELECT so.[Id]
@@ -6138,6 +6435,8 @@ end
 
        
 --end
+
+
 
 --GO
 
@@ -6186,7 +6485,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE InsUpdDelFleetOwnerRoutes
+CREATE PROCEDURE [dbo].[InsUpdDelFleetOwnerRoutes]
 @Id int = -1,
 @RouteId int,
 @cmpId int,
@@ -6200,15 +6499,12 @@ begin
 declare @cnt  int
 set @cnt = -1
 
-declare @foid  int
-set @foid = -1
-
-select @foid = id from fleetowner where userid = @fleetOwnerId
+declare @rsId int
 
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetOwnerRoute] 
-where [FleetOwnerId] = @foid
+where [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
 
 if @cnt = 0 
@@ -6220,11 +6516,65 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRoute]
            ,[FromDate]
            ,[ToDate])
      VALUES
-           (@foid
+           (@fleetOwnerId
            ,@cmpId
            ,@RouteId
            ,@FromDate
            ,@ToDate)
+
+--insert record into FleetOwnerRouteStop
+ SELECT @rsId = rs.[Id]
+  FROM [POSDashboard].[dbo].[RouteStops] rs
+  inner join routes r on (rs.routeid = r.id
+  and rs.fromstopid = r.[SourceId]
+      and rs.tostopid = [DestinationId])
+  where r.[Id] = @routeid
+
+if @rsId is not null 
+ begin
+   INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteStop]
+           ([FleetOwnerId]
+           ,[RouteStopId])
+     VALUES
+           (@fleetOwnerId,@rsId) 
+end
+
+declare @stopscnt int
+declare @srcstopid int
+declare @deststopid int
+
+  select @srcstopid = sourceid from routes where id = @routeid
+select @deststopid = destinationid from routes where id = @routeid
+
+select @stopscnt = count(*) from fleetownerstops where fleetownerid = @fleetOwnerId
+and routeid = @routeid and stopid = @srcstopid
+
+if @stopscnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerStops]
+           ([FleetOwnerId]
+           ,[RouteId]
+           ,[StopId])
+     VALUES
+           (@fleetOwnerId
+           ,@RouteId
+           ,@srcstopid)
+
+end
+
+select @stopscnt = count(*) from fleetownerstops where fleetownerid = @fleetOwnerId
+and routeid = @routeid and stopid = @deststopid
+
+if @stopscnt = 0 
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerStops]
+           ([FleetOwnerId]
+           ,[RouteId]
+           ,[StopId])
+     VALUES
+           (@fleetOwnerId
+           ,@RouteId
+           ,@deststopid)
+
 end
 else
   if @insupddelflag = 'U'
@@ -6232,41 +6582,74 @@ else
 UPDATE [POSDashboard].[dbo].[FleetOwnerRoute]
    SET [FromDate] = @FromDate
       ,[ToDate] = @ToDate
- WHERE [FleetOwnerId] = @foid
+ WHERE [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
       
 else
 if @insupddelflag = 'D'
+begin
   delete from [POSDashboard].[dbo].[FleetOwnerRoute]
-where [FleetOwnerId] = @foid
+where [FleetOwnerId] = @fleetOwnerId
 and  [RouteId] = @RouteId
 
+--remove all the FleetOwnerRouteStop references for the route
+
+delete from [POSDashboard].[dbo].[FleetOwnerRouteStop] 
+where id in (
+select fs.id from [POSDashboard].[dbo].[FleetOwnerRouteStop] fs
+inner join [RouteStops] rs on rs.id = fs.RouteStopId
+where [FleetOwnerId] = @fleetOwnerId
+and rs.RouteId = @RouteId
+)
+
+
+delete from fleetownerstops where routeid = @routeid and fleetownerid = @fleetOwnerId
+
+delete from FORouteFleetSchedule where routeid = @routeid  and fleetownerid = @fleetOwnerId
+
+end
+
+
 End
-GO
-
-
-
 
 GO
 
---SET ANSI_NULLS ON
---GO
---SET QUOTED_IDENTIFIER ON
---GO
---ALTER procedure [dbo].[getpaymentHistory]
---as
---begin
---select * from PaymentHistory
---end
+CREATE TABLE [dbo].[PaymentHistory](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Amount] [int] NOT NULL,
+	[Code] [nvarchar](50) NOT NULL,
+	[Desc] [int] NOT NULL,
+	[InventoryId] [int] NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[ReceivedOn] [datetime] NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[TransactionType] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
 
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetPaymentHistory]
+
+as begin 
+SELECT * from PaymentHistory
+
+       
+end
+
+
+GO
 Go
-create procedure GetFOVehicleFareConfig
-(@vehicleid int)
+create procedure [dbo].[GetFOVehicleFareConfig]
+(@vehicleid int, @routeId int)
 as
 begin
-SELECT 
-      dest.name Dest
-      ,src.name Src
+SELECT
+      src.name Src
+	  ,dest.name Dest
 	  ,fs.Id [FORouteStopId]
       ,[VehicleTypeId]
       ,f.[Distance]
@@ -6279,11 +6662,1219 @@ SELECT
       ,[VehicleId]
      
   FROM [POSDashboard].[dbo].fleetownerroutestop fs  
-  --inner join fleetownerroutestop fs 
+left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
   inner join routestops r on r.id = fs.routestopid
   left outer join stops src on src.id =r.fromstopid
 left outer join stops dest on dest.id =r.tostopid
-left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
+where r.Id = @routeId
 order by src 
 
 end
+
+
+/****** Object:  StoredProcedure [dbo].[GetLicensePageDetails]    Script Date: 06/03/2016 10:09:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[GetLicensePageDetails]
+(@catId int = -1)
+as
+begin
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseCatId]
+      ,[LicenseType]
+      ,[Description]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicenseTypes]
+  where (LicenseCatId = @catId or @catId = -1)
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseTypeId]
+      ,[FeatureName]
+      ,[FeatureLabel]
+      ,[FeatureValue]
+      ,[LabelClass]
+      ,[Active]
+      ,[fromDate]
+      ,[toDate]
+  FROM [POSDashboard].[dbo].[LicenseDetails]
+  
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP 1000 [Id]
+      ,[LicenseId]
+      ,[RenewalFreqTypeId]
+      ,[RenewalFreq]
+      ,[UnitPrice]
+      ,[fromdate]
+      ,[todate]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicensePricing]
+  
+  end
+
+
+Go
+
+
+Create PROCEDURE [dbo].[GetFleetOwnerRouteAssigned]
+(@fleetownerId int)
+AS
+BEGIN
+	
+SELECT 
+      fr.[Id],
+      fr.[FleetOwnerId],
+      fr.[CompanyId],
+      r.routename,
+      r.code,
+      r.[Id] RouteId,
+      [FromDate],
+      [ToDate],
+      fr.[Active]
+      ,case when u.id is null then 0 else 1 end assigned
+      --,0 assigned
+  FROM routes r
+inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+ inner join fleetowner f on f.id = fr.fleetownerid 
+  inner join users u on f.userid = u.id 
+  where f.Id = @fleetownerId
+
+
+
+end
+Go
+ 
+SET ANSI_NULLS ON
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PurchaseOrder](
+	[Id] [int] NOT NULL,
+	[PONum] [nvarchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[itemId] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[StatusId] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetPurchaseOrder]
+
+as begin 
+SELECT po.[Id]
+      ,[PONum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[itemId]
+      ,[Quantity]
+      ,t.name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[PurchaseOrder] po
+  inner join Types t on t.Id = po.StatusId
+  inner join InventoryItem i on i.Id = po.itemId
+       
+end
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetInvoices]
+
+as begin 
+SELECT Io.[Id]
+      ,[Invoices]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[item]
+      ,[Quantity]
+      ,t.Name Status
+      ,i.ItemName
+  FROM [POSDashboard].[dbo].[Invoices] Io
+  inner join Types t on t.Id =Io.Id
+  inner join InventoryItem i on i.Id = Io.Id
+
+
+       
+end
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE TABLE [dbo].[Invoices](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Invoices] [varchar](15) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[item] [int] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+Go
+
+/****** Object:  Table [dbo].[ShippingOrder]    Script Date: 06/07/2016 19:34:17 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ShippingOrder](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ShippingOrderNum] [nvarchar](50) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL,
+	[SalesOrderId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[GetShippingOrder]
+
+as begin 
+SELECT [Id]
+      ,[ShippingOrderNum]
+      ,[TransactionId]
+      ,[Date]
+      ,[amount]
+      ,[Status]
+      ,[SalesOrderId]
+  FROM [POSDashboard].[dbo].[ShippingOrder]
+
+         
+end
+Go
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsUpdDelVehicleLayout](	
+	@VehicleLayoutTypeId int,
+	@RowNo int,
+	@ColNo varchar(50),
+	@VehicleTypeId int,
+	@label varchar(10),
+	@insupddelflag varchar   
+)
+AS
+BEGIN
+INSERT INTO [dbo].[VehicleLayout]
+           ([VehicleLayoutTypeId]
+           ,[RowNo]
+           ,[ColNo]
+           ,[VehicleTypeId]
+           ,[label]
+           )
+     VALUES
+           (@VehicleLayoutTypeId
+           ,@RowNo
+           ,@ColNo
+           ,@VehicleTypeId
+           ,@label)
+           
+   
+
+End
+
+/****** Object:  Table [dbo].[UserInfo]    Script Date: 06/07/2016 12:29:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WebsiteUserInfo](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [nvarchar](50) NULL,
+	[UserName] [nvarchar](50) NULL,
+	[EmailAddress] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL,
+	[ConfirmPassword] [nvarchar](50) NULL,
+	[Gender] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+/****** Object:  Table [dbo].[WebsiteUserLogin]    Script Date: 06/08/2016 16:10:38 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[websiteUserLogin](
+	[LoginInfo] [nvarchar](50) NOT NULL,
+	[PassKey] [nvarchar](50) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [nchar](10) NOT NULL,
+	[salt] [varchar](50) NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[WebsiteUserInfo]    Script Date: 06/08/2016 16:09:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetWebsiteUserInfo]
+
+AS
+BEGIN
+
+SELECT U.[Id]
+      ,U.[FirstName]
+      ,U.[LastName]      
+      
+      ,U.[EmailAddress]
+     
+      ,ul.logininfo as UserName
+      ,ul.passkey as [Password]            
+      
+  FROM [POSDashboard].[dbo].[WebsiteUserInfo] U
+  
+ 
+left OUTER join dbo.websiteUserLogin ul on ul.userid = U.id    
+ left OUTER join dbo.WebsiteUserInfo u2 on ul.userid = U.id   
+end
+
+/****** Object:  StoredProcedure [dbo].[GetinterbusUserLogin]    Script Date: 06/08/2016 16:08:17 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetwebsiteUserLogin]
+
+AS
+BEGIN
+
+SELECT U.[Id]
+        
+      ,U.[Active]
+      
+      ,UserName as logininfo
+      ,[Password] as passkey            
+      
+  FROM [POSDashboard].[dbo].[websiteUserLogin] U
+  
+  left outer join dbo.WebsiteUserInfo u1 on u.userid = U.id    
+  
+end
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[InsUpdWebsiteUserInfo]    Script Date: 06/08/2016 16:06:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdWebsiteUserInfo](
+@FirstName varchar(50)
+,@LastName varchar(50)
+,@UserName varchar(50)  
+,@Password varchar(50)  
+,@EmailAddress varchar(50)
+,@ConfirmPassword varchar(50)
+,@Gender varchar(50),@salt varchar(50)=null,@Active int=1,@userid int = -1)
+
+ AS
+BEGIN
+DECLARE @LASTID int
+	
+INSERT INTO [POSDashboard].[dbo].[WebsiteUserInfo]
+           ([FirstName]
+           ,[LastName]
+           ,[UserName]
+           ,[EmailAddress]
+           ,[Password]
+           ,[ConfirmPassword]
+           ,[Gender])
+     VALUES
+           (@FirstName
+           ,@LastName
+           ,@UserName
+           ,@EmailAddress
+           ,@Password
+           ,@ConfirmPassword
+           ,@Gender
+       )
+           
+ set @LASTID=SCOPE_IDENTITY();
+           
+           INSERT INTO [POSDashboard].[dbo].[WebsiteUserLogin]
+           ([LoginInfo]
+           ,[PassKey]
+       
+           ,[UserId]
+           ,[salt]
+           ,[Active])
+     VALUES
+           (@UserName
+           ,@Password
+           ,@LASTID
+           ,@salt
+           ,@Active
+           )
+           
+
+
+END
+
+
+/****** Object:  StoredProcedure [dbo].[ValidateCredentials]    Script Date: 06/08/2016 16:05:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[WebsiteValidateCredentials](@logininfo varchar(50) = null, @passkey varchar(50) = null)
+as
+begin
+
+select logininfo,FirstName, Lastname,u.Id 
+from WebsiteUserlogin ul 
+inner join WebsiteuserInfo u on 
+u.id = ul.UserId
+
+where LoginInfo=@logininfo and [PassKey]=@passkey
+
+end
+
+
+
+/****** Object:  Table [dbo].[ResetPassword]    Script Date: 06/07/2016 19:40:00 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WebsiteResetPassword](
+	[UserName] [varchar](50) NULL,
+	[OldPassword] [varchar](50) NULL,
+	[NewPassword] [varchar](50) NULL,
+	[ReenterNewPassword] [varchar](50) NULL,
+	[Id] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+/****** Object:  StoredProcedure [dbo].[InsUpdwebsiteresetpassword]    Script Date: 06/07/2016 19:40:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[InsUpdwebsiteresetpassword]
+	-- Add the parameters for the stored procedure here
+
+	@UserName varchar(50)
+,@OldPassword varchar(50)
+,@NewPassword varchar(50)  
+,@ReenterNewPassword varchar(50)  
+
+AS
+BEGIN
+	UPDATE WebsiteUserInfo
+SET Password=@NewPassword where UserName = @UserName
+and Password = @OldPassword
+UPDATE WebsiteUserlogin
+SET Passkey=@NewPassword where Logininfo = @UserName
+and Passkey = @OldPassword
+
+
+END
+
+
+GO
+
+/****** Object:  Table [dbo].[WebsiteUserregister]    Script Date: 06/08/2016 16:11:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WebsiteUserregister](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NULL,
+	[LastName] [nvarchar](50) NULL,
+	[UserName] [nvarchar](50) NULL,
+	[EmailAddress] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL,
+	[ConfirmPassword] [nvarchar](50) NULL,
+	[Gender] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+GO
+
+/****** Object:  Table [dbo].[FleetOwnerVehicleLayOut]    Script Date: 06/10/2016 09:17:52 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerVehicleLayOut](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleLayoutTypeId] [int] NOT NULL,
+	[RowNo] [int] NOT NULL,
+	[ColNo] [int] NOT NULL,
+	[VehicleTypeId] [int] NOT NULL,
+	[label] [varchar](10) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerVehicleLayout]    Script Date: 06/10/2016 09:12:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
+	@VehicleLayoutTypeId int,
+	@RowNo int,
+	@ColNo varchar(50),
+	@VehicleTypeId int,
+	@label varchar(10),
+	@FleetOwnerId int,
+	@insupdflag varchar (10)   
+)
+AS
+BEGIN
+if @insupdflag = 'I'
+INSERT INTO [dbo].[FleetOwnerVehicleLayout]
+           ([VehicleLayoutTypeId]
+           ,[RowNo]
+           ,[ColNo]
+           ,[VehicleTypeId]
+           ,[label]
+           ,[FleetOwnerId]
+           )
+     VALUES
+           (@VehicleLayoutTypeId
+           ,@RowNo
+           ,@ColNo
+           ,@VehicleTypeId
+           ,@label
+           ,@FleetOwnerId)
+           
+
+
+End
+Go
+
+/****** Object:  Table [dbo].[FleetOwnerStops]    Script Date: 06/10/2016 22:21:15 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[FleetOwnerStops](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[StopId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+
+create procedure [dbo].[GetFleetOwnerRouteDetails]
+(@fleetOwnerId int, @routeid int)
+as
+begin
+
+SELECT r.[Id]
+      ,r.routename as routename
+	  ,r.code as routecode      
+      ,src.name source
+      , dest.name dest
+  FROM [POSDashboard].[dbo].[Routes] r
+inner join stops src on src.id = r.sourceid
+inner join stops dest on dest.id = r.destinationid
+where r.Id = @routeid 
+
+SELECT distinct rd.[Id]
+      ,r.routename as routename
+	  ,r.code as routecode
+      ,rd.[RouteId]      
+      ,rd.stopid
+      ,src.name StopName
+      ,src.code StopCode
+	  ,[PreviousStopId]
+      ,[NextStopId]
+      ,prevstops.name prevstop
+      ,nextstops.name nextstop
+      ,[DistanceFromSource]
+      ,[DistanceFromDestination]
+      ,[DistanceFromPreviousStop]
+      ,[DistanceFromNextStop]   
+	  ,[StopNo]
+      ,case 
+when fos.stopid is null then 0
+ else 1 end assigned
+  FROM [POSDashboard].[dbo].[RouteDetails] rd
+  inner join stops src on src.id = rd.stopid
+inner join routes r on r.id = rd.routeid
+inner join stops prevstops on prevstops.id =previousstopid
+inner join stops nextstops on nextstops.id = nextstopid
+left outer join fleetownerstops fos 
+on fos.stopid = rd.stopid and (fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
+  where  (rd.routeid = @routeid )
+  order by stopno
+
+end
+
+GO
+
+
+/****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/11/2016 05:35:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[FORouteFleetSchedule](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleId] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[StopId] [int] NOT NULL,
+	[ArrivalHr] [int] NULL,
+	[DepartureHr] [int] NULL,
+	[Duration] [decimal](18, 0) NULL,
+	[ArrivalMin] [int] NULL,
+	[DepartureMin] [int] NULL,
+	[ArrivalAMPM] [varchar](2) NULL,
+	[DepartureAMPM] [varchar](2) NULL
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+
+Go
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+create procedure [dbo].[getFORVehicleSchedule]
+(@fleetOwnerId int, @routeid int, @vehicleId int)
+as
+begin
+
+SELECT distinct 
+      rd.stopid
+      ,src.name StopName
+      ,src.code StopCode	 
+	  ,[StopNo]
+      ,fs.arrivalhr
+      ,fs.arrivalmin
+      ,fs.arrivalampm
+      ,fs.departurehr
+      ,fs.departuremin
+      ,fs.departureampm
+  FROM [POSDashboard].[dbo].[RouteDetails] rd
+  inner join stops src on src.id = rd.stopid
+  inner join fleetownerstops fos 
+on (fos.stopid = rd.stopid and fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
+left outer join FORouteFleetSchedule fs 
+on fs.stopid = fos.stopid and (fs.fleetownerid = @fleetownerid and fs.routeid = @routeid
+and fs.vehicleId = @vehicleId)
+  where  (rd.routeid = @routeid )
+  order by stopno
+
+end
+
+GO
+
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+
+Create procedure [dbo].[InsUpdDelFleetAvailability](
+@Id int,
+@VehicleId int,
+@FromDate datetime = null,
+@ToDate datetime = null,
+@insupddelflag varchar(1)
+)
+as
+begin
+declare @cnt int
+set @cnt = 0
+
+if @insupddelflag = 'I'
+		begin
+			--check if already company exists
+			select @cnt = count(1) from FleetAvailability where VehicleId = @VehicleId
+
+			if @cnt = 0 
+			begin
+
+			INSERT INTO [POSDashboard].[dbo].[FleetAvailability]
+           ([VehicleId]
+           ,[FromDate]
+           ,[ToDate])
+			VALUES
+           (@VehicleId,@FromDate,@ToDate)			
+		   
+			end
+	 end
+else
+
+   if @insupddelflag = 'U'
+		begin
+				UPDATE [POSDashboard].[dbo].[FleetAvailability]
+				SET [FromDate] = @FromDate
+					,[ToDate] = @ToDate
+				 WHERE VehicleId = @VehicleId
+		end
+   else
+	if @insupddelflag = 'D'
+     delete from [POSDashboard].[dbo].[FleetAvailability]
+	 where VehicleId = @VehicleId
+end
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[InsUpdDelFleetOwnerRouteStops]
+	-- Add the parameters for the stored procedure here
+	@FleetOwnerId int,
+	@RouteId int,
+	@StopId int,
+    @insupddelflag varchar(1)
+AS
+BEGIN
+declare @cnt int
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	if @insupddelflag = 'I'
+	begin
+
+	  select @cnt = count(*) 
+	  FROM  [POSDashboard].[dbo].[FleetOwnerStops]
+	  WHERE FleetOwnerId = @FleetOwnerId 
+		  and RouteId = @RouteId 
+		  and StopId = @StopId
+
+			if @cnt = 0 
+			begin
+				INSERT INTO [POSDashboard].[dbo].[FleetOwnerStops]
+					   ([FleetOwnerId]
+					   ,[RouteId]
+					   ,[StopId])
+				 VALUES
+					   (@FleetOwnerId
+					   ,@RouteId
+					   ,@StopId)
+
+						--insert the fleet owner stops id also
+						--for this get all the records with stopid as src for given route and insert the same
+						--get all the records with stopid as dest and insert
+						declare @sid int
+						declare @scnt int
+
+						DECLARE db_cursor CURSOR FOR
+						select Id from routestops 
+						where  routeid = @RouteId
+						and (fromstopid = @StopId or tostopid = @StopId)
+
+						OPEN db_cursor  
+						FETCH NEXT FROM db_cursor INTO @sid 
+
+						WHILE @@FETCH_STATUS = 0  
+						BEGIN  
+						 
+								select @scnt = count(1) from [POSDashboard].[dbo].[FleetOwnerRouteStop]
+								where RouteStopId = @sid      
+
+								if @scnt = 0 
+								INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteStop]
+									  ([FleetOwnerId]
+										,[RouteStopId])
+								 VALUES
+									   (@FleetOwnerId
+									   ,@sid)
+								
+
+							   FETCH NEXT FROM db_cursor INTO @sid
+						END  
+
+						CLOSE db_cursor  
+						DEALLOCATE db_cursor 
+
+			end
+
+	end
+else
+	if @insupddelflag = 'D'
+	begin
+		DELETE FROM [POSDashboard].[dbo].[FleetOwnerStops]
+			  WHERE FleetOwnerId = @FleetOwnerId 
+			  and RouteId = @RouteId 
+			  and StopId = @StopId
+
+		delete from [POSDashboard].[dbo].[FleetOwnerRouteStop]
+		where FleetOwnerId = @FleetOwnerId 
+		and RouteStopId in (select Id from routestops 
+		where  routeid = @RouteId
+		and (fromstopid = @StopId or tostopid = @StopId))
+	end
+
+END
+GO
+
+
+
+
+
+/****** Object:  Table [dbo].[Ex_Availableseats]    Script Date: 06/14/2016 11:15:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Ex_Availableseats](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Bus_Id] [int] NOT NULL,
+	[Bustype] [varchar](50) NOT NULL,
+	[From_Time] [varchar](50) NOT NULL,
+	[To_Time] [varchar](50) NOT NULL,
+	[Availableseats] [int] NOT NULL,
+	[Cost] [float] NOT NULL,
+	[Sourcename] [varchar](50) NOT NULL,
+	[Destinationname] [nvarchar](50) NOT NULL,
+	[SourceId] [int] NOT NULL,
+	[DestinationId] [int] NOT NULL,
+	[Travelsname] [varchar](30) NULL,
+	[Duration] [varchar](10) NULL,
+ CONSTRAINT [PK_Ex_Availableseats] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+/****** Object:  Table [dbo].[PassengerDetails]    Script Date: 06/14/2016 11:13:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PassengerDetails](
+	[PassengerId] [int] IDENTITY(1,1) NOT NULL,
+	[Fname] [varchar](30) NOT NULL,
+	[Lname] [varchar](30) NOT NULL,
+	[Age] [int] NOT NULL,
+	[Sex] [int] NOT NULL,
+	[datetime] [varchar](30) NOT NULL,
+	[Pnr_Id] [int] NOT NULL,
+	[Pnr_No] [varchar](20) NOT NULL,
+	[Identityproof] [varchar](30) NOT NULL,
+ CONSTRAINT [PK__Passenge__88915FB01D7B6025] PRIMARY KEY CLUSTERED 
+(
+	[PassengerId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+/****** Object:  Table [dbo].[PaymentDetails]    Script Date: 06/14/2016 11:14:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PaymentDetails](
+	[TransactionId] [int] IDENTITY(1,1) NOT NULL,
+	[Transaction_Number] [varchar](30) NULL,
+	[Amount] [bigint] NULL,
+	[Paymentmode] [int] NULL,
+	[dateandtime] [datetime] NULL,
+	[Pnr_Id] [int] NULL,
+	[Pnr_No] [varchar](20) NULL,
+	[Gateway_transId] [varchar](20) NULL,
+	[TransactionStatus] [int] NULL,
+ CONSTRAINT [PK__Transact__55433A6B214BF109] PRIMARY KEY CLUSTERED 
+(
+	[TransactionId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+/****** Object:  Table [dbo].[PnrDetails]    Script Date: 06/14/2016 11:14:32 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PnrDetails](
+	[Pnr_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Pnr_No] [varchar](20) NOT NULL,
+	[No_Seats] [int] NOT NULL,
+	[cost] [int] NOT NULL,
+	[dateandtime] [varchar](30) NOT NULL,
+	[src] [varchar](30) NULL,
+	[dest] [varchar](30) NULL,
+	[vehicle_No] [varchar](20) NULL,
+	[JourneyDate] [varchar](30) NOT NULL,
+	[ArrivalTime] [varchar](30) NOT NULL,
+	[DeptTime] [varchar](30) NOT NULL,
+	[fleetOwnerId] [int] NULL,
+	[RouteId] [int] NULL,
+	[JourneyType] [int] NOT NULL,
+	[AuthCode] [varchar](10) NOT NULL,
+ CONSTRAINT [PK__Pnr_Deta__0A9420FF19AACF41] PRIMARY KEY CLUSTERED 
+(
+	[Pnr_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+/****** Object:  Table [dbo].[PnrToSeats]    Script Date: 06/14/2016 11:14:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[PnrToSeats](
+	[PnrSeatsID] [int] IDENTITY(1,1) NOT NULL,
+	[Pnr_ID] [int] NOT NULL,
+	[Pnr_No] [varchar](20) NOT NULL,
+	[SeatNo] [varchar](5) NOT NULL,
+	[VehicleNo] [varchar](20) NULL,
+	[Date] [datetime] NOT NULL,
+	[SeatId] [int] NULL,
+ CONSTRAINT [PK_OnrToSeats] PRIMARY KEY CLUSTERED 
+(
+	[PnrSeatsID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
+ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[Getsp_Availableseats]    Script Date: 06/14/2016 11:19:23 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[Getsp_Availableseats]
+@Src_Id int,
+@Des_Id int
+AS
+BEGIN
+SELECT  [Id]
+      ,[Bus_Id]
+      ,[Bustype]
+      ,[From_Time]
+      ,[To_Time]
+      ,[Availableseats]
+      ,[Cost]
+      ,[Sourcename]
+      ,[Destinationname]
+      ,[SourceId]
+      ,[DestinationId]
+      ,[Travelsname]
+      ,[Duration]
+  FROM [POSDashboard].[dbo].[Ex_Availableseats] where SourceId=@Src_Id and DestinationId=@Des_Id
+END
+
+GO
+
+
+
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPassengerDetails]    Script Date: 06/14/2016 11:16:59 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPassengerDetails] 
+	 
+     @Pnr_No varchar(20),@Pnr_Id int,
+     @Fname varchar(30),@Lname varchar(30), @Age int, @Sex int,@datetime varchar(30), @Identityproof 
+varchar(30)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+INSERT INTO PassengerDetails
+          (Fname,Lname,Age,Sex,datetime,Pnr_Id,Pnr_No,Identityproof) 
+     VALUES 
+          (@Fname,@Lname,@Age,@Sex,@datetime,@Pnr_Id,@Pnr_No,@Identityproof) 
+END
+
+GO
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPaymentDetails]    Script Date: 06/14/2016 11:17:19 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPaymentDetails] 
+	 (
+      @Transaction_Number varchar(30)=null
+      ,@Amount int=null,
+      @Paymentmode int=null,@dateandtime datetime=null,@Gateway_transId varchar(20)=null,@Pnr_Id int=null
+      ,@Pnr_No varchar(20)=null, @TransactionStatus int
+      )
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+INSERT INTO PaymentDetails
+(Transaction_Number,Amount,Paymentmode,dateandtime,Pnr_Id,Pnr_No,Gateway_transId,TransactionStatus) 
+     VALUES 
+(@Transaction_Number,@Amount,@Paymentmode,@dateandtime,@Pnr_Id,@Pnr_No,@Gateway_transId,@TransactionStatus)  	
+END
+
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrDetails]    Script Date: 06/14/2016 11:17:29 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPnrDetails] 
+	 
+      @Pnr_No varchar(20) = null,
+      @No_Seats int  = null,
+      @cost int  = null,
+      @dateandtime varchar(30)=null,
+      @src varchar(30)= null,
+      @dest varchar(30) = null,
+      @vehicle_No varchar(20) = null,
+      @JourneyDate varchar(30)=null,
+      @ArrivalTime varchar(30)=null,
+      @DeptTime varchar(30)=null,
+      @RouteId int=null,
+      @fleetOwnerId int=null,
+      @JourneyType int,
+      @AuthCode varchar(10),
+      @LastInsPnrID INT OUTPUT
+AS
+BEGIN
+declare @startId int
+	SET NOCOUNT ON
+INSERT INTO PnrDetails
+          (Pnr_No,No_Seats,cost,dateandtime,src,dest,vehicle_No,JourneyDate, ArrivalTime, 
+DeptTime,fleetOwnerId,RouteId,JourneyType,AuthCode) 
+     VALUES 
+          (@Pnr_No,@No_Seats,@cost,@dateandtime,@src,@dest,@vehicle_No,@JourneyDate, @ArrivalTime, 
+@DeptTime,@fleetOwnerId,@RouteId,@JourneyType,@AuthCode) 
+          
+          SELECT @LastInsPnrID = SCOPE_IDENTITY()
+         	
+END
+GO
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrToSeats]    Script Date: 06/14/2016 11:17:46 
+******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_InsPnrToSeats]
+      @Pnr_ID int,
+      @Pnr_No varchar(20),@SeatNo varchar(20), @Date varchar(20),@VehicleNo int=null, @SeatId int
+      AS
+BEGIN
+	
+	SET NOCOUNT ON;
+INSERT INTO PnrToSeats
+          (Pnr_ID,Pnr_No,SeatNo,VehicleNo,Date,SeatId) 
+     VALUES 
+          (@Pnr_ID,@Pnr_No,@SeatNo,@VehicleNo,@Date,@SeatId)
+END
+
+GO
+

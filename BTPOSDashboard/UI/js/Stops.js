@@ -74,7 +74,8 @@ var ctrl = app.controller('Mycntrlr', function ($scope, $http, $localStorage) {
 
             Active: (Stops.Active == true) ? 1 : 0,
 
-            insupdflag: flag
+
+            insupdflag: "U"
         }
 
         var req = {

@@ -3,21 +3,23 @@ var myapp1 = angular.module('myApp', [])
 
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
-    $scope.routefares =
-        [
-          {
-              "Rows": "Hyderabad", "Hyderabad": 0, "Vijaywada": 307, "Kurnool": 400, "Karimnagar": 200
-          },
-          {
-              "Rows": "Vijaywada", "Hyderabad": 307, "Vijaywada": 0, "Kurnool": 100, "Karimnagar": 500
-          },
-          {
-              "Rows": "Kurnool", "Hyderabad": 400, "Vijaywada": 100, "Kurnool": 0, "Karimnagar": 300
-          },
-          {
-              "Rows": "Karimnagar","Hyderabad": 200,"Vijaywada": 500,"Kurnool": 300,"Karimnagar": 0
-          }
-        ];
+    $scope.GetRoutes = function () {
+        $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
+            $scope.routes = res.data;
+            // GetRouteDetails($scope.routes[0].Id);
+        });
+        
+        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+            $scope.Stops = res.data;
+        });
+        
+    }
+
+    $scope.GetRouteFareDetails = function () {
+        $http.get('http://localhost:1476/api/RouteFare/getRouteFare?routeId='+$scope.s.Id).then(function (res, data) {
+            $scope.routefares = res.data;
+        });
+    }
 
     $scope.GetStops = function () {
         $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {

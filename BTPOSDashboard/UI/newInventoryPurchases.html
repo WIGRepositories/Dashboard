@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
     <!--Loading bootstrap css-->
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
@@ -298,34 +298,6 @@
                             </li>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <!--<li>
                 <a href="#">
                     <i class="fa fa-send-o fa-fw">
@@ -475,7 +447,7 @@
                                                                     <div class="form-group">
 
                                                                         <label for="selCountry" class="col-md-3 control-label">SubCategory</label>
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-6">
                                                                             <select ng-options="s.SubCategory for s in InventoryItem track by s.subcategoryid" class="form-control" ng-model="Item.SubCategory">
                                                                                 <option value="">Select</option>
                                                                             </select>
@@ -494,23 +466,27 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label">Purchase Date:<span class='require'>*</span></label>
+                                                                        <div style="width:50%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                            <input type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                        </div>
 
-                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="help-block"></span></div>
                                                                     </div>
+                                                                       <!----- <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseDate" /><span class="help-block"></span></div>
+                                                                    </div>----->
                                                                     <div class="form-group">
                                                                         <label for="selCompany" class="col-md-3 control-label">Purchase Order Number:</label>
 
                                                                         <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseOrderNumber" /><span class="help-block"></span></div>
                                                                     </div>
-
+                                                                   
                                                                 </div>
 
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn btn-primary" ng-click="savepurchases(Group);">Save</button>
+                                                                        <button  class="btn btn-primary" ng-click="savepurchases(Group);">Save</button>
 
-                                                                        <button type="reset" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
-                                                                    </div>
+                                                                        <a href="InventoryPurchases.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+</div>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -541,29 +517,35 @@
     </div>
     <!--END PAGE WRAPPER-->
 
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/InventoryPurchases.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    
+    
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('.datepicker-filter').datepicker({
+            autoclose: true
+        });
+    </script>
+<!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/InventoryPurchases.js"></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    <title>Home | BT POS | Vehicle Details</title>
+    <title>Home | Fleet | Fleet Routes</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
@@ -10,10 +10,9 @@
     <!--Loading bootstrap css-->    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">    
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">    
     <!--Loading style-->
@@ -21,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetCompanies();" ng-model="FleetRoute">
+<body ng-init="GetCompanies();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -53,7 +52,7 @@
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
+                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success">7</span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                                 <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
@@ -150,6 +149,25 @@
                             </ul>
 
                         </li>
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            </ul>
+                        </li>
+
 
                         <li>
                             <a href="#">
@@ -298,7 +316,7 @@
 
                             </ul>
                         </li>
-                      </ul>
+                        </ul>
                     </div>
                 </nav>
                 <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
@@ -329,30 +347,109 @@
 
                                                 <div class="table-container">
 
+
                                                     <div class="row mbm">
-                                                        <div class="form-group">
-                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Company:</label>
+                                                        <div class="col-md-5">
+                                                            Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            Fleet Owner:<select ng-options="s.Name for s in FleetOwners.Table track by s.Id" ng-model="s" ng-change="GetFleetRoutes()">
 
-                                                            <div class="col-md-6">
-                                                                <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                            </div>
+                                                                     <option value="">Select</option>
+                                                                       </select>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Fleet Owner:</label>
-
-                                                            <div class="col-md-6">
-                                                                <select ng-options="f.Name for f in cmpdata.Table track by f.Id" ng-model="fo" ng-change="GetFleetRoutes();" width="100%">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
 
 
                                                         <div class="actions">
                                                             <a href="NewFleetRoutes.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">Assign Route to fleet</button></a>
+
+                                                        </div>
+
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Routes</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="currGroup">
+
+                                                                        <div class="row">
+                                                                          
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Vehicle Reg No:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="col-md-6">
+                                                                                    <select ng-options="v.VehicleRegNo for v in initdata.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" width="100%" ng-model="initdata.newfleet.v">
+                                                                                        <option value="">Select</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Fleet Route:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="col-md-6">
+                                                                                    <select ng-options="r.routename for r in initdata.Table track by r.Id" class="form-control" ng-model="initdata.newfleet.r">
+                                                                                        <option value="">Select</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+
+
+                                                                            <div class="row">
+
+                                                                                <div class="col-md-6">
+                                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                                        <label for="inputFirstName" class="control-label">Effective From:<span class='require'>*</span></label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group">
+                                                                                        <div style="width:30%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Effective Till:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group">
+                                                                                    <div style="width:30%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="button" class="btn btn-primary" >Save</button>
+                                                                            <button type="button" class="btn btn-default">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
 
                                                         </div>
 
@@ -365,7 +462,7 @@
                                                                 <th width="22%">Vehicle Reg No</th>
                                                                 <th>Fleet Route</th>
                                                                 <th>Effective From</th>
-                                                                <th>Effective Till</th>                                                               
+                                                                <th>Effective Till</th>
                                                                 <th>Edit</th>
                                                                 <th>Delete</th>
 
@@ -377,17 +474,17 @@
                                                                 <td>{{R.VehicleRegNo}}</td>
                                                                 <td>{{R.RouteName}}</td>
                                                                 <td>{{R.EffectiveFrom}}</td>
-                                                                <td>{{R.EffectiveTill}}</td>                          
-                                                               <td>
+                                                                <td>{{R.EffectiveTill}}</td>
+                                                                <td>
 
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setRoute(R);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
+                                                                        Edit
                                                                     </button>
                                                                 </td>
                                                                 <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
-                                                                
-                                                               
+
+
                                                             </tr>
 
                                                         </tbody>
@@ -415,34 +512,34 @@
             </div>
         </div>
     </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
 
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/FleetRoutes.js"></script>    
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<script src="js/table-action.js"></script>
+<!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
+
+<script src="js/angular.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/FleetRoutes.js"></script>
 
 </body>
 </html>

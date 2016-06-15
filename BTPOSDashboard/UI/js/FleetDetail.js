@@ -2,12 +2,24 @@ var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
 
-    //$scope.GetFleetDetails= function () {
+    $scope.GetFleetDetails= function () {
 
-    //    $http.get('http://localhost:1476/api/Fleet/GetFleetDetails').then(function (res, data) {
-    //        $scope.FleetDetails = res.data.Table;
-    //    });
-    //}
+         if ($scope.cmp == null)
+        {
+            $scope.cmpdata = null;
+            return;
+        }
+
+        if ($scope.s == null)
+        {
+          $scope.Fleet = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId='+ $scope.cmp.Id+ '&fleetOwnerId=' + $scope.s.Id).then(function(res, data) {
+            $scope.Fleet = res.data.Table;
+      });
+    }
    
     $scope.GetCompanies = function ()
     {
@@ -25,7 +37,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
         $http(req).then(function (res)
         {
-            $scope.initdata = res.data;
+            //$scope.initdata = res.data;
+            $scope.companies = res.data;
         });
 
     }
@@ -34,7 +47,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     {
         if ($scope.cmp == null)
         {
-            $scope.FleetOwners = null;
+            $scope.cmpdata = null;
+            $scope.Fleet = null;
             return;
         }
         var vc = {
@@ -54,14 +68,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
         $http(req).then(function (res)
         {
-            $scope.cmpdata = res.data;
+            $scope.cmpdata = res.data.Table;
         });
     }
 
     $scope.GetVehicleConfig = function () {
 
         var vc = {
-            needfleetowners:'1',
+           // needfleetowners:'1',
             needvehicleType: '1',
             needServiceType: '1',
             needvehiclelayout: '1',
@@ -84,12 +98,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
-    $scope.GetFleetDetails = function () {
+   /* $scope.GetFleetDetails = function () {
 
-        $http.get('http://localhost:1476/api/Fleet/getFleetList').then(function (res, data) {
+        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.Fleet = res.data.Table;
         });
-    }
+    }*/
    
     $scope.save = function (Fleet) {
         if (Fleet == null) {
@@ -107,7 +121,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
        }
       
                        
-       
+        
         var Fleet = {
             Id:Fleet.Id,
             VehicleRegNo: Fleet.VehicleRegNo,
@@ -116,8 +130,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             FleetOwnerId: Fleet.FleetOwnerId,
             CompanyId: Fleet.CompanyId,
             ServiceTypeId: Fleet.ServiceTypeId,
-            Active: Fleet.Active,
-           
+            EngineNo: Fleet.EngineNo,
+            FuelUsed: Fleet.FuelUsed,       
+            MonthAndYrOfMfr: Fleet.Mfr,
+            ChasisNo: Fleet.ChasisNo,
+            SeatingCapacity: Fleet.SeatingCapacity,
+            DateOfRegistration: Fleet.dor,
+            
+
+
         };
      
         var req = {
@@ -137,11 +158,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     
     $scope.savenewfleetdetails = function (initdata) {
         var newVD = initdata.newfleet;
-       /* if (newVD == null) {
+      if (newVD == null) {
             alert('Please enter VehicleRegNo.');
             return;
         }
-
+        /* 
         if (newVD.VehicleRegNo == null) {
             alert('Please enter VehicleRegNo.');
             return;
@@ -159,7 +180,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             VehicleTypeId: newVD.vt.Id,
             VehicleLayoutId: newVD.vl.Id,
             FleetOwnerId: newVD.fo.Id,
-            CompanyId: newVD.c.Id,
+            CompanyId: $scope.cmp.Id,
             ServiceTypeId: newVD.st.Id,
             Active:1,
 
@@ -177,6 +198,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (res) {
             alert('Sucessfully saved!');
         });
+}
+ 
+    $scope.setFleet = function (F) {
+        $scope.currVD = F;            
     }
 });
    

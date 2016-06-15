@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="myApp" ng-controller="myCtrl">
 <head>
-    <title>Home | Users | Users | Add New User</title>
+    <title>Home | Fleet | Fleet Routes | Assign Route</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
     <!--Loading bootstrap css-->    
@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
@@ -303,7 +303,7 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">New Routes</div>
+                            <div class="page-title">Assign Fleet Routes</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -325,7 +325,7 @@
                                     <div id="tab-form-actions" class="tab-pane fade active in">
                                         <div class="row">
 
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-9">
                                                 <div class="panel panel-violet">
                                                     <div class="panel-heading">Assign Fleet Route</div>
                                                     <div class="panel-body pan">
@@ -335,8 +335,8 @@
                                                                 <div class="form-group">
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Company:</label>
 
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
+                                                                    <div class="col-md-4">
+                                                                        <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -345,8 +345,8 @@
                                                                 <div class="form-group">
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Fleet Owner:</label>
 
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="f.Name for f in FleetOwners track by f.Id" ng-model="fo" ng-change="GetFleetBTPosForFO();" width="100%">
+                                                                    <div class="col-md-4">
+                                                                        <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" ng-model="s" ng-change="GetRoutesForFO();" width="100%">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -355,41 +355,41 @@
                                                                 <div class="form-group">
                                                                     <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Vehicle Reg No:</label>
 
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="initdata.newfleet.v">
+                                                                    <div class="col-md-4">
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" width="100%" ng-model="initdata.newfleet.v">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Route Name:</label>
+                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Route:</label>
 
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="r.routename for r in initdata.Table track by r.ID" class="form-control" ng-model="initdata.newfleet.r">
+                                                                    <div class="col-md-4">
+                                                                        <select ng-options="r.routename for r in initdata.Table track by r.Id" class="form-control" ng-model="initdata.newfleet.r">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label for="Name" class="col-md-3 control-label">Effective From:<span class='require'></span></label>
+                                                                    <label for="Description" class="col-md-3 control-label">Effective From:<span class='require'></span></label>
 
-                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                    <div style="width:30%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="Description" class="col-md-3 control-label"> Effective Till <span class='require'></span></label>
+                                                                    <label for="Description" class="col-md-3 control-label"> Effective Till:<span class='require'></span></label>
 
-                                                                    <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                    <div style="width:30%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
                                                                 </div>
 
                                                                 <div class="form-actions">
-                                                                    <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="submit" class="btn btn-primary" ng-click="saveNewFleetRoutes(initdata);">Save</button>
+                                                                    <div class="col-md-offset-4 col-md-9">
+                                                                        <button  class="btn btn-primary" ng-click="saveNewFleetRoutes(initdata);">Save</button>
 
-                                                                        <button type="reset" class="btn btn-green">Cancel</button>
-                                                                    </div>
+                                                                        <a href="FleetRoutes.html" class="btn btn-green">Cancel</a>
+</div>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -399,10 +399,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                                    <div id="footer">
-                                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                    </div>
+                                    
                                     <!--END FOOTER-->
                                 </div>
                                 <!--END PAGE WRAPPER-->
@@ -410,41 +407,44 @@
                             <!--END PAGE WRAPPER-->
                         </div>
                     </div>
-
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script>
-        $('.datepicker-filter').datepicker({
-            autoclose: true
-        });
-    </script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/FleetRoutes.js"></script>
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script>
+    $('.datepicker-filter').datepicker({
+        autoclose: true
+    });
+</script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/FleetRoutes.js"></script>
 </body>
 
 </html>

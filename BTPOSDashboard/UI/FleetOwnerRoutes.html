@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">    
     <!--Loading style-->
@@ -145,6 +145,25 @@
 
                             </ul>
 
+                        </li>
+
+
+                        <li class="active">
+
+                            <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            </ul>
                         </li>
 
                         <li>
@@ -386,7 +405,7 @@
                                                                                     </td>
                                                                                     <td class="col-lg-2">
 
-                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="text" id="{{route.routename}}TDate" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="text" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
                                                                                     </td>
                                                                                     <!--<td>{{route.FromDate}}</td>
                                                                                     <td>{{route.ToDate}}</td>-->
@@ -446,32 +465,32 @@
         </div>
     </div>
 
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
 
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
 
-    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
 
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ngStorage.js"></script>
 
-    <script src="js/FleetOwnerRoutes.js"></script>
+<script src="js/FleetOwnerRoutes.js"></script>
 </body>
 </html>
