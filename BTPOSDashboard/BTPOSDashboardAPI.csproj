@@ -494,6 +494,7 @@
     <Content Include="UI\js\tableexportcanvas.js" />
     <Content Include="UI\js\tableexportjspdf.js" />
     <Content Include="UI\js\tableexportsprintf.js" />
+    <Content Include="UI\js\UserLicense.js" />
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
@@ -588,6 +589,7 @@
     <Content Include="UI\TroubleTicketReports.html" />
     <Content Include="UI\TypeGroups.html" />
     <Content Include="UI\Types.html" />
+    <Content Include="UI\ulicense1.html" />
     <Content Include="UI\UserDetails.html" />
     <Content Include="UI\UserLicense.html" />
     <Content Include="UI\UserProfile.html" />
@@ -2041,6 +2043,7 @@
     <Compile Include="Controllers\SalesOrderController.cs" />
     <Compile Include="Controllers\ShippingOrderController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
+    <Compile Include="Controllers\UserLicenseController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
