@@ -88,6 +88,12 @@ var ctrl = app.controller('mycntrlr', function ($scope, $http, $localStorage, $f
                 $scope.fleet = null;
                 return;
             }
+
+            if ($scope.r == null) {
+                $scope.fleet = null;
+                return;
+            }
+
             var cmpId = (selCmp == null) ? -1 : selCmp.Id;
 
             var fr = {

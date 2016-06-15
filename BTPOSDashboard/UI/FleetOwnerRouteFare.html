@@ -355,36 +355,36 @@
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Route Name: <select ng-options="r.routename for r in FORoutes track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
-                                             <option value="">Select</option>
-                                                          </select>
+                                                                Vehicle Reg No.: <select ng-options="v.VehicleRegNo for v in fleet track by v.VehicleId" ng-model="v" ng-change="getVehicleFareConfig()" style="width:100px">
+                                                                    <option value="">Select</option>
+                                                                </select>
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Code: <input type="text" readonly style="width:100px" value="{{r.Code}}"/>
+                                                                Vehicle Type: <input type="text" style="width:100px" value="{{v.vehicleType}}" disabled/>
                                                             </div>
 
 
                                                         </div>
                                                         <div class="row mbm">
-
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Vehicle Type: <input type="text" readonly style="width:100px" />
+                                                                Route Name: <select ng-options="r.routename for r in FORoutes track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
+                                                                    <option value="">Select</option>
+                                                                </select>
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Vehicle Reg No.: <select ng-options="v.VehicleRegNo for v in fleet track by v.VehicleId" ng-model="v" ng-change="getVehicleFareConfig()" style="width:100px">
-    <option value="">Select</option>
-</select>
+                                                                Code: <input type="text" readonly style="width:100px" value="{{r.code}}" disabled/>
                                                             </div>
 
+                                                            
                                                            
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Source: <input type="text" readonly style="width:100px" />
+                                                                Source: <input type="text" readonly style="width:100px" value="{{r.src}}" disabled />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Destination: <input type="text" readonly style="width:100px" />
+                                                                Destination: <input type="text" readonly style="width:100px" value="{{r.dest}}" disabled />
                                                             </div>
 
                                                         </div>
@@ -403,11 +403,11 @@
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                distance: <input type="text" readonly style="width:100px" />
+                                                                distance: <input type="text" readonly style="width:100px" value="{{r.distance}}" disabled />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Total: <input type="text" readonly style="width:100px" />
+                                                                Total: <input type="text" readonly style="width:100px" readOnly/>
                                                             </div>
 
                                                         </div>
@@ -421,7 +421,9 @@
 
                                                                 <th>Source stop</th>
                                                                 <th>target stop</th>
-                                                                <th>Pricing Type</th>
+                                                                <th>Pricing Type</th>                                                                
+                                                                <th>Unit Price</th>
+                                                                <th>Distance</th>
                                                                 <th>Amount</th>
                                                                 <!--<th>List Key</th>
                                                                 <th>List value</th>-->
@@ -438,15 +440,17 @@
                                                                 <td>{{T.Src}}</td>
                                                                 <td>{{T.Dest}}</td>
                                                                 <td>
-                                                                    <select ng-model="prc">
+                                                                    <select ng-model="prc" ng-disabled="prc == 1">
                                                                         <option value="">Select</option>
                                                                         <option value="1">Per unit pricing</option>
                                                                         <option value="2">Adhoc pricing</option>
                                                                     </select>
                                                                 </td>
+                                                                <td><input type="text" class="form-control" style="width:100px" id="amt" ng-model="T.PerUnitPrice" /></td>
+                                                                <td><input type="text" class="form-control" style="width:100px" id="amt" ng-model="T.Distance" /></td>
                                                                 <td><input type="text" class="form-control" style="width:100px" id="amt" ng-model="T.Amount" /></td>
-                                                                <td>{{T.From}}</td>
-                                                                <td>{{T.To}}</td>
+                                                                <td><input type="date" ng-mode="T.From" value={{T.From}}></td>
+                                                                <td><input type="date" ng-mode="T.To" value={{T.To}}></td>
                                                             </tr>
                                                         </tbody>
 
