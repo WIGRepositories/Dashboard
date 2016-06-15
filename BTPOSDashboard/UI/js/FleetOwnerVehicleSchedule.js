@@ -12,6 +12,7 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout) {
             }
         }
     };
+   
 });
 
 var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
@@ -35,6 +36,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         });
 
     }
+
 
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
@@ -165,6 +167,18 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
        
     });
+
+    $scope.GetData = function () {
+        $scope.StopNo = '1';
+        $scope.StopName = "Hyderabad";
+        $scope.StopCode = "HYD";
+
+      //  $http(req).then(function (res) {
+          //  $scope.Data = res.data;
+            // GetRouteDetails1();
+       // });
+      
+    }
 
 });
 
