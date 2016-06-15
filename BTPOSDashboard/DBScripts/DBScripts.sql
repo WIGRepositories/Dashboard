@@ -7315,8 +7315,7 @@ end
 
 GO
 
-
-/****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/11/2016 05:35:47 ******/
+/****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/15/2016 07:54:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7335,8 +7334,12 @@ CREATE TABLE [dbo].[FORouteFleetSchedule](
 	[ArrivalMin] [int] NULL,
 	[DepartureMin] [int] NULL,
 	[ArrivalAMPM] [varchar](2) NULL,
-	[DepartureAMPM] [varchar](2) NULL
+	[DepartureAMPM] [varchar](2) NULL,
+	[ArrivalTime] [datetime] NULL,
+	[DepartureTime] [datetime] NULL
 ) ON [PRIMARY]
+
+
 
 GO
 SET ANSI_PADDING OFF

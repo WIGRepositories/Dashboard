@@ -153,6 +153,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     $scope.save = function () {
         var test = $scope.RouteVehicleSchedule;
+
+       
     }
 
     $scope.test = function (a) {
