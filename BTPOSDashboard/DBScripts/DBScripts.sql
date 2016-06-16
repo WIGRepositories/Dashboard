@@ -8053,7 +8053,7 @@ INSERT INTO [dbo].[FleetOwnerRequestDetails]
            ,[CompanyEmployeSize]
              ,[FleetSize]      
               ,[Gender]        
-              ,[Address] )
+              ,[Address])
      VALUES
           (@FirstName    
            ,@LastName
@@ -8065,7 +8065,7 @@ INSERT INTO [dbo].[FleetOwnerRequestDetails]
            ,@CompanyEmployeSize 
            ,@FleetSize     
           , @Gender   
-          , @Address )
+          , @Address)
           
   
           else
