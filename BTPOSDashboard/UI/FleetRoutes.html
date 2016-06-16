@@ -150,6 +150,7 @@
 
                         </li>
 
+
                         <li>
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -377,13 +378,13 @@
                                                                     <div class="modal-body" ng-model="currGroup">
 
                                                                         <div class="row">
-
-                                                                            <div class="col-md-6">
+                                                                          
+                                                                            <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
                                                                                     <label for="inputFirstName" class="control-label">Vehicle Reg No:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-4">
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="v.VehicleRegNo for v in initdata.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" width="100%" ng-model="initdata.newfleet.v">
                                                                                         <option value="">Select</option>

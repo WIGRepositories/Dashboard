@@ -5295,15 +5295,10 @@ SELECT distinct
       r.[Id] RouteId,
       [FromDate],
       [ToDate],
-      src.Name src,
-      dest.Name dest,
-      r.distance,
       fr.[Active]
       ,case when fr.FleetOwnerId is null then 0 else 1 end assigned
       --,0 assigned
   FROM [routes] r
-inner join stops src on src.id = sourceid
-inner join stops dest on dest.id = destinationid
 left outer join [POSDashboard].[dbo].[FleetOwnerRoute] fr 
 on r.id = fr.routeid and  (fr.fleetownerid = @fleetownerId or @fleetownerId = -1)
 order by RouteName
@@ -6706,11 +6701,11 @@ SELECT
       ,[VehicleId]
      
   FROM [POSDashboard].[dbo].fleetownerroutestop fs  
-left outer join [FleetOwnerRouteFare] f  on (fs.id = f.FORouteStopId and f.vehicleid = @vehicleid)
+left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
   inner join routestops r on r.id = fs.routestopid
   left outer join stops src on src.id =r.fromstopid
 left outer join stops dest on dest.id =r.tostopid
-where r.RouteId = @routeId
+where r.Id = @routeId
 order by src 
 
 end
@@ -7359,7 +7354,8 @@ end
 
 GO
 
-/****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/15/2016 07:54:53 ******/
+
+/****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/11/2016 05:35:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7378,12 +7374,8 @@ CREATE TABLE [dbo].[FORouteFleetSchedule](
 	[ArrivalMin] [int] NULL,
 	[DepartureMin] [int] NULL,
 	[ArrivalAMPM] [varchar](2) NULL,
-	[DepartureAMPM] [varchar](2) NULL,
-	[ArrivalTime] [datetime] NULL,
-	[DepartureTime] [datetime] NULL
+	[DepartureAMPM] [varchar](2) NULL
 ) ON [PRIMARY]
-
-
 
 GO
 SET ANSI_PADDING OFF
@@ -7924,4 +7916,3 @@ INSERT INTO PnrToSeats
 END
 
 GO
-
