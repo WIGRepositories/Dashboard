@@ -7401,7 +7401,11 @@ SELECT distinct
       ,fs.arrivalampm
       ,fs.departurehr
       ,fs.departuremin
-      ,fs.departureampm
+      ,fs.departureampm 
+    --  ,convert(varchar(8), ArrivalTime, 108)  ArrivalTime
+    ,ArrivalTime
+    --  ,convert(varchar(8), DepartureTime, 108) DepartureTime
+    ,DepartureTime
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
   inner join fleetownerstops fos 
@@ -7915,4 +7919,82 @@ INSERT INTO PnrToSeats
           (@Pnr_ID,@Pnr_No,@SeatNo,@VehicleNo,@Date,@SeatId)
 END
 
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE InsUpdDelFORVehicleSchedule
+	@VehicleId int,
+	@RouteId int,
+	@FleetOwnerId int,
+	@StopId int,
+	@ArrivalHr int = NULL,
+	@DepartureHr int = NULL,
+	@Duration decimal = NULL,
+	@ArrivalMin int = NULL,
+	@DepartureMin int = NULL,
+	@ArrivalAMPM varchar(2) = NULL,
+	@DepartureAMPM  varchar(2)= NULL,
+	@ArrivalTime datetime = NULL,
+	@DepartureTime datetime = NULL
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	
+	UPDATE [POSDashboard].[dbo].[FORouteFleetSchedule]
+   SET
+      [ArrivalHr] = @ArrivalHr
+      ,[DepartureHr] = @DepartureHr
+      ,[Duration] = @Duration
+      ,[ArrivalMin] = @ArrivalMin
+      ,[DepartureMin] = @DepartureMin
+      ,[ArrivalAMPM] = @ArrivalAMPM
+      ,[DepartureAMPM] = @DepartureAMPM
+      ,[ArrivalTime] = @ArrivalTime
+      ,[DepartureTime] = @DepartureTime
+ WHERE 
+  [VehicleId] = @VehicleId and [RouteId] = @RouteId and [StopId] = @StopId
+  
+  if @@rowcount = 0
+
+    -- Insert statements for procedure here
+	INSERT INTO [POSDashboard].[dbo].[FORouteFleetSchedule]
+           ([VehicleId]
+           ,[RouteId]
+           ,[FleetOwnerId]
+           ,[StopId]
+           ,[ArrivalHr]
+           ,[DepartureHr]
+           ,[Duration]
+           ,[ArrivalMin]
+           ,[DepartureMin]
+           ,[ArrivalAMPM]
+           ,[DepartureAMPM]
+           ,[ArrivalTime]
+           ,[DepartureTime])
+     VALUES
+           (@VehicleId
+           ,@RouteId
+           ,@FleetOwnerId
+           ,@StopId
+           ,@ArrivalHr
+           ,@DepartureHr
+           ,@Duration
+           ,@ArrivalMin
+           ,@DepartureMin
+           ,@ArrivalAMPM
+           ,@DepartureAMPM
+           ,@ArrivalTime
+           ,@DepartureTime)
+END
 GO

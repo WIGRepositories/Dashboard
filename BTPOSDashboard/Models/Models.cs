@@ -1424,6 +1424,23 @@ namespace BTPOSDashboardAPI.Models
 
     }
 
+    public class FORVehicleSchedule {
+        public int VehicleId { get; set; }
+        public int RouteId { get; set; }
+        public int StopId { get; set; }
+        public int FleetOwnerId { get; set; }
+        public int ArrivalHr { get; set; }
+        public int DepartureHr { get; set; }
+        public int ArrivalMin { get; set; }
+        public int DepartureMin { get; set; }
+        public DateTime? ArrivalTime { get; set; }
+        public DateTime? DepartureTime { get; set; }               
+        public string insupddelflag { get; set; }
+        public string arrMeridian { get; set; }
+        public string deptMeridian { get; set; }
+        public decimal duration { get; set; }
+    }
+
 
 }                     
         
