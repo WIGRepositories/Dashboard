@@ -4965,6 +4965,7 @@ SELECT fr.[Id]
       ,fr.[RouteId]
       ,fd.VehicleRegNo
       ,t.name vehicleType
+      ,t.Id as VehicleTypeId
       ,r.RouteName
       ,[EffectiveFrom]
       ,[EffectiveTill]
@@ -5128,10 +5129,10 @@ create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
            ,@Amount decimal
            ,@FareTypeId int
            ,@Active int
-           ,@FromDate datetime
-           ,@ToDate datetime
+            ,@FromDate datetime = null
+           ,@ToDate datetime = null
            ,@VehicleId int
-           ,@InsUpdDelFlag varchar(1)
+           --,@InsUpdDelFlag varchar(1)
 )                        
 as
 begin
@@ -5143,6 +5144,42 @@ where fromstopid = @FromStopId
 and tostopid = @ToStopid
 and routeId = @routeId
 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
+   SET [VehicleTypeId] = @VehicleTypeId
+      ,[Distance] = @Distance
+      ,[PerUnitPrice] = @PerUnitPrice
+      ,[Amount] = @Amount
+      ,[FareTypeId] = @FareTypeId
+      ,[Active] = @Active
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+      ,[VehicleId] = @VehicleId
+ WHERE [FORouteStopId] = @fsId
+ 
+ if @@rowcount  = 0 
+ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
+           ([FORouteStopId]
+           ,[VehicleTypeId]
+           ,[Distance]
+           ,[PerUnitPrice]
+           ,[Amount]
+           ,[FareTypeId]
+           ,[Active]
+           ,[FromDate]
+           ,[ToDate]
+           ,[VehicleId])
+     VALUES
+           (@fsId
+           ,@VehicleTypeId
+           ,@Distance
+           ,@PerUnitPrice
+           ,@Amount
+           ,@FareTypeId
+           ,@Active
+           ,@FromDate
+           ,@ToDate
+           ,@VehicleId)
+/*
 if @InsUpdDelFlag = 'I' 
 begin
 if @fsId = 0 
@@ -5185,10 +5222,10 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
  WHERE [FORouteStopId] = @fsId
 
 else
-if @InsUpdDelFlag = 'U' 
+if @InsUpdDelFlag = 'D' 
 DELETE FROM [POSDashboard].[dbo].[FleetOwnerRouteFare]
       WHERE [FORouteStopId] = @fsId
-
+*/
 
 end
 /****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/02/2016 17:11:26 ******/
@@ -6654,7 +6691,9 @@ as
 begin
 SELECT
       src.name Src
+      ,src.Id FromStopId
 	  ,dest.name Dest
+	  ,dest.Id ToStopId
 	  ,fs.Id [FORouteStopId]
       ,[VehicleTypeId]
       ,f.[Distance]

@@ -129,56 +129,42 @@ var ctrl = app.controller('mycntrlr', function ($scope, $http, $localStorage, $f
 
     }
 
-    $scope.saveFORoutes = function () {
+    $scope.SetPrice = function () {
+        for (var cnt = 0; cnt < $scope.FOVFareConfig.length; cnt++) {
+            angular.element('')
+        }
+    }
+    $scope.saveFORouteFare = function () {
 
-        //from the checked and unchecked array get the actuallly records to be saved
-        //from checked array take the records which have assigned = 0 as there are new assignements
-        //from unchecked array take assgined = 1 as these need to be removed
+        if ($scope.prc == null) return;
+        var FleetOwnerRouteFare = [];
+        var configFareList = $scope.FOVFareConfig;
+        for (var cnt = 0; cnt < configFareList.length; cnt++) {
 
-
-        var FleetOwnerRoutes = [];
-
-        for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
-
-            if ($scope.checkedArr[cnt].assigned == 0) {
-                var fr = {
-                    Id: -1,
-                    FleetOwnerId: $scope.s.Id,
-                    CompanyId: $scope.cmp.Id,
-                    RouteId: $scope.checkedArr[cnt].RouteId,
-                    From: $scope.checkedArr[cnt].FromDate,
-                    To: $scope.checkedArr[cnt].ToDate,
-                    Active: 1,
-                    insupddelflag: 'I'
-                }
-
-                FleetOwnerRoutes.push(fr);
-            }
+            var fr = {
+                RouteId         : $scope.r.RouteId,                    
+                VehicleTypeId   : $scope.v.VehicleTypeId,
+                FromStopId      : configFareList[cnt].FromStopId,
+                ToStopId        : configFareList[cnt].ToStopId,
+                Distance        :configFareList[cnt].Distance,
+                PerUnitPrice    : $scope.puprc,
+                Amount          : ($scope.prc == 1) ? eval($scope.puprc) * eval(configFareList[cnt].Distance) : configFareList[cnt].Amount,
+                FareTypeId      :configFareList[cnt].FareTypeId,
+                VehicleId       : $scope.v.Id,
+                Active          :1,      
+                FromDate        :configFareList[cnt].FromDate,
+                ToDate          :configFareList[cnt].ToDate
         }
 
-        for (var cnt = 0; cnt < $scope.uncheckedArr.length; cnt++) {
-
-            if ($scope.uncheckedArr[cnt].assigned == 1) {
-                var fr = {
-                    Id: -1,
-                    FleetOwnerId: $scope.s.Id,
-                    CompanyId: $scope.cmp.Id,
-                    RouteId: $scope.uncheckedArr[cnt].RouteId,
-                    From: $scope.uncheckedArr[cnt].FromDate,
-                    To: $scope.uncheckedArr[cnt].ToDate,
-                    Active: 1,
-                    insupddelflag: 'D'
-                }
-
-                FleetOwnerRoutes.push(fr);
-            }
-        }
+                FleetOwnerRouteFare.push(fr);
+            
+        }        
 
         $http({
-            url: 'http://localhost:1476/api/FleetOwnerRoute/saveFleetOwnerRoute',
+            url: 'http://localhost:1476/api/FleetOwnerRouteFare/saveFleetOwnerRoutefare',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            data: FleetOwnerRoutes,
+            data: FleetOwnerRouteFare,
 
         }).success(function (data, status, headers, config) {
             alert('Fleet owner routes successfully');
@@ -186,47 +172,6 @@ var ctrl = app.controller('mycntrlr', function ($scope, $http, $localStorage, $f
         }).error(function (ata, status, headers, config) {
             alert(ata);
         });
-    };
-
-
-    $scope.toggle = function (item) {
-        var idx = $scope.checkedArr.indexOf(item);
-        if (idx > -1) {
-            $scope.checkedArr.splice(idx, 1);
-        }
-        else {
-            $scope.checkedArr.push(item);
-        }
-
-        var idx = $scope.uncheckedArr.indexOf(item);
-        if (idx > -1) {
-            $scope.uncheckedArr.splice(idx, 1);
-        }
-        else {
-            $scope.uncheckedArr.push(item);
-        }
-    };
-
-
-    $scope.toggleAll = function () {
-        if ($scope.checkedArr.length === $scope.FORoutes.length) {
-            $scope.uncheckedArr = $scope.checkedArr.slice(0);
-            $scope.checkedArr = [];
-
-        } else if ($scope.checkedArr.length === 0 || $scope.FORoutes.length > 0) {
-            $scope.checkedArr = $scope.FORoutes.slice(0);
-            $scope.uncheckedArr = [];
-        }
-
-    };
-
-    $scope.exists = function (item, list) {
-        return list.indexOf(item) > -1;
-    };
-
-
-    $scope.isChecked = function () {
-        return $scope.checkedArr.length === $scope.FORoutes.length;
     };
 
     $scope.$on('ngRepeatFinished', function () {
