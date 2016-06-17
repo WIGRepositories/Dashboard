@@ -152,49 +152,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     }
 
     $scope.save = function () {
-        var scheduleList = $scope.RouteVehicleSchedule;
-       
-        var scheduleListArr = [];
-        
-        for (var cnt = 0; cnt < scheduleList.length; cnt++) {
-
-            var arrT = scheduleList[cnt].ArrivalTime;
-            var depT = scheduleList[cnt].DepartureTime;
-
-            if (arrT == null && depT == null) continue;
-
-            var fs = {
-                RouteId: $scope.r.RouteId,
-                VehicleId: $scope.v.Id,
-                FleetOwnerId: $scope.s.Id,                
-                StopId: scheduleList[cnt].stopid
-                ,ArrivalHr: (arrT) ? arrT.getHours() : ""
-                , DepartureHr: (depT) ? depT.getHours() : ""
-                //,Duration: arrT - depT
-                , ArrivalMin: (arrT) ? arrT.getMinutes() : ""
-                , DepartureMin: (depT) ? depT.getMinutes() : ""
-              //  ,ArrivalAMPM: arrT.getMeridian()
-              //  ,DepartureAMPM:depT.getMeridian()
-                ,ArrivalTime: (arrT) ?new Date(arrT): ""
-                ,DepartureTime: (depT) ? new Date(depT) : "" 
-            }
-
-            scheduleListArr.push(fs);
-
-        }
-
-        $http({
-            url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFleetOwnerRoutefare',
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            data: scheduleListArr,
-
-        }).success(function (data, status, headers, config) {
-            alert('Fleet owner routes successfully');
-            $scope.GetVehicleSchedule();
-        }).error(function (ata, status, headers, config) {
-            alert(ata);
-        });
+        var test = $scope.RouteVehicleSchedule;
     }
 
     $scope.test = function (a) {

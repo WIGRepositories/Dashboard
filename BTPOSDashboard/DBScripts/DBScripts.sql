@@ -7401,11 +7401,7 @@ SELECT distinct
       ,fs.arrivalampm
       ,fs.departurehr
       ,fs.departuremin
-      ,fs.departureampm 
-    --  ,convert(varchar(8), ArrivalTime, 108)  ArrivalTime
-    ,ArrivalTime
-    --  ,convert(varchar(8), DepartureTime, 108) DepartureTime
-    ,DepartureTime
+      ,fs.departureampm
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
   inner join fleetownerstops fos 
@@ -7921,80 +7917,171 @@ END
 
 GO
 
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRequest](
+	[CurrentSystemInUse] [varchar](50) NOT NULL,
+	[howdidyouhearaboutus] [varchar](50) NOT NULL,
+	[SentNewProductsEmails] [bit] NOT NULL,
+	[Agreetotermsandconditions] [bit] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[FleetOwnerRequestDetails]    Script Date: 06/16/2016 18:21:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRequestDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[PhoneNo] [varchar](50) NOT NULL,
+	[EmailAddress] [varchar](50) NOT NULL,
+	[CompanyName] [varchar](20) NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[Title] [varchar](20) NOT NULL,
+	[FleetSize] [int] NOT NULL,
+	[CompanyEmployeSize] [int] NOT NULL,
+	[Gender] [int] NOT NULL,
+	[Address] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
 
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- =============================================
--- Author:		<Author,,Name>
--- Create date: <Create Date,,>
--- Description:	<Description,,>
--- =============================================
-CREATE PROCEDURE InsUpdDelFORVehicleSchedule
-	@VehicleId int,
-	@RouteId int,
-	@FleetOwnerId int,
-	@StopId int,
-	@ArrivalHr int = NULL,
-	@DepartureHr int = NULL,
-	@Duration decimal = NULL,
-	@ArrivalMin int = NULL,
-	@DepartureMin int = NULL,
-	@ArrivalAMPM varchar(2) = NULL,
-	@DepartureAMPM  varchar(2)= NULL,
-	@ArrivalTime datetime = NULL,
-	@DepartureTime datetime = NULL
+ALTER PROCEDURE[dbo].[InSupdFleetOwnerRequest](
+		  
+          @CurrentSystemInUse varchar(50),
+          @SentNewProductsEmails bit,
+      
+          @howdidyouhearaboutus varchar(50),
+          @Agreetotermsandconditions bit,
+           @insupdflag varchar(20)
+           )
+ 
 AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-	
-	UPDATE [POSDashboard].[dbo].[FORouteFleetSchedule]
-   SET
-      [ArrivalHr] = @ArrivalHr
-      ,[DepartureHr] = @DepartureHr
-      ,[Duration] = @Duration
-      ,[ArrivalMin] = @ArrivalMin
-      ,[DepartureMin] = @DepartureMin
-      ,[ArrivalAMPM] = @ArrivalAMPM
-      ,[DepartureAMPM] = @DepartureAMPM
-      ,[ArrivalTime] = @ArrivalTime
-      ,[DepartureTime] = @DepartureTime
- WHERE 
-  [VehicleId] = @VehicleId and [RouteId] = @RouteId and [StopId] = @StopId
-  
-  if @@rowcount = 0
-
-    -- Insert statements for procedure here
-	INSERT INTO [POSDashboard].[dbo].[FORouteFleetSchedule]
-           ([VehicleId]
-           ,[RouteId]
-           ,[FleetOwnerId]
-           ,[StopId]
-           ,[ArrivalHr]
-           ,[DepartureHr]
-           ,[Duration]
-           ,[ArrivalMin]
-           ,[DepartureMin]
-           ,[ArrivalAMPM]
-           ,[DepartureAMPM]
-           ,[ArrivalTime]
-           ,[DepartureTime])
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[FleetOwnerRequest]
+          
+            ([CurrentSystemInUse]
+            ,[SentNewProductsEmails] 
+             
+           ,[howdidyouhearaboutus] 
+          ,[Agreetotermsandconditions]
+               )
      VALUES
-           (@VehicleId
-           ,@RouteId
-           ,@FleetOwnerId
-           ,@StopId
-           ,@ArrivalHr
-           ,@DepartureHr
-           ,@Duration
-           ,@ArrivalMin
-           ,@DepartureMin
-           ,@ArrivalAMPM
-           ,@DepartureAMPM
-           ,@ArrivalTime
-           ,@DepartureTime)
+          (
+           @CurrentSystemInUse
+       , @SentNewProductsEmails 
+        
+         ,@howdidyouhearaboutus
+         ,@Agreetotermsandconditions
+          )
+          
+  
+          else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRequest]
+   SET
+      
+     [CurrentSystemInUse] = @CurrentSystemInUse
+     ,[SentNewProductsEmails]=@SentNewProductsEmails 
+      
+     ,[howdidyouhearaboutus]=@howdidyouhearaboutus
+     ,[Agreetotermsandconditions]=@Agreetotermsandconditions
+      
+
 END
 GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
+		   @FirstName varchar(50),   
+           @LastName varchar(50),
+           @PhoneNo  varchar(50),
+           @EmailAddress varchar(20),
+           @CompanyName varchar(20),
+           @Description varchar(50) ,
+           @Title varchar(20),
+           @CompanyEmployeSize int,
+           @FleetSize int,         
+           @Gender varchar(20),      
+           @Address varchar(50),
+           @insupdflag varchar(10)
+           )
+ 
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[FleetOwnerRequestDetails]
+           ([FirstName]
+           ,[LastName]
+           ,[PhoneNo]
+           ,[EmailAddress]
+           ,[CompanyName]
+           ,[Description]
+           ,[Title]
+           ,[CompanyEmployeSize]
+             ,[FleetSize]      
+              ,[Gender]        
+              ,[Address])
+     VALUES
+          (@FirstName    
+           ,@LastName
+          , @PhoneNo
+           ,@EmailAddress
+           ,@CompanyName
+           ,@Description 
+           ,@Title
+           ,@CompanyEmployeSize 
+           ,@FleetSize     
+          , @Gender   
+          , @Address)
+          
+  
+          else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
+   SET
+      [FirstName] = @FirstName
+      ,[LastName] = @LastName
+      ,[PhoneNo] = @PhoneNo
+      ,[EmailAddress] = @EmailAddress
+      ,[CompanyName] = @CompanyName
+      ,[Description] = @Description
+      ,[Title] = @Title
+      ,[CompanyEmployeSize] = @CompanyEmployeSize 
+      ,[FleetSize] = @FleetSize  
+       ,[Gender] = @Gender 
+       ,[Address]= @Address
+
+END
