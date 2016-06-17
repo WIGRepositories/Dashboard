@@ -41,7 +41,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var vc = {
             needfleetowners: '1',
-            cmpId: $scope.cmp.Id
+            cmpId: cmpId
         };
 
         var req = {
@@ -143,14 +143,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
       
                 var newpos = {
                     Id: Group.Id,
-                    CompanyId: $scope.cmp.Id,
-                    GroupId: Group.GroupId,
+                    CompanyId: ($scope.cmp1 ==null) ? Group.CompanyId : $scope.cmp1.Id,                    
                     IMEI: Group.IMEI,
                     POSID: Group.POSID,
-                    StatusId: Group.StatusId,
+                    StatusId: Group.Status.Id,
                     ipconfig: Group.ipconfig,
                     active: 1,//Group.ipconfig,
-                    fleetownerid: $scope.s.Id,
+                    fleetownerid: ($scope.s1 == null) ? null: $scope.s1.Id,
                     insupdflag: flag
                 }
                 btposlist.push(newpos);
@@ -175,9 +174,42 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=1').then(function (res, data) {
             $scope.Types = res.data;
         });
+        //$scope.cmp1.Id = grp.CompanyId;
+        $scope.GetPopupFleetOwners(grp);
     };
 
     $scope.clearGroup = function () {
         $scope.currGroup = null;
-    }   
+    }
+
+    $scope.GetPopupFleetOwners = function (g) {
+        var cId = g.CompanyId;
+        if (cId == null) {
+            $scope.cmpdata1 = null;           
+            return;
+        }
+        var vc = {
+            needfleetowners: '1',
+            cmpId: cId
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.cmpdata1 = res.data;
+        });
+
+        if (g.CompanyId == $scope.currGroup.CompanyId)
+            s1.value = $scope.currGroup.fleetownerid;
+    }
+
+   
 });
