@@ -11,15 +11,7 @@ var ctrl = app.controller('Myctrlr', function ($scope, $http, $localStorage) {
     });
 
 
-    $scope.gridOptions = {
-        data: 'sampledata',
-        columnDefs: [
-        { field: 'name' },
-        { field: 'gender' },
-        { field: 'company' },
-        { field: 'click', cellTemplate: '<button class="btn primary" ng-click="grid.appScope.sampledetails()">Click Me</button>' }
-        ]
-    };
+    
 
 });
    

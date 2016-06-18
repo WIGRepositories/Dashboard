@@ -102,6 +102,14 @@ namespace BTPOSDashboardAPI.Controllers
                     fo.Value = n.fleetownerid;
                     cmd.Parameters.Add(fo);
 
+                    SqlParameter fo1 = new SqlParameter("@pageno", SqlDbType.Int);
+                    fo1.Value = n.fleetownerid;
+                    cmd.Parameters.Add(fo1);
+
+                    SqlParameter fo2 = new SqlParameter("@pagesize", SqlDbType.Int);
+                    fo2.Value = n.fleetownerid;
+                    cmd.Parameters.Add(fo2);
+
                     SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                     insupdflag.Value = n.insupdflag;
                     cmd.Parameters.Add(insupdflag);

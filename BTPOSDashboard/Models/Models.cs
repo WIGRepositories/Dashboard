@@ -34,6 +34,7 @@ namespace BTPOSDashboardAPI.Models
         public string Status { get; set; }
         public string IMEI { get; set; }
         public string Location { get; set; }
+
     }
     public class btposgroups
     {

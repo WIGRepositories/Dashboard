@@ -1147,6 +1147,7 @@
     <Content Include="UI\vendors\dropzone\js\dropzone-amd-module.min.js" />
     <Content Include="UI\vendors\dropzone\js\dropzone.js" />
     <Content Include="UI\vendors\dropzone\js\dropzone.min.js" />
+    <Content Include="UI\vendors\exx.html" />
     <Content Include="UI\vendors\flot-chart\examples\ajax\index.html" />
     <Content Include="UI\vendors\flot-chart\examples\annotating\index.html" />
     <Content Include="UI\vendors\flot-chart\examples\axes-interacting\index.html" />

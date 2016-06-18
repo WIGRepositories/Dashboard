@@ -339,21 +339,39 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
-                                                            <div class="col-md-5">
-                                                                Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()">
-    <option value="">All</option>
-</select>
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()">
+                                                        <div class="col-md-5">
+                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()">
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()">
 
-    <option value="">All</option>
-</select>
-                                                            </div>
-                                                           
-                                                       
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xs-4">
+                                                            <label for="search">Page Number:</label>
+                                                            <input type="number" min="1" max="10" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize">
+                                                        </div>
+
+                                                        <div class="col-xs-4">
+                                                            <label for="search">Page Size:</label>
+                                                            <input type="number" min="1" max="500" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize1">
+                                                        </div>
+                                                        <div style="height: 6%;">
+                                                            Page Size:
+                                                            <select onchange="onPageSizeChanged(this.value)">
+                                                                <option value="10">10</option>
+                                                                <option value="100">100</option>
+                                                                <option value="500" selected>500</option>
+                                                              
+                                                            </select>
+                                                        </div>
+                                                        <div style="height: 94%;" id="myGrid" class="ag-fresh"></div>
+
                                                         <div class="actions">
-                                                            <a href="AddNewBTPOSDetails.html">  <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button></a>
+                                                            <a href="AddNewBTPOSDetails.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button></a>
 
                                                         </div>
 
@@ -460,7 +478,7 @@
 
                                                                                             <option value="{{currGroup.StatusId}}">{{currGroup.Status}}</option>
                                                                                         </select>
-</div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -526,13 +544,18 @@
                                                         </tbody>
 
                                                     </table>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
 
-                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-                                                    </div>
-
+                                                   
                                                 </div>
+                                            </div>
+                                            
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+
+                                                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                            </div>
+
+                                        </div>
                                             </div>
                                         </div>
                                     </div>
@@ -540,17 +563,20 @@
                                 </div>
                             </div>
                         </div>
+                <div id="footer">
+                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                </div>
                     </div>
                     <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
+                   
                     <!--END FOOTER-->
                 </div>
                 <!--END PAGE WRAPPER-->
             </div>
-        </div>
-    </div>
+    
+   
+  
+   
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -571,6 +597,10 @@
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <!--LOADING SCRIPTS FOR PAGE-->
     <script src="js/table-action.js"></script>
+    <!-- you don't need ignore=notused in your code, this is just here to trick the cache -->
+    <script src="../dist/ag-grid.js?ignore=notused19"></script>
+    <script src="paging.js"></script>
+
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>

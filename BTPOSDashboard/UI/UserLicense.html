@@ -469,44 +469,9 @@
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <script type="text/javascript">
-    var myApp = angular.module('sampleapp', ['ui.grid', 'ui.grid.selection', 'ui.grid.exporter']);
-    myApp.controller("appcontroller", function ($scope, $http) {
-        $scope.gridOptions = {
-            data: 'sampledata',
-            columnDefs: [
-            { field: 'name' },
-            { field: 'gender' },
-            { field: 'company' },
-            { field: 'click', cellTemplate: '<button class="btn primary" ng-click="grid.appScope.sampledetails()">Click Me</button>' }
-            ]
-        };
-        $scope.sampledata = { "data": [] };
-        $http.get('https://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/data/100.json')
-        .success(function (data) {
-            $scope.sampledata = data;
-        });
-        $scope.sampledetails = function () {
-            alert('Hi Click is working');
-            return false;
-        };
-    });
+   
     </script>
-    <style type="text/css">
-        .grid {
-            width: 500px;
-            height: 400px;
-        }
-
-        .nodatatxt {
-            position: absolute;
-            top: 80px;
-            opacity: 0.25;
-            font-size: 1.5em;
-            width: 100%;
-            text-align: center;
-            z-index: 1000;
-        }
-    </style>
+  
     <!--LOADING SCRIPTS FOR PAGE-->
     <script src="js/table-action.js"></script>
     <!--CORE JAVASCRIPT-->
