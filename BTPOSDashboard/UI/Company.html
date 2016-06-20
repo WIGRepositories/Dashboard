@@ -8,7 +8,7 @@
     <!--Loading bootstrap css-->    
     
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -340,11 +340,9 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
-                                                        <div class="actions">
-                                                            <a href="#">
+                                                        <div class="actions">                                                            
                                                                 <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Company</button>
-                                                            </a>
-                                                        </div>
+                                                            </div>
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -408,7 +406,7 @@
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-true-value="1" ng-false-value="0" ng-checked="{{currGroup.active==1}}" checked/></div>
+                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-true-value="1" ng-false-value="0" ng-checked="{{currGroup.active==1}}" checked /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -535,23 +533,25 @@
             </div>
         </div>
 
-        <script type="text/ng-template" id="myModalContent.html">
-            <div class="modal-header">
-                <h3 class="modal-title">Save confirmation!</h3>
-            </div>
-            <div class="modal-body">
-                <!--<ul>
+        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+           
+                <div class="modal-header">
+                    <h3 class="modal-title">Save confirmation!</h3>
+                </div>
+                <div class="modal-body">
+                    <!--<ul>
                     <li ng-repeat="item in items">
                         <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
                     </li>
                 </ul>
                 Selected: <b>{{ selected.item }}</b>-->
-                {{mssg}}
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
+                    {{mssg}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+           
         </script>
     </div>
     <script src="js/jquery-1.10.2.min.js"></script>

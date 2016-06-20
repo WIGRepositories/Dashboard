@@ -115,7 +115,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
+            controller: 'ModalInstanceCtrl',            
             resolve: {
                 mssg: function () {
                     return message;
