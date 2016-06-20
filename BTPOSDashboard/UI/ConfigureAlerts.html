@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Action Tables | Tables</title>
     <meta charset="utf-8">
@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetAlertsConfiguration();">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetRoles();" ng-model="Types">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -354,14 +354,14 @@
                                                     <div class="row mbm">
                                                         <div class="col-md-5">
                                                             Roles:<select ng-options="r.Name for r in GetRoles track by r.Names" ng-model="r" ng-change="GetAlertsConfiguration();">
-                                                           <option value="">All</option>
-                                                           </select>
+                                                            <option value="">All</option>
+                                                            </select>
                                                         </div>
-                                                        <!--<div class="col-md-5">
-                                                             Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
-                                                              <option value="">All</option>
-                                                              </select>
-                                                         </div>-->                                                        
+                                                       <!--<div class="col-md-5">
+                                                            Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>-->
 
                                                     </div>
                                                 </div>
@@ -388,7 +388,7 @@
                                                             <td><input type="checkBox" ng-checked="T.Active"/></td>
                                                             <!--<td>{{Alert Item}}</td>-->
                                                            <td>{{A.AlertType}}</td>
-                                                          
+
                                                         </tr>
                                                     </tbody>
 
@@ -458,6 +458,6 @@
         <script src="js/BTPOSDetails.js"></script>
         <script src="js/ngStorage.js"></script>
         <!--<script src="js/Types.js"></script>-->
-        <script src="js/AlertsConfiguration.js"></script>
+    <script src="js/AlertsConfiguration.js"></script>
 </body>
 </html>

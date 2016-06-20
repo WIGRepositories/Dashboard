@@ -270,7 +270,7 @@ THE SOFTWARE.*/
 					excelFile += "</xml>";
 					excelFile += "<![endif]-->";
 					excelFile += "</head>";
-					excelFile += "<body>";
+					excelFile += "<body ng-app="myApp" ng-controller="myCtrl" >";
 					excelFile += excel;
 					excelFile += "</body>";
 					excelFile += "</html>";

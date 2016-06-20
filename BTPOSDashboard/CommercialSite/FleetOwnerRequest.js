@@ -1,7 +1,7 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', [])
-var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
+var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.GetUsers = function () {
         $http.get('http://localhost:1476/api/CreateFleetOwner/NewFleet').then(function (res, data) {
             $scope.User = res.data;

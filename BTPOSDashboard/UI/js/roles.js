@@ -1,6 +1,6 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
 
     $scope.GetRoles = function()

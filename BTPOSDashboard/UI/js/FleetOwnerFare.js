@@ -1,7 +1,7 @@
 ﻿// JavaScript source code
 var myapp1 = angular.module('myApp', [])
 
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 
     $scope.routefares =
         [

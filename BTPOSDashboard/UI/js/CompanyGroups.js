@@ -1,7 +1,5 @@
-// JavaScript source code
-// JavaScript source code
-var app = angular.module('myApp', ['ngStorage'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var app = angular.module('myApp', ['ngStorage','ui.bootstrap'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname;
     $scope.GetCompanys = function () {
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
@@ -15,15 +13,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             alert('Please enter CompanyName.');
             return;
         }
-        if (Group.Name == null) {
+        if (Group.Name == null || Group.Name == "") {
             alert('Please enter CompanyName.');
             return;
-        }
-        if (flag == null) {
-            alert('Please enter code.');
-            return;
-        }
-        if (Group.code == null) {
+        }        
+        if (Group.code == null || Group.code == "") {
             alert('Please enter code.');
             return;
         }
@@ -35,7 +29,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             descr: Group.desc,
             active: (Group.active==true)?1:0,
             insupdflag:flag 
-
         }
         
 
@@ -45,8 +38,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: newCmp
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
+
+            $scope.showDialog("Saved successfully!");
+            
             $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
 
      
@@ -55,6 +56,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.saveCmpChanges = function (Group, flag) {
 
+        if (Group == null) {
+            alert('Please enter CompanyName.');
+            return;
+        }
+        if (Group.Name == null || Group.Name == "") {
+            alert('Please enter CompanyName.');
+            return;
+        }
+        if (Group.code == null || Group.code == "") {
+            alert('Please enter code.');
+            return;
+        }
         var Group = {
             Id: Group.Id,
             Name: Group.Name,
@@ -73,10 +86,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: Group
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
+
+            $scope.showDialog("Saved successfully!");
+            
+        }
+        , function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";            
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;            
+            $scope.showDialog(errmssg);
+           
         });
-
-
+        $scope.GetCompanys();
         $scope.currGroup = null;
     };
       
@@ -85,7 +106,33 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = grp;
     };
 
-    $scope.clearGroup = function () {
+    $scope.clearGroup = function () {        
         $scope.currGroup = null;
+    };
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',            
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+});
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
     };
 });

@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Home | Configuration | Types | Add New Type</title>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-model="TypeGroups">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-model="TypeGroups">
     <div>
 
 
@@ -501,7 +501,7 @@
 
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button  class="btn btn-primary" ng-click="saveNew(TypeGroups);">Save</button>
+                                                                        <button class="btn btn-primary" type="button" ng-click="saveNew(TypeGroups);">Save</button>
 
                                                                         <a href="TypeGroups.html" class="btn btn-green">Cancel</a>
 </div>

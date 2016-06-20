@@ -2099,6 +2099,8 @@ if @insupdflag = 'I'
 	       -- exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
 		   
 			end
+			else
+			RAISERROR ('Company already exists',16,1); 
 		end
 else
 
@@ -2109,19 +2111,17 @@ else
 			    
 				if @cnt = 0 
 				begin
-				update Company
-				set Name = @Name, code = @code, [desc] = @desc, active = @active
-				where Id = @Id
-				
-				
-				--insert into edit history
-			exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
-		                     
-		           
-			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
-			exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-			exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-			exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+					update Company
+					set Name = @Name, code = @code, [desc] = @desc, active = @active
+					where Id = @Id						
+						
+						--insert into edit history
+					exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
+				           
+					exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+					exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+					exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+					exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 				
 				end
 				else

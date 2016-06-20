@@ -1,6 +1,6 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', [])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 
     $scope.GetCategories = function () {
         $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Home | Configuration | Types</title>
     <meta charset="utf-8">
@@ -31,7 +31,7 @@
     <!-- Custom Fonts -->
     <!--<link rel="stylesheet" href="css/styles.css" type="text/css">-->
 </head>
-<body ng-init="GetVehicleConfig();" ng-model="initdata">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetVehicleConfig();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
