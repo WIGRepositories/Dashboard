@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Home | Users | Users | Add New Inventory</title>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetSubCategories();" ng-model="Item">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetSubCategories();" ng-model="Item">
     <div>
 
         <!--BEGIN THEME SETTINGS-->

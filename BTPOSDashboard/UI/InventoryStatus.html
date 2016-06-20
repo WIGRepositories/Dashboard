@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en">
 <head>
     <title>Inventory Status</title>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetInventory();" ng-model="Inventory">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetInventory();" ng-model="Inventory">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->

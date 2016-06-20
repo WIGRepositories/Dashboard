@@ -1435,7 +1435,7 @@ function getNgAttribute(element, ngAttr) {
  *
  * Use this directive to **auto-bootstrap** an AngularJS application. The `ngApp` directive
  * designates the **root element** of the application and is typically placed near the root element
- * of the page - e.g. on the `<body>` or `<html>` tags.
+ * of the page - e.g. on the `<body ng-app="myApp" ng-controller="myCtrl" >` or `<html>` tags.
  *
  * Only one AngularJS application can be auto-bootstrapped per HTML document. The first `ngApp`
  * found in the document will be used to define the root element to auto-bootstrap as an
@@ -1593,7 +1593,7 @@ function angularInit(element, bootstrap) {
  * ```html
  * <!doctype html>
  * <html>
- * <body>
+ * <body ng-app="myApp" ng-controller="myCtrl" >
  * <div ng-controller="WelcomeController">
  *   {{greeting}}
  * </div>
@@ -5134,7 +5134,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @description Associates the provided element with a host parent element to allow the element to be animated even if it exists
        *    outside of the DOM structure of the Angular application. By doing so, any animation triggered via `$animate` can be issued on the
        *    element despite being outside the realm of the application or within another application. Say for example if the application
-       *    was bootstrapped on an element that is somewhere inside of the `<body>` tag, but we wanted to allow for an element to be situated
+       *    was bootstrapped on an element that is somewhere inside of the `<body ng-app="myApp" ng-controller="myCtrl" >` tag, but we wanted to allow for an element to be situated
        *    as a direct child of `document.body`, then this can be achieved by pinning the element via `$animate.pin(element)`. Keep in mind
        *    that calling `$animate.pin(element, parentElement)` will not actually insert into the DOM anywhere; it will just create the association.
        *
@@ -22998,7 +22998,7 @@ var ngClassEvenDirective = classDirective('Even', 1);
  * displayed by the browser in its raw (uncompiled) form while your application is loading. Use this
  * directive to avoid the undesirable flicker effect caused by the html template display.
  *
- * The directive can be applied to the `<body>` element, but the preferred usage is to apply
+ * The directive can be applied to the `<body ng-app="myApp" ng-controller="myCtrl" >` element, but the preferred usage is to apply
  * multiple `ngCloak` directives to small portions of the page to permit progressive rendering
  * of the browser view.
  *
@@ -23335,22 +23335,22 @@ var ngControllerDirective = [function() {
  *
  *
  * * No declaration means that Angular will assume that you can do inline styles, but it will do
- * a runtime check for unsafe-eval. E.g. `<body>`. This is backwardly compatible with previous versions
+ * a runtime check for unsafe-eval. E.g. `<body ng-app="myApp" ng-controller="myCtrl" >`. This is backwardly compatible with previous versions
  * of Angular.
  *
  * * A simple `ng-csp` (or `data-ng-csp`) attribute will tell Angular to deactivate both inline
- * styles and unsafe eval. E.g. `<body ng-csp>`. This is backwardly compatible with previous versions
+ * styles and unsafe eval. E.g. `<body ng-app="myApp" ng-controller="myCtrl"  ng-csp>`. This is backwardly compatible with previous versions
  * of Angular.
  *
  * * Specifying only `no-unsafe-eval` tells Angular that we must not use eval, but that we can inject
- * inline styles. E.g. `<body ng-csp="no-unsafe-eval">`.
+ * inline styles. E.g. `<body ng-app="myApp" ng-controller="myCtrl"  ng-csp="no-unsafe-eval">`.
  *
  * * Specifying only `no-inline-style` tells Angular that we must not inject styles, but that we can
- * run eval - no automcatic check for unsafe eval will occur. E.g. `<body ng-csp="no-inline-style">`
+ * run eval - no automcatic check for unsafe eval will occur. E.g. `<body ng-app="myApp" ng-controller="myCtrl"  ng-csp="no-inline-style">`
  *
  * * Specifying both `no-unsafe-eval` and `no-inline-style` tells Angular that we must not inject
  * styles nor use eval, which is the same as an empty: ng-csp.
- * E.g.`<body ng-csp="no-inline-style;no-unsafe-eval">`
+ * E.g.`<body ng-app="myApp" ng-controller="myCtrl"  ng-csp="no-inline-style;no-unsafe-eval">`
  *
  * @example
  * This example shows how to apply the `ngCsp` directive to the `html` tag.

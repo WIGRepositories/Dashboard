@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en">
 <head>
     <title>Home | BT POS | Vehicle Details</title>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetCompanies();" ng-model="FleetBtposList">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();" ng-model="FleetBtposList">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->

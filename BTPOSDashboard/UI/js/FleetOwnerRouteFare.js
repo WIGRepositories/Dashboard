@@ -14,7 +14,7 @@ app.directive('ngOnFinishRender', function ($timeout) {
     };
 });
 
-var ctrl = app.controller('mycntrlr', function ($scope, $http, $localStorage, $filter) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
     $scope.uname = $localStorage.uname;
 
 
