@@ -2099,8 +2099,6 @@ if @insupdflag = 'I'
 	       -- exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
 		   
 			end
-			else
-			RAISERROR ('Company already exists',16,1); 
 		end
 else
 
@@ -2115,9 +2113,11 @@ else
 					set Name = @Name, code = @code, [desc] = @desc, active = @active
 					where Id = @Id						
 						
+				
 						--insert into edit history
 					exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
 				           
+		           
 					exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
 					exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
 					exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
@@ -2485,12 +2485,12 @@ SELECT b.[Id]
       ,[ipconfig]
       ,b.[active]
       ,u.FirstName + ' '+ u.LastName as fleetowner
-      ,f.Id as fleetownerid
+      ,u.Id as fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   left outer join Types t on t.Id = statusid
   left outer join Company c on c.Id = CompanyId
   left outer join fleetowner f on f.id = FleetOwnerId 
-  left outer join Users u on u.Id = f.userId 
+  left outer join Users u on u.Id = f.Id 
 where (c.Id = @cmpId or @cmpId = -1)
 and(f.Id = @fleetownerId or @fleetownerId = -1)
   
@@ -4965,7 +4965,6 @@ SELECT fr.[Id]
       ,fr.[RouteId]
       ,fd.VehicleRegNo
       ,t.name vehicleType
-      ,t.Id as VehicleTypeId
       ,r.RouteName
       ,[EffectiveFrom]
       ,[EffectiveTill]
@@ -5129,10 +5128,10 @@ create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
            ,@Amount decimal
            ,@FareTypeId int
            ,@Active int
-            ,@FromDate datetime = null
-           ,@ToDate datetime = null
+           ,@FromDate datetime
+           ,@ToDate datetime
            ,@VehicleId int
-           --,@InsUpdDelFlag varchar(1)
+           ,@InsUpdDelFlag varchar(1)
 )                        
 as
 begin
@@ -5144,42 +5143,6 @@ where fromstopid = @FromStopId
 and tostopid = @ToStopid
 and routeId = @routeId
 
-UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
-   SET [VehicleTypeId] = @VehicleTypeId
-      ,[Distance] = @Distance
-      ,[PerUnitPrice] = @PerUnitPrice
-      ,[Amount] = @Amount
-      ,[FareTypeId] = @FareTypeId
-      ,[Active] = @Active
-      ,[FromDate] = @FromDate
-      ,[ToDate] = @ToDate
-      ,[VehicleId] = @VehicleId
- WHERE [FORouteStopId] = @fsId
- 
- if @@rowcount  = 0 
- INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
-           ([FORouteStopId]
-           ,[VehicleTypeId]
-           ,[Distance]
-           ,[PerUnitPrice]
-           ,[Amount]
-           ,[FareTypeId]
-           ,[Active]
-           ,[FromDate]
-           ,[ToDate]
-           ,[VehicleId])
-     VALUES
-           (@fsId
-           ,@VehicleTypeId
-           ,@Distance
-           ,@PerUnitPrice
-           ,@Amount
-           ,@FareTypeId
-           ,@Active
-           ,@FromDate
-           ,@ToDate
-           ,@VehicleId)
-/*
 if @InsUpdDelFlag = 'I' 
 begin
 if @fsId = 0 
@@ -5222,10 +5185,10 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
  WHERE [FORouteStopId] = @fsId
 
 else
-if @InsUpdDelFlag = 'D' 
+if @InsUpdDelFlag = 'U' 
 DELETE FROM [POSDashboard].[dbo].[FleetOwnerRouteFare]
       WHERE [FORouteStopId] = @fsId
-*/
+
 
 end
 /****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/02/2016 17:11:26 ******/
@@ -6686,9 +6649,7 @@ as
 begin
 SELECT
       src.name Src
-      ,src.Id FromStopId
 	  ,dest.name Dest
-	  ,dest.Id ToStopId
 	  ,fs.Id [FORouteStopId]
       ,[VehicleTypeId]
       ,f.[Distance]
@@ -7917,177 +7878,6 @@ END
 
 GO
 
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[FleetOwnerRequest](
-	[CurrentSystemInUse] [varchar](50) NOT NULL,
-	[howdidyouhearaboutus] [varchar](50) NOT NULL,
-	[SentNewProductsEmails] [bit] NOT NULL,
-	[Agreetotermsandconditions] [bit] NOT NULL
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-USE [POSDashboard]
-GO
-
-/****** Object:  Table [dbo].[FleetOwnerRequestDetails]    Script Date: 06/16/2016 18:21:09 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[FleetOwnerRequestDetails](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[FirstName] [varchar](50) NOT NULL,
-	[LastName] [varchar](50) NOT NULL,
-	[PhoneNo] [varchar](50) NOT NULL,
-	[EmailAddress] [varchar](50) NOT NULL,
-	[CompanyName] [varchar](20) NOT NULL,
-	[Description] [varchar](50) NOT NULL,
-	[Title] [varchar](20) NOT NULL,
-	[FleetSize] [int] NOT NULL,
-	[CompanyEmployeSize] [int] NOT NULL,
-	[Gender] [int] NOT NULL,
-	[Address] [varchar](50) NOT NULL
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InSupdFleetOwnerRequest](
-		  
-          @CurrentSystemInUse varchar(50),
-          @SentNewProductsEmails bit,
-      
-          @howdidyouhearaboutus varchar(50),
-          @Agreetotermsandconditions bit,
-           @insupdflag varchar(20)
-           )
- 
-AS
-BEGIN	
-if @insupdflag = 'I' 
-INSERT INTO [dbo].[FleetOwnerRequest]
-          
-            ([CurrentSystemInUse]
-            ,[SentNewProductsEmails] 
-             
-           ,[howdidyouhearaboutus] 
-          ,[Agreetotermsandconditions]
-               )
-     VALUES
-          (
-           @CurrentSystemInUse
-       , @SentNewProductsEmails 
-        
-         ,@howdidyouhearaboutus
-         ,@Agreetotermsandconditions
-          )
-          
-  
-          else
-  if @insupdflag = 'U' 
-UPDATE [POSDashboard].[dbo].[FleetOwnerRequest]
-   SET
-      
-     [CurrentSystemInUse] = @CurrentSystemInUse
-     ,[SentNewProductsEmails]=@SentNewProductsEmails 
-      
-     ,[howdidyouhearaboutus]=@howdidyouhearaboutus
-     ,[Agreetotermsandconditions]=@Agreetotermsandconditions
-      
-
-END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
-		   @FirstName varchar(50),   
-           @LastName varchar(50),
-           @PhoneNo  varchar(50),
-           @EmailAddress varchar(20),
-           @CompanyName varchar(20),
-           @Description varchar(50) ,
-           @Title varchar(20),
-           @CompanyEmployeSize int,
-           @FleetSize int,         
-           @Gender varchar(20),      
-           @Address varchar(50),
-           @insupdflag varchar(10)
-           )
- 
-AS
-BEGIN	
-if @insupdflag = 'I' 
-INSERT INTO [dbo].[FleetOwnerRequestDetails]
-           ([FirstName]
-           ,[LastName]
-           ,[PhoneNo]
-           ,[EmailAddress]
-           ,[CompanyName]
-           ,[Description]
-           ,[Title]
-           ,[CompanyEmployeSize]
-             ,[FleetSize]      
-              ,[Gender]        
-              ,[Address])
-     VALUES
-          (@FirstName    
-           ,@LastName
-          , @PhoneNo
-           ,@EmailAddress
-           ,@CompanyName
-           ,@Description 
-           ,@Title
-           ,@CompanyEmployeSize 
-           ,@FleetSize     
-          , @Gender   
-          , @Address)
-          
-  
-          else
-  if @insupdflag = 'U' 
-UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
-   SET
-      [FirstName] = @FirstName
-      ,[LastName] = @LastName
-      ,[PhoneNo] = @PhoneNo
-      ,[EmailAddress] = @EmailAddress
-      ,[CompanyName] = @CompanyName
-      ,[Description] = @Description
-      ,[Title] = @Title
-      ,[CompanyEmployeSize] = @CompanyEmployeSize 
-      ,[FleetSize] = @FleetSize  
-       ,[Gender] = @Gender 
-       ,[Address]= @Address
-
-END
-
-GO
-
 Create procedure [dbo].[getNotficationConfiguration]
 (@roleId int = -1)
 as
@@ -8169,4 +7959,3 @@ CREATE TABLE [dbo].[NotificationConfiguration](
 ) ON [PRIMARY]
 
 GO
-
