@@ -445,9 +445,9 @@
                         <div class="clearfix"></div>
                     </div>
                     <script type="text/ng-template" id="myModalContent.html">
-                        <!--<div class="modal-header">
-                            <h3 class="modal-title">I'm a modal!</h3>
-                        </div>-->
+                        <div class="modal-header">
+                            <h3 class="modal-title">Save confirmation!</h3>
+                        </div>
                         <div class="modal-body">
                             <!--<ul>
                                 <li ng-repeat="item in items">
@@ -470,7 +470,6 @@
 
                                 <div style="background: transparent; border: 0; box-shadow: none !important" class="tab-content pan mtl mbn responsive">
                                     <div id="tab-form-actions" class="tab-pane fade active in">
-                                        <div class="row">
 
                                             <div class="col-lg-6">
                                                 <div class="panel panel-violet">
@@ -500,7 +499,7 @@
                                                                     <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>
 
                                                                     <div class="col-md-4">
-                                                                        <div><input id="active" type="checkbox" ng-model="Group.active" class="form-control" checked /></div>
+                                                                        <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -516,25 +515,11 @@
                                                 </div>
                                             </div>
 
-
-
-
-                                        </div>
                                     </div>
-
-
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
 
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">

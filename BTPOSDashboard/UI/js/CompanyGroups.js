@@ -38,26 +38,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             data: newCmp
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
+
+            $scope.showDialog("Saved successfully!");
+            
             $scope.Group = null;
+
         }, function (errres) {
             var errdata = errres.data;
             var errmssg = "";
-            if(errdata && errdata.ExceptionMessage)
-                errmssg = errdata.ExceptionMessage;
-            else
-                errmssg = errdata.Message;
-
-            var modalInstance = $uibModal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                resolve: {
-                    mssg: function () {
-                        return "Save failed! error mssg:" + errmssg
-                    }
-                }
-            });
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
 
      
@@ -96,29 +86,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             data: Group
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
+
+            $scope.showDialog("Saved successfully!");
             
         }
-        , , function (errres) {
+        , function (errres) {
             var errdata = errres.data;
-            var errmssg = "";
-            if(errdata && errdata.ExceptionMessage)
-                errmssg = errdata.ExceptionMessage;
-            else
-                errmssg = errdata.Message;
-
-            var modalInstance = $uibModal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                resolve: {
-                    mssg: function () {
-                        return "Save failed! error mssg:" + errmssg
-                    }
-                }
-            });
+            var errmssg = "";            
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;            
+            $scope.showDialog(errmssg);
+           
         });
-
+        $scope.GetCompanys();
         $scope.currGroup = null;
     };
       
@@ -130,15 +109,25 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.clearGroup = function () {        
         $scope.currGroup = null;
     };
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
 });
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
-    //$scope.selected = {
-    //    item: $scope.items[0]
-    //};
-
     $scope.ok = function () {
         $uibModalInstance.close('test');
     };
