@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Home | Users | Users</title>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetCompanies();"> 
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();"> 
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -538,7 +538,7 @@
                                                                            
                                                                                                                                                                                                                                                                                                           
                                                                             <div class="modal-footer">
-                                                                                <button data-dismiss="modal" class="btn btn-primary" ng-click="save(User1, 'U');">Save</button>
+                                                                                <button class="btn btn-primary" type="button" ng-click="save(User1, 'U');">Save</button>
                                                                                 <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
                                                                             </div>
                                                                             

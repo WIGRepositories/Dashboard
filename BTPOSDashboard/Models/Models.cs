@@ -1199,22 +1199,24 @@ namespace BTPOSDashboardAPI.Models
     public class FleetOwnerRouteFare
     {
         public int Id { get; set; }
-        public int FleetOwnerId { get; set; }
         public int RouteId { get; set; }
-        public int CompanyId { get; set; }
-        public string VehicleType { get; set; }
-
-
-        public int SourceStopId { get; set; }
-        public int DestinationStopId { get; set; }
-        public string Distance { get; set; }
-        public int PerUnitPrice { get; set; }
-
-        public int Amount { get; set; }
-
+        public string VehicleTypeId { get; set; }
+        public int FromStopId { get; set; }
+        public int ToStopId { get; set; }
+        public decimal Distance { get; set; }
+        public decimal PerUnitPrice { get; set; }
+        public decimal Amount { get; set; }
         public String FareType { get; set; }
+        public int FareTypeId { get; set; }
+        public int VehicleId { get; set; }
         public int Active { get; set; }
+        public int FleetOwnerId { get; set; }
+        public int CompanyId { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string insupddelflag { get; set; }
     }
+
     public class LicenseDetails
     {
 

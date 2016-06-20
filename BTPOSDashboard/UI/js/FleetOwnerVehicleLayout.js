@@ -1,7 +1,7 @@
 ﻿
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage, $filter) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
     $scope.uname = $localStorage.uname;
     $scope.GetFleetDetails = function () {
 

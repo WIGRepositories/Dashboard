@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="mycntrlr">
+<html lang="en">
 <head>
     <title>Home | Inventory | Purchase Orders</title>
     <meta charset="utf-8">
@@ -22,7 +22,7 @@
 
 
 
-<body ng-init="GetPurchaseOrder();" ng-model="PurchaseOrder">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetPurchaseOrder();" ng-model="PurchaseOrder">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -146,6 +146,7 @@
                             </ul>
 
                         </li>
+
 
 
                         <li>

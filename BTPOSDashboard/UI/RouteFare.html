@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Route Fare Details </title>
     <meta charset="utf-8">
@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <link rel="stylesheet" type="text/css" href="css/handsontable.full.min.css" />
 </head>
-<body ng-init="GetRoutes();" ng-model="RouteDetails">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetRoutes();" ng-model="RouteDetails">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -144,6 +144,7 @@
                                 </ul>
 
                             </li>
+
 
 
                             <li>

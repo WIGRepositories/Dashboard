@@ -1,7 +1,7 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', [])
-var ctrl = app.controller('Mycntrlr', function ($scope, $http) {
+var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
     //app.controller('showHide', function ($scope) {
     //  $scope.toggle = function () {

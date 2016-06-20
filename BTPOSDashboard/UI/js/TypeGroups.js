@@ -1,6 +1,6 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http,$localStorage) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage) {
     $scope.uname = $localStorage.uname;
     $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;

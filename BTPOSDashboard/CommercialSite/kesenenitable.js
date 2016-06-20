@@ -1,6 +1,6 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', [])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
     
     $http.get('http://localhost:50780/api/KESENINE3/commericialsite').then(function (res, data) {
         $scope.tr= res.data;

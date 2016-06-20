@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en">
 <head>
     <title>Home | Utilities & Tools | TroubleTicketingDetails | AddTroubleTicketingDetails</title>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="saveTroubleTicketingDetails();" ng-model="Group">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="saveTroubleTicketingDetails();" ng-model="Group">
     <div>
 
 
@@ -527,7 +527,7 @@
 
 
                                                                         <div class="form-actions text-center">
-                                                                            <button class="btn btn-green" ng-click="save(Group)">Save</button>
+                                                                            <button class="btn btn-green" type="button" ng-click="save(Group)">Save</button>
                                                                             &nbsp;
                                                                             <button type="reset" class="btn btn-primary" ng-click="clearGroup()">Cancel</button><br />
                                                                         </div>

@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Home | Configuration | License Types</title>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 
 </head>
-<body ng-init="GetLicenseCat();" ng-model="LicenseTypes">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetLicenseCat();" ng-model="LicenseTypes">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -144,6 +144,7 @@
                             </ul>
 
                         </li>
+
 
 
                         <li>
