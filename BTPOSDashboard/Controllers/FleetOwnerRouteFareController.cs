@@ -48,14 +48,14 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable saveFleetOwnerRoutefare(IEnumerable<FleetOwnerRouteFare> fareList)
+        public HttpResponseMessage saveFleetOwnerRoutefare(IEnumerable<FleetOwnerRouteFare> fareList)
         {
-            DataTable Tbl = new DataTable();
-
-
+            SqlConnection conn = new SqlConnection();
+            try
+            {
 
             //connect to database
-            SqlConnection conn = new SqlConnection();
+            
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -149,9 +149,19 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Clear();
             }
             conn.Close();
-            // int found = 0;
-            return Tbl;
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
+
         public void Options()
         {
 

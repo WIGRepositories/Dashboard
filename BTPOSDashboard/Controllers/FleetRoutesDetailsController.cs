@@ -46,13 +46,15 @@ namespace BTPOSDashboard.Controllers
 
 
         [HttpPost]
-        public DataTable saveroutedetails(IEnumerable<RouteDetails> routestops)
+        public HttpResponseMessage saveroutedetails(IEnumerable<RouteDetails> routestops)
         {
-            DataTable Tbl = new DataTable();
+            SqlConnection conn = new SqlConnection();
+            try
+            {
 
 
             //connect to database
-            SqlConnection conn = new SqlConnection();
+            
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -114,8 +116,17 @@ namespace BTPOSDashboard.Controllers
             }
             conn.Close();
 
-            return Tbl;
-
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         public void Options() { }
 

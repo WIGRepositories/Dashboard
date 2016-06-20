@@ -38,6 +38,7 @@ namespace BTPOSDashboardAPI.Controllers
         }
     }
 }
+
 //        [HttpPost]
 //        public DataTable SaveAlerts(Alerts n)
 //        {

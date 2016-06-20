@@ -36,13 +36,14 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable saveFleetOwnerRoute(FleetOwnerRouteStop b)
+        public HttpResponseMessage saveFleetOwnerRoute(FleetOwnerRouteStop b)
         {
-            DataTable Tbl = new DataTable();
-
+            SqlConnection conn = new SqlConnection();
+            try
+            {
 
             //connect to database
-            SqlConnection conn = new SqlConnection();
+           
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -103,7 +104,17 @@ namespace BTPOSDashboard.Controllers
             cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;
-            return Tbl;
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         public void Options()
         {
