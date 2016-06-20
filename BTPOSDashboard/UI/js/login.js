@@ -1,6 +1,6 @@
 var myapp1 = angular.module('myApp', ['ngStorage'])
 
-var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http, $localStorage) {
+var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.save = function (type) {
 
         var type = {
@@ -17,10 +17,7 @@ var myCtrl = myapp1.controller('Mycntrl', function ($scope, $http, $localStorage
             url: 'http://localhost:1476/api/UserLogins/ResetPassword',
             //headers: {
             //    'Content-Type': undefined
-
             data: type
-
-
         }
         $http(req).then(function (response) {
 
