@@ -24,7 +24,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-init="GetRoles();" ng-model="Types">
+<body ng-init="GetAlertsConfiguration();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -335,7 +335,7 @@
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Alerts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Alerts Configuration </a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li class="active">Action Tables</li>
+                           
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -353,19 +353,15 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-5">
-                                                            Roles: <select ng-options="s.Name for s in GetRoles track by s.Id" ng-model="s" ng-change="GetAlertsConfiguration()">
-                                                            <option value="">All</option>
-                                                            </select>
+                                                            Roles:<select ng-options="r.Name for r in GetRoles track by r.Names" ng-model="r" ng-change="GetAlertsConfiguration();">
+                                                           <option value="">All</option>
+                                                           </select>
                                                         </div>
-                                                       <!--<div class="col-md-5">
-                                                            Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
-                                                                <option value="">All</option>
-                                                            </select>
-                                                        </div>-->
-
-
-
-
+                                                        <!--<div class="col-md-5">
+                                                             Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
+                                                              <option value="">All</option>
+                                                              </select>
+                                                         </div>-->                                                        
 
                                                     </div>
                                                 </div>
@@ -375,10 +371,9 @@
                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
                                                         <tr>
-
-                                                            <th>Id</th>
-                                                            <th>RoleId</th>
-                                                            <th>Alert TypeId</th>
+                                                            <th>Active</th>
+                                                            <!--<th>Alert Items</th>-->                                                            
+                                                            <th>Alert Type</th>                                                          
 
                                                             <!--<th>List Key</th>
                                                             <th>List value</th>-->
@@ -390,15 +385,10 @@
 
                                                         <tr ng-repeat="A in AlertsConfiguration">
 
-
-                                                            <td>{{A.Id}}</td>
-                                                            <td>{{A.RoleId}}</td>
-                                                            <td>{{A.AlertTypeId}}</td>
-
-
-                                                            <!--<td>{{T.ListKey}}</td>
-                                                            <td>{{T.Listvalue}}</td>-->
-
+                                                            <td><input type="checkBox" ng-checked="T.Active"/></td>
+                                                            <!--<td>{{Alert Item}}</td>-->
+                                                           <td>{{A.AlertType}}</td>
+                                                          
                                                         </tr>
                                                     </tbody>
 
@@ -415,15 +405,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
@@ -477,6 +458,6 @@
         <script src="js/BTPOSDetails.js"></script>
         <script src="js/ngStorage.js"></script>
         <!--<script src="js/Types.js"></script>-->
-    <script src="js/AlertsConfiguration.js"></script>
+        <script src="js/AlertsConfiguration.js"></script>
 </body>
 </html>

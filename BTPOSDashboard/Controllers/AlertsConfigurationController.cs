@@ -24,8 +24,17 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetAlertsConfiguration";
+            cmd.CommandText = "getAlertsConfiguration";
             cmd.Connection = conn;
+
+            //SqlParameter Rid = new SqlParameter();
+            //Rid.ParameterName = "@TypeGroupId";
+            //Rid.SqlDbType = SqlDbType.Int;
+            //Rid.Value = TypeGroupId;
+            //cmd.Parameters.Add(Rid);
+
+
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);

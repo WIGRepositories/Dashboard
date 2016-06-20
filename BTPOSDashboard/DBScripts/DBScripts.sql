@@ -7975,7 +7975,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE[dbo].[InSupdFleetOwnerRequest](
+create PROCEDURE[dbo].[InSupdFleetOwnerRequest](
 		  
           @CurrentSystemInUse varchar(50),
           @SentNewProductsEmails bit,
@@ -8024,7 +8024,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
+create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
 		   @FirstName varchar(50),   
            @LastName varchar(50),
            @PhoneNo  varchar(50),
@@ -8083,5 +8083,48 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
       ,[FleetSize] = @FleetSize  
        ,[Gender] = @Gender 
        ,[Address]= @Address
+
+END
+
+GO
+
+Create procedure [dbo].[getNotficationConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,NotificationId
+,t.Name AlertType
+,case when a.NotificationId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [NotificationConfiguration] a on a.NotificationId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 9)
+
+
+END
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAlertsConfiguration]    Script Date: 06/20/2016 11:39:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetAlertsConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,AlertTypeId
+,t.Name AlertType
+,case when a.AlertTypeId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [AlertsConfiguration] a on a.AlertTypeId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 8)
+
 
 END
