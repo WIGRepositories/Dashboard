@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Text;
+using System.IO;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -38,6 +40,14 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
+
+            //prepare a file
+            StringBuilder str = new StringBuilder();
+
+            str.Append(string.Format("test\n{0}", groupid.ToString()));
+
+            
+
 
             // int found = 0;
             return Tbl;
