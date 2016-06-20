@@ -41,7 +41,7 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(fid);
 
             SqlParameter cid = new SqlParameter();
-            cid.ParameterName = "@BTPOSID";
+            cid.ParameterName = "@POSID";
             cid.SqlDbType = SqlDbType.Int;
             cid.Value = BTPOSID;
             cmd.Parameters.Add(cid);

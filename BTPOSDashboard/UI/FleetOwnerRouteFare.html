@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp" ng-controller="mycntrlr">
 <head>
     <title>Route Fare Details </title>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();" ng-model="RouteDetails">
+<body ng-init="GetCompanies();" ng-model="RouteDetails">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -355,43 +355,43 @@
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Vehicle Reg No.: <select ng-options="v.VehicleRegNo for v in fleet track by v.VehicleId" ng-model="v" ng-change="getVehicleFareConfig()" style="width:100px">
-                                                                    <option value="">Select</option>
-                                                                </select>
+                                                                Route Name: <select ng-options="r.routename for r in FORoutes track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
+                                             <option value="">Select</option>
+                                                          </select>
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Vehicle Type: <input type="text" style="width:100px" value="{{v.vehicleType}}" disabled/>
+                                                                Code: <input type="text" readonly style="width:100px" value="{{r.Code}}"/>
                                                             </div>
 
 
                                                         </div>
                                                         <div class="row mbm">
+
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Route Name: <select ng-options="r.routename for r in FORoutes track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
-                                                                    <option value="">Select</option>
-                                                                </select>
+                                                                Vehicle Type: <input type="text" readonly style="width:100px" />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Code: <input type="text" readonly style="width:100px" value="{{r.code}}" disabled/>
+                                                                Vehicle Reg No.: <select ng-options="v.VehicleRegNo for v in fleet track by v.VehicleId" ng-model="v" ng-change="getVehicleFareConfig()" style="width:100px">
+    <option value="">Select</option>
+</select>
                                                             </div>
 
-                                                            
                                                            
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Source: <input type="text" readonly style="width:100px" value="{{r.src}}" disabled />
+                                                                Source: <input type="text" readonly style="width:100px" />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Destination: <input type="text" readonly style="width:100px" value="{{r.dest}}" disabled />
+                                                                Destination: <input type="text" readonly style="width:100px" />
                                                             </div>
 
                                                         </div>
 
                                                         <div class="row mbm" style="text-align:right">
                                                             <div class="col-md-3">
-                                                                Pricing Type: <select ng-model="prc" ng-change="SetPrice();">
+                                                                Pricing Type: <select ng-model="prc">
                                                                     <option value="">Select</option>
                                                                     <option value="1">Per unit pricing</option>
                                                                     <option value="2">Stage to Stage</option>
@@ -399,15 +399,15 @@
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Per KM price: <input type="text" style="width:100px" value="r.PerUnitPrice" ng-model="puprc" ng-disabled="prc == 2 || prc==''" />
+                                                                Per KM price: <input type="text" style="width:100px" />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                distance: <input type="text" readonly style="width:100px" value="{{r.distance}}" disabled />
+                                                                distance: <input type="text" readonly style="width:100px" />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Total: <input type="text" readonly style="width:100px" disabled value="{{puprc * r.distance}}" />
+                                                                Total: <input type="text" readonly style="width:100px" />
                                                             </div>
 
                                                         </div>
@@ -421,14 +421,12 @@
 
                                                                 <th>Source stop</th>
                                                                 <th>target stop</th>
-                                                                <th>Pricing Type</th>                                                                
-                                                                <th>Unit Price</th>
-                                                                <th>Distance</th>
+                                                                <th>Pricing Type</th>
                                                                 <th>Amount</th>
                                                                 <!--<th>List Key</th>
                                                                 <th>List value</th>-->
-                                                                <!--<th>Effective from</th>
-                                                                <th>Effective Till</th>-->
+                                                                <th>Effective from</th>
+                                                                <th>Effective Till</th>
 
                                                             </tr>
                                                         </thead>
@@ -440,24 +438,22 @@
                                                                 <td>{{T.Src}}</td>
                                                                 <td>{{T.Dest}}</td>
                                                                 <td>
-                                                                    <select ng-model="prc" disabled>
+                                                                    <select ng-model="prc">
                                                                         <option value="">Select</option>
                                                                         <option value="1">Per unit pricing</option>
                                                                         <option value="2">Adhoc pricing</option>
                                                                     </select>
-                                                                    <!--<input type="text" class="form-control" style="width:100px" id="p" ng-model="prc" value="prc.value" disabled/>--></td>
-                                                                <td><input type="text" class="form-control" style="width:100px" id="p" ng-model="T.PerUnitPrice" value="{{puprc}}" disabled /></td>
-                                                                <td><input type="text" class="form-control" style="width:100px" id="d" ng-model="T.Distance" disabled/></td>
-                                                                <td><input type="text" class="form-control" style="width:100px" id="amt" value="{{puprc * T.Distance}}" ng-model="T.Amount" ng-disabled="prc == 1" /></td>
-                                                                <!--<td><input type="date" ng-mode="T.nFrom" value={{T.From}}></td>
-                                                                <td><input type="date" ng-mode="T.nTo" value={{T.To}}></td>-->
+                                                                </td>
+                                                                <td><input type="text" class="form-control" style="width:100px" id="amt" ng-model="T.Amount" /></td>
+                                                                <td>{{T.From}}</td>
+                                                                <td>{{T.To}}</td>
                                                             </tr>
                                                         </tbody>
 
                                                     </table>
 
                                                     <div style="text-align:center">
-                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveFORouteFare();">Save</button>
+                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
 
                                                         <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                     </div>

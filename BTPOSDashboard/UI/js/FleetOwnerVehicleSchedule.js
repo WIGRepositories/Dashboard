@@ -15,7 +15,7 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout) {
    
 });
 
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
+var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
     $scope.StopCount = [];
 
     $scope.GetCompanies = function () {

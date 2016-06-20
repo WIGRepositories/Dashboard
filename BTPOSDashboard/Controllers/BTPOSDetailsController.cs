@@ -42,7 +42,39 @@ namespace BTPOSDashboardAPI.Controllers
             
             return Tbl;
         }
+        [HttpGet]
 
+        public DataTable GetBTPOSDetails1(int cmpId, int fId)
+           
+    {
+
+        DataTable Tbl = new DataTable();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "getBTPOSDetails1";
+            cmd.Connection = conn;
+
+            SqlParameter cmp = new SqlParameter("@pageno", SqlDbType.Int);
+            cmp.Value = cmpId;
+            cmd.Parameters.Add(cmp);
+
+            SqlParameter fo = new SqlParameter("@pagesize", SqlDbType.Int);
+            fo.Value = fId;
+            cmd.Parameters.Add(fo);
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+
+            return Tbl;
+        }
+
+        
         
 
         [HttpPost]
@@ -101,6 +133,14 @@ namespace BTPOSDashboardAPI.Controllers
                     SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
                     fo.Value = n.fleetownerid;
                     cmd.Parameters.Add(fo);
+
+                    SqlParameter fo1 = new SqlParameter("@pageno", SqlDbType.Int);
+                    fo1.Value = n.fleetownerid;
+                    cmd.Parameters.Add(fo1);
+
+                    SqlParameter fo2 = new SqlParameter("@pagesize", SqlDbType.Int);
+                    fo2.Value = n.fleetownerid;
+                    cmd.Parameters.Add(fo2);
 
                     SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                     insupdflag.Value = n.insupdflag;
