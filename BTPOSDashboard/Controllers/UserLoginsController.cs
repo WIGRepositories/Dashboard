@@ -36,13 +36,12 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable userlogins(UserLogin b)
+        public HttpResponseMessage userlogins(UserLogin b)
         {
-            DataTable Tbl = new DataTable();
-
-
-            //connect to database
+             //connect to database
             SqlConnection conn = new SqlConnection();
+            try
+            { 
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -88,8 +87,17 @@ namespace BTPOSDashboardAPI.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         public void Options()
         {
@@ -101,13 +109,15 @@ namespace BTPOSDashboardAPI.Controllers
 
         [HttpPost]
         [Route("api/UserLogins/ResetPassword")]
-        public DataTable savepassword(reset b)
+        public HttpResponseMessage savepassword(reset b)
         {
-            DataTable Tbl = new DataTable();
+           
 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
+            try
+            { 
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -152,8 +162,17 @@ namespace BTPOSDashboardAPI.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
     }
  

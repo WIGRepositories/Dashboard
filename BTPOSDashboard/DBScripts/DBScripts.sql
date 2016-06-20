@@ -8128,3 +8128,45 @@ and t.TypeGroupId = 8)
 
 
 END
+Go
+
+
+/****** Object:  Table [dbo].[AlertsConfiguration]    Script Date: 06/20/2016 11:53:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[AlertsConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[AlertTypeId] [int] NOT NULL,
+	[AlertItems] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+/****** Object:  Table [dbo].[NotificationConfiguration]    Script Date: 06/20/2016 11:55:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[NotificationConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[NotificationId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+

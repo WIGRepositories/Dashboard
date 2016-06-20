@@ -40,49 +40,56 @@ namespace blocklist1.Controllers
             return Tbl;
         }
           [HttpPost]
-          public DataTable pos(ZipCode b)
-          {
-              DataTable Tbl = new DataTable();
-
+          public HttpResponseMessage pos(ZipCode b)
+          {            
               //connect to database
               SqlConnection conn = new SqlConnection();
-              //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-              conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-              SqlCommand cmd = new SqlCommand();
-              cmd.CommandType = CommandType.StoredProcedure;
-              cmd.CommandText = "InsUpdDelELZipCode";
-              cmd.Connection = conn;
-              conn.Open();
+              try
+              {
+                  //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                  conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-      
-              SqlParameter Aid = new SqlParameter();
-              Aid.ParameterName = "@Id";
-              Aid.SqlDbType = SqlDbType.VarChar;
-              Aid.Value = b.Id;
-              Aid.Value = Convert.ToString(b.Id);
-              cmd.Parameters.Add(Aid);
+                  SqlCommand cmd = new SqlCommand();
+                  cmd.CommandType = CommandType.StoredProcedure;
+                  cmd.CommandText = "InsUpdDelELZipCode";
+                  cmd.Connection = conn;
+                  conn.Open();
 
-              SqlParameter Gid = new SqlParameter();
-              Gid.ParameterName = "@Code";
-              Gid.SqlDbType = SqlDbType.VarChar;
-              Gid.Value = b.Code;
-              cmd.Parameters.Add(Gid);
 
-              SqlParameter lid = new SqlParameter();
-              lid.ParameterName = "@Active";
-              lid.SqlDbType = SqlDbType.VarChar;
-              lid.Value = b.Active;
-              cmd.Parameters.Add(lid);
+                  SqlParameter Aid = new SqlParameter();
+                  Aid.ParameterName = "@Id";
+                  Aid.SqlDbType = SqlDbType.VarChar;
+                  Aid.Value = b.Id;
+                  Aid.Value = Convert.ToString(b.Id);
+                  cmd.Parameters.Add(Aid);
 
-              //DataSet ds = new DataSet();
-              //SqlDataAdapter db = new SqlDataAdapter(cmd);
-              //db.Fill(ds);
-              // Tbl = Tables[0];
-              cmd.ExecuteScalar();
-              conn.Close();
-              // int found = 0;
-              return Tbl;
+                  SqlParameter Gid = new SqlParameter();
+                  Gid.ParameterName = "@Code";
+                  Gid.SqlDbType = SqlDbType.VarChar;
+                  Gid.Value = b.Code;
+                  cmd.Parameters.Add(Gid);
+
+                  SqlParameter lid = new SqlParameter();
+                  lid.ParameterName = "@Active";
+                  lid.SqlDbType = SqlDbType.VarChar;
+                  lid.Value = b.Active;
+                  cmd.Parameters.Add(lid);
+
+                  cmd.ExecuteScalar();
+                  conn.Close();
+
+                  return new HttpResponseMessage(HttpStatusCode.OK);
+              }
+              catch (Exception ex)
+              {
+                  if (conn != null && conn.State == ConnectionState.Open)
+                  {
+                      conn.Close();
+                  }
+                  string str = ex.Message;
+                  return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+              }
           }
           public void Options() { }
 
