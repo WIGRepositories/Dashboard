@@ -40,12 +40,12 @@ namespace blocklist1.Controllers
 
 
         [HttpPost]
-        public DataTable pos(Paymentgateway b)
+        public HttpResponseMessage pos(Paymentgateway b)
         {
-            DataTable Tbl = new DataTable();
-
             //connect to database
             SqlConnection conn = new SqlConnection();
+            try
+            {
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
           
@@ -103,14 +103,14 @@ namespace blocklist1.Controllers
 
 
 
-SqlParameter mm = new SqlParameter();
+             SqlParameter mm = new SqlParameter();
             mm.ParameterName = "@Testurl ";
             mm.SqlDbType = SqlDbType.VarChar;
             mm.Value = b.Testurl ;
             cmd.Parameters.Add(mm);
 
 
-SqlParameter nn = new SqlParameter();
+            SqlParameter nn = new SqlParameter();
             nn.ParameterName = "@Salt";
             nn.SqlDbType = SqlDbType.VarChar;
             nn.Value = b.Salt;
@@ -118,7 +118,7 @@ SqlParameter nn = new SqlParameter();
             
 
 
-SqlParameter pp= new SqlParameter();
+            SqlParameter pp= new SqlParameter();
             pp.ParameterName = "@Hash ";
             pp.SqlDbType = SqlDbType.VarChar;
             pp.Value = b.Hash;
@@ -132,8 +132,17 @@ SqlParameter pp= new SqlParameter();
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         public void Options() { }
 

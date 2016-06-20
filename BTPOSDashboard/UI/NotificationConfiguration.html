@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetDashboardDS();" ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetRoles();" ng-model="dashboardDS">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -316,7 +316,7 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                       
+
                                         <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications Configurations</span></a></li>
 
                                     </ul>
@@ -354,15 +354,15 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-5">
-                                                            Roles:<select ng-options="r.Name for r in GetRoles track by r.Names" ng-model="r" ng-change="GetAlertsConfiguration();">
+                                                            Roles:<select ng-options="r.Name for r in GetRoles track by r.Names" ng-model="r" ng-change="GetNoticationConfiguration();">
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
                                                         <!--<div class="col-md-5">
-                                             Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
-                                              <option value="">All</option>
-                                              </select>
-                                         </div>-->
+                                                            Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
+                                                             <option value="">All</option>
+                                                             </select>
+                                                        </div>-->
 
                                                     </div>
                                                 </div>
@@ -373,26 +373,21 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Active</th>
-                                                            <!--<th>Alert Items</th>-->
-                                                            <th>Id</th>
-                                                            <th>RoleId</th>
-                                                            <th>Alert TypeId</th>
-
-                                                            <!--<th>List Key</th>
-                                            <th>List value</th>-->
+                                                            <!--<th>Alert Items</th>-->                                                       
+                                                            
+                                                            <th>NotificationType</th>                                                       
 
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
-                                                        <tr ng-repeat="A in AlertsConfiguration">
+                                                        <tr ng-repeat="N in NotficationConfiguration">
 
                                                             <td><input type="checkBox" ng-checked="T.Active" /></td>
-                                                            <!--<td>{{Alert Item}}</td>-->
-                                                            <td>{{A.Id}}</td>
-                                                            <td>{{A.RoleId}}</td>
-                                                            <td>{{A.AlertTypeId}}</td>
+                                                            <!--<td>{{Alert Item}}</td>-->                                                          
+                                                            
+                                                            <td>{{N.AlertType}}</td>
 
                                                         </tr>
                                                     </tbody>
@@ -457,6 +452,7 @@
     <script src="js/ngStorage.js"></script>
 
     <script src="js/source.js"></script>
+    <script src="js/NotificationsConfigurations.js"></script>
 
 </body>
 

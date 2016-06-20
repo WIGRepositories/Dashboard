@@ -35,14 +35,14 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpGet]
-        public DataTable saveloginpage(string userid, string pwd)
+        public HttpResponseMessage saveloginpage(string userid, string pwd)
         {
-            DataTable Tbl = new DataTable();
+            //connect to database
+            SqlConnection conn = new SqlConnection();
 
             try
             {
-                //connect to database
-                SqlConnection conn = new SqlConnection();
+               
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -67,18 +67,17 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
-                DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-            return Tbl;
-
         }
         public void Options()
         {

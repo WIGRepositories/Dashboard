@@ -2109,19 +2109,19 @@ else
 			    
 				if @cnt = 0 
 				begin
-				update Company
-				set Name = @Name, code = @code, [desc] = @desc, active = @active
-				where Id = @Id
+					update Company
+					set Name = @Name, code = @code, [desc] = @desc, active = @active
+					where Id = @Id						
+						
 				
-				
-				--insert into edit history
-			exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
-		                     
+						--insert into edit history
+					exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
+				           
 		           
-			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
-			exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-			exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-			exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+					exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+					exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+					exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+					exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 				
 				end
 				else
@@ -7878,3 +7878,84 @@ END
 
 GO
 
+Create procedure [dbo].[getNotficationConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,NotificationId
+,t.Name AlertType
+,case when a.NotificationId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [NotificationConfiguration] a on a.NotificationId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 9)
+
+
+END
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAlertsConfiguration]    Script Date: 06/20/2016 11:39:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetAlertsConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,AlertTypeId
+,t.Name AlertType
+,case when a.AlertTypeId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [AlertsConfiguration] a on a.AlertTypeId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 8)
+
+
+END
+Go
+
+
+/****** Object:  Table [dbo].[AlertsConfiguration]    Script Date: 06/20/2016 11:53:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[AlertsConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[AlertTypeId] [int] NOT NULL,
+	[AlertItems] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+/****** Object:  Table [dbo].[NotificationConfiguration]    Script Date: 06/20/2016 11:55:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[NotificationConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[NotificationId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO

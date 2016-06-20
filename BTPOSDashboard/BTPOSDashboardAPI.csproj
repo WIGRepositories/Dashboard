@@ -470,6 +470,7 @@
     <Content Include="UI\js\InventoryStatus.js" />
     <Content Include="UI\js\Invoices.js" />
     <Content Include="UI\js\JavaScript1.js" />
+    <Content Include="UI\js\NotificationsConfigurations.js" />
     <Content Include="UI\js\treetable.js" />
     <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
@@ -2040,6 +2041,7 @@
     <Compile Include="Controllers\LicenseDetailsController.cs" />
     <Compile Include="Controllers\LicensePricingController.cs" />
     <Compile Include="Controllers\List.cs" />
+    <Compile Include="Controllers\NotficationConfigurationController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PaymentHistoryController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />

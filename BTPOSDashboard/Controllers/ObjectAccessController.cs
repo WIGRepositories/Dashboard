@@ -40,7 +40,7 @@ namespace BTPOSDashboard.Controllers
 
         [HttpPost]
          public HttpResponseMessage SaveObjectAccess(ObjectAccess b)
-         {
+        {
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -86,18 +86,18 @@ namespace BTPOSDashboard.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            return new HttpResponseMessage(HttpStatusCode.OK);
-            }
-            catch (Exception ex)
-            {
-                if (conn != null && conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
-                string str = ex.Message;
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-            }
-         }
+              return new HttpResponseMessage(HttpStatusCode.OK);
+              }
+              catch (Exception ex)
+              {
+                  if (conn != null && conn.State == ConnectionState.Open)
+                  {
+                      conn.Close();
+                  }
+                  string str = ex.Message;
+                  return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+              }
+        }
         public void Options() { }
 
     }
