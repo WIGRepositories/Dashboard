@@ -444,7 +444,7 @@
                                                         
                                                            
                                                             <div class="actions">
-                                                                <a href="AddTypeGroup.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add TypeGroup</button></a>
+                                                                <a href="AddTypeGroup.html"><button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add TypeGroup</button></a>
 
                                                             </div>
                                                             <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -530,7 +530,7 @@
                                                                 <td><input type="checkbox" checked /></td>
                                                                 <td>
                                                                     {{T.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setTypeGroup(T);">
+                                                                    <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setTypeGroup(T);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>

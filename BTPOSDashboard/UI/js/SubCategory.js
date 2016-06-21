@@ -1,7 +1,8 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
-
+    //$scope.userdetails = $localStorage.userdetails;
+    //$scope.Roleid = $scope.userdetails[0].roleid;
     $scope.GetCategories = function () {
         $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
             $scope.Categories = response.data;

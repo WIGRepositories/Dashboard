@@ -1,7 +1,8 @@
 ﻿var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname
-
+    //$scope.uname = $localStorage.uname
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
     $scope.GetFleetOwner = function () {
 
         $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner').then(function (res, data) {
