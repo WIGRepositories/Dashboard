@@ -164,9 +164,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 }
 
                 $http(req).then(function (response) {
-                    alert('saved btpos details successfully');                    
+
+                    $scope.showDialog("Saved successfully!");
+
+                    $scope.Group = null;
+
+                }, function (errres) {
+                    var errdata = errres.data;
+                    var errmssg = "";
+                    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+                    $scope.showDialog(errmssg);
                 });
-      
         $scope.currGroup = null;
     };
 
