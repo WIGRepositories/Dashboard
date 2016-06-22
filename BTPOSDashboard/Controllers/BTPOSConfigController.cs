@@ -32,17 +32,17 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "GetBTPOSRecords";
             cmd.Connection = conn;
 
-            SqlParameter cid1 = new SqlParameter();
-            cid1.ParameterName = "@Id";
-            cid1.SqlDbType = SqlDbType.Int;
-            cid1.Value = Id;
-            cmd.Parameters.Add(cid1);
+            //SqlParameter cid1 = new SqlParameter();
+            //cid1.ParameterName = "@Id";
+            //cid1.SqlDbType = SqlDbType.Int;
+            //cid1.Value = Id;
+            //cmd.Parameters.Add(cid1);
 
-            SqlParameter cid = new SqlParameter();
-            cid.ParameterName = "@POSID";
-            cid.SqlDbType = SqlDbType.Int;
-            cid.Value = POSID;
-            cmd.Parameters.Add(cid);
+            //SqlParameter cid = new SqlParameter();
+            //cid.ParameterName = "@POSID";
+            //cid.SqlDbType = SqlDbType.Int;
+            //cid.Value = POSID;
+            //cmd.Parameters.Add(cid);
 
             //SqlParameter fid1 = new SqlParameter();
             //fid1.ParameterName = "@FileName";
@@ -71,12 +71,13 @@ namespace BTPOSDashboard.Controllers
             //prepare a file
             StringBuilder str = new StringBuilder();
           //  str.Append("Filename,Id,Description,Lastdownloadtime");
+           
 
             str.Append(string.Format("test\n{0}", POSID.ToString()));
 
-            str.Append("Id,filename,Description,LastModifiedtime");
+          //  str.Append("Id,filename,Description,LastModifiedtime");
 
-        //   str.Append(string.Format("test\n{1}", FileName.ToString()));
+        //  str.Append(string.Format("test\n{1}", FileName.ToString()));
 
 
         //    str.Append(string.Format("test\n{2}", Description.ToString()));
@@ -85,28 +86,33 @@ namespace BTPOSDashboard.Controllers
 
 
 
-            for (int i = 0; i <= Tbl.Rows.Count; i++)
+            for (int i = 0; i < Tbl.Rows.Count; i++)
             {
-                str.Append(Tbl.Rows[i]["POSID"].ToString());
+               // str.Append(Tbl.Rows[i]["POSID"].ToString()+",");
 
-                str.Append(Tbl.Rows[i]["Filename"].ToString());
+                str.Append(Tbl.Rows[i]["FileName"].ToString() + ",");
 
-                str.Append(Tbl.Rows[i]["Description"].ToString());
+                str.Append(Tbl.Rows[i]["Description"].ToString() + ",");
 
                 str.Append(Tbl.Rows[i]["LastDownloadtime"].ToString());
 
-                str.AppendLine("enter new line");
-
+                str.Append(Environment.NewLine);
             }
             String str1 = str.ToString();
 
-           
-            // int found = 0;
-            return Tbl;
+            System.IO.StreamWriter file = new System.IO.StreamWriter(@"D:\Welcome.txt");
+            
+            file.WriteLine(str.ToString());
+            file.Flush(); 
+            file.Close();
+                // Show(str1);
+
+                // int found = 0;
+                return Tbl;
         }
 
         [HttpPost]
-        public DataTable SaveBTPosRecords(BtposRecords b1)
+        public DataTable saveFleetBTPOS(BtposRecords b1)
         {
             DataTable Tbl = new DataTable();
 

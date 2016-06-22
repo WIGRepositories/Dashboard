@@ -348,10 +348,10 @@
                                                             </select>
                                                         </div>                
                                                                   <div class="col-md-3">
-                                                            BTPOS: <select ng-options="b.POSID for b in sdata.Table track by b.Id" ng-model="b" ng-change="GetFleeBTPosDetails(b)">
+                                                            BTPOS: <select ng-options="b.POSID for b in sdata.Table track by b.Id" ng-model="b" ng-change="GetFleeBTPosDetails()">
 
-                                                                <option value="">All</option>
-                                                            </select>
+    <option value="">All</option>
+</select>
                                                         </div>
                                                         <br><br />
 
@@ -432,7 +432,7 @@
 <script src="vendors/holder/holder.js"></script>
 <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
 <!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
+<!--<script src="js/table-action.js"></script>-->
 <!--CORE JAVASCRIPT-->
 <script src="js/main.js"></script>
 

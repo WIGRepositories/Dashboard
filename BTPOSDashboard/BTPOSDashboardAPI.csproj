@@ -2049,7 +2049,6 @@
     <Compile Include="Controllers\ShippingOrderController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\UserLicenseController.cs" />
-    <Compile Include="Controllers\Value.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
