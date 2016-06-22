@@ -177,6 +177,19 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 });
         $scope.currGroup = null;
     };
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
 
 
     $scope.setBTPOS = function (grp) {
@@ -226,6 +239,30 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     //};
 
+
+    $scope.save = function (Group1,flag) {
+        
+        var Group1 = {
+            IMEI: Group1.IMEI,
+            ipconfig: Group1.ipconfig,
+            active: Group1.active,
+            fleetowner: Group1.fleetowner,
+            insupdflag: flag,
+          
+        }
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/BTPOSDetails/SaveBTPOSDetails1',
+
+            data: Group1
+
+        }
+
+        $http(req).then(function (response) {
+
+        });
+    };
 
 
 

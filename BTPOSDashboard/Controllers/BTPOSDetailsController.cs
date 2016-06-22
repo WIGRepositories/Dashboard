@@ -102,8 +102,8 @@ namespace BTPOSDashboardAPI.Controllers
                 foreach (BTPOSDetails n in posList)
                 {
                     SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
-                    ba.Value = n.Id;
-                    cmd.Parameters.Add(ba);
+                     ba.Value = n.Id;
+                     cmd.Parameters.Add(ba);
 
                     SqlParameter bb = new SqlParameter("@CompanyId", SqlDbType.Int);
                     bb.Value = n.CompanyId;
@@ -165,6 +165,76 @@ namespace BTPOSDashboardAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
+
+
+        [HttpPost]
+
+        public HttpResponseMessage SaveBTPOSDetails1(IEnumerable<BTPOSDetails> posList)
+        {
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+
+                // BTPOSDetails n = new BTPOSDetails();
+
+                //connect to database
+
+                // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd1 = new SqlCommand();
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.CommandText = "InsUpdDelBTPOSDetails";
+                cmd1.Connection = conn;
+
+                conn.Open();
+
+                foreach (BTPOSDetails n in posList)
+                {
+                    SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
+                    ba.Value = n.Id;
+                    cmd1.Parameters.Add(ba);
+
+                    SqlParameter bd = new SqlParameter("@IMEI", SqlDbType.VarChar, 20);
+                    bd.Value = n.IMEI;
+                    cmd1.Parameters.Add(bd);
+
+                    SqlParameter ipconfig = new SqlParameter("@ipconfig", SqlDbType.VarChar, 20);
+                    ipconfig.Value = n.ipconfig;
+                    cmd1.Parameters.Add(ipconfig);
+
+                    SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
+                    active.Value = 1;
+                    cmd1.Parameters.Add(active);
+
+                    SqlParameter fo = new SqlParameter("@fleetowner", SqlDbType.Int);
+                    fo.Value = n.fleetownerid;
+                    cmd1.Parameters.Add(fo);
+
+                    SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
+                    insupdflag.Value = n.insupdflag;
+                    cmd1.Parameters.Add(insupdflag);
+
+                    cmd1.ExecuteScalar();
+
+                    cmd1.Parameters.Clear();
+                }
+                conn.Close();
+
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+        }
+              
+
         public void Options()
         {
         }
