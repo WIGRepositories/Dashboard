@@ -8285,4 +8285,33 @@ CREATE TABLE [dbo].[NotificationConfiguration](
 	[NotificationId] [int] NOT NULL
 ) ON [PRIMARY]
 
+
+
+
 GO
+/****** Object:  StoredProcedure [dbo].[ValidateFleetOwnerCode]    Script Date: 06/22/2016 18:49:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[ValidateFleetOwnerCode]
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	
+	--select @result = COUNT(*) from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+    select  
+    fo.Id,
+    FleetOwnerCode,
+    Email,
+    fo.UserId,
+    u.Id 
+    from FleetOwner fo
+    inner join Users u on u.Id=fo.UserId 
+    
+    -- Insert statements for procedure here
+   --return @result
+END
+
