@@ -37,10 +37,17 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             data: selRole
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
 
-        });
+            $scope.showDialog("Saved successfully!");
 
+        }
+, function (errres) {
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+
+});
         $scope.currRole = null;
 
     };
@@ -71,9 +78,17 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             data: selRole
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
 
-        });
+            $scope.showDialog("Saved successfully!");
+
+        }
+, function (errres) {
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+
+});
         $scope.currRole = null;
 
     };
@@ -151,9 +166,17 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             data: cmprole
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
 
-        });
+            $scope.showDialog("Saved successfully!");
+
+        }
+, function (errres) {
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+
+});
         $scope.currRole = null;
 
     };

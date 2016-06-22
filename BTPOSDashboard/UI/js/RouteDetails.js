@@ -60,9 +60,18 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 
                 data: RouteDetails.Table1
             }
-            $http(req).then(function (res) {
-                alert('saved successfully.');
-            });
+            $http(req).then(function (response) {
+
+                $scope.showDialog("Saved successfully!");
+
+            }
+, function (errres) {
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+
+});
 
         }
 

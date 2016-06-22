@@ -64,9 +64,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
               url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
               data: Item
           }
-          $http(req).then(function (res) {
-              alert('saved successfully.');
+          $http(req).then(function (response) {
 
+              $scope.showDialog("Saved successfully!");
+
+              $scope.Group = null;
+
+          }, function (errres) {
+              var errdata = errres.data;
+              var errmssg = "";
+              errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+              $scope.showDialog(errmssg);
           });
       }
 
@@ -87,9 +95,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
                 data: Item
             }
-            $http(req).then(function (res) {
-                alert('saved successfully.');
-          
+            $http(req).then(function (response) {
+
+                $scope.showDialog("Saved successfully!");
+
+                $scope.Group = null;
+
+            }, function (errres) {
+                var errdata = errres.data;
+                var errmssg = "";
+                errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+                $scope.showDialog(errmssg);
             });
 
 

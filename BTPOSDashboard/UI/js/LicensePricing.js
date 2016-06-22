@@ -72,7 +72,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         }
         $http(req).then(function (response) {
-            alert('saved successfully');
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
     }
 
@@ -102,7 +111,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         }
         $http(req).then(function (response) {
-            alert('saved successfully');
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
     }
 
