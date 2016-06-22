@@ -18,13 +18,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.User1 = null;
     }
 
-    $scope.setUsers = function (usr) {
-        $scope.User1 = usr;
-    };
+   // $scope.setUsers = function (usr) {
+        //$scope.User1 = usr;
+    //};
 
-    $scope.clearUsers = function () {
-        $scope.User1 = null;
-    }
+    //$scope.clearUsers = function () {
+        //$scope.User1 = null;
+   // }
 
     $scope.saveCmpChanges = function (Fleet, flag) {
 
