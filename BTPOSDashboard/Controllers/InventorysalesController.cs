@@ -37,15 +37,13 @@ namespace BTPOSDashboard.Controllers
         }
          [HttpPost]
 
-         public DataTable SaveInventorySales(ISales S)
-         {
-             DataTable Tbl = new DataTable();
-
-
+         public HttpResponseMessage SaveInventorySales(ISales S)
+          {
+            SqlConnection conn = new SqlConnection();
+            try
+            {
              //connect to database
-             SqlConnection conn = new SqlConnection();
-             try
-             {
+            
                  // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                  conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -130,19 +128,20 @@ namespace BTPOSDashboard.Controllers
                 #endregion
 
                      conn.Close();
-                
-                 //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                 //db.Fill(ds);
-                 //Tbl = ds.Tables[0];
-             }
-             catch (Exception ex)
-             {
-                 string str = ex.Message;
-             }
-             // int found = 0;
-             return Tbl;
 
-         }
+                     return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+          }
+
          public void Options()
          {
          }

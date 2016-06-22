@@ -15,10 +15,9 @@ namespace BTPOSDashboard.Controllers
 
         [HttpPost]
         [Route("api/VehicleLayout/saveVehicleLayout")]
-        public DataSet saveVehicleLayout(IEnumerable<VehicleLayout> vcList)
+        public HttpResponseMessage saveVehicleLayout(IEnumerable<VehicleLayout> vcList)
         {
 
-            //DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -30,10 +29,6 @@ namespace BTPOSDashboard.Controllers
             cmd.Connection = conn;
             conn.Open();
 
-            //  SqlParameter gsaa = new SqlParameter();                    
-            //  gsaa.ParameterName = "@Id";
-            //  gsaa.SqlDbType = SqlDbType.Int;         
-            //  cmd.Parameters.Add(gsaa);
             try
             {
                 foreach (VehicleLayout vc in vcList)
@@ -74,30 +69,29 @@ namespace BTPOSDashboard.Controllers
                     cmd.Parameters.Add(insupdflag);
 
 
-
-
                     cmd.ExecuteScalar();
 
                     cmd.Parameters.Clear();
                 }
 
                 conn.Close();
+
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
-                if (conn.State == ConnectionState.Open)
+                if (conn != null && conn.State == ConnectionState.Open)
                 {
                     conn.Close();
                 }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-
-            return null;
         }
 
         [HttpPost]
         [Route("api/VehicleLayout/SaveFleetOwnerVehicleLayout")]
-        public DataSet SaveFleetOwnerVehicleLayout(IEnumerable<VehicleLayout> FOvcList)
+        public HttpResponseMessage SaveFleetOwnerVehicleLayout(IEnumerable<VehicleLayout> FOvcList)
         {
 
             //DataTable Tbl = new DataTable();
@@ -165,20 +159,19 @@ namespace BTPOSDashboard.Controllers
                     cmd.ExecuteScalar();
                     cmd.Parameters.Clear();
 
-                } 
+                }
 
-                conn.Close();
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
-            catch (Exception exe)
+            catch (Exception ex)
             {
-                if (conn.State == ConnectionState.Open)
+                if (conn != null && conn.State == ConnectionState.Open)
                 {
                     conn.Close();
                 }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-
-            return null;
         }
     }
 }

@@ -50,14 +50,15 @@ namespace BTPOSDashboard.Controllers
         }
 
         [HttpPost]
-        public DataTable AssignFleetBTPOS(FleetBTPOS fb)
+        public HttpResponseMessage AssignFleetBTPOS(FleetBTPOS fb)
         {
-            DataTable Tbl = new DataTable();
-
+            SqlConnection conn = new SqlConnection();
             try
             {
+
+
                 //connect to database
-                SqlConnection conn = new SqlConnection();
+
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -79,7 +80,7 @@ namespace BTPOSDashboard.Controllers
                 vid.SqlDbType = SqlDbType.Int;
                 vid.Value = fb.vehicleId;
                 cmd.Parameters.Add(vid);
-               
+
                 SqlParameter gsab = new SqlParameter();
                 gsab.ParameterName = "@btposId";
                 gsab.SqlDbType = SqlDbType.Int;
@@ -105,15 +106,19 @@ namespace BTPOSDashboard.Controllers
                 cmd.ExecuteScalar();
                 conn.Close();
 
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-            return Tbl;
-
         }
     }
-
 }
+
+

@@ -36,14 +36,14 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable Smsforms(Smsformat s)
+        public HttpResponseMessage Smsforms(Smsformat s)
         {
-            DataTable Tbl = new DataTable();
+            //connect to database
+            SqlConnection conn = new SqlConnection();
             try
             {
 
-                //connect to database
-                SqlConnection conn = new SqlConnection();
+
                 //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
                 //conn.ConnectionString = "Data Source=localhost;Initial Catalog=MyAlerts;integrated security=sspi;";
@@ -60,7 +60,7 @@ namespace BTPOSDashboardAPI.Controllers
                 SqlParameter smessage = new SqlParameter();
                 smessage.ParameterName = "@message";
                 smessage.SqlDbType = SqlDbType.VarChar;
-                smessage.Value =s.message;
+                smessage.Value = s.message;
                 cmd.Parameters.Add(smessage);
                 SqlParameter sActive = new SqlParameter();
                 sActive.ParameterName = "@Active ";
@@ -83,9 +83,9 @@ namespace BTPOSDashboardAPI.Controllers
                 sToAddr.SqlDbType = SqlDbType.VarChar;
                 sToAddr.Value = s.ToAddr;
                 cmd.Parameters.Add(sToAddr);
-                SqlParameter sBTPOSGrpId  = new SqlParameter();
+                SqlParameter sBTPOSGrpId = new SqlParameter();
                 sBTPOSGrpId.ParameterName = "@BTPOSGrpId";
-                sBTPOSGrpId .SqlDbType = SqlDbType.Int;
+                sBTPOSGrpId.SqlDbType = SqlDbType.Int;
                 sBTPOSGrpId.Value = Convert.ToString(s.BTPOSGrpId);
                 cmd.Parameters.Add(sBTPOSGrpId);
 
@@ -94,17 +94,17 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.ExecuteScalar();
                 conn.Close();
 
-                //DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                // db.Fill(ds);
-                // Tbl = ds.Tables[0];
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-            return Tbl;
         }
 
         public void Options()

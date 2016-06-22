@@ -45,8 +45,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
         }
 
         $http(req).then(function (response) {
-            alert('saved successfully.');
 
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
     }
         $scope.save = function (Sales) {
@@ -66,10 +74,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
                 data: Sales
             }
             $http(req).then(function (response) {
-                alert('saved successfully.');
 
+                $scope.showDialog("Saved successfully!");
+
+                $scope.Group = null;
+
+            }, function (errres) {
+                var errdata = errres.data;
+                var errmssg = "";
+                errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+                $scope.showDialog(errmssg);
             });
-
 
         $scope.Sales1 = null;
     };

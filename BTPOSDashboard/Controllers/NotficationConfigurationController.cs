@@ -6,15 +6,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BTPOSDashboardAPI.Models;
+
 namespace BTPOSDashboard.Controllers
 {
-    public class AlertsConfigurationController : ApiController
+    public class NotficationConfigurationController : ApiController
     {
-        [HttpGet]
-        public DataTable GetAlertsConfiguration()
+         [HttpGet]
+        public DataTable GetNoticationConfiguration()
         {
-            DataTable Tbl = new DataTable();
+             DataTable Tbl = new DataTable();
 
 
             //connect to database
@@ -24,15 +24,8 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getAlertsConfiguration";
-            cmd.Connection = conn;
-
-            //SqlParameter Rid = new SqlParameter();
-            //Rid.ParameterName = "@TypeGroupId";
-            //Rid.SqlDbType = SqlDbType.Int;
-            //Rid.Value = TypeGroupId;
-            //cmd.Parameters.Add(Rid);
-
+            cmd.CommandText = "getNotficationConfiguration";
+            cmd.Connection = conn;        
 
 
             DataSet ds = new DataSet();
@@ -44,6 +37,5 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
     }
+    }
 
-
-}
