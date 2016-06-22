@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Fleet Owner Vehicle Schedule</title>
     <meta charset="utf-8" />
@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <!--<link type="text/css" rel="stylesheet" href="css/ngTimepicker.css">-->
 </head>
-<body ng-init="GetCompanies();StopCount=0" ng-model="RouteVehicleSchedule">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();StopCount=0" ng-model="RouteVehicleSchedule">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -143,6 +143,7 @@
                                 </ul>
 
                             </li>
+
 
                             <li>
                                 <a href="#">

@@ -2099,6 +2099,8 @@ if @insupdflag = 'I'
 	       -- exec InsUpdDelNotification @dt,@m,-1,-1,1,'Admin','fleet owner creation'
 		   
 			end
+			else
+			RAISERROR ('Company already exists',16,1); 
 		end
 else
 
@@ -2109,19 +2111,17 @@ else
 			    
 				if @cnt = 0 
 				begin
-				update Company
-				set Name = @Name, code = @code, [desc] = @desc, active = @active
-				where Id = @Id
-				
-				
-				--insert into edit history
-			exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
-		                     
-		           
-			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
-			exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-			exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
-			exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
+					update Company
+					set Name = @Name, code = @code, [desc] = @desc, active = @active
+					where Id = @Id						
+						
+						--insert into edit history
+					exec InsEditHistory 'Company', 'Name',@Name,'Company creation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output
+				           
+					exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
+					exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
+					exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+					exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 				
 				end
 				else
@@ -2485,12 +2485,12 @@ SELECT b.[Id]
       ,[ipconfig]
       ,b.[active]
       ,u.FirstName + ' '+ u.LastName as fleetowner
-      ,u.Id as fleetownerid
+      ,f.Id as fleetownerid
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   left outer join Types t on t.Id = statusid
   left outer join Company c on c.Id = CompanyId
   left outer join fleetowner f on f.id = FleetOwnerId 
-  left outer join Users u on u.Id = f.Id 
+  left outer join Users u on u.Id = f.userId 
 where (c.Id = @cmpId or @cmpId = -1)
 and(f.Id = @fleetownerId or @fleetownerId = -1)
   
@@ -4965,6 +4965,7 @@ SELECT fr.[Id]
       ,fr.[RouteId]
       ,fd.VehicleRegNo
       ,t.name vehicleType
+      ,t.Id as VehicleTypeId
       ,r.RouteName
       ,[EffectiveFrom]
       ,[EffectiveTill]
@@ -5128,10 +5129,10 @@ create procedure [dbo].[InsUpdDelFleetOwnerRouteFare](
            ,@Amount decimal
            ,@FareTypeId int
            ,@Active int
-           ,@FromDate datetime
-           ,@ToDate datetime
+            ,@FromDate datetime = null
+           ,@ToDate datetime = null
            ,@VehicleId int
-           ,@InsUpdDelFlag varchar(1)
+           --,@InsUpdDelFlag varchar(1)
 )                        
 as
 begin
@@ -5143,6 +5144,42 @@ where fromstopid = @FromStopId
 and tostopid = @ToStopid
 and routeId = @routeId
 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
+   SET [VehicleTypeId] = @VehicleTypeId
+      ,[Distance] = @Distance
+      ,[PerUnitPrice] = @PerUnitPrice
+      ,[Amount] = @Amount
+      ,[FareTypeId] = @FareTypeId
+      ,[Active] = @Active
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+      ,[VehicleId] = @VehicleId
+ WHERE [FORouteStopId] = @fsId
+ 
+ if @@rowcount  = 0 
+ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRouteFare]
+           ([FORouteStopId]
+           ,[VehicleTypeId]
+           ,[Distance]
+           ,[PerUnitPrice]
+           ,[Amount]
+           ,[FareTypeId]
+           ,[Active]
+           ,[FromDate]
+           ,[ToDate]
+           ,[VehicleId])
+     VALUES
+           (@fsId
+           ,@VehicleTypeId
+           ,@Distance
+           ,@PerUnitPrice
+           ,@Amount
+           ,@FareTypeId
+           ,@Active
+           ,@FromDate
+           ,@ToDate
+           ,@VehicleId)
+/*
 if @InsUpdDelFlag = 'I' 
 begin
 if @fsId = 0 
@@ -5185,10 +5222,10 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRouteFare]
  WHERE [FORouteStopId] = @fsId
 
 else
-if @InsUpdDelFlag = 'U' 
+if @InsUpdDelFlag = 'D' 
 DELETE FROM [POSDashboard].[dbo].[FleetOwnerRouteFare]
       WHERE [FORouteStopId] = @fsId
-
+*/
 
 end
 /****** Object:  Table [dbo].[FleetOwnerRoute]    Script Date: 05/02/2016 17:11:26 ******/
@@ -6649,7 +6686,9 @@ as
 begin
 SELECT
       src.name Src
+      ,src.Id FromStopId
 	  ,dest.name Dest
+	  ,dest.Id ToStopId
 	  ,fs.Id [FORouteStopId]
       ,[VehicleTypeId]
       ,f.[Distance]
@@ -7877,4 +7916,292 @@ INSERT INTO PnrToSeats
 END
 
 GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRequest](
+	[CurrentSystemInUse] [varchar](50) NOT NULL,
+	[howdidyouhearaboutus] [varchar](50) NOT NULL,
+	[SentNewProductsEmails] [bit] NOT NULL,
+	[Agreetotermsandconditions] [bit] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[FleetOwnerRequestDetails]    Script Date: 06/16/2016 18:21:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FleetOwnerRequestDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[PhoneNo] [varchar](50) NOT NULL,
+	[EmailAddress] [varchar](50) NOT NULL,
+	[CompanyName] [varchar](20) NOT NULL,
+	[Description] [varchar](50) NOT NULL,
+	[Title] [varchar](20) NOT NULL,
+	[FleetSize] [int] NOT NULL,
+	[CompanyEmployeSize] [int] NOT NULL,
+	[Gender] [int] NOT NULL,
+	[Address] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE[dbo].[InSupdFleetOwnerRequest](
+		  
+          @CurrentSystemInUse varchar(50),
+          @SentNewProductsEmails bit,
+      
+          @howdidyouhearaboutus varchar(50),
+          @Agreetotermsandconditions bit,
+           @insupdflag varchar(20)
+           )
+ 
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[FleetOwnerRequest]
+          
+            ([CurrentSystemInUse]
+            ,[SentNewProductsEmails] 
+             
+           ,[howdidyouhearaboutus] 
+          ,[Agreetotermsandconditions]
+               )
+     VALUES
+          (
+           @CurrentSystemInUse
+       , @SentNewProductsEmails 
+        
+         ,@howdidyouhearaboutus
+         ,@Agreetotermsandconditions
+          )
+          
+  
+          else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRequest]
+   SET
+      
+     [CurrentSystemInUse] = @CurrentSystemInUse
+     ,[SentNewProductsEmails]=@SentNewProductsEmails 
+      
+     ,[howdidyouhearaboutus]=@howdidyouhearaboutus
+     ,[Agreetotermsandconditions]=@Agreetotermsandconditions
+      
+
+END
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
+		   @FirstName varchar(50),   
+           @LastName varchar(50),
+           @PhoneNo  varchar(50),
+           @EmailAddress varchar(20),
+           @CompanyName varchar(20),
+           @Description varchar(50) ,
+           @Title varchar(20),
+           @CompanyEmployeSize int,
+           @FleetSize int,         
+           @Gender varchar(20),      
+           @Address varchar(50),
+           @insupdflag varchar(10)
+           )
+ 
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[FleetOwnerRequestDetails]
+           ([FirstName]
+           ,[LastName]
+           ,[PhoneNo]
+           ,[EmailAddress]
+           ,[CompanyName]
+           ,[Description]
+           ,[Title]
+           ,[CompanyEmployeSize]
+             ,[FleetSize]      
+              ,[Gender]        
+              ,[Address])
+     VALUES
+          (@FirstName    
+           ,@LastName
+          , @PhoneNo
+           ,@EmailAddress
+           ,@CompanyName
+           ,@Description 
+           ,@Title
+           ,@CompanyEmployeSize 
+           ,@FleetSize     
+          , @Gender   
+          , @Address)
+          
+  
+          else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
+   SET
+      [FirstName] = @FirstName
+      ,[LastName] = @LastName
+      ,[PhoneNo] = @PhoneNo
+      ,[EmailAddress] = @EmailAddress
+      ,[CompanyName] = @CompanyName
+      ,[Description] = @Description
+      ,[Title] = @Title
+      ,[CompanyEmployeSize] = @CompanyEmployeSize 
+      ,[FleetSize] = @FleetSize  
+       ,[Gender] = @Gender 
+       ,[Address]= @Address
+
+END
+
+GO
+
+Create procedure [dbo].[getNotficationConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,NotificationId
+,t.Name AlertType
+,case when a.NotificationId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [NotificationConfiguration] a on a.NotificationId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 9)
+
+
+END
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAlertsConfiguration]    Script Date: 06/20/2016 11:39:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetAlertsConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,AlertTypeId
+,t.Name AlertType
+,case when a.AlertTypeId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [AlertsConfiguration] a on a.AlertTypeId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 8)
+
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSRecords]    Script Date: 06/20/2016 16:29:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[InsUpdDelBTPOSRecords]
+@Id int = -1,
+@POSID int,
+@RecordData binary,
+@FileName varchar,
+@Description varchar,
+@CreatedDate datetime = null,
+@Downloaded datetime = null,
+@LastDownloadtime datetime = null,
+@IsDirty int,
+@insupddelflag varchar
+as
+begin
+
+declare @cnt  int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].[BTPOSRecords] 
+where POSID = @POSID
+
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[BTPOSRecords]
+           (
+POSID,
+RecordData ,
+[FileName] ,
+Description ,
+CreatedDate ,
+Downloaded ,
+LastDownloadtime ,
+IsDirty )
+
+     VALUES
+           (@POSID
+           ,@RecordData
+           ,@FileName
+           ,@Description
+           ,@CreatedDate
+           ,@Downloaded
+           ,@LastDownloadtime
+           ,@IsDirty)
+end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[BTPOSRecords]
+   SET [POSID] = @POSID
+      ,[RecordData] = @RecordData
+      ,[FileName] = @FileName
+      ,[Description] = @Description
+      ,[CreatedDate] = @CreatedDate
+      ,[Downloaded] = @Downloaded 
+      ,[LastDownloadtime] = @LastDownloadtime
+      ,[IsDirty] = @IsDirty
+ WHERE Id = @Id
+
+else
+  delete from [POSDashboard].[dbo].[BTPOSRecords]
+where POSID = @POSID
+
+
+End
+
 
