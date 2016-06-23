@@ -38,10 +38,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         if (User.FirstName == null) {
             alert('Please enter first name.');
+            return;
         }
 
         if (User.LastName == null) {
-            alert('Please enter first name.');
+            alert('Please enter last name.');
+            return;
         }
 
         if (User.Email == null) {

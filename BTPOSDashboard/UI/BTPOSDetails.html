@@ -338,20 +338,20 @@
 
 
                                                 <div class="table-container">
-                                                   
+
 
                                                        
                                                         <div class="actions">
                                                             <div class="col-md-4">
-                                                                Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()">
-                                                                    <option value="">All</option>
-                                                                </select>
-                                                            </div>
+                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()">
+    <option value="">All</option>
+</select>
+                                                        </div>
                                                             <div class="col-md-4">
-                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()">
-                                                                    <option value="">All</option>
-                                                                </select>
-                                                            </div>
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()">
+    <option value="">All</option>
+</select>
+                                                        </div>
 
                                                             <a href="AddNewBTPOSDetails.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button></a>
 
@@ -381,7 +381,7 @@
                                                         </div>-->
                                                         <!--<div style="height: 94%;" id="myGrid" class="ag-fresh"></div>-->
 
-                                                       
+
 
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">

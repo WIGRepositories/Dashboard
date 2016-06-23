@@ -246,7 +246,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 
 });
-
+        
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;

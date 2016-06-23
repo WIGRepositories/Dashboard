@@ -345,7 +345,7 @@
 
                                                         <div class="actions">
                                                             <a href="AddFleetowner.html">
-                                                                <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add FleetOwner</button>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add FleetOwner</button>
                                                             </a>
                                                         </div>
 
@@ -362,7 +362,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">First Name:<span class='require'>*</span></label>
+                                                                                    <label for="inputFirstName" class="control-label">FirstName:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -375,7 +375,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Last Name:</label>
+                                                                                    <label for="inputFirstName" class="control-label">LastName:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -388,12 +388,12 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Middle Name:</label>
+                                                                                    <label for="inputFirstName" class="control-label">MiddleName:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User.MiddleName" /></div>
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.MiddleName" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -403,7 +403,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Employee No:<span class='require'>*</span></label>
+                                                                                    <label for="inputFirstName" class="control-label">EmployeeNo:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -417,7 +417,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">E-mail:</label>
+                                                                                    <label for="inputFirstName" class="control-label">Email:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -430,7 +430,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Mobile No:</label>
+                                                                                    <label for="inputFirstName" class="control-label">MobileNo:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -495,7 +495,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">User Name:<span class='require'>*</span></label>
+                                                                                <label for="inputFirstName" class="control-label">UserName:<span class='require'>*</span></label>
 
                                                                             </div>
                                                                         </div>
@@ -522,7 +522,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Re Password:<span class='require'>*</span></label>
+                                                                                <label for="inputFirstName" class="control-label">RePassword:<span class='require'>*</span></label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
@@ -534,7 +534,7 @@
 
 
                                                                     <div class="modal-footer">
-                                                                        <button data-dismiss="modal" class="btn btn-primary" type="button" ng-click="save(User1, 'U');">Save</button>
+                                                                        <button data-dismiss="modal" class="btn btn-primary" type="button" ng-click="saveCmpChanges(User1, 'U');">Save</button>
                                                                         <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
                                                                     </div>
 
