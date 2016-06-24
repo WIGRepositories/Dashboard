@@ -7592,8 +7592,7 @@ CREATE TABLE [dbo].[Ex_Availableseats](
  CONSTRAINT [PK_Ex_Availableseats] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7626,8 +7625,7 @@ CREATE TABLE [dbo].[PassengerDetails](
  CONSTRAINT [PK__Passenge__88915FB01D7B6025] PRIMARY KEY CLUSTERED 
 (
 	[PassengerId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7661,8 +7659,7 @@ CREATE TABLE [dbo].[PaymentDetails](
  CONSTRAINT [PK__Transact__55433A6B214BF109] PRIMARY KEY CLUSTERED 
 (
 	[TransactionId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7703,8 +7700,7 @@ CREATE TABLE [dbo].[PnrDetails](
  CONSTRAINT [PK__Pnr_Deta__0A9420FF19AACF41] PRIMARY KEY CLUSTERED 
 (
 	[Pnr_ID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7738,8 +7734,7 @@ CREATE TABLE [dbo].[PnrToSeats](
  CONSTRAINT [PK_OnrToSeats] PRIMARY KEY CLUSTERED 
 (
 	[PnrSeatsID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7755,8 +7750,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[Getsp_Availableseats]    Script Date: 06/14/2016 11:19:23 
-******/
+/****** Object:  StoredProcedure [dbo].[Getsp_Availableseats]    Script Date: 06/14/2016 11:19:23 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7793,8 +7787,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPassengerDetails]    Script Date: 06/14/2016 11:16:59 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPassengerDetails]    Script Date: 06/14/2016 11:16:59 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7804,8 +7797,7 @@ GO
 CREATE PROCEDURE [dbo].[sp_InsPassengerDetails] 
 	 
      @Pnr_No varchar(20),@Pnr_Id int,
-     @Fname varchar(30),@Lname varchar(30), @Age int, @Sex int,@datetime varchar(30), @Identityproof 
-varchar(30)
+     @Fname varchar(30),@Lname varchar(30), @Age int, @Sex int,@datetime varchar(30), @Identityproof varchar(30)
 AS
 BEGIN
 	
@@ -7822,8 +7814,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPaymentDetails]    Script Date: 06/14/2016 11:17:19 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPaymentDetails]    Script Date: 06/14/2016 11:17:19 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7850,8 +7841,7 @@ END
 GO
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPnrDetails]    Script Date: 06/14/2016 11:17:29 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrDetails]    Script Date: 06/14/2016 11:17:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7880,11 +7870,9 @@ BEGIN
 declare @startId int
 	SET NOCOUNT ON
 INSERT INTO PnrDetails
-          (Pnr_No,No_Seats,cost,dateandtime,src,dest,vehicle_No,JourneyDate, ArrivalTime, 
-DeptTime,fleetOwnerId,RouteId,JourneyType,AuthCode) 
+          (Pnr_No,No_Seats,cost,dateandtime,src,dest,vehicle_No,JourneyDate, ArrivalTime, DeptTime,fleetOwnerId,RouteId,JourneyType,AuthCode) 
      VALUES 
-          (@Pnr_No,@No_Seats,@cost,@dateandtime,@src,@dest,@vehicle_No,@JourneyDate, @ArrivalTime, 
-@DeptTime,@fleetOwnerId,@RouteId,@JourneyType,@AuthCode) 
+          (@Pnr_No,@No_Seats,@cost,@dateandtime,@src,@dest,@vehicle_No,@JourneyDate, @ArrivalTime, @DeptTime,@fleetOwnerId,@RouteId,@JourneyType,@AuthCode) 
           
           SELECT @LastInsPnrID = SCOPE_IDENTITY()
          	
@@ -7894,8 +7882,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPnrToSeats]    Script Date: 06/14/2016 11:17:46 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrToSeats]    Script Date: 06/14/2016 11:17:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7975,7 +7962,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InSupdFleetOwnerRequest](
+CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequest](
 		  
           @CurrentSystemInUse varchar(50),
           @SentNewProductsEmails bit,
@@ -8024,7 +8011,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
+CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
 		   @FirstName varchar(50),   
            @LastName varchar(50),
            @PhoneNo  varchar(50),
@@ -8285,4 +8272,33 @@ CREATE TABLE [dbo].[NotificationConfiguration](
 	[NotificationId] [int] NOT NULL
 ) ON [PRIMARY]
 
+
+
+
 GO
+/****** Object:  StoredProcedure [dbo].[ValidateFleetOwnerCode]    Script Date: 06/22/2016 18:49:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[ValidateFleetOwnerCode]
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	
+	--select @result = COUNT(*) from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+    select  
+    fo.Id,
+    FleetOwnerCode,
+    Email,
+    fo.UserId,
+    u.Id 
+    from FleetOwner fo
+    inner join Users u on u.Id=fo.UserId 
+    
+    -- Insert statements for procedure here
+   --return @result
+END
+
