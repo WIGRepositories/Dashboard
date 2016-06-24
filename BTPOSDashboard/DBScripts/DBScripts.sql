@@ -5306,24 +5306,7 @@ order by RouteName
 
 end
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[ValidateFleetOwnerCode]
-	@fleetownercode varchar(10),
-	@result int out 
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	
-	select @result = COUNT(*) from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
 
-    -- Insert statements for procedure here
-	return @result
-END
 
 GO
 SET ANSI_NULLS ON
@@ -8074,57 +8057,13 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
 END
 
 GO
-
-Create procedure [dbo].[getNotficationConfiguration]
-(@roleId int = -1)
-as
-begin
-
-select a.Id atypeid,r.Name,r.Id as roleid,NotificationId
-,t.Name AlertType
-,case when a.NotificationId IS null then 0 else 1 end as assigned
- from Types t
-left outer join [NotificationConfiguration] a on a.NotificationId = t.Id 
-left outer join Roles r on a.RoleId = r.id
-where ((r.Id = @roleId or @roleId = -1)
-and t.TypeGroupId = 9)
-
-
-END
-
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetAlertsConfiguration]    Script Date: 06/20/2016 11:39:01 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create procedure [dbo].[GetAlertsConfiguration]
-(@roleId int = -1)
-as
-begin
-
-select a.Id atypeid,r.Name,r.Id as roleid,AlertTypeId
-,t.Name AlertType
-,case when a.AlertTypeId IS null then 0 else 1 end as assigned
- from Types t
-left outer join [AlertsConfiguration] a on a.AlertTypeId = t.Id 
-left outer join Roles r on a.RoleId = r.id
-where ((r.Id = @roleId or @roleId = -1)
-and t.TypeGroupId = 8)
-
-
-END
-
-
-GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSRecords]    Script Date: 06/20/2016 16:29:46 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[InsUpdDelBTPOSRecords]
+CREATE PROCEDURE [dbo].[InsUpdDelBTPOSRecords]
 @Id int = -1,
 @POSID int,
 @RecordData binary,
@@ -8190,7 +8129,75 @@ where POSID = @POSID
 
 
 End
+GO
 
+Go
+
+
+/****** Object:  Table [dbo].[AlertsConfiguration]    Script Date: 06/20/2016 11:53:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[AlertsConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[AlertTypeId] [int] NOT NULL,
+	[AlertItems] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+/****** Object:  Table [dbo].[NotificationConfiguration]    Script Date: 06/20/2016 11:55:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[NotificationConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[NotificationId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  StoredProcedure [dbo].[ValidateFleetOwnerCode]    Script Date: 06/22/2016 18:49:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[ValidateFleetOwnerCode]
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	
+	--select @result = COUNT(*) from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+    select  
+    fo.Id,
+    FleetOwnerCode,
+    Email,
+    fo.UserId,
+    u.Id 
+    from FleetOwner fo
+    inner join Users u on u.Id=fo.UserId 
+    
+    -- Insert statements for procedure here
+   --return @result
+END
+GO
 
 Create procedure [dbo].[getNotficationConfiguration]
 (@roleId int = -1)
@@ -8232,73 +8239,6 @@ and t.TypeGroupId = 8)
 
 
 END
-Go
-
-
-/****** Object:  Table [dbo].[AlertsConfiguration]    Script Date: 06/20/2016 11:53:06 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[AlertsConfiguration](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RoleId] [int] NOT NULL,
-	[AlertTypeId] [int] NOT NULL,
-	[AlertItems] [varchar](50) NULL
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-
-
-/****** Object:  Table [dbo].[NotificationConfiguration]    Script Date: 06/20/2016 11:55:35 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[NotificationConfiguration](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RoleId] [int] NOT NULL,
-	[NotificationId] [int] NOT NULL
-) ON [PRIMARY]
-
-
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[ValidateFleetOwnerCode]    Script Date: 06/22/2016 18:49:08 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER PROCEDURE [dbo].[ValidateFleetOwnerCode]
-	
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	
-	--select @result = COUNT(*) from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
-    select  
-    fo.Id,
-    FleetOwnerCode,
-    Email,
-    fo.UserId,
-    u.Id 
-    from FleetOwner fo
-    inner join Users u on u.Id=fo.UserId 
-    
-    -- Insert statements for procedure here
-   --return @result
-END
-
