@@ -17,9 +17,9 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetFleetOwner();">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetFleetOwner();" ng-model="FleetOwner">
     <div>
-       
+
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
@@ -156,7 +156,7 @@
                                 </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li ><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
                                 <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                                 <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
                                 <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
@@ -345,7 +345,7 @@
 
                                                         <div class="actions">
                                                             <a href="AddFleetowner.html">
-                                                                <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add FleetOwner</button>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add FleetOwner</button>
                                                             </a>
                                                         </div>
 
@@ -362,7 +362,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">First Name:<span class='require'>*</span></label>
+                                                                                    <label for="inputFirstName" class="control-label">FirstName:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -375,7 +375,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Last Name:</label>
+                                                                                    <label for="inputFirstName" class="control-label">LastName:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -388,12 +388,12 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Middle Name:</label>
+                                                                                    <label for="inputFirstName" class="control-label">MiddleName:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User.MiddleName" /></div>
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.MiddleName" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -403,7 +403,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Employee No:<span class='require'>*</span></label>
+                                                                                    <label for="inputFirstName" class="control-label">EmployeeNo:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -417,7 +417,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">E-mail:</label>
+                                                                                    <label for="inputFirstName" class="control-label">Email:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -430,7 +430,7 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Mobile No:</label>
+                                                                                    <label for="inputFirstName" class="control-label">MobileNo:</label>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-5">
@@ -495,7 +495,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">User Name:<span class='require'>*</span></label>
+                                                                                <label for="inputFirstName" class="control-label">UserName:<span class='require'>*</span></label>
 
                                                                             </div>
                                                                         </div>
@@ -522,7 +522,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Re Password:<span class='require'>*</span></label>
+                                                                                <label for="inputFirstName" class="control-label">RePassword:<span class='require'>*</span></label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
@@ -534,7 +534,7 @@
 
 
                                                                     <div class="modal-footer">
-                                                                        <button data-dismiss="modal" class="btn btn-primary" type="button" ng-click="save(User1, 'U');">Save</button>
+                                                                        <button data-dismiss="modal" class="btn btn-primary" type="button" ng-click="saveCmpChanges(User1, 'U');">Save</button>
                                                                         <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
                                                                     </div>
 
@@ -564,7 +564,7 @@
 
                                                             <td>{{F.Name}}</td>
                                                             <td>{{F.Company}}</td>
-                                                            <td>{{F.FleetOwnerCode}}</td>                                                            
+                                                            <td>{{F.FleetOwnerCode}}</td>
                                                             <td><input type="checkbox" checked /></td>
                                                             <td>
                                                                 <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(F);">
@@ -593,7 +593,7 @@
                         <!--END FOOTER-->
                     </div>
 
-                    
+
 
                     <!--BEGIN FOOTER-->
                     <div id="footer">
@@ -613,11 +613,11 @@
             </div>
             <div class="modal-body">
                 <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                    <li ng-repeat="item in items">
+                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -632,34 +632,33 @@
 
 
     <!--END CONTENT-->
-   
-   
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
-<script src="js/angular.js"></script>
-<script src="js/ngStorage.js"></script>
 
-<script src="js/FleetOwners.js"></script>
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+
+
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+
+    <script src="js/FleetOwners.js"></script>
     <!--<script src="js/source.js"></script>-->
     <!--<script src="js/Alerts.js"></script>
 

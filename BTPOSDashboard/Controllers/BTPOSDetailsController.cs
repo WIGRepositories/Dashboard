@@ -42,37 +42,37 @@ namespace BTPOSDashboardAPI.Controllers
             
             return Tbl;
         }
-        [HttpGet]
+    //    [HttpGet]
 
-        public DataTable GetBTPOSDetails1(int cmpId, int fId)
+    //    public DataTable GetBTPOSDetails1(int cmpId, int fId)
            
-    {
+    //{
 
-        DataTable Tbl = new DataTable();
+    //    DataTable Tbl = new DataTable();
 
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+    //        //connect to database
+    //        SqlConnection conn = new SqlConnection();
+    //        //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+    //        conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getBTPOSDetails1";
-            cmd.Connection = conn;
+    //        SqlCommand cmd = new SqlCommand();
+    //        cmd.CommandType = CommandType.StoredProcedure;
+    //        cmd.CommandText = "getBTPOSDetails1";
+    //        cmd.Connection = conn;
 
-            SqlParameter cmp = new SqlParameter("@pageno", SqlDbType.Int);
-            cmp.Value = cmpId;
-            cmd.Parameters.Add(cmp);
+    //        SqlParameter cmp = new SqlParameter("@pageno", SqlDbType.Int);
+    //        cmp.Value = cmpId;
+    //        cmd.Parameters.Add(cmp);
 
-            SqlParameter fo = new SqlParameter("@pagesize", SqlDbType.Int);
-            fo.Value = fId;
-            cmd.Parameters.Add(fo);
+    //        SqlParameter fo = new SqlParameter("@pagesize", SqlDbType.Int);
+    //        fo.Value = fId;
+    //        cmd.Parameters.Add(fo);
 
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(Tbl);
+    //        SqlDataAdapter db = new SqlDataAdapter(cmd);
+    //        db.Fill(Tbl);
 
-            return Tbl;
-        }
+    //        return Tbl;
+    //    }
 
         
         
@@ -102,8 +102,8 @@ namespace BTPOSDashboardAPI.Controllers
                 foreach (BTPOSDetails n in posList)
                 {
                     SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
-                    ba.Value = n.Id;
-                    cmd.Parameters.Add(ba);
+                     ba.Value = n.Id;
+                     cmd.Parameters.Add(ba);
 
                     SqlParameter bb = new SqlParameter("@CompanyId", SqlDbType.Int);
                     bb.Value = n.CompanyId;
@@ -135,13 +135,13 @@ namespace BTPOSDashboardAPI.Controllers
                     fo.Value = n.fleetownerid;
                     cmd.Parameters.Add(fo);
 
-                    SqlParameter fo1 = new SqlParameter("@pageno", SqlDbType.Int);
-                    fo1.Value = n.fleetownerid;
-                    cmd.Parameters.Add(fo1);
+                    //SqlParameter fo1 = new SqlParameter("@pageno", SqlDbType.Int);
+                    //fo1.Value = n.fleetownerid;
+                    //cmd.Parameters.Add(fo1);
 
-                    SqlParameter fo2 = new SqlParameter("@pagesize", SqlDbType.Int);
-                    fo2.Value = n.fleetownerid;
-                    cmd.Parameters.Add(fo2);
+                    //SqlParameter fo2 = new SqlParameter("@pagesize", SqlDbType.Int);
+                    //fo2.Value = n.fleetownerid;
+                    //cmd.Parameters.Add(fo2);
 
                     SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                     insupdflag.Value = n.insupdflag;
@@ -165,6 +165,76 @@ namespace BTPOSDashboardAPI.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
+
+
+        //[HttpPost]
+
+        //public HttpResponseMessage SaveBTPOSDetails1(IEnumerable<BTPOSDetails> posList)
+        //{
+        //    SqlConnection conn = new SqlConnection();
+        //    try
+        //    {
+
+        //        // BTPOSDetails n = new BTPOSDetails();
+
+        //        //connect to database
+
+        //        // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
+        //        conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+        //        SqlCommand cmd1 = new SqlCommand();
+        //        cmd1.CommandType = CommandType.StoredProcedure;
+        //        cmd1.CommandText = "InsUpdDelBTPOSDetails";
+        //        cmd1.Connection = conn;
+
+        //        conn.Open();
+
+        //        foreach (BTPOSDetails n in posList)
+        //        {
+        //            SqlParameter ba = new SqlParameter("@Id", SqlDbType.Int);
+        //            ba.Value = n.Id;
+        //            cmd1.Parameters.Add(ba);
+
+        //            SqlParameter bd = new SqlParameter("@IMEI", SqlDbType.VarChar, 20);
+        //            bd.Value = n.IMEI;
+        //            cmd1.Parameters.Add(bd);
+
+        //            SqlParameter ipconfig = new SqlParameter("@ipconfig", SqlDbType.VarChar, 20);
+        //            ipconfig.Value = n.ipconfig;
+        //            cmd1.Parameters.Add(ipconfig);
+
+        //            SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
+        //            active.Value = 1;
+        //            cmd1.Parameters.Add(active);
+
+        //            SqlParameter fo = new SqlParameter("@fleetowner", SqlDbType.Int);
+        //            fo.Value = n.fleetownerid;
+        //            cmd1.Parameters.Add(fo);
+
+        //            SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
+        //            insupdflag.Value = n.insupdflag;
+        //            cmd1.Parameters.Add(insupdflag);
+
+        //            cmd1.ExecuteScalar();
+
+        //            cmd1.Parameters.Clear();
+        //        }
+        //        conn.Close();
+
+        //        return new HttpResponseMessage(HttpStatusCode.OK);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (conn != null && conn.State == ConnectionState.Open)
+        //        {
+        //            conn.Close();
+        //        }
+        //        string str = ex.Message;
+        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+        //    }
+        //}
+              
+
         public void Options()
         {
         }
