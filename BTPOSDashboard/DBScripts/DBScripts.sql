@@ -7975,7 +7975,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE[dbo].[InSupdFleetOwnerRequest](
+CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequest](
 		  
           @CurrentSystemInUse varchar(50),
           @SentNewProductsEmails bit,
@@ -8024,7 +8024,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
+CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
 		   @FirstName varchar(50),   
            @LastName varchar(50),
            @PhoneNo  varchar(50),
@@ -8085,3 +8085,42 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
        ,[Address]= @Address
 
 END
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[GetAvailableServices] 
+@sourceId int,
+@destinationId int,
+@starttime datetime = null,
+@endtime datetime = null,
+@fromdate datetime = null,
+@enddate datetime = null
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT src.Name src, dest.Name dest,
+	c.name,frf.amount
+	,t.name vehicletype	
+	from routestops rs
+	inner join fleetownerroutestop frs on frs.routestopid = rs.id
+	inner join fleetownerroutefare frf on frf.foroutestopid = frs.id
+	inner join stops src on src.id = rs.fromstopid
+	inner join stops dest on dest.id = rs.tostopid
+	inner join fleetowner f on f.id = frs.fleetownerid 
+	inner join company c on c.id = f.companyId
+	inner join fleetdetails fd on fd.id = frf.vehicleid
+	inner join types t on t.id = fd.vehicletypeid
+	where rs.FromStopId = @sourceId	and rs.ToStopId = @destinationId	
+	
+	
+END
+
+Go
