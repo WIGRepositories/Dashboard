@@ -355,25 +355,23 @@
 
 
                                                 <div class="table-container">
-                                                    <div class="row mbm">
-
-                                                        <div>
-                                                           
-                                                                License Category: <select ng-options="s.Name for s in lcat track by s.Id" ng-model="s" ng-change="getLicenseTypes()">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                           
-                                                        </div>
-                                                        <div>
-                                                      
-                                                                License Type: <select ng-options="l.LicenseType for l in lTypes track by l.Id" ng-model="l" ng-change="GetLicenseFeatures()">
-                                                                    <option value="">Select</option>
-                                                                </select>
-                                                  
-                                                        </div>
-                                                    </div>
+                                                    
 
                                                     <div class="actions">
+                                                        <div class="col-lg-4">
+
+                                                            License Category: <select ng-options="s.Name for s in lcat track by s.Id" ng-model="s" ng-change="getLicenseTypes()">
+                                                                <option value="">Select</option>
+                                                            </select>
+
+                                                        </div>
+                                                        <div class="col-lg-4">
+
+                                                            License Type: <select ng-options="l.LicenseType for l in lTypes track by l.Id" ng-model="l" ng-change="GetLicenseFeatures()">
+                                                                <option value="">Select</option>
+                                                            </select>
+
+                                                        </div>
                                                         <button type="button" data-target="#Modal-header-primary-New" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add Feature</button>
 
                                                     </div>

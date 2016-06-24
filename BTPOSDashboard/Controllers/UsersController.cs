@@ -27,6 +27,8 @@ namespace BTPOSDashboardAPI.Controllers
             SqlParameter cmpid = new SqlParameter("@cmpId", SqlDbType.Int);
             cmpid.Value = cmpId;
             cmd.Parameters.Add(cmpid);
+
+           
           
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
