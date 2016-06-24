@@ -144,8 +144,17 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             data: Fleet
         }
 
-        $http(req).then(function (res) {
-            alert('Sucessfully saved!');
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
     }
 

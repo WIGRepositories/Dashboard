@@ -25,7 +25,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
 
         $http.get('http://localhost:1476/api/BTPOSConfig/GetFleeBTPosDetails?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id + '&BTPosId=' + $scope.b.Id).then(function (res, data) {
-            $scope.Btpos = res.data;
+            $scope.BTPos = res.data;
         });
     }
 
@@ -136,12 +136,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: newFleetPOS
         }
 
-        $http(req).then(function (res) {
-            alert('Sucessfully saved!');
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
-
-
-
     }
 
 });

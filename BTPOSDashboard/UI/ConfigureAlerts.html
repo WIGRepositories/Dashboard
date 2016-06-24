@@ -335,7 +335,7 @@
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Alerts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Alerts Configuration </a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li class="active">Action Tables</li>
+                           
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -353,7 +353,7 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-5">
-                                                            Roles: <select ng-options="s.Name for s in GetRoles track by s.Id" ng-model="s" ng-change="GetAlertsConfiguration()">
+                                                            Roles:<select ng-options="r.Name for r in GetRoles track by r.Names" ng-model="r" ng-change="GetAlertsConfiguration();">
                                                             <option value="">All</option>
                                                             </select>
                                                         </div>
@@ -363,10 +363,6 @@
                                                             </select>
                                                         </div>-->
 
-
-
-
-
                                                     </div>
                                                 </div>
 
@@ -375,10 +371,9 @@
                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
                                                         <tr>
-
-                                                            <th>Id</th>
-                                                            <th>RoleId</th>
-                                                            <th>Alert TypeId</th>
+                                                            <th>Active</th>
+                                                            <!--<th>Alert Items</th>-->                                                            
+                                                            <th>Alert Type</th>                                                          
 
                                                             <!--<th>List Key</th>
                                                             <th>List value</th>-->
@@ -390,14 +385,9 @@
 
                                                         <tr ng-repeat="A in AlertsConfiguration">
 
-
-                                                            <td>{{A.Id}}</td>
-                                                            <td>{{A.RoleId}}</td>
-                                                            <td>{{A.AlertTypeId}}</td>
-
-
-                                                            <!--<td>{{T.ListKey}}</td>
-                                                            <td>{{T.Listvalue}}</td>-->
+                                                            <td><input type="checkBox" ng-checked="T.Active"/></td>
+                                                            <!--<td>{{Alert Item}}</td>-->
+                                                           <td>{{A.AlertType}}</td>
 
                                                         </tr>
                                                     </tbody>
@@ -415,15 +405,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
@@ -432,6 +413,26 @@
                 </div>
                 <!--END PAGE WRAPPER-->
             </div>
+            <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+                <div class="modal-header">
+                    <h3 class="modal-title">Save confirmation!</h3>
+                </div>
+                <div class="modal-body">
+                    <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+                    {{mssg}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+
+            </script>
         </div>
         <script src="js/jquery-1.10.2.min.js"></script>
         <script src="js/jquery-migrate-1.2.1.min.js"></script>

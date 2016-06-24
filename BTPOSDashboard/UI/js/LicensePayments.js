@@ -7,7 +7,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
         $scope.Group = response.data;
 
     });
-    $scope.save = function (Group) {
+    $scope.save = function (Group,flag) {
       
         var Group = {
             expiryOn: Group.expiryOn,
@@ -18,7 +18,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
             licenseType: Group.licenseType,
             paidon: Group.paidon,
             renewedon: Group.renewedon,
-            transId: Group.transId
+            transId: Group.transId,
+            insupdflag:flag
         }
 
         var req = {
@@ -27,7 +28,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
             data: Group
         }
         $http(req).then(function (response) {
-          
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
     };
 });

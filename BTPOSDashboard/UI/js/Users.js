@@ -38,10 +38,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         if (User.FirstName == null) {
             alert('Please enter first name.');
+            return;
         }
 
         if (User.LastName == null) {
-            alert('Please enter first name.');
+            alert('Please enter last name.');
+            return;
         }
 
         if (User.Email == null) {
@@ -89,9 +91,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: User
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
 
-        });
+            $scope.showDialog("Saved successfully!");
+
+        }
+ , function (errres) {
+     var errdata = errres.data;
+     var errmssg = "";
+     errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+     $scope.showDialog(errmssg);
+
+ });
 
 
         $scope.User1 = null;

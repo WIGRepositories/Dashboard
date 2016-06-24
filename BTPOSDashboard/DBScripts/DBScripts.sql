@@ -7592,8 +7592,7 @@ CREATE TABLE [dbo].[Ex_Availableseats](
  CONSTRAINT [PK_Ex_Availableseats] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7626,8 +7625,7 @@ CREATE TABLE [dbo].[PassengerDetails](
  CONSTRAINT [PK__Passenge__88915FB01D7B6025] PRIMARY KEY CLUSTERED 
 (
 	[PassengerId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7661,8 +7659,7 @@ CREATE TABLE [dbo].[PaymentDetails](
  CONSTRAINT [PK__Transact__55433A6B214BF109] PRIMARY KEY CLUSTERED 
 (
 	[TransactionId] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7703,8 +7700,7 @@ CREATE TABLE [dbo].[PnrDetails](
  CONSTRAINT [PK__Pnr_Deta__0A9420FF19AACF41] PRIMARY KEY CLUSTERED 
 (
 	[Pnr_ID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7738,8 +7734,7 @@ CREATE TABLE [dbo].[PnrToSeats](
  CONSTRAINT [PK_OnrToSeats] PRIMARY KEY CLUSTERED 
 (
 	[PnrSeatsID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, 
-ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
@@ -7755,8 +7750,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[Getsp_Availableseats]    Script Date: 06/14/2016 11:19:23 
-******/
+/****** Object:  StoredProcedure [dbo].[Getsp_Availableseats]    Script Date: 06/14/2016 11:19:23 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7793,8 +7787,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPassengerDetails]    Script Date: 06/14/2016 11:16:59 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPassengerDetails]    Script Date: 06/14/2016 11:16:59 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7804,8 +7797,7 @@ GO
 CREATE PROCEDURE [dbo].[sp_InsPassengerDetails] 
 	 
      @Pnr_No varchar(20),@Pnr_Id int,
-     @Fname varchar(30),@Lname varchar(30), @Age int, @Sex int,@datetime varchar(30), @Identityproof 
-varchar(30)
+     @Fname varchar(30),@Lname varchar(30), @Age int, @Sex int,@datetime varchar(30), @Identityproof varchar(30)
 AS
 BEGIN
 	
@@ -7822,8 +7814,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPaymentDetails]    Script Date: 06/14/2016 11:17:19 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPaymentDetails]    Script Date: 06/14/2016 11:17:19 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7850,8 +7841,7 @@ END
 GO
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPnrDetails]    Script Date: 06/14/2016 11:17:29 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrDetails]    Script Date: 06/14/2016 11:17:29 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7880,11 +7870,9 @@ BEGIN
 declare @startId int
 	SET NOCOUNT ON
 INSERT INTO PnrDetails
-          (Pnr_No,No_Seats,cost,dateandtime,src,dest,vehicle_No,JourneyDate, ArrivalTime, 
-DeptTime,fleetOwnerId,RouteId,JourneyType,AuthCode) 
+          (Pnr_No,No_Seats,cost,dateandtime,src,dest,vehicle_No,JourneyDate, ArrivalTime, DeptTime,fleetOwnerId,RouteId,JourneyType,AuthCode) 
      VALUES 
-          (@Pnr_No,@No_Seats,@cost,@dateandtime,@src,@dest,@vehicle_No,@JourneyDate, @ArrivalTime, 
-@DeptTime,@fleetOwnerId,@RouteId,@JourneyType,@AuthCode) 
+          (@Pnr_No,@No_Seats,@cost,@dateandtime,@src,@dest,@vehicle_No,@JourneyDate, @ArrivalTime, @DeptTime,@fleetOwnerId,@RouteId,@JourneyType,@AuthCode) 
           
           SELECT @LastInsPnrID = SCOPE_IDENTITY()
          	
@@ -7894,8 +7882,7 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[sp_InsPnrToSeats]    Script Date: 06/14/2016 11:17:46 
-******/
+/****** Object:  StoredProcedure [dbo].[sp_InsPnrToSeats]    Script Date: 06/14/2016 11:17:46 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -8088,39 +8075,201 @@ END
 
 GO
 
+Create procedure [dbo].[getNotficationConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,NotificationId
+,t.Name AlertType
+,case when a.NotificationId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [NotificationConfiguration] a on a.NotificationId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 9)
+
+
+END
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAlertsConfiguration]    Script Date: 06/20/2016 11:39:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create PROCEDURE [dbo].[GetAvailableServices] 
-@sourceId int,
-@destinationId int,
-@starttime datetime = null,
-@endtime datetime = null,
-@fromdate datetime = null,
-@enddate datetime = null
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
+create procedure [dbo].[GetAlertsConfiguration]
+(@roleId int = -1)
+as
+begin
 
-    -- Insert statements for procedure here
-	SELECT src.Name src, dest.Name dest,
-	c.name,frf.amount
-	,t.name vehicletype	
-	from routestops rs
-	inner join fleetownerroutestop frs on frs.routestopid = rs.id
-	inner join fleetownerroutefare frf on frf.foroutestopid = frs.id
-	inner join stops src on src.id = rs.fromstopid
-	inner join stops dest on dest.id = rs.tostopid
-	inner join fleetowner f on f.id = frs.fleetownerid 
-	inner join company c on c.id = f.companyId
-	inner join fleetdetails fd on fd.id = frf.vehicleid
-	inner join types t on t.id = fd.vehicletypeid
-	where rs.FromStopId = @sourceId	and rs.ToStopId = @destinationId	
-	
-	
+select a.Id atypeid,r.Name,r.Id as roleid,AlertTypeId
+,t.Name AlertType
+,case when a.AlertTypeId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [AlertsConfiguration] a on a.AlertTypeId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 8)
+
+
 END
 
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSRecords]    Script Date: 06/20/2016 16:29:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[InsUpdDelBTPOSRecords]
+@Id int = -1,
+@POSID int,
+@RecordData binary,
+@FileName varchar,
+@Description varchar,
+@CreatedDate datetime = null,
+@Downloaded datetime = null,
+@LastDownloadtime datetime = null,
+@IsDirty int,
+@insupddelflag varchar
+as
+begin
+
+declare @cnt  int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].[BTPOSRecords] 
+where POSID = @POSID
+
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[BTPOSRecords]
+           (
+POSID,
+RecordData ,
+[FileName] ,
+Description ,
+CreatedDate ,
+Downloaded ,
+LastDownloadtime ,
+IsDirty )
+
+     VALUES
+           (@POSID
+           ,@RecordData
+           ,@FileName
+           ,@Description
+           ,@CreatedDate
+           ,@Downloaded
+           ,@LastDownloadtime
+           ,@IsDirty)
+end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[BTPOSRecords]
+   SET [POSID] = @POSID
+      ,[RecordData] = @RecordData
+      ,[FileName] = @FileName
+      ,[Description] = @Description
+      ,[CreatedDate] = @CreatedDate
+      ,[Downloaded] = @Downloaded 
+      ,[LastDownloadtime] = @LastDownloadtime
+      ,[IsDirty] = @IsDirty
+ WHERE Id = @Id
+
+else
+  delete from [POSDashboard].[dbo].[BTPOSRecords]
+where POSID = @POSID
+
+
+End
+
+
+Create procedure [dbo].[getNotficationConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,NotificationId
+,t.Name AlertType
+,case when a.NotificationId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [NotificationConfiguration] a on a.NotificationId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 9)
+
+
+END
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetAlertsConfiguration]    Script Date: 06/20/2016 11:39:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetAlertsConfiguration]
+(@roleId int = -1)
+as
+begin
+
+select a.Id atypeid,r.Name,r.Id as roleid,AlertTypeId
+,t.Name AlertType
+,case when a.AlertTypeId IS null then 0 else 1 end as assigned
+ from Types t
+left outer join [AlertsConfiguration] a on a.AlertTypeId = t.Id 
+left outer join Roles r on a.RoleId = r.id
+where ((r.Id = @roleId or @roleId = -1)
+and t.TypeGroupId = 8)
+
+
+END
 Go
+
+
+/****** Object:  Table [dbo].[AlertsConfiguration]    Script Date: 06/20/2016 11:53:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[AlertsConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[AlertTypeId] [int] NOT NULL,
+	[AlertItems] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+/****** Object:  Table [dbo].[NotificationConfiguration]    Script Date: 06/20/2016 11:55:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[NotificationConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[RoleId] [int] NOT NULL,
+	[NotificationId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO

@@ -2,7 +2,9 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname
+    //$scope.uname = $localStorage.uname
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.GetFleeBTPosDetails = function () {
 
@@ -143,8 +145,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: newFleetPOS
         }
 
-        $http(req).then(function (res) {
-            alert('Sucessfully saved!');
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
 
 

@@ -1,6 +1,6 @@
-var app = angular.module('myApp', ['ngStorage'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname;
 
     btposlist = [];
@@ -36,12 +36,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1').then(function (response, req) {
             $scope.BTPOS1 = response.data;
+         
             //  $localStorage.BTPOSOld = response.data;
+            $scope.setPage();
         })
 
         var vc = {
             needfleetowners: '1',
-            cmpId: cmpId
+            cmpId: ($scope.cmp == null) ? '-1': $scope.cmp.Id
         };
 
         var req = {
@@ -131,9 +133,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: btposlist,
 
         }).success(function (data, status, headers, config) {
-            alert('saved btpos details successfully');
+            $scope.showDialog('saved btpos details successfully');
+            btposlist = [];
         }).error(function (ata, status, headers, config) {
-            alert(ata);
+            var errdata = ata;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
 
    }
@@ -142,14 +148,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.save = function (Group, flag) {
       
                 var newpos = {
-                    Id: Group.Id,
-                    CompanyId: ($scope.cmp1 ==null) ? Group.CompanyId : $scope.cmp1.Id,                    
+                    Id: (flag == 'I') ? '-1' : Group.Id,
+                    CompanyId: (flag == 'I') ? '1' : $scope.cmp.Id,
+                    //GroupId: Group.GroupId,
                     IMEI: Group.IMEI,
                     POSID: Group.POSID,
-                    StatusId: Group.Status.Id,
+                    StatusId: (flag == 'I') ? '1' : Group.StatusId,
                     ipconfig: Group.ipconfig,
                     active: 1,//Group.ipconfig,
-                    fleetownerid: ($scope.s1 == null) ? null: $scope.s1.Id,
+                    fleetownerid: (flag == 'I') ? null : $scope.s.Id,
                     insupdflag: flag
                 }
                 btposlist.push(newpos);
@@ -161,11 +168,33 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 }
 
                 $http(req).then(function (response) {
-                    alert('saved btpos details successfully');                    
+
+                    $scope.showDialog("Saved successfully!");
+
+                    $scope.Group = null;
+                    btposlist = [];
+
+                }, function (errres) {
+                    var errdata = errres.data;
+                    var errmssg = "";
+                    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+                    $scope.showDialog(errmssg);
                 });
-      
         $scope.currGroup = null;
     };
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
 
 
     $scope.setBTPOS = function (grp) {
@@ -174,42 +203,58 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=1').then(function (res, data) {
             $scope.Types = res.data;
         });
-        //$scope.cmp1.Id = grp.CompanyId;
-        $scope.GetPopupFleetOwners(grp);
     };
 
     $scope.clearGroup = function () {
         $scope.currGroup = null;
     }
 
-    $scope.GetPopupFleetOwners = function (g) {
-        var cId = g.CompanyId;
-        if (cId == null) {
-            $scope.cmpdata1 = null;           
-            return;
-        }
-        var vc = {
-            needfleetowners: '1',
-            cmpId: cId
-        };
-
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-
-            data: vc
 
 
-        }
-        $http(req).then(function (res) {
-            $scope.cmpdata1 = res.data;
-        });
+    //$scope.setPage = function () {
 
-        if (g.CompanyId == $scope.currGroup.CompanyId)
-            s1.value = $scope.currGroup.fleetownerid;
-    }
+    //    $scope.cmpdata = null;
+    //    $scope.BTPOS1 = null;
 
-   
+    //    var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+    //    var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+
+    //    $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails1?fId=-1').then(function (response, req) {
+    //        $scope.BTPOS1 = response.data;
+    //    })
+
+    //    var vc = {
+    //        needfleetowners: '1',
+    //        cmpId: $scope.cmp.Id
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+
+    //        data: vc
+
+
+    //    }
+    //    $http(req).then(function (res) {
+    //        $scope.cmpdata = res.data;
+    //    });
+
+    //};
+
+
+});
+        
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

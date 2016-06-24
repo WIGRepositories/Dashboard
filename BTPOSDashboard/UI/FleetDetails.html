@@ -423,14 +423,14 @@
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-6">
                                                                             <label for="Name" class="col-md-8 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
 
-
+                                                                            <div class="col-md-6">
                                                                             <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
                                                                                 <input type="text" class="form-control" value="{{currVD.MonthAndYrOfMfr}}" ng-model="initdata.newfleet.Mfr" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                                             </div>
-
+                                                                                </div>
                                                                         </div>
 
                                                                     </div>
@@ -466,8 +466,8 @@
                                                                             <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="Name" class="col-md-8 control-label">Date Of Registration:<span class='require'></span></label>
+                                                                    <div class="col-md-6">
+                                                                        <label for="Name" class="col-md-6 control-label">Date Of Registration:<span class='require'></span></label>
 
                                                                         <div data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
                                                                             <input type="text" class="form-control" value="{{currVD.DateOfRegistration}}" ng-model="initdata.newfleet.dor" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -475,17 +475,21 @@
 
 
                                                                     </div>
-                                                                    <div class="col-md-4">
-                                                                        <label for="Description" class="col-md-5 control-label">Seating Capacity<span class='require'>*</span></label>
+                                                                    <div class="col-md-6">
+                                                                        <label for="Description" class="col-md-6 control-label">Seating Capacity<span class='require'>*</span></label>
 
-                                                                        <div class="col-md-7"><input id="Description" type="text" value="{{currVD.SeatingCapacity}}" cl class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="Description" type="text" value="{{currVD.SeatingCapacity}}"  class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
 
                                                                     </div>
-                                                                </div>
                                                                 <div class="col-md-6 col-md-offset-2">
                                                                     <button class="btn btn-primary" type="button">Save</button>
                                                                     <button class="btn btn-primary" type="button">Cancel</button>
                                                                 </div>
+                                                                </div>
+                                                                <!--<div class="col-md-6 col-md-offset-2">
+                                                                    <button class="btn btn-primary" type="button">Save</button>
+                                                                    <button class="btn btn-primary" type="button">Cancel</button>
+                                                                </div>-->
                                                             </div>
                                                         </div>
 
@@ -589,6 +593,26 @@
             </div>
                             </div>
                             <!--END PAGE WRAPPER-->
+        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+            <div class="modal-header">
+                <h3 class="modal-title">Save confirmation!</h3>
+            </div>
+            <div class="modal-body">
+                <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+                {{mssg}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+
+        </script>
                         </div>
 
                

@@ -40,13 +40,15 @@ namespace blocklist1.Controllers
 
 
         [HttpPost]
-          public DataTable pos(COUNTRY b)
-        {
-            DataTable Tbl = new DataTable();
+          public HttpResponseMessage pos(COUNTRY b)
+       {
+            SqlConnection conn = new SqlConnection();
+            try
+            {
 
 
             //connect to database
-            SqlConnection conn = new SqlConnection();
+           
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
           
@@ -87,9 +89,19 @@ namespace blocklist1.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
-        }
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+       }
+
         public void Options() { }
 
     }

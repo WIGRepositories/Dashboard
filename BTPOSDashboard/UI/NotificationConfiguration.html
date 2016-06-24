@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetDashboardDS();" ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetRoles();" ng-model="dashboardDS">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -316,7 +316,7 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                       
+
                                         <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications Configurations</span></a></li>
 
                                     </ul>
@@ -341,7 +341,70 @@
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    
+                    <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div class="col-lg-12">
+
+                                <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+
+                                            <div class="col-lg-12">
+
+                                                <div class="table-container">
+                                                    <div class="row mbm">
+                                                        <div class="col-md-5">
+                                                            Roles:<select ng-options="r.Name for r in GetRoles track by r.Names" ng-model="r" ng-change="GetNoticationConfiguration();">
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+                                                        <!--<div class="col-md-5">
+                                                            Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
+                                                             <option value="">All</option>
+                                                             </select>
+                                                        </div>-->
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Active</th>
+                                                            <!--<th>Alert Items</th>-->                                                       
+                                                            
+                                                            <th>NotificationType</th>                                                       
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat="N in NotficationConfiguration">
+
+                                                            <td><input type="checkBox" ng-checked="T.Active" /></td>
+                                                            <!--<td>{{Alert Item}}</td>-->                                                          
+                                                            
+                                                            <td>{{N.AlertType}}</td>
+
+                                                        </tr>
+                                                    </tbody>
+
+                                                </table>
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                     <!--END PAGE WRAPPER-->
                     <!--BEGIN FOOTER-->
                     <div id="footer">
@@ -352,6 +415,26 @@
             </div>
 
         </div>
+        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+            <div class="modal-header">
+                <h3 class="modal-title">Save confirmation!</h3>
+            </div>
+            <div class="modal-body">
+                <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+                {{mssg}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+
+        </script>
     </div>
 
     <script src="js/jquery-1.10.2.min.js"></script>
@@ -389,6 +472,7 @@
     <script src="js/ngStorage.js"></script>
 
     <script src="js/source.js"></script>
+    <script src="js/NotificationsConfigurations.js"></script>
 
 </body>
 

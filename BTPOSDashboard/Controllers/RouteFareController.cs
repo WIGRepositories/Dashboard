@@ -74,83 +74,93 @@ namespace BTPOSDashboard.Controllers
             return rs;
         }
         [HttpPost]
-        public DataTable saveRouteFare(RouteFare b)
+        public HttpResponseMessage saveRouteFare(RouteFare b)
         {
-            DataTable Tbl = new DataTable();
-
-
             //connect to database
             SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelELRouteFare";
-            cmd.Connection = conn;
-            conn.Open();
-            SqlParameter cc = new SqlParameter();
-            cc.ParameterName = "@Id";
-            cc.SqlDbType = SqlDbType.Int;
-            cc.Value = b.Id;
-            SqlParameter ccd = new SqlParameter();
-            ccd.ParameterName = "@RouteId";
-            ccd.SqlDbType = SqlDbType.Int;
-            ccd.Value = Convert.ToString(b.RouteId);
-            cmd.Parameters.Add(ccd);
-            SqlParameter cname = new SqlParameter();
-            cname.ParameterName = "@VehicleType";
-            cname.SqlDbType = SqlDbType.VarChar;
-            cname.Value = b.VehicleType;
-            cmd.Parameters.Add(cname);
-            SqlParameter ccds = new SqlParameter();
-            ccds.ParameterName = "@SourceStopId";
-            ccds.SqlDbType = SqlDbType.Int;
-            ccds.Value = Convert.ToString(b.SourceStopId);
-            cmd.Parameters.Add(ccds);
-            SqlParameter ccdsa = new SqlParameter();
-            ccdsa.ParameterName = "@DestinationStopId";
-            ccdsa.SqlDbType = SqlDbType.Int;
-            ccdsa.Value = Convert.ToString(b.DestinationStopId);
-            cmd.Parameters.Add(ccdsa);
+            try
+            {
 
-            SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Distance";
-            dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Distance;
-            cmd.Parameters.Add(dd);
-            SqlParameter pup = new SqlParameter();
-            pup.ParameterName = "@PerUnitPrice";
-            pup.SqlDbType = SqlDbType.Int;
-            pup.Value = Convert.ToString(b.PerUnitPrice);
-            cmd.Parameters.Add(pup);
-            SqlParameter pupa = new SqlParameter();
-            pupa.ParameterName = "@Amount";
-            pupa.SqlDbType = SqlDbType.Int;
-            pupa.Value = Convert.ToString(b.Amount);
-            cmd.Parameters.Add(pupa);
-            SqlParameter dda = new SqlParameter();
-            dda.ParameterName = "@FareType";
-            dda.SqlDbType = SqlDbType.VarChar;
-            dda.Value = b.FareType;
-            cmd.Parameters.Add(dda);
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelELRouteFare";
+                cmd.Connection = conn;
+                conn.Open();
+                SqlParameter cc = new SqlParameter();
+                cc.ParameterName = "@Id";
+                cc.SqlDbType = SqlDbType.Int;
+                cc.Value = b.Id;
+                SqlParameter ccd = new SqlParameter();
+                ccd.ParameterName = "@RouteId";
+                ccd.SqlDbType = SqlDbType.Int;
+                ccd.Value = Convert.ToString(b.RouteId);
+                cmd.Parameters.Add(ccd);
+                SqlParameter cname = new SqlParameter();
+                cname.ParameterName = "@VehicleType";
+                cname.SqlDbType = SqlDbType.VarChar;
+                cname.Value = b.VehicleType;
+                cmd.Parameters.Add(cname);
+                SqlParameter ccds = new SqlParameter();
+                ccds.ParameterName = "@SourceStopId";
+                ccds.SqlDbType = SqlDbType.Int;
+                ccds.Value = Convert.ToString(b.SourceStopId);
+                cmd.Parameters.Add(ccds);
+                SqlParameter ccdsa = new SqlParameter();
+                ccdsa.ParameterName = "@DestinationStopId";
+                ccdsa.SqlDbType = SqlDbType.Int;
+                ccdsa.Value = Convert.ToString(b.DestinationStopId);
+                cmd.Parameters.Add(ccdsa);
 
-            SqlParameter aa = new SqlParameter();
-            aa.ParameterName = "@Active";
-            aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = b.Active;
-            cmd.Parameters.Add(aa);
+                SqlParameter dd = new SqlParameter();
+                dd.ParameterName = "@Distance";
+                dd.SqlDbType = SqlDbType.VarChar;
+                dd.Value = b.Distance;
+                cmd.Parameters.Add(dd);
+                SqlParameter pup = new SqlParameter();
+                pup.ParameterName = "@PerUnitPrice";
+                pup.SqlDbType = SqlDbType.Int;
+                pup.Value = Convert.ToString(b.PerUnitPrice);
+                cmd.Parameters.Add(pup);
+                SqlParameter pupa = new SqlParameter();
+                pupa.ParameterName = "@Amount";
+                pupa.SqlDbType = SqlDbType.Int;
+                pupa.Value = Convert.ToString(b.Amount);
+                cmd.Parameters.Add(pupa);
+                SqlParameter dda = new SqlParameter();
+                dda.ParameterName = "@FareType";
+                dda.SqlDbType = SqlDbType.VarChar;
+                dda.Value = b.FareType;
+                cmd.Parameters.Add(dda);
 
 
-            //DataSet ds = new DataSet();
-            //SqlDataAdapter db = new SqlDataAdapter(cmd);
-            //db.Fill(ds);
-            // Tbl = Tables[0];
-            cmd.ExecuteScalar();
-            conn.Close();
-            // int found = 0;
-            return Tbl;
+                SqlParameter aa = new SqlParameter();
+                aa.ParameterName = "@Active";
+                aa.SqlDbType = SqlDbType.VarChar;
+                aa.Value = b.Active;
+                cmd.Parameters.Add(aa);
+
+
+                //DataSet ds = new DataSet();
+                //SqlDataAdapter db = new SqlDataAdapter(cmd);
+                //db.Fill(ds);
+                // Tbl = Tables[0];
+                cmd.ExecuteScalar();
+                conn.Close();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         public void Options()
         {

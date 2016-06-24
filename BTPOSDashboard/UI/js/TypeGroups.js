@@ -1,7 +1,9 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage) {
-    $scope.uname = $localStorage.uname;
+    //$scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
     $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
     });
@@ -71,10 +73,18 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage)
             //    'Content-Type': undefined
             data: SelTypeGroup
         }
-        $http(req).then(function (res) {
-            alert('saved successfully');
+        $http(req).then(function (response) {
 
-        });
+            $scope.showDialog("Saved successfully!");
+
+        }
+, function (errres) {
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+
+});
 
         $scope.currGroup = null;
     };

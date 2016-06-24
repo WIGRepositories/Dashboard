@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using BTPOSDashboardAPI.Models;
+
 namespace BTPOSDashboard.Controllers
 {
-    public class AlertsConfigurationController : ApiController
+    public class UserLicenseController : ApiController
     {
         [HttpGet]
-        public DataTable GetAlertsConfiguration()
+        public DataTable GetLicensePayments(int Id)
         {
             DataTable Tbl = new DataTable();
 
@@ -24,19 +24,19 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getAlertsConfiguration";
+            cmd.CommandText = "getLicensePayments";
             cmd.Connection = conn;
-
-            //SqlParameter Rid = new SqlParameter();
-            //Rid.ParameterName = "@TypeGroupId";
-            //Rid.SqlDbType = SqlDbType.Int;
-            //Rid.Value = TypeGroupId;
-            //cmd.Parameters.Add(Rid);
-
-
-
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
+
+            SqlParameter fo = new SqlParameter();
+            fo.ParameterName = "@Id";
+            fo.SqlDbType = SqlDbType.Int;
+            fo.Value = Id;
+            cmd.Parameters.Add(fo);
+
+
+
             db.Fill(ds);
             Tbl = ds.Tables[0];
 
@@ -44,6 +44,4 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
     }
-
-
 }

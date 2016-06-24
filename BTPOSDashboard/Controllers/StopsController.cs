@@ -36,9 +36,9 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable saveStops(stops s)
+        public HttpResponseMessage saveStops(stops s)
         {
-            DataTable Tbl = new DataTable();
+            
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -72,7 +72,7 @@ namespace BTPOSDashboard.Controllers
                 sActive.Value = s.Active;
                 cmd.Parameters.Add(sActive);
 
-                
+
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                 insupdflag.Value = s.insupdflag;
@@ -83,14 +83,17 @@ namespace BTPOSDashboard.Controllers
 
                 conn.Close();
 
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
-                conn.Close();
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-            return Tbl;
         }
 
         public void Options()

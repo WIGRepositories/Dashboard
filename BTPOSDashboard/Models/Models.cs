@@ -13,6 +13,7 @@ namespace BTPOSDashboardAPI.Models
         public string MessageTypeId { get; set; }
         public string StatusId { get; set; }
         public string UserId { get; set; }
+
         public string Name { get; set; }
     }
     public class Notifications
@@ -34,7 +35,28 @@ namespace BTPOSDashboardAPI.Models
         public string Status { get; set; }
         public string IMEI { get; set; }
         public string Location { get; set; }
+
     }
+
+    public class BtposRecords
+    {
+
+        public int Id { get; set; }
+        public string RecordData { get; set; }
+        public int POSID { get; set; }
+        public string FileName { get; set; }
+        public string Description { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime Downloaded { get; set; }
+
+        public DateTime LastDownloadtime { get; set; }
+
+        public int IsDirty { get; set; }
+
+        public char insupddelflag { get; set; }
+
+    }
+   
     public class btposgroups
     {
         public int Id { get; set; }
