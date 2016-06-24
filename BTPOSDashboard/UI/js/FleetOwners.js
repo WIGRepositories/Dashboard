@@ -6,7 +6,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
    // $scope.EmpNo = $localStorage.eno;
     $scope.GetFleetOwner = function () {
 
-        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?EmpNo=').then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?EMpNo').then(function (res, data) {
             $scope.FleetOwner = res.data;
         });
     }
@@ -67,7 +67,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
+           
 
         })
      , function (errres) {
