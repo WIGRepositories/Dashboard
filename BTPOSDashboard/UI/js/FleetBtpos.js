@@ -1,8 +1,10 @@
 
 // JavaScript source code
-var app = angular.module('myApp', ['ngStorage'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+    //$scope.uname = $localStorage.uname
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.GetFleeBTPosDetails = function () {
 
@@ -160,4 +162,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
+});
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

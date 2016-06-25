@@ -1,6 +1,6 @@
-var app = angular.module('myApp', ['ngStorage'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname;
 
     btposlist = [];
@@ -43,7 +43,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var vc = {
             needfleetowners: '1',
-            cmpId: $scope.cmp.Id
+            cmpId: ($scope.cmp == null) ? '-1': $scope.cmp.Id
         };
 
         var req = {
@@ -133,9 +133,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: btposlist,
 
         }).success(function (data, status, headers, config) {
-            alert('saved btpos details successfully');
+            $scope.showDialog('saved btpos details successfully');
+            btposlist = [];
         }).error(function (ata, status, headers, config) {
-            alert(ata);
+            var errdata = ata;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
 
    }
@@ -144,15 +148,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.save = function (Group, flag) {
       
                 var newpos = {
-                    Id: Group.Id,
-                    CompanyId: $scope.cmp.Id,
-                    GroupId: Group.GroupId,
+                    Id: (flag == 'I') ? '-1' : Group.Id,
+                    CompanyId: (flag == 'I') ? '1' : $scope.cmp.Id,
+                    //GroupId: Group.GroupId,
                     IMEI: Group.IMEI,
                     POSID: Group.POSID,
-                    StatusId: Group.StatusId,
+                    StatusId: (flag == 'I') ? '1' : Group.StatusId,
                     ipconfig: Group.ipconfig,
                     active: 1,//Group.ipconfig,
-                    fleetownerid: $scope.s.Id,
+                    fleetownerid: (flag == 'I') ? null : $scope.s.Id,
                     insupdflag: flag
                 }
                 btposlist.push(newpos);
@@ -168,6 +172,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                     $scope.showDialog("Saved successfully!");
 
                     $scope.Group = null;
+                    btposlist = [];
 
                 }, function (errres) {
                     var errdata = errres.data;
@@ -177,6 +182,19 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 });
         $scope.currGroup = null;
     };
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
 
 
     $scope.setBTPOS = function (grp) {
@@ -227,7 +245,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     //};
 
 
+});
+        
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
 
-
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

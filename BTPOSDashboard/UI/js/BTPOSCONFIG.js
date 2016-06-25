@@ -25,7 +25,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
 
         $http.get('http://localhost:1476/api/BTPOSConfig/GetFleeBTPosDetails?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id + '&BTPosId=' + $scope.b.Id).then(function (res, data) {
-            $scope.Btpos = res.data;
+            $scope.BTPos = res.data;
         });
     }
 

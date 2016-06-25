@@ -188,6 +188,20 @@ $scope.saveNewLicense = function (License) {
 
 };
 
+$scope.showDialog = function (message) {
+
+    var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'myModalContent.html',
+        controller: 'ModalInstanceCtrl',
+        resolve: {
+            mssg: function () {
+                return message;
+            }
+        }
+    });
+}
+
 $scope.setCurrLicenseType = function (lt) {
     $scope.currLicenseType = lt;
 };

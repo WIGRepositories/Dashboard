@@ -1,8 +1,9 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname;
-
+    //$scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
     $scope.GetRoles = function()
     {
         $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=-1').then(function (response, data) {

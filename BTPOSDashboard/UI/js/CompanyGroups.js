@@ -1,6 +1,8 @@
 var app = angular.module('myApp', ['ngStorage','ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
-    $scope.uname = $localStorage.uname;
+   // $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
     $scope.GetCompanys = function () {
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
