@@ -1,5 +1,5 @@
-var app = angular.module('myApp', ['ngStorage'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var app = angular.module('myApp', ['ngStorage','ui.bootstrap'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname
 
     $scope.GetFleetDetails= function () {
@@ -158,7 +158,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     
     $scope.savenewfleetdetails = function (initdata) {
         var newVD = initdata.newfleet;
-      if (newVD == null) {
+        if (newVD == null) {
             alert('Please enter VehicleRegNo.');
             return;
         }
@@ -182,7 +182,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             FleetOwnerId: newVD.fo.Id,
             CompanyId: $scope.cmp.Id,
             ServiceTypeId: newVD.st.Id,
-            Active:1,
+            Active: 1,
 
         };
 
@@ -198,7 +198,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http(req).then(function (response) {
 
             $scope.showDialog("Saved successfully!");
-            
+
             $scope.Group = null;
 
         }, function (errres) {
@@ -207,11 +207,24 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
             $scope.showDialog(errmssg);
         });
- 
-    $scope.setFleet = function (F) {
-        $scope.currVD = F;            
+
+        $scope.setFleet = function (F) {
+            $scope.currVD = F;
+        }
     }
 });
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
    
 
    
