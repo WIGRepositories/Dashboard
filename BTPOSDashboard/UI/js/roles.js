@@ -1,6 +1,6 @@
 // JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     //$scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
@@ -38,7 +38,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
         $http(req).then(function (response) {
 
-           // $scope.showDialog("Saved successfully!");
+            $scope.showDialog("Saved successfully!");
 
         }
 , function (errres) {
@@ -167,7 +167,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
         $http(req).then(function (response) {
 
-            //$scope.showDialog("Saved successfully!");
+            $scope.showDialog("Saved successfully!");
 
         }
 , function (errres) {
@@ -206,4 +206,15 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         });
         $scope.currRole = null;
     }
+});
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

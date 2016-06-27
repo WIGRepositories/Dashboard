@@ -82,7 +82,7 @@ namespace POSDBAccess.Controllers
                 SqlParameter gsab = new SqlParameter();
                 gsab.ParameterName = "@desc";
                 gsab.SqlDbType = SqlDbType.VarChar;
-                gsab.Value = n.descr;
+                gsab.Value = n.desc;
                 cmd.Parameters.Add(gsab);
 
                 SqlParameter gsac = new SqlParameter("@Id",SqlDbType.Int);

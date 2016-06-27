@@ -6,8 +6,40 @@ INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Active])
 VALUES ('ZUPCO','ZUPCO','ZUPCO company',1)
 
 --create 6 users (3 for each company, 1 superviosr each)
+INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Lokesh','Nandikunta','Web1','Lokesh@gmail.com',123,973484551,1,'Loku',1,1)
+
+ INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Siva','Nara','Web2','Siva@gmail.com',12,973484521,1,'siva',1,1)
+
+ INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Vinay','Nandikunta','Web3','Vinay@gmail.com',1234,973444551,1,'Vinu',1,1)
+
+ INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Sai','KalePalle','Zup1','Sai@gmail.com',123,973484551,1,'Sai',2,1)
+
+ INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Lalli','Gajula','Zup2','Lalli@gmail.com',142,975584551,1,'lali',2,1)
+
+ INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('sri','Nidhi','Zup3','sri@gmail.com',1236,9799551,1,'sri',2,1)
 
 --create 2 fleet owners
+INSERT INTO [POSDashboard].[dbo].[FleetOwner]
+           ([UserId],[CompanyId],[Active],[FleetOwnerCode])
+     VALUES
+           (8 ,1 ,1,'Fl001')
+
+INSERT INTO [POSDashboard].[dbo].[FleetOwner]
+           ([UserId],[CompanyId],[Active],[FleetOwnerCode])
+     VALUES
+           (9 ,2 ,1,'Fl002')
 
 --assign roles to company
 INSERT INTO [POSDashboard].[dbo].[CompanyRoles]([CompanyId],[RoleId],[Active]) VALUES (2,6,1)
@@ -27,8 +59,25 @@ INSERT INTO [POSDashboard].[dbo].[CompanyRoles]([CompanyId],[RoleId],[Active]) V
 INSERT INTO [POSDashboard].[dbo].[CompanyRoles]([CompanyId],[RoleId],[Active]) VALUES (3,13,1)
 
 --assign users
+INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Lokesh','Nandikunta','Web1','Lokesh@gmail.com',123,973484551,1,'Loku',1,1)
+
+ INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Siva','Nara','Web2','Siva@gmail.com',12,973484521,1,'siva',1,1)
+
+ INSERT INTO [POSDashboard].[dbo].[Users]
+([FirstName] ,[LastName],[EmpNo] ,[Email],[AddressId],[MobileNo],[Active],[MiddleName],[CompanyId],[ManagerId])
+ VALUES('Vinay','Nandikunta','Web3','Vinay@gmail.com',1234,973444551,1,'Vinu',1,1)
+
+
 --make  2 users as fleet owners
+
+
 --make 1 user as conductor
+ 
+
 --make 1 user as dirver
 
 --create some stops

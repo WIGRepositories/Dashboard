@@ -533,7 +533,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string code { get; set; }
 
-        public string descr { get; set; }
+        public string desc { get; set; }
 
         public int Id { get; set; }
 
