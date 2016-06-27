@@ -126,6 +126,7 @@
     <Content Include="CommercialSite\multiplicationofcells.html" />
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
+    <Content Include="DBScripts\Data.sql" />
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="DBScripts\Init.sql" />
     <Content Include="DBScripts\RolesInit.sql" />
