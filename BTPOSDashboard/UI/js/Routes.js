@@ -9,7 +9,12 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.routes = res.data;
         });
     }
-
+    //This will hide the DIV by default.
+    $scope.IsVisible = false;
+    $scope.ShowHide = function () {
+        //If DIV is visible it will be hidden and vice versa.
+        $scope.IsVisible = $scope.ShowPassport;
+    }
     $scope.GetStops = function () {
         $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {          
             $scope.Stops = res.data;
@@ -106,4 +111,5 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         alert('saved successfully.');
         $scope.routes = null;
     };
+   
 });

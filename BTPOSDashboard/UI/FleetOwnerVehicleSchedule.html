@@ -703,18 +703,21 @@
                                                                             </div>
                                                                             <div class="row">
 
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                                        <label for="inputFirstName" class="control-label">Departure:<span class='require'>*</span></label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-5">                                                                                                                                                                     
-                                                                                    <div class="form-group">
-                                                                                        <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+                                                                  <div class="col-md-3">
+                                               <div class="form-group has-success" style="text-align:right">
+                              <label for="inputFirstName" class="control-label">Departure:<span class='require'>*</span></label>
+                              </div>
+                         </div>
+                        <div class="col-md-5">
+                           <div class="form-group">
 
+                                 <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                           <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                          </div>
+
+                               </div>
+                       </div>
+                                      </div>
                                                                            
 
                                                                         </div>
@@ -722,6 +725,24 @@
                                                                             <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNextStop(newNextStop);">Update</button>
                                                                             <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Arrival:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+
+                                                                                    <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                        <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -756,7 +777,7 @@
                                                                         <div>
                                                                             <div class="col-md-3">
 
-                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.Id" ng-model="v" ng-change="GetVehicleSchedule()">
+                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="GetVehicleSchedule()">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -810,7 +831,7 @@
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
-                                                                <div class="col-lg-6">
+                                                                <!--<div class="col-lg-6">
                                                                     <div class="panel panel-grey">
                                                                         <div class="panel-heading">Routes</div><br />
                                                                         <div class="row">
@@ -870,7 +891,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div>-->
                                                                             <!-- <div class="col-md-2">
                         <div class="form-group has-success" style="text-align:right">
                             <label for="inputFirstName" class="control-label">Update Timing:<span class='require'>*</span></label>

@@ -17,6 +17,7 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetStops();" ng-model="routes">
     <div>
@@ -384,10 +385,10 @@
                                                 <div class="form-group">
 
                                                     <label for="Name" class="col-md-4  control-label" style="color:red;">Return route?</label>
-                                                    <div class="col-md-5"><input id="rtn" type="checkbox" class="form-control" /></div>
+                                                    <div class="col-md-5" for="chkPassport"><input id="rtn" type="checkbox"  ng-model="ShowPassport" ng-change="ShowHide()" class="form-control" /></div>
                                                 </div>
 
-                                                <div class="form-group">
+                                                <div class="form-group" ng-show="IsVisible">
 
                                                     <label for="Name" class="col-md-4 control-label" style="color:red;"> Return Route Name: <span class='require'></span></label>
 
