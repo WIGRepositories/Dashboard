@@ -38,18 +38,21 @@
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li><p>You have 3 new notifications</p></li>
-                                <li>
-
-                                </li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new alerts</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li><p>You have 0 new messages</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                <li><p>You have 0 new notifications</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">

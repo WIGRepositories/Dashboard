@@ -1,7 +1,8 @@
 ﻿// JavaScript source code
-var app = angular.module('myApp', [])
+var app = angular.module('myApp', ['ngStorage'])
 
-var cntrlr = app.controller('myCtrl', function ($scope, $http) {
+var cntrlr = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
 
 

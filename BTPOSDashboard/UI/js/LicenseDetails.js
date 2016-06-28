@@ -1,6 +1,7 @@
 ﻿
-    var app = angular.module('myApp',[])
-    var ctrl = app.controller('myCtrl', function ($scope, $http) {
+var app = angular.module('myApp', ['ngStorage'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+        $scope.dashboardDS = $localStorage.dashboardDS;
 
         $scope.GetLicenseCategories = function () {
             $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {

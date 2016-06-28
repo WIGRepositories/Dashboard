@@ -2,6 +2,7 @@
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
     //$scope.uname = $localStorage.uname
+    $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
 

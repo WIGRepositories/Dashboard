@@ -21,7 +21,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();" ng-model="FleetAvailability">
+<body ng-app="myApp" ng-controller="Mycntrl" ng-init="GetCompanies();" ng-model="FleetAvailability">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -36,15 +36,21 @@
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li><p>You have 0 new notifications</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new alerts</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li><p>You have 0 new messages</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                <li><p>You have 0 new notifications</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
@@ -356,7 +362,7 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
-                                                      
+
                                                         <div class="row mbm">
                                                             <div class="col-md-5">
                                                                 Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
@@ -366,8 +372,8 @@
                                                             <div class="col-md-5">
                                                                 Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeAvailabilty();">
 
-    <option value="">Select</option>
-</select>
+                                                                    <option value="">Select</option>
+                                                                </select>
                                                             </div>
 
                                                             <div class="actions">
@@ -452,69 +458,69 @@
 
 
                                                         </div>
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
+                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                            <thead>
+                                                                <tr>
 
 
-                                                                <th>Vehicle Reg No</th>
-                                                                <th>Fleet Owner</th>
-                                                                <th>From Date</th>
+                                                                    <th>Vehicle Reg No</th>
+                                                                    <th>Fleet Owner</th>
+                                                                    <th>From Date</th>
 
-                                                                <th>To Date</th>
-                                                                <th>Update</th>
-                                                                <th>Delete</th>
+                                                                    <th>To Date</th>
+                                                                    <th>Update</th>
+                                                                    <th>Delete</th>
 
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
 
-                                                            <tr ng-repeat="R in FleetAvailability" class="gradeA">
-                                                                <td>{{R.VehicleRegNo}}</td>
-                                                                <td>{{R.FleetOwner}}</td>
-                                                                <td>{{R.FromDate}}</td>
-                                                                <td>{{R.ToDate}}</td>
+                                                                <tr ng-repeat="R in FleetAvailability" class="gradeA">
+                                                                    <td>{{R.VehicleRegNo}}</td>
+                                                                    <td>{{R.FleetOwner}}</td>
+                                                                    <td>{{R.FromDate}}</td>
+                                                                    <td>{{R.ToDate}}</td>
 
-                                                                <td>
+                                                                    <td>
 
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div>
-                                                                    <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
-                                                                        <i class="fa fa-times-circle"></i>&nbsp;
-                                                                        Delete
-                                                                    </button>-->
-                                                                </td>
-                                                            </tr>
+                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
+                                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                                            Edit
+                                                                        </button>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div>
+                                                                        <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
+                                                                            <i class="fa fa-times-circle"></i>&nbsp;
+                                                                            Delete
+                                                                        </button>-->
+                                                                    </td>
+                                                                </tr>
 
-                                                        </tbody>
+                                                            </tbody>
 
-                                                    </table>
+                                                        </table>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
+                        <!--END CONTENT--><!--BEGIN FOOTER-->
+                        <div id="footer">
+                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        </div>
+                        <!--END FOOTER-->
                     </div>
-                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                    </div>
-                    <!--END FOOTER-->
+                    <!--END PAGE WRAPPER-->
                 </div>
-                <!--END PAGE WRAPPER-->
             </div>
         </div>
-    </div>
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">
@@ -522,11 +528,11 @@
             </div>
             <div class="modal-body">
                 <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                    <li ng-repeat="item in items">
+                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -535,35 +541,35 @@
             </div>
 
         </script>
-        </div>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
 
-<script src="js/angular.js"></script>
-<script src="js/ngStorage.js"></script>
-<script src="js/FleetAvailability.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/FleetAvailability.js"></script>
 
 </body>
 </html>

@@ -29,6 +29,7 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout) {
 
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
     $scope.uname = $localStorage.uname;
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
    
 

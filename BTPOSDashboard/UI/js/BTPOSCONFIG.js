@@ -2,6 +2,7 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
   //  $scope.FleeBTPosDetails = [];
   
