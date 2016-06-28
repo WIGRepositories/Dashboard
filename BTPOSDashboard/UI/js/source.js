@@ -5,6 +5,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     //    window.location.href = "login.html";
     //}
     $scope.uname = $localStorage.uname;
+    $scope.dashboardDS = $localStorage.dashboardDS;
+
     //if ($localStorage.userdetails && $localStorage.userdetails.length > 0 && $localStorage.userdetails[0])
     //$scope.userid = $localStorage.userdetails[0].userid;
 

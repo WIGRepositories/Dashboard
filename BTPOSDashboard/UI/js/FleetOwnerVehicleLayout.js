@@ -3,6 +3,7 @@
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
     $scope.uname = $localStorage.uname;
+    $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetFleetDetails = function () {
 
         if ($scope.cmp == null) {

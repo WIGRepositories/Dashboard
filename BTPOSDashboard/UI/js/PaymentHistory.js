@@ -1,6 +1,7 @@
 ﻿var app = angular.module('myApp', ['ngStorage']);
-var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
     $scope.GetPaymentHistory = function () {
 

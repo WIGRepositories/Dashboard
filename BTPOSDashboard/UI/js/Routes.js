@@ -3,7 +3,7 @@
 var myapp1 = angular.module('myApp', ['ngStorage'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
-
+    $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetRoutes = function () {
         $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
             $scope.routes = res.data;

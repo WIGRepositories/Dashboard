@@ -1,8 +1,9 @@
 // JavaScript source code
 // JavaScript source code
 // JavaScript source code
-var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
+var app = angular.module('myApp', ['ngStorage'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.dashboardDS = $localStorage.dashboardDS;
  
     $http.get('http://localhost:1476/api/objects/getobjects').then(function (res, data) {
         $scope.NewObjects = res.data;
