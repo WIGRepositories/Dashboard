@@ -183,6 +183,12 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
       
     }
 
+    $scope.updateTime = function (s) {
+        var aid = s.stopid + 'ADate';
+        var did = s.stopid + 'DDate';
+        s.arrivaltime = document.getElementById(aid).value;
+       // s.departuretime = document.getElementById(did).value;
+    }
 
 });
 

@@ -792,7 +792,7 @@
                 );
             } else if (pickTime) {
                 return (
-                    '<div class="bootstrap-datetimepicker-widget dropdown-menu">' +
+                    '<div class="bootstrap-datetimepicker-widget dropdown-menu" style="z-index:9999 !important;">' +
                         '<div class="timepicker">' + tpGlobal.getTemplate() + '</div>' +
                     '</div>'
                 );
@@ -850,7 +850,7 @@
 
         tpGlobal.getTemplate = function () {
             return (
-                '<div class="timepicker-picker">' +
+                '<div class="timepicker-picker" >' +
                     '<table class="table-condensed">' +
 						'<tr>' +
 							'<td><a href="#" class="btn" data-action="incrementHours"><span class="' + picker.options.icons.up + '"></span></a></td>' +
