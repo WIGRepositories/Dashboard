@@ -17,6 +17,7 @@
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
+
 </head>
 
 <body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetInventoryItems()" ng-model="InventoryItems">
@@ -447,6 +448,7 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Item Name</th>
+                                                                <th>Item Image</th>
                                                                 <th>Code</th>
                                                                 <th>Description</th>
                                                                 <th>Category</th>
@@ -457,6 +459,7 @@
                                                         <tbody>
                                                             <tr ng-repeat="G in InventoryItems">
                                                                 <td>{{G.ItemName}}</td>
+                                                                <td>{{G.ItemImage}}</td>
                                                                 <td>{{G.Code}}</td>
                                                                 <td>{{G.Description}}</td>
                                                                 <td>{{G.Category}}</td>

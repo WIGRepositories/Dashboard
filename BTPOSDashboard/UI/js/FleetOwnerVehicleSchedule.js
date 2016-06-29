@@ -123,7 +123,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
         });
     }
 
-    $scope.GetVehicleSchedule = function () {
+    $scope. getFORVehicleSchedule = function () {
         $scope.RouteVehicleSchedule = [];
         if ($scope.r == null || $scope.r.RouteId == null) {
             //alert('Please select a route.');

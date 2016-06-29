@@ -703,10 +703,12 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
+                                                                                        <input type="time" id="exampleInput" name="input" ng-model="example.value"
+                                                                                               placeholder="HH:mm:ss" min="08:00:00" max="17:00:00" required />
 
-                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                       <!--<div style="z-index:10000" class="input-group datetimepicker-disable-date date">
                                                                                             <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                                        </div>
+                                                                                        </div>-->
 
                                                                                     </div>
                                                                                 </div>
@@ -720,10 +722,12 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
+                                                                                       <input type="time" id="exampleInput" name="input" ng-model="example.value"
+                                                                                        placeholder="HH:mm:ss" min="08:00:00" max="17:00:00" required />
 
-                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                       <!-- <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
                                                                                             <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                                        </div>
+                                                                                        </div>-->
 
                                                                                     </div>
                                                                                 </div>
@@ -787,9 +791,9 @@
                                                                         <div>
                                                                             <div class="col-md-3">
 
-                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="GetVehicleSchedule()">
-                                                                                    <option value="">Select</option>
-                                                                                </select>
+                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="getFORVehicleSchedule()">
+    <option value="">Select</option>
+</select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -824,20 +828,20 @@
                                                                                 </button>
                                                                             </td>
                                                                             <!--<td>
-                        <div class="col-md-12 active">
-                            <div class="input-group datetimepicker-disable-date date">
-                                <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-md-12 active">
-                            <div class="input-group datetimepicker-disable-date date" >
-                                <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
-                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                        </div>
-                    </td>-->
+            <div class="col-md-12 active">
+                <div class="input-group datetimepicker-disable-date date">
+                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="col-md-12 active">
+                <div class="input-group datetimepicker-disable-date date" >
+                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
+                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                </div>
+            </div>
+        </td>-->
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -1018,6 +1022,14 @@
             autoclose: true,
             pickDate: false
         });
+    </script>
+    <script>
+    angular.module('timeExample', [])
+      .controller('DateController', ['$scope', function ($scope) {
+          $scope.example = {
+              value: new Date(1970, 0, 1, 14, 57, 0)
+          };
+      }]);
     </script>
 
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->

@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl" ng-model="dashboardDS" ng-init="increasecart(qty)">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -185,7 +185,7 @@
                                 </li>
 
 
-                                <li >
+                                <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory</span><span class="fa arrow"></span></a>
 
                                     <ul class="nav nav-third-level">
@@ -355,6 +355,18 @@
                                                     <button type="button" data-type="jplist-grid-view" class="jplist-view jplist-grid-view btn btn-default"><i class="fa fa-th"></i></button>
                                                     <button type="button" data-type="jplist-thumbs-view" class="jplist-view jplist-thumbs-view btn btn-default"><i class="fa fa-reorder"></i></button>
                                                 </div>
+                                                <ul class="nav navbar navbar-top-links navbar-right mbn">
+                                                    <li class="dropdown">
+                                                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i><span class="badge badge-green"></span></a>
+
+                                                        <ul class="dropdown-menu dropdown-messages">
+                                                            <li><p>No Items added to cart</p></li>
+                                                            <p>{{cartitem}}</p>
+                                                        </ul>
+                                                    </li>
+
+
+                                                </ul>
 
                                             </div>
                                             <ul class="box text-shadow ul-li-list">
@@ -371,19 +383,19 @@
                                                                     <p>
                                                                         <input type="hidden" name="op" value="add">
                                                                         <input type="hidden" name="OptionCount" value="1">
-                                                                        qty  
+                                                                        qty
                                                                         <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
                                                                                name="item_qty" value="1" style="width:100px;">
-                                                               
-                                                                </p>
-                                                                <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
-                                                                <input type="hidden" name="item_price" value="38.95">
-                                                                <input type="hidden" name="item_id" value="JDR">
-                                                                <input type="hidden" name="product_shipping_class" value="0">
-                                                                <input type="hidden" name="cid" value="000">
+
+                                                                    </p>
+                                                                    <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
+                                                                    <input type="hidden" name="item_price" value="38.95">
+                                                                    <input type="hidden" name="item_id" value="JDR">
+                                                                    <input type="hidden" name="product_shipping_class" value="0">
+                                                                    <input type="hidden" name="cid" value="000">
                                                                     <p><input type="button" value="Add to Cart" style="width:100px;"></p>
                                                                     <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
-</div>
+                                                                </div>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -404,7 +416,7 @@
                                                                         <input type="hidden" name="OptionCount" value="1">
                                                                         qty
                                                                         <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize1" size="2"
-                                                                             name="item_qty" value="1" style="width:100px;">
+                                                                               name="item_qty" value="1" style="width:100px;">
                                                                     </p>
                                                                     <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
                                                                     <input type="hidden" name="item_price" value="38.95">
@@ -489,7 +501,7 @@
                                                                     <input type="hidden" name="item_id" value="JDR">
                                                                     <input type="hidden" name="product_shipping_class" value="0">
                                                                     <input type="hidden" name="cid" value="000">
-                                                                    <p><input type="button" value="Add to Cart" style="width:100px;"></p>
+                                                                    <p><input type="button" value="Add to Cart" style="width:100px;" ng-click="increasecart()"></p>
                                                                     <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
                                                                 </div>
                                                             </form>
@@ -518,11 +530,11 @@
                         </div>
                         <div class="modal-body">
                             <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                                <li ng-repeat="item in items">
+                                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                                </li>
+                            </ul>
+                            Selected: <b>{{ selected.item }}</b>-->
                             {{mssg}}
                         </div>
                         <div class="modal-footer">
@@ -532,36 +544,40 @@
 
                     </script>
                 </div>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                
-                
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<script src="vendors/jplist/html/js/vendor/modernizr.min.js"></script>
-<script src="vendors/jplist/html/js/jplist.min.js"></script>
-<script src="js/jplist.js"></script>
-<script src="js/table-action.js"></script>
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
+            </div>
+            </div>
+        </div>
+            <script src="js/jquery-1.10.2.min.js"></script>
+            <script src="js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="js/jquery-ui.js"></script>
+            <!--loading bootstrap js-->
+            <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-<script src="js/angular.js"></script>
-<script src="js/ngStorage.js"></script>
 
-<script src="js/source.js"></script>
+            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+            <script src="vendors/iCheck/icheck.min.js"></script>
+            <script src="vendors/iCheck/custom.min.js"></script>
+            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+            <script src="js/jquery.menu.js"></script>
+            <script src="vendors/jquery-pace/pace.min.js"></script>
+            <script src="vendors/holder/holder.js"></script>
+            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+            <!--LOADING SCRIPTS FOR PAGE-->
+            <script src="vendors/jplist/html/js/vendor/modernizr.min.js"></script>
+            <script src="vendors/jplist/html/js/jplist.min.js"></script>
+            <script src="js/jplist.js"></script>
+            <script src="js/table-action.js"></script>
+            <!--CORE JAVASCRIPT-->
+            <script src="js/main.js"></script>
+
+            <script src="js/angular.js"></script>
+            <script src="js/ngStorage.js"></script>
+
+            <script src="js/source.js"></script>
+            <script src="js/ShoppingCart.js"></script>
 
 
 </body>
