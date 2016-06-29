@@ -1,5 +1,6 @@
-﻿var app = angular.module('myApp', [])
-var ctrl = app.controller('myCtrl', function ($scope, $http) {
+﻿var app = angular.module('myApp', ['ngStorage'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
     $scope.GetEditHistory = function () {
         $http.get('http://localhost:1476/api/EditHistory/GetEditHistory').then(function (res, data) {

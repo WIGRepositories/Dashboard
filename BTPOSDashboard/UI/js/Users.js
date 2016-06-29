@@ -3,6 +3,8 @@ var app = angular.module('myApp', ['ngStorage'])
 
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
 
     /* user details functions */
     $scope.GetCompanies = function () {    
@@ -209,5 +211,32 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
 
     }
+     $scope.testdel = function (role)
+    {       
+        var userrole = {
+
+            RoleId: role.RoleId,
+            UserId: role.UserId,
+            Active: 1,
+            insdelflag: 1
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/AssignDelRoles',
+            data: userrole
+        }
+        $http(req).then(function (response) {
+            alert('Removed successfully.');
+            
+            $http.get('http://localhost:1476/api/Users/GetUserRoles?UserId=' + role.UserId).then(function (res, data) {
+                $scope.userroles = res.data;
+            });
+
+        });
+        $scope.currRole = null;
+    }
+
     
 });
+

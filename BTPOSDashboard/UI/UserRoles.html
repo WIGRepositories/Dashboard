@@ -32,15 +32,21 @@
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li><p>You have 0 new notifications</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new alerts</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li><p>You have 0 new messages</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                <li><p>You have 0 new notifications</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
@@ -350,11 +356,11 @@
 
                                                     </div>
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
+                                                        <!--<div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Assign Role to user</h4>
+                                                                    <h1 id="modal-header-primary-label" class="modal-title">Assign Role to user</h1>
                                                                 </div>
                                                                 <form action="#" class="form-horizontal form-seperated form-row-stripped">
                                                                     <div class="form-body">
@@ -400,7 +406,7 @@
 
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div>-->
                                                     </div>
 
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
@@ -418,12 +424,12 @@
                                                                 <td>{{ur.username}}</td>
                                                                 <td>{{ur.rolename}}</td>
                                                                 <td>{{ur.companyname}}</td>
-                                                                <td>
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setTypeGroup(T);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>
 
-                                                                    </button>
-                                                                </td>
+                                                                <!--<button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="testdel(role);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                </button>
+                                                                </td>-->
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -488,7 +494,7 @@
 <script src="vendors/holder/holder.js"></script>
 <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
 <!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
+<!--<script src="js/table-action.js"></!--script>-->
 <!--CORE JAVASCRIPT-->
 <script src="js/main.js"></script>
 

@@ -2,6 +2,7 @@
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     $scope.uname = $localStorage.uname
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
 
     $scope.GetCompanies = function () {

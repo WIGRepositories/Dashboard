@@ -483,6 +483,36 @@
                                                                         <div class="col-md-5"><input id="itemName" type="text" placeholder="Item Name" class="form-control" ng-model="Item.ItemName" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
+
+                                                                        <label class="col-md-4 control-label">Item Image: <span class='require'>*</span></label>
+
+
+
+                                                                        <div class="col-lg-7">
+                                                                            <!--The fileinput-button span is used to style the file input field as button-->
+                                                                            <div class="col-md-5">
+                                                                                <input type="file" name="files[]" multiple="multiple"></div>
+
+
+                                                                            </div>
+                                                                        <!--<!--<!--<!--The global progress state-->
+                                                                        <!--<div class="col-lg-5 fileupload-progress fade">
+                        <!--The global progress bar-->
+                                                                        <!--<div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress progress-striped active">
+                        <div style="width: 0%;" class="progress-bar progress-bar-success"></div>
+                    </div>-->
+                                                                        <!--The extended global progress state-->
+                                                                        <!--<div class="progress-extended">&nbsp;</div>
+                        </div>
+                    </div>-->
+                                                                        <!--The table listing the files available for upload/download-->
+                                                                        <!--<table role="presentation" class="table table-striped">
+                        <tbody class="files"></tbody>
+                    </table>-->
+
+                                                                    </div>
+
+                                                                    <div class="form-group">
                                                                         <label class="col-md-4 control-label">Code: <span class='require'>*</span></label>
 
                                                                         <div class="col-md-5"><input id="itemcode" type="text" placeholder="Item Code" class="form-control" ng-model="Item.Code" /><span class="help-block"></span></div>
@@ -502,7 +532,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                 
+
                                                                         <label for="selCountry" class="col-md-4 control-label">SubCategory:</label>
                                                                         <div class="col-md-5">
                                                                             <select ng-options="s.Name for s in SubCategory track by s.Id" class="form-control" ng-model="Item.SubCategory">
@@ -515,15 +545,17 @@
                                                                         <label for="" class="col-md-4 control-label">Re-order point:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-5"><input id="reorderpoint" type="text" class="form-control" ng-model="Item.ReOrderPoint" /><span class="help-block"></span></div>
+                                                          </div>
+                                                            <div class="form-actions">
+                                                                <div class="col-md-offset-3 col-md-9">
+                                                                    <button class="btn btn-primary" type="button" ng-click="saveNewItem(Item);">Save</button>
+                                                                    <a href="InventoryItems.html" class="btn btn-green">Cancel</a>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                         </form>
+                                                            </div>
 
-                                                                        <div class="form-actions">
-                                                                            <div class="col-md-offset-3 col-md-9">
-                                                                                <button class="btn btn-primary" type="button" ng-click="saveNewItem(Item);">Save</button>
-                                                                                <a href="InventoryItems.html" class="btn btn-green">Cancel</a>
-</div>
-
-                                                                        </div></div>
-                                                            </form>
                                                         </div>
                                                     </div>
 
@@ -531,11 +563,9 @@
 
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                              </div>
+                           
+                   
 
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">

@@ -1,7 +1,8 @@
 ﻿//var myapp1 = angular.module('myApp', ['timepicker'])
-var myapp1 = angular.module('myApp', [])
+var myapp1 = angular.module('myApp', ['ngStorage'])
 
-angular.module('myApp').directive('ngOnFinishRender', function ($timeout) {
+angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $localStorage) {
+    
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
@@ -16,6 +17,8 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout) {
 });
 
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
+   
+   
     $scope.StopCount = [];
 
     $scope.GetCompanies = function () {
@@ -179,6 +182,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
        // });
       
     }
+
 
 });
 

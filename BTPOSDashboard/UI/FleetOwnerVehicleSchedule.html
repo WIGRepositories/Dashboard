@@ -33,15 +33,21 @@
 
                         <ul class="nav navbar navbar-top-links navbar-right mbn">
                             <li class="dropdown">
-                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                                <ul class="dropdown-menu dropdown-alerts">
-                                    <li><p>You have 0 new notifications</p></li>
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                                <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                    <li><p>You have 0 new alerts</p></li>
+                                </ul>
+                                <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                    <li><p>{{A.Message}}</p></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                                <ul class="dropdown-menu dropdown-messages">
-                                    <li><p>You have 0 new messages</p></li>
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                                <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                    <li><p>You have 0 new notifications</p></li>
+                                </ul>
+                                <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                    <li><p>{{A.Message}}</p></li>
                                 </ul>
                             </li>
                             <li class="dropdown topbar-user">
@@ -632,7 +638,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                        
                                                             <div class="modal fade" id="UpdateSchedule" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
@@ -652,7 +658,7 @@
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
                                                                                         <div>
-                                                                                            <input type="text" class="form-control" ng-model="currStop.StopName" readonly/>
+                                                                                            <input type="text" class="form-control" ng-model="currStop.StopName" readonly />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -670,7 +676,7 @@
                                                                                         <div class="input-icon right"><input type="text" class="form-control" ng-model="currStop.StopCode" readonly /></div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>                                                                            
+                                                                            </div>
                                                                             <div class="row">
 
                                                                                 <div class="col-md-3">
@@ -693,11 +699,11 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        
-                                                                                            <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
-                                                                                                <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                                            </div>
-                                                                                        
+
+                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                            <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                        </div>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -708,20 +714,41 @@
                                                                                         <label for="inputFirstName" class="control-label">Departure:<span class='require'>*</span></label>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-md-5">                                                                                                                                                                     
+                                                                                <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+
+                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                            <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                        </div>
+
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
 
-                                                                           
 
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNextStop(newNextStop);">Update</button>
                                                                             <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
+                                                                        </div>
+                                                                        
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Arrival:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+
+                                                                                    <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                        <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -756,7 +783,7 @@
                                                                         <div>
                                                                             <div class="col-md-3">
 
-                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.Id" ng-model="v" ng-change="GetVehicleSchedule()">
+                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="GetVehicleSchedule()">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -810,7 +837,7 @@
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
-                                                                <div class="col-lg-6">
+                                                                <!--<div class="col-lg-6">
                                                                     <div class="panel panel-grey">
                                                                         <div class="panel-heading">Routes</div><br />
                                                                         <div class="row">
@@ -870,7 +897,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
+                                                                            </div>-->
                                                                             <!-- <div class="col-md-2">
                         <div class="form-group has-success" style="text-align:right">
                             <label for="inputFirstName" class="control-label">Update Timing:<span class='require'>*</span></label>
