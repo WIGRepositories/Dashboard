@@ -61,11 +61,17 @@ namespace BTPOSDashboardAPI.Controllers
                 gsn.Value = n.InventoryId;
                 cmd.Parameters.Add(gsn);
 
-                SqlParameter guid = new SqlParameter();
-                guid.ParameterName = "@Name";
-                guid.SqlDbType = SqlDbType.VarChar;
-                guid.Value = n.Name;
-                cmd.Parameters.Add(guid);
+                SqlParameter guid1 = new SqlParameter();
+                guid1.ParameterName = "@Name";
+                guid1.SqlDbType = SqlDbType.VarChar;
+                guid1.Value = n.Name;
+                cmd.Parameters.Add(guid1);
+
+                SqlParameter guid11 = new SqlParameter();
+                guid11.ParameterName = "@Image";
+                guid11.SqlDbType = SqlDbType.VarChar;
+                guid11.Value = n.Name;
+                cmd.Parameters.Add(guid11);
 
                 SqlParameter gida = new SqlParameter();
                 gida.ParameterName = "@Code";

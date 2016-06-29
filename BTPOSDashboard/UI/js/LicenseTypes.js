@@ -1,7 +1,7 @@
 ﻿// JavaScript source code
-var myapp1 = angular.module('myApp', [])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
-
+var myapp1 = angular.module('myApp', ['ngStorage'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
 $scope.GetLicenseCat = function () {
     $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {

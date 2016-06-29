@@ -2,6 +2,7 @@
 
 var ctrl = app.controller('Myctrlr', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
+    $scope.dashboardDS = $localStorage.dashboardDS;
 
     /* user details functions */
     $scope.uname = $localStorage.uname;

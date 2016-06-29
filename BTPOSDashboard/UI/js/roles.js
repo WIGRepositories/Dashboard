@@ -4,6 +4,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     //$scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
+    $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetRoles = function()
     {
         $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=-1').then(function (response, data) {
@@ -106,6 +107,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
         });
+
     }
 
 

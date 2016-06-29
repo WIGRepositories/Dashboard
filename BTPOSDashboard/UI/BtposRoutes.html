@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();" ng-model="initdata">
+<body ng-app="myApp" ng-controller="myctrl" ng-init="GetCompanies();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -33,15 +33,21 @@
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li><p>You have 0 new notifications</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new alerts</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li><p>You have 0 new messages</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                <li><p>You have 0 new notifications</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
@@ -359,7 +365,7 @@
                                                                     <th>Reg No</th>
                                                                     <th>POSID</th>
                                                                     <th>Route</th>
-                                                                  
+
                                                                     <th>Active</th>
                                                                     <th>Update</th>
                                                                 </tr>
@@ -372,7 +378,7 @@
                                                                     <td>{{B.POSID}}</td>
 
                                                                     <td>{{B.route}}</td>
-                                                                    
+
 
                                                                     <td><input type="checkbox" class="form-control" id="Active" ng-model="B.Active" checked /></td>
                                                                     <td>
@@ -385,38 +391,38 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-                                                      
+
                                                         <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                    <thead>
-                        <tr>
-                            <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                            <th>FeatureName</th>
-                            <th>FeatureValue</th>
-                            <th>Description</th>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th width="3%"><input type="checkbox" class="checkall" />Select</th>
+                                                                    <th>FeatureName</th>
+                                                                    <th>FeatureValue</th>
+                                                                    <th>Description</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="L in License">
-                            <td><input type="checkbox" /> </td>
-                            <td>{{L.FeatureName}}</td>
-                            <td>{{L.FeatureValue}}</td>
-                            <td>{{L.Description}}</td>
-                        </tr>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="L in License">
+                                                                    <td><input type="checkbox" /> </td>
+                                                                    <td>{{L.FeatureName}}</td>
+                                                                    <td>{{L.FeatureValue}}</td>
+                                                                    <td>{{L.Description}}</td>
+                                                                </tr>
 
-                    </tbody>
-                </table>-->
+                                                            </tbody>
+                                                        </table>-->
                                                         <!---<a href="#" class="list-group-item">
-                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
-                    &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                </a><a href="#" class="list-group-item">
-                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                        <span class="glyphicon glyphicon-paperclip"></span>
-                    </span>
-                </a>---->
-                                                       
-                                                   
-                                                       
+                                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
+                                                            &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                                        </a><a href="#" class="list-group-item">
+                                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
+                                                                <span class="glyphicon glyphicon-paperclip"></span>
+                                                            </span>
+                                                        </a>---->
+
+
+
                                                     </div>
 
                                                 </div>
@@ -429,25 +435,25 @@
 
                                         </div>
                                     </div>
-                                <!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                                </div>
-                                <!--END FOOTER-->
+                                    <!--BEGIN FOOTER-->
+                                    <div id="footer">
+                                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                                    </div>
+                                    <!--END FOOTER-->
                                 </div>
                             </div>
                         </div>
                     </div>
-                <!--BEGIN FOOTER-->
-                <div id="footer">
-                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
-                </div>
-                <!--END FOOTER-->
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
 
 
-                </div>
             </div>
+        </div>
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">
@@ -455,11 +461,11 @@
             </div>
             <div class="modal-body">
                 <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                    <li ng-repeat="item in items">
+                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -468,43 +474,43 @@
             </div>
 
         </script>
-        </div>
-    
-      
+    </div>
 
 
-                    <script src="js/jquery-1.10.2.min.js"></script>
-             
-                    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-                    <script src="js/jquery-ui.js"></script>
-                    <!--loading bootstrap js-->
-                    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                    <script src="vendors/iCheck/icheck.min.js"></script>
-                    <script src="vendors/iCheck/custom.min.js"></script>
-                    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-                    <script src="js/jquery.menu.js"></script>
-                    <script src="vendors/jquery-pace/pace.min.js"></script>
-                    <script src="vendors/holder/holder.js"></script>
-                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                    <!--LOADING SCRIPTS FOR PAGE-->
-                    <script src="js/table-action.js"></script>
-                    <!--CORE JAVASCRIPT-->
-                    <script src="js/main.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
 
-                    <script src="js/angular.js"></script>
-                    <script src="js/ngStorage.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-                    <script src="js/source.js"></script>
-                    <script src="js/BTPOSRoute.js"></script>
-                    <!--<script src="js/Alerts.js"></script>
 
-                    <script src="js/Notifications.js"></script>-->
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+
+    <script src="js/source.js"></script>
+    <script src="js/BTPOSRoute.js"></script>
+    <!--<script src="js/Alerts.js"></script>
+
+    <script src="js/Notifications.js"></script>-->
 </body>
 
 </html>

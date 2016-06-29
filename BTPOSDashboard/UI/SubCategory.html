@@ -14,7 +14,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCategories();" ng-model="SubCategory">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCategories();" ng-model="SubCategory">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -29,15 +29,21 @@
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li><p>You have 0 new notifications</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new alerts</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li><p>You have 0 new messages</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                <li><p>You have 0 new notifications</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
@@ -312,57 +318,55 @@
                             </ul>
                         </li>
                         <!--<li>
-                <a href="#">
-                    <i class="fa fa-send-o fa-fw">
-                        <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                    <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
-                    <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                    <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
-                    <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
-                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
-                    <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
-                    <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
-                </ul>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Users</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
+                                <li><a href="CompanyRoles.html"><i class="fa fa-briefcase"></i><span class="submenu-title">CompanyRoles</span></a></li>
+                                <li><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
+                                <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
+                                <li><a href="InventoryItems.html"><i class="fa fa-briefcase"></i><span class="submenu-title">InventoryItems</span></a></li>
+                                <li><a href="LicenseDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">License Details</span></a></li>
+                                <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
+                                <li><a href="InventorySales.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventorySales</span></a></li>
+                                <li><a href="InventoryPurchases.html"><i class="fa fa-align-left"></i><span class="submenu-title">InventoryPurchases</span></a></li>
+                            </ul>
 
-            </li>-->
+                        </li>-->
                         <!--<li>
-                <a href="#">
-                    <i class="fa fa-desktop fa-fw">
-                        <div class="icon-bg bg-pink"></div>
-                    </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                    <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                    <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
-                    <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
-                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
+                            <a href="#">
+                                <i class="fa fa-desktop fa-fw">
+                                    <div class="icon-bg bg-pink"></div>
+                                </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
+                                <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
+                                <li><a href="AddNewRouteDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Route Details</span></a></li>
+                                <li><a href="Stops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
+                                <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
 
-                </ul>
-            </li>
-
-
-            <li>
-                <a href="#">
-                    <i class="fa fa-send-o fa-fw">
-                        <div class="icon-bg bg-green"></div>
-                    </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                    <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                    <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                    <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
-                    <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
-                </ul>
-            </li>
+                            </ul>
+                        </li>
 
 
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
+                                <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
+                                <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
+                                <li><a href="RoleDetails.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Role Details</span></a></li>
+                                <li><a href="Objects.html"><i class="fa fa-align-left"></i><span class="submenu-title">Objects</span></a></li>
+                            </ul>
+                        </li>
 
 
 
@@ -372,46 +376,48 @@
 
 
 
-            <li>
-                <a href="#">
-                    <i class="fa fa-edit fa-fw">
-                        <div class="icon-bg bg-violet"></div>
-                    </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
-                    <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-th-list fa-fw">
-                        <div class="icon-bg bg-blue"></div>
-                    </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-envelope-o">
-                        <div class="icon-bg bg-primary"></div>
-                    </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
-                </a>
-                <ul class="nav nav-second-level">
-                    <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                    <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                    <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                    <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                    <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
-                    <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
-                </ul>
-            </li>-->
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-edit fa-fw">
+                                    <div class="icon-bg bg-violet"></div>
+                                </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="EditHistory.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
+                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
+                                <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-th-list fa-fw">
+                                    <div class="icon-bg bg-blue"></div>
+                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-envelope-o">
+                                    <div class="icon-bg bg-primary"></div>
+                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="Inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
+                                <li><a href="ComposeMail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
+                                <li><a href="ViewMail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
+                                <li><a href="Alerts.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
+                                <li><a href="Notifications.html"><i class="fa fa-inbox"></i><span class="submenu-title">Notifications</span></a></li>
+                                <li><a href="ConfigureAlerts.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
+                            </ul>
+                        </li>-->
                         </ul>
                     </div>
                 </nav>
@@ -440,144 +446,144 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="table-container">
-                                            
-                                            
-
-                                             <div class="col-lg-12">
-
-                                                 <div class="col-md-5">
-                                                     Category: <select ng-options="s.Name for s in Categories track by s.Id" ng-model="s" ng-change="getselectval(s)">
-                                                         <option value="">All</option>
-                                                     </select>
-                                                 </div>
 
 
-                                                 <div class="actions">
-                                                     <a href="AddSubCategory.html"><button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Subcategory</button></a>
 
-                                                 </div>
-                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit SubCategory</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-model="currGroup">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Category:<span class='require'>*</span></label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Category" /></div>
-                                                                            </div>
+                                            <div class="col-lg-12">
+
+                                                <div class="col-md-5">
+                                                    Category: <select ng-options="s.Name for s in Categories track by s.Id" ng-model="s" ng-change="getselectval(s)">
+                                                        <option value="">All</option>
+                                                    </select>
+                                                </div>
+
+
+                                                <div class="actions">
+                                                    <a href="AddSubCategory.html"><button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Subcategory</button></a>
+
+                                                </div>
+                                                <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header modal-header-primary">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                <h4 id="modal-header-primary-label" class="modal-title">Edit SubCategory</h4>
+                                                            </div>
+                                                            <div class="modal-body" ng-model="currGroup">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Category:<span class='require'>*</span></label>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Description:</label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-5">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Description" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-3">
-                                                                            <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.Active" checked /></div>
-                                                                            </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Category" /></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup);">Save</button>
-                                                                    <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
-
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Description:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.Description" /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.Active" checked /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup);">Save</button>
+                                                                <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Description</th>
-                                                                <th>Active</th>
-                                                                <th>update</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <tr ng-repeat=" Category in SubCategory" class="gradeA">
-
-                                                                <td>{{Category.Name}}</td>
-                                                                <td>{{Category.Description}}</td>
-                                                                <td>
-                                                                    <input type="checkbox" ng-checked="Category.Active" checked>
-                                                                </td>
-                                                                <td>
-                                                                    <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(Category);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-
-                                                    </table>
-
                                                 </div>
-                                              </div>
+
+                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Description</th>
+                                                            <th>Active</th>
+                                                            <th>update</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat=" Category in SubCategory" class="gradeA">
+
+                                                            <td>{{Category.Name}}</td>
+                                                            <td>{{Category.Description}}</td>
+                                                            <td>
+                                                                <input type="checkbox" ng-checked="Category.Active" checked>
+                                                            </td>
+                                                            <td>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(Category);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+
+                                                </table>
 
                                             </div>
                                         </div>
 
-
                                     </div>
                                 </div>
 
-                               
-                    
-                            <!--END PAGE WRAPPER-->
+
+                            </div>
                         </div>
-              
+
+
+
+                        <!--END PAGE WRAPPER-->
+                    </div>
+
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                     </div>
                     <!--END FOOTER-->
 
-                      </div>
-        </div>
+                </div>
+            </div>
             <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
                 <div class="modal-header">
@@ -585,11 +591,11 @@
                 </div>
                 <div class="modal-body">
                     <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                        <li ng-repeat="item in items">
+                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                        </li>
+                    </ul>
+                    Selected: <b>{{ selected.item }}</b>-->
                     {{mssg}}
                 </div>
                 <div class="modal-footer">
@@ -598,29 +604,29 @@
                 </div>
 
             </script>
-    </div>
-       
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
-<script src="js/angular.js"></script>
-<script src="js/ngStorage.js"></script>
-<script src="js/SubCategory.js"></script>
+        </div>
+
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <!--loading bootstrap js-->
+        <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+        <script src="vendors/iCheck/icheck.js"></script>
+        <script src="vendors/iCheck/custom.min.js"></script>
+        <script src="js/jquery.menu.js"></script>
+        <script src="vendors/jquery-pace/pace.min.js"></script>
+        <script src="vendors/holder/holder.js"></script>
+        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+        <!--LOADING SCRIPTS FOR PAGE-->
+        <!--CORE JAVASCRIPT-->
+        <script src="js/main.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/SubCategory.js"></script>
 
 </body>
 </html>
