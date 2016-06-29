@@ -172,18 +172,19 @@
                                 <a href="#">
                                     <i class="fa fa-mobile">
                                         <div class="icon-bg bg-dark"></div>
-                                    </i><span class="menu-title">Inventory & BT POS</span><span class="fa arrow"></span>
+                                    </i><span class="menu-title">Inventory & BTPOS</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
 
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
+                                            <li><a href="BTPOSDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
                                             <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
                                             <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                             <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
-                                            <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                            <li><a href="BTPOSConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Configuration</span></a></li>
+                                            <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
                                         </ul>
                                     </li>
 
@@ -198,9 +199,14 @@
                                             <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
                                             <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
                                             <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                            <li><a href="SalesOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Sales orders</span></a></li>
                                             <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                            <li><a href="ShippingOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Shipping Order</span></a></li>
 
                                         </ul>
+                                    <li>
+                                        <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                    </li>
                                 </ul>
                             </li>
 
@@ -699,10 +705,12 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
+                                                                                        <input type="time" id="exampleInput" name="input" ng-model="example.value"
+                                                                                               placeholder="HH:mm:ss" min="08:00:00" max="17:00:00" required />
 
-                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                       <!--<div style="z-index:10000" class="input-group datetimepicker-disable-date date">
                                                                                             <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                                        </div>
+                                                                                        </div>-->
 
                                                                                     </div>
                                                                                 </div>
@@ -716,10 +724,12 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
+                                                                                       <input type="time" id="exampleInput" name="input" ng-model="example.value"
+                                                                                        placeholder="HH:mm:ss" min="08:00:00" max="17:00:00" required />
 
-                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
+                                                                                       <!-- <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
                                                                                             <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                                        </div>
+                                                                                        </div>-->
 
                                                                                     </div>
                                                                                 </div>
@@ -783,9 +793,9 @@
                                                                         <div>
                                                                             <div class="col-md-3">
 
-                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="GetVehicleSchedule()">
-                                                                                    <option value="">Select</option>
-                                                                                </select>
+                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="getFORVehicleSchedule()">
+    <option value="">Select</option>
+</select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -820,20 +830,20 @@
                                                                                 </button>
                                                                             </td>
                                                                             <!--<td>
-                        <div class="col-md-12 active">
-                            <div class="input-group datetimepicker-disable-date date">
-                                <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-md-12 active">
-                            <div class="input-group datetimepicker-disable-date date" >
-                                <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
-                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                        </div>
-                    </td>-->
+            <div class="col-md-12 active">
+                <div class="input-group datetimepicker-disable-date date">
+                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="col-md-12 active">
+                <div class="input-group datetimepicker-disable-date date" >
+                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
+                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                </div>
+            </div>
+        </td>-->
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -1014,6 +1024,14 @@
             autoclose: true,
             pickDate: false
         });
+    </script>
+    <script>
+    angular.module('timeExample', [])
+      .controller('DateController', ['$scope', function ($scope) {
+          $scope.example = {
+              value: new Date(1970, 0, 1, 14, 57, 0)
+          };
+      }]);
     </script>
 
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->

@@ -173,18 +173,19 @@
                             <a href="#">
                                 <i class="fa fa-mobile">
                                     <div class="icon-bg bg-dark"></div>
-                                </i><span class="menu-title">Inventory & BT POS</span><span class="fa arrow"></span>
+                                </i><span class="menu-title">Inventory & BTPOS</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
 
                                 <li class="active">
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                        <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BT POS License</span></a></li>
-                                        <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BT POS</span></a></li>
-                                        <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BT POS Routes</span></a></li>
-                                        <li><a href="BTPOSConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BT POS Configuration</span></a></li>
+                                        <li><a href="BTPOSDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
+                                        <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                        <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+                                        <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                        <li><a href="BTPOSConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Configuration</span></a></li>
+                                        <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
                                     </ul>
                                 </li>
 
@@ -199,9 +200,14 @@
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
                                         <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
                                         <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                        <li><a href="SalesOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Sales orders</span></a></li>
                                         <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                        <li><a href="ShippingOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Shipping Order</span></a></li>
 
                                     </ul>
+                                <li>
+                                    <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                </li>
                             </ul>
                         </li>
 
@@ -209,7 +215,7 @@
                             <a href="#">
                                 <i class="fa fa-gears">
                                     <div class="icon-bg bg-dark"></div>
-                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                                </i><span class="menu-title">BTPOS Configuration</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
 
@@ -321,12 +327,12 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">BT POS Configuration</div>
+                            <div class="page-title">BTPOS Configuration</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">BT POS </a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">BT POS Configuration </a>
+                            <li><a href="#">BTPOS </a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">BTPOS Configuration </a>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -356,8 +362,8 @@
                                                                   <div class="col-md-3">
                                                             BTPOS: <select ng-options="b.POSID for b in sdata.Table track by b.Id" ng-model="b" ng-change="GetFleeBTPosDetails()">
 
-    <option value="">All</option>
-</select>
+                                                                          <option value="">All</option>
+                                                                         </select>
                                                         </div>
                                                         <br><br />
 

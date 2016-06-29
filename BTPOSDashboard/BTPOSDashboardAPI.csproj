@@ -586,6 +586,7 @@
     <Content Include="UI\Routes.html" />
     <Content Include="UI\SalesOrder.html" />
     <Content Include="UI\Seating.html" />
+    <Content Include="UI\ShippingOrder.html" />
     <Content Include="UI\ShoppingCart.html">
       <BrowseToURL>ShoppingCart.html</BrowseToURL>
     </Content>
