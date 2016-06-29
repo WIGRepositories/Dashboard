@@ -471,6 +471,10 @@
     <Content Include="UI\js\InventoryStatus.js" />
     <Content Include="UI\js\Invoices.js" />
     <Content Include="UI\js\JavaScript1.js" />
+    <Content Include="UI\js\libs\angular-route.js" />
+    <Content Include="UI\js\libs\angular-ui-router.js" />
+    <Content Include="UI\js\libs\ocLazyLoad.js" />
+    <Content Include="UI\js\libs\ui-bootstrap.js" />
     <Content Include="UI\js\treetable.js" />
     <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
