@@ -95,6 +95,69 @@ namespace POSDBAccess.Controllers
                 gid.Value = n.Name;
                 cmd.Parameters.Add(gid);
 
+                SqlParameter gad = new SqlParameter();
+                gad.ParameterName = "@Address";
+                gad.SqlDbType = SqlDbType.VarChar;
+                gad.Value = n.Address;
+                cmd.Parameters.Add(gad);
+
+                SqlParameter gcn = new SqlParameter();
+                gcn.ParameterName = "@ContactNo1";
+                gcn.SqlDbType = SqlDbType.VarChar;
+                gcn.Value = n.ContactNo1;
+                cmd.Parameters.Add(gcn);
+
+                SqlParameter gcn1 = new SqlParameter();
+                gcn1.ParameterName = "@ContactNo2";
+                gcn1.SqlDbType = SqlDbType.VarChar;
+                gcn1.Value = n.ContactNo2;
+                cmd.Parameters.Add(gcn1);
+
+                SqlParameter gfx = new SqlParameter();
+                gfx.ParameterName = "@Fax";
+                gfx.SqlDbType = SqlDbType.VarChar;
+                gfx.Value = n.Fax;
+                cmd.Parameters.Add(gfx);
+
+                SqlParameter gem = new SqlParameter();
+                gem.ParameterName = "@EmailId";
+                gem.SqlDbType = SqlDbType.VarChar;
+                gem.Value = n.EmailId;
+                cmd.Parameters.Add(gem);
+
+                SqlParameter gtl = new SqlParameter();
+                gtl.ParameterName = "@Title";
+                gtl.SqlDbType = SqlDbType.VarChar;
+                gtl.Value = n.Title;
+                cmd.Parameters.Add(gtl);
+
+                SqlParameter gcp = new SqlParameter();
+                gcp.ParameterName = "@Caption";
+                gcp.SqlDbType = SqlDbType.VarChar;
+                gcp.Value = n.Caption;
+                cmd.Parameters.Add(gcp);
+
+                SqlParameter gct = new SqlParameter();
+                gct.ParameterName = "@Country";
+                gct.SqlDbType = SqlDbType.VarChar;
+                gct.Value = n.Country;
+                cmd.Parameters.Add(gct);
+
+                SqlParameter gzp = new SqlParameter();
+                gzp.ParameterName = "@ZipCode";
+                gzp.SqlDbType = SqlDbType.Int;
+                gzp.Value = n.ZipCode;
+                cmd.Parameters.Add(gzp);
+
+                SqlParameter gst = new SqlParameter();
+                gst.ParameterName = "@State";
+                gst.SqlDbType = SqlDbType.VarChar;
+                gst.Value = n.State;
+                cmd.Parameters.Add(gst);
+
+
+
+
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,1);
                 insupdflag.Value = n.insupdflag;
                 cmd.Parameters.Add(insupdflag);
