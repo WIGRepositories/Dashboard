@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Home | Fleet | Fleet Details | Add Fleet Details</title>
@@ -6,21 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
     <!--Loading bootstrap css-->
     
-    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <!--<link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
-    <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+  
     
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
-    <!--Loading style-->
+    
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetVehicleConfig()" ng-model="initdata">
     <div>
-        <!--BEGIN THEME SETTINGS-->
-        <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
+        
+       <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <div id="header-topbar-option-demo" class="page-header-topbar">
                 <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
@@ -34,9 +34,9 @@
 
                     </div>
                 </nav>
-                <!--END TOPBAR-->
+               
                 <div id="wrapper">
-                    <!--BEGIN SIDEBAR MENU-->
+                 
                     <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
                         <div class="sidebar-collapse menu-scroll">
                             <ul id="side-menu" class="nav">
@@ -284,9 +284,9 @@
                             </ul>
                         </div>
                     </nav>
-                    <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
+                   
                     <div id="page-wrapper">
-                        <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                        
                         <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                             <div class="page-header pull-left">
                                 <div class="page-title">Fleet Details</div>
@@ -317,7 +317,8 @@
                                                                     <div class="form-group">
                                                                         <label for="Description" class="col-md-3 control-label">Vehicle Reg No <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-3"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
+                                                           <div class="col-md-3">
+                                                                        <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
                                                                         <label for="Description" class="col-md-3 control-label">Engine No <span class='require'>*</span></label>
 
                                                                         <div class="col-md-3"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.EngineNo" /><span class="help-block"></span></div>
@@ -345,11 +346,11 @@
                                                                             </select>
                                                                        </div>
                                                                         <div class="form-group">
-                                                                       <label for="Name" class="col-md-3 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
+                                                                            <label for="Name" class="col-md-6 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
 
 
                                                                             <div style="width:25%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
-                                                                            <input type="text" class="form-control" ng-model="initdata.newfleet.Mfr" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                       <input type="text" class="form-control" ng-model="initdata.newfleet.Mfr" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
 
                                                                         </div>
 
@@ -428,12 +429,12 @@
                             </div>
                      </div>
           
-            <!--END FOOTER-->
+           
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
                         </div>
     </div>
-                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                   
                     
                     </div>
                 </div>
@@ -444,12 +445,7 @@
                 <h3 class="modal-title">Save confirmation!</h3>
             </div>
             <div class="modal-body">
-                <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+               
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -459,12 +455,12 @@
 
         </script>
         </div>
-    <!--END PAGE WRAPPER-->
+   
 
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
+   
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
     
@@ -485,8 +481,7 @@
             autoclose: true
         });
     </script>
-    <!--LOADING SCRIPTS FOR PAGE-->    
-    <!--CORE JAVASCRIPT-->
+    
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
@@ -496,4 +491,4 @@
 </body>
 
 
-</html>
+</html>-->
