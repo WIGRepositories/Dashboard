@@ -123,7 +123,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         });
     }
 
-    $scope.GetVehicleSchedule = function () {
+    $scope. getFORVehicleSchedule = function () {
         $scope.RouteVehicleSchedule = [];
         if ($scope.r == null || $scope.r.RouteId == null) {
             //alert('Please select a route.');
@@ -183,6 +183,12 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
       
     }
 
+    $scope.updateTime = function (s) {
+        var aid = s.stopid + 'ADate';
+        var did = s.stopid + 'DDate';
+        s.arrivaltime = document.getElementById(aid).value;
+       // s.departuretime = document.getElementById(did).value;
+    }
 
 });
 

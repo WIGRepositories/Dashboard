@@ -179,18 +179,19 @@
                             <a href="#">
                                 <i class="fa fa-mobile">
                                     <div class="icon-bg bg-dark"></div>
-                                </i><span class="menu-title">Inventory & BT POS</span><span class="fa arrow"></span>
+                                </i><span class="menu-title">Inventory & BTPOS</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
 
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li><a href="btposdetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
+                                        <li><a href="BTPOSDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
                                         <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
                                         <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                         <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
-                                        <li><a href="Configuration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Configuration</span></a></li>
+                                        <li><a href="BTPOSConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Configuration</span></a></li>
+                                        <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
                                     </ul>
                                 </li>
 
@@ -205,9 +206,14 @@
                                         <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
                                         <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
                                         <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                        <li><a href="SalesOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Sales orders</span></a></li>
                                         <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                        <li><a href="ShippingOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Shipping Order</span></a></li>
 
                                     </ul>
+                                <li>
+                                    <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                </li>
                             </ul>
                         </li>
 
@@ -450,8 +456,8 @@
                                                         
                                                            
                                                             <div class="actions">
-                                                                <a href="AddTypeGroup.html"><button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add TypeGroup</button></a>
-
+                                                            <!----   <button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add TypeGroup</button>--->
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Type Group</button>
                                                             </div>
                                                             <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                                 <div class="modal-dialog">
@@ -543,7 +549,67 @@
                                                                 </td>
                                                             </tr>
                                                         </tbody>
-                                                    </table>                                                  
+                                                    </table>
+                                                        <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Add Type Group</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="TypeGroups">
+                                                                        <div class="row">
+
+                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+
+                                                                            <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="TypeGroups.Name" class="form-control" /><span class="help-block"></span></div>
+                                                                        </div>
+
+
+                                                                        <div class="row">
+                                                                            <label for="Description" class="col-md-3 control-label"> Description <span class='require'></span></label>
+
+
+                                                                            <div class="col-md-4"><input id="Description" type="text" ng-model="TypeGroups.Description" class="form-control" /><span class="help-block"></span></div>
+                                                                        </div>
+
+
+
+                                                                        <div class="row">
+                                                                            <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
+
+                                                                            <div class="col-md-4">
+                                                                                <input type="checkbox" checked />
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-actions">
+                                                                            <div class="col-md-offset-3 col-md-9">
+                                                                                <button class="btn btn-primary" type="button" ng-click="saveNew(TypeGroups);">Save</button>
+
+
+                                                                                <a href="TypeGroups.html" class="btn btn-green">Cancel</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                            </div>
+
+                                                        </div>
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                                                                          
                                                 </div>
                                             </div>
                                         </div>

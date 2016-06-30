@@ -198,7 +198,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
+            //$scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
 
@@ -212,6 +212,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.setFleet = function (F) {
             $scope.currVD = F;
         }
+    }
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
     }
 });
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
