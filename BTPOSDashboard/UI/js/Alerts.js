@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngStorage'])
+var app = angular.module('myApp', ['ngStorage','ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -13,6 +13,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
 });
+
+
     //$scope.save = function (A) {
 
     //    var Alerts = {

@@ -1,5 +1,6 @@
-﻿// JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
+﻿
+// JavaScript source code
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
 
@@ -72,11 +73,33 @@ $scope.saveLicenseType = function (licenseType, flag) {
         errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
         $scope.showDialog(errmssg);
     });
+    $scope.currGroup = null;
+};
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+
+   
+
+
+});
 
 
     $scope.currLicenseType = null;
 
-}
+
 
 $scope.getselectval = function (seltype) {
     var grpid = (seltype) ? seltype.Id : -1;
@@ -209,4 +232,4 @@ $scope.setCurrLicenseType = function (lt) {
 $scope.clearCurrLicenseType = function () {
     $scope.currLicenseType = null;
 };
-});
+
