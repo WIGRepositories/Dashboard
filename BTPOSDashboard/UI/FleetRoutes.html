@@ -471,7 +471,7 @@
                                                                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                         <h4 id="modal-header-primary-label" class="modal-title">NewFleetRoutes</h4>
                                                                     </div>
-                                                                    <div class="modal-body">
+                                                                    <div class="modal-body" ng-init="GetCompanies();" ng-model="initdata">
                                                                         <div class="row">
 
                                                                             <label for="descr" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
@@ -489,8 +489,8 @@
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
-                                                                            </div>
-                                                                        
+                                                                        </div>
+
                                                                         <div class="row">
                                                                             <label for="descr" class="col-md-4 control-label">Vehicle Reg No:<span class='require'></span></label>
 
@@ -522,7 +522,7 @@
                                                                             <label for="active" class="col-md-4 control-label">Effective Till: <span class='require'></span></label>
 
                                                                             <div class="col-md-6">
-                                                                              <!----  <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>--->
+                                                                                <!----  <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>--->
                                                                                 <input type="date" ng-model="initdata.newfleet.td" />
                                                                             </div>
                                                                         </div>

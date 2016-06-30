@@ -464,7 +464,7 @@
                                                                             <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                             <h4 id="modal-header-primary-label" class="modal-title">Add Fleet Availability</h4>
                                                                         </div>
-                                                                        <div class="modal-body">
+                                                                        <div class="modal-body" ng-init="GetCompanies();" ng-model="FleetAvailability">
                                                                             <div class="row">
 
                                                                                 <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Company:</label>
@@ -493,15 +493,15 @@
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
-                                                                            
+
                                                                             <div class="form-group">
                                                                                 <label for="Name" class="col-md-3 control-label">Effective From:<span class='require'></span></label>
                                                                                 <input type="date" ng-model="FleetBtpos.fd">
 
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <<label for="Description" class="col-md-3 control-label">Effective Till:<span class='require'></span></label>
->
+                                                                                <label for="Description" class="col-md-3 control-label">Effective Till:<span class='require'></span></label>
+                                                                                
                                                                                 <input type="date" ng-model="FleetAvailability.td">
                                                                             </div>
                                                                         </div>
