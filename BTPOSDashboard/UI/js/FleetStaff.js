@@ -1,8 +1,8 @@
 
 // JavaScript source code
 // JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname
     $scope.dashboardDS = $localStorage.dashboardDS;
 
@@ -175,6 +175,32 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         });
     }
 
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+});
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
 
    

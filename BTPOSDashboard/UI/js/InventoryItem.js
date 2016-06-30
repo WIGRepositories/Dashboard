@@ -53,6 +53,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
           var Item = {
               Id: -1,
               ItemName: Item.ItemName,
+              ItemImage: Item.ItemImage,
               Code: Item.Code,
               Description: Item.Description,
               Category: 6,// Item.Category.Id,
@@ -84,6 +85,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             var Item = {
                 Id: Item.Id,
                 ItemName: Item.ItemName,
+                ItemImage: Item.ItemImage,
                 Code: Item.Code,
                 Description: Item.Description,
                 Category: Item.Category,
@@ -120,4 +122,5 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.clearItems1 = function () {
         $scope.Items1 = null;
     }
+
 });

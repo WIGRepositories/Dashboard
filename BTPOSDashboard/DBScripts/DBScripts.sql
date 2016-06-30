@@ -8242,3 +8242,55 @@ END
 
 
 GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelUserRoles]    Script Date: 06/29/2016 10:07:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[InsUpdDelUserRoles](
+@Id int,
+@roleid int,
+@UserId int,
+@CompanyId int = null,
+@insupdflag int = 0
+)
+as
+begin
+
+declare @cnt int
+
+select @cnt = count(*) from UserRoles where [UserId] = @UserId and [roleid] = @roleid
+
+if @insupdflag = 0
+begin
+if @cnt = 0
+INSERT INTO [POSDashboard].[dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId]
+           ,[CompanyId])
+     VALUES
+           (@UserId
+           ,@RoleId
+           ,@CompanyId)
+    end
+    
+--begin
+--UPDATE [POSDashboard].[dbo].[UserRoles]
+ --  SET [UserId] = @UserId
+  --    ,[RoleId] = @RoleId
+    --  ,[CompanyId] = @CompanyId
+ --WHERE Id = @Id
+-- end
+ else
+ begin
+if @insupdflag = 1
+
+delete from [UserRoles] where [UserId] = @UserId and RoleId = @roleid
+
+end
+
+end
