@@ -447,6 +447,7 @@
     <Content Include="UI\js\angular-animate.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
+    <Content Include="UI\js\BTPOSMonitoringPage.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\EditHistory.js" />
@@ -2018,6 +2019,7 @@
     <Compile Include="Controllers\BTPOSGroupsController.cs" />
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
+    <Compile Include="Controllers\BTPOSMonitoringPageController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\BtposRoutesController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />

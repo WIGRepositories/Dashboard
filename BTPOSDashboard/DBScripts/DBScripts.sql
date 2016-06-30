@@ -2037,6 +2037,18 @@ CREATE procedure [dbo].[InsUpdDelCompany](
 @desc varchar(50) = '',
 @Id int,
 @Name varchar(50),
+@Address varchar(500),
+@EmailId varchar(50),
+@ContactNo1 varchar(50),
+@ContactNo2 varchar(50),
+@Fax varchar(50),
+@Title varchar(50),
+@Caption varchar(50),
+@Country varchar(50),
+@ZipCode int,
+@State varchar(50),
+--@FleetSize int ,
+--@StaffSize int,
 @insupdflag varchar(1),
 @userid int = -1
 )
@@ -2063,7 +2075,7 @@ if @insupdflag = 'I'
 
 			if @cnt = 0 
 			begin
-			insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
+			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State)
 			
 			SELECT @newCmpId = SCOPE_IDENTITY()
 			
@@ -2132,8 +2144,8 @@ else
      delete from Company where Id = @Id
 end
 
+Go
 
-GO
 
 -- =============================================
 -- Author:		<Author,,Name>
@@ -3518,16 +3530,23 @@ BEGIN
 END
 
 GO
+/****** Object:  StoredProcedure [dbo].[InsUpdTypes]    Script Date: 06/30/2016 11:00:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30),@insupdflag varchar(1))
+ALTER procedure [dbo].[InsUpdTypes](@Id int,@Name varchar(50),@Description varchar(50) = null,@TypeGroupId varchar(50),@Active varchar(30),@insupdflag varchar(1))
 as
 begin
 
+declare @dt datetime
+set @dt = GETDATE()
 
 declare @cnt int
+declare @edithistoryid int
+declare @oldname varchar(50)
+declare @olddesc varchar(250)
+declare @oldactive int
 
 if @insupdflag = 'I'
 begin
@@ -3546,6 +3565,15 @@ INSERT INTO [POSDashboard].[dbo].[Types]
            ,@TypeGroupId 
            ,@Active)
            
+           
+           exec InsEditHistory 'Types','Name', @Name,'Type Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		              
+			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null			
+			exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+			exec InsEditHistoryDetails @edithistoryid,null,@Active,'Insertion','Active',null
+
+
+           
            end
 else
 if @insupdflag = 'U'
@@ -3556,6 +3584,8 @@ and Id <> @Id
 
 if @cnt =0
 
+select @oldname = name, @olddesc = description, @oldactive = active from types where Id = @Id
+
 
 update types 
 set 
@@ -3565,8 +3595,16 @@ set
 
 where Id = @Id
 
+ exec InsEditHistory 'Types','Name', @Name,'Type updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
 
+if @oldname <> @Name
+exec InsEditHistoryDetails @edithistoryid,@oldname,@Name,'Modication','Name',null		
 
+if @olddesc <> @Description
+exec InsEditHistoryDetails @edithistoryid,@olddesc,@Description,'Modication','Description',null		
+
+if @oldactive <> @Active
+exec InsEditHistoryDetails @edithistoryid,@oldactive,@Active,'Modication','Active',null		
 
 end
 if @insupdflag = 'D'
@@ -3575,7 +3613,6 @@ DELETE FROM [POSDashboard].[dbo].[Types]
       WHERE Id = @Id
 end
 end
-
 
 
 GO
@@ -3653,16 +3690,22 @@ select * from TypeGroups
 end
 
 GO
+/****** Object:  StoredProcedure [dbo].[InsUpdTypeGroups]    Script Date: 06/30/2016 11:19:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdTypeGroups](@Id int,@Name varchar(50)
+ALTER procedure [dbo].[InsUpdTypeGroups](@Id int,@Name varchar(50)
 ,@Description varchar(50) = null,@Active int, @insupdflag varchar(1))
 as
 begin
-
+declare @dt datetime
+set @dt = GETDATE()
 declare @cnt int
+declare @edithistoryid int
+declare @oldname varchar(50)
+declare @olddesc varchar(250)
+declare @oldactive int
 
 if @insupdflag = 'I'
 begin
@@ -3680,6 +3723,13 @@ INSERT INTO [POSDashboard].[dbo].[TypeGroups]
            ,@Description
            ,@Active)
 
+exec InsEditHistory 'TypeGroups','Name', @Name,'TypeGroups Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		              
+			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null			
+			exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+			exec InsEditHistoryDetails @edithistoryid,null,@Active,'Insertion','Active',null
+
+
 
 
 end
@@ -3692,14 +3742,25 @@ and Id <> @Id
               
 if @cnt =0
            
-           
+   select @oldname = name, @olddesc = description, @oldactive = active from TypeGroups where Id = @Id        
+
 UPDATE [POSDashboard].[dbo].[TypeGroups]
    SET [Name] = @Name
       ,[Description] = @Description
       ,[Active] = @Active
  WHERE Id = @Id
 	
-	
+	exec InsEditHistory 'TypeGroups','Name', @Name,'Type updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
+
+if @oldname <> @Name
+exec InsEditHistoryDetails @edithistoryid,@oldname,@Name,'Modication','Name',null		
+
+if @olddesc <> @Description
+exec InsEditHistoryDetails @edithistoryid,@olddesc,@Description,'Modication','Description',null		
+
+if @oldactive <> @Active
+exec InsEditHistoryDetails @edithistoryid,@oldactive,@Active,'Modication','Active',null		
+
 
               
 end
@@ -3711,6 +3772,8 @@ end
 end
           
    
+
+
 
 GO
 SET ANSI_NULLS ON
@@ -6120,10 +6183,14 @@ where ((FD.FleetOwnerId = @fleetowner or @fleetowner = -1)
  and (FD.CompanyId = @cmpId or @cmpId  = -1))
 
 END
+Go
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetStaff]    Script Date: 06/30/2016 17:00:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
-GO 
-
-CREATE PROCEDURE [dbo].[InsUpdDelFleetStaff]
+ALTER PROCEDURE [dbo].[InsUpdDelFleetStaff]
 @Id int = -1,
 @RoleId int,
 @UserId int,
@@ -6137,16 +6204,26 @@ begin
 
 declare @cnt  int
 set @cnt = -1
+declare @dt datetime
+set @dt = GETDATE()
+
+declare @edithistoryid int
+declare @oldVehicleId int
+declare @oldUserId int
+declare @oldCompanyId int
+declare @oldRoleId int
+
 
 if @insupddelflag = 'I'
 
 select @cnt = count(1) from [POSDashboard].[dbo].[FleetStaff] 
 where vehicleid = @vehicleid 
 and userid = @userid 
-and companyid = @cmpId
+
 and roleid = @roleid
 
 if @cnt = 0 
+select @oldVehicleId = VehicleId, @oldUserId = UserId, @oldRoleId=RoleId from FleetStaff where Id = @Id
 begin
 INSERT INTO [POSDashboard].[dbo].[FleetStaff]
            ([RoleId]
@@ -6162,8 +6239,19 @@ INSERT INTO [POSDashboard].[dbo].[FleetStaff]
            ,@ToDate
            ,@VehicleId
            ,@cmpId)
+         exec InsEditHistory 'Types','Name', @VehicleId,'FleetStaff Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		              
+			exec InsEditHistoryDetails @edithistoryid,null,@VehicleId,'Insertion','VehicleId',null			
+			exec InsEditHistoryDetails @edithistoryid,null,@UserId,'Insertion','UserId',null
+			
+            exec InsEditHistoryDetails @edithistoryid,null,@RoleId,'Insertion','RoleId',null
+  
+           
+           
+           
+           
 end
-else
+
   if @insupddelflag = 'U'
 
 UPDATE [POSDashboard].[dbo].[FleetStaff]
@@ -6173,7 +6261,23 @@ UPDATE [POSDashboard].[dbo].[FleetStaff]
       ,[ToDate] = @ToDate
       ,[VehicleId] = @VehicleId
       ,[CompanyId] = @cmpId
+
  WHERE Id = @Id
+
+
+exec InsEditHistory 'FleetStaff','Name', @VehicleId,'Type updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
+
+if @VehicleId <> @VehicleId
+exec InsEditHistoryDetails @edithistoryid,@oldVehicleId,@VehicleId,'Modication','VehicleId',null		
+
+if @UserId <> @UserId
+exec InsEditHistoryDetails @edithistoryid,@oldUserId,@UserId,'Modication','UserId',null		
+
+
+
+if @RoleId <> @RoleId
+exec InsEditHistoryDetails @edithistoryid,@oldRoleId,@RoleId,'Modication','RoleId',null		
+		
 
 else
   delete from [POSDashboard].[dbo].[FleetStaff]
@@ -6183,6 +6287,7 @@ and companyid = @cmpid
 and roleid = @roleid
 
 End
+
 
 GO
 /****** Object:  Table [dbo].[VehicleLayout]    Script Date: 05/21/2016 23:31:02 ******/

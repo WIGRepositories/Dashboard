@@ -463,13 +463,13 @@
                                                                 <div class="modal-body">
                                                                     <div class="form-group">
 
-                                                                        <label class="col-md-4 control-label">Item Name: <span class='require'>*</span></label>
+                                                                        <label class="col-md-12 control-label">Item Name: <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-5"><input id="itemName" type="text" placeholder="Item Name" class="form-control" ng-model="Item.ItemName" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-12"><input id="itemName" type="text" placeholder="Item Name" class="form-control" ng-model="Item.ItemName" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
 
-                                                                        <label class="col-md-4 control-label">Item Image: <span class='require'>*</span></label>
+                                                                        <label class="col-md-6 control-label">Item Image: <span class='require'>*</span></label>
 
                                                                       
                                                                         <div class="col-lg-6">
@@ -507,19 +507,19 @@
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <label class="col-md-4 control-label">Code: <span class='require'>*</span></label>
+                                                                        <label class="col-md-6 control-label">Code: <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-5"><input id="itemcode" type="text" placeholder="Item Code" class="form-control" ng-model="Item.Code" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="itemcode" type="text" placeholder="Item Code" class="form-control" ng-model="Item.Code" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="itemDesc" class="col-md-4 control-label">Description:</label>
 
-                                                                        <div class="col-md-5"><input id="itemDesc" type="text" placeholder="Item Description" class="form-control" ng-model="Item.Description" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="itemDesc" type="text" placeholder="Item Description" class="form-control" ng-model="Item.Description" /><span class="help-block"></span></div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="selCountry" class="col-md-4 control-label">Category:</label>
 
-                                                                        <div class="col-md-5">
+                                                                        <div class="col-md-6">
                                                                             <select disabled>
                                                                                 <option value="">Inventory Category</option>
                                                                             </select>
@@ -528,7 +528,7 @@
                                                                     <div class="form-group">
 
                                                                         <label for="selCountry" class="col-md-4 control-label">SubCategory:</label>
-                                                                        <div class="col-md-5">
+                                                                        <div class="col-md-6">
                                                                             <select ng-options="s.Name for s in SubCategory track by s.Id" class="form-control" ng-model="Item.SubCategory">
                                                                                 <option value="">All</option>
                                                                             </select>
@@ -536,9 +536,9 @@
 
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="" class="col-md-4 control-label">Re-order point:<span class='require'>*</span></label>
+                                                                        <label for="" class="col-md-6 control-label">Re-order point:<span class='require'>*</span></label>
 
-                                                                        <div class="col-md-5"><input id="reorderpoint" type="text" class="form-control" ng-model="Item.ReOrderPoint" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6"><input id="reorderpoint" type="text" class="form-control" ng-model="Item.ReOrderPoint" /><span class="help-block"></span></div>
                                                           </div>
 
                                                             <div class="form-actions">
