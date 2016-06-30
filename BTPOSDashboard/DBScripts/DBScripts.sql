@@ -8399,3 +8399,29 @@ delete from [UserRoles] where [UserId] = @UserId and RoleId = @roleid
 end
 
 end
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelInventory]    Script Date: 06/30/2016 18:00:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[InsUpdDelBTPOSMoitoringPage]
+(@BTPOSId int,
+@Xcoordinate float,
+@Ycoordinate float,
+@LocationName varchar(500),
+@SNo int,
+@DateTime datetime)
+as
+begin
+insert into  BTPOSMonitoring 
+values(@BTPOSId,
+@Xcoordinate,
+@Ycoordinate,
+@LocationName,
+@SNo,
+@DateTime
+)
+end
+
+
