@@ -95,6 +95,7 @@ namespace POSDBAccess.Controllers
                 gid.Value = n.Name;
                 cmd.Parameters.Add(gid);
 
+
                 SqlParameter gad = new SqlParameter();
                 gad.ParameterName = "@Address";
                 gad.SqlDbType = SqlDbType.VarChar;

@@ -27,6 +27,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
         var newCmp = {
+
             Id: Group.Id,
             Name: Group.Name,
             admin: Group.admin,

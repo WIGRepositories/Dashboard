@@ -541,9 +541,9 @@ namespace BTPOSDashboardAPI.Models
 
         public string  ContactNo1{get; set;}
         
-        public string ContactNo2{get; set;}
-        public string Fax {get; set;}
-        public string EmailId {get; set;}
+        public string ContactNo2 {get; set;}
+        public string Fax  {get; set;}
+        public string EmailId  {get; set;}
         public string Title {get; set;}
         public string Caption {get; set;} 
         public string Country {get; set;}

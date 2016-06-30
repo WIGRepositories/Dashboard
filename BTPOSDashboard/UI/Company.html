@@ -437,8 +437,7 @@
                                                                     <div class="modal-header modal-header-primary">
                                                                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>                                                                        
                                                                             <h4 id="modal-header-primary-label" class="modal-title">Add Company</h4>
-                                                                        </div>
-                                                                    
+                                                                        </div>                                                                    
                                                                         <div class="modal-body">
                                                                             <div class="form-group">
 
@@ -493,33 +492,37 @@
 
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="Fax" class="col-md-3 control-label">Country<span class='require'></span></label>
-                                                                                <div class="col-md-4"><input id="Country" type="text" ng-model="Group.Country" class="form-control" /><span class="help-block"></span></div>
-
+                                                                                 <label for="inputMiddleName" class="col-md-2 control-label">Country:<span class='require'>*</span></label>
+                                                                                <select class="form-group" ng-model="Group.Country">
+                                                                                    <option value="select Country">select Country</option>
+                                                                                    <option value="Afghanistan">Afghanistan</option>
+                                                                                    <option value="Albania">Albania</option>
+                                                                                    <option value="Algeria">Algeria</option>
+                                                                                    <option value="American Samoa">American Samoa</option>
+                                                                                    <option value="Andorra">Andorra</option>
+                                                                                    <option value="Angola">Angola</option>
+                                                                                    <option value="Anguilla">Anguilla</option>
+                                                                                    <option value="Antartica">Antarctica</option>
+                                                                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                                                    <option value="Argentina">Argentina</option>
+                                                                                    <option value="Armenia">Armenia</option>
+                                                                                    <option value="Aruba">Aruba</option>
+                                                                                    <option value="Australia">Australia</option>
+                                                                                </select>
+                                                                                
                                                                                 <label for="Fax" class="col-md-3 control-label">State<span class='require'></span></label>
                                                                                 <div class="col-md-4"><input id="State" type="text" ng-model="Group.State" class="form-control" /><span class="help-block"></span></div>
-                                                                            </div>
-                                                                            <div class="form-group">
+                                                                            </div>                                                                            
+                                                                                <div class="form-group">
+                                                                                    <label for="Fax" class="col-md-3 control-label">ZipCode<span class='require'></span></label>
+                                                                                    <div class="col-md-4"><input id="ZipCode" type="text" ng-model="Group.ZipCode" class="form-control" /><span class="help-block"></span></div>                                                                                 
+               
 
-                                                                                <label for="Fax" class="col-md-3 control-label">ZipCode<span class='require'></span></label>
-                                                                                <div class="col-md-4"><input id="ZipCode" type="text" ng-model="Group.ZipCode" class="form-control" /><span class="help-block"></span></div>
-
-                                                                                <!--<div class="row">
-                    <label for="Fax" class="col-md-3 control-label">FleetSize<span class='require'></span></label>
-                    <div class="col-md-4"><input id="FleetSize" type="text" ng-model="Group.FleetSize" class="form-control" /><span class="help-block"></span></div>
-                </div>
-                <div class="row">
-                    <label for="Fax" class="col-md-3 control-label">StaffSize<span class='require'></span></label>
-                    <div class="col-md-4"><input id="StaffSize" type="text" ng-model="Group.StaffSize" class="form-control" /><span class="help-block"></span></div>
-                </div>-->
-
-                                                                                <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>
-
-                                                                                <div class="col-md-4">
-                                                                                    <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
+                                                                                      <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>                                                                                  
+                                                                                        <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
+                                                                                    
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
                                                                         <div class="form-actions">
                                                                             <div class="col-md-offset-3 col-md-9">
                                                                                 <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
@@ -540,14 +543,7 @@
                                                         <tr>
                                                             <th>Name</th>
                                                             <th>Code</th>
-                                                            <th>Description</th>
-                                                            <th>ContactNo1</th>                                                            
-                                                            <th>Fax</th>
-                                                            <th>Email</th>
-                                                            <th>Title</th>
-                                                            <th>Caption</th> 
-                                                            <th>Address</th> 
-                                                            <th>ZipCode</th>
+                                                            <th>Description</th>                                                           
                                                             <th>Active</th>
                                                             <th>Update</th>
                                                         </tr>
@@ -557,14 +553,7 @@
                                                         <tr ng-repeat="cmp in Companies" class="gradeA">
                                                             <td>{{cmp.Name}}</td>
                                                             <td>{{cmp.code}}</td>
-                                                            <td>{{cmp.desc}}</td>
-                                                            <td>{{cmp.ContactNo1}}</td>                                                            
-                                                            <td>{{cmp.Fax}}</td>
-                                                            <td>{{cmp.EmailId}}</td>
-                                                            <td>{{cmp.Title}}</td>                                                            
-                                                            <td>{{cmp.Caption}}</td>
-                                                            <td>{{cmp.Address}}</td>
-                                                            <td>{{cmp.ZipCode}}</td>  
+                                                            <td>{{cmp.desc}}</td>                                                             
                                                             <td>
                                                                 <input type="checkbox" checked readonly>
                                                             </td>
