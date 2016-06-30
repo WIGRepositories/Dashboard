@@ -376,6 +376,7 @@
                                                             </div>
 
                                                             <div class="actions">
+                                                             <!----   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
                                                                 <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>
                                                             </div>
 
@@ -399,9 +400,9 @@
                                                                                         <label for="Description" class="col-md-6 control-label">Engine No <span class='require'>*</span></label>
 
 
-                                                                                        <div class="col-md-6">
-                                                                                            <div class="col-md-3"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.EngineNo" /><span class="help-block"></span></div>
-                                                                                        </div>
+                                                                                    
+                                                                                            <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.EngineNo" /><span class="help-block"></span></div>
+                                                                                        
                                                                                     </div>
 
                                                                                 </div>
@@ -487,7 +488,7 @@
                                                                                             </div>
                                                                                             <label for="Description" class="col-md-6 control-label">Seating Capacity<span class='require'>*</span></label>
 
-                                                                                            <div class="col-md-3"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
+                                                                                            <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
 
                                                                                         </div>
                                                                                     </div>
@@ -530,14 +531,14 @@
                                                             </div>
 
 
+                                                                </div>
 
 
-
-                                                            <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header modal-header-primary">
-                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                           <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                             <h5 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h5>
                                                                         </div>
                                                                         <div class="modal-body">
