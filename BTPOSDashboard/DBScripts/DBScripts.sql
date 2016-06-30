@@ -8404,31 +8404,31 @@ end
 
 end
 
-GO
-/****** Object:  StoredProcedure [dbo].[getFORVehicleSchedule]    Script Date: 06/30/2016 14:55:12 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelInventory]    Script Date: 06/30/2016 18:00:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-ALTER procedure [dbo].[getFORVehicleSchedule]
-(@fleetOwnerId int, @routeid int, @vehicleId int)
+Create procedure [dbo].[InsUpdDelBTPOSMoitoringPage]
+(@BTPOSId int,
+@Xcoordinate float,
+@Ycoordinate float,
+@LocationName varchar(500),
+@SNo int,
+@DateTime datetime)
 as
 begin
+insert into  BTPOSMonitoring 
+values(@BTPOSId,
+@Xcoordinate,
+@Ycoordinate,
+@LocationName,
+@SNo,
+@DateTime
+)
+end
 
-SELECT distinct 
-      rd.stopid
-      ,src.name StopName
-      ,src.code StopCode	 
-	  ,[StopNo]
-      ,fs.arrivalhr
-      ,fs.arrivalmin
-      ,fs.arrivalampm
-      ,fs.departurehr
-      ,fs.departuremin
-      ,fs.departureampm
-      
-      ,fs.arrivalhr + ''+ fs.arrivalmin + ''+ fs.arrivalampm  as ArrivalTime
+
 	  ,fs.departurehr + '' + fs.departuremin + ''+ fs.departureampm as DepartureTime
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
