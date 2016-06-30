@@ -16,9 +16,9 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $local
    
 });
 
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
    
-   
+    $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.StopCount = [];
 
     $scope.GetCompanies = function () {

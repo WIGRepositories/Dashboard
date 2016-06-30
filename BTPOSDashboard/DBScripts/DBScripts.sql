@@ -2037,6 +2037,18 @@ CREATE procedure [dbo].[InsUpdDelCompany](
 @desc varchar(50) = '',
 @Id int,
 @Name varchar(50),
+@Address varchar(500),
+@EmailId varchar(50),
+@ContactNo1 varchar(50),
+@ContactNo2 varchar(50),
+@Fax varchar(50),
+@Title varchar(50),
+@Caption varchar(50),
+@Country varchar(50),
+@ZipCode int,
+@State varchar(50),
+--@FleetSize int ,
+--@StaffSize int,
 @insupdflag varchar(1),
 @userid int = -1
 )
@@ -2063,7 +2075,7 @@ if @insupdflag = 'I'
 
 			if @cnt = 0 
 			begin
-			insert into Company (active,code,[desc],Name) values(@active,@code,@desc,@Name)
+			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State)
 			
 			SELECT @newCmpId = SCOPE_IDENTITY()
 			
@@ -2132,8 +2144,8 @@ else
      delete from Company where Id = @Id
 end
 
+Go
 
-GO
 
 -- =============================================
 -- Author:		<Author,,Name>
