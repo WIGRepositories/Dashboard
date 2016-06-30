@@ -475,6 +475,7 @@
     <Content Include="UI\js\libs\angular-ui-router.js" />
     <Content Include="UI\js\libs\ocLazyLoad.js" />
     <Content Include="UI\js\libs\ui-bootstrap.js" />
+    <Content Include="UI\js\ShoppingCart.js" />
     <Content Include="UI\js\treetable.js" />
     <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
@@ -2050,6 +2051,7 @@
     <Compile Include="Controllers\RouteFareController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
     <Compile Include="Controllers\ShippingOrderController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />

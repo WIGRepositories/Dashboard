@@ -722,12 +722,10 @@
                                                                                 </div>
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
-                                                                                        <input type="time" id="exampleInput" name="input" ng-model="dtime"
-                                                                                               placeholder="HH:mm:ss" min="08:00:00" max="17:00:00" required />
 
-                                                                                       <!-- <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
-                                                                                            <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                                        </div>-->
+                                                                                        <div class="input-group datetimepicker-disable-date date" ng-model="currStop.departuretime">
+                                                                                            <input type="text" id="{{currStop.stopid}}DDate" class="form-control" value="currStop.departuretime" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                        </div>
 
                                                                                     </div>
                                                                                 </div>
@@ -790,8 +788,14 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th width="20%"> Stop Name</th>
-                                                                            <th width="20%">Stop Code</th>
+                                                                           <th width="20%">Stop Code</th>
                                                                             <th width="20%">Stop No</th>
+                                                                            <th width="20%">Arrivalhr</th> 
+                                                                            <th width="20%">Departurehr</th>
+                                                                            <th width="20%">Arrivalmin</th>
+                                                                            <th width="20%">Departuremin</th>
+                                                                            <th width="20%">Arrivalampm</th>
+                                                                            <th width="20%">Departureampm</th>
                                                                             <th width="10%">Arrival</th>
                                                                             <th width="10%">departure</th>
                                                                             <th width="20%">Update timing</th>
@@ -803,6 +807,12 @@
                                                                             <td>{{stop.StopName}}</td>
                                                                             <td>{{stop.StopCode}}</td>
                                                                             <td>{{stop.StopNo}}</td>
+                                                                            <td>{{stop.ArrivalHr}}</td>
+                                                                            <td>{{stop.DepartureHr}}</td>
+                                                                            <td>{{stop.ArrivalMin}}</td>
+                                                                            <td>{{stop.DepartureMin}}</td>
+                                                                            <td>{{stop.ArrivalAMPM}}</td>
+                                                                            <td>{{stop.DepartureAMPM}}</td>
                                                                             <td>{{stop.arrivaltime}}</td>
                                                                             <td>{{stop.departuretime}}</td>
                                                                             <td>
@@ -904,7 +914,7 @@
 
                                                                     <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
                                                                         <div class="col-md-12" style="text-align:center">
-                                                                            <button ng-click="save();" class="btn btn-success">
+                                                                            <button ng-click="save(test);" class="btn btn-success">
                                                                                 <i class="fa fa-save"></i>&nbsp;
                                                                                 Save
                                                                             </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
@@ -939,9 +949,7 @@
 
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                         
 
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>

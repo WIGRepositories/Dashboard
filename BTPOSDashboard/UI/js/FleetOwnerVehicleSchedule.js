@@ -156,6 +156,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 
     $scope.save = function () {
         var test = $scope.RouteVehicleSchedule;
+       
     }
 
     $scope.test = function (a) {
@@ -187,8 +188,56 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
         var aid = s.stopid + 'ADate';
         var did = s.stopid + 'DDate';
         s.arrivaltime = document.getElementById(aid).value;
-       // s.departuretime = document.getElementById(did).value;
+        s.departuretime = document.getElementById(did).value;
+
+        var arrArry = s.arrivaltime.split(' ');
+        var depArry = s.departuretime.split(' ');
+
+
     }
+    
+    //$scope.save = function (stop, flag) {
+
+        
+    //    var FOVS = {
+    //        //Id: stop.Id,
+    //       StopNmae:stop.StopNmae,
+       //            StopNo:stop.StopNo,
+       //       StopCode:stop.StopCode,
+    //        ArrivalHr: stop.ArrivalHr,
+    //        DepartureHr: stop.DepartureHr,
+    //        Duration: stop.Duration,
+    //        ArrivalMin: stop.ArrivalMin,
+    //        DepartureMin: stop.DepartureMin,
+    //        ArrivalAMPM: stop.ArrivalAMPM,
+    //        DepartureAmPm: stop.DepartureAmPmtopId,
+    //        arrivaltime: stop.arrivaltime,
+    //        departuretime: stop.departuretime,            
+    //        insupdflag: flag
+    //    }
+
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/save',
+    //        data: FOVS
+    //    }
+    //    $http(req).then(function (response) {
+
+    //        $scope.showDialog("Saved successfully!!");
+
+    //        $scope.Group = null;
+
+    //    }, function (errres) {
+    //        var errdata = errres.data;
+    //        var errmssg = "";
+    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    //        $scope.showDialog(errmssg);
+    //    });
+
+
+       
+    //};
 
 });
 
