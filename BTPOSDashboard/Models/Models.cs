@@ -1463,6 +1463,18 @@ namespace BTPOSDashboardAPI.Models
 
     }
 
+    public class BTPOSMoitoringPage
+    {
+        public int BTPOSId {get; set;}
+        public float Xcoordinate { get; set; }
+        public float Ycoordinate { get; set; }
+        public string LocationName { get; set; }
+        public int SNo { get; set; }
+        public DateTime DateTime { get; set; }           
+          
+         
+    }
+
 
 }                     
         
