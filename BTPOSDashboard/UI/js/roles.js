@@ -182,7 +182,19 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currRole = null;
 
     };
+    $scope.showDialog = function (message) {
 
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
     $scope.testdel = function (role)
     {       
         var cmprole = {
@@ -209,7 +221,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currRole = null;
     }
 });
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg, $uibModal) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {
