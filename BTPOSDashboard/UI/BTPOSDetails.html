@@ -358,7 +358,7 @@
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
-
+                                                        
                                                         <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button>
 
                                                     </div>
@@ -505,7 +505,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    
                                                     <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -519,15 +519,17 @@
                                                                         <label for="IMEI" class="col-md-4 control-label" style="color:red;">IMEI: <span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
-                                                                           <input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span></div>
+                                                                            <input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span>
                                                                         </div>
-                                                                   
+                                                                    </div>
+
 
                                                                     <div class="row">
                                                                         <label for="IMEI" class="col-md-4 control-label" style="color:red;">IP Config: <span class='require'>*</span></label>
                                                                         <div class="col-md-6">
-                                                                            <input id="ipconfig" type="text" ng-model="Group.ipconfig" class="form-control" /><span class="help-block"></span></div>
-                                                                        
+                                                                            <input id="ipconfig" type="text" ng-model="Group.ipconfig" class="form-control" /><span class="help-block"></span>
+                                                                        </div>
+
                                                                     </div>
                                                                     <div class="row">
                                                                         <label for="selCountry" class="col-md-4 control-label">Company name:</label>
@@ -545,10 +547,10 @@
 
 
                                                                         <div class="col-md-6">
-                                                                          <select id="selusertype" class="form-control" ng-model="Group.FleetOwnerId" disabled>
-                                                                           <option value="">None</option>
-                                                                                </select>
-                                                                           </div>
+                                                                            <select id="selusertype" class="form-control" ng-model="Group.FleetOwnerId" disabled>
+                                                                                <option value="">None</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="selCountry" class="col-md-4 control-label">Status:</label>
@@ -559,7 +561,7 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    
+
                                                                 </div>
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">

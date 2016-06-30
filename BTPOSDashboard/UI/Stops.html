@@ -362,9 +362,10 @@
                                                     <div class="row mbm">
 
                                                         <div class="actions">
-                                                            <a href="AddNewStops.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add New Stop</button></a>
+                                                  <!----<button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add New Stop</button></a>--->
+                                                            <button  type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add New Stop</button>
                                                         </div>
-                                                        </div>
+                                                        
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -458,7 +459,59 @@
                                                             </tbody>
 
                                                         </table>
+                                                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Type</h4>
+                                                                </div>
+                                                                <div class="modal-body" ng-model="newStop">
+                                                                    <div class="row">
 
+                                                                        <label for="inputFirstName" class="col-md-3 control-label">Name <span class='require'>*</span></label>
+
+
+                                                                        <div class="col-md-4"><input id="inputFirstName" type="text" placeholder="Name" class="form-control" ng-model="newStop.Name" /><span class="help-block"></span></div>
+                                                                    </div>
+
+
+                                                                    <div class="row">
+                                                                        <label for="inputLastName" class="col-md-3 control-label">Description </label>
+
+                                                                        <div class="col-md-4"><input id="inputLastName" type="text" placeholder="" class="form-control" ng-model="newStop.Description" /><span class="help-block"></span></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <label for="inputMiddleName" class="col-md-3 control-label">Code<span class='require'>*</span></label>
+
+                                                                        <div class="col-md-4"><input id="inputMiddleName" type="text" placeholder="" class="form-control" ng-model="newStop.Code" /><span class="help-block"></span></div>
+                                                                    </div>
+
+
+
+                                                                    <div class="row">
+                                                                        <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
+
+                                                                        <div class="col-md-4">
+                                                                            <input type="checkbox" checked ng-model="newStop.Active" />
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button class="btn btn-green" type="button" ng-click="saveNewStop(newStop)">Save</button>
+
+                                                                            <a href="Stops.html" class="btn btn-primary" ng-click="clearStops()">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                    </div>
                                                         
                                                    
                                                 </div>
