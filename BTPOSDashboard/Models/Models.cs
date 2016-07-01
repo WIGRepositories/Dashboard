@@ -1447,8 +1447,19 @@ namespace BTPOSDashboardAPI.Models
         public int VehicleTypeId { get; set; }
         public String label { get; set; }
         public string insupdflag { get; set; }
+        //public int FleetOwnerId { get; set; }
+    }
+    public class FleetOwnerVehicleLayout
+    {
+        public int VehicleLayoutTypeId { get; set; }
+        public int RowNo { get; set; }
+        public int ColNo { get; set; }
+        public int VehicleTypeId { get; set; }
+        public String label { get; set; }
+        public string insupdflag { get; set; }
         public int FleetOwnerId { get; set; }
     }
+
     
     public class reset
     {
