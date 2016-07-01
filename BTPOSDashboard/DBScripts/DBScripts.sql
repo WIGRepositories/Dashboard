@@ -8429,18 +8429,9 @@ values(@BTPOSId,
 end
 
 
-	  ,fs.departurehr + '' + fs.departuremin + ''+ fs.departureampm as DepartureTime
-  FROM [POSDashboard].[dbo].[RouteDetails] rd
-  inner join stops src on src.id = rd.stopid
-  inner join fleetownerstops fos 
-on (fos.stopid = rd.stopid and fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
-left outer join FORouteFleetSchedule fs 
-on fs.stopid = fos.stopid and (fs.fleetownerid = @fleetownerid and fs.routeid = @routeid
-and fs.vehicleId = @vehicleId)
-  where  (rd.routeid = @routeid )
-  order by stopno
+	 
 
-end
+
 
 
 GO
@@ -8637,7 +8628,7 @@ else
 end
 
 
-USE [POSDashboard]
+
 GO
 
 /****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/30/2016 18:57:29 ******/
