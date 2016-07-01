@@ -6704,12 +6704,13 @@ inner join Types t on t.Id = licensecatid
 END
 
 
+/****** Object:  StoredProcedure [dbo].[InsUpdLicenseTypes]    Script Date: 07/01/2016 17:45:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE InsUpdLicenseTypes 
+ALTER PROCEDURE [dbo].[InsUpdLicenseTypes] 
 (@Id int = -1
 ,@LicenseCatId int
 ,@LicenseType varchar(50)
@@ -6717,12 +6718,34 @@ CREATE PROCEDURE InsUpdLicenseTypes
 ,@Active int = 1)	
 AS
 BEGIN
+declare @dt datetime
+set @dt = GETDATE()
+
+
+declare @edithistoryid int
+declare @oldLicenseType varchar(50)
+declare @oldDescription varchar(500)
+declare @oldActive int
+select @oldLicenseType = LicenseType, @oldActive = Active, @oldDescription = Description from LicenseTypes where Id = @Id
+
+
 	UPDATE [POSDashboard].[dbo].[LicenseTypes]
    SET [LicenseCatId] = @LicenseCatId
       ,[LicenseType] = @LicenseType
       ,[Description] = @Description
       ,[Active] = @Active
 	WHERE Id = @Id
+exec InsEditHistory 'LicenseTypes','Name', @LicenseType,'LicenseTypes updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
+
+if @oldLicenseType <> @LicenseType
+exec InsEditHistoryDetails @edithistoryid,@oldLicenseType,@LicenseType,'Modication','LicenseType',null		
+
+if @oldDescription<> @Description
+exec InsEditHistoryDetails @edithistoryid,@oldDescription,@Description,'Modication','Description',null		
+
+if @oldActive <> @Active
+exec InsEditHistoryDetails @edithistoryid,@oldActive,@Active,'Modication','Active',null			
+	
 
 if @@rowcount = 0
 
@@ -6736,8 +6759,16 @@ INSERT INTO [POSDashboard].[dbo].[LicenseTypes]
            ,@LicenseType
            ,@Description
            ,@Active)
+           
+           exec InsEditHistory 'LicenseTypes','Name', @LicenseType,'LicenseTypes Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		              
+			exec InsEditHistoryDetails @edithistoryid,null,@LicenseType,'Insertion','LicenseType',null			
+			exec InsEditHistoryDetails @edithistoryid,null,@Active,'Insertion','Active',null
+			exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+
 
 END
+
 
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFleetRoutes]    Script Date: 07/01/2016 10:10:30 ******/
