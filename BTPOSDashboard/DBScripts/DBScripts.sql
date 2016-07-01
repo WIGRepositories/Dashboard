@@ -8403,6 +8403,60 @@ delete from [UserRoles] where [UserId] = @UserId and RoleId = @roleid
 end
 
 end
+Go
+
+GO
+
+/****** Object:  Table [dbo].[BTPOSMonitoring]    Script Date: 07/01/2016 09:55:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[BTPOSMonitoring](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[BTPOSId] [int] NOT NULL,
+	[Xcoordinate] [float] NOT NULL,
+	[Ycoordinate] [float] NOT NULL,
+	[LocationName] [varchar](50) NOT NULL,
+	[SNo] [int] NOT NULL,
+	[DateTime] [datetime] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetBTPOSMonitoring]    Script Date: 07/01/2016 09:55:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetBTPOSMonitoring]
+
+AS
+BEGIN
+	
+SELECT  
+      
+          [BTPOSId],
+         [Xcoordinate],
+         [Ycoordinate],
+         [LocationName],
+         [SNo],
+         [POSID],
+         [DateTime]
+from  BTPOSMonitoring B 
+inner join BTPOSDetails Bd on Bd.ID = B.BTPOSId
+end
+
+
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelInventory]    Script Date: 06/30/2016 18:00:08 ******/
 SET ANSI_NULLS ON
