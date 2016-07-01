@@ -201,17 +201,47 @@ END
 
 
 GO
+
+GO
+
+/****** Object:  Table [dbo].[Company]    Script Date: 07/01/2016 12:23:02 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[Company](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
 	[Code] [varchar](50) NOT NULL,
 	[Desc] [varchar](50) NULL,
-	[Active] [int] NOT NULL
-) ON [PRIMARY]
+	[Active] [int] NOT NULL,
+	[Logo] [image] NULL,
+	[Address] [varchar](500) NULL,
+	[ContactNo1] [varchar](50) NULL,
+	[ContactNo2] [varchar](50) NULL,
+	[Fax] [varchar](50) NULL,
+	[EmailId] [varchar](50) NULL,
+	[Title] [varchar](50) NULL,
+	[Caption] [varchar](50) NULL,
+	[Country] [varchar](50) NULL,
+	[ZipCode] [int] NULL,
+	[State] [varchar](50) NULL,
+	[FleetSize] [int] NULL,
+	[StaffSize] [int] NULL,
+	[AddressId] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
 
 GO
 

@@ -102,13 +102,46 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     }
 
+    $scope.displocations = function (){
+        var maplocations = $scope.locations;
 
+                   var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
+                       zoom: 15,
+                       center: new google.maps.LatLng(-17.8252, 31.0335), //17.8252° S, 31.0335° E
+                       mapTypeId: google.maps.MapTypeId.ROADMAP
+                   });
+                                                       
+
+                   var infowindow = new google.maps.InfoWindow();
+
+
+                   var marker, i;
+
+
+                   for (i = 0; i < maplocations.length; i++) {
+                       marker = new google.maps.Marker({
+                           position: new google.maps.LatLng(maplocations[i]['Xcoordinate'], maplocations[i]['Ycoordinate']),
+                           map: map
+                       });
+
+
+                       google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                           return function () {
+                               infowindow.setContent(maplocations[i][0]);
+                               infowindow.open(map, marker);
+                           }
+                       })(marker, i));
+                   }
+
+    }
 
 
     $scope.getBTPOSMonitoring = function () {
         $http.get('http://localhost:1476/api/BTPOSMonitoringPage/GetBTPOSMonitoring').then(function (response, data) {
             $scope.BTPOSMonitoring = response.data;
 
+            $scope.locations = response.data;
+            $scope.displocations();
         });
     }
   
