@@ -8403,6 +8403,60 @@ delete from [UserRoles] where [UserId] = @UserId and RoleId = @roleid
 end
 
 end
+Go
+
+GO
+
+/****** Object:  Table [dbo].[BTPOSMonitoring]    Script Date: 07/01/2016 09:55:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[BTPOSMonitoring](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[BTPOSId] [int] NOT NULL,
+	[Xcoordinate] [float] NOT NULL,
+	[Ycoordinate] [float] NOT NULL,
+	[LocationName] [varchar](50) NOT NULL,
+	[SNo] [int] NOT NULL,
+	[DateTime] [datetime] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetBTPOSMonitoring]    Script Date: 07/01/2016 09:55:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetBTPOSMonitoring]
+
+AS
+BEGIN
+	
+SELECT  
+      
+          [BTPOSId],
+         [Xcoordinate],
+         [Ycoordinate],
+         [LocationName],
+         [SNo],
+         [POSID],
+         [DateTime]
+from  BTPOSMonitoring B 
+inner join BTPOSDetails Bd on Bd.ID = B.BTPOSId
+end
+
+
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelInventory]    Script Date: 06/30/2016 18:00:08 ******/
 SET ANSI_NULLS ON
@@ -8430,6 +8484,41 @@ end
 
 
 	 
+GO
+/****** Object:  StoredProcedure [dbo].[getFORVehicleSchedule]    Script Date: 07/01/2016 09:49:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[getFORVehicleSchedule]
+(@fleetOwnerId int, @routeid int, @vehicleId int)
+as
+begin
+
+SELECT distinct 
+      rd.stopid
+      ,src.name StopName
+      ,src.code StopCode	 
+	  ,[StopNo]
+      ,fs.arrivalhr
+      ,fs.arrivalmin
+      ,fs.arrivalampm
+      ,fs.departurehr
+      ,fs.departuremin
+      ,fs.departureampm
+      
+      ,fs.arrivalhr + ''+ fs.arrivalmin + ''+ fs.arrivalampm  as ArrivalTime
+	  ,fs.departurehr + '' + fs.departuremin + ''+ fs.departureampm as DepartureTime
+  FROM [POSDashboard].[dbo].[RouteDetails] rd
+  inner join stops src on src.id = rd.stopid
+  inner join fleetownerstops fos 
+on (fos.stopid = rd.stopid and fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
+left outer join FORouteFleetSchedule fs 
+on fs.stopid = fos.stopid and (fs.fleetownerid = @fleetownerid and fs.routeid = @routeid
+and fs.vehicleId = @vehicleId)
+  where  (rd.routeid = @routeid )
+  order by stopno
 
 
 
