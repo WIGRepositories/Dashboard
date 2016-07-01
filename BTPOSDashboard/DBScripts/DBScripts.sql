@@ -7441,10 +7441,11 @@ create PROCEDURE [dbo].[InsUpdDelVehicleLayout](
 	@ColNo varchar(50),
 	@VehicleTypeId int,
 	@label varchar(10),
-	@insupddelflag varchar   
+	@insupdflag varchar   
 )
 AS
 BEGIN
+if @insupdflag = 'I'
 INSERT INTO [dbo].[VehicleLayout]
            ([VehicleLayoutTypeId]
            ,[RowNo]
