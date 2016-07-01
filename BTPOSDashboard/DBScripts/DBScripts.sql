@@ -8700,6 +8700,35 @@ SET ANSI_PADDING OFF
 GO
 
 
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[InventoryItem]    Script Date: 07/01/2016 12:04:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+CREATE TABLE [dbo].[InventoryItem](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Code] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[CategoryId] [int] NOT NULL,
+	[SubCategoryId] [int] NOT NULL,
+	[ReOrderPoint] [int] NOT NULL,
+	[ItemImage] [image] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
 
 
 

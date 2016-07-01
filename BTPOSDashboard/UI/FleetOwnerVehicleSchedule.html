@@ -789,15 +789,9 @@
                                                                         <tr>
                                                                             <th width="20%"> Stop Name</th>
                                                                            <th width="20%">Stop Code</th>
-                                                                            <th width="20%">Stop No</th>
-                                                                            <th width="20%">Arrivalhr</th> 
-                                                                            <th width="20%">Departurehr</th>
-                                                                            <th width="20%">Arrivalmin</th>
-                                                                            <th width="20%">Departuremin</th>
-                                                                            <th width="20%">Arrivalampm</th>
-                                                                            <th width="20%">Departureampm</th>
-                                                                            <th width="10%">Arrival</th>
-                                                                            <th width="10%">departure</th>
+                                                                            <th width="20%">Stop No</th>                                                                           
+                                                                            <th width="10%">ArrivalTime</th>
+                                                                            <th width="10%">departureTime</th>
                                                                             <th width="20%">Update timing</th>
                                                                         </tr>
                                                                     </thead>
@@ -806,13 +800,7 @@
                                                                         <tr ng-repeat="stop in RouteVehicleSchedule" ng-on-finish-render ng-init="cnt=1">
                                                                             <td>{{stop.StopName}}</td>
                                                                             <td>{{stop.StopCode}}</td>
-                                                                            <td>{{stop.StopNo}}</td>
-                                                                            <td>{{stop.ArrivalHr}}</td>
-                                                                            <td>{{stop.DepartureHr}}</td>
-                                                                            <td>{{stop.ArrivalMin}}</td>
-                                                                            <td>{{stop.DepartureMin}}</td>
-                                                                            <td>{{stop.ArrivalAMPM}}</td>
-                                                                            <td>{{stop.DepartureAMPM}}</td>
+                                                                            <td>{{stop.StopNo}}</td>                                                                           
                                                                             <td>{{stop.arrivaltime}}</td>
                                                                             <td>{{stop.departuretime}}</td>
                                                                             <td>

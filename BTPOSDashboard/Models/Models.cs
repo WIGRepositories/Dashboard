@@ -1467,6 +1467,7 @@ namespace BTPOSDashboardAPI.Models
          public string StopName { get; set; }
          public string StopCode { get; set; }
          public string StopNo { get; set; }
+         public string insupddelflag { get; set; }
 
     }
 

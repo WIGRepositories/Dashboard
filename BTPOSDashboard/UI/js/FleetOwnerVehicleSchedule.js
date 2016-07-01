@@ -154,10 +154,10 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
     }
 
-    $scope.save = function () {
-        var test = $scope.RouteVehicleSchedule;
+    //$scope.save = function () {
+    //    var test = $scope.RouteVehicleSchedule;
        
-    }
+    //}
 
     $scope.test = function (a) {
         alert(a);
@@ -196,50 +196,71 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     }
     
-    //$scope.save = function (stop, flag) {
+    $scope.save = function (stop, flag) {
 
-        
-    //    var FOVS = {
-    //        //Id: stop.Id,
-    //       StopNmae:stop.StopNmae,
-       //            StopNo:stop.StopNo,
-       //       StopCode:stop.StopCode,
-    //        ArrivalHr: stop.ArrivalHr,
-    //        DepartureHr: stop.DepartureHr,
-    //        Duration: stop.Duration,
-    //        ArrivalMin: stop.ArrivalMin,
-    //        DepartureMin: stop.DepartureMin,
-    //        ArrivalAMPM: stop.ArrivalAMPM,
-    //        DepartureAmPm: stop.DepartureAmPmtopId,
-    //        arrivaltime: stop.arrivaltime,
-    //        departuretime: stop.departuretime,            
-    //        insupdflag: flag
-    //    }
+      //  var test = $scope.RouteVehicleSchedule;
 
-
-    //    var req = {
-    //        method: 'POST',
-    //        url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/save',
-    //        data: FOVS
-    //    }
-    //    $http(req).then(function (response) {
-
-    //        $scope.showDialog("Saved successfully!!");
-
-    //        $scope.Group = null;
-
-    //    }, function (errres) {
-    //        var errdata = errres.data;
-    //        var errmssg = "";
-    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-    //        $scope.showDialog(errmssg);
-    //    });
+        //var FOVS = {
+        //    //Id: stop.Id,
+        //    StopNmae: stop.StopNmae,
+        //    StopNo: stop.StopNo,
+        //    StopCode: stop.StopCode,
+        //    ArrivalHr: stop.ArrivalHr,
+        //    DepartureHr: stop.DepartureHr,
+        //    Duration: stop.Duration,
+        //    ArrivalMin: stop.ArrivalMin,
+        //    DepartureMin: stop.DepartureMin,
+        //    ArrivalAMPM: stop.ArrivalAMPM,
+        //    DepartureAmPm: stop.DepartureAmPmtopId,
+        //    arrivaltime: stop.arrivaltime,
+        //    departuretime: stop.departuretime,
+        //    insupdflag: flag
+        //}
 
 
-       
-    //};
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
+            data: $scope.RouteVehicleSchedule
+        }
+        $http(req).then(function (response) {
 
+            $scope.showDialog("Saved successfully!!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+    }
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',            
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
 });
 
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
 

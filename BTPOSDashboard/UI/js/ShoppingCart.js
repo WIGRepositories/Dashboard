@@ -25,7 +25,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
 
-    $scope.Save = function (items) {
+    $scope.Save = function (items,flag) {
 
         if (items == null) {
             alert('Please select any item.');
@@ -34,10 +34,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var saveitems  = {
 
             ItemId: items.ItemId,
-           ItemName: items.ItemName,
+            ItemName: items.ItemName,
             UnitPrice: items.UnitPrice,
            
-            //insupddelflag: 'U'
+            insupddelflag: flag,
         };
 
         var req = {

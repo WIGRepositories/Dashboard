@@ -56,8 +56,6 @@ namespace BTPOSDashboard.Controllers
 
                 conn.Open();
 
-                
-
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@ItemId";
                 gsn.SqlDbType = SqlDbType.Int;
@@ -74,11 +72,12 @@ namespace BTPOSDashboard.Controllers
                 gsac.Value = f.UnitPrice;
                 cmd.Parameters.Add(gsac);
 
-                
 
-                SqlParameter flag = new SqlParameter("@insupddelflag", SqlDbType.Char);
-                flag.Value = f.insupddelflag;
-                cmd.Parameters.Add(flag);
+
+                SqlParameter insupddelflag = new SqlParameter("@insupddelflag", SqlDbType.VarChar);
+                insupddelflag.SqlDbType = SqlDbType.VarChar;
+                insupddelflag.Value = f.insupddelflag;
+                cmd.Parameters.Add(insupddelflag);
 
 
                 cmd.ExecuteScalar();
