@@ -8429,6 +8429,32 @@ values(@BTPOSId,
 end
 
 
+	 
+GO
+/****** Object:  StoredProcedure [dbo].[getFORVehicleSchedule]    Script Date: 07/01/2016 09:49:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[getFORVehicleSchedule]
+(@fleetOwnerId int, @routeid int, @vehicleId int)
+as
+begin
+
+SELECT distinct 
+      rd.stopid
+      ,src.name StopName
+      ,src.code StopCode	 
+	  ,[StopNo]
+      ,fs.arrivalhr
+      ,fs.arrivalmin
+      ,fs.arrivalampm
+      ,fs.departurehr
+      ,fs.departuremin
+      ,fs.departureampm
+      
+      ,fs.arrivalhr + ''+ fs.arrivalmin + ''+ fs.arrivalampm  as ArrivalTime
 	  ,fs.departurehr + '' + fs.departuremin + ''+ fs.departureampm as DepartureTime
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
@@ -8441,6 +8467,7 @@ and fs.vehicleId = @vehicleId)
   order by stopno
 
 end
+
 
 
 GO
@@ -8637,7 +8664,7 @@ else
 end
 
 
-USE [POSDashboard]
+
 GO
 
 /****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/30/2016 18:57:29 ******/
