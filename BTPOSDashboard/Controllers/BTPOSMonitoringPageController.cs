@@ -60,11 +60,11 @@ namespace BTPOSDashboard.Controllers
                 BTPOSId.Value = BP.BTPOSId;
                 cmd.Parameters.Add(BTPOSId);
 
-                SqlParameter Xcoordinate = new SqlParameter("@Xcoordinate", SqlDbType.VarChar, 50);
+                SqlParameter Xcoordinate = new SqlParameter("@Xcoordinate", SqlDbType.Float);
                 Xcoordinate.Value = BP.Xcoordinate;
                 cmd.Parameters.Add(Xcoordinate);
 
-                SqlParameter Ycoordinate = new SqlParameter("@Ycoordinate", SqlDbType.VarChar, 50);
+                SqlParameter Ycoordinate = new SqlParameter("@Ycoordinate", SqlDbType.Float);
                 Ycoordinate.Value = BP.Ycoordinate;
                 cmd.Parameters.Add(Ycoordinate);
 
@@ -76,7 +76,7 @@ namespace BTPOSDashboard.Controllers
                 SNo.Value = BP.SNo;
                 cmd.Parameters.Add(SNo);
 
-                SqlParameter DateTime = new SqlParameter("@DateTime", SqlDbType.VarChar, 15);
+                SqlParameter DateTime = new SqlParameter("@DateTime", SqlDbType.DateTime);
                 DateTime.Value = BP.DateTime;
                 cmd.Parameters.Add(DateTime);
 

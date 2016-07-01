@@ -540,6 +540,18 @@ namespace BTPOSDashboardAPI.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Address { get; set; }
+        public string ContactNo1 { get; set;}
+        public string ContactNo2 { get; set; }
+        public string Fax { get; set;}
+        public string EmailId { get; set; }
+        public string Title { get; set; }
+        public string Caption { get; set; }
+        public string Country { get; set; }
+        public int ZipCode { get; set; }
+        public string State { get; set; }
+
         public string insupdflag { get; set; }
 
     }
@@ -1435,8 +1447,19 @@ namespace BTPOSDashboardAPI.Models
         public int VehicleTypeId { get; set; }
         public String label { get; set; }
         public string insupdflag { get; set; }
+        //public int FleetOwnerId { get; set; }
+    }
+    public class FleetOwnerVehicleLayout
+    {
+        public int VehicleLayoutTypeId { get; set; }
+        public int RowNo { get; set; }
+        public int ColNo { get; set; }
+        public int VehicleTypeId { get; set; }
+        public String label { get; set; }
+        public string insupdflag { get; set; }
         public int FleetOwnerId { get; set; }
     }
+
     
     public class reset
     {
@@ -1479,6 +1502,16 @@ namespace BTPOSDashboardAPI.Models
 
         public string insupddelflag { set; get; }
      
+    }
+    public class BTPOSMoitoringPage
+    {
+        public int BTPOSId { get; set; }
+        public float Xcoordinate { get; set; }
+        public float Ycoordinate { get; set; }
+        public string LocationName { get; set; }
+        public int SNo { get; set; }
+        public DateTime DateTime { get; set; }
+
     }
 }                     
         

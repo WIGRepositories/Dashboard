@@ -91,7 +91,7 @@ namespace BTPOSDashboard.Controllers
 
         [HttpPost]
         [Route("api/VehicleLayout/SaveFleetOwnerVehicleLayout")]
-        public HttpResponseMessage SaveFleetOwnerVehicleLayout(IEnumerable<VehicleLayout> FOvcList)
+        public HttpResponseMessage SaveFleetOwnerVehicleLayout(IEnumerable<FleetOwnerVehicleLayout> FOvcList)
         {
 
             //DataTable Tbl = new DataTable();
@@ -112,7 +112,7 @@ namespace BTPOSDashboard.Controllers
             //  cmd.Parameters.Add(gsaa);
             try
             {
-                foreach (VehicleLayout vc in FOvcList)
+                foreach (FleetOwnerVehicleLayout vc in FOvcList)
                 {
                     SqlParameter gsab1 = new SqlParameter();
                     gsab1.ParameterName = "@VehicleLayoutTypeId";
@@ -139,11 +139,11 @@ namespace BTPOSDashboard.Controllers
                     cmd.Parameters.Add(gsk);
 
                     //@needHireVehicle
-                    SqlParameter nhv = new SqlParameter();
-                    nhv.ParameterName = "@label";
-                    nhv.SqlDbType = SqlDbType.VarChar;
-                    nhv.Value = vc.label;
-                    cmd.Parameters.Add(nhv);
+                    SqlParameter nhv1 = new SqlParameter();
+                    nhv1.ParameterName = "@label";
+                    nhv1.SqlDbType = SqlDbType.VarChar;
+                    nhv1.Value = vc.label;
+                    cmd.Parameters.Add(nhv1);
 
                     SqlParameter nhve = new SqlParameter();
                     nhve.ParameterName = "@FleetOwnerId";
