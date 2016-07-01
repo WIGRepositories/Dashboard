@@ -1,5 +1,4 @@
-﻿
-// JavaScript source code
+﻿// JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {

@@ -129,134 +129,133 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.User1 = null;
     
 
-    $scope.setUsers = function (usr) {
-        $scope.User1 = usr;
-    };
+        $scope.setUsers = function (usr) {
+            $scope.User1 = usr;
 
-    $scope.clearUsers = function () {
-        $scope.User1 = null;
-    }
 
-    /*end of user details functions */
+            $scope.clearUsers = function () {
+                $scope.User1 = null;
+            }
 
-    $scope.getUserRolesForCompany = function (cmp) {
+            /*end of user details functions */
 
-        if (cmp == null) {
-            $scope.userRoles = null;
-            return;
+            $scope.getUserRolesForCompany = function (cmp) {
+
+                if (cmp == null) {
+                    $scope.userRoles = null;
+                    return;
+                }
+
+                $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+                    $scope.userRoles = res.data;
+                });
+            }
+
+            $scope.GetUsersinitData = function () {
+                //get companies list   
+                $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+                    $scope.Companies = response.data;
+                });
+            }
+
+            $scope.getRolesForCompany = function (seltype) {
+                if (seltype == null) {
+                    $scope.cmproles = null;
+                    $scope.MgrUsers = null;
+                    return;
+                }
+                var cmpId = (seltype) ? seltype.Id : -1;
+
+                $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+                    $scope.cmproles = res.data;
+                });
+
+                $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+                    $scope.MgrUsers = res.data;
+                });
+                //get users for the company or all users based on company
+            }
+
+            $scope.getUsersnRoles = function () {
+                if ($scope.s == null) {
+                    $scope.cmproles1 = null;
+                    $scope.cmpUsers1 = null;
+                    return;
+                }
+                var cmpId = ($scope.s == null) ? -1 : $scope.s.Id;
+
+                $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+                    $scope.cmproles1 = res.data;
+                });
+
+                $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+                    $scope.cmpUsers1 = res.data;
+                });
+            }
+            $scope.saveUserRoles = function (flag) {
+
+                if ($scope.s.Id == null) {
+                    alert('Please select company.');
+                    return;
+                }
+
+                if ($scope.ur.RoleId == null) {
+                    alert('Please select role.');
+                    return;
+                }
+                if ($scope.uu.Id == null) {
+                    alert('Please select user.');
+                    return;
+                }
+                var userrole = {
+                    Id: -1,
+                    UserId: $scope.uu.Id,
+                    CompanyId: $scope.s.Id,
+                    RoleId: $scope.ur.RoleId,
+                    flag: flag
+                };
+
+                var req = {
+                    method: 'POST',
+                    url: 'http://localhost:1476/api/Users/SaveUserRoles',
+                    //headers: {
+                    //    'Content-Type': undefined
+                    data: userrole
+                }
+
+                $http(req).then(function (res) {
+                    alert('Saved successfully');
+                    $scope.s = null;
+                    $scope.ur = null;
+                    $scope.uu = null;
+                });
+
+            }
+            $scope.testdel = function (role) {
+                var userrole = {
+
+                    RoleId: role.RoleId,
+                    UserId: role.UserId,
+                    Active: 1,
+                    insdelflag: 1
+                };
+
+                var req = {
+                    method: 'POST',
+                    url: 'http://localhost:1476/api/AssignDelRoles',
+                    data: userrole
+                }
+                $http(req).then(function (response) {
+                    alert('Removed successfully.');
+
+                    $http.get('http://localhost:1476/api/Users/GetUserRoles?UserId=' + role.UserId).then(function (res, data) {
+                        $scope.userroles = res.data;
+                    });
+
+                });
+                $scope.currRole = null;
+            }
+
+
         }
-
-        $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
-            $scope.userRoles = res.data;
-        });
-    }
-
-    $scope.GetUsersinitData = function () {
-        //get companies list   
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
-            $scope.Companies = response.data;
-        });
-    }
-
-    $scope.getRolesForCompany = function (seltype) {
-        if (seltype == null) {
-            $scope.cmproles = null;
-            $scope.MgrUsers = null;
-            return;
-        }
-        var cmpId = (seltype) ? seltype.Id : -1;
-
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
-            $scope.cmproles = res.data;
-        });
-
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
-            $scope.MgrUsers = res.data;
-        });
-        //get users for the company or all users based on company
-    }
-
-    $scope.getUsersnRoles = function () {
-        if ($scope.s == null) {
-            $scope.cmproles1 = null;
-            $scope.cmpUsers1 = null;
-            return;
-        }
-        var cmpId = ($scope.s == null) ? -1 : $scope.s.Id;
-
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
-            $scope.cmproles1 = res.data;
-        });
-
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
-            $scope.cmpUsers1 = res.data;
-        });
-    }
-    $scope.saveUserRoles = function (flag) {
-
-        if ($scope.s.Id == null) {
-            alert('Please select company.');
-            return;
-        }
-
-        if ($scope.ur.RoleId == null) {
-            alert('Please select role.');
-            return;
-        }
-        if ($scope.uu.Id == null) {
-            alert('Please select user.');
-            return;
-        }
-        var userrole = {
-            Id: -1,
-            UserId: $scope.uu.Id,
-            CompanyId: $scope.s.Id,
-            RoleId: $scope.ur.RoleId,
-            flag: flag
-        };
-
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/Users/SaveUserRoles',
-            //headers: {
-            //    'Content-Type': undefined
-            data: userrole
-        }
-
-        $http(req).then(function (res) {
-            alert('Saved successfully');
-            $scope.s = null;
-            $scope.ur = null;
-            $scope.uu = null;
-        });
-
-    }
-     $scope.testdel = function (role)
-    {       
-        var userrole = {
-
-            RoleId: role.RoleId,
-            UserId: role.UserId,
-            Active: 1,
-            insdelflag: 1
-        };
-
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/AssignDelRoles',
-            data: userrole
-        }
-        $http(req).then(function (response) {
-            alert('Removed successfully.');
-            
-            $http.get('http://localhost:1476/api/Users/GetUserRoles?UserId=' + role.UserId).then(function (res, data) {
-                $scope.userroles = res.data;
-            });
-
-        });
-        $scope.currRole = null;
-    }
-
-    
-
 

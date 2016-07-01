@@ -1,5 +1,4 @@
-﻿
-var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
+﻿var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
 var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -131,9 +130,4 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
             }
         });
     }
-
-
-
-
-
 });

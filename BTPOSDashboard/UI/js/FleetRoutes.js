@@ -1,4 +1,3 @@
-
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
@@ -93,9 +92,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.FleetRoute = res.data;
         });
     }
-
-
-   
 
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
@@ -224,8 +220,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
 });
-
-
 
 $scope.set = function (R) {
     $scope.currFR = R;

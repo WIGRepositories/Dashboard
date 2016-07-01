@@ -1,4 +1,3 @@
-
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
@@ -174,11 +173,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
         });
     }
-
-
-
-
-
 });
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {

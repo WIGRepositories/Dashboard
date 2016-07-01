@@ -1,4 +1,3 @@
-
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
@@ -73,9 +72,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
     }
 
 
-   
-
-
 });
     $scope.save = function (Group) {
 
@@ -122,11 +118,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
         });
     }
 
-
-   
-
-
-   
 
     $scope.setGroups = function (usr) {
         $scope.Purchase1 = usr;

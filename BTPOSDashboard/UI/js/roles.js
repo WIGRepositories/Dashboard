@@ -212,9 +212,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         });
     }
 
-
-
-
     $scope.testdel = function (role)
     {       
         var cmprole = {

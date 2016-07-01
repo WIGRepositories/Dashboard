@@ -11,9 +11,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var Roledetails = {
             ObjectName: Roledetails.ObjectName,
             Path: Roledetails.Path,
-           
-
-
+         
 
         }
 

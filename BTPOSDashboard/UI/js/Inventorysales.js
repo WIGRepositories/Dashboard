@@ -74,10 +74,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
         });
     }
 
-
-   
-
-
 });
         $scope.save = function (Sales) {
 

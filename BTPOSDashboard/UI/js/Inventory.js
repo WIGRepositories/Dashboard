@@ -1,4 +1,3 @@
-
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
@@ -85,10 +84,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             }
         });
     }
-
-
-   
-
 
 });
     $scope.save = function (Group) {

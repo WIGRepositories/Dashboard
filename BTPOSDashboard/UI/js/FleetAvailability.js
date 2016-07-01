@@ -146,11 +146,6 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
             }
         });
     }
-
-
-
-
-
 });
 
 
