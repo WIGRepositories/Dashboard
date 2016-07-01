@@ -1,4 +1,4 @@
-USE [POSDashboard]
+
 
 /****** Object:  Table [dbo].[Alerts]    Script Date: 05/05/2016 18:38:41 ******/
 SET ANSI_NULLS ON
