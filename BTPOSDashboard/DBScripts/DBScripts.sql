@@ -7462,7 +7462,9 @@ CREATE TABLE [dbo].[FORouteFleetSchedule](
 	[ArrivalMin] [int] NULL,
 	[DepartureMin] [int] NULL,
 	[ArrivalAMPM] [varchar](2) NULL,
-	[DepartureAMPM] [varchar](2) NULL
+	[DepartureAMPM] [varchar](2) NULL,
+	[ArrivalTime] [datetime] NULL,
+	[DepartureTime] [datetime] NULL,
 ) ON [PRIMARY]
 
 GO
@@ -7490,6 +7492,8 @@ SELECT distinct
       ,fs.departurehr
       ,fs.departuremin
       ,fs.departureampm
+	  ,fs.ArrivalTime
+	  ,fs.DepartureTime
   FROM [POSDashboard].[dbo].[RouteDetails] rd
   inner join stops src on src.id = rd.stopid
   inner join fleetownerstops fos 
@@ -8399,3 +8403,278 @@ delete from [UserRoles] where [UserId] = @UserId and RoleId = @roleid
 end
 
 end
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelInventory]    Script Date: 06/30/2016 18:00:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[InsUpdDelBTPOSMoitoringPage]
+(@BTPOSId int,
+@Xcoordinate float,
+@Ycoordinate float,
+@LocationName varchar(500),
+@SNo int,
+@DateTime datetime)
+as
+begin
+insert into  BTPOSMonitoring 
+values(@BTPOSId,
+@Xcoordinate,
+@Ycoordinate,
+@LocationName,
+@SNo,
+@DateTime
+)
+end
+
+
+	  ,fs.departurehr + '' + fs.departuremin + ''+ fs.departureampm as DepartureTime
+  FROM [POSDashboard].[dbo].[RouteDetails] rd
+  inner join stops src on src.id = rd.stopid
+  inner join fleetownerstops fos 
+on (fos.stopid = rd.stopid and fos.fleetownerid = @fleetownerid and fos.routeid = @routeid)
+left outer join FORouteFleetSchedule fs 
+on fs.stopid = fos.stopid and (fs.fleetownerid = @fleetownerid and fs.routeid = @routeid
+and fs.vehicleId = @vehicleId)
+  where  (rd.routeid = @routeid )
+  order by stopno
+
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetRoutes]    Script Date: 06/30/2016 17:53:00 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsUpdDelShoppingCart]
+@Id int = -1,
+@ItemId int,
+@ItemName varchar,
+@UnitPrice money,
+@insupddelflag varchar
+as
+begin
+
+declare @cnt  int
+set @cnt = -1
+
+if @insupddelflag = 'I'
+
+select @cnt = count(1) from [POSDashboard].[dbo].[Shoppingcart] 
+where ItemId = @ItemId
+
+
+if @cnt = 0 
+begin
+INSERT INTO [POSDashboard].[dbo].[Shoppingcart]
+           ([ItemId]
+           ,[ItemName]
+           ,[UnitPrice]
+           )
+     VALUES
+           (@ItemId
+           ,@ItemName
+           ,@UnitPrice
+           )
+end
+else
+  if @insupddelflag = 'U'
+
+UPDATE [POSDashboard].[dbo].[Shoppingcart]
+   SET [ItemId] = @ItemId     
+      ,[ItemName] = @ItemName
+      ,[UnitPrice] = @UnitPrice     
+ WHERE ItemId = @ItemId
+
+else
+  delete from [POSDashboard].[dbo].[Shoppingcart]
+where ItemId = @ItemId
+
+End
+
+
+GO
+
+/****** Object:  Table [dbo].[shoppingcart]    Script Date: 06/30/2016 18:50:35 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[shoppingcart](
+	[ItemId] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[UnitPrice] [money] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+
+GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[getCompanies]    Script Date: 06/30/2016 17:06:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[getShoppingCart]
+(@ItemId int =-1)
+as
+begin
+SELECT distinct 
+      [ItemId]
+      ,[ItemName]
+      ,[UnitPrice]
+      
+  FROM [POSDashboard].[dbo].[ShoppingCart] 
+  
+  order by [ItemId]
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetAvailability]    Script Date: 06/30/2016 11:00:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+create procedure [dbo].[InsUpdDelFORouteFleetSchedule](
+@Id int,
+@VehicleId int,
+@RouteId int,
+@FleetOwnerId int,
+@StopId int,
+@ArrivalHr int,
+@DepartureHr int,
+@Duration decimal,
+@ArrivalMin int,
+@DepartureMin int,
+@ArrivalAMPM varchar(10),
+@DepartureAMPM varchar(10),
+@arrivaltime datetime = null,
+@departuretime datetime = null,
+@insupddelflag varchar(1)
+)
+as
+begin
+declare @cnt int
+set @cnt = 0
+
+if @insupddelflag = 'I'
+		begin
+			--check if already company exists
+			select @cnt = count(1) from FORouteFleetSchedule where VehicleId = @VehicleId
+
+			if @cnt = 0 
+			begin
+
+			INSERT INTO [POSDashboard].[dbo].[FORouteFleetSchedule]
+           ([VehicleId]
+           ,[RouteId]
+           ,[FleetOwnerId]
+           ,[StopId ]
+           ,[ArrivalHr]
+           ,[DepartureHr]
+           ,[Duration]
+           ,[ArrivalMin]
+           ,[DepartureMin]
+           ,[ArrivalAMPM ]
+           ,[DepartureAMPM]
+           ,[arrivaltime]
+           ,[departuretime])
+			VALUES
+           (@VehicleId,@RouteId,
+@FleetOwnerId,
+@StopId,
+@ArrivalHr,
+@DepartureHr,
+@Duration,
+@ArrivalMin,
+@DepartureMin,
+@ArrivalAMPM,
+@DepartureAMPM,
+@arrivaltime,
+@departuretime)			
+		   
+			end
+	 end
+else
+
+   if @insupddelflag = 'U'
+		begin
+				UPDATE [POSDashboard].[dbo].[FORouteFleetSchedule]
+				SET [VehicleId] = @VehicleId
+           ,[RouteId]=@RouteId
+           ,[FleetOwnerId]=@FleetOwnerId
+           ,[StopId]=@StopId
+           ,[ArrivalHr]=@ArrivalHr 
+           ,[DepartureHr]=@DepartureHr
+           ,[Duration]=@Duration
+           ,[ArrivalMin]=@ArrivalMin
+           ,[DepartureMin]=@DepartureMin
+           ,[ArrivalAMPM ]=@ArrivalAMPM
+           ,[DepartureAMPM]=@DepartureAMPM
+           ,[arrivaltime]=@arrivaltime
+           ,[departuretime]=@departuretime
+				 WHERE VehicleId = @VehicleId
+		end
+   else
+	if @insupddelflag = 'D'
+     delete from [POSDashboard].[dbo].[FORouteFleetSchedule]
+	 where VehicleId = @VehicleId
+end
+
+
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[FORouteFleetSchedule]    Script Date: 06/30/2016 18:57:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FORouteFleetSchedule](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[VehicleId] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[FleetOwnerId] [int] NOT NULL,
+	[StopId] [int] NOT NULL,
+	[ArrivalHr] [int] NULL,
+	[DepartureHr] [int] NULL,
+	[Duration] [decimal](18, 0) NULL,
+	[ArrivalMin] [int] NULL,
+	[DepartureMin] [int] NULL,
+	[ArrivalAMPM] [varchar](2) NULL,
+	[DepartureAMPM] [varchar](2) NULL,
+	[arrivaltime] [datetime] NULL,
+	[departuretime] [datetime] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+
