@@ -184,17 +184,18 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
       
     }
 
-    $scope.updateTime = function (s) {
-        var aid = s.stopid + 'ADate';
-        var did = s.stopid + 'DDate';
-        s.arrivaltime = document.getElementById(aid).value;
-        s.departuretime = document.getElementById(did).value;
+        $scope.updateTime = function (s) {
+            var aid = s.stopid + 'ADate';
+            var did = s.stopid + 'DDate';
+            s.arrivaltime = document.getElementById(aid).value;
+            s.departuretime = document.getElementById(did).value;
 
-        var arrArry = s.arrivaltime.split(' ');
-        var depArry = s.departuretime.split(' ');
+            var arrArry = s.arrivaltime.split(' ');
+            var depArry = s.departuretime.split(' ');
 
 
-    }
+        }
+   
     
     $scope.save = function (stop, flag) {
 

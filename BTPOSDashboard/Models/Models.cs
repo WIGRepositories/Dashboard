@@ -1163,6 +1163,7 @@ namespace BTPOSDashboardAPI.Models
         public int Id { get; set; }
 
         public String ItemName { get; set; }
+       // public String ItemImage { get; set; }
         public String Code { get; set; }
 
         public String Description { get; set; }
@@ -1496,11 +1497,12 @@ namespace BTPOSDashboardAPI.Models
 
     public class ShoppingCart
     {
+        public int Id { get; set; }
         public string ItemName { set; get; }
         public decimal UnitPrice { set; get; }
         public int ItemId { set; get; }
 
-        public string insupddelflag { set; get; }
+       // public string insupddelflag { set; get; }
      
     }
     public class BTPOSMoitoringPage

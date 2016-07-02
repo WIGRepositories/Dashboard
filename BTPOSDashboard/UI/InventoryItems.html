@@ -455,7 +455,7 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">New Fleet Routes</h4>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Items</h4>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="row">
@@ -564,7 +564,7 @@
                                                                 <td>{{G.ReOrderPoint}}</td>
                                                                 <td>
                                                                     {{U.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setItem(G);">
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setItem(G);" group>
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
@@ -578,9 +578,8 @@
 
 
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                
+                           
                         <!--END CONTENT--><!--BEGIN FOOTER-->
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
@@ -588,9 +587,7 @@
                         <!--END FOOTER-->
                     </div>
                     <!--END PAGE WRAPPER-->
-                </div>
-            </div>
-        </div>
+               
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">
@@ -611,7 +608,7 @@
             </div>
 
         </script>
-    </div>
+   
 
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>

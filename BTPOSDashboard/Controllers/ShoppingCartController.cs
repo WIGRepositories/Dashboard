@@ -55,6 +55,11 @@ namespace BTPOSDashboard.Controllers
                 cmd.Connection = conn;
 
                 conn.Open();
+                SqlParameter Cid = new SqlParameter();
+                Cid.ParameterName = "@Id";
+                Cid.SqlDbType = SqlDbType.Int;
+                Cid.Value = f.Id;
+                cmd.Parameters.Add(Cid);
 
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@ItemId";
@@ -74,10 +79,10 @@ namespace BTPOSDashboard.Controllers
 
 
 
-                SqlParameter insupddelflag = new SqlParameter("@insupddelflag", SqlDbType.VarChar);
-                insupddelflag.SqlDbType = SqlDbType.VarChar;
-                insupddelflag.Value = f.insupddelflag;
-                cmd.Parameters.Add(insupddelflag);
+                //SqlParameter insupdelflag = new SqlParameter("@insupddelflag", SqlDbType.VarChar);
+                //insupdelflag.SqlDbType = SqlDbType.VarChar;
+                //insupdelflag.Value = f.insupddelflag;
+                //cmd.Parameters.Add(insupdelflag);
 
 
                 cmd.ExecuteScalar();

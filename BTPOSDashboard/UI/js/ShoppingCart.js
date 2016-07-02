@@ -25,19 +25,19 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
 
-    $scope.Save = function (items,flag) {
+    $scope.Save = function (items) {
 
         if (items == null) {
             alert('Please select any item.');
             return;
         }
-        var saveitems  = {
-
+        var items = {
+            Id: -1,
             ItemId: items.ItemId,
             ItemName: items.ItemName,
             UnitPrice: items.UnitPrice,
-           
-            insupddelflag: flag,
+
+            // insupddelflag: 'I',
         };
 
         var req = {
@@ -45,11 +45,35 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             url: 'http://localhost:1476/api/ShoppingCart/SaveCartItems',
             //headers: {
             //    'Content-Type': undefined
-            data: saveitems
+            data: items
         }
-        $http(req).then(function (res) {
-            alert('saved successfully');
+        $http(req).then(function (response) {
 
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+
+
+    }
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
         });
     }
+
 });
