@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" >
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetVehicleConfig();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -330,7 +330,9 @@
                         </li>
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
@@ -377,12 +379,12 @@
 
                                                 <div class="row mbm">
                                                     <div class="col-md-5">
-                                                        Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                        Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
                                                             <option value="">Select</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-5">
-                                                        Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                                        Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="getBTPOSMonitoring()">
 
                                                             <option value="">Select</option>
                                                         </select>
@@ -391,6 +393,44 @@
 
 
                                                 </div>
+                                                <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>BTPOSId</th>
+                                                            <th>Xcoordinate</th>
+                                                            <th>Ycoordinate</th>
+                                                            <th>LocationName</th>
+                                                            <th>SNo</th>
+                                                            <th>POSID</th>
+                                                            <th>DateTime</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat="B in BTPOSMonitoring" class="gradeA">
+                                                            <td>{{B.BTPOSId}}</td>
+                                                            <td>{{B.Xcoordinate}}</td>
+                                                            <td>{{B.Ycoordinate}}</td>
+                                                            <td>{{B.LocationName}}</td>
+                                                            <td>{{B.SNo}}</td>
+                                                            <td>{{B.POSID}}</td>
+                                                            <td>{{B.DateTime}}</td>
+                                                            <!--<td>
+                                                                <input type="checkbox" checked readonly>
+                                                            </td>-->
+                                                            <!--<td>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
+
+                                                            </td>-->
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
                                                 <div class="tab-content">
                                                     <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
 
@@ -451,42 +491,50 @@
 } google.maps.event.addDomListener(window, 'load', init_map);
                                                         */
                                                     
-var locations = [ 
-       ['Bondi Beach', -17.8295, 31.0337, 4],
-       ['Coogee Beach', -17.8295, 31.0358, 5],
-       ['Cronulla Beach', -17.8295, 31.0345, 3],
-       ['Manly Beach', -17.8295, 31.0331, 2],
-       ['Maroubra Beach', -17.8295, 31.0331, 1]
-     ]; 
+                                                        //var locations = [
+                                                        //       ['Bondi Beach', -17.8295, 31.0337, 4],
+                                                        //       ['Coogee Beach', -17.8295, 31.0358, 5],
+                                                        //       ['Cronulla Beach', -17.8295, 31.0345, 3],
+                                                        //       ['Manly Beach', -17.8295, 31.0331, 2],
+                                                        //       ['Maroubra Beach', -17.8295, 31.0331, 1],
+                                                        //       ['Prince Edward Street', -17.8209773, 31.0235831, 14],
+                                                        //       ['Rainbow Towers', -17.831312, 31.035206, 21],
+                                                        //       ['Star Studio', -17.830766,31.035535,20],
+                                                        //       ['Conference Centre', -17.830785, 31.03485, 19],
+                                                        //       ['La Chandelle', -17.831309, 31.035697, 20],
+                                                        //       ['Teppanyaki', 17.831359, 31.035708, 20],
+                                                        //       ['Museum of Human Sciences', -17.832487, 31.038941, 21]
+                                                               
+                                                        //];
  
  
-var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
-       zoom: 15, 
-       center: new google.maps.LatLng(-17.8252, 31.0335), //17.8252° S, 31.0335° E
-       mapTypeId: google.maps.MapTypeId.ROADMAP 
-     }); 
+                                                        //var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
+                                                        //    zoom: 15,
+                                                        //    center: new google.maps.LatLng(-17.8252, 31.0335), //17.8252° S, 31.0335° E
+                                                        //    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                                        //});
  
  
-     var infowindow = new google.maps.InfoWindow(); 
+                                                        //var infowindow = new google.maps.InfoWindow();
  
  
-     var marker, i; 
+                                                        //var marker, i;
  
  
-     for (i = 0; i < locations.length; i++) {  
-       marker = new google.maps.Marker({ 
-         position: new google.maps.LatLng(locations[i][1], locations[i][2]), 
-         map: map 
-       }); 
+                                                        //for (i = 0; i < locations.length; i++) {
+                                                        //    marker = new google.maps.Marker({
+                                                        //        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                                        //        map: map
+                                                        //    });
  
  
-       google.maps.event.addListener(marker, 'click', (function(marker, i) { 
-         return function() { 
-           infowindow.setContent(locations[i][0]); 
-          infowindow.open(map, marker); 
-         } 
-       })(marker, i)); 
-     } 
+                                                        //    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                                                        //        return function () {
+                                                        //            infowindow.setContent(locations[i][0]);
+                                                        //            infowindow.open(map, marker);
+                                                        //        }
+                                                        //    })(marker, i));
+                                                        //}
 
                                                     </script>
                                                 </div>
@@ -513,7 +561,6 @@ var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
 
 
                                         </div>
-
                                         <!-- Do not change code! -->
                                         <!-- Do not change code! -->
 

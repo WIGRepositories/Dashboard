@@ -101,10 +101,10 @@ VALUES(8,6,3)
 --make 1 user as dirver
 --make 1 user as supervisor
 INSERT INTO [POSDashboard].[dbo].[UserRoles]([UserId],[RoleId],[CompanyId])
-VALUES(5,9,2)
+VALUES(5,13,2)
 
 INSERT INTO [POSDashboard].[dbo].[UserRoles]([UserId],[RoleId],[CompanyId])
-VALUES(6,13,2)
+VALUES(6,9,2)
 
 INSERT INTO [POSDashboard].[dbo].[UserRoles]([UserId],[RoleId],[CompanyId])
 VALUES(7,7,2)
@@ -113,11 +113,11 @@ VALUES(7,7,2)
 --make 1 user as dirver
 --make 1 user as supervisor
 INSERT INTO [POSDashboard].[dbo].[UserRoles]([UserId],[RoleId],[CompanyId])
-VALUES(9,9,3)
+VALUES(9,13,3)
 
 
 INSERT INTO [POSDashboard].[dbo].[UserRoles]([UserId],[RoleId],[CompanyId])
-VALUES(10,13,3)
+VALUES(10,9,3)
 
 INSERT INTO [POSDashboard].[dbo].[UserRoles]([UserId],[RoleId],[CompanyId])
 VALUES(11,7,3)
@@ -144,38 +144,17 @@ INSERT INTO [POSDashboard].[dbo].[Stops]([Name],[Description],[Code],[Active])
 
 --create 2-3 routes using above stops
 --1
-INSERT INTO [POSDashboard].[dbo].[Routes]
-           ([RouteName],[Code]           ,[Description]           ,[Active]           ,[SourceId]           ,[DestinationId]           ,[Distance])
-     VALUES('HYD-GNTR','R1','R1',1,1,6,300)
-
+--[InsUpdDelRoutes](@Id int,@RouteName varchar(50),@Description varchar(50) = null,@Active int,@Code varchar(10),@SourceId int,@DestinationId int,@Distance decimal)
+exec [InsUpdDelRoutes] -1,'HYD-GNTR',null,1,'R1',1,6,300
 --2
-INSERT INTO [POSDashboard].[dbo].[Routes]          
-		 ([RouteName]           ,[Code]           ,[Description]           ,[Active]           ,[SourceId]           ,[DestinationId]           ,[Distance])
-     VALUES
-           ('GNTR-HYD','R2','R2',1,6,1,300)
+exec [InsUpdDelRoutes] -1,'GNTR-HYD',null,1,'R2',6,1,300
 
 --3
-INSERT INTO [POSDashboard].[dbo].[Routes]
-           ([RouteName]
-           ,[Code]
-           ,[Description]
-           ,[Active]
-           ,[SourceId]
-           ,[DestinationId]
-           ,[Distance])
-     VALUES
-           ('HYD-KDD','R3','R3',1,1,4,300)
- --4                     
-INSERT INTO [POSDashboard].[dbo].[Routes]
-           ([RouteName]
-           ,[Code]
-           ,[Description]
-           ,[Active]
-           ,[SourceId]
-           ,[DestinationId]
-           ,[Distance])
-     VALUES
-           ('KDD-HYD','R4','R4',1,4,1,300)
+exec [InsUpdDelRoutes] -1,'HYD-KDD',null,1,'R3',1,4,180
+
+--4
+exec [InsUpdDelRoutes] -1,'KDD-HYD',null,1,'R4',4,1,180
+
 
 --assign the above routes to fleet owners
 --[InsUpdDelFleetOwnerRoutes] @Id,@RouteId,@cmpId,@fleetOwnerId,@FromDate,@ToDate,@insupddelflag 
@@ -183,9 +162,21 @@ INSERT INTO [POSDashboard].[dbo].[Routes]
 exec [InsUpdDelFleetOwnerRoutes]  -1, 1,2,1,null, null,'I'
 exec [InsUpdDelFleetOwnerRoutes]  -1, 2,2,1,null, null,'I'
 
+--[InsUpdDelFleetOwnerRouteStops] @FleetOwnerId int,	@RouteId int,	@StopId int,    @insupddelflag varchar(1)
+exec [InsUpdDelFleetOwnerRouteStops] 1,1,1,'I'
+exec [InsUpdDelFleetOwnerRouteStops] 1,1,6,'I'
+exec [InsUpdDelFleetOwnerRouteStops] 1,2,1,'I'
+exec [InsUpdDelFleetOwnerRouteStops] 1,2,6,'I'
+
 --zupco
 exec [InsUpdDelFleetOwnerRoutes]  -1, 2,3,2,null, null,'I'
 exec [InsUpdDelFleetOwnerRoutes]  -1, 3,3,2,null, null,'I'
+--[InsUpdDelFleetOwnerRouteStops] @FleetOwnerId int,	@RouteId int,	@StopId int,    @insupddelflag varchar(1)
+exec [InsUpdDelFleetOwnerRouteStops] 2,3,1,'I'
+exec [InsUpdDelFleetOwnerRouteStops] 2,3,4,'I'
+
+exec [InsUpdDelFleetOwnerRouteStops] 2,4,1,'I'
+exec [InsUpdDelFleetOwnerRouteStops] 2,4,4,'I'
 
 --create atleast 3 vehciles for fleet owner (1 and 2) 
 --insert 6 vehicles
@@ -193,33 +184,33 @@ exec [InsUpdDelFleetOwnerRoutes]  -1, 3,3,2,null, null,'I'
 INSERT INTO [POSDashboard].[dbo].[FleetDetails]
  ([VehicleRegNo],[VehicleTypeId],[FleetOwnerId],[CompanyId],[ServiceTypeId],[Active],[LayoutTypeId],[EngineNo],[FuelUsed],[MonthAndYrOfMfr],[ChasisNo],[SeatingCapacity],[DateOfRegistration])
  VALUES
-  ('AP4952',10,1, 2,12,1,27,'CMP1',10,null,'Cpm21',56,null)
+  ('W1AP4952',10,1, 2,12,1,13,'CMP1',10,null,'Cpm21',56,null)
 
 INSERT INTO [POSDashboard].[dbo].[FleetDetails]
 ([VehicleRegNo],[VehicleTypeId],[FleetOwnerId],[CompanyId],[ServiceTypeId],[Active],[LayoutTypeId],[EngineNo],[FuelUsed],[MonthAndYrOfMfr],[ChasisNo],[SeatingCapacity],[DateOfRegistration])
  VALUES
- ('TS9911',9,1, 2,12,1,27,'CMP2',10,null,'Cpm22',54,null)
+ ('W2TS9911',9,1, 2,12,1,13,'CMP2',10,null,'Cpm22',54,null)
 
  INSERT INTO [POSDashboard].[dbo].[FleetDetails]
 ([VehicleRegNo],[VehicleTypeId],[FleetOwnerId],[CompanyId],[ServiceTypeId],[Active],[LayoutTypeId],[EngineNo],[FuelUsed],[MonthAndYrOfMfr],[ChasisNo],[SeatingCapacity],[DateOfRegistration])
  VALUES
- ('TS4952',10,1, 2,12,1,27,'CMP3',10,null,'Cpm23',32,null)
+ ('W3TS4952',10,1, 2,12,1,13,'CMP3',10,null,'Cpm23',32,null)
 
 ----fleet owner 2
  INSERT INTO [POSDashboard].[dbo].[FleetDetails]
  ([VehicleRegNo],[VehicleTypeId],[FleetOwnerId],[CompanyId],[ServiceTypeId],[Active],[LayoutTypeId],[EngineNo],[FuelUsed],[MonthAndYrOfMfr],[ChasisNo],[SeatingCapacity],[DateOfRegistration])
  VALUES
-  ('AP4952',10,2, 3,12,1,27,'ZpuP1',10,null,'Zup21',56,null)
+  ('Z1AP4952',10,2, 3,12,1,13,'ZpuP1',10,null,'Zup21',56,null)
 
 INSERT INTO [POSDashboard].[dbo].[FleetDetails]
 ([VehicleRegNo],[VehicleTypeId],[FleetOwnerId],[CompanyId],[ServiceTypeId],[Active],[LayoutTypeId],[EngineNo],[FuelUsed],[MonthAndYrOfMfr],[ChasisNo],[SeatingCapacity],[DateOfRegistration])
  VALUES
- ('TS9911',10,2, 3,12,1,27,'Zup2',10,null,'Zup22',46,null)
+ ('Z2TS9911',10,2, 3,12,1,13,'Zup2',10,null,'Zup22',46,null)
 
  INSERT INTO [POSDashboard].[dbo].[FleetDetails]
 ([VehicleRegNo],[VehicleTypeId],[FleetOwnerId],[CompanyId],[ServiceTypeId],[Active],[LayoutTypeId],[EngineNo],[FuelUsed],[MonthAndYrOfMfr],[ChasisNo],[SeatingCapacity],[DateOfRegistration])
  VALUES
- ('TS4952',9,2, 3,12,1,27,'Zup3',10,null,'Zup23',33,null)
+ ('Z3TS4952',9,2, 3,12,1,13,'Zup3',10,null,'Zup23',33,null)
 
 --fleet - route combination
 INSERT INTO [POSDashboard].[dbo].[FleetRoutes]([VehicleId],[RouteId],[EffectiveFrom] ,[EffectiveTill])

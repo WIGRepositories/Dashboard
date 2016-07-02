@@ -1,4 +1,5 @@
-﻿// JavaScript source code
+﻿
+// JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
     $scope.uname = $localStorage.uname;
@@ -34,6 +35,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }     
     }
 
+
     $scope.displayLayout = function () {
         var container = document.getElementById('basic_example');
 
@@ -48,7 +50,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             for (i = 0; i < rowCount; i++) {
                 var row = [];
                 for (j = 0; j < colCount; j++) {
-                    row.push({"Id":spreadsheetColumnLabel(j) + (i + 1),"selected":true});
+                row.push({ "Id": spreadsheetColumnLabel(j) + (i + 1), "selected": true });
                 }
                 rows.push(row);
             }
@@ -97,7 +99,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         //});
     }
 
-    $scope.saveVehicleLayout = function () {
+    $scope.SaveVehicleLayout = function () {
 
         var savedata = $scope.datarows;
         //var Vl = {
@@ -123,10 +125,8 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         //i;      
         //var col = [];
         //j;
-        for (i = 0; i < savedata.length; i++)
-        {
-            for(j=0; j < savedata[i].length; j++)
-            {                
+        for (i = 0; i < savedata.length; i++) {
+            for (j = 0; j < savedata[i].length; j++) {
 
                 var item = {
                     "label": savedata[i][j].Id, 
@@ -173,7 +173,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
                     return message;
                 }
             }
-        });
+ });
     }
 
 });

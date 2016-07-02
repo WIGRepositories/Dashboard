@@ -27,11 +27,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
         var newCmp = {
+
             Id: Group.Id,
             Name: Group.Name,
             admin: Group.admin,
             code: Group.code,
-            desc: Group.desc,
+            desc: Group.desc,            
+            Address:Group.Address,
+            ContactNo1: Group.ContactNo1,
+            ContactNo2: Group.ContactNo2,
+            Fax:Group.Fax,
+            EmailId:Group.EmailId,
+            Title:Group.Title,
+            Caption:Group.Caption,
+            Country:Group.Country,
+            ZipCode:Group.ZipCode,
+            State:Group.State,
             active: (Group.active==true)?1:0,
             insupdflag:flag 
         }

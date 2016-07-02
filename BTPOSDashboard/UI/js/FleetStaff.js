@@ -1,7 +1,7 @@
 // JavaScript source code
 // JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname
     $scope.dashboardDS = $localStorage.dashboardDS;
 
@@ -159,7 +159,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currGroup = null;
     };
 
-   
+
     $scope.GetFleetStaff = function () {
         if ($scope.cmp == null || $scope.cmp.Id == null) {
             $scope.FleetStaff = null;
@@ -191,9 +191,8 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     }
 
 });
-   
 
-myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {
@@ -204,3 +203,6 @@ myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg
         $uibModalInstance.dismiss('cancel');
     };
 });
+
+   
+

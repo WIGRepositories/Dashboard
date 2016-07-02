@@ -85,11 +85,11 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.Group = null;
 
         }, function (errres) {
-            var errdata = errres.data;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
-        });
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+});
         $scope.currGroup = null;
     };
 
@@ -100,7 +100,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.clearCurrRole = function () {
         $scope.currRole = null;
     };
-
+    
     $scope.GetCompanies = function () {
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
@@ -115,7 +115,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.cmproles = null;
             return;
         }
-        var cmpId = (seltype) ? seltype.Id : -1;
+        var cmpId = (seltype) ? seltype.Id : -1;        
 
         $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
@@ -173,17 +173,16 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.Group = null;
 
         }, function (errres) {
-            var errdata = errres.data;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
-        });
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+});
         $scope.currGroup = null;
     };
 
-
-
-    $scope.testdel = function (role) {
+    $scope.testdel = function (role)
+    {       
         var cmprole = {
 
             RoleId: role.RoleId,
@@ -199,7 +198,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
-
+            
             $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + role.CompanyId).then(function (res, data) {
                 $scope.cmproles = res.data;
             });

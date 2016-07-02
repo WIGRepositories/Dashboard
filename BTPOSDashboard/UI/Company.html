@@ -441,48 +441,104 @@
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header modal-header-primary">
-                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                        <h4 id="modal-header-primary-label" class="modal-title">Add Company</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="row">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>                                                                        
+                                                                            <h4 id="modal-header-primary-label" class="modal-title">Add Company</h4>
+                                                                        </div>                                                                    
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group">
 
-                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+                                                                                <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
 
-                                                                            <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="Group.Name" class="form-control" /><span class="help-block"></span></div>
-                                                                        </div>
+                                                                                <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="Group.Name" class="form-control" /><span class="help-block"></span></div>
 
 
-                                                                        <div class="row">
-                                                                            <label for="code" class="col-md-3 control-label" style="color:red;">Code *<span class='require'></span></label>
+                                                                                <label for="code" class="col-md-3 control-label" style="color:red;">Code *<span class='require'></span></label>
 
-                                                                            <div class="col-md-4"><input id="code" type="text" ng-model="Group.code" class="form-control" /><span class="help-block"></span></div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <label for="descr" class="col-md-3 control-label">Description <span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="code" type="text" ng-model="Group.code" class="form-control" /><span class="help-block"></span></div>
 
-                                                                            <div class="col-md-4"><input id="desc" type="text" ng-model="Group.desc" class="form-control" /><span class="help-block"></span></div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>
+                                                                            </div>
+                                                                            <div class="form-group">
 
-                                                                            <div class="col-md-4">
-                                                                                <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
+                                                                                <label for="descr" class="col-md-3 control-label">Description <span class='require'></span></label>
+
+                                                                                <div class="col-md-4"><input id="desc" type="text" ng-model="Group.desc" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                                <label for="ContactNo1" class="col-md-3 control-label">ContactNo1 <span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="ContactNo1" type="text" ng-model="Group.ContactNo1" class="form-control" /><span class="help-block"></span></div>
+
+                                                                            </div>
+                                                                            <div class="form-group">
+
+                                                                                <label for="ContactNo2" class="col-md-3 control-label">ContactNo2<span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="ContactNo2" type="text" ng-model="Group.ContactNo2" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                                <label for="Fax" class="col-md-3 control-label">Fax<span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="Fax" type="text" ng-model="Group.Fax" class="form-control" /><span class="help-block"></span></div>
+
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="Fax" class="col-md-3 control-label">EmailId<span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="EmailId" type="text" ng-model="Group.EmailId" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                                <label for="Fax" class="col-md-3 control-label">Title<span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="Title" type="text" ng-model="Group.Title" class="form-control" /><span class="help-block"></span></div>
+
+                                                                            </div>
+                                                                            <div class="form-group">
+
+                                                                                <label for="Fax" class="col-md-3 control-label">Caption<span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="Caption" type="text" ng-model="Group.Caption" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                                <label for="Fax" class="col-md-3 control-label">Address<span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="Address" type="text" ng-model="Group.Address" class="form-control" /><span class="help-block"></span></div>
+
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                 <label for="inputMiddleName" class="col-md-2 control-label">Country:<span class='require'>*</span></label>
+                                                                                <select class="form-group" ng-model="Group.Country">
+                                                                                    <option value="select Country">select Country</option>
+                                                                                    <option value="Afghanistan">Afghanistan</option>
+                                                                                    <option value="Albania">Albania</option>
+                                                                                    <option value="Algeria">Algeria</option>
+                                                                                    <option value="American Samoa">American Samoa</option>
+                                                                                    <option value="Andorra">Andorra</option>
+                                                                                    <option value="Angola">Angola</option>
+                                                                                    <option value="Anguilla">Anguilla</option>
+                                                                                    <option value="Antartica">Antarctica</option>
+                                                                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                                                    <option value="Argentina">Argentina</option>
+                                                                                    <option value="Armenia">Armenia</option>
+                                                                                    <option value="Aruba">Aruba</option>
+                                                                                    <option value="Australia">Australia</option>
+                                                                                </select>
+                                                                                
+                                                                                <label for="Fax" class="col-md-3 control-label">State<span class='require'></span></label>
+                                                                                <div class="col-md-4"><input id="State" type="text" ng-model="Group.State" class="form-control" /><span class="help-block"></span></div>
+                                                                            </div>                                                                            
+                                                                                <div class="form-group">
+                                                                                    <label for="Fax" class="col-md-3 control-label">ZipCode<span class='require'></span></label>
+                                                                                    <div class="col-md-4"><input id="ZipCode" type="text" ng-model="Group.ZipCode" class="form-control" /><span class="help-block"></span></div>                                                                                 
+               
+
+                                                                                      <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>                                                                                  
+                                                                                        <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        <div class="form-actions">
+                                                                            <div class="col-md-offset-3 col-md-9">
+                                                                                <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
+
+                                                                                <a href="Company.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
                                                                             </div>
                                                                         </div>
+                                                                       
+</div>                                                               
                                                                     </div>
-                                                                    <div class="form-actions">
-                                                                        <div class="col-md-offset-3 col-md-9">
-                                                                            <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
-
-                                                                            <a href="Company.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
-
                                                         </div>
 
                                                     </div>
@@ -491,23 +547,19 @@
                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
                                                         <tr>
-
                                                             <th>Name</th>
                                                             <th>Code</th>
-                                                            <th>Description</th>
+                                                            <th>Description</th>                                                           
                                                             <th>Active</th>
                                                             <th>Update</th>
-
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
                                                         <tr ng-repeat="cmp in Companies" class="gradeA">
-
-
                                                             <td>{{cmp.Name}}</td>
                                                             <td>{{cmp.code}}</td>
-                                                            <td>{{cmp.desc}}</td>
+                                                            <td>{{cmp.desc}}</td>                                                             
                                                             <td>
                                                                 <input type="checkbox" checked readonly>
                                                             </td>

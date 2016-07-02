@@ -53,6 +53,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
           var Item = {
               Id: -1,
               ItemName: Item.ItemName,
+              ItemImage: Item.ItemImage,
               Code: Item.Code,
               Description: Item.Description,
               Category: 6,// Item.Category.Id,
@@ -80,47 +81,48 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
           $scope.currGroup = null;
       };
 
-      $scope.save = function (Item) {
+        $scope.save = function (Item) {
 
-          var Item = {
-              Id: Item.Id,
-              ItemName: Item.ItemName,
-              Code: Item.Code,
-              Description: Item.Description,
-              Category: Item.Category,
-              SubCategory: Item.SubCategory,
-              ReOrderPoint: Item.ReOrderPoint
-          }
+            var Item = {
+                Id: Item.Id,
+                ItemName: Item.ItemName,
+                ItemImage: Item.ItemImage,
+                Code: Item.Code,
+                Description: Item.Description,
+                Category: Item.Category,
+                SubCategory: Item.SubCategory,
+                ReOrderPoint: Item.ReOrderPoint
+            }
 
-          var req = {
-              method: 'POST',
-              url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
-              data: Item
-          }
-          $http(req).then(function (response) {
+            var req = {
+                method: 'POST',
+                url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
+                data: Item
+            }
+            $http(req).then(function (response) {
 
-              $scope.showDialog("Saved successfully!");
+                $scope.showDialog("Saved successfully!");
 
-              $scope.Group = null;
+                $scope.Group = null;
 
-          }, function (errres) {
-              var errdata = errres.data;
-              var errmssg = "";
-              errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-              $scope.showDialog(errmssg);
-          });
+            }, function (errres) {
+                var errdata = errres.data;
+                var errmssg = "";
+                errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+                $scope.showDialog(errmssg);
+            });
           $scope.currGroup = null;
       };
       $scope.Items1 = null;
 
 
-      $scope.setItem = function (item) {
-          $scope.CurrItem = item;
-      };
+    $scope.setItem = function (item) {
+        $scope.CurrItem = item;        
+    };
 
-      $scope.clearItems1 = function () {
-          $scope.Items1 = null;
-      }
+    $scope.clearItems1 = function () {
+        $scope.Items1 = null;
+    }
 
 
     $scope.showDialog = function (message) {
@@ -149,4 +151,4 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-    });
+});

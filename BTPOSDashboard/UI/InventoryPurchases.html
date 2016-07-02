@@ -355,7 +355,7 @@
                                                     <div class="row mbm">
 
                                                         <div class="actions">
-                                                            <a href="newInventoryPurchases.html"> <button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;">Add Inventory Purchases</button></a>
+                                                            <button  type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;">Add Inventory Purchases</button>
 
                                                         </div>
 
@@ -446,32 +446,104 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
+                                                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">New Inventory Purchases</h4>
+                                                                </div>
+                                                                <div class="modal-body" ng-init="GetInventoryItems();" ng-model="group">
+                                                                    <div class="row">
 
-                                                                <th>Item Name</th>
-                                                                <th>Quantity</th>
-                                                                <th>PerUnitPrice</th>
-                                                                <th>PurchaseDate</th>
-                                                                <th>PurchaseOrderNumber</th>
-                                                                
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Item:<span class='require'>*</span></label>
 
-                                                            </tr>
-                                                        <tbody>
-                                                            <tr ng-repeat="G in Group">
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="I.ItemName for I in InventoryItem track by I.Id" class="form-control" ng-model="Group.ItemName">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
 
-                                                                <td>{{G.ItemName}}</td>
-                                                                <td>{{G.Quantity}}</td>
-                                                                <td>{{G.PerUnitPrice}}</td>
-                                                                <td>{{G.PurchaseDate}}</td>
-                                                                <td>{{G.PurchaseOrderNumber}}</td>
-                                                                
 
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                                    <div class="row">
+                                                                        <label for="code" class="col-md-3 control-label" style="color:red;">SubCategory<span class='require'></span></label>
+
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="s.SubCategory for s in InventoryItem track by s.subcategoryid" class="form-control" ng-model="Item.SubCategory">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <label for="descr" class="col-md-3 control-label">Quantity:  <span class='require'></span></label>
+
+                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.Quantity" /><span class="help-block"></span></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <label for="active" class="col-md-3 control-label">Per Unit Price: <span class='require'></span></label>
+
+                                                                       
+                                                                            <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PerUnitPrice" /><span class="help-block"></span></div>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                               
+                                                                    <label for="selCompany" class="col-md-4 control-label">Purchase Order Number:</label>
+
+                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseOrderNumber" /><span class="help-block"></span></div>
+
+                                                             
+                                                                <label for="selCompany" class="col-md-4 control-label">Purchase Date:<span class='require'>*</span></label>
+                                                                <input type="date" ng-model="Group.PurchaseDate"><div style="width:50%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+                                                                       
+                                                                    </div>
+
+                                                         
+                                                               
+                                                                 
+                                                            <div class="form-actions">
+                                                                <div class="col-md-offset-3 col-md-9">
+                                                                    <button class="btn btn-primary" type="button" ng-click="savepurchases(Group);">Save</button>
+
+                                                                    <a href="InventoryPurchases.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                </div>
+                                                            </div>
+                                                      
+                                                        </div>
+
+
+
+                                                    </div>
+
                                                 </div>
+                                            </div>
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Item Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>PerUnitPrice</th>
+                                                        <th>PurchaseDate</th>
+                                                        <th>PurchaseOrderNumber</th>
+
+
+                                                    </tr>
+                                                <tbody>
+                                                    <tr ng-repeat="G in Group">
+
+                                                        <td>{{G.ItemName}}</td>
+                                                        <td>{{G.Quantity}}</td>
+                                                        <td>{{G.PerUnitPrice}}</td>
+                                                        <td>{{G.PurchaseDate}}</td>
+                                                        <td>{{G.PurchaseOrderNumber}}</td>
+
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                             </div>
                                         </div>
 

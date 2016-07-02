@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
 
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -637,7 +637,7 @@
 
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNextStop(newNextStop);">Add Stop</button>
+                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="update(newNextStop);">Add Stop</button>
                                                                             <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
                                                                         </div>
@@ -706,8 +706,8 @@
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
 
-                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
-                                                                                            <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                        <div class="input-group datetimepicker-disable-date date" ng-model="currStop.arrivaltime">
+                                                                                            <input type="text" id="{{currStop.stopid}}ADate" class="form-control" value="currStop.arrivaltime" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                                                                         </div>
 
                                                                                     </div>
@@ -723,8 +723,8 @@
                                                                                 <div class="col-md-5">
                                                                                     <div class="form-group">
 
-                                                                                        <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
-                                                                                            <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                        <div class="input-group datetimepicker-disable-date date" ng-model="currStop.departuretime">
+                                                                                            <input type="text" id="{{currStop.stopid}}DDate" class="form-control" value="currStop.departuretime" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                                                                         </div>
 
                                                                                     </div>
@@ -734,28 +734,12 @@
 
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNextStop(newNextStop);">Update</button>
+                                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateTime(currStop);">Update</button>
                                                                             <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
                                                                         </div>
                                                                         
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Arrival:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-
-                                                                                    <div style="z-index:10000" class="input-group datetimepicker-disable-date date">
-                                                                                        <input type="text" id="{{currStop.Id}}Date" class="form-control" ng-model="currStop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -789,9 +773,9 @@
                                                                         <div>
                                                                             <div class="col-md-3">
 
-                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="GetVehicleSchedule()">
-                                                                                    <option value="">Select</option>
-                                                                                </select>
+                                                                                Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="getFORVehicleSchedule()">
+    <option value="">Select</option>
+</select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -804,8 +788,14 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th width="20%"> Stop Name</th>
-                                                                            <th width="20%">Stop Code</th>
+                                                                           <th width="20%">Stop Code</th>
                                                                             <th width="20%">Stop No</th>
+                                                                            <th width="20%">Arrivalhr</th> 
+                                                                            <th width="20%">Departurehr</th>
+                                                                            <th width="20%">Arrivalmin</th>
+                                                                            <th width="20%">Departuremin</th>
+                                                                            <th width="20%">Arrivalampm</th>
+                                                                            <th width="20%">Departureampm</th>
                                                                             <th width="10%">Arrival</th>
                                                                             <th width="10%">departure</th>
                                                                             <th width="20%">Update timing</th>
@@ -817,8 +807,14 @@
                                                                             <td>{{stop.StopName}}</td>
                                                                             <td>{{stop.StopCode}}</td>
                                                                             <td>{{stop.StopNo}}</td>
-                                                                            <td>{{stop.arrivalhr}}</td>
-                                                                            <td>{{stop.departurehr}}</td>
+                                                                            <td>{{stop.ArrivalHr}}</td>
+                                                                            <td>{{stop.DepartureHr}}</td>
+                                                                            <td>{{stop.ArrivalMin}}</td>
+                                                                            <td>{{stop.DepartureMin}}</td>
+                                                                            <td>{{stop.ArrivalAMPM}}</td>
+                                                                            <td>{{stop.DepartureAMPM}}</td>
+                                                                            <td>{{stop.arrivaltime}}</td>
+                                                                            <td>{{stop.departuretime}}</td>
                                                                             <td>
                                                                                 <button type="button" data-target="#UpdateSchedule" data-toggle="modal" class="btn btn-default btn-xs" ng-click="SetCurrStop(stop);">
                                                                                     <i class="fa fa-edit"></i>&nbsp;
@@ -826,20 +822,20 @@
                                                                                 </button>
                                                                             </td>
                                                                             <!--<td>
-                        <div class="col-md-12 active">
-                            <div class="input-group datetimepicker-disable-date date">
-                                <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-md-12 active">
-                            <div class="input-group datetimepicker-disable-date date" >
-                                <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
-                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                            </div>
-                        </div>
-                    </td>-->
+            <div class="col-md-12 active">
+                <div class="input-group datetimepicker-disable-date date">
+                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="col-md-12 active">
+                <div class="input-group datetimepicker-disable-date date" >
+                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
+                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                </div>
+            </div>
+        </td>-->
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -918,7 +914,7 @@
 
                                                                     <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
                                                                         <div class="col-md-12" style="text-align:center">
-                                                                            <button ng-click="save();" class="btn btn-success">
+                                                                            <button ng-click="save(test);" class="btn btn-success">
                                                                                 <i class="fa fa-save"></i>&nbsp;
                                                                                 Save
                                                                             </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
@@ -953,9 +949,7 @@
 
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                         
 
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
@@ -1008,7 +1002,7 @@
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
     <script src="vendors/moment/moment.js"></script>
-    <script src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="vendors/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
     <script>
         $('.datetimepicker-disable-date').datetimepicker({
             pickDate: false
@@ -1021,6 +1015,14 @@
             pickDate: false
         });
     </script>
+    <!--<script>
+    angular.module('timeExample', [])
+      .controller('DateController', ['$scope', function ($scope) {
+          $scope.example = {
+              value: new Date(1970, 0, 1, 14, 57, 0)
+          };
+      }]);
+    </script>-->
 
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>

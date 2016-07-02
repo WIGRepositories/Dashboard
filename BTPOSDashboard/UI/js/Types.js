@@ -67,11 +67,11 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.Group = null;
 
         }, function (errres) {
-            var errdata = errres.data;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
-        });
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+});
         $scope.currGroup = null;
     };
 
@@ -91,7 +91,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         if (newType.group == null || newType.group.Id == null) {
             alert('Please select a type group');
             return;
-        }
+        }       
 
         var newTypeData = {
 
@@ -107,22 +107,22 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Types/SaveType',
+            url: 'http://localhost:1476/api/Types/SaveType',           
             data: newTypeData
         }
 
         $http(req).then(function (response) {
 
             $scope.showDialog("Saved successfully!");
-
+            
             $scope.Group = null;
 
         }, function (errres) {
-            var errdata = errres.data;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
-        });
+      var errdata = errres.data;
+      var errmssg = "";            
+      errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;            
+      $scope.showDialog(errmssg);
+        }); 
         $scope.currGroup = null;
     };
 
@@ -176,5 +176,19 @@ myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
-    };
+    };    
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
 });

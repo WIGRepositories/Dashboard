@@ -461,8 +461,8 @@
 
 
                                                 <div class="actions">
-                                                    <a href="AddSubCategory.html"><button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Subcategory</button></a>
-
+                                               <!---     <button type="button" data-target="#Modal-header-new" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add Subcategory</button>--->
+                                                    <button  type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add Subcategory</button>
                                                 </div>
                                                 <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                     <div class="modal-dialog">
@@ -562,7 +562,59 @@
                                                     </tbody>
 
                                                 </table>
+                                                <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header modal-header-primary">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                <h4 id="modal-header-primary-label" class="modal-title">Add Subcategory</h4>
+                                                            </div>
+                                                            <div class="modal-body" ng-init="GetCategories();" ng-model="Subcategory">
+                                                                <div class="row">
 
+                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Category:</label>
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="s.Name for s in Categories track by s.Id" class="form-control" ng-model="SubCategory.Category">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    </div>
+
+                                                                <div class="row">
+                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+                                                                    <div class="col-md-6"><input id="Name" type="text" class="form-control" ng-model="SubCategory.Name" /><span class="help-block"></span></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <label for="Description" class="col-md-3 control-label">Description <span class='require'></span></label>
+
+                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="SubCategory.Description" /><span class="help-block"></span></div>
+                                                                </div>
+
+
+
+                                                                <div class="row">
+                                                                    <label for="Active" class="col-md-3 control-label">Active:<span class='require'></span></label>
+
+                                                                    <div class="col-md-4">
+                                                                        <div><input type="checkbox" ng-checked="Types.Active" /></div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="col-md-offset-3 col-md-9">
+                                                                        <button class="btn btn-primary" type="button" ng-click="saveNewSubCategory(SubCategory);">Save</button>
+
+                                                                        <a href="SubCategory.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
 

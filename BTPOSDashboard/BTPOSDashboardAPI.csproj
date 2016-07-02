@@ -447,6 +447,7 @@
     <Content Include="UI\js\angular-animate.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
+    <Content Include="UI\js\BTPOSMonitoringPage.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\EditHistory.js" />
@@ -471,6 +472,11 @@
     <Content Include="UI\js\InventoryStatus.js" />
     <Content Include="UI\js\Invoices.js" />
     <Content Include="UI\js\JavaScript1.js" />
+    <Content Include="UI\js\libs\angular-route.js" />
+    <Content Include="UI\js\libs\angular-ui-router.js" />
+    <Content Include="UI\js\libs\ocLazyLoad.js" />
+    <Content Include="UI\js\libs\ui-bootstrap.js" />
+    <Content Include="UI\js\ShoppingCart.js" />
     <Content Include="UI\js\treetable.js" />
     <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
@@ -2013,6 +2019,7 @@
     <Compile Include="Controllers\BTPOSGroupsController.cs" />
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
     <Compile Include="Controllers\BTPOSLocController.cs" />
+    <Compile Include="Controllers\BTPOSMonitoringPageController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\BtposRoutesController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
@@ -2046,6 +2053,7 @@
     <Compile Include="Controllers\RouteFareController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />
     <Compile Include="Controllers\ShippingOrderController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
