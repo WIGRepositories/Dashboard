@@ -50,21 +50,25 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsUpdDelObjects";
             cmd.Connection = conn;
             conn.Open();
+
             SqlParameter cc = new SqlParameter();
             cc.ParameterName = "@Id";
             cc.SqlDbType = SqlDbType.Int;
             cc.Value = b.Id;
             cmd.Parameters.Add(cc);
+
             SqlParameter cname = new SqlParameter();
             cname.ParameterName = "@Name";
             cname.SqlDbType = SqlDbType.VarChar;
             cname.Value = b.Name;
             cmd.Parameters.Add(cname);
+
             SqlParameter dd = new SqlParameter();
             dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
             dd.Value = b.Description;
             cmd.Parameters.Add(dd);
+
             SqlParameter dda = new SqlParameter();
             dda.ParameterName = "@Path";
             dda.SqlDbType = SqlDbType.VarChar;
@@ -81,7 +85,7 @@ namespace BTPOSDashboard.Controllers
             SqlParameter flag = new SqlParameter();
             flag.ParameterName = "@insupdflag";
             flag.SqlDbType = SqlDbType.VarChar;
-            flag.Value = b.insupddelflag;
+            flag.Value = b.insupdflag;
             //llid.Value = b.Active;
             cmd.Parameters.Add(flag);
            

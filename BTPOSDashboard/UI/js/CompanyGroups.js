@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngStorage','ui.bootstrap'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
    // $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;

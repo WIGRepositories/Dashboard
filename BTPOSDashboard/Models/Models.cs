@@ -1103,7 +1103,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string Path { get; set; }
         public int Active { get; set; }
-        public string insupddelflag { get; set; }
+        public string insupdflag { get; set; }
 
     }
     public class ObjectAccess

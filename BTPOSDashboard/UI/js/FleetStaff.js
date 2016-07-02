@@ -1,4 +1,3 @@
-
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
@@ -157,7 +156,9 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
             $scope.showDialog(errmssg);
         });
-    }
+        $scope.currGroup = null;
+    };
+
 
     $scope.GetFleetStaff = function () {
         if ($scope.cmp == null || $scope.cmp.Id == null) {
