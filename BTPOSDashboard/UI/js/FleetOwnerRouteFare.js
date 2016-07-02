@@ -1,6 +1,4 @@
 ﻿var app = angular.module('myApp', ['ngStorage']);
-
-
 app.directive('ngOnFinishRender', function ($timeout) {
     return {
         restrict: 'A',

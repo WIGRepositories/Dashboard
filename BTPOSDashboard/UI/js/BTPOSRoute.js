@@ -1,4 +1,4 @@
-﻿var app = angular.module('myApp', ['ngStorage']);
+﻿var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
 var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -114,6 +114,32 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
             $scope.showDialog(errmssg);
         });
+        $scope.currGroup = null;
+    };
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
     }
-   
+});
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

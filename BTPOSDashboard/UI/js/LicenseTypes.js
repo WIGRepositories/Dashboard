@@ -72,11 +72,13 @@ $scope.saveLicenseType = function (licenseType, flag) {
         errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
         $scope.showDialog(errmssg);
     });
+    $scope.currGroup = null;
+};
 
 
     $scope.currLicenseType = null;
 
-}
+
 
 $scope.getselectval = function (seltype) {
     var grpid = (seltype) ? seltype.Id : -1;
@@ -188,6 +190,14 @@ $scope.saveNewLicense = function (License) {
 
 };
 
+$scope.setCurrLicenseType = function (lt) {
+    $scope.currLicenseType = lt;
+};
+
+$scope.clearCurrLicenseType = function () {
+    $scope.currLicenseType = null;
+};
+
 $scope.showDialog = function (message) {
 
     var modalInstance = $uibModal.open({
@@ -202,12 +212,17 @@ $scope.showDialog = function (message) {
     });
 }
 
-$scope.setCurrLicenseType = function (lt) {
-    $scope.currLicenseType = lt;
+});
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
 };
 
-$scope.clearCurrLicenseType = function () {
-    $scope.currLicenseType = null;
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
 };
 });
 myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
