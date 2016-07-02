@@ -135,6 +135,12 @@ namespace BTPOSDashboard.Controllers
                     chss.Value = n.ArrivalAMPM;
                     cmd.Parameters.Add(chss);
 
+                    SqlParameter ch = new SqlParameter("@Duration", SqlDbType.Decimal);
+                    ch.SqlDbType = SqlDbType.Decimal;
+                    ch.Value = n.ArrivalAMPM;
+                    cmd.Parameters.Add(ch);
+
+
 
                     SqlParameter chss1 = new SqlParameter("@DepartureAmPm", SqlDbType.VarChar);
                     chss1.SqlDbType = SqlDbType.VarChar;

@@ -183,7 +183,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
        // });
       
     }
-
+   // if (StopCount > 0) {
         $scope.updateTime = function (s) {
             var aid = s.stopid + 'ADate';
             var did = s.stopid + 'DDate';
@@ -195,6 +195,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
 
         }
+   // }
    
     
     $scope.save = function (stop, flag) {

@@ -35,9 +35,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Id: -1,
             ItemId: items.ItemId,
             ItemName: items.ItemName,
-            UnitPrice: items.UnitPrice,
+            UnitPrice: items.UnitPrice
 
-            // insupddelflag: 'I',
+           
         };
 
         var req = {
@@ -77,3 +77,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
 });
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
