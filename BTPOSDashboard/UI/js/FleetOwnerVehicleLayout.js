@@ -57,7 +57,9 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var vc = {
             needvehicleType: '1',
-            needvehiclelayout: '1'
+            needvehiclelayout: '1',
+            needCompanyName: '1'
+
         };
 
         var req = {

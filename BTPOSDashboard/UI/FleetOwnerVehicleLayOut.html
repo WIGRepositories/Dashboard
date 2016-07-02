@@ -31,7 +31,7 @@
     <!-- Custom Fonts -->
     <!--<link rel="stylesheet" href="css/styles.css" type="text/css">-->
 </head>
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();GetVehicleConfig();" ng-model="initdata">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetVehicleConfig();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -373,7 +373,7 @@
 
                                                         <div class="col-lg-12">
                                                             <div class="col-md-5">
-                                                                Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
@@ -387,7 +387,7 @@
                                                             <br />
 
                                                             <div class="col-md-3">
-                                                                Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
+                                                                Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table2 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>

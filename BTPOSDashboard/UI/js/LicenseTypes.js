@@ -1,6 +1,6 @@
 ﻿// JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var myapp1 = angular.module('myApp', ['ngStorage','ui.bootstrap'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 $scope.GetLicenseCat = function () {
@@ -210,3 +210,15 @@ $scope.clearCurrLicenseType = function () {
     $scope.currLicenseType = null;
 };
 });
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
