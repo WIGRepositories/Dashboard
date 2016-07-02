@@ -31,7 +31,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             FirstName: FleetOwner.FirstName,
             LastName: FleetOwner.LastName,
             MiddleName: FleetOwner.MiddleName,
-            EmployeeNo: FleetOwner.EmpNo,
+           EmpNo: FleetOwner.EmpNo,
             Email: FleetOwner.Email,
             MobileNo: FleetOwner.MobileNo,
             Active: FleetOwner.Active,

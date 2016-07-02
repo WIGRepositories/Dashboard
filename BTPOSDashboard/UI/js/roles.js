@@ -221,7 +221,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currRole = null;
     }
 });
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg, $uibModal) {
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg, $uibModal) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {

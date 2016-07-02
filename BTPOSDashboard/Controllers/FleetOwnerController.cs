@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     public class FleetOwnerController : ApiController
     {
         [HttpGet]
-        public DataTable getFleetOwner(int EmpNo)//Main Method
+        public DataTable getFleetOwner()//Main Method
         {
 
 
@@ -25,9 +25,9 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;//Stored Procedure
             cmd.CommandText = "getFleetOwner";
             cmd.Connection = conn;
-            SqlParameter empid = new SqlParameter("@EmpNo", SqlDbType.Int);
-            empid.Value = empid;
-            cmd.Parameters.Add(empid);
+            //SqlParameter empid = new SqlParameter("@EmpNo", SqlDbType.Int);
+            //empid.Value = empid;
+           // cmd.Parameters.Add(empid);
           
 
             DataSet ds = new DataSet();
