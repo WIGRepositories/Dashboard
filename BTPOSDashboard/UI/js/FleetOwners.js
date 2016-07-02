@@ -9,6 +9,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner').then(function (res, data) {
             $scope.FleetOwner = res.data;
+
         });
     }
 
