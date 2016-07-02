@@ -208,11 +208,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
             $scope.showDialog(errmssg);
         });
+        $scope.currGroup = null;
+    };
 
         $scope.setFleet = function (F) {
             $scope.currVD = F;
         }
-    }
 
     $scope.showDialog = function (message) {
 
@@ -224,10 +225,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 mssg: function () {
                     return message;
                 }
-            }
-        });
     }
 });
+    }
+
+});
+    
+
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;

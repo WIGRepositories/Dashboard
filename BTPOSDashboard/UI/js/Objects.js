@@ -1,14 +1,15 @@
+
 // JavaScript source code
 // JavaScript source code
 // JavaScript source code
-var app = angular.module('myApp', ['ngStorage'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
  
     $http.get('http://localhost:1476/api/objects/getobjects').then(function (res, data) {
         $scope.NewObjects = res.data;
     });
-    $scope.save = function (NewObject) {
+    $scope.save = function (NewObject,flag) {
         
         if (NewObject == null)
         {
@@ -33,7 +34,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Description: NewObject.Description,
             Path: NewObject.Path,
             Access: NewObject.Access,
-            insupddelflag:'U',
+            insupdflag: 'U',
             Active:1,
 
 
@@ -83,7 +84,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Path: NewObject.Path,
 
             Active: 1,
-            insupddelflag: 'I'
+            insupdflag: 'I'
         };
 
         var req = {

@@ -111,7 +111,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li><a href="UserDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
@@ -369,7 +369,7 @@
 
 
                                                     <div class="actions">
-                                                        <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Assign Roles</button>
+                                                        <button  type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Assign Roles</button>
                                                     </div>
 
                                                     <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -446,7 +446,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="GetRolesToAssign(s)">
+                                                                    <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" class="form-control" ng-model="s" ng-change="GetRolesToAssign(s)">
                                                                         <option value="">Select</option>
                                                                     </select>
                                                                 </div>
@@ -460,7 +460,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <select style="width:260px" ng-options="r.Name for r in roles track by r.Id" ng-model="r">
+                                                                    <select style="width:260px" ng-options="r.Name for r in roles track by r.Id" class="form-control" ng-model="r">
                                                                         <option value="">Select</option>
                                                                     </select>
                                                                 </div>
@@ -477,7 +477,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <input type="checkbox" checked />
+                                                                    <input type="checkbox" class="form-control" checked />
 
                                                                 </div>
 

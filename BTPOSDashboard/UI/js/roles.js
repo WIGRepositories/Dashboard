@@ -82,16 +82,15 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
             $scope.showDialog("Saved successfully!");
 
-        }
-, function (errres) {
+            $scope.Group = null;
+
+        }, function (errres) {
     var errdata = errres.data;
     var errmssg = "";
     errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
     $scope.showDialog(errmssg);
-
 });
-        $scope.currRole = null;
-
+        $scope.currGroup = null;
     };
 
     $scope.setCurrRole = function (grp) {
@@ -128,7 +127,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.roles = null;
             return;
         }
-        var cmpId = (seltype.Id == 1) ? 0:1;
+        var cmpId = (seltype.Id == 1) ? 0 : 1;
 
         $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=' + cmpId).then(function (response, data) {
             $scope.roles = response.data;
@@ -171,30 +170,17 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
             $scope.showDialog("Saved successfully!");
 
-        }
-, function (errres) {
+            $scope.Group = null;
+
+        }, function (errres) {
     var errdata = errres.data;
     var errmssg = "";
     errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
     $scope.showDialog(errmssg);
-
 });
-        $scope.currRole = null;
-
+        $scope.currGroup = null;
     };
-    $scope.showDialog = function (message) {
 
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
     $scope.testdel = function (role)
     {       
         var cmprole = {
@@ -220,8 +206,26 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         });
         $scope.currRole = null;
     }
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+
 });
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg, $uibModal) {
+   
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {
