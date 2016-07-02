@@ -80,6 +80,49 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
           $scope.currGroup = null;
       };
 
+      $scope.save = function (Item) {
+
+          var Item = {
+              Id: Item.Id,
+              ItemName: Item.ItemName,
+              Code: Item.Code,
+              Description: Item.Description,
+              Category: Item.Category,
+              SubCategory: Item.SubCategory,
+              ReOrderPoint: Item.ReOrderPoint
+          }
+
+          var req = {
+              method: 'POST',
+              url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
+              data: Item
+          }
+          $http(req).then(function (response) {
+
+              $scope.showDialog("Saved successfully!");
+
+              $scope.Group = null;
+
+          }, function (errres) {
+              var errdata = errres.data;
+              var errmssg = "";
+              errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+              $scope.showDialog(errmssg);
+          });
+          $scope.currGroup = null;
+      };
+      $scope.Items1 = null;
+
+
+      $scope.setItem = function (item) {
+          $scope.CurrItem = item;
+      };
+
+      $scope.clearItems1 = function () {
+          $scope.Items1 = null;
+      }
+
+
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({
@@ -96,59 +139,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
 });
 
-        $scope.save = function (Item) {
+    app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
-            var Item = {
-                Id: Item.Id,
-                ItemName: Item.ItemName,
-                Code: Item.Code,
-                Description: Item.Description,
-                Category: Item.Category,
-                SubCategory: Item.SubCategory,
-                ReOrderPoint: Item.ReOrderPoint
-            }
-
-            var req = {
-                method: 'POST',
-                url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
-                data: Item
-            }
-            $http(req).then(function (response) {
-
-                $scope.showDialog("Saved successfully!");
-
-                $scope.Group = null;
-
-            }, function (errres) {
-                var errdata = errres.data;
-                var errmssg = "";
-                errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-                $scope.showDialog(errmssg);
-            });
-            $scope.currGroup = null;
+        $scope.mssg = mssg;
+        $scope.ok = function () {
+            $uibModalInstance.close('test');
         };
 
-        $scope.showDialog = function (message) {
-
-            var modalInstance = $uibModal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                resolve: {
-                    mssg: function () {
-                        return message;
-                    }
-                }
-            });
-        }
-
-        $scope.Items1 = null;
-    
-
-    $scope.setItem = function (item) {
-        $scope.CurrItem = item;        
-    };
-
-    $scope.clearItems1 = function () {
-        $scope.Items1 = null;
-    }
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    });

@@ -90,6 +90,16 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage)
         $scope.currGroup = null;
     };
 
+
+    $scope.setTypeGroup = function (grp) {
+        $scope.currGroup = grp;
+    };
+
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
+    };
+
+
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({
@@ -106,14 +116,18 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage)
     
 });
 
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
-    $scope.setTypeGroup = function (grp) {
-    $scope.currGroup = grp;
-};
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
 
-$scope.clearGroup = function () {
-    $scope.currGroup = null;
-};
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
 
 
 

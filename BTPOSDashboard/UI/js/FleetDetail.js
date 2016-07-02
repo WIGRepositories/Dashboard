@@ -211,6 +211,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currGroup = null;
     };
 
+    $scope.setFleet = function (F) {
+        $scope.currVD = F;
+    }
+
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({
@@ -226,10 +230,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
 
 });
-
-        $scope.setFleet = function (F) {
-            $scope.currVD = F;
-        }
     
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {

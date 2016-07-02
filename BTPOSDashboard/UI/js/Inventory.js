@@ -71,37 +71,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = null;
     };
 
-    $scope.showDialog = function (message) {
-
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
-
-});
     $scope.save = function (Group) {
-        
+
         var Group = {
             Active: Group.Active,
             availableQty: Group.availableQty,
             category: Group.category,
             code: Group.code,
             desc: Group.desc,
-           InventoryId: Group.InventoryId,
+            InventoryId: Group.InventoryId,
             name: Group.name,
             PerUnitPrice: Group.PerUnitPrice,
             reorderpoint: Group.reorderpoint,
             subcat: Group.subcat
         }
         var req = {
-            
+
             method: 'POST',
             url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: Group
@@ -121,6 +106,19 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = null;
     };
 
+    $scope.Inventory = null;
+
+    $scope.setInventory = function (usr) {
+        $scope.Inventory = usr;
+
+    };
+
+    $scope.clearInventory = function () {
+        $scope.Inventory = null;
+
+
+    };
+
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({
@@ -135,23 +133,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
-
-   
-
-
-    
+});
 
 
-        $scope.Inventory = null;
-   
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
-    $scope.setInventory = function (usr) {
-        $scope.Inventory = usr;
-
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
     };
 
-    $scope.clearInventory = function () {
-        $scope.Inventory = null;
-
-       
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
     };
+});

@@ -76,22 +76,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.currGroup = null;
         };
 
-    $scope.showDialog = function (message) {
-
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
-
-});
-
         $scope.addPrevStop = function (stop) {
             //  stopsList.splice(index, 0, stop);
             var newStop = {
@@ -108,45 +92,44 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
                 DistanceFromPreviousStop: stop.DistanceFromPreviousStop,
                 DistanceFromNextStop: stop.DistanceFromNextStop,
                 StopNo: $scope.currStop.StopNo,
-                insupddelflag:'I'
+                insupddelflag: 'I'
             }
 
             $scope.RouteDetails.Table1.splice($scope.currStopIndx, 0, newStop);
 
-            for (var cnt = 0; cnt < $scope.RouteDetails.Table1.length; cnt++)
-            {
+            for (var cnt = 0; cnt < $scope.RouteDetails.Table1.length; cnt++) {
                 if ($scope.RouteDetails.Table1[cnt].insupddelflag == null || $scope.RouteDetails.Table1[cnt].insupddelflag != 'I') {
-                
+
                     $scope.RouteDetails.Table1[cnt].insupddelflag = 'U';
                 }
-                $scope.RouteDetails.Table1[cnt].StopNo = cnt+1;
+                $scope.RouteDetails.Table1[cnt].StopNo = cnt + 1;
             }
-            $scope.currStop.PreviousStopId = stop.stp.Id;            
+            $scope.currStop.PreviousStopId = stop.stp.Id;
             $scope.currStop.prevstop = stop.stp.Name;
 
-            var prvStop = $scope.RouteDetails.Table1[$scope.currStopIndx-1];
+            var prvStop = $scope.RouteDetails.Table1[$scope.currStopIndx - 1];
             prvStop.NextStopId = stop.stp.Id;
-            prvStop.nextstop = stop.stp.Name;            
+            prvStop.nextstop = stop.stp.Name;
 
         }
 
         $scope.addNextStop = function (stop) {
             //stopsList.splice(index, 0, stop);
             var newStop = {
-            StopName: stop.stp.Name,
-            StopCode: stop.StopCode,
-            RouteId: $scope.s.Id,
-            stopid:stop.stp.Id,
-            PreviousStopId: $scope.currStop.stopid,
-            prevstop: $scope.currStop.StopName,
-            nextstop: $scope.currStop.nextstop,
-            NextStopId:$scope.currStop.NextStopId,
-            DistanceFromSource: stop.DistanceFromSource,
-            DistanceFromDestination: stop.DistanceFromDestination,
-            DistanceFromPreviousStop: stop.DistanceFromPreviousStop,
-            DistanceFromNextStop: stop.DistanceFromNextStop,
-            StopNo: $scope.currStop.StopNo + 1,
-                insupddelflag:'I'
+                StopName: stop.stp.Name,
+                StopCode: stop.StopCode,
+                RouteId: $scope.s.Id,
+                stopid: stop.stp.Id,
+                PreviousStopId: $scope.currStop.stopid,
+                prevstop: $scope.currStop.StopName,
+                nextstop: $scope.currStop.nextstop,
+                NextStopId: $scope.currStop.NextStopId,
+                DistanceFromSource: stop.DistanceFromSource,
+                DistanceFromDestination: stop.DistanceFromDestination,
+                DistanceFromPreviousStop: stop.DistanceFromPreviousStop,
+                DistanceFromNextStop: stop.DistanceFromNextStop,
+                StopNo: $scope.currStop.StopNo + 1,
+                insupddelflag: 'I'
             }
             $scope.currStop.NextStopId = stop.stp.Id;
             $scope.currStop.nextstop = stop.stp.Name;
@@ -157,7 +140,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             nxtStop.PreviousStopId = stop.stp.Id;
             nxtStop.prevstop = stop.stp.Name;
 
-            
+
             for (var cnt = 0; cnt < $scope.RouteDetails.Table1.length; cnt++) {
                 if ($scope.RouteDetails.Table1[cnt].insupddelflag == null || $scope.RouteDetails.Table1[cnt].insupddelflag != 'I') {
                     $scope.RouteDetails.Table1[cnt].insupddelflag = 'U';
@@ -170,6 +153,36 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.delStop = function (stop) {
             stopsList.splice(index, 0, stop);
         }
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+});
+
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+      
     
     
    

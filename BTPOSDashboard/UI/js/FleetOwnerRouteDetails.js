@@ -172,3 +172,14 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 });
 
 
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});

@@ -93,23 +93,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currGroup = null;
     };
 
-    $scope.showDialog = function (message) {
-
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
-
-
-});
-
     $scope.setCurrRole = function (grp) {
         $scope.currRole = grp;
     };
@@ -117,7 +100,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.clearCurrRole = function () {
         $scope.currRole = null;
     };
-    
+
     $scope.GetCompanies = function () {
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
@@ -132,7 +115,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.cmproles = null;
             return;
         }
-        var cmpId = (seltype) ? seltype.Id : -1;        
+        var cmpId = (seltype) ? seltype.Id : -1;
 
         $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
@@ -144,7 +127,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.roles = null;
             return;
         }
-        var cmpId = (seltype.Id == 1) ? 0:1;
+        var cmpId = (seltype.Id == 1) ? 0 : 1;
 
         $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=' + cmpId).then(function (response, data) {
             $scope.roles = response.data;
@@ -198,22 +181,9 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currGroup = null;
     };
 
-    $scope.showDialog = function (message) {
 
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
 
-    $scope.testdel = function (role)
-    {       
+    $scope.testdel = function (role) {
         var cmprole = {
 
             RoleId: role.RoleId,
@@ -229,7 +199,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
-            
+
             $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + role.CompanyId).then(function (res, data) {
                 $scope.cmproles = res.data;
             });
@@ -238,7 +208,25 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currRole = null;
     }
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+
+});
+   
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {

@@ -87,44 +87,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = null;
     };
 
-    $scope.showDialog = function (message) {
-
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
-
-
-});
-
-    $scope.showDialog = function (message) {
-
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
-
-
-   
-
-
-
-
-
     $scope.Save = function (currSelLicense) {
 
         var newLicensePricing = {
@@ -176,6 +138,32 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             }
         });
     }
+
+
+});
+
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+   
+
+
+
+
+
+
+
+
 
 
    

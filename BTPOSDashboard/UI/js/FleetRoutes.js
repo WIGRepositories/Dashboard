@@ -205,6 +205,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = null;
     };
 
+    $scope.set = function (R) {
+        $scope.currFR = R;
+        $scope.currFR.VehicleTypeId = 9;
+    }
+
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({
@@ -221,12 +226,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
 });
 
-$scope.set = function (R) {
-    $scope.currFR = R;
-    $scope.currFR.VehicleTypeId = 9;
-}
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
 
-
-
-
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});

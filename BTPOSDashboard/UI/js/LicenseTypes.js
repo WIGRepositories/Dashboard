@@ -75,24 +75,8 @@ $scope.saveLicenseType = function (licenseType, flag) {
     $scope.currGroup = null;
 };
 
-    $scope.showDialog = function (message) {
 
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
-
-});
-
-
-    $scope.currLicenseType = null;
+$scope.currLicenseType = null;
 
 
 
@@ -134,7 +118,7 @@ $scope.save = function (License) {
         effectiveTill: License.effectiveTill,
         Label: License.Label,
         labelclass: License.labelclass,
-           
+
     };
 
     var req = {
@@ -149,7 +133,7 @@ $scope.save = function (License) {
 
 };
 
-    
+
 
 $scope.saveNewLicense = function (License) {
 
@@ -206,20 +190,6 @@ $scope.saveNewLicense = function (License) {
 
 };
 
-$scope.showDialog = function (message) {
-
-    var modalInstance = $uibModal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
-        resolve: {
-            mssg: function () {
-                return message;
-            }
-        }
-    });
-}
-
 $scope.setCurrLicenseType = function (lt) {
     $scope.currLicenseType = lt;
 };
@@ -228,3 +198,30 @@ $scope.clearCurrLicenseType = function () {
     $scope.currLicenseType = null;
 };
 
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+});
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
