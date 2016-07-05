@@ -205,7 +205,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $scope.currGroup = null;
     };
 
-    $scope.set = function (R) {
+    $scope.setRoute = function (R) {
         $scope.currFR = R;
         $scope.currFR.VehicleTypeId = 9;
     }

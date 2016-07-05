@@ -64,6 +64,12 @@ namespace BTPOSDashboard.Controllers
             Gid.Value = b.ItemName;
             cmd.Parameters.Add(Gid);
 
+            //SqlParameter li = new SqlParameter();
+            //li.ParameterName = "@ItemImage";
+            //li.SqlDbType = SqlDbType.VarChar;
+            //li.Value = b.ItemImage;
+            //cmd.Parameters.Add(li);
+
             SqlParameter lid = new SqlParameter();
             lid.ParameterName = "@Code";
             lid.SqlDbType = SqlDbType.VarChar;

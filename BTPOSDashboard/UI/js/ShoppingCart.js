@@ -31,13 +31,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             alert('Please select any item.');
             return;
         }
-        var saveitems  = {
-
+        var items = {
+            Id: -1,
             ItemId: items.ItemId,
-           ItemName: items.ItemName,
-            UnitPrice: items.UnitPrice,
+            ItemName: items.ItemName,
+            UnitPrice: items.UnitPrice
+
            
-            //insupddelflag: 'U'
         };
 
         var req = {
@@ -45,11 +45,47 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             url: 'http://localhost:1476/api/ShoppingCart/SaveCartItems',
             //headers: {
             //    'Content-Type': undefined
-            data: saveitems
+            data: items
         }
-        $http(req).then(function (res) {
-            alert('saved successfully');
+        $http(req).then(function (response) {
 
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+
+
+    }
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
         });
     }
+
 });
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+

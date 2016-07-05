@@ -363,7 +363,7 @@
 
                                                         <ul class="dropdown-menu dropdown-messages">
                                                             <li><p>No Items added to cart</p></li>
-                                                            <p>{{cartitem}}</p>
+                                                            <p>{{items}}</p>
                                                         </ul>
                                                     </li>
 
@@ -371,9 +371,9 @@
                                                 </ul>
 
                                             </div>
-                                            <ul class="box text-shadow ul-li-list">
+                                            <ul class="box text-shadow ul-li-list" >
                                                 <!--<item>1</item>-->
-                                                <li class="list-item">
+                                                <li class="list-item" ng-repeat="i in items">
                                                     <div class="list-box">
                                                         <!--<img/>-->
                                                         <div class="img"><a href="cables.html"><img src="images/adapter.jpeg" height="70" width="70" alt="" title="" /></a></div>
@@ -383,13 +383,13 @@
                                                             <form>
                                                                 <div class="list-box">
                                                                     <!--<p>
-                                                                        <input type="hidden" name="op" value="add">
-                                                                        <input type="hidden" name="OptionCount" value="1">
+                            <input type="hidden" name="op" value="add">
+                            <input type="hidden" name="OptionCount" value="1">
                                                                         qty  
-                                                                        <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
-                                                                               name="item_qty" value="1" style="width:100px;">
+                            <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
+                                   name="item_qty" value="1" style="width:100px;">
                                                                
-                                                                    </p>-->
+                        </p>-->
                                                                 <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
                                                                 <input type="hidden" name="item_price" value="38.95">
                                                                 <input type="hidden" name="item_id" value="JDR">
@@ -400,149 +400,27 @@
                                                                     <p><input type="button" value="Add to Cart" style="width:100px;"></p>
                                                                     <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
                                                                     <p><input type="button" value="Showdetails" style="width:100px;"></p><br />
-                                                                    <p>ItemName:<input id="Text1" type="text" style="width:70px;" /></p>
-                                                                    <p>Unitprice:<input id="Text1" type="text" style="width:70px;" /></p>
+                                                                    <p>ItemName:{{i.ItemName}}</p>                                                                  
+                                                                    <p>Unitprice:{{i.UnitPrice}}</p>
 </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <!--<item>2</item>-->
-                                                <li class="list-item">
-                                                    <div class="list-box">
-                                                        <!--<img/>-->
-                                                        <div class="img">
-                                                            <a href="DisplayCables.html"><img src="images/wires.jpeg" height="70" width="70"></a>
-                                                        </div>
-                                                        <!--<data></data>-->
-                                                        <div class="block">
-                                                            <form>
-                                                                <div class="list-box">
-                                                                    <!--<p>
-                                                                        <input type="hidden" name="op" value="add">
-                                                                        <input type="hidden" name="OptionCount" value="1">
-                                                                        qty
-                                                                        <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize1" size="2"
+                                                               
                                                                              name="item_qty" value="1" style="width:100px;">
-                                                                    </p>-->
-                                                                    <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
-                                                                    <input type="hidden" name="item_price" value="38.95">
-                                                                    <input type="hidden" name="item_id" value="JDR">
-                                                                    <input type="hidden" name="product_shipping_class" value="0">
-                                                                    <input type="hidden" name="cid" value="000">
-                                                                    <p><input type="button" value="Increment" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Decrement" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Add to Cart" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
-                                                                    <p><input type="button" value="Showdetails" style="width:100px;"></p><br />
-                                                                    <p>ItemName:<input id="Text1" type="text" style="width:70px;" /></p>
-                                                                    <p>Unitprice:<input id="Text1" type="text" style="width:70px;" /></p>
-                                                                </div>
                                                             </form>
                                                         </div>
-                                                    </div>
-                                                </li>
-                                                <!--<item>3</item>-->
-                                                <li class="list-item">
-                                                    <div class="list-box">
-                                                        <!--<img/>-->
-                                                        <div class="img"><a href="PaperRolls.html"><img src="images/paper_rolls.jpeg" height="70" width="70" alt="" title="" /></a></div>
-                                                        <!--<data></data>-->
-                                                        <div class="block">
-                                                            <form>
-                                                                <div class="list-box">
-                                                                    <!--<p>
-                                                                        <input type="hidden" name="op" value="add">
-                                                                        <input type="hidden" name="OptionCount" value="1">
-                                                                        qty
-                                                                        <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize2" size="2"
-                                                                               name="item_qty" value="1" style="width:100px;">
-                                                                    </p>-->
-                                                                    <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
-                                                                    <input type="hidden" name="item_price" value="38.95">
-                                                                    <input type="hidden" name="item_id" value="JDR">
-                                                                    <input type="hidden" name="product_shipping_class" value="0">
-                                                                    <input type="hidden" name="cid" value="000">
-                                                                    <p><input type="button" value="Increment" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Decrement" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Add to Cart" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
-                                                                    <p><input type="button" value="Showdetails" style="width:100px;"></p><br />
-                                                                    <p>ItemName:<input id="Text1" type="text" style="width:70px;" /></p>
-                                                                    <p>Unitprice:<input id="Text1" type="text" style="width:70px;" /></p>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-item">
-                                                    <div class="list-box">
-                                                        <div class="img"><a href="BtPosPics.html"><img src="images/wirelessadapter.jpeg" height="70" width="70" alt="" title="" /></a></div>
-                                                        <div class="block">
-                                                            <form>
-                                                                <div class="list-box">
-                                                                    <!--<p>
-                                                                        <input type="hidden" name="op" value="add">
-                                                                        <input type="hidden" name="OptionCount" value="1">
-                                                                        qty
-                                                                        <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize3" size="2"
-                                                                               name="item_qty" value="1" style="width:100px;">
-                                                                    </p>-->
-                                                                    <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
-                                                                    <input type="hidden" name="item_price" value="38.95">
-                                                                    <input type="hidden" name="item_id" value="JDR">
-                                                                    <input type="hidden" name="product_shipping_class" value="0">
-                                                                    <input type="hidden" name="cid" value="000">
-                                                                    <p><input type="button" value="Increment" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Decrement" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Add to Cart" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
-                                                                    <p><input type="button" value="Showdetails" style="width:100px;"></p><br />
-                                                                    <p>ItemName:<input id="Text1" type="text" style="width:70px;" /></p>
-                                                                    <p>Unitprice:<input id="Text1" type="text" style="width:70px;" /></p>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-item">
-                                                    <div class="list-box">
-                                                        <div class="img"><a href="BtPosPics.html"><img src="images/wirelessadapter.jpeg" height="70" width="70" alt="" title="" /></a></div>
-                                                        <div class="block">
-                                                            <form>
-                                                                <div class="list-box">
-                                                                    <!--<p>
-                                                                        <input type="hidden" name="op" value="add">
-                                                                        <input type="hidden" name="OptionCount" value="1">
-                                                                        qty
-                                                                        <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize4" size="2"
-                                                                               name="item_qty" value="1" style="width:100px;">
-                                                                    </p>-->
-                                                                    <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
-                                                                    <input type="hidden" name="item_price" value="38.95">
-                                                                    <input type="hidden" name="item_id" value="JDR">
-                                                                    <input type="hidden" name="product_shipping_class" value="0">
-                                                                    <input type="hidden" name="cid" value="000">
-                                                                    <p><input type="button" value="Increment" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Decrement" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Add to Cart" style="width:100px;" ng-click="increasecart()"></p>
-                                                                    <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
-                                                                    <p><input type="button" value="Showdetails" style="width:100px;"></p><br />
-                                                                    <p>ItemName:<input id="Text1" value="{{items.ItemName}}" type="text" style="width:70px;" /></p>
-                                                                    <p>Unitprice:<input id="Text1" value="{{items.UnitPrice}}" type="text" style="width:70px;" /></p>
-                                                                </div>
 
-                                                                <div style="align-content:center">
-                                                                    <button class="btn btn-primary" type="button" ng-click="save(items)">Save</button>
-                                                                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                                                                </div>
-                                                        </div>
                                                     </div>
                                                 </li>
+                                               
+                                              
                                             </ul>
 
                                         </div>
+                                        <div class="col-md-6 col-md-offset-2">
+                                            <button class="btn btn-primary" type="button" ng-click="Save(items);">Save</button>
+                                            <button class="btn btn-primary" type="button">Cancel</button>
+                                        </div>
                                     </div>
+                                   
                                 </div>
                                 <!--END CONTENT--><!--BEGIN FOOTER-->
                                 <div id="footer">
@@ -569,17 +447,17 @@
                             {{mssg}}
 
                             </div>
-                        </div>
+                       
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
                             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                         </div>
-
-                    </script>
+                </script>
+                   
                 </div>
             </div>
         </div>
-    </div>
+   
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>
@@ -606,7 +484,7 @@
 <!--CORE JAVASCRIPT-->
 <script src="js/main.js"></script>
 
-    <script src="js/angular.js"></script><div class="modal-footer">
+    <script src="js/angular.js"></script>
 <script src="js/ngStorage.js"></script>
                 <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
 <script src="js/source.js"></script>

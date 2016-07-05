@@ -8881,30 +8881,28 @@ end
 	 
 GO
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetRoutes]    Script Date: 06/30/2016 17:53:00 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelShoppingCart]    Script Date: 07/02/2016 12:38:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE [dbo].[InsUpdDelShoppingCart]
-@Id int = -1,
+ALTER PROCEDURE [dbo].[InsUpdDelShoppingCart]
+@Id int,
 @ItemId int,
 @ItemName varchar,
-@UnitPrice money,
-@insupddelflag varchar
+@UnitPrice money
+
 as
 begin
 
-declare @cnt  int
-set @cnt = -1
-
-if @insupddelflag = 'I'
-
-select @cnt = count(1) from [POSDashboard].[dbo].[Shoppingcart] 
-where ItemId = @ItemId
+UPDATE [POSDashboard].[dbo].[Shoppingcart]
+   SET [ItemId] = @ItemId     
+      ,[ItemName] = @ItemName
+      ,[UnitPrice] = @UnitPrice     
+ WHERE Id = @Id
 
 
-if @cnt = 0 
+if @@rowcount = 0 
 begin
 INSERT INTO [POSDashboard].[dbo].[Shoppingcart]
            ([ItemId]
@@ -8917,18 +8915,6 @@ INSERT INTO [POSDashboard].[dbo].[Shoppingcart]
            ,@UnitPrice
            )
 end
-else
-  if @insupddelflag = 'U'
-
-UPDATE [POSDashboard].[dbo].[Shoppingcart]
-   SET [ItemId] = @ItemId     
-      ,[ItemName] = @ItemName
-      ,[UnitPrice] = @UnitPrice     
- WHERE ItemId = @ItemId
-
-else
-  delete from [POSDashboard].[dbo].[Shoppingcart]
-where ItemId = @ItemId
 
 End
 
@@ -9077,6 +9063,35 @@ end
 
 GO
 
+
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[InventoryItem]    Script Date: 07/01/2016 12:04:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+CREATE TABLE [dbo].[InventoryItem](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Code] [varchar](50) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[CategoryId] [int] NOT NULL,
+	[SubCategoryId] [int] NOT NULL,
+	[ReOrderPoint] [int] NOT NULL,
+	[ItemImage] [image] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
 
 
 
