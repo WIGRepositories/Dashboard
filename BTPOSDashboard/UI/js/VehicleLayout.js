@@ -1,7 +1,7 @@
 ﻿
 // JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
 
@@ -178,7 +178,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
 });
 
-myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {
