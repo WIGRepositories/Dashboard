@@ -8,10 +8,11 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.Roleid = $scope.userdetails[0].roleid;
     $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
-        
+        $scope.getselectval();
     });
 
-   {
+    $scope.getselectval = function (seltype) {
+        var grpid = (seltype) ? seltype.Id : -1;
       
 
         $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=' + grpid).then(function (res, data) {

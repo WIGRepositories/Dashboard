@@ -16,16 +16,10 @@ CREATE TABLE [dbo].[Alerts](
 	[Message] [varchar](50) NOT NULL,
 	[MessageTypeId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[UserId] [int] NOT NULL,
+	[UserId] [int] NOT NULL  DEFAULT ((1)),
 	[Name] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[Alerts] ADD  CONSTRAINT [DF_AlertNotifications_UserId]  DEFAULT ((1)) FOR [UserId]
 GO
 
 /****** Object:  Table [dbo].[Notifications]    Script Date: 06/03/2016 17:10:29 ******/
@@ -44,18 +38,10 @@ CREATE TABLE [dbo].[Notifications](
 	[Message] [varchar](500) NOT NULL,
 	[MessageTypeId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[UserId] [int] NOT NULL,
+	[UserId] [int] NOT NULL  DEFAULT ((1)),
 	[Name] [varchar](50) NOT NULL,
 	[Source] [varchar](50) NULL
 ) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
-GO
 
 GO
 SET ANSI_NULLS ON
@@ -331,21 +317,11 @@ CREATE TABLE [dbo].[BTPOSRecords](
 	[CreatedDate] [datetime] NULL,
 	[Downloaded] [datetime] NULL,
 	[LastDownloadtime] [datetime] NULL,
-	[IsDirty] [int] NULL
+	[IsDirty] [int] NULL default 1
 ) ON [PRIMARY]
 
 GO
 
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[BTPOSRecords] ADD  CONSTRAINT [DF_BTPOSRecords_IsDirty]  DEFAULT ((1)) FOR [IsDirty]
-GO
-
-
-
-
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1628,7 +1604,8 @@ CREATE TABLE [dbo].[InventoryItem](
 	[Description] [varchar](50) NULL,
 	[CategoryId] [int] NOT NULL,
 	[SubCategoryId] [int] NOT NULL,
-	[ReOrderPoint] [int] NOT NULL
+	[ReOrderPoint] [int] NOT NULL,
+	[ItemImage] [image] NULL
 ) ON [PRIMARY]
 
 GO
@@ -2544,7 +2521,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
+CREATE  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
 		  @Id int,
            @CompanyId int,   
            @POSID varchar(20),
@@ -4637,7 +4614,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelRoles](@Id int,@Name varchar(50)
+CREATE procedure [dbo].[InsUpdDelRoles](@Id int,@Name varchar(50)
 ,@Description varchar(50) = null,@Active int = 1
 ,@IsPublic int = 1)
 as
@@ -5794,7 +5771,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelSubCategory]
+CREATE procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
 begin
@@ -6049,7 +6026,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER procedure [dbo].[InsUpdDelRoutes](
+CREATE procedure [dbo].[InsUpdDelRoutes](
 @Id int
 ,@RouteName varchar(50)
 ,@Description varchar(50) = null
@@ -6710,7 +6687,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[InsUpdLicenseTypes] 
+CREATE PROCEDURE [dbo].[InsUpdLicenseTypes] 
 (@Id int = -1
 ,@LicenseCatId int
 ,@LicenseType varchar(50)
@@ -8886,7 +8863,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[InsUpdDelShoppingCart]
+CREATE PROCEDURE [dbo].[InsUpdDelShoppingCart]
 @Id int,
 @ItemId int,
 @ItemName varchar,
@@ -9062,39 +9039,4 @@ end
 
 
 GO
-
-
-USE [POSDashboard]
-GO
-
-/****** Object:  Table [dbo].[InventoryItem]    Script Date: 07/01/2016 12:04:09 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-CREATE TABLE [dbo].[InventoryItem](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ItemName] [varchar](50) NOT NULL,
-	[Code] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NULL,
-	[CategoryId] [int] NOT NULL,
-	[SubCategoryId] [int] NOT NULL,
-	[ReOrderPoint] [int] NOT NULL,
-	[ItemImage] [image] NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-
-
-
-
 

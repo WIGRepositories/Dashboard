@@ -392,11 +392,8 @@
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\BTPOSConfiguration.html" />
     <Content Include="UI\createfleet.html" />
-    <Content Include="UI\CreatePurchaseOrder.html" />
-    <Content Include="UI\CreateRole.html" />
     <Content Include="UI\css\bootstrap.min.css" />
     <Content Include="UI\css\handsontable.full.min.css" />
-    <Content Include="UI\Customers.html" />
     <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
@@ -508,7 +505,6 @@
     <Content Include="UI\js\tableexportsprintf.js" />
     <Content Include="UI\js\ui-bootstrap-tpls-1.3.3.js" />
     <Content Include="UI\js\VehicleLayout.js" />
-    <Content Include="UI\js\Vendors.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
     <Content Include="UI\LicenseTypes.html" />
@@ -611,7 +607,6 @@
     <Content Include="UI\Users.html" />
     <Content Include="UI\VehicleDetails.html" />
     <Content Include="UI\VehicleLayout.html" />
-    <Content Include="UI\Vendors.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />
