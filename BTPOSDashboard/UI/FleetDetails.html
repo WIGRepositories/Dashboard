@@ -584,15 +584,15 @@
                                                                                 <div class="col-md-6">
                                                                                     <label for="selCountry" class="col-md-6 control-label">Service Type</label>
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="st.Name for st in initdata.Table track by st.Id" value="{{currVD.ServiceTypeId}}" ng-model="initdata.newfleet.st" class="form-control">
+                                                                                        <select ng-options="st.Name for st in initdata.Table1 track by st.Id" value="{{currVD.ServiceTypeId}}" ng-model="initdata.newfleet.st" class="form-control">
                                                                                             <option value="">Select</option>
-                                                                                        </select>
+                                                                                            </select>
                                                                                     </div>
 
                                                                                 </div>
 
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Name" class="col-md-6 control-label">Month And Yr. Of Mfr.:<span class='require'></span></label>
+                                                                                    <label for="Name" class="col-md-6 control-label">MonthAndYr.OfMfr.:<span class='require'></span></label>
 
                                                                                     <div class="col-md-6">
                                                                                         <div>
@@ -611,8 +611,9 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="selCountry" class="col-md-6 control-label">Vehicle Layout</label>
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="vl.Name for vl in initdata.Table track by vl.Id" value="{{currVD.vehiclelayoutId}}" ng-model="initdata.newfleet.vl" class="form-control">
+                                                                                    <select ng-options="vl.Name for vl in initdata.Table3 track by vl.Id" value="{{currVD.vehiclelayoutId}}" ng-model="initdata.newfleet.vl" class="form-control">
                                                                                         <option value="">Select</option>
+                                                                                        
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
@@ -631,7 +632,7 @@
 
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-6 control-label">Date Of Registration:<span class='require'></span></label>
+                                                                                <label for="Name" class="col-md-6 control-label">DateOfRegistration:<span class='require'></span></label>
                                                                                 <div>
                                                                                     <input type="date" ng-model="initdata.newfleet.dor" />
                                                                                     
