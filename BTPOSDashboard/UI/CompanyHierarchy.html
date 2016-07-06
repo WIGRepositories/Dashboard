@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanys()">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -344,79 +344,6 @@
                         <div class="clearfix"></div>
                     </div>
 
-
-                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <!--<div class="page-content">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul id="treeviewTab" class="nav nav-tabs">
-                                    <li><a href="#family-treeview-tab" data-toggle="tab">Family Treeview</a></li>
-                                </ul>
-                                <div id="treeviewTabContent" class="tab-content">
-                                    <div id="family-treeview-tab" class="tab-pane fade Active ">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h3>Family Treeview - Horizontal</h3>
-                                                <div class="family-tree-horizontal">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">InterBus</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">BTPOS Details</a>
-                                                                    <ul>
-                                                                        <li><a href="#">Fleet Owner</a></li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                                    <ul>
-                                                                        <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                       
-                                                                        <li>
-                                                                            <a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-
-                                                                           
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="#">Great Grand Child</a>
-                                                                                    <img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                                                </li>
-                                                                               
-                                                                                
-                                                                                <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                               
-                                                                                <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-
-                                                                                
-                                                                            </ul>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Grand Child</a>
-                                                                            <img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                                        </li>
-                                                                        
-
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-
-
-                    <ul id="treeviewTab" class="nav nav-tabs">
-                        <li><a href="#family-treeview-tab" data-toggle="tab">Family Treeview</a></li>
-                    </ul>
                     <div id="treeviewTabContent" class="tab-content">
 
                         <div class="row">
@@ -425,15 +352,14 @@
                                 <div class="col-lg-6" style="float:left">
 
 
-                                    <h3>Family Treeview - Vertical</h3>
-
+                                    <h3>Organization Hierarchy - Vertical</h3>
                                     <div class="family-tree-vertical">
-                                        <ul>
+                                        <ul ng-repeat="c in Companies">
                                             <li>
-                                                <a href="#">Company1</a>
+                                                <a href="#"><i class="fa fa-sitemap fa-fw"><div class="icon-bg bg-dark"></div></i>{{c.Name}}</a>
                                                 <ul>
                                                     <li>
-                                                        <a href="#">Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
+                                                        <a href="#">Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
                                                         <ul>
                                                             <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
                                                         </ul>
@@ -457,6 +383,7 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    
                                 </div>
 
                                 <div class="col-lg-6" style="float:right">
@@ -497,9 +424,9 @@
                         </div>
                     </div>
 
-                    
-                        <!--END PAGE WRAPPER-->
-                    </div>
+
+                    <!--END PAGE WRAPPER-->
+                </div>
             </div>
 
         </div>
@@ -510,11 +437,11 @@
             </div>
             <div class="modal-body">
                 <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                    <li ng-repeat="item in items">
+                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -550,18 +477,10 @@
 
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
     <script src="js/angular.js"></script>
-   
-
     <script src="js/ngStorage.js"></script>
+    <script src="js/CompanyHierarchy.js"></script>
 
-    <script src="js/source.js"></script>
-
-    <!--<script src="js/Alerts.js"></script>
-
-    <script src="js/Notifications.js"></script>-->
-    
 </body>
 
 </html>

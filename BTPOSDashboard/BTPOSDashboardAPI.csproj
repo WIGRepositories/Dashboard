@@ -449,6 +449,7 @@
     <Content Include="UI\js\BTPOSConfig.js" />
     <Content Include="UI\js\BTPOSMonitoringPage.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
+    <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\FleetAvailability.js" />
