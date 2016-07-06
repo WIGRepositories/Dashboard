@@ -21,7 +21,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetAlert();">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetAlerts();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -481,7 +481,7 @@
                                                 </thead>
                                                 <tbody>
 
-                                                    <tr ng-repeat="R in Alert" class="gradeA">
+                                                    <tr ng-repeat="R in GetAlerts" class="gradeA">
                                                         <td>{{R.Username}}</td>
                                                         <td>{{R.Message}}</td>
                                                         <td>{{R.Date}}</td>

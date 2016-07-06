@@ -4,10 +4,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-    $scope.GetAlert = function () {
+    $scope.GetAlerts = function () {
 
-        $http.get('http://localhost:1476/api/Alert/GetAlert').then(function (response, req) {
-            $scope.Alert = response.data;
+        $http.get('http://localhost:1476/api/Alert/GetAlerts').then(function (response, req) {
+            $scope.GetAlerts = response.data;
 
         });
     }

@@ -491,7 +491,7 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-5" style="margin:20px;">
-                                                            Role: <select ng-options="s.name for s in sample" ng-model="seltype" ng-change="getselectval(seltype)">
+                                                            Role: <select  ng-options="s.name for s in sample" ng-model="seltype" ng-change="getselectval(seltype)">
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
@@ -578,6 +578,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        </div>
 
 
 
@@ -588,11 +589,7 @@
 
                                                                     <th>ObjectName</th>
                                                                     <th>Path</th>
-
                                                                     <th>Access</th>
-
-
-
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -603,11 +600,11 @@
                                                                     <td>{{T.ObjectName}}</td>
                                                                     <td>{{T.Path}}</td>
                                                                     <td>{{T.Access}}</td>
-                                                                    <div class="col-md-3">
+                                                                    <!--<div class="col-md-3">
                                                                         <select>
                                                                             <option value="">View</option>
                                                                         </select>
-                                                                    </div>
+                                                                    </div>-->
                                                                 </tr>
                                                             </tbody>
 
@@ -654,7 +651,7 @@
                             </div>
                         </div>
 
-                    </div>
+                   
                     <!--END PAGE WRAPPER-->
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">

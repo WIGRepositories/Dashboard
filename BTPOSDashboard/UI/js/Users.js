@@ -126,7 +126,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 });
 
 
-        $scope.User1 = null;
+       // $scope.User1 = null;
     
 
         $scope.setUsers = function (usr) {

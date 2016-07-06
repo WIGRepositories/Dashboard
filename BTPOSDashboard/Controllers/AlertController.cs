@@ -13,7 +13,7 @@ namespace BTPOSDashboardAPI.Controllers
     public class Alerts : ApiController
     {
         [HttpGet]
-        public DataTable GetAlert()
+        public DataTable GetAlerts()
         {
             DataTable Tbl = new DataTable();
 
