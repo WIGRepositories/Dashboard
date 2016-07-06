@@ -58,7 +58,7 @@
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success">7</span></a></li>
+                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success"></span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                                 <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
@@ -549,12 +549,10 @@
                                                                 </div>
                                                                 <div class="modal-body" ng-init="GetStops();" ng-model="routes">
                                                                     <div class="row">
-
-
                                                                         <label for="Name" class="col-md-4 control-label" style="color:red;"> Route Name: <span class='require'>*</span></label>
 
                                                                         <div class="col-md-5"><input id="inputFirstName" type="text" ng-model="routes.RouteName" class="form-control" /><span class="help-block"></span></div>
-
+                                                                        </div>
 
                                                                         <div class="row">
                                                                             <label for="Name" class="col-md-4  control-label" style="color:red;"> Code: <span class='require'>*</span></label>
@@ -627,7 +625,7 @@
                     <!--END PAGE WRAPPER-->
                     <!--BEGIN FOOTER-->
                     <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
                     <!--END FOOTER-->
                 </div>
@@ -681,6 +679,7 @@
 <script src="js/main.js"></script>
 
 <script src="js/angular.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
 <script src="js/ngStorage.js"></script>
 <script src="js/Routes.js"></script>
 </body>

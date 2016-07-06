@@ -1,5 +1,5 @@
 // JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage) {
     //$scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -79,26 +79,55 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage)
 
             $scope.showDialog("Saved successfully!");
 
-        }
-, function (errres) {
-    var errdata = errres.data;
-    var errmssg = "";
-    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-    $scope.showDialog(errmssg);
+            $scope.Group = null;
 
-});
-
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
         $scope.currGroup = null;
     };
 
 
     $scope.setTypeGroup = function (grp) {
-    $scope.currGroup = grp;
-};
+        $scope.currGroup = grp;
+    };
 
-$scope.clearGroup = function () {
-    $scope.currGroup = null;
-};
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
+    };
 
 
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+    
 });
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+
+
+

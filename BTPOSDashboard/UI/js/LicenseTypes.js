@@ -1,6 +1,6 @@
 ﻿// JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var myapp1 = angular.module('myApp', ['ngStorage','ui.bootstrap'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 $scope.GetLicenseCat = function () {
@@ -72,11 +72,26 @@ $scope.saveLicenseType = function (licenseType, flag) {
         errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
         $scope.showDialog(errmssg);
     });
+    $scope.currGroup = null;
+};
+$scope.showDialog = function (message) {
+
+    var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'myModalContent.html',
+        controller: 'ModalInstanceCtrl',
+        resolve: {
+            mssg: function () {
+                return message;
+            }
+        }
+    });
+}
 
 
     $scope.currLicenseType = null;
 
-}
+
 
 $scope.getselectval = function (seltype) {
     var grpid = (seltype) ? seltype.Id : -1;
@@ -187,7 +202,6 @@ $scope.saveNewLicense = function (License) {
     $scope.currRole = null;
 
 };
-
 $scope.showDialog = function (message) {
 
     var modalInstance = $uibModal.open({
@@ -209,4 +223,21 @@ $scope.setCurrLicenseType = function (lt) {
 $scope.clearCurrLicenseType = function () {
     $scope.currLicenseType = null;
 };
+
+
+
 });
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+};
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+};
+});
+
+

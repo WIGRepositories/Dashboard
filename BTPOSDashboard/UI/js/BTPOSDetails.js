@@ -1,5 +1,4 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -168,34 +167,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                     data: btposlist 
                 }
 
-                $http(req).then(function (response) {
+                 $http(req).then(function (response) {
 
-                    $scope.showDialog("Saved successfully!");
+            $scope.showDialog("Saved successfully!");
 
-                    $scope.Group = null;
-                    btposlist = [];
+            $scope.Group = null;
 
-                }, function (errres) {
-                    var errdata = errres.data;
-                    var errmssg = "";
-                    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-                    $scope.showDialog(errmssg);
-                });
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
         $scope.currGroup = null;
     };
-    $scope.showDialog = function (message) {
 
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
+
 
 
     $scope.setBTPOS = function (grp) {
@@ -246,7 +233,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //};
 
 
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
 });
+   
         
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 

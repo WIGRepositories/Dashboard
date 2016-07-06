@@ -1,6 +1,6 @@
 // JavaScript source code
 // JavaScript source code
-var app = angular.module('myApp', ['ngStorage'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
     $scope.uname = $localStorage.uname
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -57,38 +57,43 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
             $scope.showDialog(errmssg);
         });
-    }
-        $scope.save = function (Sales) {
-
-            var Sales = {
-                Id: Sales.Id,
-                ItemName: Sales.ItemName,
-                Quantity: Sales.Quantity,
-                PerUnitPrice: Sales.PerUnitPrice,
-                PurchaseDate: Sales.PurchaseDate,
-                InVoiceNumber: Sales.InVoiceNumber
-            }
-
-            var req = {
-                method: 'POST',
-                url: 'http://localhost:1476/api/Inventorysales/SaveInventorySales',
-                data: Sales
-            }
-            $http(req).then(function (response) {
-
-                $scope.showDialog("Saved successfully!");
-
-                $scope.Group = null;
-
-            }, function (errres) {
-                var errdata = errres.data;
-                var errmssg = "";
-                errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-                $scope.showDialog(errmssg);
-            });
-
-        $scope.Sales1 = null;
+        $scope.currGroup = null;
     };
+
+    $scope.save = function (Sales) {
+
+        var Sales = {
+            Id: Sales.Id,
+            ItemName: Sales.ItemName,
+            Quantity: Sales.Quantity,
+            PerUnitPrice: Sales.PerUnitPrice,
+            PurchaseDate: Sales.PurchaseDate,
+            InVoiceNumber: Sales.InVoiceNumber
+        }
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/Inventorysales/SaveInventorySales',
+            data: Sales
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
+    };
+
+
+    $scope.Sales1 = null;
+
 
     $scope.setSales = function (usr) {
         $scope.Sales1 = usr;
@@ -97,11 +102,33 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
         $scope.Sales1 = null;
     }
 
-   
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
 });
+        
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
 
-
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
 
 
 

@@ -1,7 +1,6 @@
-﻿
-// JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
+﻿// JavaScript source code
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $filter, $uibModal) {
     $scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
 
@@ -57,7 +56,9 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var vc = {
             needvehicleType: '1',
-            needvehiclelayout: '1'
+            needvehiclelayout: '1',
+            needCompanyName: '1'
+
         };
 
         var req = {
@@ -208,5 +209,33 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
                 errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
                 $scope.showDialog(errmssg);
             });
+            $scope.currGroup = null;
+    };
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
     }
+
+});
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

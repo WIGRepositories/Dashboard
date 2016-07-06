@@ -7,8 +7,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
    // $scope.EmpNo = $localStorage.eno;
     $scope.GetFleetOwner = function () {
 
-        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?EMpNo').then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner').then(function (res, data) {
             $scope.FleetOwner = res.data;
+
         });
     }
 
@@ -22,31 +23,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     
 
-    $scope.saveCmpChanges = function (Fleet, flag) {
+    $scope.saveCmpChanges = function (FleetOwner) {
 
-        // if( eno== null)
-        //{
-        //  alert("enter EmpNo");
-        //return;
-        //}
-        //if (Fleet.FirstName == null || Group.FirstName == "") {
-        //  alert('Please enter CompanyName.');
-        //  return;
-        //}
-
-        var Fleet = {
-            Id: Fleet.Id,
-            FirstName: Fleet.FirstName,
-            LastName: Fleet.LastName,
-            MiddleName: Fleet.MiddleName,
-            EmployeeNo: Fleet.EmpNo,
-            Email: Fleet.Email,
-            MobileNo: Fleet.MobileNo,
-            Active: Fleet.Active,
-            UserName: Fleet.UserName,
-            Password: Fleet.Password,
-            RePassword: Fleet.Password,
-            insupdflag: flag
+       
+        var FleetOwner = {
+            Id: FleetOwner.Id,
+            FirstName: FleetOwner.FirstName,
+            LastName: FleetOwner.LastName,
+            MiddleName: FleetOwner.MiddleName,
+           EmpNo: FleetOwner.EmpNo,
+            Email: FleetOwner.Email,
+            MobileNo: FleetOwner.MobileNo,
+            Active: FleetOwner.Active,
+            UserName: FleetOwner.UserName,
+            Password: FleetOwner.Password,
+            RePassword: FleetOwner.Password,
+            insupdflag: 'U'
 
 
         }
@@ -54,7 +46,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/users/saveusers',
-            data: Fleet
+            data:  FleetOwner
         }
         //        $http(req).then(function (response) {
 

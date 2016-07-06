@@ -1103,7 +1103,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string Path { get; set; }
         public int Active { get; set; }
-        public string insupddelflag { get; set; }
+        public string insupdflag { get; set; }
 
     }
     public class ObjectAccess
@@ -1163,6 +1163,7 @@ namespace BTPOSDashboardAPI.Models
         public int Id { get; set; }
 
         public String ItemName { get; set; }
+       // public String ItemImage { get; set; }
         public String Code { get; set; }
 
         public String Description { get; set; }
@@ -1490,16 +1491,18 @@ namespace BTPOSDashboardAPI.Models
          public string StopName { get; set; }
          public string StopCode { get; set; }
          public string StopNo { get; set; }
+         public string insupddelflag { get; set; }
 
     }
 
     public class ShoppingCart
     {
+        public int Id { get; set; }
         public string ItemName { set; get; }
         public decimal UnitPrice { set; get; }
         public int ItemId { set; get; }
 
-        public string insupddelflag { set; get; }
+       // public string insupddelflag { set; get; }
      
     }
     public class BTPOSMoitoringPage

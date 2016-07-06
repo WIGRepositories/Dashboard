@@ -4,14 +4,14 @@
     <title>Home | Configuration | Types</title>
     <meta charset="utf-8">
     <!--Loading bootstrap css-->
-
+    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-
+    
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
@@ -69,7 +69,7 @@
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success">7</span></a></li>
+                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success"></span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                                 <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
@@ -144,7 +144,7 @@
 
 
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-truck">
                                     <div class="icon-bg bg-green"></div>
@@ -153,18 +153,20 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerRoutes</span></a></li>
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
-
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerVehicleLayOut</span></a></li>
                             </ul>
 
                         </li>
 
 
 
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-truck">
                                     <div class="icon-bg bg-green"></div>
@@ -372,8 +374,8 @@
                                                     <div class="row mbm">
 
                                                         <div class="col-lg-12">
-                                                           
-                                                            
+
+
 
                                                             <div class="col-md-3">
                                                                 Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table1 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
@@ -451,14 +453,34 @@
 
                         </div>
 
-
-
                     </div>
 
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+
                     </div>
+
+                    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+                        <div class="modal-header">
+                            <h3 class="modal-title">Save confirmation!</h3>
+                        </div>
+                        <div class="modal-body">
+                            <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+                            {{mssg}}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
+
+                    </script>
                     <!--END FOOTER-->
                     <!-- Custom Theme JavaScript -->
                     <script type="text/javascript">
@@ -512,34 +534,30 @@
                         });
 
                         //buttonContainerDiv=buttonContainerDiv.append('<li class="parent_li"></li>');
-                    </script>
+</script>
 
 
 
-                    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
 
-
-                    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                    <script src="vendors/iCheck/icheck.min.js"></script>
-                    <script src="vendors/iCheck/custom.min.js"></script>
-
-                    <script src="js/jquery.menu.js"></script>
-                    <script src="vendors/jquery-pace/pace.min.js"></script>
-                    <script src="vendors/holder/holder.js"></script>
-                    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                    <!--LOADING SCRIPTS FOR PAGE-->
-                    <!--<script src="js/table-action.js"></script>-->
-                    <!--CORE JAVASCRIPT-->
-                    <!--<script src="js/mainTbl.js"></script>
-                    <script src="js/handsontable.full.js"></script>-->
-                    <script src="js/main.js"></script>
-
-
-                    <script src="js/angular.js"></script>
-                    <script src="js/VehicleLayout.js"></script>
-                    <script src="js/ngStorage.js"></script>
-
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<!--<script src="js/table-action.js"></script>-->
+<!--CORE JAVASCRIPT-->
+<!--<script src="js/mainTbl.js"></script>
+<script src="js/handsontable.full.js"></script>-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/VehicleLayout.js"></script>
 </body>
 </html>

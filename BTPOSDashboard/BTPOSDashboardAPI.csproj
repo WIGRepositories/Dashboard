@@ -392,7 +392,6 @@
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\BTPOSConfiguration.html" />
     <Content Include="UI\createfleet.html" />
-    <Content Include="UI\CreateRole.html" />
     <Content Include="UI\css\bootstrap.min.css" />
     <Content Include="UI\css\handsontable.full.min.css" />
     <Content Include="UI\CustomizeRoutes.html" />
@@ -451,6 +450,8 @@
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\createfleet.js" />
+    <Content Include="UI\js\CreatePurchaseOrder.js" />
+    <Content Include="UI\js\Customers.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
