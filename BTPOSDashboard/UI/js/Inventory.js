@@ -1,7 +1,7 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
     $http.get('http://localhost:1476/api/Inventory/GetInventory').then(function (response, req) {
