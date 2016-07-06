@@ -4,7 +4,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-    $scope.GetAlerts = function () {
+    $scope.getAlerts = function () {
 
         $http.get('http://localhost:1476/api/Alert/GetAlerts').then(function (response, req) {
             $scope.GetAlerts = response.data;
