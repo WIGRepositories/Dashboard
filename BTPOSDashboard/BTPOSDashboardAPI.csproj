@@ -442,7 +442,6 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
-    <Content Include="UI\js\AlertsConfiguration.js" />
     <Content Include="UI\js\angular-animate.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
@@ -450,8 +449,6 @@
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\createfleet.js" />
-    <Content Include="UI\js\CreatePurchaseOrder.js" />
-    <Content Include="UI\js\Customers.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />

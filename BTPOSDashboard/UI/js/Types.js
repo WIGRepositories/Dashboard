@@ -1,7 +1,7 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
-    // $scope.uname = $localStorage.uname;
+     $scope.uname = $localStorage.uname;
     $scope.dashboardDS = $localStorage.dashboardDS;
 
     $scope.userdetails = $localStorage.userdetails;
