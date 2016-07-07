@@ -1,12 +1,17 @@
 var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
-    $scope.uname = $localStorage.uname
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
     $scope.dashboardDS = $localStorage.dashboardDS;
 
+    $scope.GetAlerts = function () {
 
-    $scope.getAlerts = function () {
-
-        $http.get('http://localhost:1476/api/Alert/GetAlerts').then(function (response, req) {
+        $http.get('http://localhost:1476/api/Alerts/GetAlerts').then(function (response, req) {
             $scope.GetAlerts = response.data;
 
         });
