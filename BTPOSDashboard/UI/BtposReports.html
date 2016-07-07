@@ -290,9 +290,9 @@
                                 </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li ><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                <li class="active"><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                <li class="active"><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                                 <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
 
@@ -336,13 +336,13 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Admin reports </div>
+                            <div class="page-title">Btpos Reports</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <!-- <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>-->
                             <li><a href="#">Reports</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Admin reports </a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Btpos Reports</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -391,7 +391,7 @@
                     <link type="text/css" rel="stylesheet" href="css/themes/style1/orange-blue.css" id="theme-change" class="style-change color-change">
                     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
                     </head>
-                    <body ng-app="myApp" ng-controller="myCtrl" class=" ">
+                    <body ng-app="myApp" ng-controller="myCtrl" ng-init="GetVehicleConfig();" ng-model="initdata" class=" ">
                         <div>
                             <!--END BACK TO TOP--><!--BEGIN TOPBAR-->
                             <div id="header-topbar-option-demo" class="page-header-topbar">
@@ -402,6 +402,17 @@
                             <div class="page-content">
                                 <div class="row">
                                     <div class="portlet box">
+                                        <div class="col-md-5">
+                                            Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-5">
+                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
                                         <div class="portlet-header pam mbn"><div style="float:right">Table Export</div></div><div class="portlet-body">
                                             <div class="btn-group mtm mbm">
                                                 <a href="#" data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle">
@@ -423,7 +434,6 @@
                                                         <a href="#" onclick="$('#example-export').tableExport({type:'xml'});">
                                                             <img src="images/icons/xml.png" width="24px" class="mrx" />Export to Xml
                                                         </a>
-
 
                                                 </ul>
                                                 <!--</a><ul class="dropdown-menu"><li><a href="#" onclick="$('#example-export').tableExport({type:'json',escape:'false'});"><img src="vendors/tableExport/icon/json.png" width="24px" class="mrx" />Export to Json</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});"><img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'sql'});"><img src="vendors/tableExport/icon/sql.png" width="24px" class="mrx" />Export to Sql</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'csv'});"><img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'txt',escape:'false'});"><img src="vendors/tableExport/icon/txt.png" width="24px" class="mrx" />Export to TXT</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});"><img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'doc',escape:'false'});"><img src="vendors/tableExport/icon/word.png" width="24px" class="mrx" />Export to word </a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'powerpoint',escape:'false'});"><img src="vendors/tableExport/icon/ppt.png" width="24px" class="mrx" />Export to powerpoint</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});"><img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf</a></li></ul>-->
@@ -623,7 +633,7 @@
                             </div>
                             <!--END PAGE WRAPPER-->
                         </div>
-                </div>
+</div>
 
             </div>
             <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
