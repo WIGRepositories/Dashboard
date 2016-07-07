@@ -372,59 +372,102 @@
                                                                     <div class="modal-body" ng-model="currGroup">
 
                                                                         <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Name:<span class='require'>*</span></label>
+                                                                                    <div class="col-md-7"><input id="inputFirstName" type="text" ng-model="currGroup.Name" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="code" class="col-md-3 control-label" style="color:red;">Code*:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="code" type="text" ng-model="currGroup.code" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="descr" class="col-md-3 control-label">Description:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="desc" type="text" ng-model="currGroup.desc" class="form-control" /><span class="help-block"></span></div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="ContactNo1" class="col-md-3 control-label">Contact No:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="ContactNo1" type="text" ng-model="currGroup.ContactNo1" class="form-control" /><span class="help-block"></span></div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="ContactNo2" class="col-md-3 control-label">Phone NO:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="ContactNo2" type="text" ng-model="currGroup.ContactNo2" class="form-control" /><span class="help-block"></span></div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="Fax" class="col-md-3 control-label">Fax<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="Fax" type="text" ng-model="currGroup.Fax" class="form-control" /><span class="help-block"></span></div>
+                                                                                    </div>
 
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Code:<span class='require'>*</span></label>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="currGroup.code" /></div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="Fax" class="col-md-3 control-label">EmailId:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="EmailId" type="text" ng-model="currGroup.EmailId" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="Fax" class="col-md-3 control-label">Title<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="Title" type="text" ng-model="currGroup.Title" class="form-control" /><span class="help-block"></span></div>
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="Fax" class="col-md-3 control-label">Caption: <span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="Caption" type="text" ng-model="currGroup.Caption" class="form-control" /><span class="help-block"></span></div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="Fax" class="col-md-3 control-label">Address <span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="Address" type="text" ng-model="currGroup.Address" class="form-control" /><span class="help-block"></span></div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="inputMiddleName" class="col-md-3 control-label">Country:<span class='require'>*</span></label>
+                                                                                        <select class="col-md-7" ng-model="currGroup.Country">
+                                                                                            <option value="select Country">select Country</option>
+                                                                                            <option value="Antartica">Antarctica</option>
+                                                                                            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                                                            <option value="Argentina">Argentina</option>
+                                                                                            <option value="Armenia">Armenia</option>
+                                                                                            <option value="Aruba">Aruba</option>
+                                                                                            <option value="Australia">Australia</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="ZipCode" class="col-md-3 control-label">ZipCode:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="ZipCode" type="text" ng-model="currGroup.ZipCode" class="form-control" /><span class="help-block"></span></div>
 
-
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Description:</label>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.desc" /></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="State" class="col-md-3 control-label">State:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="State" type="text" ng-model="currGroup.State" class="form-control" /><span class="help-block"></span></div>
 
-                                                                        <div class="row">
+                                                                                    </div>
 
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-true-value="1" ng-false-value="0" ng-checked="{{currGroup.active==1}}" checked /></div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>
+                                                                                        <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="currGroup.active" class="form-control" checked /></div>
+                                                                                    </div>
+
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -453,100 +496,103 @@
                                                                             <div class="modal-body">
                                                                                 
                                                                                 <div class="row">
-                                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="inputFirstName" type="text" ng-model="Group.Name" class="form-control" /><span class="help-block"></span></div>
-                                                                                    </div>
-                                                                                    </div>
-                                                                                    <div class="row">
-                                                                                        <label for="code" class="col-md-3 control-label" style="color:red;">Code *<span class='require'></span></label>
+                                                                                    <div class="col-md-12">
                                                                                         <div class="col-md-6">
-                                                                                            <div class="col-md-12"><input id="code" type="text" ng-model="Group.code" class="form-control" /><span class="help-block"></span></div>
+                                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Name:<span class='require'>*</span></label>
+                                                                                            <div class="col-md-7"><input id="inputFirstName" type="text" ng-model="Group.Name" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="code" class="col-md-3 control-label" style="color:red;">Code*:<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="code" type="text" ng-model="Group.code" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div> 
+                                                                                    </div>                                                                                         
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="descr" class="col-md-3 control-label">Description:<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="desc" type="text" ng-model="Group.desc" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="ContactNo1" class="col-md-3 control-label">Contact No:<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="ContactNo1" type="text" ng-model="Group.ContactNo1" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                    </div> 
+                                                                                    </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="ContactNo2" class="col-md-3 control-label">Phone NO:<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="ContactNo2" type="text" ng-model="Group.ContactNo2" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="Fax" class="col-md-3 control-label">Fax<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="Fax" type="text" ng-model="Group.Fax" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                    </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="Fax" class="col-md-3 control-label">EmailId:<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="EmailId" type="text" ng-model="Group.EmailId" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="Fax" class="col-md-3 control-label">Title<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="Title" type="text" ng-model="Group.Title" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                   
+                                                                                    </div>                                                                                                                                                               
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="Fax" class="col-md-3 control-label">Caption: <span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="Caption" type="text" ng-model="Group.Caption" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="Fax" class="col-md-3 control-label">Address <span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="Address" type="text" ng-model="Group.Address" class="form-control" /><span class="help-block"></span></div>
+                                                                                        </div>
+                                                                                     </div>
+                                                                                    </div>
+                                                                                <div class="row">                                                                                   
+                                                                                    <div class="col-md-12">
+                                                                                       <div class="col-md-6">
+                                                                                           <label for="inputMiddleName" class="col-md-3 control-label">Country:<span class='require'>*</span></label>                                                                                          
+                                                                                           <select class="col-md-7" ng-model="Group.Country">
+                                                                                               <option value="select Country">select Country</option>
+                                                                                               <option value="Antartica">Antarctica</option>
+                                                                                               <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                                                               <option value="Argentina">Argentina</option>
+                                                                                               <option value="Armenia">Armenia</option>
+                                                                                               <option value="Aruba">Aruba</option>
+                                                                                               <option value="Australia">Australia</option>
+                                                                                           </select>
+                                                                                         </div>                                                                                      
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="ZipCode" class="col-md-3 control-label">ZipCode:<span class='require'></span></label>
+                                                                                            <div class="col-md-7"><input id="ZipCode" type="text" ng-model="Group.ZipCode" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                        </div>
+                                                                                        </div>
+                                                                                    </div>                                                                               
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="col-md-6">                                                                                            
+                                                                                                <label for="State" class="col-md-3 control-label">State:<span class='require'></span></label>
+                                                                                                <div class="col-md-7"><input id="State" type="text" ng-model="Group.State" class="form-control" /><span class="help-block"></span></div>
+
                                                                                             </div>
+                                                                                        
+                                                                                        <div class="col-md-6">
+                                                                                            <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>
+                                                                                            <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
                                                                                         </div>
-                                                                                <div class="row">
-
-                                                                                    <label for="descr" class="col-md-3 control-label">Description <span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="desc" type="text" ng-model="Group.desc" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
+                                                                                        
                                                                                     </div>
-                                                                                <div class="row">
-                                                                                    <label for="ContactNo1" class="col-md-3 control-label">ContactNo1 <span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="ContactNo1" type="text" ng-model="Group.ContactNo1" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <div class="row">
-
-                                                                                    <label for="ContactNo2" class="col-md-3 control-label">ContactNo2<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="ContactNo2" type="text" ng-model="Group.ContactNo2" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <div class="row">
-                                                                                    <label for="Fax" class="col-md-3 control-label">Fax<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="Fax" type="text" ng-model="Group.Fax" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <div class="row">
-                                                                                    <label for="Fax" class="col-md-3 control-label">EmailId<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="EmailId" type="text" ng-model="Group.EmailId" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <div class="row">
-                                                                                    <label for="Fax" class="col-md-3 control-label">Title<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="Title" type="text" ng-model="Group.Title" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <div class="row">
-
-                                                                                    <label for="Fax" class="col-md-3 control-label">Caption<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="Caption" type="text" ng-model="Group.Caption" class="form-control" /><span class="help-block"></span></div>
-                                                                                    </div>
-                                                                                    </div>
-                                                                                <div class="row">
-                                                                                    <label for="Fax" class="col-md-3 control-label">Address<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="Address" type="text" ng-model="Group.Address" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                <div class="row">
-                                                                                    <label for="inputMiddleName" class="col-md-2 control-label">Country:<span class='require'>*</span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <select class="form-control" ng-model="Group.Country">
-                                                                                            <option value="select Country">select Country</option>                                                                                            
-                                                                                            <option value="Antartica">Antarctica</option>
-                                                                                            <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                                                                                            <option value="Argentina">Argentina</option>
-                                                                                            <option value="Armenia">Armenia</option>
-                                                                                            <option value="Aruba">Aruba</option>
-                                                                                            <option value="Australia">Australia</option>
-                                                                                        </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <div class="row">
-                                                                                    <label for="Fax" class="col-md-3 control-label">State<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="State" type="text" ng-model="Group.State" class="form-control" /><span class="help-block"></span></div>
-                                                                                    </div>
-                                                                                    </div>
-                                                                                <div class="row">
-                                                                                    <label for="Fax" class="col-md-3 control-label">ZipCode<span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="col-md-12"><input id="ZipCode" type="text" ng-model="Group.ZipCode" class="form-control" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                <div class="row">
-                                                                                    <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>
-                                                                                    <div class="col-md-6">
-                                                                                        <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
-                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             <div class="form-actions">

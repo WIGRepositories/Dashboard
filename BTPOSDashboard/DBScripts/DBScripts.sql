@@ -2131,7 +2131,7 @@ else
 				if @cnt = 0 
 				begin
 					update Company
-					set Name = @Name, code = @code, [desc] = @desc, active = @active
+					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId=@EmailId,ContactNo1 =@ContactNo1,ContactNo2=@ContactNo2,Fax=@Fax,Title=@Title,Caption=@Caption,Country=@Country,ZipCode=@ZipCode,State=@State,active = @active
 					where Id = @Id						
 						
 						--insert into edit history
