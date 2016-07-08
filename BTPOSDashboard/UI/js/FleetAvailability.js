@@ -10,6 +10,14 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
+    $scope.setCurrRole = function (grp) {
+        $scope.currRole = grp;
+    };
+
+    $scope.clearGroup = function () {
+        $scope.currRole = null;
+    };
+
 
     $scope.GetCompanies = function () {
 
