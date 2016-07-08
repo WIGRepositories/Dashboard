@@ -309,7 +309,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -318,13 +318,12 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
-
-
 
                             </ul>
                         </li>
@@ -370,8 +369,8 @@
                                                         <div class="col-md-5">
                                                             Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()">
 
-                                                                  <option value="">Select</option>
-                                                                 </select>
+                                                                <option value="">Select</option>
+                                                            </select>
                                                         </div>
                                                         <br><br />
 
@@ -387,8 +386,8 @@
                                                                                 <tr>
                                                                                     <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
                                                                                     <!--<th><input type="checkbox"
-                                                                                    ng-checked="checkedArr.length == FORoutes.length"
-                                                                                    ng-click="toggleAll()">Select</th>-->
+                                                                            ng-checked="checkedArr.length == FORoutes.length"
+                                                                            ng-click="toggleAll()">Select</th>-->
 
                                                                                     <th>Route Name</th>
                                                                                     <th>Route Code</th>
@@ -403,7 +402,7 @@
                                                                                 <tr ng-repeat="route in FORoutes" ng-on-finish-render>
 
                                                                                     <!--<td>
-                                                                                    <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="route.assigned.toString() == '1'" ng-click="toggle(route, checkedArr);" /></td>-->
+                                                                            <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="route.assigned.toString() == '1'" ng-click="toggle(route, checkedArr);" /></td>-->
                                                                                     <td>
                                                                                         <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(route, checkedArr)" ng-click="toggle(route, checkedArr);" />
                                                                                     </td>
@@ -422,7 +421,7 @@
                                                                                         <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="text" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
                                                                                     </td>
                                                                                     <!--<td>{{route.FromDate}}</td>
-                                                                                    <td>{{route.ToDate}}</td>-->
+                                                                            <td>{{route.ToDate}}</td>-->
                                                                                     <!--<td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>-->
                                                                                 </tr>
 
@@ -435,8 +434,8 @@
                                                                         </table>
 
                                                                         <!--checked: {{checkedArr | json}}
-                                                                         <br />
-                                                                         unchecked: {{uncheckedArr | json}}-->
+                                                                 <br />
+                                                                 unchecked: {{uncheckedArr | json}}-->
                                                                     </div>
 
 

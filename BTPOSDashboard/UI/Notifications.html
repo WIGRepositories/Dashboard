@@ -331,7 +331,7 @@
                                 <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                    <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                    <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                 </ul>
                             </li>
@@ -340,15 +340,15 @@
                             <li class="active">
                                 <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
-                                    <li class="active"><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                    <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+
+                                    <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
+                                    <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                 </ul>
                             </li>
 
                         </ul>
                     </li>
-
                     </ul>
                 </div>
             </nav>
@@ -389,6 +389,7 @@
                                                         <th>Name</th>
                                                         <th>Message</th>
                                                         <th>Date</th>
+                                                        <th>Delete</th>
 
                                                     </tr>
                                                 </thead>
@@ -398,6 +399,7 @@
                                                         <td>{{R.Name}}</td>
                                                         <td>{{R.Message}}</td>
                                                         <td>{{R.Date}}</td>
+                                                        <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>
 
                                                     </tr>
 
