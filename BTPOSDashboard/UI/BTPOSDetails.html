@@ -455,7 +455,7 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp1" ng-change="GetPopupFleetOwners(cmp1.Id);" value="{{currGroup.CompanyId}}">
+                                                                                        <select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners();" value="{{currGroup.CompanyId}}">
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -474,7 +474,8 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <select name="s1" id="s1" ng-options="s.Name for s in cmpdata1.Table track by s.Id" ng-model="s1" value="{{currGroup.fleetownerid}}">
+
+                                                                                        <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" value="{{currGroup.fleetownerid}}">
 
                                                                                             <option value="">Select</option>
                                                                                         </select>
