@@ -462,7 +462,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col-md-6">
-                                                                                            <label for="Description" class="col-md-6 control-label">Chasis No <span class='require'>*</span></label>
+                                                                                            <label for="Description" class="col-md-6 control-label">Chasis No: <span class='require'>*</span></label>
 
                                                                                             <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.ChasisNo" /><span class="help-block"></span></div>
                                                                                         </div>
@@ -474,7 +474,7 @@
                                                                                   
                                                                                     <div class="col-md-12">
                                                                                         <div class="col-md-6">
-                                                                                            <label for="Name" class="col-md-6 control-label">DateOfRegistration:<span class='require'></span></label>
+                                                                                            <label for="Name" class="col-md-6 control-label">Date Of Registration:<span class='require'></span></label>
                                                                                             <div class="col-md-6">
                                                                                                 <input type="date" ng-model="initdata.newfleet.dor" />
 
@@ -489,7 +489,7 @@
                                                                                                 </select>
 
                                                                                             </div>
-                                                                                            <label for="Description" class="col-md-6 control-label">SeatingCapacity<span class='require'>*</span></label>
+                                                                                            <label for="Description" class="col-md-6 control-label">Seating Capacity<span class='require'>*</span></label>
 
                                                                                             <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
 
@@ -552,12 +552,12 @@
                                                                                     <div class="col-md-6">
                                                                                         <label for="Description" class="col-md-6 control-label">Vehicle RegNo <span class='require'>*</span></label>
 
-                                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.VehicleRegNo}}" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.VehicleRegNo}}" ng-model="currVD.VehicleRegNo" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="Description" class="col-md-6 control-label">Engine No<span class='require'>*</span></label>
 
-                                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.EngineNo}}" ng-model="initdata.newfleet.EngineNo" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.EngineNo}}" ng-model="currVD.EngineNo" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -567,7 +567,7 @@
 
                                                                                     <label for="selCountry" class="col-md-6 control-label">Vehicle Type</label>
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" value="{{currVD.VehicleTypeId}}" ng-model="initdata.newfleet.vt" class="form-control">
+                                                                                        <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" value="{{currVD.VehicleTypeId}}" ng-model="currVD.vt" class="form-control">
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -575,7 +575,7 @@
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-6 control-label">Fuel Used <span class='require'>*</span></label>
 
-                                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.FuelUsed}}" ng-m ng-model="initdata.newfleet.FuelUsed" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.FuelUsed}}" ng-m ng-model="currVD.FuelUsed" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
 
@@ -584,9 +584,9 @@
                                                                                 <div class="col-md-6">
                                                                                     <label for="selCountry" class="col-md-6 control-label">Service Type</label>
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="st.Name for st in initdata.Table1 track by st.Id" value="{{currVD.ServiceTypeId}}" ng-model="initdata.newfleet.st" class="form-control">
+                                                                                        <select ng-options="st.Name for st in initdata.Table1 track by st.Id" value="{{currVD.ServiceTypeId}}" ng-model="currVD.st" class="form-control">
                                                                                             <option value="">Select</option>
-                                                                                            </select>
+                                                                                        </select>
                                                                                     </div>
 
                                                                                 </div>
@@ -618,9 +618,9 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Chasis No <span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-6 control-label">Chasis No: <span class='require'>*</span></label>
 
-                                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.ChasisNo}}" ng-m ng-model="initdata.newfleet.ChasisNo" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.ChasisNo}}"  ng-model="initdata.newfleet.ChasisNo" /><span class="help-block"></span></div>
                                                                             </div>
 
                                                                         </div>
@@ -632,7 +632,7 @@
 
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-6 control-label">DateOfRegistration:<span class='require'></span></label>
+                                                                                <label for="Name" class="col-md-6 control-label">Date Of Registration:<span class='require'></span></label>
                                                                                 <div>
                                                                                     <input type="date" ng-model="initdata.newfleet.dor" />
                                                                                     
@@ -657,7 +657,7 @@
 
                                                                                 <div class="form-actions">
                                                                                     <div class="col-md-6 col-md-offset-2">
-                                                                                        <button class="btn btn-primary" type="button">Save</button>
+                                                                                        <button class="btn btn-primary" type="button" ng-click="savenewfleetdetails(initdata);">Save</button>
                                                                                         <button class="btn btn-primary" type="button">Cancel</button>
                                                                                     </div>
 
