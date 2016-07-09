@@ -186,7 +186,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             VehicleRegNo: newVD.VehicleRegNo,
             VehicleTypeId: (newVD.vt != null) ? newVD.vt.Id : newVD.VehicleTypeId,
             VehicleLayoutId: (newVD.vl != null) ? newVD.vl.Id : newVD.VehicleLayoutId,
-            FleetOwnerId: newVD.fo.Id,
+            FleetOwnerId: $scope.s.Id,
             CompanyId: $scope.cmp.Id,
             ServiceTypeId: (newVD.st != null) ? newVD.st.Id : newVD.ServiceTypeId,
             EngineNo: newVD.EngineNo,

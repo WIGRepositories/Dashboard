@@ -69,7 +69,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.BTPOS1 = response.data;
          
             //  $localStorage.BTPOSOld = response.data;
-            $scope.setPage();
+            //$scope.setPage();
         })
 
         var vc = {
