@@ -1,5 +1,4 @@
-﻿using BTPOSDashboardAPI.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,14 +6,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BTPOSDashboardAPI.Models;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class PaymentGatewayConfigurationController : ApiController
+    public class SmsGatewayConfigController : ApiController
     {
         [HttpGet]
 
-        public DataTable GetPaymentGateway()
+        public DataTable GetSmsGatewayConfig()
         {
             DataTable Tbl = new DataTable();
 
@@ -26,7 +26,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getPaymentGatewaySettings";
+            cmd.CommandText = "getSmsGatewayeConfiguration";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -37,7 +37,7 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
          [HttpPost]
-        public HttpResponseMessage SavePaymentGatewaySettings(PaymentGatewaySettings b)
+        public HttpResponseMessage SaveSmsGatewaySettings(SMSEmailConfiguration b)
         {
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -48,16 +48,10 @@ namespace BTPOSDashboard.Controllers
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelPaymentGatewaySettings";
+            cmd.CommandText = "InsUpdDelSMSGatewayConfiguration";
             cmd.Connection = conn;
             conn.Open();
-
-            //SqlParameter Aid = new SqlParameter();
-            //Aid.ParameterName = "@";
-            //Aid.SqlDbType = SqlDbType.VarChar;
-            //Aid.Value = b.Id;
-            //Aid.Value = Convert.ToString(b.Id);
-            //cmd.Parameters.Add(Aid);
+          
 
             SqlParameter Gid = new SqlParameter();
             Gid.ParameterName = "@providername";
@@ -79,9 +73,9 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(pid);
           
             SqlParameter ss = new SqlParameter();
-            ss.ParameterName = "@PaymentGatewayTypeId";
+            ss.ParameterName = "@AlertTypeId";
             ss.SqlDbType = SqlDbType.Int;
-            ss.Value = b.PaymentGatewayTypeId;           
+            ss.Value = b.AlertTypeId;           
             cmd.Parameters.Add(ss);
             
 
@@ -133,8 +127,6 @@ namespace BTPOSDashboard.Controllers
         public void Options() { }
 
     }
-     
 
  }
-    
 
