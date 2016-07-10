@@ -693,7 +693,7 @@ namespace BTPOSDashboardAPI.Models
 
         public DateTime hashkey { get; set; }
 
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         public string providername { get; set; }
 
@@ -712,7 +712,7 @@ namespace BTPOSDashboardAPI.Models
 
         public DateTime hashkey { get; set; }
 
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
         public int PaymentGatewayTypeId { get; set; }
 

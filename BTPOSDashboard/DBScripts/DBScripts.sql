@@ -3045,18 +3045,30 @@ GO
 CREATE procedure [dbo].[getPaymentGatewaySettings]
 as
 begin
-select * from PaymentGatewaySettings
+SELECT  [enddate]
+      ,[hashkey]
+      ,p.[Id]
+      ,[PaymentGatewayTypeId]
+      ,[providername]
+      ,[pwd]
+      ,[saltkey]
+      ,[startdate]
+      ,[username]
+      ,Ty.Name
+    
+  FROM [POSDashboard].[dbo].[PaymentGatewaySettings] p
+  inner join TypeGroups Ty on Ty.Id = p.Id 
+    
 end
 
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelPaymentGatewaySettings](@enddate datetime,@hashkey datetime,@Id int,@PaymentGatewayTypeId int,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+Create procedure [dbo].[InsUpdDelPaymentGatewaySettings](@enddate datetime,@hashkey datetime,@PaymentGatewayTypeId int,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
 as
 begin
-insert into PaymentGatewaySettings values(@enddate,@hashkey,@Id,@PaymentGatewayTypeId,@providername,@pwd,@saltkey,@startdate,@username)
+insert into PaymentGatewaySettings values(@enddate,@hashkey,@PaymentGatewayTypeId,@providername,@pwd,@saltkey,@startdate,@username)
 end
 
 GO
@@ -9037,3 +9049,227 @@ end
 
 GO
 
+/****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/09/2016 16:38:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SmsGatewayeConfiguration](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AlertTypeId] [int] NOT NULL,
+	[enddate] [datetime] NOT NULL,
+	[hashkey] [datetime] NOT NULL,
+	[providername] [varchar](50) NOT NULL,
+	[pwd] [varchar](50) NOT NULL,
+	[saltkey] [datetime] NOT NULL,
+	[startdate] [datetime] NOT NULL,
+	[username] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[getSmsGatewayeConfiguration]    Script Date: 07/09/2016 16:31:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getSmsGatewayeConfiguration]
+as
+begin
+SELECT Distinct s.[Id]
+      ,[username]
+      ,[pwd]
+    --  ,[AlertTypeId]
+      ,[providername]
+      ,[saltkey]
+      ,[startdate]
+      ,[hashkey]
+      ,Ts.[Name]
+  FROM [POSDashboard].[dbo].[SmsGatewayeConfiguration] s
+    
+ inner join Types Ts on Ts.TypeGroupId = s.Id 
+    
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/09/2016 16:45:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[InsUpdDelSMSGatewayConfiguration](@AlertTypeId int,@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+as
+begin
+insert into SmsGatewayeConfiguration values(@AlertTypeId,@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username)
+end
+
+/****** Object:  Table [dbo].[Index]    Script Date: 07/09/2016 17:22:46 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Index](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IndexFileData] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Authentication]    Script Date: 07/09/2016 17:23:39 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Authentication](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFileContentAuthentication]    Script Date: 07/09/2016 17:24:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentAuthentication]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      A1.UserName,
+      A1.Password
+  FROM [POSDashboard].[dbo].[Authentication] A1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+/****** Object:  StoredProcedure [dbo].[GetFileContentBTPOSDetails]    Script Date: 07/09/2016 17:24:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentBTPOSDetails]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      B1.[POSID]
+  FROM [POSDashboard].[dbo].[BTPOSDetails] B1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+/****** Object:  StoredProcedure [dbo].[GetFileContentIndex]    Script Date: 07/09/2016 17:24:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentIndex]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      I1.IndexFileData
+    
+  FROM [POSDashboard].[dbo].[Index] I1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+/****** Object:  StoredProcedure [dbo].[GetFileContentRouteFare]    Script Date: 07/09/2016 17:24:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentRouteFare]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      R1.[Amount]
+  FROM [POSDashboard].[dbo].[RouteFare] R1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+
+/****** Object:  StoredProcedure [dbo].[GetFileContentRoutes]    Script Date: 07/09/2016 17:25:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentRoutes]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      R.[RouteName]
+     -- ,R.[Code]      
+      --,S.[Name]
+      --,S.[Code]
+      -- ,R1.[Amount]
+  FROM [POSDashboard].[dbo].[Routes] R
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+
+
+/****** Object:  StoredProcedure [dbo].[GetFileContentStops]    Script Date: 07/09/2016 17:25:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentStops]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+      S.[Name]
+      --,S.[Code]
+      -- ,R1.[Amount]
+  FROM [POSDashboard].[dbo].[Stops] S
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
