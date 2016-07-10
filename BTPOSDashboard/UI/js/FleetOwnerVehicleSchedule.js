@@ -1,5 +1,5 @@
 ﻿//var myapp1 = angular.module('myApp', ['timepicker'])
-var myapp1 = angular.module('myApp', ['ngStorage'])
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 
 angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $localStorage) {
     
@@ -16,7 +16,7 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $local
    
 });
 
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
    
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.StopCount = [];
