@@ -3,7 +3,7 @@
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.GetUsers = function () {
-        $http.get('http://localhost:1476/api/CreateFleetOwner/NewFleet').then(function (res, data) {
+        $http.get('http://154.120.237.198:1476/api/CreateFleetOwner/NewFleet').then(function (res, data) {
             $scope.User = res.data;
         });
     }
@@ -36,7 +36,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CreateFleetOwner/Savenewfleet',
+            url: 'http://154.120.237.198:1476/api/CreateFleetOwner/Savenewfleet',
             data: Fleet
         }
         $http(req).then(function (response) {
