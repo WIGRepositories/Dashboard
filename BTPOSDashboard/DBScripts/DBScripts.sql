@@ -16,16 +16,10 @@ CREATE TABLE [dbo].[Alerts](
 	[Message] [varchar](50) NOT NULL,
 	[MessageTypeId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[UserId] [int] NOT NULL,
+	[UserId] [int] NOT NULL  DEFAULT ((1)),
 	[Name] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[Alerts] ADD  CONSTRAINT [DF_AlertNotifications_UserId]  DEFAULT ((1)) FOR [UserId]
 GO
 
 /****** Object:  Table [dbo].[Notifications]    Script Date: 06/03/2016 17:10:29 ******/
@@ -44,18 +38,10 @@ CREATE TABLE [dbo].[Notifications](
 	[Message] [varchar](500) NOT NULL,
 	[MessageTypeId] [int] NOT NULL,
 	[StatusId] [int] NOT NULL,
-	[UserId] [int] NOT NULL,
+	[UserId] [int] NOT NULL  DEFAULT ((1)),
 	[Name] [varchar](50) NOT NULL,
 	[Source] [varchar](50) NULL
 ) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[Notifications] ADD  CONSTRAINT [DF_Notifications_UserId]  DEFAULT ((1)) FOR [UserId]
-GO
 
 GO
 SET ANSI_NULLS ON
@@ -331,21 +317,11 @@ CREATE TABLE [dbo].[BTPOSRecords](
 	[CreatedDate] [datetime] NULL,
 	[Downloaded] [datetime] NULL,
 	[LastDownloadtime] [datetime] NULL,
-	[IsDirty] [int] NULL
+	[IsDirty] [int] NULL default 1
 ) ON [PRIMARY]
 
 GO
 
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[BTPOSRecords] ADD  CONSTRAINT [DF_BTPOSRecords_IsDirty]  DEFAULT ((1)) FOR [IsDirty]
-GO
-
-
-
-
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1628,7 +1604,8 @@ CREATE TABLE [dbo].[InventoryItem](
 	[Description] [varchar](50) NULL,
 	[CategoryId] [int] NOT NULL,
 	[SubCategoryId] [int] NOT NULL,
-	[ReOrderPoint] [int] NOT NULL
+	[ReOrderPoint] [int] NOT NULL,
+	[ItemImage] [image] NULL
 ) ON [PRIMARY]
 
 GO
@@ -2154,7 +2131,7 @@ else
 				if @cnt = 0 
 				begin
 					update Company
-					set Name = @Name, code = @code, [desc] = @desc, active = @active
+					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId=@EmailId,ContactNo1 =@ContactNo1,ContactNo2=@ContactNo2,Fax=@Fax,Title=@Title,Caption=@Caption,Country=@Country,ZipCode=@ZipCode,State=@State,active = @active
 					where Id = @Id						
 						
 						--insert into edit history
@@ -2544,7 +2521,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
+CREATE  PROCEDURE[dbo].[InsUpdDelBTPOSDetails](
 		  @Id int,
            @CompanyId int,   
            @POSID varchar(20),
@@ -3068,18 +3045,30 @@ GO
 CREATE procedure [dbo].[getPaymentGatewaySettings]
 as
 begin
-select * from PaymentGatewaySettings
+SELECT  [enddate]
+      ,[hashkey]
+      ,p.[Id]
+      ,[PaymentGatewayTypeId]
+      ,[providername]
+      ,[pwd]
+      ,[saltkey]
+      ,[startdate]
+      ,[username]
+      ,Ty.Name
+    
+  FROM [POSDashboard].[dbo].[PaymentGatewaySettings] p
+  inner join TypeGroups Ty on Ty.Id = p.Id 
+    
 end
 
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelPaymentGatewaySettings](@enddate datetime,@hashkey datetime,@Id int,@PaymentGatewayTypeId int,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+Create procedure [dbo].[InsUpdDelPaymentGatewaySettings](@enddate datetime,@hashkey datetime,@PaymentGatewayTypeId int,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
 as
 begin
-insert into PaymentGatewaySettings values(@enddate,@hashkey,@Id,@PaymentGatewayTypeId,@providername,@pwd,@saltkey,@startdate,@username)
+insert into PaymentGatewaySettings values(@enddate,@hashkey,@PaymentGatewayTypeId,@providername,@pwd,@saltkey,@startdate,@username)
 end
 
 GO
@@ -4637,7 +4626,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelRoles](@Id int,@Name varchar(50)
+CREATE procedure [dbo].[InsUpdDelRoles](@Id int,@Name varchar(50)
 ,@Description varchar(50) = null,@Active int = 1
 ,@IsPublic int = 1)
 as
@@ -5037,7 +5026,7 @@ CREATE procedure [dbo].[ValidateCredentials](@logininfo varchar(50) = null, @pas
 as
 begin
 
-select logininfo,firstname, lastname,u.Id ,r.Name as RoleName,ur.roleid
+select logininfo,firstname, lastname,u.Id,firstname+' '+lastname as uname ,r.Name as RoleName,ur.roleid
 from userlogins ul 
 inner join users u on 
 u.id = ul.userid
@@ -5794,7 +5783,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelSubCategory]
+CREATE procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
 begin
@@ -6049,7 +6038,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER procedure [dbo].[InsUpdDelRoutes](
+CREATE procedure [dbo].[InsUpdDelRoutes](
 @Id int
 ,@RouteName varchar(50)
 ,@Description varchar(50) = null
@@ -6130,6 +6119,8 @@ INSERT INTO [POSDashboard].[dbo].[Routes]
            ,@DestinationId
            ,@Distance)
            
+		   select @routeid = @@IDENTITY
+
             exec InsEditHistory 'Routes','Name', @RouteName,'Routes Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
 		              
 			exec InsEditHistoryDetails @edithistoryid,null,@RouteName,'Insertion','RouteName',null			
@@ -6139,11 +6130,6 @@ INSERT INTO [POSDashboard].[dbo].[Routes]
 			exec InsEditHistoryDetails @edithistoryid,null,@SourceId,'Insertion','SourceId',null
 			exec InsEditHistoryDetails @edithistoryid,null,@DestinationId,'Insertion','DestinationId',null
 	        exec InsEditHistoryDetails @edithistoryid,null,@Distance,'Insertion','Distance',null
-
-
-
-
-select @routeid = @@IDENTITY
 
 --insert the source stop
 INSERT INTO [POSDashboard].[dbo].[RouteDetails]
@@ -6710,7 +6696,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[InsUpdLicenseTypes] 
+CREATE PROCEDURE [dbo].[InsUpdLicenseTypes] 
 (@Id int = -1
 ,@LicenseCatId int
 ,@LicenseType varchar(50)
@@ -8886,7 +8872,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[InsUpdDelShoppingCart]
+CREATE PROCEDURE [dbo].[InsUpdDelShoppingCart]
 @Id int,
 @ItemId int,
 @ItemName varchar,
@@ -9063,38 +9049,227 @@ end
 
 GO
 
-
-USE [POSDashboard]
-GO
-
-/****** Object:  Table [dbo].[InventoryItem]    Script Date: 07/01/2016 12:04:09 ******/
+/****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/09/2016 16:38:06 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-SET ANSI_PADDING OFF
+SET ANSI_PADDING ON
 GO
 
-CREATE TABLE [dbo].[InventoryItem](
+CREATE TABLE [dbo].[SmsGatewayeConfiguration](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ItemName] [varchar](50) NOT NULL,
-	[Code] [varchar](50) NOT NULL,
-	[Description] [varchar](50) NULL,
-	[CategoryId] [int] NOT NULL,
-	[SubCategoryId] [int] NOT NULL,
-	[ReOrderPoint] [int] NOT NULL,
-	[ItemImage] [image] NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+	[AlertTypeId] [int] NOT NULL,
+	[enddate] [datetime] NOT NULL,
+	[hashkey] [datetime] NOT NULL,
+	[providername] [varchar](50) NOT NULL,
+	[pwd] [varchar](50) NOT NULL,
+	[saltkey] [datetime] NOT NULL,
+	[startdate] [datetime] NOT NULL,
+	[username] [varchar](50) NOT NULL
+) ON [PRIMARY]
 
 GO
 
 SET ANSI_PADDING OFF
 GO
+/****** Object:  StoredProcedure [dbo].[getSmsGatewayeConfiguration]    Script Date: 07/09/2016 16:31:37 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[getSmsGatewayeConfiguration]
+as
+begin
+SELECT Distinct s.[Id]
+      ,[username]
+      ,[pwd]
+    --  ,[AlertTypeId]
+      ,[providername]
+      ,[saltkey]
+      ,[startdate]
+      ,[hashkey]
+      ,Ts.[Name]
+  FROM [POSDashboard].[dbo].[SmsGatewayeConfiguration] s
+    
+ inner join Types Ts on Ts.TypeGroupId = s.Id 
+    
+end
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/09/2016 16:45:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[InsUpdDelSMSGatewayConfiguration](@AlertTypeId int,@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+as
+begin
+insert into SmsGatewayeConfiguration values(@AlertTypeId,@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username)
+end
+
+/****** Object:  Table [dbo].[Index]    Script Date: 07/09/2016 17:22:46 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Index](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IndexFileData] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Authentication]    Script Date: 07/09/2016 17:23:39 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Authentication](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserName] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetFileContentAuthentication]    Script Date: 07/09/2016 17:24:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentAuthentication]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      A1.UserName,
+      A1.Password
+  FROM [POSDashboard].[dbo].[Authentication] A1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+/****** Object:  StoredProcedure [dbo].[GetFileContentBTPOSDetails]    Script Date: 07/09/2016 17:24:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentBTPOSDetails]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      B1.[POSID]
+  FROM [POSDashboard].[dbo].[BTPOSDetails] B1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+/****** Object:  StoredProcedure [dbo].[GetFileContentIndex]    Script Date: 07/09/2016 17:24:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentIndex]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      I1.IndexFileData
+    
+  FROM [POSDashboard].[dbo].[Index] I1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+/****** Object:  StoredProcedure [dbo].[GetFileContentRouteFare]    Script Date: 07/09/2016 17:24:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentRouteFare]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+     -- S.[Name]
+      --,S.[Code]
+      R1.[Amount]
+  FROM [POSDashboard].[dbo].[RouteFare] R1
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
+
+/****** Object:  StoredProcedure [dbo].[GetFileContentRoutes]    Script Date: 07/09/2016 17:25:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentRoutes]
+
+AS
+BEGIN
+
+SELECT--R.[Id]
+      R.[RouteName]
+     -- ,R.[Code]      
+      --,S.[Name]
+      --,S.[Code]
+      -- ,R1.[Amount]
+  FROM [POSDashboard].[dbo].[Routes] R
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end
 
 
+/****** Object:  StoredProcedure [dbo].[GetFileContentStops]    Script Date: 07/09/2016 17:25:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFileContentStops]
 
+AS
+BEGIN
 
-
-
+SELECT--R.[Id]
+      --R.[RouteName]
+     -- ,R.[Code]      
+      S.[Name]
+      --,S.[Code]
+      -- ,R1.[Amount]
+  FROM [POSDashboard].[dbo].[Stops] S
+ -- inner join Stops S on (S.Id = R.id)
+  --inner join RouteFare R1 on R1.RouteId = R.Id
+ 
+   
+end

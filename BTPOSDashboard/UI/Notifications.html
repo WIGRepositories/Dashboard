@@ -22,7 +22,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="getNotification();">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="getNotification();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -143,7 +143,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                        <li><a href="UserDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                        <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                         <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                     </ul>
@@ -314,6 +314,7 @@
                             <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                             <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                             <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                            <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                         </ul>
                     </li>
 
@@ -330,7 +331,7 @@
                                 <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                    <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                    <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                 </ul>
                             </li>
@@ -339,15 +340,15 @@
                             <li class="active">
                                 <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
-                                    <li class="active"><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                    <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+
+                                    <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
+                                    <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                 </ul>
                             </li>
 
                         </ul>
                     </li>
-
                     </ul>
                 </div>
             </nav>
@@ -366,7 +367,7 @@
                     <div class="clearfix"></div>
                 </div>
 
-                
+
 
 
 
@@ -388,6 +389,7 @@
                                                         <th>Name</th>
                                                         <th>Message</th>
                                                         <th>Date</th>
+                                                        <th>Delete</th>
 
                                                     </tr>
                                                 </thead>
@@ -397,13 +399,14 @@
                                                         <td>{{R.Name}}</td>
                                                         <td>{{R.Message}}</td>
                                                         <td>{{R.Date}}</td>
+                                                        <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>
 
                                                     </tr>
 
                                                 </tbody>
 
                                             </table>
-                                            
+
                                         </div>
                                     </div>
 
@@ -420,7 +423,7 @@
                 </div>
                 <!--END CONTENT--><!--BEGIN FOOTER-->
                 <div id="footer">
-                    <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                 </div>
                 <!--END FOOTER-->
             </div>
@@ -433,11 +436,11 @@
             </div>
             <div class="modal-body">
                 <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                    <li ng-repeat="item in items">
+                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -453,8 +456,8 @@
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
+
+
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>

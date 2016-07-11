@@ -112,7 +112,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                            <li><a href="UserDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
@@ -144,7 +144,7 @@
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
                                 <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
-
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
                             </ul>
 
                         </li>
@@ -209,7 +209,7 @@
                             </ul>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-gears">
                                     <div class="icon-bg bg-dark"></div>
@@ -217,7 +217,7 @@
                             </a>
                             <ul class="nav nav-second-level">
 
-                                <li>
+                                <li class="active">
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Master Data</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="TypeGroups.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Type Groups</span></a></li>
@@ -293,7 +293,7 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
@@ -310,7 +310,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -319,8 +319,9 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -361,10 +362,10 @@
                                                     <div class="row mbm">
 
                                                         <div class="actions">
-                                                  <!----<button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add New Stop</button></a>--->
-                                                            <button  type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add New Stop</button>
+                                                            <!----<button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add New Stop</button></a>--->
+                                                            <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add New Stop</button>
                                                         </div>
-                                                        
+
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -426,38 +427,39 @@
 
 
                                                         </div>
-                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                            <thead>
-                                                                <tr>
+                                                    </div>
+                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <thead>
+                                                            <tr>
 
 
-                                                                    <th width="10%">Name</th>
-                                                                    <th width="10%">Description</th>
-                                                                    <th width="10%">Code</th>
+                                                                <th width="10%">Name</th>
+                                                                <th width="10%">Description</th>
+                                                                <th width="10%">Code</th>
 
-                                                                    <th width="9%">Active</th>
-                                                                    <th width="9%">Update</th>
+                                                                <th width="9%">Active</th>
+                                                                <th width="9%">Update</th>
 
-                                                                </tr>
-                                                            <tbody>
-                                                                <tr ng-repeat="St in Stops">
+                                                            </tr>
+                                                        <tbody>
+                                                            <tr ng-repeat="St in Stops">
 
-                                                                    <td>{{St.Name}}</td>
-                                                                    <td>{{St.Description}}</td>
-                                                                    <td>{{St.Code}}</td>
-                                                                    <td><input type="checkbox" checked /></td>
-                                                                    <td>
-                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setStops(St);">
-                                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                                            Edit
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
+                                                                <td>{{St.Name}}</td>
+                                                                <td>{{St.Description}}</td>
+                                                                <td>{{St.Code}}</td>
+                                                                <td><input type="checkbox" checked /></td>
+                                                                <td>
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setStops(St);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
 
 
-                                                            </tbody>
+                                                        </tbody>
 
-                                                        </table>
+                                                    </table>
                                                     <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -511,8 +513,8 @@
                                                         </div>
 
                                                     </div>
-                                                        
-                                                   
+
+
                                                 </div>
                                             </div>
 
@@ -529,7 +531,7 @@
 
                     <!--BEGIN FOOTER-->
                     <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
                     <!--END FOOTER-->
                 </div>

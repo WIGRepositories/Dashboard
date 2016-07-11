@@ -113,7 +113,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                            <li><a href="UserDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
@@ -178,7 +178,7 @@
                                         <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
                                         <li><a href="BTPOSConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Configuration</span></a></li>
                                         <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
-                                        
+
                                     </ul>
                                 </li>
 
@@ -291,12 +291,12 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
                                     <div class="icon-bg bg-dark"></div>
@@ -308,17 +308,18 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
 
 
-                                <li>
+                                <li class="active">
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
 
-                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications Configurations</span></a></li>
+                                        <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -327,17 +328,18 @@
                         </li>
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Notifications Configurations</div>
+                            <div class="page-title">Notification Configurations</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">NotificationsConfigurations</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">NotificationConfigurations</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -360,10 +362,10 @@
                                                             </select>
                                                         </div>
                                                         <!--<div class="col-md-5">
-                                                            Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
-                                                             <option value="">All</option>
-                                                             </select>
-                                                        </div>-->
+                                                    Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
+                                                     <option value="">All</option>
+                                                     </select>
+                                                </div>-->
 
                                                     </div>
                                                 </div>
@@ -374,9 +376,9 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Active</th>
-                                                            <!--<th>Alert Items</th>-->                                                       
-                                                            
-                                                            <th>NotificationType</th>                                                       
+                                                            <!--<th>Alert Items</th>-->
+
+                                                            <th>NotificationType</th>
 
 
                                                         </tr>
@@ -386,8 +388,8 @@
                                                         <tr ng-repeat="N in NotficationConfiguration">
 
                                                             <td><input type="checkBox" ng-checked="T.Active" /></td>
-                                                            <!--<td>{{Alert Item}}</td>-->                                                          
-                                                            
+                                                            <!--<td>{{Alert Item}}</td>-->
+
                                                             <td>{{N.AlertType}}</td>
 
                                                         </tr>
@@ -409,7 +411,7 @@
                     <!--END PAGE WRAPPER-->
                     <!--BEGIN FOOTER-->
                     <div id="footer">
-                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
                     <!--END FOOTER-->
                 </div>

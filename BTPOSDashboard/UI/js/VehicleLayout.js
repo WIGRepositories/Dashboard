@@ -1,9 +1,16 @@
 ﻿
 // JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
     $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
     $scope.dashboardDS = $localStorage.dashboardDS;
+
 
 
     $scope.GetVehicleConfig = function () {
@@ -178,7 +185,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
 });
 
-myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {

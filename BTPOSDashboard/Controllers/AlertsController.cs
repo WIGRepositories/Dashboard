@@ -10,10 +10,10 @@ using System.Web.Http;
 
 namespace BTPOSDashboardAPI.Controllers
 {
-    public class Alerts : ApiController
+    public class AlertsController : ApiController
     {
         [HttpGet]
-        public DataTable GetAlert()
+        public DataTable GetAlerts()
         {
             DataTable Tbl = new DataTable();
 

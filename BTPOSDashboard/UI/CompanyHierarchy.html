@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanys()">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li >
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
@@ -109,7 +109,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                            <li><a href="UserDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
@@ -293,6 +293,7 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
 
                             </ul>
                         </li>
@@ -310,7 +311,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -319,8 +320,9 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -329,7 +331,8 @@
                         </li>
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
@@ -344,79 +347,6 @@
                         <div class="clearfix"></div>
                     </div>
 
-
-                    <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <!--<div class="page-content">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul id="treeviewTab" class="nav nav-tabs">
-                                    <li><a href="#family-treeview-tab" data-toggle="tab">Family Treeview</a></li>
-                                </ul>
-                                <div id="treeviewTabContent" class="tab-content">
-                                    <div id="family-treeview-tab" class="tab-pane fade Active ">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h3>Family Treeview - Horizontal</h3>
-                                                <div class="family-tree-horizontal">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">InterBus</a>
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#">BTPOS Details</a>
-                                                                    <ul>
-                                                                        <li><a href="#">Fleet Owner</a></li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                                    <ul>
-                                                                        <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                       
-                                                                        <li>
-                                                                            <a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-
-                                                                           
-                                                                            <ul>
-                                                                                <li>
-                                                                                    <a href="#">Great Grand Child</a>
-                                                                                    <img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                                                </li>
-                                                                               
-                                                                                
-                                                                                <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                               
-                                                                                <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-
-                                                                                
-                                                                            </ul>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">Grand Child</a>
-                                                                            <img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                                        </li>
-                                                                        
-
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
-
-
-                    <ul id="treeviewTab" class="nav nav-tabs">
-                        <li><a href="#family-treeview-tab" data-toggle="tab">Family Treeview</a></li>
-                    </ul>
                     <div id="treeviewTabContent" class="tab-content">
 
                         <div class="row">
@@ -425,15 +355,14 @@
                                 <div class="col-lg-6" style="float:left">
 
 
-                                    <h3>Family Treeview - Vertical</h3>
-
+                                    <h3>Organization Hierarchy - Vertical</h3>
                                     <div class="family-tree-vertical">
-                                        <ul>
+                                        <ul ng-repeat="c in Companies">
                                             <li>
-                                                <a href="#">Company1</a>
+                                                <a href="#"><i class="fa fa-sitemap fa-fw"><div class="icon-bg bg-dark"></div></i>{{c.Name}}</a>
                                                 <ul>
                                                     <li>
-                                                        <a href="#">Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
+                                                        <a href="#">Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
                                                         <ul>
                                                             <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
                                                         </ul>
@@ -457,6 +386,7 @@
                                             </li>
                                         </ul>
                                     </div>
+
                                 </div>
 
                                 <div class="col-lg-6" style="float:right">
@@ -497,9 +427,9 @@
                         </div>
                     </div>
 
-                    
-                        <!--END PAGE WRAPPER-->
-                    </div>
+
+                    <!--END PAGE WRAPPER-->
+                </div>
             </div>
 
         </div>
@@ -550,17 +480,9 @@
 
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
     <script src="js/angular.js"></script>
-   
-
     <script src="js/ngStorage.js"></script>
-    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-    <script src="js/source.js"></script>
-
-    <!--<script src="js/Alerts.js"></script>
-
-    <script src="js/Notifications.js"></script>-->
+    <script src="js/CompanyHierarchy.js"></script>
     
 </body>
 

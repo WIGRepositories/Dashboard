@@ -34,15 +34,21 @@
 
                         <ul class="nav navbar navbar-top-links navbar-right mbn">
                             <li class="dropdown">
-                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                                <ul class="dropdown-menu dropdown-alerts">
-                                    <li><p>You have 0 new notifications</p></li>
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                                <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                    <li><p>You have 0 new alerts</p></li>
+                                </ul>
+                                <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                    <li><p>{{A.Message}}</p></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                                <ul class="dropdown-menu dropdown-messages">
-                                    <li><p>You have 0 new messages</p></li>
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                                <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                    <li><p>You have 0 new notifications</p></li>
+                                </ul>
+                                <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                    <li><p>{{A.Message}}</p></li>
                                 </ul>
                             </li>
                             <li class="dropdown topbar-user">
@@ -111,7 +117,7 @@
                                             <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                             <ul class="nav nav-third-level">
                                                 <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                                <li><a href="UserDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                                <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                                 <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                             </ul>
@@ -146,20 +152,20 @@
 
                             </li>
 
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-truck">
                                         <div class="icon-bg bg-green"></div>
                                     </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
-                                    <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
-                                    <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
-                                    <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
-                                    <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
-                                    <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
-                                    <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                    <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">FleetOwners</span></
+                                    <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerRoutes</span></a></li>
+                                    <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerVehicleLayout</span></a></li>
+                                    <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">FleetOwnerRouteDetails</span></a></li>
+                                    <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">FleetOwnerVehicleSchedule</span></a></li>
+                                    <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">FleetOwnerRouteFare</span></a></li>
+                                    <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">FleetOwnerreports</span></a></li>
                                 </ul>
                             </li>
 
@@ -282,6 +288,7 @@
                                     <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                                 </ul>
                             </li>
 
@@ -298,7 +305,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                            <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                            <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -307,8 +314,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
+
                                             <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                            <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                            <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -356,8 +364,8 @@
                                                             <div class="col-md-3" style="text-align:right">
                                                                 Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()">
 
-                                                       <option value="">Select</option>
-                                                         </select>
+                                                                    <option value="">Select</option>
+                                                                </select>
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
@@ -367,7 +375,7 @@
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Vehicle Type: <input type="text" style="width:100px" value="{{v.vehicleType}}" disabled/>
+                                                                Vehicle Type: <input type="text" style="width:100px" value="{{v.vehicleType}}" disabled />
                                                             </div>
 
 
@@ -380,11 +388,11 @@
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Code: <input type="text" readonly style="width:100px" value="{{r.code}}" disabled/>
+                                                                Code: <input type="text" readonly style="width:100px" value="{{r.code}}" disabled />
                                                             </div>
 
-                                                            
-                                                           
+
+
                                                             <div class="col-md-3" style="text-align:right">
                                                                 Source: <input type="text" readonly style="width:100px" value="{{r.src}}" disabled />
                                                             </div>
@@ -427,14 +435,14 @@
 
                                                                 <th>Source stop</th>
                                                                 <th>target stop</th>
-                                                                <th>Pricing Type</th>                                                                
+                                                                <th>Pricing Type</th>
                                                                 <th>Unit Price</th>
                                                                 <th>Distance</th>
                                                                 <th>Amount</th>
                                                                 <!--<th>List Key</th>
-                                                                <th>List value</th>-->
+                                                    <th>List value</th>-->
                                                                 <!--<th>Effective from</th>
-                                                                <th>Effective Till</th>-->
+                                                    <th>Effective Till</th>-->
 
                                                             </tr>
                                                         </thead>
@@ -451,12 +459,13 @@
                                                                         <option value="1">Per unit pricing</option>
                                                                         <option value="2">Adhoc pricing</option>
                                                                     </select>
-                                                                    <!--<input type="text" class="form-control" style="width:100px" id="p" ng-model="prc" value="prc.value" disabled/>--></td>
+                                                                    <!--<input type="text" class="form-control" style="width:100px" id="p" ng-model="prc" value="prc.value" disabled/>-->
+                                                                </td>
                                                                 <td><input type="text" class="form-control" style="width:100px" id="p" ng-model="T.PerUnitPrice" value="{{puprc}}" disabled /></td>
-                                                                <td><input type="text" class="form-control" style="width:100px" id="d" ng-model="T.Distance" disabled/></td>
+                                                                <td><input type="text" class="form-control" style="width:100px" id="d" ng-model="T.Distance" disabled /></td>
                                                                 <td><input type="text" class="form-control" style="width:100px" id="amt" value="{{puprc * T.Distance}}" ng-model="T.Amount" ng-disabled="prc == 1" /></td>
                                                                 <!--<td><input type="date" ng-mode="T.nFrom" value={{T.From}}></td>
-                                                                <td><input type="date" ng-mode="T.nTo" value={{T.To}}></td>-->
+                                                    <td><input type="date" ng-mode="T.nTo" value={{T.To}}></td>-->
                                                             </tr>
                                                         </tbody>
 
@@ -482,7 +491,7 @@
 
                         </div><!--BEGIN FOOTER-->
                         <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                            <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                         </div>
 
                     </div>

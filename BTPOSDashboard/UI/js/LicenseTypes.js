@@ -1,8 +1,14 @@
 ﻿// JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage','ui.bootstrap'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
-    $scope.dashboardDS = $localStorage.dashboardDS;
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
 
+    $scope.dashboardDS = $localStorage.dashboardDS;
 $scope.GetLicenseCat = function () {
     $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
         $scope.LicenseCat = res.data;            
@@ -74,6 +80,19 @@ $scope.saveLicenseType = function (licenseType, flag) {
     });
     $scope.currGroup = null;
 };
+$scope.showDialog = function (message) {
+
+    var modalInstance = $uibModal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'myModalContent.html',
+        controller: 'ModalInstanceCtrl',
+        resolve: {
+            mssg: function () {
+                return message;
+            }
+        }
+    });
+}
 
 
     $scope.currLicenseType = null;
@@ -189,15 +208,6 @@ $scope.saveNewLicense = function (License) {
     $scope.currRole = null;
 
 };
-
-$scope.setCurrLicenseType = function (lt) {
-    $scope.currLicenseType = lt;
-};
-
-$scope.clearCurrLicenseType = function () {
-    $scope.currLicenseType = null;
-};
-
 $scope.showDialog = function (message) {
 
     var modalInstance = $uibModal.open({
@@ -212,6 +222,16 @@ $scope.showDialog = function (message) {
     });
 }
 
+$scope.setCurrLicenseType = function (lt) {
+    $scope.currLicenseType = lt;
+};
+
+$scope.clearCurrLicenseType = function () {
+    $scope.currLicenseType = null;
+};
+
+
+
 });
 
 myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
@@ -225,15 +245,5 @@ myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg
         $uibModalInstance.dismiss('cancel');
 };
 });
-myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
-    $scope.mssg = mssg;
-    $scope.ok = function () {
-        $uibModalInstance.close('test');
-    };
-
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
 

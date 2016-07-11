@@ -1,6 +1,10 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
-   // $scope.uname = $localStorage.uname;
+    if ($localStorage.uname == null)
+    {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
@@ -90,6 +94,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             admin: Group.admin,
             code: Group.code,
             desc: Group.desc,
+            Address:Group.Address,
+            EmailId:Group.EmailId,
+            ContactNo1:Group.ContactNo1,
+            ContactNo2:Group.ContactNo2,
+            Fax:Group.Fax,
+            Title:Group.Title,
+            Caption:Group.Caption,
+            Country:Group.Country,
+            ZipCode:Group.ZipCode,
+            State:Group.State,
             active: (Group.active == true) ? 1 : 0,
             insupdflag: flag
 

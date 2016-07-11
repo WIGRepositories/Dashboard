@@ -1,6 +1,13 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+   
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
     $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
     $scope.dashboardDS = $localStorage.dashboardDS;
 
     btposlist = [];
@@ -24,7 +31,31 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.GetBTPOSList();
 
     } 
+    $scope.GetFleetOwners = function () {
+        if ($scope.cmp == null) {
+            $scope.cmpdata = null;
+            $scope.Fleet = null;
+            return;
+        }
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
 
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.cmpdata = res.data.Table;
+        });
+    }
 
     $scope.GetBTPOSList = function () {
 
@@ -38,7 +69,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.BTPOS1 = response.data;
          
             //  $localStorage.BTPOSOld = response.data;
-            $scope.setPage();
+            //$scope.setPage();
         })
 
         var vc = {
