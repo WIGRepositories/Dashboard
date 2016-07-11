@@ -2037,6 +2037,7 @@
     <Compile Include="Controllers\FleetOwnerFareController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteDetailsController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteController.cs" />
+    <Compile Include="Controllers\FleetOwnerRouteFare.cs" />
     <Compile Include="Controllers\FleetOwnerRouteFareController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteStopController.cs" />
     <Compile Include="Controllers\FleetOwnerVehicleLayoutController.cs" />

@@ -1232,7 +1232,25 @@ namespace BTPOSDashboardAPI.Models
 
         public int Active { get; set; }
     }
-    public class FleetOwnerRouteFare
+
+    public class FORouteFareConfig {
+        
+       public List<FORouteFare> routeFare { get; set; }
+        public int Id { get; set; }
+        public int RouteId { get; set; }
+        
+        public decimal UnitPrice { get; set; }
+        
+        public int VehicleId { get; set; }
+
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string insupddelflag { get; set; }
+        public string PriceType { get; set; }
+        public int PriceTypeId { get; set; }
+    }
+
+    public class FORouteFare
     {
         public int Id { get; set; }
         public int RouteId { get; set; }
@@ -1251,6 +1269,10 @@ namespace BTPOSDashboardAPI.Models
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public string insupddelflag { get; set; }
+
+        public string PricingType { get; set; }
+
+        public Decimal PerkmPrice { get; set; }
     }
 
     public class LicenseDetails
@@ -1515,6 +1537,22 @@ namespace BTPOSDashboardAPI.Models
         public DateTime DateTime { get; set; }
 
     }
+
+    //public class FORouteFare
+    //{
+    //    public int Id { get; set; }
+    //    public int RouteId { get; set; }
+       
+       
+    //    public decimal PerKmPrice { get; set; }
+    //    public decimal Amount { get; set; }
+       
+    //    public int VehicleId { get; set; }
+       
+    //    public DateTime FromDate { get; set; }
+    //    public DateTime ToDate { get; set; }
+    //    public string insupddelflag { get; set; }
+    //}
 }                     
         
 

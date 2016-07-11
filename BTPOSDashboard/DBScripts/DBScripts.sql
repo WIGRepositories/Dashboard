@@ -9311,3 +9311,163 @@ SELECT--R.[Id]
  
    
 end
+
+
+
+GO
+
+/****** Object:  Table [dbo].[FORouteFare]    Script Date: 07/11/2016 13:51:01 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FORouteFare](
+	[VehicleId] [varchar](50) NOT NULL,
+	[Id] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[Amount] [money] NOT NULL,
+	[PricingType] [varchar](50) NOT NULL,
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL,
+	[PerKmPrice] [money] NOT NULL,
+	[Source] [varchar](50) NOT NULL,
+	[Destination] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerRouteFare]    Script Date: 07/11/2016 13:08:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+alter procedure [dbo].[InsUpdDelFORouteFare](
+           @RouteId int		   
+           ,@PerKmPrice decimal
+           ,@PricingType varchar         
+            ,@FromDate datetime = getdate
+           ,@ToDate datetime = getdate
+           ,@VehicleId int
+           ,@Source varchar = 'hyd'
+           ,@Destination varchar = 'vij'
+          -- ,@InsUpdDelFlag varchar(1)
+)                        
+as
+begin
+declare @Id int
+
+
+UPDATE [POSDashboard].[dbo].[FORouteFare]
+   SET 
+  
+    [RouteId]= @RouteId
+      ,[PerKmPrice] = @PerKmPrice      
+      --,[FareTypeId] = @FareTypeId
+      --,[Active] = @Active
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+      ,[VehicleId] = @VehicleId
+      ,[PricingType]= @PricingType
+      ,[Source]= @Source
+      ,[Destination]= @Destination
+ WHERE [Id] = @Id
+ 
+ if @@rowcount  = 0 
+ INSERT INTO [POSDashboard].[dbo].[FORouteFare]
+           (
+          [RouteId]
+          ,[source]
+          ,[pricingType]
+           ,[Destination]
+           ,[PerKmPrice]           
+           ,[FromDate]
+           ,[ToDate]
+           ,[VehicleId])
+     VALUES
+           (@RouteId
+           ,@Source
+           ,@PricingType
+           ,@Destination
+           ,@PerKmPrice         
+           ,@FromDate
+           ,@ToDate
+           ,@VehicleId
+           )
+
+
+
+GO
+
+/****** Object:  Table [dbo].[FORouteFare]    Script Date: 07/11/2016 19:42:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FORouteFare](
+	[VehicleId] [varchar](50) NOT NULL,
+	[Id] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[Amount] [money] NOT NULL,
+	[PricingType] [varchar](50) NOT NULL,
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL,
+	[PerKmPrice] [money] NOT NULL,
+	[Source] [varchar](50) NOT NULL,
+	[Destination] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetOwnerRouteFare]    Script Date: 07/11/2016 12:46:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFORouteFare]
+AS
+BEGIN
+	
+SELECT fo.[Id]
+      ,[VehicleId]
+      ,[RouteId]
+      ,[PricingType]
+      ,[PerKmPrice]
+      ,[Amount]
+      ,[Source]
+      ,[Destination]
+      ,f.[VehicleRegNo]
+      ,r.RouteName
+      ,r.Code
+   
+      ,[FromDate]
+      ,[ToDate]
+     
+  FROM [POSDashboard].[dbo].[FORouteFare]fo
+  inner join FleetDetails f on f.Id = fo.Id
+  inner join Routes r on r.Id = fo.Id
+
+
+end
+
