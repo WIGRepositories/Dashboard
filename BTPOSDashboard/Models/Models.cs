@@ -622,13 +622,13 @@ namespace BTPOSDashboardAPI.Models
     {
         public int RefId { get; set; }
 
-        public string Type { get; set; }
+        public int Type { get; set; }
 
-        public string createdBy { get; set; }
+        public int createdBy { get; set; }
 
-        public string Raised { get; set; }
+        public int Raised { get; set; }
 
-        public string TicketTitle { get; set; }
+        public int TicketTitle { get; set; }
 
         public string IssueDetails { get; set; }
 
@@ -636,7 +636,7 @@ namespace BTPOSDashboardAPI.Models
 
         public int Status { get; set; }
 
-        public string Asign { get; set; }  	
+        public int Asign { get; set; }  	
 
         public int Id{get;set;}
 
@@ -685,15 +685,14 @@ namespace BTPOSDashboardAPI.Models
         public int userid { get; set; }
     }
 
-    public class SMSEmailConfiguration
+    public class SMSGatewayConfiguration
+
     {
-        public int AlertTypeId { get; set; }
 
         public DateTime enddate { get; set; }
 
         public DateTime hashkey { get; set; }
 
-        //public int Id { get; set; }
 
         public string providername { get; set; }
 
@@ -704,6 +703,8 @@ namespace BTPOSDashboardAPI.Models
         public DateTime startdate { get; set; }
 
         public string username { get; set; }
+        public int ClientId {get;set;}
+        public int SelectId { get; set; }
     }
 
     public class PaymentGatewaySettings
@@ -712,7 +713,7 @@ namespace BTPOSDashboardAPI.Models
 
         public DateTime hashkey { get; set; }
 
-        //public int Id { get; set; }
+
 
         public int PaymentGatewayTypeId { get; set; }
 
@@ -1537,22 +1538,28 @@ namespace BTPOSDashboardAPI.Models
         public DateTime DateTime { get; set; }
 
     }
+    public class EmailGatewaySettings
+    {
+        public DateTime enddate { get; set; }
 
-    //public class FORouteFare
-    //{
-    //    public int Id { get; set; }
-    //    public int RouteId { get; set; }
-       
-       
-    //    public decimal PerKmPrice { get; set; }
-    //    public decimal Amount { get; set; }
-       
-    //    public int VehicleId { get; set; }
-       
-    //    public DateTime FromDate { get; set; }
-    //    public DateTime ToDate { get; set; }
-    //    public string insupddelflag { get; set; }
-    //}
+        public DateTime hashkey { get; set; }
+
+
+        public string providername { get; set; }
+
+        public string pwd { get; set; }
+
+        public DateTime saltkey { get; set; }
+
+        public DateTime startdate { get; set; }
+
+        public string username { get; set; }
+        public int ClientId { get; set; }
+        public int SelectId { get; set; }
+
+        public int Port { get; set; }
+
+    }
 }                     
         
 

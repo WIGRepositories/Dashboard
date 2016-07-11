@@ -24,7 +24,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var Group = {
             RefId: Group.RefId,
             Type: Group.Type,
-            createdBy: Group.createdBy,
+            CreatedBy: Group.CreatedBy,
             Id: Group.Id,
             Raised: Group.Raised,
             TicketTitle: Group.TicketTitle,

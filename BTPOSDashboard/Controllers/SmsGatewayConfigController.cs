@@ -37,7 +37,7 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
          [HttpPost]
-        public HttpResponseMessage SaveSmsGatewaySettings(SMSEmailConfiguration b)
+        public HttpResponseMessage SaveSmsGatewaySettings(SMSGatewayConfiguration b)
         {
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -70,13 +70,8 @@ namespace BTPOSDashboard.Controllers
             pid.ParameterName = "@hashkey";
             pid.SqlDbType = SqlDbType.Date;
             pid.Value =b.hashkey;
-            cmd.Parameters.Add(pid);
-          
-            SqlParameter ss = new SqlParameter();
-            ss.ParameterName = "@AlertTypeId";
-            ss.SqlDbType = SqlDbType.Int;
-            ss.Value = b.AlertTypeId;           
-            cmd.Parameters.Add(ss);
+            cmd.Parameters.Add(pid);         
+           
             
 
             SqlParameter ii = new SqlParameter();
@@ -103,6 +98,21 @@ namespace BTPOSDashboard.Controllers
             vvu.SqlDbType = SqlDbType.VarChar;
             vvu.Value = b.username;
             cmd.Parameters.Add(vvu);
+
+            SqlParameter Cli = new SqlParameter();
+            Cli.ParameterName = "@ClientId";
+            Cli.SqlDbType = SqlDbType.VarChar;
+            Cli.Value = b.ClientId;
+            cmd.Parameters.Add(Cli);
+
+
+            SqlParameter Sl = new SqlParameter();
+            Sl.ParameterName = "@SelectId";
+            Sl.SqlDbType = SqlDbType.VarChar;
+            Sl.Value = b.SelectId;
+            cmd.Parameters.Add(Sl);
+
+
 
 
 
