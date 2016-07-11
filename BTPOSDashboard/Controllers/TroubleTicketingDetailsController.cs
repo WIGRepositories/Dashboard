@@ -65,13 +65,13 @@ namespace POSDBAccess.Controllers
 
                 SqlParameter gss = new SqlParameter();
                 gss.ParameterName = "@Type";
-                gss.SqlDbType = SqlDbType.VarChar;
+                gss.SqlDbType = SqlDbType.Int;
                 gss.Value = n.Type;
                 cmd.Parameters.Add(gss);
 
                 SqlParameter gsa = new SqlParameter();
                 gsa.ParameterName = "@createdBy";
-                gsa.SqlDbType = SqlDbType.VarChar;
+                gsa.SqlDbType = SqlDbType.Int;
                 gsa.Value = n.createdBy;
                 cmd.Parameters.Add(gsa);
 
@@ -83,25 +83,25 @@ namespace POSDBAccess.Controllers
 
                 SqlParameter gssa = new SqlParameter();
                 gssa.ParameterName = "@Raised";
-                gssa.SqlDbType = SqlDbType.VarChar;
+                gssa.SqlDbType = SqlDbType.Int;
                 gssa.Value = n.Raised;
                 cmd.Parameters.Add(gssa);
 
                 SqlParameter gsad = new SqlParameter();
                 gsad.ParameterName = "@TicketTitle";
-                gsad.SqlDbType = SqlDbType.VarChar;
+                gsad.SqlDbType = SqlDbType.Int;
                 gsad.Value = n.TicketTitle;
                 cmd.Parameters.Add(gsad);
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@IssueDetails";
-                gid.SqlDbType = SqlDbType.VarChar;
+                gid.SqlDbType = SqlDbType.NVarChar;
                 gid.Value = n.IssueDetails;
                 cmd.Parameters.Add(gid);
 
                 SqlParameter gsae = new SqlParameter();
                 gsae.ParameterName = "@AddInfo";
-                gsae.SqlDbType = SqlDbType.VarChar;
+                gsae.SqlDbType = SqlDbType.NVarChar;
                 gsae.Value = n.AddInfo;
                 cmd.Parameters.Add(gsae);
 
@@ -113,7 +113,7 @@ namespace POSDBAccess.Controllers
 
                 SqlParameter gsab = new SqlParameter();
                 gsab.ParameterName = "@Asign";
-                gsab.SqlDbType = SqlDbType.VarChar;
+                gsab.SqlDbType = SqlDbType.Int;
                 gsab.Value = n.Asign;
                 cmd.Parameters.Add(gsab);
 

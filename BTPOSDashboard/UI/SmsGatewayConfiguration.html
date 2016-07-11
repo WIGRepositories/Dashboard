@@ -30,15 +30,21 @@
 
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li class="dropdown">
-                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                        <ul class="dropdown-menu dropdown-alerts">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-alerts" ng-show="dashboardDS.Table2.length==0">
                             <li><p>You have 0 new notifications</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                            <li><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                        <ul class="dropdown-menu dropdown-messages">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
                             <li><p>You have 0 new messages</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                            <li><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown topbar-user">
@@ -95,7 +101,7 @@
                                     <ul class="nav nav-third-level">
                                         <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
                                         <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
-
+                                        <li><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
                                     </ul>
                                 </li>
 
@@ -370,7 +376,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="ContactNo1" class="col-md-5 control-label">pwd:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="UserName" type="text" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="UserName" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -402,6 +408,21 @@
                                                                             </div>
 
                                                                         </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">ClientId:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.ClientId" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">SelectId<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.SelectId" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
@@ -420,23 +441,21 @@
                                                     <thead>
                                                         <tr>
                                                             <th>username</th>
-                                                            <th>hashkey</th>
-                                                            <th>SmsGatewayType</th>
                                                             <th>providername</th>
-                                                            <th>saltkey</th>
-                                                            <th>startdate</th>
+                                                            <th>SelectId</th>
+                                                            <th>ClientId</th>
+                                                            
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
                                                         <tr ng-repeat="R in GetSmsGatewayConfig" class="gradeA">
-                                                            <td>{{R.username}}</td>
-                                                            <td>{{R.hashkey}}</td>
-                                                            <td>{{R.Name}}</td>
+                                                            <td>{{R.username}}</td>                                                            
                                                             <td>{{R.providername}}</td>
-                                                            <td>{{R.saltkey}}</td>
-                                                            <td>{{R.startdate}}</td>
+                                                            <td>{{R.SelectId}}</td>
+                                                            <td>{{R.ClientId}}</td>
+                                                           
 
                                                         </tr>
 

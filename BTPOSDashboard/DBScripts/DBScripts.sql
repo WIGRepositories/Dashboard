@@ -1192,23 +1192,39 @@ CREATE TABLE [dbo].[SMSEmailSubscribers](
 ) ON [PRIMARY]
 
 GO
+/****** Object:  Table [dbo].[SMSEmailConfiguration]    Script Date: 07/11/2016 14:30:36 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[SMSEmailConfiguration](
-	[AlertTypeId] [int] NOT NULL,
 	[enddate] [datetime] NOT NULL,
 	[hashkey] [datetime] NOT NULL,
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
 	[saltkey] [datetime] NOT NULL,
 	[startdate] [datetime] NOT NULL,
-	[username] [varchar](50) NOT NULL
+	[username] [varchar](50) NOT NULL,
+	[Port] [int] NOT NULL,
+	[ClientId] [int] NOT NULL,
+	[SelectId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
+
+SET ANSI_PADDING OFF
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4371,26 +4387,44 @@ insert into SMSEmailSubscribers values(@AlertId,@emailid,@enddate,@frequency,@Id
 end
 
 GO
+/****** Object:  StoredProcedure [dbo].[getSMSEmailConfiguration]    Script Date: 07/11/2016 14:30:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getSMSEmailConfiguration]
+Create procedure [dbo].[getSMSEmailConfiguration]
 as
 begin
-select * from SMSEmailConfiguration
+ SELECT  Distinct 
+      [enddate]
+      ,[hashkey]
+      ,[Id]
+      ,[providername]
+      ,[pwd]
+      ,[saltkey]
+      ,[startdate]
+      ,[username] 
+     ,[Port]
+     ,[ClientId]
+     ,[SelectId]
+  FROM [POSDashboard].[dbo].[SMSEmailConfiguration] 
+
 end
 
+
+
 GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailConfiguration]    Script Date: 07/11/2016 14:31:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelSMSEmailConfiguration](@AlertTypeId int,@enddate datetime,@hashkey datetime,@Id int,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+Create procedure [dbo].[InsUpdDelSMSEmailConfiguration](@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50),@Port int,@ClientId int,@SelectId int)
 as
 begin
-insert into SMSEmailConfiguration values(@AlertTypeId,@enddate,@hashkey,@Id,@providername,@pwd,@saltkey,@startdate,@username)
+insert into SMSEmailConfiguration values(@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username,@Port,@ClientId,@SelectId)
 end
+
 
 GO
 SET ANSI_NULLS ON
@@ -9049,7 +9083,7 @@ end
 
 GO
 
-/****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/09/2016 16:38:06 ******/
+/****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/11/2016 10:49:39 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9061,21 +9095,23 @@ GO
 
 CREATE TABLE [dbo].[SmsGatewayeConfiguration](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[AlertTypeId] [int] NOT NULL,
 	[enddate] [datetime] NOT NULL,
 	[hashkey] [datetime] NOT NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
 	[saltkey] [datetime] NOT NULL,
 	[startdate] [datetime] NOT NULL,
-	[username] [varchar](50) NOT NULL
+	[username] [varchar](50) NOT NULL,
+	[ClientId] [int] NOT NULL,
+	[SelectId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
 
 SET ANSI_PADDING OFF
 GO
-/****** Object:  StoredProcedure [dbo].[getSmsGatewayeConfiguration]    Script Date: 07/09/2016 16:31:37 ******/
+GO
+/****** Object:  StoredProcedure [dbo].[getSmsGatewayeConfiguration]    Script Date: 07/11/2016 10:45:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9083,30 +9119,31 @@ GO
 Create procedure [dbo].[getSmsGatewayeConfiguration]
 as
 begin
-SELECT Distinct s.[Id]
+SELECT Distinct [Id]
       ,[username]
-      ,[pwd]
-    --  ,[AlertTypeId]
+      ,[pwd]   
       ,[providername]
       ,[saltkey]
       ,[startdate]
       ,[hashkey]
-      ,Ts.[Name]
-  FROM [POSDashboard].[dbo].[SmsGatewayeConfiguration] s
+      ,[ClientId]
+      ,[SelectId]
+     
+  FROM [POSDashboard].[dbo].[SmsGatewayeConfiguration] 
     
- inner join Types Ts on Ts.TypeGroupId = s.Id 
+  
     
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/09/2016 16:45:46 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/11/2016 10:47:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelSMSGatewayConfiguration](@AlertTypeId int,@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+Create  procedure [dbo].[InsUpdDelSMSGatewayConfiguration](@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50),@ClientId int,@SelectId int)
 as
 begin
-insert into SmsGatewayeConfiguration values(@AlertTypeId,@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username)
+insert into SmsGatewayeConfiguration values(@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username,@ClientId,@SelectId)
 end
 
 /****** Object:  Table [dbo].[Index]    Script Date: 07/09/2016 17:22:46 ******/

@@ -30,15 +30,21 @@
 
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li class="dropdown">
-                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                        <ul class="dropdown-menu dropdown-alerts">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-alerts" ng-show="dashboardDS.Table2.length==0">
                             <li><p>You have 0 new notifications</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                            <li><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                        <ul class="dropdown-menu dropdown-messages">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
                             <li><p>You have 0 new messages</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                            <li><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown topbar-user">
@@ -95,7 +101,7 @@
                                     <ul class="nav nav-third-level">
                                         <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
                                         <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
-
+                                        <li><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
                                     </ul>
                                 </li>
 
@@ -336,7 +342,7 @@
                                                 <div class="row mbm">
 
                                                     <div class="actions">
-                                                        <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add SmsGateway Configuration</button>
+                                                        <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add EmailGateway Configuration</button>
                                                     </div>
 
 
@@ -346,15 +352,15 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add SmsGateway Configuration</h4>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add EmailGateway Configuration</h4>
                                                                 </div>
                                                                 <div class="modal-body">
 
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-5 control-label" style="color:red;">SmsGatewayType:<span class='require'>*</span></label>
-                                                                                <div class="col-md-7"><input id="PaymentGatewayType" type="text" ng-model="Group.AlertTypeId" class="form-control" /><span class="help-block"></span></div>
+                                                                                <label for="Name" class="col-md-5 control-label" style="color:red;">Port:<span class='require'>*</span></label>
+                                                                                <div class="col-md-7"><input id="Port" type="text" ng-model="Group.Port" class="form-control" /><span class="help-block"></span></div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <label for="code" class="col-md-5 control-label" style="color:red;">ProviderName:<span class='require'></span></label>
@@ -369,7 +375,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="ContactNo1" class="col-md-5 control-label">pwd:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="UserName" type="text" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="UserName" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -400,7 +406,22 @@
 
                                                                             </div>
 
-                                                                        </div>
+                                                                        </div> 
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">ClientId:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="ClientId" type="text" ng-model="Group.ClientId" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">SelectId<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="SelectId" type="text" ng-model="Group.SelectId" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>                                                                       
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
@@ -418,26 +439,18 @@
                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
                                                         <tr>
-                                                            <th>username</th>
-                                                            <th>hashkey</th>
-                                                            <th>EmailGatewayType</th>
-                                                            <th>providername</th>
-                                                            <th>saltkey</th>
-                                                            <th>startdate</th>
-                                                            <th>enddate</th>
+                                                            <th>username</th>                                                                                                                      
+                                                            <th>providername</th>                                                                                                                      
+                                                            <th>Port</th>
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
                                                         <tr ng-repeat="R in GetEmailGateway" class="gradeA">
-                                                            <td>{{R.username}}</td>
-                                                            <td>{{R.hashkey}}</td>
-                                                            <td>{{R.Name}}</td>
-                                                            <td>{{R.providername}}</td>
-                                                            <td>{{R.saltkey}}</td>
-                                                            <td>{{R.startdate}}</td>
-                                                            <td>{{R.enddate}}</td>
+                                                            <td>{{R.username}}</td>                                                                                                                   
+                                                            <td>{{R.providername}}</td> 
+                                                            <td>{{R.Port}}</td>
                                                         </tr>
 
                                                     </tbody>
@@ -517,7 +530,6 @@
     <script src="js/angular.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
     <script src="js/ngStorage.js"></script>
-
     <script src="js/EmailGatewayConfiguration.js"></script>
 </body>
 </html>

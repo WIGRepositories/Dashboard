@@ -27,13 +27,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             saltkey: Group.saltkey,
             startdate: Group.startdate,
             username: Group.username,    //       
-
+            Port: Group.Port,
+            ClientId: Group.ClientId,
+            SelectId:Group.SelectId
         }
 
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/PaymentGatewayConfiguration/SavePaymentGatewaySettings',
+            url: 'http://localhost:1476/api/EmailGatewayConfig/SaveEmailGatewaySettings',
             data: newCmp
         }
         $http(req).then(function (response) {

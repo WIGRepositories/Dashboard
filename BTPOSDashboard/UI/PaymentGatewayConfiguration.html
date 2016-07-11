@@ -380,7 +380,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="ContactNo1" class="col-md-5 control-label">pwd:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="UserName" type="text" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="UserName" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -430,7 +430,7 @@
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>username</th>
-                                                                                        <th>hashkey</th>
+                                                                                        
                                                                                         <th>PaymentGatewayType</th>
                                                                                         <th>providername</th>
                                                                                         <th>saltkey</th>
@@ -442,7 +442,7 @@
 
                                                                                     <tr ng-repeat="R in GetPaymentGateway" class="gradeA">
                                                                                         <td>{{R.username}}</td>
-                                                                                        <td>{{R.hashkey}}</td>
+                                                                                       
                                                                                         <td>{{R.Name}}</td>
                                                                                         <td>{{R.providername}}</td>
                                                                                         <td>{{R.saltkey}}</td>
