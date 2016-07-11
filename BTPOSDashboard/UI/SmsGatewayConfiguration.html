@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Page Blank | Extras</title>
+    <title>Home | Configuration| SmsGatewayConfiguration</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
@@ -30,15 +30,21 @@
 
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     <li class="dropdown">
-                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                        <ul class="dropdown-menu dropdown-alerts">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-alerts" ng-show="dashboardDS.Table2.length==0">
                             <li><p>You have 0 new notifications</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                            <li><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                        <ul class="dropdown-menu dropdown-messages">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
                             <li><p>You have 0 new messages</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                            <li><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown topbar-user">
@@ -95,7 +101,7 @@
                                     <ul class="nav nav-third-level">
                                         <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
                                         <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
-
+                                        <li><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
                                     </ul>
                                 </li>
 
@@ -340,14 +346,12 @@
                                                         <button  type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add SmsGateway Configuration</button>
                                                     </div>
 
-
-
-                                                    <div id="Modal-header-new" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add SmsGateway Configuration</h4>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit PaymentGateway</h4>
                                                                 </div>
                                                                 <div class="modal-body">
 
@@ -370,7 +374,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="ContactNo1" class="col-md-5 control-label">pwd:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="UserName" type="text" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="UserName" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -402,6 +406,114 @@
                                                                             </div>
 
                                                                         </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">ClientId:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.ClientId" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">SelectId<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.SelectId" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
+
+                                                                            <a href="SmsGatewayConfiguration.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <div id="Modal-header-new" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add SmsGateway Configuration</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="col-md-6">
+                                                                                <label for="Name" class="col-md-5 control-label" style="color:red;">SmsGatewayType:<span class='require'>*</span></label>
+                                                                                <div class="col-md-7"><input id="PaymentGatewayType" type="text" ng-model="Group.AlertTypeId" class="form-control" /><span class="help-block"></span></div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <label for="code" class="col-md-5 control-label" style="color:red;">ProviderName:<span class='require'></span></label>
+                                                                                <div class="col-md-7"><input id="ProviderName" type="text" ng-model="Group.providername" class="form-control" /><span class="help-block"></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="descr" class="col-md-5 control-label">UserName:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.username" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="ContactNo1" class="col-md-5 control-label">pwd:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="UserName" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="ContactNo2" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">startdate<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.startdate" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">enddate:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.enddate" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">hashkey<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">ClientId:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.ClientId" class="form-control" /><span class="help-block"></span></div>
+
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="Fax" class="col-md-5 control-label">SelectId<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.SelectId" class="form-control" /><span class="help-block"></span></div>
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
@@ -420,23 +532,28 @@
                                                     <thead>
                                                         <tr>
                                                             <th>username</th>
-                                                            <th>hashkey</th>
-                                                            <th>SmsGatewayType</th>
                                                             <th>providername</th>
-                                                            <th>saltkey</th>
-                                                            <th>startdate</th>
+                                                            <th>SelectId</th>
+                                                            <th>ClientId</th>
+                                                            <th>Edit</th>
+                                                            
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
                                                         <tr ng-repeat="R in GetSmsGatewayConfig" class="gradeA">
-                                                            <td>{{R.username}}</td>
-                                                            <td>{{R.hashkey}}</td>
-                                                            <td>{{R.Name}}</td>
+                                                            <td>{{R.username}}</td>                                                            
                                                             <td>{{R.providername}}</td>
-                                                            <td>{{R.saltkey}}</td>
-                                                            <td>{{R.startdate}}</td>
+                                                            <td>{{R.SelectId}}</td>
+                                                            <td>{{R.ClientId}}</td>
+                                                            <td>
+                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
+
+                                                            </td>
 
                                                         </tr>
 

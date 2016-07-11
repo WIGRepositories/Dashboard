@@ -478,6 +478,7 @@
     <Content Include="UI\js\libs\ocLazyLoad.js" />
     <Content Include="UI\js\libs\ui-bootstrap.js" />
     <Content Include="UI\js\NotificationsConfigurations.js" />
+    <Content Include="UI\js\PaymentGateWayConfiguration.js" />
     <Content Include="UI\js\ShoppingCart.js" />
     <Content Include="UI\js\SmsGatewayConfiguration.js" />
     <Content Include="UI\js\treetable.js" />
