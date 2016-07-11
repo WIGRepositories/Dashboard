@@ -16,9 +16,18 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $local
    
 });
 
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
    
     $scope.dashboardDS = $localStorage.dashboardDS;
+
+   
+   
     $scope.StopCount = [];
 
     $scope.GetCompanies = function () {
@@ -196,48 +205,117 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         }
    // }
-   
-    
-    $scope.save = function (stop, flag) {
+        $scope.addpos = function (pos) {
+            if (pos == null) {
+                alert('Please enter IMEI.');
+                return;
+            }
 
-      //  var test = $scope.RouteVehicleSchedule;
+            if (pos.IMEI == null) {
+                alert('Please enter IMEI.');
+                return;
+            }
 
-        //var FOVS = {
-        //    //Id: stop.Id,
-        //    StopNmae: stop.StopNmae,
-        //    StopNo: stop.StopNo,
-        //    StopCode: stop.StopCode,
-        //    ArrivalHr: stop.ArrivalHr,
-        //    DepartureHr: stop.DepartureHr,
-        //    Duration: stop.Duration,
-        //    ArrivalMin: stop.ArrivalMin,
-        //    DepartureMin: stop.DepartureMin,
-        //    ArrivalAMPM: stop.ArrivalAMPM,
-        //    DepartureAmPm: stop.DepartureAmPmtopId,
-        //    arrivaltime: stop.arrivaltime,
-        //    departuretime: stop.departuretime,
-        //    insupdflag: flag
-        //}
+            if (pos.CompanyId == null) {
+                alert('Please enter CompanyId')
+                return;
+            }
+            var found = false;
+            for (var i = 0; i < btposlist.length ; i++) {
+                if (btposlist[i].Id == pos.Id) {
+                    found = true;
 
+                    btposlist[i].IMEI = pos.IMEI;
+                    btposlist[i].ipconfig = pos.ipconfig;
+                    btposlist[i].insupdflag = 'U';
+                    break;
+                }
+            }
+            if (!found) {
+                var Group = {
+                       Id: stop.Id,
+                       StopNmae: stop.StopNmae,
+                       StopNo: stop.StopNo,
+                     StopCode: stop.StopCode,
+                        ArrivalHr: stop.ArrivalHr,
+                      DepartureHr: stop.DepartureHr,
+                        Duration: stop.Duration,
+                     ArrivalMin: stop.ArrivalMin,
+                        DepartureMin: stop.DepartureMin,
+                       ArrivalAMPM: stop.ArrivalAMPM,
+                      DepartureAmPm: stop.DepartureAmPmtopId,
+                      arrivaltime: stop.arrivaltime,
+                       departuretime: stop.departuretime,
+                     insupdflag: flag
+                   // insupdflag: 'U'
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
-            data: $scope.RouteVehicleSchedule
+                }
+
+                btposlist.push(Group);
+            }
         }
-        $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!!");
+        $scope.saveBTPOSList = function () {
 
-            $scope.Group = null;
+            $http({
+                url: 'http://localhost:1476/api/BTPOSDetails/SaveBTPOSDetails',
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                data: btposlist,
 
-        }, function (errres) {
-            var errdata = errres.data;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
-        });
-    }
+            }).success(function (data, status, headers, config) {
+                $scope.showDialog('saved btpos details successfully');
+                btposlist = [];
+            }).error(function (ata, status, headers, config) {
+                var errdata = ata;
+                var errmssg = "";
+                errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+                $scope.showDialog(errmssg);
+            });
+
+        }
+
+    
+    //$scope.save = function (stop, flag) {
+
+    //  //  var test = $scope.RouteVehicleSchedule;
+
+    //    //var FOVS = {
+    //    //    //Id: stop.Id,
+    //    //    StopNmae: stop.StopNmae,
+    //    //    StopNo: stop.StopNo,
+    //    //    StopCode: stop.StopCode,
+    //    //    ArrivalHr: stop.ArrivalHr,
+    //    //    DepartureHr: stop.DepartureHr,
+    //    //    Duration: stop.Duration,
+    //    //    ArrivalMin: stop.ArrivalMin,
+    //    //    DepartureMin: stop.DepartureMin,
+    //    //    ArrivalAMPM: stop.ArrivalAMPM,
+    //    //    DepartureAmPm: stop.DepartureAmPmtopId,
+    //    //    arrivaltime: stop.arrivaltime,
+    //    //    departuretime: stop.departuretime,
+    //    //    insupdflag: flag
+    //    //}
+
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
+    //        data: $scope.RouteVehicleSchedule
+    //    }
+    //    $http(req).then(function (response) {
+
+    //        $scope.showDialog("Saved successfully!!");
+
+    //        $scope.Group = null;
+
+    //    }, function (errres) {
+    //        var errdata = errres.data;
+    //        var errmssg = "";
+    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    //        $scope.showDialog(errmssg);
+    //    });
+    //}
 
     $scope.showDialog = function (message) {
 

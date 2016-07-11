@@ -4534,8 +4534,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
 CREATE procedure [dbo].[InsUpdDelRouteDetails]
 (           @RouteId int
@@ -4599,6 +4599,7 @@ declare @sid int
 declare @Var2 int
 declare @sstopno int
 declare @Vstopno2 int
+declare @distance decimal
 
 DECLARE db_cursor CURSOR FOR  
 SELECT distinct stopid,stopno from [POSDashboard].[dbo].[RouteDetails] where routeid = @RouteId order by stopno
@@ -4626,17 +4627,27 @@ BEGIN
 --					continue;
 --					end
 
+                    begin
+						begin try
+							select @distance = distancefromnextstop from routedetails where stopid = @sid and nextstopid = @Var2
+						end try
+						begin catch
+							set @distance = 0;
+						end catch
+                    end
 					select @cnt = count(1) from [POSDashboard].[dbo].[RouteStops] where fromstopid = @sid and tostopid = @Var2 and RouteId = @RouteId           
 
 					if @cnt = 0 
 					INSERT INTO [POSDashboard].[dbo].[RouteStops]
 						   ([RouteId]
 						   ,[FromStopId]
-						   ,[ToStopId])
+						   ,[ToStopId]
+						   ,distance)
 					 VALUES
 						   (@RouteId
 						   ,@sid
-						   ,@Var2)
+						   ,@Var2
+						   ,@distance)
 					end
 						   Fetch Next From Cursor2 into @Var2,@Vstopno2;
 					
@@ -4654,6 +4665,7 @@ CLOSE db_cursor
 DEALLOCATE db_cursor 
 
 end
+Go
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRoles]    Script Date: 07/01/2016 16:13:42 ******/
 SET ANSI_NULLS ON
@@ -6216,11 +6228,13 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
           INSERT INTO [POSDashboard].[dbo].[RouteStops]
            ([RouteId]
            ,[FromStopId]
-           ,[ToStopId])
+           ,[ToStopId]
+           ,distance)
      VALUES
            (@routeid
            ,@SourceId
-           ,@DestinationId)
+           ,@DestinationId
+           ,@Distance)
      
 end
 end
@@ -7210,14 +7224,14 @@ create procedure [dbo].[GetFOVehicleFareConfig]
 (@vehicleid int, @routeId int)
 as
 begin
-SELECT
+SELECT distinct
       src.name Src
       ,src.Id FromStopId
 	  ,dest.name Dest
 	  ,dest.Id ToStopId
-	  ,fs.Id [FORouteStopId]
+	  ,f.[FORouteStopId]
       ,[VehicleTypeId]
-      ,f.[Distance]
+      ,r.[Distance]
       ,[PerUnitPrice]
       ,[Amount]
       ,[FareTypeId]
@@ -7227,11 +7241,11 @@ SELECT
       ,[VehicleId]
      
   FROM [POSDashboard].[dbo].fleetownerroutestop fs  
-left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
   inner join routestops r on r.id = fs.routestopid
-  left outer join stops src on src.id =r.fromstopid
-left outer join stops dest on dest.id =r.tostopid
-where r.Id = @routeId
+  inner join stops src on src.id =r.fromstopid
+  inner join stops dest on dest.id =r.tostopid
+  left outer join [FleetOwnerRouteFare] f on (fs.routestopid = f.foroutestopid and f.vehicleid = @vehicleid)
+where r.routeId = @routeId
 order by src 
 
 end
@@ -7303,16 +7317,21 @@ SELECT
       [ToDate],
       fr.[Active]
       ,case when u.id is null then 0 else 1 end assigned
-      --,0 assigned
+      ,src.name as srcStop
+      ,src.id as srcId
+      ,dest.name as destStop
+      ,dest.Id as destId
+      ,r.distance
   FROM routes r
 inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+inner join stops src on src.id = r.SourceId
+inner join stops dest on dest.id = r.DestinationId
  inner join fleetowner f on f.id = fr.fleetownerid 
   inner join users u on f.userid = u.id 
   where f.Id = @fleetownerId
 
-
-
 end
+
 Go
  
 SET ANSI_NULLS ON
@@ -9078,9 +9097,28 @@ else
      delete from [POSDashboard].[dbo].[FORouteFleetSchedule]
 	 where VehicleId = @VehicleId
 end
+GO
 
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
 
+CREATE PROCEDURE [dbo].[GetBTPOSId]
+(@imei varchar(20), @fleetownerCode varchar(10))
+AS
+BEGIN
 
+SELECT b.[CompanyId]
+      ,[POSID]
+      ,[StatusId]
+      ,[IMEI]
+      ,[ipconfig]     
+      ,b.[FleetOwnerId]
+  FROM [POSDashboard].[dbo].[BTPOSDetails] b
+  inner join fleetowner fo on fo.id  = b.fleetownerid
+where (IMEI = @imei and @fleetownercode like '%'+@fleetownerCode+'%')
+
+end
 GO
 
 /****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/11/2016 10:49:39 ******/

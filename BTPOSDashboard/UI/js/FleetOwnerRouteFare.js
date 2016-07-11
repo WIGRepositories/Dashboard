@@ -13,8 +13,16 @@ app.directive('ngOnFinishRender', function ($timeout) {
 });
 
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
+   
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
     $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
     $scope.dashboardDS = $localStorage.dashboardDS;
+
 
 
 
@@ -73,7 +81,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRoute/getFleetOwnerRoute?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetOwnerRoute/GetFleetOwnerRouteAssigned?fleetownerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FORoutes = res.data;
           
         });

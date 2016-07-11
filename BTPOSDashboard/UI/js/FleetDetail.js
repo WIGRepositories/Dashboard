@@ -1,7 +1,16 @@
 var app = angular.module('myApp', ['ngStorage','ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
-    $scope.uname = $localStorage.uname
+   
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
     $scope.dashboardDS = $localStorage.dashboardDS;
+
+   
 
     $scope.GetFleetDetails= function () {
 
@@ -116,30 +125,27 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             alert('Please enter VehicleRegNo.');
             return;
        }
-       if (Fleet.group == null || Fleet.VehicleTypeId.group.Id == null) {
-           alert('Please select a type group');
-           return;
-       }
+       //if (Fleet.group == null || Fleet.VehicleTypeId.group.Id == null) {
+       //    alert('Please select a type group');
+       //    return;
+       //}
       
                        
         
         var Fleet = {
             Id:Fleet.Id,
             VehicleRegNo: Fleet.VehicleRegNo,
-            VehicleTypeId: Fleet.VehicleTypeId,
-            VehicleLayout: Fleet.VehicleLayout,
-            FleetOwnerId: Fleet.FleetOwnerId,
-            CompanyId: Fleet.CompanyId,
-            ServiceTypeId: Fleet.ServiceTypeId,
+            VehicleTypeId: (Fleet.vt != null) ? Fleet.vt.Id : Fleet.VehicleTypeId,
+            VehicleLayoutId: (Fleet.vl != null) ? Fleet.vl.Id : Fleet.VehicleLayoutId,
+            FleetOwnerId: $scope.s.Id,
+            CompanyId: $scope.cmp.Id,
+            ServiceTypeId: (Fleet.st != null) ? Fleet.st.Id : Fleet.ServiceTypeId,
             EngineNo: Fleet.EngineNo,
             FuelUsed: Fleet.FuelUsed,       
-            MonthAndYrOfMfr: Fleet.Mfr,
+            MonthAndYrOfMfr: Fleet.MonthAndYrOfMfr,
             ChasisNo: Fleet.ChasisNo,
             SeatingCapacity: Fleet.SeatingCapacity,
-            DateOfRegistration: Fleet.dor,
-            
-
-
+            DateOfRegistration: Fleet.DateOfRegistration
         };
      
         var req = {
@@ -178,11 +184,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var Fleet = {
             Id: -1,
             VehicleRegNo: newVD.VehicleRegNo,
-            VehicleTypeId: newVD.vt.Id,
-            VehicleLayoutId: newVD.vl.Id,
-            FleetOwnerId: newVD.fo.Id,
+            VehicleTypeId: (newVD.vt != null) ? newVD.vt.Id : newVD.VehicleTypeId,
+            VehicleLayoutId: (newVD.vl != null) ? newVD.vl.Id : newVD.VehicleLayoutId,
+            FleetOwnerId: $scope.s.Id,
             CompanyId: $scope.cmp.Id,
-            ServiceTypeId: newVD.st.Id,
+            ServiceTypeId: (newVD.st != null) ? newVD.st.Id : newVD.ServiceTypeId,
+            EngineNo: newVD.EngineNo,
+            FuelUsed: newVD.FuelUsed,
+            MonthAndYrOfMfr: newVD.MonthAndYrOfMfr,
+            ChasisNo: newVD.ChasisNo,
+            SeatingCapacity: newVD.SeatingCapacity,
+            DateOfRegistration: newVD.DateOfRegistration,
             Active: 1,
 
         };
