@@ -81,7 +81,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRoute/getFleetOwnerRoute?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetOwnerRoute/GetFleetOwnerRouteAssigned?fleetownerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FORoutes = res.data;
           
         });

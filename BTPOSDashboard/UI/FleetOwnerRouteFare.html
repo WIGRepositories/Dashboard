@@ -394,11 +394,11 @@
 
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Source: <input type="text" readonly style="width:100px" value="{{r.src}}" disabled />
+                                                                Source: <input type="text" readonly style="width:100px" value="{{r.srcStop}}" disabled />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Destination: <input type="text" readonly style="width:100px" value="{{r.dest}}" disabled />
+                                                                Destination: <input type="text" readonly style="width:100px" value="{{r.destStop}}" disabled />
                                                             </div>
 
                                                         </div>
@@ -413,7 +413,7 @@
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Per KM price: <input type="text" style="width:100px" value="r.PerUnitPrice" ng-model="puprc" ng-disabled="prc == 2 || prc==''" />
+                                                                Per KM price: <input type="text" style="width:100px" ng-init="puprc=0" value="r.PerUnitPrice" ng-model="puprc" ng-disabled="prc == 2 || prc==''" />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
