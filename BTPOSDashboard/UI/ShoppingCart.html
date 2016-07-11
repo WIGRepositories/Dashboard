@@ -203,7 +203,7 @@
 
 
                                     </ul>
-<li class="active">
+                                <li class="active">
                                     <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
                                 </li>
                             </ul>
@@ -292,7 +292,7 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
@@ -309,7 +309,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -318,8 +318,9 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -328,7 +329,8 @@
                         </li>
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
@@ -373,7 +375,7 @@
                                                 </ul>
 
                                             </div>
-                                            <ul class="box text-shadow ul-li-list" >
+                                            <ul class="box text-shadow ul-li-list">
                                                 <!--<item>1</item>-->
                                                 <li class="list-item" ng-repeat="i in items">
                                                     <div class="list-box">
@@ -385,35 +387,35 @@
                                                             <form>
                                                                 <div class="list-box">
                                                                     <!--<p>
-                            <input type="hidden" name="op" value="add">
-                            <input type="hidden" name="OptionCount" value="1">
-                                                                        qty  
-                            <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
-                                   name="item_qty" value="1" style="width:100px;">
-                                                               
-                        </p>-->
-                                                                <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
-                                                                <input type="hidden" name="item_price" value="38.95">
-                                                                <input type="hidden" name="item_id" value="JDR">
-                                                                <input type="hidden" name="product_shipping_class" value="0">
-                                                                <input type="hidden" name="cid" value="000">
+                                                                <input type="hidden" name="op" value="add">
+                                                                <input type="hidden" name="OptionCount" value="1">
+                                                                                                            qty
+                                                                <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
+                                                                       name="item_qty" value="1" style="width:100px;">
+
+                                                            </p>-->
+                                                                    <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
+                                                                    <input type="hidden" name="item_price" value="38.95">
+                                                                    <input type="hidden" name="item_id" value="JDR">
+                                                                    <input type="hidden" name="product_shipping_class" value="0">
+                                                                    <input type="hidden" name="cid" value="000">
                                                                     <p><input type="button" value="Increment" style="width:100px;"></p>
                                                                     <p><input type="button" value="Decrement" style="width:100px;"></p>
                                                                     <p><input type="button" value="Add to Cart" style="width:100px;"></p>
                                                                     <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
                                                                     <p><input type="button" value="Showdetails" style="width:100px;"></p><br />
-                                                                    <p>ItemName:{{i.ItemName}}</p>                                                                  
+                                                                    <p>ItemName:{{i.ItemName}}</p>
                                                                     <p>Unitprice:{{i.UnitPrice}}</p>
-</div>
-                                                               
-                                                                             name="item_qty" value="1" style="width:100px;">
+                                                                </div>
+
+                                                                name="item_qty" value="1" style="width:100px;">
                                                             </form>
                                                         </div>
 
                                                     </div>
                                                 </li>
-                                               
-                                              
+
+
                                             </ul>
 
                                         </div>
@@ -422,7 +424,7 @@
                                             <button class="btn btn-primary" type="button">Cancel</button>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <!--END CONTENT--><!--BEGIN FOOTER-->
                                 <div id="footer">
@@ -441,21 +443,21 @@
                         </div>
                         <div class="modal-body">
                             <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                        <li ng-repeat="item in items">
+                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                        </li>
+                    </ul>
+                    Selected: <b>{{ selected.item }}</b>-->
                             {{mssg}}
 
-                            </div>
-                       
+                        </div>
+
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
                             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                         </div>
-                </script>
-                   
+                    </script>
+
                 </div>
             </div>
         </div>

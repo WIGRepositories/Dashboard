@@ -280,6 +280,7 @@
                                     <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                                 </ul>
                             </li>
 
@@ -296,7 +297,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                            <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                            <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -305,8 +306,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
+
                                             <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                            <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                            <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -376,38 +378,43 @@
                                                     <th>Pricing Type</th>
                                                     <th>Amount</th>
                                                     <!--<th>List Key</th>
-                                                    <th>List value</th>-->
+                                        <th>List value</th>-->
                                                     <th>From </th>
                                                     <th>To</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr role="row" class="filter">
-                                                    <td><select class="form-control input-sm">
-    <option value="">Select...</option>
-    <option value="pending">Pending</option>
-    <option value="closed">Closed</option>
-    <option value="hold">On Hold</option>
-</select></td>
-                                                    <td><select class="form-control input-sm">
-    <option value="">Select...</option>
-    <option value="pending">Pending</option>
-    <option value="closed">Closed</option>
-    <option value="hold">On Hold</option>
-</select></td>
-                                                    <td><select class="form-control input-sm">
-    <option value="">Select...</option>
-    <option value="pending">Pending</option>
-    <option value="closed">Closed</option>
-    <option value="hold">On Hold</option>
-</select>
-                                                      
-                                                        
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
                                                     </td>
-                                                    
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control input-sm">
+                                                            <option value="">Select...</option>
+                                                            <option value="pending">Pending</option>
+                                                            <option value="closed">Closed</option>
+                                                            <option value="hold">On Hold</option>
+                                                        </select>
+
+
+                                                    </td>
+
                                                     <td>
                                                         <div class="mbs"><input type="text" class="form-control input-sm" /></div>
-                                                        
+
                                                     </td>
                                                     <td class="cd-md-2">
                                                         <input type="text" class="form-control input-sm" />

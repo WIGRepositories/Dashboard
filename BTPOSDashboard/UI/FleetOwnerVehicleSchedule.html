@@ -288,6 +288,7 @@
                                     <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                                 </ul>
                             </li>
 
@@ -304,7 +305,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                            <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                            <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -313,8 +314,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
+
                                             <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                            <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                            <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -646,7 +648,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        
+
                                                             <div class="modal fade" id="UpdateSchedule" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
@@ -740,13 +742,13 @@
                                                                             <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
 
                                                                         </div>
-                                                                        
-                                                                        
+
+
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            
-                                                            
+
+
                                                             <div class="col-md-12">
                                                                 <div class="row">
                                                                     <div class="row mbm">
@@ -776,8 +778,8 @@
                                                                             <div class="col-md-3">
 
                                                                                 Vehicle Reg No:<select ng-options="v.VehicleRegNo for v in RouteFleet track by v.VehicleId" ng-model="v" ng-change="getFORVehicleSchedule()">
-    <option value="">Select</option>
-</select>
+                                                                                    <option value="">Select</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -790,8 +792,8 @@
                                                                     <thead>
                                                                         <tr>
                                                                             <th width="20%"> Stop Name</th>
-                                                                           <th width="20%">Stop Code</th>
-                                                                            <th width="20%">Stop No</th>                                                                           
+                                                                            <th width="20%">Stop Code</th>
+                                                                            <th width="20%">Stop No</th>
                                                                             <th width="10%">ArrivalTime</th>
                                                                             <th width="10%">departureTime</th>
                                                                             <th width="20%">Update timing</th>
@@ -802,7 +804,7 @@
                                                                         <tr ng-repeat="stop in RouteVehicleSchedule" ng-on-finish-render ng-init="cnt=1">
                                                                             <td>{{stop.StopName}}</td>
                                                                             <td>{{stop.StopCode}}</td>
-                                                                            <td>{{stop.StopNo}}</td>                                                                           
+                                                                            <td>{{stop.StopNo}}</td>
                                                                             <td>{{stop.arrivaltime}}</td>
                                                                             <td>{{stop.departuretime}}</td>
                                                                             <td>
@@ -812,134 +814,134 @@
                                                                                 </button>
                                                                             </td>
                                                                             <!--<td>
-            <div class="col-md-12 active">
-                <div class="input-group datetimepicker-disable-date date">
-                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                </div>
-            </div>
-        </td>
-        <td>
-            <div class="col-md-12 active">
-                <div class="input-group datetimepicker-disable-date date" >
-                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
-                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                </div>
-            </div>
-        </td>-->
-                                                                        </tr> 
+                                                                    <div class="col-md-12 active">
+                                                                        <div class="input-group datetimepicker-disable-date date">
+                                                                            <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="col-md-12 active">
+                                                                        <div class="input-group datetimepicker-disable-date date" >
+                                                                            <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
+                                                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>-->
+                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
                                                                 <!--<div class="col-lg-6">
-                                                                    <div class="panel panel-grey">
-                                                                        <div class="panel-heading">Routes</div><br />
-                                                                        <div class="row">
-                                                                            <div class="col-lg-12">
-                                                                                <div class="col-md-2">
-                                                                                    <div class="form-group has-success">
-                                                                                        <div class="col-md-6">
-                                                                                            <label for="inputFirstName" class="control-label">Stop No:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="col-md-4"><input id="Description" type="text" class="form-control" value="{{data.StopNo}}" ng-model="GetData();" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-2">
-                                                                                    <div class="form-group has-success">
-                                                                                        <div class="col-md-6">
-                                                                                            <label for="inputFirstName" class="control-label">Stop Name:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="col-md-4"><input id="Description" type="text" class="form-control" value="{{data.StopName}}" ng-model="GetData();" /><span class="help-block"></span></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-2">
-                                                                                    <div class="form-group has-success">
-                                                                                        <div class="col-md-6">
-                                                                                            <label for="inputFirstName" class="control-label">Stop Code:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                        <div class="col-md-2">
-                                                                                            <div class="col-md-2">
-                                                                                                <div class="col-md-3"><input id="Description" type="text" class="form-control" value="{{data.StopCode}}" ng-model="GetData();" /><span class="help-block"></span></div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success">
-                                                                                        <div class="col-md-6">
-                                                                                            <label for="inputFirstName" class="control-label">Arrival:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <div class="input-group datetimepicker-disable-date date"><input type="text" class="form-control"><span class="input-group-addon"><i class="fa fa-clock-o"></i></span></div>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="col-md-3">
-                                                                                    <div class="form-group has-success">
-                                                                                        <div class="col-md-6">
-                                                                                            <label for="inputFirstName" class="control-label">Departure:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <div class="input-group datetimepicker-disable-date date"><input type="text" class="form-control"><span class="input-group-addon"><i class="fa fa-clock-o"></i></span></div>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>-->
-                                                                            <!-- <div class="col-md-2">
-                        <div class="form-group has-success" style="text-align:right">
-                            <label for="inputFirstName" class="control-label">Update Timing:<span class='require'>*</span></label>
-                        </div>
-                    </div>-->
-
+                                                        <div class="panel panel-grey">
+                                                            <div class="panel-heading">Routes</div><br />
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group has-success">
+                                                                            <div class="col-md-6">
+                                                                                <label for="inputFirstName" class="control-label">Stop No:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <div class="col-md-4"><input id="Description" type="text" class="form-control" value="{{data.StopNo}}" ng-model="GetData();" /><span class="help-block"></span></div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                                    <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
-                                                                        <div class="col-md-12" style="text-align:center">
-                                                                            <button ng-click="save(test);" class="btn btn-success">
-                                                                                <i class="fa fa-save"></i>&nbsp;
-                                                                                Save
-                                                                            </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group has-success">
+                                                                            <div class="col-md-6">
+                                                                                <label for="inputFirstName" class="control-label">Stop Name:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <div class="col-md-4"><input id="Description" type="text" class="form-control" value="{{data.StopName}}" ng-model="GetData();" /><span class="help-block"></span></div>
+                                                                            </div>
                                                                         </div>
-                                                                        <br />
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group has-success">
+                                                                            <div class="col-md-6">
+                                                                                <label for="inputFirstName" class="control-label">Stop Code:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-2">
+                                                                                <div class="col-md-2">
+                                                                                    <div class="col-md-3"><input id="Description" type="text" class="form-control" value="{{data.StopCode}}" ng-model="GetData();" /><span class="help-block"></span></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success">
+                                                                            <div class="col-md-6">
+                                                                                <label for="inputFirstName" class="control-label">Arrival:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="input-group datetimepicker-disable-date date"><input type="text" class="form-control"><span class="input-group-addon"><i class="fa fa-clock-o"></i></span></div>
+
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
 
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success">
+                                                                            <div class="col-md-6">
+                                                                                <label for="inputFirstName" class="control-label">Departure:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="input-group datetimepicker-disable-date date"><input type="text" class="form-control"><span class="input-group-addon"><i class="fa fa-clock-o"></i></span></div>
 
-                                                                    <!--<div class="panel panel-violet">
-
-                <div class="panel-heading">Route configuration</div>
-                <div class="portlet-body" ng-model="RouteVehicleSchedule">
-                    <br />
-                    <form role="form" class="form-horizontal">
-                        <div class="row">
-
-
-                        </div>
-                    </form>
-
-
-                </div>
-
-
-            </div>-->
-                                                                    <!--END CONTENT-->
-                                                                    <!--BEGIN FOOTER-->
-                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
+                                                                <!-- <div class="col-md-2">
+                                                        <div class="form-group has-success" style="text-align:right">
+                                                            <label for="inputFirstName" class="control-label">Update Timing:<span class='require'>*</span></label>
+                                                        </div>
+                                                    </div>-->
 
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                        </div>
+                                            <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
+                                                <div class="col-md-12" style="text-align:center">
+                                                    <button ng-click="save(test);" class="btn btn-success">
+                                                        <i class="fa fa-save"></i>&nbsp;
+                                                        Save
+                                                    </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
+                                                </div>
+                                                <br />
+                                            </div>
+
+
+                                            <!--<div class="panel panel-violet">
+
+                                    <div class="panel-heading">Route configuration</div>
+                                    <div class="portlet-body" ng-model="RouteVehicleSchedule">
+                                        <br />
+                                        <form role="form" class="form-horizontal">
+                                            <div class="row">
+
+
+                                            </div>
+                                        </form>
+
+
                                     </div>
-                         
+
+
+                                </div>-->
+                                            <!--END CONTENT-->
+                                            <!--BEGIN FOOTER-->
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
 
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>

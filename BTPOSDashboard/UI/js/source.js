@@ -1,9 +1,5 @@
 var app = angular.module('myApp', ['ngStorage']);
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {    
-    //if ($localStorage.uname == null)
-    //{
-    //    window.location.href = "login.html";
-    //}
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }

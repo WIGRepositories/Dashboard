@@ -282,6 +282,7 @@
                                     <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                                 </ul>
                             </li>
 
@@ -298,7 +299,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                            <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                            <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -307,8 +308,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
+
                                             <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                            <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                            <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -348,101 +350,101 @@
                                                     <div class="table-container">
 
                                                         <div class="row mbm">
-                                                            <div class="col-md-3">                                                            
-                                                              Vehicle Type  : <select ng-model="prc">
-                                                                             <option value="">Select</option>
-                                                                             <option value="1">A/C</option>
-                                                                             <option value="2">Non A/C</option>
-                                                                            
-                                                                            </select>
-                                                                     </div>
                                                             <div class="col-md-3">
-                                                              Pricing Type  : <select ng-model="prc">
+                                                                Vehicle Type  : <select ng-model="prc">
+                                                                    <option value="">Select</option>
+                                                                    <option value="1">A/C</option>
+                                                                    <option value="2">Non A/C</option>
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                Pricing Type  : <select ng-model="prc">
                                                                     <option value="">Select</option>
                                                                     <option value="1">Per Unit</option>
                                                                     <option value="2">Per Unit</option>
 
                                                                 </select>
                                                             </div>
-                                                            </div>                                                                                       
-                                                                                                                 
-                                                        </div>                                                
-                                                            </div>                      
-                                                                                               
                                                         </div>
-                                                    </div>
 
-
-
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-
-                                                                <th>Route</th>                                                                                                                                                                                               
-                                                                <th>Vehicle Type</th>
-                                                                <th>Pricing Type</th>
-                                                                <th>Amount</th>
-                                                                <!--<th>List Key</th>
-                                                                <th>List value</th>-->
-                                                                <th>From </th>
-                                                                <th>To</th>
-                                                            </tr>                                                           
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>R1</td>
-                                                                <td>Non A/c</td>
-                                                                <td>Per Unit</td>
-                                                                <td>10</td>
-                                                                <td>12/06/2016</td>
-                                                                <td>13/07/2016</td>
-                                                            </tr>
-                                                            <tr>                                                               
-                                                                <td>R1</td>
-                                                                <td>A/c</td>
-                                                                <td>Per Unit</td>
-                                                                <td>5</td>
-                                                                <td>12/06/2016</td>
-                                                                <td>13/07/2016</td>
-                                                              
-                                                            </tr>
-                                                            <tr>
-                                                                <td>R2</td>
-                                                                <td>Non A/c</td>
-                                                                <td>Per Unit</td>
-                                                                <td>10</td>
-                                                                <td>12/06/2016</td>
-                                                                <td>13/07/2016</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>R2</td>
-                                                                <td>A/c</td>
-                                                                <td>Per Unit</td>
-                                                                <td>5</td>
-                                                                <td>12/06/2016</td>
-                                                                <td>13/07/2016</td>
-
-                                                            </tr>
-                                                           
-                                                        </tbody>
-
-                                                    </table>
-
-                                                    <div style="text-align:center">
-                                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
-
-                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                     </div>
                                                 </div>
 
-
-
                                             </div>
+                                        </div>
+
+
+
+                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Route</th>
+                                                    <th>Vehicle Type</th>
+                                                    <th>Pricing Type</th>
+                                                    <th>Amount</th>
+                                                    <!--<th>List Key</th>
+                                        <th>List value</th>-->
+                                                    <th>From </th>
+                                                    <th>To</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>R1</td>
+                                                    <td>Non A/c</td>
+                                                    <td>Per Unit</td>
+                                                    <td>10</td>
+                                                    <td>12/06/2016</td>
+                                                    <td>13/07/2016</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>R1</td>
+                                                    <td>A/c</td>
+                                                    <td>Per Unit</td>
+                                                    <td>5</td>
+                                                    <td>12/06/2016</td>
+                                                    <td>13/07/2016</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>R2</td>
+                                                    <td>Non A/c</td>
+                                                    <td>Per Unit</td>
+                                                    <td>10</td>
+                                                    <td>12/06/2016</td>
+                                                    <td>13/07/2016</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>R2</td>
+                                                    <td>A/c</td>
+                                                    <td>Per Unit</td>
+                                                    <td>5</td>
+                                                    <td>12/06/2016</td>
+                                                    <td>13/07/2016</td>
+
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+
+                                        <div style="text-align:center">
+                                            <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+
+                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                         </div>
                                     </div>
 
+
+
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+                </div>
 
                             <!--END CONTENT-->
 

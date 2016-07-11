@@ -12,8 +12,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
-   
-
     /* user details functions */
     $scope.GetCompanies = function () {    
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
@@ -62,7 +60,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
 
         if (User.EmpNo == null) {
-            alert('Please enter EmpNo.');
+            alert('Please enter FleetOwnerCode.');
             return;
         }
 

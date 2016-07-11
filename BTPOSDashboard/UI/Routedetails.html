@@ -289,6 +289,7 @@
                                     <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                     <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                     <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                    <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                                 </ul>
                             </li>
 
@@ -305,7 +306,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                            <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                            <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -314,8 +315,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
+
                                             <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                            <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                            <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -491,7 +493,7 @@
                             </div>
 
                             <div class="modal fade" id="Modal-next" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true">
-                                <div class="modal-dialog" >
+                                <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header modal-header-primary">
                                             <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
@@ -597,7 +599,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row">
 
                                                 <div class="col-md-3">
@@ -653,7 +655,8 @@
                                                 </td>
                                                 <td>
                                                     <div>
-                                                        Route Code: <input type="text" disabled ng-model="RouteDetails.Table[0].routecode"/></div>
+                                                        Route Code: <input type="text" disabled ng-model="RouteDetails.Table[0].routecode" />
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <div>
@@ -705,7 +708,7 @@
                                                                         <label class="col-md-5 control-label">Stop Code:</label>
                                                                         <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.StopCode" /></div>
                                                                     </div>
-                                                                    
+
                                                                     <div class="form-group">
                                                                         <label class="col-md-5 control-label">Previous stop:</label>
                                                                         <div class="col-md-5"><input type="text" class="form-control" ng-model="currStop.prevstop" /></div>
@@ -754,7 +757,7 @@
                                                             <td colspan="2">
                                                                 <div class="form-group">
                                                                     <div class="col-sm-12 controls" style="text-align:center">
-                                                                        <button  data-target="#Modal-prev" data-toggle="modal" class="btn btn-primary btn-xs">Add Previous Stop</button>
+                                                                        <button data-target="#Modal-prev" data-toggle="modal" class="btn btn-primary btn-xs">Add Previous Stop</button>
                                                                         <button data-target="#Modal-next" data-toggle="modal" class="btn btn-primary btn-xs">Add Next Stop</button>
                                                                         <button class="btn btn-primary btn-xs">Delete</button>
                                                                     </div>
@@ -781,7 +784,7 @@
 
 
                                 </div>
-                                
+
 
                             </div>
                             <div id="footer">

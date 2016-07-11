@@ -270,7 +270,7 @@ THE SOFTWARE.*/
 					excelFile += "</xml>";
 					excelFile += "<![endif]-->";
 					excelFile += "</head>";
-					excelFile += "<body >";
+					excelFile += "<body>";
 					excelFile += excel;
 					excelFile += "</body>";
 					excelFile += "</html>";

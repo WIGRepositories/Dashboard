@@ -1,5 +1,5 @@
 ﻿//var myapp1 = angular.module('myApp', ['timepicker'])
-var myapp1 = angular.module('myApp', ['ngStorage'])
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 
 angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $localStorage) {
     
@@ -23,7 +23,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
-
+   
     $scope.dashboardDS = $localStorage.dashboardDS;
 
    

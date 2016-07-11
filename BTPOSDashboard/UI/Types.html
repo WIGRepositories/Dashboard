@@ -289,6 +289,7 @@
                                 <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
@@ -305,7 +306,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -314,18 +315,15 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
 
-
-
                             </ul>
                         </li>
-
-
                         </ul>
                     </div>
                 </nav>
@@ -447,123 +445,123 @@
 
 
                                                     </div>
-                                                
 
-                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                <thead>
-                                                    <tr>
 
-                                                        <th>Name</th>
-                                                        <th>Description</th>
-                                                        <th>Type Group</th>
-                                                        <th>Active</th>
-                                                        <!--<th>List Key</th>
+                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Name</th>
+                                                                <th>Description</th>
+                                                                <th>Type Group</th>
+                                                                <th>Active</th>
+                                                                <!--<th>List Key</th>
                                                         <th>List value</th>-->
-                                                        <th>Update</th>
+                                                                <th>Update</th>
 
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
 
-                                                    <tr ng-repeat="T in Types">
+                                                            <tr ng-repeat="T in Types">
 
 
-                                                        <td>{{T.Name}}</td>
-                                                        <td>{{T.Description}}</td>
-                                                        <td>{{T.TypeGroup}}</td>
-                                                        <td><input type="checkBox" ng-checked="T.Active" disabled /></td>
+                                                                <td>{{T.Name}}</td>
+                                                                <td>{{T.Description}}</td>
+                                                                <td>{{T.TypeGroup}}</td>
+                                                                <td><input type="checkBox" ng-checked="T.Active" disabled /></td>
 
-                                                        <!--<td>{{T.ListKey}}</td>
+                                                                <!--<td>{{T.ListKey}}</td>
                                                         <td>{{T.Listvalue}}</td>-->
-                                                        <td>
-                                                            {{T.Update}}
-                                                            <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(T);">
-                                                                <i class="fa fa-edit"></i>&nbsp;
-                                                                Edit
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
+                                                                <td>
+                                                                    {{T.Update}}
+                                                                    <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(T);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
 
-                                            </table>
-                                            <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header modal-header-primary">
-                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                            <h4 id="modal-header-primary-label" class="modal-title">Add New Type</h4>
+                                                    </table>
+                                                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header modal-header-primary">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Type</h4>
+                                                                </div>
+                                                                <div class="modal-body" ng-model="Types">
+                                                                    <div class="row">
+
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;">Name:<span class='require'>*</span></label>
+
+                                                                        <div class="col-md-6"><input id="inputFirstName" type="text" ng-model="Types.Name" class="form-control" /><span class="help-block"></span></div>
+                                                                    </div>
+
+
+                                                                    <div class="row">
+                                                                        <label for="Description" class="col-md-3 control-label"> Description: <span class='require'></span></label>
+                                                                        <div class="col-md-6"><input id="Description" type="text" ng-model="Types.Description" class="form-control" /><span class="help-block"></span></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Type Group:</label>
+
+
+                                                                        <div class="col-md-4">
+                                                                            <select ng-options="s.Name for s in TypeGroups track by s.Id" class="form-control" ng-model="Types.group">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <div class="row">
+                                                                        <label for="Active" class="col-md-3 control-label">Active:<span class='require'></span></label>
+
+                                                                        <div class="col-md-4">
+                                                                            <div><input type="checkbox" ng-checked="Types.Active" /></div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button class="btn btn-primary" type="button" ng-click="saveNewType(Types);">Save</button>
+
+                                                                            <button type="reset" class="btn btn-green">Cancel</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
                                                         </div>
-                                                        <div class="modal-body" ng-model="Types">
-                                                            <div class="row">
 
-                                                                <label for="Name" class="col-md-3 control-label" style="color:red;">Name:<span class='require'>*</span></label>
-
-                                                                <div class="col-md-6"><input id="inputFirstName" type="text" ng-model="Types.Name" class="form-control" /><span class="help-block"></span></div>
-                                                            </div>
-
-
-                                                            <div class="row">
-                                                                <label for="Description" class="col-md-3 control-label"> Description: <span class='require'></span></label>
-                                                                <div class="col-md-6"><input id="Description" type="text" ng-model="Types.Description" class="form-control" /><span class="help-block"></span></div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Type Group:</label>
-
-
-                                                                <div class="col-md-4">
-                                                                    <select ng-options="s.Name for s in TypeGroups track by s.Id" class="form-control" ng-model="Types.group">
-                                                                        <option value="">Select</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-
-
-                                                            <div class="row">
-                                                                <label for="Active" class="col-md-3 control-label">Active:<span class='require'></span></label>
-
-                                                                <div class="col-md-4">
-                                                                    <div><input type="checkbox" ng-checked="Types.Active" /></div>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-actions">
-                                                                <div class="col-md-offset-3 col-md-9">
-                                                                    <button class="btn btn-primary" type="button" ng-click="saveNewType(Types);">Save</button>
-
-                                                                    <button type="reset" class="btn btn-green">Cancel</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
-
-
-
                                                 </div>
 
                                             </div>
+
+
+
                                         </div>
-
                                     </div>
-
-
-
                                 </div>
+
                             </div>
                         </div>
-
                     </div>
+
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
-            </div>
 
-            <!--END CONTENT--><!--BEGIN FOOTER-->
-            <div id="footer">
-                <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
             </div>
-            <!--END FOOTER-->
-        </div>
-
-    </div>
     <!--END PAGE WRAPPER-->
 
     <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">

@@ -282,6 +282,7 @@
                                 <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
@@ -298,7 +299,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -307,8 +308,9 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -317,7 +319,8 @@
                         </li>
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
 
@@ -395,33 +398,33 @@
                                                         </table>
 
                                                         <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                                                                    <th>FeatureName</th>
-                                                                    <th>FeatureValue</th>
-                                                                    <th>Description</th>
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="3%"><input type="checkbox" class="checkall" />Select</th>
+                                                            <th>FeatureName</th>
+                                                            <th>FeatureValue</th>
+                                                            <th>Description</th>
 
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr ng-repeat="L in License">
-                                                                    <td><input type="checkbox" /> </td>
-                                                                    <td>{{L.FeatureName}}</td>
-                                                                    <td>{{L.FeatureValue}}</td>
-                                                                    <td>{{L.Description}}</td>
-                                                                </tr>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="L in License">
+                                                            <td><input type="checkbox" /> </td>
+                                                            <td>{{L.FeatureName}}</td>
+                                                            <td>{{L.FeatureValue}}</td>
+                                                            <td>{{L.Description}}</td>
+                                                        </tr>
 
-                                                            </tbody>
-                                                        </table>-->
+                                                    </tbody>
+                                                </table>-->
                                                         <!---<a href="#" class="list-group-item">
-                                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
-                                                            &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                                        </a><a href="#" class="list-group-item">
-                                                            <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
-                                                                <span class="glyphicon glyphicon-paperclip"></span>
-                                                            </span>
-                                                        </a>---->
+                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;
+                                                    &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
+                                                </a><a href="#" class="list-group-item">
+                                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span><span style="min-width: 120px; display: inline-block;" class="name">Bhaumik Patel</span><span>License to be renewed</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">12:10 AM</span><span class="pull-right mrl">
+                                                        <span class="glyphicon glyphicon-paperclip"></span>
+                                                    </span>
+                                                </a>---->
 
 
 

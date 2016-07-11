@@ -258,6 +258,7 @@
                                 <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
@@ -274,7 +275,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -283,17 +284,15 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
 
-
-
                             </ul>
                         </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -329,10 +328,10 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <!--<div class="form-group">
-                                                                        <label for="POSID" class="col-md-3 control-label" style="color:red;">POSID <span class='require'>*</span></label>
+                                                                <label for="POSID" class="col-md-3 control-label" style="color:red;">POSID <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-4"><input id="POSID" type="text" ng-model="Group.POSID" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>-->
+                                                                <div class="col-md-4"><input id="POSID" type="text" ng-model="Group.POSID" class="form-control" /><span class="help-block"></span></div>
+                                                            </div>-->
                                                                     <div class="form-group">
                                                                         <label for="IMEI" class="col-md-4 control-label" style="color:red;">IMEI: <span class='require'>*</span></label>
 
@@ -356,29 +355,29 @@
                                                                     </div>
 
                                                                     <!--<div class="form-group">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Company name:</label>
+                                                                <label for="selCountry" class="col-md-4 control-label">Company name:</label>
 
-                                                                        <div class="col-md-6">
-                                                                            <select ng-options="c.Name for c in initdata.Table track by c.Id" class="form-control" ng-model="cmp" ng-change="GetBTPOSList()">
-                                                                                <option value="">All</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>-->
+                                                                <div class="col-md-6">
+                                                                    <select ng-options="c.Name for c in initdata.Table track by c.Id" class="form-control" ng-model="cmp" ng-change="GetBTPOSList()">
+                                                                        <option value="">All</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>-->
                                                                     <!--<div class="form-group">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Fleet Owner:</label>
-                                                                        <div class="col-md-6">
-                                                                            <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetBTPOSListByFleetOwner()">
-                                                                                <option value="">All</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>-->
+                                                                <label for="selCountry" class="col-md-4 control-label">Fleet Owner:</label>
+                                                                <div class="col-md-6">
+                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetBTPOSListByFleetOwner()">
+                                                                        <option value="">All</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>-->
 
                                                                     <div class="form-group">
                                                                         <label for="selCountry" class="col-md-4 control-label">Fleet Owner:</label>
 
                                                                         <div class="col-md-6">
                                                                             <select id="selusertype" class="form-control" ng-model="Group.FleetOwnerId" disabled>
-                                                                                <option value="">None</option>                                                                               
+                                                                                <option value="">None</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

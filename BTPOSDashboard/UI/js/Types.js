@@ -1,11 +1,14 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
-     $scope.uname = $localStorage.uname;
-    $scope.dashboardDS = $localStorage.dashboardDS;
-
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
+
+    $scope.dashboardDS = $localStorage.dashboardDS;
     $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
         $scope.getselectval();

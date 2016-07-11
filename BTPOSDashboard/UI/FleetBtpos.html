@@ -299,6 +299,7 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
 
                             </ul>
                         </li>
@@ -316,7 +317,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -325,8 +326,9 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -335,7 +337,8 @@
                         </li>
                         </ul>
                     </div>
-                </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                </nav>
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
@@ -389,164 +392,129 @@
                                                                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                         <h4 id="modal-header-primary-label" class="modal-title">New Fleet BTPOS</h4>
                                                                     </div>
-
                                                                     <div class="modal-body" ng-init="GetCompanies();" ng-model="FleetBtpos">
-                                                                       
                                                                         <div class="row">
 
-                                                                            <div class="row mbm">
-                                                                                <div class="col-lg-12">
-                                                                                    <div class="col-lg-3">
-
-                                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
-                                                                                    </div>
-                                                                                        <div class="col-md-6">
-                                                                                            <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
-                                                                                                <option value="">Select</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
+                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
+                                                                            <div class="col-md-6">
+                                                                                <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
+                                                                                    <option value="">Select</option>
+                                                                                </select>
                                                                             </div>
-                                                                            </div>
-                                                                            <div class="row mbm">
-                                                                                
-                                                                                    <div class="row">
-                                                                                        <div class="col-lg-12">
-                                                                                            <div class="col-lg-3">
-                                                                                                <label for="code" class="col-md-3 control-label" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
-                                                                                                </div>
-                                                                                                <div class="col-md-6">
-                                                                                                    <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="fo" ng-change="GetFleetBTPosForFO();">
-                                                                                                        <option value="">Select</option>
-                                                                                                    </select>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                </div>
-                                                                            </div>
+                                                                        </div>
+                                                                        <div>
 
                                                                             <div class="row">
-
-                                                                                <div class="row mbm">
-                                                                                    <div class="col-lg-12">
-                                                                                        <div class="col-lg-3">
-                                                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;">Vehicle Reg No:<span class='require'>*</span></label>
-
-                                                                                            </div>
-                                                                                            <div class="col-md-6">
-                                                                                                <select ng-options="v.VehicleRegNo for v in FleetnBTPos.Table track by v.Id" class="form-control" ng-model="FleetBtpos.v">
-                                                                                                    <option value="">Select</option>
-                                                                                                </select>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                <label for="code" class="col-md-3 control-label" style="color:red;">Fleet Owner:<span class='require'></span></label>
+                                                                                <div class="col-md-6">
+                                                                                    <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="fo" ng-change="GetFleetBTPosForFO();">
+                                                                                        <option value="">Select</option>
+                                                                                    </select>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="row">
-                                                                                <div class="row mbm">
-                                                                                    <div class="col-lg-12">
-                                                                                        <div class="col-lg-3">
-                                                                                            <label for="selCountry" class="col-md-3 control-label" style="color:red;">BTPOS ID:<span class='require'>*</span></label>
-                                                                                            </div>
+                                                                            <div>
+                                                                                <div class="row">
+                                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>Vehicle Reg No:</label>
 
-                                                                                            <div class="col-md-6">
-                                                                                                <select ng-options="b.POSID for b in FleetnBTPos.Table1 track by b.Id" class="form-control" ng-model="FleetBtpos.b">
-                                                                                                    <option value="">Select</option>
-                                                                                                </select>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="row mbm">
-                                                                                    <div class="col-lg-12">
-                                                                                      
-                                                                                            <label for="Name" class="col-md-3">Effective From:<span class='require'></span></label>
-                                                                                          
-                                                                                        <input type="date" ng-model=" fleetbtpos.fd" class="col-md-6">
-                                                                                        </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        
-                                                                            <div class="row">
-                                                                                <div class="row mbm">
-                                                                                    <div class="col-lg-12">
-                                                                                        <label for="Name" class="col-md-3"> Effective Till: <span class='require'></span></label>
 
-                                                                                        <input type="date" ng-model="FleetBtpos.td" class="col-md-6">
+                                                                                    <div class="col-md-6">
+                                                                                        <select ng-options="v.VehicleRegNo for v in FleetnBTPos.Table track by v.Id" class="form-control" ng-model="FleetBtpos.v">
+                                                                                            <option value="">Select</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
-                                                                                    <div class="form-actions">
-                                                                                        <div class="col-md-offset-3 col-md-9">
-                                                                                            <button class="btn btn-primary" type="button" ng-click="saveFleetBTPOS(FleetBtpos);">Save</button>
+                                                                                <div class="row">
+                                                                                    <label for="selCountry" class="col-md-3 control-label" style="color:red;"><span class='require'>*</span>BTPOS ID:</label>
 
-                                                                                            <a href="FleetBtpos.html" class="btn btn-green">Cancel</a>
-                                                                                        </div>
+
+                                                                                    <div class="col-md-6">
+                                                                                        <select ng-options="b.POSID for b in FleetnBTPos.Table1 track by b.Id" class="form-control" ng-model="FleetBtpos.b">
+                                                                                            <option value="">Select</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
-                                                                                </div>
+
+                                                                                <label for="Name" class="col-md-3 control-label">Effective From:<span class='require'></span></label>
+                                                                                <input type="date" ng-model=" fleetbtpos.fd">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="Description" class="col-md-3 control-label"> Effective Till <span class='require'></span></label>
+
+                                                                                <input type="date" ng-model="FleetBtpos.td">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-actions">
+                                                                            <div class="col-md-offset-3 col-md-9">
+                                                                                <button class="btn btn-primary" type="button" ng-click="saveFleetBTPOS(FleetBtpos);">Save</button>
+
+                                                                                <a href="FleetBtpos.html" class="btn btn-green">Cancel</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
 
+
+                                                            </div>
 
                                                         </div>
-
                                                     </div>
-                                                </div>
-
-                                            </div>
-                                            </div>
-                                        
-                                        
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-
-                                                                <th>Vehicle Reg No</th>
-                                                                <th>BTPOS</th>
-                                                                <th>From Date </th>
-                                                                <th>To Date</th>
-                                                                <th>Update</th>
-                                                                <th>Delete</th>
-
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <tr ng-repeat="R in FleetBtposList" class="gradeA">
-                                                                <td>{{R.VehicleRegNo}}</td>
-                                                                <td>{{R.POSID}}</td>
-                                                                <td>{{R.FromDate}}</td>
-                                                                <td>{{R.ToDate}}</td>
-
-                                                                <td>
-
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div>
-                                                                    <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
-             <i class="fa fa-trash-o"></i>&nbsp;
-
-                        </button>-->
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-
-                                                    </table>
 
                                                 </div>
                                             </div>
+
+
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Vehicle Reg No</th>
+                                                        <th>BTPOS</th>
+                                                        <th>From Date </th>
+                                                        <th>To Date</th>
+                                                        <th>Update</th>
+                                                        <th>Delete</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr ng-repeat="R in FleetBtposList" class="gradeA">
+                                                        <td>{{R.VehicleRegNo}}</td>
+                                                        <td>{{R.POSID}}</td>
+                                                        <td>{{R.FromDate}}</td>
+                                                        <td>{{R.ToDate}}</td>
+
+                                                        <td>
+
+                                                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div>
+                                                            <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(group);">
+                                                    <i class="fa fa-trash-o"></i>&nbsp;
+
+                                                               </button>-->
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+
+                                            </table>
+
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
+                </div>
+            </div>
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>

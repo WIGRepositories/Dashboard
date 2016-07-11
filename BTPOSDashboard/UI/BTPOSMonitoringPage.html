@@ -294,6 +294,7 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
 
                             </ul>
                         </li>
@@ -311,7 +312,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -320,8 +321,9 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -347,25 +349,25 @@
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-            <thead>
-                <tr>
-                    <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                    <th>FeatureName</th>
-                    <th>FeatureValue</th>
-                    <th>Description</th>
+                <thead>
+                    <tr>
+                        <th width="3%"><input type="checkbox" class="checkall" />Select</th>
+                        <th>FeatureName</th>
+                        <th>FeatureValue</th>
+                        <th>Description</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="L in License">
-                    <td><input type="checkbox" /> </td>
-                    <td>{{L.FeatureName}}</td>
-                    <td>{{L.FeatureValue}}</td>
-                    <td>{{L.Description}}</td>
-                </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="L in License">
+                        <td><input type="checkbox" /> </td>
+                        <td>{{L.FeatureName}}</td>
+                        <td>{{L.FeatureValue}}</td>
+                        <td>{{L.Description}}</td>
+                    </tr>
 
-            </tbody>
-        </table>-->
+                </tbody>
+            </table>-->
                     <div id="table-action" class="row">
                         <div class="col-lg-12">
 
@@ -394,41 +396,40 @@
 
                                                 </div>
                                                 <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>BTPOSId</th>
-                                                            <th>Xcoordinate</th>
-                                                            <th>Ycoordinate</th>
-                                                            <th>LocationName</th>
-                                                            <th>SNo</th>
-                                                            <th>POSID</th>
-                                                            <th>DateTime</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
+                                            <thead>
+                                                <tr>
+                                                    <th>BTPOSId</th>
+                                                    <th>Xcoordinate</th>
+                                                    <th>Ycoordinate</th>
+                                                    <th>LocationName</th>
+                                                    <th>SNo</th>
+                                                    <th>POSID</th>
+                                                    <th>DateTime</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                                        <tr ng-repeat="B in BTPOSMonitoring" class="gradeA">
-                                                            <td>{{B.BTPOSId}}</td>
-                                                            <td>{{B.Xcoordinate}}</td>
-                                                            <td>{{B.Ycoordinate}}</td>
-                                                            <td>{{B.LocationName}}</td>
-                                                            <td>{{B.SNo}}</td>
-                                                            <td>{{B.POSID}}</td>
-                                                            <td>{{B.DateTime}}</td>
-                                                            <!--<td>
-                                                                <input type="checkbox" checked readonly>
-                                                            </td>-->
-                                                            <!--<td>
-                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
+                                                <tr ng-repeat="B in BTPOSMonitoring" class="gradeA">
+                                                    <td>{{B.BTPOSId}}</td>
+                                                    <td>{{B.Xcoordinate}}</td>
+                                                    <td>{{B.Ycoordinate}}</td>
+                                                    <td>{{B.LocationName}}</td>
+                                                    <td>{{B.SNo}}</td>
+                                                    <td>{{B.POSID}}</td>
+                                                    <td>{{B.DateTime}}</td>
+                                                    <!--<td>
+                                                        <input type="checkbox" checked readonly>
+                                                    </td>-->
+                                                <!--<td>
+                                            <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                <i class="fa fa-edit"></i>&nbsp;
+                                                Edit
+                                            </button>
 
-                                                            </td>-->
+                                        </td>-->
+                                                </tr>
 
-                                                        </tr>
-
-                                                    </tbody>
+                                                </tbody>
                                                 </table>
 
                                                 <div class="tab-content">
@@ -446,51 +447,51 @@
                                                     <a href='https://www.add-map.net/'>BT POS tracking</a>
                                                     <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
                                                     <script type='text/javascript'>
-/*function init_map()
-{
-    var locations = [ 
-       ['Bondi Beach', -33.890542, 151.274856, 4], 
-       ['Coogee Beach', -33.923036, 151.259052, 5], 
-       ['Cronulla Beach', -34.028249, 151.157507, 3], 
-       ['Manly Beach', -33.80010128657071, 151.28747820854187, 2], 
-       ['Maroubra Beach', -33.950198, 151.259302, 1] 
-     ]; 
+                                                        /*function init_map()
+                                                        {
+                                                            var locations = [
+                                                               ['Bondi Beach', -33.890542, 151.274856, 4],
+                                                               ['Coogee Beach', -33.923036, 151.259052, 5],
+                                                               ['Cronulla Beach', -34.028249, 151.157507, 3],
+                                                               ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+                                                               ['Maroubra Beach', -33.950198, 151.259302, 1]
+                                                             ];
 
 
-    var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP };
-    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                                                            var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP };
+                                                            map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
 
 
-  //  marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) });
-    infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' });
-    google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); });
+                                                          //  marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) });
+                                                            infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' });
+                                                            google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); });
 
 
-    var marker, i;
-    for (i = 0; i < locations.length; i++)
-    {
-        marker = new google.maps.Marker({
-            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-            map: map
-        });
+                                                            var marker, i;
+                                                            for (i = 0; i < locations.length; i++)
+                                                            {
+                                                                marker = new google.maps.Marker({
+                                                                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                                                                    map: map
+                                                                });
 
-        google.maps.event.addListener(marker, 'click', (function (marker, i)
-        {
-            return function ()
-            {
-                infowindow.setContent(locations[i][0]);
-                infowindow.open(map, marker);
-            }
-        })(marker, i));
-    }
-
-
-    infowindow.open(map, marker);
+                                                                google.maps.event.addListener(marker, 'click', (function (marker, i)
+                                                                {
+                                                                    return function ()
+                                                                    {
+                                                                        infowindow.setContent(locations[i][0]);
+                                                                        infowindow.open(map, marker);
+                                                                    }
+                                                                })(marker, i));
+                                                            }
 
 
-} google.maps.event.addDomListener(window, 'load', init_map);
-                                                        */
-                                                    
+                                                            infowindow.open(map, marker);
+
+
+                                                        } google.maps.event.addDomListener(window, 'load', init_map);
+                                                                                                                */
+
                                                         //var locations = [
                                                         //       ['Bondi Beach', -17.8295, 31.0337, 4],
                                                         //       ['Coogee Beach', -17.8295, 31.0358, 5],
@@ -504,30 +505,30 @@
                                                         //       ['La Chandelle', -17.831309, 31.035697, 20],
                                                         //       ['Teppanyaki', 17.831359, 31.035708, 20],
                                                         //       ['Museum of Human Sciences', -17.832487, 31.038941, 21]
-                                                               
+
                                                         //];
- 
- 
+
+
                                                         //var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
                                                         //    zoom: 15,
                                                         //    center: new google.maps.LatLng(-17.8252, 31.0335), //17.8252° S, 31.0335° E
                                                         //    mapTypeId: google.maps.MapTypeId.ROADMAP
                                                         //});
- 
- 
+
+
                                                         //var infowindow = new google.maps.InfoWindow();
- 
- 
+
+
                                                         //var marker, i;
- 
- 
+
+
                                                         //for (i = 0; i < locations.length; i++) {
                                                         //    marker = new google.maps.Marker({
                                                         //        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                                                         //        map: map
                                                         //    });
- 
- 
+
+
                                                         //    google.maps.event.addListener(marker, 'click', (function (marker, i) {
                                                         //        return function () {
                                                         //            infowindow.setContent(locations[i][0]);
@@ -539,23 +540,23 @@
                                                     </script>
                                                 </div>
                                                 <!--<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:600px;width:920px;'>
-                                                    <div id='gmap_canvas' style='height:800px;width:1020px;'></div>
-                                                    <style>
-                                                        #gmap_canvas img {
-                                                            max-width: none !important;
-                                                            background: none !important;
-                                                        }
-                                                    </style>
-                                                </div> <a href='https://mapswebsite.org/'>google maps embedded</a>
-                                                <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=b6e1f3babccae3b3971fdedb363d11ccbf288563'></script>
-                                                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(23.0040631, 72.5607804), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(23.0040631, 72.5607804) }); infowindow = new google.maps.InfoWindow({ content: '<strong>India</strong><br>Telangana<br> <br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
+                                            <div id='gmap_canvas' style='height:800px;width:1020px;'></div>
+                                            <style>
+                                                #gmap_canvas img {
+                                                    max-width: none !important;
+                                                    background: none !important;
+                                                }
+                                            </style>
+                                        </div> <a href='https://mapswebsite.org/'>google maps embedded</a>
+                                        <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=b6e1f3babccae3b3971fdedb363d11ccbf288563'></script>
+                                        <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(23.0040631, 72.5607804), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(23.0040631, 72.5607804) }); infowindow = new google.maps.InfoWindow({ content: '<strong>India</strong><br>Telangana<br> <br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>
 
 
-                                                <a href='https://www.add-map.net/'>BT POS tracking</a>
-                                                <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                                                <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>-->
+                                        <a href='https://www.add-map.net/'>BT POS tracking</a>
+                                        <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
+                                        <script type='text/javascript'>function init_map() { var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP }; map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions); marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) }); infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' }); google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker); } google.maps.event.addDomListener(window, 'load', init_map);</script>-->
 
-                                               
+
 
                                             </div>
 
@@ -568,15 +569,15 @@
 
                                 </div>
 
-                                </div>
                             </div>
                         </div>
+                    </div>
 
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
-                    </div>
                 </div>
+            </div>
             </div>
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 

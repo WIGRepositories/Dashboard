@@ -410,7 +410,7 @@
     <Content Include="UI\BusDetails.html" />
     <Content Include="UI\Company.html" />
     <Content Include="UI\ComposeMail.html" />
-    <Content Include="UI\ConfigureAlerts.html" />
+    <Content Include="UI\AlertsConfiguration.html" />
     <Content Include="UI\css\style-responsive.css" />
     <Content Include="UI\css\themes\style2\pink-blue.css" />
     <Content Include="UI\css\themes\style2\pink-brown.css" />
@@ -442,6 +442,7 @@
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
     <Content Include="UI\js\Alerts.js" />
+    <Content Include="UI\js\AlertsConfiguration.js" />
     <Content Include="UI\js\angular-animate.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
@@ -450,6 +451,7 @@
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\EditHistory.js" />
+    <Content Include="UI\js\EmailGatewayConfiguration.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
@@ -475,7 +477,10 @@
     <Content Include="UI\js\libs\angular-ui-router.js" />
     <Content Include="UI\js\libs\ocLazyLoad.js" />
     <Content Include="UI\js\libs\ui-bootstrap.js" />
+    <Content Include="UI\js\NotificationsConfigurations.js" />
+    <Content Include="UI\js\PaymentGateWayConfiguration.js" />
     <Content Include="UI\js\ShoppingCart.js" />
+    <Content Include="UI\js\SmsGatewayConfiguration.js" />
     <Content Include="UI\js\treetable.js" />
     <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
@@ -501,7 +506,9 @@
     <Content Include="UI\js\tableexportcanvas.js" />
     <Content Include="UI\js\tableexportjspdf.js" />
     <Content Include="UI\js\tableexportsprintf.js" />
+    <Content Include="UI\js\treeview.js" />
     <Content Include="UI\js\ui-bootstrap-tpls-1.3.3.js" />
+    <Content Include="UI\js\UserLicense.js" />
     <Content Include="UI\js\VehicleLayout.js" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
@@ -2010,8 +2017,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommercialSite\Class1.cs" />
     <Compile Include="Controllers\AddressController.cs" />
-    <Compile Include="Controllers\AlertController.cs" />
     <Compile Include="Controllers\AlertsConfigurationController.cs" />
+    <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
     <Compile Include="Controllers\BTPOSConfigController.cs" />
     <Compile Include="Controllers\BTPOSDetailsController.cs" />
@@ -2024,6 +2031,7 @@
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
+    <Compile Include="Controllers\EmailGatewayConfigController.cs" />
     <Compile Include="Controllers\FleetAvailabilityController.cs" />
     <Compile Include="Controllers\FleetBtposController.cs" />
     <Compile Include="Controllers\FleetController.cs" />
@@ -2046,6 +2054,7 @@
     <Compile Include="Controllers\LicensePricingController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\PaymentGatewayConfigurationController.cs" />
     <Compile Include="Controllers\PaymentHistoryController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
@@ -2053,6 +2062,7 @@
     <Compile Include="Controllers\SalesOrderController.cs" />
     <Compile Include="Controllers\ShippingOrderController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\SmsGatewayConfigController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
