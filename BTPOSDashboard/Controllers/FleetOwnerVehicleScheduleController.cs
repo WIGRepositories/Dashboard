@@ -55,7 +55,7 @@ namespace BTPOSDashboard.Controllers
 
         [HttpPost]
 
-        public HttpResponseMessage saveFORSchedule(IEnumerable<FORouteFleetSchedule> nList)
+        public HttpResponseMessage saveFORSchedule(IEnumerable<FORouteFleetSchedule> nList, int VehicleId, int RouteId, int FleetOwnerId)
         {
             SqlConnection conn = new SqlConnection();
             try
