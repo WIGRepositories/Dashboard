@@ -50,7 +50,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             data: vc
 
-
+        }
+    }
     $scope.GetPopupFleetOwners = function (cid) {
 
         var vc = {
