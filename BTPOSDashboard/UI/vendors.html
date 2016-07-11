@@ -2,25 +2,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home | BT POS | Routes</title>
+    <title>Home | Users | Company details</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Loading bootstrap css-->
 
-    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    
+
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    
+
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetRoutes();" ng-model="routes">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanys();" ng-model="Companies">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -36,8 +35,8 @@
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
-                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
-                                <li><p>You have 0 new alerts</p></li>
+                            <ul class="dropdown-menu dropdown-alerts" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new notifications</p></li>
                             </ul>
                             <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
                                 <li><p>{{A.Message}}</p></li>
@@ -46,7 +45,7 @@
                         <li class="dropdown">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
                             <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
-                                <li><p>You have 0 new notifications</p></li>
+                                <li><p>You have 0 new messages</p></li>
                             </ul>
                             <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
                                 <li><p>{{A.Message}}</p></li>
@@ -94,7 +93,7 @@
                                 </a>
                             </li>
 
-                            <li>
+                            <li class="active">
                                 <a href="#">
                                     <i class="fa fa-sitemap fa-fw">
                                         <div class="icon-bg bg-dark"></div>
@@ -102,10 +101,10 @@
                                 </a>
                                 <ul class="nav nav-second-level">
 
-                                    <li>
+                                    <li class="active">
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Company</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
+                                            <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></class>
                                             <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
 
                                         </ul>
@@ -116,7 +115,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li><a href="UserDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
@@ -212,7 +211,7 @@
                             </ul>
                         </li>
 
-                        <li class="active">
+                        <li>
                             <a href="#">
                                 <i class="fa fa-gears">
                                     <div class="icon-bg bg-dark"></div>
@@ -235,7 +234,7 @@
                                 </li>
 
 
-                                <li class="active">
+                                <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Routes</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
@@ -248,7 +247,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details</span></a></li>
+                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
 
 
@@ -288,7 +287,6 @@
                                 <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
@@ -305,7 +303,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
+                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -314,38 +312,34 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
+                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
 
                                     </ul>
                                 </li>
+
+
 
                             </ul>
                         </li>
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
-                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Routes</div>
+                            <div class="page-title">Company Details</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Configuration</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Master Date</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Routes.html">Routes</a></li>
-
+                            <li><a href="#">Company and Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="Company.html">Company Details</a>
 
                         </ol>
                         <div class="clearfix"></div>
                     </div>
-                </div>
-                <div id="page-wrapper">
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
                         <div id="table-action" class="row">
@@ -355,122 +349,85 @@
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
                                             <div class="col-lg-12">
-
-
                                                 <div class="table-container">
                                                     <div class="row mbm">
 
                                                         <div class="actions">
-                                                            <!------      <a href="Addnewroute.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New Route</button></a>--->
-                                                            <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add New Route</button>
+                                                            <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Company</button>
                                                         </div>
 
-
-
-                                                    </div>
-
-
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-
-                                                                <th>Route Name</th>
-                                                                <th>Code</th>
-                                                                <th>Source</th>
-                                                                <th>Destination</th>
-                                                                <th>Distance</th>
-                                                                <th>Active</th>
-                                                                <th>Customize</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <tr ng-repeat="route in routes" class="gradeA">
-
-
-                                                                <td>{{route.RouteName}}</td>
-                                                                <td>{{route.Code}}</td>
-                                                                <td>{{route.Source}}</td>
-                                                                <td>{{route.Destination}}</td>
-                                                                <td>{{route.Distance}}</td>
-
-                                                                <td> <input type="checkbox" checked></td>
-                                                                <td>
-                                                                    <a href="RouteDetails.html">
-                                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
-                                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                                            Customize
-                                                                        </button>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-
-                                                    </table>
-
-                                                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Routes</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-init="GetStops();" ng-model="routes">
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4 control-label" style="color:red;"> Route Name: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-5"><input id="inputFirstName" type="text" ng-model="routes.RouteName" class="form-control" /><span class="help-block"></span></div>
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
                                                                     </div>
+                                                                    <div class="modal-body" ng-model="currGroup">
 
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;"> Code: <span class='require'>*</span></label>
+                                                                        <div class="row">
 
-                                                                        <div class="col-md-5"><input id="inputFirstName" type="text" ng-model="routes.Code" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Source:<span class='require'>*</span></label>
-
-                                                                        <div class="col-md-5">
-                                                                            <select ng-options="s.Name for s in Stops track by s.Id" class="form-control" ng-model="routes.Source" style="width:100%">
-                                                                                <option value="">Select</option>
-                                                                            </select>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currGroup.Name" /></div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Destination:<span class='require'>*</span></label>
 
-                                                                        <div class="col-md-5">
-                                                                            <select ng-options="d.Name for d in Stops track by d.Id" class="form-control" ng-model="routes.Destination" style="width:100%">
-                                                                                <option value="">Select</option>
-                                                                            </select>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Code:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="currGroup.code" /></div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;"> Distance: <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-5"><input id="inputFirstName" type="text" ng-model="routes.Distance" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;">Return route?</label>
-                                                                        <div class="col-md-5"><input id="rtn" type="checkbox" class="form-control" /></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4 control-label" style="color:red;"> Return Route Name: <span class='require'></span></label>
 
-                                                                        <div class="col-md-5"><input id="rtnName" type="text" ng-model="routes.ReturnRouteName" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;"> Return route Code: <span class='require'>*</span></label>
 
-                                                                        <div class="col-md-5"><input id="rtnCode" type="text" ng-model="routes.ReturnCode" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
+                                                                        <div class="row">
 
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Description:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.desc" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-true-value="1" ng-false-value="0" ng-checked="{{currGroup.active==1}}" checked /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
-                                                                            <button class="btn btn-primary" type="button" ng-click="save(routes);">Save</button>
-
-                                                                            <a href="Routes.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                            <button type="button" class="btn btn-primary" ng-click="saveCmpChanges(currGroup, 'U');">Save</button>
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -480,28 +437,166 @@
 
                                                         </div>
 
+                                                        <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Add Company</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="form-group">
+
+                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+
+                                                                            <div class="col-md-4"><input id="inputFirstName" type="text" ng-model="Group.Name" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                            <label for="code" class="col-md-3 control-label" style="color:red;">Code *<span class='require'></span></label>
+
+                                                                            <div class="col-md-4"><input id="code" type="text" ng-model="Group.code" class="form-control" /><span class="help-block"></span></div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <label for="descr" class="col-md-3 control-label">Description <span class='require'></span></label>
+
+                                                                            <div class="col-md-4"><input id="desc" type="text" ng-model="Group.desc" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                            <label for="ContactNo1" class="col-md-3 control-label">ContactNo1 <span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="ContactNo1" type="text" ng-model="Group.ContactNo1" class="form-control" /><span class="help-block"></span></div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <label for="ContactNo2" class="col-md-3 control-label">ContactNo2<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="ContactNo2" type="text" ng-model="Group.ContactNo2" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                            <label for="Fax" class="col-md-3 control-label">Fax<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="Fax" type="text" ng-model="Group.Fax" class="form-control" /><span class="help-block"></span></div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="Fax" class="col-md-3 control-label">EmailId<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="EmailId" type="text" ng-model="Group.EmailId" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                            <label for="Fax" class="col-md-3 control-label">Title<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="Title" type="text" ng-model="Group.Title" class="form-control" /><span class="help-block"></span></div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+
+                                                                            <label for="Fax" class="col-md-3 control-label">Caption<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="Caption" type="text" ng-model="Group.Caption" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                            <label for="Fax" class="col-md-3 control-label">Address<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="Address" type="text" ng-model="Group.Address" class="form-control" /><span class="help-block"></span></div>
+
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="inputMiddleName" class="col-md-2 control-label">Country:<span class='require'>*</span></label>
+                                                                            <select class="form-group" ng-model="Group.Country">
+                                                                                <option value="select Country">select Country</option>
+                                                                                <option value="Afghanistan">Afghanistan</option>
+                                                                                <option value="Albania">Albania</option>
+                                                                                <option value="Algeria">Algeria</option>
+                                                                                <option value="American Samoa">American Samoa</option>
+                                                                                <option value="Andorra">Andorra</option>
+                                                                                <option value="Angola">Angola</option>
+                                                                                <option value="Anguilla">Anguilla</option>
+                                                                                <option value="Antartica">Antarctica</option>
+                                                                                <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                                                <option value="Argentina">Argentina</option>
+                                                                                <option value="Armenia">Armenia</option>
+                                                                                <option value="Aruba">Aruba</option>
+                                                                                <option value="Australia">Australia</option>
+                                                                            </select>
+
+                                                                            <label for="Fax" class="col-md-3 control-label">State<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="State" type="text" ng-model="Group.State" class="form-control" /><span class="help-block"></span></div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="Fax" class="col-md-3 control-label">ZipCode<span class='require'></span></label>
+                                                                            <div class="col-md-4"><input id="ZipCode" type="text" ng-model="Group.ZipCode" class="form-control" /><span class="help-block"></span></div>
+
+
+                                                                            <label for="active" class="col-md-3 control-label">active <span class='require'></span></label>
+                                                                            <div><input id="active" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="Group.active" class="form-control" checked /></div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
+
+                                                                            <a href="Company.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
+
+                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Code</th>
+                                                            <th>Description</th>
+                                                            <th>Active</th>
+                                                            <th>Update</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr ng-repeat="cmp in Companies" class="gradeA">
+                                                            <td>{{cmp.Name}}</td>
+                                                            <td>{{cmp.code}}</td>
+                                                            <td>{{cmp.desc}}</td>
+                                                            <td>
+                                                                <input type="checkbox" checked readonly>
+                                                            </td>
+                                                            <td>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+
+
                                             </div>
-
-
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                        </div>
-                        <!--END PAGE WRAPPER-->
-                        <!--BEGIN FOOTER-->
-                        <div id="footer">
-                            <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
-                        </div>
-                        <!--END FOOTER-->
                     </div>
-                    <!--END CONTENT-->
+                    <!--END PAGE WRAPPER-->
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
                 </div>
-
             </div>
+        </div>
+
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">
@@ -509,11 +604,11 @@
             </div>
             <div class="modal-body">
                 <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
+                    <li ng-repeat="item in items">
+                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -522,34 +617,28 @@
             </div>
 
         </script>
-
     </div>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
-
-<script src="js/angular.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-<script src="js/ngStorage.js"></script>
-<script src="js/Routes.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/CompanyGroups.js"></script>
 </body>
 </html>

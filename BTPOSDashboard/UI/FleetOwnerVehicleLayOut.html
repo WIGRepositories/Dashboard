@@ -144,7 +144,7 @@
 
 
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-truck">
                                     <div class="icon-bg bg-green"></div>
@@ -167,7 +167,7 @@
 
 
 
-                        <li class="active">
+                        <li>
 
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -322,7 +322,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -331,19 +331,15 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
 
-
-
                             </ul>
                         </li>
-
-
-
                         </ul>
                     </div>
                 </nav>
@@ -379,45 +375,45 @@
                                                     <div class="row mbm">
 
                                                         <div class="col-lg-12">
-                                                            <div class="col-md-5">
+
+
                                                                 Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
                                                                     <option value="">Select</option>
                                                                 </select>
-                                                            </div>
-                                                            <div class="col-md-5">
+
+
                                                                 Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
 
                                                                     <option value="">Select</option>
                                                                 </select>
-                                                            </div>
-                                                            <br />
-                                                            <br />
 
-                                                            <div class="col-md-3">
                                                                 Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table2 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
-
-                                                            <div class="col-md-3">
+                                                        <div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
                                                                 Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
                                                                     <option value="">Select</option>
                                                                 </select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
 
-                                                            </div>
-                                                            <div class="col-md-3">
+                                                        Rows: <select id="rowSelected"></select>
+
+
+                                                        Columns:<select textholder="Columns" id="colSelected"></select>
+
+
                                                                 <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
                                                                 <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
 
+
                                                             </div>
 
+                                                <div class="col-lg-12">
                                                             <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+
                                                                 <thead>
                                                                     <!--<tr>
                                                                     <th>Destination/Source</th>
@@ -454,10 +450,8 @@
                                                 </div>
                                             </div>
                                         </div>-->
-                                        <div class="col-lg-12" id="basic_example"></div>
-                                    </div>
-                                </div>
-                            </div>
+                                       
+                                
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="SaveFleetOwnerVehicleLayout();">Save</button>
@@ -490,7 +484,9 @@
                 </li>
             </ul>
             Selected: <b>{{ selected.item }}</b>-->
-                            {{mssg}}
+                            {{mssg
+}}
+                              </di
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>

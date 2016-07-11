@@ -7206,7 +7206,7 @@ SELECT distinct
       ,[ToDate]
       ,[VehicleId]
      
-  FROM [POSDashboard].[dbo].fleetownerroutestop fs    
+  FROM [POSDashboard].[dbo].fleetownerroutestop fs  
   inner join routestops r on r.id = fs.routestopid
   inner join stops src on src.id =r.fromstopid
   inner join stops dest on dest.id =r.tostopid
@@ -9073,7 +9073,7 @@ CREATE PROCEDURE [dbo].[GetBTPOSId]
 (@imei varchar(20), @fleetownerCode varchar(10))
 AS
 BEGIN
-	
+
 SELECT b.[CompanyId]
       ,[POSID]
       ,[StatusId]
@@ -9083,7 +9083,7 @@ SELECT b.[CompanyId]
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   inner join fleetowner fo on fo.id  = b.fleetownerid
 where (IMEI = @imei and @fleetownercode like '%'+@fleetownerCode+'%')
-  
+
 end
 GO
 
@@ -9118,7 +9118,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[getSmsGatewayeConfiguration]
+Create procedure [dbo].[getSmsGatewayeConfiguration]
 as
 begin
 SELECT Distinct s.[Id]

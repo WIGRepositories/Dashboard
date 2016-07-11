@@ -16,9 +16,18 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $local
    
 });
 
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
    
     $scope.dashboardDS = $localStorage.dashboardDS;
+
+   
+   
     $scope.StopCount = [];
 
     $scope.GetCompanies = function () {

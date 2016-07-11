@@ -1,14 +1,15 @@
 ﻿// JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-if ($localStorage.uname == null)
-{
-    window.location.href = "login.html";
-}
-$scope.uname = $localStorage.uname;
-$scope.userdetails = $localStorage.userdetails;
-$scope.Roleid = $scope.userdetails[0].roleid;
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
 
-$scope.dashboardDS = $localStorage.dashboardDS; 
+    $scope.dashboardDS = $localStorage.dashboardDS;
+
 
     //  $scope.FleeBTPosDetails = [];
 
