@@ -143,7 +143,7 @@
 
                                 </ul>
 
-                            </li> 
+                            </li>
 
 
 
@@ -302,7 +302,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                            <li><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                            <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -311,8 +311,9 @@
                                     <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
+
                                             <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                            <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                            <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                         </ul>
                                     </li>
@@ -400,7 +401,7 @@
 
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
-                                                            <tr >
+                                                            <tr>
                                                                 <th>Destination/Source</th>
                                                                 <th ng-repeat="s in Stops">{{s.Name}}</th>
                                                             </tr>
@@ -408,23 +409,23 @@
                                                         <tbody>
                                                             <tr ng-repeat="r in routefares">
                                                                 <!--<td ng-repeat="dr in r" ng-if="$index == 0 || r.$index==1">{{dr}}</td>
-                                                                <td ng-repeat="dr in r" ng-if="$index != 0">
-                                                                    <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }"  ng-change="test(dr)" ng-model="dr" /></td>-->
+                                                    <td ng-repeat="dr in r" ng-if="$index != 0">
+                                                        <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }"  ng-change="test(dr)" ng-model="dr" /></td>-->
 
                                                                 <td ng-repeat="dr in r" ng-if="$index == 0 || r==$parent.$index">{{dr}}</td>
                                                                 <td ng-repeat="dr in r" ng-if="$index != 0">
-                                                                    <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }" ng-change="test(dr)" ng-model="dr"  />
+                                                                    <input type="number" style="border:none" ng-model-options="{ updateOn: 'blur' }" ng-change="test(dr)" ng-model="dr" />
                                                                 </td>
 
-                                                               
-                                                                
+
+
                                                             </tr>
                                                         </tbody>
 
                                                     </table>
 
                                                     <div id="basic_example"></div>
-                                                    
+
 
                                                     <div style="text-align:center">
                                                         <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>

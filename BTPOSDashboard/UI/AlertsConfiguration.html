@@ -311,7 +311,7 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
-                                        <li class="active"><a href="ConfigureAlerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alert Configuration </span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -320,17 +320,15 @@
                                 <li>
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
+
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="ConfigureNotifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
 
                                     </ul>
                                 </li>
 
-
-
                             </ul>
                         </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -346,7 +344,7 @@
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Alerts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="#">Alerts Configuration </a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                           
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
@@ -365,14 +363,14 @@
                                                     <div class="row mbm">
                                                         <div class="col-md-5">
                                                             Roles:<select ng-options="r.Name for r in GetRoles track by r.Names" ng-model="r" ng-change="GetAlertsConfiguration();">
-                                                            <option value="">All</option>
-                                                            </select>
-                                                        </div>
-                                                       <!--<div class="col-md-5">
-                                                            Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
                                                                 <option value="">All</option>
                                                             </select>
-                                                        </div>-->
+                                                        </div>
+                                                        <!--<div class="col-md-5">
+                                                     Role Types : <select ng-options="r.Name for r in Roles track by r.Id" ng-model="rl" ng-change="getRoles()">
+                                                         <option value="">All</option>
+                                                     </select>
+                                                 </div>-->
 
                                                     </div>
                                                 </div>
@@ -383,11 +381,11 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Active</th>
-                                                            <!--<th>Alert Items</th>-->                                                            
-                                                            <th>Alert Type</th>                                                          
+                                                            <!--<th>Alert Items</th>-->
+                                                            <th>Alert Type</th>
 
                                                             <!--<th>List Key</th>
-                                                            <th>List value</th>-->
+                                                    <th>List value</th>-->
 
 
                                                         </tr>
@@ -396,9 +394,9 @@
 
                                                         <tr ng-repeat="A in AlertsConfiguration">
 
-                                                            <td><input type="checkBox" ng-checked="T.Active"/></td>
+                                                            <td><input type="checkBox" ng-checked="T.Active" /></td>
                                                             <!--<td>{{Alert Item}}</td>-->
-                                                           <td>{{A.AlertType}}</td>
+                                                            <td>{{A.AlertType}}</td>
 
                                                         </tr>
                                                     </tbody>

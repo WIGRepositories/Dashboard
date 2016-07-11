@@ -410,7 +410,7 @@
     <Content Include="UI\BusDetails.html" />
     <Content Include="UI\Company.html" />
     <Content Include="UI\ComposeMail.html" />
-    <Content Include="UI\ConfigureAlerts.html" />
+    <Content Include="UI\AlertsConfiguration.html" />
     <Content Include="UI\css\style-responsive.css" />
     <Content Include="UI\css\themes\style2\pink-blue.css" />
     <Content Include="UI\css\themes\style2\pink-brown.css" />

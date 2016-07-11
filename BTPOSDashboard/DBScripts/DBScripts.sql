@@ -6119,6 +6119,8 @@ INSERT INTO [POSDashboard].[dbo].[Routes]
            ,@DestinationId
            ,@Distance)
            
+		   select @routeid = @@IDENTITY
+
             exec InsEditHistory 'Routes','Name', @RouteName,'Routes Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
 		              
 			exec InsEditHistoryDetails @edithistoryid,null,@RouteName,'Insertion','RouteName',null			
@@ -6128,11 +6130,6 @@ INSERT INTO [POSDashboard].[dbo].[Routes]
 			exec InsEditHistoryDetails @edithistoryid,null,@SourceId,'Insertion','SourceId',null
 			exec InsEditHistoryDetails @edithistoryid,null,@DestinationId,'Insertion','DestinationId',null
 	        exec InsEditHistoryDetails @edithistoryid,null,@Distance,'Insertion','Distance',null
-
-
-
-
-select @routeid = @@IDENTITY
 
 --insert the source stop
 INSERT INTO [POSDashboard].[dbo].[RouteDetails]
