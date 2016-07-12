@@ -75,11 +75,11 @@ namespace POSDBAccess.Controllers
                 gsa.Value = n.createdBy;
                 cmd.Parameters.Add(gsa);
 
-                SqlParameter gsaz = new SqlParameter();
-                gsaz.ParameterName = "@Id";
-                gsaz.SqlDbType = SqlDbType.Int;
-                gsaz.Value = n.Id;
-                cmd.Parameters.Add(gsaz);
+                //SqlParameter gsaz = new SqlParameter();
+                //gsaz.ParameterName = "@Id";
+                //gsaz.SqlDbType = SqlDbType.Int;
+                //gsaz.Value = n.Id;
+                //cmd.Parameters.Add(gsaz);
 
                 SqlParameter gssa = new SqlParameter();
                 gssa.ParameterName = "@Raised";

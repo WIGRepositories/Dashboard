@@ -358,11 +358,23 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="table-container">
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-4">
                                                         Company: <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getUserRolesForCompany(cmp)" width="100%">
                                                             <option value="">Select Company</option>
                                                         </select>
                                                     </div>
+                                                    <!--<div class="col-md-3">
+                                                        Search: <select width="100%">
+                                                            <option value="">Select </option>
+                                                           <option value="">LastName</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="input-append">
+                                                            <input type="text" class="input-small search-query" name="s" placeholder="Search" value="">
+                                                           
+                                                        </div>
+                                                    </div>-->
                                                     <div class="actions">
                                                         <!----  <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Assign Role</button>--->
                                                         <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Assign Role</button>

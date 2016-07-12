@@ -360,11 +360,12 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-5" style="margin:20px;">
-                                                            Role: <select ng-options="s.name for s in sample" ng-model="seltype" ng-change="getselectval(seltype)">
-                                                                <option value="">All</option>
+                                                            Role: <select ng-options="r.Name for r in roles track by r.Id" ng-model="r">
+                                                                <option value="">Select</option>
                                                             </select>
-                                                        </div>
-
+                                                        </div>                                                       
+                                                            
+                                                        
                                                         <!--<div class="actions">
                                                     <a href="NewObject.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New Object</button></a>
 

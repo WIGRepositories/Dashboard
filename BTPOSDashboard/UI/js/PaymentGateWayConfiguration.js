@@ -11,7 +11,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetPaymentGateway = function () {
 
         $http.get('http://localhost:1476/api/PaymentGatewayConfiguration/GetPaymentGateway').then(function (response, req) {
-            $scope.GetPaymentGateway = response.data;
+            $scope.PaymentGateway = response.data;
 
         });
     }
@@ -26,7 +26,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             pwd: Group.pwd,
             saltkey: Group.saltkey,
             startdate: Group.startdate,
-            username: Group.username,    //       
+            username: Group.username,
+            ClientId: Group.ClientId,
+            SelectId: Group.SelectId
             
         }
 
@@ -52,6 +54,50 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $scope.currGroup = null;
     };
+
+    $scope.savecmpChanges = function (Group) {
+       
+        var Group = {                     
+                providername: Group.providername,
+                enddate: Group.enddate,
+                hashkey: Group.hashkey,
+                PaymentGatewayTypeId: Group.PaymentGatewayTypeId,
+                pwd: Group.pwd,
+                saltkey: Group.saltkey,
+                startdate: Group.startdate,
+                username: Group.username, 
+
+        }
+
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/PaymentGatewayConfiguration/SavePaymentGatewaySettings',
+            data: Group
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!!");
+
+        }
+        , function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+
+        });
+        $scope.GetPaymentGateway();
+        $scope.currGroup = null;
+    };
+    $scope.setPaymentGateway = function (grp) {
+        $scope.currGroup = grp;
+    };
+
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
+    };
+
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({

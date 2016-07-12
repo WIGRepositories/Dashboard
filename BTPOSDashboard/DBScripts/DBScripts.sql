@@ -561,16 +561,18 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PaymentGatewaySettings](
+CREATE TABLE[dbo].[PaymentGatewaySettings](
 	[enddate] [datetime] NOT NULL,
 	[hashkey] [datetime] NOT NULL,
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[PaymentGatewayTypeId] [int] NOT NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
 	[saltkey] [datetime] NOT NULL,
 	[startdate] [datetime] NOT NULL,
-	[username] [varchar](50) NOT NULL
+	[username] [varchar](50) NOT NULL,
+	[ClientId] [int] NULL,
+	[SelectId] [int] NULL
 ) ON [PRIMARY]
 
 GO
@@ -3070,6 +3072,8 @@ SELECT  [enddate]
       ,[saltkey]
       ,[startdate]
       ,[username]
+	  ,[ClientId]
+      ,[SelectId]
       ,Ty.Name
     
   FROM [POSDashboard].[dbo].[PaymentGatewaySettings] p
@@ -3081,12 +3085,31 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create procedure [dbo].[InsUpdDelPaymentGatewaySettings](@enddate datetime,@hashkey datetime,@PaymentGatewayTypeId int,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+Create procedure [dbo].[InsUpdDelPaymentGatewaySettings]
+(@enddate datetime,
+@hashkey datetime,
+@PaymentGatewayTypeId int,
+@providername varchar(50),
+@pwd varchar(50),
+@saltkey datetime,
+@startdate datetime,
+@username varchar(50),
+@ClientId int,
+@SelectId int)
 as
 begin
-insert into PaymentGatewaySettings values(@enddate,@hashkey,@PaymentGatewayTypeId,@providername,@pwd,@saltkey,@startdate,@username)
+insert into PaymentGatewaySettings values
+(@enddate,
+@hashkey,
+@PaymentGatewayTypeId,
+@providername,
+@pwd,
+@saltkey,
+@startdate,
+@username,
+@clientId,
+@SelectId)
 end
-
 GO
 SET ANSI_NULLS ON
 GO

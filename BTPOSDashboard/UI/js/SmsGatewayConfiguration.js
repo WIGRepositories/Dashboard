@@ -55,6 +55,54 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currGroup = null;
     };
 
+    $scope.saveCmpChanges = function (Group) {
+
+       
+        var Group = {
+            providername: Group.providername,
+            enddate: Group.enddate,
+            hashkey: Group.hashkey,
+            AlertTypeId: Group.AlertTypeId,
+            pwd: Group.pwd,
+            saltkey: Group.saltkey,
+            startdate: Group.startdate,
+            username: Group.username,
+            ClientId: Group.ClientId,
+            SelectId: Group.SelectId,
+           
+        }
+
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/SmsGatewayConfig/SaveSmsGatewaySettings',
+            data: Group
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!!");
+
+        }
+        , function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+
+        });
+        $scope.GetSmsGatewayConfig();
+        $scope.currGroup = null;
+    };
+
+
+    $scope.setSmsGatewayConfig = function (grp) {
+        $scope.currGroup = grp;
+    };
+
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
+    };
+
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({
@@ -69,7 +117,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
     }
 
-
+    
 });
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 

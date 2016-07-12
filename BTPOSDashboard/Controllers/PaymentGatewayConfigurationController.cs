@@ -110,6 +110,18 @@ namespace BTPOSDashboard.Controllers
             vvu.Value = b.username;
             cmd.Parameters.Add(vvu);
 
+            SqlParameter vcl = new SqlParameter();
+            vcl.ParameterName = "@ClientId";
+            vcl.SqlDbType = SqlDbType.VarChar;
+            vcl.Value = b.ClientId;
+            cmd.Parameters.Add(vcl);
+
+            SqlParameter vsl = new SqlParameter();
+            vsl.ParameterName = "@SelectId";
+            vsl.SqlDbType = SqlDbType.VarChar;
+            vsl.Value = b.SelectId;
+            cmd.Parameters.Add(vsl);
+
 
 
             //DataSet ds = new DataSet();

@@ -636,9 +636,9 @@ namespace BTPOSDashboardAPI.Models
 
         public int Status { get; set; }
 
-        public int Asign { get; set; }  	
+        public int Asign { get; set; }  
 
-        public int Id{get;set;}
+     
 
     }
     public class TroubleTicketingHandlers
@@ -713,7 +713,9 @@ namespace BTPOSDashboardAPI.Models
 
         public DateTime hashkey { get; set; }
 
+        public int ClientId { get; set; }
 
+        public int SelectId { get; set; }
 
         public int PaymentGatewayTypeId { get; set; }
 
