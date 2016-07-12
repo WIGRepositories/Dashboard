@@ -2046,6 +2046,7 @@
     <Compile Include="Controllers\FleetRoutesController.cs" />
     <Compile Include="Controllers\FleetRoutesDetailsController.cs" />
     <Compile Include="Controllers\FleetStaffController.cs" />
+    <Compile Include="Controllers\FOVSchedule.cs" />
     <Compile Include="Controllers\InventoryItemController.cs" />
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
