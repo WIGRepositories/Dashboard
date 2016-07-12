@@ -170,11 +170,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
         }).success(function (data, status, headers, config) {
             alert('Fleet owner routes successfully');
-            $scope.getFleetOwnerRoute();
+            $scope.GetFORouteFare();
         }).error(function (ata, status, headers, config) {
             alert(ata);
         });
     }
+
+    
+
+
 
     $scope.saveFORouteFare = function () {
 
@@ -221,5 +225,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             dateFormat: "dd/mm/yy"
         });
     });
+
 
 });

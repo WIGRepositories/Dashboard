@@ -54,8 +54,8 @@ namespace BTPOSDashboard.Controllers
         }
 
         [HttpPost]
-
-        public HttpResponseMessage saveFORSchedule(FORouteFleetSchedule FVS)
+        [Route("api/FleetOwnerVehicleSchedule/saveFORSchedule")]
+        public HttpResponseMessage saveFORSchedule(IEnumerable<FORouteFleetSchedule> nList)
         {
             SqlConnection conn = new SqlConnection();
             try
@@ -141,7 +141,7 @@ namespace BTPOSDashboard.Controllers
                     chss.Value = n.ArrivalAMPM;
                     cmd.Parameters.Add(chss);
 
-                  
+
                     SqlParameter chss1 = new SqlParameter("@DepartureAmPm", SqlDbType.VarChar);
                     chss1.SqlDbType = SqlDbType.VarChar;
                     chss1.Value = n.DepartureAmPm;
@@ -156,7 +156,7 @@ namespace BTPOSDashboard.Controllers
                     SqlParameter deat = new SqlParameter("@departuretime", SqlDbType.VarChar);
                     deat.SqlDbType = SqlDbType.DateTime;
                     deat.Value = n.departuretime;
-                    cmd.Parameters.Add(deat);                   
+                    cmd.Parameters.Add(deat);
 
                     SqlParameter e3 = new SqlParameter("@insupddelflag ", SqlDbType.VarChar);
                     e3.SqlDbType = SqlDbType.VarChar;

@@ -163,7 +163,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
     }
 
-    
+
 
 
     $scope.$on('ngRepeatFinished', function () {
@@ -232,9 +232,9 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
                 departuretime: depTime,
 
                 insupddelflag: 'U'
-            }
-            FleetOwnerVS.push(FVS);
         }
+            FleetOwnerVS.push(FVS);
+    }
         foSchedule.VSchedule = FleetOwnerVS;
         $http({
             url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
@@ -249,6 +249,47 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             alert(ata);
         });
     }
+
+    //$scope.save = function (stop, flag) {
+
+    //    //  var test = $scope.RouteVehicleSchedule;
+
+    //    //var FOVS = {
+    //    //    //Id: stop.Id,
+    //    //    StopNmae: stop.StopNmae,
+    //    //    StopNo: stop.StopNo,
+    //    //    StopCode: stop.StopCode,
+    //    //    ArrivalHr: stop.ArrivalHr,
+    //    //    DepartureHr: stop.DepartureHr,
+    //    //    Duration: stop.Duration,
+    //    //    ArrivalMin: stop.ArrivalMin,
+    //    //    DepartureMin: stop.DepartureMin,
+    //    //    ArrivalAMPM: stop.ArrivalAMPM,
+    //    //    DepartureAmPm: stop.DepartureAmPmtopId,
+    //    //    arrivaltime: stop.arrivaltime,
+    //    //    departuretime: stop.departuretime,
+    //    //    insupdflag: flag
+    //    //}
+
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
+    //        data: $scope.RouteVehicleSchedule
+    //    }
+    //    $http(req).then(function (response) {
+
+    //        $scope.showDialog("Saved successfully!!");
+
+    //        $scope.Group = null;
+
+    //    }, function (errres) {
+    //        var errdata = errres.data;
+    //        var errmssg = "";
+    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    //        $scope.showDialog(errmssg);
+    //    });
+    //}
 
     $scope.showDialog = function (message) {
 
