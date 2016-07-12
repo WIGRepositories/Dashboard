@@ -276,7 +276,7 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
-                                <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
+                                <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
                                 <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
 
 
@@ -401,6 +401,22 @@
                             </div><!--END TOPBAR-->
                             <div id="wrapper">
                             </div>
+                             <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+
+                                                <div class="table-container">
+                                                    <div class="col-md-5">
+                                                        Amin Report: <select ng-model="s" ng-change="">
+                                                         <option value="">Select</option>
+                                                          <option value="0">Payment History</option>
+                                                          <option value="1">User license</option>
+                                                          <option value="2">Btpos license</option>
+                                                           <option value="2">Advertisment license</option>
+                                                          </select>
+                                                    </div>
                             <div class="page-content">
                                 <div class="row">
                                     <div class="portlet box">
@@ -411,25 +427,26 @@
                                                     Export
 
                                                 </a><ul class="dropdown-menu">
+    
 
-                                                    <li>
-                                                        <a href="#" onclick="$('#example-export').tableExport({type:'excel'});">
-                                                            <img src="images/icons/xls.png" width="24px" class="mrx" />Export to Excel
-                                                        </a>
-                                                        <a href="#" onclick="$('#example-export').tableExport({type:'pdf'});">
-                                                            <img src="images/icons/pdf.png" width="24px" class="mrx" />Export to Pdf
-                                                        </a>
-                                                        <a href="#" onclick="$('#example-export').tableExport({type:'csv'});">
-                                                            <img src="images/icons/csv.png" width="24px" class="mrx" />Export to csv
-                                                        </a>
-                                                        <a href="#" onclick="$('#example-export').tableExport({type:'xml'});">
-                                                            <img src="images/icons/xml.png" width="24px" class="mrx" />Export to Xml
-                                                        </a>
+                                           <li>
+                                          <a href="#" onclick="$('#example-export').tableExport({type:'excel'});">
+                                            <img src="images/icons/xls.png" width="24px" class="mrx" />Export to Excel
+                                          </a>
+                                       <a href="#" onclick="$('#example-export').tableExport({type:'pdf'});">
+                                       <img src="images/icons/pdf.png" width="24px" class="mrx" />Export to Pdf
+                                       </a>
+                                       <a href="#" onclick="$('#example-export').tableExport({type:'csv'});">
+                                         <img src="images/icons/csv.png" width="24px" class="mrx" />Export to csv
+                                          </a>
+                                        <a href="#" onclick="$('#example-export').tableExport({type:'xml'});">
+                                     <img src="images/icons/xml.png" width="24px" class="mrx" />Export to Xml
+                                       </a>
 
 
-                                                </ul>
-                                                <!--</a><ul class="dropdown-menu"><li><a href="#" onclick="$('#example-export').tableExport({type:'json',escape:'false'});"><img src="vendors/tableExport/icon/json.png" width="24px" class="mrx" />Export to Json</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});"><img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'sql'});"><img src="vendors/tableExport/icon/sql.png" width="24px" class="mrx" />Export to Sql</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'csv'});"><img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'txt',escape:'false'});"><img src="vendors/tableExport/icon/txt.png" width="24px" class="mrx" />Export to TXT</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});"><img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'doc',escape:'false'});"><img src="vendors/tableExport/icon/word.png" width="24px" class="mrx" />Export to word </a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'powerpoint',escape:'false'});"><img src="vendors/tableExport/icon/ppt.png" width="24px" class="mrx" />Export to powerpoint</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});"><img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf</a></li></ul>-->
-                                            </div><table id="example-export" class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
+                                            </ul>
+                              <!--</a><ul class="dropdown-menu"><li><a href="#" onclick="$('#example-export').tableExport({type:'json',escape:'false'});"><img src="vendors/tableExport/icon/json.png" width="24px" class="mrx" />Export to Json</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});"><img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'sql'});"><img src="vendors/tableExport/icon/sql.png" width="24px" class="mrx" />Export to Sql</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'csv'});"><img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'txt',escape:'false'});"><img src="vendors/tableExport/icon/txt.png" width="24px" class="mrx" />Export to TXT</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});"><img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'doc',escape:'false'});"><img src="vendors/tableExport/icon/word.png" width="24px" class="mrx" />Export to word </a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'powerpoint',escape:'false'});"><img src="vendors/tableExport/icon/ppt.png" width="24px" class="mrx" />Export to powerpoint</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});"><img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf</a></li></ul>-->
+                                       </div><table id="example-export" class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
                                                 <thead><tr><th width="9%">Record #</th><th width="10%">Username</th><th width="10%">Country</th><th width="10%">Gender</th><th width="7%">Order</th><th width="12%">Date</th><th width="10%">Price</th><th width="9%">Status</th><th width="12%">Actions</th></tr></thead>
                                                 <tbody>
                                                     <tr>

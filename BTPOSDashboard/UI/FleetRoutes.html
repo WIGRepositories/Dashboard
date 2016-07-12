@@ -277,7 +277,7 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
-                                <li><a href="paymentHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
+                                <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
                                 <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
 
 
@@ -395,7 +395,8 @@
 
                                                                             <label for="descr" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
                                                                             <div class="col-md-6">
-                                                                                <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
+                                                                                <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp
+                                                                                        " ng-change="GetFleetOwners();" width="100%">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>

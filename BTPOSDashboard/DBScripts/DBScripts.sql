@@ -7953,9 +7953,11 @@ SET ANSI_PADDING OFF
 
 Go
 
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-go
+/****** Object:  StoredProcedure [dbo].[getFORVehicleSchedule]    Script Date: 07/12/2016 12:02:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
 create procedure [dbo].[getFORVehicleSchedule]
 (@fleetOwnerId int, @routeid int, @vehicleId int)
@@ -7987,13 +7989,7 @@ and fs.vehicleId = @vehicleId)
 
 end
 
-GO
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-go
-
-
+[getFORVehicleSchedule] 1,2,2
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFleetAvailability]    Script Date: 07/01/2016 11:01:22 ******/
 SET ANSI_NULLS ON
 GO
@@ -9028,7 +9024,9 @@ end
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetAvailability]    Script Date: 06/30/2016 11:00:42 ******/
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFORouteFleetSchedule]    Script Date: 07/12/2016 19:29:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9036,21 +9034,21 @@ GO
 
 
 create procedure [dbo].[InsUpdDelFORouteFleetSchedule](
-@Id int,
+@Id int = -1,
 @VehicleId int,
 @RouteId int,
 @FleetOwnerId int,
 @StopId int,
 @ArrivalHr int,
 @DepartureHr int,
-@Duration decimal,
+@Duration decimal = null,
 @ArrivalMin int,
 @DepartureMin int,
 @ArrivalAMPM varchar(10),
 @DepartureAMPM varchar(10),
 @arrivaltime datetime = null,
 @departuretime datetime = null,
-@insupddelflag varchar(1)
+@insupddelflag varchar(1) 
 )
 as
 begin
@@ -9069,13 +9067,13 @@ if @insupddelflag = 'I'
            ([VehicleId]
            ,[RouteId]
            ,[FleetOwnerId]
-           ,[StopId ]
+           ,[StopId]
            ,[ArrivalHr]
            ,[DepartureHr]
            ,[Duration]
            ,[ArrivalMin]
            ,[DepartureMin]
-           ,[ArrivalAMPM ]
+           ,[ArrivalAMPM]
            ,[DepartureAMPM]
            ,[arrivaltime]
            ,[departuretime])
@@ -9100,26 +9098,59 @@ else
    if @insupddelflag = 'U'
 		begin
 				UPDATE [POSDashboard].[dbo].[FORouteFleetSchedule]
-				SET [VehicleId] = @VehicleId
-           ,[RouteId]=@RouteId
-           ,[FleetOwnerId]=@FleetOwnerId
-           ,[StopId]=@StopId
-           ,[ArrivalHr]=@ArrivalHr 
+				SET --[VehicleId] = @VehicleId
+          -- ,[RouteId]=@RouteId
+          -- ,[FleetOwnerId]=@FleetOwnerId
+          -- ,[StopId]=@StopId
+           [ArrivalHr]=@ArrivalHr 
            ,[DepartureHr]=@DepartureHr
            ,[Duration]=@Duration
            ,[ArrivalMin]=@ArrivalMin
            ,[DepartureMin]=@DepartureMin
-           ,[ArrivalAMPM ]=@ArrivalAMPM
+           ,[ArrivalAMPM]=@ArrivalAMPM
            ,[DepartureAMPM]=@DepartureAMPM
            ,[arrivaltime]=@arrivaltime
            ,[departuretime]=@departuretime
 				 WHERE VehicleId = @VehicleId
+				 and [RouteId]=@RouteId
+				 and [FleetOwnerId]=@FleetOwnerId
+				 and [StopId]=@StopId
+				 
+				 if @@ROWCOUNT = 0
+				 INSERT INTO [POSDashboard].[dbo].[FORouteFleetSchedule]
+           ([VehicleId]
+           ,[RouteId]
+           ,[FleetOwnerId]
+           ,[StopId]
+           ,[ArrivalHr]
+           ,[DepartureHr]
+           ,[Duration]
+           ,[ArrivalMin]
+           ,[DepartureMin]
+           ,[ArrivalAMPM]
+           ,[DepartureAMPM]
+           ,[arrivaltime]
+           ,[departuretime])
+			VALUES
+           (@VehicleId,@RouteId,
+@FleetOwnerId,
+@StopId,
+@ArrivalHr,
+@DepartureHr,
+@Duration,
+@ArrivalMin,
+@DepartureMin,
+@ArrivalAMPM,
+@DepartureAMPM,
+@arrivaltime,
+@departuretime)	
 		end
    else
 	if @insupddelflag = 'D'
      delete from [POSDashboard].[dbo].[FORouteFleetSchedule]
 	 where VehicleId = @VehicleId
 end
+
 GO
 
 set ANSI_NULLS ON
@@ -9405,14 +9436,14 @@ SET ANSI_PADDING OFF
 GO
 
 
-USE [POSDashboard]
+
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerRouteFare]    Script Date: 07/11/2016 13:08:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-alter procedure [dbo].[InsUpdDelFORouteFare](
+create procedure [dbo].[InsUpdDelFORouteFare](
            @RouteId int		   
            ,@PerKmPrice decimal
            ,@PricingType varchar         
@@ -9464,10 +9495,10 @@ UPDATE [POSDashboard].[dbo].[FORouteFare]
            ,@ToDate
            ,@VehicleId
            )
+end
 
 
 
-GO
 
 /****** Object:  Table [dbo].[FORouteFare]    Script Date: 07/11/2016 19:42:06 ******/
 SET ANSI_NULLS ON

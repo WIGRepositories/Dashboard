@@ -76,7 +76,7 @@ namespace BTPOSDashboard.Controllers
 
                     SqlParameter pup1 = new SqlParameter();
                     pup1.ParameterName = "@PerKmPrice";
-                    pup1.SqlDbType = SqlDbType.Money;
+                    pup1.SqlDbType = SqlDbType.Decimal;
                     pup1.Value = RouteFareConfig.UnitPrice;
                     cmd1.Parameters.Add(pup1);                  
 
@@ -112,6 +112,8 @@ namespace BTPOSDashboard.Controllers
                 {
                     fareList = RouteFareConfig.routeFare;
                 }
+
+                 
                 foreach (FORouteFare b in fareList)
                 {
                     SqlParameter ccd = new SqlParameter();
