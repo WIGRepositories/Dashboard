@@ -15,7 +15,25 @@ namespace BTPOSDashboard.Controllers
 {
     public class BTPOSConfigController : ApiController
     {
+        [HttpGet]
+        [Route("api/GetBTPOSId")]
+        public DataTable GetBTPOSId(string imeiNo, string foCode) {
 
+            DataTable Tbl = new DataTable();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetBTPOSId";
+            cmd.Connection = conn;
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+            return Tbl;
+        }
         [HttpGet]
         public DataTable GetFleeBTPosRecords(int POSID, int Id)
         {

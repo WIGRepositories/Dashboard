@@ -54,7 +54,7 @@ namespace BTPOSDashboard.Controllers
         }
 
         [HttpPost]
-
+        [Route("api/FleetOwnerVehicleSchedule/saveFORSchedule")]
         public HttpResponseMessage saveFORSchedule(IEnumerable<FORouteFleetSchedule> nList, int VehicleId, int RouteId, int FleetOwnerId)
         {
             SqlConnection conn = new SqlConnection();
@@ -72,30 +72,38 @@ namespace BTPOSDashboard.Controllers
                 cmd.Connection = conn;
 
                 conn.Open();
+                List<VehicleSchedule> vSchedList = FVS.VSchedule;
 
+                //if (FVS.VehicleSchedule != null && FVS.VehicleSchedule.Count > 0)
+                //{
+                //    fareList = FVS.VehicleSchedule;
+                //}
+                foreach (VehicleSchedule n in vSchedList)
+                {
                 //SqlParameter gsa = new SqlParameter();
                 //gsa.ParameterName = "@Id";
                 //gsa.SqlDbType = SqlDbType.Int;
                 //gsa.Value = n.Id;
                 //cmd.Parameters.Add(gsa);
+                
                 foreach (FORouteFleetSchedule n in nList)
                 {
                     SqlParameter gsn = new SqlParameter();
                     gsn.ParameterName = "@VehicleId ";
                     gsn.SqlDbType = SqlDbType.VarChar;
-                    gsn.Value = n.VehicleId;
+                    gsn.Value = FVS.VehicleId;
                     cmd.Parameters.Add(gsn);
 
                     SqlParameter gsab = new SqlParameter();
                     gsab.ParameterName = "@RouteId";
                     gsab.SqlDbType = SqlDbType.Int;
-                    gsab.Value = n.RouteId;
+                    gsab.Value = FVS.RouteId;
                     cmd.Parameters.Add(gsab);
 
                     SqlParameter gsab1 = new SqlParameter();
                     gsab1.ParameterName = "@FleetOwnerId";
                     gsab1.SqlDbType = SqlDbType.Int;
-                    gsab1.Value = n.FleetOwnerId;
+                    gsab1.Value = FVS.FleetOwnerId;
                     cmd.Parameters.Add(gsab1);
 
                     SqlParameter gsac = new SqlParameter("@StopId", SqlDbType.VarChar);
@@ -135,33 +143,11 @@ namespace BTPOSDashboard.Controllers
                     chss.Value = n.ArrivalAMPM;
                     cmd.Parameters.Add(chss);
 
-                    SqlParameter ch = new SqlParameter("@Duration", SqlDbType.Decimal);
-                    ch.SqlDbType = SqlDbType.Decimal;
-                    ch.Value = n.ArrivalAMPM;
-                    cmd.Parameters.Add(ch);
-
-
 
                     SqlParameter chss1 = new SqlParameter("@DepartureAmPm", SqlDbType.VarChar);
                     chss1.SqlDbType = SqlDbType.VarChar;
                     chss1.Value = n.DepartureAmPm;
                     cmd.Parameters.Add(chss1);
-
-                    SqlParameter ee = new SqlParameter("@StopName", SqlDbType.VarChar);
-                    ee.SqlDbType = SqlDbType.VarChar;
-                    ee.Value = n.StopName;
-                    cmd.Parameters.Add(ee);
-
-                    SqlParameter ee1 = new SqlParameter("@StopCode", SqlDbType.VarChar);
-                    ee1.SqlDbType = SqlDbType.VarChar;
-                    ee1.Value = n.StopCode;
-                    cmd.Parameters.Add(ee1);
-
-                    SqlParameter ee2 = new SqlParameter("@StopNo", SqlDbType.VarChar);
-                    ee2.SqlDbType = SqlDbType.Int;
-                    ee2.Value = n.StopNo;
-                    cmd.Parameters.Add(ee2);
-
 
                     SqlParameter seatc = new SqlParameter("@arrivaltime", SqlDbType.VarChar);
                     seatc.SqlDbType = SqlDbType.DateTime;
@@ -173,7 +159,6 @@ namespace BTPOSDashboard.Controllers
                     deat.SqlDbType = SqlDbType.DateTime;
                     deat.Value = n.departuretime;
                     cmd.Parameters.Add(deat);
-                    cmd.ExecuteScalar();
 
                     SqlParameter e3 = new SqlParameter("@insupddelflag ", SqlDbType.VarChar);
                     e3.SqlDbType = SqlDbType.VarChar;
@@ -199,5 +184,10 @@ namespace BTPOSDashboard.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
+         public void Options()
+        {
+
+        }
+
     }
 }

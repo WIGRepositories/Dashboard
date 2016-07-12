@@ -40,7 +40,7 @@ namespace BTPOSDashboard.Controllers
             rid.Value = routeId;
 
             cmd.Parameters.Add(rid);
-            
+
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
 
@@ -48,108 +48,158 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public HttpResponseMessage saveFleetOwnerRoutefare(IEnumerable<FleetOwnerRouteFare> fareList)
+        public HttpResponseMessage saveFleetOwnerRoutefare(FORouteFareConfig RouteFareConfig)
         {
             SqlConnection conn = new SqlConnection();
             try
             {
+                    //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                    conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-            //connect to database
-            
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                    SqlCommand cmd1 = new SqlCommand();
+                    cmd1.CommandType = CommandType.StoredProcedure;
+                    cmd1.CommandText = "InsUpdDelFORouteFare";
+                    cmd1.Connection = conn;
+                    conn.Open();
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelFleetOwnerRouteFare";
-            cmd.Connection = conn;
-            conn.Open();
+                    SqlParameter ccd1 = new SqlParameter();
+                    ccd1.ParameterName = "@RouteId";
+                    ccd1.SqlDbType = SqlDbType.Int;
+                    ccd1.Value = RouteFareConfig.RouteId;
+                    cmd1.Parameters.Add(ccd1);
 
-            foreach (FleetOwnerRouteFare b in fareList)
-            {
-                SqlParameter ccd = new SqlParameter();
-                ccd.ParameterName = "@RouteId";
-                ccd.SqlDbType = SqlDbType.Int;
-                ccd.Value = b.RouteId;
-                cmd.Parameters.Add(ccd);
+                    SqlParameter pu = new SqlParameter();
+                    pu.ParameterName = "@PricingType";
+                    pu.SqlDbType = SqlDbType.VarChar;
+                    pu.Value = RouteFareConfig.PriceTypeId;
+                    cmd1.Parameters.Add(pu);
 
-                SqlParameter ccdf = new SqlParameter();
-                ccdf.ParameterName = "@FromStopId";
-                ccdf.SqlDbType = SqlDbType.Int;
-                ccdf.Value = b.FromStopId;
-                cmd.Parameters.Add(ccdf);
+                    SqlParameter pup1 = new SqlParameter();
+                    pup1.ParameterName = "@PerKmPrice";
+                    pup1.SqlDbType = SqlDbType.Decimal;
+                    pup1.Value = RouteFareConfig.UnitPrice;
+                    cmd1.Parameters.Add(pup1);                  
 
-                SqlParameter ccdff = new SqlParameter();
-                ccdff.ParameterName = "@ToStopId";
-                ccdff.SqlDbType = SqlDbType.Int;
-                ccdff.Value = b.ToStopId;
-                cmd.Parameters.Add(ccdff);
+                    SqlParameter fd1 = new SqlParameter();
+                    fd1.ParameterName = "@FromDate";
+                    fd1.SqlDbType = SqlDbType.DateTime;
+                    fd1.Value = RouteFareConfig.FromDate;
+                    cmd1.Parameters.Add(fd1);
 
-                SqlParameter cname = new SqlParameter();
-                cname.ParameterName = "@VehicleTypeId";
-                cname.SqlDbType = SqlDbType.VarChar;
-                cname.Value = b.VehicleTypeId;
-                cmd.Parameters.Add(cname);
+                    SqlParameter td1 = new SqlParameter();
+                    td1.ParameterName = "@ToDate";
+                    td1.SqlDbType = SqlDbType.DateTime;
+                    td1.Value = RouteFareConfig.ToDate;
+                    cmd1.Parameters.Add(td1);
 
+                    SqlParameter vid1 = new SqlParameter();
+                    vid1.ParameterName = "@VehicleId";
+                    vid1.SqlDbType = SqlDbType.Int;
+                    vid1.Value = RouteFareConfig.VehicleId;
+                    cmd1.Parameters.Add(vid1);
 
-                SqlParameter dd = new SqlParameter();
-                dd.ParameterName = "@Distance";
-                dd.SqlDbType = SqlDbType.Decimal;
-                dd.Value = b.Distance;
-                cmd.Parameters.Add(dd);
-
-                SqlParameter pup = new SqlParameter();
-                pup.ParameterName = "@PerUnitPrice";
-                pup.SqlDbType = SqlDbType.Decimal;
-                pup.Value = b.PerUnitPrice;
-                cmd.Parameters.Add(pup);
-
-                SqlParameter pupa = new SqlParameter();
-                pupa.ParameterName = "@Amount";
-                pupa.SqlDbType = SqlDbType.Decimal;
-                pupa.Value = b.Amount;
-                cmd.Parameters.Add(pupa);
-
-                SqlParameter dda = new SqlParameter();
-                dda.ParameterName = "@FareTypeId";
-                dda.SqlDbType = SqlDbType.Int;
-                dda.Value = b.FareTypeId;
-                cmd.Parameters.Add(dda);
+                    cmd1.ExecuteScalar();
 
 
-                SqlParameter aa = new SqlParameter();
-                aa.ParameterName = "@Active";
-                aa.SqlDbType = SqlDbType.Int;
-                aa.Value = b.Active;
-                cmd.Parameters.Add(aa);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelFleetOwnerRouteFare";
+                cmd.Connection = conn;
+              
 
-                SqlParameter fd = new SqlParameter();
-                fd.ParameterName = "@FromDate";
-                fd.SqlDbType = SqlDbType.DateTime;
-                fd.Value = b.FromDate;
-                cmd.Parameters.Add(fd);
+                List<FORouteFare> fareList = null;
+                if (RouteFareConfig.routeFare != null && RouteFareConfig.routeFare.Count > 0)
+                {
+                    fareList = RouteFareConfig.routeFare;
+                }
+
+                 
+                foreach (FORouteFare b in fareList)
+                {
+                    SqlParameter ccd = new SqlParameter();
+                    ccd.ParameterName = "@RouteId";
+                    ccd.SqlDbType = SqlDbType.Int;
+                    ccd.Value = b.RouteId;
+                    cmd.Parameters.Add(ccd);
+
+                    SqlParameter ccdf = new SqlParameter();
+                    ccdf.ParameterName = "@FromStopId";
+                    ccdf.SqlDbType = SqlDbType.Int;
+                    ccdf.Value = b.FromStopId;
+                    cmd.Parameters.Add(ccdf);
+
+                    SqlParameter ccdff = new SqlParameter();
+                    ccdff.ParameterName = "@ToStopId";
+                    ccdff.SqlDbType = SqlDbType.Int;
+                    ccdff.Value = b.ToStopId;
+                    cmd.Parameters.Add(ccdff);
+
+                    SqlParameter cname = new SqlParameter();
+                    cname.ParameterName = "@VehicleTypeId";
+                    cname.SqlDbType = SqlDbType.VarChar;
+                    cname.Value = b.VehicleTypeId;
+                    cmd.Parameters.Add(cname);
 
 
-                SqlParameter td = new SqlParameter();
-                td.ParameterName = "@ToDate";
-                td.SqlDbType = SqlDbType.DateTime;
-                td.Value = b.ToDate;
-                cmd.Parameters.Add(td);
+                    SqlParameter dd = new SqlParameter();
+                    dd.ParameterName = "@Distance";
+                    dd.SqlDbType = SqlDbType.Decimal;
+                    dd.Value = b.Distance;
+                    cmd.Parameters.Add(dd);
+
+                    SqlParameter pup = new SqlParameter();
+                    pup.ParameterName = "@PerUnitPrice";
+                    pup.SqlDbType = SqlDbType.Decimal;
+                    pup.Value = b.PerUnitPrice;
+                    cmd.Parameters.Add(pup);
+
+                    SqlParameter pupa = new SqlParameter();
+                    pupa.ParameterName = "@Amount";
+                    pupa.SqlDbType = SqlDbType.Decimal;
+                    pupa.Value = b.Amount;
+                    cmd.Parameters.Add(pupa);
+
+                    SqlParameter dda = new SqlParameter();
+                    dda.ParameterName = "@FareTypeId";
+                    dda.SqlDbType = SqlDbType.Int;
+                    dda.Value = b.FareTypeId;
+                    cmd.Parameters.Add(dda);
 
 
-                SqlParameter vid = new SqlParameter();
-                vid.ParameterName = "@VehicleId";
-                vid.SqlDbType = SqlDbType.Int;
-                vid.Value = b.VehicleId;
-                cmd.Parameters.Add(vid);
+                    SqlParameter aa = new SqlParameter();
+                    aa.ParameterName = "@Active";
+                    aa.SqlDbType = SqlDbType.Int;
+                    aa.Value = b.Active;
+                    cmd.Parameters.Add(aa);
 
-            
-                cmd.ExecuteScalar();
+                    SqlParameter fd = new SqlParameter();
+                    fd.ParameterName = "@FromDate";
+                    fd.SqlDbType = SqlDbType.DateTime;
+                    fd.Value = b.FromDate;
+                    cmd.Parameters.Add(fd);
 
-                cmd.Parameters.Clear();
-            }
-            conn.Close();
-            return new HttpResponseMessage(HttpStatusCode.OK);
+
+                    SqlParameter td = new SqlParameter();
+                    td.ParameterName = "@ToDate";
+                    td.SqlDbType = SqlDbType.DateTime;
+                    td.Value = b.ToDate;
+                    cmd.Parameters.Add(td);
+
+
+                    SqlParameter vid = new SqlParameter();
+                    vid.ParameterName = "@VehicleId";
+                    vid.SqlDbType = SqlDbType.Int;
+                    vid.Value = b.VehicleId;
+                    cmd.Parameters.Add(vid);
+
+
+                    cmd.ExecuteScalar();
+
+                    cmd.Parameters.Clear();
+                }
+               //connect to database
+                conn.Close();
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
@@ -166,5 +216,8 @@ namespace BTPOSDashboard.Controllers
         {
 
         }
+
     }
 }
+
+  

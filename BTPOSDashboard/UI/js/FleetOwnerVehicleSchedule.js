@@ -16,7 +16,7 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $local
 
 });
 
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -27,7 +27,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-
+    fovslist = [];
     $scope.StopCount = [];
 
     $scope.GetCompanies = function () {
@@ -163,14 +163,8 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
     }
 
-    //$scope.save = function () {
-    //    var test = $scope.RouteVehicleSchedule;
 
-    //}
 
-    $scope.test = function (a) {
-        alert(a);
-    }
 
     $scope.$on('ngRepeatFinished', function () {
 
@@ -192,91 +186,68 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         // });
 
     }
-    // if (StopCount > 0) {
+       
     $scope.updateTime = function (s) {
         var aid = s.stopid + 'ADate';
         var did = s.stopid + 'DDate';
-        
+
         s.arrivaltime = document.getElementById(aid).value;
         s.departuretime = document.getElementById(did).value;
-        s.ArrivalHr = document.getElementById(aid).value;
-        s.DepartureHr = document.getElementById(did).value;
-        s.ArrivalMin = document.getElementById(aid).value;
-        s.DepartureMin = document.getElementById(did).value;
-        s.ArrivalAMPM = document.getElementById(aid).value;
-        s.DepartureAmPm = document.getElementById(did).value;
-
-
-        var arrArry = s.arrivaltime.split('');
-        var depArry = s.departuretime.split('');
-        var arrhrArry = s.ArrivalHr.split('');
-        var dephrArry = s.DepartureHr.split('');
-        var arrminArry = s.ArrivalMin.split('');
-        var depminArry = s.DepartureMin.split('');
-        var arrampmArry = s.ArrivalAMPM.split('');
-        var depampmArry = s.DepartureAmPm.split('');
-        //var str = "AM,PM";
-        //var splitted = str.split(" ", 1);
-        //var splitted = (s.arrivaltime,s.departuretime)
-
-    }
-    // }
-    
-    
-    $scope.addfovs = function (stop) {
-        
-        var found = false;
-        for (var i = 0; i < fovslist.length ; i++) {
-            if (fovslist[i].Id == stop.Id) {
-                found = true;
-
-               
-                fovslist[i].departuretime = stop.departuretime;
-                fovslist[i].arrivaltime = stop.arrivaltime;
-                fovslist[i].insupdflag = 'I';
-                break;
-            }
-        }
-        if (!found) {
-            var FOVS = {
-                   //Id: stop.Id,
-                   StopNmae: stop.StopNmae,
-                   StopNo: stop.StopNo,
-                   StopCode: stop.StopCode,
-                   ArrivalHr: stop.ArrivalHr,
-                   DepartureHr: stop.DepartureHr,
-                   Duration: stop.Duration,
-                   ArrivalMin: stop.ArrivalMin,
-                   DepartureMin: stop.DepartureMin,
-                   ArrivalAMPM: stop.ArrivalAMPM,
-                   DepartureAmPm: stop.DepartureAmPmtopId,
-                   arrivaltime: stop.arrivaltime,
-                   departuretime: stop.departuretime,
-                   insupdflag: 'I'
-            }
-
-            fovslist.push(FOVS);
-        }
-    }
+    }   
 
     $scope.save = function () {
+        var FleetOwnerVS = [];
+        var configFareList = $scope.RouteVehicleSchedule;
 
+        var foSchedule = new Object();
+        foSchedule.VehicleId =$scope.v.Id;
+        foSchedule.RouteId = $scope.r.RouteId;
+        foSchedule.FleetOwnerId = $scope.s.Id;
+
+        for (var cnt = 0; cnt < configFareList.length; cnt++) {
+            var arrTime = configFareList[cnt].arrivaltime; //12:00 AM
+
+            var atimeAtt = arrTime.split(' ')
+            var atArr = atimeAtt[0].split(':');
+
+            var depTime = configFareList[cnt].departuretime; //12:00 AM
+
+            var dtimeAtt = depTime.split(' ')
+            var dtArr = dtimeAtt[0].split(':');
+
+
+            var FVS = {
+               
+                StopId : configFareList[cnt].stopid,
+                ArrivalHr: atArr[0],
+                DepartureHr: dtArr[0],
+                
+                ArrivalMin: atArr[1],
+                DepartureMin: dtArr[1],
+                ArrivalAMPM: atimeAtt[1],
+                DepartureAmPm: dtimeAtt[1],
+                Duration: stop.Duration,
+
+                arrivaltime: arrTime,
+                departuretime: depTime,
+
+                insupddelflag: 'U'
+        }
+            FleetOwnerVS.push(FVS);
+    }
+        foSchedule.VSchedule = FleetOwnerVS;
         $http({
             url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            data: fovslist,
+            data: foSchedule,
 
         }).success(function (data, status, headers, config) {
-            $scope.showDialog('saved btpos details successfully');
-            fovslist = [];
+            alert('Fleet owner Vehicle Schedule Saved successfully');
+            $scope.GetFORoutes();
         }).error(function (ata, status, headers, config) {
-            var errdata = ata;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
+            alert(ata);
         });
-
     }
 
     //$scope.save = function (stop, flag) {
@@ -346,5 +317,4 @@ myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg
         $uibModalInstance.dismiss('cancel');
     };
 });
-
 

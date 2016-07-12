@@ -1192,23 +1192,39 @@ CREATE TABLE [dbo].[SMSEmailSubscribers](
 ) ON [PRIMARY]
 
 GO
+/****** Object:  Table [dbo].[SMSEmailConfiguration]    Script Date: 07/11/2016 14:30:36 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
+
+SET ANSI_PADDING ON
+GO
+
 CREATE TABLE [dbo].[SMSEmailConfiguration](
-	[AlertTypeId] [int] NOT NULL,
 	[enddate] [datetime] NOT NULL,
 	[hashkey] [datetime] NOT NULL,
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
 	[saltkey] [datetime] NOT NULL,
 	[startdate] [datetime] NOT NULL,
-	[username] [varchar](50) NOT NULL
+	[username] [varchar](50) NOT NULL,
+	[Port] [int] NOT NULL,
+	[ClientId] [int] NOT NULL,
+	[SelectId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
+
+SET ANSI_PADDING OFF
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4371,26 +4387,44 @@ insert into SMSEmailSubscribers values(@AlertId,@emailid,@enddate,@frequency,@Id
 end
 
 GO
+/****** Object:  StoredProcedure [dbo].[getSMSEmailConfiguration]    Script Date: 07/11/2016 14:30:59 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getSMSEmailConfiguration]
+Create procedure [dbo].[getSMSEmailConfiguration]
 as
 begin
-select * from SMSEmailConfiguration
+ SELECT  Distinct 
+      [enddate]
+      ,[hashkey]
+      ,[Id]
+      ,[providername]
+      ,[pwd]
+      ,[saltkey]
+      ,[startdate]
+      ,[username] 
+     ,[Port]
+     ,[ClientId]
+     ,[SelectId]
+  FROM [POSDashboard].[dbo].[SMSEmailConfiguration] 
+
 end
 
+
+
 GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailConfiguration]    Script Date: 07/11/2016 14:31:12 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelSMSEmailConfiguration](@AlertTypeId int,@enddate datetime,@hashkey datetime,@Id int,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+Create procedure [dbo].[InsUpdDelSMSEmailConfiguration](@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50),@Port int,@ClientId int,@SelectId int)
 as
 begin
-insert into SMSEmailConfiguration values(@AlertTypeId,@enddate,@hashkey,@Id,@providername,@pwd,@saltkey,@startdate,@username)
+insert into SMSEmailConfiguration values(@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username,@Port,@ClientId,@SelectId)
 end
+
 
 GO
 SET ANSI_NULLS ON
@@ -4500,8 +4534,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
+/****** Object:  StoredProcedure [dbo].[InsUpdDelRouteDetails]    Script Date: 04/13/2016 11:13:24 ******/
 
 CREATE procedure [dbo].[InsUpdDelRouteDetails]
 (           @RouteId int
@@ -4565,6 +4599,7 @@ declare @sid int
 declare @Var2 int
 declare @sstopno int
 declare @Vstopno2 int
+declare @distance decimal
 
 DECLARE db_cursor CURSOR FOR  
 SELECT distinct stopid,stopno from [POSDashboard].[dbo].[RouteDetails] where routeid = @RouteId order by stopno
@@ -4592,17 +4627,27 @@ BEGIN
 --					continue;
 --					end
 
+                    begin
+						begin try
+							select @distance = distancefromnextstop from routedetails where stopid = @sid and nextstopid = @Var2
+						end try
+						begin catch
+							set @distance = 0;
+						end catch
+                    end
 					select @cnt = count(1) from [POSDashboard].[dbo].[RouteStops] where fromstopid = @sid and tostopid = @Var2 and RouteId = @RouteId           
 
 					if @cnt = 0 
 					INSERT INTO [POSDashboard].[dbo].[RouteStops]
 						   ([RouteId]
 						   ,[FromStopId]
-						   ,[ToStopId])
+						   ,[ToStopId]
+						   ,distance)
 					 VALUES
 						   (@RouteId
 						   ,@sid
-						   ,@Var2)
+						   ,@Var2
+						   ,@distance)
 					end
 						   Fetch Next From Cursor2 into @Var2,@Vstopno2;
 					
@@ -4620,6 +4665,7 @@ CLOSE db_cursor
 DEALLOCATE db_cursor 
 
 end
+Go
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRoles]    Script Date: 07/01/2016 16:13:42 ******/
 SET ANSI_NULLS ON
@@ -6182,11 +6228,13 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
           INSERT INTO [POSDashboard].[dbo].[RouteStops]
            ([RouteId]
            ,[FromStopId]
-           ,[ToStopId])
+           ,[ToStopId]
+           ,distance)
      VALUES
            (@routeid
            ,@SourceId
-           ,@DestinationId)
+           ,@DestinationId
+           ,@Distance)
      
 end
 end
@@ -7176,14 +7224,14 @@ create procedure [dbo].[GetFOVehicleFareConfig]
 (@vehicleid int, @routeId int)
 as
 begin
-SELECT
+SELECT distinct
       src.name Src
       ,src.Id FromStopId
 	  ,dest.name Dest
 	  ,dest.Id ToStopId
-	  ,fs.Id [FORouteStopId]
+	  ,f.[FORouteStopId]
       ,[VehicleTypeId]
-      ,f.[Distance]
+      ,r.[Distance]
       ,[PerUnitPrice]
       ,[Amount]
       ,[FareTypeId]
@@ -7193,11 +7241,11 @@ SELECT
       ,[VehicleId]
      
   FROM [POSDashboard].[dbo].fleetownerroutestop fs  
-left outer join [FleetOwnerRouteFare] f on (fs.id = f.id and f.vehicleid = @vehicleid)
   inner join routestops r on r.id = fs.routestopid
-  left outer join stops src on src.id =r.fromstopid
-left outer join stops dest on dest.id =r.tostopid
-where r.Id = @routeId
+  inner join stops src on src.id =r.fromstopid
+  inner join stops dest on dest.id =r.tostopid
+  left outer join [FleetOwnerRouteFare] f on (fs.routestopid = f.foroutestopid and f.vehicleid = @vehicleid)
+where r.routeId = @routeId
 order by src 
 
 end
@@ -7269,16 +7317,21 @@ SELECT
       [ToDate],
       fr.[Active]
       ,case when u.id is null then 0 else 1 end assigned
-      --,0 assigned
+      ,src.name as srcStop
+      ,src.id as srcId
+      ,dest.name as destStop
+      ,dest.Id as destId
+      ,r.distance
   FROM routes r
 inner join [POSDashboard].[dbo].[FleetOwnerRoute] fr on r.id = fr.routeid
+inner join stops src on src.id = r.SourceId
+inner join stops dest on dest.id = r.DestinationId
  inner join fleetowner f on f.id = fr.fleetownerid 
   inner join users u on f.userid = u.id 
   where f.Id = @fleetownerId
 
-
-
 end
+
 Go
  
 SET ANSI_NULLS ON
@@ -7877,9 +7930,11 @@ SET ANSI_PADDING OFF
 
 Go
 
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-go
+/****** Object:  StoredProcedure [dbo].[getFORVehicleSchedule]    Script Date: 07/12/2016 12:02:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
 create procedure [dbo].[getFORVehicleSchedule]
 (@fleetOwnerId int, @routeid int, @vehicleId int)
@@ -7911,13 +7966,7 @@ and fs.vehicleId = @vehicleId)
 
 end
 
-GO
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
-go
-
-
+[getFORVehicleSchedule] 1,2,2
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFleetAvailability]    Script Date: 07/01/2016 11:01:22 ******/
 SET ANSI_NULLS ON
 GO
@@ -8952,7 +9001,9 @@ end
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetAvailability]    Script Date: 06/30/2016 11:00:42 ******/
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFORouteFleetSchedule]    Script Date: 07/12/2016 19:29:53 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -8960,21 +9011,21 @@ GO
 
 
 create procedure [dbo].[InsUpdDelFORouteFleetSchedule](
-@Id int,
+@Id int = -1,
 @VehicleId int,
 @RouteId int,
 @FleetOwnerId int,
 @StopId int,
 @ArrivalHr int,
 @DepartureHr int,
-@Duration decimal,
+@Duration decimal = null,
 @ArrivalMin int,
 @DepartureMin int,
 @ArrivalAMPM varchar(10),
 @DepartureAMPM varchar(10),
 @arrivaltime datetime = null,
 @departuretime datetime = null,
-@insupddelflag varchar(1)
+@insupddelflag varchar(1) 
 )
 as
 begin
@@ -8993,13 +9044,13 @@ if @insupddelflag = 'I'
            ([VehicleId]
            ,[RouteId]
            ,[FleetOwnerId]
-           ,[StopId ]
+           ,[StopId]
            ,[ArrivalHr]
            ,[DepartureHr]
            ,[Duration]
            ,[ArrivalMin]
            ,[DepartureMin]
-           ,[ArrivalAMPM ]
+           ,[ArrivalAMPM]
            ,[DepartureAMPM]
            ,[arrivaltime]
            ,[departuretime])
@@ -9024,20 +9075,52 @@ else
    if @insupddelflag = 'U'
 		begin
 				UPDATE [POSDashboard].[dbo].[FORouteFleetSchedule]
-				SET [VehicleId] = @VehicleId
-           ,[RouteId]=@RouteId
-           ,[FleetOwnerId]=@FleetOwnerId
-           ,[StopId]=@StopId
-           ,[ArrivalHr]=@ArrivalHr 
+				SET --[VehicleId] = @VehicleId
+          -- ,[RouteId]=@RouteId
+          -- ,[FleetOwnerId]=@FleetOwnerId
+          -- ,[StopId]=@StopId
+           [ArrivalHr]=@ArrivalHr 
            ,[DepartureHr]=@DepartureHr
            ,[Duration]=@Duration
            ,[ArrivalMin]=@ArrivalMin
            ,[DepartureMin]=@DepartureMin
-           ,[ArrivalAMPM ]=@ArrivalAMPM
+           ,[ArrivalAMPM]=@ArrivalAMPM
            ,[DepartureAMPM]=@DepartureAMPM
            ,[arrivaltime]=@arrivaltime
            ,[departuretime]=@departuretime
 				 WHERE VehicleId = @VehicleId
+				 and [RouteId]=@RouteId
+				 and [FleetOwnerId]=@FleetOwnerId
+				 and [StopId]=@StopId
+				 
+				 if @@ROWCOUNT = 0
+				 INSERT INTO [POSDashboard].[dbo].[FORouteFleetSchedule]
+           ([VehicleId]
+           ,[RouteId]
+           ,[FleetOwnerId]
+           ,[StopId]
+           ,[ArrivalHr]
+           ,[DepartureHr]
+           ,[Duration]
+           ,[ArrivalMin]
+           ,[DepartureMin]
+           ,[ArrivalAMPM]
+           ,[DepartureAMPM]
+           ,[arrivaltime]
+           ,[departuretime])
+			VALUES
+           (@VehicleId,@RouteId,
+@FleetOwnerId,
+@StopId,
+@ArrivalHr,
+@DepartureHr,
+@Duration,
+@ArrivalMin,
+@DepartureMin,
+@ArrivalAMPM,
+@DepartureAMPM,
+@arrivaltime,
+@departuretime)	
 		end
    else
 	if @insupddelflag = 'D'
@@ -9045,11 +9128,31 @@ else
 	 where VehicleId = @VehicleId
 end
 
-
-
 GO
 
-/****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/09/2016 16:38:06 ******/
+set ANSI_NULLS ON
+set QUOTED_IDENTIFIER ON
+go
+
+CREATE PROCEDURE [dbo].[GetBTPOSId]
+(@imei varchar(20), @fleetownerCode varchar(10))
+AS
+BEGIN
+
+SELECT b.[CompanyId]
+      ,[POSID]
+      ,[StatusId]
+      ,[IMEI]
+      ,[ipconfig]     
+      ,b.[FleetOwnerId]
+  FROM [POSDashboard].[dbo].[BTPOSDetails] b
+  inner join fleetowner fo on fo.id  = b.fleetownerid
+where (IMEI = @imei and @fleetownercode like '%'+@fleetownerCode+'%')
+
+end
+GO
+
+/****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/11/2016 10:49:39 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9061,52 +9164,55 @@ GO
 
 CREATE TABLE [dbo].[SmsGatewayeConfiguration](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[AlertTypeId] [int] NOT NULL,
 	[enddate] [datetime] NOT NULL,
 	[hashkey] [datetime] NOT NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
 	[saltkey] [datetime] NOT NULL,
 	[startdate] [datetime] NOT NULL,
-	[username] [varchar](50) NOT NULL
+	[username] [varchar](50) NOT NULL,
+	[ClientId] [int] NOT NULL,
+	[SelectId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
 
 SET ANSI_PADDING OFF
 GO
-/****** Object:  StoredProcedure [dbo].[getSmsGatewayeConfiguration]    Script Date: 07/09/2016 16:31:37 ******/
+GO
+/****** Object:  StoredProcedure [dbo].[getSmsGatewayeConfiguration]    Script Date: 07/11/2016 10:45:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[getSmsGatewayeConfiguration]
+Create procedure [dbo].[getSmsGatewayeConfiguration]
 as
 begin
-SELECT Distinct s.[Id]
+SELECT Distinct [Id]
       ,[username]
-      ,[pwd]
-    --  ,[AlertTypeId]
+      ,[pwd]   
       ,[providername]
       ,[saltkey]
       ,[startdate]
       ,[hashkey]
-      ,Ts.[Name]
-  FROM [POSDashboard].[dbo].[SmsGatewayeConfiguration] s
+      ,[ClientId]
+      ,[SelectId]
+     
+  FROM [POSDashboard].[dbo].[SmsGatewayeConfiguration] 
     
- inner join Types Ts on Ts.TypeGroupId = s.Id 
+  
     
 end
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/09/2016 16:45:46 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/11/2016 10:47:33 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelSMSGatewayConfiguration](@AlertTypeId int,@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50))
+Create  procedure [dbo].[InsUpdDelSMSGatewayConfiguration](@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50),@ClientId int,@SelectId int)
 as
 begin
-insert into SmsGatewayeConfiguration values(@AlertTypeId,@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username)
+insert into SmsGatewayeConfiguration values(@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username,@ClientId,@SelectId)
 end
 
 /****** Object:  Table [dbo].[Index]    Script Date: 07/09/2016 17:22:46 ******/
@@ -9273,3 +9379,163 @@ SELECT--R.[Id]
  
    
 end
+
+
+
+GO
+
+/****** Object:  Table [dbo].[FORouteFare]    Script Date: 07/11/2016 13:51:01 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FORouteFare](
+	[VehicleId] [varchar](50) NOT NULL,
+	[Id] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[Amount] [money] NOT NULL,
+	[PricingType] [varchar](50) NOT NULL,
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL,
+	[PerKmPrice] [money] NOT NULL,
+	[Source] [varchar](50) NOT NULL,
+	[Destination] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerRouteFare]    Script Date: 07/11/2016 13:08:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelFORouteFare](
+           @RouteId int		   
+           ,@PerKmPrice decimal
+           ,@PricingType varchar         
+            ,@FromDate datetime = getdate
+           ,@ToDate datetime = getdate
+           ,@VehicleId int
+           ,@Source varchar = 'hyd'
+           ,@Destination varchar = 'vij'
+          -- ,@InsUpdDelFlag varchar(1)
+)                        
+as
+begin
+declare @Id int
+
+
+UPDATE [POSDashboard].[dbo].[FORouteFare]
+   SET 
+  
+    [RouteId]= @RouteId
+      ,[PerKmPrice] = @PerKmPrice      
+      --,[FareTypeId] = @FareTypeId
+      --,[Active] = @Active
+      ,[FromDate] = @FromDate
+      ,[ToDate] = @ToDate
+      ,[VehicleId] = @VehicleId
+      ,[PricingType]= @PricingType
+      ,[Source]= @Source
+      ,[Destination]= @Destination
+ WHERE [Id] = @Id
+ 
+ if @@rowcount  = 0 
+ INSERT INTO [POSDashboard].[dbo].[FORouteFare]
+           (
+          [RouteId]
+          ,[source]
+          ,[pricingType]
+           ,[Destination]
+           ,[PerKmPrice]           
+           ,[FromDate]
+           ,[ToDate]
+           ,[VehicleId])
+     VALUES
+           (@RouteId
+           ,@Source
+           ,@PricingType
+           ,@Destination
+           ,@PerKmPrice         
+           ,@FromDate
+           ,@ToDate
+           ,@VehicleId
+           )
+end
+
+
+
+
+/****** Object:  Table [dbo].[FORouteFare]    Script Date: 07/11/2016 19:42:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[FORouteFare](
+	[VehicleId] [varchar](50) NOT NULL,
+	[Id] [int] NOT NULL,
+	[RouteId] [int] NOT NULL,
+	[Amount] [money] NOT NULL,
+	[PricingType] [varchar](50) NOT NULL,
+	[FromDate] [datetime] NOT NULL,
+	[ToDate] [datetime] NOT NULL,
+	[PerKmPrice] [money] NOT NULL,
+	[Source] [varchar](50) NOT NULL,
+	[Destination] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[GetFleetOwnerRouteFare]    Script Date: 07/11/2016 12:46:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetFORouteFare]
+AS
+BEGIN
+	
+SELECT fo.[Id]
+      ,[VehicleId]
+      ,[RouteId]
+      ,[PricingType]
+      ,[PerKmPrice]
+      ,[Amount]
+      ,[Source]
+      ,[Destination]
+      ,f.[VehicleRegNo]
+      ,r.RouteName
+      ,r.Code
+   
+      ,[FromDate]
+      ,[ToDate]
+     
+  FROM [POSDashboard].[dbo].[FORouteFare]fo
+  inner join FleetDetails f on f.Id = fo.Id
+  inner join Routes r on r.Id = fo.Id
+
+
+end
+

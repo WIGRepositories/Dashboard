@@ -1,6 +1,6 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -41,12 +41,21 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage)
             //    'Content-Type': undefined
             data: SelTypeGroup
         }
-        $http(req).then(function (res) {
-            alert('saved successfully');
-       
-        });
+        $http(req).then(function (response) {
 
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.TypeGroups();
         $scope.currGroup = null;
+
     };
 
 
@@ -89,7 +98,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http,$localStorage)
             var errmssg = "";
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
             $scope.showDialog(errmssg);
-        });
+        });       
         $scope.currGroup = null;
     };
 

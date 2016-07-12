@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     <!--<link type="text/css" rel="stylesheet" href="css/ngTimepicker.css">-->
 </head>
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();StopCount=0" ng-model="RouteVehicleSchedule">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();StopCount=0" ng-model="RouteVehicleSchedule" >
     <div>
         <!--BEGIN THEME SETTING-->
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -106,7 +106,7 @@
                                             <ul class="nav nav-third-level">
                                                 <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
                                                 <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
-
+                                                <li><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
                                             </ul>
                                         </li>
 
@@ -270,7 +270,7 @@
                                 <ul class="nav nav-second-level">
 
                                     <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
-                                    <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                    <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
                                     <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
 
 
@@ -786,7 +786,7 @@
 
 
 
-                                                                </div>
+                                                               
 
                                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                                     <thead>
@@ -805,14 +805,12 @@
                                                                             <td>{{stop.StopName}}</td>
                                                                             <td>{{stop.StopCode}}</td>
                                                                             <td>{{stop.StopNo}}</td>
-
-                                                                            <td>{{stop.arrivaltime}}</td>
-                                                                            <td><input type="text" class="form-control" id="arrivaltime" ng-model="stop.arrivaltime" ng-change="addfovs(stop);" /></td>
+                                                                            <td>{{stop.arrivaltime}}
+                                                                                <h3 id="mmss"></h3></td>
+                                                                            <!--<td><input type="text" class="form-control" id="arrivaltime" ng-model="stop.arrivaltime" ng-change="addpos(stop);" /></td>-->
 
                                                                             <td>{{stop.departuretime}}</td>
-                                                                            <td>
-                                                                                <input type="text" class="form-control" id="departuretime" ng-model="stop.departuretime" ng-change="addfovs(stop);" />
-                                                                            </td>
+                                                                            <!--<td><input type="text" class="form-control" id="departuretime" ng-model="stop.departuretime" ng-change="addpos(stop);" /></td>-->
                                                                             <td>
                                                                                 <button type="button" data-target="#UpdateSchedule" data-toggle="modal" class="btn btn-default btn-xs" ng-click="SetCurrStop(stop);">
                                                                                     <i class="fa fa-edit"></i>&nbsp;
@@ -820,20 +818,20 @@
                                                                                 </button>
                                                                             </td>
                                                                             <!--<td>
-            <div class="col-md-12 active">
-                <div class="input-group datetimepicker-disable-date date">
-                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                </div>
-            </div>
-        </td>
-        <td>
-            <div class="col-md-12 active">
-                <div class="input-group datetimepicker-disable-date date" >
-                    <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
-                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                </div>
-            </div>
-        </td>-->
+                                                                                <div class="col-md-12 active">
+                                                                                    <div class="input-group datetimepicker-disable-date date">
+                                                                                        <input type="text" id="{{stop.Id}}Date" class="form-control" ng-model="stop.arrivalhr" /><span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="col-md-12 active">
+                                                                                    <div class="input-group datetimepicker-disable-date date" >
+                                                                                        <input type="text" id="{{stop.Id}}Date" class="form-control" ng-blur="test(stop)" ng-model="stop.arrivalhr" />
+                                                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </td>-->
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -912,7 +910,7 @@
 
                                             <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
                                                 <div class="col-md-12" style="text-align:center">
-                                                    <button ng-click="save();" class="btn btn-success">
+                                                    <button ng-click="save(strDate);" class="btn btn-success">
                                                         <i class="fa fa-save"></i>&nbsp;
                                                         Save
                                                     </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
@@ -1021,6 +1019,25 @@
           };
       }]);
     </script>-->
+    <script>
+        function time1() {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            h = h % 12;
+            h = h ? h : 12; // the hour '0' should be '12'
+            var ampm = h >= 12 ? 'PM' : 'AM';
+            m = m < 10 ? '0' + m : m;
+            s = s < 10 ? '0' + s : s;
+            // add a zero in front of numbers<10
+
+            document.getElementById('clk').innerHTML = h + ':' + m + ':' + s + ' ' + ampm;
+            t = setTimeout(function () { time1() }, 500);
+        }
+    </script>
+
+
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
@@ -1032,5 +1049,3 @@
 
 </body>
 </html>
-
-

@@ -26,7 +26,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             pwd: Group.pwd,
             saltkey: Group.saltkey,
             startdate: Group.startdate,
-            username: Group.username,    //       
+            username: Group.username,
+            ClientId: Group.ClientId,
+            SelectId:Group.SelectId,
 
         }
 

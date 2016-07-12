@@ -13,8 +13,16 @@ app.directive('ngOnFinishRender', function ($timeout) {
 });
 
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
+   
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
     $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
     $scope.dashboardDS = $localStorage.dashboardDS;
+
 
 
 
@@ -73,7 +81,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRoute/getFleetOwnerRoute?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetOwnerRoute/GetFleetOwnerRouteAssigned?fleetownerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FORoutes = res.data;
           
         });
@@ -127,7 +135,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             angular.element('')
         }
     }
-    $scope.saveFORouteFare = function () {
+    $scope.saveFORouteFare1 = function () {
 
         if ($scope.prc == null) return;
         var FleetOwnerRouteFare = [];
@@ -146,7 +154,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
                 VehicleId       : $scope.v.Id,
                 Active          :1,      
                 FromDate        :configFareList[cnt].FromDate,
-                ToDate          :configFareList[cnt].ToDate
+                ToDate: configFareList[cnt].ToDate
+
         }
 
                 FleetOwnerRouteFare.push(fr);
@@ -161,16 +170,61 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
         }).success(function (data, status, headers, config) {
             alert('Fleet owner routes successfully');
+            $scope.GetFORouteFare();
+        }).error(function (ata, status, headers, config) {
+            alert(ata);
+        });
+    }
+
+    
+
+
+
+    $scope.saveFORouteFare = function () {
+
+        if ($scope.prc == null) return;
+        var FleetOwnerRouteFare1 = [];
+        var configFareList = $scope.FOVFareConfig;
+
+      
+
+        for (var cnt = 0; cnt < configFareList.length; cnt++) {           
+
+            FleetOwnerRouteFare1.push(configFareList[cnt]);
+
+        }
+
+        var RouteFareConfig = {
+            RouteId: $scope.r.RouteId,           
+            PriceTypeId: 1,//$scope.p.PricingType,
+            UnitPrice: $scope.puprc,
+            VehicleId: $scope.v.Id,          
+          //  FromDate: configFareList[cnt].FromDate,
+           // ToDate: configFareList[cnt].ToDate,
+            insupddelflag:'I',
+            routeFare: FleetOwnerRouteFare1
+        }
+
+        $http({
+            url: 'http://localhost:1476/api/FleetOwnerRouteFare/saveFleetOwnerRoutefare',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: RouteFareConfig,
+
+        }).success(function (data, status, headers, config) {
+            alert('Fleet owner routes successfully');
             $scope.getFleetOwnerRoute();
         }).error(function (ata, status, headers, config) {
             alert(ata);
         });
-    };
+    }
+
 
     $scope.$on('ngRepeatFinished', function () {
         $("input[id*='date']").datepicker({
             dateFormat: "dd/mm/yy"
         });
     });
+
 
 });

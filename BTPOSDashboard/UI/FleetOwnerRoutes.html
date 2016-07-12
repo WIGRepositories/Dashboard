@@ -109,7 +109,7 @@
                                         <ul class="nav nav-third-level">
                                             <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
                                             <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
-
+                                            <li><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
                                         </ul>
                                     </li>
 
@@ -134,7 +134,7 @@
                         </li>
 
 
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-truck">
                                     <div class="icon-bg bg-green"></div>
@@ -156,7 +156,7 @@
                         </li>
 
 
-                        <li class="active">
+                        <li>
 
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -412,13 +412,13 @@
                                                                                     <td>{{route.routename}}</td>
                                                                                     <td>{{route.code}}</td>
                                                                                     <td class="col-lg-2">
-                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter  input-group-sm mbs"><input type="text" id="{{route.routename}}FDate" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter  input-group-sm mbs"><input type="date" id="{{route.routename}}FDate" class="form-control" /><span class="input-group-addon"></span></div>
 
 
                                                                                     </td>
                                                                                     <td class="col-lg-2">
 
-                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="text" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
+                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="date" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"></span></div>
                                                                                     </td>
                                                                                     <!--<td>{{route.FromDate}}</td>
                                                                             <td>{{route.ToDate}}</td>-->
