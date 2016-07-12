@@ -16,7 +16,7 @@ angular.module('myApp').directive('ngOnFinishRender', function ($timeout, $local
 
 });
 
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -27,7 +27,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-
+    fovslist = [];
     $scope.StopCount = [];
 
     $scope.GetCompanies = function () {
@@ -240,7 +240,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         if (!found) {
             var FOVS = {
                 //Id: stop.Id,
-                StopNmae: stop.StopNmae,
+                StopName: stop.StopName,
                 StopNo: stop.StopNo,
                 StopCode: stop.StopCode,
                 ArrivalHr: stop.ArrivalHr,
@@ -268,7 +268,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             data: fovslist,
 
         }).success(function (data, status, headers, config) {
-            $scope.showDialog('saved btpos details successfully');
+            $scope.showDialog('saved FleetOwner Vehicle Schedule details successfully');
             fovslist = [];
         }).error(function (ata, status, headers, config) {
             var errdata = ata;
