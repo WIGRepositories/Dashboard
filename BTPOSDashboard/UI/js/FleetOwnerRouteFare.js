@@ -135,7 +135,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             angular.element('')
         }
     }
-    $scope.saveFORouteFare = function () {
+    $scope.saveFORouteFare1 = function () {
 
         if ($scope.prc == null) return;
         var FleetOwnerRouteFare = [];
@@ -154,7 +154,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
                 VehicleId       : $scope.v.Id,
                 Active          :1,      
                 FromDate        :configFareList[cnt].FromDate,
-                ToDate          :configFareList[cnt].ToDate
+                ToDate: configFareList[cnt].ToDate
+
         }
 
                 FleetOwnerRouteFare.push(fr);
@@ -173,7 +174,47 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         }).error(function (ata, status, headers, config) {
             alert(ata);
         });
-    };
+    }
+
+    $scope.saveFORouteFare = function () {
+
+        if ($scope.prc == null) return;
+        var FleetOwnerRouteFare1 = [];
+        var configFareList = $scope.FOVFareConfig;
+
+      
+
+        for (var cnt = 0; cnt < configFareList.length; cnt++) {           
+
+            FleetOwnerRouteFare1.push(configFareList[cnt]);
+
+        }
+
+        var RouteFareConfig = {
+            RouteId: $scope.r.RouteId,           
+            PriceTypeId: 1,//$scope.p.PricingType,
+            UnitPrice: $scope.puprc,
+            VehicleId: $scope.v.Id,          
+          //  FromDate: configFareList[cnt].FromDate,
+           // ToDate: configFareList[cnt].ToDate,
+            insupddelflag:'I',
+            routeFare: FleetOwnerRouteFare1
+        }
+
+        $http({
+            url: 'http://localhost:1476/api/FleetOwnerRouteFare/saveFleetOwnerRoutefare',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: RouteFareConfig,
+
+        }).success(function (data, status, headers, config) {
+            alert('Fleet owner routes successfully');
+            $scope.getFleetOwnerRoute();
+        }).error(function (ata, status, headers, config) {
+            alert(ata);
+        });
+    }
+
 
     $scope.$on('ngRepeatFinished', function () {
         $("input[id*='date']").datepicker({
