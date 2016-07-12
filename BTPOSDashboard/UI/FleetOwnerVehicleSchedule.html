@@ -805,7 +805,8 @@
                                                                             <td>{{stop.StopName}}</td>
                                                                             <td>{{stop.StopCode}}</td>
                                                                             <td>{{stop.StopNo}}</td>
-                                                                            <td>{{stop.arrivaltime}}</td>
+                                                                            <td>{{stop.arrivaltime}}
+                                                                                <h3 id="mmss"></h3></td>
                                                                             <!--<td><input type="text" class="form-control" id="arrivaltime" ng-model="stop.arrivaltime" ng-change="addpos(stop);" /></td>-->
 
                                                                             <td>{{stop.departuretime}}</td>
@@ -909,7 +910,7 @@
 
                                             <div class="form-group" ng-hide="RouteDetails.Table1.length == 0">
                                                 <div class="col-md-12" style="text-align:center">
-                                                    <button ng-click="save(test);" class="btn btn-success">
+                                                    <button ng-click="save(strDate);" class="btn btn-success">
                                                         <i class="fa fa-save"></i>&nbsp;
                                                         Save
                                                     </button>&nbsp; &nbsp;<a href="#" class="btn btn-default">Cancel</a>
