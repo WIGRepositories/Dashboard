@@ -9382,14 +9382,14 @@ SET ANSI_PADDING OFF
 GO
 
 
-USE [POSDashboard]
+
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFleetOwnerRouteFare]    Script Date: 07/11/2016 13:08:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-alter procedure [dbo].[InsUpdDelFORouteFare](
+create procedure [dbo].[InsUpdDelFORouteFare](
            @RouteId int		   
            ,@PerKmPrice decimal
            ,@PricingType varchar         
@@ -9441,10 +9441,10 @@ UPDATE [POSDashboard].[dbo].[FORouteFare]
            ,@ToDate
            ,@VehicleId
            )
+end
 
 
 
-GO
 
 /****** Object:  Table [dbo].[FORouteFare]    Script Date: 07/11/2016 19:42:06 ******/
 SET ANSI_NULLS ON

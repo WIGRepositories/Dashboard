@@ -279,6 +279,24 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     }
 
+    //function timeTo12HrFormat(time) {   // Take a time in 24 hour format and format it in 12 hour format
+    //    var time_part_array = time.split(":");
+    //    var ampm = 'AM';
+
+    //    if (time_part_array[0] >= 12) {
+    //        ampm = 'PM';
+    //    }
+
+    //    if (time_part_array[0] > 12) {
+    //        time_part_array[0] = time_part_array[0] - 12;
+    //    }
+
+    //    formatted_time = time_part_array[0] + ':' + time_part_array[1] + ':' + time_part_array[2] + ' ' + ampm;
+
+    //    return formatted_time;
+    //}
+    //var time = timeTo12HrFormat(18:00:00);
+    //console.log(time); 
     //$scope.save = function (stop, flag) {
 
     //    //  var test = $scope.RouteVehicleSchedule;

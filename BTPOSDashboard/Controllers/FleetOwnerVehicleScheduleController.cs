@@ -54,7 +54,7 @@ namespace BTPOSDashboard.Controllers
         }
 
         [HttpPost]
-
+        [Route("api/FleetOwnerVehicleSchedule/saveFORSchedule")]
         public HttpResponseMessage saveFORSchedule(IEnumerable<FORouteFleetSchedule> nList)
         {
             SqlConnection conn = new SqlConnection();
