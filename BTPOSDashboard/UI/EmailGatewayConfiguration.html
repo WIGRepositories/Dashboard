@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetEmailGateway();">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetEmailGateway();" ng-model="GetEmailGateway">
     <div>
         <!--END THEME SETTING--><!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
         <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
@@ -351,28 +351,28 @@
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Edit PaymentGateway</h4>
                                                                 </div>
-                                                                <div class="modal-body">
+                                                                <div class="modal-body" ng-model="currGroup">
 
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
                                                                                 <label for="Name" class="col-md-5 control-label" style="color:red;">Port:<span class='require'>*</span></label>
-                                                                                <div class="col-md-7"><input id="Port" type="text" ng-model="Group.Port" class="form-control" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-7"><input id="Port" type="text" ng-model="currGroup.Port" class="form-control" /><span class="help-block"></span></div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <label for="code" class="col-md-5 control-label" style="color:red;">ProviderName:<span class='require'></span></label>
-                                                                                <div class="col-md-7"><input id="ProviderName" type="text" ng-model="Group.providername" class="form-control" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-7"><input id="ProviderName" type="text" ng-model="currGroup.providername" class="form-control" /><span class="help-block"></span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="descr" class="col-md-5 control-label">UserName:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="Group.username" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="desc" type="text" ng-model="currGroup.username" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="ContactNo1" class="col-md-5 control-label">pwd:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="UserName" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="UserName" type="password" ng-model="currGroup.pwd" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -380,11 +380,11 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="ContactNo2" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="currGroup.saltkey" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="Fax" class="col-md-5 control-label">startdate<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.startdate" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="currGroup.startdate" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
 
                                                                             </div>
@@ -393,12 +393,12 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="Fax" class="col-md-5 control-label">enddate:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.enddate" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="currGroup.enddate" class="form-control" /><span class="help-block"></span></div>
 
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="Fax" class="col-md-5 control-label">hashkey<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="date" type="date" ng-model="currGroup.hashkey" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
 
                                                                             </div>
@@ -408,18 +408,18 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="Fax" class="col-md-5 control-label">ClientId:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="ClientId" type="text" ng-model="Group.ClientId" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="ClientId" type="text" ng-model="currGroup.ClientId" class="form-control" /><span class="help-block"></span></div>
 
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="Fax" class="col-md-5 control-label">SelectId<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="SelectId" type="text" ng-model="Group.SelectId" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="SelectId" type="text" ng-model="currGroup.SelectId" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
 
                                                                             </div>
 
                                                                         </div>
-                                                                    </div>   
+                                                                    </div>
                                                                 </div>
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
@@ -494,7 +494,7 @@
 
                                                                             </div>
 
-                                                                        </div> 
+                                                                        </div>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
@@ -509,13 +509,13 @@
 
                                                                             </div>
 
-                                                                        </div>                                                                       
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
                                                                             <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
 
-                                                                            <a href="SmsGatewayConfiguration.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                            <a href="" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
                                                                         </div>
                                                                     </div>
 
@@ -527,8 +527,8 @@
                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
                                                         <tr>
-                                                            <th>username</th>                                                                                                                      
-                                                            <th>providername</th>                                                                                                                      
+                                                            <th>username</th>
+                                                            <th>providername</th>
                                                             <th>Port</th>
                                                             <th>Edit</th>
 
@@ -537,11 +537,11 @@
                                                     <tbody>
 
                                                         <tr ng-repeat="R in GetEmailGateway" class="gradeA">
-                                                            <td>{{R.username}}</td>                                                                                                                   
-                                                            <td>{{R.providername}}</td> 
+                                                            <td>{{R.username}}</td>
+                                                            <td>{{R.providername}}</td>
                                                             <td>{{R.Port}}</td>
                                                             <td>
-                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="">
+                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setEmailGateway(R);">
                                                                     <i class="fa fa-edit"></i>&nbsp;
                                                                     Edit
                                                                 </button>
