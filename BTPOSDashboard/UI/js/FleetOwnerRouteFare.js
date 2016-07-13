@@ -24,7 +24,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-
+    
 
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
@@ -47,6 +47,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             $scope.initdata = res.data;
         });
 
+        $scope.pricingType = [{ "Id": "1", "Name": "Per unit pricing" }, { "Id": "2", "Name": "Stage to Stage" }]
     }
 
     $scope.GetFleetOwners = function () {
@@ -123,23 +124,32 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRouteFare/GetFOVehicleFareConfig?vehicleId=' + $scope.v.VehicleId+'&routeId='+$scope.r.RouteId).then(function (res, data) {
-            $scope.FOVFareConfig = res.data;
-
+        $http.get('http://localhost:1476/api/FleetOwnerRouteFare/GetFOVehicleFareConfig?vehicleId=' + $scope.v.VehicleId + '&routeId=' + $scope.r.RouteId).then(function (res, data) {
+            $scope.FOVFare = res.data.Table;
+            $scope.FOVFareConfig = res.data.Table1;
+            $scope.puprc = $scope.FOVFare[0]['UnitPrice'];
+            $scope.prc = $scope.FOVFare[0]['PricingTypeId'];
+            angular.element('pt').value = $scope.prc;
         });
 
     }
 
     $scope.SetPrice = function () {
+        if($scope.prc == 20)
+            {
+       // var configFareList = $scope.FOVFareConfig;        
+
         for (var cnt = 0; cnt < $scope.FOVFareConfig.length; cnt++) {
-            angular.element('')
+            $scope.FOVFareConfig[cnt].Amount = ($scope.prc == 20) ? eval($scope.puprc) * eval($scope.FOVFareConfig[cnt].Distance) : $scope.FOVFareConfig[cnt].Amount;
+            }
         }
     }
-    $scope.saveFORouteFare1 = function () {
+    $scope.saveFORouteFare = function () {
 
         if ($scope.prc == null) return;
-        var FleetOwnerRouteFare = [];
-        var configFareList = $scope.FOVFareConfig;
+        var FleetOwnerRouteFare1 = [];
+        var configFareList = $scope.FOVFareConfig;        
+
         for (var cnt = 0; cnt < configFareList.length; cnt++) {
 
             var fr = {
@@ -149,59 +159,29 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
                 ToStopId        : configFareList[cnt].ToStopId,
                 Distance        :configFareList[cnt].Distance,
                 PerUnitPrice    : $scope.puprc,
-                Amount          : ($scope.prc == 1) ? eval($scope.puprc) * eval(configFareList[cnt].Distance) : configFareList[cnt].Amount,
+                Amount          : ($scope.prc == 20) ? eval($scope.puprc) * eval(configFareList[cnt].Distance) : configFareList[cnt].Amount,
                 FareTypeId      :configFareList[cnt].FareTypeId,
                 VehicleId       : $scope.v.Id,
                 Active          :1,      
                 FromDate        :configFareList[cnt].FromDate,
                 ToDate: configFareList[cnt].ToDate
-
         }
 
-                FleetOwnerRouteFare.push(fr);
+                FleetOwnerRouteFare1.push(fr);
             
-        }        
-
-        $http({
-            url: 'http://localhost:1476/api/FleetOwnerRouteFare/saveFleetOwnerRoutefare',
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            data: FleetOwnerRouteFare,
-
-        }).success(function (data, status, headers, config) {
-            alert('Fleet owner routes successfully');
-            $scope.GetFORouteFare();
-        }).error(function (ata, status, headers, config) {
-            alert(ata);
-        });
-    }
-
-    
-
-
-
-    $scope.saveFORouteFare = function () {
-
-        if ($scope.prc == null) return;
-        var FleetOwnerRouteFare1 = [];
-        var configFareList = $scope.FOVFareConfig;
-
-      
-
-        for (var cnt = 0; cnt < configFareList.length; cnt++) {           
-
-            FleetOwnerRouteFare1.push(configFareList[cnt]);
-
         }
 
         var RouteFareConfig = {
-            RouteId: $scope.r.RouteId,           
-            PriceTypeId: 1,//$scope.p.PricingType,
+            VehicleId: $scope.v.Id,
+            RouteId: $scope.r.RouteId,
+            PriceTypeId: $scope.prc,
             UnitPrice: $scope.puprc,
-            VehicleId: $scope.v.Id,          
-          //  FromDate: configFareList[cnt].FromDate,
-           // ToDate: configFareList[cnt].ToDate,
-            insupddelflag:'I',
+            Amount:eval($scope.puprc) * eval($scope.r.distance),
+                SourceId:$scope.r.srcId,
+            DestinationId:$scope.r.destId,
+            //  FromDate: configFareList[cnt].FromDate,
+            // ToDate: configFareList[cnt].ToDate,
+            insupddelflag: 'I',
             routeFare: FleetOwnerRouteFare1
         }
 
@@ -213,11 +193,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
         }).success(function (data, status, headers, config) {
             alert('Fleet owner routes successfully');
-            $scope.getFleetOwnerRoute();
+            //$scope.GetFORouteFare();
         }).error(function (ata, status, headers, config) {
             alert(ata);
         });
-    }
+    }    
 
 
     $scope.$on('ngRepeatFinished', function () {

@@ -55,7 +55,7 @@ namespace BTPOSDashboard.Controllers
 
         [HttpPost]
         [Route("api/FleetOwnerVehicleSchedule/saveFORSchedule")]
-        public HttpResponseMessage saveFORSchedule(IEnumerable<FORouteFleetSchedule> nList, int VehicleId, int RouteId, int FleetOwnerId)
+        public HttpResponseMessage saveFORSchedule(FORouteFleetSchedule FVS)
         {
             SqlConnection conn = new SqlConnection();
             try
@@ -74,19 +74,7 @@ namespace BTPOSDashboard.Controllers
                 conn.Open();
                 List<VehicleSchedule> vSchedList = FVS.VSchedule;
 
-                //if (FVS.VehicleSchedule != null && FVS.VehicleSchedule.Count > 0)
-                //{
-                //    fareList = FVS.VehicleSchedule;
-                //}
                 foreach (VehicleSchedule n in vSchedList)
-                {
-                //SqlParameter gsa = new SqlParameter();
-                //gsa.ParameterName = "@Id";
-                //gsa.SqlDbType = SqlDbType.Int;
-                //gsa.Value = n.Id;
-                //cmd.Parameters.Add(gsa);
-                
-                foreach (FORouteFleetSchedule n in nList)
                 {
                     SqlParameter gsn = new SqlParameter();
                     gsn.ParameterName = "@VehicleId ";

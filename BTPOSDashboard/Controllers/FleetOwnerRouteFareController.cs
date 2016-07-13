@@ -13,9 +13,9 @@ namespace BTPOSDashboard.Controllers
     public class FleetOwnerRouteFareController : ApiController
     {
         [HttpGet]
-        public DataTable GetFOVehicleFareConfig(int vehicleId, int routeId)
+        public DataSet GetFOVehicleFareConfig(int vehicleId, int routeId)
         {
-            DataTable Tbl = new DataTable();
+            DataSet Tbl = new DataSet();
 
 
             //connect to database
@@ -62,6 +62,12 @@ namespace BTPOSDashboard.Controllers
                     cmd1.Connection = conn;
                     conn.Open();
 
+                    SqlParameter vid1 = new SqlParameter();
+                    vid1.ParameterName = "@VehicleId";
+                    vid1.SqlDbType = SqlDbType.Int;
+                    vid1.Value = RouteFareConfig.VehicleId;
+                    cmd1.Parameters.Add(vid1);
+
                     SqlParameter ccd1 = new SqlParameter();
                     ccd1.ParameterName = "@RouteId";
                     ccd1.SqlDbType = SqlDbType.Int;
@@ -69,16 +75,22 @@ namespace BTPOSDashboard.Controllers
                     cmd1.Parameters.Add(ccd1);
 
                     SqlParameter pu = new SqlParameter();
-                    pu.ParameterName = "@PricingType";
-                    pu.SqlDbType = SqlDbType.VarChar;
+                    pu.ParameterName = "@PricingTypeId";
+                    pu.SqlDbType = SqlDbType.Int;
                     pu.Value = RouteFareConfig.PriceTypeId;
                     cmd1.Parameters.Add(pu);
 
                     SqlParameter pup1 = new SqlParameter();
-                    pup1.ParameterName = "@PerKmPrice";
+                    pup1.ParameterName = "@UnitPrice";
                     pup1.SqlDbType = SqlDbType.Decimal;
                     pup1.Value = RouteFareConfig.UnitPrice;
-                    cmd1.Parameters.Add(pup1);                  
+                    cmd1.Parameters.Add(pup1); 
+                
+                   SqlParameter amt = new SqlParameter();
+                    amt.ParameterName = "@Amount";
+                    amt.SqlDbType = SqlDbType.Decimal;
+                    amt.Value = RouteFareConfig.Amount;
+                    cmd1.Parameters.Add(amt); 
 
                     SqlParameter fd1 = new SqlParameter();
                     fd1.ParameterName = "@FromDate";
@@ -92,11 +104,17 @@ namespace BTPOSDashboard.Controllers
                     td1.Value = RouteFareConfig.ToDate;
                     cmd1.Parameters.Add(td1);
 
-                    SqlParameter vid1 = new SqlParameter();
-                    vid1.ParameterName = "@VehicleId";
-                    vid1.SqlDbType = SqlDbType.Int;
-                    vid1.Value = RouteFareConfig.VehicleId;
-                    cmd1.Parameters.Add(vid1);
+                    SqlParameter sid = new SqlParameter();
+                    sid.ParameterName = "@SourceId";
+                    sid.SqlDbType = SqlDbType.Int;
+                    sid.Value = RouteFareConfig.SourceId;
+                    cmd1.Parameters.Add(sid);
+
+                SqlParameter did = new SqlParameter();
+                did.ParameterName = "@DestinationId";
+                did.SqlDbType = SqlDbType.Int;
+                did.Value = RouteFareConfig.DestinationId;
+                cmd1.Parameters.Add(did);
 
                     cmd1.ExecuteScalar();
 

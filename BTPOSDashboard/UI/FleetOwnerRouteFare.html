@@ -404,16 +404,21 @@
                                                         </div>
 
                                                         <div class="row mbm" style="text-align:right">
-                                                            <div class="col-md-3">
-                                                                Pricing Type: <select ng-model="prc" ng-change="SetPrice();">
+                                                            <div class="col-md-3">Pricing Type: 
+                                                                <select id="pt" ng-model="prc" value={{prc}} ng-change="SetPrice();">
                                                                     <option value="">Select</option>
-                                                                    <option value="1">Per unit pricing</option>
-                                                                    <option value="2">Stage to Stage</option>
+                                                                    <option value="20">Per unit pricing</option>
+                                                                    <option value="21">Stage to Stage</option>
                                                                 </select>
+
+                                                                <!--<select ng-options="c.Name for c in pricingType track by c.Id" ng-model="prc" ng-change="SetPrice();" value="{{prc}}">
+                                                                    <option value="">Select</option>
+                                                                </select>-->
+
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
-                                                                Per KM price: <input type="text" style="width:100px" ng-init="puprc=0" value="r.PerUnitPrice" ng-model="puprc" ng-disabled="prc == 2 || prc==''" />
+                                                                Per unit(km) price: <input type="text" style="width:100px" ng-init="puprc=0" value="r.PerUnitPrice" ng-model="puprc" ng-disabled="prc != 20" ng-change="SetPrice();" />
                                                             </div>
 
                                                             <div class="col-md-3" style="text-align:right">
@@ -427,51 +432,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-
-                                                                <th>Route</th>
-                                                                <th>Vehicle Reg No</th>
-                                                                <th>Pricing Type</th>
-                                                              
-                                                                <th>From Date</th>
-                                                                <th>To Date</th>
-                                                                <th>Amount</th>
-                                                                <!--<th>List Key</th>
-                <th>List value</th>-->
-                                                                <!--<th>Effective from</th>
-                <th>Effective Till</th>-->
-
-                                                            <!--</tr>
-                                                        </thead>
-                                                        <tbody>
-
-                                                            <tr ng-repeat="v in FOVFareConfig">
-
-
-                                                                <td>{{v.RouteId}}</td>
-                                                                <td>{{v.VehiclId }}</td>
-                                                                <td>
-                                                                    <select ng-model="prc" disabled>
-                                                                        <option value="">Select</option>
-                                                                        <option value="1">Per unit pricing</option>
-                                                                        <option value="2">Adhoc pricing</option>
-                                                                    </select>
-                                                                    <!--<input type="text" class="form-control" style="width:100px" id="p" ng-model="prc" value="prc.value" disabled/>-->
-                                                                <!--</td>
-                                                                <td>
-    <input type="date" class="form-control" ng-model="v.FromDate" /><span class="input-group-addon"></span>
-</td>
-                                                                <td><input type="date" class="form-control" ng-model="initdata.newfleet.Mfr" /><span class="v.ToDate"></span>
-</td>
-                                                                <td><input type="text" class="form-control" style="width:100px" id="amt"  ng-model="v.Amount" ng-disabled="prc == 1" /></td>
-                                                                <td><input type="date" ng-mode="T.nFrom" value={{T.From}}></td>
-                <td><input type="date" ng-mode="T.nTo" value={{T.To}}></td>
-                                                            </tr>
-                                                        </tbody>
-
-                                                    </table>-->
+                                                  
 
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
@@ -498,16 +459,18 @@
                                                                 <td>{{T.Src}}</td>
                                                                 <td>{{T.Dest}}</td>
                                                                 <td>
-                                                                    <select ng-model="prc" disabled>
+                                                                    <select ng-model="prc" disabled value="{{prc}}">
                                                                         <option value="">Select</option>
-                                                                        <option value="1">Per unit pricing</option>
-                                                                        <option value="2">Adhoc pricing</option>
+                                                                        <option value="20">Per unit pricing</option>
+                                                                        <option value="21">Stage to Stage</option>
                                                                     </select>
-                                                                    <!--<input type="text" class="form-control" style="width:100px" id="p" ng-model="prc" value="prc.value" disabled/>-->
-                                                                </td>
+                                                                    <!--<select ng-options="c.Name for c in pricingType track by c.Id" ng-model="prc" ng-change="SetPrice();" value="{{prc}}">
+                                                                        <option value="">Select</option></select>-->
+                                                                        <!--<input type="text" class="form-control" style="width:100px" id="p" ng-model="prc" value="prc.value" disabled/>-->
+</td>
                                                                 <td><input type="text" class="form-control" style="width:100px" id="p" ng-model="T.PerUnitPrice" value="{{puprc}}" disabled /></td>
                                                                 <td><input type="text" class="form-control" style="width:100px" id="d" ng-model="T.Distance" disabled /></td>
-                                                                <td><input type="text" class="form-control" style="width:100px" id="amt" value="{{puprc * T.Distance}}" ng-model="T.Amount" ng-disabled="prc == 1" /></td>
+                                                                <td><input type="text" class="form-control" style="width:100px" id="amt" value="{{T.Amount}}" ng-model="T.Amount" ng-disabled="prc == 20 || prc==''" /></td>
                                                                 <!--<td><input type="date" ng-mode="T.nFrom" value={{T.From}}></td>
                                                     <td><input type="date" ng-mode="T.nTo" value={{T.To}}></td>-->
                                                             </tr>

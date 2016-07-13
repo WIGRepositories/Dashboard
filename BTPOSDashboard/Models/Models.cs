@@ -1241,16 +1241,22 @@ namespace BTPOSDashboardAPI.Models
        public List<FORouteFare> routeFare { get; set; }
         public int Id { get; set; }
         public int RouteId { get; set; }
-        
+        public string RouteName { get; set; }
+        public string RouteCode { get; set; }
         public decimal UnitPrice { get; set; }
-        
+        public decimal Amount { get; set; }
         public int VehicleId { get; set; }
-
+        public string VehicleRegNo { get; set; }
         public DateTime? FromDate { get; set; }
         public DateTime? ToDate { get; set; }
         public string insupddelflag { get; set; }
         public string PriceType { get; set; }
         public int PriceTypeId { get; set; }
+
+        public int SourceId { get; set; }
+        public string Source { get; set; }
+        public int DestinationId { get; set; }
+        public string Destination { get; set; }
     }
 
     public class FORouteFare
