@@ -374,7 +374,7 @@
                                                         <label for="selCompany" class="col-md-3 control-label" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
 
                                                         <div class="col-md-6">
-                                                            <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetVehicleConfig()">
+                                                            <select ng-options="s.Name for s in cmpdata.Table track by s.Id" class="form-control" ng-model="s" ng-change="GetVehicleConfig()">
 
 
                                                                 <option value="">Select</option>
@@ -397,7 +397,7 @@
                                                         <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
 
                                                         <div class="col-md-6">
-                                                            <select ng-options="u.username  for u in userRoles track by u.Id" ng-model="f.uu">
+                                                            <select ng-options="u.username  for u in userRoles track by u.Id" class="form-control" ng-model="f.uu">
                                                                 <option value="">Select</option>
                                                             </select>
 

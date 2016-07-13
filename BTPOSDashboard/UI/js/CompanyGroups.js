@@ -127,13 +127,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog(errmssg);
            
         });
-        $scope.GetCompanys();
+        $scope.GetCompanys(cmp);
         $scope.currGroup = null;
     };
       
 
-    $scope.setCompany = function (grp) {
-        $scope.currGroup = grp;
+    $scope.setCompany = function (cmp) {
+        $scope.currGroup = cmp;
     };
 
     $scope.clearGroup = function () {        
