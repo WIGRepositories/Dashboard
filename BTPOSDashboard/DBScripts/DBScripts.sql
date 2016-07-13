@@ -2623,6 +2623,7 @@ exec InsEditHistoryDetails @edithistoryid,@oldipconfig,@ipconfig,'Modication','i
  
  
  else
+ if @insupdflag = 'D' 
    delete from BTPOSDetails where Id = @Id
 
 END
