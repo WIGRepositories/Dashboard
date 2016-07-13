@@ -32,14 +32,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     } 
     $scope.GetFleetOwners = function () {
-        if ($scope.cmp == null) {
-            $scope.cmpdata = null;
-            $scope.Fleet = null;
+        if ($scope.cmp1 == null) {
+            $scope.fdata = null;            
             return;
         }
         var vc = {
             needfleetowners: '1',
-            cmpId: $scope.cmp.Id
+            cmpId: $scope.cmp1.Id
         };
 
         var req = {
@@ -51,6 +50,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             data: vc
 
         }
+
+        $http(req).then(function (res) {
+            $scope.fdata = res.data;
+        });
     }
     $scope.GetPopupFleetOwners = function (cid) {
 
