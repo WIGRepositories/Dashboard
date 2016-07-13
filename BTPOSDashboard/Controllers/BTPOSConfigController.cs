@@ -30,10 +30,24 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetBTPOSId";
             cmd.Connection = conn;
+
+            SqlParameter cid = new SqlParameter();
+            cid.ParameterName = "@imei";
+            cid.SqlDbType = SqlDbType.VarChar;
+            cid.Value = imeiNo;
+            cmd.Parameters.Add(cid);
+
+            SqlParameter fid1 = new SqlParameter();
+            fid1.ParameterName = "@fleetownerCode";
+            fid1.SqlDbType = SqlDbType.VarChar;
+            fid1.Value = foCode;
+            cmd.Parameters.Add(fid1);
+
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
             return Tbl;
         }
+
         [HttpGet]
         public DataTable GetFleeBTPosRecords(int POSID, int Id)
         {
