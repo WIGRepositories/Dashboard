@@ -154,13 +154,13 @@
                                 </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
-                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
-                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
-                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
-                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
-                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
-                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="Fleet Owners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="Fleet Owner Routes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="Fleet Owner VehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="Fleet Owner RouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="Fleet Owner VehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="Fleet Owner RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="Fleet Owner Reports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                             </ul>
                         </li>
 
@@ -279,7 +279,7 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="Fleet Owner Reports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                                 <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
@@ -350,7 +350,7 @@
                                                             <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add PaymentGateway Configuration</button>
                                                         </div>
 
-                                                        <div id="Modal-header-primary"  role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                        <div id="Modal-header-primary" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header modal-header-primary">
@@ -362,18 +362,18 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="PaymentGatewayType" class="col-md-5 control-label" style="color:red;">PaymentGatewayType:<span class='require'>*</span></label>
+                                                                                    <label for="PaymentGatewayType" class="col-md-5 control-label" style="color:red;">Payment GatewayType:<span class='require'>*</span></label>
                                                                                     <div class="col-md-7"><input id="PaymentGatewayType" type="text" ng-model="currGroup.TypeGroupId" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="ProviderName" class="col-md-5 control-label" style="color:red;">ProviderName:<span class='require'></span></label>
+                                                                                    <label for="ProviderName" class="col-md-5 control-label" style="color:red;">Provider Name:<span class='require'></span></label>
                                                                                     <div class="col-md-7"><input id="ProviderName" type="text" ng-model="currGroup.providername" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
-                                                                                        <label for="UserName" class="col-md-5 control-label">UserName:<span class='require'></span></label>
+                                                                                        <label for="UserName" class="col-md-5 control-label">User Name:<span class='require'></span></label>
                                                                                         <div class="col-md-7"><input id="UserName" type="text" ng-model="currGroup.username" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
@@ -427,18 +427,17 @@
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
-                                                                            <button type="button" class="btn btn-primary" ng-click="savecmpChanges(currGroup, 'U');">Save</button>
+                                                                            <button type="button" class="btn btn-primary" ng-click="savecmpChanges(currGroup);">Save</button>
                                                                             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
-
                                                         </div>
 
-                                                        <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+
+
+                                                        <div id="Modal-header-new" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header modal-header-primary">
@@ -450,18 +449,18 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Name" class="col-md-5 control-label" style="color:red;">PaymentGatewayType:<span class='require'>*</span></label>
-                                                                                    <div class="col-md-7"><input id="PaymentGatewayType" type="text" ng-model="Group.TypeGroupId" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <label for="Name" class="col-md-5 control-label" style="color:red;">Payment GatewayType:<span class='require'>*</span></label>
+                                                                                    <div class="col-md-7"><input id="TypeGroupId" type="text" ng-model="Group.TypeGroupId" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="code" class="col-md-5 control-label" style="color:red;">ProviderName:<span class='require'></span></label>
+                                                                                    <label for="code" class="col-md-5 control-label" style="color:red;">Provider Name:<span class='require'></span></label>
                                                                                     <div class="col-md-7"><input id="ProviderName" type="text" ng-model="Group.providername" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
-                                                                                        <label for="descr" class="col-md-5 control-label">UserName:<span class='require'></span></label>
+                                                                                        <label for="descr" class="col-md-5 control-label">User Name:<span class='require'></span></label>
                                                                                         <div class="col-md-7"><input id="desc" type="text" ng-model="Group.username" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
@@ -477,7 +476,7 @@
                                                                                         <div class="col-md-7"><input id="date" type="date" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
-                                                                                        <label for="Fax" class="col-md-5 control-label">startdate<span class='require'></span></label>
+                                                                                        <label for="Fax" class="col-md-5 control-label">start date<span class='require'></span></label>
                                                                                         <div class="col-md-7"><input id="date" type="date" ng-model="Group.startdate" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
 
@@ -486,7 +485,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
-                                                                                        <label for="Fax" class="col-md-5 control-label">enddate:<span class='require'></span></label>
+                                                                                        <label for="Fax" class="col-md-5 control-label">End date:<span class='require'></span></label>
                                                                                         <div class="col-md-7"><input id="date" type="date" ng-model="Group.enddate" class="form-control" /><span class="help-block"></span></div>
 
                                                                                     </div>
@@ -513,7 +512,7 @@
                                                                         </div>
                                                                         <div class="form-actions">
                                                                             <div class="col-md-offset-3 col-md-9">
-                                                                                <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
+                                                                                <button class="btn btn-primary" type="button" ng-click="save(Group);">Save</button>
 
                                                                                 <a href="PaymentGatewayConfiguration.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
                                                                             </div>
@@ -527,10 +526,10 @@
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
-                                                                <th>username</th>
+                                                                <th>User Name</th>
 
-                                                                <th>PaymentGatewayType</th>
-                                                                <th>providername</th>
+                                                                <th>Payment GatewayType</th>
+                                                                <th>provider Name</th>
                                                                 <th>ClientId</th>
                                                                 <th>SelectId</th>
                                                                 <th>Edit</th>
@@ -547,7 +546,9 @@
                                                                 <td>{{R.ClientId}}</td>
                                                                 <td>{{R.SelectId}}</td>
                                                                 <td>
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setPaymentGateway(cmp);">
+
+
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setPaymentGateway(R);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
@@ -558,6 +559,8 @@
                                                         </tbody>
 
                                                     </table>
+
+
                                                 </div>
                                             </div>
 
@@ -630,7 +633,6 @@
         <script src="js/angular.js"></script>
         <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
         <script src="js/ngStorage.js"></script>
-
         <script src="js/PaymentGateWayConfiguration.js"></script>
 
 

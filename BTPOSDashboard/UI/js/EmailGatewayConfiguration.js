@@ -15,21 +15,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         });
     }
-    $scope.save = function (Group) {
-
+    
+    $scope.save = function (Group,flag) {
 
         var newCmp = {
             providername: Group.providername,
             enddate: Group.enddate,
             hashkey: Group.hashkey,
-            AlertTypeId: Group.AlertTypeId,
             pwd: Group.pwd,
             saltkey: Group.saltkey,
             startdate: Group.startdate,
             username: Group.username,    //       
             Port: Group.Port,
             ClientId: Group.ClientId,
-            SelectId:Group.SelectId
+            SelectId: Group.SelectId,
+            insupdflag: 'I'
         }
 
 
@@ -54,6 +54,53 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $scope.currGroup = null;
     };
+
+    $scope.savecmpChanges = function (Group,flag) {
+
+        var newCmp = {
+            providername: Group.providername,
+            enddate: Group.enddate,
+            hashkey: Group.hashkey,
+            pwd: Group.pwd,
+            saltkey: Group.saltkey,
+            startdate: Group.startdate,
+            username: Group.username,    //       
+            Port: Group.Port,
+            ClientId: Group.ClientId,
+            SelectId: Group.SelectId,
+            insupdflag: 'U'
+        }
+
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/EmailGatewayConfig/SaveEmailGatewaySettings',
+            data: Group
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!!");
+
+        }
+        , function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+
+        });
+        $scope.GetEmailGateway();
+        $scope.currGroup = null;
+    };
+
+    $scope.setEmailGateway = function (grp) {
+        $scope.currGroup = grp;
+    };
+
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
+    };
+
 
     $scope.showDialog = function (message) {
 

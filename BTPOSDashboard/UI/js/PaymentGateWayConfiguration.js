@@ -14,21 +14,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.PaymentGateway = response.data;
 
         });
-    }
-    $scope.save = function (Group) {
-
+    }   
+     $scope.save = function (Group,flag) {
         
         var newCmp = {          
             providername: Group.providername,
             enddate: Group.enddate,
             hashkey: Group.hashkey,
-            PaymentGatewayTypeId: Group.PaymentGatewayTypeId,
+            TypeGroupId: Group.TypeGroupId,
             pwd: Group.pwd,
             saltkey: Group.saltkey,
             startdate: Group.startdate,
             username: Group.username,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId
+            SelectId: Group.SelectId,
+            insupdflag: 'I'
             
         }
 
@@ -55,7 +55,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currGroup = null;
     };
 
-    $scope.savecmpChanges = function (Group) {
+    $scope.savecmpChanges = function (Group,flag) {
        
         var Group = {                     
                 providername: Group.providername,
@@ -65,7 +65,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 pwd: Group.pwd,
                 saltkey: Group.saltkey,
                 startdate: Group.startdate,
-                username: Group.username, 
+                username: Group.username,
+                insupdflag: 'U'
 
         }
 
@@ -97,6 +98,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.clearGroup = function () {
         $scope.currGroup = null;
     };
+
+   
 
     $scope.showDialog = function (message) {
 
