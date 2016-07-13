@@ -15,7 +15,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         });
     }
-    $scope.save = function (Group) {
+    $scope.save = function (Group,flag) {
 
 
         var newCmp = {
@@ -28,7 +28,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             startdate: Group.startdate,
             username: Group.username,
             ClientId: Group.ClientId,
-            SelectId:Group.SelectId,
+            SelectId: Group.SelectId,
+            insupdflag: 'I'
 
         }
 
@@ -55,7 +56,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currGroup = null;
     };
 
-    $scope.saveCmpChanges = function (Group) {
+    $scope.saveCmpChanges = function (Group,flag) {
 
        
         var Group = {
@@ -69,6 +70,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             username: Group.username,
             ClientId: Group.ClientId,
             SelectId: Group.SelectId,
+            insupdflag: 'U'
            
         }
 

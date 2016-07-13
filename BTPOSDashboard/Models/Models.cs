@@ -705,6 +705,7 @@ namespace BTPOSDashboardAPI.Models
         public string username { get; set; }
         public int ClientId {get;set;}
         public int SelectId { get; set; }
+        public string insupdflag { get; set; }
     }
 
     public class PaymentGatewaySettings
@@ -728,6 +729,8 @@ namespace BTPOSDashboardAPI.Models
         public DateTime startdate { get; set; }
 
         public string username { get; set; }
+        public string insupdflag  { get; set; }
+
     }
 
     public class Transactions
@@ -1586,6 +1589,7 @@ namespace BTPOSDashboardAPI.Models
         public int SelectId { get; set; }
 
         public int Port { get; set; }
+        public string insupdflag { get; set; }
 
     }
 }                     

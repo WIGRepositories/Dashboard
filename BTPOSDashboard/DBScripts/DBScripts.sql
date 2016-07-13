@@ -3082,12 +3082,15 @@ SELECT  [enddate]
     
 end
 
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPaymentGatewaySettings]    Script Date: 07/13/2016 18:04:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create procedure [dbo].[InsUpdDelPaymentGatewaySettings]
-(@enddate datetime,
+create procedure [dbo].[InsUpdDelPaymentGatewaySettings]
+(
+@enddate datetime,
 @hashkey datetime,
 @PaymentGatewayTypeId int,
 @providername varchar(50),
@@ -3096,10 +3099,23 @@ Create procedure [dbo].[InsUpdDelPaymentGatewaySettings]
 @startdate datetime,
 @username varchar(50),
 @ClientId int,
-@SelectId int)
-as
-begin
-insert into PaymentGatewaySettings values
+@SelectId int,
+@insupdflag varchar(10))
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[PaymentGatewaySettings]
+           ([enddate]
+           ,[hashkey]
+           ,[PaymentGatewayTypeId]
+           ,[providername]
+           ,[pwd]
+           ,[saltkey]
+           ,[startdate]
+           ,[username]
+             ,[ClientId]      
+              ,[SelectId]        
+             )  values
 (@enddate,
 @hashkey,
 @PaymentGatewayTypeId,
@@ -3110,6 +3126,19 @@ insert into PaymentGatewaySettings values
 @username,
 @clientId,
 @SelectId)
+
+          else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[PaymentGatewaySettings]
+   SET   [hashkey] = @hashkey 
+         ,[providername] = @providername
+         ,[pwd] = @pwd
+       ,[saltkey] = @saltkey
+      ,[startdate] = @startdate
+      ,[username] = @username
+      ,[ClientId] = @ClientId
+     ,[SelectId] = @SelectId
+      ,[enddate] = @enddate      
 end
 GO
 SET ANSI_NULLS ON
@@ -4436,17 +4465,62 @@ begin
 end
 
 
-
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailConfiguration]    Script Date: 07/11/2016 14:31:12 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSEmailConfiguration]    Script Date: 07/13/2016 18:21:51 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create procedure [dbo].[InsUpdDelSMSEmailConfiguration](@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50),@Port int,@ClientId int,@SelectId int)
-as
-begin
-insert into SMSEmailConfiguration values(@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username,@Port,@ClientId,@SelectId)
+Create procedure [dbo].[InsUpdDelSMSEmailConfiguration]
+(@enddate datetime,
+@hashkey datetime,
+@providername varchar(50),
+@pwd varchar(50),
+@saltkey datetime,
+@startdate datetime,
+@username varchar(50),
+@Port int,
+@ClientId int,
+@SelectId int,
+@insupdflag varchar(10))
+AS
+BEGIN	
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[SMSEmailConfiguration]
+           ([enddate]
+           ,[hashkey]           
+           ,[providername]
+           ,[pwd]
+           ,[saltkey]
+           ,[startdate]
+           ,[username]
+           ,[Port]
+             ,[ClientId]      
+              ,[SelectId] )         
+values
+(@enddate,
+@hashkey,
+@providername,
+@pwd,
+@saltkey,
+@startdate,
+@username,
+@Port,
+@ClientId,
+@SelectId)
+          else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[SMSEmailConfiguration]
+   SET   [hashkey] = @hashkey 
+         ,[providername] = @providername
+         ,[pwd] = @pwd
+       ,[saltkey] = @saltkey
+      ,[startdate] = @startdate
+      ,[username] = @username
+      ,[Port]= @Port
+      ,[ClientId] = @ClientId
+     ,[SelectId] = @SelectId
+      ,[enddate] = @enddate  
 end
 
 
@@ -9239,17 +9313,63 @@ SELECT Distinct [Id]
   
     
 end
+
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/11/2016 10:47:33 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSMSGatewayConfiguration]    Script Date: 07/13/2016 18:03:50 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create  procedure [dbo].[InsUpdDelSMSGatewayConfiguration](@enddate datetime,@hashkey datetime,@providername varchar(50),@pwd varchar(50),@saltkey datetime,@startdate datetime,@username varchar(50),@ClientId int,@SelectId int)
+create  procedure [dbo].[InsUpdDelSMSGatewayConfiguration]
+(@enddate datetime,
+@hashkey datetime,
+@providername varchar(50),
+@pwd varchar(50),
+@saltkey datetime,
+@startdate datetime,
+@username varchar(50),
+@ClientId int,
+@SelectId int,
+@insupdflag varchar(10))
 as
 begin
-insert into SmsGatewayeConfiguration values(@enddate,@hashkey,@providername,@pwd,@saltkey,@startdate,@username,@ClientId,@SelectId)
+if @insupdflag = 'I' 
+INSERT INTO [dbo].[SmsGatewayeConfiguration]
+           ([enddate]
+           ,[hashkey]          
+           ,[providername]
+           ,[pwd]
+           ,[saltkey]
+           ,[startdate]
+           ,[username]
+            ,[ClientId]      
+              ,[SelectId]        
+             )   
+values
+(@enddate,
+@hashkey,
+@providername,
+@pwd,
+@saltkey,
+@startdate,
+@username,
+@ClientId,
+@SelectId)
+      else
+  if @insupdflag = 'U' 
+UPDATE [POSDashboard].[dbo].[SmsGatewayeConfiguration]
+   SET   [hashkey] = @hashkey 
+         ,[providername] = @providername
+         ,[pwd] = @pwd
+       ,[saltkey] = @saltkey
+      ,[startdate] = @startdate
+      ,[username] = @username
+      ,[ClientId] = @ClientId
+     ,[SelectId] = @SelectId
+      ,[enddate] = @enddate      
 end
+
+
 
 /****** Object:  Table [dbo].[Index]    Script Date: 07/09/2016 17:22:46 ******/
 SET ANSI_NULLS ON

@@ -112,6 +112,10 @@ namespace BTPOSDashboard.Controllers
             Sl.Value = b.SelectId;
             cmd.Parameters.Add(Sl);
 
+            SqlParameter insdelflag = new SqlParameter("@insupdflag", SqlDbType.VarChar);
+            insdelflag.Value = b.insupdflag;
+            cmd.Parameters.Add(insdelflag);
+
 
 
 
