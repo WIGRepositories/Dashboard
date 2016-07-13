@@ -9525,3 +9525,118 @@ SELECT fo.[Id]
 
 end
 
+
+
+GO
+
+/****** Object:  Table [dbo].[Paymentdetailsnw]    Script Date: 07/13/2016 19:20:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Paymentdetailsnw](
+	[ItemId] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Unitprice] [decimal](18, 0) NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[Transactionid] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+GO
+
+/****** Object:  Table [dbo].[Salesordernw]    Script Date: 07/13/2016 19:20:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Salesordernw](
+	[ItemId] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[UnitPrice] [decimal](18, 0) NOT NULL,
+	[Quantity] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSalesordernw]    Script Date: 07/13/2016 17:35:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsUpdDelSalesordernw]
+
+@ItemId int,
+@ItemName varchar,
+@UnitPrice money
+
+as
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Salesordernw]
+           ([ItemId]
+           ,[ItemName]
+           ,[UnitPrice]
+           )
+     VALUES
+           (@ItemId
+           ,@ItemName
+           ,@UnitPrice
+           )
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSalesordernw]    Script Date: 07/13/2016 17:35:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsUpdDelSalesordernw]
+
+@ItemId int,
+@ItemName varchar,
+@UnitPrice money
+
+as
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Salesordernw]
+           ([ItemId]
+           ,[ItemName]
+           ,[UnitPrice]
+           )
+     VALUES
+           (@ItemId
+           ,@ItemName
+           ,@UnitPrice
+           )
+end
+
+
+
+
+
+

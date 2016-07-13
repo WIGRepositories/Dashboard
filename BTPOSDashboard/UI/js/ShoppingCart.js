@@ -1,7 +1,8 @@
 ﻿var app = angular.module('myApp', ['ngStorage'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+    $scope.uname = $localStorage.uname
     if ($localStorage.uname == null) {
-        window.location.href = "login.html";
+       window.location.href = "login.html";
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
@@ -35,16 +36,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.Save = function (items) {
 
-        if (items == null) {
-            alert('Please select any item.');
-            return;
-        }
+       
         var items = {
-            Id: -1,
+          //  Id: 1,
             ItemId: items.ItemId,
             ItemName: items.ItemName,
-            UnitPrice: items.UnitPrice
-
+            UnitPrice: items.Unitprice,
+            Transactionid: items.Transactionid,
+            Quantity: items.Quantity
            
         };
 
@@ -87,13 +86,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 });
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
-    $scope.mssg = mssg;
+   $scope.mssg = mssg;
     $scope.ok = function () {
         $uibModalInstance.close('test');
-    };
+   };
 
-    $scope.cancel = function () {
+   $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
-    };
+  };
 });
 

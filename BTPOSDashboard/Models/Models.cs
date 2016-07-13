@@ -1549,6 +1549,23 @@ namespace BTPOSDashboardAPI.Models
         public DateTime DateTime { get; set; }
 
     }
+    public class items
+    {
+        //public int Id { get; set; }
+        public int ItemId { get; set; }
+
+        public String ItemName { get; set; }
+
+
+        public decimal UnitPrice { get; set; }
+
+        public int Transactionid { get; set; }
+
+        public int Quantity { get; set; }
+
+       
+
+    }
     public class EmailGatewaySettings
     {
         public DateTime enddate { get; set; }
