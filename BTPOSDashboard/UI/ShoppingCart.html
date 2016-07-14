@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-model="items" ng-init="GetItems();">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetItems();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -154,13 +154,13 @@
                                 </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="Fleet Owners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
-                                <li><a href="Fleet Owner Routes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
-                                <li><a href="Fleet Owner VehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
-                                <li><a href="Fleet Owner RouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
-                                <li><a href="Fleet Owner VehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
-                                <li><a href="Fleet Owner RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
-                                <li><a href="Fleet Owner Reports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                             </ul>
                         </li>
 
@@ -287,7 +287,7 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li><a href="Fleet Owner Reports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                                 <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
@@ -349,6 +349,8 @@
                             <div class="col-lg-12">
                                 <div class="panel">
                                     <div class="panel-body">
+
+
                                         <div id="grid-layout-ul-li" class="box jplist">
                                             <div class="jplist-ios-button"><i class="fa fa-sort"></i>jPList Actions</div>
                                             <div class="jplist-panel box panel-top">
@@ -364,133 +366,232 @@
                                                         <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i><span class="badge badge-green">{{items.length}}</span></a>
 
                                                         <ul class="dropdown-menu dropdown-messages">
-                                                            <li><p>No Items added to cart</p></li>
+                                                            <li><p>Items added to cart are</p></li>
                                                             <p>{{items}}</p>
+                                                            <p><input type="button" value="CheckOut" style="width:125px;" ng-click="Save(items);"></p>
                                                         </ul>
                                                     </li>
 
 
                                                 </ul>
+                                                
+                                                
 
-                                            </div>
-                                            <ul class="box text-shadow ul-li-list">
-                                                <!--<item>1</item>-->
-                                                <li class="list-item" ng-repeat="i in items">
-                                                    <div class="list-box">
-                                                        <!--<img/>-->
-                                                        <div class="img"><a href="cables.html"><img src="images/adapter.jpeg" height="70" width="70" alt="" title="" /></a></div>
 
-                                                        <!--<data></data>-->
-                                                        <div class="block">
-                                                            <form>
-                                                                <div class="list-box">
-                                                                    <!--<p>
-                            <input type="hidden" name="op" value="add">
-                            <input type="hidden" name="OptionCount" value="1">
-                                                                        qty  
-                            <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
-                                   name="item_qty" value="1" style="width:100px;">
-                                                               
-                        </p>-->
-                                                                <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
-                                                                <input type="hidden" name="item_price" value="38.95">
-                                                                <input type="hidden" name="item_id" value="JDR">
-                                                                <input type="hidden" name="product_shipping_class" value="0">
-                                                                <input type="hidden" name="cid" value="000">
-                                                                    <p><input type="button" value="Increment" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Decrement" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Add to Cart" style="width:100px;"></p>
-                                                                    <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
-                                                                    <p><input type="button" value="Showdetails" style="width:100px;"></p><br />
-                                                                    <p>ItemName:{{i.ItemName}}</p>                                                                  
-                                                                    <p>Unitprice:{{i.UnitPrice}}</p>
-</div>
-                                                               
-                                                                            
-                                                            </form>
+                                                <ul class="box text-shadow ul-li-list">
+                                                    <!--<item>1</item>-->
+                                                    <li class="list-item"ng-repeat="i in items">
+                                                        <div class="list-box">
+                                                            <!--<img/>-->
+                                                            <div class="img"><a href="cables.html"><img src="images/adapter.jpeg" height="70" width="70" alt="" title="" /></a></div>
+
+                                                            <!--<data></data>-->
+                                                            <div class="block">
+                                                                <form>
+                                                                    <div class="list-box">
+                                                                        <!--<p>
+                                                                            <input type="hidden" name="op" value="add">
+                                                                            <input type="hidden" name="OptionCount" value="1">
+                                                                            qty
+                                                                            <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
+                                                                                   name="item_qty" value="1" style="width:100px;">
+
+                                                                        </p>-->
+                                                                        <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
+                                                                        <input type="hidden" name="item_price" value="38.95">
+                                                                        <input type="hidden" name="item_id" value="JDR">
+                                                                        <input type="hidden" name="product_shipping_class" value="0">
+                                                                        <input type="hidden" name="cid" value="000">
+                                                                        <p><input type="button" value="Increment" style="width:100px;"></p>
+                                                                        <p><input type="button" value="Decrement" style="width:100px;"></p>
+                                                                        <p><input type="button" value="Add to Cart" style="width:100px;"></p>
+                                                                        <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
+                                                                        <p><input type="button" value="Cart Details" style="width:125px;" ng-click="GetItems(i);"></p>
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <p>Item Id:{{i.ItemId}}</p>
+                                                                            <p>ItemName:{{i.ItemName}}</p>
+                                                                            <p>Unitprice:{{i.UnitPrice}}</p>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
                                                         </div>
+                                                        <!--<div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Cart Details</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
 
-                                                    </div>
-                                                </li>
-                                               
-                                              
-                                            </ul>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Item Name:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.PONumber" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Vendor Id:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.VendorId" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Date:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.Date" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Total Amount:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.TotalAmount" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Status:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.StatusId" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Shipped To:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.ShippedTo" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-actions">
+                                                                            <div class="col-md-offset-3 col-md-9">
+                                                                                <button class="btn btn-primary" type="button" ng-click="addPurchase(SubCategory1,'I');">Save</button>
+                                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>-->
+                                            </div>
+                                            <div class="col-md-6 col-md-offset-2">
+                                                <button class="btn btn-primary" type="button" ng-click="Save(items);">Save</button>
+                                                <button class="btn btn-primary" type="button">Cancel</button>
+                                            </div>
 
                                         </div>
-                                        <div class="col-md-6 col-md-offset-2">
-                                            <button class="btn btn-primary" type="button" ng-click="Save(items);">Save</button>
-                                            <button class="btn btn-primary" type="button">Cancel</button>
+
+                                        <!--END CONTENT--><!--BEGIN FOOTER-->
+                                        <div id="footer">
+                                            <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                                         </div>
+                                        <!--END FOOTER-->
                                     </div>
-                                   
+
                                 </div>
-                                <!--END CONTENT--><!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
-                                </div>
-                                <!--END FOOTER-->
+
                             </div>
+                            <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Save confirmation!</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <!--<ul>
+                                        <li ng-repeat="item in items">
+                                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                                        </li>
+                                    </ul>
+                                    Selected: <b>{{ selected.item }}</b>-->
+                                    {{mssg}}
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                                </div>
+                            </script>
 
                         </div>
-
                     </div>
-                    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
-
-                        <div class="modal-header">
-                            <h3 class="modal-title">Save confirmation!</h3>
-                        </div>
-                        <div class="modal-body">
-                            <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
-                            {{mssg}}
-
-                            </div>
-                       
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                        </div>
-                </script>
-                   
                 </div>
-            </div>
-        </div>
-   
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-                
-                
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<script src="vendors/jplist/html/js/vendor/modernizr.min.js"></script>
-<script src="vendors/jplist/html/js/jplist.min.js"></script>
-<script src="js/jplist.js"></script>
-<script src="js/table-action.js"></script>
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
 
-    <script src="js/angular.js"></script>
-<script src="js/ngStorage.js"></script>
+                <script src="js/jquery-1.10.2.min.js"></script>
+                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <!--loading bootstrap js-->
+                <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+
+
+                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                <script src="vendors/iCheck/icheck.min.js"></script>
+                <script src="vendors/iCheck/custom.min.js"></script>
+                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                <script src="js/jquery.menu.js"></script>
+                <script src="vendors/jquery-pace/pace.min.js"></script>
+                <script src="vendors/holder/holder.js"></script>
+                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <script src="vendors/jplist/html/js/vendor/modernizr.min.js"></script>
+                <script src="vendors/jplist/html/js/jplist.min.js"></script>
+                <script src="js/jplist.js"></script>
+                <script src="js/table-action.js"></script>
+                <!--CORE JAVASCRIPT-->
+                <script src="js/main.js"></script>
+
+                <script src="js/angular.js"></script>
+                <script src="js/ngStorage.js"></script>
                 <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-<script src="js/source.js"></script>
-        <script src="js/ShoppingCart.js"></script>
+                <script src="js/source.js"></script>
+                <script src="js/ShoppingCart.js"></script>
 
 
 </body>

@@ -160,13 +160,13 @@
                                 </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-                                <li><a href="Fleet Owners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
-                                <li><a href="Fleet Owner Routes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
-                                <li><a href="Fleet Owner VehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
-                                <li><a href="Fleet Owner RouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
-                                <li><a href="Fleet Owner VehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
-                                <li><a href="Fleet Owner RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
-                                <li><a href="Fleet Owner Reports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                             </ul>
                         </li>
 
@@ -285,7 +285,7 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                <li><a href="Fleet Owner Reports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
                                 <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
@@ -455,9 +455,11 @@
                                                                     <h4 id="modal-header-primary-label" class="modal-title">New Inventory Purchases</h4>
                                                                 </div>
                                                                 <div class="modal-body" ng-init="GetInventoryItems();" ng-model="group">
-                                                                    <div class="row">
+                                                                    
 
-                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Item:<span class='require'>*</span></label>
+                                                                    <div class="row mbm">
+
+                                                                        <label for="Name" class="col-md-4 control-label" style="color:red;"> Item:<span class='require'>*</span></label>
 
                                                                         <div class="col-md-6">
                                                                             <select ng-options="I.ItemName for I in InventoryItem track by I.Id" class="form-control" ng-model="Group.ItemName">
@@ -467,51 +469,61 @@
                                                                     </div>
 
 
-                                                                    <div class="row">
-                                                                        <label for="code" class="col-md-3 control-label" style="color:red;">SubCategory<span class='require'></span></label>
+                                                                    <div class="row mbm">
+                                                                        <label for="code" class="col-md-4 control-label" style="color:red;">SubCategory<span class='require'></span></label>
 
                                                                         <div class="col-md-6">
+
                                                                             <select ng-options="s.SubCategory for s in InventoryItem track by s.subcategoryid" class="form-control" ng-model="Item.SubCategory">
                                                                                 <option value="">Select</option>
                                                                             </select>
+
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <label for="descr" class="col-md-3 control-label">Quantity:  <span class='require'></span></label>
+                                                                    <div class="row mbm">
+                                                                        <label for="descr" class="col-md-4 control-label">Quantity:  <span class='require'></span></label>
 
-                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.Quantity" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6">
+                                                                            <input id="Description" type="text" class="form-control" ng-model="Group.Quantity" /><span class="help-block"></span>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <label for="active" class="col-md-3 control-label">Per Unit Price: <span class='require'></span></label>
+
+                                                                    <div class="row mbm">
+                                                                        <label for="active" class="col-md-4 control-label">Per Unit Price: <span class='require'></span></label>
 
 
-                                                                        <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PerUnitPrice" /><span class="help-block"></span></div>
+                                                                        <div class="col-md-6">
+                                                                            <input id="Description" type="text" class="form-control" ng-model="Group.PerUnitPrice" /><span class="help-block"></span>
 
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                    <div class="row mbm">
+                                                                        <label for="selCompany" class="col-md-4 control-label">Purchase Order Number:</label>
 
-                                                                <label for="selCompany" class="col-md-4 control-label">Purchase Order Number:</label>
-
-                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="Group.PurchaseOrderNumber" /><span class="help-block"></span></div>
-
-
-                                                                <label for="selCompany" class="col-md-4 control-label">Purchase Date:<span class='require'>*</span></label>
-                                                                <input type="date" ng-model="Group.PurchaseDate"><div style="width:50%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
-
-                                                                </div>
-
-
-
-
-                                                                <div class="form-actions">
-                                                                    <div class="col-md-offset-3 col-md-9">
-                                                                        <button class="btn btn-primary" type="button" ng-click="savepurchases(Group);">Save</button>
-
-                                                                        <a href="InventoryPurchases.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                        <div class="col-md-6">
+                                                                            <input id="Description" type="text" class="form-control" ng-model="Group.PurchaseOrderNumber" /><span class="help-block"></span>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                              
+                                                                    <div class="row mbm">
+                                                                        <label for="selCompany" class="col-md-4 control-label">Purchase Date:<span class='require'>*</span></label>
+                                                                        <div class="col-md-6">
+                                                                            <input type="date" ng-model="Group.PurchaseDate"><div style="width:50%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
 
-                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                            <div class="form-actions">
+                                                                                <div class="col-md-offset-3 col-md-9">
+                                                                                    <button class="btn btn-primary" type="button" ng-click="savepurchases(Group);">Save</button>
+
+                                                                                    <a href="InventoryPurchases.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
 
 
 
