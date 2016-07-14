@@ -474,38 +474,42 @@
                                                                             <div class="row mbm">
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
-                                                                                   <label for="Description" class="col-md-6 control-label">Date Of Registration: <span class='require'>*</span></label>
+                                                                                        <label for="Description" class="col-md-6 control-label">Company: <span class='require'>*</span></label>
 
-                                                                                   <div class="col-md-6"><input type="date" ng-model="initdata.newfleet.DateOfRegistration" /></div></div>
+                                                                                        <div class="col-md-6"><select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();">
+                                                                                      <option value="">Select</option>
+                                                                                    </select></div>
+                                                                                    </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="Description" class="col-md-6 control-label">Company:<span class='require'>*</span></label>
 
-                                                                                        <div class="col-md-6"><select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();">
-                                                                                          <option value="">Select</option>
-                                                                                             </select>
+                                                                                        <div class="col-md-6">
+                                                                                            <input type="date" ng-model="initdata.newfleet.DateOfRegistration" />
+                                                                                            
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
                                                                             <div class="row mbm">
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
-                                                                                        <label for="Description" class="col-md-6 control-label">Seating Capacity<span class='require'>*</span></label>
+                                                                                        <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                         <div class="col-md-6">
-                                                                                            <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span>
+                                                                                            <select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();">
+                                                                                                <option value="">Select</option>
+                                                                                            </select>
 
                                                                                         </div>
 
                                                                                     </div>
-
+                                                                                   
                                                                                     <div class="col-md-6">
-                                                                                        <label for="selCountry" class="col-md-6 control-label">Fleet Owner:</label>
+                                                                                        <label for="selCountry" class="col-md-6 control-label">Seating Capacity</label>
 
                                                                                         <div class="col-md-6">
                                                                                             <div>
-                                                                                                <select ng-options="fo.Name for fo in cmpdata track by fo.Id" ng-model="initdata.newfleet.fo" class="form-control">
-                                                                                                    <option value="">Select</option>
-                                                                                                </select>
+                                                                                                <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span>
+                                                                                               
 
                                                                                             </div>
                                                                                         </div>
@@ -514,7 +518,7 @@
                                                                                 </div>
 
                                                                             </div>
-                                                                         
+
 
                                                                             <div class="form-actions">
                                                                                 <div class="col-md-offset-5 col-md-9">
@@ -524,30 +528,30 @@
                                                                                 </div>
                                                                             </div>
                                                                             <!---- <div class="col-md-6 col-md-offset-2">
-            <button class="btn btn-primary" type="button">Save</button>
-            <button class="btn btn-primary" type="button">Cancel</button>
-        </div>--->
-                                                                       
+                        <button class="btn btn-primary" type="button">Save</button>
+                        <button class="btn btn-primary" type="button">Cancel</button>
+                    </div>--->
 
-                                                                   
+
+
+                                                                        </div>
+
+
+
                                                                     </div>
-
 
 
                                                                 </div>
 
-
                                                             </div>
-
-                                                       
-                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade" style="max-width: 1000%;">
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                                 <div class=" modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                     <h5 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h5>
                                                                 </div>
-                                                                <!-----<div id='poppingup' style="max-width: 100%; display:none">---->
+                                                               
                                                                 <div class="modal-body" ng-model="currVD">
 
                                                                     <div class="row">
@@ -643,8 +647,14 @@
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-4 control-label">Date Of Registration:<span class='require'>*</span></label>
+                                                                                    <div class="col-md-2">
+                                                                                        <div>
+                                                                                            <input type="date" ng-model="currVD.newfleet.DateOfRegistration" />
 
-                                                                                    <div class="col-md-2"><input type="date" ng-model="currVD.newfleet.DateOfRegistration" /></div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                   
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -657,7 +667,7 @@
 
 
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();">
+                                                                                        <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();" disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -666,10 +676,10 @@
                                                                                     <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="fo.Name for fo in cmpdata track by fo.Id" ng-model="initdata.newfleet.fo" class="form-control">
+                                                                                        <select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();" disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
-                                                                                    </div>
+</div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
