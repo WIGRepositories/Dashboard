@@ -366,8 +366,10 @@
                                                         <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i><span class="badge badge-green">{{items.length}}</span></a>
 
                                                         <ul class="dropdown-menu dropdown-messages">
-                                                            <li><p>Items added to cart are</p></li>
-                                                            <p>{{items}}</p>
+                                                            <li><p>{{items.length}} items added to Cart</p></li>
+                                                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/adapter.jpeg" height="30" width="30" class="img-responsive img-circle" />adapter</a>
+                                                            
+                                                            
                                                             <p><input type="button" value="CheckOut" style="width:125px;" ng-click="Save(items);"></p>
                                                         </ul>
                                                     </li>
@@ -408,9 +410,10 @@
                                                                         <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
                                                                         <p><input type="button" value="Cart Details" style="width:125px;" ng-click="GetItems(i);"></p>
                                                                         <div class="form-group has-success" style="text-align:right">
-                                                                            <p>Item Id:{{i.ItemId}}</p>
+                                                                            <p>Item Id:{{i.Item}}</p>
                                                                             <p>ItemName:{{i.ItemName}}</p>
                                                                             <p>Unitprice:{{i.UnitPrice}}</p>
+                                                                            <p>Quantity:{{i.Quantity}}</p>
 
                                                                         </div>
 
@@ -518,10 +521,10 @@
 
                                                         </div>-->
                                             </div>
-                                            <div class="col-md-6 col-md-offset-2">
+                                            <!--<div class="col-md-6 col-md-offset-2">
                                                 <button class="btn btn-primary" type="button" ng-click="Save(items);">Save</button>
                                                 <button class="btn btn-primary" type="button">Cancel</button>
-                                            </div>
+                                            </div>-->
 
                                         </div>
 

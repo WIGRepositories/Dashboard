@@ -1552,21 +1552,46 @@ namespace BTPOSDashboardAPI.Models
         public DateTime DateTime { get; set; }
 
     }
-    public class items
+    public class Shoppingcarts
     {
-        //public int Id { get; set; }
-        public int ItemId { get; set; }
+        public int Id { get; set; }
+        public List<itemslist> slist { get; set; }
+        public int Item { get; set; }
 
-        public String ItemName { get; set; }
+        public String SalesOrderNum { get; set; }
 
 
-        public decimal UnitPrice { get; set; }
+        public int TransactionId  { get; set; }
 
-        public int Transactionid { get; set; }
+        public DateTime? Date { get; set; }
+        public Decimal amount { get; set; }
 
-        public int Quantity { get; set; }
+        public Decimal Quantity { get; set; }
+        public int Status { get; set; }
+        public int Transactionstatus { get; set; }
+        public String Gateway_transId { get; set; }
+        public int PaymentMode { get; set; }
+        public String Transaction_Num { get; set; }
+
 
        
+
+    }
+
+    public class itemslist
+    {
+        public int TransactionId { get; set; }
+        public String Transaction_Num { get; set; }
+
+       public Decimal amount { get; set; }
+
+       public int PaymentMode { get; set; }
+
+       public DateTime? Date { get; set; }
+
+        public int Transactionstatus { get; set; }
+       public String Gateway_transId { get; set; }
+
 
     }
     public class EmailGatewaySettings

@@ -37,8 +37,10 @@ namespace BTPOSDashboard.Controllers
 
         }
         [HttpPost]
-        public HttpResponseMessage SaveCartItems(items f)
+        [Route("api/ShoppingCart/SaveCartItems")]
+        public HttpResponseMessage SaveCartItems(Shoppingcarts f)
         {
+          //  DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -51,40 +53,64 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelSalesordernw";
+                cmd.CommandText = "InsUpdDelsalesorder";
                 cmd.Connection = conn;
 
                 conn.Open();
-                //SqlParameter Cid = new SqlParameter();
-                //Cid.ParameterName = "@Id";
-                //Cid.SqlDbType = SqlDbType.Int;
-                //Cid.Value = f.Id;
-                // cmd.Parameters.Add(Cid);
+                SqlParameter Cid = new SqlParameter();
+                Cid.ParameterName = "@Id";
+                Cid.SqlDbType = SqlDbType.Int;
+                Cid.Value = f.Id;
+                cmd.Parameters.Add(Cid);
 
                 SqlParameter gsn = new SqlParameter();
-                gsn.ParameterName = "@ItemId";
+                gsn.ParameterName = "@Item";
                 gsn.SqlDbType = SqlDbType.Int;
-                gsn.Value = f.ItemId;
+                gsn.Value = f.Item;
                 cmd.Parameters.Add(gsn);
 
+                SqlParameter gs = new SqlParameter();
+                gs.ParameterName = "@TransactionId";
+                gs.SqlDbType = SqlDbType.Int;
+                gs.Value = f.TransactionId;
+                cmd.Parameters.Add(gs);
+
+                SqlParameter gn = new SqlParameter();
+                gn.ParameterName = "@Status";
+                gn.SqlDbType = SqlDbType.Int;
+                gn.Value = f.Status;
+                cmd.Parameters.Add(gn);
+
                 SqlParameter gsab = new SqlParameter();
-                gsab.ParameterName = "@ItemName";
-                gsab.SqlDbType = SqlDbType.VarChar;
-                gsab.Value = f.ItemName;
+                gsab.ParameterName = "@SalesOrderNum";
+                gsab.SqlDbType = SqlDbType.NVarChar;
+                gsab.Value = f.SalesOrderNum;
                 cmd.Parameters.Add(gsab);
 
-                SqlParameter gsac = new SqlParameter("@UnitPrice", SqlDbType.Decimal);
-                gsac.Value = f.UnitPrice;
+
+                SqlParameter gg = new SqlParameter();
+                gg.ParameterName = "@Quantity";
+                gg.SqlDbType = SqlDbType.Decimal;
+                gg.Value = f.Quantity;
+                cmd.Parameters.Add(gg);
+
+                SqlParameter gg1 = new SqlParameter();
+                gg1.ParameterName = "@Date";
+                gg1.SqlDbType = SqlDbType.DateTime;
+                gg1.Value = f.Date;
+                cmd.Parameters.Add(gg1);
+
+
+                SqlParameter gsac = new SqlParameter("@amount", SqlDbType.Decimal);
+                gsac.Value = f.amount;
                 cmd.Parameters.Add(gsac);
 
-                //SqlParameter insupdelflag = new SqlParameter("@insupddelflag", SqlDbType.VarChar);
-                //insupdelflag.SqlDbType = SqlDbType.VarChar;
-                //insupdelflag.Value = f.insupddelflag;
-                //cmd.Parameters.Add(insupdelflag);
 
 
                 cmd.ExecuteScalar();
-                cmd.Parameters.Clear();
+               // cmd.Parameters.Clear();
+             //  conn.Close();
+
 
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
@@ -92,48 +118,84 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd1 = new SqlCommand();
                 cmd1.CommandType = CommandType.StoredProcedure;
-                cmd1.CommandText = "InsUpdDelPaymentdetailsnw";
+                cmd1.CommandText = "InsUpdDelPayments";
                 cmd1.Connection = conn;
 
-                conn.Open();
+                // conn.Open();
                 //SqlParameter Cid = new SqlParameter();
                 //Cid.ParameterName = "@Id";
                 //Cid.SqlDbType = SqlDbType.Int;
-                //Cid.Value = f.Id;
+                //Cid.Value = f.Id; public List<itemslist> ilist { get; set; }
                 //cmd.Parameters.Add(Cid);
 
-                SqlParameter gsn1 = new SqlParameter();
-                gsn1.ParameterName = "@ItemId";
-                gsn1.SqlDbType = SqlDbType.Int;
-                gsn1.Value = f.ItemId;
-                cmd.Parameters.Add(gsn1);
+                //SqlParameter gsn1 = new SqlParameter();
+                //gsn1.ParameterName = "@Item";
+                //gsn1.SqlDbType = SqlDbType.Int;
+                //gsn1.Value = f.Item;
+                //cmd.Parameters.Add(gsn1);
+              //  conn.Open();
+                List<itemslist> ilist = null;
+                  if (items1.slist != null && items1.slist.Count > 0)
+                {
+                    ilist = items1.slist;
+                }
 
-                SqlParameter gsab1 = new SqlParameter();
-                gsab1.ParameterName = "@ItemName";
-                gsab1.SqlDbType = SqlDbType.VarChar;
-                gsab1.Value = f.ItemName;
-                cmd.Parameters.Add(gsab1);
+                foreach (itemslist n in ilist)
+                {
 
-                SqlParameter gsac1 = new SqlParameter("@UnitPrice", SqlDbType.Decimal);
-                gsac1.Value = f.UnitPrice;
-                cmd.Parameters.Add(gsac1);
-
-                SqlParameter gs = new SqlParameter();
-                gs.ParameterName = "@Transactionid";
-                gs.SqlDbType = SqlDbType.Int;
-                gs.Value = f.ItemName;
-                cmd.Parameters.Add(gs);
-
-                SqlParameter g = new SqlParameter();
-                g.ParameterName = "@Quantity";
-                g.SqlDbType = SqlDbType.Int;
-                g.Value = f.ItemName;
-                cmd.Parameters.Add(g);
-
-                cmd1.ExecuteScalar();
-                cmd1.Parameters.Clear();
+                    SqlParameter gsab1 = new SqlParameter();
+                    gsab1.ParameterName = "@Transaction_Num";
+                    gsab1.SqlDbType = SqlDbType.VarChar;
+                    gsab1.Value = f.Transaction_Num;
+                    cmd.Parameters.Add(gsab1);
 
 
+
+                    SqlParameter gs1 = new SqlParameter();
+                    gs1.ParameterName = "@amount";
+                    gs1.SqlDbType = SqlDbType.Decimal;
+                    gs1.Value = f.amount;
+                    cmd.Parameters.Add(gs1);
+
+
+                    SqlParameter gss = new SqlParameter();
+                    gss.ParameterName = "@TransactionId";
+                    gss.SqlDbType = SqlDbType.Int;
+                    gss.Value = f.TransactionId;
+                    cmd.Parameters.Add(gss);
+
+                    SqlParameter g1 = new SqlParameter();
+                    g1.ParameterName = "@PaymentMode";
+                    g1.SqlDbType = SqlDbType.Int;
+                    g1.Value = f.PaymentMode;
+                    cmd.Parameters.Add(g1);
+
+                    SqlParameter g12 = new SqlParameter();
+                    g12.ParameterName = "@Date";
+                    g12.SqlDbType = SqlDbType.DateTime;
+                    g12.Value = f.Date;
+                    cmd.Parameters.Add(g12);
+
+
+                    SqlParameter ga = new SqlParameter();
+                    ga.ParameterName = "@Transactionstatus";
+                    ga.SqlDbType = SqlDbType.Int;
+                    ga.Value = f.Transactionstatus;
+                    cmd.Parameters.Add(ga);
+
+                    SqlParameter sg1 = new SqlParameter();
+                    sg1.ParameterName = "@Gateway_transId";
+                    sg1.SqlDbType = SqlDbType.VarChar;
+                    sg1.Value = f.Gateway_transId;
+                    cmd.Parameters.Add(sg1);
+
+                    cmd1.ExecuteScalar();
+                    cmd1.Parameters.Clear();
+
+
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                conn.Close();
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -149,7 +211,7 @@ namespace BTPOSDashboard.Controllers
 
         public void Options()
         {
-        }
 
+        }
     }
 }
