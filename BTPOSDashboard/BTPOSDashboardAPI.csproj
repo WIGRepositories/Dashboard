@@ -382,6 +382,7 @@
     <Content Include="UI\AddNewInventoryItem.html" />
     <Content Include="UI\AddNewSeats.html" />
     <Content Include="UI\AdminReports.html" />
+    <Content Include="UI\Advertisment.html" />
     <Content Include="UI\AssignRole.html" />
     <Content Include="UI\BlockList.html" />
     <Content Include="UI\BtposLicense.html" />
@@ -441,6 +442,7 @@
     <Content Include="UI\InventorySales.html" />
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
+    <Content Include="UI\js\Advertisment.js" />
     <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\AlertsConfiguration.js" />
     <Content Include="UI\js\angular-animate.js" />
@@ -2017,6 +2019,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommercialSite\Class1.cs" />
     <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\AdvertismentController.cs" />
     <Compile Include="Controllers\AlertsConfigurationController.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
@@ -2038,6 +2041,7 @@
     <Compile Include="Controllers\FleetOwnerFareController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteDetailsController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteController.cs" />
+    <Compile Include="Controllers\FleetOwnerRouteFare.cs" />
     <Compile Include="Controllers\FleetOwnerRouteFareController.cs" />
     <Compile Include="Controllers\FleetOwnerRouteStopController.cs" />
     <Compile Include="Controllers\FleetOwnerVehicleLayoutController.cs" />
@@ -2045,6 +2049,7 @@
     <Compile Include="Controllers\FleetRoutesController.cs" />
     <Compile Include="Controllers\FleetRoutesDetailsController.cs" />
     <Compile Include="Controllers\FleetStaffController.cs" />
+    <Compile Include="Controllers\FOVSchedule.cs" />
     <Compile Include="Controllers\InventoryItemController.cs" />
     <Compile Include="Controllers\InventoryPurchaseController.cs" />
     <Compile Include="Controllers\InventorySalesController.cs" />
