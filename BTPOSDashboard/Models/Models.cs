@@ -688,6 +688,7 @@ namespace BTPOSDashboardAPI.Models
     public class SMSGatewayConfiguration
 
     {
+        public int Id { get; set; }
 
         public DateTime enddate { get; set; }
 
@@ -703,20 +704,21 @@ namespace BTPOSDashboardAPI.Models
         public DateTime startdate { get; set; }
 
         public string username { get; set; }
-        public int ClientId {get;set;}
-        public int SelectId { get; set; }
+        public string ClientId {get;set;}
+        public string SecretId { get; set; }
         public string insupdflag { get; set; }
     }
 
     public class PaymentGatewaySettings
     {
+        public int Id { get; set; }
         public DateTime enddate { get; set; }
 
         public DateTime hashkey { get; set; }
 
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
 
-        public int SelectId { get; set; }
+        public string secretId { get; set; }
 
         public int PaymentGatewayTypeId { get; set; }
 
@@ -1554,6 +1556,7 @@ namespace BTPOSDashboardAPI.Models
     }
     public class EmailGatewaySettings
     {
+        public int Id { get; set; }
         public DateTime enddate { get; set; }
 
         public DateTime hashkey { get; set; }
@@ -1568,8 +1571,8 @@ namespace BTPOSDashboardAPI.Models
         public DateTime startdate { get; set; }
 
         public string username { get; set; }
-        public int ClientId { get; set; }
-        public int SelectId { get; set; }
+        public string ClientId { get; set; }
+        public string SecretId { get; set; }
 
         public int Port { get; set; }
         public string insupdflag { get; set; }

@@ -363,18 +363,18 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="PaymentGatewayType" class="col-md-5 control-label" style="color:red;">Payment GatewayType:<span class='require'>*</span></label>
-                                                                                    <div class="col-md-7"><input id="PaymentGatewayType" type="text" ng-model="currGroup.TypeGroupId" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="PaymentGatewayTypeId" type="text" ng-model="currGroup.PaymentGatewayTypeId" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="ProviderName" class="col-md-5 control-label" style="color:red;">Provider Name:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="ProviderName" type="text" ng-model="currGroup.providername" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="providername" type="text" ng-model="currGroup.providername" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
                                                                                         <label for="UserName" class="col-md-5 control-label">User Name:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="UserName" type="text" ng-model="currGroup.username" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="username" type="text" ng-model="currGroup.username" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="pwd" class="col-md-5 control-label">pwd:<span class='require'></span></label>
@@ -417,8 +417,8 @@
                                                                                         <div class="col-md-7"><input id="ClientId" type="text" ng-model="currGroup.ClientId" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
-                                                                                        <label for="SelectId" class="col-md-5 control-label" style="color:red;">SelectId:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="SelectId" type="text" ng-model="currGroup.SelectId" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <label for="SelectId" class="col-md-5 control-label" style="color:red;">SecretId:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="secretId" type="text" ng-model="currGroup.secretId" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -427,7 +427,7 @@
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
-                                                                            <button type="button" class="btn btn-primary" ng-click="savecmpChanges(currGroup);">Save</button>
+                                                                            <button type="button" class="btn btn-primary" ng-click="savecmpChanges(currGroup, 'U' );">Save</button>
                                                                             <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                         </div>
                                                                     </div>
@@ -450,7 +450,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="Name" class="col-md-5 control-label" style="color:red;">Payment GatewayType:<span class='require'>*</span></label>
-                                                                                    <div class="col-md-7"><input id="TypeGroupId" type="text" ng-model="Group.TypeGroupId" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="PaymentGatewayTypeId" type="text" ng-model="Group.PaymentGatewayTypeId" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="code" class="col-md-5 control-label" style="color:red;">Provider Name:<span class='require'></span></label>
@@ -461,11 +461,11 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
                                                                                         <label for="descr" class="col-md-5 control-label">User Name:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="desc" type="text" ng-model="Group.username" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="username" type="text" ng-model="Group.username" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="ContactNo1" class="col-md-5 control-label">pwd:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="UserName" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="pwd" type="password" ng-model="Group.pwd" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -473,11 +473,11 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
                                                                                         <label for="ContactNo2" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="date" type="date" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="saltkey" type="date" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="Fax" class="col-md-5 control-label">start date<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="date" type="date" ng-model="Group.startdate" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="startdate" type="date" ng-model="Group.startdate" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
 
                                                                                 </div>
@@ -486,12 +486,12 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
                                                                                         <label for="Fax" class="col-md-5 control-label">End date:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="date" type="date" ng-model="Group.enddate" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="enddate" type="date" ng-model="Group.enddate" class="form-control" /><span class="help-block"></span></div>
 
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="Fax" class="col-md-5 control-label">hashkey<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="date" type="date" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="hashkey" type="date" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
 
                                                                                 </div>
@@ -504,15 +504,15 @@
                                                                                         <div class="col-md-7"><input id="ClientId" type="text" ng-model="Group.ClientId" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
-                                                                                        <label for="SelectId" class="col-md-5 control-label" style="color:red;">SelectId:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="SelectId" type="text" ng-model="Group.SelectId" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <label for="SelectId" class="col-md-5 control-label" style="color:red;">SecretId:<span class='require'></span></label>
+                                                                                        <div class="col-md-7"><input id="secretId" type="text" ng-model="Group.secretId" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-actions">
                                                                             <div class="col-md-offset-3 col-md-9">
-                                                                                <button class="btn btn-primary" type="button" ng-click="save(Group);">Save</button>
+                                                                                <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
 
                                                                                 <a href="PaymentGatewayConfiguration.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
                                                                             </div>
@@ -531,7 +531,7 @@
                                                                 <th>Payment GatewayType</th>
                                                                 <th>provider Name</th>
                                                                 <th>ClientId</th>
-                                                                <th>SelectId</th>
+                                                                <th>secretId</th>
                                                                 <th>Edit</th>
 
                                                             </tr>
@@ -544,7 +544,7 @@
                                                                 <td>{{R.Name}}</td>
                                                                 <td>{{R.providername}}</td>
                                                                 <td>{{R.ClientId}}</td>
-                                                                <td>{{R.SelectId}}</td>
+                                                                <td>{{R.secretId}}</td>
                                                                 <td>
 
 

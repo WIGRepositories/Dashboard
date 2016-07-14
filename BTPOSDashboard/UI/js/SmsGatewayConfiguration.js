@@ -19,16 +19,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 
         var newCmp = {
+            Id:Group.Id,
             providername: Group.providername,
             enddate: Group.enddate,
-            hashkey: Group.hashkey,
-            AlertTypeId: Group.AlertTypeId,
+            hashkey: Group.hashkey,          
             pwd: Group.pwd,
             saltkey: Group.saltkey,
             startdate: Group.startdate,
             username: Group.username,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId,
+            SecretId: Group.SecretId,
             insupdflag: 'I'
 
         }
@@ -60,16 +60,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
        
         var Group = {
+            Id:Group.Id,
             providername: Group.providername,
             enddate: Group.enddate,
-            hashkey: Group.hashkey,
-            AlertTypeId: Group.AlertTypeId,
+            hashkey: Group.hashkey,           
             pwd: Group.pwd,
             saltkey: Group.saltkey,
             startdate: Group.startdate,
             username: Group.username,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId,
+            SecretId: Group.SecretId,
             insupdflag: 'U'
            
         }

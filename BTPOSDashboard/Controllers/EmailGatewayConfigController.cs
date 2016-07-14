@@ -51,6 +51,12 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsUpdDelSMSEmailConfiguration";
             cmd.Connection = conn;
             conn.Open();
+
+            SqlParameter id = new SqlParameter();
+            id.ParameterName = "@Id";
+            id.SqlDbType = SqlDbType.Int;
+            id.Value = b.Id;
+            cmd.Parameters.Add(id);
            
 
             SqlParameter Gid = new SqlParameter();
@@ -105,9 +111,9 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(Cl);
 
             SqlParameter Sl = new SqlParameter();
-            Sl.ParameterName = "@SelectId";
+            Sl.ParameterName = "@SecretId";
             Sl.SqlDbType = SqlDbType.VarChar;
-            Sl.Value = b.SelectId;
+            Sl.Value = b.SecretId;
             cmd.Parameters.Add(Sl);
 
             SqlParameter vp = new SqlParameter();
