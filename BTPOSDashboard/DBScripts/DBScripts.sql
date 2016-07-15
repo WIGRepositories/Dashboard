@@ -9760,3 +9760,187 @@ end
 
 
 
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPayment]    Script Date: 07/14/2016 13:43:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create  procedure [dbo].[InsUpdDelSalesOrder]
+(
+@Id int
+,@SalesOrderNum nvarchar(15)
+ ,@TransactionId int
+      ,@Date datetime
+      ,@amount decimal
+      ,@Item int
+      ,@Quantity decimal
+      ,@Status int)
+as
+begin
+insert into SalesOrder(Id
+ ,SalesOrderNum
+,TransactionId
+,Date
+,amount
+,Item
+,Quantity
+,Status)values(
+@Id
+ ,@SalesOrderNum
+,@TransactionId
+,@Date
+,@amount
+,@Item
+
+,@Quantity
+,@Status)
+
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPayment]    Script Date: 07/14/2016 13:43:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelPayments]
+(--@Card varchar(50)=null
+--@MobilePayment varchar(50)=null
+--@Cash varchar(50)=null
+@TransactionId int
+,@Transaction_Num varchar(50)
+,@amount decimal
+,@PaymentMode int
+,@Date datetime
+,@Transactionstatus int
+,@Gateway_transId varchar(50))
+as
+begin
+insert into Payments (TransactionId
+,Transaction_Num
+,amount
+,PaymentMode
+,Date
+,Transactionstatus
+,Gateway_transId)values(
+--@Card
+--,@MobilePayment
+--,@Cash
+@TransactionId
+,@Transaction_Num
+,@amount
+,@PaymentMode
+,@Date
+,@Transactionstatus
+,@Gateway_transId)
+end
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[getShoppingCart]    Script Date: 07/14/2016 13:38:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[getShoppingCart]
+(@ItemId int =-1)
+as
+begin
+SELECT distinct 
+      [Item]
+      ,[ItemName]
+      ,[UnitPrice]
+      ,s.[Id]
+      ,[TransactionId]
+      ,[Transaction_Num]
+      ,[amount]
+      ,[Quantity]
+      ,[Status]
+      ,[SalesOrderNum]
+      ,[PaymentMode]
+      ,[Date]
+      ,[Transactionstatus]
+      ,[Gateway_transid]
+      ,ty.[Name]
+      
+  FROM [POSDashboard].[dbo].[ShoppingCart]s 
+  inner join Types ty on ty.Id=s.Transactionstatus
+  
+  order by [Item]
+end
+
+
+GO
+
+/****** Object:  Table [dbo].[Payments]    Script Date: 07/14/2016 16:54:11 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Payments](
+	[Card] [varchar](50) NOT NULL,
+	[MobilePayment] [varchar](50) NOT NULL,
+	[Cash] [varchar](50) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Transaction_Num] [varchar](50) NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[PaymentMode] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[TransactionStatus] [int] NOT NULL,
+	[Gateway_transId] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+GO
+
+/****** Object:  Table [dbo].[ShoppingCart]    Script Date: 07/15/2016 11:51:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[ShoppingCart](
+	[Item] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[UnitPrice] [decimal](18, 0) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Transaction_Num] [varchar](30) NOT NULL,
+	[amount] [bigint] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL,
+	[SalesOrderNum] [nvarchar](15) NOT NULL,
+	[PaymentMode] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Transactionstatus] [int] NOT NULL,
+	[Gateway_transid] [varchar](15) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
