@@ -1205,17 +1205,17 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[SMSEmailConfiguration](
-	[enddate] [datetime] NOT NULL,
-	[hashkey] [datetime] NOT NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[enddate] [datetime] NULL,
+	[hashkey] [datetime] NULL,
+	[Id] [int] NOT NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
-	[saltkey] [datetime] NOT NULL,
-	[startdate] [datetime] NOT NULL,
+	[saltkey] [datetime] NULL,
+	[startdate] [datetime] NULL,
 	[username] [varchar](50) NOT NULL,
 	[Port] [int] NOT NULL,
-	[ClientId] [int] NOT NULL,
-	[SelectId] [int] NOT NULL
+	[ClientId] [varchar](50) NOT NULL,
+	[SecretId] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -4472,22 +4472,24 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 Create procedure [dbo].[InsUpdDelSMSEmailConfiguration]
-(@enddate datetime,
-@hashkey datetime,
+(@Id int,
+@enddate datetime = null ,
+@hashkey datetime = null ,
 @providername varchar(50),
 @pwd varchar(50),
-@saltkey datetime,
-@startdate datetime,
+@saltkey datetime = null ,
+@startdate datetime = null,
 @username varchar(50),
 @Port int,
-@ClientId int,
-@SelectId int,
+@ClientId varchar(50),
+@SecretId varchar(50),
 @insupdflag varchar(10))
 AS
 BEGIN	
 if @insupdflag = 'I' 
 INSERT INTO [dbo].[SMSEmailConfiguration]
-           ([enddate]
+           ([Id]
+           ,[enddate]
            ,[hashkey]           
            ,[providername]
            ,[pwd]
@@ -4496,9 +4498,10 @@ INSERT INTO [dbo].[SMSEmailConfiguration]
            ,[username]
            ,[Port]
              ,[ClientId]      
-              ,[SelectId] )         
+              ,[SecretId] )         
 values
-(@enddate,
+(@Id,
+@enddate,
 @hashkey,
 @providername,
 @pwd,
@@ -4507,7 +4510,7 @@ values
 @username,
 @Port,
 @ClientId,
-@SelectId)
+@SecretId)
           else
   if @insupdflag = 'U' 
 UPDATE [POSDashboard].[dbo].[SMSEmailConfiguration]
@@ -4519,9 +4522,11 @@ UPDATE [POSDashboard].[dbo].[SMSEmailConfiguration]
       ,[username] = @username
       ,[Port]= @Port
       ,[ClientId] = @ClientId
-     ,[SelectId] = @SelectId
-      ,[enddate] = @enddate  
+     ,[SecretId] = @SecretId
+      ,[enddate] = @enddate 
+      Where Id = @Id 
 end
+
 
 
 GO
@@ -8600,10 +8605,10 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[FleetOwnerRequest](
-	[CurrentSystemInUse] [varchar](50) NOT NULL,
-	[howdidyouhearaboutus] [varchar](50) NOT NULL,
-	[SentNewProductsEmails] [bit] NOT NULL,
-	[Agreetotermsandconditions] [bit] NOT NULL
+	[CurrentSystemInUse] [varchar](50) NULL,
+	[howdidyouhearaboutus] [varchar](50) NULL,
+	[SentNewProductsEmails] [bit] NULL,
+	[Agreetotermsandconditions] [bit] NULL
 ) ON [PRIMARY]
 
 GO
@@ -8648,13 +8653,13 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequest](
+CREATE PROCEDURE[dbo].[InsupdFleetOwnerRequest](
 		  
-          @CurrentSystemInUse varchar(50),
-          @SentNewProductsEmails bit,
+          @CurrentSystemInUse varchar(50) = null,
+          @SentNewProductsEmails bit = 0,
       
-          @howdidyouhearaboutus varchar(50),
-          @Agreetotermsandconditions bit,
+          @howdidyouhearaboutus varchar(50) = null,
+          @Agreetotermsandconditions bit = 1,
            @insupdflag varchar(20)
            )
  
@@ -8693,22 +8698,23 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequest]
 
 END
 GO
+/****** Object:  StoredProcedure [dbo].[InSupdFleetOwnerRequestDetails]    Script Date: 07/15/2016 10:19:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
+Create PROCEDURE [dbo].[InSupdFleetOwnerRequestDetails](
 		   @FirstName varchar(50),   
            @LastName varchar(50),
            @PhoneNo  varchar(50),
            @EmailAddress varchar(20),
            @CompanyName varchar(20),
-           @Description varchar(50) ,
-           @Title varchar(20),
-           @CompanyEmployeSize int,
-           @FleetSize int,         
-           @Gender varchar(20),      
-           @Address varchar(50),
+           @Description varchar(50) =null,
+           @Title varchar(20) =null,
+           @CompanyEmployeSize int =null,
+           @FleetSize int = null,         
+           @Gender varchar(20) = null,      
+           @Address varchar(50) =null,
            @insupdflag varchar(10)
            )
  
@@ -8757,7 +8763,13 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
        ,[Gender] = @Gender 
        ,[Address]= @Address
 
+  exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,'I'
+
+select FleetOwnerCode from dbo.FleetOwner f 
+inner join Users u on u.Id = f.UserId
+where u.FirstName = @FirstName and u.LastName = @LastName
 END
+
 
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSRecords]    Script Date: 06/20/2016 16:29:46 ******/
@@ -9273,16 +9285,16 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[SmsGatewayeConfiguration](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[enddate] [datetime] NOT NULL,
-	[hashkey] [datetime] NOT NULL,
+	[Id] [int] NOT NULL,
+	[enddate] [datetime] NULL,
+	[hashkey] [datetime] NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
-	[saltkey] [datetime] NOT NULL,
-	[startdate] [datetime] NOT NULL,
+	[saltkey] [datetime] NULL,
+	[startdate] [datetime] NULL,
 	[username] [varchar](50) NOT NULL,
-	[ClientId] [int] NOT NULL,
-	[SelectId] [int] NOT NULL
+	[ClientId] [varchar](50) NOT NULL,
+	[SecretId] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -9321,15 +9333,16 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 create  procedure [dbo].[InsUpdDelSMSGatewayConfiguration]
-(@enddate datetime,
-@hashkey datetime,
+(@Id int,
+@enddate datetime = null,
+@hashkey datetime = null,
 @providername varchar(50),
 @pwd varchar(50),
-@saltkey datetime,
-@startdate datetime,
+@saltkey datetime = null,
+@startdate datetime = null,
 @username varchar(50),
-@ClientId int,
-@SelectId int,
+@ClientId varchar(50),
+@SecretId varchar(50),
 @insupdflag varchar(10))
 as
 begin

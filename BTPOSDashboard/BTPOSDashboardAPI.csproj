@@ -422,13 +422,6 @@
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
-    <Content Include="UI\Fleet Owner Reports.html" />
-    <Content Include="UI\Fleet Owner RouteDetails.html" />
-    <Content Include="UI\Fleet Owner RouteFare.html" />
-    <Content Include="UI\Fleet Owner Routes.html" />
-    <Content Include="UI\Fleet Owner VehicleLayOut.html" />
-    <Content Include="UI\Fleet Owner VehicleSchedule.html" />
-    <Content Include="UI\Fleet Owners.html" />
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
