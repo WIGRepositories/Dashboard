@@ -109,19 +109,19 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                // cmd.Parameters.Clear();
-             //  conn.Close();
+               conn.Close();
 
 
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                //conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
                 SqlCommand cmd1 = new SqlCommand();
                 cmd1.CommandType = CommandType.StoredProcedure;
                 cmd1.CommandText = "InsUpdDelPayments";
                 cmd1.Connection = conn;
 
-                // conn.Open();
+                 conn.Open();
                 //SqlParameter Cid = new SqlParameter();
                 //Cid.ParameterName = "@Id";
                 //Cid.SqlDbType = SqlDbType.Int;
@@ -146,7 +146,7 @@ namespace BTPOSDashboard.Controllers
                     SqlParameter gsab1 = new SqlParameter();
                     gsab1.ParameterName = "@Transaction_Num";
                     gsab1.SqlDbType = SqlDbType.VarChar;
-                    gsab1.Value = items1.Transaction_Num;
+                    gsab1.Value = n.Transaction_Num;
                     cmd.Parameters.Add(gsab1);
 
 
@@ -154,39 +154,39 @@ namespace BTPOSDashboard.Controllers
                     SqlParameter gs1 = new SqlParameter();
                     gs1.ParameterName = "@amount";
                     gs1.SqlDbType = SqlDbType.Decimal;
-                    gs1.Value = items1.amount;
+                    gs1.Value = n.amount;
                     cmd.Parameters.Add(gs1);
 
 
                     SqlParameter gss = new SqlParameter();
                     gss.ParameterName = "@TransactionId";
                     gss.SqlDbType = SqlDbType.Int;
-                    gss.Value = items1.TransactionId;
+                    gss.Value = n.TransactionId;
                     cmd.Parameters.Add(gss);
 
                     SqlParameter g1 = new SqlParameter();
                     g1.ParameterName = "@PaymentMode";
                     g1.SqlDbType = SqlDbType.Int;
-                    g1.Value = items1.PaymentMode;
+                    g1.Value = n.PaymentMode;
                     cmd.Parameters.Add(g1);
 
                     SqlParameter g12 = new SqlParameter();
                     g12.ParameterName = "@Date";
                     g12.SqlDbType = SqlDbType.DateTime;
-                    g12.Value = items1.Date;
+                    g12.Value = n.Date;
                     cmd.Parameters.Add(g12);
 
 
                     SqlParameter ga = new SqlParameter();
                     ga.ParameterName = "@Transactionstatus";
                     ga.SqlDbType = SqlDbType.Int;
-                    ga.Value = items1.Transactionstatus;
+                    ga.Value = n.Transactionstatus;
                     cmd.Parameters.Add(ga);
 
                     SqlParameter sg1 = new SqlParameter();
                     sg1.ParameterName = "@Gateway_transId";
                     sg1.SqlDbType = SqlDbType.VarChar;
-                    sg1.Value = items1.Gateway_transId;
+                    sg1.Value = n.Gateway_transId;
                     cmd.Parameters.Add(sg1);
 
                     cmd1.ExecuteScalar();
@@ -207,6 +207,7 @@ namespace BTPOSDashboard.Controllers
                 string str = ex.Message;
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
+           
         }
 
         public void Options()
@@ -215,3 +216,5 @@ namespace BTPOSDashboard.Controllers
         }
     }
 }
+
+

@@ -30,6 +30,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetItems = function () {
         $http.get('http://localhost:1476/api/ShoppingCart/GetItems').then(function (response, req) {
             $scope.items = response.data;
+            $scope.itemsList = $scope.items;
         });
     }
 
@@ -44,8 +45,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             var items = {
                 //  Id: 1,
                 Item: items.Item,
-                // ItemName: items.ItemName,
-                // UnitPrice: items.Unitprice,
+               // ItemName: items.ItemName,
+                 UnitPrice: items.Unitprice,
                 TransactionId: items.TransactionId,
                 // Transaction_Num: items.Transaction_Num,
                 amount: items.amount,
@@ -64,17 +65,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var items1 = {
 
             TransactionId: items.TransactionId,
-            Transaction_Num: items.Transaction_Num,
+           Transaction_Num: items.Transaction_Num,
             amount: items.amount,
-            PaymentMode: items.PaymentMode,
+           PaymentMode: items.PaymentMode,
             Transactionstatus: items.Transactionstatus,
             Gateway_transId: items.Gateway_transId,
             Date: items.Date,
-            slist: Shoppingcart1
+           slist: Shoppingcart1
         }
 
         $http({
-            url: 'http://localhost:1476/api/ShoppingCart/SaveCartItems`',
+            url: 'http://localhost:1476/api/ShoppingCart/SaveCartItems',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             data: items1,
