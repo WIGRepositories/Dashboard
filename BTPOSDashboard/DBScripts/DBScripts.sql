@@ -9945,3 +9945,101 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+/****** Object:  Table [dbo].[CartPaymentDetails]    Script Date: 07/15/2016 20:04:13 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CartPaymentDetails](
+	[LicenseType] [nvarchar](50) NULL,
+	[Frequency] [int] NULL,
+	[NoOfMonths] [nvarchar](50) NULL,
+	[TotalAmount] [int] NULL,
+	[CreateDate] [date] NULL,
+	[TransId] [nvarchar](50) NULL,
+	[UnitPrice] [int] NULL,
+	[FleetOwner] [nvarchar](50) NULL,
+	[Id] [int] NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetCartPaymentDetails]    Script Date: 07/15/2016 20:05:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetCartPaymentDetails]
+   (@LicenseType varchar(50)
+           ,@Frequency int
+           ,@NoOfMonths varchar(50)
+           ,@TotalAmount int
+           ,@CreateDate date
+           ,@TransId varchar(50)
+           ,@UnitPrice int
+           ,@FleetOwner varchar(50))
+AS
+BEGIN
+
+    INSERT INTO [POSDashboard].[dbo].[CartPaymentDetails]
+           ([LicenseType]
+           ,[Frequency]
+           ,[NoOfMonths]
+           ,[TotalAmount]
+           ,[CreateDate]
+           ,[TransId]
+           ,[UnitPrice]
+           ,[FleetOwner])
+     VALUES
+           (@LicenseType
+           ,@Frequency
+           ,@NoOfMonths
+           ,@TotalAmount
+           ,@CreateDate
+           ,@TransId
+           ,@UnitPrice
+           ,@FleetOwner)   
+       
+     
+      
+  
+end
+/****** Object:  StoredProcedure [dbo].[InsupdCartPaymentDetails]    Script Date: 07/15/2016 20:06:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[InsupdCartPaymentDetails]  (@LicenseType varchar(50)
+           ,@Frequency int
+           ,@NoOfMonths varchar(50)
+           ,@TotalAmount int
+           ,@CreateDate date
+           ,@TransId varchar(50)
+           ,@UnitPrice int
+           ,@FleetOwner varchar(50))
+	
+AS
+BEGIN
+	
+	INSERT INTO [POSDashboard].[dbo].[CartPaymentDetails]
+           ([LicenseType]
+           ,[Frequency]
+           ,[NoOfMonths]
+           ,[TotalAmount]
+           ,[CreateDate]
+           ,[TransId]
+           ,[UnitPrice]
+           ,[FleetOwner])
+     VALUES
+           (@LicenseType
+            ,@Frequency
+           ,@NoOfMonths
+           ,@TotalAmount
+           ,@CreateDate
+           ,@TransId
+           ,@UnitPrice
+           ,@FleetOwner)
+
+END
