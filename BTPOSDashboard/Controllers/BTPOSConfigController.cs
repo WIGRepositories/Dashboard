@@ -14,39 +14,7 @@ using BTPOSDashboardAPI.Models;
 namespace BTPOSDashboard.Controllers
 {
     public class BTPOSConfigController : ApiController
-    {
-        [HttpGet]
-        [Route("api/GetBTPOSId")]
-        public DataTable GetBTPOSId(string imeiNo, string foCode) {
-
-            DataTable Tbl = new DataTable();
-
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetBTPOSId";
-            cmd.Connection = conn;
-
-            SqlParameter cid = new SqlParameter();
-            cid.ParameterName = "@imei";
-            cid.SqlDbType = SqlDbType.VarChar;
-            cid.Value = imeiNo;
-            cmd.Parameters.Add(cid);
-
-            SqlParameter fid1 = new SqlParameter();
-            fid1.ParameterName = "@fleetownerCode";
-            fid1.SqlDbType = SqlDbType.VarChar;
-            fid1.Value = foCode;
-            cmd.Parameters.Add(fid1);
-
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(Tbl);
-            return Tbl;
-        }
+    {       
 
         [HttpGet]
         public DataTable GetFleeBTPosRecords(int POSID, int Id)
@@ -192,232 +160,226 @@ namespace BTPOSDashboard.Controllers
         }
 
         [HttpGet]
+        [Route("api/GetBTPOSId")]
+        public DataTable GetBTPOSId(string imeiNo, string foCode)
+        {
+
+            DataTable Tbl = new DataTable();
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetBTPOSId";
+            cmd.Connection = conn;
+
+            SqlParameter cid = new SqlParameter();
+            cid.ParameterName = "@imei";
+            cid.SqlDbType = SqlDbType.VarChar;
+            cid.Value = imeiNo;
+            cmd.Parameters.Add(cid);
+
+            SqlParameter fid1 = new SqlParameter();
+            fid1.ParameterName = "@fleetownerCode";
+            fid1.SqlDbType = SqlDbType.VarChar;
+            fid1.Value = foCode;
+            cmd.Parameters.Add(fid1);
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+            return Tbl;
+        }
+
+        [HttpGet]
         [Route("api/GetIndexFile")]
-        public DataTable GetIndexFile(string posid)
+        public DataTable GetIndexFile()
         {
             DataTable indexTbl = new DataTable();
-
-            indexTbl.Columns.Add("IndexFile");
-            indexTbl.Columns.Add("IndexFileData");
-
+            indexTbl.Columns.Add("IndexFile");          
             DataRow dr = indexTbl.NewRow();
-            dr[0] = "IndexFile";
-            dr[1] = "RoutesFile\nStopsfile\nroutefare\nauthfile\nblocklist\n";
 
+            StringBuilder strBldr = new StringBuilder();
+            strBldr.Append("~");
+            strBldr.AppendLine("ROUTESFILE");
+            strBldr.AppendLine("STOPSFILE");
+            strBldr.AppendLine("ROUTEFARE");
+            strBldr.AppendLine("AUTHFILE");
+            strBldr.Append("~");
+            dr[0] = strBldr.ToString();
             indexTbl.Rows.Add(dr);
 
             return indexTbl;
         }
-
+                
         [HttpGet]
-        [Route("api/GetFileContentRoutes")]
-        public DataTable GetFileContentRoute(string filename)
+        [Route("api/GetFileContent")]
+        public DataTable GetFileContent(string filename, string BTPOSId)
         {
-            DataTable Tbl = new DataTable();
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFileContentRoutes";
-            cmd.Connection = conn;
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
-
-            DataTable indexTbl = new DataTable();
-            indexTbl = Tbl;
-
-            DataRow dr = indexTbl.NewRow();
-            return indexTbl;
-        
-        }
-         [HttpGet]
-        [Route("api/GetFileContentStops")]
-        public DataTable GetFileContent1(string filename)
-        {
-            DataTable Tbl = new DataTable();
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFileContentStops";
-            cmd.Connection = conn;
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0]; 
+            //DataTable Tbl = new DataTable();
+            ////connect to database
+            //SqlConnection conn = new SqlConnection();
+            ////connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            //conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+            //SqlCommand cmd = new SqlCommand();
+            //cmd.CommandType = CommandType.StoredProcedure;
+            //cmd.CommandText = "GetFileContentStops";
+            //cmd.Connection = conn;
+            //DataSet ds = new DataSet();
+            //SqlDataAdapter db = new SqlDataAdapter(cmd);
+            //db.Fill(ds);
+            //Tbl = ds.Tables[0]; 
            
             DataTable indexTbl = new DataTable();
-            indexTbl = Tbl;
-
             DataRow dr = indexTbl.NewRow();
-          
-        
+            StringBuilder strBldr = new StringBuilder();
 
             switch (filename.ToUpper())
             {
-                case "RouteFile":
-                    indexTbl.Columns.Add("IndexFile");
-                    indexTbl.Columns.Add("IndexFileData");
-
-
-                    dr[0] = "INDEXFILE";
-                    dr[1] = "R1,R2,R3,R4";
-
+                case "ROUTESFILE":
+                    indexTbl.Columns.Add(filename);
+                    //strBldr.AppendLine("Route1<s.no,id,active>");
+                    strBldr.Append("~");
+                    strBldr.AppendLine("Route1<1,1,1>");
+                    strBldr.AppendLine("Route2<2,2,1>");
+                    strBldr.AppendLine("Route3<3,3,1>");
+                    strBldr.AppendLine("Route4<4,4,1>");
+                    strBldr.Append("~");
+                    dr[0] = strBldr.ToString();
                     indexTbl.Rows.Add(dr);
                     break;
-                    indexTbl.Columns.Add("IndexFile");
-                    indexTbl.Columns.Add("IndexFileData");
 
+                case "STOPSFILE":                                      
 
-                    dr[0] = "IndexFile";
-                    dr[1] = "Stop1,Stop2";
+                    indexTbl.Columns.Add(filename);
+                    //strBldr.AppendLine("Stage 01<s.no,id,routeid,active>");
+                    //Route1
+                    strBldr.Append("~");
+                    strBldr.AppendLine("Stage 01<1,1,1,1>");
+                    strBldr.AppendLine("Stage 02<2,2,1,1>");
+                    strBldr.AppendLine("Stage 03<3,3,1,1>");
+                    strBldr.AppendLine("Stage 04<4,4,1,1>");
+                    strBldr.AppendLine("Stage 05<5,5,1,1>");
 
+                    //Route2
+                    strBldr.AppendLine("Stage 05<1,5,2,1>");
+                    strBldr.AppendLine("Stage 04<2,4,2,1>");
+                    strBldr.AppendLine("Stage 03<3,3,2,1>");
+                    strBldr.AppendLine("Stage 02<4,2,2,1>");
+                    strBldr.AppendLine("Stage 01<5,1,2,1>");
+
+                    //Route3
+                    strBldr.AppendLine("Stage 06<1,6,3,1>");
+                    strBldr.AppendLine("Stage 07<2,7,3,1>");
+                    strBldr.AppendLine("Stage 08<3,8,3,1>");
+                    strBldr.AppendLine("Stage 09<4,9,3,1>");
+                    strBldr.AppendLine("Stage 10<5,10,3,1>");
+
+                    //Route4
+                    strBldr.AppendLine("Stage 10<1,10,4,1>");
+                    strBldr.AppendLine("Stage 09<2,9,4,1>");
+                    strBldr.AppendLine("Stage 08<3,8,4,1>");
+                    strBldr.AppendLine("Stage 07<4,7,4,1>");
+                    strBldr.AppendLine("Stage 06<5,6,4,1>");
+                    strBldr.Append("~");
+                    dr[0] = strBldr.ToString();
                     indexTbl.Rows.Add(dr);
-                case "STOPSFILE":
+
                     break;
-                    indexTbl.Columns.Add("IndexFile");
-                    indexTbl.Columns.Add("IndexFileData");
 
-
-                    dr[0] = "IndexFile";
-                    dr[1] = "RoutesFile\nStopsfile\nroutefare\nauthfile\nblocklist\n";
-
-                    indexTbl.Rows.Add(dr);
                 case "ROUTEFARE":
+
+                    indexTbl.Columns.Add(filename);
+
+                    //strBldr.AppendLine("Route|Src|tgt<fare>");
+                    //Route1
+                    strBldr.Append("~");
+                    strBldr.AppendLine("Route1|Stage 01|Stage 02<0.15>");
+                    strBldr.AppendLine("Route1|Stage 01|Stage 03<0.25>");
+                    strBldr.AppendLine("Route1|Stage 01|Stage 04<0.35>");
+                    strBldr.AppendLine("Route1|Stage 01|Stage 05<0.45>");
+
+                    strBldr.AppendLine("Route1|Stage 02|Stage 03<0.10>");
+                    strBldr.AppendLine("Route1|Stage 02|Stage 04<0.15>");
+                    strBldr.AppendLine("Route1|Stage 02|Stage 05<0.20>");
+                    
+                    strBldr.AppendLine("Route1|Stage 03|Stage 04<0.10>");
+                    strBldr.AppendLine("Route1|Stage 03|Stage 05<0.15>");
+
+                    strBldr.AppendLine("Route1|Stage 04|Stage 05<0.20>");
+
+                    //Route2
+                    strBldr.AppendLine("Route2|Stage 05|Stage 04<0.15>");
+                    strBldr.AppendLine("Route2|Stage 05|Stage 03<0.25>");
+                    strBldr.AppendLine("Route2|Stage 05|Stage 02<0.35>");
+                    strBldr.AppendLine("Route2|Stage 05|Stage 01<0.45>");
+
+                    strBldr.AppendLine("Route2|Stage 04|Stage 03<0.10>");
+                    strBldr.AppendLine("Route2|Stage 04|Stage 02<0.15>");
+                    strBldr.AppendLine("Route2|Stage 04|Stage 01<0.20>");
+
+                    strBldr.AppendLine("Route2|Stage 03|Stage 02<0.10>");
+                    strBldr.AppendLine("Route2|Stage 03|Stage 01<0.15>");
+
+                    strBldr.AppendLine("Route2|Stage 02|Stage 01<0.20>");
+
+
+                    //Route1
+                    strBldr.AppendLine("Route3|Stage 06|Stage 07<0.15>");
+                    strBldr.AppendLine("Route3|Stage 06|Stage 08<0.25>");
+                    strBldr.AppendLine("Route3|Stage 06|Stage 09<0.35>");
+                    strBldr.AppendLine("Route3|Stage 06|Stage 10<0.45>");
+
+                    strBldr.AppendLine("Route3|Stage 07|Stage 08<0.10>");
+                    strBldr.AppendLine("Route3|Stage 07|Stage 09<0.15>");
+                    strBldr.AppendLine("Route3|Stage 07|Stage 10<0.20>");
+
+                    strBldr.AppendLine("Route3|Stage 08|Stage 09<0.10>");
+                    strBldr.AppendLine("Route3|Stage 08|Stage 10<0.15>");
+
+                    strBldr.AppendLine("Route3|Stage 09|Stage 10<0.20>");
+
+
+                    //Route1
+                    strBldr.AppendLine("Route4|Stage 10|Stage 09<0.15>");
+                    strBldr.AppendLine("Route4|Stage 10|Stage 08<0.25>");
+                    strBldr.AppendLine("Route4|Stage 10|Stage 07<0.35>");
+                    strBldr.AppendLine("Route4|Stage 10|Stage 06<0.45>");
+
+                    strBldr.AppendLine("Route4|Stage 09|Stage 08<0.10>");
+                    strBldr.AppendLine("Route4|Stage 09|Stage 07<0.15>");
+                    strBldr.AppendLine("Route4|Stage 09|Stage 06<0.20>");
+
+                    strBldr.AppendLine("Route4|Stage 08|Stage 07<0.10>");
+                    strBldr.AppendLine("Route4|Stage 08|Stage 06<0.15>");
+
+                    strBldr.AppendLine("Route4|Stage 07|Stage 06<0.20>");
+                    strBldr.Append("~");
+                    dr[0] = strBldr.ToString();
+                    indexTbl.Rows.Add(dr);
+
                     break;
 
                 case "AUTHFILE":
-                    indexTbl.Columns.Add("IndexFile");
-                    indexTbl.Columns.Add("IndexFileData");
-
-
-                    dr[0] = "INDEXFILE";
-                    dr[1] = "RoutesFile\nStopsfile\nroutefare\nauthfile\nblocklist\n";
-
+                    
+                    indexTbl.Columns.Add(filename);
+                    strBldr.Append("~");
+                   //strBldr.AppendLine("userid<password,userid,active>");
+                    strBldr.AppendLine("user1<1111,4,1>");
+                    strBldr.AppendLine("user2<2222,5,1>");
+                    strBldr.AppendLine("user3<3333,6,1>");
+                    strBldr.AppendLine("user4<4444,7,1>");
+                    strBldr.Append("~");
+                    dr[0] = strBldr.ToString();
                     indexTbl.Rows.Add(dr);
+
                     break;
 
-
             }
-          
-
-
-
-
             return indexTbl;
         }
-
-         [HttpGet]
-        [Route("api/GetFileContentRouteFare")]
-         public DataTable GetFileContentRouteFare(string filename)
-        {
-            DataTable Tbl = new DataTable();
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetFileContentRouteFare";
-            cmd.Connection = conn;
-            DataSet ds = new DataSet();
-            SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0]; 
-           
-            DataTable indexTbl = new DataTable();
-            indexTbl = Tbl;
-
-            DataRow dr = indexTbl.NewRow();
-
-
-            return indexTbl;
-        }
-
-         [HttpGet]
-         [Route("api/GetFileContentAuthen")]
-         public DataTable GetFileContentAuthen(string filename)
-         {
-             DataTable Tbl = new DataTable();
-             //connect to database
-             SqlConnection conn = new SqlConnection();
-             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-             SqlCommand cmd = new SqlCommand();
-             cmd.CommandType = CommandType.StoredProcedure;
-             cmd.CommandText = "GetFileContentAuthentication";
-             cmd.Connection = conn;
-             DataSet ds = new DataSet();
-             SqlDataAdapter db = new SqlDataAdapter(cmd);
-             db.Fill(ds);
-             Tbl = ds.Tables[0];
-
-             DataTable indexTbl = new DataTable();
-             indexTbl = Tbl;
-
-             DataRow dr = indexTbl.NewRow();
-
-
-             return indexTbl;
-         }
-         [HttpGet]
-         [Route("api/GetFileContentIndex")]
-         public DataTable GetFileContentIndex(string filename)
-         {
-             DataTable Tbl = new DataTable();
-             //connect to database
-             SqlConnection conn = new SqlConnection();
-             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-             SqlCommand cmd = new SqlCommand();
-             cmd.CommandType = CommandType.StoredProcedure;
-             cmd.CommandText = "GetFileContentIndex";
-             cmd.Connection = conn;
-             DataSet ds = new DataSet();
-             SqlDataAdapter db = new SqlDataAdapter(cmd);
-             db.Fill(ds);
-             Tbl = ds.Tables[0];
-
-             DataTable indexTbl = new DataTable();
-             indexTbl = Tbl;
-
-             DataRow dr = indexTbl.NewRow();
-
-
-             return indexTbl;
-         }
-         [HttpGet]
-         [Route("api/GetFileContentBTPOSD")]
-         public DataTable GetFileContentBTPOSD(string POSID)
-         {
-             DataTable Tbl = new DataTable();
-             //connect to database
-             SqlConnection conn = new SqlConnection();
-             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-             SqlCommand cmd = new SqlCommand();
-             cmd.CommandType = CommandType.StoredProcedure;
-             cmd.CommandText = "GetFileContentBTPOSDetails";
-             cmd.Connection = conn;
-             DataSet ds = new DataSet();
-             SqlDataAdapter db = new SqlDataAdapter(cmd);
-             db.Fill(ds);
-             Tbl = ds.Tables[0];
-
-             DataTable indexTbl = new DataTable();
-             indexTbl = Tbl;
-
-             DataRow dr = indexTbl.NewRow();
-
-
-             return indexTbl;
-         }
 
     }
 }
