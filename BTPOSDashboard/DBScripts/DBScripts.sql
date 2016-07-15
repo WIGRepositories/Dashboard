@@ -9910,3 +9910,38 @@ GO
 
 
 
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[ShoppingCart]    Script Date: 07/15/2016 11:51:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[ShoppingCart](
+	[Item] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[UnitPrice] [decimal](18, 0) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Transaction_Num] [varchar](30) NOT NULL,
+	[amount] [bigint] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL,
+	[SalesOrderNum] [nvarchar](15) NOT NULL,
+	[PaymentMode] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Transactionstatus] [int] NOT NULL,
+	[Gateway_transid] [varchar](15) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
