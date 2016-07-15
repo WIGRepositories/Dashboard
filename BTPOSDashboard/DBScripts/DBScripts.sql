@@ -9910,7 +9910,6 @@ GO
 
 
 
-USE [POSDashboard]
 GO
 
 /****** Object:  Table [dbo].[ShoppingCart]    Script Date: 07/15/2016 11:51:56 ******/
