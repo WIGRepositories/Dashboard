@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetItems();">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetItems();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -366,14 +366,77 @@
                                                         <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i><span class="badge badge-green">{{items.length}}</span></a>
 
                                                         <ul class="dropdown-menu dropdown-messages">
-                                                            <li><p>Items added to cart are</p></li>
-                                                            <p>{{items}}</p>
-                                                            <p><input type="button" value="CheckOut" style="width:125px;" ng-click="Save(items);"></p>
-                                                        </ul>
+                                                           
+                                                            <li><p>{{items.length}} items added to Cart</p></li>
+                                                            
+                  
+                                                           
+                                                                <!----   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
+                                                           
+                                                             <p><input type="button" value="CheckOut" data-target="#Modal-header-new" data-toggle="modal" style="margin: 10px;" ng-click="Save(items1);"/></p>
+                                                              
+                                                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/adapter.jpeg" height="30" width="30" class="img-responsive img-circle" />&nbsp;&nbsp;<span class="caret"></span>adapter</a>
+                                                              
+                                                               
+                                                          
+                                                            </ul>
                                                     </li>
 
 
                                                 </ul>
+                                                
+                                                <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade"width="50"height="50">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header modal-header-primary">
+                                                                <button type="button" style="float:right" data-dismiss="modal" aria-hidden="true" class="close">&times;</button> 
+                                                                <h6 id="modal-header-primary-label" class="modal-title">CHECKOUT</h6>
+                                                              
+                                                            </div>
+                                                            <div class="modal-body" ng-init="GetItems();" ng-model="initdata">
+                                                                <div class="row">
+                                                                    <div class="col-md-offset-5 col-md-12">
+                                                                        <h1 type="button" class="btn btn-green" ng-click="Save(initdata);">CHECKOUT</h1>
+
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+
+                                                                </div>
+
+
+                                                                <div class="row">
+
+                                                                </div>
+
+
+
+
+
+
+
+
+
+
+                                                                <!---- <div class="col-md-6 col-md-offset-2">
+            <button class="btn btn-primary" type="button">Save</button>
+            <button class="btn btn-primary" type="button">Cancel</button>
+        </div>--->
+
+
+
+                                                            </div>
+
+
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
                                                 
                                                 
 
@@ -406,11 +469,12 @@
                                                                         <p><input type="button" value="Decrement" style="width:100px;"></p>
                                                                         <p><input type="button" value="Add to Cart" style="width:100px;"></p>
                                                                         <p><input type="button" value="Remove from Cart" style="width:125px;"></p>
-                                                                        <p><input type="button" value="Cart Details" style="width:125px;" ng-click="GetItems(i);"></p>
+                                                                       
                                                                         <div class="form-group has-success" style="text-align:right">
-                                                                            <p>Item Id:{{i.ItemId}}</p>
+                                                                            <p>Item Id:{{i.Item}}</p>
                                                                             <p>ItemName:{{i.ItemName}}</p>
                                                                             <p>Unitprice:{{i.UnitPrice}}</p>
+                                                                            <p>Quantity:{{i.Quantity}}</p>
 
                                                                         </div>
 
@@ -518,10 +582,10 @@
 
                                                         </div>-->
                                             </div>
-                                            <div class="col-md-6 col-md-offset-2">
+                                            <!--<div class="col-md-6 col-md-offset-2">
                                                 <button class="btn btn-primary" type="button" ng-click="Save(items);">Save</button>
                                                 <button class="btn btn-primary" type="button">Cancel</button>
-                                            </div>
+                                            </div>-->
 
                                         </div>
 

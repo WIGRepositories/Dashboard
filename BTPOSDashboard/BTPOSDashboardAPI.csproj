@@ -419,6 +419,7 @@
     <Content Include="UI\css\themes\style2\pink-green.css" />
     <Content Include="UI\css\themes\style2\pink-grey.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
+    <Content Include="UI\DataLoad.html" />
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
@@ -452,6 +453,7 @@
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\createfleet.js" />
+    <Content Include="UI\js\DataLoad.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\EmailGatewayConfiguration.js" />
     <Content Include="UI\js\FleetAvailability.js" />
@@ -585,6 +587,7 @@
     <Content Include="UI\PaymentConfirmation.html" />
     <Content Include="UI\PaymentGatewayConfiguration.html" />
     <Content Include="UI\paymentHistory.html" />
+    <Content Include="UI\popup.html" />
     <Content Include="UI\PurchaseOrders.html" />
     <Content Include="UI\register.html" />
     <Content Include="UI\ResetPassword.html" />
@@ -2032,6 +2035,7 @@
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\BtposRoutesController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\DataLoadController.cs" />
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\EmailGatewayConfigController.cs" />

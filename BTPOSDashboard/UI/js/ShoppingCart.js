@@ -30,60 +30,94 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetItems = function () {
         $http.get('http://localhost:1476/api/ShoppingCart/GetItems').then(function (response, req) {
             $scope.items = response.data;
+            $scope.itemsList = $scope.items;
         });
     }
 
 
-    $scope.Save = function (items) {
+    $scope.Save = function () {
 
-       
-        var items = {
-          //  Id: 1,
-            ItemId: items.ItemId,
-            ItemName: items.ItemName,
-            UnitPrice: items.Unitprice,
-            Transactionid: items.Transactionid,
-            Quantity: items.Quantity
-           
-        };
+        if ($scope.items == null) return;
+        var Shoppingcart1 = [];
+        var itemsList = $scope.Shoppingcarts;
+        for (var cnt = 0; cnt < itemsList.length; cnt++) {
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/ShoppingCart/SaveCartItems',
-            //headers: {
-            //    'Content-Type': undefined
-            data: items
-        }
-        $http(req).then(function (response) {
-
-            $scope.showDialog("Saved successfully!");
-
-            $scope.Group = null;
-
-        }, function (errres) {
-            var errdata = errres.data;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
-        });
-
-
-    }
-    $scope.showDialog = function (message) {
-
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
+            var items = {
+                //  Id: 1,
+                Item: items.Item,
+               // ItemName: items.ItemName,
+                 UnitPrice: items.Unitprice,
+                TransactionId: items.TransactionId,
+                // Transaction_Num: items.Transaction_Num,
+                amount: items.amount,
+                //  PaymentMode: items.PaymentMode,
+                Date: items.Date,
+                // Transactionstatus: items.Transactionstatus,
+                //Gateway_transId :items.Gateway_transId ,
+                Quantity: items.Quantity,
+                Id: items.Id,
+                SalesOrderNum: items.SalesOrderNum,
+                Status: items.Status
             }
+            Shoppingcart1.push(items);
+
+        }
+        var items1 = {
+
+            TransactionId: items.TransactionId,
+           Transaction_Num: items.Transaction_Num,
+            amount: items.amount,
+           PaymentMode: items.PaymentMode,
+            Transactionstatus: items.Transactionstatus,
+            Gateway_transId: items.Gateway_transId,
+            Date: items.Date,
+           slist: Shoppingcart1
+        }
+
+        $http({
+            url: 'http://localhost:1476/api/ShoppingCart/SaveCartItems',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: items1,
+
+        }).success(function (data, status, headers, config) {
+            alert('saved successfully');
+            window.location.href = "http://localhost:52800/UI/LicenseConfirmation.html";
+        }).error(function (ata, status, headers, config) {
+            alert(ata);
         });
     }
-
 });
+    //    $http(req).then(function (response) {
+
+    //        $scope.showDialog("Saved successfully!");
+
+    //        $scope.Group = null;
+
+    //    }, function (errres) {
+    //        var errdata = errres.data;
+    //        var errmssg = "";
+    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    //        $scope.showDialog(errmssg);
+    //    });
+
+
+    //}
+    //$scope.showDialog = function (message) {
+
+    //    var modalInstance = $uibModal.open({
+    //        animation: $scope.animationsEnabled,
+    //        templateUrl: 'myModalContent.html',
+    //        controller: 'ModalInstanceCtrl',
+    //        resolve: {
+    //            mssg: function () {
+    //                return message;
+    //            }
+    //        }
+    //    });
+    //}
+
+
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
    $scope.mssg = mssg;
