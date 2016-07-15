@@ -85,7 +85,7 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                 cmd.Parameters.Clear();
-
+                conn.Close();
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
@@ -133,7 +133,7 @@ namespace BTPOSDashboard.Controllers
                 cmd1.ExecuteScalar();
                 cmd1.Parameters.Clear();
 
-
+                conn.Close();
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
