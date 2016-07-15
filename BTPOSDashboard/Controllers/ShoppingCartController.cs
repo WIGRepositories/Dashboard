@@ -121,7 +121,7 @@ namespace BTPOSDashboard.Controllers
                 cmd1.CommandText = "InsUpdDelPayments";
                 cmd1.Connection = conn;
 
-                 conn.Open();
+                // conn.Open();
                 //SqlParameter Cid = new SqlParameter();
                 //Cid.ParameterName = "@Id";
                 //Cid.SqlDbType = SqlDbType.Int;
@@ -212,6 +212,7 @@ namespace BTPOSDashboard.Controllers
 
         public void Options()
         {
+        }
 
         }
     }
