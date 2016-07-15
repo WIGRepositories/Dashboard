@@ -417,54 +417,77 @@
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Add New Routes</h4>
                                                                 </div>
                                                                 <div class="modal-body" ng-init="GetStops();" ng-model="routes">
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4 control-label" style="color:red;"> Route Name: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-5"><input id="inputFirstName" type="text" ng-model="routes.RouteName" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;"> Code: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-5"><input id="inputFirstName" type="text" ng-model="routes.Code" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Source:<span class='require'>*</span></label>
-
-                                                                        <div class="col-md-5">
-                                                                            <select ng-options="s.Name for s in Stops track by s.Id" class="form-control" ng-model="routes.Source" style="width:100%">
-                                                                                <option value="">Select</option>
-                                                                            </select>
+                                                                  
+                                                                    
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Name" class="col-md-4 control-label" style="color:red;"> Route Name: <span class='require'>*</span></label>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Destination:<span class='require'>*</span></label>
+                                                                        <div class="col-md-6">
+                                                                            <input id="inputFirstName" type="text" ng-model="routes.RouteName" class="form-control" /><span class="help-block"></span>
+                                                                        </div>
+                                                                        </div>
 
-                                                                        <div class="col-md-5">
+                                                                        <div class="row mbm">
+                                                                            <div style="text-align:right">
+                                                                                <label for="Name" class="col-md-4  control-label" style="color:red;"> Code: <span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <input id="inputFirstName" type="text" ng-model="routes.Code" class="form-control" /><span class="help-block"></span>
+                                                                            </div>
+                                                                            </div>
+                                                                            <div class="row mbm">
+                                                                                <div style="text-align:right">
+                                                                                    <label for="selCountry" class="col-md-4 control-label">Source:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <select ng-options="s.Name for s in Stops track by s.Id" class="form-control" ng-model="routes.Source" style="width:100%">
+                                                                                        <option value="">Select</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                </div>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="selCountry" class="col-md-4 control-label">Destination:<span class='require'>*</span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
                                                                             <select ng-options="d.Name for d in Stops track by d.Id" class="form-control" ng-model="routes.Destination" style="width:100%">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;"> Distance: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-5"><input id="inputFirstName" type="text" ng-model="routes.Distance" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;">Return route?</label>
-                                                                        <div class="col-md-5"><input id="rtn" type="checkbox" class="form-control" /></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4 control-label" style="color:red;"> Return Route Name: <span class='require'></span></label>
-
-                                                                        <div class="col-md-5"><input id="rtnName" type="text" ng-model="routes.ReturnRouteName" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="Name" class="col-md-4  control-label" style="color:red;"> Return route Code: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-5"><input id="rtnCode" type="text" ng-model="routes.ReturnCode" class="form-control" /><span class="help-block"></span></div>
-                                                                    </div>
+                                                                        </div>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Name" class="col-md-4  control-label" style="color:red;"> Distance: <span class='require'>*</span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input id="inputFirstName" type="text" ng-model="routes.Distance" class="form-control" /><span class="help-block"></span>
+                                                                        </div>
+                                                                        </div>
+                                                                 <div class="row mbm">
+                                                                     <div style="text-align:right">
+                                                                         <label for="Name" class="col-md-4  control-label" style="color:red;">Return route?</label>
+                                                                     </div>
+                                                                     <div class="col-md-6">
+                                                                         <input id="rtn" type="checkbox" class="form-control" />
+                                                                     </div>
+                                                                     </div>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Name" class="col-md-4 control-label" style="color:red;"> Return Route Name: <span class='require'></span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input id="rtnName" type="text" ng-model="routes.ReturnRouteName" class="form-control" /><span class="help-block"></span>
+                                                                        </div>
+                                                                        </div>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Name" class="col-md-4  control-label" style="color:red;"> Return route Code: <span class='require'>*</span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input id="rtnCode" type="text" ng-model="routes.ReturnCode" class="form-control" /><span class="help-block"></span>
+                                                                        </div>
+                                                                        </div>
 
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">

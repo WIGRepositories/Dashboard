@@ -109,12 +109,12 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                // cmd.Parameters.Clear();
-             //  conn.Close();
+               conn.Close();
 
 
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-              //  conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                //conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
                 SqlCommand cmd1 = new SqlCommand();
                 cmd1.CommandType = CommandType.StoredProcedure;
@@ -207,11 +207,15 @@ namespace BTPOSDashboard.Controllers
                 string str = ex.Message;
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
+           
         }
 
         public void Options()
         {
+        }
 
         }
     }
 }
+
+
