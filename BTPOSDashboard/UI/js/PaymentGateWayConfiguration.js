@@ -27,7 +27,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             startdate: Group.startdate,
             username: Group.username,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId,
+            secretId: Group.secretId,
             insupdflag: 'I'
             
         }
@@ -57,7 +57,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.savecmpChanges = function (Group,flag) {
        
-        var Group = {                     
+        var Group = {
+                Id :Group.Id,
                 providername: Group.providername,
                 enddate: Group.enddate,
                 hashkey: Group.hashkey,
@@ -66,6 +67,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 saltkey: Group.saltkey,
                 startdate: Group.startdate,
                 username: Group.username,
+                ClientId: Group.ClientId,
+                secretId: Group.secretId,
                 insupdflag: 'U'
 
         }

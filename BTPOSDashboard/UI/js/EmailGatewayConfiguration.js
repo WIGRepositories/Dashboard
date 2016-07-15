@@ -12,6 +12,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/EmailGatewayConfig/GetEmailGateway').then(function (response, req) {
             $scope.GetEmailGateway = response.data;
+            for (cnt = 0; cnt < response.data.length; cnt++) {
+                $scope.GetEmailGateway[cnt].startdate = new Date($scope.GetEmailGateway[cnt].startdate);
+                $scope.GetEmailGateway[cnt].enddate = new Date($scope.GetEmailGateway[cnt].enddate);
+            }
 
         });
     }
@@ -28,7 +32,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             username: Group.username,    //       
             Port: Group.Port,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId,
+            SecretId: Group.SecretId,
             insupdflag: 'I'
         }
 
@@ -55,9 +59,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currGroup = null;
     };
 
-    $scope.savecmpChanges = function (Group,flag) {
+    $scope.saveCmpChanges = function (Group, flag) {
 
         var newCmp = {
+            Id:Group.Id,
             providername: Group.providername,
             enddate: Group.enddate,
             hashkey: Group.hashkey,
@@ -67,7 +72,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             username: Group.username,    //       
             Port: Group.Port,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId,
+            SecretId: Group.SecretId,
             insupdflag: 'U'
         }
 
@@ -75,7 +80,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/EmailGatewayConfig/SaveEmailGatewaySettings',
-            data: Group
+            data: newCmp
         }
         $http(req).then(function (response) {
 
@@ -89,7 +94,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog(errmssg);
 
         });
-        $scope.GetEmailGateway();
+
+      
         $scope.currGroup = null;
     };
 

@@ -688,35 +688,37 @@ namespace BTPOSDashboardAPI.Models
     public class SMSGatewayConfiguration
 
     {
+        public int Id { get; set; }
 
-        public DateTime enddate { get; set; }
+        public DateTime? enddate { get; set; }
 
-        public DateTime hashkey { get; set; }
+        public DateTime? hashkey { get; set; }
 
 
         public string providername { get; set; }
 
         public string pwd { get; set; }
 
-        public DateTime saltkey { get; set; }
+        public DateTime? saltkey { get; set; }
 
-        public DateTime startdate { get; set; }
+        public DateTime? startdate { get; set; }
 
         public string username { get; set; }
-        public int ClientId {get;set;}
-        public int SelectId { get; set; }
+        public string ClientId {get;set;}
+        public string SecretId { get; set; }
         public string insupdflag { get; set; }
     }
 
     public class PaymentGatewaySettings
     {
+        public int Id { get; set; }
         public DateTime enddate { get; set; }
 
         public DateTime hashkey { get; set; }
 
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
 
-        public int SelectId { get; set; }
+        public string secretId { get; set; }
 
         public int PaymentGatewayTypeId { get; set; }
 
@@ -1552,8 +1554,52 @@ namespace BTPOSDashboardAPI.Models
         public DateTime DateTime { get; set; }
 
     }
+    public class Shoppingcarts
+    {
+       
+        public List<itemslist> slist { get; set; }
+        public int Item { get; set; }
+        public int Id { get; set; }
+
+        public String SalesOrderNum { get; set; }
+
+
+        public int TransactionId  { get; set; }
+
+        public DateTime? Date { get; set; }
+        public Decimal amount { get; set; }
+
+        public Decimal Quantity { get; set; }
+        public int Status { get; set; }
+        public int Transactionstatus { get; set; }
+        public String Gateway_transId { get; set; }
+        public int PaymentMode { get; set; }
+        public String Transaction_Num { get; set; }
+
+
+       
+
+    }
+
+    public class itemslist
+    {
+        public int TransactionId { get; set; }
+        public String Transaction_Num { get; set; }
+
+       public Decimal amount { get; set; }
+
+       public int PaymentMode { get; set; }
+
+       public DateTime? Date { get; set; }
+
+        public int Transactionstatus { get; set; }
+       public String Gateway_transId { get; set; }
+
+
+    }
     public class EmailGatewaySettings
     {
+        public int Id { get; set; }
         public DateTime enddate { get; set; }
 
         public DateTime hashkey { get; set; }
@@ -1568,8 +1614,8 @@ namespace BTPOSDashboardAPI.Models
         public DateTime startdate { get; set; }
 
         public string username { get; set; }
-        public int ClientId { get; set; }
-        public int SelectId { get; set; }
+        public string ClientId { get; set; }
+        public string SecretId { get; set; }
 
         public int Port { get; set; }
         public string insupdflag { get; set; }

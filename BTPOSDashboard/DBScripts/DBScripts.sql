@@ -1205,17 +1205,17 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[SMSEmailConfiguration](
-	[enddate] [datetime] NOT NULL,
-	[hashkey] [datetime] NOT NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[enddate] [datetime] NULL,
+	[hashkey] [datetime] NULL,
+	[Id] [int] NOT NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
-	[saltkey] [datetime] NOT NULL,
-	[startdate] [datetime] NOT NULL,
+	[saltkey] [datetime] NULL,
+	[startdate] [datetime] NULL,
 	[username] [varchar](50) NOT NULL,
 	[Port] [int] NOT NULL,
-	[ClientId] [int] NOT NULL,
-	[SelectId] [int] NOT NULL
+	[ClientId] [varchar](50) NOT NULL,
+	[SecretId] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -4472,22 +4472,24 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 Create procedure [dbo].[InsUpdDelSMSEmailConfiguration]
-(@enddate datetime,
-@hashkey datetime,
+(@Id int,
+@enddate datetime = null ,
+@hashkey datetime = null ,
 @providername varchar(50),
 @pwd varchar(50),
-@saltkey datetime,
-@startdate datetime,
+@saltkey datetime = null ,
+@startdate datetime = null,
 @username varchar(50),
 @Port int,
-@ClientId int,
-@SelectId int,
+@ClientId varchar(50),
+@SecretId varchar(50),
 @insupdflag varchar(10))
 AS
 BEGIN	
 if @insupdflag = 'I' 
 INSERT INTO [dbo].[SMSEmailConfiguration]
-           ([enddate]
+           ([Id]
+           ,[enddate]
            ,[hashkey]           
            ,[providername]
            ,[pwd]
@@ -4496,9 +4498,10 @@ INSERT INTO [dbo].[SMSEmailConfiguration]
            ,[username]
            ,[Port]
              ,[ClientId]      
-              ,[SelectId] )         
+              ,[SecretId] )         
 values
-(@enddate,
+(@Id,
+@enddate,
 @hashkey,
 @providername,
 @pwd,
@@ -4507,7 +4510,7 @@ values
 @username,
 @Port,
 @ClientId,
-@SelectId)
+@SecretId)
           else
   if @insupdflag = 'U' 
 UPDATE [POSDashboard].[dbo].[SMSEmailConfiguration]
@@ -4519,9 +4522,11 @@ UPDATE [POSDashboard].[dbo].[SMSEmailConfiguration]
       ,[username] = @username
       ,[Port]= @Port
       ,[ClientId] = @ClientId
-     ,[SelectId] = @SelectId
-      ,[enddate] = @enddate  
+     ,[SecretId] = @SecretId
+      ,[enddate] = @enddate 
+      Where Id = @Id 
 end
+
 
 
 GO
@@ -8600,10 +8605,10 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[FleetOwnerRequest](
-	[CurrentSystemInUse] [varchar](50) NOT NULL,
-	[howdidyouhearaboutus] [varchar](50) NOT NULL,
-	[SentNewProductsEmails] [bit] NOT NULL,
-	[Agreetotermsandconditions] [bit] NOT NULL
+	[CurrentSystemInUse] [varchar](50) NULL,
+	[howdidyouhearaboutus] [varchar](50) NULL,
+	[SentNewProductsEmails] [bit] NULL,
+	[Agreetotermsandconditions] [bit] NULL
 ) ON [PRIMARY]
 
 GO
@@ -8648,13 +8653,13 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequest](
+CREATE PROCEDURE[dbo].[InsupdFleetOwnerRequest](
 		  
-          @CurrentSystemInUse varchar(50),
-          @SentNewProductsEmails bit,
+          @CurrentSystemInUse varchar(50) = null,
+          @SentNewProductsEmails bit = 0,
       
-          @howdidyouhearaboutus varchar(50),
-          @Agreetotermsandconditions bit,
+          @howdidyouhearaboutus varchar(50) = null,
+          @Agreetotermsandconditions bit = 1,
            @insupdflag varchar(20)
            )
  
@@ -8693,22 +8698,23 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequest]
 
 END
 GO
+/****** Object:  StoredProcedure [dbo].[InSupdFleetOwnerRequestDetails]    Script Date: 07/15/2016 10:19:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
+Create PROCEDURE [dbo].[InSupdFleetOwnerRequestDetails](
 		   @FirstName varchar(50),   
            @LastName varchar(50),
            @PhoneNo  varchar(50),
            @EmailAddress varchar(20),
            @CompanyName varchar(20),
-           @Description varchar(50) ,
-           @Title varchar(20),
-           @CompanyEmployeSize int,
-           @FleetSize int,         
-           @Gender varchar(20),      
-           @Address varchar(50),
+           @Description varchar(50) =null,
+           @Title varchar(20) =null,
+           @CompanyEmployeSize int =null,
+           @FleetSize int = null,         
+           @Gender varchar(20) = null,      
+           @Address varchar(50) =null,
            @insupdflag varchar(10)
            )
  
@@ -8757,7 +8763,13 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
        ,[Gender] = @Gender 
        ,[Address]= @Address
 
+  exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,'I'
+
+select FleetOwnerCode from dbo.FleetOwner f 
+inner join Users u on u.Id = f.UserId
+where u.FirstName = @FirstName and u.LastName = @LastName
 END
+
 
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSRecords]    Script Date: 06/20/2016 16:29:46 ******/
@@ -9273,16 +9285,16 @@ SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[SmsGatewayeConfiguration](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[enddate] [datetime] NOT NULL,
-	[hashkey] [datetime] NOT NULL,
+	[Id] [int] NOT NULL,
+	[enddate] [datetime] NULL,
+	[hashkey] [datetime] NULL,
 	[providername] [varchar](50) NOT NULL,
 	[pwd] [varchar](50) NOT NULL,
-	[saltkey] [datetime] NOT NULL,
-	[startdate] [datetime] NOT NULL,
+	[saltkey] [datetime] NULL,
+	[startdate] [datetime] NULL,
 	[username] [varchar](50) NOT NULL,
-	[ClientId] [int] NOT NULL,
-	[SelectId] [int] NOT NULL
+	[ClientId] [varchar](50) NOT NULL,
+	[SecretId] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -9321,15 +9333,16 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 create  procedure [dbo].[InsUpdDelSMSGatewayConfiguration]
-(@enddate datetime,
-@hashkey datetime,
+(@Id int,
+@enddate datetime = null,
+@hashkey datetime = null,
 @providername varchar(50),
 @pwd varchar(50),
-@saltkey datetime,
-@startdate datetime,
+@saltkey datetime = null,
+@startdate datetime = null,
 @username varchar(50),
-@ClientId int,
-@SelectId int,
+@ClientId varchar(50),
+@SecretId varchar(50),
 @insupdflag varchar(10))
 as
 begin
@@ -9645,3 +9658,400 @@ SELECT fo.[Id]
 
 end
 
+
+
+GO
+
+/****** Object:  Table [dbo].[Paymentdetailsnw]    Script Date: 07/13/2016 19:20:25 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Paymentdetailsnw](
+	[ItemId] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[Unitprice] [decimal](18, 0) NOT NULL,
+	[Quantity] [int] NOT NULL,
+	[Transactionid] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+GO
+
+/****** Object:  Table [dbo].[Salesordernw]    Script Date: 07/13/2016 19:20:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Salesordernw](
+	[ItemId] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[UnitPrice] [decimal](18, 0) NOT NULL,
+	[Quantity] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSalesordernw]    Script Date: 07/13/2016 17:35:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsUpdDelSalesordernw]
+
+@ItemId int,
+@ItemName varchar,
+@UnitPrice money
+
+as
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Salesordernw]
+           ([ItemId]
+           ,[ItemName]
+           ,[UnitPrice]
+           )
+     VALUES
+           (@ItemId
+           ,@ItemName
+           ,@UnitPrice
+           )
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSalesordernw]    Script Date: 07/13/2016 17:35:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[InsUpdDelSalesordernw]
+
+@ItemId int,
+@ItemName varchar,
+@UnitPrice money
+
+as
+begin
+
+INSERT INTO [POSDashboard].[dbo].[Salesordernw]
+           ([ItemId]
+           ,[ItemName]
+           ,[UnitPrice]
+           )
+     VALUES
+           (@ItemId
+           ,@ItemName
+           ,@UnitPrice
+           )
+end
+
+
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPayment]    Script Date: 07/14/2016 13:43:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create  procedure [dbo].[InsUpdDelSalesOrder]
+(
+@Id int
+,@SalesOrderNum nvarchar(15)
+ ,@TransactionId int
+      ,@Date datetime
+      ,@amount decimal
+      ,@Item int
+      ,@Quantity decimal
+      ,@Status int)
+as
+begin
+insert into SalesOrder(Id
+ ,SalesOrderNum
+,TransactionId
+,Date
+,amount
+,Item
+,Quantity
+,Status)values(
+@Id
+ ,@SalesOrderNum
+,@TransactionId
+,@Date
+,@amount
+,@Item
+
+,@Quantity
+,@Status)
+
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelPayment]    Script Date: 07/14/2016 13:43:25 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelPayments]
+(--@Card varchar(50)=null
+--@MobilePayment varchar(50)=null
+--@Cash varchar(50)=null
+@TransactionId int
+,@Transaction_Num varchar(50)
+,@amount decimal
+,@PaymentMode int
+,@Date datetime
+,@Transactionstatus int
+,@Gateway_transId varchar(50))
+as
+begin
+insert into Payments (TransactionId
+,Transaction_Num
+,amount
+,PaymentMode
+,Date
+,Transactionstatus
+,Gateway_transId)values(
+--@Card
+--,@MobilePayment
+--,@Cash
+@TransactionId
+,@Transaction_Num
+,@amount
+,@PaymentMode
+,@Date
+,@Transactionstatus
+,@Gateway_transId)
+end
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[getShoppingCart]    Script Date: 07/14/2016 13:38:38 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[getShoppingCart]
+(@ItemId int =-1)
+as
+begin
+SELECT distinct 
+      [Item]
+      ,[ItemName]
+      ,[UnitPrice]
+      ,s.[Id]
+      ,[TransactionId]
+      ,[Transaction_Num]
+      ,[amount]
+      ,[Quantity]
+      ,[Status]
+      ,[SalesOrderNum]
+      ,[PaymentMode]
+      ,[Date]
+      ,[Transactionstatus]
+      ,[Gateway_transid]
+      ,ty.[Name]
+      
+  FROM [POSDashboard].[dbo].[ShoppingCart]s 
+  inner join Types ty on ty.Id=s.Transactionstatus
+  
+  order by [Item]
+end
+
+
+GO
+
+/****** Object:  Table [dbo].[Payments]    Script Date: 07/14/2016 16:54:11 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Payments](
+	[Card] [varchar](50) NOT NULL,
+	[MobilePayment] [varchar](50) NOT NULL,
+	[Cash] [varchar](50) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Transaction_Num] [varchar](50) NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[PaymentMode] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[TransactionStatus] [int] NOT NULL,
+	[Gateway_transId] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+
+GO
+
+/****** Object:  Table [dbo].[ShoppingCart]    Script Date: 07/15/2016 11:51:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[ShoppingCart](
+	[Item] [int] NOT NULL,
+	[ItemName] [varchar](50) NOT NULL,
+	[UnitPrice] [decimal](18, 0) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransactionId] [int] NOT NULL,
+	[Transaction_Num] [varchar](30) NOT NULL,
+	[amount] [bigint] NOT NULL,
+	[Quantity] [decimal](18, 0) NOT NULL,
+	[Status] [int] NOT NULL,
+	[SalesOrderNum] [nvarchar](15) NOT NULL,
+	[PaymentMode] [int] NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Transactionstatus] [int] NOT NULL,
+	[Gateway_transid] [varchar](15) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+/****** Object:  Table [dbo].[CartPaymentDetails]    Script Date: 07/15/2016 20:04:13 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CartPaymentDetails](
+	[LicenseType] [nvarchar](50) NULL,
+	[Frequency] [int] NULL,
+	[NoOfMonths] [nvarchar](50) NULL,
+	[TotalAmount] [int] NULL,
+	[CreateDate] [date] NULL,
+	[TransId] [nvarchar](50) NULL,
+	[UnitPrice] [int] NULL,
+	[FleetOwner] [nvarchar](50) NULL,
+	[Id] [int] NULL
+) ON [PRIMARY]
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetCartPaymentDetails]    Script Date: 07/15/2016 20:05:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetCartPaymentDetails]
+   (@LicenseType varchar(50)
+           ,@Frequency int
+           ,@NoOfMonths varchar(50)
+           ,@TotalAmount int
+           ,@CreateDate date
+           ,@TransId varchar(50)
+           ,@UnitPrice int
+           ,@FleetOwner varchar(50))
+AS
+BEGIN
+
+    INSERT INTO [POSDashboard].[dbo].[CartPaymentDetails]
+           ([LicenseType]
+           ,[Frequency]
+           ,[NoOfMonths]
+           ,[TotalAmount]
+           ,[CreateDate]
+           ,[TransId]
+           ,[UnitPrice]
+           ,[FleetOwner])
+     VALUES
+           (@LicenseType
+           ,@Frequency
+           ,@NoOfMonths
+           ,@TotalAmount
+           ,@CreateDate
+           ,@TransId
+           ,@UnitPrice
+           ,@FleetOwner)   
+       
+     
+      
+  
+end
+/****** Object:  StoredProcedure [dbo].[InsupdCartPaymentDetails]    Script Date: 07/15/2016 20:06:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create PROCEDURE [dbo].[InsupdCartPaymentDetails]  (@LicenseType varchar(50)
+           ,@Frequency int
+           ,@NoOfMonths varchar(50)
+           ,@TotalAmount int
+           ,@CreateDate date
+           ,@TransId varchar(50)
+           ,@UnitPrice int
+           ,@FleetOwner varchar(50))
+	
+AS
+BEGIN
+	
+	INSERT INTO [POSDashboard].[dbo].[CartPaymentDetails]
+           ([LicenseType]
+           ,[Frequency]
+           ,[NoOfMonths]
+           ,[TotalAmount]
+           ,[CreateDate]
+           ,[TransId]
+           ,[UnitPrice]
+           ,[FleetOwner])
+     VALUES
+           (@LicenseType
+            ,@Frequency
+           ,@NoOfMonths
+           ,@TotalAmount
+           ,@CreateDate
+           ,@TransId
+           ,@UnitPrice
+           ,@FleetOwner)
+
+END

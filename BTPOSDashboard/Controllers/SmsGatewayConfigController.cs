@@ -51,6 +51,12 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsUpdDelSMSGatewayConfiguration";
             cmd.Connection = conn;
             conn.Open();
+
+            SqlParameter id = new SqlParameter();
+            id.ParameterName = "@Id";
+            id.SqlDbType = SqlDbType.VarChar;
+            id.Value = b.Id;
+            cmd.Parameters.Add(id);
           
 
             SqlParameter Gid = new SqlParameter();
@@ -107,9 +113,9 @@ namespace BTPOSDashboard.Controllers
 
 
             SqlParameter Sl = new SqlParameter();
-            Sl.ParameterName = "@SelectId";
+            Sl.ParameterName = "@SecretId";
             Sl.SqlDbType = SqlDbType.VarChar;
-            Sl.Value = b.SelectId;
+            Sl.Value = b.SecretId;
             cmd.Parameters.Add(Sl);
 
             SqlParameter insdelflag = new SqlParameter("@insupdflag", SqlDbType.VarChar);
