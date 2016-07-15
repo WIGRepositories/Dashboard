@@ -457,53 +457,54 @@
                                                             <h4 id="modal-header-primary-label" class="modal-title">Add New Items</h4>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div class="row">
+                                                            
+
+                                                            <div class="row mbm">
 
                                                                 <label class="col-md-4 control-label">Item Name: <span class='require'>*</span></label>
                                                                 <div class="col-md-6">
-                                                                    <div class="col-md-6"><input id="itemName" type="text" placeholder="Item Name" class="form-control" ng-model="Item.ItemName" /><span class="help-block"></span></div>
+                                                                    <input id="itemName" type="text" placeholder="Item Name" class="form-control" ng-model="Item.ItemName" /><span class="help-block"></span>
                                                                 </div>
                                                             </div>
-
-                                                            <div class="row">
+                                                            <div class="row mbm">
                                                                 <label class="col-md-4 control-label">Item Image: <span class='require'>*</span></label>
-                                                                <div class="col-lg-7">
+                                                                <div class="col-md-6">
                                                                     <!--The fileinput-button span is used to style the file input field as button-->
-                                                                    <div class="col-md-6">
-                                                                        <input type="file" name="files[]" multiple="multiple">
-                                                                    </div>
 
-
+                                                                    <input type="file" name="files[]" multiple="multiple">
                                                                 </div>
+
+
+
                                                             </div>
 
-                                                            <div class="row">
+                                                            <div class="row mbm">
                                                                 <label class="col-md-4 control-label">Code: <span class='require'>*</span></label>
 
                                                                 <div class="col-md-6">
-                                                                    <div class="col-md-5"><input id="itemcode" type="text" placeholder="Item Code" class="form-control" ng-model="Item.Code" /><span class="help-block"></span></div>
+                                                          <input id="itemcode" type="text" placeholder="Item Code" class="form-control" ng-model="Item.Code" /><span class="help-block"></span>
                                                                 </div>
                                                             </div>
 
                                                             <div class="row">
                                                                 <label for="itemDesc" class="col-md-4 control-label">Description:</label>
-                                                                >
+
 
                                                                 <div class="col-md-6">
                                                                     <div class="col-md-5"><input id="itemDesc" type="text" placeholder="Item Description" class="form-control" ng-model="Item.Description" /><span class="help-block"></span></div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
+                                                            <div class="row mbm">
                                                                 <label for="selCountry" class="col-md-4 control-label">Category:</label>
 
 
                                                                 <div class="col-md-6">
-                                                                    <select disabled>
+                                                                    <select disabled class="form-control">
                                                                         <option value="">Inventory Category</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
+                                                            <div class="row mbm">
                                                                 <label for="selCountry" class="col-md-4 control-label">SubCategory:</label>
 
                                                                 <div class="col-md-6">
@@ -512,18 +513,15 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="row mbm">
+
                                                                 <label for="" class="col-md-4 control-label">Re-order point:<span class='require'>*</span></label>
 
-                                                                <div class="col-md-6"><input id="reorderpoint" type="text" class="form-control" ng-model="Item.ReOrderPoint" /><span class="help-block"></span></div>
+                                                                <div class="col-md-6">
+                                                                    <input id="reorderpoint" type="text" class="form-control" ng-model="Item.ReOrderPoint" /><span class="help-block"></span>
+                                                                </div>
                                                             </div>
-
-
-
-
-
-
-                                                        </div>
+                                                        
                                                         <div class="form-actions">
                                                             <div class="col-md-offset-3 col-md-9">
                                                                 <button class="btn btn-primary" type="button" ng-click="saveNewItem(Item);">Save</button>

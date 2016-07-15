@@ -52,12 +52,11 @@ namespace BTPOSDashboard.Controllers
             cmd.Connection = conn;
             conn.Open();
 
-            //SqlParameter Aid = new SqlParameter();
-            //Aid.ParameterName = "@";
-            //Aid.SqlDbType = SqlDbType.VarChar;
-            //Aid.Value = b.Id;
-            //Aid.Value = Convert.ToString(b.Id);
-            //cmd.Parameters.Add(Aid);
+            SqlParameter Aid = new SqlParameter();
+            Aid.ParameterName = "@Id";
+            Aid.SqlDbType = SqlDbType.Int;
+            Aid.Value = b.Id;
+            cmd.Parameters.Add(Aid);
 
             SqlParameter Gid = new SqlParameter();
             Gid.ParameterName = "@providername";
@@ -117,9 +116,9 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(vcl);
 
             SqlParameter vsl = new SqlParameter();
-            vsl.ParameterName = "@SelectId";
+            vsl.ParameterName = "@secretId";
             vsl.SqlDbType = SqlDbType.VarChar;
-            vsl.Value = b.SelectId;
+            vsl.Value = b.secretId;
             cmd.Parameters.Add(vsl);
 
             SqlParameter insdelflag = new SqlParameter("@insupdflag", SqlDbType.VarChar);

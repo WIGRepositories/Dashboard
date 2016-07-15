@@ -468,36 +468,47 @@
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Add New Type</h4>
                                                                 </div>
                                                                 <div class="modal-body" ng-model="newStop">
-                                                                    <div class="row">
+                                                                    
 
-                                                                        <label for="inputFirstName" class="col-md-3 control-label">Name <span class='require'>*</span></label>
-
-
-                                                                        <div class="col-md-4"><input id="inputFirstName" type="text" placeholder="Name" class="form-control" ng-model="newStop.Name" /><span class="help-block"></span></div>
-                                                                    </div>
-
-
-                                                                    <div class="row">
-                                                                        <label for="inputLastName" class="col-md-3 control-label">Description </label>
-
-                                                                        <div class="col-md-4"><input id="inputLastName" type="text" placeholder="" class="form-control" ng-model="newStop.Description" /><span class="help-block"></span></div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <label for="inputMiddleName" class="col-md-3 control-label">Code<span class='require'>*</span></label>
-
-                                                                        <div class="col-md-4"><input id="inputMiddleName" type="text" placeholder="" class="form-control" ng-model="newStop.Code" /><span class="help-block"></span></div>
-                                                                    </div>
-
-
-
-                                                                    <div class="row">
-                                                                        <label for="Active" class="col-md-3 control-label">Active<span class='require'></span></label>
-
-                                                                        <div class="col-md-4">
-                                                                            <input type="checkbox" checked ng-model="newStop.Active" />
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="inputFirstName" class="col-md-4 control-label">Name <span class='require'>*</span></label>
 
                                                                         </div>
-                                                                    </div>
+                                                                            <div class="col-md-4">
+                                                                        <input id="inputFirstName" type="text" placeholder="Name" class="form-control" ng-model="newStop.Name" /><span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="inputLastName" class="col-md-4 control-label">Description </label>
+                                                                        </div>
+                                                                            <div class="col-md-4">
+                                                                        <input id="inputLastName" type="text" placeholder="" class="form-control" ng-model="newStop.Description" /><span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="inputMiddleName" class="col-md-4 control-label">Code<span class='require'>*</span></label>
+                                                                        </div>
+                                                                            <div class="col-md-4">
+                                                                        <input id="inputMiddleName" type="text" placeholder="" class="form-control" ng-model="newStop.Code" /><span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Active" class="col-md-4 control-label">Active<span class='require'></span></label>
+                                                                        </div>
+                                                                            <div class="col-md-4">
+                                                                                <input type="checkbox" checked ng-model="newStop.Active" />
+
+                                                                            </div>
+                                                                        </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
                                                                             <button class="btn btn-green" type="button" ng-click="saveNewStop(newStop)">Save</button>

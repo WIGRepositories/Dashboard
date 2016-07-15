@@ -28,7 +28,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             username: Group.username,    //       
             Port: Group.Port,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId,
+            SecretId: Group.SecretId,
             insupdflag: 'I'
         }
 
@@ -58,6 +58,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.savecmpChanges = function (Group,flag) {
 
         var newCmp = {
+            Id:Group.Id,
             providername: Group.providername,
             enddate: Group.enddate,
             hashkey: Group.hashkey,
@@ -67,7 +68,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             username: Group.username,    //       
             Port: Group.Port,
             ClientId: Group.ClientId,
-            SelectId: Group.SelectId,
+            SecretId: Group.SecretId,
             insupdflag: 'U'
         }
 
@@ -75,7 +76,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/EmailGatewayConfig/SaveEmailGatewaySettings',
-            data: Group
+            data: newCmp
         }
         $http(req).then(function (response) {
 
@@ -89,6 +90,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog(errmssg);
 
         });
+
         $scope.GetEmailGateway();
         $scope.currGroup = null;
     };

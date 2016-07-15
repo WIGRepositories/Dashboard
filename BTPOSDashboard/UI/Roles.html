@@ -471,24 +471,32 @@
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Create Role</h4>
                                                                 </div>
                                                                 <div class="modal-body" ng-model="newrole">
-                                                                    <div>
+                                                                   
 
-                                                                        <div class="row">
 
-                                                                            <label for="Name" class="col-md-3 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Name" class="col-md-4 control-label" style="color:red;"> Name <span class='require'>*</span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input id="Name" type="text" class="form-control" ng-model="newrole.Name" /><span class="help-block"></span>
+                                                                        </div>
+                                                                    </div>
+                                                               
 
-                                                                            <div class="col-md-6"><input id="Name" type="text" class="form-control" ng-model="newrole.Name" /><span class="help-block"></span></div>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Description" class="col-md-4 control-label">Description <span class='require'></span></label>
+                                                                        </div>
+                                                                            <div class="col-md-6">
+                                                                                <input id="Name" type="text" class="form-control" ng-model="newrole.Description" /><span class="help-block"></span>
+                                                                            </div>
                                                                         </div>
 
-
-                                                                        <div class="row">
-                                                                            <label for="Description" class="col-md-3 control-label">Description <span class='require'></span></label>
-
-                                                                            <div class="col-md-6"><input id="Name" type="text" class="form-control" ng-model="newrole.Description" /><span class="help-block"></span></div>
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Active" class="col-md-4 control-label" style="color:red;">IsPublic:<span class='require'>*</span></label>
                                                                         </div>
-                                                                        <div class="row">
-                                                                            <label for="Active" class="col-md-3 control-label" style="color:red;">IsPublic:<span class='require'>*</span></label>
-
                                                                             <div class="col-md-6">
                                                                                 <input type="checkbox" checked />
 
@@ -497,9 +505,10 @@
 
 
 
-                                                                        <div class="row">
-                                                                            <label for="Active" class="col-md-3 control-label" style="color:red;">Active:<span class='require'>*</span></label>
-
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="Active" class="col-md-4 control-label" style="color:red;">Active:<span class='require'>*</span></label>
+                                                                        </div>
                                                                             <div class="col-md-6">
                                                                                 <div><input type="checkbox" ng-checked="Types.Active" /></div>
 
