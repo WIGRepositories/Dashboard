@@ -114,7 +114,7 @@ namespace BTPOSDashboard.Controllers
 
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-                //conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
                 SqlCommand cmd1 = new SqlCommand();
                 cmd1.CommandType = CommandType.StoredProcedure;
@@ -216,6 +216,6 @@ namespace BTPOSDashboard.Controllers
 
         }
     }
-}
+
 
 
