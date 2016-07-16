@@ -14,9 +14,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.cartitem = [];
 
     //get the items first (based on filters if any)
-    $scope.items = [{ "name": "BT POS", "price": "10", "Id": "1" },
-        { "name": "BT POS1", "price": "11", "Id": "3" }
-        , { "name": "BT POS2", "price": "12", "Id": "2" }];
+  //  $scope.items = [{ "name": "BT POS", "price": "10", "Id": "1" },
+      //  { "name": "BT POS1", "price": "11", "Id": "3" }
+      //  , { "name": "BT POS2", "price": "12", "Id": "2" }];
 
 
 
@@ -30,7 +30,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetItems = function () {
         $http.get('http://localhost:1476/api/ShoppingCart/GetItems').then(function (response, req) {
             $scope.items = response.data;
-            $scope.itemsList = $scope.items;
+            $scope.itemsList = response.data;
         });
     }
 
@@ -82,7 +82,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         }).success(function (data, status, headers, config) {
             alert('saved successfully');
-            window.location.href = "http://localhost:52800/UI/LicenseConfirmation.html";
+            window.location.href = "http://localhost:1476/UI/Payments.html";
         }).error(function (ata, status, headers, config) {
             alert(ata);
         });

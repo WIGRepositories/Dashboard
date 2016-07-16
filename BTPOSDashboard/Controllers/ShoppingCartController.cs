@@ -40,7 +40,7 @@ namespace BTPOSDashboard.Controllers
         [Route("api/ShoppingCart/SaveCartItems")]
         public HttpResponseMessage SaveCartItems(Shoppingcarts items1)
         {
-          //  DataTable Tbl = new DataTable();
+            //  DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -108,13 +108,13 @@ namespace BTPOSDashboard.Controllers
 
 
                 cmd.ExecuteScalar();
-               // cmd.Parameters.Clear();
-               conn.Close();
+                // cmd.Parameters.Clear();
+                //  conn.Close();
 
 
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-                //conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
                 SqlCommand cmd1 = new SqlCommand();
                 cmd1.CommandType = CommandType.StoredProcedure;
@@ -133,9 +133,9 @@ namespace BTPOSDashboard.Controllers
                 //gsn1.SqlDbType = SqlDbType.Int;
                 //gsn1.Value = f.Item;
                 //cmd.Parameters.Add(gsn1);
-              //  conn.Open();
+                //  conn.Open();
                 List<itemslist> ilist = null;
-                  if (items1.slist != null && items1.slist.Count > 0)
+                if (items1.slist != null && items1.slist.Count > 0)
                 {
                     ilist = items1.slist;
                 }
@@ -207,15 +207,11 @@ namespace BTPOSDashboard.Controllers
                 string str = ex.Message;
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-           
         }
 
         public void Options()
         {
-        }
 
         }
     }
 }
-
-
