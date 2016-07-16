@@ -40,6 +40,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
         $scope.currGroup = null;
     };
+   
 
     $scope.showDialog = function (message) {
 
