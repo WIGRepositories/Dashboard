@@ -464,31 +464,40 @@
                                                                 </div>
                                                                 <div class="modal-body" ng-init="GetCompanies();" ng-model="newrole">
                                                                     <div class="row">
-
-                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6">
-                                                                            <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" class="form-control" ng-model="s" ng-change="GetRolesToAssign(s)">
-                                                                                <option value="">Select</option>
-                                                                            </select>
+                                                                        <div class="col-md-8">
+                                                                            <div class="col-md-6">
+                                                                                <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" class="form-control" ng-model="s" ng-change="GetRolesToAssign(s)">
+                                                                                    <option value="">Select</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
 
                                                                     <div class="row">
-                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Role <span class='require'>*</span></label>
+                                                                        <div class="col-md-8">
+                                                                            <div class="col-md-6">
+                                                                                <label for="Name" class="col-md-3 control-label" style="color:red;">Role:<span class='require'>*</span></label>
+                                                                            </div>
 
-                                                                        <div class="col-md-6">
-                                                                            <select style="width:260px" ng-options="r.Name for r in roles track by r.Id" class="form-control" ng-model="r">
-                                                                                <option value="">Select</option>
-                                                                            </select>
+                                                                            <div class="col-md-6">
+                                                                                <select style="width:260px" ng-options="r.Name for r in roles track by r.Id" class="form-control" ng-model="r">
+                                                                                    <option value="">Select</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <label for="Active" class="col-md-3 control-label" style="color:red;">Active:<span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6">
-                                                                            <input type="checkbox" checked />
+                                                                        <div class="col-md-8">
+                                                                            <div class="col-md-6">
+                                                                                <label for="Active" class="col-md-3 control-label" style="color:red;">Active:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <input type="checkbox" checked />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
