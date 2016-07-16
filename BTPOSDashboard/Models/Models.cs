@@ -692,14 +692,14 @@ namespace BTPOSDashboardAPI.Models
 
         public DateTime enddate { get; set; }
 
-        public DateTime hashkey { get; set; }
+        public string hashkey { get; set; }
 
 
         public string providername { get; set; }
 
         public string pwd { get; set; }
 
-        public DateTime saltkey { get; set; }
+        public string saltkey { get; set; }
 
         public DateTime startdate { get; set; }
 
@@ -1556,9 +1556,10 @@ namespace BTPOSDashboardAPI.Models
     }
     public class Shoppingcarts
     {
-        public int Id { get; set; }
+       
         public List<itemslist> slist { get; set; }
         public int Item { get; set; }
+        public int Id { get; set; }
 
         public String SalesOrderNum { get; set; }
 
@@ -1601,14 +1602,14 @@ namespace BTPOSDashboardAPI.Models
         public int Id { get; set; }
         public DateTime enddate { get; set; }
 
-        public DateTime hashkey { get; set; }
+        public string hashkey { get; set; }
 
 
         public string providername { get; set; }
 
         public string pwd { get; set; }
 
-        public DateTime saltkey { get; set; }
+        public string saltkey { get; set; }
 
         public DateTime startdate { get; set; }
 

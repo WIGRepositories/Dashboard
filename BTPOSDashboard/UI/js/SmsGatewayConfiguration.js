@@ -12,6 +12,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/SmsGatewayConfig/GetSmsGatewayConfig').then(function (response, req) {
             $scope.GetSmsGatewayConfig = response.data;
+           
+            for (cnt = 0; cnt < response.data.length; cnt++) {
+                $scope.GetSmsGatewayConfig[cnt].startdate = new Date($scope.GetSmsGatewayConfig[cnt].startdate);
+                $scope.GetSmsGatewayConfig[cnt].enddate = new Date($scope.GetSmsGatewayConfig[cnt].enddate);
+            }
 
         });
     }
@@ -92,7 +97,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog(errmssg);
 
         });
-        $scope.GetSmsGatewayConfig();
+       
         $scope.currGroup = null;
     };
 

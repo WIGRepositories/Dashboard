@@ -1,26 +1,26 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User Roles</title>
+    <title>Dashboard</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    
+
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetUsersinitData();" ng-model="userRoles">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetDataLoad();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
-        <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
+        <!--BEGIN BACK TO TOP-->
+        <a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
@@ -67,6 +67,9 @@
             <!--END TOPBAR-->
             <div id="wrapper">
                 <!--BEGIN SIDEBAR MENU-->
+                
+
+                <!--BEGIN SIDEBAR MENU-->
                 <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
                     <div class="sidebar-collapse menu-scroll">
                         <ul id="side-menu" class="nav">
@@ -91,11 +94,6 @@
                                 </a>
                             </li>
 
-
-
-
-
-
                             <li class="active">
                                 <a href="#">
                                     <i class="fa fa-sitemap fa-fw">
@@ -104,17 +102,17 @@
                                 </a>
                                 <ul class="nav nav-second-level">
 
-                                    <li>
+                                    <li class="active">
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Company</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
-                                            <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
+                                            <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></class>
                                             <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
                                             <li><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
                                         </ul>
                                     </li>
 
 
-                                    <li class="active">
+                                    <li>
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
@@ -153,6 +151,7 @@
                             </ul>
 
                         </li>
+
 
 
                         <li>
@@ -233,8 +232,7 @@
                                         <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                         <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
                                         <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
-                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Sms Gateway Configuration</span></a></li>
-                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Email Gateway Configuration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">EmailGatewayConfiguration</span></a></li>
                                     </ul>
                                 </li>
 
@@ -245,6 +243,10 @@
                                         <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                         <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="FleetOwnerFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                        <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                        <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
 
                                     </ul>
                                 </li>
@@ -254,7 +256,7 @@
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
                                         <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
-
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
 
                                     </ul>
                                 </li>
@@ -272,7 +274,7 @@
                                 </i><span class="menu-title">Utilties & Tools</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-
+                                <li><a href="DataLoad.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Data Load</span></a></li>
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
                                 <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
                                 <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
@@ -292,7 +294,7 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Bt pos Reports</span></a></li>
                             </ul>
                         </li>
 
@@ -330,23 +332,22 @@
                         </ul>
                     </div>
                 </nav>
-                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">User Roles</div>
+                            <div class="page-title">Data Load</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
-                            <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="UserRoles.html">User Roles</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Utilties & Tools</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="Company.html">Data Load</a>
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-
-
                     <div class="page-content">
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
@@ -356,160 +357,48 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="table-container">
-                                                    <div class="col-md-4">
-                                                        Company: <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getUserRolesForCompany(cmp)" width="100%">
-                                                            <option value="">Select Company</option>
-                                                        </select>
-                                                    </div>
-                                                    <!--<div class="col-md-3">
-                                                        Search: <select width="100%">
-                                                            <option value="">Select </option>
-                                                           <option value="">LastName</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="input-append">
-                                                            <input type="text" class="input-small search-query" name="s" placeholder="Search" value="">
-                                                           
-                                                        </div>
-                                                    </div>-->
-                                                    <div class="actions">
-                                                        <!----  <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Assign Role</button>--->
-                                                        <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Assign Role</button>
-                                                    </div>
-                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <!--<div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header modal-header-primary">
-                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                            <h1 id="modal-header-primary-label" class="modal-title">Assign Role to user</h1>
-                                                        </div>
-                                                        <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                            <div class="form-body">
+                                                    <div class="row mbm">
 
-                                                                <div class="form-group">
-                                                                    <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
+                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>FileName</th>
+                                                                    <th>path</th>
+                                                                    <th>Progress</th>
+                                                                    <th>Load</th>
+                                                                    <th>Cancel</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
 
-                                                                    <div class="col-md-6">
-                                                                        <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getUsersnRoles()">
-                                                                            <option value="">Select</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
+                                                                <tr ng-repeat="R in GetDataLoad" class="gradeA">
+                                                                    <td>{{R.FileName}}</td>
+                                                                    <td>{{R.path}}</td>
+                                                                    <td>{{R.Progress}}</td>
 
-                                                                <div class="form-group">
-                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
+                                                                    <td>
+                                                                        <button ng-disabled="Roleid != 1"
+                                                                                type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-
+                                                                                click="setDataLoad;">
 
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="uu" style="width:100%">
-                                                                            <option value="">Select</option>
-                                                                        </select>
+                                                                            Load
+                                                                        </button>
 
+                                                                    </td>
+                                                                    <td>
+                                                                        <button ng-disabled="Roleid != 1"
+                                                                                type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-
+                                                                                click="setDataLoad;">
 
-                                                                    </div>
-                                                                </div>
+                                                                            Cancel
+                                                                        </button>
 
-                                                                <div class="form-group">
-                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
+                                                                    </td>
+                                                                </tr>
 
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="ur" width="100%">
-                                                                            <option value="">Select</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            </tbody>
 
-
-                                                        </form>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveUserRoles(1);">Save</button>
-                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
-
-                                                        </div>
-                                                    </div>
-                                                </div>-->
-                                                    </div>
-
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>User Name</th>
-                                                                <th>Role</th>
-                                                                <th>Company</th>
-                                                                <th>Delete</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="ur in userRoles" class="gradeA">
-
-                                                                <td>{{ur.username}}</td>
-                                                                <td>{{ur.rolename}}</td>
-                                                                <td>{{ur.companyname}}</td>
-                                                                <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>
-
-                                                                <!--<button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="testdel(role);">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                        </button>
-                                                        </td>-->
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Assign Role</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-init="GetCompanies();" ng-model="newrole">
-                                                                    <div class="row">
-                                                                        <div class="col-md-8">
-                                                                            <div class="col-md-6">
-                                                                                <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" class="form-control" ng-model="s" ng-change="GetRolesToAssign(s)">
-                                                                                    <option value="">Select</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="row">
-                                                                        <div class="col-md-8">
-                                                                            <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-3 control-label" style="color:red;">Role:<span class='require'>*</span></label>
-                                                                            </div>
-
-                                                                            <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="r.Name for r in roles track by r.Id" class="form-control" ng-model="r">
-                                                                                    <option value="">Select</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-8">
-                                                                            <div class="col-md-6">
-                                                                                <label for="Active" class="col-md-3 control-label" style="color:red;">Active:<span class='require'>*</span></label>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <input type="checkbox" checked />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-actions">
-                                                                    <div class="col-md-offset-3 col-md-9">
-                                                                        <button class="btn btn-primary" type="button" ng-click="AssignRole(newrole);">Save</button>
-
-                                                                        <a href="CompanyRoles.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        </table>
 
 
                                                     </div>
@@ -520,65 +409,44 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--END CONTENT--><!--BEGIN FOOTER-->
-                                <div id="footer">
-                                    <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
-                                </div>
-                                <!--END FOOTER-->
+
                             </div>
+                            <!--END PAGE WRAPPER-->
+                            <!--END CONTENT--><!--BEGIN FOOTER-->
+                            <div id="footer">
+                                <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+                            </div>
+                            <!--END FOOTER-->
                         </div>
                     </div>
                 </div>
 
-            </div>
-        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
-            <div class="modal-header">
-                <h3 class="modal-title">Save confirmation!</h3>
-            </div>
-            <div class="modal-body">
-                <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
-                {{mssg}}
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
+                <script src="js/jquery-1.10.2.min.js"></script>
+                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <!--loading bootstrap js-->
+                <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-        </script>
-    </div>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<!--<script src="js/table-action.js"></!--script>-->
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
-<script src="js/angular.js"></script>
-<script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-<script src="js/ngStorage.js"></script>
-<script src="js/Users.js"></script>
 
+                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                <script src="vendors/iCheck/icheck.min.js"></script>
+                <script src="vendors/iCheck/custom.min.js"></script>
+                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                <script src="js/jquery.menu.js"></script>
+                <script src="vendors/jquery-pace/pace.min.js"></script>
+                <script src="vendors/holder/holder.js"></script>
+                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <!--CORE JAVASCRIPT-->
+                <script src="js/main.js"></script>
+                <script src="js/angular.js"></script>
+                <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+                <script src="js/ngStorage.js"></script>
+                <script src="js/DataLoad.js"></script>
 </body>
-
 </html>

@@ -39,10 +39,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPal, Version=1.7.3.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\PayPal.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
@@ -373,6 +381,8 @@
     <Content Include="DBScripts\Tables\dbo.ZipCode.sql" />
     <Content Include="DBScripts\Tables\TypesGroups.sql" />
     <Content Include="Global.asax" />
+    <Content Include="References\log4net.dll" />
+    <Content Include="References\PayPal.dll" />
     <Content Include="UI\AddFleetAvailability.html" />
     <Content Include="UI\AddFleetDetails.html" />
     <Content Include="UI\AddFleetowner.html" />
@@ -419,26 +429,20 @@
     <Content Include="UI\css\themes\style2\pink-green.css" />
     <Content Include="UI\css\themes\style2\pink-grey.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
+    <Content Include="UI\DataLoad.html" />
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
-    <Content Include="UI\Fleet Owner Reports.html" />
-    <Content Include="UI\Fleet Owner RouteDetails.html" />
-    <Content Include="UI\Fleet Owner RouteFare.html" />
-    <Content Include="UI\Fleet Owner Routes.html" />
-    <Content Include="UI\Fleet Owner VehicleLayOut.html" />
-    <Content Include="UI\Fleet Owner VehicleSchedule.html" />
-    <Content Include="UI\Fleet Owners.html" />
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
     <Content Include="UI\FleetOwnerDefaultRoutePricing.html" />
-    <Content Include="UI\FleetOwnerRouteDetails.html" />
     <Content Include="UI\FleetOwnerFare.html" />
     <Content Include="UI\FleetOwnerReports.html" />
+    <Content Include="UI\FleetOwnerRouteDetails.html" />
     <Content Include="UI\FleetOwnerRouteFare.html" />
-    <Content Include="UI\FleetOwnerRoutesDetails.html" />
     <Content Include="UI\FleetOwnerRoutes.html" />
+    <Content Include="UI\FleetOwnerRoutesDetails.html" />
     <Content Include="UI\FleetOwners.html" />
     <Content Include="UI\FleetOwnerVehicleLayOut.html" />
     <Content Include="UI\FleetOwnerVehicleSchedule.html" />
@@ -459,6 +463,7 @@
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\createfleet.js" />
+    <Content Include="UI\js\DataLoad.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\EmailGatewayConfiguration.js" />
     <Content Include="UI\js\FleetAvailability.js" />
@@ -592,6 +597,7 @@
     <Content Include="UI\PaymentConfirmation.html" />
     <Content Include="UI\PaymentGatewayConfiguration.html" />
     <Content Include="UI\paymentHistory.html" />
+    <Content Include="UI\popup.html" />
     <Content Include="UI\PurchaseOrders.html" />
     <Content Include="UI\register.html" />
     <Content Include="UI\ResetPassword.html" />
@@ -2039,6 +2045,7 @@
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
     <Compile Include="Controllers\BtposRoutesController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
+    <Compile Include="Controllers\DataLoadController.cs" />
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\EmailGatewayConfigController.cs" />
@@ -2068,6 +2075,7 @@
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PaymentGatewayConfigurationController.cs" />
     <Compile Include="Controllers\PaymentHistoryController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />

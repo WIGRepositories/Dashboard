@@ -204,7 +204,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li class="active">
                         <a href="#">
                             <i class="fa fa-gears">
                                 <div class="icon-bg bg-dark"></div>
@@ -212,7 +212,7 @@
                         </a>
                         <ul class="nav nav-second-level">
 
-                            <li>
+                            <li class="active">
                                 <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Master Data</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a href="TypeGroups.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Type Groups</span></a></li>
@@ -223,6 +223,8 @@
                                     <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                     <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
                                     <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                    <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Sms Gateway Configuration</span></a></li>
+                                    <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Email Gateway Configuration</span></a></li>
                                 </ul>
                             </li>
 
@@ -380,7 +382,7 @@
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="saltkey" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="saltkey" type="date" ng-model="currGroup.saltkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="saltkey" type="text" ng-model="currGroup.saltkey" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="startdate" class="col-md-5 control-label">startdate<span class='require'></span></label>
@@ -398,7 +400,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="hashkey" class="col-md-5 control-label">hashkey<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="hashkey" type="date" ng-model="currGroup.hashkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-7"><input id="hashkey" type="text" ng-model="currGroup.hashkey" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
 
                                                                             </div>
@@ -447,18 +449,18 @@
                                                                     <div class="row">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-5 control-label" style="color:red;">Port:<span class='require'>*</span></label>
+                                                                                <label for="Port" class="col-md-5 control-label" style="color:red;">Port:<span class='require'>*</span></label>
                                                                                 <div class="col-md-7"><input id="Port" type="text" ng-model="Group.Port" class="form-control" /><span class="help-block"></span></div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="code" class="col-md-5 control-label" style="color:red;">ProviderName:<span class='require'></span></label>
+                                                                                <label for="ProviderName" class="col-md-5 control-label" style="color:red;">ProviderName:<span class='require'></span></label>
                                                                                 <div class="col-md-7"><input id="ProviderName" type="text" ng-model="Group.providername" class="form-control" /><span class="help-block"></span></div>
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="descr" class="col-md-5 control-label">UserName:<span class='require'></span></label>
+                                                                                    <label for="username" class="col-md-5 control-label">User Name:<span class='require'></span></label>
                                                                                     <div class="col-md-7"><input id="username" type="text" ng-model="Group.username" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
@@ -470,11 +472,11 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="ContactNo2" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="saltkey" type="date" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <label for="saltkey" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="saltkey" type="text" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Fax" class="col-md-5 control-label">startdate<span class='require'></span></label>
+                                                                                    <label for="startdate" class="col-md-5 control-label">startdate<span class='require'></span></label>
                                                                                     <div class="col-md-7"><input id="startdate" type="date" ng-model="Group.startdate" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
 
@@ -483,13 +485,13 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Fax" class="col-md-5 control-label">enddate:<span class='require'></span></label>
+                                                                                    <label for="enddate" class="col-md-5 control-label">enddate:<span class='require'></span></label>
                                                                                     <div class="col-md-7"><input id="enddate" type="date" ng-model="Group.enddate" class="form-control" /><span class="help-block"></span></div>
 
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Fax" class="col-md-5 control-label">hashkey<span class='require'></span></label>
-                                                                                    <div class="col-md-7"><input id="hashkey" type="date" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <label for="hashkey" class="col-md-5 control-label">hashkey<span class='require'></span></label>
+                                                                                    <div class="col-md-7"><input id="hashkey" type="text" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
 
                                                                             </div>
@@ -498,7 +500,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Fax" class="col-md-5 control-label">ClientId:<span class='require'></span></label>
+                                                                                    <label for="ClientId" class="col-md-5 control-label">ClientId:<span class='require'></span></label>
                                                                                     <div class="col-md-7"><input id="ClientId" type="text" ng-model="Group.ClientId" class="form-control" /><span class="help-block"></span></div>
 
                                                                                 </div>
@@ -620,7 +622,7 @@
     <script src="vendors/jquery-pace/pace.min.js"></script>
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+    
     <!--LOADING SCRIPTS FOR PAGE--><!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
     <script src="js/angular.js"></script>
