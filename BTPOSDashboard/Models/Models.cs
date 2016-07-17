@@ -1294,6 +1294,7 @@ namespace BTPOSDashboardAPI.Models
 
 
         public int Id { get; set; }
+        public int FeatureTypeId { get; set; }
         public string FeatureName { get; set; }
         public String FeatureLabel { get; set; }
         public String LicenseCode { get; set; }

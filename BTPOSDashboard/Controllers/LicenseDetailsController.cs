@@ -72,9 +72,9 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(lid);           
            
             SqlParameter nn = new SqlParameter();
-            nn.ParameterName = "@FeatureName";
-            nn.SqlDbType = SqlDbType.VarChar;
-            nn.Value = b.FeatureName;
+            nn.ParameterName = "@FeatureTypeId";
+            nn.SqlDbType = SqlDbType.Int;
+            nn.Value = b.FeatureTypeId;
             cmd.Parameters.Add(nn);
 
              SqlParameter nm = new SqlParameter();

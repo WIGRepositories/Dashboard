@@ -61,9 +61,7 @@ namespace BTPOSDashboard.Controllers
        {
             SqlConnection conn = new SqlConnection();
             try
-            {
-
-            
+            {            
                 //connect to database
                
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";

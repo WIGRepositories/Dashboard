@@ -1,6 +1,6 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
