@@ -37,7 +37,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             admin: Group.admin,
             code: Group.code,
             desc: Group.desc,            
-            Address:Group.Address,
+            Address: Group.Address,
             ContactNo1: Group.ContactNo1,
             ContactNo2: Group.ContactNo2,
             Fax:Group.Fax,

@@ -238,6 +238,30 @@ namespace BTPOSDashboard.Controllers
 
             switch (filename.ToUpper())
             {
+                case "MENUFILE":
+                    indexTbl.Columns.Add(filename);
+                    //strBldr.AppendLine("Route1<s.no,id,active>");
+                    strBldr.Append("~");
+                    strBldr.AppendLine("Ticketing<1,0,1>");
+                    strBldr.AppendLine("Validate ticket<2,0,1>");
+                    strBldr.AppendLine("Set Route<3,0,1>");
+                    strBldr.AppendLine("Server comm<4,0,1>");
+                    strBldr.AppendLine("Print trans<5,0,1>");
+                    strBldr.AppendLine("POS Config<6,0,1>");
+                    strBldr.AppendLine("Misc Expense<7,1,1>");
+                    strBldr.AppendLine("Payment Options<8,1,1>");
+                    strBldr.AppendLine("Cash<9,8,1>");
+                    strBldr.AppendLine("Card<10,8,1>");
+                    strBldr.AppendLine("Mobile Money<11,8,1>");
+                    strBldr.AppendLine("Ping Server<12,4,1>");
+                    strBldr.AppendLine("Download files<13,4,1>");
+                    strBldr.AppendLine("Reset Password<14,6,1>");
+                    strBldr.AppendLine("Show Co-ords<15,6,1>");
+                    strBldr.AppendLine("Renewal Frequency<16,6,1>");
+                    strBldr.Append("~");
+                    dr[0] = strBldr.ToString();
+                    indexTbl.Rows.Add(dr);
+                    break;
                 case "ROUTESFILE":
                     indexTbl.Columns.Add(filename);
                     //strBldr.AppendLine("Route1<s.no,id,active>");
@@ -251,38 +275,38 @@ namespace BTPOSDashboard.Controllers
                     indexTbl.Rows.Add(dr);
                     break;
 
-                case "STOPSFILE":                                      
+                case "STOPSFILE":
 
                     indexTbl.Columns.Add(filename);
-                    //strBldr.AppendLine("Stage 01<s.no,id,routeid,active>");
+                    //strBldr.AppendLine("Stage 01<id,routeid,active>");
                     //Route1
                     strBldr.Append("~");
-                    strBldr.AppendLine("Stage 01<1,1,1,1>");
-                    strBldr.AppendLine("Stage 02<2,2,1,1>");
-                    strBldr.AppendLine("Stage 03<3,3,1,1>");
-                    strBldr.AppendLine("Stage 04<4,4,1,1>");
-                    strBldr.AppendLine("Stage 05<5,5,1,1>");
+                    strBldr.AppendLine("Stage 01<1,1,1>");
+                    strBldr.AppendLine("Stage 02<2,1,1>");
+                    strBldr.AppendLine("Stage 03<3,1,1>");
+                    strBldr.AppendLine("Stage 04<4,1,1>");
+                    strBldr.AppendLine("Stage 05<5,1,1>");
 
                     //Route2
-                    strBldr.AppendLine("Stage 05<1,5,2,1>");
-                    strBldr.AppendLine("Stage 04<2,4,2,1>");
-                    strBldr.AppendLine("Stage 03<3,3,2,1>");
-                    strBldr.AppendLine("Stage 02<4,2,2,1>");
-                    strBldr.AppendLine("Stage 01<5,1,2,1>");
+                    strBldr.AppendLine("Stage 05<5,2,1>");
+                    strBldr.AppendLine("Stage 04<4,2,1>");
+                    strBldr.AppendLine("Stage 03<3,2,1>");
+                    strBldr.AppendLine("Stage 02<2,2,1>");
+                    strBldr.AppendLine("Stage 01<1,2,1>");
 
                     //Route3
-                    strBldr.AppendLine("Stage 06<1,6,3,1>");
-                    strBldr.AppendLine("Stage 07<2,7,3,1>");
-                    strBldr.AppendLine("Stage 08<3,8,3,1>");
-                    strBldr.AppendLine("Stage 09<4,9,3,1>");
-                    strBldr.AppendLine("Stage 10<5,10,3,1>");
+                    strBldr.AppendLine("Stage 06<6,3,1>");
+                    strBldr.AppendLine("Stage 07<7,3,1>");
+                    strBldr.AppendLine("Stage 08<8,3,1>");
+                    strBldr.AppendLine("Stage 09<9,3,1>");
+                    strBldr.AppendLine("Stage 10<10,3,1>");
 
                     //Route4
-                    strBldr.AppendLine("Stage 10<1,10,4,1>");
-                    strBldr.AppendLine("Stage 09<2,9,4,1>");
-                    strBldr.AppendLine("Stage 08<3,8,4,1>");
-                    strBldr.AppendLine("Stage 07<4,7,4,1>");
-                    strBldr.AppendLine("Stage 06<5,6,4,1>");
+                    strBldr.AppendLine("Stage 10<10,4,1>");
+                    strBldr.AppendLine("Stage 09<9,4,1>");
+                    strBldr.AppendLine("Stage 08<8,4,1>");
+                    strBldr.AppendLine("Stage 07<7,4,1>");
+                    strBldr.AppendLine("Stage 06<6,4,1>");
                     strBldr.Append("~");
                     dr[0] = strBldr.ToString();
                     indexTbl.Rows.Add(dr);
@@ -304,7 +328,7 @@ namespace BTPOSDashboard.Controllers
                     strBldr.AppendLine("Route1|Stage 02|Stage 03<0.10>");
                     strBldr.AppendLine("Route1|Stage 02|Stage 04<0.15>");
                     strBldr.AppendLine("Route1|Stage 02|Stage 05<0.20>");
-                    
+
                     strBldr.AppendLine("Route1|Stage 03|Stage 04<0.10>");
                     strBldr.AppendLine("Route1|Stage 03|Stage 05<0.15>");
 
@@ -363,10 +387,10 @@ namespace BTPOSDashboard.Controllers
                     break;
 
                 case "AUTHFILE":
-                    
+
                     indexTbl.Columns.Add(filename);
                     strBldr.Append("~");
-                   //strBldr.AppendLine("userid<password,userid,active>");
+                    //strBldr.AppendLine("userid<password,userid,active>");
                     strBldr.AppendLine("user1<1111,4,1>");
                     strBldr.AppendLine("user2<2222,5,1>");
                     strBldr.AppendLine("user3<3333,6,1>");

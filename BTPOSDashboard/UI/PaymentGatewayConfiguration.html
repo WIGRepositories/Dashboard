@@ -388,7 +388,7 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
                                                                                         <label for="saltkey" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="saltkey" type="date" ng-model="currGroup.saltkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="saltkey" type="text" ng-model="currGroup.saltkey" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="startdate" class="col-md-5 control-label">startdate<span class='require'></span></label>
@@ -406,7 +406,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="hashkey" class="col-md-5 control-label">hashkey<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="hashkey" type="date" ng-model="currGroup.hashkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="hashkey" type="text" ng-model="currGroup.hashkey" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
 
                                                                                 </div>
@@ -475,7 +475,7 @@
                                                                                 <div class="col-md-12">
                                                                                     <div class="col-md-6">
                                                                                         <label for="ContactNo2" class="col-md-5 control-label">saltkey:<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="saltkey" type="date" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="saltkey" type="text" ng-model="Group.saltkey" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="Fax" class="col-md-5 control-label">start date<span class='require'></span></label>
@@ -493,7 +493,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="Fax" class="col-md-5 control-label">hashkey<span class='require'></span></label>
-                                                                                        <div class="col-md-7"><input id="hashkey" type="date" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
+                                                                                        <div class="col-md-7"><input id="hashkey" type="text" ng-model="Group.hashkey" class="form-control" /><span class="help-block"></span></div>
                                                                                     </div>
 
                                                                                 </div>
@@ -540,7 +540,7 @@
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat="R in PaymentGateway" class="gradeA">
+                                                            <tr ng-repeat="R in GetPaymentGateway" class="gradeA">
                                                                 <td>{{R.username}}</td>
 
                                                                 <td>{{R.Name}}</td>
@@ -628,7 +628,7 @@
         <script src="vendors/holder/holder.js"></script>
         <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
         <!--LOADING SCRIPTS FOR PAGE-->
-        <script src="js/table-action.js"></script>
+       
         <!--CORE JAVASCRIPT-->
         <script src="js/main.js"></script>
 
