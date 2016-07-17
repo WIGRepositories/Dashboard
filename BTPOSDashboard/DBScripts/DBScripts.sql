@@ -9962,7 +9962,7 @@ CREATE TABLE [dbo].[CartPaymentDetails](
 ) ON [PRIMARY]
 
 GO
-/****** Object:  StoredProcedure [dbo].[GetCartPaymentDetails]    Script Date: 07/15/2016 20:05:35 ******/
+/****** Object:  StoredProcedure [dbo].[GetCartPaymentDetails]    Script Date: 07/17/2016 09:03:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9999,9 +9999,11 @@ BEGIN
            ,@FleetOwner)   
        
      
-      
+ update LicensePayments set 
+   [licenseFor]=@FleetOwner
   
 end
+
 /****** Object:  StoredProcedure [dbo].[InsupdCartPaymentDetails]    Script Date: 07/15/2016 20:06:04 ******/
 SET ANSI_NULLS ON
 GO
