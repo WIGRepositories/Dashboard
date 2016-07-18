@@ -12,6 +12,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/EmailGatewayConfig/GetEmailGateway').then(function (response, req) {
             $scope.GetEmailGateway = response.data;
+            for (cnt = 0; cnt < response.data.length; cnt++) {
+                $scope.GetEmailGateway[cnt].startdate = new Date($scope.GetEmailGateway[cnt].startdate);
+                $scope.GetEmailGateway[cnt].enddate = new Date($scope.GetEmailGateway[cnt].enddate);
+            }
 
         });
     }
@@ -55,7 +59,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currGroup = null;
     };
 
-    $scope.savecmpChanges = function (Group,flag) {
+    $scope.saveCmpChanges = function (Group, flag) {
 
         var newCmp = {
             Id:Group.Id,
@@ -91,7 +95,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         });
 
-        $scope.GetEmailGateway();
+      
         $scope.currGroup = null;
     };
 

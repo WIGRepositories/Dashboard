@@ -40,7 +40,7 @@ namespace BTPOSDashboard.Controllers
         [Route("api/ShoppingCart/SaveCartItems")]
         public HttpResponseMessage SaveCartItems(Shoppingcarts items1)
         {
-            //  DataTable Tbl = new DataTable();
+          //  DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -108,7 +108,7 @@ namespace BTPOSDashboard.Controllers
 
 
                 cmd.ExecuteScalar();
-                // cmd.Parameters.Clear();
+               // cmd.Parameters.Clear();
                 //  conn.Close();
 
 
@@ -133,9 +133,9 @@ namespace BTPOSDashboard.Controllers
                 //gsn1.SqlDbType = SqlDbType.Int;
                 //gsn1.Value = f.Item;
                 //cmd.Parameters.Add(gsn1);
-                //  conn.Open();
+              //  conn.Open();
                 List<itemslist> ilist = null;
-                if (items1.slist != null && items1.slist.Count > 0)
+                  if (items1.slist != null && items1.slist.Count > 0)
                 {
                     ilist = items1.slist;
                 }
