@@ -35,7 +35,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
       //  javascript: document.getElementById("qty").value++;
         $scope.cartitem.push(qty);
 
-      return $scope.cartitem;
+            return $scope.cartitem;
      
     }
     //$scope.decrementcart = function (qty) {
@@ -56,7 +56,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
 
     $scope.Save = function () {
-       
+
         if ($scope.items == null) return;
         var Shoppingcart1 = [];
         var itemsList = $scope.Shoppingcarts;
@@ -67,7 +67,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                  ItemId: items.ItemId,
                // ItemName: items.ItemName,
                 // UnitPrice: items.Unitprice,
-                 TransactionId: items.TransactionId,
+                TransactionId: items.TransactionId,
                 // Transaction_Num: items.Transaction_Num,
                 amount: items.amount,
                 //  PaymentMode: items.PaymentMode,

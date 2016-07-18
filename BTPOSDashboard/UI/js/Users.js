@@ -9,6 +9,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
+    $scope.UserCmpid = $scope.userdetails[0].CompanyId;
+    $scope.UserCmp = $scope.userdetails[0].companyName;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
@@ -17,6 +19,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
         });
+        if ($scope.Roleid != 1) { $scope.cmpId = $scope.UserCmpid;}
     }
 
     $scope.GetUsersForCmp = function () {
@@ -213,7 +216,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             UserId: $scope.uu.Id,
             CompanyId: $scope.s.Id,
             RoleId: $scope.ur.RoleId,
-            flag: flag
+            insupdflag:'I'
         };
 
         var req = {
@@ -232,13 +235,59 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
 
     }
-    $scope.testdel = function (role) {
+
+
+    $scope.chgUserRoles = function (flag) {
+
+        if ($scope.s.Id == null) {
+            alert('Please select company.');
+            return;
+        }
+
+        if ($scope.ur.RoleId == null) {
+            alert('Please select role.');
+            return;
+        }
+        if ($scope.uu.Id == null) {
+            alert('Please select user.');
+            return;
+        }
+        var userrole = {
+            Id: -1,
+            UserId: $scope.uu.Id,
+            CompanyId: $scope.s.Id,
+            RoleId: $scope.ur.RoleId,
+            insupdflag: 'U'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/Users/SaveUserRoles',
+            //headers: {
+            //    'Content-Type': undefined
+            data: userrole
+        }
+
+        $http(req).then(function (res) {
+            alert('Saved successfully');
+            $scope.s = null;
+            $scope.ur = null;
+            $scope.uu = null;
+        });
+
+    } 
+
+
+
+
+    $scope.testdel = function (ur,flag) {
         var userrole = {
 
-            RoleId: role.RoleId,
-            UserId: role.UserId,
+            RoleId: ur.RoleId,
+            UserId: ur.Id,
+            CompanyId: ur.Id,
             Active: 1,
-            insdelflag: 1
+            insupdflag: 'D'
         };
 
         var req = {
@@ -250,7 +299,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             alert('Removed successfully.');
 
             $http.get('http://localhost:1476/api/Users/GetUserRoles?UserId=' + role.UserId).then(function (res, data) {
-                $scope.userroles = res.data;
+                $scope.userRoles = res.data;
             });
 
         });
