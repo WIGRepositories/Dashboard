@@ -167,6 +167,8 @@ namespace BTPOSDashboardAPI.Models
         public int flag { set; get; }
         public string Passkey { set; get; }
 
+        public string insupdflag { set; get; }
+
     }
 
     public class STATE

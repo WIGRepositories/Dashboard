@@ -4916,19 +4916,18 @@ t2.LastName
 end
 
 GO
-
-/****** Object:  StoredProcedure [dbo].[InsUpdDelUserRoles]    Script Date: 06/29/2016 10:07:53 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelUserRoles]    Script Date: 07/18/2016 12:13:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-create procedure [dbo].[InsUpdDelUserRoles](
+create  procedure [dbo].[InsUpdDelUserRoles](
 @Id int,
 @roleid int,
 @UserId int,
 @CompanyId int = null,
-@insupdflag int = 0
+@insupdflag varchar
 )
 as
 begin
@@ -4937,7 +4936,7 @@ declare @cnt int
 
 select @cnt = count(*) from UserRoles where [UserId] = @UserId and [roleid] = @roleid
 
-if @insupdflag = 0
+if @insupdflag = 'I'
 begin
 if @cnt = 0
 INSERT INTO [POSDashboard].[dbo].[UserRoles]
@@ -4949,23 +4948,25 @@ INSERT INTO [POSDashboard].[dbo].[UserRoles]
            ,@RoleId
            ,@CompanyId)
     end
-    
---begin
---UPDATE [POSDashboard].[dbo].[UserRoles]
- --  SET [UserId] = @UserId
-  --    ,[RoleId] = @RoleId
-    --  ,[CompanyId] = @CompanyId
- --WHERE Id = @Id
--- end
+    else
+   if @insupdflag = 'U'
+begin 
+UPDATE [POSDashboard].[dbo].[UserRoles]
+  SET [UserId] = @UserId
+     ,[RoleId] = @RoleId
+     ,[CompanyId] = @CompanyId
+  WHERE Id = @Id
+ end
  else
+ 
+if @insupdflag = 'D'
  begin
-if @insupdflag = 1
-
-delete from [UserRoles] where [UserId] = @UserId and RoleId = @roleid
+delete from [UserRoles] where [UserId] = @UserId and RoleId = @roleid and CompanyId  = @CompanyId
 
 end
 
 end
+
 Go
 
 

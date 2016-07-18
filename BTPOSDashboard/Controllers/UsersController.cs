@@ -191,6 +191,10 @@ namespace BTPOSDashboardAPI.Controllers
                 UCmp.Value = U.CompanyId;
                 cmd.Parameters.Add(UCmp);
 
+                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
+                insupdflag.Value = U.insupdflag;
+                cmd.Parameters.Add(insupdflag);
+
                 cmd.ExecuteScalar();
 
                 conn.Close();
