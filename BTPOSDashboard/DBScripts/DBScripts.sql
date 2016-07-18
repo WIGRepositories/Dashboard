@@ -9878,19 +9878,20 @@ end
 
 
 
+
 GO
-/****** Object:  StoredProcedure [dbo].[getShoppingCart]    Script Date: 07/14/2016 13:38:38 ******/
+/****** Object:  StoredProcedure [dbo].[getShoppingCart]    Script Date: 07/18/2016 10:52:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[getShoppingCart]
+ALTER procedure [dbo].[getShoppingCart]
 (@ItemId int =-1)
 as
 begin
 SELECT distinct 
       [ItemId]
-      ,[ItemName]
+      ,i.[ItemName]
       ,[UnitPrice]
       ,s.[Id]
       ,[TransactionId]
@@ -9906,10 +9907,14 @@ SELECT distinct
       ,ty.[Name]
       
   FROM [POSDashboard].[dbo].[ShoppingCart]s 
+  inner join InventoryItem i on i.Id=s.ItemId
   inner join Types ty on ty.Id=s.Transactionstatus
   
-  order by [ItemName]
+  order by [ItemId]
 end
+
+ 
+
 
 
 GO

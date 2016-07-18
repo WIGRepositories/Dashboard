@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getShoppingCart";
+            cmd.CommandText = "GetInventoryItem";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -64,9 +64,9 @@ namespace BTPOSDashboard.Controllers
                 cmd.Parameters.Add(Cid);
 
                 SqlParameter gsn = new SqlParameter();
-                gsn.ParameterName = "@Item";
+                gsn.ParameterName = "@ItemId";
                 gsn.SqlDbType = SqlDbType.Int;
-                gsn.Value = items1.Item;
+                gsn.Value = items1.ItemId;
                 cmd.Parameters.Add(gsn);
 
                 SqlParameter gs = new SqlParameter();
@@ -109,12 +109,12 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                // cmd.Parameters.Clear();
-               conn.Close();
+              // conn.Close();
 
 
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
-                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+               // conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
                 SqlCommand cmd1 = new SqlCommand();
                 cmd1.CommandType = CommandType.StoredProcedure;

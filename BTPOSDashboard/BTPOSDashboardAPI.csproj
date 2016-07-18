@@ -398,6 +398,8 @@
     <Content Include="UI\BtposLicense.html" />
     <Content Include="UI\BTPOSMonitoringPage.html" />
     <Content Include="UI\BtposRoutes.html" />
+    <Content Include="UI\CartDetails.html" />
+    <Content Include="UI\CheckOut.html" />
     <Content Include="UI\CompanyHierarchy.html" />
     <Content Include="UI\CompanyReports.html" />
     <Content Include="UI\CompanyRoles.html" />
@@ -911,6 +913,7 @@
     <Content Include="UI\vendors\chart.js\site\assets\simple.png" />
     <Content Include="UI\vendors\chart.js\site\index.html" />
     <Content Include="UI\vendors\chart.js\site\styles.css" />
+    <Content Include="UI\vendors\CheckOut.html" />
     <Content Include="UI\vendors\ckeditor\adapters\jquery.js" />
     <Content Include="UI\vendors\ckeditor\build-config.js" />
     <Content Include="UI\vendors\ckeditor\ckeditor.js" />

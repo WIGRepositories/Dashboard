@@ -1572,10 +1572,10 @@ namespace BTPOSDashboardAPI.Models
 
         public Decimal Quantity { get; set; }
         public int Status { get; set; }
-        public int Transactionstatus { get; set; }
-        public String Gateway_transId { get; set; }
-        public int PaymentMode { get; set; }
-        public String Transaction_Num { get; set; }
+      //  public int Transactionstatus { get; set; }
+      //  public String Gateway_transId { get; set; }
+      //  public int PaymentMode { get; set; }
+     //   public String Transaction_Num { get; set; }
 
 
        
