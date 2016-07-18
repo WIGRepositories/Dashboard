@@ -109,7 +109,7 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                // cmd.Parameters.Clear();
-               conn.Close();
+                //  conn.Close();
 
 
 
@@ -207,15 +207,11 @@ namespace BTPOSDashboard.Controllers
                 string str = ex.Message;
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-           
         }
 
         public void Options()
         {
-        }
 
         }
     }
-
-
-
+}
