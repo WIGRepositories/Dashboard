@@ -11,7 +11,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetPaymentGateway = function () {
 
         $http.get('http://localhost:1476/api/PaymentGatewayConfiguration/GetPaymentGateway').then(function (response, req) {
-            $scope.PaymentGateway = response.data;
+            $scope.GetPaymentGateway = response.data;
+            for (cnt = 0; cnt < response.data.length; cnt++) {
+                $scope.GetPaymentGateway[cnt].startdate = new Date($scope.GetPaymentGateway[cnt].startdate);
+                $scope.GetPaymentGateway[cnt].enddate = new Date($scope.GetPaymentGateway[cnt].enddate);
+            }
 
         });
     }   

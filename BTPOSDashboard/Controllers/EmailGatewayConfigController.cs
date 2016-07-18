@@ -74,7 +74,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlParameter pid = new SqlParameter();
             pid.ParameterName = "@hashkey";
-            pid.SqlDbType = SqlDbType.Date;
+            pid.SqlDbType = SqlDbType.VarChar;
             pid.Value =b.hashkey;
             cmd.Parameters.Add(pid);          
            
@@ -88,7 +88,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlParameter vv = new SqlParameter();
             vv.ParameterName = "@saltkey";
-            vv.SqlDbType = SqlDbType.Date;
+            vv.SqlDbType = SqlDbType.VarChar;
             vv.Value =b.saltkey;
             cmd.Parameters.Add(vv);
 

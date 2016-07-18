@@ -13,6 +13,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
                 $scope.lcat = res.data;
             });
+
+            $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=9').then(function (res, data) {
+                $scope.Types = res.data;
+            });
         }
     
         $scope.getLicenseTypes = function () {
@@ -43,13 +47,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
     
         $scope.currLicense = function (L) {
-            $scope.currSelLicense = L;
+            $scope.currSelLicense = L;            
         }
         $scope.Save = function (currSelLicense,flag) {
 
+            if (currSelLicense.LicenseTypeId == null) {
+                alert('Please select the Feature name');
+                return
+            }
+
             var currSelLicense = {
                 LicenseTypeId: currSelLicense.LicenseTypeId,
-                FeatureName: currSelLicense.FeatureName,
+                FeatureTypeId: currSelLicense.FeatureTypeId,
                 FeatureValue: currSelLicense.FeatureValue,
                 FeatureLabel: currSelLicense.FeatureLabel,               
                 //LabelClass: currSelLicense.LabelClass,                
@@ -92,9 +101,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 return;
             }
 
+            if ($scope.f.Id == null) {
+                alert('Please select the Feature name');
+                return
+            }
+
             var currSelLicense = {
                 LicenseTypeId: selCat.Id,
-                FeatureName: currSelLicense.FeatureName,
+                FeatureTypeId: $scope.f.Id,
                 FeatureValue: currSelLicense.FeatureValue,
                 FeatureLabel: currSelLicense.FeatureLabel,
                 //LabelClass: currSelLicense.LabelClass,                
@@ -117,7 +131,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
                 $scope.showDialog("Saved successfully!");
 
-                $scope.Group = null;
+                $scope.newFeature = null;
 
             }, function (errres) {
                 var errdata = errres.data;
@@ -140,7 +154,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             }
         });
     }
-
+       
 });
 
 

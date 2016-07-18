@@ -9,7 +9,7 @@
    
     
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
     
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
@@ -25,7 +25,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
     
 </head>
-<body ng-app="myApp" ng-controller="myCtrl" ng-model="Roledetails">
+<body ng-app="myApp" ng-controller="myCtrl" ng-model="roles">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -237,6 +237,8 @@
                                         <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                         <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
                                         <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Sms Gateway Configuration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Email Gateway Configuration</span></a></li>
                                     </ul>
                                 </li>
 
@@ -361,15 +363,15 @@
                                                     <div class="row mbm">
                                                         <div class="col-md-5" style="margin:20px;">
                                                             Role: <select ng-options="r.Name for r in roles track by r.Id" ng-model="r">
-                                                                <option value="">Select</option>
+                                                            <option value="">Select</option>
                                                             </select>
-                                                        </div>                                                       
-                                                            
-                                                        
-                                                        <!--<div class="actions">
-                                                    <a href="NewObject.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New Object</button></a>
+                                                        </div>
 
-                                                </div>-->
+
+                                                        <!--<div class="actions">
+                                                            <a href="NewObject.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New Object</button></a>
+
+                                                        </div>-->
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -471,43 +473,43 @@
                                                                 <td>{{T.Path}}</td>
                                                                 <td>{{T.Access}}</td>
                                                                 <!--<div class="col-md-3">
-                                                            <select>
-                                                                <option value="">View</option>
-                                                            </select>
-                                                        </div>-->
+                                                                    <select>
+                                                                        <option value="">View</option>
+                                                                    </select>
+                                                                </div>-->
                                                             </tr>
                                                         </tbody>
 
                                                     </table>
                                                     <!--<div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="pagination-panel">
-                                                        Page
-                                                        &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                        of 6 | View
-                                                        &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                            <option value="20" selected="selected">20</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                            <option value="150">150</option>
-                                                            <option value="-1">All</option>
-                                                        </select>&nbsp;
-                                                        records
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 text-right">
-                                                    <div class="pagination-panel">
-                                                        <ul class="pagination pagination-sm man">
-                                                            <li><a href="#">&laquo;</a></li>
-                                                            <li><a href="#">1</a></li>
-                                                            <li><a href="#">2</a></li>
-                                                            <li><a href="#">3</a></li>
+                                                        <div class="col-lg-6">
+                                                            <div class="pagination-panel">
+                                                                Page
+                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
+                                                                of 6 | View
+                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline">
+                                                                    <option value="20" selected="selected">20</option>
+                                                                    <option value="50">50</option>
+                                                                    <option value="100">100</option>
+                                                                    <option value="150">150</option>
+                                                                    <option value="-1">All</option>
+                                                                </select>&nbsp;
+                                                                records
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 text-right">
+                                                            <div class="pagination-panel">
+                                                                <ul class="pagination pagination-sm man">
+                                                                    <li><a href="#">&laquo;</a></li>
+                                                                    <li><a href="#">1</a></li>
+                                                                    <li><a href="#">2</a></li>
+                                                                    <li><a href="#">3</a></li>
 
-                                                            <li><a href="#">&raquo;</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>-->
+                                                                    <li><a href="#">&raquo;</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>-->
                                                 </div>
 
 
@@ -551,32 +553,32 @@
 
             </script>
         </div>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="js/jquery-1.10.2.min.js"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <!--loading bootstrap js-->
+        <script src="vendors/bootstrap/js/bootstrap.js"></script>
+        <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
-<script src="js/angular.js"></script>
-<script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-<script src="js/ngStorage.js"></script>
-<script src="js/Roledetails.js"></script>
-        
+        <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+        <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+        <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+        <script src="vendors/iCheck/icheck.min.js"></script>
+        <script src="vendors/iCheck/custom.min.js"></script>
+        <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+        <script src="js/jquery.menu.js"></script>
+        <script src="vendors/jquery-pace/pace.min.js"></script>
+        <script src="vendors/holder/holder.js"></script>
+        <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+        <!--LOADING SCRIPTS FOR PAGE-->
+        <script src="js/table-action.js"></script>
+        <!--CORE JAVASCRIPT-->
+        <script src="js/main.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/Roledetails.js"></script>
+
 </body>
 </html>
