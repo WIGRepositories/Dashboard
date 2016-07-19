@@ -10329,4 +10329,475 @@ GO
 
 
 
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserLicense]    Script Date: 07/19/2016 12:50:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetUserLicense]
+as 
+begin
+SELECT u.[Id]
+      ,[UserId]
+      ,us.FirstName + '' + us.LastName as UName
+      ,[FOId]
+      ,f.FirstName + '' + f.LastName as FName
+      ,[LicenseTypeId]
+      ,[StartDate]
+      ,[ExpiryOn]
+      ,[GracePeriod]
+      ,[ActualExpiry]
+      ,[LastUpdatedOn]
+      ,u.[Active]
+      ,[StatusId]
+  FROM [POSDashboard].[dbo].[UserLicense]u
+  inner join Users us on us.Id=u.UserId
+  inner join FleetOwnerRequestDetails f on f.Id = u.FOId
+ 
+  
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserLicensePayments]    Script Date: 07/19/2016 12:50:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetUserLicensePayments]
+as 
+begin
+SELECT [Id]
+      ,[ULId]
+      ,[CreatedOn]
+      ,[Amount]
+      ,[UnitPrice]
+      ,[Units]
+      ,[StatusId]
+      ,[LicensePymtTransId]
+      ,[IsRenewal]
+  FROM [POSDashboard].[dbo].[UserLicensePayments]
+  
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserLicensePymtTransactions]    Script Date: 07/19/2016 12:51:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetUserLicensePymtTransactions]
+as 
+begin
+SELECT  [Id]
+      ,[TransId]
+      ,[GatewayTransId]
+      ,[Amount]
+      ,[TransDate]
+      ,[ULPymtId]
+      ,[StatusId]
+      ,[Desc]
+  FROM [POSDashboard].[dbo].[UserLicensePymtTransactions]
+  
+ 
+  
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetULPymtTransDetails]    Script Date: 07/19/2016 12:53:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetULPymtTransDetails]
+as 
+begin
+SELECT TOP 1000 [Id]
+      ,[ULPPymtTransId]
+      ,[PaymentTypeId]
+      ,[StatusId]
+      ,[Discount]
+      ,[Tax]
+      ,[Amount]
+      ,[TransDate]
+  FROM [POSDashboard].[dbo].[ULPymtTransDetails]
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetULFeatures]    Script Date: 07/19/2016 12:53:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetULFeatures]
+as 
+begin
+SELECT [Id]
+      ,[ULPymtId]
+      ,[FeatureId]
+      ,[FeatureValue]
+      ,[FeatureDesc]
+  FROM [POSDashboard].[dbo].[ULFeatures]
+ 
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelUserLicense](
+@Id int = -1,
+@UserId int,
+@FOId int,
+@LicenseTypeId int,
+@StartDate datetime = null,
+@ExpiryOn datetime = null,
+@GracePeriod int,
+@ActualExpiry datetime = null,
+@LastUpdatedOn datetime = null,
+@StatusId int,
+@insupddelflag char
+)
+as
+begin
+
+if @insupddelflag = 'I'
+begin
+INSERT INTO [POSDashboard].[dbo].[UserLicense]
+           ([UserId]
+           ,[FOId]
+           ,[LicenseTypeId]
+           ,[StartDate]
+           ,[ExpiryOn]           
+           ,[GracePeriod]
+           ,[ActualExpiry]
+           ,[LastUpdatedOn]
+           ,[StatusId]
+           )
+     VALUES
+           (@UserId
+           ,@FOId
+           ,@LicenseTypeId
+           ,@StartDate
+           ,@ExpiryOn           
+           ,@GracePeriod
+          
+           ,@ActualExpiry
+           ,@LastUpdatedOn
+           ,@StatusId
+          )
+          end
+else
+if @insupddelflag = 'U'
+begin
+
+UPDATE [POSDashboard].[dbo].[UserLicense]
+   SET [UserId] = @UserId
+      ,[FOId] = @FOId
+      ,[LicenseTypeId] = @LicenseTypeId
+      ,[StartDate] = @StartDate
+      ,[ExpiryOn] = @ExpiryOn
+      ,[GracePeriod] = @GracePeriod
+      ,[ActualExpiry] = @ActualExpiry
+      ,[LastUpdatedOn] = @LastUpdatedOn
+      ,[StatusId] = @StatusId
+ WHERE [UserId] = @UserId
+end
+else
+if @insupddelflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[UserLicense]
+      WHERE [UserId] = @UserId
+end
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelUserLicensePayments](
+@Id int = -1,
+@ULId int,
+@CreatedOn datetime=null,
+@Amount decimal,
+@UnitPrice decimal,
+@Units decimal,
+@StatusId int,
+@LicensePymtTransId int,
+@IsRenewal int,
+
+@insupddelflag char
+)
+as
+begin
+
+if @insupddelflag = 'I'
+begin
+INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
+           ([ULId]
+           ,[CreatedOn]
+           ,[Amount]
+           ,[UnitPrice]
+           ,[Units]           
+           ,[StatusId]
+           ,[LicensePymtTransId]
+           
+           ,[IsRenewal]
+           )
+     VALUES
+           (@ULId
+           ,@CreatedOn
+           ,@Amount
+           ,@UnitPrice 
+           ,@Units          
+           ,@StatusId
+           ,@LicensePymtTransId
+           ,@IsRenewal
+            )
+          end
+else
+if @insupddelflag = 'U'
+begin
+
+UPDATE [POSDashboard].[dbo].[UserLicensePayments]
+   SET [ULId] = @ULId
+      ,[CreatedOn] = @CreatedOn
+      ,[Amount] = @Amount
+      ,[UnitPrice] = @UnitPrice
+      ,[Units] = @Units
+      ,[StatusId] =@StatusId
+      ,[LicensePymtTransId] = @LicensePymtTransId
+      ,[IsRenewal] = @IsRenewal
+     
+ WHERE [Id] = @Id 
+end
+else
+if @insupddelflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[UserLicensePayments]
+      WHERE [Id] = @Id 
+end
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelUserLicensePymtTransactions](
+@Id int = -1,
+@TransId varchar(50),
+@GatewayTransId varchar(50),
+@Amount decimal(18,0),
+@TransDate datetime=null,
+@ULPymtId int,
+@StatusId int,
+@Desc varchar(250),
+
+@insupddelflag char
+)
+as
+begin
+
+if @insupddelflag = 'I'
+begin
+INSERT INTO [POSDashboard].[dbo].[UserLicensePymtTransactions]
+           ([TransId]
+           ,[GatewayTransId]
+           ,[Amount]
+           ,[TransDate]
+           ,[ULPymtId]           
+           ,[StatusId]
+           ,[Desc]
+           
+          
+           )
+     VALUES
+           (@TransId
+           ,@GatewayTransId 
+           ,@Amount
+           ,@TransDate
+           ,@ULPymtId        
+           ,@StatusId
+           ,@Desc
+        
+            )
+          end
+else
+if @insupddelflag = 'U'
+begin
+
+UPDATE [POSDashboard].[dbo].[UserLicensePymtTransactions]
+   SET [TransId] = @TransId
+      ,[GatewayTransId] = @GatewayTransId 
+      ,[Amount] = @Amount
+      ,[TransDate] = @TransDate
+      ,[ULPymtId] = @ULPymtId
+      ,[StatusId] =@StatusId
+      ,[Desc] = @Desc
+    
+     
+ WHERE [Id] = @Id 
+end
+else
+if @insupddelflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[UserLicensePymtTransactions]
+      WHERE [Id] = @Id 
+end
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelULPymtTransDetails](
+@Id int = -1,
+@ULPPymtTransId int,
+@PaymentTypeId int,
+@StatusId int,
+@Discount decimal(18,0),
+@Tax decimal(18,0),
+@Amount decimal(18,0),
+@TransDate datetime=null,
+
+@insupddelflag char
+)
+as
+begin
+
+if @insupddelflag = 'I'
+begin
+INSERT INTO [POSDashboard].[dbo].[ULPymtTransDetails]
+           ([ULPPymtTransId]
+           ,[PaymentTypeId]
+           ,[StatusId]
+           ,[Discount]
+           ,[Tax]           
+           ,[Amount]
+           ,[TransDate]
+           
+          
+           )
+     VALUES
+           (@ULPPymtTransId
+           ,@PaymentTypeId 
+           ,@StatusId
+           ,@Discount
+           ,@Tax        
+           ,@Amount
+           ,@TransDate
+        
+            )
+          end
+else
+if @insupddelflag = 'U'
+begin
+
+UPDATE [POSDashboard].[dbo].[ULPymtTransDetails]
+   SET [ULPPymtTransId] = @ULPPymtTransId
+      ,[PaymentTypeId] = @PaymentTypeId
+      ,[StatusId] = @StatusId
+      ,[Discount] = @Discount
+      ,[Tax] = @Tax
+      ,[Amount] =@Amount
+      ,[TransDate] = @TransDate
+    
+     
+ WHERE [Id] = @Id 
+end
+else
+if @insupddelflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[ULPymtTransDetails]
+      WHERE [Id] = @Id 
+end
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelULFeatures](
+@Id int = -1,
+@ULPymtId int,
+@FeatureId int,
+@FeatureValue varchar(50),
+@FeatureDesc varchar(50),
+
+@insupddelflag char
+)
+as
+begin
+
+if @insupddelflag = 'I'
+begin
+INSERT INTO [POSDashboard].[dbo].[ULFeatures]
+           ([ULPymtId]
+           ,[FeatureId]
+           ,[FeatureValue]
+           ,[FeatureDesc]
+           
+           )
+     VALUES
+           (@ULPymtId
+           ,@FeatureId
+           ,@FeatureValue
+           ,@FeatureDesc
+           
+            )
+          end
+else
+if @insupddelflag = 'U'
+begin
+
+UPDATE [POSDashboard].[dbo].[ULFeatures]
+   SET [ULPymtId] = @ULPymtId
+      ,[FeatureId] = @FeatureId
+      ,[FeatureValue] = @FeatureValue
+      ,[FeatureDesc] = @FeatureDesc
+     
+     
+ WHERE [Id] = @Id 
+end
+else
+if @insupddelflag = 'D'
+begin
+DELETE FROM [POSDashboard].[dbo].[ULFeatures]
+      WHERE [Id] = @Id 
+end
+end
+
+
+
+
+
+
+
+
+
 
