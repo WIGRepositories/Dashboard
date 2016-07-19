@@ -66,7 +66,7 @@ namespace BTPOSDashboard.Controllers
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@ItemId";
                 gsn.SqlDbType = SqlDbType.Int;
-                gsn.Value = items1.ItemId;
+                gsn.Value = items1.Item;
                 cmd.Parameters.Add(gsn);
 
                 SqlParameter gs = new SqlParameter();

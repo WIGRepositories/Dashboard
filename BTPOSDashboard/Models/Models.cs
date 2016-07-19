@@ -1561,7 +1561,7 @@ namespace BTPOSDashboardAPI.Models
     {
        
         public List<itemslist> slist { get; set; }
-        public int ItemId { get; set; }
+        public int Item { get; set; }
         public int Id { get; set; }
 
         public String SalesOrderNum { get; set; }
