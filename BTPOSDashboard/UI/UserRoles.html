@@ -434,6 +434,7 @@
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
+                                                                <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
                                                                 <th>User Name</th>
                                                                 <th>Role</th>
                                                                 <th>Company</th>
@@ -444,12 +445,14 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr ng-repeat="ur in userRoles" class="gradeA">
-
+                                                                <td>
+                                                                    <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(ur, checkedArr)" ng-click="toggle(ur, checkedArr);" />
+                                                                </td>
                                                                 <td>{{ur.username}}</td>
                                                                 <td>{{ur.rolename}}</td>
                                                                 <td>{{ur.companyname}}</td>
                                                                 <td>
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs">
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUserRoles(ur);">
                                                                         <i class="fa fa-edit"></i>&nbsp;
                                                                         Edit
                                                                     </button>
@@ -542,14 +545,14 @@
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Edit Roles</h4>
                                                                 </div>
-                                                                <div class="modal-body" ng-init="GetCompanies();" ng-model="newrole">
+                                                                <div class="modal-body" ng-model="currur">
                                                                     <div class="row">
                                                                         <div class="col-md-8">
                                                                             <div class="col-md-6">
                                                                                 <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" class="form-control" ng-model="s" ng-change="getUsersnRoles()">
+                                                                                <select style="width:260px" ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp"  disabled>
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -562,7 +565,7 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="uu" ng-change="GetUsersForCmp(cmp)" class="form-control">
+                                                                                <select style="width:260px" ng-options="u.username for u in ur userRoles track by u.Id" value={{"currur.username"}} ng-model="currur.u"  class="form-control">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -577,7 +580,7 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="ur" class="form-control">
+                                                                                <select style="width:260px" ng-options="r.rolename for r in ur track by r.RoleId" ng-model="UserRoles" class="form-control">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>

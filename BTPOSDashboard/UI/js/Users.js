@@ -13,6 +13,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.UserCmp = $scope.userdetails[0].companyName;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
+    $scope.checkedArr = new Array();
+    $scope.uncheckedArr = new Array();
+    $scope.userRoles = [];
 
     /* user details functions */
     $scope.GetCompanies = function () {    
@@ -235,50 +238,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
 
     }
+    $scope.setUserRoles = function (ur) {
+        $scope.currur = ur;
+    }
 
-
-    $scope.chgUserRoles = function (flag) {
-
-        if ($scope.s.Id == null) {
-            alert('Please select company.');
-            return;
-        }
-
-        if ($scope.ur.RoleId == null) {
-            alert('Please select role.');
-            return;
-        }
-        if ($scope.uu.Id == null) {
-            alert('Please select user.');
-            return;
-        }
-        var userrole = {
-            Id: -1,
-            UserId: $scope.uu.Id,
-            CompanyId: $scope.s.Id,
-            RoleId: $scope.ur.RoleId,
-            insupdflag: 'U'
-        };
-
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/Users/SaveUserRoles',
-            //headers: {
-            //    'Content-Type': undefined
-            data: userrole
-        }
-
-        $http(req).then(function (res) {
-            alert('Saved successfully');
-            $scope.s = null;
-            $scope.ur = null;
-            $scope.uu = null;
-        });
-
-    } 
-
-
-
+    $scope.clearUsers = function () {
+        $scope.UserRoles = null;
+    }
 
     $scope.testdel = function (ur,flag) {
         var userrole = {
@@ -292,13 +258,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/AssignDelRoles',
+            url: 'http://localhost:1476/api/Users/GetUsers?cmpId=-1',
             data: userrole
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/Users/GetUserRoles?UserId=' + role.UserId).then(function (res, data) {
+            $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
                 $scope.userRoles = res.data;
             });
 
@@ -307,8 +273,50 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
 
-});
 
+    $scope.toggle = function (item) {
+        var idx = $scope.checkedArr.indexOf(item);
+        if (idx > -1) {
+            $scope.checkedArr.splice(idx, 1);
+        }
+        else {
+            $scope.checkedArr.push(item);
+        }
+
+        var idx = $scope.uncheckedArr.indexOf(item);
+        if (idx > -1) {
+            $scope.uncheckedArr.splice(idx, 1);
+        }
+        else {
+            $scope.uncheckedArr.push(item);
+        }
+    };
+
+
+    $scope.toggleAll = function () {
+        if ($scope.checkedArr.length === $scope.userRoles.length) {
+            $scope.uncheckedArr = $scope.checkedArr.slice(0);
+            $scope.checkedArr = [];
+
+        } else if ($scope.checkedArr.length === 0 || $scope.userRoles.length > 0) {
+            $scope.checkedArr = $scope.userRoles.slice(0);
+            $scope.uncheckedArr = [];
+        }
+
+    };
+
+    $scope.exists = function (item, list) {
+        return list.indexOf(item) > -1;
+    };
+
+
+    $scope.isChecked = function () {
+        return $scope.checkedArr.length === $scope.userRoles.length;
+    };
+
+
+
+});
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
