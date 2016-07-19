@@ -10329,4 +10329,119 @@ GO
 
 
 
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserLicense]    Script Date: 07/19/2016 12:50:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetUserLicense]
+as 
+begin
+SELECT u.[Id]
+      ,[UserId]
+      ,us.FirstName + '' + us.LastName as UName
+      ,[FOId]
+      ,f.FirstName + '' + f.LastName as FName
+      ,[LicenseTypeId]
+      ,[StartDate]
+      ,[ExpiryOn]
+      ,[GracePeriod]
+      ,[ActualExpiry]
+      ,[LastUpdatedOn]
+      ,u.[Active]
+      ,[StatusId]
+  FROM [POSDashboard].[dbo].[UserLicense]u
+  inner join Users us on us.Id=u.UserId
+  inner join FleetOwnerRequestDetails f on f.Id = u.FOId
+ 
+  
+end
 
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserLicensePayments]    Script Date: 07/19/2016 12:50:59 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetUserLicensePayments]
+as 
+begin
+SELECT [Id]
+      ,[ULId]
+      ,[CreatedOn]
+      ,[Amount]
+      ,[UnitPrice]
+      ,[Units]
+      ,[StatusId]
+      ,[LicensePymtTransId]
+      ,[IsRenewal]
+  FROM [POSDashboard].[dbo].[UserLicensePayments]
+  
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserLicensePymtTransactions]    Script Date: 07/19/2016 12:51:46 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetUserLicensePymtTransactions]
+as 
+begin
+SELECT  [Id]
+      ,[TransId]
+      ,[GatewayTransId]
+      ,[Amount]
+      ,[TransDate]
+      ,[ULPymtId]
+      ,[StatusId]
+      ,[Desc]
+  FROM [POSDashboard].[dbo].[UserLicensePymtTransactions]
+  
+ 
+  
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetULPymtTransDetails]    Script Date: 07/19/2016 12:53:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetULPymtTransDetails]
+as 
+begin
+SELECT TOP 1000 [Id]
+      ,[ULPPymtTransId]
+      ,[PaymentTypeId]
+      ,[StatusId]
+      ,[Discount]
+      ,[Tax]
+      ,[Amount]
+      ,[TransDate]
+  FROM [POSDashboard].[dbo].[ULPymtTransDetails]
+end
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetULFeatures]    Script Date: 07/19/2016 12:53:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetULFeatures]
+as 
+begin
+SELECT [Id]
+      ,[ULPymtId]
+      ,[FeatureId]
+      ,[FeatureValue]
+      ,[FeatureDesc]
+  FROM [POSDashboard].[dbo].[ULFeatures]
+ 
+end
