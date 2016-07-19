@@ -10208,3 +10208,125 @@ end
     end
     
 END
+GO
+
+/****** Object:  Table [dbo].[UserLicense]    Script Date: 07/19/2016 08:42:31 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserLicense](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[FOId] [int] NULL,
+	[LicenseTypeId] [int] NOT NULL,
+	[StartDate] [datetime] NULL,
+	[ExpiryOn] [datetime] NULL,
+	[GracePeriod] [int] NULL,
+	[ActualExpiry] [datetime] NULL,
+	[LastUpdatedOn] [datetime] NULL,
+	[Active] [int] NULL,
+	[StatusId] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[UserLicensePayments]    Script Date: 07/19/2016 08:43:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[UserLicensePayments](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ULId] [int] NOT NULL,
+	[CreatedOn] [datetime] NOT NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
+	[UnitPrice] [decimal](18, 0) NULL,
+	[Units] [decimal](18, 0) NULL,
+	[StatusId] [int] NULL,
+	[LicensePymtTransId] [int] NULL,
+	[IsRenewal] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[UserLicensePayments] ADD  CONSTRAINT [DF_UserLicensePayments_IsRenewal]  DEFAULT ((0)) FOR [IsRenewal]
+GO
+
+/****** Object:  Table [dbo].[UserLicensePymtTransactions]    Script Date: 07/19/2016 08:45:05 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[UserLicensePymtTransactions](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[TransId] [varchar](20) NOT NULL,
+	[GatewayTransId] [varchar](20) NULL,
+	[Amount] [decimal](18, 0) NOT NULL,
+	[TransDate] [datetime] NOT NULL,
+	[ULPymtId] [int] NOT NULL,
+	[StatusId] [int] NULL,
+	[Desc] [varchar](250) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+/****** Object:  Table [dbo].[ULPymtTransDetails]    Script Date: 07/19/2016 08:46:51 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ULPymtTransDetails](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ULPPymtTransId] [int] NOT NULL,
+	[PaymentTypeId] [int] NOT NULL,
+	[StatusId] [int] NOT NULL,
+	[Discount] [decimal](18, 0) NULL,
+	[Tax] [decimal](18, 0) NULL,
+	[Amount] [decimal](18, 0) NULL,
+	[TransDate] [datetime] NULL
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[ULFeatures]    Script Date: 07/19/2016 08:47:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[ULFeatures](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ULPymtId] [int] NOT NULL,
+	[FeatureId] [int] NOT NULL,
+	[FeatureValue] [varchar](50) NOT NULL,
+	[FeatureDesc] [varchar](250) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
