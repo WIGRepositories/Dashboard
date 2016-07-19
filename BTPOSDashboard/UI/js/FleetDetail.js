@@ -138,7 +138,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             MonthAndYrOfMfr: Fleet.MonthAndYrOfMfr,
             ChasisNo: Fleet.ChasisNo,
             SeatingCapacity: Fleet.SeatingCapacity,
-            DateOfRegistration: Fleet.DateOfRegistration
+            DateOfRegistration: Fleet.DateOfRegistration,
+            insupddelflag: 'U'
         };
 
         var req = {
@@ -189,6 +190,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             SeatingCapacity: newVD.SeatingCapacity,
             DateOfRegistration: newVD.DateOfRegistration,
             Active: 1,
+            insupddelflag: 'I'
 
         };
 

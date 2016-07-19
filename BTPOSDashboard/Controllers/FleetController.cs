@@ -147,6 +147,13 @@ namespace BTPOSDashboard.Controllers
                 SqlParameter nActive = new SqlParameter("@Active", SqlDbType.Int);
                 nActive.Value = n.Active;
                 cmd.Parameters.Add(nActive);
+               
+                SqlParameter flag = new SqlParameter();
+                flag.ParameterName = "@insupdflag";
+                flag.SqlDbType = SqlDbType.VarChar;
+                flag.Value = n.insupddelflag;
+                //llid.Value = b.Active;
+                cmd.Parameters.Add(flag);
                 cmd.ExecuteScalar();
 
                 conn.Close();

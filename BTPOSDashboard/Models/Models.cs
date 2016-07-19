@@ -1355,6 +1355,8 @@ namespace BTPOSDashboardAPI.Models
         public int SeatingCapacity { get; set; }
 
         public DateTime? DateOfRegistration { get; set; }
+        public string insupddelflag { get; set; }
+        
     }
     public class FleetRoutes
     {
