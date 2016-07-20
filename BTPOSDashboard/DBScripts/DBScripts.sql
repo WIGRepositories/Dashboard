@@ -10228,7 +10228,8 @@ CREATE TABLE [dbo].[UserLicense](
 	[ActualExpiry] [datetime] NULL,
 	[LastUpdatedOn] [datetime] NULL,
 	[Active] [int] NULL,
-	[StatusId] [int] NULL
+	[StatusId] [int] NULL,
+	[RenewFreqTypeId] int NULL
 ) ON [PRIMARY]
 
 GO
@@ -10792,7 +10793,115 @@ DELETE FROM [POSDashboard].[dbo].[ULFeatures]
 end
 end
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+Create PROCEDURE InsUpdDelUserLicenseDetails
+(@FOCode varchar(10), @licenseTypeId int, @amount decimal,@unitprice decimal,@units int,@renewFreqTypeId int,@insupddelFlag varchar(1))
+	
+AS
+BEGIN
+declare @userid int, @foId int, @currDate datetime, @ULId int = 0,@ulCnt int = -1, @ulPcnt int = -1
+select @currDate = GETDATE()
+--set foId = -1
 
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+
+if @insupddelFlag = 'I' 
+begin
+
+select @ulCnt = COUNT(*) from [POSDashboard].[dbo].[UserLicense] where UserId = @userid and LicenseTypeId = @licenseTypeId
+    -- Insert statements for procedure here
+    --1) master user license record will be maintained for all user licenses
+    --FOid, licenseTypeId, active, startdate, expiryon, graceperiod,lastupdatedon
+    if @ulCnt = 0 
+    begin
+    INSERT INTO [POSDashboard].[dbo].[UserLicense]
+           ([UserId]
+           ,[FOId]
+           ,[LicenseTypeId]
+           ,[StartDate]
+           ,[ExpiryOn]
+           ,[GracePeriod]
+           ,[ActualExpiry]
+           ,[LastUpdatedOn]
+           ,[Active]
+           ,[StatusId]
+           ,[RenewFreqTypeId])
+     VALUES
+           (@userid,@foId,@licenseTypeId,@currDate,null,7,null,@currDate,0,1,@renewFreqTypeId)
+    
+    SELECT @ULId = SCOPE_IDENTITY()
+    end
+      
+      select @ulPcnt = COUNT(*) from  [POSDashboard].[dbo].[UserLicensePayments] where ULId = @ULId
+		if @ulPcnt = 0 
+		begin
+		INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
+           ([ULId]
+           ,[CreatedOn]
+           ,[Amount]
+           ,[UnitPrice]
+           ,[Units]
+           ,[StatusId]
+           ,[LicensePymtTransId]
+           ,[IsRenewal])
+		VALUES
+           (@ULId,@currDate,@amount,@unitprice,@units,1,null,0)
+        end              
+
+    --the payment made by the user for the license purchase will be stored next
+    --2) enter details into user license payments
+    --ULId, data, amount, unitprice, duration, status,transid,isrenewal
+    
+    --the transaction details need to be stored next
+    --3) for the payment a transaction will be done the details will be stored into licensepaymenttrans
+    --ULPId, transid,gatewaytransid, status, amount, datetime, comment, 
+    
+    --further details of the transaction - how the payment is made is stored
+    --3) payment details are stored into lcPymtdetails table
+    --lpymttransId, paymentTypeId, status, discount, tax, amt
+        
+    --all the benefits that the user gets as part of license will be stored 
+    --4)features and their values will be stored into ULFeatures Table    
+    --ULPid, featureid, value,desc
+    
+    --5)insert an alert to notify admin
+    --6)update the owner ship for bt pos if needed
+    --7)generate a SO and shipping order for the BT POS
+    --8)insert SO and shipping order notification for admin
+    --9)update edit history
+    --10) insert a notfication for user also
+    --11)create dashboard login credentails also
+    --12) update the inventory status also
+    end
+else
+begin
+		if @insupddelFlag = 'U'
+		 begin
+	     select 1
+		 end
+		else		
+		  begin
+		  if @insupddelFlag = 'D'
+	       begin
+	       select 1
+	       end
+          end
+end
+    
+
+END
+GO
 
 
 
