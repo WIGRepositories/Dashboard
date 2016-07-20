@@ -10926,6 +10926,18 @@ end
 	select * from Users u inner join FleetOwner f on f.UserId = u.Id and UPPER(f.fleetownercode) = UPPER(@FOCode)
 
 END
+
+
+GO
+
+/****** Object:  Table [dbo].[BlockListNew]    Script Date: 07/20/2016 18:05:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
 GO
 
 USE [POSDashboard]
