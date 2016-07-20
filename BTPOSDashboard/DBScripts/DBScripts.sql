@@ -5367,7 +5367,8 @@ and (fd.fleetownerid = @fleetownerId or @fleetownerId = -1))
 
 END
 
-/****** Object:  StoredProcedure [dbo].[InsupddelFleetDetails]    Script Date: 07/18/2016 15:14:23 ******/
+GO
+/****** Object:  StoredProcedure [dbo].[InsupddelFleetDetails]    Script Date: 07/20/2016 18:16:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5375,7 +5376,7 @@ GO
 
 
 
-create PROCEDURE [dbo].[InsupddelFleetDetails]
+ALTER PROCEDURE [dbo].[InsupddelFleetDetails]
  (@Id int,
  @VehicleRegNo varchar(15)
            ,@VehicleTypeId int
@@ -5390,6 +5391,7 @@ create PROCEDURE [dbo].[InsupddelFleetDetails]
            ,@ChasisNo varchar = null
            ,@SeatingCapacity int = 0
            ,@DateOfRegistration datetime = null
+           ,@insupdflag varchar(1)
            )
 	-- Add the parameters for the stored procedure here
 	
@@ -5404,9 +5406,9 @@ declare @oldVehicleTypeId int
 
 declare @oldServiceTypeId int
 
-if @@ROWCOUNT = 0
-
+if @insupdflag = 'I'
 begin
+
 	INSERT INTO [POSDashboard].[dbo].[FleetDetails]
            ([VehicleRegNo]
            ,[VehicleTypeId]
@@ -5444,10 +5446,10 @@ begin
     exec InsEditHistoryDetails @edithistoryid,null,@VehicleTypeId,'Insertion','VehicleTypeId',null
     
     exec InsEditHistoryDetails @edithistoryid,null,@ServiceTypeId ,'Insertion','ServiceTypeId',null
+
 end
 else
-if @@ROWCOUNT> 0
-
+if @insupdflag = 'U'
 begin
 select @oldVehicleRegNo = VehicleRegNo, @oldVehicleTypeId = VehicleTypeId, @oldServiceTypeId=ServiceTypeId from FleetDetails where Id = @Id
 update [POSDashboard].[dbo].[FleetDetails]
@@ -5484,6 +5486,9 @@ exec InsEditHistoryDetails @edithistoryid,@oldServiceTypeId,@ServiceTypeId,'Modi
 
 end
 end
+
+
+
 
 
 /****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
@@ -10336,12 +10341,18 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[GetUserLicense]
-(@foCode varchar(10))
+/****** Object:  StoredProcedure [dbo].[GetUserLicense]    Script Date: 07/20/2016 18:04:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[GetUserLicense]
+--(@foCode varchar(10))
 as 
 begin
 SELECT u.[Id]
       ,u.[UserId]
+     
       ,us.FirstName + '' + us.LastName as UName
       ,[FOId]      
       ,[LicenseTypeId]
@@ -10354,14 +10365,23 @@ SELECT u.[Id]
       ,[RenewFreqTypeId]
       ,r.Name
       ,u.[Active]
-      ,[StatusId]
+      ,u.[StatusId]
+     ,f.FleetOwnerCode
+     ,uld.Tax
+     ,uld.Discount
+     ,ulp.UnitPrice
   FROM [POSDashboard].[dbo].[UserLicense]u
   inner join Users us on us.Id=u.UserId
-  inner join FleetOwner f on upper(f.FleetOwnerCode) = upper(@focode)
+  inner join FleetOwner f on f.Id=u.FOId
   inner join Types r on r.Id = RenewFreqTypeId
   inner join LicenseTypes lt on lt.Id = LicenseTypeId
+  inner join UserLicensePayments ulp on ulp.Id = u.Id
+  inner join ULPymtTransDetails uld on uld.Id = u.id
   
 end
+
+
+--upper(f.FleetOwnerCode) = upper(@focode)
 
 
 
@@ -10908,6 +10928,52 @@ end
 END
 GO
 
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[checkout]    Script Date: 07/20/2016 18:15:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[checkout](
+	[Id] [int] NOT NULL,
+	[ckdetails] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[getcheckout]    Script Date: 07/20/2016 18:15:01 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getcheckout]
+as
+begin
+select c.[Id]
+      ,[ckdetails]
+            ,fd.Firstname
+      ,fd.LastName
+      ,fd.PhoneNo
+      ,fd.EmailAddress
+      ,cy.Country
+      ,cy.ZipCode
+    ,cy.State
+  FROM [POSDashboard].[dbo].[checkout]c
+   inner join FleetOwnerRequestDetails fd on fd.id=c.id
+   inner join Company cy on cy.Id=fd.Id
+end
 
 
 
