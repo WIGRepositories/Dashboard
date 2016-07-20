@@ -238,8 +238,47 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
 
     }
+    //$scope.chgsaveUserRoles = function (flag) {
+
+    //    if ($scope.s.Id == null) {
+    //        alert('Please select company.');
+    //        return;
+    //    }
+
+    //    if ($scope.ur.RoleId == null) {
+    //        alert('Please select role.');
+    //        return;
+    //    }
+    //    if ($scope.uu.Id == null) {
+    //        alert('Please select user.');
+    //        return;
+    //    }
+    //    var userrole = {
+    //        Id: -1,
+    //        UserId: $scope.uu.Id,
+    //        CompanyId: $scope.s.Id,
+    //        RoleId: $scope.ur.RoleId,
+    //        insupdflag: 'U'
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/Users/SaveUserRoles',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+    //        data: userrole
+    //    }
+
+    //    $http(req).then(function (res) {
+    //        alert('Saved successfully');
+    //        $scope.s = null;
+    //        $scope.ur = null;
+    //        $scope.uu = null;
+    //    });
+
+    //}
     $scope.setUserRoles = function (ur) {
-        $scope.currur = ur;
+        $scope.UserRoles = ur;
     }
 
     $scope.clearUsers = function () {

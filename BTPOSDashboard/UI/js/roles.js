@@ -8,6 +8,9 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
     $scope.dashboardDS = $localStorage.dashboardDS;
+    $scope.checkedArr = new Array();
+    $scope.uncheckedArr = new Array();
+    $scope.cmproles = [];
     $scope.GetRoles = function()
     {
         $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=-1').then(function (response, data) {
@@ -223,6 +226,45 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             }
         });
     }
+    $scope.toggle = function (item) {
+        var idx = $scope.checkedArr.indexOf(item);
+        if (idx > -1) {
+            $scope.checkedArr.splice(idx, 1);
+        }
+        else {
+            $scope.checkedArr.push(item);
+        }
+
+        var idx = $scope.uncheckedArr.indexOf(item);
+        if (idx > -1) {
+            $scope.uncheckedArr.splice(idx, 1);
+        }
+        else {
+            $scope.uncheckedArr.push(item);
+        }
+    };
+
+
+    $scope.toggleAll = function () {
+        if ($scope.checkedArr.length === $scope.cmproles.length) {
+            $scope.uncheckedArr = $scope.checkedArr.slice(0);
+            $scope.checkedArr = [];
+
+        } else if ($scope.checkedArr.length === 0 || $scope.cmproles.length > 0) {
+            $scope.checkedArr = $scope.cmproles.slice(0);
+            $scope.uncheckedArr = [];
+        }
+
+    };
+
+    $scope.exists = function (item, list) {
+        return list.indexOf(item) > -1;
+    };
+
+
+    $scope.isChecked = function () {
+        return $scope.checkedArr.length === $scope.cmproles.length;
+    };
 
 
 });

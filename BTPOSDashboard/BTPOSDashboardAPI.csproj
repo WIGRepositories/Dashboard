@@ -459,6 +459,7 @@
     <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\AlertsConfiguration.js" />
     <Content Include="UI\js\angular-animate.js" />
+    <Content Include="UI\js\BlockList.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
     <Content Include="UI\js\BTPOSMonitoringPage.js" />
@@ -2039,6 +2040,7 @@
     <Compile Include="Controllers\AlertsConfigurationController.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
+    <Compile Include="Controllers\blocklistnewController.cs" />
     <Compile Include="Controllers\BTPOSConfigController.cs" />
     <Compile Include="Controllers\BTPOSDetailsController.cs" />
     <Compile Include="Controllers\BTPOSGroupsController.cs" />

@@ -10901,8 +10901,51 @@ end
     
 
 END
+
+
 GO
 
+/****** Object:  Table [dbo].[BlockListNew]    Script Date: 07/20/2016 18:05:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[BlockListNew](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemId] [int] NOT NULL,
+	[ItemTypeId] [int] NOT NULL,
+	[BlockedOn] [date] NOT NULL,
+	[BlockedBy] [varchar](50) NOT NULL,
+	[Reason] [varchar](500) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+GO
+/****** Object:  StoredProcedure [dbo].[GetBlockList]    Script Date: 07/20/2016 18:07:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetBlockList]
+AS
+BEGIN
+SELECT distinct 
+	  [Id]
+	,[ItemId]
+	,[ItemTypeId]
+	,[BlockedOn]
+	,[BlockedBy] 
+	 ,[Reason]
+ FROM [POSDashboard].[dbo].[BlockListNew]
+end
 
 
 
