@@ -10337,25 +10337,29 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 create procedure [dbo].[GetUserLicense]
+(@foCode varchar(10))
 as 
 begin
 SELECT u.[Id]
-      ,[UserId]
+      ,u.[UserId]
       ,us.FirstName + '' + us.LastName as UName
-      ,[FOId]
-      ,f.FirstName + '' + f.LastName as FName
+      ,[FOId]      
       ,[LicenseTypeId]
+      ,lt.LicenseType
       ,[StartDate]
       ,[ExpiryOn]
       ,[GracePeriod]
       ,[ActualExpiry]
       ,[LastUpdatedOn]
+      ,[RenewFreqTypeId]
+      ,r.Name
       ,u.[Active]
       ,[StatusId]
   FROM [POSDashboard].[dbo].[UserLicense]u
   inner join Users us on us.Id=u.UserId
-  inner join FleetOwnerRequestDetails f on f.Id = u.FOId
- 
+  inner join FleetOwner f on upper(f.FleetOwnerCode) = upper(@focode)
+  inner join Types r on r.Id = RenewFreqTypeId
+  inner join LicenseTypes lt on lt.Id = LicenseTypeId
   
 end
 
@@ -10899,6 +10903,7 @@ begin
           end
 end
     
+	select * from Users u inner join FleetOwner f on f.UserId = u.Id and UPPER(f.fleetownercode) = UPPER(@FOCode)
 
 END
 
