@@ -10615,7 +10615,7 @@ begin
 DELETE FROM [POSDashboard].[dbo].[UserLicensePayments]
       WHERE [Id] = @Id 
 end
-end
+
 
 
 
@@ -10930,18 +10930,6 @@ END
 
 GO
 
-/****** Object:  Table [dbo].[BlockListNew]    Script Date: 07/20/2016 18:05:58 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-USE [POSDashboard]
-GO
 
 /****** Object:  Table [dbo].[checkout]    Script Date: 07/20/2016 18:15:42 ******/
 SET ANSI_NULLS ON
