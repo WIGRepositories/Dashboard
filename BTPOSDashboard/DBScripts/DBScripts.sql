@@ -8931,11 +8931,36 @@ CREATE PROCEDURE [dbo].[ValidateFleetOwnerCode]
 	@result int out 
 AS
 BEGIN
+declare @fid int = 0
+
+
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	
-	select @result = COUNT(*) from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
-
+	select @fid = id from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+	
+	if @fid is not null 
+	begin	
+	select f.id foid, u.id userid, f.FleetOwnerCode from FleetOwner f inner join Users u on f.UserId = u.Id and UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+			
+	SELECT [Id]
+      ,[UserId]
+      ,[FOId]
+      ,[LicenseTypeId]
+      ,[StartDate]
+      ,[ExpiryOn]
+      ,[GracePeriod]
+      ,[ActualExpiry]
+      ,[LastUpdatedOn]
+      ,[Active]
+      ,[StatusId]
+      ,[RenewFreqTypeId]
+    FROM [POSDashboard].[dbo].[UserLicense] ul
+    where ul.foid = @fid
+    	
+	end
+	
+    Set @result = @fid    
     -- Insert statements for procedure here
 	return @result
 END
