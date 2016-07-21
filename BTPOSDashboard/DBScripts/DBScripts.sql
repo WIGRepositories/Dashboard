@@ -8931,11 +8931,36 @@ CREATE PROCEDURE [dbo].[ValidateFleetOwnerCode]
 	@result int out 
 AS
 BEGIN
+declare @fid int = 0
+
+
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	
-	select @result = COUNT(*) from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
-
+	select @fid = id from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+	
+	if @fid is not null 
+	begin	
+	select f.id foid, u.id userid, f.FleetOwnerCode from FleetOwner f inner join Users u on f.UserId = u.Id and UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+			
+	SELECT [Id]
+      ,[UserId]
+      ,[FOId]
+      ,[LicenseTypeId]
+      ,[StartDate]
+      ,[ExpiryOn]
+      ,[GracePeriod]
+      ,[ActualExpiry]
+      ,[LastUpdatedOn]
+      ,[Active]
+      ,[StatusId]
+      ,[RenewFreqTypeId]
+    FROM [POSDashboard].[dbo].[UserLicense] ul
+    where ul.foid = @fid
+    	
+	end
+	
+    Set @result = @fid    
     -- Insert statements for procedure here
 	return @result
 END
@@ -10975,6 +11000,35 @@ select c.[Id]
    inner join Company cy on cy.Id=fd.Id
 end
 
+GO
+
+/****** Object:  Table [dbo].[Address]    Script Date: 07/21/2016 18:09:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Address](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemId] [int] NOT NULL,
+	[AddresTypeId] [int] NOT NULL,
+	[Fled1] [varchar](50) NOT NULL,
+	[Fled2] [varchar](50) NOT NULL,
+	[Country] [varchar](50) NOT NULL,
+	[State] [varchar](50) NOT NULL,
+	[ZipCode] [nvarchar](50) NOT NULL,
+	[Fax] [nvarchar](50) NOT NULL,
+	[City] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
 
 
 
