@@ -11012,6 +11012,35 @@ select c.[Id]
    inner join Company cy on cy.Id=fd.Id
 end
 
+GO
+
+/****** Object:  Table [dbo].[Address]    Script Date: 07/21/2016 18:09:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Address](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemId] [int] NOT NULL,
+	[AddresTypeId] [int] NOT NULL,
+	[Fled1] [varchar](50) NOT NULL,
+	[Fled2] [varchar](50) NOT NULL,
+	[Country] [varchar](50) NOT NULL,
+	[State] [varchar](50) NOT NULL,
+	[ZipCode] [nvarchar](50) NOT NULL,
+	[Fax] [nvarchar](50) NOT NULL,
+	[City] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
 
 
 
