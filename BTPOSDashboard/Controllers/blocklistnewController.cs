@@ -13,7 +13,7 @@ namespace BTPOSDashboard.Controllers
     {
         [HttpGet]
 
-        public DataTable Getblocklist()
+        public DataTable Getblocklist(int selectedId)
         {
             DataTable Tbl = new DataTable();
 
@@ -25,8 +25,15 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Getblocklist";
+            cmd.CommandText = "GetBlockListNew";
             cmd.Connection = conn;
+
+            SqlParameter gid = new SqlParameter();
+            gid.ParameterName = "@selectedId";
+            gid.SqlDbType = SqlDbType.Int;
+            gid.Value = selectedId;
+            cmd.Parameters.Add(gid);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);

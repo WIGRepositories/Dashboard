@@ -11043,6 +11043,42 @@ SET ANSI_PADDING OFF
 GO
 
 
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[GetBlockListNew]
+@selectedId int = 1
+AS
+
+BEGIN
+
+
+if  @selectedId = 1
+begin
+select * from Company
+
+end
+else if @selectedId =2
+begin
+select * from Users
+end
+else if @selectedId =3
+begin
+select * from BTPOSDetails
+end
+else if @selectedId = 4
+begin
+select * from Routes 
+end
+else if @selectedId = 5
+
+select * from Stops
+ 
+end
+
 
 
 
