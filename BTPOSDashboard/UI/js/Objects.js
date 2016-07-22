@@ -18,22 +18,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     });
     $scope.save = function (NewObject,flag) {
         
-        if (NewObject == null)
-        {
-            alert('please enter Name');
-            return;
-        }
-        if (NewObject.Name == null)
-        {
-            alert('Please Enter Nmae');
-            return;
-        }
+        //if (NewObject == null)
+        //{
+        //    alert('please enter Name');
+        //    return;
+        //}
+        //if (NewObject.Name == null)
+        //{
+        //    alert('Please Enter Nmae');
+        //    return;
+        //}
        
-        if (NewObject.Path == null)
-        {
-            alert('Please Enter Path');
-            return;
-        }
+        //if (NewObject.Path == null)
+        //{
+        //    alert('Please Enter Path');
+        //    return;
+        //}
    
         var SelNewObjects = {
             Id:-1,
@@ -41,7 +41,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Description: NewObject.Description,
             Path: NewObject.Path,
             Access: NewObject.Access,
-            insupdflag: 'U',
+            insupdflag: 'I',
             Active:1,
 
 
@@ -91,7 +91,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Path: NewObject.Path,
 
             Active: 1,
-            insupdflag: 'I'
+            insupdflag: 'U'
         };
 
         var req = {

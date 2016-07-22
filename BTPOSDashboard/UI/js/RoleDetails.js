@@ -12,6 +12,40 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $http.get('http://localhost:1476/api/Roledetails/getroledetails').then(function (res, data) {
         $scope.Roledetails = res.data;
     });
+
+
+    $scope.GetCompanies = function () {
+
+        var vc = {
+            needCompanyName: '1'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
+        }
+        $http(req).then(function (res) {
+            $scope.initdata = res.data;
+        });
+
+        $scope.getRolesForCompany = function (seltype) {
+            if (seltype == null) {
+                $scope.cmproles = null;
+                return;
+            }
+            var cmpId = (seltype) ? seltype.Id : -1;
+
+            $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+                $scope.cmproles = res.data;
+            });
+        }
+
+    }
+
+
     $scope.save = function (Roledetails) {
         alert("ok");
         var Roledetails = {
