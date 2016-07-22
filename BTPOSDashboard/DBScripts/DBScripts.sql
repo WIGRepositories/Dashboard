@@ -10515,6 +10515,8 @@ create procedure [dbo].[InsUpdDelUserLicense](
 @ActualExpiry datetime = null,
 @LastUpdatedOn datetime = null,
 @StatusId int,
+@RenewFreqTypeId int,
+@Active int,
 @insupddelflag char
 )
 as
@@ -10531,7 +10533,9 @@ INSERT INTO [POSDashboard].[dbo].[UserLicense]
            ,[GracePeriod]
            ,[ActualExpiry]
            ,[LastUpdatedOn]
+           ,[Active]
            ,[StatusId]
+           ,[RenewFreqTypeId]
            )
      VALUES
            (@UserId
@@ -10539,11 +10543,12 @@ INSERT INTO [POSDashboard].[dbo].[UserLicense]
            ,@LicenseTypeId
            ,@StartDate
            ,@ExpiryOn           
-           ,@GracePeriod
-          
+           ,@GracePeriod          
            ,@ActualExpiry
            ,@LastUpdatedOn
+           ,@Active
            ,@StatusId
+           ,@RenewFreqTypeId
           )
           end
 else
@@ -10560,6 +10565,8 @@ UPDATE [POSDashboard].[dbo].[UserLicense]
       ,[ActualExpiry] = @ActualExpiry
       ,[LastUpdatedOn] = @LastUpdatedOn
       ,[StatusId] = @StatusId
+      ,[Active] = @Active      
+      ,[RenewFreqTypeId] = @RenewFreqTypeId           
  WHERE [UserId] = @UserId
 end
 else
@@ -10571,9 +10578,29 @@ end
 end
 
 
+if @insupddelflag = 'I' or @insupddelflag = 'U'
+begin
+
+SELECT [Id]
+      ,[UserId]
+      ,[FOId]
+      ,[LicenseTypeId]
+      ,[StartDate]
+      ,[ExpiryOn]
+      ,[GracePeriod]
+      ,[ActualExpiry]
+      ,[LastUpdatedOn]
+      ,[Active]
+      ,[StatusId]
+      ,[RenewFreqTypeId]
+  FROM [POSDashboard].[dbo].[UserLicense]
+   WHERE [UserId] = @UserId
+
+ 
+end
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10596,6 +10623,10 @@ begin
 
 if @insupddelflag = 'I'
 begin
+
+select @CreatedOn = GETDATE()
+
+
 INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ([ULId]
            ,[CreatedOn]
@@ -10603,8 +10634,7 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ,[UnitPrice]
            ,[Units]           
            ,[StatusId]
-           ,[LicensePymtTransId]
-           
+           ,[LicensePymtTransId]           
            ,[IsRenewal]
            )
      VALUES
@@ -10617,32 +10647,41 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ,@LicensePymtTransId
            ,@IsRenewal
             )
-          end
+end
 else
 if @insupddelflag = 'U'
 begin
 
 UPDATE [POSDashboard].[dbo].[UserLicensePayments]
-   SET [ULId] = @ULId
-      ,[CreatedOn] = @CreatedOn
+   SET [CreatedOn] = @CreatedOn
       ,[Amount] = @Amount
       ,[UnitPrice] = @UnitPrice
       ,[Units] = @Units
       ,[StatusId] =@StatusId
       ,[LicensePymtTransId] = @LicensePymtTransId
-      ,[IsRenewal] = @IsRenewal
-     
- WHERE [Id] = @Id 
+      ,[IsRenewal] = @IsRenewal     
+ WHERE [ULId] = @ULId 
+ 
 end
 else
 if @insupddelflag = 'D'
 begin
 DELETE FROM [POSDashboard].[dbo].[UserLicensePayments]
-      WHERE [Id] = @Id 
+      WHERE [ULId] = @ULId
 end
 
+--return the fleet owner details
+if @insupddelflag = 'I' or @insupddelflag = 'U'
+begin
 
+select * from Users u
+inner join UserLicense ul on u.Id = ul.UserId
+inner join UserLicensePayments ulp on ulp.ULId = ul.Id
+where ulp.ULId = @ULId
 
+end
+
+end
 
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
