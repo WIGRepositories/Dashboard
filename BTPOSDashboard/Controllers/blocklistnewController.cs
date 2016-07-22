@@ -43,6 +43,39 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
 
+        [HttpGet]
+        [Route("api/blocklistnew/GetBlockDetails")]
+        public DataTable GetBlockDetails(int selId)
+        {
+            DataTable Tbl = new DataTable();
+
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetBlockListNew";
+            cmd.Connection = conn;
+
+            SqlParameter gid = new SqlParameter();
+            gid.ParameterName = "@selId";
+            gid.SqlDbType = SqlDbType.Int;
+            gid.Value = selId;
+            cmd.Parameters.Add(gid);
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            Tbl = ds.Tables[0];
+
+            // int found = 0;
+            return Tbl;
+
+        }
+
 
     }
 }

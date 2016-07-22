@@ -15,9 +15,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.Getblocklist = function () {
 
-        $http.get('http://localhost:1476/api/blocklistnew/Getblocklist?selectedId='+ $scope.selectedId).then(function (response, req) {
+        $http.get('http://localhost:1476/api/BlkLst/Getblocklist').then(function (response, req) {
             $scope.blocklist = response.data;
 
+        });
+    }
+
+    $scope.GetBlockDetails = function () {
+
+        if ($scope.insid == null) {
+            $scope.blocklist = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/BlkLst/GetBlockDetails?insid=' + $scope.insid).then(function (res, data) {
+            
+                $scope.blocklist = res.data.Table;
+            
         });
     }
 
