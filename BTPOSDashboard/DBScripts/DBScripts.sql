@@ -5368,7 +5368,7 @@ and (fd.fleetownerid = @fleetownerId or @fleetownerId = -1))
 END
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsupddelFleetDetails]    Script Date: 07/20/2016 18:16:07 ******/
+/****** Object:  StoredProcedure [dbo].[InsupddelFleetDetails]    Script Date: 07/23/2016 09:31:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5376,7 +5376,7 @@ GO
 
 
 
-ALTER PROCEDURE [dbo].[InsupddelFleetDetails]
+create PROCEDURE [dbo].[InsupddelFleetDetails]
  (@Id int,
  @VehicleRegNo varchar(15)
            ,@VehicleTypeId int
@@ -5385,10 +5385,10 @@ ALTER PROCEDURE [dbo].[InsupddelFleetDetails]
            ,@ServiceTypeId int
            ,@VehicleLayoutId int
            ,@Active int
-           ,@EngineNo varchar = null
-           ,@FuelUsed varchar = null
+           ,@EngineNo varchar(50) = null
+           ,@FuelUsed varchar(50) = null
            ,@MonthAndYrOfMfr datetime = null
-           ,@ChasisNo varchar = null
+           ,@ChasisNo varchar(50) = null
            ,@SeatingCapacity int = 0
            ,@DateOfRegistration datetime = null
            ,@insupdflag varchar(1)
@@ -5432,7 +5432,7 @@ begin
            ,@ServiceTypeId 
            ,@VehicleLayoutId
            ,@Active 
-           ,@EngineNo
+           ,@EngineNo 
            ,@FuelUsed
            ,@MonthAndYrOfMfr
            ,@ChasisNo
@@ -5461,7 +5461,7 @@ set
 ,[ServiceTypeId] = @ServiceTypeId
 ,[LayoutTypeId] = @VehicleLayoutId
 ,[Active] = @Active
-,[EngineNo] = @EngineNo
+,[EngineNo] = @EngineNo 
 ,[FuelUsed] = @FuelUsed
 ,[MonthAndYrOfMfr] = @MonthAndYrOfMfr
 ,[ChasisNo] = @ChasisNo
@@ -5489,6 +5489,9 @@ end
 
 
 
+
+
+Go
 
 
 /****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
@@ -11103,6 +11106,57 @@ select * from Stops
  
 END
 
+INSERT INTO [POSDashboard].[dbo].[BtposPayment]
+           ([PosId]
+           ,[DateTime]
+           ,[Amount]
+           ,[TransactionId]
+           ,[TransactionTypeId]
+           ,[OperatorId]
+           ,[StatusId]
+           ,[GatewayId]
+           ,[Deatails])
+     VALUES
+           (PosId, varchar(50)
+           ,DateTime, datetime
+           ,Amount, int
+           ,TransactionId, nvarchar(50)
+           ,TransactionTypeId, int
+           ,OperatorId, int
+           ,StatusId, int
+           ,GatewayId, int
+           ,Deatails, varchar(50)
 
 
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[getBtposPayment]    Script Date: 07/23/2016 17:10:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getBtposPayment]
+as
+begin
+SELECT  distinct
+    
+       bd.[POSID]
+      ,[DateTime]
+      ,[Amount]
+      ,[TransactionId]
+      ,[TransactionTypeId]
+      ,[OperatorId]
+      ,bp.[StatusId]
+      ,[GatewayId]
+      ,[Deatails]
+  FROM [POSDashboard].[dbo].[BtposPayment]bp
+  inner join BTPOSDetails bd on bd.ID=bp.Id
+  inner join Users u on u.Id=bp.OperatorId
+
+
+
+end
 
