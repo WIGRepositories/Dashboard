@@ -152,7 +152,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 
         }
-        $http(req).then(function (res) { });
+        $http(req).then(function (res) {
+            $scope.showDialog("Updated successfully!");
+        });
 
 
     }
@@ -205,7 +207,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http(req).then(function (response) {
 
-            //$scope.showDialog("Saved successfully!");
+            $scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
 
