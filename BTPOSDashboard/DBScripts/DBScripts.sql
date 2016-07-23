@@ -11071,41 +11071,37 @@ GO
 
 
 GO
-
+/****** Object:  StoredProcedure [dbo].[GetBlockListNew]    Script Date: 07/23/2016 07:20:16 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create PROCEDURE [dbo].[GetBlockListNew]
-@selectedId int = 1
+create PROCEDURE [dbo].[GetBlockListNew]
+(@selectedId int)
 AS
-
 BEGIN
 
-
 if  @selectedId = 1
-begin
+
 select * from Company
 
-end
 else if @selectedId =2
-begin
+
 select * from Users
-end
+
 else if @selectedId =3
-begin
+
 select * from BTPOSDetails
-end
+
 else if @selectedId = 4
-begin
+
 select * from Routes 
-end
+
 else if @selectedId = 5
 
 select * from Stops
  
-end
-
+END
 
 
 
