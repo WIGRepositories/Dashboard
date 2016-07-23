@@ -147,13 +147,13 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
-                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerRoutes</span></a></li>
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
-                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
-                                <li><a href="FleetOwnerVehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerVehicleLayout</span></a></li>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
                             </ul>
 
                         </li>
@@ -381,7 +381,7 @@
 
 
                                                         <div class="actions">
-                                                            <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right">Assign Route to fleet</button></a>
+                                                            <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Assign Route to fleet</button></a>
 
                                                         </div>
 
@@ -393,119 +393,117 @@
                                                                         <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Routes</h4>
                                                                     </div>
                                                                     <div class="modal-body" ng-model="currGroup">
-                                                                      
-                                                                            <div class="row mbm">
 
-                                                                                <div style="text-align:right">
-                                                                                  
-
-                                                                              <label for=" descr" class="col-md-4 control-label" style="color:red;">
-                                                                                       Company:<span class='require'>*</span>
-
-                                                                                            </label>
-                                                                                    
-                                                                                    </div>
-                                                                                   
-                                                                                        <div class="col-md-6">
-                                                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp    " ng-change="GetFleetOwners();">
-
-                                                                                                <option value="">Select</option>
-                                                                                            </select>
-                                                                                     
-                                                                                    </div>
-                                                                                    </div>
-                                                                                </div>
                                                                         <div class="row mbm">
-                                                                      
-                                                                           
-                                                                                <div style="text-align:right">
-                                                                                    <label for="descr" class="col-md-4 control-label" style="color:red;">Fleet Owner:<span class='require'></span></label>
-                                                                                </div>
-                                                                           
+
+                                                                            <div style="text-align:right">
+
+
+                                                                                <label for=" descr" class="col-md-4 control-label" style="color:red;">
+                                                                                    Company:<span class='require'>*</span>
+
+                                                                                </label>
+
+                                                                            </div>
+
                                                                             <div class="col-md-6">
-                                                       <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model=" s" ng-change="GetRoutesForFO();">
+                                                                                <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp    " ng-change="GetFleetOwners();">
+
                                                                                     <option value="">Select</option>
                                                                                 </select>
 
                                                                             </div>
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="row mbm">
 
 
-                                                                     
-                                                                        <div class="row mbm">
-                                                                            <div style="text-align:right">
-                                                                                <label for="descr" class="col-md-4 control-label">Vehicle Reg No:<span class='require'></span></label>
-                                                                            </div>
-                                                                                <div class="col-md-6">
-                                                                                    <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
-                                                                                        <option value="">Select</option>
-                                                                                    </select>
-
-                                                                                </div>
-                                                                            </div>
-
-
-                                                                                <div class="row mbm">
-                                                                                    <div style="text-align:right">
-
-                                                                                        <label for="descr" class="col-md-4 control-label">Route: <span class='require'></span></label>
-                                                                                    </div>
-                                                                                        <div class="col-md-6">
-                                                           <select ng-options="r.routename for r in vehicles.Table1 track by r.ID" class="form-control" ng-model="initdata.newfleet.r">
-                                                                                                <option value="">Select</option>
-                                                                                            </select>
-                                                                                        </div>
-
-                                                                                    </div>
-                                                                           
-                                                                        <div class="row mbm">
-                                                                            <div style="text-align:right">
-
-                                                                                <label for="descr" class="col-md-4 control-label">Effective From:<span class='require'></span></label>
-                                                                            </div>
-                                                                            <div class="col-md-6">
-                                                                                <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
-                                                                                <input type="date" ng-model="initdata.newfleet.fd" />
-
-                                                                            </div>
-                                                                            </div>
-                                                                        
-                                                                          
-                                                                        <div class="row mbm">
-                                                                            <div style="text-align:right">
-                                                                               
-                                                                                <label for="active" class="col-md-4 control-label">Effective Till: <span class='require'></span></label>
-                                                                                </div>
-                                                                                <div class="col-md-6">
-                                                                                    <!----  <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>--->
-                                                                                    <input type="date" ng-model="initdata.newfleet.td" />
-                                                                                </div>
-                                                                            </div>         
-                                                                            
-                                                                            <div class="form-actions">
-                                                                                <div class="col-md-offset-3 col-md-9">
-                                                                                    <button type="button" class="btn btn-primary">Save</button>
-                                                                                    <button type="button" class="btn btn-default">Close</button>
-                                                                                </div>
-                                                                            </div>
+                                                                        <div style="text-align:right">
+                                                                            <label for="descr" class="col-md-4 control-label" style="color:red;">Fleet Owner:<span class='require'></span></label>
                                                                         </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model=" s" ng-change="GetRoutesForFO();">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+
+                                                                        </div>
+                                                                    </div>
+
+
+
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="descr" class="col-md-4 control-label">Vehicle Reg No:<span class='require'></span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+
+                                                                            <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+
+                                                                            <label for="descr" class="col-md-4 control-label">Route: <span class='require'></span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="r.routename for r in vehicles.Table1 track by r.ID" class="form-control" ng-model="initdata.newfleet.r">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+
+                                                                            <label for="descr" class="col-md-4 control-label">Effective From:<span class='require'></span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
+                                                                            <input type="date" ng-model="initdata.newfleet.fd" />
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="row mbm">
+                                                                        <div style="text-align:right">
+
+                                                                            <label for="active" class="col-md-4 control-label">Effective Till: <span class='require'></span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <!----  <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>--->
+                                                                            <input type="date" ng-model="initdata.newfleet.td" />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="button" class="btn btn-primary" ng-click="save(FleetRoute);">Save</button>
+                                                                            <button type="button" class="btn btn-default">Close</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-
-
-
                                                             </div>
+
 
 
                                                         </div>
 
 
-
-
+                                                    </div>
 
 
 
                                                 </div>
                                             </div>
+                                        </div>
                                             <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                 <thead>
                                                     <tr>
@@ -581,8 +579,8 @@
                                                                         </div>
                                                                     </div>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
-                                                                                <option value="">Select</option>
+                                                                    <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
+                                                                     <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 

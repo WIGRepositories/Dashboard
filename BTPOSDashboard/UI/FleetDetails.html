@@ -151,8 +151,8 @@
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
-                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></>
-                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerVehicleLayOut</span></a></>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Vehicle Layout</span></a></>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle LayOut</span></a></>
                             </ul>
 
                         </li>
@@ -295,6 +295,7 @@
                                 <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
                                 <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
                                 <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
                             </ul>
                         </li>
 
@@ -671,7 +672,7 @@
 
 
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();" disabled>
+                                                                                        <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control"  disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -680,7 +681,7 @@
                                                                                     <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();" disabled>
+                                                                                        <select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" class="form-control"  disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
 </div>
@@ -822,7 +823,7 @@
 
                         <!--END FOOTER-->
 
-                    </div><div id="footer">
+                    <div id="footer">
                         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
                 </div>

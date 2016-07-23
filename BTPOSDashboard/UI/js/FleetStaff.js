@@ -61,7 +61,11 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
         $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.userRoles = res.data;
         });
-    }    
+    }
+    $scope.setFleet = function (Fleet) {
+        $scope.currFleet= Fleet;
+    };
+
 
     $scope.GetVehicleConfig = function () {
 
@@ -166,6 +170,56 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
         $scope.currGroup = null;
     };
 
+    $scope.savenewfleetStaffdetails = function () {
+        var newVD = $scope.f;
+        if (newVD == null) {
+            alert('Please select VehicleRegNo.');
+            return;
+        }
+
+        if (newVD.Id == null) {
+            alert('Please select VehicleRegNo.');
+            return;
+        }
+        //validate user, company and role also      
+
+
+        var Fleet = {
+            Id: -1,
+            vehicleId: newVD.Id,
+            roleId: newVD.uu.RoleId,
+            UserId: newVD.uu.Id,
+            cmpId: $scope.cmp.Id,
+            FromDate: newVD.fd,
+            ToDate: newVD.td,
+            // Active:1,
+            insupddelflag: 'I'
+        };
+
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: Fleet
+        }
+
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
+    };
 
     $scope.GetFleetStaff = function () {
         if ($scope.cmp == null || $scope.cmp.Id == null) {
@@ -176,12 +230,14 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
         if ($scope.s == null || $scope.s.Id == null) {
             $scope.FleetStaff = null;
             return;
-        }       
+        }
 
         $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?foId=' + $scope.s.Id + '&cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.FleetStaff = res.data;
         });
     }
+    
+   
 
     $scope.showDialog = function (message) {
 

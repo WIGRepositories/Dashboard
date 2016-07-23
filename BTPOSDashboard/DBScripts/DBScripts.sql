@@ -5368,7 +5368,7 @@ and (fd.fleetownerid = @fleetownerId or @fleetownerId = -1))
 END
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsupddelFleetDetails]    Script Date: 07/20/2016 18:16:07 ******/
+/****** Object:  StoredProcedure [dbo].[InsupddelFleetDetails]    Script Date: 07/23/2016 09:31:32 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5376,7 +5376,7 @@ GO
 
 
 
-ALTER PROCEDURE [dbo].[InsupddelFleetDetails]
+create PROCEDURE [dbo].[InsupddelFleetDetails]
  (@Id int,
  @VehicleRegNo varchar(15)
            ,@VehicleTypeId int
@@ -5385,10 +5385,10 @@ ALTER PROCEDURE [dbo].[InsupddelFleetDetails]
            ,@ServiceTypeId int
            ,@VehicleLayoutId int
            ,@Active int
-           ,@EngineNo varchar = null
-           ,@FuelUsed varchar = null
+           ,@EngineNo varchar(50) = null
+           ,@FuelUsed varchar(50) = null
            ,@MonthAndYrOfMfr datetime = null
-           ,@ChasisNo varchar = null
+           ,@ChasisNo varchar(50) = null
            ,@SeatingCapacity int = 0
            ,@DateOfRegistration datetime = null
            ,@insupdflag varchar(1)
@@ -5432,7 +5432,7 @@ begin
            ,@ServiceTypeId 
            ,@VehicleLayoutId
            ,@Active 
-           ,@EngineNo
+           ,@EngineNo 
            ,@FuelUsed
            ,@MonthAndYrOfMfr
            ,@ChasisNo
@@ -5461,7 +5461,7 @@ set
 ,[ServiceTypeId] = @ServiceTypeId
 ,[LayoutTypeId] = @VehicleLayoutId
 ,[Active] = @Active
-,[EngineNo] = @EngineNo
+,[EngineNo] = @EngineNo 
 ,[FuelUsed] = @FuelUsed
 ,[MonthAndYrOfMfr] = @MonthAndYrOfMfr
 ,[ChasisNo] = @ChasisNo
@@ -5489,6 +5489,9 @@ end
 
 
 
+
+
+Go
 
 
 /****** Object:  Table [dbo].[FleetOwnerRouteStop]    Script Date: 05/02/2016 16:31:56 ******/
@@ -10515,6 +10518,8 @@ create procedure [dbo].[InsUpdDelUserLicense](
 @ActualExpiry datetime = null,
 @LastUpdatedOn datetime = null,
 @StatusId int,
+@RenewFreqTypeId int,
+@Active int,
 @insupddelflag char
 )
 as
@@ -10531,7 +10536,9 @@ INSERT INTO [POSDashboard].[dbo].[UserLicense]
            ,[GracePeriod]
            ,[ActualExpiry]
            ,[LastUpdatedOn]
+           ,[Active]
            ,[StatusId]
+           ,[RenewFreqTypeId]
            )
      VALUES
            (@UserId
@@ -10539,11 +10546,12 @@ INSERT INTO [POSDashboard].[dbo].[UserLicense]
            ,@LicenseTypeId
            ,@StartDate
            ,@ExpiryOn           
-           ,@GracePeriod
-          
+           ,@GracePeriod          
            ,@ActualExpiry
            ,@LastUpdatedOn
+           ,@Active
            ,@StatusId
+           ,@RenewFreqTypeId
           )
           end
 else
@@ -10560,6 +10568,8 @@ UPDATE [POSDashboard].[dbo].[UserLicense]
       ,[ActualExpiry] = @ActualExpiry
       ,[LastUpdatedOn] = @LastUpdatedOn
       ,[StatusId] = @StatusId
+      ,[Active] = @Active      
+      ,[RenewFreqTypeId] = @RenewFreqTypeId           
  WHERE [UserId] = @UserId
 end
 else
@@ -10571,9 +10581,29 @@ end
 end
 
 
+if @insupddelflag = 'I' or @insupddelflag = 'U'
+begin
+
+SELECT [Id]
+      ,[UserId]
+      ,[FOId]
+      ,[LicenseTypeId]
+      ,[StartDate]
+      ,[ExpiryOn]
+      ,[GracePeriod]
+      ,[ActualExpiry]
+      ,[LastUpdatedOn]
+      ,[Active]
+      ,[StatusId]
+      ,[RenewFreqTypeId]
+  FROM [POSDashboard].[dbo].[UserLicense]
+   WHERE [UserId] = @UserId
+
+ 
+end
 
 GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10596,6 +10626,10 @@ begin
 
 if @insupddelflag = 'I'
 begin
+
+select @CreatedOn = GETDATE()
+
+
 INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ([ULId]
            ,[CreatedOn]
@@ -10603,8 +10637,7 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ,[UnitPrice]
            ,[Units]           
            ,[StatusId]
-           ,[LicensePymtTransId]
-           
+           ,[LicensePymtTransId]           
            ,[IsRenewal]
            )
      VALUES
@@ -10617,32 +10650,41 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ,@LicensePymtTransId
            ,@IsRenewal
             )
-          end
+end
 else
 if @insupddelflag = 'U'
 begin
 
 UPDATE [POSDashboard].[dbo].[UserLicensePayments]
-   SET [ULId] = @ULId
-      ,[CreatedOn] = @CreatedOn
+   SET [CreatedOn] = @CreatedOn
       ,[Amount] = @Amount
       ,[UnitPrice] = @UnitPrice
       ,[Units] = @Units
       ,[StatusId] =@StatusId
       ,[LicensePymtTransId] = @LicensePymtTransId
-      ,[IsRenewal] = @IsRenewal
-     
- WHERE [Id] = @Id 
+      ,[IsRenewal] = @IsRenewal     
+ WHERE [ULId] = @ULId 
+ 
 end
 else
 if @insupddelflag = 'D'
 begin
 DELETE FROM [POSDashboard].[dbo].[UserLicensePayments]
-      WHERE [Id] = @Id 
-end
+      WHERE [ULId] = @ULId
 end
 
+--return the fleet owner details
+if @insupddelflag = 'I' or @insupddelflag = 'U'
+begin
 
+select * from Users u
+inner join UserLicense ul on u.Id = ul.UserId
+inner join UserLicensePayments ulp on ulp.ULId = ul.Id
+where ulp.ULId = @ULId
+
+end
+
+end
 
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
@@ -10955,18 +10997,6 @@ END
 
 GO
 
-/****** Object:  Table [dbo].[BlockListNew]    Script Date: 07/20/2016 18:05:58 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-USE [POSDashboard]
-GO
 
 /****** Object:  Table [dbo].[checkout]    Script Date: 07/20/2016 18:15:42 ******/
 SET ANSI_NULLS ON
@@ -11012,9 +11042,121 @@ select c.[Id]
    inner join Company cy on cy.Id=fd.Id
 end
 
+GO
+
+/****** Object:  Table [dbo].[Address]    Script Date: 07/21/2016 18:09:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Address](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ItemId] [int] NOT NULL,
+	[AddresTypeId] [int] NOT NULL,
+	[Fled1] [varchar](50) NOT NULL,
+	[Fled2] [varchar](50) NOT NULL,
+	[Country] [varchar](50) NOT NULL,
+	[State] [varchar](50) NOT NULL,
+	[ZipCode] [nvarchar](50) NOT NULL,
+	[Fax] [nvarchar](50) NOT NULL,
+	[City] [varchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetBlockListNew]    Script Date: 07/23/2016 07:20:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetBlockListNew]
+(@selectedId int)
+AS
+BEGIN
+
+if  @selectedId = 1
+
+select * from Company
+
+else if @selectedId =2
+
+select * from Users
+
+else if @selectedId =3
+
+select * from BTPOSDetails
+
+else if @selectedId = 4
+
+select * from Routes 
+
+else if @selectedId = 5
+
+select * from Stops
+ 
+END
+
+INSERT INTO [POSDashboard].[dbo].[BtposPayment]
+           ([PosId]
+           ,[DateTime]
+           ,[Amount]
+           ,[TransactionId]
+           ,[TransactionTypeId]
+           ,[OperatorId]
+           ,[StatusId]
+           ,[GatewayId]
+           ,[Deatails])
+     VALUES
+           (PosId, varchar(50)
+           ,DateTime, datetime
+           ,Amount, int
+           ,TransactionId, nvarchar(50)
+           ,TransactionTypeId, int
+           ,OperatorId, int
+           ,StatusId, int
+           ,GatewayId, int
+           ,Deatails, varchar(50)
 
 
 
 
 
+
+GO
+/****** Object:  StoredProcedure [dbo].[getBtposPayment]    Script Date: 07/23/2016 17:10:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getBtposPayment]
+as
+begin
+SELECT  distinct
+    
+       bd.[POSID]
+      ,[DateTime]
+      ,[Amount]
+      ,[TransactionId]
+      ,[TransactionTypeId]
+      ,[OperatorId]
+      ,bp.[StatusId]
+      ,[GatewayId]
+      ,[Deatails]
+  FROM [POSDashboard].[dbo].[BtposPayment]bp
+  inner join BTPOSDetails bd on bd.ID=bp.Id
+  inner join Users u on u.Id=bp.OperatorId
+
+
+
+end
 
