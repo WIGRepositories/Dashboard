@@ -32,10 +32,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     }
 
     $scope.increasecart = function (qty) {
-      //  javascript: document.getElementById("qty").value++;
-        $scope.cartitem.push(qty);
+        v = parseInt(document.getElementById(qty).value);
+        document.getElementById(qty).value = v + 1;
+        //$scope.cartitem.push(qty);
 
-            return $scope.cartitem;
+            return v;
      
     }
     //$scope.decrementcart = function (qty) {
@@ -49,15 +50,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetItems = function () {
         $http.get('http://localhost:1476/api/ShoppingCart/GetItems').then(function (response, req) {
+            $scope.sitems = response.data;
+            $scope.Shoppingcarts = $scope.sitems;
+        });
+    }
+
+    $scope.GetItems1 = function () {
+        $http.get('http://localhost:1476/api/ShoppingCart/GetItems1').then(function (response, req) {
             $scope.items = response.data;
             $scope.Shoppingcarts = $scope.items;
         });
     }
 
-
     $scope.Save = function () {
 
-        if ($scope.items == null) return;
+        if ($scope.items == null)
+            return null;
         var Shoppingcart1 = [];
         var itemsList = $scope.Shoppingcarts;
         for (var cnt = 0; cnt < itemsList.length; cnt++) {
@@ -91,7 +99,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             Transactionstatus: items.Transactionstatus,
             Gateway_transId: items.Gateway_transId,
             Date: items.Date,
-          // slist: Shoppingcart1
+           slist: Shoppingcart1
         }
 
         $http({
