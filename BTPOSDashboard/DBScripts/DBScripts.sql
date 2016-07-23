@@ -11070,6 +11070,38 @@ SET ANSI_PADDING OFF
 GO
 
 
+GO
+/****** Object:  StoredProcedure [dbo].[GetBlockListNew]    Script Date: 07/23/2016 07:20:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[GetBlockListNew]
+(@selectedId int)
+AS
+BEGIN
+
+if  @selectedId = 1
+
+select * from Company
+
+else if @selectedId =2
+
+select * from Users
+
+else if @selectedId =3
+
+select * from BTPOSDetails
+
+else if @selectedId = 4
+
+select * from Routes 
+
+else if @selectedId = 5
+
+select * from Stops
+ 
+END
 
 
 
