@@ -30,7 +30,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         $http.get('http://localhost:1476/api/blocklistnew/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
             
-                $scope.blocklist = res.data.Table;
+                $scope.blocklist = res.data;
             
         });
     }
