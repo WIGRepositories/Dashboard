@@ -11106,6 +11106,57 @@ select * from Stops
  
 END
 
+INSERT INTO [POSDashboard].[dbo].[BtposPayment]
+           ([PosId]
+           ,[DateTime]
+           ,[Amount]
+           ,[TransactionId]
+           ,[TransactionTypeId]
+           ,[OperatorId]
+           ,[StatusId]
+           ,[GatewayId]
+           ,[Deatails])
+     VALUES
+           (PosId, varchar(50)
+           ,DateTime, datetime
+           ,Amount, int
+           ,TransactionId, nvarchar(50)
+           ,TransactionTypeId, int
+           ,OperatorId, int
+           ,StatusId, int
+           ,GatewayId, int
+           ,Deatails, varchar(50)
 
 
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[getBtposPayment]    Script Date: 07/23/2016 17:10:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER procedure [dbo].[getBtposPayment]
+as
+begin
+SELECT  distinct
+    
+       bd.[POSID]
+      ,[DateTime]
+      ,[Amount]
+      ,[TransactionId]
+      ,[TransactionTypeId]
+      ,[OperatorId]
+      ,bp.[StatusId]
+      ,[GatewayId]
+      ,[Deatails]
+  FROM [POSDashboard].[dbo].[BtposPayment]bp
+  inner join BTPOSDetails bd on bd.ID=bp.Id
+  inner join Users u on u.Id=bp.OperatorId
+
+
+
+end
 
