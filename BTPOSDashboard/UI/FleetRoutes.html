@@ -437,6 +437,7 @@
                                                                                 <label for="descr" class="col-md-4 control-label">Vehicle Reg No:<span class='require'></span></label>
                                                                             </div>
                                                                                 <div class="col-md-6">
+                                                                                   
                                                                                     <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
                                                                                         <option value="">Select</option>
                                                                                     </select>
@@ -484,7 +485,7 @@
                                                                             
                                                                             <div class="form-actions">
                                                                                 <div class="col-md-offset-3 col-md-9">
-                                                                                    <button type="button" class="btn btn-primary">Save</button>
+                                                                                    <button type="button" class="btn btn-primary" ng-click="save(FleetRoute);">Save</button>
                                                                                     <button type="button" class="btn btn-default">Close</button>
                                                                                 </div>
                                                                             </div>
@@ -567,7 +568,7 @@
                                                                         <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'></span></label>
                                                                     </div>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
+                                                                            <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model="initdata.newfleet.s" ng-change="GetRoutesForFO();">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -581,8 +582,8 @@
                                                                         </div>
                                                                     </div>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
-                                                                                <option value="">Select</option>
+                                                                    <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
+                                                                     <option value="">Select</option>
                                                                             </select>
                                                                         </div>
 
