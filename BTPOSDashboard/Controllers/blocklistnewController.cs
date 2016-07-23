@@ -45,7 +45,7 @@ namespace BTPOSDashboard.Controllers
 
         [HttpGet]
         [Route("api/blocklistnew/GetBlockDetails")]
-        public DataTable GetBlockDetails(int selId)
+        public DataTable GetBlockDetails(int selectedId)
         {
             DataTable Tbl = new DataTable();
 
@@ -61,9 +61,9 @@ namespace BTPOSDashboard.Controllers
             cmd.Connection = conn;
 
             SqlParameter gid = new SqlParameter();
-            gid.ParameterName = "@selId";
+            gid.ParameterName = "@selectedId";
             gid.SqlDbType = SqlDbType.Int;
-            gid.Value = selId;
+            gid.Value = selectedId;
             cmd.Parameters.Add(gid);
 
             DataSet ds = new DataSet();
