@@ -119,15 +119,76 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.getRolesForCompany = function (seltype) {
         if (seltype == null) {
             $scope.cmproles = null;
+           
             return;
         }
         var cmpId = (seltype) ? seltype.Id : -1;        
 
         $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
+           
         });
     }
 
+
+    //$scope.saveRoles = function () {
+
+    //    //from the checked and unchecked array get the actuallly records to be saved
+    //    //from checked array take the records which have assigned = 0 as there are new assignements
+    //    //from unchecked array take assgined = 1 as these need to be removed
+
+
+    //    var cmproles = [];
+
+    //    for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
+
+    //        if ($scope.checkedArr[cnt].assigned == 0) {
+    //            var fr = {
+    //                Id: -1,
+    //                rolename: $scope.s.Id,
+    //                description: $scope.cmp.Id,
+    //                RouteId: $scope.checkedArr[cnt].RouteId,
+    //                From: $scope.checkedArr[cnt].FromDate,
+    //                To: $scope.checkedArr[cnt].ToDate,
+    //                Active: 1,
+    //                insupddelflag: 'I'
+    //            }
+
+    //            FleetOwnerRoutes.push(fr);
+    //        }
+    //    }
+
+    //    for (var cnt = 0; cnt < $scope.uncheckedArr.length; cnt++) {
+
+    //        if ($scope.uncheckedArr[cnt].assigned == 1) {
+    //            var fr = {
+    //                Id: -1,
+    //                FleetOwnerId: $scope.s.Id,
+    //                CompanyId: $scope.cmp.Id,
+    //                RouteId: $scope.uncheckedArr[cnt].RouteId,
+    //                From: $scope.uncheckedArr[cnt].FromDate,
+    //                To: $scope.uncheckedArr[cnt].ToDate,
+    //                Active: 1,
+    //                insupddelflag: 'D'
+    //            }
+
+    //            FleetOwnerRoutes.push(fr);
+    //        }
+    //    }
+
+    //    $http({
+    //        url: 'http://localhost:1476/api/FleetOwnerRoute/saveFleetOwnerRoute',
+    //        method: 'POST',
+    //        headers: { 'Content-Type': 'application/json' },
+    //        data: FleetOwnerRoutes,
+
+    //    }).success(function (data, status, headers, config) {
+    //        alert('Fleet owner routes successfully');
+    //        $scope.getFleetOwnerRoute();
+    //    }).error(function (ata, status, headers, config) {
+    //        alert(ata);
+    //    });
+    //};
     $scope.GetRolesToAssign = function (seltype) {
         if (seltype == null) {
             $scope.roles = null;

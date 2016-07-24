@@ -606,6 +606,7 @@
     <Content Include="UI\RouteFare.html" />
     <Content Include="UI\Routes.html" />
     <Content Include="UI\SalesOrder.html" />
+    <Content Include="UI\SavePopup.html" />
     <Content Include="UI\Seating.html" />
     <Content Include="UI\ShippingOrder.html" />
     <Content Include="UI\ShoppingCart.html">
@@ -2043,7 +2044,9 @@
     <Compile Include="Controllers\BTPOSLocController.cs" />
     <Compile Include="Controllers\BTPOSMonitoringPageController.cs" />
     <Compile Include="Controllers\BTPOSOperatorsController.cs" />
+    <Compile Include="Controllers\BTPOSPaymentController.cs" />
     <Compile Include="Controllers\BtposRoutesController.cs" />
+    <Compile Include="Controllers\BtposTicketDetailsController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
     <Compile Include="Controllers\DataLoadController.cs" />
     <Compile Include="Controllers\EditHistoryController.cs" />

@@ -108,7 +108,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
          });
      }*/
 
-    $scope.save = function (Fleet) {
+    $scope.save = function (Fleet,flag) {
         if (Fleet == null) {
             alert('Please enter VehicleRegNo.');
             return;
@@ -152,12 +152,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 
         }
-        $http(req).then(function (res) { });
+        $http(req).then(function (res) {
+            $scope.showDialog("Updated successfully!");
+        });
 
 
     }
 
-    $scope.savenewfleetdetails = function (initdata) {
+    $scope.savenewfleetdetails = function (initdata,flag) {
         var newVD = initdata.newfleet;
         if (newVD == null) {
             alert('Please enter VehicleRegNo.');
@@ -205,7 +207,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http(req).then(function (response) {
 
-            //$scope.showDialog("Saved successfully!");
+            $scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
 

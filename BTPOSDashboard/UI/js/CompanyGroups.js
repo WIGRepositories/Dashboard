@@ -62,6 +62,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog("Saved successfully!!");
             
             $scope.Group = null;
+            $scope.GetCompanys();
 
         }, function (errres) {
             var errdata = errres.data;
@@ -144,8 +145,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',            
+            backdrop:false,
+            templateUrl: 'SavePopup.html',
+          //  controller: 'ModalInstanceCtrl',            
             resolve: {
                 mssg: function () {
                     return message;
@@ -155,14 +157,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
 });
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+//app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
-    $scope.mssg = mssg;
-    $scope.ok = function () {
-        $uibModalInstance.close('test');
-    };
+//    $scope.mssg = mssg;
+//    $scope.ok = function () {
+//        $uibModalInstance.close('test');
+//    };
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
+//    $scope.cancel = function () {
+//        $uibModalInstance.dismiss('cancel');
+//    };
+//});
