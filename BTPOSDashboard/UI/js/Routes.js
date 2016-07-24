@@ -1,7 +1,7 @@
 // JavaScript source code
 
-var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -114,8 +114,46 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
                 // alert('Route created successfully');
             });
         }
-        alert('saved successfully.');
-        $scope.routes = null;
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
     };
+    //    alert('saved successfully.');
+    //    $scope.routes = null;
+    //};
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
    
+});
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
