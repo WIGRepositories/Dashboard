@@ -425,11 +425,6 @@
     <Content Include="UI\ComposeMail.html" />
     <Content Include="UI\AlertsConfiguration.html" />
     <Content Include="UI\css\style-responsive.css" />
-    <Content Include="UI\css\themes\style2\pink-blue.css" />
-    <Content Include="UI\css\themes\style2\pink-brown.css" />
-    <Content Include="UI\css\themes\style2\pink-dark.css" />
-    <Content Include="UI\css\themes\style2\pink-green.css" />
-    <Content Include="UI\css\themes\style2\pink-grey.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
     <Content Include="UI\DataLoad.html" />
     <Content Include="UI\DefaultRoutePricing.html" />

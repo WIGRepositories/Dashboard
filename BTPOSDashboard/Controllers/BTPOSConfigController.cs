@@ -321,6 +321,30 @@ namespace BTPOSDashboard.Controllers
 
                     break;
 
+                case "CURRENCYFILE":
+
+                   // dt = GetFileContentFormDB("CURRENCYFILE", BTPOSId);
+
+                    indexTbl.Columns.Add(filename);
+                    strBldr.Append("~");
+                    strBldr.AppendLine("USD<0.2>");
+                    strBldr.AppendLine("FRA<0.5>");
+                    strBldr.AppendLine("PND<0.3>");
+                    strBldr.AppendLine("EUR<0.4>");
+
+                    //strBldr.AppendLine("userid<password,userid,active>");
+
+                    //foreach (DataRow dr1 in dt.Rows)
+                    //{
+                    //    strBldr.AppendLine(string.Format("{0}<{1},{2}<{3}>", dr1[0].ToString(), dr1[1].ToString(), dr1[2].ToString(), dr1[3].ToString()));
+                    //}
+
+                    strBldr.Append("~");
+                    dr[0] = strBldr.ToString();
+                    indexTbl.Rows.Add(dr);
+
+                    break;
+
             }
             return indexTbl;
         }
@@ -352,6 +376,61 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
             return Tbl;
+        }
+
+
+        [HttpGet]
+        [Route("api/GetFare")]
+        public DataTable GetFare(string BTPOSId, int routeid, int srcId, int destId,int pssgnr, int childs, int luggage)
+        {
+           // DataTable dt = GetFileContentFormDB("INDEXFILE", null);
+
+            DataTable indexTbl = new DataTable();
+            indexTbl.Columns.Add("GetFare");
+            DataRow dr = indexTbl.NewRow();
+
+            StringBuilder strBldr = new StringBuilder();
+            strBldr.Append("~");
+            strBldr.AppendLine("0.12");
+            //foreach (DataRow dr1 in dt.Rows)
+            //{
+            //    strBldr.AppendLine(dr1[0].ToString());
+            //}
+            strBldr.Append("~");
+            dr[0] = strBldr.ToString();
+            indexTbl.Rows.Add(dr);
+
+            return indexTbl;
+        }
+
+        [HttpGet]
+        [Route("api/ResetPassword")]
+        public DataTable ResetPassword(string BTPOSId, string userid, string oldPwd, string newPwd)
+        {
+            DataTable indexTbl = new DataTable();
+            indexTbl.Columns.Add("Status");
+            indexTbl.Columns.Add("Details");
+            DataRow dr = indexTbl.NewRow();
+            dr[0] = (oldPwd == "1111" || oldPwd == "2222") ? 1 : 0;
+            dr[1] = (oldPwd == "1111" || oldPwd == "2222") ? "Changed successfully" : "invalid userid";
+            indexTbl.Rows.Add(dr);
+
+            return indexTbl;
+        }
+
+        [HttpGet]
+        [Route("api/SaveTrans")]
+        public DataTable SaveTrans(string BTPOSId, int transTypeId, decimal amt, string gatewayId, string datetime, string srcId, string destId)
+        {
+            DataTable indexTbl = new DataTable();
+            indexTbl.Columns.Add("Status");
+            
+            DataRow dr = indexTbl.NewRow();
+            dr[0] =  1;
+            
+            indexTbl.Rows.Add(dr);
+
+            return indexTbl;
         }
     }
 }

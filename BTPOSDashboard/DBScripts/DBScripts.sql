@@ -10263,12 +10263,14 @@ CREATE TABLE [dbo].[UserLicense](
 ) ON [PRIMARY]
 
 GO
-
-/****** Object:  Table [dbo].[UserLicensePayments]    Script Date: 07/19/2016 08:43:15 ******/
+/****** Object:  Table [dbo].[UserLicensePayments]    Script Date: 07/24/2016 21:59:38 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
 GO
 
 CREATE TABLE [dbo].[UserLicensePayments](
@@ -10280,9 +10282,13 @@ CREATE TABLE [dbo].[UserLicensePayments](
 	[Units] [decimal](18, 0) NULL,
 	[StatusId] [int] NULL,
 	[LicensePymtTransId] [int] NULL,
-	[IsRenewal] [int] NULL
+	[IsRenewal] [int] NULL,
+	[TransId] [varchar](50) NULL
 ) ON [PRIMARY]
 
+GO
+
+SET ANSI_PADDING OFF
 GO
 
 ALTER TABLE [dbo].[UserLicensePayments] ADD  CONSTRAINT [DF_UserLicensePayments_IsRenewal]  DEFAULT ((0)) FOR [IsRenewal]
@@ -10306,6 +10312,9 @@ CREATE TABLE [dbo].[UserLicensePymtTransactions](
 	[TransDate] [datetime] NOT NULL,
 	[ULPymtId] [int] NOT NULL,
 	[StatusId] [int] NULL,
+	[PymtTypeId] [int] NOT NULL,
+	[Tax] [decimal](18, 0) NULL,
+	[Discount] [decimal](18, 0) NULL,
 	[Desc] [varchar](250) NULL
 ) ON [PRIMARY]
 
@@ -10522,35 +10531,46 @@ create procedure [dbo].[InsUpdDelUserLicense](
 as
 begin
 
+declare @cnt int = 0,@currDate datetime
+select @currDate = GETDATE()
+
 if @insupddelflag = 'I'
 begin
-INSERT INTO [POSDashboard].[dbo].[UserLicense]
-           ([UserId]
-           ,[FOId]
-           ,[LicenseTypeId]
-           ,[StartDate]
-           ,[ExpiryOn]           
-           ,[GracePeriod]
-           ,[ActualExpiry]
-           ,[LastUpdatedOn]
-           ,[Active]
-           ,[StatusId]
-           ,[RenewFreqTypeId]
-           )
-     VALUES
-           (@UserId
-           ,@FOId
-           ,@LicenseTypeId
-           ,@StartDate
-           ,@ExpiryOn           
-           ,@GracePeriod          
-           ,@ActualExpiry
-           ,@LastUpdatedOn
-           ,@Active
-           ,@StatusId
-           ,@RenewFreqTypeId
-          )
-          end
+
+select @cnt = COUNT(*) from [POSDashboard].[dbo].[UserLicense] where [UserId] = @UserId and [LicenseTypeId] = @LicenseTypeId
+
+	if @cnt = 0 
+	begin
+
+	INSERT INTO [POSDashboard].[dbo].[UserLicense]
+			   ([UserId]
+			   ,[FOId]
+			   ,[LicenseTypeId]
+			   ,[StartDate]
+			   ,[ExpiryOn]           
+			   ,[GracePeriod]
+			   ,[ActualExpiry]
+			   ,[LastUpdatedOn]
+			   ,[Active]
+			   ,[StatusId]
+			   ,[RenewFreqTypeId]
+			   )
+		 VALUES
+			   (@UserId
+			   ,@FOId
+			   ,@LicenseTypeId
+			   ,@StartDate
+			   ,@ExpiryOn           
+			   ,@GracePeriod          
+			   ,@ActualExpiry
+			   ,@currDate
+			   ,@Active
+			   ,@StatusId
+			   ,@RenewFreqTypeId
+			  )
+	end
+
+end
 else
 if @insupddelflag = 'U'
 begin
@@ -10572,8 +10592,7 @@ end
 else
 if @insupddelflag = 'D'
 begin
-DELETE FROM [POSDashboard].[dbo].[UserLicense]
-      WHERE [UserId] = @UserId
+	DELETE FROM [POSDashboard].[dbo].[UserLicense] WHERE [UserId] = @UserId
 end
 end
 
@@ -10608,6 +10627,7 @@ GO
 create procedure [dbo].[InsUpdDelUserLicensePayments](
 @Id int = -1,
 @ULId int,
+@TransId varchar(20),
 @CreatedOn datetime=null,
 @Amount decimal,
 @UnitPrice decimal,
@@ -10615,17 +10635,22 @@ create procedure [dbo].[InsUpdDelUserLicensePayments](
 @StatusId int,
 @LicensePymtTransId int,
 @IsRenewal int,
-
 @insupddelflag char
 )
 as
 begin
 
+declare @cnt int = 0
+
+--select @cnt = COUNT(*) from [POSDashboard].[dbo].[UserLicensePayments] where [ULId] = @ULId
+
+
+	
 if @insupddelflag = 'I'
 begin
 
-select @CreatedOn = GETDATE()
 
+select @CreatedOn = GETDATE()
 
 INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ([ULId]
@@ -10636,6 +10661,7 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ,[StatusId]
            ,[LicensePymtTransId]           
            ,[IsRenewal]
+           ,[TransId]
            )
      VALUES
            (@ULId
@@ -10646,8 +10672,11 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePayments]
            ,@StatusId
            ,@LicensePymtTransId
            ,@IsRenewal
+           ,@TransId
             )
+
 end
+
 else
 if @insupddelflag = 'U'
 begin
@@ -10660,15 +10689,16 @@ UPDATE [POSDashboard].[dbo].[UserLicensePayments]
       ,[StatusId] =@StatusId
       ,[LicensePymtTransId] = @LicensePymtTransId
       ,[IsRenewal] = @IsRenewal     
- WHERE [ULId] = @ULId 
+ WHERE [ULId] = @ULId and transid = @TransId
  
 end
 else
 if @insupddelflag = 'D'
 begin
 DELETE FROM [POSDashboard].[dbo].[UserLicensePayments]
-      WHERE [ULId] = @ULId
+      WHERE [ULId] = @ULId and transid = @TransId
 end
+
 
 --return the fleet owner details
 if @insupddelflag = 'I' or @insupddelflag = 'U'
@@ -10677,7 +10707,20 @@ begin
 select * from Users u
 inner join UserLicense ul on u.Id = ul.UserId
 inner join UserLicensePayments ulp on ulp.ULId = ul.Id
-where ulp.ULId = @ULId
+where ulp.ULId = @ULId and transid = @TransId
+
+SELECT [Id]
+      ,[ULId]
+      ,[CreatedOn]
+      ,[Amount]
+      ,[UnitPrice]
+      ,[Units]
+      ,[StatusId]
+      ,[LicensePymtTransId]
+      ,[IsRenewal]
+      ,[TransId]
+  FROM [POSDashboard].[dbo].[UserLicensePayments]
+  where [ULId] = @ULId and [TransId] = @TransId
 
 end
 
@@ -10698,11 +10741,14 @@ create procedure [dbo].[InsUpdDelUserLicensePymtTransactions](
 @ULPymtId int,
 @StatusId int,
 @Desc varchar(250),
-
+@PymtTypeId int,
+@Tax decimal(18,0) = 0,
+@Discount decimal(18,0) = 0,
 @insupddelflag char
 )
 as
 begin
+declare @LicensePymtTransId int
 
 if @insupddelflag = 'I'
 begin
@@ -10713,9 +10759,10 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePymtTransactions]
            ,[TransDate]
            ,[ULPymtId]           
            ,[StatusId]
+           ,[PymtTypeId]
+           ,[Tax]
+           ,[Discount]
            ,[Desc]
-           
-          
            )
      VALUES
            (@TransId
@@ -10724,10 +10771,18 @@ INSERT INTO [POSDashboard].[dbo].[UserLicensePymtTransactions]
            ,@TransDate
            ,@ULPymtId        
            ,@StatusId
+           ,@PymtTypeId
+           ,@Tax
+           ,@Discount
            ,@Desc
-        
-            )
-          end
+            ) 
+            SELECT @LicensePymtTransId = SCOPE_IDENTITY()  
+            
+            update [POSDashboard].[dbo].[UserLicensePayments]
+            set [LicensePymtTransId]  = @LicensePymtTransId 
+            where [Id] = @ULPymtId 
+
+end
 else
 if @insupddelflag = 'U'
 begin
@@ -10740,6 +10795,9 @@ UPDATE [POSDashboard].[dbo].[UserLicensePymtTransactions]
       ,[ULPymtId] = @ULPymtId
       ,[StatusId] =@StatusId
       ,[Desc] = @Desc
+      ,[PymtTypeId]= @PymtTypeId
+      ,[Tax] = @Tax
+      ,[Discount] = @Discount
     
      
  WHERE [Id] = @Id 
@@ -10750,9 +10808,8 @@ begin
 DELETE FROM [POSDashboard].[dbo].[UserLicensePymtTransactions]
       WHERE [Id] = @Id 
 end
+
 end
-
-
 
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelLicenseDetails]    Script Date: 07/19/2016 12:45:42 ******/
@@ -11105,6 +11162,80 @@ else if @selectedId = 5
 select * from Stops
  
 end
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelUserLicenseDetails]    Script Date: 07/24/2016 22:33:52 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+create PROCEDURE [dbo].[InsUpdDelUserLicenseConfirmDetails]
+(@foId int,
+@TransId varchar(50),
+@GatewayTransId varchar(50),
+@ULId int,
+@ULPymtId int,
+@units int,
+@insupddelFlag varchar(1))
+	
+AS
+BEGIN
+declare @expDt datetime,  @currDate datetime
+select @currDate = GETDATE()
+
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+    /*
+    1) update userlicense with start and expiry dates
+    2) update userlicensepaymenttransactions table with gatewayTransId 
+     --5)insert an alert to notify admin
+    --6)update the owner ship for bt pos if needed
+    
+    --7)generate a SO and shipping order for the BT POS
+    --8)insert SO and shipping order notification for admin
+    --9)update edit history
+    --10) insert a notfication for user also
+    --11)create dashboard login credentails also
+    --12) update the inventory status also
+    */
+
+--all the benefits that the user gets as part of license will be stored 
+    --4)features and their values will be stored into ULFeatures Table    
+    --ULPid, featureid, value,desc   
+   select @expDt = @currDate + (select [units] from UserLicensePayments)
+    UPDATE [POSDashboard].[dbo].[UserLicense]
+   SET 
+      [StartDate] = @currDate
+      ,[ExpiryOn] = @expDt     
+      ,[ActualExpiry] = (@expDt + (select [graceperiod] from UserLicense)) 
+      ,[LastUpdatedOn] = @currDate
+      ,[Active] = 1
+      ,[StatusId] = 3      
+ WHERE [Id] = @ULId
+
+UPDATE [POSDashboard].[dbo].[UserLicensePymtTransactions]
+   SET [GatewayTransId] = @GatewayTransId       
+      ,[StatusId] =3
+      where [TransId] = @TransId
+      
+     UPDATE BTPOSDetails
+        SET FleetOwnerId = @foId
+        ,CompanyId = (select [CompanyId] from FleetOwner where Id = @foId)
+    FROM BTPOSDetails
+    INNER JOIN (
+        SELECT TOP(@units) ID FROM BTPOSDetails WHERE FleetOwnerId = 1
+         ORDER BY ID
+    ) AS InnerMyTable ON BTPOSDetails.ID = InnerMyTable.ID
+     
+      
+
+END
 
 
 
