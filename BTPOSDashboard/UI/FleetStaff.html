@@ -486,41 +486,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                    <thead>
-
-                                        <tr>
-                                            <th>Vehicle Reg.No</th>
-                                            <th>User Name</th>
-                                            <th>Staff Role</th>
-                                            <th>From </th>
-                                            <th>To</th>
-                                            <th>Edit</th>
-                                            <th>Delete</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr ng-repeat="Fleet in FleetStaff" class="gradeA">
-                                            <td>{{Fleet.VehicleRegNo}}</td>
-                                            <td>{{Fleet.UserName}}</td>
-                                            <td>{{Fleet.rolename}}</td>
-                                            <td>{{Fleet.FromDate}}</td>
-                                            <td>{{Fleet.ToDate}}</td>
-                                            <td>
-
-                                                <button type="button" data-target="#Modal-header-primary" data-toggle="model" class="btn btn-default btn-xs" ng-click="setFleet(Fleet);">
-                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                    Edit
-                                                </button>
-                                            <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
-
-                                        </tr>
-                                    </tbody>
-
-                                </table>
-
                                 <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -618,6 +583,42 @@
                                     </div>
 
                                 </div>
+                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Vehicle Reg.No</th>
+                                            <th>User Name</th>
+                                            <th>Staff Role</th>
+                                            <th>From </th>
+                                            <th>To</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="Fleet in FleetStaff" class="gradeA">
+                                            <td>{{Fleet.VehicleRegNo}}</td>
+                                            <td>{{Fleet.UserName}}</td>
+                                            <td>{{Fleet.rolename}}</td>
+                                            <td>{{Fleet.FromDate}}</td>
+                                            <td>{{Fleet.ToDate}}</td>
+                                            <td>
+
+                                                <button type="button" data-target="#Modal-header-primary" data-toggle="model" class="btn btn-default btn-xs" ng-click="setFleet(Fleet);">
+                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                    Edit
+                                                </button>
+                                            <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                                
                             </div>
 
                         <!--</div>

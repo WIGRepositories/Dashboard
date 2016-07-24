@@ -12,7 +12,9 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-   
+    $scope.setFleet = function (Fleet) {
+        $scope.currFleet = Fleet;
+    };
     $scope.GetCompanies = function () {
 
         var vc = {
@@ -62,9 +64,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             $scope.userRoles = res.data;
         });
     }
-    $scope.setFleet = function (Fleet) {
-        $scope.currFleet= Fleet;
-    };
+   
 
 
     $scope.GetVehicleConfig = function () {
