@@ -151,8 +151,8 @@
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
-                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></>
-                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerVehicleLayOut</span></a></>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Vehicle Layout</span></a></>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle LayOut</span></a></>
                             </ul>
 
                         </li>
@@ -386,7 +386,7 @@
                                                                 <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>
                                                             </div>
 
-                                                            <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade" style="width:">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header modal-header-primary">
@@ -479,16 +479,18 @@
                                                                                     <div class="col-md-6">
                                                                                         <label for="Description" class="col-md-6 control-label">Company: <span class='require'>*</span></label>
 
-                                                                                        <div class="col-md-6"><select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();">
-                                                                                      <option value="">Select</option>
-                                                                                    </select></div>
+                                                                                        <div class="col-md-6">
+                                                                                            <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();">
+                                                                                                <option value="">Select</option>
+                                                                                            </select>
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <label for="Description" class="col-md-6 control-label">Company:<span class='require'>*</span></label>
 
                                                                                         <div class="col-md-6">
                                                                                             <input type="date" ng-model="initdata.newfleet.DateOfRegistration" />
-                                                                                            
+
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -505,14 +507,14 @@
                                                                                         </div>
 
                                                                                     </div>
-                                                                                   
+
                                                                                     <div class="col-md-6">
                                                                                         <label for="selCountry" class="col-md-6 control-label">Seating Capacity</label>
 
                                                                                         <div class="col-md-6">
                                                                                             <div>
                                                                                                 <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span>
-                                                                                               
+
 
                                                                                             </div>
                                                                                         </div>
@@ -821,7 +823,7 @@
 
                         <!--END FOOTER-->
 
-                    </div><div id="footer">
+                    <div id="footer">
                         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
                 </div>

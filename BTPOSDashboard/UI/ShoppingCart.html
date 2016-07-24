@@ -25,7 +25,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">BTPOS Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">Smart Tickets Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -361,7 +361,7 @@
                                                     <button type="button" data-type="jplist-grid-view" class="jplist-view jplist-grid-view btn btn-default"><i class="fa fa-th"></i></button>
                                                     <button type="button" data-type="jplist-thumbs-view" class="jplist-view jplist-thumbs-view btn btn-default"><i class="fa fa-reorder"></i></button>
                                                 </div>
-                                                <ul class="nav navbar navbar-top-links navbar-right mbn">
+                                                <!--<ul class="nav navbar navbar-top-links navbar-right mbn">
                                                     <li class="dropdown">
                                                         <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i><span class="badge badge-green">{{additem.length}}</span></a>
 
@@ -387,7 +387,7 @@
                                                             
                   
                                                            
-                                                                <!----   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
+                                                                --   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>
                                                            
                                                     <a href="CheckOut.html"> <p><input type="button" value="CheckOut" data-target="#Modal-header-new" data-toggle="modal" style="margin: 10px;" ng-click="Save(items1);" /></p></a>
 
@@ -396,7 +396,7 @@
 
 
                                                     </li> 
-                                                </ul>
+                                                </ul>-->
                                                               
                                                 <div class="topbar-main">
                                                               
@@ -404,7 +404,7 @@
                                                                
                                                           
                                                         <li class="dropdown topbar-user">
-                                                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/adapter.jpeg" height="30" width="30" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{i.ItemName}}</span>&nbsp;<span class="caret"></span></a>
+                                                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i><span class="badge badge-green">{{additem.length}}</span><span class="hidden-xs">{{i.ItemName}}</span>&nbsp;<span class="caret"></span><p>{{additem.length}}items added to Cart</p></a>
                                                             <ul class="dropdown-menu dropdown-user pull-right">
                                                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>My Profile</a></li>
                                                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -413,6 +413,9 @@
                                                                 <li class="divider"></li>
                                                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                                                                 <li><a href="login.html"><i class="fa fa-key"></i>Log Out</a></li>
+                                                                <li><a  href="#" class="dropdown-toggle"><img src="images/adapter.jpeg" height="20" width="20" alt="" class="img-responsive img-circle" /><span class="hidden-xs">{{i.ItemName}}</span></a></li>
+
+                                                                <a href="CheckOut.html"><p><input type="button" value="CheckOut" data-target="#Modal-header-new" data-toggle="modal" style="margin: 10px;" ng-click="Save(items1);" /></p></a>
                                                             </ul>
                                                     </li>
                                                     </ul>
@@ -475,7 +478,7 @@
 
                                                 <ul class="box text-shadow ul-li-list">
                                                     <!--<item>1</item>-->
-                                                    <li class="list-item"ng-repeat="i in items">
+                                                    <li class="list-item"ng-repeat="i in sitems">
                                                         <div class="list-box">
                                                             <!--<img/>-->
                                                             <div class="img"><a href="cables.html"><img src="images/adapter.jpeg" height="70" width="70" alt="" title="" /></a></div>
@@ -497,11 +500,11 @@
                                                                         <input type="hidden" name="item_id" value="JDR">
                                                                         <input type="hidden" name="product_shipping_class" value="0">
                                                                         <input type="hidden" name="cid" value="000">
-                                                                        <p>
-                                                                            <button type="button" class=" fa fa-plus" style="width:100px;" ng-click="increasecart()"></button>
-                                                                            <button type="button" class=" fa fa-minus" style="width:100px;" ng-click="decrementcart()"></button>
-                                                                            <!--<input type='button' name='add' onclick='javascript: document.getElementById("qty").value++;' value='+' />
-                                                                            <input type='button' name='subtract' onclick='javascript: document.getElementById("qty").value--;' value='-' />-->
+                                                                       
+                                                                        <p id="qty">
+                                                                            <button type="button" class=" fa fa-plus" style="width:100px;" onclick="increasecart(i)"></button>
+                                                                            <button type="button" class=" fa fa-minus" style="width:100px;" onclick="subtractQty(i)"></button>
+
                                                                         </p>
                                                                         <p><input type="button" value="Add to Cart" style="width:100px;" ng-click="addtocart(i);">
                                                                        <input type="button" value="Remove from Cart" style="width:125px;"></p>
@@ -692,6 +695,17 @@
                 <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
                 <script src="js/source.js"></script>
                 <script src="js/ShoppingCart.js"></script>
+
+           
+
+            <script type="text/javascript">
+                function subtractQty() {
+                    if (document.getElementById("qty").value - 1 < 0)
+                        return;
+                    else
+                        document.getElementById("qty").value--;
+                }
+            </script>
 
 
 </body>
