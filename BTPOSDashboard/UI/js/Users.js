@@ -2,7 +2,7 @@
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -229,15 +229,46 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             //    'Content-Type': undefined
             data: userrole
         }
+        $http(req).then(function (response) {
 
-        $http(req).then(function (res) {
-            alert('Saved successfully');
-            $scope.s = null;
-            $scope.ur = null;
-            $scope.uu = null;
+            $scope.showDialog("Saved successfully!");
+
+                    $scope.s = null;
+                    $scope.ur = null;
+                    $scope.uu = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
+        
+       
+    };
 
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
     }
+
+    //    $http(req).then(function (res) {
+    //        alert('Saved successfully');
+    //        $scope.s = null;
+    //        $scope.ur = null;
+    //        $scope.uu = null;
+    //    });
+
+    //}
    
     $scope.setUserRoles = function (ur) {
         $scope.UserRoles = ur;

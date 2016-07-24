@@ -1,7 +1,7 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage','ui.bootstrap'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage,$uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -100,13 +100,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             data: Stops
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
 
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
-
-
-        $scope.Stops1 = null;
+        $scope.currGroup = null;
     };
+
+    $scope.Stops = null;
 
     $scope.setStops = function (usr) {
         $scope.Stops1 = usr;
