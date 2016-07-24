@@ -433,35 +433,35 @@
                                                                                         <div class="col-md-6">
                                                                                             <label for="Address Id" class="col-md-3 control-label">Address:</label>
 
-                                                                                            <div class="col-md-9"><textarea rows="3" class="form-control" ng-model="Group.Address"></textarea></div>
+                                                                                            <div class="col-md-9"><textarea rows="2" class="form-control" ng-model="Group.Address"></textarea></div>
 
-                                                                                            <!--<label for="Fax" class="col-md-3 control-label">Address <span class='require'></span></label>
-                                                                                            <div class="col-md-7"><input id="Address" type="text" ng-model="Group.Address" class="form-control" /><span class="help-block"></span></div>-->
-                                                                                        </div>
+                                                                                                 </div>
                                                                                      
                                                                                     </div>
-                                                                                <div class="row">                                                                                   
+                                                                                <div class="row" style="margin-top:5px">                                                                                   
                                                                                     
                                                                                        <div class="col-md-6">
                                                                                            <label for="inputMiddleName" class="col-md-3 control-label">Country:<span class='require'>*</span></label>                                                                                          
-                                                                                           <select class="col-md-9" ng-model="Group.Country">
-                                                                                               <option value="select Country">select Country</option>
-                                                                                               <option value="Antartica">Antarctica</option>
-                                                                                               <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                                                                                               <option value="Argentina">Argentina</option>
-                                                                                               <option value="Armenia">Armenia</option>
-                                                                                               <option value="Aruba">Aruba</option>
-                                                                                               <option value="Australia">Australia</option>
-                                                                                           </select>
+                                                                                           <div class="col-md-9">
+                                                                                               <select class="col-md-12 form-control" ng-model="Group.Country">
+                                                                                                   <option value="select Country">select Country</option>
+                                                                                                   <option value="Antartica">Antarctica</option>
+                                                                                                   <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                                                                   <option value="Argentina">Argentina</option>
+                                                                                                   <option value="Armenia">Armenia</option>
+                                                                                                   <option value="Aruba">Aruba</option>
+                                                                                                   <option value="Australia">Australia</option>
+                                                                                               </select>
+                                                                                           </div>
                                                                                          </div> 
-                                                                                                                                                                         
+                                                                                   
                                                                                         <div class="col-md-6">
                                                                                             <label for="ZipCode" class="col-md-3 control-label">ZipCode:<span class='require'></span></label>
 
                                                                                             <div class="col-md-9"><input id="ZipCode" type="text" ng-model="Group.ZipCode" class="form-control" /><span class="help-block"></span></div>
 
                                                                                         </div>
-                                                                                       
+
                                                                                     </div>                                                                               
                                                                                       <div class="row">
                                                                                     
@@ -568,7 +568,32 @@
                                                                                 </div>
                                                                            
                                                                         </div>
-                                                                        <div class="row">
+                                                                    <div class="row" style="margin-top:5px">
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="inputMiddleName" class="col-md-3 control-label">Country:<span class='require'>*</span></label>
+                                                                            <div class="col-md-9">
+                                                                                <select class="col-md-12 form-control" ng-model="currGroup.Country">
+                                                                                    <option value="select Country">select Country</option>
+                                                                                    <option value="Antartica">Antarctica</option>
+                                                                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                                                    <option value="Argentina">Argentina</option>
+                                                                                    <option value="Armenia">Armenia</option>
+                                                                                    <option value="Aruba">Aruba</option>
+                                                                                    <option value="Australia">Australia</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <label for="ZipCode" class="col-md-3 control-label">ZipCode:<span class='require'></span></label>
+
+                                                                            <div class="col-md-9"><input id="ZipCode" type="text" ng-model="currGroup.ZipCode" class="form-control" /><span class="help-block"></span></div>
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                        <!--<div class="row">
                                                                             
                                                                                 <div class="col-md-6">
                                                                                     <label for="inputMiddleName" class="col-md-3 control-label">Country:<span class='require'>*</span></label>
@@ -588,7 +613,7 @@
 
                                                                                 </div>
                                                                            
-                                                                        </div>
+                                                                        </div>-->
                                                                         <div class="row">
                                                                            
                                                                                 <div class="col-md-6">
