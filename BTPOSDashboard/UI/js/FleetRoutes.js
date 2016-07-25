@@ -124,12 +124,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
     }
 
-    $scope.save = function (FleetRoute) {
-        if(FleetRoute == null || FleetRoutes.VehicleId == null){
+    $scope.save = function (currFR) {
+        var FleetRoutes = currFR.newfleet;
+
+        if (FleetRoutes == null || FleetRoutes.v == null) {
             alert('Please select a type VehicleId');
             return;
         }
-        if(FleetRoute == null || FleetRoutes.RouteId == null){
+        if(FleetRoutes == null || FleetRoutes.RouteId == null){
             alert('Please select a type  RouteId ');
             return;
         }
@@ -210,6 +212,32 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
         $scope.currGroup = null;
     };
+    $scope.testdel = function (R) {
+        var FRoutes = {
+
+            Id: -1,
+            VehicleId: R.Id,
+            RouteId: R.RouteId,
+            EffectiveFrom: R.fd,
+            EffectiveTill: R.td,
+            insupddelflag: 'D'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetRoutes/NewFleetRoutes',
+            data: FRoutes
+        }
+        $http(req).then(function (response) {
+            alert('Removed successfully.');
+
+            $http.get('http://localhost:1476/api/FleetRoutes/getFleetRoutesList?VehicleId=' + R.VehicleId).then(function (res, data) {
+                $scope.FleetRoute = res.data;
+            });
+
+        });
+       
+    }
 
     $scope.setRoute = function (R) {
         $scope.currFR = R;
