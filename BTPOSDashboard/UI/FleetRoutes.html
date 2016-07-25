@@ -391,7 +391,7 @@
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Routes</h4>
                                                                 </div>
-                                                                <div class="modal-body" ng-model="currGroup">
+                                                                <div class="modal-body" ng-model="currFR">
 
                                                                     <div class="row mbm">
 
@@ -406,7 +406,7 @@
                                                                         </div>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp    " ng-change="GetFleetOwners();">
+                                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
 
                                                                                 <option value="">Select</option>
                                                                             </select>
@@ -422,7 +422,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model=" s" ng-change="GetRoutesForFO();">
+                                                                        <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -437,7 +437,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
 
-                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="initdata.newfleet.v">
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="currFR.v">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -451,7 +451,7 @@
                                                                         <label for="descr" class="col-md-4 control-label">Route: <span class='require'></span></label>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="r.routename for r in vehicles.Table1 track by r.ID" class="form-control" ng-model="initdata.newfleet.r">
+                                                                        <select ng-options="r.routename for r in vehicles.Table1 track by r.ID" class="form-control" ng-model="currFR.r">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -465,7 +465,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
-                                                                        <input type="date" ng-model="initdata.newfleet.fd" />
+                                                                        <input type="date" ng-model="currFR.fd" />
 
                                                                     </div>
                                                                 </div>
@@ -478,13 +478,13 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <!----  <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>--->
-                                                                        <input type="date" ng-model="initdata.newfleet.td" />
+                                                                        <input type="date" ng-model="currFR.td" />
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="button" class="btn btn-primary" ng-click="save(FleetRoute);">Save</button>
+                                                                        <button type="button" class="btn btn-primary" ng-click="save(currFR);">Save</button>
                                                                         <button type="button" class="btn btn-default">Close</button>
                                                                     </div>
                                                                 </div>

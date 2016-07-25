@@ -124,7 +124,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
     }
 
-    $scope.save = function (FleetRoute) {
+    $scope.save = function (initdata) {
+        var FleetRoute = initdata.newfleet;
         if(FleetRoute == null || FleetRoutes.VehicleId == null){
             alert('Please select a type VehicleId');
             return;
