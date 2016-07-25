@@ -5204,7 +5204,7 @@ CREATE procedure [dbo].[ValidateCredentials](@logininfo varchar(50) = null, @pas
 as
 begin
 
-select logininfo,firstname, lastname,u.Id,firstname+' '+lastname as uname ,r.Name as RoleName,ur.roleid
+select logininfo,firstname, lastname,u.Id,firstname+' '+lastname as uname ,r.Name as RoleName,ur.roleid,u.CompanyId,ur.UserId
 from userlogins ul 
 inner join users u on 
 u.id = ul.userid

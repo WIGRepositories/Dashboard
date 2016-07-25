@@ -129,7 +129,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Id: Fleet.Id,
             VehicleRegNo: Fleet.VehicleRegNo,
             VehicleTypeId: (Fleet.vt != null) ? Fleet.vt.Id : Fleet.VehicleTypeId,
-            VehicleLayoutId: (Fleet.vl != null) ? Fleet.vl.Id : Fleet.VehicleLayoutId,
+            VehicleLayoutId: (Fleet.vl != null) ? Fleet.vl.Id : Fleet.LayoutTypeId,
             FleetOwnerId: $scope.s.Id,
             CompanyId: $scope.cmp.Id,
             ServiceTypeId: (Fleet.st != null) ? Fleet.st.Id : Fleet.ServiceTypeId,
@@ -154,6 +154,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         $http(req).then(function (res) {
             $scope.showDialog("Updated successfully!");
+            GetFleetDetails();
         });
 
 
