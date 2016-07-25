@@ -508,9 +508,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat=" role in cmproles">
+                                                <tr ng-repeat=" role in cmproles" ng-on-finish-render>
                                                     <td>
-                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-model="role.selected" ng-checked="exists(role, checkedArr)" ng-click="toggle(role, checkedArr);" />
+                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(role, checkedArr)" ng-click="toggle(role, checkedArr);" />
                                                     </td>
                                                     <td>{{role.rolename}}</td>
                                                     <td>{{role.description}}</td>
@@ -523,7 +523,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveCompanyRoles();">Save</button>
 
                                         <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                                     </div>
