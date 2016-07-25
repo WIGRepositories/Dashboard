@@ -363,9 +363,9 @@
                                                 <div class="table-container">
 
                                                     <div class="col-md-5">
-                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getRolesForCompany(s)" id="test">
-                                                            <option value="">Select</option>
-                                                        </select>
+                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id"  ng-model="s" ng-change="getRolesForCompany(s)" id="test">
+    <option value="">Select</option>
+</select>
                                                     </div>
 
 
@@ -498,7 +498,7 @@
                                             </div>
                                         </div>
 
-                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter" >
                                             <thead>
                                                 <tr>
                                                     <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
