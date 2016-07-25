@@ -523,6 +523,7 @@
                                                 <td>{{R.RouteName}}</td>
                                                 <td>{{R.EffectiveFrom}}</td>
                                                 <td>{{R.EffectiveTill}}</td>
+                                               
                                                 <td>
 
                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setRoute(R);">
@@ -530,7 +531,8 @@
                                                         Edit
                                                     </button>
                                                 </td>
-                                                <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+                                                <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(R);"><i class="fa fa-trash-o"></i></a></div></td>
+                                                <!--<td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>-->
 
 
                                             </tr>
@@ -592,7 +594,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="r.routename for r in vehicles.Table1 track by r.ID" class="form-control" ng-model="initdata.newfleet.r">
+                                                            <select ng-options="r.routename for r in vehicles.Table1 track by RouteId" class="form-control" ng-model="initdata.newfleet.r">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
