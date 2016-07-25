@@ -69,6 +69,14 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.cmpdata = res.data;
         });
     }
+
+
+    //This will hide the DIV by default.
+    $scope.IsHidden = true;
+    $scope.ShowHide = function () {
+        //If DIV is hidden it will be visible and vice versa.
+        $scope.IsHidden = $scope.IsHidden ? false : true;
+    }
   
     $scope.GetFORoutes = function () {
 
@@ -109,6 +117,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $http.get('http://localhost:1476/api/FleetOwnerRouteDetails/GetFleetOwnerRouteDetails?fleetownerid=' + $scope.s.Id + '&routeid=' + $scope.r.RouteId).then(function (res, data) {
             $scope.RouteDetails = res.data;
         });
+      
     }
 
     $scope.SetCurrStop = function (currStop, indx) {

@@ -7,6 +7,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
@@ -111,7 +112,24 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
+
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userCmpId) {
+                        $scope.s = res.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.getRolesForCompany($scope.s);
         });
+
+      
 
     }
 

@@ -9,7 +9,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
-    $scope.UserCmpid = $scope.userdetails[0].CompanyId;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
     $scope.UserCmp = $scope.userdetails[0].companyName;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -21,6 +21,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetCompanies = function () {    
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
+
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < response.data.length; i++) {
+                    if (response.data[i].Id == $scope.userCmpId) {
+                        $scope.cmp = response.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled =false;
+            }
+
+            $scope.getUserRolesForCompany($scope.cmp);
         });
         if ($scope.Roleid != 1) { $scope.cmpId = $scope.UserCmpid;}
     }
