@@ -616,6 +616,7 @@
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
+    <Content Include="UI\TroubleTicketHistory.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TroubleTicketReports.html" />
     <Content Include="UI\TypeGroups.html" />

@@ -10,13 +10,11 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-    $scope.setCurrRole = function (grp) {
-        $scope.currRole = grp;
+    $scope.setCurrRole = function (R) {
+        $scope.currRole = R;
     };
 
-    $scope.clearGroup = function () {
-        $scope.currRole = null;
-    };
+   
 
 
     $scope.GetCompanies = function () {
@@ -147,6 +145,35 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
         });
         $scope.currGroup = null;
     };
+
+
+
+
+    $scope.testdel = function (R) {
+        var FAvaliability = {
+
+            Id: -1,
+            VehicleId: R.Id,           
+            FromDate: R.fd,
+            ToDate: R.td,
+            insupddelflag: 'D'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetAvailability/SetFleetAvailability',
+            data: FAvaliability
+        }
+        $http(req).then(function (response) {
+            alert('Removed successfully.');
+
+            $http.get('http://localhost:1476/api/FleetAvailability/GetFleetAvailability?VehicleId=' + R.VehicleId).then(function (res, data) {
+                $scope.FleetAvailability = res.data;
+            });
+
+        });
+
+    }
 
     $scope.showDialog = function (message) {
 

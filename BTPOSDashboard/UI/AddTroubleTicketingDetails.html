@@ -393,12 +393,18 @@
                                                                             <label for="Type" class="col-md-2 control-label">Type:</label>
                                                                             <div class="col-md-3">
                                                                                 <select ng-model="Group.Type" style="width:100%">
+                                                                                    <!--Type Group: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">-->
+                                                                                    <option value="">All</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <!--<div class="col-md-3">
+                                                                                <select ng-model="Group.Type" style="width:100%">
                                                                                     <option value="">Select</option>
                                                                                     <option value="1">A</option>
                                                                                     <option value="2">N</option>
 
                                                                                 </select>
-                                                                            </div>
+                                                                            </div>-->
                                                                         </div>
 
 
