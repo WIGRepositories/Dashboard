@@ -38,7 +38,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
             else {
                 document.getElementById('test').disabled = false;
-            }
+        }
             $scope.GetFleetOwners($scope.cmp);
         });
 
@@ -208,12 +208,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
 
         var FleetRouters = {
-            Id:-1 ,
+        Id: -1,
             VehicleId: newFR.v.Id,          
             RouteId: newFR.r.RouteId,
             EffectiveFrom: newFR.fd,
             EffectiveTill: newFR.td,
-            insupddelflag:'I'            
+        insupddelflag: 'I'
         };
 
         var req = {
@@ -234,11 +234,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }, function (errres) {
             var errdata = errres.data;
             var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : 
+errdata.Message;
             $scope.showDialog(errmssg);
         });
         $scope.currGroup = null;
     };
+
     $scope.testdel = function (R) {
         var FRoutes = {
 
@@ -258,7 +260,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/FleetRoutes/getFleetRoutesList?VehicleId=' + R.VehicleId).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetRoutes/getFleetRoutesList?VehicleId=' + 
+R.VehicleId).then(function (res, data) {
                 $scope.FleetRoute = res.data;
             });
 

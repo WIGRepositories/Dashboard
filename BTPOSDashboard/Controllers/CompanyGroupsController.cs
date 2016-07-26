@@ -81,7 +81,7 @@ namespace POSDBAccess.Controllers
 
 
         [HttpPost]
-
+        [Route("api/CompanyGroups/SaveCompanyGroups")]
         public HttpResponseMessage SaveCompanyGroups(CompanyGroups n)
         {
             //DataTable Tbl = new DataTable();
@@ -265,6 +265,75 @@ namespace POSDBAccess.Controllers
                 cmd.Parameters.Add(gsac);
                 
                 cmd.ExecuteScalar();
+                conn.Close();
+
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/SaveCmpRoles")]
+        public HttpResponseMessage SaveCmpRoles(IEnumerable<CompanyRoles> cRoles) 
+        {
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+
+                //connect to database
+
+                // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelCompanyRoles";
+                cmd.Connection = conn;
+
+                conn.Open();
+
+                foreach (CompanyRoles r in cRoles)
+                {
+                    SqlParameter gsa = new SqlParameter();
+                    gsa.ParameterName = "@active";
+                    gsa.SqlDbType = SqlDbType.Int;
+                    gsa.Value = r.Active;
+                    cmd.Parameters.Add(gsa);
+
+                    SqlParameter gsn = new SqlParameter();
+                    gsn.ParameterName = "@roleid";
+                    gsn.SqlDbType = SqlDbType.Int;
+                    gsn.Value = r.RoleId;
+                    cmd.Parameters.Add(gsn);
+
+                    SqlParameter gsab = new SqlParameter();
+                    gsab.ParameterName = "@companyid";
+                    gsab.SqlDbType = SqlDbType.Int;
+                    gsab.Value = r.CompanyId;
+                    cmd.Parameters.Add(gsab);
+
+                    SqlParameter f = new SqlParameter();
+                    f.ParameterName = "@insupdflag";
+                    f.SqlDbType = SqlDbType.Int;
+                    f.Value = r.insdelflag;
+                    cmd.Parameters.Add(f);
+
+                    SqlParameter gsac = new SqlParameter("@Id", SqlDbType.Int);
+                    gsac.Value = r.Id;
+                    gsac.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(gsac);
+
+                cmd.ExecuteScalar();
+                cmd.Parameters.Clear();
+                }
                 conn.Close();
 
                 return new HttpResponseMessage(HttpStatusCode.OK);

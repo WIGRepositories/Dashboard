@@ -38,10 +38,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-
-
-   
-
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
     $scope.FORoutes = [];

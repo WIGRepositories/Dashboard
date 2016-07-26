@@ -36,7 +36,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         //}
    
         var SelNewObjects = {
-            Id:-1,
+            Id:1,
             Name: NewObject.Name,
             Description: NewObject.Description,
             Path: NewObject.Path,
@@ -143,7 +143,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 });
 
-myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
     $scope.ok = function () {
