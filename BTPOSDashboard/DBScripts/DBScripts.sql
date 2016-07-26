@@ -1463,7 +1463,7 @@ begin
 select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name) 
 and Id <> @Id
 
-if @cnt =0
+if @cnt > 0
 
 
 update Objects 
@@ -1472,7 +1472,7 @@ set
 ,[Active] = @Active
 ,[Description] = @Description
 ,[Path]=@Path
-where Id = @Id
+where Name = @Name
 
 
 
@@ -5204,12 +5204,13 @@ CREATE procedure [dbo].[ValidateCredentials](@logininfo varchar(50) = null, @pas
 as
 begin
 
-select logininfo,firstname, lastname,u.Id,firstname+' '+lastname as uname ,r.Name as RoleName,ur.roleid,u.CompanyId,ur.UserId
+select logininfo,firstname, lastname,u.Id,firstname+' '+lastname as uname ,r.Name as RoleName,ur.roleid,u.CompanyId,FO.UserId
 from userlogins ul 
 inner join users u on 
 u.id = ul.userid
 left outer join UserRoles ur on ur.UserId=u.Id
 left outer join roles r on r.id = ur.roleid
+left outer join FleetOwner FO on FO.UserId=u.Id
 where LoginInfo=@logininfo and [PassKey]=@passkey
 
 end

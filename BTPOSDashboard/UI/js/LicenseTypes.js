@@ -108,49 +108,49 @@ $scope.getselectval = function (seltype) {
     });
 }
 
-$scope.save = function (License) {
+//$scope.save = function (License) {
 
-    if (License == null) {
-        alert('Please enter values.');
-        return;
-    }
+//    if (License == null) {
+//        alert('Please enter values.');
+//        return;
+//    }
 
-    if (License.FeatureName == null) {
-        alert('Please enter FeatureName.');
-        return;
-    }
-    if (License.FeatureValue == null) {
-        alert('Please enter FeatureValue.');
-        return;
-    }
+//    if (License.FeatureName == null) {
+//        alert('Please enter FeatureName.');
+//        return;
+//    }
+//    if (License.FeatureValue == null) {
+//        alert('Please enter FeatureValue.');
+//        return;
+//    }
 
 
-    var currLicense = {
+//    var currLicense = {
 
-        Id: License.Id,
-        LicenseTypeId: License.LicenseTypeId,
-        FeatureName: License.FeatureName,
-        FeatureValue: License.FeatureValue,
-        FeatureType: License.FeatureType,
-        Description: License.Description,
-        effectiveFrom: License.effectiveFrom,
-        effectiveTill: License.effectiveTill,
-        Label: License.Label,
-        labelclass: License.labelclass,
+//        Id: License.Id,
+//        LicenseTypeId: License.LicenseTypeId,
+//        FeatureName: License.FeatureName,
+//        FeatureValue: License.FeatureValue,
+//        FeatureType: License.FeatureType,
+//        Description: License.Description,
+//        effectiveFrom: License.effectiveFrom,
+//        effectiveTill: License.effectiveTill,
+//        Label: License.Label,
+//        labelclass: License.labelclass,
            
-    };
+//    };
 
-    var req = {
-        method: 'POST',
-        url: 'http://localhost:1476/api/license/savelicense',
-        data: currLicense
-    }
-    $http(req).then(function (response) { });
+//    var req = {
+//        method: 'POST',
+//        url: 'http://localhost:1476/api/license/savelicense',
+//        data: currLicense
+//    }
+//    $http(req).then(function (response) { });
 
 
-    $scope.currGroup = null;
+//    $scope.currGroup = null;
 
-};
+//};
 
     
 

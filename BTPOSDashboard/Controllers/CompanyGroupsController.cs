@@ -46,8 +46,42 @@ namespace POSDBAccess.Controllers
             return Tbl;
         }
 
-        [HttpPost]
+        [HttpGet]
+        [Route("api/Getfleet")]
+        public DataTable Getfleet()
+        {
+            DataTable Tbl = new DataTable();
 
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "getFleetOwner";
+
+            //SqlParameter uid = new SqlParameter();
+            //uid.ParameterName = "@fleetownerid";
+            //uid.SqlDbType = SqlDbType.Int;
+            //uid.Value = fleetownerid;
+            //cmd.Parameters.Add(uid);
+
+
+            cmd.Connection = conn;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            Tbl = ds.Tables[0];
+
+            // int found = 0;
+            return Tbl;
+        }
+
+
+        [HttpPost]
+        [Route("api/CompanyGroups/SaveCompanyGroups")]
         public HttpResponseMessage SaveCompanyGroups(CompanyGroups n)
         {
             //DataTable Tbl = new DataTable();
@@ -247,8 +281,8 @@ namespace POSDBAccess.Controllers
         }
 
         [HttpPost]
-        [Route("api/SaveCompanyRoles")]
-        public HttpResponseMessage SaveCompanyRoles(IEnumerable<CompanyRoles> cRoles)
+        [Route("api/SaveCmpRoles")]
+        public HttpResponseMessage SaveCmpRoles(IEnumerable<CompanyRoles> cRoles) 
         {
             SqlConnection conn = new SqlConnection();
             try
@@ -274,28 +308,28 @@ namespace POSDBAccess.Controllers
                     gsa.Value = r.Active;
                     cmd.Parameters.Add(gsa);
 
-                SqlParameter gsn = new SqlParameter();
-                gsn.ParameterName = "@roleid";
-                gsn.SqlDbType = SqlDbType.Int;
-                gsn.Value = r.RoleId;
-                cmd.Parameters.Add(gsn);
+                    SqlParameter gsn = new SqlParameter();
+                    gsn.ParameterName = "@roleid";
+                    gsn.SqlDbType = SqlDbType.Int;
+                    gsn.Value = r.RoleId;
+                    cmd.Parameters.Add(gsn);
 
-                SqlParameter gsab = new SqlParameter();
-                gsab.ParameterName = "@companyid";
-                gsab.SqlDbType = SqlDbType.Int;
-                gsab.Value = r.CompanyId;
-                cmd.Parameters.Add(gsab);
+                    SqlParameter gsab = new SqlParameter();
+                    gsab.ParameterName = "@companyid";
+                    gsab.SqlDbType = SqlDbType.Int;
+                    gsab.Value = r.CompanyId;
+                    cmd.Parameters.Add(gsab);
 
-                SqlParameter f = new SqlParameter();
-                f.ParameterName = "@insupdflag";
-                f.SqlDbType = SqlDbType.Int;
-                f.Value = r.insdelflag;
-                cmd.Parameters.Add(f);
+                    SqlParameter f = new SqlParameter();
+                    f.ParameterName = "@insupdflag";
+                    f.SqlDbType = SqlDbType.Int;
+                    f.Value = r.insdelflag;
+                    cmd.Parameters.Add(f);
 
-                SqlParameter gsac = new SqlParameter("@Id", SqlDbType.Int);
-                gsac.Value = r.Id;
-                gsac.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(gsac);
+                    SqlParameter gsac = new SqlParameter("@Id", SqlDbType.Int);
+                    gsac.Value = r.Id;
+                    gsac.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(gsac);
 
                 cmd.ExecuteScalar();
                 cmd.Parameters.Clear();
