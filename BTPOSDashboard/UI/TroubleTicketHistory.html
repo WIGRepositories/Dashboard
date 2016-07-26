@@ -5,24 +5,24 @@
     <title>Home | Utilities & Tools | TroubleTicketing</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-   
+
     <!--Loading bootstrap css-->
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
-    
+
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    
+
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    
+
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="getTroubleTicketingDetails();" ng-model="Groups">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="getTroubleTicketingDetails();" ng-model="Groups">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -72,9 +72,9 @@
                         </li>
                     </ul>
                 </div>
-            </nav>          
-   
-        <!--END TOPBAR-->
+            </nav>
+
+            <!--END TOPBAR-->
             <div id="wrapper">
                 <!--BEGIN SIDEBAR MENU-->
                 <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
@@ -278,7 +278,7 @@
 
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
                                 <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
-                                <!--<li class="active"><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>-->
+                                <!--<li class="active"><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticketing Details</span></a></li>-->
 
 
                             </ul>
@@ -353,7 +353,7 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">TroubleTicketing</div>
+                            <div class="page-title">Trouble Ticket History</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -375,10 +375,10 @@
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
+                                       
 
 
-
-                                                        <div class="actions">
+                                                        <!--<div class="actions">
                                                             <a href="AddTroubleTicketingDetails.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;" ;right:0;top:0">  Add  Trouble Ticket</button></a>
 
                                                         </div>
@@ -387,10 +387,10 @@
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
-                                                                    <!--<div class="modal-header modal-header-primary">
-                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
-                                                            </div>-->
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
+                                                                    </div>
                                                                     <div class="modal-body" ng-model="currGroup">
                                                                         <table>
                                                                             <tr>
@@ -433,9 +433,9 @@
                                                         </div>
 
 
-                                                    </div>
+                                                    </div>-->
 
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
 
@@ -468,8 +468,26 @@
                                                             </tr>
 
                                                         </tbody>
+                                                         <td>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
 
-                                                    </table>
+                                                            </td>
+
+                                                    </table>-->
+                                                        <div class="col-md-6">
+                                                            Enter Trouble Ticket Number:
+                                                            <input id="Caption" type="text" ng-model="currGroup.Caption" class="form-control" /><span class="help-block"></span></div>
+                                                        </div>
+                                                        <div>
+                                                            <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                                <i class="fa fa-Search"></i>&nbsp;
+                                                                Search
+                                                            </button>
+
+                         
                                                 </div>
                                             </div>
                                         </div>
@@ -478,6 +496,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <!--END CONTENT--><!--BEGIN FOOTER-->
                         <div id="footer">
                             <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
@@ -493,13 +512,14 @@
                     </div>
                     <div class="modal-body">
                         <!--<ul>
-                    <li ng-repeat="item in items">
-                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>-->
-                        {{mssg
-}}
+                            <li ng-repeat="item in items">
+                                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                            </li>
+                        </ul>
+                        Selected: <b>{{ selected.item }}</b>-->
+                        {{
+mssg
+                        }}
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
@@ -508,30 +528,30 @@
 
                 </script>
             </div>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-        
-        
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<script src="js/table-action.js"></script>
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
+            <script src="js/jquery-1.10.2.min.js"></script>
+            <script src="js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="js/jquery-ui.js"></script>
+            <!--loading bootstrap js-->
+            <script src="vendors/bootstrap/js/bootstrap.js"></script>
+            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
-<script>
+
+            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+            <script src="vendors/iCheck/icheck.min.js"></script>
+            <script src="vendors/iCheck/custom.min.js"></script>
+            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+            <script src="js/jquery.menu.js"></script>
+            <script src="vendors/jquery-pace/pace.min.js"></script>
+            <script src="vendors/holder/holder.js"></script>
+            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+            <!--LOADING SCRIPTS FOR PAGE-->
+            <script src="js/table-action.js"></script>
+            <!--CORE JAVASCRIPT-->
+            <script src="js/main.js"></script>
+
+            <script>
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {
@@ -547,11 +567,11 @@
     ga('send', 'pageview');
 
 
-</script>
-<script src="js/angular.js"></script>
-<script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-<script src="js/ngStorage.js"></script>
+            </script>
+            <script src="js/angular.js"></script>
             <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-<script src="js/TroubleTicketingDetails.js"></script>
+            <script src="js/ngStorage.js"></script>
+            <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+            <script src="js/TroubleTicketingDetails.js"></script>
 </body>
 </html>
