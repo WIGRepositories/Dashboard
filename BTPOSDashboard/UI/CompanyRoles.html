@@ -504,17 +504,17 @@
                                                     <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
                                                     <th>Role Name</th>
                                                     <th>Description</th>
-                                                    <th>Delete</th>
+                                                    <!--<th>Delete</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat=" role in cmproles" ng-on-finish-render>
                                                     <td>
-                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(role, checkedArr)" ng-click="toggle(role, checkedArr);" />
+                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox"  ng-click="toggle(role, checkedArr);" checked />
                                                     </td>
                                                     <td>{{role.rolename}}</td>
                                                     <td>{{role.description}}</td>
-                                                    <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>
+                                                    <!--<td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>-->
                                                 </tr>
 
                                             </tbody>
@@ -523,7 +523,7 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveCompanyRoles();">Save</button>
+                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="SaveCmpRoles();">Save</button>
 
                                         <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                                     </div>

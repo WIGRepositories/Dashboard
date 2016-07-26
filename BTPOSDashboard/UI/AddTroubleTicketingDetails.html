@@ -271,8 +271,9 @@
                                 <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                    <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details</span></a></li>
+                                    <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
+                                    <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
 
 
                                 </ul>
@@ -392,12 +393,18 @@
                                                                             <label for="Type" class="col-md-2 control-label">Type:</label>
                                                                             <div class="col-md-3">
                                                                                 <select ng-model="Group.Type" style="width:100%">
+                                                                                    <!--Type Group: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">-->
+                                                                                    <option value="">All</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <!--<div class="col-md-3">
+                                                                                <select ng-model="Group.Type" style="width:100%">
                                                                                     <option value="">Select</option>
                                                                                     <option value="1">A</option>
                                                                                     <option value="2">N</option>
 
                                                                                 </select>
-                                                                            </div>
+                                                                            </div>-->
                                                                         </div>
 
 

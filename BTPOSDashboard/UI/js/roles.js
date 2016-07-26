@@ -223,7 +223,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     };
 
 
-    $scope.saveCompanyRoles = function () {
+    $scope.SaveCmpRoles = function () {
 
         //from the checked and unchecked array get the actuallly records to be saved
         //from checked array take the records which have assigned = 0 as there are new assignements
@@ -237,9 +237,10 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             if ($scope.checkedArr[cnt].assigned == 0) {
                 var fr = {
                     Id: -1,
+                    CompanyId: $scope.cmp.Id,
                     rolename: $scope.rolename,
                     description: $scope.description, 
-                    insupdflag: '0'
+                    insdelflag: '0'
                 }
 
                 CompanyRole.push(fr);
@@ -251,9 +252,10 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             if ($scope.uncheckedArr[cnt].assigned == 1) {
                 var fr = {
                     Id: -1,
+                    CompanyId: $scope.cmp.Id,
                     rolename: $scope.rolename,
                     description: $scope.description, 
-                    insupdflag: '1'
+                    insdelflag: '1'
                 }
 
                 CompanyRole.push(fr);
@@ -261,9 +263,9 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
 
         $http({
-            url: 'http://localhost:1476/api/CompanyGroups/SaveCompanyRoles',
+            url: 'http://localhost:1476/api/SaveCmpRoles',
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            //headers: { 'Content-Type': 'application/json' },
             data: CompanyRole,
 
         }).success(function (data, status, headers, config) {
