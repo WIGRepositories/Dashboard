@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetUsersinitData();" ng-model="newrole">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="newrole">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -357,7 +357,8 @@
                                             <div class="col-lg-12">
                                                 <div class="table-container">
                                                     <div class="col-md-4">
-                                                        Company: <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getUserRolesForCompany(cmp)" width="100%">
+                                                        Company: <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getUserRolesForCompany(cmp)"
+        id="test" width="100%">
     <option value="">Select Company</option>
 </select>
                                                     </div>
@@ -370,7 +371,7 @@
                                                     <div class="col-md-3">
                                                         <div class="input-append">
                                                             <input type="text" class="input-small search-query" name="s" placeholder="Search" value="">
-                                                           
+
                                                         </div>
                                                     </div>-->
                                                     <div class="actions">
@@ -378,58 +379,58 @@
                                                         <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Assign Role</button>
                                                     </div>
                                                     <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header modal-header-primary">
-                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                            <h1 id="modal-header-primary-label" class="modal-title">Assign Role to user</h1>
-                                                        </div>
-                                                        <form action="#" class="form-horizontal form-seperated form-row-stripped">
-                                                            <div class="form-body">
-
-                                                                <div class="form-group">
-                                                                    <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
-
-                                                                    <div class="col-md-6">
-                                                                        <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getUsersnRoles()">
-                                                                            <option value="">Select</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
-
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="uu" style="width:100%">
-                                                                            <option value="">Select</option>
-                                                                        </select>
-
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="form-group">
-                                                                    <label for="Name" class="col-md-3 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
-
-                                                                    <div class="col-md-6">
-                                                                        <select ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="ur" width="100%">
-                                                                            <option value="">Select</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header modal-header-primary">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                <h1 id="modal-header-primary-label" class="modal-title">Assign Role to user</h1>
                                                             </div>
+                                                            <form action="#" class="form-horizontal form-seperated form-row-stripped">
+                                                                <div class="form-body">
+
+                                                                    <div class="form-group">
+                                                                        <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
+
+                                                                        <div class="col-md-6">
+                                                                            <select style="width:260px" ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getUsersnRoles()">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> User: <span class='require'>*</span></label>
+
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-model="uu" style="width:100%">
+                                                                                <option value="">Select</option>
+                                                                            </select>
 
 
-                                                        </form>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveUserRoles(1);">Save</button>
-                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        </div>
+                                                                    </div>
 
+                                                                    <div class="form-group">
+                                                                        <label for="Name" class="col-md-3 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
+
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="r.rolename for r in cmproles1 track by r.Id" ng-model="ur" width="100%">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </form>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveUserRoles(1);">Save</button>
+                                                                <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
+
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                    </div>-->
+                                                        </div>-->
 
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
@@ -440,7 +441,7 @@
                                                                 <th>Company</th>
                                                                 <th>Edit</th>
                                                                 <th>Delete</th>
-                                                                
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -461,9 +462,9 @@
                                                                 <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(ur);"><i class="fa fa-trash-o"></i></a></div></td>
 
                                                                 <!--<button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="testdel(role);">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                        </button>
-                                                        </td>-->
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                </button>
+                                                                </td>-->
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -538,7 +539,7 @@
 
                                                     </div>
 
-                                                    <div id="Modal-header-primary"  role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                    <div id="Modal-header-primary" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
@@ -552,7 +553,7 @@
                                                                                 <label for="selCompany" class="col-md-3 control-label" style="color:red;">Company:<span class='require'>*</span></label>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp"  ng-change="getUserRolesForCompany(cmp)" disabled>
+                                                                                <select style="width:260px" ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getUserRolesForCompany(cmp)" disabled>
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -565,7 +566,7 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <select style="width:260px" ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id"  ng-change="GetUsersForCmp(cmp)" class="form-control">
+                                                                                <select style="width:260px" ng-options="u.FirstName+' '+u.LastName  for u in cmpUsers1 track by u.Id" ng-change="GetUsersForCmp(cmp)" class="form-control">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -627,54 +628,54 @@
                 </div>
 
             </div>
-        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+            <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
-            <div class="modal-header">
-                <h3 class="modal-title">Save confirmation!</h3>
-            </div>
-            <div class="modal-body">
-                <!--<ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>-->
-                {{mssg}}
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
+                <div class="modal-header">
+                    <h3 class="modal-title">Save confirmation!</h3>
+                </div>
+                <div class="modal-body">
+                    <!--<ul>
+                        <li ng-repeat="item in items">
+                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                        </li>
+                    </ul>
+                    Selected: <b>{{ selected.item }}</b>-->
+                    {{mssg}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
 
-        </script>
+            </script>
+        </div>
     </div>
-  </div>
-<script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/jquery-migrate-1.2.1.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="vendors/bootstrap/js/bootstrap.js"></script>
-<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    
-    
-<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="vendors/iCheck/icheck.min.js"></script>
-<script src="vendors/iCheck/custom.min.js"></script>
-<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="js/jquery.menu.js"></script>
-<script src="vendors/jquery-pace/pace.min.js"></script>
-<script src="vendors/holder/holder.js"></script>
-<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-<!--<script src="js/table-action.js"></!--script>-->
-<!--CORE JAVASCRIPT-->
-<script src="js/main.js"></script>
-<script src="js/angular.js"></script>
-<script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-<script src="js/ngStorage.js"></script>
-<script src="js/Users.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+
+
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <!--<script src="js/table-action.js"></!--script>-->
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/Users.js"></script>
 
 </body>
 

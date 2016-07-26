@@ -397,6 +397,7 @@
     <Content Include="UI\BlockList.html" />
     <Content Include="UI\BtposLicense.html" />
     <Content Include="UI\BTPOSMonitoringPage.html" />
+    <Content Include="UI\BtposReports.html" />
     <Content Include="UI\BtposRoutes.html" />
     <Content Include="UI\CartDetails.html" />
     <Content Include="UI\CheckOut.html" />

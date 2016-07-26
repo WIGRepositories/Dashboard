@@ -33,13 +33,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
+    $scope.userUId = $scope.userdetails[0].Id;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-
-
-   
-
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
     $scope.FORoutes = [];
@@ -59,6 +57,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         }
         $http(req).then(function (res) {
             $scope.initdata = res.data;
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userCmpId) {
+                        $scope.cmp = res.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.GetFleetOwners($scope.cmp);
         });
 
     }
@@ -85,6 +97,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         }
         $http(req).then(function (res) {
             $scope.cmpdata = res.data;
+            if ($scope.uname != 4) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.uname) {
+                        $scope.s = res.data[i];
+                        document.getElementById('test1').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test1').disabled = false;
+            }
+            $scope.getFleetOwnerRoute($scope.s);
         });
     }
 
@@ -102,6 +128,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             $scope.checkedArr =  $filter('filter')($scope.FORoutes, { assigned: "1" });
             $scope.uncheckedArr = $filter('filter')($scope.FORoutes, { assigned: "0" });
         });
+    }
+
+
+    //This will hide the DIV by default.
+    $scope.IsHidden = true;
+    $scope.ShowHide = function () {
+        //If DIV is hidden it will be visible and vice versa.
+        $scope.IsHidden = $scope.IsHidden ? false : true;
     }
 
     $scope.saveFORoutes = function () {
