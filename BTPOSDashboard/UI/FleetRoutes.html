@@ -594,7 +594,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="r.routename for r in vehicles.Table1 track by RouteId" class="form-control" ng-model="initdata.newfleet.r">
+                                                            <select ng-options="r.routename for r in vehicles.Table1 track by r.RouteId" class="form-control" ng-model="initdata.newfleet.r.RouteId">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
