@@ -1463,7 +1463,7 @@ begin
 select @cnt = COUNT(*) from Objects where UPPER(name) = UPPER(@Name) 
 and Id <> @Id
 
-if @cnt =0
+if @cnt > 0
 
 
 update Objects 
@@ -1472,7 +1472,7 @@ set
 ,[Active] = @Active
 ,[Description] = @Description
 ,[Path]=@Path
-where Id = @Id
+where Name = @Name
 
 
 
