@@ -64,8 +64,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             $scope.GetFleetOwners($scope.cmp);
         });
 
-
-
     }
 
     //$scope.GetCompanies = function () {
