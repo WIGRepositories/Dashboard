@@ -153,7 +153,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
         var FAvaliability = {
 
             Id: -1,
-            VehicleId: R.Id,           
+            VehicleId: R.Id,
             FromDate: R.fd,
             ToDate: R.td,
             insupddelflag: 'D'
