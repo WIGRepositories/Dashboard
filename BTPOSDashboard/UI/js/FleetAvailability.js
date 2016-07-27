@@ -147,13 +147,49 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     };
 
 
+    $scope.save = function (currRole) {
+       
+        if (currRole == null || currRole.VehicleId == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+        if (currRole.VehicleId == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+
+        var FAvailability = {
+            Id: -1,
+            VehicleId: currRole.VehicleId,
+            FromDate: currRole.fd,
+            ToDate: currRole.td,
+            insupddelflag: 'U'
+
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetAvailability/SetFleetAvailability',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: FAvailability
+
+
+        }
+        $http(req).then(function (res) { });
+        alert('updated successfully.');
+
+    }
 
 
     $scope.testdel = function (R) {
         var FAvaliability = {
 
             Id: -1,
-            VehicleId: R.Id,
+            VehicleId: R.VehicleId,
             FromDate: R.fd,
             ToDate: R.td,
             insupddelflag: 'D'
