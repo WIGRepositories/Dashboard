@@ -11163,30 +11163,30 @@ select * from Stops
  
 END
 
-INSERT INTO [POSDashboard].[dbo].[BtposPayment]
-           ([PosId]
-           ,[DateTime]
-           ,[Amount]
-           ,[TransactionId]
-           ,[TransactionTypeId]
-           ,[OperatorId]
-           ,[StatusId]
-           ,[GatewayId]
-           ,[Deatails])
-     VALUES
-           (PosId, varchar(50)
-           ,DateTime, datetime
-           ,Amount, int
-           ,TransactionId, nvarchar(50)
-           ,TransactionTypeId, int
-           ,OperatorId, int
-           ,StatusId, int
-           ,GatewayId, int
-           ,Deatails, varchar(50)
+--INSERT INTO [POSDashboard].[dbo].[BtposPayment]
+--           ([PosId]
+--           ,[DateTime]
+--           ,[Amount]
+--           ,[TransactionId]
+--           ,[TransactionTypeId]
+--           ,[OperatorId]
+--           ,[StatusId]
+--           ,[GatewayId]
+--           ,[Deatails])
+--     VALUES
+--           (PosId, varchar(50)
+--           ,DateTime, datetime
+--           ,Amount, int
+--           ,TransactionId, nvarchar(50)
+--           ,TransactionTypeId, int
+--           ,OperatorId, int
+--           ,StatusId, int
+--           ,GatewayId, int
+--           ,Deatails, varchar(50)
 
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelUserLicenseDetails]    Script Date: 07/24/2016 22:33:52 ******/
-SET ANSI_NULLS ON
+--/****** Object:  StoredProcedure [dbo].[InsUpdDelUserLicenseDetails]    Script Date: 07/24/2016 22:33:52 ******/
+--SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -11195,18 +11195,25 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE [dbo].[InsUpdDelUserLicenseConfirmDetails]
+CREATE PROCEDURE [dbo].[InsUpdDelUserLicenseConfirmDetails]
 (@foId int,
+@userId int,
 @TransId varchar(50),
 @GatewayTransId varchar(50),
 @ULId int,
 @ULPymtId int,
 @units int,
+@isRenewal int,
+@itemId int,
+@address varchar(250) = null,
+@amount decimal,
 @insupddelFlag varchar(1))
 	
 AS
 BEGIN
-declare @expDt datetime,  @currDate datetime
+declare @expDt datetime,  @currDate datetime,@userloginid varchar(10) =  null ,@shipOrder varchar(10),@licenseCode varchar(20) = 'LC0001',@posid int
+,@soId int
+
 select @currDate = GETDATE()
 
 
@@ -11229,13 +11236,17 @@ select @currDate = GETDATE()
 
 --all the benefits that the user gets as part of license will be stored 
     --4)features and their values will be stored into ULFeatures Table    
-    --ULPid, featureid, value,desc   
-   select @expDt = @currDate + (select [units] from UserLicensePayments)
+    --ULPid, featureid, value,desc
+if @isRenewal = 0 
+begin
+   
+   select @expDt = GETDATE() --(select [units] from UserLicensePayments)
+   
     UPDATE [POSDashboard].[dbo].[UserLicense]
    SET 
       [StartDate] = @currDate
       ,[ExpiryOn] = @expDt     
-      ,[ActualExpiry] = (@expDt + (select [graceperiod] from UserLicense)) 
+      ,[ActualExpiry] = @expDt--(@expDt + (select [graceperiod] from UserLicense WHERE [Id] = @ULId)) 
       ,[LastUpdatedOn] = @currDate
       ,[Active] = 1
       ,[StatusId] = 3      
@@ -11246,48 +11257,142 @@ UPDATE [POSDashboard].[dbo].[UserLicensePymtTransactions]
       ,[StatusId] =3
       where [TransId] = @TransId
       
-     UPDATE BTPOSDetails
-        SET FleetOwnerId = @foId
-        ,CompanyId = (select [CompanyId] from FleetOwner where Id = @foId)
-    FROM BTPOSDetails
-    INNER JOIN (
-        SELECT TOP(@units) ID FROM BTPOSDetails WHERE FleetOwnerId = 1
-         ORDER BY ID
-    ) AS InnerMyTable ON BTPOSDetails.ID = InnerMyTable.ID
+     select  @userloginid =  'FO'+(select replace(convert(char(10), getdate(), 108), ':', ''))
      
-      
-
-END
-
-
-
-
-
-GO
-/****** Object:  StoredProcedure [dbo].[getBtposPayment]    Script Date: 07/23/2016 17:10:33 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-ALTER procedure [dbo].[getBtposPayment]
-as
-begin
-SELECT  distinct
-    
-       bd.[POSID]
-      ,[DateTime]
-      ,[Amount]
-      ,[TransactionId]
-      ,[TransactionTypeId]
-      ,[OperatorId]
-      ,bp.[StatusId]
-      ,[GatewayId]
-      ,[Deatails]
-  FROM [POSDashboard].[dbo].[BtposPayment]bp
-  inner join BTPOSDetails bd on bd.ID=bp.Id
-  inner join Users u on u.Id=bp.OperatorId
-
-
+     INSERT INTO [POSDashboard].[dbo].[UserLogins]
+           ([LoginInfo]
+           ,[PassKey]
+           ,[UserId]
+           ,[salt]
+           ,[Active])
+     VALUES
+           (@userloginid,@userloginid,@userId,null,1)
+          
 
 end
+
+----if there are POS units to be sent then update the details and generate SO and shipping orders
+if @units > 0 
+begin
+
+--check if it is renewal
+if @isRenewal = 0 
+begin
+    --UPDATE BTPOSDetails
+    --    SET FleetOwnerId = @foId
+    --  --  ,CompanyId = (select [CompanyId] from FleetOwner where Id = @foId)
+    --FROM BTPOSDetails
+    --INNER JOIN (
+    --    SELECT TOP(@units) ID FROM BTPOSDetails WHERE FleetOwnerId is null
+    --     ORDER BY ID
+    --) AS InnerMyTable ON BTPOSDetails.ID = InnerMyTable.ID
+    
+DECLARE db_cursor CURSOR FOR  
+SELECT TOP(@units) id from [POSDashboard].[dbo].[BTPOSDetails] where FleetOwnerId is null or fleetownerid  = 0 ORDER BY ID
+
+
+OPEN db_cursor  
+FETCH NEXT FROM db_cursor INTO @posid
+
+WHILE @@FETCH_STATUS = 0  
+BEGIN  
+
+update [POSDashboard].[dbo].[BTPOSDetails]
+set FleetOwnerId = @foId, CompanyId = 2--(select [CompanyId] from FleetOwner where Id = @foId)
+where Id = @posid
+ 
+FETCH NEXT FROM db_cursor INTO @posid  
+END  
+
+CLOSE db_cursor  
+DEALLOCATE db_cursor 
+
+declare @sonum varchar(20),@shipOrderNum varchar(20)
+
+ select @sonum = 'SO'+(select replace(convert(char(10), getdate(), 108), ':', ''))
+ select @shipOrderNum = 'SH'+(select replace(convert(char(10), getdate(), 108), ':', ''))
+
+      INSERT INTO [POSDashboard].[dbo].[SalesOrder]
+           ([SalesOrderNum]
+           ,[TransactionId]
+           ,[Date]
+           ,[amount]
+           ,[ItemId]
+           ,[Quantity]
+           ,[Status])
+     VALUES
+           (@sonum
+           ,@ULPymtId
+           ,@currDate,@amount,@itemId,@units,1)
+           
+           SELECT @soId = SCOPE_IDENTITY() 
+           
+           INSERT INTO [POSDashboard].[dbo].[Notifications]
+           ([Date]
+           ,[Message]
+           ,[MessageTypeId]
+           ,[StatusId]
+           ,[UserId]
+           ,[Name]
+           ,[Source])
+     VALUES
+           (@currDate,'A sales order '+@sonum+' is generated for BT POS',1,1,1,'Admin Admin','License Payments')
+          
+
+           INSERT INTO [POSDashboard].[dbo].[ShippingOrder]
+           ([ShippingOrderNum]
+           ,[TransactionId]
+           ,[Date]
+           ,[amount]
+           ,[Status]
+           ,[SalesOrderId])
+     VALUES
+           (@shipOrderNum,@ULPymtId,@currDate,@amount,1,@soId)
+
+INSERT INTO [POSDashboard].[dbo].[Notifications]
+           ([Date]
+           ,[Message]
+           ,[MessageTypeId]
+           ,[StatusId]
+           ,[UserId]
+           ,[Name]
+           ,[Source])
+     VALUES
+           (@currDate,'A shipping order '+@shipOrderNum+' is generated for BT POS',1,1,1,'Admin Admin','License Payments')
+           
+		--update the inventory status
+		--check the availability and if not possible, generate error
+		--if avilable qty falls below reorder point then generate an alert also
+		UPDATE [POSDashboard].[dbo].[Inventory]
+		   SET [availableQty] = ([availableQty] - @units)		 
+		 WHERE [InventoryItemId] = @itemId
+        
+end
+else
+begin
+select 1
+ --if it is renewal, then verify if any pos units need to be increased.
+ --and also extend the date. no need of sending login info
+end
+
+
+
+--return back below
+--1) login userid 
+--2) shipping order confirmation
+--3) license code
+--4) payment transaction id
+--5) expiry date
+end
+
+select @userloginid username
+,@shipOrderNum shipOrder
+,@licenseCode licenseCode
+,@TransId transId
+,@expDt expiryon
+, @currDate startdate
+,@units noofunits
+,'a.b@c.com' emailid
+
+END
 
