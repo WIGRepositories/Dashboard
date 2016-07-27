@@ -143,7 +143,7 @@ $scope.save = function (currFR) {
     var FleetRoutes = {
         Id: -1,
         VehicleId: FleetRoute.v.Id,
-        RouteId: FleetRoute.r,
+        RouteId: FleetRoute.r.RouteId,
         EffectiveFrom: FleetRoute.EffectiveFrom,
         EffectiveTill: FleetRoute.EffectiveTill,
         Active: FleetRoute.Active,

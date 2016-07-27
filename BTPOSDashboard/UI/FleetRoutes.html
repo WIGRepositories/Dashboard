@@ -367,14 +367,14 @@
 
                                                         <div class="col-md-3">
                                                             Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
-    <option value="">Select</option>
-</select>
+                                                        <option value="">Select</option>
+                                                          </select>
                                                         </div>
                                                         <div class="col-md-5">
                                                             Fleet Owner:<select ng-options="s.Name for s in FleetOwners.Table track by s.Id" ng-model="s" ng-change="GetFleetRoutes()" id="test1">
 
-    <option value="">Select</option>
-</select>
+                                                      <option value="">Select</option>
+                                                                </select>
 
                                                         </div>
 
@@ -405,23 +405,23 @@
                                                                         </div>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
+                                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
 
                                                                                 <option value="">Select</option>
                                                                             </select>
-
-                                                                        </div>
+                                                                           
+</div>
                                                                     </div>
-                                                                </div>
+                                                               
                                                                 <div class="row mbm">
 
 
                                                                     <div style="text-align:right">
                                                                         <label for="descr" class="col-md-4 control-label" style="color:red;">Fleet Owner:<span class='require'></span></label>
                                                                     </div>
-
+                                                                   
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="f.Name for fleet in track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
+                                                                        <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
                                                                             <option value="">Select</option>
                                                                         </select>
 
