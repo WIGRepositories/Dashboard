@@ -405,7 +405,7 @@
                                                                         </div>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
+                                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
 
                                                                                 <option value="">Select</option>
                                                                             </select>
@@ -421,7 +421,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
+                                                                        <select ng-options="f.Name for fleet in track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
                                                                             <option value="">Select</option>
                                                                         </select>
 
