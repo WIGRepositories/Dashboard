@@ -33,58 +33,113 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
+    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-
-
-   
-
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
     $scope.FORoutes = [];
 
+
     $scope.GetCompanies = function () {
 
-        var vc = {
-            needCompanyName: '1'
-        };
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+            $scope.Companies = res.data;
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-            data: vc
-        }
-        $http(req).then(function (res) {
-            $scope.initdata = res.data;
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userCmpId) {
+                        $scope.cmp = res.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.GetFleetOwners($scope.cmp);
         });
 
     }
 
+    //$scope.GetCompanies = function () {
+
+    //    var vc = {
+    //        needCompanyName: '1'
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+    //        data: vc
+    //    }
+    //    $http(req).then(function (res) {
+    //        $scope.initdata = res.data;
+    //        if ($scope.userCmpId != 1) {
+    //            //loop throug the companies and identify the correct one
+    //            for (i = 0; i < res.data.length; i++) {
+    //                if (res.data[i].Id == $scope.userCmpId) {
+    //                    $scope.cmp = res.data[i];
+    //                    document.getElementById('test').disabled = true;
+    //                    break
+    //                }
+    //            }
+    //        }
+    //        else {
+    //            document.getElementById('test').disabled = false;
+    //        }
+    //        $scope.GetFleetOwners($scope.cmp);
+    //    });
+
+
+
+    //if ($scope.cmp == null) {
+    //    $scope.FleetOwners = null;
+    //    return;
+    //} u
+    //var vc = {
+    //    needfleetowners: '1',
+    //    cmpId: $scope.cmp.Id
+    //};
+
+    //var req = {
+    //    method: 'POST',
+    //    url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //    //headers: {
+    //    //    'Content-Type': undefined
+
+    //    data: vc
+
+
+    //}
+    //}
+
     $scope.GetFleetOwners = function () {
-        if ($scope.cmp == null) {
-            $scope.FleetOwners = null;
-            return;
-        }
-        var vc = {
-            needfleetowners: '1',
-            cmpId: $scope.cmp.Id
-        };
+        
+     
+        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+            $scope.fleet= res.data;
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-
-            data: vc
-
-
-        }
-        $http(req).then(function (res) {
-            $scope.cmpdata = res.data;
+            if ($scope.userSId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userSId) {
+                        $scope.s = res.data[i];
+                        document.getElementById('test1').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test1').disabled = false;
+            }
+            $scope.getFleetOwnerRoute($scope.s);
         });
     }
 
@@ -102,6 +157,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             $scope.checkedArr =  $filter('filter')($scope.FORoutes, { assigned: "1" });
             $scope.uncheckedArr = $filter('filter')($scope.FORoutes, { assigned: "0" });
         });
+    }
+
+
+    //This will hide the DIV by default.
+    $scope.IsHidden = true;
+    $scope.ShowHide = function () {
+        //If DIV is hidden it will be visible and vice versa.
+        $scope.IsHidden = $scope.IsHidden ? false : true;
     }
 
     $scope.saveFORoutes = function () {

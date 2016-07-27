@@ -1,12 +1,13 @@
 // JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal, $filter) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
@@ -111,7 +112,24 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
+
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userCmpId) {
+                        $scope.s = res.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.getRolesForCompany($scope.s);
         });
+
+      
 
     }
 
@@ -119,6 +137,8 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.getRolesForCompany = function (seltype) {
         if (seltype == null) {
             $scope.cmproles = null;
+            $scope.checkedArr = [];
+            $scope.uncheckedArr = [];
            
             return;
         }
@@ -126,69 +146,22 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
+            $scope.checkedArr = $filter('filter')($scope.cmproles, { assigned: "1" });
+            $scope.uncheckedArr = $filter('filter')($scope.cmproles, { assigned: "0" });
            
         });
+       
     }
+    
+        //This will hide the DIV by default.
+        $scope.IsHidden = true;
+        $scope.ShowHide = function () {
+            //If DIV is hidden it will be visible and vice versa.
+            $scope.IsHidden = $scope.IsHidden ? false : true;
+        }
 
 
-    //$scope.saveRoles = function () {
-
-    //    //from the checked and unchecked array get the actuallly records to be saved
-    //    //from checked array take the records which have assigned = 0 as there are new assignements
-    //    //from unchecked array take assgined = 1 as these need to be removed
-
-
-    //    var cmproles = [];
-
-    //    for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
-
-    //        if ($scope.checkedArr[cnt].assigned == 0) {
-    //            var fr = {
-    //                Id: -1,
-    //                rolename: $scope.s.Id,
-    //                description: $scope.cmp.Id,
-    //                RouteId: $scope.checkedArr[cnt].RouteId,
-    //                From: $scope.checkedArr[cnt].FromDate,
-    //                To: $scope.checkedArr[cnt].ToDate,
-    //                Active: 1,
-    //                insupddelflag: 'I'
-    //            }
-
-    //            FleetOwnerRoutes.push(fr);
-    //        }
-    //    }
-
-    //    for (var cnt = 0; cnt < $scope.uncheckedArr.length; cnt++) {
-
-    //        if ($scope.uncheckedArr[cnt].assigned == 1) {
-    //            var fr = {
-    //                Id: -1,
-    //                FleetOwnerId: $scope.s.Id,
-    //                CompanyId: $scope.cmp.Id,
-    //                RouteId: $scope.uncheckedArr[cnt].RouteId,
-    //                From: $scope.uncheckedArr[cnt].FromDate,
-    //                To: $scope.uncheckedArr[cnt].ToDate,
-    //                Active: 1,
-    //                insupddelflag: 'D'
-    //            }
-
-    //            FleetOwnerRoutes.push(fr);
-    //        }
-    //    }
-
-    //    $http({
-    //        url: 'http://localhost:1476/api/FleetOwnerRoute/saveFleetOwnerRoute',
-    //        method: 'POST',
-    //        headers: { 'Content-Type': 'application/json' },
-    //        data: FleetOwnerRoutes,
-
-    //    }).success(function (data, status, headers, config) {
-    //        alert('Fleet owner routes successfully');
-    //        $scope.getFleetOwnerRoute();
-    //    }).error(function (ata, status, headers, config) {
-    //        alert(ata);
-    //    });
-    //};
+   
     $scope.GetRolesToAssign = function (seltype) {
         if (seltype == null) {
             $scope.roles = null;
@@ -199,6 +172,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=' + cmpId).then(function (response, data) {
             $scope.roles = response.data;
         });
+       
     }
 
     $scope.AssignRole = function () {
@@ -248,6 +222,61 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currGroup = null;
     };
 
+
+    $scope.SaveCmpRoles = function () {
+
+        //from the checked and unchecked array get the actuallly records to be saved
+        //from checked array take the records which have assigned = 0 as there are new assignements
+        //from unchecked array take assgined = 1 as these need to be removed
+
+
+        var CompanyRole = [];
+
+        for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
+
+            if ($scope.checkedArr[cnt].assigned == 0) {
+                var fr = {
+                    Id: -1,
+                    CompanyId: $scope.cmp.Id,
+                    rolename: $scope.rolename,
+                    description: $scope.description, 
+                    insdelflag: '0'
+                }
+
+                CompanyRole.push(fr);
+            }
+        }
+
+        for (var cnt = 0; cnt < $scope.uncheckedArr.length; cnt++) {
+
+            if ($scope.uncheckedArr[cnt].assigned == 1) {
+                var fr = {
+                    Id: -1,
+                    CompanyId: $scope.cmp.Id,
+                    rolename: $scope.rolename,
+                    description: $scope.description, 
+                    insdelflag: '1'
+                }
+
+                CompanyRole.push(fr);
+            }
+        }
+
+        $http({
+            url: 'http://localhost:1476/api/SaveCmpRoles',
+            method: 'POST',
+            //headers: { 'Content-Type': 'application/json' },
+            data: CompanyRole,
+
+        }).success(function (data, status, headers, config) {
+            alert('Company Roles successfully');
+           
+        }).error(function (ata, status, headers, config) {
+            alert(ata);
+        });
+    };
+
+
     $scope.testdel = function (role)
     {       
         var cmprole = {
@@ -274,19 +303,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currRole = null;
     }
 
-    $scope.showDialog = function (message) {
-
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            resolve: {
-                mssg: function () {
-                    return message;
-                }
-            }
-        });
-    }
     $scope.toggle = function (item) {
         var idx = $scope.checkedArr.indexOf(item);
         if (idx > -1) {

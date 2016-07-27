@@ -567,7 +567,6 @@ namespace BTPOSDashboardAPI.Models
         public string IsPublic { get; set; }
         public string Company { get; set; }
         public int CompanyId { get; set; }
-
         public int insdelflag { get; set; }
 
     }
@@ -716,7 +715,7 @@ namespace BTPOSDashboardAPI.Models
         public int Id { get; set; }
         public DateTime enddate { get; set; }
 
-        public DateTime hashkey { get; set; }
+        public string hashkey { get; set; }
 
         public string ClientId { get; set; }
 
@@ -728,7 +727,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string pwd { get; set; }
 
-        public DateTime saltkey { get; set; }
+        public string saltkey { get; set; }
 
         public DateTime startdate { get; set; }
 

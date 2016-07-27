@@ -397,6 +397,7 @@
     <Content Include="UI\BlockList.html" />
     <Content Include="UI\BtposLicense.html" />
     <Content Include="UI\BTPOSMonitoringPage.html" />
+    <Content Include="UI\BtposReports.html" />
     <Content Include="UI\BtposRoutes.html" />
     <Content Include="UI\CartDetails.html" />
     <Content Include="UI\CheckOut.html" />
@@ -615,6 +616,7 @@
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />
+    <Content Include="UI\TroubleTicketHistory.html" />
     <Content Include="UI\TroubleTicketingDetails.html" />
     <Content Include="UI\TroubleTicketReports.html" />
     <Content Include="UI\TypeGroups.html" />

@@ -117,6 +117,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         
     }
 
+
+
+    //This will hide the DIV by default.
+    $scope.IsHidden = true;
+    $scope.ShowHide = function () {
+        //If DIV is hidden it will be visible and vice versa.
+        $scope.IsHidden = $scope.IsHidden ? false : true;
+    }
+
     $scope.getVehicleFareConfig = function () {
 
         if ($scope.v == null) {

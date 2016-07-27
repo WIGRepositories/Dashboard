@@ -25,7 +25,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text" style="width:200px;height:200px">SmartTickets Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/user.jpg" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -75,7 +75,7 @@
                                 <div class="info">
                                     <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
-                                        <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                        <li><a href="UserPofile.html"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
                                         <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
@@ -253,8 +253,9 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details</span></a></li>
+                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
 
 
                                     </ul>
@@ -363,20 +364,20 @@
                                                     <div class="row mbm">
 
                                                         <div class="col-md-5">
-                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                                <option value="">Select</option>
-                                                            </select>
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
+    <option value="">Select</option>
+</select>
                                                         </div>
                                                         <div class="col-md-5">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()">
+                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute(s)" ng-click="ShowHide()" id="test1">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
                                                         <br><br />
 
 
-                                                        <div id="tableadvancedTabContent" class="tab-content">
+                                                        <div id="tableadvancedTabContent" class="tab-content" ng-hide="IsHidden">
                                                             <div id="table-sorter-tab" class="tab-pane fade in active">
                                                                 <div class="row">
                                                                     <div class="col-lg-12">
@@ -385,10 +386,10 @@
                                                                         <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                                             <thead>
                                                                                 <tr>
-                                                                                    <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
+                                                                                    <th width="30%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
                                                                                     <!--<th><input type="checkbox"
-                                                                            ng-checked="checkedArr.length == FORoutes.length"
-                                                                            ng-click="toggleAll()">Select</th>-->
+                                ng-checked="checkedArr.length == FORoutes.length"
+                                ng-click="toggleAll()">Select</th>-->
 
                                                                                     <th>Route Name</th>
                                                                                     <th>Route Code</th>
@@ -403,9 +404,9 @@
                                                                                 <tr ng-repeat="route in FORoutes" ng-on-finish-render>
 
                                                                                     <!--<td>
-                                                                            <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="route.assigned.toString() == '1'" ng-click="toggle(route, checkedArr);" /></td>-->
+                                <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="route.assigned.toString() == '1'" ng-click="toggle(route, checkedArr);" /></td>-->
                                                                                     <td>
-                                                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox"  ng-checked="exists(route, checkedArr)" ng-click="toggle(route, checkedArr);" />
+                                                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(route, checkedArr)" ng-click="toggle(route, checkedArr);" />
                                                                                     </td>
 
 
@@ -413,16 +414,18 @@
                                                                                     <td>{{route.routename}}</td>
                                                                                     <td>{{route.code}}</td>
                                                                                     <td class="col-lg-2">
-                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter  input-group-sm mbs"><input type="date" id="{{route.routename}}FDate" class="form-control" /><span class="input-group-addon"></span></div>
+                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter  input-group-sm mbs">
+                                                                                        <input type="date" id="{{route.routename}}FDate" class="form-control" /><span class="input-group-addon"></span></div>
 
 
                                                                                     </td>
                                                                                     <td class="col-lg-2">
 
-                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="date" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"></span></div>
+                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm">
+                                                                                        <input type="date" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"></span></div>
                                                                                     </td>
                                                                                     <!--<td>{{route.FromDate}}</td>
-                                                                            <td>{{route.ToDate}}</td>-->
+                                <td>{{route.ToDate}}</td>-->
                                                                                     <!--<td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>-->
                                                                                 </tr>
 
@@ -435,8 +438,8 @@
                                                                         </table>
 
                                                                         <!--checked: {{checkedArr | json}}
-                                                                 <br />
-                                                                 unchecked: {{uncheckedArr | json}}-->
+                    <br />
+                    unchecked: {{uncheckedArr | json}}-->
                                                                     </div>
 
 

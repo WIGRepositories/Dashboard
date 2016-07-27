@@ -1,22 +1,28 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home | Users | Users | Add New User</title>
+    <title>Home | Utilities & Tools | TroubleTicketing</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <!--Loading bootstrap css-->    
+
+    <!--Loading bootstrap css-->
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    
+
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    
+
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetUsersinitData();" ng-model="User">
+
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="getTroubleTicketingDetails();" ng-model="Groups">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -28,6 +34,10 @@
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+                    <form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+                        <div class="input-icon right"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control" /></div>
+                    </form>
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
@@ -63,6 +73,7 @@
                     </ul>
                 </div>
             </nav>
+
             <!--END TOPBAR-->
             <div id="wrapper">
                 <!--BEGIN SIDEBAR MENU-->
@@ -82,18 +93,13 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
-
-
-
-
-
 
                             <li>
                                 <a href="#">
@@ -151,6 +157,8 @@
                             </ul>
 
                         </li>
+
+
                         <li>
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -202,7 +210,6 @@
                                         <li><a href="SalesOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Sales orders</span></a></li>
                                         <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
                                         <li><a href="ShippingOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Shipping Order</span></a></li>
-
                                     </ul>
                                 <li>
                                     <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
@@ -248,9 +255,8 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
-                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
 
 
                                     </ul>
@@ -262,7 +268,7 @@
                         </li>
 
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="fa fa-gavel">
                                     <div class="icon-bg bg-green"></div>
@@ -272,7 +278,21 @@
 
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
                                 <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
-                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
+                                <!--<li class="active"><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticketing Details</span></a></li>-->
+
+
+                            </ul>
+
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                <i class="fa fa-gavel">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Trouble Ticket</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li class="active"><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticketing Details</span></a></li>
+                                <li><a href="TroubleTicketHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticket History</span></a></li>
 
 
                             </ul>
@@ -327,195 +347,231 @@
                         </ul>
                     </div>
                 </nav>
-                <!--END SIDEBAR MENU--><!--BEGIN PAGE WRAPPER-->
+                <!--END SIDEBAR MENU--><!--BEGIN CHAT FORM-->
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Add User</div>
+                            <div class="page-title">Trouble Ticket History</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="#">Company and Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Users.html">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="AddNewUser.html">Add New User</a></li>
+                            <li><a href="#">Utilities & Tools</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="TroubleTicketingDetails.html">Trouble Tickets</a></li>
+
                         </ol>
                         <div class="clearfix"></div>
                     </div>
-
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-                    <!--BEGIN TITLE & BREADCRUMB PAGE-->
-
                     <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div class="col-lg-12">
 
-                        <div id="tab-form-actions" class="tab-pane fade active in">
-                            <div class="row">
+                                <div id="tableactionTabContent" class="tab-content">
+                                    <div id="table-table-tab" class="tab-pane fade in active">
+                                        <div class="row">
+                                            <div class="col-lg-12">
 
-                                <div class="col-lg-12">
-                                    <div class="panel panel-violet">
-                                        <div class="panel-heading">Add New User</div>
-                                        <div class="panel-body pan">
-                                            <form action="#" class="form-horizontal">
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="inputFirstName" class="col-md-2 control-label">First Name:<span class='require'>*</span></label>
+                                                <div class="table-container">
+                                                    <div class="row mbm">
+                                       
 
-                                                        <div class="col-md-3"><input id="inputFirstName" type="text" placeholder="First Name" class="form-control" ng-model="User.FirstName" /><span class="help-block"></span></div>
 
-                                                        <label for="inputLastName" class="col-md-2 control-label">Last Name:<span class='require'>*</span></label>
+                                                        <!--<div class="actions">
+                                                            <a href="AddTroubleTicketingDetails.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;" ;right:0;top:0">  Add  Trouble Ticket</button></a>
 
-                                                        <div class="col-md-3"><input id="inputLastName" type="text" placeholder="Last Name" class="form-control" ng-model="User.LastName" /><span class="help-block"></span></div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="inputMiddleName" class="col-md-2 control-label">Middle Name</label>
-
-                                                        <div class="col-md-3"><input id="inputMiddleName" type="text" placeholder="Middle Name" class="form-control" ng-model="User.MiddleName" /><span class="help-block"></span></div>
-
-                                                        <label for="inputLastName" class="col-md-2 control-label">Email:<span class='require'>*</span></label>
-
-                                                        <div class="col-md-3"><input id="inputLastName" type="text" placeholder="" class="form-control" ng-model="User.Email" /><span class="help-block"></span></div>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="inputMiddleName" class="col-md-2 control-label">Mobile Number:</label>
-
-                                                        <div class="col-md-3"><input id="inputMiddleName" type="number"  placeholder="" class="form-control" ng-model="User.MobileNo" /><span class="help-block"></span></div>
-
-                                                        <label for="" class="col-md-2 control-label">Employee No:<span class='require'>*</span></label>
-
-                                                        <div class="col-md-3"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="Address Id" class="col-md-2 control-label">Address:</label>
-
-                                                        <div class="col-md-3"><textarea rows="3" class="form-control" ng-model="User.AdressId"></textarea></div>
-                                                        <label for="inputMiddleName" class="col-md-2 control-label">Company:<span class='require'>*</span></label>
-
-                                                        <div class="col-md-3">
-                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%">
-                                                                <option value="">Select Company</option>
-                                                            </select>
-                                                        </div>
-                                                        <br />
-                                                        <br />
-
-                                                        <label for="" class="col-md-2 control-label">Supervisor:</label>
-                                                        <div class="col-md-3">
-                                                            <select ng-options="mgr.FirstName+' '+mgr.LastName  for mgr in MgrUsers track by mgr.Id" ng-model="mgr" style="width:100%">
-                                                                <option value="">Select</option>
-                                                            </select>
                                                         </div>
 
-                                                    </div>
-                                                    <div class="form-group">
 
-                                                        <label for="inputMiddleName" class="col-md-2 control-label">Role:<span class='require'>*</span></label>
-                                                        <div class="col-md-3">
-                                                            <select ng-options="r.rolename for r in cmproles track by r.Id" ng-model="r" width="100%">
-                                                                <option value="">Select Role</option>
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="panel panel-violet">
-                                                        <div class="panel-heading">User Login</div>
-
-                                                        <br />
-                                                        <div class="form-group">
-
-                                                            <div style="width:30%;float:left">
-                                                                <label for="inputMiddleName" class="col-md-5">User Name:</label>
-
-                                                                <div class="col-md-7"><input type="text" class="form-control" ng-model="User.UserName" /></div>
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Company Details</h4>
+                                                                    </div>
+                                                                    <div class="modal-body" ng-model="currGroup">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <td> Name:</td>
+                                                                                <td><input type="text" id="Name" ng-model="currGroup.Name"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> admin:</td>
+                                                                                <td><input type="text" id="admin" ng-model="currGroup.admin"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> adminId:</td>
+                                                                                <td><input type="text" id="adminId" ng-model="currGroup.adminId"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> code:</td>
+                                                                                <td><input type="text" id="code" ng-model="currGroup.code"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td> descr:</td>
+                                                                                <td><input type="text" id="descr" ng-model="currGroup.descr"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>active:</td>
+                                                                                <td>
+                                                                                    <label class="checkbox">
+                                                                                        <input type="checkbox" ng-model="currGroup.active" />
+                                                                                    </label>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        <button type="button" class="btn btn-primary" ng-click="save(currGroup);">Save</button>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div style="width:30%;float:left">
-                                                                <label for="inputMiddleName" class="col-md-5">Password:</label>
 
-                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="User.Password" /></div>
-                                                            </div>
-                                                            <div style="width:30%;float:left">
-                                                                <label for="inputMiddleName" class="col-md-5">Re-Enter Password:</label>
-
-                                                                <div class="col-md-7"><input type="password" class="form-control" ng-model="reenteredPwd" /><span class="help-block"></span></div>
-                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-actions text-center">
-                                                        <button class="btn btn-green" type="button" ng-click="save(User, 'I',-1)">Save</button>
-                                                        &nbsp;
-                                                        <a href="Users.html" class="btn btn-primary" ng-click="clearUser()">Cancel</a><br />
-                                                    </div>
 
 
+                                                    </div>-->
+
+                                                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>RefId</th>
+                                                                <th>Type</th>
+                                                                <th>createdBy</th>
+                                                                <th>Raised</th>
+                                                                <th>TicketTitle</th>
+                                                                <th>IssueDetails</th>
+                                                                <th>AddInfo</th>
+                                                                <th>Status</th>
+                                                                <th>Asign</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <tr ng-repeat="group in Group" class="gradeA">
+
+
+                                                                <td>{{group.RefId}}</td>
+                                                                <td>{{group.Type}}</td>
+                                                                <td>{{group.createdBy}}</td>
+                                                                <td>{{group.Raised}}</td>
+                                                                <td>{{group.TicketTitle}}</td>
+                                                                <td>{{group.IssueDetails}}</td>
+                                                                <td>{{group.AddInfo}}</td>
+                                                                <td>{{group.Status}}</td>
+                                                                <td>{{group.Asign}}</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                         <td>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Edit
+                                                                </button>
+
+                                                            </td>
+
+                                                    </table>-->
+                                                        <div class="col-md-6">
+                                                            Enter Trouble Ticket Number:
+                                                            <input id="Caption" type="text" ng-model="currGroup.Caption" class="form-control" /><span class="help-block"></span></div>
+                                                        </div>
+                                                        <div>
+                                                            <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                                <i class="fa fa-Search"></i>&nbsp;
+                                                                Search
+                                                            </button>
+
+                         
                                                 </div>
-                                            </form>
+                                            </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
+                        <!--END CONTENT--><!--BEGIN FOOTER-->
+                        <div id="footer">
+                            <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+                        </div>
+                        <!--END FOOTER-->
                     </div>
-
-
-                    <!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
-                    </div>
-
+                    <!--END PAGE WRAPPER-->
                 </div>
+                <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+                    <div class="modal-header">
+                        <h3 class="modal-title">Save confirmation!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <!--<ul>
+                            <li ng-repeat="item in items">
+                                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                            </li>
+                        </ul>
+                        Selected: <b>{{ selected.item }}</b>-->
+                        {{
+mssg
+                        }}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                    </div>
+
+                </script>
             </div>
-        </div>
-        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
-
-            <div class="modal-header">
-                <h3 class="modal-title">Save confirmation!</h3>
-            </div>
-            <div class="modal-body">
-                <!--<ul>
-                    <li ng-repeat="item in items">
-                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>-->
-                {{mssg}}
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
-
-        </script>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+            <script src="js/jquery-1.10.2.min.js"></script>
+            <script src="js/jquery-migrate-1.2.1.min.js"></script>
+            <script src="js/jquery-ui.js"></script>
+            <!--loading bootstrap js-->
+            <script src="vendors/bootstrap/js/bootstrap.js"></script>
+            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/Users.js"></script>
+            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+            <script src="vendors/iCheck/icheck.min.js"></script>
+            <script src="vendors/iCheck/custom.min.js"></script>
+            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+            <script src="js/jquery.menu.js"></script>
+            <script src="vendors/jquery-pace/pace.min.js"></script>
+            <script src="vendors/holder/holder.js"></script>
+            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+            <!--LOADING SCRIPTS FOR PAGE-->
+            <script src="js/table-action.js"></script>
+            <!--CORE JAVASCRIPT-->
+            <script src="js/main.js"></script>
 
+            <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-145464-12', 'auto');
+    ga('send', 'pageview');
+
+
+            </script>
+            <script src="js/angular.js"></script>
+            <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+            <script src="js/ngStorage.js"></script>
+            <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+            <script src="js/TroubleTicketingDetails.js"></script>
 </body>
 </html>
