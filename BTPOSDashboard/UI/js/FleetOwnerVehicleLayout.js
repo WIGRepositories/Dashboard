@@ -153,7 +153,47 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         //    contextMenu: true           
         //});
     }
-      
+    $scope.save = function (currFR) {
+        var FleetRoute = currFR.newfleet;
+
+        if (FleetRoute == null || FleetRoute.v == null) {
+            alert('Please select a type VehicleId');
+            return;
+        }
+        if (FleetRoute.v == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+        if (FleetRoute.r == null) {
+            alert('Please select a type  RouteId ');
+            return;
+        }
+
+        var FleetRoutes = {
+            Id: -1,
+            VehicleId: FleetRoute.v.Id,
+            RouteId: FleetRoute.r.RouteId,
+            EffectiveFrom: FleetRoute.EffectiveFrom,
+            EffectiveTill: FleetRoute.EffectiveTill,
+            Active: FleetRoute.Active,
+            insupddelflag: 'U'
+
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetRoutes/NewFleetRoutes',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: FleetRoutes
+
+
+        }
+        $http(req).then(function (res) { });
+
+
+    }
     $scope.SaveFleetOwnerVehicleLayout = function () {
 
             var savedata = $scope.datarows;

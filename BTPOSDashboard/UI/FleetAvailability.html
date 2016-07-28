@@ -370,15 +370,15 @@
 
                                                     <div class="row mbm">
                                                         <div class="col-md-4">
-                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                                <option value="">Select</option>
-                                                            </select>
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()"id="test">
+    <option value="">Select</option>
+</select>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeAvailabilty();">
+                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleeAvailabilty();" id="test1">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
 
 
@@ -406,6 +406,7 @@
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <div class="form-group">
+
                                                                             <div class="input-icon right"><input type="text" class="form-control" id="busId" ng-model="currRole.VehicleRegNo" /></div>
                                                                         </div>
                                                                     </div>

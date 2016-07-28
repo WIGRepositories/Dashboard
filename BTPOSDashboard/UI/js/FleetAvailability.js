@@ -5,6 +5,8 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
+    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -15,26 +17,47 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     };
 
    
-
-
     $scope.GetCompanies = function () {
 
-        var vc = {
-            needCompanyName: '1'
-        };
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+            $scope.Companies = res.data;
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-            data: vc
-        }
-        $http(req).then(function (res) {
-            $scope.initdata = res.data;
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userCmpId) {
+                        $scope.cmp = res.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.GetFleetOwners($scope.cmp);
         });
 
     }
+
+    //$scope.GetCompanies = function () {
+
+    //    var vc = {
+    //        needCompanyName: '1'
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+    //        data: vc
+    //    }
+    //    $http(req).then(function (res) {
+    //        $scope.initdata = res.data;
+    //    });
+
+    //}
 
     $scope.GetFleeAvailabilty = function () {
 
@@ -51,29 +74,52 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     }
 
     $scope.GetFleetOwners = function () {
-        if ($scope.cmp == null) {
-            $scope.FleetOwners = null;
-            return;
-        }
-        var vc = {
-            needfleetowners: '1',
-            cmpId: $scope.cmp.Id
-        };
-
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-
-            data: vc
 
 
-        }
-        $http(req).then(function (res) {
-            $scope.cmpdata = res.data;
+        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+            $scope.fleet = res.data;
+
+            if ($scope.userSId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userSId) {
+                        $scope.s = res.data[i];
+                        document.getElementById('test1').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test1').disabled = false;
+            }
+            $scope.GetFleeAvailabilty($scope.s);
         });
     }
+
+    //$scope.GetFleetOwners = function () {
+    //    if ($scope.cmp == null) {
+    //        $scope.FleetOwners = null;
+    //        return;
+    //    }
+    //    var vc = {
+    //        needfleetowners: '1',
+    //        cmpId: $scope.cmp.Id
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+
+    //        data: vc
+
+
+    //    }
+    //    $http(req).then(function (res) {
+    //        $scope.cmpdata = res.data;
+    //    });
+    //}
 
     $scope.GetFleetForFO = function () {
 
@@ -147,13 +193,49 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
     };
 
 
+    $scope.save = function (currRole) {
+       
+        if (currRole == null || currRole.VehicleId == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+        if (currRole.VehicleId == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+
+        var FAvailability = {
+            Id: -1,
+            VehicleId: currRole.VehicleId,
+            FromDate: currRole.fd,
+            ToDate: currRole.td,
+            insupddelflag: 'U'
+
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetAvailability/SetFleetAvailability',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: FAvailability
+
+
+        }
+        $http(req).then(function (res) { });
+        alert('updated successfully.');
+
+    }
 
 
     $scope.testdel = function (R) {
         var FAvaliability = {
 
             Id: -1,
-            VehicleId: R.Id,           
+            VehicleId: R.VehicleId,
             FromDate: R.fd,
             ToDate: R.td,
             insupddelflag: 'D'
