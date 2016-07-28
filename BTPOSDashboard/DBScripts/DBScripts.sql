@@ -8804,6 +8804,13 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
        ,[Gender] = @Gender 
        ,[Address]= @Address
 
+ exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,'I'
+
+select FleetOwnerCode from dbo.FleetOwner f 
+inner join Users u on u.Id = f.UserId
+where u.FirstName = @FirstName and u.LastName = @LastName
+
+
 END
 end
 
