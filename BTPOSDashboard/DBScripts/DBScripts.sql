@@ -2536,6 +2536,8 @@ SELECT b.[Id]
   left outer join Users u on u.Id = f.userId 
 where (c.Id = @cmpId or @cmpId = -1)
 and(f.Id = @fleetownerId or @fleetownerId = -1)
+
+select COUNT(*) as RowNumber from BTPOSDetails
   
 end
 
