@@ -17,7 +17,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetFleetDetails = function () {
 
         if ($scope.cmp == null) {
-            $scope.cmpdata = null;
+            $scope.Companies = null;
             return;
         }
 
