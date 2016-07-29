@@ -17,7 +17,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetFleetDetails = function () {
 
         if ($scope.cmp == null) {
-            $scope.cmpdata = null;
+            $scope.Companies = null;
             return;
         }
 
@@ -75,6 +75,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
             $scope.GetFleetDetails($scope.s);
         });
+    }
+
+    //This will hide the DIV by default.
+    $scope.IsHidden = true;
+    $scope.ShowHide = function () {
+        //If DIV is hidden it will be visible and vice versa.
+        $scope.IsHidden = $scope.IsHidden ? false : true;
     }
 
 

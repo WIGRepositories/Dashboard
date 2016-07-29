@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="FleetOwner">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="Companies">
     <div>
 
         <!--BEGIN THEME SETTING-->
@@ -598,7 +598,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="F in fleet" class="gradeA">
+                                                        <tr ng-repeat="F in FleetOwner" class="gradeA">
 
                                                             <td>{{F.Name}}</td>
                                                             <td>{{F.Company}}</td>
