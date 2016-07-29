@@ -5919,12 +5919,14 @@ BEGIN
 	 -- [Description],I.AvailableQty,tg.Name as Category,t.TypeGroupId as SubCategoryId,I.PerUnitPrice,I.ReorderPont,I.Active from Inventory I inner join TypeGroups tg on tg.Id=I.InventoryId
   --   inner join Types t on t.Id=I.InventoryId
 END
-/****** Object:  StoredProcedure [dbo].[InsUpdDelSubCategory]    Script Date: 07/01/2016 15:35:54 ******/
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelSubCategory]    Script Date: 07/29/2016 12:16:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelSubCategory]
+ALTER procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
 begin
@@ -5939,13 +5941,27 @@ declare @olddesc varchar(250)
 declare @oldactive int
 select @oldname = name, @olddesc = description, @oldactive = active from types where Id = @Id
 
+
+
+if @@rowcount = 0 
+begin
+insert into subcategory(Name,[Description],CategoryId,Active) values(@Name,@Description,@CategoryId,@Active)
+
+ exec InsEditHistory 'subcategory','Name', @Name,'subcategory Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		              
+			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null			
+			exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+			exec InsEditHistoryDetails @edithistoryid,null,@Active,'Insertion','Active',null
+end
+
+else
+begin
 update subcategory 
 set name=@Name
 ,Active = @Active
 ,Description = @Description
 ,CategoryId = @CategoryId
 where Id = @Id
-
 
 exec InsEditHistory 'subcategory','Name', @Name,'subcategory updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
 
@@ -5958,24 +5974,10 @@ exec InsEditHistoryDetails @edithistoryid,@olddesc,@Description,'Modication','De
 if @oldactive <> @Active
 exec InsEditHistoryDetails @edithistoryid,@oldactive,@Active,'Modication','Active',null		
 
-if @@rowcount = 0 
-begin
-insert into subcategory(Name,[Description],CategoryId,Active) values(@Name,@Description,@CategoryId,@Active)
-
- exec InsEditHistory 'subcategory','Name', @Name,'subcategory Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
-		              
-			exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null			
-			exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
-			exec InsEditHistoryDetails @edithistoryid,null,@Active,'Insertion','Active',null
-
-
-
-
-
-
 end
 
 end
+
 
 
 /****** Object:  StoredProcedure [dbo].[InsupdCreateFleetOwner]    Script Date: 07/18/2016 12:13:31 ******/
@@ -6849,13 +6851,14 @@ inner join Types t on t.Id = licensecatid
 END
 
 
-/****** Object:  StoredProcedure [dbo].[InsUpdLicenseTypes]    Script Date: 07/01/2016 17:45:16 ******/
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdLicenseTypes]    Script Date: 07/29/2016 16:28:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[InsUpdLicenseTypes] 
+ALTER PROCEDURE [dbo].[InsUpdLicenseTypes] 
 (@Id int = -1
 ,@LicenseCatId int
 ,@LicenseType varchar(50)
@@ -6874,26 +6877,8 @@ declare @oldActive int
 select @oldLicenseType = LicenseType, @oldActive = Active, @oldDescription = Description from LicenseTypes where Id = @Id
 
 
-	UPDATE [POSDashboard].[dbo].[LicenseTypes]
-   SET [LicenseCatId] = @LicenseCatId
-      ,[LicenseType] = @LicenseType
-      ,[Description] = @Description
-      ,[Active] = @Active
-	WHERE Id = @Id
-exec InsEditHistory 'LicenseTypes','Name', @LicenseType,'LicenseTypes updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
-
-if @oldLicenseType <> @LicenseType
-exec InsEditHistoryDetails @edithistoryid,@oldLicenseType,@LicenseType,'Modication','LicenseType',null		
-
-if @oldDescription<> @Description
-exec InsEditHistoryDetails @edithistoryid,@oldDescription,@Description,'Modication','Description',null		
-
-if @oldActive <> @Active
-exec InsEditHistoryDetails @edithistoryid,@oldActive,@Active,'Modication','Active',null			
-	
-
 if @@rowcount = 0
-
+begin
 INSERT INTO [POSDashboard].[dbo].[LicenseTypes]
            ([LicenseCatId]
            ,[LicenseType]
@@ -6910,10 +6895,32 @@ INSERT INTO [POSDashboard].[dbo].[LicenseTypes]
 			exec InsEditHistoryDetails @edithistoryid,null,@LicenseType,'Insertion','LicenseType',null			
 			exec InsEditHistoryDetails @edithistoryid,null,@Active,'Insertion','Active',null
 			exec InsEditHistoryDetails @edithistoryid,null,@Description,'Insertion','Description',null
+end
+else
+begin
+	UPDATE [POSDashboard].[dbo].[LicenseTypes]
+   SET [LicenseCatId] = @LicenseCatId
+      ,[LicenseType] = @LicenseType
+      ,[Description] = @Description
+      ,[Active] = @Active
+	WHERE Id = @Id
+	end
+exec InsEditHistory 'LicenseTypes','Name', @LicenseType,'LicenseTypes updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
+
+if @oldLicenseType <> @LicenseType
+exec InsEditHistoryDetails @edithistoryid,@oldLicenseType,@LicenseType,'Modication','LicenseType',null		
+
+if @oldDescription<> @Description
+exec InsEditHistoryDetails @edithistoryid,@oldDescription,@Description,'Modication','Description',null		
+
+if @oldActive <> @Active
+exec InsEditHistoryDetails @edithistoryid,@oldActive,@Active,'Modication','Active',null			
+	
+
+
 
 
 END
-
 
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFleetRoutes]    Script Date: 07/18/2016 15:58:19 ******/
