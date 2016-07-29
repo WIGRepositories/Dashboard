@@ -376,7 +376,7 @@
 </select>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleetDetails()" id="test1">
+                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleetDetails()" id="test1" ng-click="ShowHide()">
 
     <option value="">Select</option>
 </select>
@@ -758,79 +758,80 @@
                                         </div>
 
                                     </div>--->
-                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                        <thead>
-                                            <tr>
+                                    <div ng-hide="IsHidden">
+                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                            <thead>
+                                                <tr>
 
-                                                <th width="22%">Vehicle Reg. No</th>
-                                                <th>Vehicle Type</th>
-                                                <th>Vehicle Layout</th>
-                                                <th>Service Type </th>
-                                                <!--<th>Engine No </th>
-                                                <th>Fuel Used </th>
-                                                <th>Month And Yr. Of Mfr </th>
-                                                <th>Chasis No </th>
-                                                <th>Date Of Registration </th>
-                                                <th>Seating Capacity </th>-->
-
-
-                                                <th>Active</th>
-                                                <th>Update</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr ng-repeat="F in Fleet" class="gradeA">
-                                                <td>
-                                                    {{F.VehicleRegNo}}
-
-                                                </td>
-                                                <td>
-                                                    {{F.VehicleType}}
-                                                </td>
-                                                <td>
-                                                    {{F.vehiclelayout}}
-                                                </td>
-                                                <td>
-                                                    {{F.ServiceType}}
-                                                </td>
-                                                <!--<td>
-                                                    {{F.EngineNo }}
-                                                </td>
-                                                <td>
-                                                    {{F.FuelUsed}}
-                                                </td>
-                                                <td>
-                                                    {{F.MonthAndYrOfMfr}}
-                                                </td>
-                                                <td>
-                                                    {{F.ChasisNo}}
-                                                </td>
-                                                <td>
-                                                    {{F.DateOfRegistration}}
-                                                </td>
-
-                                                <td>
-                                                    {{F.SeatingCapacity}}
-                                                </td>-->
-
-                                                <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
-                                                <td>
-
-                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
-                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                        Edit
-                                                    </button>
-                                                </td>
-
-                                            </tr>
-
-                                        </tbody>
-
-                                    </table>
+                                                    <th width="22%">Vehicle Reg. No</th>
+                                                    <th>Vehicle Type</th>
+                                                    <th>Vehicle Layout</th>
+                                                    <th>Service Type </th>
+                                                    <!--<th>Engine No </th>
+                    <th>Fuel Used </th>
+                    <th>Month And Yr. Of Mfr </th>
+                    <th>Chasis No </th>
+                    <th>Date Of Registration </th>
+                    <th>Seating Capacity </th>-->
 
 
-                                </div>
+                                                    <th>Active</th>
+                                                    <th>Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr ng-repeat="F in Fleet" class="gradeA">
+                                                    <td>
+                                                        {{F.VehicleRegNo}}
+
+                                                    </td>
+                                                    <td>
+                                                        {{F.VehicleType}}
+                                                    </td>
+                                                    <td>
+                                                        {{F.vehiclelayout}}
+                                                    </td>
+                                                    <td>
+                                                        {{F.ServiceType}}
+                                                    </td>
+                                                    <!--<td>
+                        {{F.EngineNo }}
+                    </td>
+                    <td>
+                        {{F.FuelUsed}}
+                    </td>
+                    <td>
+                        {{F.MonthAndYrOfMfr}}
+                    </td>
+                    <td>
+                        {{F.ChasisNo}}
+                    </td>
+                    <td>
+                        {{F.DateOfRegistration}}
+                    </td>
+
+                    <td>
+                        {{F.SeatingCapacity}}
+                    </td>-->
+
+                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
+                                                    <td>
+
+                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                            Edit
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                      
+                                    </div>
 
                             </div>
 
