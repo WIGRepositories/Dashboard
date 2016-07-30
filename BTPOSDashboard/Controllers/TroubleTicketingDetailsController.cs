@@ -116,19 +116,16 @@ namespace POSDBAccess.Controllers
                 gsab.SqlDbType = SqlDbType.Int;
                 gsab.Value = n.Asign;
                 cmd.Parameters.Add(gsab);
-
-                //SqlParameter ga = new SqlParameter();
-                //ga.ParameterName = "@Active";
-                //ga.SqlDbType = SqlDbType.Int;
-                //ga.Value = Convert.ToString(n.Active);
-                //cmd.Parameters.Add(ga);
+               
 
                 cmd.ExecuteScalar();
-                conn.Close();
+               
                 DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-               // db.Fill(ds);
+                SqlDataAdapter db = new SqlDataAdapter(cmd);
+                db.Fill(Tbl);
                 Tbl = ds.Tables[0];
+
+
             }
             catch (Exception ex)
             {

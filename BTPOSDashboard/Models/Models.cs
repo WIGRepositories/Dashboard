@@ -621,6 +621,7 @@ namespace BTPOSDashboardAPI.Models
 
     public class TroubleTicketingDetails
     {
+        //public int Id { get; set; }
         public int RefId { get; set; }
 
         public int Type { get; set; }
