@@ -377,9 +377,9 @@
                                                                     </select>
                                                                 </div>
 
-                                                                <div class="col-md-3" style="text-align:right">
+                                                                <!--<div class="col-md-3" style="text-align:right">
                                                                     Vehicle Type: <input type="text" style="width:100px" value="{{v.vehicleType}}" disabled />
-                                                                </div>
+                                                                </div>-->
 
 
                                                             </div>
@@ -390,7 +390,7 @@
                                                                     </select>
                                                                 </div>
 
-                                                                <div class="col-md-3" style="text-align:right">
+                                                                <!--<div class="col-md-3" style="text-align:right">
                                                                     Code: <input type="text" readonly style="width:100px" value="{{r.code}}" disabled />
                                                                 </div>
 
@@ -402,30 +402,30 @@
 
                                                                 <div class="col-md-3" style="text-align:right">
                                                                     Destination: <input type="text" readonly style="width:100px" value="{{r.destStop}}" disabled />
-                                                                </div>
+                                                                </div>-->
 
                                                             </div>
 
-                                                            <div class="row mbm" style="text-align:right">
-                                                                <div class="col-md-3">
+                                                            <!--<div class="row mbm" style="text-align:right">
+                                                                <!--<div class="col-md-3">
                                                                     Pricing Type:
                                                                     <select id="pt" ng-model="prc" value={{prc}} ng-change="SetPrice();">
                                                                         <option value="">Select</option>
                                                                         <option value="20">Per unit pricing</option>
                                                                         <option value="21">Stage to Stage</option>
-                                                                    </select>
+                                                                    </select>-->
 
                                                                     <!--<select ng-options="c.Name for c in pricingType track by c.Id" ng-model="prc" ng-change="SetPrice();" value="{{prc}}">
                         <option value="">Select</option>
                     </select>-->
 
-                                                                </div>
+                                                                <!--</div>-->
 
-                                                                <div class="col-md-3" style="text-align:right">
+                                                                <!--<div class="col-md-3" style="text-align:right">
                                                                     Per unit(km) price: <input type="text" style="width:100px" ng-init="puprc=0" value="r.PerUnitPrice" ng-model="puprc" ng-disabled="prc != 20" ng-change="SetPrice();" />
-                                                                </div>
+                                                                </div>-->
 
-                                                                <div class="col-md-3" style="text-align:right">
+                                                                <!--<div class="col-md-3" style="text-align:right">
                                                                     distance: <input type="text" readonly style="width:100px" value="{{r.distance}}" disabled />
                                                                 </div>
 
@@ -433,7 +433,7 @@
                                                                     Total: <input type="text" readonly style="width:100px" disabled value="{{puprc * r.distance}}" />
                                                                 </div>
 
-                                                            </div>
+                                                            </div>-->
                                                         </div>
 
 
