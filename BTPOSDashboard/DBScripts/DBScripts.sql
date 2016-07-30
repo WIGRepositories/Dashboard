@@ -4058,14 +4058,47 @@ insert into TroubleTicketingDevice values(@deviceid,@Id,@ticketTypeId,@TTId)
 end
 
 GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelTroubleTicketingDetails]    Script Date: 07/30/2016 16:38:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[InsUpdDelTroubleTicketingDetails](@RefId Int,@Type varchar(50),@createdBy Varchar(50),@Id int,@raised varchar(50),@status int,@TicketTitle varchar(50),@IssueDetails Varchar(50),@AddInfo Varchar(50),@Asign varchar(50))
+create procedure [dbo].[InsUpdDelTroubleTicketingDetails]
+(@RefId Int,
+@Type int,
+@createdBy Varchar(50),
+--@Id int,
+@raised int,
+@status int,
+@TicketTitle int, 
+@IssueDetails Varchar(50),
+@AddInfo Varchar(50),
+@Asign int)
 as
 begin
-insert into TroubleTicketingDetails(Type,createdBy,Id ,raised,status ,TicketTitle,IssueDetails,AddInfo ,Asign ) values( @Id,@Type ,@createdBy,@raised ,@status ,@TicketTitle ,@IssueDetails ,@AddInfo ,@Asign)
+insert into TroubleTicketingDetails
+(
+Type,
+createdBy,
+--Id ,
+raised,
+status ,
+TicketTitle,
+IssueDetails,
+AddInfo ,
+RefId,
+Asign ) 
+values
+( --@Id,
+@Type ,
+@createdBy,
+@raised ,
+@status ,
+@TicketTitle ,
+@IssueDetails ,
+@AddInfo ,
+@RefId,
+@Asign)
 end
 
 
