@@ -221,6 +221,49 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
+    $scope.btpostrans = [{ "BTPOSId": "btpos11", "transTypeId": "101", "amt": "100", "gatewayId": "gw11", "datetime": "2016-8-9", "srcId": "src11", "destid": "dst22" }
+]
+
+    $scope.SaveTrans = function (btpostrans) {
+
+       
+
+        var Btpostr = {
+            Id: -1,
+            BTPOSId: btpostrans.BTPOSId,
+            transTypeId: btpostrans.transTypeId,
+            amt: btpostrans.amt,
+            gatewayId: btpostrans.gatewayId,
+            datetime: btpostrans.datetime,
+            srcId: btpostrans.srcId,
+            destid: btpostrans.destid,
+        };
+
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/BTPOSConfig/SaveTrans',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: Btpostr
+        }
+
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
+    };
+
 
 });
 

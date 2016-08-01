@@ -104,6 +104,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //        $scope.fdata = res.data;
     //    });
     //}
+
+
+    $scope.GetBTPOSDetails = function () {
+
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails1?cmpId=' + cmpId + '&fId=-1' + '&pageNum=-1' + '&pagesize=-1').then(function (res, data) {
+            $scope.Details = res.data;
+        });
+    }
     $scope.GetPopupFleetOwners = function (cid) {
 
         var vc = {

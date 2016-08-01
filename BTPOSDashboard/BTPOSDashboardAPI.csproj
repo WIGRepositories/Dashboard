@@ -446,6 +446,7 @@
     <Content Include="UI\FleetOwnerVehicleSchedule.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
+    <Content Include="UI\getregistrationform.html" />
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />
@@ -496,6 +497,7 @@
     <Content Include="UI\js\libs\ui-bootstrap.js" />
     <Content Include="UI\js\NotificationsConfigurations.js" />
     <Content Include="UI\js\PaymentGateWayConfiguration.js" />
+    <Content Include="UI\js\registrationform.js" />
     <Content Include="UI\js\ShoppingCart.js" />
     <Content Include="UI\js\SmsGatewayConfiguration.js" />
     <Content Include="UI\js\treetable.js" />
@@ -604,6 +606,7 @@
     <Content Include="UI\popup.html" />
     <Content Include="UI\PurchaseOrders.html" />
     <Content Include="UI\register.html" />
+    <Content Include="UI\registrationform.html" />
     <Content Include="UI\ResetPassword.html" />
     <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
@@ -2087,6 +2090,7 @@
     <Compile Include="Controllers\PaymentHistoryController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\registrationformController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />

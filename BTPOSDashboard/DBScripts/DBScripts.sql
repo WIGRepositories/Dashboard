@@ -2514,9 +2514,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[GetBTPOSDetails]
-(@cmpId int = -1, @fleetownerId int =-1)
+(@cmpId int = -1, @fleetownerId int =-1,@pageNum int = 5,@pageSize int = 10)
 AS
 BEGIN
+--declare Row_Number int 
+
 	
 SELECT b.[Id]
       ,c.[Id] as CompanyId
@@ -2540,8 +2542,8 @@ and(f.Id = @fleetownerId or @fleetownerId = -1)
 select COUNT(*) as Row_count from BTPOSDetails
 
 DECLARE @PageNumber AS INT, @RowspPage AS INT
-SET @PageNumber = 2
-SET @Pagesize = 10
+--SET @PageNumber = 2
+--SET @Pagesize = 10
 SELECT * FROM (
              SELECT ROW_NUMBER() OVER(ORDER BY b.Id) AS ROWNUMBER,
       c.Name as companyname
@@ -2558,11 +2560,11 @@ SELECT * FROM (
   left outer join fleetowner f on f.id = FleetOwnerId 
   left outer join Users u on u.Id = f.userId 
                ) AS TBL
-WHERE ROWNUMBER > ((@PageNumber - 1) * @Pagesize ) AND 
-ROWNUMBER < (@PageNumber * @Pagesize)
-
-
+WHERE ROWNUMBER > ((@pageNum - 1) * @pageSize ) AND 
+ROWNUMBER <= (@pageNum * @Pagesize)
 end
+
+--exec [dbo].[GetBTPOSDetails] @pageNum = 6,@pageSize = 3
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSDetails]    Script Date: 07/18/2016 12:22:26 ******/
 SET ANSI_NULLS ON
@@ -11468,4 +11470,64 @@ select @userloginid username
 ,'a.b@c.com' emailid
 
 END
+
+
+GO
+
+/****** Object:  Table [dbo].[BTPOSTrans]    Script Date: 08/01/2016 13:53:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[BTPOSTrans](
+	[BTPOSId] [varchar](50) NOT NULL,
+	[transTypeId] [int] NOT NULL,
+	[amount] [decimal](18, 0) NOT NULL,
+	[gatewayId] [varchar](50) NOT NULL,
+	[datetime] [varchar](50) NOT NULL,
+	[srcId] [varchar](50) NOT NULL,
+	[destid] [varchar](50) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdDelregisterform]    Script Date: 08/01/2016 13:44:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[InsUpdDelBTPOSTrans](@BTPOSId varchar(max),
+@transTypeId int,@amount Decimal(18,0),@gatewayId varchar(max),
+@datetime varchar(max),@srcId varchar(max),@destid varchar(max))
+as
+begin
+
+INSERT INTO 
+[BTPOSTrans] VALUES
+           (@BTPOSId,
+              
+          
+           @transTypeId,
+		     @amount,
+			    @gatewayId,
+           @datetime,
+           @srcId,
+           @destid
+         
+         )
+   
+
+end
 
