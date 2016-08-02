@@ -447,6 +447,7 @@
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
     <Content Include="UI\getregistrationform.html" />
+    <Content Include="UI\images\dashboard.png" />
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />

@@ -86,7 +86,7 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
@@ -400,7 +400,11 @@
                                                                                     
                                                                                         <div class="col-md-6">
                                                                                             <label for="ContactNo2" class="col-md-3 control-label">Phone NO:<span class='require'></span></label>
-                                                                                            <div class="col-md-9"><input id="ContactNo2" type="text" ng-model="Group.ContactNo2" class="form-control" maxlength="10" /><span class="help-block"></span></div>
+                                                                                            <div class="col-md-9">
+                                                                                                <input type="text" id="ContactNo2" ng-model="Group.ContactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid phone numbers" data-fv-phone-country11="IN" required="required" data-fv-notempty-message="This field cannot be left blank." placeholder="Mobile No. " class="form-control" name="data[User][mobile]" data-fv-field="data[User][mobile]">
+                                                                                            <!--<input id="ContactNo2" type="text" ng-model="Group.ContactNo2" class="form-control" maxlength="10" />-->
+                                                                                            <span class="help-block">
+                                                                                                </span></div>
                                                                                         </div>
                                                                                         <div class="col-md-6">
                                                                                             <label for="Fax" class="col-md-3 control-label">Fax<span class='require'></span></label>
@@ -412,7 +416,7 @@
                                                                         <div class="row">
                                                                                     
                                                                                         <div class="col-md-6">
-                                                                                            <label for="Fax" class="col-md-3 control-label">EmailId:<span class='require'></span></label>
+                                                                                            <label for="Fax" class="col-md-3 control-label">E-mail Id:<span class='require'></span></label>
                                                                                             <div class="col-md-9"><input id="EmailId" type="text" ng-model="Group.EmailId" class="form-control" /><span class="help-block"></span></div>
 
                                                                             </div>
@@ -479,16 +483,15 @@
                                                                                         
                                                                                        
                                                                                           <div class="col-md-2">
-                                                                                              <label for="active" class="col-md-6 control-label">User: <span class='require'></span></label>
+                                                                                              <label for="active" class="col-md-6 control-label">Logo: <span class='require'></span></label>
                                                                                           </div>
                                                                                               <div class="text-center mbl"><img src="images/user.jpg" alt="" class="img-responsive" width="45px" />
                                                                                                   <div class="text-center mbl">
-                                                                                                      <a href="#" class="btn btn-green">
+                                                                                                      <!--<a href="#" class="btn btn-green">
                                                                                                           <i class="fa fa-upload"></i>&nbsp;
                                                                                                           Upload
-
-                                                                                                      </a>
-                                                                                                
+                                                                                                      </a>-->
+                                                                                                      <input type="file" class="btn btn-primary" value="Upload">                                                                                                     
                                                                                               </div>
                                                                                           </div>
                                                                                         

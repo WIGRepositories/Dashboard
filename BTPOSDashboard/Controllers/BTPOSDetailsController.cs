@@ -67,13 +67,13 @@ namespace BTPOSDashboardAPI.Controllers
             fo.Value = fId;
             cmd.Parameters.Add(fo);
 
-            SqlParameter cmp = new SqlParameter("@pageno", SqlDbType.Int);
-            cmp.Value = cmpId;
-            cmd.Parameters.Add(cmp);
+            SqlParameter pNo = new SqlParameter("@pageno", SqlDbType.Int);
+            pNo.Value = pageno;
+            cmd.Parameters.Add(pNo);
 
-            SqlParameter fo = new SqlParameter("@pagesize", SqlDbType.Int);
-            fo.Value = fId;
-            cmd.Parameters.Add(fo);
+            SqlParameter pSize = new SqlParameter("@pagesize", SqlDbType.Int);
+            pSize.Value = pagesize;
+            cmd.Parameters.Add(pSize);
 
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
