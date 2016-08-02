@@ -118,12 +118,12 @@ namespace POSDBAccess.Controllers
                 cmd.Parameters.Add(gsab);
                
 
-                cmd.ExecuteScalar();
+               // cmd.ExecuteScalar();
                
-                DataSet ds = new DataSet();
+               // DataSet ds = new DataSet();
                 SqlDataAdapter db = new SqlDataAdapter(cmd);
                 db.Fill(Tbl);
-                Tbl = ds.Tables[0];
+                //Tbl = ds.Tables[0];
 
 
             }
