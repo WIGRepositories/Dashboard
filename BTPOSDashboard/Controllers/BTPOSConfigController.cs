@@ -386,6 +386,7 @@ namespace BTPOSDashboard.Controllers
            // DataTable dt = GetFileContentFormDB("INDEXFILE", null);
 
             DataTable indexTbl = new DataTable();
+
             indexTbl.Columns.Add("GetFare");
             DataRow dr = indexTbl.NewRow();
 
@@ -418,13 +419,65 @@ namespace BTPOSDashboard.Controllers
             return indexTbl;
         }
 
-        [HttpGet]
-        [Route("api/SaveTrans")]
+        [HttpPost]
+        //[Route("api/SaveTrans")]
         public DataTable SaveTrans(string BTPOSId, int transTypeId, decimal amt, string gatewayId, string datetime, string srcId, string destId)
         {
             DataTable indexTbl = new DataTable();
             indexTbl.Columns.Add("Status");
-            
+
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd1 = new SqlCommand();
+            cmd1.CommandType = CommandType.StoredProcedure;
+            cmd1.CommandText = "InsUpdDelBTPOSTrans";
+            cmd1.Connection = conn;
+
+            SqlParameter cid = new SqlParameter();
+            cid.ParameterName = "@BTPOSId";
+            cid.SqlDbType = SqlDbType.VarChar;
+            cid.Value = BTPOSId;
+            cmd1.Parameters.Add(cid);
+
+            SqlParameter fid1 = new SqlParameter();
+            fid1.ParameterName = "@transTypeId";
+            fid1.SqlDbType = SqlDbType.Int;
+            fid1.Value = transTypeId;
+            cmd1.Parameters.Add(fid1);
+
+            SqlParameter fi = new SqlParameter();
+            fi.ParameterName = "@amt";
+            fi.SqlDbType = SqlDbType.Decimal;
+            fi.Value = amt;
+            cmd1.Parameters.Add(fi);
+
+            SqlParameter f = new SqlParameter();
+            f.ParameterName = "@datetime";
+            f.SqlDbType = SqlDbType.VarChar;
+            f.Value = datetime;
+            cmd1.Parameters.Add(f);
+
+            SqlParameter f1 = new SqlParameter();
+            f1.ParameterName = "@gatewayId";
+            f1.SqlDbType = SqlDbType.VarChar;
+            f1.Value = gatewayId;
+            cmd1.Parameters.Add(f1);
+
+            SqlParameter ff = new SqlParameter();
+            ff.ParameterName = "@srcId";
+            ff.SqlDbType = SqlDbType.VarChar;
+            ff.Value = srcId;
+            cmd1.Parameters.Add(ff);
+
+            SqlParameter fid2 = new SqlParameter();
+            fid2.ParameterName = "@destId";
+            fid2.SqlDbType = SqlDbType.VarChar;
+            fid2.Value = destId;
+            cmd1.Parameters.Add(fid2);
+
+
             DataRow dr = indexTbl.NewRow();
             dr[0] =  1;
             

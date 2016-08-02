@@ -42,37 +42,44 @@ namespace BTPOSDashboardAPI.Controllers
             
             return Tbl;
         }
-    //    [HttpGet]
+        [HttpGet]
 
-    //    public DataTable GetBTPOSDetails1(int cmpId, int fId)
-           
-    //{
+        public DataTable GetBTPOSDetails1(int cmpId, int fId, int pageno, int pagesize)
+        {
 
-    //    DataTable Tbl = new DataTable();
+            DataTable Tbl = new DataTable();
 
-    //        //connect to database
-    //        SqlConnection conn = new SqlConnection();
-    //        //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-    //        conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-    //        SqlCommand cmd = new SqlCommand();
-    //        cmd.CommandType = CommandType.StoredProcedure;
-    //        cmd.CommandText = "getBTPOSDetails1";
-    //        cmd.Connection = conn;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetBTPOSDetails";
+            cmd.Connection = conn;
 
-    //        SqlParameter cmp = new SqlParameter("@pageno", SqlDbType.Int);
-    //        cmp.Value = cmpId;
-    //        cmd.Parameters.Add(cmp);
+            SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);
+            cmp.Value = cmpId;
+            cmd.Parameters.Add(cmp);
 
-    //        SqlParameter fo = new SqlParameter("@pagesize", SqlDbType.Int);
-    //        fo.Value = fId;
-    //        cmd.Parameters.Add(fo);
+            SqlParameter fo = new SqlParameter("@fleetownerId", SqlDbType.Int);
+            fo.Value = fId;
+            cmd.Parameters.Add(fo);
 
-    //        SqlDataAdapter db = new SqlDataAdapter(cmd);
-    //        db.Fill(Tbl);
+            SqlParameter cmp = new SqlParameter("@pageno", SqlDbType.Int);
+            cmp.Value = cmpId;
+            cmd.Parameters.Add(cmp);
 
-    //        return Tbl;
-    //    }
+            SqlParameter fo = new SqlParameter("@pagesize", SqlDbType.Int);
+            fo.Value = fId;
+            cmd.Parameters.Add(fo);
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+
+            return Tbl;
+        }
 
         
         
