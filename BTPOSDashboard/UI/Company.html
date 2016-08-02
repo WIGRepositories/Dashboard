@@ -27,7 +27,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/user.jpg" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -499,9 +499,9 @@
                                                                     </div>
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-3 col-md-9">
-                                                                            <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
+                                                                            <button class="btn btn-green" type="button" ng-click="save(Group, 'I');">Save</button>
 
-                                                                            <a href="Company.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                            <a href="Company.html" class="btn btn-primary" ng-click="clearGroup()">Cancel</a>
                                                                         </div>
                                                                     </div>
 
@@ -651,8 +651,8 @@
                                                                 </div>
                                                                 <div class="form-actions">
                                                                     <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="button" class="btn btn-primary" ng-click="saveCmpChanges(currGroup, 'U');">Save</button>
-                                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                                                        <button type="button" class="btn btn-green" ng-click="saveCmpChanges(currGroup, 'U');">Save</button>
+                                                                        <button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -668,7 +668,7 @@
                                                             <th>Name</th>
                                                             <th>Code</th>
                                                             <th>Description</th>
-                                                            <th>Active</th>
+                                                            <th>Details</th>
                                                             <th>Update</th>
                                                         </tr>
                                                     </thead>
@@ -679,7 +679,11 @@
                                                             <td>{{cmp.code}}</td>
                                                             <td>{{cmp.desc}}</td>
                                                             <td>
-                                                                <input type="checkbox" checked readonly>
+                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
+                                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                                    Details
+                                                                </button>
+
                                                             </td>
                                                             <td>
                                                                 <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCompany(cmp);">
