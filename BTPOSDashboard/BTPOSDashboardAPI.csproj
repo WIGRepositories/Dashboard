@@ -446,6 +446,7 @@
     <Content Include="UI\FleetOwnerVehicleSchedule.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
+    <Content Include="UI\images\interbusLogo.png" />
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />
@@ -584,6 +585,7 @@
     <Content Include="UI\js\Types.js" />
     <Content Include="UI\js\Users.js" />
     <Content Include="UI\LicensePayments.html" />
+    <Content Include="UI\login1.html" />
     <Content Include="UI\newBTPOS.html" />
     <Content Include="UI\NewFleetBTPOS.html" />
     <Content Include="UI\NewFleetRoutes.html" />

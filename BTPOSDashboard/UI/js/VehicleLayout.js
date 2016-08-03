@@ -39,31 +39,31 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         if (vlType == null) {
             $scope.vlConfig = null;
             return;
-        }     
+        }
     }
 
 
     $scope.displayLayout = function () {
         var container = document.getElementById('basic_example');
 
-           // rowCount = typeof rowCount === 'number' ? rowCount : 4;
+        // rowCount = typeof rowCount === 'number' ? rowCount : 4;
         //  colCount = typeof colCount === 'number' ? colCount : 13;
 
         rowCount = document.getElementById('rowSelected').value;
         colCount = document.getElementById('colSelected').value;
-            var rows = [],
-                i,
-                j;
-            for (i = 0; i < rowCount; i++) {
-                var row = [];
-                for (j = 0; j < colCount; j++) {
+        var rows = [],
+            i,
+            j;
+        for (i = 0; i < rowCount; i++) {
+            var row = [];
+            for (j = 0; j < colCount; j++) {
                 row.push({ "Id": spreadsheetColumnLabel(j) + (i + 1), "selected": true });
-                }
-                rows.push(row);
             }
-            
+            rows.push(row);
+        }
 
-            $scope.datarows = rows;
+
+        $scope.datarows = rows;
 
         //function getData(rowCount, colCount) {
 
@@ -116,14 +116,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         //    VehicleITypeId: $scope.checkedArr[cnt].VehicleITypeId,
         //    ColNo: $scope.checkedArr[cnt].ColNo,
         //    label: $scope.checkedArr[cnt].lbl,
-            
+
         //    insupddelflag: 'I'
-            
+
         //}
 
         //rowCount = document.getElementById('rowSelected').value;
         //colCount = document.getElementById('colSelected').value;
-      
+
         ////var checkedArr = []
         ////var uncheckedArr = [];
         var checkedArr = new Array();
@@ -136,17 +136,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             for (j = 0; j < savedata[i].length; j++) {
 
                 var item = {
-                    "label": savedata[i][j].Id, 
+                    "label": savedata[i][j].Id,
                     "RowNo": i,
                     "ColNo": j,
                     "VehicleLayoutTypeId": $scope.layout.vl.Id,
-                    "VehicleTypeId": $scope.layout.vt.Id,                    
-                }                
-                    item.insupdflag = (savedata[i][j].selected == true) ? "I" : "D";
-                    checkedArr.push(item)                
+                    "VehicleTypeId": $scope.layout.vt.Id,
+                }
+                item.insupdflag = (savedata[i][j].selected == true) ? "I" : "D";
+                checkedArr.push(item)
             }
         }
-       
+
         //write the post logic and test
         var req = {
             method: 'POST',
@@ -180,7 +180,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                     return message;
                 }
             }
- });
+        });
     }
 
 });

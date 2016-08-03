@@ -56,14 +56,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             //headers: {
             //    'Content-Type': undefined
             data: vc
-                    }
+        }
         $http(req).then(function (res) {
             $scope.initdata = res.data;
         });
 
-
-
     }
+
+    $scope.GetFleetOwners = function () {
+        if ($scope.cmp == null) {
+            $scope.FleetOwners = null;
+            return;
+        }
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -78,7 +82,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             data: vc
 
 
-                    }
+        }
         $http(req).then(function (res) {
             $scope.cmpdata = res.data;
         });
@@ -105,8 +109,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         //from the checked and unchecked array get the actuallly records to be saved
         //from checked array take the records which have assigned = 0 as there are new assignements
         //from unchecked array take assgined = 1 as these need to be removed
-                
-      
+
+
         var FleetOwnerRoutes = [];
 
         for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
@@ -143,7 +147,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
                 FleetOwnerRoutes.push(fr);
             }
-        }      
+        }
 
         $http({
             url: 'http://localhost:1476/api/FleetOwnerRoute/saveFleetOwnerRoute',
@@ -177,7 +181,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             $scope.uncheckedArr.push(item);
         }
     };
-    
+
 
     $scope.toggleAll = function () {
         if ($scope.checkedArr.length === $scope.FORoutes.length) {
@@ -188,14 +192,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             $scope.checkedArr = $scope.FORoutes.slice(0);
             $scope.uncheckedArr = [];
         }
-      
+
     };
 
     $scope.exists = function (item, list) {
         return list.indexOf(item) > -1;
     };
-  
-   
+
+
     $scope.isChecked = function () {
         return $scope.checkedArr.length === $scope.FORoutes.length;
     };
@@ -205,5 +209,5 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             dateFormat: "dd/mm/yy"
         });
     });
-   
+
 });
