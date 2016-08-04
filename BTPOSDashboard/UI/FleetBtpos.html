@@ -19,7 +19,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();" ng-model="FleetBtposList">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="FleetBtposList">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -142,13 +142,13 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
-                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerRoutes</span></a></li>
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                                 <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
-                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Vehicle Layout</span></a></li>
-                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle LayOut</span></a></li>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FleetOwnerVehicleLayOut</span></a></li>
 
                             </ul>
 
@@ -366,33 +366,25 @@
 
 
                                                 <div class="table-container">
-                                                   
                                                         <div class="row mbm">
-
-
-                                                            <div class="col-md-4">
-
-                                                                Company:<select ng-options="c.Name for c in  Companies  track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()" id="test">
+                                                        <div class="col-md-5">
+                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
     <option value="">Select</option>
 </select>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                Fleet Owner::<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleeBTPosDetails()" id="test1">
+                                                        <div class="col-md-5">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeBTPosDetails()">
 
     <option value="">Select</option>
 </select>
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus"> Assign New BTPOS</button>
 
-
-                                                            </div>
+                                                       
+                                                       
+                                                        <div class="actions">
+                                                            <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right; margin:10px"> Assign New BTPOS</button></a>
 
                                                         </div>
-
-                                                       
-                                                       
-
                                                         <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
@@ -534,14 +526,19 @@
                             </div>
 
 
-                        
-              
+                    </div>
+                </div>
+            </div>
+        </div>
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
                     <!--END FOOTER-->
-               
+    </div>
+    <!--END PAGE WRAPPER-->
+    </div>
+    </div>
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">

@@ -19,7 +19,7 @@
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();" ng-model="FleetStaff">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="FleetStaff">
 
     <div>
         <!--BEGIN THEME SETTING-->
@@ -27,7 +27,6 @@
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
-
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                     <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
@@ -258,9 +257,9 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
-                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
+
 
                                     </ul>
                                 </li>
@@ -366,12 +365,12 @@
 
                                             <div class="row mbm">
                                                 <div class="col-md-4">
-                                                    Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
+                                                    Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
     <option value="">Select</option>
 </select>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleetStaff(s)" id="test1">
+                                                    Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetStaff()">
 
     <option value="">Select</option>
 </select>
@@ -386,16 +385,15 @@
 
 
 
-                                        </div>
 
                                         <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header modal-header-primary">
                                                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                        <h4 id="modal-header-primary-label" class="modal-title">Add Fleet Staff</h4>
+                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Staff</h4>
                                                     </div>
-                                                    <div class="modal-body" ng-init="GetCompanies();" ng-model="initdata">
+                                                        <div class="modal-body" ng-model="currFleet">
                                                         <div class="row mbm">
                                                             <div style="text-align:right">
                                                                 <label for="selCompany" class="col-md-4 control-label" style="color:red;">Company:<span class='require'>*</span></label>
@@ -485,16 +483,14 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                </div>
                                 <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header modal-header-primary">
                                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Staff</h4>
+                                                            <h4 id="modal-header-primary-label" class="modal-title">Add Fleet Staff</h4>
                                             </div>
-                                            <div class="modal-body" ng-model="currFleet">
+                                                        <div class="modal-body" ng-init="GetCompanies();" ng-model="initdata">
                                                 <div class="row mbm">
                                                     <div style="text-align:right">
                                                         <label for="selCompany" class="col-md-4 control-label" style="color:red;">Company:<span class='require'>*</span></label>
@@ -584,6 +580,9 @@
                                     </div>
 
                                 </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                     <thead>
 
@@ -612,7 +611,8 @@
                                                     <i class="fa fa-edit"></i>&nbsp;
                                                     Edit
                                                 </button>
-                                            <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+                                            </td>
+                                            <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(Fleet);"><i class="fa fa-trash-o"></i></a></div></td>
 
                                         </tr>
                                     </tbody>
