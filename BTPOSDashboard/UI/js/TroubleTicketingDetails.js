@@ -25,7 +25,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             RefId: Group.RefId,
             Type: Group.Type,
             CreatedBy: Group.CreatedBy,
-            Id: Group.Id,
+            //Id: Group.Id,
             Raised: Group.Raised,
             TicketTitle: Group.TicketTitle,
             IssueDetails: Group.IssueDetails,
@@ -45,7 +45,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
 
         $http(req).then(function (response) {
-        
+            $scope.currGroup = null;
         });
     };   
 

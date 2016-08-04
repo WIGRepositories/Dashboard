@@ -63,6 +63,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
+    $scope.getFleetOwnerRoute = function () {
+
+        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner').then(function (res, data) {
+            $scope.FleetOwner = res.data;
+
+        });
+  
+    }
+
     $scope.setUsers = function (usr) {
         $scope.User1 = usr;
     };

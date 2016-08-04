@@ -19,6 +19,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
+    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -75,6 +77,52 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         });
     }
 
+
+    //$scope.GetCompanies = function () {
+
+    //    $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+    //        $scope.Companies = res.data;
+
+    //        if ($scope.userCmpId != 1) {
+    //            loop throug the companies and identify the correct one
+    //            for (i = 0; i < res.data.length; i++) {
+    //                if (res.data[i].Id == $scope.userCmpId) {
+    //                    $scope.cmp = res.data[i];
+    //                    document.getElementById('test').disabled = true;
+    //                    break
+    //                }
+    //            }
+    //        }
+    //        else {
+    //            document.getElementById('test').disabled = false;
+    //        }
+    //        $scope.GetFleetOwners($scope.cmp);
+    //    });
+
+    //}
+
+    //$scope.GetFleetOwners = function () {
+
+
+    //    $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+    //        $scope.fleet = res.data;
+
+    //        if ($scope.userSId != 1) {
+    //            loop throug the companies and identify the correct one
+    //            for (i = 0; i < res.data.length; i++) {
+    //                if (res.data[i].Id == $scope.userSId) {
+    //                    $scope.s = res.data[i];
+    //                    document.getElementById('test1').disabled = true;
+    //                    break
+    //                }
+    //            }
+    //        }
+    //        else {
+    //            document.getElementById('test1').disabled = false;
+    //        }
+    //        $scope.getFleetOwnerRoute($scope.s);
+    //    });
+    //}
     $scope.getFleetOwnerRoute = function () {
 
         if ($scope.s == null) {

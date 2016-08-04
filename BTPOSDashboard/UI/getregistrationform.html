@@ -1,97 +1,84 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Action Tables | Tables</title>
+    <title>Dashboard</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  
     <!--Loading bootstrap css-->
-
-    
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    
+
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
+
+
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
+    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
+    <!--Loading style-->
+    <link type="text/css" rel="stylesheet" href="css/themes/style3/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetAlerts();">
-    <div>
-        <!--BEGIN THEME SETTING-->
-        <!--BEGIN BACK TO TOP-->
-        <a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
-        <div id="header-topbar-option-demo" class="page-header-topbar">
-            <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
-                <div class="navbar-header">
-                    <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
-                </div>
-                <div class="topbar-main">
-                    <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="getdata();" ng-model="initdata">
 
-                    <ul class="nav navbar navbar-top-links navbar-right mbn">
-                        <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
-                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
-                                <li><p>You have 0 new alerts</p></li>
-                            </ul>
-                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
-                                <li><p>{{A.Message}}</p></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
-                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
-                                <li><p>You have 0 new notifications</p></li>
-                            </ul>
-                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
-                                <li><p>{{A.Message}}</p></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown topbar-user">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
-                            <ul class="dropdown-menu dropdown-user pull-right">
-                                <li><a href="UserProfile.html"><i class="fa fa-user"></i>My Profile</a></li>
-                                <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
-                                <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success"></span></a></li>
-                                <li class="divider"></li>
-                                <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                                <li><a href="login.html"><i class="fa fa-key"></i>Log Out</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <!--BEGIN MODAL CONFIG PORTLET-->
-            <div id="modal-config" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                            <h4 class="modal-title">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend et nisl eget porta. Curabitur elementum sem molestie nisl varius, eget tempus odio molestie. Nunc vehicula sem arcu, eu pulvinar neque cursus ac. Aliquam ultricies lobortis magna et aliquam. Vestibulum egestas eu urna sed ultricies. Nullam pulvinar dolor vitae quam dictum
-                                condimentum. Integer a sodales elit, eu pulvinar leo. Nunc nec aliquam nisi, a mollis neque. Ut vel felis quis tellus hendrerit placerat. Vivamus vel nisl non magna feugiat dignissim sed ut nibh. Nulla elementum, est a pretium hendrerit, arcu risus luctus augue, mattis aliquet orci ligula eget massa. Sed ut ultricies felis.
-                            </p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
+    <!--BEGIN THEME SETTING-->
+    <!--BEGIN BACK TO TOP-->
+    <a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
+    <div id="header-topbar-option-demo" class="page-header-topbar">
+        <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+            <div class="navbar-header">
+                <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <a id="logo" href="index.html" class="navbar-brand"><img src="images/user.jpg" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
             </div>
-            <!--END MODAL CONFIG PORTLET-->
-        </div>
+            <div class="topbar-main">
+                <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+                <ul class="nav navbar navbar-top-links navbar-right mbn">
+                    <li class="dropdown">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                            <li><p>You have 0 new alerts</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                            <li><p>{{A.Message}}</p></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                        <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                            <li><p>You have 0 new notifications</p></li>
+                        </ul>
+                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                            <li><p>{{A.Message}}</p></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown topbar-user">
+                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-user pull-right">
+                            <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
+                            <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                            <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
+                            <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success"></span></a></li>
+                            <li class="divider"></li>
+                            <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
+                            <li><a href="login.html"><i class="fa fa-key"></i>Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <!--END TOPBAR-->
         <div id="wrapper">
             <!--BEGIN SIDEBAR MENU-->
@@ -103,7 +90,7 @@
                             <div class="info">
                                 <p>{{uname}}</p>
                                 <ul class="list-inline list-unstyled">
-                                    <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                    <li><a href="UserProfile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                     <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                     <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
                                     <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
@@ -111,18 +98,16 @@
                             </div>
                             <div class="clearfix"></div>
                         </li>
-
-                        <li>
-                            <a href="index.html">
+                        <li class="active">
+                            <a href="#">
                                 <i class="fa fa-tachometer fa-fw">
                                     <div class="icon-bg bg-orange"></div>
                                 </i><span class="menu-title">Dashboard</span>
                             </a>
                         </li>
 
-
                         <li>
-                            <a href="#">
+                            <a href="Company.html">
                                 <i class="fa fa-sitemap fa-fw">
                                     <div class="icon-bg bg-dark"></div>
                                 </i><span class="menu-title">Company and Users</span><span class="fa arrow"></span>
@@ -154,9 +139,6 @@
                         </li>
                     </ul>
                     </li>
-
-
-
                     <li>
                         <a href="#">
                             <i class="fa fa-truck">
@@ -166,16 +148,16 @@
                         <ul class="nav nav-second-level">
 
                             <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                            <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                             <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                             <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                             <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
                             <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
+                            <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Vehicle Layout</span></a></li>
+                            <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
 
                         </ul>
-
                     </li>
-
-
 
                     <li>
                         <a href="#">
@@ -190,7 +172,8 @@
                             <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
                             <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
                             <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
-                            <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            <li><a href="Advertisment.html"><i class="fa fa-tablet"></i><span class="submenu-title">Advertisment</span></a></li>
+
                         </ul>
                     </li>
 
@@ -255,8 +238,9 @@
                                     <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                     <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
                                     <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
-                                    <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Sms Gateway Configuration</span></a></li>
-                                    <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Email Gateway Configuration</span></a></li>
+                                    <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">SmsGatewayConfiguration</span></a></li>
+                                    <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">EmailGatewayConfiguration</span></a></li>
+
                                 </ul>
                             </li>
 
@@ -267,6 +251,13 @@
                                     <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                     <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                     <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                    <li><a href="FleetOwnerFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+
+                                    <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                    <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+
+
+                                    <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
 
                                 </ul>
                             </li>
@@ -277,7 +268,6 @@
                                     <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                     <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
                                     <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
-
 
                                 </ul>
                             </li>
@@ -295,10 +285,24 @@
                             </i><span class="menu-title">Utilties & Tools</span><span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-
+                            <li><a href="DataLoad.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Data Load</span></a></li>
                             <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
-                            <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
-                            <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
+                            <li><a href="paymentHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
+                            <!--<li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>-->
+
+
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-gavel">
+                                <div class="icon-bg bg-green"></div>
+                            </i><span class="menu-title">Trouble Ticket</span><span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticketing Details</span></a></li>
+                            <li><a href="TroubleTicketHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticket History</span></a></li>
 
 
                         </ul>
@@ -320,7 +324,7 @@
                     </li>
 
 
-                    <li class="active">
+                    <li>
                         <a href="#">
                             <i class="fa fa-send-o fa-fw">
                                 <div class="icon-bg bg-dark"></div>
@@ -328,7 +332,7 @@
                         </a>
                         <ul class="nav nav-second-level">
 
-                            <li class="active">
+                            <li>
                                 <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
@@ -343,7 +347,7 @@
                                 <ul class="nav nav-third-level">
 
                                     <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                    <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
+                                    <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">NotificationConfiguration </span></a></li>
 
                                 </ul>
                             </li>
@@ -352,66 +356,110 @@
                     </li>
                     </ul>
                 </div>
-            </nav>
-            <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+            </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
             <div id="page-wrapper">
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
-                        <div class="page-title">Alerts</div>
+                        <div class="page-title">Dashboard</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
-                        <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li><a href="#">Alerts</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                     </ol>
                     <div class="clearfix"></div>
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                 <div class="page-content">
-
-
                     <div id="tableadvancedTabContent" class="tab-content">
                         <div id="table-sorter-tab" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div>
-                                        <div id="tab-general">
+                                        <div class="page-content">
+                                            <div class="page-content">
 
-                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Username</th>
-                                                        <th>Message</th>
-                                                        <th>Date</th>
-                                                        <th>Delete</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                                <div class="page-form" >
+                                                    <form id="signup-form" class="form">
+                                                        <div class="header-content"><h1>Registration</h1></div>
+                                                        <div class="body-content" ng-model="register" ng-repeat="t in type">
+                                                            <div class="form-group">
+                                                                <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="Username" name="username" class="form-control" ng-model="register.username" value="{{t.UserName}}"></div>
+                                                            </div>
+                                                            <div class="form-group">
 
-                                                    <tr ng-repeat="R in GetAlerts" class="gradeA">
-                                                        <td>{{R.Username}}</td>
-                                                        <td>{{R.Message}}</td>
-                                                        <td>{{R.Date}}</td>
-                                                        <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(role);"><i class="fa fa-trash-o"></i></a></div></td>
-                                                        <!--<button type="button" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(R);">
-                                                        <i class="fa fa-times-circle"></i>&nbsp;
-                                                        Delete
-                                                    </button>-->
+                                                                <div class="input-icon right"><i class="fa fa-envelope"></i><input type="email" placeholder="Emailaddress" name="email" class="form-control" ng-model="register.Emailaddress" value="{{t.Emailaddress}}"></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right"><i class="fa fa-key"></i><input id="password" type="password" placeholder="Password" name="password" class="form-control" ng-model="register.Password"value="{{t.Password}}"></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon right"><i class="fa fa-key"></i><input type="password" placeholder="ConfirmPassword" name="passwordConfirm" class="form-control" ng-model="register.ConfirmPassword" value="{{t.ConfirmPassword}}"></div>
+                                                            </div>
+                                                            <hr>
+                                                            <div style="margin-bottom: 15px" class="row">
+                                                                <div class="col-lg-6"><label><input type="text" placeholder="First Name" name="firstname" class="form-control" ng-model="register.firstname" value="{{t.FirstName}}"></label></div>
+                                                                <div class="col-lg-6"><label><input type="text" placeholder="Last Name" name="lastname" class="form-control" ng-model="register.lastname" value="{{t.LastName}}"></label></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label style="display: block" class="select">
 
-                                                    </tr>
+                                                                    <select name="gender" class="form-control" ng-model="register.Gender" >
+                                                                        <option value="" selected disabled>Gender</option>
+                                                                        <option value="">{{t.Gender}}</option>
+                                                                        <option value="">{{t.Gender}}</option>
 
-                                                </tbody>
-
-                                            </table>
+                                                                    </select>
+                                                                </label>
+                                                            </div>
+                                                            <!--<div class="form-group">
+        <div class="checkbox-list">
+            <label>
+                <input id="subscription" type="checkbox" name="subscription">&nbsp;
+                I want to receive news and special offers
+            </label>
+        </div>
+        </div>-->
+                                                            <!--<div class="form-group">
+                <div class="checkbox-list">
+                    <label>
+                        <input id="terms" type="checkbox" name="terms">&nbsp;
+                        I agree with the Terms and Conditions
+                    </label>
+            </div>
+        </div>-->
+                                                            <hr>
+                                                            <div class="form-group mbn">
+                                                                <a href="extra-signin.html" class="btn btn-warning">
+                                                                    <i class="fa fa-chevron-circle-left"></i>&nbsp;
+                                                                    Back
+                                                                </a>
+                                                                <button class="btn btn-info pull-right" ng-click="save(register);">
+                                                                    Submit
+                                                                    &nbsp;<i class="fa fa-chevron-circle-right"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                    </div><br />
+
+
+
+
 
                                 </div>
-
                             </div>
 
                         </div>
+
+
+
                     </div>
+
 
 
                     <!--END CONTENT-->
@@ -420,57 +468,121 @@
                 <!--END PAGE WRAPPER-->
                 <!--BEGIN FOOTER-->
                 <div id="footer">
-                    <div class="copyright">2016 © Interbus -Smart Ticketing Dashboard portal</div>
+                    <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                 </div>
                 <!--END FOOTER-->
-                <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
-
-                    <div class="modal-header">
-                        <h3 class="modal-title">Save confirmation!</h3>
-                    </div>
-                    <div class="modal-body">
-                        <!--<ul>
-                        <li ng-repeat="item in items">
-                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                        </li>
-                    </ul>
-                    Selected: <b>{{ selected.item }}</b>-->
-                        {{mssg}}
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                    </div>
-
-                </script>
             </div>
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery-migrate-1.2.1.min.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <!--loading bootstrap js-->
-            <script src="vendors/bootstrap/js/bootstrap.js"></script>
-            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        </div>
+
+    </div>
+    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+        <div class="modal-header">
+            <h3 class="modal-title">Save confirmation!</h3>
+        </div>
+        <div class="modal-body">
+            <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+            {{mssg}}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </script>
+    </div>
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-            <script src="vendors/iCheck/icheck.min.js"></script>
-            <script src="vendors/iCheck/custom.min.js"></script>
-            <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-            <script src="js/jquery.menu.js"></script>
-            <script src="vendors/jquery-pace/pace.min.js"></script>
-            <script src="vendors/holder/holder.js"></script>
-            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-            <!--LOADING SCRIPTS FOR PAGE-->
-            <script src="js/table-action.js"></script>
-            <!--CORE JAVASCRIPT-->
-            <script src="js/main.js"></script>
-            <script src="js/angular.js"></script>
-            <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-            <script src="js/ngStorage.js"></script>
-            <script src="js/Alerts.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <!--<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>-->
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
 
+    <script src="js/angular.js"></script>
+
+
+    <!--<script src="vendors/tableExport/tableExport.js"></script>
+    <script src="vendors/tableExport/jquery.base64.js"></script>
+    <script src="vendors/tableExport/html2canvas.js"></script>
+    <script src="vendors/tableExport/jspdf/libs/sprintf.js"></script>
+    <script src="vendors/tableExport/jspdf/jspdf.js"></script>
+    <script src="vendors/tableExport/jspdf/libs/base64.js"></script>-->
+
+    <script src="js/libs/angular-route.js"></script>
+    <script src="js/libs/angular-ui-router.js"></script>
+    <script src="js/libs/ocLazyLoad.js"></script>
+    <script src="js/libs/ui-bootstrap.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/charts-highchart-line.js"></script>
+    <script src="js/source.js"></script>
+
+
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+
+    <script src="vendors/jquery-highcharts/highcharts.js"></script>
+    <script src="vendors/jquery-highcharts/exporting.js"></script>
+    <script src="js/charts-highchart-line.js"></script>
+    <script src="js/registrationform.js"></script>
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-145464-12', 'auto');
+        ga('send', 'pageview');
+
+
+    </script>
 
 </body>
+
 </html>

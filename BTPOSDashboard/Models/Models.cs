@@ -621,6 +621,7 @@ namespace BTPOSDashboardAPI.Models
 
     public class TroubleTicketingDetails
     {
+        //public int Id { get; set; }
         public int RefId { get; set; }
 
         public int Type { get; set; }
@@ -1624,6 +1625,30 @@ namespace BTPOSDashboardAPI.Models
         public int Port { get; set; }
         public string insupdflag { get; set; }
 
+    }
+
+    public class Registrationform
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Emailaddress { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string Gender { get; set; }
+    }
+
+
+
+    public class BTPOSTrans
+    {
+        public string BTPOSId { get; set; }
+        public int transTypeId { get; set; }
+        public Decimal amt { get; set; }
+        public string gatewayId { get; set; }
+        public string datetime { get; set; }
+        public string srcId { get; set; }
+        public string destId { get; set; }
     }
 }                     
         

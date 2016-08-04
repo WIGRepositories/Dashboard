@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl" ng-model="dashboardDS" ng-init="GetCompanies();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -26,7 +26,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/user.jpg" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -85,7 +85,7 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
@@ -350,25 +350,25 @@
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                <thead>
-                    <tr>
-                        <th width="3%"><input type="checkbox" class="checkall" />Select</th>
-                        <th>FeatureName</th>
-                        <th>FeatureValue</th>
-                        <th>Description</th>
+                        <thead>
+                            <tr>
+                                <th width="3%"><input type="checkbox" class="checkall" />Select</th>
+                                <th>FeatureName</th>
+                                <th>FeatureValue</th>
+                                <th>Description</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="L in License">
-                        <td><input type="checkbox" /> </td>
-                        <td>{{L.FeatureName}}</td>
-                        <td>{{L.FeatureValue}}</td>
-                        <td>{{L.Description}}</td>
-                    </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="L in License">
+                                <td><input type="checkbox" /> </td>
+                                <td>{{L.FeatureName}}</td>
+                                <td>{{L.FeatureValue}}</td>
+                                <td>{{L.Description}}</td>
+                            </tr>
 
-                </tbody>
-            </table>-->
+                        </tbody>
+                    </table>-->
                     <title>Export Tables | Tables</title>
                     <meta charset="utf-8">
                     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -405,15 +405,15 @@
                                 <div class="row">
                                     <div class="portlet box">
                                         <div class="col-md-5">
-                                            Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                <option value="">Select</option>
-                                            </select>
+                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()"id="test">
+    <option value="">Select</option>
+</select>
                                         </div>
                                         <div class="col-md-5">
-                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleetDetails()"id="test1">
 
-                                                <option value="">Select</option>
-                                            </select>
+    <option value="">Select</option>
+</select>
                                         </div>
                                         <div class="portlet-header pam mbn"></div><div class="portlet-body">
                                             <div class="btn-group mtm mbm">
@@ -441,13 +441,13 @@
                                                 </ul>
                                                 <!--</a><ul class="dropdown-menu"><li><a href="#" onclick="$('#example-export').tableExport({type:'json',escape:'false'});"><img src="vendors/tableExport/icon/json.png" width="24px" class="mrx" />Export to Json</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'xml',escape:'false'});"><img src="vendors/tableExport/icon/xml.png" width="24px" class="mrx" />Export to Xml</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'sql'});"><img src="vendors/tableExport/icon/sql.png" width="24px" class="mrx" />Export to Sql</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'csv'});"><img src="vendors/tableExport/icon/csv.png" width="24px" class="mrx" />Export to csv</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'txt',escape:'false'});"><img src="vendors/tableExport/icon/txt.png" width="24px" class="mrx" />Export to TXT</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'excel',escape:'false'});"><img src="vendors/tableExport/icon/xls.png" width="24px" class="mrx" />Export to Excel</a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'doc',escape:'false'});"><img src="vendors/tableExport/icon/word.png" width="24px" class="mrx" />Export to word </a></li><li><a href="#" onclick="$('#example-export').tableExport({type:'powerpoint',escape:'false'});"><img src="vendors/tableExport/icon/ppt.png" width="24px" class="mrx" />Export to powerpoint</a></li><li class="divider"></li><li><a href="#" onclick="$('#example-export').tableExport({type:'pdf', pdfFontSize:'14', escape:'true'});"><img src="vendors/tableExport/icon/pdf.png" width="24px" class="mrx" />Export to Pdf</a></li></ul>-->
                                             </div><table id="example-export" class="table table-hover table-striped table-bordered table-advanced tablesorter mbn">
-                                                <thead><tr><th width="9%">Record #</th><th width="10%">Username</th><th width="10%">Country</th><th width="10%">Gender</th><th width="7%">Order</th><th width="12%">Date</th><th width="10%">Price</th><th width="9%">Status</th><th width="12%">Actions</th></tr></thead>
+                                                      <thead><tr><th width="9%">Record #</th><th width="10%">Username</th><th width="10%">Company</th><th width="10%">FleetOwner</th><th width="7%">Btpos</th><th width="12%">Date</th><th width="10%">Price</th><th width="9%">Status</th><th width="12%">Actions</th></tr></thead>
                                                 <tbody>
                                                     <tr>
                                                         <td>1</td>
                                                         <td>Henry</td>
-                                                        <td>United States</td>
-                                                        <td>Male</td>
+                                                        <td>Webingate</td>
+                                                        <td>Fl001</td>
                                                         <td>32</td>
                                                         <td>20-05-2014</td>
                                                         <td>$240.50</td>
@@ -462,8 +462,8 @@
                                                     <tr>
                                                         <td>2</td>
                                                         <td>John</td>
-                                                        <td>United States</td>
-                                                        <td>Female</td>
+                                                        <td>Zupco</td>
+                                                        <td>Fl002</td>
                                                         <td>45</td>
                                                         <td>20-05-2014</td>
                                                         <td>$240.50</td>
@@ -478,8 +478,8 @@
                                                     <tr>
                                                         <td>3</td>
                                                         <td>Larry</td>
-                                                        <td>United States</td>
-                                                        <td>Female</td>
+                                                        <td>Thomson</td>
+                                                        <td>Fl003</td>
                                                         <td>40</td>
                                                         <td>20-05-2014</td>
                                                         <td>$240.50</td>
@@ -491,7 +491,7 @@
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <!--<tr>
                                                         <td>4</td>
                                                         <td>Lahm</td>
                                                         <td>United States</td>
@@ -618,7 +618,7 @@
                                                                 Edit
                                                             </button>
                                                         </td>
-                                                    </tr>
+                                                    </tr>-->
                                                 </tbody>
 
                                         </div>
@@ -694,6 +694,7 @@
         <script src="js/ngStorage.js"></script>
         <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
         <script src="js/source.js"></script>
+        <script src="js/TTReports.js"></script>
 
         <!--<script src="js/Alerts.js"></script>
 

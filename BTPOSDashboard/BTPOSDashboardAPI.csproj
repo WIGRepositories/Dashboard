@@ -446,7 +446,8 @@
     <Content Include="UI\FleetOwnerVehicleSchedule.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
-    <Content Include="UI\images\interbusLogo.png" />
+    <Content Include="UI\getregistrationform.html" />
+    <Content Include="UI\images\dashboard.png" />
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />
@@ -460,8 +461,11 @@
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
     <Content Include="UI\js\BTPOSMonitoringPage.js" />
+    <Content Include="UI\js\BTPosReports.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
+    <Content Include="UI\js\charts-highchart-line.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
+    <Content Include="UI\js\CompanyReports.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\DataLoad.js" />
     <Content Include="UI\js\EditHistory.js" />
@@ -479,6 +483,7 @@
     <Content Include="UI\js\FleetOwnerVehicleSchedule.js" />
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
+    <Content Include="UI\js\FOReports.js" />
     <Content Include="UI\js\handsontable.full.js" />
     <Content Include="UI\js\html5shiv.js" />
     <Content Include="UI\js\InventoryItem.js" />
@@ -493,6 +498,7 @@
     <Content Include="UI\js\libs\ui-bootstrap.js" />
     <Content Include="UI\js\NotificationsConfigurations.js" />
     <Content Include="UI\js\PaymentGateWayConfiguration.js" />
+    <Content Include="UI\js\registrationform.js" />
     <Content Include="UI\js\ShoppingCart.js" />
     <Content Include="UI\js\SmsGatewayConfiguration.js" />
     <Content Include="UI\js\treetable.js" />
@@ -521,6 +527,7 @@
     <Content Include="UI\js\tableexportjspdf.js" />
     <Content Include="UI\js\tableexportsprintf.js" />
     <Content Include="UI\js\treeview.js" />
+    <Content Include="UI\js\TTReports.js" />
     <Content Include="UI\js\ui-bootstrap-tpls-1.3.3.js" />
     <Content Include="UI\js\UserLicense.js" />
     <Content Include="UI\js\VehicleLayout.js" />
@@ -601,6 +608,7 @@
     <Content Include="UI\popup.html" />
     <Content Include="UI\PurchaseOrders.html" />
     <Content Include="UI\register.html" />
+    <Content Include="UI\registrationform.html" />
     <Content Include="UI\ResetPassword.html" />
     <Content Include="UI\Roledetails.html" />
     <Content Include="UI\Roles.html" />
@@ -2084,6 +2092,7 @@
     <Compile Include="Controllers\PaymentHistoryController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\registrationformController.cs" />
     <Compile Include="Controllers\RouteDetailsController.cs" />
     <Compile Include="Controllers\RouteFareController.cs" />
     <Compile Include="Controllers\SalesOrderController.cs" />

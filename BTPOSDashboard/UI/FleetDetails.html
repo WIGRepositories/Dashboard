@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetVehicleConfig();" ng-model="initdata">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -26,7 +26,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/user.jpg" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -85,7 +85,7 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
@@ -371,15 +371,15 @@
 
                                                         <div class="col-md-4">
 
-                                                            Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                                <option value="">Select</option>
-                                                            </select>
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()"id="test">
+    <option value="">Select</option>
+</select>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleetDetails()" id="test1" ng-click="ShowHide()">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="text-align-last:right">Add Fleet Details</button>
@@ -390,19 +390,19 @@
                                                     </div>
 
                                                     <!--<div class="actions">
-                                          <!--<div class="col-md-5">
-                                              Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                  <option value="">Select</option>
-                                              </select>
-                                          </div>
-                                          <div class="col-md-5">
-                                              Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                                    <!--<div class="col-md-5">
+                                                        Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
 
-                                                  <option value="">Select</option>
-                                              </select>
-                                          </div>-->
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>-->
                                                     <!--<div class="actions">
-                                        <!----   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
+                                                    <!----   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
                                                     <!--<button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
                                                     <!-----  </div>----->
 
@@ -520,7 +520,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();">
+                                                                                    <select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();">
                                                                                         <option value="">Select</option>
                                                                                     </select>
 
@@ -547,15 +547,15 @@
 
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-5 col-md-9">
-                                                                            <button class="btn btn-primary" type="button" ng-click="savenewfleetdetails(initdata);">Save</button>
+                                                                            <button class="btn btn-green" type="button" ng-click="savenewfleetdetails(initdata);">Save</button>
 
-                                                                            <a href="FleetDetails.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                                                            <a href="FleetDetails.html" class="btn btn-primary" ng-click="clearGroup()">Cancel</a>
                                                                         </div>
                                                                     </div>
                                                                     <!---- <div class="col-md-6 col-md-offset-2">
-                                                        <button class="btn btn-primary" type="button">Save</button>
-                                                        <button class="btn btn-primary" type="button">Cancel</button>
-                                                    </div>--->
+                                                                        <button class="btn btn-primary" type="button">Save</button>
+                                                                        <button class="btn btn-primary" type="button">Cancel</button>
+                                                                    </div>--->
 
 
 
@@ -692,7 +692,7 @@
 
 
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" disabled>
+                                                                                        <select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" class="form-control" disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -701,7 +701,7 @@
                                                                                     <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" class="form-control" disabled>
+                                                                                        <select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" class="form-control" disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -712,19 +712,19 @@
 
 
                                                                     <!--<div class="row mbm">
-                                                        <div class="row">
+                                                                        <div class="row">
 
 
-                                                            <div class="col-md-12">
+                                                                            <div class="col-md-12">
 
-                                                                <div class="col-md-6">
-                                                                    <label for="inputFirstName" class="col-md-6 control-label">Active:<span class='require'>*</span></label>
-                                                                    <input type="checkbox" class="form-control" id="cactive" ng-model="currVD.active" checked />
+                                                                                <div class="col-md-6">
+                                                                                    <label for="inputFirstName" class="col-md-6 control-label">Active:<span class='require'>*</span></label>
+                                                                                    <input type="checkbox" class="form-control" id="cactive" ng-model="currVD.active" checked />
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>-->
 
                                                                     <div class="form-actions">
                                                                         <div class="col-md-6 col-md-offset-2">
@@ -734,9 +734,9 @@
                                                                         </div>
 
                                                                         <!--<div class="col-md-6 col-md-offset-2">
-                                                        <button class="btn btn-primary" type="button">Save</button>
-                                                        <button class="btn btn-primary" type="button">Cancel</button>
-                                                               </div>-->
+                                                                        <button class="btn btn-primary" type="button">Save</button>
+                                                                        <button class="btn btn-primary" type="button">Cancel</button>
+                                                                               </div>-->
                                                                     </div>
 
                                                                 </div>
@@ -750,156 +750,157 @@
                                         </div>
                                     </div>
                                     <!----<div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group has-success" style="text-align:right">
-                                <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
-                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
-                            </div>
-                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group has-success" style="text-align:right">
+                                                <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
+                                                <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
+                                            </div>
+                                        </div>
 
-                    </div>--->
-                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                        <thead>
-                                            <tr>
+                                    </div>--->
+                                    <div ng-hide="IsHidden">
+                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                            <thead>
+                                                <tr>
 
-                                                <th width="22%">Vehicle Reg. No</th>
-                                                <th>Vehicle Type</th>
-                                                <th>Vehicle Layout</th>
-                                                <th>Service Type </th>
-                                                <!--<th>Engine No </th>
-                                <th>Fuel Used </th>
-                                <th>Month And Yr. Of Mfr </th>
-                                <th>Chasis No </th>
-                                <th>Date Of Registration </th>
-                                <th>Seating Capacity </th>-->
-
-
-                                                <th>Active</th>
-                                                <th>Update</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr ng-repeat="F in Fleet" class="gradeA">
-                                                <td>
-                                                    {{F.VehicleRegNo}}
-
-                                                </td>
-                                                <td>
-                                                    {{F.VehicleType}}
-                                                </td>
-                                                <td>
-                                                    {{F.vehiclelayout}}
-                                                </td>
-                                                <td>
-                                                    {{F.ServiceType}}
-                                                </td>
-                                                <!--<td>
-                                    {{F.EngineNo }}
-                                </td>
-                                <td>
-                                    {{F.FuelUsed}}
-                                </td>
-                                <td>
-                                    {{F.MonthAndYrOfMfr}}
-                                </td>
-                                <td>
-                                    {{F.ChasisNo}}
-                                </td>
-                                <td>
-                                    {{F.DateOfRegistration}}
-                                </td>
-
-                                <td>
-                                    {{F.SeatingCapacity}}
-                                </td>-->
-
-                                                <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
-                                                <td>
-
-                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
-                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                        Edit
-                                                    </button>
-                                                </td>
-
-                                            </tr>
-
-                                        </tbody>
-
-                                    </table>
+                                                    <th width="22%">Vehicle Reg. No</th>
+                                                    <th>Vehicle Type</th>
+                                                    <th>Vehicle Layout</th>
+                                                    <th>Service Type </th>
+                                                    <!--<th>Engine No </th>
+                    <th>Fuel Used </th>
+                    <th>Month And Yr. Of Mfr </th>
+                    <th>Chasis No </th>
+                    <th>Date Of Registration </th>
+                    <th>Seating Capacity </th>-->
 
 
-                                </div>
+                                                    <th>Active</th>
+                                                    <th>Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr ng-repeat="F in Fleet" class="gradeA">
+                                                    <td>
+                                                        {{F.VehicleRegNo}}
+
+                                                    </td>
+                                                    <td>
+                                                        {{F.VehicleType}}
+                                                    </td>
+                                                    <td>
+                                                        {{F.vehiclelayout}}
+                                                    </td>
+                                                    <td>
+                                                        {{F.ServiceType}}
+                                                    </td>
+                                                    <!--<td>
+                        {{F.EngineNo }}
+                    </td>
+                    <td>
+                        {{F.FuelUsed}}
+                    </td>
+                    <td>
+                        {{F.MonthAndYrOfMfr}}
+                    </td>
+                    <td>
+                        {{F.ChasisNo}}
+                    </td>
+                    <td>
+                        {{F.DateOfRegistration}}
+                    </td>
+
+                    <td>
+                        {{F.SeatingCapacity}}
+                    </td>-->
+
+                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
+                                                    <td>
+
+                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
+                                                            <i class="fa fa-edit"></i>&nbsp;
+                                                            Edit
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                      
+                                    </div>
 
                             </div>
 
                         </div>
                     </div>
 
-                        <!--END FOOTER-->
+                    <!--END FOOTER-->
 
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
-                
-        <!--END PAGE WRAPPER-->
-        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
-            <div class="modal-header">
-                <h3 class="modal-title">Save confirmation!</h3>
-            </div>
-            <div class="modal-body">
-                <!--<ul>
-                    <li ng-repeat="item in items">
-                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>-->
-                {{mssg}}
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-            </div>
+                    <!--END PAGE WRAPPER-->
+                    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
-        </script>
-    </div>
+                        <div class="modal-header">
+                            <h3 class="modal-title">Save confirmation!</h3>
+                        </div>
+                        <div class="modal-body">
+                            <!--<ul>
+                                <li ng-repeat="item in items">
+                                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                                </li>
+                            </ul>
+                            Selected: <b>{{ selected.item }}</b>-->
+                            {{mssg}}
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
 
-
+                    </script>
+                </div>
 
 
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script>
-        $('.datepicker-filter').datepicker({
-            autoclose: true
-        });
-    </script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/FleetDetail.js"></script>
+                <script src="js/jquery-1.10.2.min.js"></script>
+                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <!--loading bootstrap js-->
+                <script src="vendors/bootstrap/js/bootstrap.js"></script>
+                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+
+
+                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                <script src="vendors/iCheck/icheck.min.js"></script>
+                <script src="vendors/iCheck/custom.min.js"></script>
+                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                <script src="js/jquery.menu.js"></script>
+                <script src="vendors/jquery-pace/pace.min.js"></script>
+                <script src="vendors/holder/holder.js"></script>
+                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+                <script>
+                    $('.datepicker-filter').datepicker({
+                        autoclose: true
+                    });
+                </script>
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <!--CORE JAVASCRIPT-->
+                <script src="js/main.js"></script>
+                <script src="js/angular.js"></script>
+                <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+                <script src="js/ngStorage.js"></script>
+                <script src="js/FleetDetail.js"></script>
 
 </body>
 </html>

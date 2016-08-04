@@ -24,7 +24,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/user.jpg" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -388,6 +388,7 @@
                                                         <div class="col-md-3"><input id="Employee no" type="text" class="form-control" ng-model="User.EmpNo" /><span class="help-block"></span></div>
 
                                                     </div>
+                                                    
                                                     <div class="form-group">
                                                         <label for="Address Id" class="col-md-2 control-label">Address:</label>
 
@@ -415,7 +416,15 @@
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Logo" class="col-md-2 control-label">Logo:</label>
 
+                                                        <div class="col-md-2">
+                                                            <img src="images/user.jpg" alt="" class="img-responsive" width="25px" />
+                                                            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                                                        </div>
+                                                    </div>
                                                     </div>
                                                     <!--<div class="panel panel-violet">
                                                 <div class="panel-heading">User Role</div><br />

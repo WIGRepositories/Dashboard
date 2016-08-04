@@ -39,7 +39,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text" style="width:200px;height:200px">SmartTickets Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -99,7 +99,7 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
@@ -376,27 +376,27 @@
                                                         <div class="col-lg-12">
 
 
-                                                            Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                                <option value="">Select</option>
-                                                            </select>
+                                                                Company:<select ng-options="c.Name for c in initdata.Table1 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                    <option value="">Select</option>
+                                                                </select>
 
 
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
+                                                                Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+                                                                    <option value="">Select</option>
+                                                                </select>
 
-                                                            Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table2 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
-                                                                <option value="">Select</option>
-                                                            </select>
-                                                        </div>
+                                                                Vehicle Layout: <select ng-options="vl.Name for vl in initdata.Table2 track by vl.Id" ng-model="layout.vl" ng-change="getselectval()">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                            </div>
                                                         <div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
-                                                            <option value="">Select</option>
-                                                        </select>
+                                                                Vehicle Type: <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="layout.vt" ng-change="getselectval()">
+                                                                    <option value="">Select</option>
+                                                                </select>
 
                                                         Rows: <select id="rowSelected"></select>
 
@@ -404,174 +404,174 @@
                                                         Columns:<select textholder="Columns" id="colSelected"></select>
 
 
-                                                        <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
+                                                                <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
                                                         <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
 
 
+                                                            </div>
+
+                                                <div class="col-lg-12">
+                                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+
+                                                                <thead>
+                                                                    <!--<tr>
+                                                                    <th>Destination/Source</th>
+                                                                       <th ng-repeat="s in Stops">{{s.Name}}</th>
+                                                                                    </tr>-->
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="r in datarows">
+                                                                        <!--<td ng-repeat="dr in r" ng-if="$index == 0 || r==$parent.$index">{{dr}}</td>-->
+                                                                        <td ng-repeat="dr in r">
+                                                                            <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" style="border:none" ng-model="dr.selected" ng-checked="{{dr.selected==true}}">{{dr.Id}}</input>
+                                                                        </td>
+
+
+                                                                    </tr>
+                                                                </tbody>
+
+                                                            </table>
+                                                        </div>
                                                     </div>
 
-                                                    <div class="col-lg-12">
-                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-
-                                                            <thead>
-                                                                <!--<tr>
-                                                                <th>Destination/Source</th>
-                                                                   <th ng-repeat="s in Stops">{{s.Name}}</th>
-                                                                                </tr>-->
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr ng-repeat="r in datarows">
-                                                                    <!--<td ng-repeat="dr in r" ng-if="$index == 0 || r==$parent.$index">{{dr}}</td>-->
-                                                                    <td ng-repeat="dr in r">
-                                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" style="border:none" ng-model="dr.selected" ng-checked="{{dr.selected==true}}">{{dr.Id}}</input>
-                                                                    </td>
-
-
-                                                                </tr>
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
                                                 </div>
 
                                             </div>
-
                                         </div>
-                                    </div>
 
 
-                                    <!--<div class="ht_master handsontable innerBorderTop" style="position: relative;">
-                                        <div class="wtHolder" style="position: relative; width: 557px; height: 396px;">
-                                            <div class="wtHider" style="width: 690px; height: 2788px;">
-                                                <div class="wtSpreader" style="position: relative; top: 0px; left: 0px;">
+                                        <!--<div class="ht_master handsontable innerBorderTop" style="position: relative;">
+                                            <div class="wtHolder" style="position: relative; width: 557px; height: 396px;">
+                                                <div class="wtHider" style="width: 690px; height: 2788px;">
+                                                    <div class="wtSpreader" style="position: relative; top: 0px; left: 0px;">
 
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>-->
+                                        </div>-->
+                                       
+                                
 
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="SaveFleetOwnerVehicleLayout();">Save</button>
 
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="SaveFleetOwnerVehicleLayout();">Save</button>
-
-                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-                                    </div>
-
-
-
-                                </div>
-
-
-
+                                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                             </div>
 
-                            <!--END CONTENT--><!--BEGIN FOOTER-->
-                            <div id="footer">
-                                <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
-                            </div>
-                            <!--END FOOTER-->
-                            <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
-                                <div class="modal-header">
-                                    <h3 class="modal-title">Save confirmation!</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <!--<ul>
-                                        <li ng-repeat="item in items">
-                                            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                                        </li>
-                                    </ul>
-                                    Selected: <b>{{ selected.item }}</b>-->
+
+                        </div>
+
+
+
+                    </div>
+
+                    <!--END CONTENT--><!--BEGIN FOOTER-->
+                    <div id="footer">
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
+                    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+                        <div class="modal-header">
+                            <h3 class="modal-title">Save confirmation!</h3>
+                        </div>
+                        <div class="modal-body">
+                            <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
                                     {{
 mssg
-                                    }}
-                                    </di
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                                </div>
+}}
+                              </di
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
 
-                            </script>
-                            <!-- Custom Theme JavaScript -->
-                            <script type="text/javascript">
+                    </script>
+                    <!-- Custom Theme JavaScript -->
+                    <script type="text/javascript">
 
-                                $(document).ready(function () {
-                                    var colSelectedDiv = $('#colSelected');
-                                    colSelectedDiv = colSelectedDiv.append('<option>Columns</option>')
-                                    for (var i = 1; i <= 20; i++) {
-                                        colSelectedDiv = colSelectedDiv.append('<option>' + i + '</option>')
+                        $(document).ready(function () {
+                            var colSelectedDiv = $('#colSelected');
+                            colSelectedDiv = colSelectedDiv.append('<option>Columns</option>')
+                            for (var i = 1; i <= 20; i++) {
+                                colSelectedDiv = colSelectedDiv.append('<option>' + i + '</option>')
+                            }
+                            var rowSelectedDiv = $('#rowSelected');
+                            rowSelectedDiv = rowSelectedDiv.append('<option>Rows</option>')
+                            for (var i = 1; i <= 20; i++) {
+                                rowSelectedDiv = rowSelectedDiv.append('<option>' + i + '</option>')
+                            }
+                        });
+
+                        var buttonContainerDiv = $('.buttonContainer');
+
+                        $('#getTable').click(function () {
+                            var x = $('#rowSelected').val();
+                            var y = $('#colSelected').val();
+                            if (isNaN(x)) {
+                                alert("select number of Rows");
+                                return false;
+                            }
+                            else if (isNaN(y)) {
+                                alert("select number of Columns");
+                                return false;
+                            }
+                            else {
+                                buttonContainerDiv.empty();
+                                for (var i = 1; i <= $('#rowSelected').val() ; i++) {
+                                    buttonContainerDiv.append("<div style='width:100px;height:10px'>");
+                                    for (var j = 1; j <= $('#colSelected').val() ; j++) {
+
+                                        buttonContainerDiv = buttonContainerDiv.append("<input type=checkbox>" + i + j + '</li>');
                                     }
-                                    var rowSelectedDiv = $('#rowSelected');
-                                    rowSelectedDiv = rowSelectedDiv.append('<option>Rows</option>')
-                                    for (var i = 1; i <= 20; i++) {
-                                        rowSelectedDiv = rowSelectedDiv.append('<option>' + i + '</option>')
+                                    buttonContainerDiv = buttonContainerDiv.append('<br>');
+                                    if (i % 2 == 0) {
+                                        buttonContainerDiv = buttonContainerDiv.append('<br>');
+                                        //if (j == $('#colSelected').val())
+                                        //    buttonContainerDiv = buttonContainerDiv.append("<div><input type=checkbox>" + i + j + "</li></div>");
+                                        //else
+                                        //    buttonContainerDiv = buttonContainerDiv.append("<div style='width:2px;height:2px;'></div>");
                                     }
-                                });
+                                    //buttonContainerDiv.append("ffdgsdfgsdfgsdf</div>");
+                                }
+                            }
 
-                                var buttonContainerDiv = $('.buttonContainer');
+                        });
 
-                                $('#getTable').click(function () {
-                                    var x = $('#rowSelected').val();
-                                    var y = $('#colSelected').val();
-                                    if (isNaN(x)) {
-                                        alert("select number of Rows");
-                                        return false;
-                                    }
-                                    else if (isNaN(y)) {
-                                        alert("select number of Columns");
-                                        return false;
-                                    }
-                                    else {
-                                        buttonContainerDiv.empty();
-                                        for (var i = 1; i <= $('#rowSelected').val() ; i++) {
-                                            buttonContainerDiv.append("<div style='width:100px;height:10px'>");
-                                            for (var j = 1; j <= $('#colSelected').val() ; j++) {
-
-                                                buttonContainerDiv = buttonContainerDiv.append("<input type=checkbox>" + i + j + '</li>');
-                                            }
-                                            buttonContainerDiv = buttonContainerDiv.append('<br>');
-                                            if (i % 2 == 0) {
-                                                buttonContainerDiv = buttonContainerDiv.append('<br>');
-                                                //if (j == $('#colSelected').val())
-                                                //    buttonContainerDiv = buttonContainerDiv.append("<div><input type=checkbox>" + i + j + "</li></div>");
-                                                //else
-                                                //    buttonContainerDiv = buttonContainerDiv.append("<div style='width:2px;height:2px;'></div>");
-                                            }
-                                            //buttonContainerDiv.append("ffdgsdfgsdfgsdf</div>");
-                                        }
-                                    }
-
-                                });
-
-                                //buttonContainerDiv=buttonContainerDiv.append('<li class="parent_li"></li>');
-                            </script>
+                        //buttonContainerDiv=buttonContainerDiv.append('<li class="parent_li"></li>');
+                    </script>
 
 
 
-                            <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-                            <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-                            <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-                            <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-                            <script src="vendors/iCheck/icheck.min.js"></script>
-                            <script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
 
-                            <script src="js/jquery.menu.js"></script>
-                            <script src="vendors/jquery-pace/pace.min.js"></script>
-                            <script src="vendors/holder/holder.js"></script>
-                            <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-                            <!--LOADING SCRIPTS FOR PAGE-->
-                            <!--<script src="js/table-action.js"></script>-->
-                            <!--CORE JAVASCRIPT-->
-                            <!--<script src="js/mainTbl.js"></script>
-                            <script src="js/handsontable.full.js"></script>-->
-                            <script src="js/main.js"></script>
-                            <script src="js/angular.js"></script>
-                            <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-                            <script src="js/ngStorage.js"></script>
-                            <script src="js/FleetOwnerVehicleLayout.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<!--<script src="js/table-action.js"></script>-->
+<!--CORE JAVASCRIPT-->
+<!--<script src="js/mainTbl.js"></script>
+<script src="js/handsontable.full.js"></script>-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/FleetOwnerVehicleLayout.js"></script>
 </body>
 </html>

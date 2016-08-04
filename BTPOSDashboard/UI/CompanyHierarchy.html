@@ -25,7 +25,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/user.jpg" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -80,7 +80,7 @@
                                 <div class="clearfix"></div>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="index.html">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
@@ -337,7 +337,7 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">Dashboard</div>
+                            <div class="page-title">Company Hierarchy</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -346,90 +346,100 @@
                         </ol>
                         <div class="clearfix"></div>
                     </div>
+                   
+                    <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                    <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div id="treeviewTabContent" class="tab-content">
+                           <div class="row">
 
-                    <div id="treeviewTabContent" class="tab-content">
-
-                        <div class="row">
-
-                            <div class="col-lg-12">
-                                <div class="col-lg-6" style="float:left">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6" style="float:left">
 
 
-                                    <h3>Organization Hierarchy - Vertical</h3>
-                                    <div class="family-tree-vertical">
-                                        <ul ng-repeat="c in Companies">
-                                            <li>
-                                                <a href="#"><i class="fa fa-sitemap fa-fw"><div class="icon-bg bg-dark"></div></i>{{c.Name}}</a>
-                                                <ul>
+                                            <h3>Organization Hierarchy - Vertical</h3>
+                                            <div class="family-tree-vertical">
+                                                <ul ng-repeat="c in Companies">
                                                     <li>
-                                                        <a href="#">Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
+                                                        <a href="#"><i class="fa fa-sitemap fa-fw"><div class="icon-bg bg-dark"></div></i>{{c.Name}}</a>
                                                         <ul>
-                                                            <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                        <ul>
-                                                            <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
                                                             <li>
-                                                                <a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
+                                                                <a href="#">Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
                                                                 <ul>
-                                                                    <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                    <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                    <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
+                                                                    <li><a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
                                                                 </ul>
                                                             </li>
-                                                            <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
+                                                            <li>
+                                                                <a href="#">Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
+                                                                <ul>
+                                                                    <li><a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                    <li>
+                                                                        <a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
+                                                                        <ul>
+                                                                            <li><a href="#">Great Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                            <li><a href="#">Great Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                            <li><a href="#">Great Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li><a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                </ul>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                 </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            </div>
 
-                                </div>
+                                        </div>
 
-                                <div class="col-lg-6" style="float:right">
-                                    <div class="row">
-                                        <div class="family-tree-vertical" style="margin-top:30px">
-                                            <ul>
-                                                <li>
-                                                    <a href="#">Company2</a>
+                                        <div class="col-lg-6" style="float:right">
+                                            <div class="row">
+                                                <div class="family-tree-vertical" style="margin-top:30px">
                                                     <ul>
                                                         <li>
-                                                            <a href="#">Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
+                                                            <a href="#">Company2</a>
                                                             <ul>
-                                                                <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
-                                                            <ul>
-                                                                <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
                                                                 <li>
-                                                                    <a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" />
+                                                                    <a href="#">Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
                                                                     <ul>
-                                                                        <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                        <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
-                                                                        <li><a href="#">Great Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
+                                                                        <li><a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
                                                                     </ul>
                                                                 </li>
-                                                                <li><a href="#">Grand Child</a><img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></li>
+                                                                <li>
+                                                                    <a href="#">Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
+                                                                    <ul>
+                                                                        <li><a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                        <li>
+                                                                            <a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a>
+                                                                            <ul>
+                                                                                <li><a href="#">Great Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                                <li><a href="#">Great Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                                <li><a href="#">Great Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                            </ul>
+                                                                        </li>
+                                                                        <li><a href="#">Grand Child<img src="images/user.jpg" style="width:30px;height:30px" alt="" class="img-circle" /></a></li>
+                                                                    </ul>
+                                                                </li>
                                                             </ul>
                                                         </li>
                                                     </ul>
-                                                </li>
-                                            </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        </div>
+
+
+                        <!--END PAGE WRAPPER-->
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
-
-
-                    <!--END PAGE WRAPPER-->
-                </div>
+                    <!--END FOOTER-->
+                    </div>
             </div>
 
         </div>
