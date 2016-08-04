@@ -17,7 +17,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
     }
     $scope.save = function (Group, flag) {
-
+        //if (!angular.element('EmailId').$valid)
+        //{
+        //    alert('invalid email id');
+        //}
         if (Group == null) {
             alert('Please enter CompanyName.');
             return;
@@ -46,7 +49,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Caption:Group.Caption,
             Country:Group.Country,
             ZipCode:Group.ZipCode,
-            State:Group.State,
+            State: Group.State,
+            Logo:Group.Logo,
             active: (Group.active==true)?1:0,
             insupdflag:flag 
         }
@@ -104,7 +108,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Caption:Group.Caption,
             Country:Group.Country,
             ZipCode:Group.ZipCode,
-            State:Group.State,
+            State: Group.State,
+            Logo:Group.Logo,
             active: (Group.active == true) ? 1 : 0,
             insupdflag: flag
 
@@ -155,16 +160,29 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
         });
     }
+
+    $scope.filterValue = function ($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
+            $event.preventDefault();
+        }
+    };
+
+    //$scope.uploadFile = function () {
+    //    var file = $scope.Logo;
+    //    console.log('file is ' + JSON.stringify(file));
+        
+    //};
+
 });
 
-//app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
-//    $scope.mssg = mssg;
-//    $scope.ok = function () {
-//        $uibModalInstance.close('test');
-//    };
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
 
-//    $scope.cancel = function () {
-//        $uibModalInstance.dismiss('cancel');
-//    };
-//});
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
