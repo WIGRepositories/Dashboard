@@ -199,7 +199,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                     StatusId: (flag == 'I') ? '1' : Group.StatusId,
                     ipconfig: Group.ipconfig,
                     active: 1,//Group.ipconfig,
-            fleetownerid: (flag == 'I') ? null : $scope.s.Id,
+                    fleetownerid: (flag == 'I') ? null : $scope.s1.Id,
                     insupdflag: flag
                 }
                 btposlist.push(newpos);

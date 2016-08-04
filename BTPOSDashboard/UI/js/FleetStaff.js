@@ -244,7 +244,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             Id: -1,
             vehicleId: Fleet.Id,
             roleId: Fleet.RoleId,
-            UserId: Fleet.Id,
+            UserId: Fleet.UserId,
             cmpId: $scope.cmp.Id,
             FromDate: Fleet.fd,
             ToDate: Fleet.td,
@@ -260,7 +260,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?RoleId=' + Fleet.RoleId).then(function (res, data) {
+            $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?roleid=' + Fleet.RoleId).then(function (res, data) {
                 $scope.FleetStaff = res.data;
             });
 
