@@ -401,7 +401,7 @@
                                                                                 <label for="Name" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <select ng-options="cmp.Name for cmp in Companies1 track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();"disabled>
+                                                                                <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();"disabled>
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
