@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="initdata">
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanies();" ng-model="Companies">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -368,15 +368,13 @@
 
                                                     <div class="row mbm">
 
-
-                                                        <div class="col-md-4">
-
-                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()"id="test">
-    <option value="">Select</option>
-</select>
+                                                        <div class="col-md-4" ng-init="GetCompanies();">
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
+                                                                <option value="">Select</option>
+                                                            </select>
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleetDetails()" id="test1" ng-click="ShowHide()">
+                                                        <div class="col-md-3">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails(s)" id="test1">
 
     <option value="">Select</option>
 </select>
@@ -407,20 +405,20 @@
                                                     <!-----  </div>----->
 
                                                     <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
+                                                        <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Add Fleet Details</h4>
                                                                 </div>
                                                                 <div class="modal-body" ng-init="GetVehicleConfig()" ng-model="initdata">
-                                                                    <div class="row">
+                                                                    <div>
                                                                         <div class="row mbm">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-6 control-label">Vehicle RegNo <span class='require'>*</span></label>
 
-                                                                                    <div class="col-md-6"> <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-6" style="text-align:left"> <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-6 control-label">Engine No<span class='require'>*</span></label>
@@ -500,7 +498,7 @@
                                                                                 <label for="Description" class="col-md-6 control-label">Company: <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners();">
+                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);"disabled>
                                                                                         <option value="">Select</option>
                                                                                     </select>
                                                                                 </div>
@@ -520,7 +518,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();">
+                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();"disabled>
                                                                                         <option value="">Select</option>
                                                                                     </select>
 
@@ -553,9 +551,9 @@
                                                                         </div>
                                                                     </div>
                                                                     <!---- <div class="col-md-6 col-md-offset-2">
-                                                                        <button class="btn btn-primary" type="button">Save</button>
-                                                                        <button class="btn btn-primary" type="button">Cancel</button>
-                                                                    </div>--->
+                    <button class="btn btn-primary" type="button">Save</button>
+                    <button class="btn btn-primary" type="button">Cancel</button>
+                </div>--->
 
 
 
@@ -570,7 +568,7 @@
 
                                                     </div>
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class=" modal-dialog">
+                                                        <div class=" modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header modal-header-primary">
                                                                     <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
@@ -712,19 +710,19 @@
 
 
                                                                     <!--<div class="row mbm">
-                                                                        <div class="row">
+                    <div class="row">
 
 
-                                                                            <div class="col-md-12">
+                        <div class="col-md-12">
 
-                                                                                <div class="col-md-6">
-                                                                                    <label for="inputFirstName" class="col-md-6 control-label">Active:<span class='require'>*</span></label>
-                                                                                    <input type="checkbox" class="form-control" id="cactive" ng-model="currVD.active" checked />
+                            <div class="col-md-6">
+                                <label for="inputFirstName" class="col-md-6 control-label">Active:<span class='require'>*</span></label>
+                                <input type="checkbox" class="form-control" id="cactive" ng-model="currVD.active" checked />
 
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
 
                                                                     <div class="form-actions">
                                                                         <div class="col-md-6 col-md-offset-2">
@@ -734,9 +732,9 @@
                                                                         </div>
 
                                                                         <!--<div class="col-md-6 col-md-offset-2">
-                                                                        <button class="btn btn-primary" type="button">Save</button>
-                                                                        <button class="btn btn-primary" type="button">Cancel</button>
-                                                                               </div>-->
+                    <button class="btn btn-primary" type="button">Save</button>
+                    <button class="btn btn-primary" type="button">Cancel</button>
+                           </div>-->
                                                                     </div>
 
                                                                 </div>
@@ -758,7 +756,7 @@
                                         </div>
 
                                     </div>--->
-                                    <div ng-hide="IsHidden">
+                                    <div>
                                         <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                             <thead>
                                                 <tr>
@@ -768,11 +766,11 @@
                                                     <th>Vehicle Layout</th>
                                                     <th>Service Type </th>
                                                     <!--<th>Engine No </th>
-                    <th>Fuel Used </th>
-                    <th>Month And Yr. Of Mfr </th>
-                    <th>Chasis No </th>
-                    <th>Date Of Registration </th>
-                    <th>Seating Capacity </th>-->
+                                                    <th>Fuel Used </th>
+                                                    <th>Month And Yr. Of Mfr </th>
+                                                    <th>Chasis No </th>
+                                                    <th>Date Of Registration </th>
+                                                    <th>Seating Capacity </th>-->
 
 
                                                     <th>Active</th>
@@ -796,24 +794,24 @@
                                                         {{F.ServiceType}}
                                                     </td>
                                                     <!--<td>
-                        {{F.EngineNo }}
-                    </td>
-                    <td>
-                        {{F.FuelUsed}}
-                    </td>
-                    <td>
-                        {{F.MonthAndYrOfMfr}}
-                    </td>
-                    <td>
-                        {{F.ChasisNo}}
-                    </td>
-                    <td>
-                        {{F.DateOfRegistration}}
-                    </td>
+                                                        {{F.EngineNo }}
+                                                    </td>
+                                                    <td>
+                                                        {{F.FuelUsed}}
+                                                    </td>
+                                                    <td>
+                                                        {{F.MonthAndYrOfMfr}}
+                                                    </td>
+                                                    <td>
+                                                        {{F.ChasisNo}}
+                                                    </td>
+                                                    <td>
+                                                        {{F.DateOfRegistration}}
+                                                    </td>
 
-                    <td>
-                        {{F.SeatingCapacity}}
-                    </td>-->
+                                                    <td>
+                                                        {{F.SeatingCapacity}}
+                                                    </td>-->
 
                                                     <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
                                                     <td>
@@ -830,8 +828,8 @@
 
                                         </table>
                                     </div>
-                                      
-                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -867,7 +865,9 @@
                     </script>
                 </div>
 
-
+                </div>
+            </div>
+        </div>
 
 
                 <script src="js/jquery-1.10.2.min.js"></script>

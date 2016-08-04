@@ -358,12 +358,12 @@
 
                                                     <div class="actions">
                                                         <div class="col-md-4">
-                                                            Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()">
-                                                                <option value="">All</option>
-                                                            </select>
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()"id="test">
+    <option value="">All</option>
+</select>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()">
+                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()"id="test1">
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
@@ -447,7 +447,7 @@
                                                                            
                                                                         <div class="col-md-5">
                                                                             
-                                                                            <select ng-options="c.Name for c in initdata.Table track by c.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();" value="{{currGroup.CompanyId}}">
+                                                                            <select ng-options="c.Name for c in Companies1 track by c.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();" value="{{currGroup.CompanyId}}">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                                 </div>
@@ -462,7 +462,7 @@
                                                                        
                                                                         <div class="col-md-5">
                                                                           
-                                                                            <select ng-options="s.Name for s in fdata.Table track by s.Id" class="form-control" ng-model="s1" value="{{currGroup.fleetownerid}}">
+                                                                            <select ng-options="s.Name for s in fleet1 track by s.Id" class="form-control" ng-model="s1" value="{{currGroup.fleetownerid}}">
 
                                                                                 <option value="">Select</option>
                                                                             </select>
@@ -625,22 +625,40 @@
 
 
                                     </div>
-                                </div>
 
+                                          
+                                </div>
+                                     
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+                                    <div>
+                                        <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
 
-                                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-                                </div>
+                                        <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
 
+                                        </div>
+
+                                        <ul class="pagination" style="float:right">
+                                            <li><a href="#">«</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li>
+
+                                            <li><a href="#">»</a></li>
+                                        </ul>
+                                        <div style="float:left" ng-repeat="d in ">
+                                            <label for="selCountry" class="col-md-6 control-label">Total no.of Records:</label>
+                                            <input id="Text1" class="col-md-3 control-label" type="text" value="{{d.Row_count}}" />
+                                        </div>
+                                    </div>
+
+                                        
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
-                            </div>
-                        </div>
                     </div>
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">

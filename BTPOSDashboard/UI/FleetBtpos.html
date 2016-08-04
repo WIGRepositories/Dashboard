@@ -377,13 +377,13 @@
 </select>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                Fleet Owner::<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleeBTPosDetails()" id="test1">
+                                                                Fleet Owner::<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleeBTPosDetails()" id="test1">
 
     <option value="">Select</option>
 </select>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus"> Assign New BTPOS</button>
+                                                                <button  type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus"> Assign New BTPOS</button>
 
 
                                                             </div>
@@ -406,7 +406,7 @@
                                                                                 <label for="Name" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
+                                                                                <select ng-options="cmp.Name for cmp in Companies1 track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();"disabled>
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -418,7 +418,7 @@
                                                                                 <label for="code" class="col-md-4 control-label" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="fo" ng-change="GetFleetBTPosForFO();">
+                                                                                <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="fo" ng-change="GetFleetBTPosForFO();" id="test1">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -444,7 +444,7 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <select ng-options="b.POSID for b in FleetnBTPos.Table1 track by b.Id" class="form-control" ng-model="FleetBtpos.b">
+                                                                                <select ng-options="b.POSID for b in FleetnBTPos.Table track by b.Id" class="form-control" ng-model="FleetBtpos.b">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>

@@ -37,6 +37,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
+            $scope.Companies1 = res.data;
 
             if ($scope.userCmpId != 1) {
                 //loop throug the companies and identify the correct one
@@ -61,7 +62,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         
      
         $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
-            $scope.fleet= res.data;
+            $scope.fleet = res.data;
+            $scope.fleet1 = res.data;
 
             if ($scope.userSId != 1) {
                 //loop throug the companies and identify the correct one

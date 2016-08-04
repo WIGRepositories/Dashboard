@@ -61,7 +61,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
               Code: Item.Code,
               Description: Item.Description,
               Category: 6,// Item.Category.Id,
-              SubCategory: Item.SubCategory.Id,
+              SubCategory: 1,//Item.SubCategory.Id,
               ReOrderPoint: Item.ReOrderPoint
           }
 

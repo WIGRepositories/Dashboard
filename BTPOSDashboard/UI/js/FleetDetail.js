@@ -22,7 +22,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
 
         if ($scope.s == null) {
-            $scope.Fleet = null;
+            $scope.fleet = null;
             return;
         }
 
@@ -45,6 +45,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                         break
                     }
                 }
+               // $scope.GetFleetOwners();
             }
             else {
                 document.getElementById('test').disabled = false;
@@ -54,38 +55,75 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     }
 
+
     $scope.GetFleetOwners = function () {
 
 
-        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
-            $scope.fleet = res.data;
+        //$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        //    $scope.fleet = res.data;
 
-            if ($scope.userSId != 1) {
-                //loop throug the companies and identify the correct one
-                for (i = 0; i < res.data.length; i++) {
-                    if (res.data[i].Id == $scope.userSId) {
-                        $scope.s = res.data[i];
-                        document.getElementById('test1').disabled = true;
-                        break
-                    }
-                }
-            }
-            else {
-                document.getElementById('test1').disabled = false;
-            }
-            $scope.GetFleetDetails($scope.s);
-        });
+        //    if ($scope.userSId != 1) {
+        //        //loop throug the companies and identify the correct one
+        //        for (i = 0; i < res.data.length; i++) {
+        //            if (res.data[i].Id == $scope.userSId) {
+        //                $scope.s = res.data[i];
+        //                document.getElementById('test1').disabled = true;
+        //                break
+        //            }
+        //        }
+        //    }
+        //    else {
+        //        document.getElementById('test1').disabled = false;
+        //    }
+        // //   $scope.GetFleetDetails($scope.s);
+        //});
+
+           
+            var vc = {
+                needfleetowners: '1',
+                cmpId: $scope.cmp.Id
+            };
+
+            var req = {
+                method: 'POST',
+                url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+                //headers: {
+                //    'Content-Type': undefined
+
+                data: vc
+
+
+                        }
+            $http(req).then(function (res) {
+                $scope.cmpdata = res.data;
+
+                if ($scope.userSId != 1) {
+                            //loop throug the fleetowners and identify the correct one
+                            for (i = 0; i < res.data.Table.length; i++) {
+                                if (res.data.Table[i].UserId == $scope.userSId) {
+                                    $scope.s = res.data.Table[i];
+                                    document.getElementById('test1').disabled = true;
+                                    break
+                                }
+                            }
+                        }
+                        else {
+                            document.getElementById('test1').disabled = false;
+                        }
+                        $scope.GetFleetDetails($scope.s);
+
+            });
     }
 
     //This will hide the DIV by default.
-    $scope.IsHidden = true;
-    $scope.ShowHide = function () {
-        //If DIV is hidden it will be visible and vice versa.
-        $scope.IsHidden = $scope.IsHidden ? false : true;
-    }
+    //$scope.IsHidden = true;
+    //$scope.ShowHide = function () {
+    //    //If DIV is hidden it will be visible and vice versa.
+    //    $scope.IsHidden = $scope.IsHidden ? false : true;
+    //}
 
 
-    //$scope.GetCompanies = function () {
+    //$scope.GetCompanies1 = function () {
 
     //    var vc = {
     //        needCompanyName: '1'
@@ -94,40 +132,40 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //    var req = {
     //        method: 'POST',
     //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-    //        //headers: {
-    //        //    'Content-Type': undefined
+    //        headers: {
+    //            'Content-Type': undefined
     //        data: vc
     //    }
     //    $http(req).then(function (res) {
-    //        //$scope.initdata = res.data;
-    //        $scope.companies = res.data;
+    //        $scope.initdata = res.data;
+    //        $scope.companies1 = res.data;
     //    });
 
     //}
 
-    //$scope.GetFleetOwners = function () {
-    //    if ($scope.cmp == null) {
-    //        $scope.cmpdata = null;
+    //$scope.GetFleetOwners1 = function () {
+    //    if ($scope.cmp1 == null) {
+    //        $scope.cmp1data = null;
     //        $scope.Fleet = null;
     //        return;
     //    }
     //    var vc = {
     //        needfleetowners: '1',
-    //        cmpId: $scope.cmp.Id
+    //        cmpId: $scope.cmp1.Id
     //    };
 
     //    var req = {
     //        method: 'POST',
     //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-    //        //headers: {
-    //        //    'Content-Type': undefined
+    //        headers: {
+    //            'Content-Type': undefined
 
     //        data: vc
 
 
     //    }
     //    $http(req).then(function (res) {
-    //        $scope.cmpdata = res.data.Table;
+    //        $scope.cmp1data = res.data.Table;
     //    });
     //}
 

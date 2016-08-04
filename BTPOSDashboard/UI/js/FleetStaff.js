@@ -22,6 +22,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
+           // $scope.Companies1 = res.data;
 
             if ($scope.userCmpId != 1) {
                 //loop throug the companies and identify the correct one
@@ -41,17 +42,34 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
     }
 
+
     $scope.GetFleetOwners = function () {
 
 
-        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
-            $scope.fleet = res.data;
+     
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.cmpdata = res.data;
 
             if ($scope.userSId != 1) {
-                //loop throug the companies and identify the correct one
-                for (i = 0; i < res.data.length; i++) {
-                    if (res.data[i].Id == $scope.userSId) {
-                        $scope.s = res.data[i];
+                //loop throug the fleetowners and identify the correct one
+                for (i = 0; i < res.data.Table.length; i++) {
+                    if (res.data.Table[i].UserId == $scope.userSId) {
+                        $scope.s = res.data.Table[i];
                         document.getElementById('test1').disabled = true;
                         break
                     }
@@ -61,19 +79,39 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
                 document.getElementById('test1').disabled = false;
             }
             $scope.GetFleetStaff($scope.s);
+
         });
     }
 
-    //$scope.GetFleetOwners = function () {
-    //    if ($scope.cmp == null) {
-    //        $scope.cmpdata = null;
+    //$scope.GetCompanies1 = function () {
+
+    //    var vc = {
+    //        needCompanyName: '1'
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+    //        data: vc
+    //    }
+    //    $http(req).then(function (res) {
+    //        //$scope.initdata = res.data;
+    //        $scope.companies1 = res.data;
+    //    });
+
+    //}
+    //$scope.GetFleetOwners1 = function () {
+    //    if ($scope.cmp1 == null) {
+    //        $scope.cmp1data = null;
     //        $scope.userRoles = null;
     //        $scope.vehicles = null;
     //        return;
     //    }
     //    var vc = {
     //        needfleetowners: '1',
-    //        cmpId: $scope.cmp.Id
+    //        cmpId: $scope.cmp1.Id
     //    };
 
     //    var req = {
@@ -87,10 +125,10 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
     //    }
     //    $http(req).then(function (res) {
-    //        $scope.cmpdata = res.data;
+    //        $scope.cmp1data = res.data;
     //    });
         
-    //    $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+    //    $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp1.Id).then(function (res, data) {
     //        $scope.userRoles = res.data;
     //    });
     //}
