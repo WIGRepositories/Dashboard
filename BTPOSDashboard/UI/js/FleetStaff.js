@@ -7,6 +7,8 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
+    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -17,7 +19,8 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
-           // $scope.Companies1 = res.data;
+            $scope.Companies1 = res.data;
+
 
             if ($scope.userCmpId != 1) {
                 //loop throug the companies and identify the correct one
@@ -27,11 +30,17 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
                         document.getElementById('test').disabled = true;
                         break
                     }
-        $http(req).then(function (res) {
-            $scope.initdata = res.data;
+                }
+                // $scope.GetFleetOwners();
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.GetFleetOwners($scope.cmp);
         });
 
     }
+
 
 
     $scope.GetFleetOwners = function () {
