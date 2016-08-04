@@ -63,32 +63,32 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     //        $scope.initdata = res.data;
     //    });
 
-    }
-
-    $scope.GetFleetOwners = function () {
-        if ($scope.cmp == null) {
-            $scope.FleetOwners = null;
-            return;
-        }
-        var vc = {
-            needfleetowners: '1',
-            cmpId: $scope.cmp.Id
-        };
-
-    //    var req = {
-    //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-    //        //headers: {
-    //        //    'Content-Type': undefined
-
-    //        data: vc
-
-
-    //                }
-    //    $http(req).then(function (res) {
-    //        $scope.cmpdata = res.data;
-    //    });
     //}
+
+    //$scope.GetFleetOwners = function () {
+    //    if ($scope.cmp == null) {
+    //        $scope.FleetOwners = null;
+    //        return;
+    //    }
+    //    var vc = {
+    //        needfleetowners: '1',
+    //        cmpId: $scope.cmp.Id
+    //    };
+
+    ////    var req = {
+    ////        method: 'POST',
+    ////        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    ////        //headers: {
+    ////        //    'Content-Type': undefined
+
+    ////        data: vc
+
+
+    ////                }
+    ////    $http(req).then(function (res) {
+    ////        $scope.cmpdata = res.data;
+    ////    });
+    ////}
 
     $scope.getFleetOwnerRoute = function () {
 
