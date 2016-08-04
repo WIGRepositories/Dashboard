@@ -1172,7 +1172,7 @@ namespace BTPOSDashboardAPI.Models
     }
     public class InventoryItem
     {
-        public int Id { get; set; }
+       // public int Id { get; set; }
 
         public String ItemName { get; set; }
        // public String ItemImage { get; set; }
@@ -1183,6 +1183,7 @@ namespace BTPOSDashboardAPI.Models
         public String SubCategory { get; set; }
 
         public int ReOrderPoint { get; set; }
+       
     }
 
     public class FleetOwnerRequest

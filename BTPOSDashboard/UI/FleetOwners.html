@@ -375,15 +375,16 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-md-5">
-                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute(s)" ng-click="ShowHide()" id="test1">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute(s)" ng-checked="ShowHide()" id="test1">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
 
                                                         <div class="actions">
+                                                          
                                                             <a href="AddFleetowner.html">
-                                                                <button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add FleetOwner</button>
+                                                                <button  type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add FleetOwner</button>
                                                             </a>
                                                         </div>
 

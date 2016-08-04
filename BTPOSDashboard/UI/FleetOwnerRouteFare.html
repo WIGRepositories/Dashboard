@@ -359,20 +359,25 @@
                                                         <div class="table-container">
                                                             <div class="row mbm">
                                                                 <div class="col-md-3" style="text-align:right">
-                                                                    Company: <select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                                    Company: <select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()"id="=test">
                                                                         <option value="">Select</option>
                                                                     </select>
                                                                 </div>
 
-                                                                <div class="col-md-3" style="text-align:right">
-                                                                    Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()">
+                                                                <div class="col-md-3" style="text-align: right">
+                                                                    Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()"id="test1">
 
                                                                         <option value="">Select</option>
                                                                     </select>
                                                                 </div>
+                                                                <div class="col-md-3" style="text-align: right">
+                                                                    Route Name: <select ng-options="r.routename for r in FORoutes track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
+                                                                        <option value="">Select</option>
+                                                                    </select>
+                                                                </div>
 
-                                                                <div class="col-md-3" style="text-align:right">
-                                                                    Vehicle Reg No.: <select ng-options="v.VehicleRegNo for v in fleet track by v.VehicleId" ng-model="v" ng-change="getVehicleFareConfig()" ng-click="ShowHide()" style="width:100px">
+                                                                <div class="col-md-3" style="text-align: left">
+                                                                    Vehicle Reg No.: <select ng-options="v.VehicleRegNo for v in fleet track by v.VehicleId" ng-model="v" ng-change="getVehicleFareConfig()" ng-checked="ShowHide()" style="width:100px">
                                                                         <option value="">Select</option>
                                                                     </select>
                                                                 </div>
@@ -383,12 +388,8 @@
 
 
                                                             </div>
-                                                            <div class="row mbm">
-                                                                <div class="col-md-3" style="text-align:right">
-                                                                    Route Name: <select ng-options="r.routename for r in FORoutes track by r.Id" ng-model="r" ng-change="getFOFleetforRoute()" style="width:100px">
-                                                                        <option value="">Select</option>
-                                                                    </select>
-                                                                </div>
+                                                            <!--<div class="row mbm">-->
+                                                                
 
                                                                 <!--<div class="col-md-3" style="text-align:right">
                                                                     Code: <input type="text" readonly style="width:100px" value="{{r.code}}" disabled />
@@ -404,7 +405,7 @@
                                                                     Destination: <input type="text" readonly style="width:100px" value="{{r.destStop}}" disabled />
                                                                 </div>-->
 
-                                                            </div>
+                                                            <!--</div>-->
 
                                                             <!--<div class="row mbm" style="text-align:right">
                                                                 <!--<div class="col-md-3">

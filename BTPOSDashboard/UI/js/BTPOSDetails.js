@@ -14,9 +14,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetCompanies = function () {
 
-        var vc = {
-            needCompanyName: '1'
-        };
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+            $scope.Companies = res.data;
+            $scope.Companies1 = res.data;
 
         var req = {
             method: 'POST',
@@ -50,7 +50,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
      
             data: vc
 
-            }
+    }
     }
     $scope.GetPopupFleetOwners = function (cid) {
 

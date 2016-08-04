@@ -364,13 +364,13 @@
 
 
                                             <div class="row mbm">
-                                                <div class="col-md-4">
-                                                    Company:<select ng-options="c.Name for c in initdata.Table track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
+                                                <div class="col-md-4" ng-init="GetCompanies();">
+                                                    Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
     <option value="">Select</option>
 </select>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetStaff()">
+                                                    Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetStaff(s)" id="test1">
 
     <option value="">Select</option>
 </select>
@@ -400,7 +400,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
-                                                                <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners()">
+                                                                <select ng-options="cmp.Name for cmp in Companies1 track by cmp.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp)">
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
@@ -435,7 +435,7 @@
                                                             </div>
 
                                                             <div class="col-md-6">
-                                                                <select ng-options="u.username  for u in userRoles track by u.Id" class="form-control" ng-model="f.uu">
+                                                                <select ng-options="u.username for u in userRoles track by u.Id" class="form-control" ng-model="f.uu">
                                                                     <option value="">Select</option>
                                                                 </select>
                                                             </div>
