@@ -27,7 +27,6 @@
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
-
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                     <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
@@ -258,9 +257,9 @@
                                     <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
-                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
-                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
+
 
                                     </ul>
                                 </li>
@@ -354,7 +353,7 @@
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
                         <!--<div id="table-action" class="row">
-                        <div class="col-lg-12">-->
+                    <div class="col-lg-12">-->
 
                         <div id="tableactionTabContent" class="tab-content">
                             <div id="table-table-tab" class="tab-pane fade in active">
@@ -367,8 +366,8 @@
                                             <div class="row mbm">
                                                 <div class="col-md-4" ng-init="GetCompanies();">
                                                     Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
-                                                        <option value="">Select</option>
-                                                    </select>
+    <option value="">Select</option>
+</select>
                                                 </div>
                                                 <div class="col-md-3">
                                                     Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetStaff(s)" id="test1">
@@ -386,16 +385,15 @@
 
 
 
-                                        </div>
 
                                         <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header modal-header-primary">
                                                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                        <h4 id="modal-header-primary-label" class="modal-title">Add Fleet Staff</h4>
+                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Staff</h4>
                                                     </div>
-                                                    <div class="modal-body" ng-init="GetCompanies();" ng-model="initdata">
+                                                        <div class="modal-body" ng-model="currFleet">
                                                         <div class="row mbm">
                                                             <div style="text-align:right">
                                                                 <label for="selCompany" class="col-md-4 control-label" style="color:red;">Company:<span class='require'>*</span></label>
@@ -413,7 +411,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
-                                                                <select ng-options="s.Name for s in fleet1 track by s.Id" ng-model="s" class="form-control" ng-change="GetVehicleConfig()">
+                                                                <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetVehicleConfig()">
 
                                                                     <option value="">Select</option>
                                                                 </select>
@@ -485,16 +483,14 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                </div>
                                 <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header modal-header-primary">
                                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                <h4 id="modal-header-primary-label" class="modal-title">Edit Fleet Staff</h4>
+                                                            <h4 id="modal-header-primary-label" class="modal-title">Add Fleet Staff</h4>
                                             </div>
-                                            <div class="modal-body" ng-model="currFleet">
+                                                        <div class="modal-body" ng-init="GetCompanies();" ng-model="initdata">
                                                 <div class="row mbm">
                                                     <div style="text-align:right">
                                                         <label for="selCompany" class="col-md-4 control-label" style="color:red;">Company:<span class='require'>*</span></label>
@@ -584,6 +580,9 @@
                                     </div>
 
                                 </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                     <thead>
 
@@ -612,29 +611,30 @@
                                                     <i class="fa fa-edit"></i>&nbsp;
                                                     Edit
                                                 </button>
-                                            <td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>
+                                            </td>
+                                            <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(Fleet);"><i class="fa fa-trash-o"></i></a></div></td>
 
                                         </tr>
                                     </tbody>
 
                                 </table>
 
-
+                                
                             </div>
 
-                            <!--</div>
-                            </div>-->
-                        </div>
+                        <!--</div>
+                </div>-->
                     </div>
-                    <!--END CONTENT--><!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
-                    </div>
-                    <!--END FOOTER-->
                 </div>
-                <!--END PAGE WRAPPER-->
+                <!--END CONTENT--><!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+                </div>
+                <!--END FOOTER-->
             </div>
+            <!--END PAGE WRAPPER-->
         </div>
+    </div>
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">
@@ -642,11 +642,11 @@
             </div>
             <div class="modal-body">
                 <!--<ul>
-                    <li ng-repeat="item in items">
-                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>-->
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -656,32 +656,32 @@
 
         </script>
     </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-
-
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    
+    
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<script src="js/table-action.js"></script>
+<!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/FleetStaff.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/FleetStaff.js"></script>
 
 
 </body>

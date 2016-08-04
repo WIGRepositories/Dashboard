@@ -871,7 +871,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-USE [POSDashboard]
+
 GO
 /****** Object:  Table [dbo].[InventoryPurchases]    Script Date: 05/06/2016 23:52:52 ******/
 SET ANSI_NULLS ON
@@ -1643,7 +1643,7 @@ CREATE TABLE [dbo].[FleetBtpos](
 
 
 GO
-USE [POSDashboard]
+
 GO
 /****** Object:  Table [dbo].[FleetDetails]    Script Date: 06/08/2016 22:52:57 ******/
 SET ANSI_NULLS ON
@@ -5984,7 +5984,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelSubCategory]
+CREATE procedure [dbo].[InsUpdDelSubCategory]
 (@Id int,@Name varchar(50),@Description varchar(50) = null,@CategoryId int,@Active int)
 as
 begin
@@ -6917,7 +6917,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[InsUpdLicenseTypes] 
+CREATE PROCEDURE [dbo].[InsUpdLicenseTypes] 
 (@Id int = -1
 ,@LicenseCatId int
 ,@LicenseType varchar(50)
@@ -7152,7 +7152,7 @@ CREATE TABLE [dbo].[SalesOrder](
 	[TransactionId] [int] NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[amount] [decimal](18, 0) NOT NULL,
-	[item] [int] NOT NULL,
+	[itemId] [int] NOT NULL,
 	[Quantity] [decimal](18, 0) NOT NULL,
 	[Status] [int] NOT NULL
 ) ON [PRIMARY]
@@ -8721,7 +8721,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-USE [POSDashboard]
+
 GO
 
 /****** Object:  Table [dbo].[FleetOwnerRequestDetails]    Script Date: 06/16/2016 18:21:09 ******/
@@ -9285,7 +9285,7 @@ GO
 
 
 --GO
---USE [POSDashboard]
+--
 GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelFORouteFleetSchedule]    Script Date: 07/12/2016 19:29:53 ******/
 SET ANSI_NULLS ON
@@ -9948,7 +9948,7 @@ create  procedure [dbo].[InsUpdDelSalesOrder]
  ,@TransactionId int
       ,@Date datetime
       ,@amount decimal
-      ,@Item int
+      ,@ItemId int
       ,@Quantity decimal
       ,@Status int)
 as
@@ -9958,7 +9958,7 @@ insert into SalesOrder(Id
 ,TransactionId
 ,Date
 ,amount
-,Item
+,ItemId
 ,Quantity
 ,Status)values(
 @Id
@@ -9966,7 +9966,7 @@ insert into SalesOrder(Id
 ,@TransactionId
 ,@Date
 ,@amount
-,@Item
+,@ItemId
 
 ,@Quantity
 ,@Status)
@@ -10022,7 +10022,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[getShoppingCart]
+CREATE procedure [dbo].[getShoppingCart]
 (@ItemId int =-1)
 as
 begin
@@ -10459,7 +10459,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[GetUserLicense]
+CREATE procedure [dbo].[GetUserLicense]
 --(@foCode varchar(10))
 as 
 begin
@@ -11158,7 +11158,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[getcheckout]
+CREATE procedure [dbo].[getcheckout]
 as
 begin
 select c.[Id]

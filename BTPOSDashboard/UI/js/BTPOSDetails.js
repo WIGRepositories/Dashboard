@@ -6,113 +6,51 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
-    $scope.userCmpId = $scope.userdetails[0].CompanyId;
-    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
     btposlist = [];
 
-    //$scope.GetCompanies = function () {
-
-    //    var vc = {
-    //        needCompanyName: '1'
-    //    };
-
-    //    var req = {
-    //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-    //        //headers: {
-    //        //    'Content-Type': undefined
-    //        data: vc
-    //    }
-    //    $http(req).then(function (res) {
-    //        $scope.initdata = res.data;
-    //    });
-    //    $scope.GetBTPOSList();
-
-    //} 
     $scope.GetCompanies = function () {
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
             $scope.Companies1 = res.data;
 
-            if ($scope.userCmpId != 1) {
-                //loop throug the companies and identify the correct one
-                for (i = 0; i < res.data.length; i++) {
-                    if (res.data[i].Id == $scope.userCmpId) {
-                        $scope.cmp = res.data[i];
-                        document.getElementById('test').disabled = true;
-                        break
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+            data: vc
                     }
-                }
-            }
-            else {
-                document.getElementById('test').disabled = false;
-            }
-            $scope.GetFleetOwners($scope.cmp);
+        $http(req).then(function (res) {
+            $scope.initdata = res.data;
         });
+        $scope.GetBTPOSList();
 
     }
-
-
     $scope.GetFleetOwners = function () {
+        if ($scope.cmp == null) {
+            $scope.cmpdata = null;
+            $scope.Fleet = null;
+            return;
+        }
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
         
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
      
-        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
-            $scope.fleet = res.data;
-            $scope.fleet1 = res.data;
+            data: vc
 
-            if ($scope.userSId != 1) {
-                //loop throug the companies and identify the correct one
-                for (i = 0; i < res.data.length; i++) {
-                    if (res.data[i].Id == $scope.userSId) {
-                        $scope.s = res.data[i];
-                        document.getElementById('test1').disabled = true;
-                        break
-                    }
-                }
-            }
-            else {
-                document.getElementById('test1').disabled = false;
-            }
-            $scope.GetBTPOSListByFleetOwner($scope.s);
-        });
     }
-
-    //$scope.GetFleetOwners = function () {
-    //    if ($scope.cmp1 == null) {
-    //        $scope.fdata = null;            
-    //        return;
-    //    }
-    //    var vc = {
-    //        needfleetowners: '1',
-    //        cmpId: $scope.cmp1.Id
-    //    };
-
-    //    var req = {
-    //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-    //        //headers: {
-    //        //    'Content-Type': undefined
-
-    //        data: vc
-
-    //    }
-
-    //    $http(req).then(function (res) {
-    //        $scope.fdata = res.data;
-    //    });
-    //}
-
-
-    $scope.GetBTPOSDetails = function () {
-
-        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails1?cmpId=' + cmpId + '&fId=-1' + '&pageNum=-1' + '&pagesize=-1').then(function (res, data) {
-            $scope.Details = res.data;
-        });
     }
     $scope.GetPopupFleetOwners = function (cid) {
 
@@ -154,7 +92,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var vc = {
             needfleetowners: '1',
-            cmpId: ($scope.cmp == null) ? '-1': $scope.cmp.Id
+            cmpId: ($scope.cmp == null) ? '-1' : $scope.cmp.Id
         };
 
         var req = {
@@ -186,8 +124,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         })
     }
 
-    $scope.addpos = function (pos)
-    {
+    $scope.addpos = function (pos) {
         if (pos == null) {
             alert('Please enter IMEI.');
             return;
@@ -198,16 +135,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
         
-        if (pos.CompanyId == null)
-        {
+        if (pos.CompanyId == null) {
             alert('Please enter CompanyId')
             return;
         }
         var found = false;
-        for (var i = 0; i < btposlist.length ; i++)
-        {
-            if(btposlist[i].Id == pos.Id)
-            {
+        for (var i = 0; i < btposlist.length ; i++) {
+            if (btposlist[i].Id == pos.Id) {
                 found = true;
 
                 btposlist[i].IMEI = pos.IMEI;
@@ -216,8 +150,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 break;
             }
         }
-        if (!found)
-        {
+        if (!found) {
             var Group = {
                 Id: pos.Id,
                 GroupName: pos.GroupName,
@@ -266,7 +199,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                     StatusId: (flag == 'I') ? '1' : Group.StatusId,
                     ipconfig: Group.ipconfig,
                     active: 1,//Group.ipconfig,
-                    fleetownerid: (flag == 'I') ? null : $scope.s1.Id,
+            fleetownerid: (flag == 'I') ? null : $scope.s.Id,
                     insupdflag: flag
                 }
                 btposlist.push(newpos);

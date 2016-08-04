@@ -7,17 +7,12 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
-   // $scope.userdetails = $localStorage.userdetails;
-    $scope.userCmpId = $scope.userdetails[0].CompanyId;
-    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
 
-    $scope.setFleet = function (Fleet) {
-        $scope.currFleet = Fleet;
-    };
+
     $scope.GetCompanies = function () {
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
@@ -32,12 +27,8 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
                         document.getElementById('test').disabled = true;
                         break
                     }
-                }
-            }
-            else {
-                document.getElementById('test').disabled = false;
-            }
-            $scope.GetFleetOwners($scope.cmp);
+        $http(req).then(function (res) {
+            $scope.initdata = res.data;
         });
 
     }
@@ -203,14 +194,14 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         var Fleet = {
             Id: -1,
-            vehicleId:newVD.Id,
-            roleId:newVD.uu.RoleId,
-            UserId:newVD.uu.Id,
+            vehicleId: newVD.Id,
+            roleId: newVD.uu.RoleId,
+            UserId: newVD.uu.Id,
             cmpId: $scope.cmp.Id,
-            FromDate:newVD.fd,
-            ToDate:newVD.td,
+            FromDate: newVD.fd,
+            ToDate: newVD.td,
            // Active:1,
-            insupddelflag:'I'
+            insupddelflag: 'I'
         };      
 
 
@@ -304,9 +295,40 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             $scope.FleetStaff = res.data;
         });
     }
-    
-   
 
+
+    $scope.setFleet = function (Fleet) {
+        $scope.currFleet = Fleet;
+    };
+    $scope.testdel = function (Fleet) {
+        var FRoutes = {
+
+            Id: -1,
+            vehicleId: Fleet.Id,
+            roleId: Fleet.RoleId,
+            UserId: Fleet.Id,
+            cmpId: $scope.cmp.Id,
+            FromDate: Fleet.fd,
+            ToDate: Fleet.td,
+            // Active:1,
+            insupddelflag: 'D'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+            data: FRoutes
+        }
+        $http(req).then(function (response) {
+            alert('Removed successfully.');
+    
+            $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?RoleId=' + Fleet.RoleId).then(function (res, data) {
+                $scope.FleetStaff = res.data;
+            });
+   
+        });
+
+    }
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({

@@ -103,7 +103,7 @@ $scope.GetRoutesForFO = function () {
     var vc = {
         needvehicleRegno: '1',
         fleetownerId: fleetowner.Id,
-        needfleetownerroutes:'1'
+            needfleetownerroutes: '1'
     };
 
     var req = {

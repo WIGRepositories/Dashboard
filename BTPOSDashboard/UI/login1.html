@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard | Login</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Loading bootstrap css-->
+    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
+    <!--Loading style vendors-->
+
+    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
+    <!--Loading style-->
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl" ng-model="type">
+    <div class="page-form">
+
+
+        <form class="form-validate-signin">
+            <div class="header-content"><h3>Smart Ticketing Dashboard Portal</h3><br /><h1>Log in</h1></div>
+            <div class="body-content">
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="Username" name="username" class="form-control required" ng-model="UserName"></div>
+                    <span ng-show="!UserName"><font color="red">Please enter UserName</font></span>
+                </div>
+                <div class="form-group">
+                    <div class="input-icon right"><i class="fa fa-key"></i><input type="password" placeholder="Password" name="password" class="form-control required password" ng-model="Password"></div>
+                    <span ng-show="!Password"><font color="red">Please enter Password</font></span>
+                </div>
+                <!--<div class="form-group pull-left">
+                    <div class="checkbox-list">
+                        <label>
+                            <input type="checkbox">&nbsp;
+                            Keep me signed in
+                        </label>
+                    </div>
+                </div>-->
+                <div class="form-group pull-right">
+                    <button ng-click="Signin()" class="btn btn-success">
+                        Log In
+                        &nbsp;<i class="fa fa-chevron-circle-right"></i>
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+                <div class="forget-password">
+                    <h4>Forgotten your Password?</h4>
+                    <p>please <a href='ResetPassword.html' class='btn-forgot-pwd'>Click Here</a> to reset your password.</p>
+                </div>
+                <hr>
+                <!--<p>Don't have an account? <a id="btn-register" href="extra-signup.html">Register Now</a></p>-->
+                <p>
+                    Don't have an account?
+                    <br />Please contact INTERBUS administrator
+                </p>
+            </div>
+        </form>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <!--<script>
+        //BEGIN CHECKBOX & RADIO
+        $('input[type="checkbox"]').iCheck({
+            checkboxClass: 'icheckbox_minimal-grey',
+            increaseArea: '20%' // optional
+        });
+        $('input[type="radio"]').iCheck({
+            radioClass: 'iradio_minimal-grey',
+            increaseArea: '20%' // optional
+        });
+        //END CHECKBOX & RADIO</script>
+
+    <script src="js/main.js"></script>-->
+
+
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

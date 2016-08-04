@@ -63,13 +63,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     //        $scope.initdata = res.data;
     //    });
 
+    }
 
-
-    //}
-    //    var vc = {
-    //        needfleetowners: '1',
-    //        cmpId: $scope.cmp.Id
-    //    };
+    $scope.GetFleetOwners = function () {
+        if ($scope.cmp == null) {
+            $scope.FleetOwners = null;
+            return;
+        }
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
 
     //    var req = {
     //        method: 'POST',
