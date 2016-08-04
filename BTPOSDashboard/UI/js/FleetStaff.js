@@ -62,10 +62,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             $scope.userRoles = res.data;
         });
     }
-    $scope.setFleet = function (Fleet) {
-        $scope.currFleet = Fleet;
-    };
-
+   
 
     $scope.GetVehicleConfig = function () {
 
@@ -238,7 +235,38 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
     }
 
 
+    $scope.setFleet = function (Fleet) {
+        $scope.currFleet = Fleet;
+    };
+    $scope.testdel = function (Fleet) {
+        var FRoutes = {
 
+            Id: -1,
+            vehicleId: Fleet.Id,
+            roleId: Fleet.RoleId,
+            UserId: Fleet.Id,
+            cmpId: $scope.cmp.Id,
+            FromDate: Fleet.fd,
+            ToDate: Fleet.td,
+            // Active:1,
+            insupddelflag: 'D'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+            data: FRoutes
+        }
+        $http(req).then(function (response) {
+            alert('Removed successfully.');
+
+            $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?RoleId=' + Fleet.RoleId).then(function (res, data) {
+                $scope.FleetStaff = res.data;
+            });
+
+        });
+
+    }
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({
