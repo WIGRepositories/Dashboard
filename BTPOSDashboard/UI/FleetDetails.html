@@ -372,14 +372,14 @@
 
                                                         <div class="col-md-4" ng-init="GetCompanies();">
                                                             Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
-                                                                <option value="">Select</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
                                                         <div class="col-md-3">
                                                             Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails(s)" id="test1">
 
-                                                                <option value="">Select</option>
-                                                            </select>
+    <option value="">Select</option>
+</select>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="text-align-last:right">Add Fleet Details</button>
@@ -500,7 +500,7 @@
                                                                                 <label for="Description" class="col-md-6 control-label">Company: <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);">
+                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);"disabled>
                                                                                         <option value="">Select</option>
                                                                                     </select>
                                                                                 </div>
@@ -520,7 +520,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();">
+                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();"disabled>
                                                                                         <option value="">Select</option>
                                                                                     </select>
 
@@ -768,11 +768,11 @@
                                                     <th>Vehicle Layout</th>
                                                     <th>Service Type </th>
                                                     <!--<th>Engine No </th>
-                                                    <th>Fuel Used </th>
-                                                    <th>Month And Yr. Of Mfr </th>
-                                                    <th>Chasis No </th>
-                                                    <th>Date Of Registration </th>
-                                                    <th>Seating Capacity </th>-->
+                    <th>Fuel Used </th>
+                    <th>Month And Yr. Of Mfr </th>
+                    <th>Chasis No </th>
+                    <th>Date Of Registration </th>
+                    <th>Seating Capacity </th>-->
 
 
                                                     <th>Active</th>
@@ -796,24 +796,24 @@
                                                         {{F.ServiceType}}
                                                     </td>
                                                     <!--<td>
-                                                        {{F.EngineNo }}
-                                                    </td>
-                                                    <td>
-                                                        {{F.FuelUsed}}
-                                                    </td>
-                                                    <td>
-                                                        {{F.MonthAndYrOfMfr}}
-                                                    </td>
-                                                    <td>
-                                                        {{F.ChasisNo}}
-                                                    </td>
-                                                    <td>
-                                                        {{F.DateOfRegistration}}
-                                                    </td>
+                        {{F.EngineNo }}
+                    </td>
+                    <td>
+                        {{F.FuelUsed}}
+                    </td>
+                    <td>
+                        {{F.MonthAndYrOfMfr}}
+                    </td>
+                    <td>
+                        {{F.ChasisNo}}
+                    </td>
+                    <td>
+                        {{F.DateOfRegistration}}
+                    </td>
 
-                                                    <td>
-                                                        {{F.SeatingCapacity}}
-                                                    </td>-->
+                    <td>
+                        {{F.SeatingCapacity}}
+                    </td>-->
 
                                                     <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
                                                     <td>
@@ -830,8 +830,8 @@
 
                                         </table>
                                     </div>
-
-                                </div>
+                                      
+                                    </div>
 
                             </div>
 
@@ -867,42 +867,42 @@
                     </script>
                 </div>
 
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+                <script src="js/jquery-1.10.2.min.js"></script>
+                <script src="js/jquery-migrate-1.2.1.min.js"></script>
+                <script src="js/jquery-ui.js"></script>
+                <!--loading bootstrap js-->
+                <script src="vendors/bootstrap/js/bootstrap.js"></script>
+                <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 
 
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script>
-        $('.datepicker-filter').datepicker({
-            autoclose: true
-        });
-    </script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/FleetDetail.js"></script>
+                <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+                <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+                <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+                <script src="vendors/iCheck/icheck.min.js"></script>
+                <script src="vendors/iCheck/custom.min.js"></script>
+                <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+                <script src="js/jquery.menu.js"></script>
+                <script src="vendors/jquery-pace/pace.min.js"></script>
+                <script src="vendors/holder/holder.js"></script>
+                <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+                <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+                <script>
+                    $('.datepicker-filter').datepicker({
+                        autoclose: true
+                    });
+                </script>
+                <!--LOADING SCRIPTS FOR PAGE-->
+                <!--CORE JAVASCRIPT-->
+                <script src="js/main.js"></script>
+                <script src="js/angular.js"></script>
+                <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+                <script src="js/ngStorage.js"></script>
+                <script src="js/FleetDetail.js"></script>
 
 </body>
 </html>

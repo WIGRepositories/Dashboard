@@ -365,17 +365,16 @@
 
                                                     <div class="row mbm">
 
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4" ng-init="GetCompanies();">
                                                             Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
-                                                        <option value="">Select</option>
-                                                          </select>
+                                                                <option value="">Select</option>
+                                                            </select>
                                                         </div>
-                                                        <div class="col-md-5">
-                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetFleetRoutes()" id="test1">
+                                           <div class="col-md-3">
+                                         Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetRoutes(s)" id="test1">
 
-                                                      <option value="">Select</option>
-                                                                </select>
-
+    <option value="">Select</option>
+</select>
                                                         </div>
 
                                                         <div class="col-md-4">
@@ -405,12 +404,12 @@
                                                                         </div>
 
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
+                                                                            <select ng-options="cmp.Name for cmp in Companies1 track by cmp.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();">
 
                                                                                 <option value="">Select</option>
                                                                             </select>
-                                                                           
-</div>
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row mbm">
@@ -419,9 +418,9 @@
                                                                     <div style="text-align:right">
                                                                         <label for="descr" class="col-md-4 control-label" style="color:red;">Fleet Owner:<span class='require'></span></label>
                                                                     </div>
-                                                                   
+
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="f.Name for fleet in track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
+                                                                        <select ng-options="f.Name for cmpdata1 in track by f.Id" class="form-control" ng-model="s1" ng-change="GetRoutesForFO();">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -435,12 +434,12 @@
                                                                         <label for="descr" class="col-md-4 control-label">Vehicle Reg No:<span class='require'></span></label>
                                                                     </div>
                                                                     <div class="col-md-6">
-                        
-                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="currFR.v">
-                                                                                <option value="">Select</option>
-                                                                            </select>
 
-</div>
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="currFR.v">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+
+                                                                    </div>
                                                                 </div>
 
 
@@ -451,9 +450,9 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <select ng-options="r.routename for r in vehicles.Table1 track by r.ID" class="form-control" ng-model="currFR.r">
-                                                                                <option value="">Select</option>
-                                                                            </select>
-</div>
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </div>
 
                                                                 </div>
 
@@ -553,7 +552,7 @@
                                                             <label for="descr" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="cmp.Name for cmp in initdata.Table1 track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
+                                                            <select ng-options="cmp.Name for cmp in Companies1 track by cmp.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
@@ -565,7 +564,7 @@
                                                             <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'></span></label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="f.Name for f in FleetOwners.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
+                                                            <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>

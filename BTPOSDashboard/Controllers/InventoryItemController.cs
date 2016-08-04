@@ -52,11 +52,11 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsupdDelInventoryItem";
             cmd.Connection = conn;
             conn.Open();
-            SqlParameter Cid = new SqlParameter();
-            Cid.ParameterName = "@Id";
-            Cid.SqlDbType = SqlDbType.Int;
-            Cid.Value = b.Id;
-            cmd.Parameters.Add(Cid);
+            //SqlParameter Cid = new SqlParameter();
+            //Cid.ParameterName = "@Id";
+            //Cid.SqlDbType = SqlDbType.Int;
+            //Cid.Value = b.Id;
+            //cmd.Parameters.Add(Cid);
 
             SqlParameter Gid = new SqlParameter();
             Gid.ParameterName = "@ItemName";

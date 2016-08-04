@@ -6,11 +6,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
+    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
-
+  
     $scope.GetFleeBTPosDetails = function () {
 
         $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
@@ -20,28 +22,30 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetCompanies = function () {
 
-        var vc = {
-            needCompanyName: '1'
-        };
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+            $scope.Companies = res.data;
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-            data: vc
-        }
-        $http(req).then(function (res) {
-            $scope.initdata = res.data;
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userCmpId) {
+                        $scope.cmp = res.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.GetFleetOwners($scope.cmp);
         });
+
+
 
     }
 
     $scope.GetFleetOwners = function () {
-        if ($scope.cmp == null) {
-            $scope.FleetOwners = null;
-            return;
-        }
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -59,7 +63,43 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         $http(req).then(function (res) {
             $scope.cmpdata = res.data;
+            $scope.cmpdata1 = res.data;
+
+            if ($scope.userSId != 1) {
+                //loop throug the fleetowners and identify the correct one
+                for (i = 0; i < res.data.Table.length; i++) {
+                    if (res.data.Table[i].UserId == $scope.userSId) {
+                        $scope.s = res.data.Table[i];
+                        document.getElementById('test1').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test1').disabled = false;
+            }
+            $scope.GetFleeBTPosDetails($scope.s);
+
         });
+
+        //$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        //    $scope.fleet = res.data;
+
+        //    if ($scope.userSId != 1) {
+        //        //loop throug the companies and identify the correct one
+        //        for (i = 0; i < res.data.length; i++) {
+        //            if (res.data[i].Id == $scope.userSId) {
+        //                $scope.s = res.data[i];
+        //                document.getElementById('test1').disabled = true;
+        //                break
+        //            }
+        //        }
+        //    }
+        //    else {
+        //        document.getElementById('test1').disabled = false;
+        //    }
+        //    $scope.getFleetOwnerRoute($scope.s);
+        //});
     }
 
     $scope.GetFleetBTPosForFO = function () {
@@ -71,7 +111,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var vc = {
             needvehicleRegno: '1',
             needbtpos: '1',
-            fleetownerId: $scope.fo.Id
+            fleetownerId: $scope.fo.Id 
         };
 
         var req = {
@@ -116,7 +156,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //}
 
     $scope.saveFleetBTPOS = function (FleetBtpos) {
-
+        
         if (FleetBtpos == null || FleetBtpos.v == null) {
             alert('Please select Vehicle.');
             return;

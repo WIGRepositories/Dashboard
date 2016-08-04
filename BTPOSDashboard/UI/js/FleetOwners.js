@@ -43,14 +43,57 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetFleetOwners = function () {
 
 
-        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
-            $scope.fleet = res.data;
+    //    $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+    //        $scope.fleet = res.data;
+
+    //        if ($scope.userSId != 1) {
+    //            //loop throug the companies and identify the correct one
+    //            for (i = 0; i < res.data.length; i++) {
+    //                if (res.data[i].Id == $scope.userSId) {
+    //                    $scope.s = res.data[i];
+    //                    document.getElementById('test1').disabled = true;
+    //                    break
+    //                }
+    //            }
+    //        }
+    //        else {
+    //            document.getElementById('test1').disabled = false;
+    //        }
+    //        $scope.getFleetOwnerRoute($scope.s);
+    //    });
+    //}
+
+    //$scope.getFleetOwnerRoute = function () {
+
+    //    $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner').then(function (res, data) {
+    //        $scope.FleetOwner = res.data;
+
+    //    });
+  
+
+        var vc = {
+            needfleetowners: '1',
+            cmpId: $scope.cmp.Id
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: vc
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.cmpdata = res.data;
 
             if ($scope.userSId != 1) {
-                //loop throug the companies and identify the correct one
-                for (i = 0; i < res.data.length; i++) {
-                    if (res.data[i].Id == $scope.userSId) {
-                        $scope.s = res.data[i];
+                //loop throug the fleetowners and identify the correct one
+                for (i = 0; i < res.data.Table.length; i++) {
+                    if (res.data.Table[i].UserId == $scope.userSId) {
+                        $scope.s = res.data.Table[i];
                         document.getElementById('test1').disabled = true;
                         break
                     }
@@ -60,16 +103,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 document.getElementById('test1').disabled = false;
             }
             $scope.getFleetOwnerRoute($scope.s);
-        });
-    }
-
-    $scope.getFleetOwnerRoute = function () {
-
-        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner').then(function (res, data) {
-            $scope.FleetOwner = res.data;
 
         });
-  
     }
 
     $scope.setUsers = function (usr) {

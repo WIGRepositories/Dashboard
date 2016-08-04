@@ -6626,6 +6626,7 @@ BEGIN
 	,FO.FleetOwnerCode
 	,FO.CompanyId
 	,FO.Id
+	,FO.UserId
 	 from FleetOwner FO
 	inner join Users u on  u.Id = FO.UserId
 	inner join Company c on c.Id = FO.companyId
