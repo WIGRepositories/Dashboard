@@ -238,56 +238,56 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
         $scope.currGroup = null;
     };
 
-    $scope.savenewfleetStaffdetails = function () {
-        var newVD = $scope.f;
-        if (newVD == null) {
-            alert('Please select VehicleRegNo.');
-            return;
-        }
+    //$scope.savenewfleetStaffdetails = function () {
+    //    var newVD = $scope.f;
+    //    if (newVD == null) {
+    //        alert('Please select VehicleRegNo.');
+    //        return;
+    //    }
 
-        if (newVD.Id == null) {
-            alert('Please select VehicleRegNo.');
-            return;
-        }
-        //validate user, company and role also      
-
-
-        var Fleet = {
-            Id: -1,
-            vehicleId: newVD.Id,
-            roleId: newVD.uu.RoleId,
-            UserId: newVD.uu.Id,
-            cmpId: $scope.cmp.Id,
-            FromDate: newVD.fd,
-            ToDate: newVD.td,
-            // Active:1,
-            insupddelflag: 'I'
-        };
+    //    if (newVD.Id == null) {
+    //        alert('Please select VehicleRegNo.');
+    //        return;
+    //    }
+    //    //validate user, company and role also      
 
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
-            //headers: {
-            //    'Content-Type': undefined
+    //    var Fleet = {
+    //        Id: -1,
+    //        vehicleId: newVD.Id,
+    //        roleId: newVD.uu.RoleId,
+    //        UserId: newVD.uu.Id,
+    //        cmpId: $scope.cmp.Id,
+    //        FromDate: newVD.fd,
+    //        ToDate: newVD.td,
+    //        // Active:1,
+    //        insupddelflag: 'I'
+    //    };
 
-            data: Fleet
-        }
 
-        $http(req).then(function (response) {
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+    //        //headers: {
+    //        //    'Content-Type': undefined
 
-            $scope.showDialog("Saved successfully!");
+    //        data: Fleet
+    //    }
 
-            $scope.Group = null;
+    //    $http(req).then(function (response) {
 
-        }, function (errres) {
-            var errdata = errres.data;
-            var errmssg = "";
-            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
-        });
-        $scope.currGroup = null;
-    };
+    //        $scope.showDialog("Saved successfully!");
+
+    //        $scope.Group = null;
+
+    //    }, function (errres) {
+    //        var errdata = errres.data;
+    //        var errmssg = "";
+    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    //        $scope.showDialog(errmssg);
+    //    });
+    //    $scope.currGroup = null;
+    //};
 
     $scope.GetFleetStaff = function () {
         if ($scope.cmp == null || $scope.cmp.Id == null) {

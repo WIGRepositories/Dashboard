@@ -1,6 +1,4 @@
 -- create companies
-INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Address],[ContactNo1],[EmailId],[Active])
-VALUES ('INTERBUS','INTERBUS','INTERBUS company','HYD',95000,'Loki@gmail.com',1)
 
 INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Address],[ContactNo1],[EmailId],[Active])
 VALUES ('WEBINGATE','WEBINGATE','WEBINGATE company','TS',95400,'Loki@gmail.com',1)

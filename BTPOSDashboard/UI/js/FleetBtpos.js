@@ -14,14 +14,31 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
   
     $scope.GetFleeBTPosDetails = function () {
+        $scope.FleetBtposList = null;
+        $scope.cmpdata = null;
+        $scope.cmpdata1 = null;
 
-        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
+        if ($scope.cmp == null) {
+           
+            return;
+        }
+
+        if ($scope.s == null) {
+         
+            return;
+        }
+
+        var foid = $scope.s.Id;
+        var cmpid = $scope.cmp.Id;
+        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId='+foid+'&cmpid='+cmpid).then(function (res, data) {
             $scope.FleetBtposList = res.data;
         });
     }
 
     $scope.GetCompanies = function () {
-
+        $scope.FleetBtposList = null;
+        $scope.cmpdata = null;
+        $scope.cmpdata1 = null;
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
@@ -46,6 +63,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
 
     $scope.GetFleetOwners = function () {
+        $scope.FleetBtposList = null;
+        $scope.cmpdata = null;
+        $scope.cmpdata1 = null;
+
+        if ($scope.cmp == null) {
+
+            return;
+        }
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -78,7 +103,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             else {
                 document.getElementById('test1').disabled = false;
             }
-            $scope.GetFleeBTPosDetails($scope.s);
+        //    $scope.GetFleeBTPosDetails($scope.s);
 
         });
 
@@ -154,7 +179,33 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //        $scope.FleetnBTPos = res.data;
     //    });
     //}
+    $scope.testdel = function (R) {
+        var FBTPOS = {
 
+            Id: -1,
+            VehicleId: R.VehicleId,
+            BTPOSId: R.BTPOSId,
+            FromDate: R.fd,
+            ToDate: R.td,
+           
+            insupddelflag: 'D'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetBtpos/AssignFleetBTPOS',
+            data: FBTPOS
+        }
+        $http(req).then(function (response) {
+            alert('Removed successfully.');
+
+            $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
+                $scope.FleetBtposList = res.data;
+            });
+
+        });
+
+    }
     $scope.saveFleetBTPOS = function (FleetBtpos) {
         
         if (FleetBtpos == null || FleetBtpos.v == null) {

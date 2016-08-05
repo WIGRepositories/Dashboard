@@ -420,7 +420,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="f.Name for cmpdata1 in track by f.Id" class="form-control" ng-model="s1" ng-change="GetRoutesForFO();">
+                                                                        
+                                                                        <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="s1" ng-change="GetRoutesForFO();">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -434,8 +435,8 @@
                                                                         <label for="descr" class="col-md-4 control-label">Vehicle Reg No:<span class='require'></span></label>
                                                                     </div>
                                                                     <div class="col-md-6">
-
-                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="currFR.v">
+                                                                       
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="currFR.newfleet.v">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -449,7 +450,7 @@
                                                                         <label for="descr" class="col-md-4 control-label">Route: <span class='require'></span></label>
                                                                     </div>
                                                                     <div class="col-md-6">
-                                                                        <select ng-options="r.routename for r in vehicles.Table1 track by r.ID" class="form-control" ng-model="currFR.r">
+                                                                        <select ng-options="r.routename for r in vehicles.Table1 track by r.RouteId" class="form-control" ng-model="currFR.newfleet.r">
                                                                             <option value="">Select</option>
                                                                         </select>
                                                                     </div>
@@ -463,7 +464,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
-                                                                        <input type="date" ng-model="currFR.fd" />
+                                                                        <input type="date" ng-model="currFR.newfleet.fd" />
 
                                                                     </div>
                                                                 </div>
@@ -476,7 +477,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <!----  <div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.td" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>--->
-                                                                        <input type="date" ng-model="currFR.td" />
+                                                                        <input type="date" ng-model="currFR.newfleet.td" />
                                                                     </div>
                                                                 </div>
 
@@ -552,7 +553,7 @@
                                                             <label for="descr" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="cmp.Name for cmp in Companies1 track by cmp.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();">
+                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
@@ -592,7 +593,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="r.routename for r in vehicles.Table1 track by r.RouteId" class="form-control" ng-model="initdata.newfleet.r.RouteId">
+                                                            <select ng-options="r.routename for r in vehicles.Table1 track by r.RouteId" class="form-control" ng-model="initdata.newfleet.r">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
