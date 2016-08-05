@@ -1,4 +1,5 @@
 -- create companies
+
 INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Address],[ContactNo1],[EmailId],[Active])
 VALUES ('WEBINGATE','WEBINGATE','WEBINGATE company','TS',95400,'Loki@gmail.com',1)
 

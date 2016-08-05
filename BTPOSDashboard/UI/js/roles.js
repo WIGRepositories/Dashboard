@@ -340,7 +340,10 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
 
     $scope.isChecked = function () {
-        return $scope.checkedArr.length === $scope.cmproles.length;
+        if ($scope.cmproles)
+            return $scope.checkedArr.length === $scope.cmproles.length;
+        else
+            return false;
     };
 
 
