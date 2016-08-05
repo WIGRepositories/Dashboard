@@ -12,33 +12,33 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
-  
+
     $scope.GetFleeBTPosDetails = function () {
-        $scope.FleetBtposList = null;
-        $scope.cmpdata = null;
-        $scope.cmpdata1 = null;
+        //$scope.FleetBtposList = null;
+        //$scope.cmpdata = null;
+        //$scope.cmpdata1 = null;
 
         if ($scope.cmp == null) {
-           
+
             return;
         }
 
         if ($scope.s == null) {
-         
+
             return;
         }
 
         var foid = $scope.s.Id;
         var cmpid = $scope.cmp.Id;
-        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId='+foid+'&cmpid='+cmpid).then(function (res, data) {
+        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=' + foid + '&cmpid=' + cmpid).then(function (res, data) {
             $scope.FleetBtposList = res.data;
         });
     }
 
     $scope.GetCompanies = function () {
-        $scope.FleetBtposList = null;
-        $scope.cmpdata = null;
-        $scope.cmpdata1 = null;
+        //$scope.FleetBtposList = null;
+        //$scope.cmpdata = null;
+        //$scope.cmpdata1 = null;
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
@@ -103,7 +103,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             else {
                 document.getElementById('test1').disabled = false;
             }
-        //    $scope.GetFleeBTPosDetails($scope.s);
+            //    $scope.GetFleeBTPosDetails($scope.s);
 
         });
 
@@ -136,7 +136,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var vc = {
             needvehicleRegno: '1',
             needbtpos: '1',
-            fleetownerId: $scope.fo.Id 
+            fleetownerId: $scope.fo.Id
         };
 
         var req = {
@@ -187,7 +187,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             BTPOSId: R.BTPOSId,
             FromDate: R.fd,
             ToDate: R.td,
-           
+
             insupddelflag: 'D'
         };
 
@@ -207,7 +207,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     }
     $scope.saveFleetBTPOS = function (FleetBtpos) {
-        
+
         if (FleetBtpos == null || FleetBtpos.v == null) {
             alert('Please select Vehicle.');
             return;

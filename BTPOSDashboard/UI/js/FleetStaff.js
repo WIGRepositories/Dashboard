@@ -307,7 +307,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
 
     $scope.setFleet = function (Fleet) {
-        $scope.currFleet = Fleet;
+        $scope.currVD = Fleet;
     };
     $scope.testdel = function (Fleet) {
         var FRoutes = {
