@@ -190,10 +190,10 @@ namespace POSDBAccess.Controllers
                 gst.Value = n.State;
                 cmd.Parameters.Add(gst);
 
-                SqlParameter logo = new SqlParameter();
-                logo.ParameterName = "@Logo";               
-                logo.Value = n.Logo;
-                cmd.Parameters.Add(logo);
+                //SqlParameter logo = new SqlParameter();
+                //logo.ParameterName = "@Logo";               
+                //logo.Value = n.Logo;
+                //cmd.Parameters.Add(logo);
 
 
 
