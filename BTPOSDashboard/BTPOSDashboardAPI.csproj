@@ -2059,6 +2059,7 @@
     <Compile Include="Controllers\BTPOSPaymentController.cs" />
     <Compile Include="Controllers\BtposRoutesController.cs" />
     <Compile Include="Controllers\BtposTicketDetailsController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
     <Compile Include="Controllers\DataLoadController.cs" />
     <Compile Include="Controllers\EditHistoryController.cs" />
@@ -2099,6 +2100,7 @@
     <Compile Include="Controllers\ShippingOrderController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\SmsGatewayConfigController.cs" />
+    <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />

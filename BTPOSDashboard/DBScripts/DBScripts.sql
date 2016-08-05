@@ -11532,3 +11532,32 @@ INSERT INTO
 
 end
 
+GO
+
+/****** Object:  Table [dbo].[Country]    Script Date: 08/05/2016 17:57:39 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Country](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Countries] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetCountries]    Script Date: 08/05/2016 18:02:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetCountries]
+
+as begin 
+SELECT * from Country
+
+       
+end
