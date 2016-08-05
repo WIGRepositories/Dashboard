@@ -207,11 +207,11 @@ CREATE TABLE [dbo].[Company](
 	[Desc] [varchar](50) NULL,
 	[Active] [int] NOT NULL,
 	[Logo] [image] NULL,
-	[Address] [varchar](500) NULL,
-	[ContactNo1] [varchar](50) NULL,
+	[Address] [varchar](500) NOT NULL,
+	[ContactNo1] [varchar](50) NOT NULL,
 	[ContactNo2] [varchar](50) NULL,
 	[Fax] [varchar](50) NULL,
-	[EmailId] [varchar](50) NULL,
+	[EmailId] [varchar](50) NOT NULL,
 	[Title] [varchar](50) NULL,
 	[Caption] [varchar](50) NULL,
 	[Country] [varchar](50) NULL,
@@ -2063,18 +2063,19 @@ GO
 create procedure [dbo].[InsUpdDelCompany](
 @active int,
 @code varchar(50),
-@desc varchar(50) = '',
+@desc varchar(50) = null,
 @Id int,
 @Name varchar(50),
 @Address varchar(500),
 @EmailId varchar(50),
 @ContactNo1 varchar(50),
-@ContactNo2 varchar(50),
-@Fax varchar(50),
-@Title varchar(50),
-@Caption varchar(50),
-@Country varchar(50),
-@ZipCode int,
+@ContactNo2 varchar(50)= null,
+@Fax varchar(50)= null,
+@Title varchar(50)= null,
+@Caption varchar(50)= null,
+@Country varchar(50)= null,
+@Logo image,
+@ZipCode int = null,
 @State varchar(50),
 --@FleetSize int ,
 --@StaffSize int,
@@ -2104,7 +2105,7 @@ if @insupdflag = 'I'
 
 			if @cnt = 0 
 			begin
-			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State)
+			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,Logo,ZipCode,State) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@Logo,@ZipCode,@State)
 			
 			SELECT @newCmpId = SCOPE_IDENTITY()
 			
@@ -2153,7 +2154,7 @@ else
 				if @cnt = 0 
 				begin
 					update Company
-					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId=@EmailId,ContactNo1 =@ContactNo1,ContactNo2=@ContactNo2,Fax=@Fax,Title=@Title,Caption=@Caption,Country=@Country,ZipCode=@ZipCode,State=@State,active = @active
+					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId = @EmailId,ContactNo1 =@ContactNo1,active = @active
 					where Id = @Id						
 						
 						--insert into edit history
@@ -2161,7 +2162,7 @@ else
 				           
 					exec InsEditHistoryDetails @edithistoryid,null,@Name,'Insertion','Name',null
 					exec InsEditHistoryDetails @edithistoryid,null,@code,'Insertion','Code',null
-					exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null
+					exec InsEditHistoryDetails @edithistoryid,null,@desc,'Insertion','Desc',null					
 					exec InsEditHistoryDetails @edithistoryid,null,@active,'Insertion','Active',null
 				
 				end

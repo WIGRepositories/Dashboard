@@ -1,9 +1,12 @@
 -- create companies
-INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Active])
-VALUES ('WEBINGATE','WEBINGATE','WEBINGATE company',1)
+INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Address],[ContactNo1],[EmailId],[Active])
+VALUES ('INTERBUS','INTERBUS','INTERBUS company','HYD',95000,'Loki@gmail.com',1)
 
-INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Active])
-VALUES ('ZUPCO','ZUPCO','ZUPCO company',1)
+INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Address],[ContactNo1],[EmailId],[Active])
+VALUES ('WEBINGATE','WEBINGATE','WEBINGATE company','TS',95400,'Loki@gmail.com',1)
+
+INSERT INTO [POSDashboard].[dbo].[Company]([Name],[Code],[Desc],[Address],[ContactNo1],[EmailId],[Active])
+VALUES ('ZUPCO','ZUPCO','ZUPCO company','AP',95200,'Loki@gmail.com',1)
 
 --create 6 users (3 for each company, 1 superviosr each)
 INSERT INTO [POSDashboard].[dbo].[Users]
