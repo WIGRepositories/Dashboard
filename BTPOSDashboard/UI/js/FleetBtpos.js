@@ -153,6 +153,49 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.FleetnBTPos = res.data;
         });
     }
+    $scope.save = function (currVD, flag) {
+        if (currVD == null || currVD.v == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+        if (currVD.v.Id == null) {
+            alert('Please select Vehicle.');
+            return;
+        }
+
+        if (currVD.b.Id == null) {
+            alert('Please select BT POS.');
+            return;
+        }
+       
+        var FleetBtposList = {
+            Id: -1,
+            VehicleId: currVD.v.Id,
+            BTPOSId: currVD.b.Id,
+            FromDate: currVD.fd,
+            ToDate: currVD.td,
+           
+            insupddelflag: 'U'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetBtpos/AssignFleetBTPOS',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: FleetBtposList
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.showDialog("Updated successfully!");
+            GetFleetDetails();
+        });
+
+
+    }
     //$scope.GetFleetBTPosForreg() = function () {
 
     //    if ($scope.vr == null) {
