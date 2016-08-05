@@ -29,7 +29,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -477,7 +477,8 @@
 
                                                                         <label for="selCountry" class="col-md-4 control-label" style="color:red;">Company:<span class='require'>*</span></label>
                                                                         <div class="col-md-6">
-                                                                            <select ng-options="cmp.Name for cmp in initdata.Table track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
+                                                                          
+                                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();" width="100%">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -509,7 +510,7 @@
                                                                             <label for="Name">Effective From:<span class='require'></span></label>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <input type="date" ng-model="FleetBtpos.fd">
+                                                                            <input type="date" ng-model="FleetAvailability.fd">
                                                                         </div>
                                                                     </div>
 

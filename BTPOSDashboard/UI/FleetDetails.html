@@ -28,7 +28,7 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive img-circle"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
@@ -414,13 +414,13 @@
                                                                     <h4 id="modal-header-primary-label" class="modal-title">Add Fleet Details</h4>
                                                                 </div>
                                                                 <div class="modal-body" ng-init="GetVehicleConfig()" ng-model="initdata">
-                                                                    <div>
+                                                                    
                                                                         <div class="row mbm">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-6 control-label">Vehicle RegNo <span class='require'>*</span></label>
 
-                                                                                    <div class="col-md-6" style="text-align:left"> <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-6"> <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-6 control-label">Engine No<span class='require'>*</span></label>
@@ -429,7 +429,7 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                   
 
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
@@ -463,7 +463,7 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-6 control-label">MonthAndYrOfMfr:<span class='require'></span></label>
+                                                                                <label for="Name" class="col-md-6 control-label">Year Of Manufacturing:<span class='require'></span></label>
 
                                                                                 <div class="col-md-4">
                                                                                     <div>
@@ -506,7 +506,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">MonthAndYrOfMfr::<span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-6 control-label">Date Of Registration:<span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6">
                                                                                     <input type="date" ng-model="initdata.newfleet.DateOfRegistration" />

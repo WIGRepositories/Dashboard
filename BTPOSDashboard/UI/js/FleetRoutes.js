@@ -50,8 +50,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetFleetOwners = function () {
 
 
-      
-
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -171,7 +169,8 @@ $scope.GetFleetRoutes = function () {
 //    $http(req).then(function (res) {
 //        $scope.FleetOwners = res.data;          
 //    });
-//}
+    //}$scope.saveNewFleetRoutes = function (initdata) {
+
 
 $scope.save = function (currFR) {
     var FleetRoute = currFR.newfleet;
@@ -188,18 +187,18 @@ $scope.save = function (currFR) {
         alert('Please select a type  RouteId ');
         return;
     }
-  
+
     var FleetRoutes = {
         Id: -1,
         VehicleId: FleetRoute.v.Id,
         RouteId: FleetRoute.r.RouteId,
-        EffectiveFrom: FleetRoute.EffectiveFrom,
-        EffectiveTill: FleetRoute.EffectiveTill,
+        EffectiveFrom: FleetRoute.fd,
+        EffectiveTill: FleetRoute.td,
         Active: FleetRoute.Active,
         insupddelflag: 'U'
 
-    }; 
-    
+    };
+
     var req = {
         method: 'POST',
         url: 'http://localhost:1476/api/FleetRoutes/NewFleetRoutes',
@@ -214,6 +213,8 @@ $scope.save = function (currFR) {
 
 
 }
+
+
 
 $scope.saveNewFleetRoutes = function (initdata) {
 

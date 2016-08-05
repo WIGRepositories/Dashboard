@@ -362,6 +362,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         return $scope.checkedArr.length === $scope.userRoles.length;
     };
 
+    $scope.filterValue = function ($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
+            $event.preventDefault();
+        }
+    };
+
 
 
 });

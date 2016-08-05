@@ -1,6 +1,6 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
-   
+
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -14,9 +14,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
-            $scope.Companies = res.data;
-            $scope.Companies1 = res.data;
+        var vc = {
+            needCompanyName: '1'
+        };
 
         var req = {
             method: 'POST',
@@ -24,7 +24,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             //headers: {
             //    'Content-Type': undefined
             data: vc
-                    }
+        }
         $http(req).then(function (res) {
             $scope.initdata = res.data;
         });
@@ -41,16 +41,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
         };
-        
+
         var req = {
             method: 'POST',
             url: 'http://localhost:1476/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
-     
+
             data: vc
 
-    }
+        }
     }
     $scope.GetPopupFleetOwners = function (cid) {
 
@@ -85,9 +85,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1').then(function (response, req) {
             $scope.BTPOS1 = response.data;
-         
+
             //  $localStorage.BTPOSOld = response.data;
-           // $scope.setPage();
+            // $scope.setPage();
         })
 
         var vc = {
@@ -112,7 +112,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     };
 
     $scope.GetBTPOSListByFleetOwner = function () {
-               
+
         $scope.BTPOS1 = null;
 
         var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
@@ -134,7 +134,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             alert('Please enter IMEI.');
             return;
         }
-        
+
         if (pos.CompanyId == null) {
             alert('Please enter CompanyId')
             return;
@@ -186,31 +186,31 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog(errmssg);
         });
 
-   }
-        
+    }
+
     $scope.save = function (Group, flag) {
-      
-                var newpos = {
-                    Id: (flag == 'I') ? '-1' : Group.Id,
-                    CompanyId: (flag == 'I') ? '1' : $scope.cmp1.Id,
-                    //GroupId: Group.GroupId,
-                    IMEI: Group.IMEI,
-                    POSID: Group.POSID,
-                    StatusId: (flag == 'I') ? '1' : Group.StatusId,
-                    ipconfig: Group.ipconfig,
-                    active: 1,//Group.ipconfig,
-                    fleetownerid: (flag == 'I') ? null : $scope.s1.Id,
-                    insupdflag: flag
-                }
-                btposlist.push(newpos);
 
-                var req = {
-                    method: 'POST',
-                    url: 'http://localhost:1476/api/BTPOSDetails/SaveBTPOSDetails',
-                    data: btposlist 
-                }
+        var newpos = {
+            Id: (flag == 'I') ? '-1' : Group.Id,
+            CompanyId: (flag == 'I') ? '1' : $scope.cmp1.Id,
+            //GroupId: Group.GroupId,
+            IMEI: Group.IMEI,
+            POSID: Group.POSID,
+            StatusId: (flag == 'I') ? '1' : Group.StatusId,
+            ipconfig: Group.ipconfig,
+            active: 1,//Group.ipconfig,
+            fleetownerid: (flag == 'I') ? null : $scope.s1.Id,
+            insupdflag: flag
+        }
+        btposlist.push(newpos);
 
-                 $http(req).then(function (response) {
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/BTPOSDetails/SaveBTPOSDetails',
+            data: btposlist
+        }
+
+        $http(req).then(function (response) {
 
             $scope.showDialog("Saved successfully!");
 
@@ -289,8 +289,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
 
 });
-   
-        
+
+
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;
