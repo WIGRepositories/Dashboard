@@ -2074,7 +2074,6 @@ create procedure [dbo].[InsUpdDelCompany](
 @Title varchar(50)= null,
 @Caption varchar(50)= null,
 @Country varchar(50)= null,
-@Logo image,
 @ZipCode int = null,
 @State varchar(50),
 --@FleetSize int ,
@@ -2105,7 +2104,7 @@ if @insupdflag = 'I'
 
 			if @cnt = 0 
 			begin
-			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,Logo,ZipCode,State) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@Logo,@ZipCode,@State)
+			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State)
 			
 			SELECT @newCmpId = SCOPE_IDENTITY()
 			

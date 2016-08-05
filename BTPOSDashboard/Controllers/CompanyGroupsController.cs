@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace POSDBAccess.Controllers
 {
     public class CompanyGroupsController : ApiController
@@ -190,13 +191,16 @@ namespace POSDBAccess.Controllers
                 gst.Value = n.State;
                 cmd.Parameters.Add(gst);
 
-                //SqlParameter logo = new SqlParameter();
-                //logo.ParameterName = "@Logo";               
-                //logo.Value = n.Logo;
-                //cmd.Parameters.Add(logo);
+                //SqlParameter log = new SqlParameter();
+                //log.ParameterName = "@Logo";
+                 
+                ////ImageConverter imgCon = new ImageConverter();
+                ////return (byte[])imgCon.ConvertTo(inImg, typeof(byte[]));
 
-
-
+                ////byte[] Logo = (byte[])cmd.ExecuteScalar();
+                ////Logo newlogo = byteArrayToImage(Logo);               
+                //log.Value = n.Logo;
+                //cmd.Parameters.Add(log);  
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,1);
                 insupdflag.Value = n.insupdflag;
