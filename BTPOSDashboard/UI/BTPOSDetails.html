@@ -357,13 +357,13 @@
                                                     <div class="actions">
                                                         <div class="col-md-4">
                                                             Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()"id="test">
-                                                                <option value="">All</option>
+                                                                <option value="">select</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()"id="test1">
-                                                                <option value="">All</option>
-                                                            </select>
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()" id="test1">
+    <option value="">select</option>
+</select>
                                                         </div>
 
                                                         <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button>
@@ -445,7 +445,7 @@
                                                                            
                                                                         <div class="col-md-5">
                                                                             
-                                                                            <select ng-options="c.Name for c in initdata.Table track by c.Id" class="form-control" ng-model="cmp1" ng-change="GetPopupFleetOwners();" value="{{currGroup.CompanyId}}">
+                                                                            <select ng-options="c.Name for c in Companies1 track by c.Id" class="form-control" ng-model="cmp1" ng-change="GetPopupFleetOwners();" value="{{currGroup.CompanyId}}">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                                 </div>
@@ -460,7 +460,7 @@
                                                                        
                                                                         <div class="col-md-5">
                                                                           
-                                                                            <select ng-options="s.Name for s in fleet1 track by s.Id" class="form-control" ng-model="s1" value="{{currGroup.fleetownerid}}">
+                                                                            <select ng-options="s.Name for s in fdata.Table track by s.Id" class="form-control" ng-model="s1" value="{{currGroup.fleetownerid}}">
 
                                                                                 <option value="">Select</option>
                                                                             </select>
@@ -638,12 +638,13 @@
                             </div>
                         </div>
                     </div>
+
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
                         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                     </div>
                     <!--END FOOTER-->
-                </div>
+            
                 <!--END PAGE WRAPPER-->
             <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
