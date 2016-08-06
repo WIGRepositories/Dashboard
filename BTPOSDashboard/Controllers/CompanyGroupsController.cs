@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -191,16 +192,16 @@ namespace POSDBAccess.Controllers
                 gst.Value = n.State;
                 cmd.Parameters.Add(gst);
 
-                //SqlParameter log = new SqlParameter();
-                //log.ParameterName = "@Logo";
-                 
-                ////ImageConverter imgCon = new ImageConverter();
-                ////return (byte[])imgCon.ConvertTo(inImg, typeof(byte[]));
+                SqlParameter log = new SqlParameter();
+                log.ParameterName = "@Logo";
+
+                ImageConverter imgCon = new ImageConverter();
+                //return (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
 
                 ////byte[] Logo = (byte[])cmd.ExecuteScalar();
                 ////Logo newlogo = byteArrayToImage(Logo);               
-                //log.Value = n.Logo;
-                //cmd.Parameters.Add(log);  
+                log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
+                cmd.Parameters.Add(log);  
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,1);
                 insupdflag.Value = n.insupdflag;
