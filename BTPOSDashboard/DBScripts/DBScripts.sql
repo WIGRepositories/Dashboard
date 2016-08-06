@@ -5576,11 +5576,13 @@ SELECT fa.[Id]
       ,u.firstname + ' ' + u.lastname as FleetOwner
   FROM [POSDashboard].[dbo].[FleetAvailability] FA
   inner join fleetdetails fd on fd.id = FA.vehicleid
-  inner join users u on u.id = fd.fleetownerid
+  inner join FleetOwner  fo on fo.Id = fd.FleetOwnerId
+  inner join users u on u.id = fo.UserId
  where ((fd.companyid = @cmpId or @cmpId = -1)
   and (fd.fleetownerid = @fleetOwnerId or @fleetOwnerId = -1))
 
 end
+
 
 GO
 SET ANSI_NULLS ON
