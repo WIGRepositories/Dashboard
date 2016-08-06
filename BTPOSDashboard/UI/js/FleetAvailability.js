@@ -195,6 +195,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         var newFleetAvail = {
             Id: -1,
+            FleetOwner:FleetAvailability.currRole.FleetOwner,
             VehicleId: FleetAvailability.v.Id,           
             FromDate: FleetAvailability.fd,
             ToDate: FleetAvailability.td,
