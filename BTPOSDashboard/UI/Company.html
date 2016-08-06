@@ -402,7 +402,7 @@
                                                                         <div class="col-md-6">
                                                                             <label for="ContactNo2" class="col-md-3 control-label"style="float:left">Phone No:<span class='require'></span></label>
                                                                             <div class="col-md-9">
-                                                                                <input type="text" id="ContactNo2" ng-keypress="filterValue($event)" ng-model="Group.ContactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid phone numbers" data-fv-phone-country11="IN" required="required" data-fv-notempty-message="This field cannot be left blank." placeholder="Mobile No. " class="form-control" name="data[User][mobile]" data-fv-field="data[User][mobile]">
+                                                                                <input type="text" id="ContactNo2" ng-keypress="filterValue($event)" ng-model="Group.ContactNo2" maxlength="10" data-fv-numeric="true" data-fv-numeric-message="Please enter valid phone numbers" data-fv-phone-country11="IN" required="required" data-fv-notempty-message="This field cannot be left blank." class="form-control" name="data[User][mobile]" data-fv-field="data[User][mobile]">
                                                                                 <!--<input id="ContactNo2" type="text" ng-model="Group.ContactNo2" class="form-control" maxlength="10" />-->
                                                                                 <span class="help-block">
                                                                                 </span>
@@ -434,7 +434,7 @@
                                                                         <div class="col-md-6">
                                                                             <label for="exampleInputFile" class="col-md-3 control-label" style="float:left">Logo:</label>
                                                                             <!--<img src="images/user.jpg" alt="" class="img-responsive" width="25px" />-->
-                                                                            <input type="file" class="form-control-file" ng-model="Group.Logo"  id="exampleInputFile" aria-describedby="fileHelp">
+                                                                            <input type="file" id="Logo" class="form-control-file" ng-model="Group.Logo" ng-file-select="onFileSelect($files)" id="exampleInputFile" aria-describedby="fileHelp">
 
                                                                         </div>
                                                                         
@@ -720,7 +720,9 @@
                                                     </tbody>
                                                 </table>
 
-
+                                        <!--<div ng-controller="UploadCtrl">
+                                            <input type="file" ng-file-select="onFileSelect($files)" multiple>
+                                        </div>-->
                                             </div>
                                         </div>
 
