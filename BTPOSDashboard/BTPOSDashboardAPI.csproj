@@ -395,6 +395,7 @@
     <Content Include="UI\Advertisment.html" />
     <Content Include="UI\AssignRole.html" />
     <Content Include="UI\BlockList.html" />
+    <Content Include="UI\Btposdetails1.html" />
     <Content Include="UI\BtposLicense.html" />
     <Content Include="UI\BTPOSMonitoringPage.html" />
     <Content Include="UI\BtposReports.html" />
@@ -460,6 +461,7 @@
     <Content Include="UI\js\BlockList.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
+    <Content Include="UI\js\Btposdetails1.js" />
     <Content Include="UI\js\BTPOSMonitoringPage.js" />
     <Content Include="UI\js\BTPosReports.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
