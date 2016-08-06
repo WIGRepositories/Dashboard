@@ -418,12 +418,12 @@
                                                                         <div class="row mbm">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Vehicle RegNo <span class='require'>*</span></label>
+                                                                                    <label for="Description" class="col-md-5 control-label">Vehicle RegNo <span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6"> <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.VehicleRegNo" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Engine No<span class='require'>*</span></label>
+                                                                                    <label for="Description" class="col-md-5 control-label">Engine No<span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.EngineNo" /><span class="help-block"></span></div>
                                                                                 </div>
@@ -435,7 +435,7 @@
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
 
-                                                                                <label for="selCountry" class="col-md-6 control-label">Vehicle Type</label>
+                                                                                <label for="selCountry" class="col-md-5 control-label">Vehicle Type</label>
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" ng-model="initdata.newfleet.vt" class="form-control">
                                                                                         <option value="">Select</option>
@@ -443,7 +443,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Fuel Used <span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-5 control-label">Fuel Used <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.FuelUsed" /><span class="help-block"></span></div>
                                                                             </div>
@@ -453,7 +453,7 @@
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="selCountry" class="col-md-6 control-label">Service Type</label>
+                                                                                <label for="selCountry" class="col-md-5 control-label">Service Type</label>
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="st.Name for st in initdata.Table1 track by st.Id" ng-model="initdata.newfleet.st" class="form-control">
                                                                                         <option value="">Select</option>
@@ -463,7 +463,7 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-6 control-label">Year Of Manufacturing:<span class='require'></span></label>
+                                                                                <label for="Name" class="col-md-5 control-label">Year Of Manufacturing:<span class='require'></span></label>
 
                                                                                 <div class="col-md-4">
                                                                                     <div>
@@ -478,7 +478,7 @@
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="selCountry" class="col-md-6 control-label">Vehicle Layout</label>
+                                                                                <label for="selCountry" class="col-md-5 control-label">Vehicle Layout</label>
                                                                                 <div class="col-md-6">
 
                                                                                     <select ng-options="vl.Name for vl in initdata.Table3 track by vl.Id" ng-model="initdata.newfleet.vl" class="form-control">
@@ -487,7 +487,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Chasis No: <span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-5 control-label">Chasis No: <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.ChasisNo" /><span class="help-block"></span></div>
                                                                             </div>
@@ -498,7 +498,7 @@
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Company: <span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-5 control-label">Company: <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);"id="test">
@@ -507,7 +507,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Date Of Registration:<span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-5 control-label">Date Of Registration:<span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6">
                                                                                     <input type="date" ng-model="initdata.newfleet.DateOfRegistration" />
@@ -519,7 +519,7 @@
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-5 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();"id="test1">
                                                                                         <option value="">Select</option>
@@ -530,7 +530,7 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <label for="selCountry" class="col-md-6 control-label">Seating Capacity</label>
+                                                                                <label for="selCountry" class="col-md-5 control-label">Seating Capacity</label>
 
                                                                                 <div class="col-md-6">
                                                                                     <div>
@@ -580,27 +580,27 @@
 
                                                                 <div class="modal-body" ng-model="currVD">
 
-                                                                    <div class="row">
+                                                                    
                                                                         <div class="row mbm">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Vehicle RegNo <span class='require'>*</span></label>
+                                                                                    <label for="Description" class="col-md-4 control-label">Vehicle RegNo <span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.VehicleRegNo}}" ng-model="currVD.VehicleRegNo" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Engine No<span class='require'>*</span></label>
+                                                                                    <label for="Description" class="col-md-5 control-label">Engine No<span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.EngineNo}}" ng-model="currVD.EngineNo" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                    
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
 
-                                                                                <label for="selCountry" class="col-md-6 control-label">Vehicle Type</label>
+                                                                                <label for="selCountry" class="col-md-4 control-label">Vehicle Type</label>
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="vt.Name for vt in initdata.Table track by vt.Id" value="{{currVD.VehicleTypeId}}" ng-model="currVD.vt" class="form-control">
                                                                                         <option value="">Select</option>
@@ -608,7 +608,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Fuel Used <span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-5 control-label">Fuel Used <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.FuelUsed}}" ng-m ng-model="currVD.FuelUsed" /><span class="help-block"></span></div>
                                                                             </div>
@@ -617,7 +617,7 @@
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="selCountry" class="col-md-6 control-label">Service Type</label>
+                                                                                <label for="selCountry" class="col-md-4 control-label">Service Type</label>
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="st.Name for st in initdata.Table1 track by st.Id" value="{{currVD.ServiceTypeId}}" ng-model="currVD.st" class="form-control">
                                                                                         <option value="">Select</option>
@@ -627,9 +627,9 @@
                                                                             </div>
 
                                                                             <div class="col-md-6">
-                                                                                <label for="Name" class="col-md-6 control-label">MonthAndYrOfMfr:<span class='require'></span></label>
+                                                                                <label for="Name" class="col-md-5 control-label">Month And Yr Off Mfr:<span class='require'></span></label>
 
-                                                                                <div class="col-md-4">
+                                                                                <div class="col-md-6">
                                                                                     <div>
                                                                                         <input type="date" ng-model="currVD.newfleet.MonthAndYrOfMfr" />
 
@@ -644,7 +644,7 @@
                                                                     <div class="row mbm">
                                                                         <div class="col-md-12">
                                                                             <div class="col-md-6">
-                                                                                <label for="selCountry" class="col-md-6 control-label">Vehicle Layout</label>
+                                                                                <label for="selCountry" class="col-md-4 control-label">Vehicle Layout</label>
                                                                                 <div class="col-md-6">
                                                                                     <select ng-options="vl.Name for vl in initdata.Table3 track by vl.Id" value="{{currVD.vehiclelayoutId}}" ng-model="currVD.newfleet.vl" class="form-control">
                                                                                         <option value="">Select</option>
@@ -653,7 +653,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Description" class="col-md-6 control-label">Chasis No: <span class='require'>*</span></label>
+                                                                                <label for="Description" class="col-md-5 control-label">Chasis No: <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.ChasisNo}}" ng-model="currVD.newfleet.ChasisNo" /><span class="help-block"></span></div>
                                                                             </div>
@@ -667,13 +667,13 @@
                                                                         <div class="row mbm">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Seating Capacity <span class='require'>*</span></label>
+                                                                                    <label for="Description" class="col-md-4 control-label">Seating Capacity <span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.SeatingCapacity}}" ng-model="currVD.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-4 control-label">Date Of Registration:<span class='require'>*</span></label>
-                                                                                    <div class="col-md-2">
+                                                                                    <label for="Description" class="col-md-5 control-label">Date Of Registration:<span class='require'>*</span></label>
+                                                                                    <div class="col-md-6">
                                                                                         <div>
                                                                                             <input type="date" ng-model="currVD.newfleet.DateOfRegistration" />
 
@@ -689,7 +689,7 @@
                                                                         <div class="row mbm">
                                                                             <div class="col-md-12">
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Company:<span class='require'>*</span></label>
+                                                                                    <label for="Description" class="col-md-4 control-label">Company:<span class='require'>*</span></label>
 
 
                                                                                     <div class="col-md-6">
@@ -699,7 +699,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
+                                                                                    <label for="Description" class="col-md-5 control-label">Fleet Owner:<span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6">
                                                                                         <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" disabled>
