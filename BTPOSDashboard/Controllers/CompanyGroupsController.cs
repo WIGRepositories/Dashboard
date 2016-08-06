@@ -194,12 +194,7 @@ namespace POSDBAccess.Controllers
 
                 //SqlParameter log = new SqlParameter();
                 //log.ParameterName = "@Logo";
-
-                //ImageConverter imgCon = new ImageConverter();
-                ////return (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
-
-                //////byte[] Logo = (byte[])cmd.ExecuteScalar();
-                //////Logo newlogo = byteArrayToImage(Logo);               
+                //ImageConverter imgCon = new ImageConverter();                             
                 //log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
                 //cmd.Parameters.Add(log);  
 

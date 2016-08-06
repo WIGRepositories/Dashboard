@@ -6,37 +6,60 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
+    $scope.userCmpId = $scope.userdetails[0].CompanyId;
+    $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
     btposlist = [];
 
+    //$scope.GetCompanies = function () {
+
+    //    var vc = {
+    //        needCompanyName: '1'
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        //headers: {
+    //        //    'Content-Type': undefined
+    //        data: vc
+    //    }
+    //    $http(req).then(function (res) {
+    //        $scope.initdata = res.data;
+    //    });
+    //    $scope.GetBTPOSList();
+
+    //}
     $scope.GetCompanies = function () {
 
-        var vc = {
-            needCompanyName: '1'
-        };
+        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+            $scope.Companies = res.data;
+            $scope.Companies1 = res.data;
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-            //headers: {
-            //    'Content-Type': undefined
-            data: vc
-        }
-        $http(req).then(function (res) {
-            $scope.initdata = res.data;
+            if ($scope.userCmpId != 1) {
+                //loop throug the companies and identify the correct one
+                for (i = 0; i < res.data.length; i++) {
+                    if (res.data[i].Id == $scope.userCmpId) {
+                        $scope.cmp = res.data[i];
+                        document.getElementById('test').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test').disabled = false;
+            }
+            $scope.GetFleetOwners($scope.cmp);
         });
-        $scope.GetBTPOSList();
+
+
 
     }
     $scope.GetFleetOwners = function () {
-        if ($scope.cmp == null) {
-            $scope.cmpdata = null;
-            $scope.Fleet = null;
-            return;
-        }
+       
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -50,13 +73,34 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             data: vc
 
+
         }
+        $http(req).then(function (res) {
+            $scope.cmpdata = res.data;
+            $scope.cmpdata1 = res.data;
+
+            if ($scope.userSId != 1) {
+                //loop throug the fleetowners and identify the correct one
+                for (i = 0; i < res.data.Table.length; i++) {
+                    if (res.data.Table[i].UserId == $scope.userSId) {
+                        $scope.s = res.data.Table[i];
+                        document.getElementById('test1').disabled = true;
+                        break
+                    }
+                }
+            }
+            else {
+                document.getElementById('test1').disabled = false;
+            }
+            $scope.GetBTPOSListByFleetOwner($scope.s);
+
+        });
     }
     $scope.GetPopupFleetOwners = function (cid) {
 
         var vc = {
             needfleetowners: '1',
-            cmpId: cid
+            cmp1Id: cid
         };
 
         var req = {
