@@ -11561,3 +11561,61 @@ SELECT * from Country
 
        
 end
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE dbo.GetAvailableServices
+	-- Add the parameters for the stored procedure here
+	@srcId int, 
+	@destId int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+/*
+1) check if there are any routes configured with the given source and destination (routestops)
+2) if they exists then from the combination get all the fleet owners (fleetownerstops)
+3) using the above get the vehicles and fare for the fleeet owner (foroutefare)
+4) and also get the schedule of the vehicles (foroutefleetschedule)
+*/
+select rs.Id, rs.RouteId,src.name,dest.name,c.Name,fofare.VehicleTypeId,fofare.VehicleId, t.Name,frs1.ArrivalTime,frs2.DepartureTime 
+from RouteStops rs
+inner join stops src on src.id = rs.fromstopid
+inner join stops dest on dest.id = rs.tostopid
+inner join FleetOwnerRoute fr on fr.RouteId = rs.RouteId
+inner join Company c on c.Id = fr.CompanyId
+inner join FleetOwnerRouteStop fors on fors.RouteStopId = rs.Id
+inner join [FleetOwnerRouteFare] fofare on fofare.FORouteStopId = fors.Id
+inner join Types t on t.Id = fofare.VehicleTypeId
+left outer join FORouteFleetSchedule frs1 on frs1.StopId = src.Id and frs1.FleetOwnerId = fors.FleetOwnerId and frs1.RouteId = rs.RouteId
+left outer join FORouteFleetSchedule frs2 on frs2.StopId = dest.Id and frs2.FleetOwnerId = fors.FleetOwnerId and frs2.RouteId = rs.RouteId
+where FromStopId = @srcId and ToStopId = @destId
+
+    -- Insert statements for procedure here
+--	select rs.Id, rs.RouteId,src.name,dest.name,c.Name,fd.VehicleTypeId,t.Name,frs1.ArrivalTime,frs2.DepartureTime from RouteStops rs
+--inner join stops src on src.id = rs.fromstopid
+--inner join stops dest on dest.id = rs.tostopid
+--inner join FleetOwnerRoute fr on fr.RouteId = rs.RouteId
+--inner join Company c on c.Id = fr.CompanyId
+--inner join FleetRoutes r on r.RouteId = rs.RouteId
+--inner join FleetDetails fd on fd.Id = r.VehicleId
+--inner join Types t on t.Id = fd.VehicleTypeId
+--inner join FORouteFleetSchedule frs1 on frs1.StopId = src.Id and frs1.FleetOwnerId = fr.FleetOwnerId and frs1.RouteId = fr.RouteId
+--inner join FORouteFleetSchedule frs2 on frs2.StopId = dest.Id and frs2.FleetOwnerId = fr.FleetOwnerId and frs2.RouteId = fr.RouteId
+-- where FromStopId = 1 and ToStopId = 4
+	
+	--fleetownerroutes -- to get company name and fleet owner name
+	--
+	
+	
+END
+GO
