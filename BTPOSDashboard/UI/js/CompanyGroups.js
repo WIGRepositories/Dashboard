@@ -1,5 +1,5 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal,$upload) {
     if ($localStorage.uname == null)
     {
         window.location.href = "login.html";
@@ -50,7 +50,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Country:Group.Country,
             ZipCode:Group.ZipCode,
             State: Group.State,
-            Logo:Group.Logo,
+            Logo: Group.Logo,
             active: (Group.active==true)?1:0,
             insupdflag:flag 
         }
@@ -109,7 +109,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Country:Group.Country,
             ZipCode:Group.ZipCode,
             State: Group.State,
-           // Logo:Group.Logo,
+            Logo:Group.Logo,
             active: (Group.active == true) ? 1 : 0,
             insupdflag: flag
 
@@ -173,6 +173,39 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         
     //};
 
+});
+
+var filectrl = app.controller('UploadCtrl', function ($scope, $http, $timeout, $upload) {
+    $scope.upload = [];
+    $scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
+
+    $scope.onFileSelect = function ($files) {
+        //$files: an array of files selected, each file has name, size, and type.
+        for (var i = 0; i < $files.length; i++) {
+            var $file = $files[i];
+            (function (index) {
+                $scope.upload[index] = $upload.upload({
+                    url: "./api/files/upload", // webapi url
+                    method: "POST",
+                    data: { fileUploadObj: $scope.fileUploadObj },
+                    file: $file
+                }).progress(function (evt) {
+                    // get upload percentage
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    // file is uploaded successfully
+                    console.log(data);
+                }).error(function (data, status, headers, config) {
+                    // file failed to upload
+                    console.log(data);
+                });
+            })(i);
+        }
+    }
+
+    $scope.abortUpload = function (index) {
+        $scope.upload[index].abort();
+    }
 });
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
