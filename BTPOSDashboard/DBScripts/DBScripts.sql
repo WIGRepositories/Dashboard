@@ -6767,7 +6767,7 @@ INSERT INTO [POSDashboard].[dbo].[FleetStaff]
            ,@ToDate
            ,@VehicleId
            ,@cmpId)
-         exec InsEditHistory 'Types','Name', @VehicleId,'FleetStaff Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+         exec InsEditHistory 'FleetStaff','Name', @VehicleId,'FleetStaff Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
 		              
 			exec InsEditHistoryDetails @edithistoryid,null,@VehicleId,'Insertion','VehicleId',null			
 			exec InsEditHistoryDetails @edithistoryid,null,@UserId,'Insertion','UserId',null
@@ -6793,7 +6793,7 @@ UPDATE [POSDashboard].[dbo].[FleetStaff]
  WHERE Id = @Id
 
 
-exec InsEditHistory 'FleetStaff','Name', @VehicleId,'Type updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
+exec InsEditHistory 'FleetStaff','Name', @VehicleId,'FleetStaff updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
 
 if @VehicleId <> @VehicleId
 exec InsEditHistoryDetails @edithistoryid,@oldVehicleId,@VehicleId,'Modication','VehicleId',null		
@@ -7081,13 +7081,13 @@ End
 
 GO
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetBTPOS]    Script Date: 07/18/2016 15:00:49 ******/
+/****** Object:  StoredProcedure [dbo].[InsUpdDelFleetBTPOS]    Script Date: 08/06/2016 15:05:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-create PROCEDURE [dbo].[InsUpdDelFleetBTPOS]
+ALTER PROCEDURE [dbo].[InsUpdDelFleetBTPOS]
 @Id int = -1,
 @VehicleId int,
 @btposId int,
@@ -7096,9 +7096,15 @@ create PROCEDURE [dbo].[InsUpdDelFleetBTPOS]
 @insupddelflag varchar
 as
 begin
-
+declare @dt datetime
+set @dt = GETDATE()
 declare @cnt  int
 set @cnt = -1
+declare @edithistoryid int
+declare @oldVehicleId int
+declare @oldBTPOSId int
+declare @oldToDate int
+declare @oldFromDate int
 
 if @insupddelflag = 'I'
 begin
@@ -7118,6 +7124,14 @@ INSERT INTO [POSDashboard].[dbo].[FleetBtpos]
            ,@FromDate
            ,@ToDate
            ,@btposId)
+             exec InsEditHistory 'FleetBtpos','Name', @VehicleId,'FleetBtpos Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
+		              
+			exec InsEditHistoryDetails @edithistoryid,null,@VehicleId,'Insertion','VehicleId',null			
+			exec InsEditHistoryDetails @edithistoryid,null,@BTPOSId,'Insertion','BTPOSId',null
+			 exec InsEditHistoryDetails @edithistoryid,null,@FromDate,'Insertion','FromDate',null
+            exec InsEditHistoryDetails @edithistoryid,null,@ToDate,'Insertion','ToDate',null
+  
+           
 end
 else
   if @insupddelflag = 'U'
@@ -7127,6 +7141,21 @@ UPDATE [POSDashboard].[dbo].[FleetBtpos]
       ,[FromDate] = @FromDate
       ,[ToDate] = @ToDate
      WHERE [VehicleId] = @VehicleId
+     
+     exec InsEditHistory 'FleetBtpos','Name', @VehicleId,'FleetBtpos updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
+
+if @VehicleId <> @VehicleId
+exec InsEditHistoryDetails @edithistoryid,@oldVehicleId,@VehicleId,'Modication','VehicleId',null		
+
+if @btposId  <> @btposId 
+exec InsEditHistoryDetails @edithistoryid,@oldbtposId ,@btposId ,'Modication','btposId ',null		
+
+if @FromDate <> @FromDate
+exec InsEditHistoryDetails @edithistoryid,@oldFromDate,@FromDate,'Modication','FromDate',null
+
+if @ToDate  <> @ToDate
+exec InsEditHistoryDetails @edithistoryid,@oldToDate ,@ToDate ,'Modication','ToDate ',null		
+		
     end  
 else
   if @insupddelflag = 'D'
@@ -7137,6 +7166,8 @@ and [BTPOSId] = @btposId
 
 End
 End
+
+
 
 GO
 

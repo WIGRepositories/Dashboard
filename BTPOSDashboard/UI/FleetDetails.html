@@ -500,7 +500,7 @@
                                                                                 <label for="Description" class="col-md-6 control-label">Company: <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);"disabled>
+                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);"id="test">
                                                                                         <option value="">Select</option>
                                                                                     </select>
                                                                                 </div>
@@ -520,7 +520,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();"disabled>
+                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();"id="test1">
                                                                                         <option value="">Select</option>
                                                                                     </select>
 
@@ -701,7 +701,7 @@
                                                                                     <label for="Description" class="col-md-6 control-label">Fleet Owner:<span class='require'>*</span></label>
 
                                                                                     <div class="col-md-6">
-                                                                                        <select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" class="form-control" disabled>
+                                                                                        <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -815,7 +815,7 @@
                         {{F.SeatingCapacity}}
                     </td>-->
 
-                                                    <td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>
+                                                    <td><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" checked  id="Active" ng-model="F.Active"/></td>
                                                     <td>
 
                                                         <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">
