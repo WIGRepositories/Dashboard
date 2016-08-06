@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+﻿var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
 
     if ($localStorage.uname == null) {
@@ -59,7 +59,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     }
     $scope.GetFleetOwners = function () {
-       
+
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -155,7 +155,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     };
 
-   
+    $scope.GetBTPOSDetails1 = function () {
+
+
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails1?cmpId=' + cmpId + '&fId=-1' + 'pageno=' + pageno + 'pagesize=' + pagesize).then(function (response, req) {
+            $scope.BTPOSdetails = response.data;
+
+            //  $localStorage.BTPOSOld = response.data;
+            // $scope.setPage();
+        })
+
+
+    };
 
     $scope.GetBTPOSListByFleetOwner = function () {
 

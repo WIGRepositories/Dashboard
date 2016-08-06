@@ -10,8 +10,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.Roleid = $scope.userdetails[0].roleid;   
     $scope.dashboardDS = $localStorage.dashboardDS;
 
-
-
+   
 
     $scope.GetCompanies = function () {
 
@@ -63,14 +62,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     //    });
     //}
 
-    //$scope.getFleetOwnerRoute = function () {
-
-    //    $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner').then(function (res, data) {
-    //        $scope.FleetOwner = res.data;
-
-    //    });
-  
-
+       
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -106,7 +98,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         });
     }
+    
+    $scope.getFleetOwnerRoute = function () {
+        if ($scope.cmp == null) {
+            $scope.Companies = null;
+            return;
+        }
 
+        //if ($scope.s == null) {
+        //    $scope.cmpdata = null;
+        //    return;
+        //}
+        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+            $scope.FleetOwner = res.data;
+           
+        });
+
+    }
     $scope.setUsers = function (usr) {
         $scope.User1 = usr;
     };
