@@ -192,16 +192,16 @@ namespace POSDBAccess.Controllers
                 gst.Value = n.State;
                 cmd.Parameters.Add(gst);
 
-                SqlParameter log = new SqlParameter();
-                log.ParameterName = "@Logo";
+                //SqlParameter log = new SqlParameter();
+                //log.ParameterName = "@Logo";
 
-                ImageConverter imgCon = new ImageConverter();
-                //return (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
+                //ImageConverter imgCon = new ImageConverter();
+                ////return (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
 
-                ////byte[] Logo = (byte[])cmd.ExecuteScalar();
-                ////Logo newlogo = byteArrayToImage(Logo);               
-                log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
-                cmd.Parameters.Add(log);  
+                //////byte[] Logo = (byte[])cmd.ExecuteScalar();
+                //////Logo newlogo = byteArrayToImage(Logo);               
+                //log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
+                //cmd.Parameters.Add(log);  
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,1);
                 insupdflag.Value = n.insupdflag;

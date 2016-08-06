@@ -523,7 +523,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         
-                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="f">
+                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="getUsersnRoles()"ng-model ="f">
                                                             <option value="">Select</option>
                                                         </select>
                                                     </div>
