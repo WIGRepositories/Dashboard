@@ -2054,6 +2054,7 @@
     <Compile Include="Controllers\Blocklistcontroller.cs" />
     <Compile Include="Controllers\blocklistnewController.cs" />
     <Compile Include="Controllers\BTPOSConfigController.cs" />
+    <Compile Include="Controllers\Btposcontroller1Controller.cs" />
     <Compile Include="Controllers\BTPOSDetailsController.cs" />
     <Compile Include="Controllers\BTPOSGroupsController.cs" />
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
