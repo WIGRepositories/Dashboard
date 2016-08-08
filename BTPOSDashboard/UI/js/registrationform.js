@@ -5,25 +5,25 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 
     $scope.getdata = function () {
         $http.get('http://localhost:1476/api/registrationform/getregdata').then(function (res, data) {
-            $scope.type = res.data;
+            $scope.register = res.data;
 
             //alerts("hi");
         });
     }
-    $scope.save = function (type) {
+    $scope.save = function (register) {
 
         var type = {
 
-            UserName: type.username,
-            Password: type.Password,
-            ConfirmPassword: type.ConfirmPassword,
-            Emailaddress: type.Emailaddress,
-            FirstName: type.firstname,
-            LastName: type.lastname,
-            Gender: type.Gender,
+            UserName: register.username,
+            Password: register.Password,
+            ConfirmPassword: register.ConfirmPassword,
+            Emailaddress: register.Emailaddress,
+            FirstName: register.firstname,
+            LastName: register.lastname,
+            Gender: register.Gender,
 
 
-
+            
         };
 
         var req = {

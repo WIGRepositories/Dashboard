@@ -11561,3 +11561,131 @@ SELECT * from Country
 
        
 end
+
+
+USE [POSDashboard]
+GO
+
+/****** Object:  Table [dbo].[WebsiteUserInfo]    Script Date: 08/08/2016 18:33:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[WebsiteUserInfo](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[UserName] [varchar](50) NOT NULL,
+	[EmailAddress] [varchar](50) NOT NULL,
+	[Password] [varchar](50) NOT NULL,
+	[Mobile] [varchar](15) NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetWebsiteUserInfo]    Script Date: 08/08/2016 18:35:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[GetWebsiteUserInfo]
+
+AS
+BEGIN
+
+SELECT U.[Id]
+      ,U.[FirstName]
+      ,U.[LastName]      
+      
+      ,U.[EmailAddress]
+     ,U.[Mobile]
+      ,ul.logininfo as UserName
+      ,ul.passkey as [Password]            
+      
+  FROM [POSDashboard].[dbo].[WebsiteUserInfo] U
+  
+ 
+left OUTER join dbo.websiteUserLogin ul on ul.userid = U.id    
+ left OUTER join dbo.WebsiteUserInfo u2 on ul.userid = U.id   
+end
+
+/****** Object:  StoredProcedure [dbo].[GetinterbusUserLogin]    Script Date: 06/08/2016 16:08:17 ******/
+SET ANSI_NULLS ON
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[InsUpdWebsiteUserInfo]    Script Date: 08/08/2016 18:36:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[InsUpdWebsiteUserInfo](
+@FirstName varchar(50)
+,@LastName varchar(50)
+,@UserName varchar(50)  
+,@Password varchar(50)  
+,@EmailAddress varchar(50)
+--,@ConfirmPassword varchar(50)
+--,@Gender varchar(50),@salt varchar(50)=null,@Active int=1,@userid int = -1
+,@Mobile varchar(15))
+
+ AS
+BEGIN
+DECLARE @COUNT int
+set @COUNT = 0
+	if @COUNT = 0
+	begin
+INSERT INTO [POSDashboard].[dbo].[WebsiteUserInfo]
+           ([FirstName]
+           ,[LastName]
+           ,[UserName]
+           ,[EmailAddress]
+           ,[Password]
+           --,[ConfirmPassword]
+          -- ,[Gender]
+           ,[Mobile])
+     VALUES
+           (@FirstName
+           ,@LastName
+           ,@UserName
+           ,@EmailAddress
+           ,@Password
+           --,@ConfirmPassword
+           --,@Gender
+           ,@Mobile)
+     end  
+           
+ --set @LASTID=SCOPE_IDENTITY();
+           
+ --          INSERT INTO [POSDashboard].[dbo].[WebsiteUserLogin]
+ --          ([LoginInfo]
+ --          ,[PassKey]
+       
+ --          ,[UserId]
+ --          ,[salt]
+ --          ,[Active])
+ --    VALUES
+ --          (@UserName
+ --          ,@Password
+ --          ,@LASTID
+ --          ,@salt
+ --          ,@Active
+ --          )
+           
+else
+			RAISERROR ('user already exists',2099,1); 
+
+END
+
+

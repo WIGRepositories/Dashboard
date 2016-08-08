@@ -54,7 +54,7 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelregistrationform";
+                cmd.CommandText = "InsUpdDelregisterform";
                 cmd.Connection = conn;
                 conn.Open();
                 //string insertquery = "insert into login(UserName,Password,FirstName,LastName,MobileNo) values (@UserName,@Password,@FirstName,@lastName,@MobileNo)";
