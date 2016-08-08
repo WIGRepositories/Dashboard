@@ -174,6 +174,13 @@ $scope.GetFleetRoutes = function () {
 
 $scope.save = function (currFR) {
     var FleetRoute = currFR.newfleet;
+    if (currFR == null) {
+        alert('please select company')
+    }
+    if (currFR.Company == null || Company == "") {
+        alert('Please select Company');
+        return;
+    }
 
     if (FleetRoute == null || FleetRoute.v == null) {
         alert('Please select a type VehicleId');

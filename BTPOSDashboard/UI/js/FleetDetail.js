@@ -208,8 +208,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        if (Fleet.VehicleRegNo == null) {
+        if (Fleet.VehicleRegNo == null || Fleet.VehicleRegNo == "") {
             alert('Please enter VehicleRegNo.');
+            return;
+        }
+        if (Fleet.FuelUsed == null || Fleet.FuelUsed == "") {
+            alert('Please enter FuelUsed.');
+            return;
+        }
+        if (Fleet.ChasisNo == null || Fleet.ChasisNo == "") {
+            alert('Please enter ChasisNo.');
+            return;
+        }
+        if (Fleet.DateOfRegistration == null || Fleet.DateOfRegistration == "") {
+            alert('Please enter DateOfRegistration.');
             return;
         }
         //if (Fleet.group == null || Fleet.VehicleTypeId.group.Id == null) {
@@ -335,6 +347,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
 
 });
+$scope.filterValue = function ($event) {
+    if (isNaN(String.fromCharCode($event.keyCode))) {
+        $event.preventDefault();
+    }
+};
 
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {

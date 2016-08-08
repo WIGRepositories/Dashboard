@@ -17,45 +17,62 @@
     <link rel="shortcut icon" href="UI/images/favicon.ico">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl"  ng-model="type">
-    <div class="page-form">
-
-        
+    <div class="page-form">   
         <form class="form-validate-signin">
-            <div class="header-content"><h3>Smart Ticketing Dashboard Portal</h3><br /><h1>Log in</h1></div>
-            <div class="body-content">
-                <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-user"></i><input type="text" placeholder="Username" name="username" class="form-control required" ng-model="UserName"></div>
-                    <span ng-show="!UserName"><font color="red">Please enter UserName</font></span>
+            <div class="header-content"><h3>Smart Ticketing Dashboard Portal</h3><h1>Log in</h1>
+                <div class="form-group" style="margin-left: 28px;">
+                    <img src="UI/images/dashboard.png" style="box-shadow: 13px 13px 13px #ccc; width:300px; height:275px" />
                 </div>
-                <div class="form-group">
-                    <div class="input-icon right"><i class="fa fa-key"></i><input type="password" placeholder="Password" name="password" class="form-control required password" ng-model="Password"></div>
-                    <span ng-show="!Password"><font color="red">Please enter Password</font></span>
-                </div>
-                <!--<div class="form-group pull-left">
-                <div class="checkbox-list">
-                    <label>
-                        <input type="checkbox">&nbsp;
-                        Keep me signed in
-                    </label>
-                </div>
-            </div>-->
-                <div class="form-group pull-right">
-                    <button  ng-click="Signin()" class="btn btn-success">                         
+                <div class="body-content">
+                    <div class="form-group">
+                        <table>
+                            <tr>
+                                <td height="5px" align="left">
+                                    <div style="margin-right:10px" class="row">
+                                        <div class="input-icon right:col-md-2">
+                                            <i class="fa fa-user"></i>
+                                            <input type="text" placeholder="Username" name="username" class="form-control" ng-model="UserName">
+                                        <!--<span ng-show="!UserName"><font color="red">Please enter UserName</font></span>-->
+                                         </div>
+                                    </div>
+                                </td>
+                                <td height="5px" align="right">
+                                    <div style="margin-left:5px" class="row">
+                                        <div class="input-icon right:col-md-2">
+                                            <i class="fa fa-key"></i>
+                                            <input type="password" placeholder="Password" name="password" class="form-control" ng-model="Password">
+                                            <!--<span ng-show="!Password"><font color="red">Please enter Password</font></span>-->
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                                <!--<div class="form-group pull-left">
+            <div class="checkbox-list">
+                <label>
+                    <input type="checkbox">&nbsp;
+                    Keep me signed in
+                </label>
+            </div>
+        </div>-->
+                    <div class="form-group col-md-offset-4">
+                        <button ng-click="Signin()" class="btn btn-success">
                             Log In
                             &nbsp;<i class="fa fa-chevron-circle-right"></i>
                         </button>
+                        <!--<div class="clearfix"></div>-->
+                        <div class="form-group">
+                  <b> Forgot your Password?</b><a style="color:blue" href='ResetPassword.html' class='btn-forgot-pwd'>Click Here</a>
+                        </div>
+                    </div>
+                                <!--<hr>
+        <p>Don't have an account? <a id="btn-register" href="UI/extra-signup.html">Register Now</a></p>
+        <p>
+            Don't have an account?
+            <br />Please contact INTERBUS administrator
+        </p>-->
                 </div>
-                <div class="clearfix"></div>
-                <div class="forget-password">
-                    <h4>Forgotten your Password?</h4>
-                    <p>please <a href='ResetPassword.html' class='btn-forgot-pwd'>Click Here</a> to reset your password.</p>
-                </div>
-                <hr>
-                <!--<p>Don't have an account? <a id="btn-register" href="UI/extra-signup.html">Register Now</a></p>-->
-                <p>
-                    Don't have an account?
-                    <br />Please contact INTERBUS administrator
-                </p>
             </div>
         </form>
     </div>
@@ -92,8 +109,8 @@
     <script src="UI/js/main.js"></script>-->
 
 
-    <script src="UI/js/angular.js"></script>
-    <script src="UI/js/ngStorage.js"></script>
-    <script src="UI/js/login.js"></script>    
+<script src="UI/js/angular.js"></script>
+<script src="UI/js/ngStorage.js"></script>
+<script src="UI/js/login.js"></script>    
 </body>
 </html>

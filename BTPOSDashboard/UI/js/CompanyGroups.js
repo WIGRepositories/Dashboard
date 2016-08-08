@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload', 'ngFileUpload'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal,$upload) {
     if ($localStorage.uname == null)
     {
@@ -17,10 +17,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
     }
     $scope.save = function (Group, flag) {
-        //if (!angular.element('EmailId').$valid)
-        //{
-        //    alert('invalid email id');
-        //}
+
         if (Group == null) {
             alert('Please enter CompanyName.');
             return;
@@ -32,6 +29,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         if (Group.code == null || Group.code == "") {
             alert('Please enter code.');
             return;
+        }
+        if (!angular.element('EmailId').$valid)
+        {
+            alert('invalid email id');
         }
         var newCmp = {
 
