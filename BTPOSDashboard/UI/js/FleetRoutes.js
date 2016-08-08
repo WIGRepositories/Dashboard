@@ -69,19 +69,19 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.cmpdata = res.data;
             $scope.cmpdata1 = res.data;
 
-            if ($scope.userSId != 1) {
-                //loop throug the fleetowners and identify the correct one
-                for (i = 0; i < res.data.Table.length; i++) {
-                    if (res.data.Table[i].UserId == $scope.userSId) {
-                        $scope.s = res.data.Table[i];
-                        document.getElementById('test1').disabled = true;
-                        break
-                    }
-                }
-            }
-            else {
-                document.getElementById('test1').disabled = false;
-            }
+            //if ($scope.userSId != 1) {
+            //    //loop throug the fleetowners and identify the correct one
+            //    for (i = 0; i < res.data.Table.length; i++) {
+            //        if (res.data.Table[i].UserId == $scope.userSId) {
+            //            $scope.s = res.data.Table[i];
+            //            document.getElementById('test1').disabled = true;
+            //            break
+            //        }
+            //    }
+            //}
+            //else {
+            //    document.getElementById('test1').disabled = false;
+            //}
             $scope.GetFleetRoutes($scope.s);
 
         });
@@ -174,6 +174,13 @@ $scope.GetFleetRoutes = function () {
 
 $scope.save = function (currFR) {
     var FleetRoute = currFR.newfleet;
+    if (currFR == null) {
+        alert('please select company')
+    }
+    if (currFR.Company == null || Company == "") {
+        alert('Please select Company');
+        return;
+    }
 
     if (FleetRoute == null || FleetRoute.v == null) {
         alert('Please select a type VehicleId');

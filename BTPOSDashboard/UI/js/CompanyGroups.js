@@ -1,5 +1,5 @@
-var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload'])
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal,$upload) {
     if ($localStorage.uname == null)
     {
         window.location.href = "login.html";
@@ -17,10 +17,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
     }
     $scope.save = function (Group, flag) {
-        //if (!angular.element('EmailId').$valid)
-        //{
-        //    alert('invalid email id');
-        //}
+
         if (Group == null) {
             alert('Please enter CompanyName.');
             return;
@@ -32,6 +29,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         if (Group.code == null || Group.code == "") {
             alert('Please enter code.');
             return;
+        }
+        if (!angular.element('EmailId').$valid)
+        {
+            alert('invalid email id');
         }
         var newCmp = {
 
@@ -50,7 +51,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Country:Group.Country,
             ZipCode:Group.ZipCode,
             State: Group.State,
-            Logo:Group.Logo,
+            Logo: Group.Logo,
             active: (Group.active==true)?1:0,
             insupdflag:flag 
         }
@@ -109,7 +110,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Country:Group.Country,
             ZipCode:Group.ZipCode,
             State: Group.State,
-           // Logo:Group.Logo,
+            Logo:Group.Logo,
             active: (Group.active == true) ? 1 : 0,
             insupdflag: flag
 
@@ -173,6 +174,56 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         
     //};
 
+});
+
+var filectrl = app.controller('UploadCtrl', function ($scope, $http, $timeout, $upload ) {
+    $scope.upload = [];
+    $scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
+
+    var UploadDataModel = { testString1: "Test string 1", testString2: "Test string 2" };
+
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: "http://localhost:1476/api/files/upload",
+            data: { file: file, 'username': $scope.username }
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+
+    $scope.onFileSelect = function ($files) {
+        //$files: an array of files selected, each file has name, size, and type.
+        for (var i = 0; i < $files.length; i++) {
+            var $file = $files[i];
+            (function (index) {
+                $scope.upload[index] = $upload.upload({
+                    url: "http://localhost:1476/api/files/upload", // webapi url
+                    method: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                   // data: UploadDataModel,
+                    file: $file
+                }).progress(function (evt) {
+                    // get upload percentage
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    // file is uploaded successfully
+                    console.log(data);
+                }).error(function (data, status, headers, config) {
+                    // file failed to upload
+                    console.log(data);
+                });
+            })(i);
+        }
+    }
+
+    $scope.abortUpload = function (index) {
+        $scope.upload[index].abort();
+    }
 });
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {

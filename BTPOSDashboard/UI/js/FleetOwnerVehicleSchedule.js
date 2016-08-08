@@ -140,7 +140,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             return;
         }
         $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/getFORVehicleSchedule?fleetownerid=' + $scope.s.Id + '&routeid='
-            + $scope.r.RouteId + '&vehicleId=' + $scope.v.Id).then(function (res, data) {
+            + $scope.r.RouteId + '&vehicleId=' + $scope.v.VehicleId).then(function (res, data) {
                 $scope.RouteVehicleSchedule = res.data;
             });
     }
@@ -200,7 +200,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         var configFareList = $scope.RouteVehicleSchedule;
 
         var foSchedule = new Object();
-        foSchedule.VehicleId =$scope.v.Id;
+        foSchedule.VehicleId = $scope.v.VehicleId;
         foSchedule.RouteId = $scope.r.RouteId;
         foSchedule.FleetOwnerId = $scope.s.Id;
 

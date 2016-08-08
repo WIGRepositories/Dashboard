@@ -237,6 +237,49 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
         });
         $scope.currGroup = null;
     };
+    $scope.savefleetStaff = function () {
+        var FleetStaff = $scope.f1;
+        if (FleetStaff == null) {
+            alert('Please select VehicleRegNo.');
+            return;
+        }
+
+        if (FleetStaff.Id == null) {
+            alert('Please select VehicleRegNo.');
+            return;
+        }
+       
+
+        var FleetS = {
+            
+            Id: -1,
+            vehicleId: FleetStaff.Id,
+            roleId: FleetStaff.uu.RoleId,
+            UserId: FleetStaff.uu.Id,
+            cmpId: $scope.cmp.Id,
+            FromDate: FleetStaff.fd,
+            ToDate: FleetStaff.td,
+            // Active:1,
+            insupddelflag: 'U'
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: FleetS
+
+
+        }
+        $http(req).then(function (res) {
+            $scope.showDialog("Updated successfully!");
+            GetFleetDetails();
+        });
+
+
+    }
 
     //$scope.savenewfleetStaffdetails = function () {
     //    var newVD = $scope.f;
@@ -307,7 +350,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
 
     $scope.setFleet = function (Fleet) {
-        $scope.currVD = Fleet;
+        $scope.currFleet = Fleet;
     };
     $scope.testdel = function (Fleet) {
         var FRoutes = {

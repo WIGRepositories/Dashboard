@@ -395,6 +395,7 @@
     <Content Include="UI\Advertisment.html" />
     <Content Include="UI\AssignRole.html" />
     <Content Include="UI\BlockList.html" />
+    <Content Include="UI\Btposdetails1.html" />
     <Content Include="UI\BtposLicense.html" />
     <Content Include="UI\BTPOSMonitoringPage.html" />
     <Content Include="UI\BtposReports.html" />
@@ -460,6 +461,7 @@
     <Content Include="UI\js\BlockList.js" />
     <Content Include="UI\js\bootstrap.min.js" />
     <Content Include="UI\js\BTPOSConfig.js" />
+    <Content Include="UI\js\Btposdetails1.js" />
     <Content Include="UI\js\BTPOSMonitoringPage.js" />
     <Content Include="UI\js\BTPosReports.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
@@ -470,6 +472,8 @@
     <Content Include="UI\js\DataLoad.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\EmailGatewayConfiguration.js" />
+    <Content Include="UI\js\fileupload\angular-file-upload-shim.js" />
+    <Content Include="UI\js\fileupload\angular-file-upload.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
@@ -2050,6 +2054,7 @@
     <Compile Include="Controllers\Blocklistcontroller.cs" />
     <Compile Include="Controllers\blocklistnewController.cs" />
     <Compile Include="Controllers\BTPOSConfigController.cs" />
+    <Compile Include="Controllers\Btposcontroller1Controller.cs" />
     <Compile Include="Controllers\BTPOSDetailsController.cs" />
     <Compile Include="Controllers\BTPOSGroupsController.cs" />
     <Compile Include="Controllers\BTPOSLicenseController.cs" />
@@ -2065,6 +2070,7 @@
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\EmailGatewayConfigController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FleetAvailabilityController.cs" />
     <Compile Include="Controllers\FleetBtposController.cs" />
     <Compile Include="Controllers\FleetController.cs" />

@@ -61,7 +61,7 @@
                                 <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password</a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                                <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
+                                <li><a href="../Login.html"><i class="fa fa-key"></i>Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -408,7 +408,7 @@
                                                             </div>
                                                             <div class="row mbm">
                                                                 <div style="text-align:right">
-                                                                    <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'></span></label>
+                                                                    <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
@@ -425,7 +425,7 @@
                                                                     <label for="selCountry" class="col-md-4 control-label" style="color:red;">Vehicle Reg No:<span class='require'>*</span></label>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="f">
+                                                                    <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="f1" ng-change="getUsersnRoles();">
                                                                         <option value="">Select</option>
                                                                     </select>
                                                                 </div>
@@ -436,7 +436,8 @@
                                                                 </div>
 
                                                                 <div class="col-md-6">
-                                                                    <select ng-options="u.username for u in userRoles track by u.Id" class="form-control" ng-model="f.uu">
+
+                                                                    <select ng-options="u.username for u in userRoles track by u.Id" class="form-control" ng-model="f1.uu">
                                                                         <option value="">Select</option>
                                                                     </select>
                                                                 </div>
@@ -446,16 +447,17 @@
                                                                     <label for="Name" class="col-md-4 control-label">EffectiveFrom:<span class='require'></span></label>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <input type="date" ng-model="f.fd" />
+                                                                    <input type="date" ng-model="f1.fd" />
                                                                 </div>
                                                             </div>
                                                             <div class="row mbm">
                                                                 <div style="text-align:right">
                                                                     <label for="Name" class="col-md-4 control-label" style="color:red;"> Role: <span class='require'>*</span></label>
                                                                 </div>
+                                                               
                                                                 <div class="col-md-6">
                                                                     <select disabled readonly class="form-control">
-                                                                        <option value="">{{f.uu.rolename}}</option>
+                                                                        <option value="">{{f1.uu.rolename}}</option>
                                                                     </select>
                                                                 </div>
 
@@ -465,13 +467,13 @@
                                                                     <label for="Description" class="col-md-4 control-label"> EffectiveTill <span class='require'></span></label>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <input type="date" ng-model="f.td" />
+                                                                    <input type="date" ng-model="f1.td" />
 
                                                                 </div>
                                                             </div>
                                                             <div class="form-actions">
                                                                 <div class="col-md-offset-3 col-md-9">
-                                                                    <button class="btn btn-green" type="button" ng-click="savenewfleetStaffdetails();">Save</button>
+                                                                    <button class="btn btn-green" type="button" ng-click="savefleetStaff(FleetStaff);">Save</button>
 
                                                                     <a href="FleetStaff.html" class="btn btn-primary">Cancel</a>
                                                                 </div>
@@ -505,7 +507,7 @@
                                                 </div>
                                                 <div class="row mbm">
                                                     <div style="text-align:right">
-                                                        <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'></span></label>
+                                                        <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <!--<div style="width:48%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs"><input type="text" class="form-control" ng-model="initdata.newfleet.fd" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>-->
@@ -523,7 +525,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         
-                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="f">
+                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-model="f" ng-change="getUsersnRoles();">
                                                             <option value="">Select</option>
                                                         </select>
                                                     </div>
@@ -569,9 +571,9 @@
                                                 </div>
                                                 <div class="form-actions">
                                                     <div class="col-md-offset-3 col-md-9">
-                                                        <button class="btn btn-primary" type="button" ng-click="savenewfleetStaffdetails();">Save</button>
+                                                        <button  class="btn btn-green" type="button" ng-click="savenewfleetStaffdetails();">Save</button>
 
-                                                        <a href="FleetStaff.html" class="btn btn-green">Cancel</a>
+                                                        <a href="FleetStaff.html" class="btn btn-primary">Cancel</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -585,7 +587,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                    </div>
+                                   
                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                     <thead>
 
@@ -595,7 +597,7 @@
                                             <th>Staff Role</th>
                                             <th>From </th>
                                             <th>To</th>
-                                            <th>Edit</th>
+                                            <th>Update</th>
                                             <th>Delete</th>
 
                                         </tr>
@@ -610,12 +612,13 @@
                                             <td>{{Fleet.ToDate}}</td>
                                             <td>
 
-                                                <button type="button" data-target="#Modal-header-primary" data-toggle="model" class="btn btn-default btn-xs" ng-click="setFleet(Fleet);">
+                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(Fleet);">
                                                     <i class="fa fa-edit"></i>&nbsp;
                                                     Edit
                                                 </button>
                                             </td>
-                                            <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(Fleet);"><i class="fa fa-trash-o"></i></a></div></td>
+                                            <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(Fleet);"><i class="fa fa-trash-o"></i></a></div>
+                                            </td>
 
                                         </tr>
                                     </tbody>

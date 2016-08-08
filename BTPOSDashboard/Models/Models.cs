@@ -554,7 +554,7 @@ namespace BTPOSDashboardAPI.Models
         public int ZipCode { get; set; }
         public string State { get; set; }
 
-        //public Byte[] Logo { get; set; }
+        public string Logo { get; set; }
 
         public string insupdflag { get; set; }
 
@@ -1652,6 +1652,11 @@ namespace BTPOSDashboardAPI.Models
         public string datetime { get; set; }
         public string srcId { get; set; }
         public string destId { get; set; }
+    }
+    public class UploadDataModel
+    {
+        public string testString1 { get; set; }
+        public string testString2 { get; set; }
     }
 }                     
         
