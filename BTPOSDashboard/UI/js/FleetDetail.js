@@ -233,6 +233,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             ChasisNo: Fleet.ChasisNo,
             SeatingCapacity: Fleet.SeatingCapacity,
             DateOfRegistration: Fleet.DateOfRegistration,
+            Active: 1,
             insupddelflag: 'U'
         };
 
