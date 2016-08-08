@@ -255,7 +255,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             Id: -1,
             vehicleId: FleetStaff.Id,
             roleId: FleetStaff.uu.RoleId,
-            UserId: FleetStaff.uu.UserId,
+            UserId: FleetStaff.uu.Id,
             cmpId: $scope.cmp.Id,
             FromDate: FleetStaff.fd,
             ToDate: FleetStaff.td,

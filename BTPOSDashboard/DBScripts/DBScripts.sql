@@ -11620,17 +11620,19 @@ BEGIN
 3) using the above get the vehicles and fare for the fleeet owner (foroutefare)
 4) and also get the schedule of the vehicles (foroutefleetschedule)
 */
-select rs.Id, rs.RouteId,src.name,dest.name,c.Name,fofare.VehicleTypeId,fofare.VehicleId, t.Name,frs1.ArrivalTime,frs2.DepartureTime 
+select distinct rs.Id, rs.RouteId,src.name srcName,dest.name destName,c.Name cmpName,fofare.VehicleTypeId,fofare.VehicleId
+, t.Name,frs1.ArrivalTime,frs2.DepartureTime , fofare.Amount,frs1.Duration
 from RouteStops rs
 inner join stops src on src.id = rs.fromstopid
 inner join stops dest on dest.id = rs.tostopid
+inner join [FleetRoutes] fr1 on fr1.RouteId = rs.RouteId
 inner join FleetOwnerRoute fr on fr.RouteId = rs.RouteId
 inner join Company c on c.Id = fr.CompanyId
 inner join FleetOwnerRouteStop fors on fors.RouteStopId = rs.Id
 inner join [FleetOwnerRouteFare] fofare on fofare.FORouteStopId = fors.Id
 inner join Types t on t.Id = fofare.VehicleTypeId
-left outer join FORouteFleetSchedule frs1 on frs1.StopId = src.Id and frs1.FleetOwnerId = fors.FleetOwnerId and frs1.RouteId = rs.RouteId
-left outer join FORouteFleetSchedule frs2 on frs2.StopId = dest.Id and frs2.FleetOwnerId = fors.FleetOwnerId and frs2.RouteId = rs.RouteId
+inner join FORouteFleetSchedule frs1 on frs1.StopId = src.Id and frs1.FleetOwnerId = fors.FleetOwnerId and frs1.RouteId = rs.RouteId and frs1.VehicleId = fr1.VehicleId
+inner join FORouteFleetSchedule frs2 on frs2.StopId = dest.Id and frs2.FleetOwnerId = fors.FleetOwnerId and frs2.RouteId = rs.RouteId and frs2.VehicleId = fr1.VehicleId
 where FromStopId = @srcId and ToStopId = @destId
 
     -- Insert statements for procedure here

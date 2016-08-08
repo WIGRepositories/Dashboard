@@ -472,6 +472,8 @@
     <Content Include="UI\js\DataLoad.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\EmailGatewayConfiguration.js" />
+    <Content Include="UI\js\fileupload\angular-file-upload-shim.js" />
+    <Content Include="UI\js\fileupload\angular-file-upload.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
@@ -2068,7 +2070,7 @@
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\EmailGatewayConfigController.cs" />
-    <Compile Include="Controllers\FilesControllerController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FleetAvailabilityController.cs" />
     <Compile Include="Controllers\FleetBtposController.cs" />
     <Compile Include="Controllers\FleetController.cs" />
