@@ -12,10 +12,11 @@ using System.Web;
 
 namespace BTPOSDashboard.Controllers
 {
-    public class FilesControllerController : ApiController
+    public class FilesController : ApiController
     {
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
-        public async Task<HttpResponseMessage> Upload(UploadDataModel up)
+        [Route("api/files/upload")]
+        public async Task<HttpResponseMessage> Upload()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
@@ -50,7 +51,7 @@ namespace BTPOSDashboard.Controllers
         {
             // IMPORTANT: replace "(tilde)" with the real tilde character
             // (our editor doesn't allow it, so I just wrote "(tilde)" instead)
-            var uploadFolder = "(~)/App_Data/Tmp/FileUploads"; // you could put this to web.config
+            var uploadFolder = "~/App_Data/Tmp/FileUploads"; // you could put this to web.config
             var root = HttpContext.Current.Server.MapPath(uploadFolder);
             Directory.CreateDirectory(root);
             return new MultipartFormDataStreamProvider(root);
