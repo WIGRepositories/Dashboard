@@ -457,13 +457,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         });
     }
 
-    $scope.next() = function (currpage) {
-        for(i=currpage ; i<= result ; i++)
-        {
-            currpage = i + 1;
-        }
+    //$scope.next() = function (currpage) {
+    //    for(i=currpage ; i<= result ; i++)
+    //    {
+    //        currpage = i + 1;
+    //    }
 
-    }
+    //}
 
 });
 

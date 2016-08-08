@@ -586,9 +586,9 @@
                                                             <option value="150">150</option>
                                                             <option value="-1">All</option>
                                                         </select>&nbsp;
-
-                                                        records | Found total {{BTPOSdetails}}records
-
+                                                        <div ng-repeat="b in BTPOSdetails">
+                                                            records | Found total {{b.Row_count}} records
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 text-right">
@@ -675,7 +675,9 @@
                                                         <option value="150">150</option>
                                                         <option value="-1">All</option>
                                                     </select>&nbsp;
-                                                    records | Found total {{BTPOSdetails}} records
+                                                    <div ng-repeat="b in BTPOSdetails">
+                                                        records | Found total {{b.Row_count}} records
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 text-right">
