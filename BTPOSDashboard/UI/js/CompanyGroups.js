@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload', 'ngFileUpload'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal,$upload) {
     if ($localStorage.uname == null)
     {
@@ -175,9 +175,25 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 });
 
-var filectrl = app.controller('UploadCtrl', function ($scope, $http, $timeout, $upload) {
+var filectrl = app.controller('UploadCtrl', function ($scope, $http, $timeout, $upload ) {
     $scope.upload = [];
     $scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
+
+    var UploadDataModel = { testString1: "Test string 1", testString2: "Test string 2" };
+
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: "http://localhost:1476/api/files/upload",
+            data: { file: file, 'username': $scope.username }
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
 
     $scope.onFileSelect = function ($files) {
         //$files: an array of files selected, each file has name, size, and type.
@@ -185,9 +201,10 @@ var filectrl = app.controller('UploadCtrl', function ($scope, $http, $timeout, $
             var $file = $files[i];
             (function (index) {
                 $scope.upload[index] = $upload.upload({
-                    url: "./api/files/upload", // webapi url
+                    url: "http://localhost:1476/api/files/upload", // webapi url
                     method: "POST",
-                    data: { fileUploadObj: $scope.fileUploadObj },
+                    contentType: 'application/json; charset=utf-8',
+                   // data: UploadDataModel,
                     file: $file
                 }).progress(function (evt) {
                     // get upload percentage
