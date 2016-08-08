@@ -1,6 +1,18 @@
 ﻿var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+    $scope.currpagefirst = 1;
+    //$scope.currpage = 0;
+    $scope.totalRecords = 100
+    $scope.totalpages = 10
+    $scope.myFunction = function () {
+        if ($scope.currpage >= 1)
+        {
+            $scope.currpage++;
+        }
+        else ($scope.currpage <= $scope.totalpages)
 
+        $scope.currpage--;
+    }
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -155,18 +167,118 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     };
 
-    $scope.GetBTPOSDetails1 = function () {
+    $scope.btpossize = [];
+    $scope.GetBTPOSDetails = function () {
+        //$scope.cmpdata = null;
+        //$scope.BTPOSdetails = null;
 
+        //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails1?cmpId=' + cmpId + '&fId=-1' + 'pageno=' + pageno + 'pagesize=' + pagesize).then(function (response, req) {
+        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails').then(function (response, req) {
             $scope.BTPOSdetails = response.data;
-
+          //  $scope.btpossize.push(BTPOSdetails);
             //  $localStorage.BTPOSOld = response.data;
             // $scope.setPage();
         })
 
 
     };
+
+    $scope.Paging = function ( cmpId,  fId,  pageno,  pagesize) {
+        //$scope.cmpdata = null;
+        //$scope.BTPOSdetails = null;
+
+        //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+
+        $http.get('http://localhost:1476/api/Btposcontroller1/Paging?').then(function (response, req) {
+            $scope.paging = response.data;
+            //  $scope.btpossize.push(BTPOSdetails);
+            //  $localStorage.BTPOSOld = response.data;
+            // $scope.setPage();
+        })
+
+
+    };
+    $scope.currpage = 1;
+  $scope.pagesize = 10;
+  $scope.totalRecords = 100;
+  $scope.totalpages = 10;
+
+
+
+     $scope.count = 0;
+
+     $scope.increase = function () {
+
+        count = count + 1;
+     }
+
+     $scope.count = 0;
+     $scope.decrease = function () {
+
+       count = count - 1;
+     }
+
+     $scope.pagearr = [{ "p1": "1", "p2": "2", "p3": "3", "p4": "4", "p5": "5" }];
+     $scope.nextPage = function () {
+         if ($scope.isLastPage()) {
+             return;
+         }
+
+         $scope.page++;
+     };
+
+     $scope.setPage = function (currpage) {
+         if (currpage > $scope.pageCount()) {
+             return;
+         }
+
+         $scope.currpage = currpage;
+     };
+     $scope.pageCount = function () {
+     $scope.result = Math.ceil(parseInt($scope.totalpages) / parseInt($scope.pagesize));
+     };
+
+     $scope.nextPage = function () {
+         if ($scope.isLastPage()) {
+             return;
+         }
+
+         $scope.currpage++;
+     };
+
+     $scope.perviousPage = function () {
+         if ($scope.isFirstPage()) {
+             return;
+         }
+
+         $scope.currpage--;
+     };
+
+     $scope.firstPage = function () {
+         $scope.currpage = 1;
+     };
+
+     //$scope.firstPage = function () {
+     //    $scope.currpage = 0;
+     //};
+
+     $scope.lastPage = function () {
+         $scope.currpage = $scope.pageCount() - 1;
+     };
+
+     $scope.isFirstPage = function () {
+         return $scope.currpage == 1;
+     };
+
+     $scope.isLastPage = function () {
+         return $scope.currpage == $scope.pageCount() - 1;
+     };
+    // $scope.length = $scope.pagearr.length;
+
+
 
     $scope.GetBTPOSListByFleetOwner = function () {
 
@@ -343,6 +455,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 }
             }
         });
+    }
+
+    $scope.next() = function (currpage) {
+        for(i=currpage ; i<= result ; i++)
+        {
+            currpage = i + 1;
+        }
+
     }
 
 });
