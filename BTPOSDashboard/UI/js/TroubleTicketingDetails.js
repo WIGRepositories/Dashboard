@@ -20,7 +20,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         {
             alert('Please enter ticketTypeId ');
             return;
-        }        
+        }
+        if (Group.RefId == null) {
+            alert('please enter RefId');
+            return;
+        }
         var Group = {
             RefId: Group.RefId,
             Type: Group.Type,
