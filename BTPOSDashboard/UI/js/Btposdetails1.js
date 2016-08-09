@@ -226,6 +226,67 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     };
 
+
+
+
+
+
+
+    $scope.GetBTPOSDetailslist = function (pageno) {
+        //$scope.cmpdata = null;
+        //$scope.BTPOSdetails = null;
+        
+        var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+        if ($scope.pageno == 1)
+            {
+        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid='+ cmpId + '&fId=-1' + '&pageno=1'  + '&pagesize=5' ).then(function (response, req) {
+            $scope.BTPOSdetailsl = response.data;
+            //  $scope.btpossize.push(BTPOSdetails);
+            //  $localStorage.BTPOSOld = response.data;
+            // $scope.setPage();
+        })
+        }
+        else if ($scope.pageno == 2)
+        {
+            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=2' + '&pagesize=5').then(function (response, req) {
+                $scope.BTPOSdetails2 = response.data;
+                //  $scope.btpossize.push(BTPOSdetails);
+                //  $localStorage.BTPOSOld = response.data;
+                // $scope.setPage();
+            })
+        }
+
+        else if ($scope.pageno == 3)
+        {
+            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=3' + '&pagesize=5').then(function (response, req) {
+                $scope.BTPOSdetails3 = response.data;
+                //  $scope.btpossize.push(BTPOSdetails);
+                //  $localStorage.BTPOSOld = response.data;
+                // $scope.setPage();
+            })
+        }
+        else if ($scope.pageno == 4)
+        {
+            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=4' + '&pagesize=5').then(function (response, req) {
+                $scope.BTPOSdetails4 = response.data;
+                //  $scope.btpossize.push(BTPOSdetails);
+                //  $localStorage.BTPOSOld = response.data;
+                // $scope.setPage();
+            })
+        }
+    else ($scope.pageno == 5)
+        {
+            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=5' + '&pagesize=5').then(function (response, req) {
+                $scope.BTPOSdetails5 = response.data;
+                //  $scope.btpossize.push(BTPOSdetails);
+                //  $localStorage.BTPOSOld = response.data;
+                // $scope.setPage();
+            })
+        }
+    };
+
+
   //  $scope.Paging = function ( cmpId,  fId,  pageno,  pagesize) {
   //      //$scope.cmpdata = null;
   //      //$scope.BTPOSdetails = null;
