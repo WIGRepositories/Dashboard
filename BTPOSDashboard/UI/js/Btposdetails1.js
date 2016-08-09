@@ -2,7 +2,7 @@
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.currpagefirst = 1;
     //$scope.currpage = 0;
-    $scope.totalRecords = 100
+    $scope.totalRecords = 17
     $scope.totalpages = 10
     $scope.myFunction = function () {
         if ($scope.currpage >= 1)
@@ -21,6 +21,47 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.userCmpId = $scope.userdetails[0].CompanyId;
     $scope.userSId = $scope.userdetails[0].UserId;
     $scope.Roleid = $scope.userdetails[0].roleid;
+
+    $scope.decPageNo = function () {
+        if ($scope.currpagefirst <= 1)
+            return;
+        else
+        {
+
+            $scope.currpagefirst = $scope.currpagefirst - 1;
+        }
+
+        var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+
+        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+            $scope.BTPOS1 = response.data;
+            //  $scope.btpossize.push(BTPOSdetails);
+            //  $localStorage.BTPOSOld = response.data;
+            // $scope.setPage();
+        })
+
+    }
+
+    $scope.IncPageNo = function () {
+        if ($scope.currpagefirst >= 1 && $scope.currpagefirst < $scope.totalRecords) {
+            $scope.currpagefirst = $scope.currpagefirst + 1;
+
+        }
+        var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+
+        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+            $scope.BTPOS1 = response.data;
+            //  $scope.btpossize.push(BTPOSdetails);
+            //  $localStorage.BTPOSOld = response.data;
+            // $scope.setPage();
+        })
+
+    }
+    $scope.pageCount = function () {
+           $scope.result = Math.ceil(parseInt($scope.totalpages) / parseInt($scope.pagesize));
+           };
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
@@ -176,7 +217,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
         $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails').then(function (response, req) {
-            $scope.BTPOSdetails = response.data;
+            $scope.BTPOSdetails1 = response.data;
           //  $scope.btpossize.push(BTPOSdetails);
             //  $localStorage.BTPOSOld = response.data;
             // $scope.setPage();
@@ -185,98 +226,98 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     };
 
-    $scope.Paging = function ( cmpId,  fId,  pageno,  pagesize) {
-        //$scope.cmpdata = null;
-        //$scope.BTPOSdetails = null;
+  //  $scope.Paging = function ( cmpId,  fId,  pageno,  pagesize) {
+  //      //$scope.cmpdata = null;
+  //      //$scope.BTPOSdetails = null;
 
-        //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
-        //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
+  //      //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+  //      //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-        $http.get('http://localhost:1476/api/Btposcontroller1/Paging?').then(function (response, req) {
-            $scope.paging = response.data;
-            //  $scope.btpossize.push(BTPOSdetails);
-            //  $localStorage.BTPOSOld = response.data;
-            // $scope.setPage();
-        })
-
-
-    };
-    $scope.currpage = 1;
-  $scope.pagesize = 10;
-  $scope.totalRecords = 100;
-  $scope.totalpages = 10;
+  //      $http.get('http://localhost:1476/api/Btposcontroller1/Paging?').then(function (response, req) {
+  //          $scope.paging = response.data;
+  //          //  $scope.btpossize.push(BTPOSdetails);
+  //          //  $localStorage.BTPOSOld = response.data;
+  //          // $scope.setPage();
+  //      })
 
 
+  //  };
+  //  $scope.currpage = 1;
+  //$scope.pagesize = 10;
+  //$scope.totalRecords = 100;
+  //$scope.totalpages = 10;
 
-     $scope.count = 0;
 
-     $scope.increase = function () {
 
-        count = count + 1;
-     }
+  //   $scope.count = 0;
 
-     $scope.count = 0;
-     $scope.decrease = function () {
+  //   $scope.increase = function () {
 
-       count = count - 1;
-     }
+  //      count = count + 1;
+  //   }
 
-     $scope.pagearr = [{ "p1": "1", "p2": "2", "p3": "3", "p4": "4", "p5": "5" }];
-     $scope.nextPage = function () {
-         if ($scope.isLastPage()) {
-             return;
-         }
+  //   $scope.count = 0;
+  //   $scope.decrease = function () {
 
-         $scope.page++;
-     };
+  //     count = count - 1;
+  //   }
 
-     $scope.setPage = function (currpage) {
-         if (currpage > $scope.pageCount()) {
-             return;
-         }
+  //   $scope.pagearr = [{ "p1": "1", "p2": "2", "p3": "3", "p4": "4", "p5": "5" }];
+  //   $scope.nextPage = function () {
+  //       if ($scope.isLastPage()) {
+  //           return;
+  //       }
 
-         $scope.currpage = currpage;
-     };
-     $scope.pageCount = function () {
-     $scope.result = Math.ceil(parseInt($scope.totalpages) / parseInt($scope.pagesize));
-     };
+  //       $scope.page++;
+  //   };
 
-     $scope.nextPage = function () {
-         if ($scope.isLastPage()) {
-             return;
-         }
+  //   $scope.setPage = function (currpage) {
+  //       if (currpage > $scope.pageCount()) {
+  //           return;
+  //       }
 
-         $scope.currpage++;
-     };
+  //       $scope.currpage = currpage;
+  //   };
+  //   $scope.pageCount = function () {
+  //   $scope.result = Math.ceil(parseInt($scope.totalpages) / parseInt($scope.pagesize));
+  //   };
 
-     $scope.perviousPage = function () {
+  //   $scope.nextPage = function () {
+  //       if ($scope.isLastPage()) {
+  //           return;
+  //       }
+
+  //       $scope.currpage++;
+  //   };
+
+    $scope.perviousPage = function (pageno) {
          if ($scope.isFirstPage()) {
              return;
          }
 
-         $scope.currpage--;
+           $scope.currpagefirst= $scope.currpagefirst-1;
      };
 
-     $scope.firstPage = function () {
-         $scope.currpage = 1;
-     };
+  //   $scope.firstPage = function () {
+  //       $scope.currpage = 1;
+  //   };
 
-     //$scope.firstPage = function () {
-     //    $scope.currpage = 0;
-     //};
+  //   //$scope.firstPage = function () {
+  //   //    $scope.currpage = 0;
+  //   //};
 
-     $scope.lastPage = function () {
-         $scope.currpage = $scope.pageCount() - 1;
-     };
+  //   $scope.lastPage = function () {
+  //       $scope.currpage = $scope.pageCount() - 1;
+  //   };
 
-     $scope.isFirstPage = function () {
-         return $scope.currpage == 1;
-     };
+  //   $scope.isFirstPage = function () {
+  //       return $scope.currpage == 1;
+  //   };
 
-     $scope.isLastPage = function () {
-         return $scope.currpage == $scope.pageCount() - 1;
-     };
-    // $scope.length = $scope.pagearr.length;
+  //   $scope.isLastPage = function () {
+  //       return $scope.currpage == $scope.pageCount() - 1;
+  //   };
+  //  // $scope.length = $scope.pagearr.length;
 
 
 
