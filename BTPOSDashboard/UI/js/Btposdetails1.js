@@ -2,8 +2,8 @@
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.currpagefirst = 1;
     //$scope.currpage = 0;
-    $scope.totalRecords = 17
-    $scope.totalpages = 10
+    $scope.totalRecords = 17;
+    $scope.totalpages = 10;
     $scope.myFunction = function () {
         if ($scope.currpage >= 1)
         {
@@ -13,7 +13,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $scope.currpage--;
     }
-    if ($localStorage.uname == null) {
+    if ($localStorage.uname == null) {            
         window.location.href = "login.html";
     }
     $scope.uname = $localStorage.uname;
@@ -36,15 +36,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
+            $scope.totalRecords = $scope.BTPOS1.Row_count;
             //  $scope.btpossize.push(BTPOSdetails);
             //  $localStorage.BTPOSOld = response.data;
             // $scope.setPage();
         })
 
     }
-
+    $scope.totalRecordscnt = $scope.totalRecords;
     $scope.IncPageNo = function () {
-        if ($scope.currpagefirst >= 1 && $scope.currpagefirst < $scope.totalRecords) {
+        if ($scope.currpagefirst < $scope.totalRecordscnt) {
             $scope.currpagefirst = $scope.currpagefirst + 1;
 
         }
@@ -53,6 +54,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
+           
             //  $scope.btpossize.push(BTPOSdetails);
             //  $localStorage.BTPOSOld = response.data;
             // $scope.setPage();
