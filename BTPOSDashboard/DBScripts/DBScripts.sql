@@ -12024,6 +12024,7 @@ DECLARE @COUNT int
 set @COUNT = 0
 	if @COUNT = 0
 	begin
+	 if not exists (select * from WebsiteUserInfo where UserName = @UserName)
 INSERT INTO [POSDashboard].[dbo].[WebsiteUserInfo]
            ([FirstName]
            ,[LastName]
@@ -12066,3 +12067,59 @@ else
 
 END
 
+GO
+
+/****** Object:  Table [dbo].[Schedules]    Script Date: 08/10/2016 18:42:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Schedules](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SNo] [int] NOT NULL,
+	[ServiceNo] [nvarchar](50) NOT NULL,
+	[From] [char](50) NOT NULL,
+	[To] [char](50) NOT NULL,
+	[CoachType] [nvarchar](50) NOT NULL,
+	[DepartureTime] [datetime] NOT NULL,
+	[ApproxJourneytime] [datetime] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetSchedules]    Script Date: 08/10/2016 18:36:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetSchedules]
+
+as begin 
+SELECT  [Id]
+      ,[SNo]
+      ,[ServiceNo]
+      ,[From]
+      ,[To]
+      ,[CoachType]
+      ,[DepartureTime]
+      ,[ApproxJourneytime]
+  FROM [POSDashboard].[dbo].[Schedules]
+
+
+
+
+
+         
+end
