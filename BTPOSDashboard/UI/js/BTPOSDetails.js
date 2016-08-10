@@ -176,13 +176,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        if (pos.IMEI == null) {
+        if (pos.IMEI == null || pos.IMEI == null) {
             alert('Please enter IMEI.');
             return;
         }
 
         if (pos.CompanyId == null) {
-            alert('Please enter CompanyId')
+            alert('Please enter CompanyId');
             return;
         }
         var found = false;
@@ -235,6 +235,18 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
 
     $scope.save = function (Group, flag) {
+        if(Group == null){
+            alert("please enter IMEI");
+
+        }
+        if (Group.IMEI == null) {
+            alert("please enter IMEI");
+        }
+        if (Group.ipconfig == null)
+        {
+            alert("please enter ipconfig");
+        }
+
 
         var newpos = {
             Id: (flag == 'I') ? '-1' : Group.Id,

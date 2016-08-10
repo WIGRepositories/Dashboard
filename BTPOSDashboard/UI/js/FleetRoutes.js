@@ -174,14 +174,6 @@ $scope.GetFleetRoutes = function () {
 
 $scope.save = function (currFR) {
     var FleetRoute = currFR.newfleet;
-    if (currFR == null) {
-        alert('please select company')
-    }
-    if (currFR.Company == null || Company == "") {
-        alert('Please select Company');
-        return;
-    }
-
     if (FleetRoute == null || FleetRoute.v == null) {
         alert('Please select a type VehicleId');
         return;
@@ -194,7 +186,6 @@ $scope.save = function (currFR) {
         alert('Please select a type  RouteId ');
         return;
     }
-
     var FleetRoutes = {
         Id: -1,
         VehicleId: FleetRoute.v.Id,
@@ -225,7 +216,7 @@ $scope.save = function (currFR) {
 
 $scope.saveNewFleetRoutes = function (initdata) {
 
-    var newFR = initdata.newfleet;
+    var newFR = initdata.newfleet;    
 
     if (newFR == null || newFR.v == null) {
         alert('Please select VehicleRegNo.');

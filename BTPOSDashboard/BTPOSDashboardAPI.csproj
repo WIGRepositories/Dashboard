@@ -474,6 +474,9 @@
     <Content Include="UI\js\EmailGatewayConfiguration.js" />
     <Content Include="UI\js\fileupload\angular-file-upload-shim.js" />
     <Content Include="UI\js\fileupload\angular-file-upload.js" />
+    <Content Include="UI\js\fileupload\FileAPI.js" />
+    <Content Include="UI\js\fileupload\ng-file-upload-shim.js" />
+    <Content Include="UI\js\fileupload\ng-file-upload.js" />
     <Content Include="UI\js\FleetAvailability.js" />
     <Content Include="UI\js\FleetBtpos.js" />
     <Content Include="UI\js\FleetDetail.js" />
