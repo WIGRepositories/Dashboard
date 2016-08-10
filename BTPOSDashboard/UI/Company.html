@@ -419,7 +419,7 @@
 
                                                                         <div class="col-md-6">
                                                                             <label for="Fax" class="col-md-3 control-label" style="float:left">E-mail Id:<span class='require'></span></label>
-                                                                            <div class="col-md-9"><input id="EmailId" type="text" ng-model="Group.EmailId" class="form-control" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" /><span class="help-block"></span></div>
+                                                                            <div class="col-md-9"><input id="EmailId" type="email" ng-model="Group.EmailId" class="form-control" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" /><span class="help-block"></span></div>
 
                                                                         </div>
                                                                         <div class="col-md-6">
@@ -571,12 +571,12 @@
                                                                         <div class="row">
                                                                            
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Fax" class="col-md-3 control-label">EmailId:<span class='require'></span></label>
-                                                                                    <div class="col-md-9"><input id="EmailId" type="text" ng-model="currGroup.EmailId" class="form-control" /><span class="help-block"></span></div>
+                                                                                    <label for="E-mail Id" class="col-md-3 control-label">E-mail Id:<span class='require'></span></label>
+                                                                                    <div class="col-md-9"><input id="Email Id" type="text" ng-model="currGroup.EmailId" class="form-control" /><span class="help-block"></span></div>
 
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <label for="Fax" class="col-md-3 control-label">Title:<span class='require'></span></label>
+                                                                                    <label for="Title" class="col-md-3 control-label">Title:<span class='require'></span></label>
                                                                                     <div class="col-md-9"><input id="Title" type="text" ng-model="currGroup.Title" class="form-control" /><span class="help-block"></span></div>
                                                                                 </div>
 
@@ -655,7 +655,7 @@
 
                                                                                 </div>
                                                                             <div class="col-md-6">
-                                                                                <label for="Fax" class="col-md-3 control-label">Caption: <span class='require'></span></label>
+                                                                                <label for="Caption" class="col-md-3 control-label">Caption: <span class='require'></span></label>
                                                                                 <div class="col-md-9"><input id="Caption" type="text" ng-model="currGroup.Caption" class="form-control" /><span class="help-block"></span></div>
                                                                             </div>                                                                              
 
@@ -748,6 +748,7 @@
                 </div>
             </div>
         </div>
+       
 
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
            
@@ -791,6 +792,7 @@
 <script src="js/angular.js"></script>
 <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
 <script src="js/ngStorage.js"></script>
+ <script src="js/email-validation.js"></script>
     <script src="js/fileupload/angular-file-upload.js"></script>
     <script src="js/fileupload/angular-file-upload-shim.js"></script>
 <script src="js/CompanyGroups.js"></script>
