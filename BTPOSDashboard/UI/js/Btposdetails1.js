@@ -2,8 +2,9 @@
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.currpagefirst = 1;
     //$scope.currpage = 0;
-    $scope.totalRecords = 17;
+    $scope.totalRecords = 58;
     $scope.totalpages = 10;
+    $scope.pagesize = 5;
     $scope.myFunction = function () {
         if ($scope.currpage >= 1)
         {
