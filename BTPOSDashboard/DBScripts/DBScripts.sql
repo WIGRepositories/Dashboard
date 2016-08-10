@@ -6604,7 +6604,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelLicenseDetails](
+Create procedure [dbo].[InsUpdDelLicenseDetails](
 @Id int = -1,
 @LicenseTypeId int,
 @FeatureTypeId int,
@@ -8181,7 +8181,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
+Create PROCEDURE [dbo].[InsUpdDelFleetOwnerVehicleLayout](	
 	@VehicleLayoutTypeId int,
 	@RowNo int,
 	@ColNo varchar(50),
@@ -8444,7 +8444,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[InsUpdDelFleetOwnerRouteStops]
+Create PROCEDURE [dbo].[InsUpdDelFleetOwnerRouteStops]
 	-- Add the parameters for the stored procedure here
 	@FleetOwnerId int,
 	@RouteId int,
@@ -10016,7 +10016,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER procedure [dbo].[InsUpdDelFORouteFare](           
+Create procedure [dbo].[InsUpdDelFORouteFare](           
             @VehicleId int         
            ,@RouteId int
            ,@Amount decimal
