@@ -1,7 +1,7 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -52,6 +52,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
           if (Item.ItemName == null) {
               alert('Please enter ItemName.');
               return;
+          }
+          if (Item.Code == null) {
+              alert('please enter Code')
           }
 
           var Item = {

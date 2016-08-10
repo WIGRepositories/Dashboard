@@ -36,7 +36,7 @@ namespace BTPOSDashboard.Controllers
 
             // Remove this line as well as GetFormData method if you're not
             // sending any form data with your upload request
-            var fileUploadObj = GetFormData<UploadDataModel>(result);
+         //   var fileUploadObj = GetFormData<UploadDataModel>(result);
 
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute

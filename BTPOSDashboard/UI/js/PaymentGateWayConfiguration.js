@@ -19,7 +19,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         });
     }   
-     $scope.save = function (Group,flag) {
+    $scope.save = function (Group, flag) {
+        if (Group == null) {
+            alert('please select PaymentGateway')
+        }
+        if (Group.TypeGroupId == null) {
+            alert('please select PaymentGateway')
+        }
+        if (Group.providername == null) {
+            alert('please select providername')
+        }
         
         var newCmp = {          
             providername: Group.providername,

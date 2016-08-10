@@ -216,7 +216,7 @@ $scope.save = function (currFR) {
 
 $scope.saveNewFleetRoutes = function (initdata) {
 
-    var newFR = initdata.newfleet;
+    var newFR = initdata.newfleet;    
 
     if (newFR == null || newFR.v == null) {
         alert('Please select VehicleRegNo.');

@@ -43,10 +43,10 @@ namespace BTPOSDashboard.Controllers
         }
         [HttpGet]
 
-        public DataTable Paging(int cmpId, int fId, int pageno, int pagesize)
+        public DataSet Paging(int cmpId, int fId, int pageno, int pagesize)
         {
 
-            DataTable Tbl = new DataTable();
+            DataSet Tbl = new DataSet();
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -66,7 +66,7 @@ namespace BTPOSDashboard.Controllers
             fo.Value = fId;
             cmd.Parameters.Add(fo);
 
-            SqlParameter pNo = new SqlParameter("@pageno", SqlDbType.Int);
+            SqlParameter pNo = new SqlParameter("@pagenum", SqlDbType.Int);
             pNo.Value = pageno;
             cmd.Parameters.Add(pNo);
 
