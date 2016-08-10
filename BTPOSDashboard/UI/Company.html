@@ -720,15 +720,15 @@
                                                     </tbody>
                                                 </table>
 
-                                        <div ng-controller="UploadCtrl">
-                                            <input type="file" ng-file-select="onFileSelect($files)" multiple>
-
+                                        <div>
+                                            <!--<input type="file" ng-file-select="onFileSelect1($files)">
+                                            <img src="{{files[0]}}" class="thumb">
                                             Profile Picture: <input type="file" ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required="">
                                             <i ng-show="myForm.file.$error.required">*required</i>
                                             <br>
 
-                                            <button ng-click="upload(file)">Submit</button>
-                                            <img ngf-src="picFile" class="thumb">
+                                            <button ng-click="onFileSelect()">Submit</button>
+                                            <img ngf-src="picFile" class="thumb">-->
 
                                         </div>
                                             </div>
@@ -793,6 +793,10 @@
 <script src="js/ngStorage.js"></script>
     <script src="js/fileupload/angular-file-upload.js"></script>
     <script src="js/fileupload/angular-file-upload-shim.js"></script>
+    <!--<script src="js/fileupload/FileAPI.js"></script>
+    <script src="js/fileupload/ng-file-upload.js"></script>
+    <script src="js/fileupload/ng-file-upload-shim.js"></script>-->
+   
 <script src="js/CompanyGroups.js"></script>
 </body>
 </html>
