@@ -13,7 +13,7 @@ using System.Web.Http;
 namespace POSDBAccess.Controllers
 {
     public class CompanyGroupsController : ApiController
-    {               
+    {
 
         [HttpGet]
         [Route("api/GetCompanyGroups")]
@@ -92,7 +92,7 @@ namespace POSDBAccess.Controllers
             try
             {
                 //connect to database
-                
+
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -107,7 +107,7 @@ namespace POSDBAccess.Controllers
                 gsa.ParameterName = "@active";
                 gsa.SqlDbType = SqlDbType.Int;
                 gsa.Value = n.active;
-                cmd.Parameters.Add(gsa);            
+                cmd.Parameters.Add(gsa);
 
                 SqlParameter gsn = new SqlParameter();
                 gsn.ParameterName = "@code";
@@ -121,7 +121,7 @@ namespace POSDBAccess.Controllers
                 gsab.Value = n.desc;
                 cmd.Parameters.Add(gsab);
 
-                SqlParameter gsac = new SqlParameter("@Id",SqlDbType.Int);
+                SqlParameter gsac = new SqlParameter("@Id", SqlDbType.Int);
                 gsac.Value = n.Id;
                 cmd.Parameters.Add(gsac);
 
@@ -192,25 +192,25 @@ namespace POSDBAccess.Controllers
                 gst.Value = n.State;
                 cmd.Parameters.Add(gst);
 
-                SqlParameter log = new SqlParameter();               
+                SqlParameter log = new SqlParameter();
                 log.ParameterName = "@Logo";
                 log.SqlDbType = SqlDbType.VarChar;
                 ImageConverter imgCon = new ImageConverter();
                 log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
-                cmd.Parameters.Add(log);  
+                cmd.Parameters.Add(log);
 
-                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,1);
+                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 1);
                 insupdflag.Value = n.insupdflag;
                 cmd.Parameters.Add(insupdflag);
 
                 cmd.ExecuteScalar();
                 conn.Close();
-               
+
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
-                if(conn !=null && conn.State == ConnectionState.Open)
+                if (conn != null && conn.State == ConnectionState.Open)
                 {
                     conn.Close();
                 }
@@ -218,7 +218,7 @@ namespace POSDBAccess.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
             // int found = 0;
-          //  return Tbl;
+            //  return Tbl;
         }
 
         [HttpPost]
@@ -230,7 +230,7 @@ namespace POSDBAccess.Controllers
             {
 
                 //connect to database
-               
+
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -269,7 +269,7 @@ namespace POSDBAccess.Controllers
                 gsac.Value = r.Id;
                 gsac.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(gsac);
-                
+
                 cmd.ExecuteScalar();
                 conn.Close();
 
@@ -288,7 +288,7 @@ namespace POSDBAccess.Controllers
 
         [HttpPost]
         [Route("api/SaveCmpRoles")]
-        public HttpResponseMessage SaveCmpRoles(IEnumerable<CompanyRoles> cRoles) 
+        public HttpResponseMessage SaveCmpRoles(IEnumerable<CompanyRoles> cRoles)
         {
             SqlConnection conn = new SqlConnection();
             try
@@ -337,8 +337,8 @@ namespace POSDBAccess.Controllers
                     gsac.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(gsac);
 
-                cmd.ExecuteScalar();
-                cmd.Parameters.Clear();
+                    cmd.ExecuteScalar();
+                    cmd.Parameters.Clear();
                 }
                 conn.Close();
 
@@ -357,6 +357,6 @@ namespace POSDBAccess.Controllers
         public void Options()
         {
         }
-       
+
     }
 }

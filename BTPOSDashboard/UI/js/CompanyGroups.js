@@ -30,10 +30,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             alert('Please enter code.');
             return;
         }
-        if (!angular.element('EmailId').$valid)
-        {
-            alert('invalid email id');
-        }
+        //if (!angular.element('EmailId').$valid)
+        //{
+        //    alert('invalid email id');
+        //}
         var newCmp = {
 
             Id: Group.Id,
@@ -67,7 +67,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog("Saved successfully!!");
             
             $scope.Group = null;
-            $scope.GetCompanys();
+            //$scope.GetCompanys();
 
         }, function (errres) {
             var errdata = errres.data;
@@ -110,7 +110,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Country:Group.Country,
             ZipCode:Group.ZipCode,
             State: Group.State,
-            Logo:Group.Logo,
+            //Logo:Group.Logo,
             active: (Group.active == true) ? 1 : 0,
             insupdflag: flag
 
@@ -134,7 +134,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog(errmssg);
            
         });
-        $scope.GetCompanys(cmp);
+        $scope.GetCompanys();
         $scope.currGroup = null;
     };
       
