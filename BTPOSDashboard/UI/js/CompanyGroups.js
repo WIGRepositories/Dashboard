@@ -167,6 +167,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $event.preventDefault();
         }
     };
+   
 
     //$scope.uploadFile = function () {
     //    var file = $scope.Logo;

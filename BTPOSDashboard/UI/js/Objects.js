@@ -18,22 +18,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     });
     $scope.save = function (NewObject,flag) {
         
-        //if (NewObject == null)
-        //{
-        //    alert('please enter Name');
-        //    return;
-        //}
-        //if (NewObject.Name == null)
-        //{
-        //    alert('Please Enter Nmae');
-        //    return;
-        //}
+        if (NewObject == null)
+        {
+            alert('please enter Name');
+            return;
+        }
+        if (NewObject.Name == null)
+        {
+            alert('Please Enter Nmae');
+            return;
+        }
        
-        //if (NewObject.Path == null)
-        //{
-        //    alert('Please Enter Path');
-        //    return;
-        //}
+        if (NewObject.Path == null)
+        {
+            alert('Please Enter Path');
+            return;
+        }
    
         var SelNewObjects = {
             Id:1,

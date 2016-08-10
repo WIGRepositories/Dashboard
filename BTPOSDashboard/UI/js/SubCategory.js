@@ -35,6 +35,10 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     $scope.save = function (SubCategory) {
 
+        if (SubCategory.CATEGORY == null) {
+            alert('Please enter Category.');
+            return;
+        }
         if (SubCategory == null) {
             alert('Please enter values.');
             return;
@@ -44,10 +48,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             alert('Please enter name.');
             return;
         }
-        if (SubCategory.CATEGORY == null) {
-            alert('Please enter Category.');
-            return;
-        }
+        
 
 
         var currSubCategory = {

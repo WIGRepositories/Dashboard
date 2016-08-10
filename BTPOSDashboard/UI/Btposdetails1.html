@@ -574,37 +574,46 @@
 
                                             <div class="row mbm">
                                                 <div class="col-lg-6">
-                                                    <div class="pagination-panel" ng-init="GetBTPOSDetails();" ng-model="BTPOSdetails">
+                                                    <div class="pagination-panel" ng-init="GetBTPOSDetails();" >
                                                         Page
-                                                        &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="currpagefirst = currpagefirst - 1"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="currpagefirst = currpagefirst + 1"><i class="fa fa-angle-right"></i></button></a>&nbsp;
+                                                        &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
                                                         of 6 | View
-                                                        &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                                  <option value="10" selected="selected">10</option>
+                                                        &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize">
+                                                            <option value="">select</option>
+                                                            <option value="5" selected="selected">5</option>
+                                                            <option value="10">10</option>
                                                             <option value="20">20</option>
                                                             <option value="50">50</option>
                                                             <option value="100">100</option>
                                                             <option value="150">150</option>
                                                             <option value="-1">All</option>
                                                         </select>&nbsp;
-                                                        <div ng-repeat="b in BTPOSdetails">
-                                                            records | Found total {{b.Row_count}} records
+                                                        <div ng-model="BTPOSdetails1">
+                                                            <div ng-repeat="b in BTPOSdetails1">
+                                                                records | Found total {{b.Row_count}} records
+
+                                                         </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 text-right">
-                                                    <div class="pagination-panel">
-                                                        <ul class="pagination pagination-sm man">
-                                                            <li><a href="#" ng-click="perviousPage();">&laquo;</a></li>
-                                                            <li><a href="#" ng-click="Paging(cId,  foId,  pno,  psize)">1</a></li>
-                                                            <li><a href="#" ng-click="paging(cid, foid, pno, psize)">2</a></li>
-                                                            <li><a href="#" ng-click="paging(cid, foid, pno, psize)">3</a></li>
-                                                            <li><a href="#" ng-click="paging(cid, foid, pno, psize)">4</a></li>
-                                                            <li><a href="#" ng-click="paging(cid, foid, pno, psize)">5</a></li>
-                                                            <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
-                                                        </ul>
+                                                    <div class="pagination-panel"ng-model="BTPOSdetails1">
+                                                       
+                                                            <ul class="pagination pagination-sm man">
+                                                                <li><a href="#" ng-click="perviousPage(pno);">&laquo;</a></li>
+                                                                <li><a href="#" ng-click="GetBTPOSDetailslist(pno)">1</a></li>
+                                                                <li><a href="#" ng-click="GetBTPOSDetailslist(pno)">2</a></li>
+                                                                <li><a href="#" ng-click="GetBTPOSDetailslist(pno)">3</a></li>
+                                                                <li><a href="#" ng-click="GetBTPOSDetailslist(pno)">4</a></li>
+                                                                <li><a href="#" ng-click="GetBTPOSDetailslist(pno)">5</a></li>
+                                                                <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
+                                                            </ul>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--cid, foid, pno, psize-->
+                                           
                                             <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                 <thead>
                                                     <tr>
@@ -620,7 +629,7 @@
                                                 </thead>
                                                 <tbody>
 
-                                                    <tr ng-repeat="pos in BTPOS1" class="gradeA">
+                                                    <tr ng-repeat="pos in BTPOS1.Table1" class="gradeA">
                                                         <td>{{pos.POSID}}</td>
                                                         <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);" /></td>
 
@@ -659,57 +668,45 @@
 
                                     </div>
 
-                                    <div class="modal-footer">
-                                        <div class="row mbm">
-                                            <div class="col-lg-6">
-                                                <div class="pagination-panel" ng-init="GetBTPOSDetails();" ng-model="BTPOSdetails">
-                                                    Page
-                                                    &nbsp;
-                                                    <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="currpagefirst = currpagefirst - 1"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="currpagefirst = currpagefirst + 1"><i class="fa fa-angle-right"></i></button></a>&nbsp;
-                                                    of 6 | View
-                                                    &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                              <option value="10" selected="selected">10</option>
-                                                        <option value="20" >20</option>
-                                                        <option value="50">50</option>
-                                                        <option value="100">100</option>
-                                                        <option value="150">150</option>
-                                                        <option value="-1">All</option>
-                                                    </select>&nbsp;
-                                                    <div ng-repeat="b in BTPOSdetails">
+                                    <div class="row mbm">
+                                        <div class="col-lg-6">
+                                            <div class="pagination-panel" ng-init="GetBTPOSDetails();" >
+                                                Page
+                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
+                                                of 6 | View
+                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline" >
+                                                   <option value="">select</option>
+                                                    <option value="5" selected="selected">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                    <option value="150">150</option>
+                                                    <option value="-1">All</option>
+                                                </select>&nbsp;
+                                                <div ng-model="BTPOSdetails1">
+                                                    <div ng-repeat="b in BTPOSdetails1">
+
+
                                                         records | Found total {{b.Row_count}} records
+
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 text-right">
-                                                <div class="pagination-panel">
-                                                    <ul class="pagination pagination-sm man">
-                                                        <li><a href="#" ng-click="perviousPage();">&laquo;</a></li>
-                                                        <li><a href="#" ng-click="firstPage();" >1</a></li><!--ng-click="Paging(cId,  foId,  pno,  psize)"-->
-                                                        <li><a href="#" ng-click="paging(cid, foid, pno, psize)">2</a></li>
-                                                        <li><a href="#" ng-click="paging(cid, foid, pno, psize)">3</a></li>
-                                                        <li><a href="#" ng-click="paging(cid, foid, pno, psize)">4</a></li>
-                                                        <li><a href="#" ng-click="lastPage()">5</a></li>
-                                                        <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
-                                                    </ul>
-                                                </div>
+                                        </div>
+                                        <div class="col-lg-6 text-right">
+                                            <div class="pagination-panel">
+                                                <ul class="pagination pagination-sm man">
+                                                    <li><a href="#" ng-click="perviousPage();">&laquo;</a></li>
+                                                    <li><a href="#" ng-click="Paging(cId,  foId,  pno, psize)">1</a></li>
+                                                    <li><a href="#" ng-click="paging(cid, foid, pno, psize)">2</a></li>
+                                                    <li><a href="#" ng-click="paging(cid, foid, pno, psize)">3</a></li>
+                                                    <li><a href="#" ng-click="paging(cid, foid, pno, psize)">4</a></li>
+                                                    <li><a href="#" ng-click="paging(cid, foid, pno, psize)">5</a></li>
+                                                    <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
+                                                </ul>
                                             </div>
                                         </div>
-
-                                        <!--<div ng-app="myApp" ng-controller="myCtrl">
-
-                                            <button ng-click="increase()">Click mee!</button>
-
-                                            <p>{{ count }}</p>
-
-                                        </div>-->
-
-                                        <div>
-                                            <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
-
-                                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-                                        </div>
-
-
                                     </div>
 
                                 </div>
