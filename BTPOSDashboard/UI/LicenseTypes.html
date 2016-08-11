@@ -367,13 +367,26 @@
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
+                                                        <div class="col-md-5">
+                                                            License Type: <select ng-options="s.Name for s in LicenseCat track by s.Id" >
+                                                                <option value="">Select</option>
+                                                                <option value="">Type1</option>
+                                                                <option value="">Type2</option>
+                                                                <option value="">Type3</option>
+                                                            </select>
+                                                        </div>
 
-                                                        <div class="actions">
+                                                        <!--<div class="actions">
                                                             <a href="#"><button type="button" data-target="#Modal-header-primary-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add License Type</button></a>
 
+                                                        </div>-->
+                                                        <div class="actions">
+                                                            <a href="#"><button type="button" data-target="#Modal-header-primary-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">My Button</button></a>
+
                                                         </div>
+
                                                         <div id="Modal-header-primary-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                            <div class="modal-dialog">
+                                                            <div class="modal-dialog modal-lg">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header modal-header-primary">
                                                                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
@@ -429,25 +442,168 @@
 
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="Active" class="control-label">Active:<span class='require'></span></label>
+                                                                                    <label for="TypeGroup" class="control-label" style="color:red;">License Frequency:<!--<span class='require'>*</span>--></label>
+                                                                                    <!--<label for="inputFirstName" class="control-label">License Frequency:</label>-->
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <input type="checkbox" class="form-control" id="cactive" ng-checked="currGroup.Active" />
+
+                                                                                        <select ng-options="ft.Name for ft in FreqTypes track by ft.Id" ng-model="currSelLicense.ftype">
+                                                                                            <option value="">Select</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label" style="color:red;">Renewal Frequency:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right">
+                                                                                        <select ng-model="currSelLicense.freq">
+                                                                                            <option value="">Select</option>
+                                                                                            <option ng-repeat="i in range" value="{{i}}">{{i}}</option>
+                                                                                        </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="row">
 
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Unit Price:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currSelLicense.UnitPrice" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
 
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-green" ng-click="saveLicenseType(currGroup, 'I');">Save</button>
-                                                                            <button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">From Date:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div>
+                                                                                        <input type="date" class="form-control" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">To Date:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                          <div class="form-group">
+                                                                          <div>
+                                                                        <input type="date" class="form-control" />
+                                                                        </div>
+                                                                           </div>
+                                                                         </div>
+                                                                        </div>
+
+                                                                
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Feature Name:<span class='require'>*</span></label>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-md-5" width="100%">
+                                                                        <select ng-options="f.Name for f in Types track by f.Id" ng-model="f">
+                                                                            <option value="">Select</option>
+                                                                        </select>
+                                                                    </div>
+                                                              <br />
+
+
+                                                                <!--<div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Feature Value:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5" >
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right">
+                                                                                <input type="text" class="form-control" id="ip" ng-model="newFeature.FeatureValue" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
+                                                                        <br />
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="align-content:right">
+                                                                                    <label for="inputFirstName" class="control-label">Feature Value:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="newFeature.FeatureValue" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                <div class="row">
+
+                                                                    <div class="col-md-3">
+                                                                        <div class="form-group has-success" style="text-align:right">
+                                                                            <label for="inputFirstName" class="control-label">Feature Label:</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group">
+                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="newFeature.FeatureLabel" /></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="Active" class="control-label">Active:<span class='require'></span></label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <div class="input-icon right">
+                                                                                    <input type="checkbox" class="form-control" id="cactive" ng-checked="currGroup.Active" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-green" ng-click="saveLicenseType(currGroup, 'I');">Save</button>
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
+                                                                </div>
+                                                            </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -538,7 +694,7 @@
 
 
 
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                    <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
                                                             <tr>
 
@@ -563,7 +719,42 @@
                                                             </tr>
                                                         </tbody>
 
+                                                    </table>-->
+
+                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Btpos</th>
+                                                                <th>Tickets</th>
+                                                                <th>Active</th>
+                                                                <th>Update</th>
+                                                                <th>Delete</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            <tr ng-repeat="T in LicenseTypes">
+                                                                <td>{{T.Btpos}}</td>
+                                                                <td>{{T.Tickets}}</td>
+                                                                <td><input type="checkBox" ng-checked="T.Active" disabled /></td>
+                                                                <td>
+                                                                    <button type="button" data-target="#Modal-header-primary-edit" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrLicenseType(T);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Edit
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" data-target="#Modal-header-primary-Delete" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrLicenseType(T);">
+                                                                        <i class="fa fa-Delete"></i>&nbsp;
+                                                                        Delete
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+
                                                     </table>
+
 
                                                 </div>
 
@@ -626,7 +817,13 @@
 <script src="js/jquery.menu.js"></script>
 <script src="vendors/jquery-pace/pace.min.js"></script>
 <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <script>
+    $('.datepicker-filter').datepicker({
+        autoclose: true
+    });
+    </script>
 <!--LOADING SCRIPTS FOR PAGE-->
 <script src="js/table-action.js"></script>
 <!--CORE JAVASCRIPT-->
