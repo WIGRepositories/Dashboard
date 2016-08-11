@@ -97,11 +97,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.getFleetOwnerRoute($scope.s);
 
         });
+        if ($scope.Fleetownerid != 1) { $scope.cmpId = $scope.UserCmpid; }
     }
     
     $scope.getFleetOwnerRoute = function () {
         if ($scope.cmp == null) {
             $scope.Companies = null;
+            $scope.cmpdata = null;
+            $scope.FleetOwner = null;
             return;
         }
 
@@ -109,6 +112,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         //    $scope.cmpdata = null;
         //    return;
         //}
+        //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+        //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
         $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FleetOwner = res.data;
            
