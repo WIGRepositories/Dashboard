@@ -52,7 +52,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             ZipCode:Group.ZipCode,
             State: Group.State,
             //Logo: Group.Logo,
-            active: (Group.active==true)?1:0,
+            active: (Group.active == false)? 1 : 0,
             insupdflag:flag 
         }
         
