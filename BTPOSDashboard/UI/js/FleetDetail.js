@@ -342,15 +342,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
         });
     }
+    $scope.filterValue = function ($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
+            $event.preventDefault();
+        }
+    };
 
 });
-$scope.filterValue = function ($event) {
-    if (isNaN(String.fromCharCode($event.keyCode))) {
-        $event.preventDefault();
-    }
-};
-
-
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;

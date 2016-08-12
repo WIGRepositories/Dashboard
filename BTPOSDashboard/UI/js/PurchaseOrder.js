@@ -16,6 +16,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.PurchaseOrder = res.data;
         });
     }
+    $scope.filterValue = function ($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
+            $event.preventDefault();
+        }
+    };
+
 
 });
 

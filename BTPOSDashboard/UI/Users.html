@@ -455,7 +455,7 @@
                                                                             </div>
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.MobileNo" /></div>
+                                                                                    <div class="input-icon right"><input type="text" ng-keypress="filterValue($event)" class="form-control" id="ip" ng-model="User1.MobileNo" /></div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -738,7 +738,7 @@
                                                                                                     <label class="col-sm-3 control-label">Mobile Phone</label>
                                                                                                     <div class="col-sm-9 controls">
                                                                                                         <div class="row">
-                                                                                                            <div class="col-xs-9"><input type="text" placeholder="mobile phone" ng-model="User1.MobileNo" class="form-control" /></div>
+                                                                                                            <div class="col-xs-9"><input type="text" placeholder="mobile phone" ng-keypress="filterValue($event)" ng-model="User1.MobileNo" class="form-control" /></div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
