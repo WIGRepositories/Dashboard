@@ -5155,7 +5155,7 @@ declare @fc varchar(10)
 	RAISERROR ('Already user login exists',16,1);
  
 		-- insert user role
-		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId 
+		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId,'I' 
    if @logincnt = 0 
    begin
 
@@ -5202,7 +5202,7 @@ end
  where id = @userid
  
 -- insert user role
-		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId
+		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId,'I'
  
  select @logincnt = COUNT(*) from userlogins where  userid = @userid
  
@@ -5284,7 +5284,6 @@ else
 					 WHERE [UserId] = @currid
  
  end
- 
  
  end
  
@@ -6244,21 +6243,20 @@ end
  end
 
 --assign fleet owner role to user
-exec [InsUpdDelUserRoles] -1,6,@currid,@cmpid
+exec [InsUpdDelUserRoles] -1,6,@currid,@cmpid,'I'
 
-declare @logincnt int
+--declare @logincnt int
 
---the login will be assigned once the user buys the license. this is for testing
-select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+----the login will be assigned once the user buys the license. this is for testing
+--select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
 
- if @logincnt = 0
-   begin
-	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
-   end
+-- if @logincnt = 0
+--   begin
+--	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+--   end
    --insert into edit history
 
 end
-
 
 
 GO
@@ -7894,33 +7892,6 @@ INSERT INTO [dbo].[VehicleLayout]
 
 End
 
-/****** Object:  Table [dbo].[UserInfo]    Script Date: 06/07/2016 12:29:24 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[WebsiteUserInfo](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[FirstName] [varchar](50) NULL,
-	[LastName] [nvarchar](50) NULL,
-	[UserName] [nvarchar](50) NULL,
-	[EmailAddress] [nvarchar](50) NULL,
-	[Password] [nvarchar](50) NULL,
-	[ConfirmPassword] [nvarchar](50) NULL,
-	[Gender] [nvarchar](50) NULL
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-
 /****** Object:  Table [dbo].[WebsiteUserLogin]    Script Date: 06/08/2016 16:10:38 ******/
 SET ANSI_NULLS ON
 GO
@@ -7945,115 +7916,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-
-/****** Object:  StoredProcedure [dbo].[WebsiteUserInfo]    Script Date: 06/08/2016 16:09:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetWebsiteUserInfo]
-
-AS
-BEGIN
-
-SELECT U.[Id]
-      ,U.[FirstName]
-      ,U.[LastName]      
-      
-      ,U.[EmailAddress]
-     
-      ,ul.logininfo as UserName
-      ,ul.passkey as [Password]            
-      
-  FROM [POSDashboard].[dbo].[WebsiteUserInfo] U
-  
- 
-left OUTER join dbo.websiteUserLogin ul on ul.userid = U.id    
- left OUTER join dbo.WebsiteUserInfo u2 on ul.userid = U.id   
-end
-
-/****** Object:  StoredProcedure [dbo].[GetinterbusUserLogin]    Script Date: 06/08/2016 16:08:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetwebsiteUserLogin]
-
-AS
-BEGIN
-
-SELECT U.[Id]
-        
-      ,U.[Active]
-      
-      ,UserName as logininfo
-      ,[Password] as passkey            
-      
-  FROM [POSDashboard].[dbo].[websiteUserLogin] U
-  
-  left outer join dbo.WebsiteUserInfo u1 on u.userid = U.id    
-  
-end
-
-
-
-
-/****** Object:  StoredProcedure [dbo].[InsUpdWebsiteUserInfo]    Script Date: 06/08/2016 16:06:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create procedure [dbo].[InsUpdWebsiteUserInfo](
-@FirstName varchar(50)
-,@LastName varchar(50)
-,@UserName varchar(50)  
-,@Password varchar(50)  
-,@EmailAddress varchar(50)
-,@ConfirmPassword varchar(50)
-,@Gender varchar(50),@salt varchar(50)=null,@Active int=1,@userid int = -1)
-
- AS
-BEGIN
-DECLARE @LASTID int
-	
-INSERT INTO [POSDashboard].[dbo].[WebsiteUserInfo]
-           ([FirstName]
-           ,[LastName]
-           ,[UserName]
-           ,[EmailAddress]
-           ,[Password]
-           ,[ConfirmPassword]
-           ,[Gender])
-     VALUES
-           (@FirstName
-           ,@LastName
-           ,@UserName
-           ,@EmailAddress
-           ,@Password
-           ,@ConfirmPassword
-           ,@Gender
-       )
-           
- set @LASTID=SCOPE_IDENTITY();
-           
-           INSERT INTO [POSDashboard].[dbo].[WebsiteUserLogin]
-           ([LoginInfo]
-           ,[PassKey]
-       
-           ,[UserId]
-           ,[salt]
-           ,[Active])
-     VALUES
-           (@UserName
-           ,@Password
-           ,@LASTID
-           ,@salt
-           ,@Active
-           )
-           
-
-
-END
 
 
 /****** Object:  StoredProcedure [dbo].[ValidateCredentials]    Script Date: 06/08/2016 16:05:29 ******/
@@ -9067,14 +8929,39 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
        ,[Gender] = @Gender 
        ,[Address]= @Address
 
- exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,'I'
+ 
+END
+
+--[dbo].[InsUpdDelCompany](@active int,@code varchar(50),@desc varchar(50) = null,@Id int,@Name varchar(50),@Address varchar(500),@EmailId varchar(50),
+--@ContactNo1 varchar(50),@ContactNo2 varchar(50)= null,@Fax varchar(50)= null,@Title varchar(50)= null,@Caption varchar(50)= null,@Country varchar(50)= null,
+--@ZipCode int = null,@State varchar(50),@insupdflag varchar(1),@userid int = -1)
+
+declare 
+@cmpcode varchar(10),@empno varchar(10),@cmpid int
+
+select @cmpcode = 'CMP00' + ltrim(rtrim(STR((max(Id)+1)))) from company
+select @empno = 'FL00' + ltrim(rtrim(STR((max(Id)+1)))) from users
+
+select @cmpid = id from company where upper(name) = upper(@CompanyName)
+
+if @cmpid is null
+exec InsUpdDelCompany 1, @cmpcode, null,-1,@CompanyName,@Address,@EmailAddress,@PhoneNo,null,null,@Title,null,null,null,null,'I',-1
+
+select @cmpid = id from company where upper(name) = upper(@CompanyName)
+
+
+--exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,@insupdflag
+
+--create procedure [dbo].[InsUpdUsers](@FirstName varchar(40),@LastName varchar(40),@MiddleName varchar(40) = ''
+--,@EmpNo varchar(15),@Email varchar(40) = '',@AdressId int,@MobileNo varchar(50) = '',@RoleId int,@cmpId int,@Active int
+--,@UserName varchar(30)  = null,@Password varchar(30)  = '',@insupdflag varchar(10),@ManagerId int = null,@userid int = -1)
+
+exec [InsUpdUsers] @FirstName,@LastName,null,@empno,@EmailAddress,0,@PhoneNo,6,@cmpid,1,null,null,'I',null,-1--  @CompanyName,@Description,@insupdflag
 
 select FleetOwnerCode from dbo.FleetOwner f 
 inner join Users u on u.Id = f.UserId
 where u.FirstName = @FirstName and u.LastName = @LastName
 
-
-END
 end
 
 
