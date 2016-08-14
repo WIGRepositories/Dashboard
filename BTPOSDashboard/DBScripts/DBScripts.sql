@@ -2622,12 +2622,24 @@ BEGIN
 declare @dt datetime
 set @dt = GETDATE()
 
-declare @edithistoryid int
+declare @edithistoryid int,@cnt int
 declare @oldPOSID varchar(20)
 declare @oldIMEI varchar(20)
 declare @oldipconfig varchar(20)
+
+select @cnt = COUNT(*) from [POSDashboard].[dbo].[BTPOSDetails] where upper([IMEI]) = upper(@IMEI)
+
+if @cnt > 0 
+begin
+RAISERROR ('IMEI already exists',16,1);
+return
+end
+
 if @insupdflag = 'I' 
 Begin
+
+
+
 INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
            ([CompanyId]
            ,[POSID]
@@ -2698,13 +2710,6 @@ exec InsEditHistoryDetails @edithistoryid,@oldipconfig,@ipconfig,'Modication','i
    delete from BTPOSDetails where Id = @Id
 End
 END
-
-
-
-
-
-
-
 
 GO
 SET ANSI_NULLS ON
@@ -4817,7 +4822,7 @@ else
   if @insupddelflag = 'D'
   begin
   delete from [POSDashboard].[dbo].[RouteDetails] where routeid = @RouteId and StopId = @StopId  
-
+  end
 
 declare @sid int
 declare @Var2 int
@@ -4888,7 +4893,7 @@ END
 CLOSE db_cursor  
 DEALLOCATE db_cursor 
 
-end
+
 end
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRoles]    Script Date: 07/01/2016 16:13:42 ******/
@@ -5937,10 +5942,19 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getFares]
+CREATE procedure [dbo].[GetFare]
+(@srcId int,@destId int, @btposid varchar(10),@routeid int)
 as
 begin
-select * from Fares
+
+select distinct amount from fleetbtpos fp 
+inner join btposdetails pos
+on pos.id = fp.btposid
+inner join foroutefare vf on vf.vehicleid = fp.vehicleid
+where vf.sourceid = @srcId and vf.destinationid = @destId 
+and vf.routeid = @routeid
+
+
 end
 
 GO
@@ -9593,6 +9607,29 @@ CREATE PROCEDURE [dbo].[GetBTPOSId]
 AS
 BEGIN
 
+
+	declare @fleetownerid int = -1, @posid int = -1, @btposId varchar(15)
+	
+	select @fleetownerid = id from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+	if(@fleetownerid is null or @fleetownerid  = -1)
+	begin
+		RAISERROR ('Invalid fleet owner code',16,1);
+	end
+	
+	select @posid = ID from BTPOSDetails where FleetOwnerId = @fleetownerid and upper(IMEI) = upper(@imei)
+	
+	if(@posid is null or @posid  = -1)
+	begin
+		RAISERROR ('POS with IMEI is not found code',16,1);
+	end
+	
+	select @btposId = 'POS'+ UPPER(@fleetownercode)+ cast(@posid as varchar(3))
+	
+	UPDATE BTPOSDetails
+        SET POSID = @btposId,statusid = 2
+    FROM BTPOSDetails
+    where FleetOwnerId = @fleetownerid and upper(IMEI) = upper(@imei)and StatusId = 4
+	
 SELECT b.[CompanyId]
       ,[POSID]
       ,[StatusId]
@@ -9601,9 +9638,10 @@ SELECT b.[CompanyId]
       ,b.[FleetOwnerId]
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   inner join fleetowner fo on fo.id  = b.fleetownerid
-where (IMEI = @imei and @fleetownercode like '%'+@fleetownerCode+'%')
+where (upper(IMEI) = upper(@imei) and (FleetOwnerCode) = UPPER(@fleetownercode))
 
 end
+
 GO
 
 /****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/11/2016 10:49:39 ******/

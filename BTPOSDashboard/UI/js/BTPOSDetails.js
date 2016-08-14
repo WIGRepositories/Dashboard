@@ -193,6 +193,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 btposlist[i].IMEI = pos.IMEI;
                 btposlist[i].ipconfig = pos.ipconfig;
                 btposlist[i].insupdflag = 'U';
+                btposlist[i].fleetownerid = pos.fleetownerid;
+                btposlist[i].CompanyId = pos.CompanyId;
                 break;
             }
         }
@@ -200,7 +202,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             var Group = {
                 Id: pos.Id,
                 GroupName: pos.GroupName,
-                CompanyId: 1,//pos.CompanyId,
+                CompanyId: pos.CompanyId,
                 IMEI: pos.IMEI,
                 POSID: pos.POSID,
                 StatusId: 4,//pos.StatusId,

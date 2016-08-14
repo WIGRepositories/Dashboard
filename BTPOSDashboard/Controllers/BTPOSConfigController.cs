@@ -383,7 +383,26 @@ namespace BTPOSDashboard.Controllers
         [Route("api/GetFare")]
         public DataTable GetFare(string BTPOSId, int routeid, int srcId, int destId,int pssgnr, int childs, int luggage)
         {
-           // DataTable dt = GetFileContentFormDB("INDEXFILE", null);
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetFare";
+            cmd.Connection = conn;
+
+        
+            cmd.Parameters.Add("@srcId", SqlDbType.Int).Value = srcId;            
+            cmd.Parameters.Add("@destId", SqlDbType.Int).Value = destId;
+            cmd.Parameters.Add("@routeid", SqlDbType.Int).Value = routeid;
+            cmd.Parameters.Add("@btposid", SqlDbType.VarChar).Value = BTPOSId;
+
+            DataTable Tbl = new DataTable();
+
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+
 
             DataTable indexTbl = new DataTable();
 
@@ -392,7 +411,8 @@ namespace BTPOSDashboard.Controllers
 
             StringBuilder strBldr = new StringBuilder();
             strBldr.Append("~");
-            strBldr.AppendLine("0.12");
+            
+            strBldr.AppendLine((Tbl.Rows.Count >0) ? Tbl.Rows[0][0].ToString(): "0.00") ;
             //foreach (DataRow dr1 in dt.Rows)
             //{
             //    strBldr.AppendLine(dr1[0].ToString());
