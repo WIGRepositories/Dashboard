@@ -129,9 +129,69 @@ namespace BTPOSDashboard.Controllers
         [Route("api/GetPaymentAck")]
         public DataTable GetPaymentAck(string BTPOSId, decimal amt, string cardno, string cvv, string expirydate)
         {
+            int btposTransId = -1;
+            SqlConnection conn = new SqlConnection();
+
             try
             {
+                #region insert initial record for trans
+              
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
+                SqlCommand cmd1 = new SqlCommand();
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.CommandText = "InsUpdDelBTPOSTrans";
+                cmd1.Connection = conn;
+
+                SqlParameter cid = new SqlParameter();
+                cid.ParameterName = "@BTPOSId";
+                cid.SqlDbType = SqlDbType.VarChar;
+                cid.Value = BTPOSId;
+                cmd1.Parameters.Add(cid);
+
+                SqlParameter fi = new SqlParameter();
+                fi.ParameterName = "@AmountPaid";
+                fi.SqlDbType = SqlDbType.Decimal;
+                fi.Value = amt;
+                cmd1.Parameters.Add(fi);
+
+                SqlParameter f = new SqlParameter();
+                f.ParameterName = "@Date";
+                f.SqlDbType = SqlDbType.DateTime;
+                f.Value = DateTime.Now;
+                cmd1.Parameters.Add(f);
+
+                SqlParameter gid = new SqlParameter();
+                gid.ParameterName = "@GatewayTransId";
+                gid.SqlDbType = SqlDbType.VarChar;
+                gid.Value = "-1";
+
+                cmd1.Parameters.Add(gid);
+
+                SqlParameter flag = new SqlParameter();
+                flag.ParameterName = "@insupdflag";
+                flag.SqlDbType = SqlDbType.VarChar;
+                flag.Value = "I";
+                cmd1.Parameters.Add(flag);  
+
+                SqlParameter tid = new SqlParameter();
+                tid.ParameterName = "@posTransId";
+                tid.SqlDbType = SqlDbType.Int;
+               tid.Direction =  ParameterDirection.Output;
+
+                cmd1.Parameters.Add(tid);  
+
+                //insert into db
+                conn.Open();
+               cmd1.ExecuteNonQuery();
+
+                object val = tid.Value;
+
+                #endregion insert initial record for trans
+
+                #region paypal
+                
                 // ### Api Context
                 // Pass in a `APIContext` object to authenticate 
                 // the call and to send a unique request id 
@@ -146,37 +206,38 @@ namespace BTPOSDashboard.Controllers
                     amount = new Amount()
                     {
                         currency = "USD",
-                        total = "7",
+                        total = amt.ToString(),
                         details = new Details()
                         {
-                            shipping = "1",
-                            subtotal = "5",
-                            tax = "1"
+                            shipping = "0",
+                            subtotal = amt.ToString(),
+                            tax = "0"
                         }
                     },
-                    description = "This is the payment transaction description.",
+                    description = "This is the ticket payment transaction.",
                     item_list = new ItemList()
                     {
                         items = new List<Item>()
                     {
                         new Item()
                         {
-                            name = "Item Name",
+                            name = "BT POS Ticket",
                             currency = "USD",
-                            price = "1",
-                            quantity = "5",
+                            price = amt.ToString(),
+                            quantity = "1",
                             sku = "sku"
                         }
-                    },
-                        shipping_address = new ShippingAddress
-                        {
-                            city = "Johnstown",
-                            country_code = "US",
-                            line1 = "52 N Main ST",
-                            postal_code = "43210",
-                            state = "OH",
-                            recipient_name = "Joe Buyer"
-                        }
+                    }
+                    //,
+                    //    shipping_address = new ShippingAddress
+                    //    {
+                    //        city = "Johnstown",
+                    //        country_code = "US",
+                    //        line1 = "52 N Main ST",
+                    //        postal_code = "43210",
+                    //        state = "OH",
+                    //        recipient_name = "Joe Buyer"
+                    //    }
                     },
                     invoice_number = Common.GetRandomInvoiceNumber()
                 };
@@ -191,19 +252,19 @@ namespace BTPOSDashboard.Controllers
                     {
                         credit_card = new CreditCard()
                         {
-                            billing_address = new Address()
-                            {
-                                city = "Johnstown",
-                                country_code = "US",
-                                line1 = "52 N Main ST",
-                                postal_code = "43210",
-                                state = "OH"
-                            },
+                            //billing_address = new Address()
+                            //{
+                            //    city = "Johnstown",
+                            //    country_code = "US",
+                            //    line1 = "52 N Main ST",
+                            //    postal_code = "43210",
+                            //    state = "OH"
+                            //},
                             cvv2 = "874",
                             expire_month = 11,
                             expire_year = 2018,
-                            first_name = "Joe",
-                            last_name = "Shopper",
+                            first_name = "admin",
+                            last_name = "admin",
                             number = "4024007185826731",//"4877274905927862",
                             type = "visa"
                         }
@@ -226,25 +287,49 @@ namespace BTPOSDashboard.Controllers
                 // Create a payment using a valid APIContext
                 var createdPayment = payment.Create(apiContext);
 
+                #endregion paypal
+
+                #region update transagain
+
+                cmd1.Parameters["@insupdflag"].Value = "U";
+                cmd1.Parameters["@GatewayTransId"].Value = createdPayment.id;
+                cmd1.Parameters.Add("@Id", SqlDbType.Int).Value = val;
+
+                cmd1.ExecuteNonQuery();
+
+                #endregion update transagain
+                
                 DataTable indexTbl = new DataTable();
                 indexTbl.Columns.Add("Status");
                 indexTbl.Columns.Add("PymntAckId");
+                indexTbl.Columns.Add("btposTransId");
+
                 DataRow dr = indexTbl.NewRow();
                 dr[0] = 1;
                 dr[1] = createdPayment.id;
-                indexTbl.Rows.Add(dr);
+                dr[2] = val;
 
+                indexTbl.Rows.Add(dr);
+                conn.Close();
                 return indexTbl;
             }
             catch (Exception ex)
             {
+                if(conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 string str = ex.Message;
                 DataTable indexTbl = new DataTable();
                 indexTbl.Columns.Add("Status");
                 indexTbl.Columns.Add("PymntAckId");
+                indexTbl.Columns.Add("btposTransId");
+
                 DataRow dr = indexTbl.NewRow();
                 dr[0] = 0;
                 dr[1] = str;
+                dr[1] = btposTransId;
+
                 indexTbl.Rows.Add(dr);
 
                 return indexTbl;

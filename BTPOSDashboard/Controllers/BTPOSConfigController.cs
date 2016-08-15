@@ -439,8 +439,8 @@ namespace BTPOSDashboard.Controllers
             return indexTbl;
         }
 
-        [HttpPost]
-        //[Route("api/SaveTrans")]
+        [HttpGet]
+        [Route("api/SaveTrans")]
         public DataTable SaveTrans(string BTPOSId, int transTypeId, decimal amt, string gatewayId, string datetime, string srcId, string destId)
         {
             DataTable indexTbl = new DataTable();
@@ -496,6 +496,21 @@ namespace BTPOSDashboard.Controllers
             fid2.SqlDbType = SqlDbType.VarChar;
             fid2.Value = destId;
             cmd1.Parameters.Add(fid2);
+
+            //insert into db
+
+            int btposTransId = (int)cmd1.ExecuteScalar();
+
+            if (btposTransId > 0)
+            {
+                //make paypal payment
+                //update the paypal payment id back
+
+
+            }
+            
+            
+
 
 
             DataRow dr = indexTbl.NewRow();
