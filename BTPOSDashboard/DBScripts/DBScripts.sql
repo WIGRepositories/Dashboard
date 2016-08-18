@@ -6688,13 +6688,12 @@ if @insupddelflag = 'U'
 begin
 
 UPDATE [POSDashboard].[dbo].[LicenseDetails]
-   SET [FeatureTypeId] = @FeatureTypeId
-      ,[FeatureLabel] = @FeatureLabel
+   SET [FeatureLabel] = @FeatureLabel
       ,[FeatureValue] = @FeatureValue
       ,[LabelClass] = @LabelClass
       ,[fromDate] = @fromDate
       ,[toDate] = @toDate
- WHERE [LicenseTypeId] = @LicenseTypeId
+ WHERE [LicenseTypeId] = @LicenseTypeId and [FeatureTypeId] = @FeatureTypeId
  
  
    exec InsEditHistory 'LicenseDetails','Name', @FeatureTypeId,'LicenseDetails updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
@@ -6725,7 +6724,7 @@ else
 if @insupddelflag = 'D'
 begin
 DELETE FROM [POSDashboard].[dbo].[LicenseDetails]
-      WHERE [LicenseTypeId] = @LicenseTypeId
+      WHERE [LicenseTypeId] = @LicenseTypeId and [FeatureTypeId] = @FeatureTypeId
 end
 end
 
