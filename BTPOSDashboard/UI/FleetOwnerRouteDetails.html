@@ -663,7 +663,7 @@
 </select>
                                                                         </div>
                                                                         <div class="col-md-4">
-                                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute(s)" id="test1">
+                                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFORoutes()" id="test1">
 
     <option value="">Select</option>
 </select>
@@ -671,7 +671,7 @@
                                                                         <div>
                                                                             <div class="col-md-4">
 
-                                                                                Route Name:<select ng-options="r.routename for r in sdata.Table track by r.RouteId" ng-model="r" ng-change="GetRouteDetails()" ng-click="ShowHide()">
+                                                                                Route Name:<select ng-options="r.routename for r in sdata.Table track by r.RouteId" ng-model="r" ng-change="GetRouteDetails()">
                                                                                     <option value="">Select</option>
                                                                                 </select>
                                                                             </div>
@@ -697,7 +697,7 @@
 
                                                                 </div>
 
-                                                                <div class="panel panel-violet" ng-hide="IsHidden">
+                                                                <div class="panel panel-violet">
 
                                                                     <div class="panel-heading">Route configuration</div>
                                                                     <div class="portlet-body" ng-model="RouteDetails.Table1">

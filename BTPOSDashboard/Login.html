@@ -15,13 +15,30 @@
     <link type="text/css" rel="stylesheet" href="UI/css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="UI/css/style-responsive.css">
     <link rel="shortcut icon" href="UI/images/favicon.ico">
+    <style>
+        /*html {
+           
+            background-image: url("UI/images/bkgRd.png");
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-position: 0% 0%;
+            background-size: contain;            
+        }*/
+
+        body {
+            background: rgba(0, 0, 0, 0) url("UI/images/bkgRd3.png") no-repeat scroll center center / cover;
+            height:80%;
+        }
+    </style>
 </head>
-<body ng-app="myApp" ng-controller="myCtrl"  ng-model="type">
-    <div class="page-form">   
+<body ng-app="myApp" ng-controller="myCtrl" ng-model="type" class="col-md-offset-8" style="margin-top:150px">
+
+    <div class="page-form" style="align-content:center;background-color:blue">
         <form class="form-validate-signin">
-            <div class="header-content"><h3>Smart Ticketing Dashboard Portal</h3><h1>Log in</h1>
+            <div class="header-content">
+                <h3>Smart Ticketing Dashboard Portal</h3><h1>Log in</h1>
                 <div class="form-group" style="margin-left: 28px;">
-                    <img src="UI/images/dashboard.png" style="box-shadow: 13px 13px 13px #ccc; width:300px; height:275px" />
+                    <img src="UI/images/dashboard.png" style="width:300px; height:275px" />
                 </div>
                 <div class="body-content">
                     <div class="form-group">
@@ -32,8 +49,8 @@
                                         <div class="input-icon right:col-md-2">
                                             <i class="fa fa-user"></i>
                                             <input type="text" placeholder="Username" name="username" class="form-control" ng-model="UserName">
-                                        <!--<span ng-show="!UserName"><font color="red">Please enter UserName</font></span>-->
-                                         </div>
+                                            <!--<span ng-show="!UserName"><font color="red">Please enter UserName</font></span>-->
+                                        </div>
                                     </div>
                                 </td>
                                 <td height="5px" align="right">
@@ -48,52 +65,52 @@
                             </tr>
                         </table>
                     </div>
-                                <!--<div class="form-group pull-left">
-            <div class="checkbox-list">
-                <label>
-                    <input type="checkbox">&nbsp;
-                    Keep me signed in
-                </label>
-            </div>
-        </div>-->
-                    <div class="form-group col-md-offset-4">
+                    <!--<div class="form-group pull-left">
+                        <div class="checkbox-list">
+                            <label>
+                                <input type="checkbox">&nbsp;
+                                Keep me signed in
+                            </label>
+                        </div>
+                    </div>-->
+                    <div class="form-group" style="text-align:center">
                         <button ng-click="Signin()" class="btn btn-success">
                             Log In
                             &nbsp;<i class="fa fa-chevron-circle-right"></i>
                         </button>
+                        <br />
                         <!--<div class="clearfix"></div>-->
                         <div class="form-group">
-                  <b> Forgot your Password?</b><a style="color:blue" href='ResetPassword.html' class='btn-forgot-pwd'>Click Here</a>
+                            <b> Forgot your Password?</b><a style="color:blue" href='ResetPassword.html' class='btn-forgot-pwd'>Click Here</a>
                         </div>
                     </div>
-                                <!--<hr>
-        <p>Don't have an account? <a id="btn-register" href="UI/extra-signup.html">Register Now</a></p>
-        <p>
-            Don't have an account?
-            <br />Please contact INTERBUS administrator
-        </p>-->
+                    <!--<hr>
+                    <p>Don't have an account? <a id="btn-register" href="UI/extra-signup.html">Register Now</a></p>
+                    <p>
+                        Don't have an account?
+                        <br />Please contact INTERBUS administrator
+                    </p>-->
                 </div>
             </div>
         </form>
     </div>
-<script src="UI/js/jquery-1.10.2.min.js"></script>
-<script src="UI/js/jquery-migrate-1.2.1.min.js"></script>
-<script src="UI/js/jquery-ui.js"></script>
-<!--loading bootstrap js-->
-<script src="UI/vendors/bootstrap/js/bootstrap.js"></script>
-<script src="UI/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script> 
-<script src="UI/vendors/metisMenu/jquery.metisMenu.js"></script>
-<script src="UI/vendors/slimScroll/jquery.slimscroll.js"></script>
-<script src="UI/vendors/jquery-cookie/jquery.cookie.js"></script>
-<script src="UI/vendors/iCheck/icheck.min.js"></script>
-<script src="UI/vendors/iCheck/custom.min.js"></script>
-<script src="UI/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-<script src="UI/js/jquery.menu.js"></script>
-<script src="UI/vendors/jquery-pace/pace.min.js"></script>
-<script src="UI/vendors/holder/holder.js"></script>
-<script src="UI/vendors/responsive-tabs/responsive-tabs.js"></script>
-<!--LOADING SCRIPTS FOR PAGE-->
-    
+    <script src="UI/js/jquery-1.10.2.min.js"></script>
+    <script src="UI/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="UI/js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="UI/vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="UI/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="UI/vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="UI/vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="UI/vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="UI/vendors/iCheck/icheck.min.js"></script>
+    <script src="UI/vendors/iCheck/custom.min.js"></script>
+    <script src="UI/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="UI/js/jquery.menu.js"></script>
+    <script src="UI/vendors/jquery-pace/pace.min.js"></script>
+    <script src="UI/vendors/holder/holder.js"></script>
+    <script src="UI/vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
     <!--<script>
         //BEGIN CHECKBOX & RADIO
         $('input[type="checkbox"]').iCheck({
@@ -109,8 +126,8 @@
     <script src="UI/js/main.js"></script>-->
 
 
-<script src="UI/js/angular.js"></script>
-<script src="UI/js/ngStorage.js"></script>
-<script src="UI/js/login.js"></script>    
+    <script src="UI/js/angular.js"></script>
+    <script src="UI/js/ngStorage.js"></script>
+    <script src="UI/js/login.js"></script>
 </body>
 </html>

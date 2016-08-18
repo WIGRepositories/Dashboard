@@ -2,8 +2,9 @@
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.currpagefirst = 1;
     //$scope.currpage = 0;
-    $scope.totalRecords = 17;
-    $scope.totalpages = 10;
+    $scope.totalRecords = 12;
+  //  $scope.totalpages = 12;
+    $scope.pagesize = 5;
     $scope.myFunction = function () {
         if ($scope.currpage >= 1)
         {
@@ -23,7 +24,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.decPageNo = function () {
-        if ($scope.currpagefirst <= 1)
+        if ($scope.currpagefirst <= 0)
             return;
         else
         {
@@ -43,9 +44,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         })
 
     }
-    $scope.totalRecordscnt = $scope.totalRecords;
+    $scope.totalpages = $scope.totalRecords;
     $scope.IncPageNo = function () {
-        if ($scope.currpagefirst < $scope.totalRecordscnt) {
+        if ($scope.currpagefirst < $scope.totalpages) {
             $scope.currpagefirst = $scope.currpagefirst + 1;
 
         }
@@ -61,8 +62,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         })
 
     }
-    $scope.pageCount = function () {
-           $scope.result = Math.ceil(parseInt($scope.totalpages) / parseInt($scope.pagesize));
+    $scope.pageCount = function (pagesize) {
+         return Math.ceil(parseInt($scope.totalpages) / parseInt($scope.pagesize));
+      //  $scope.result = (parseInt($scope.totalpages) / parseInt($scope.pagesize));
            };
 
     $scope.dashboardDS = $localStorage.dashboardDS;
@@ -92,9 +94,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
-            $scope.Companies1 = res.data;
+          //  $scope.Companies1 = res.data;
+            var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
+            var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-            if ($scope.userCmpId != 1) {
+            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+                $scope.BTPOS1 = response.data;
+
+            });
+          if ($scope.userCmpId != 1) {
                 //loop throug the companies and identify the correct one
                 for (i = 0; i < res.data.length; i++) {
                     if (res.data[i].Id == $scope.userCmpId) {
@@ -107,12 +115,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             else {
                 document.getElementById('test').disabled = false;
             }
+         
             $scope.GetFleetOwners($scope.cmp);
         });
+       
 
-
-
-    }
+        }
     $scope.GetFleetOwners = function () {
 
         var vc = {

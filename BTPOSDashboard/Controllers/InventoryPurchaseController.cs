@@ -126,7 +126,7 @@ namespace BTPOSDashboard.Controllers
                                 cmd.Parameters.Add(bb);
 
                                 SqlParameter bd = new SqlParameter("@IMEI", SqlDbType.VarChar, 20);
-                                bd.Value = "";
+                                bd.Value = DBNull.Value;
                                 cmd.Parameters.Add(bd);
 
 

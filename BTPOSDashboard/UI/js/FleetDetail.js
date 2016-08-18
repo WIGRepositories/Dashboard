@@ -220,10 +220,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             alert('Please enter ChasisNo.');
             return;
         }
-        if (Fleet.DateOfRegistration == null || Fleet.DateOfRegistration == "") {
-            alert('Please enter DateOfRegistration.');
-            return;
-        }
+        
         //if (Fleet.group == null || Fleet.VehicleTypeId.group.Id == null) {
         //    alert('Please select a type group');
         //    return;
@@ -345,15 +342,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
         });
     }
+    $scope.filterValue = function ($event) {
+        if (isNaN(String.fromCharCode($event.keyCode))) {
+            $event.preventDefault();
+        }
+    };
 
 });
-$scope.filterValue = function ($event) {
-    if (isNaN(String.fromCharCode($event.keyCode))) {
-        $event.preventDefault();
-    }
-};
-
-
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
     $scope.mssg = mssg;

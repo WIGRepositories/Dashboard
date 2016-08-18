@@ -2067,8 +2067,18 @@ CREATE procedure [dbo].[getCompanies]
 as
 begin
 SELECT distinct c.[active]
-      ,[code]
+       ,[code]
       ,[desc]
+      ,[ContactNo1]
+      ,[ContactNo2]
+      ,[EmailId]
+      ,[Address]
+      ,[Fax]
+      ,[Title]
+      ,[Caption]
+      ,[Country]
+      ,[ZipCode]
+      ,[State]      
       ,c.[Id]
       ,[Name]
   FROM [POSDashboard].[dbo].[Company] c
@@ -2612,12 +2622,24 @@ BEGIN
 declare @dt datetime
 set @dt = GETDATE()
 
-declare @edithistoryid int
+declare @edithistoryid int,@cnt int
 declare @oldPOSID varchar(20)
 declare @oldIMEI varchar(20)
 declare @oldipconfig varchar(20)
+
+select @cnt = COUNT(*) from [POSDashboard].[dbo].[BTPOSDetails] where upper([IMEI]) = upper(@IMEI) and [IMEI] is not null
+
+if @cnt > 0 
+begin
+RAISERROR ('IMEI already exists',16,1);
+return
+end
+
 if @insupdflag = 'I' 
 Begin
+
+
+
 INSERT INTO [POSDashboard].[dbo].[BTPOSDetails]
            ([CompanyId]
            ,[POSID]
@@ -2688,13 +2710,6 @@ exec InsEditHistoryDetails @edithistoryid,@oldipconfig,@ipconfig,'Modication','i
    delete from BTPOSDetails where Id = @Id
 End
 END
-
-
-
-
-
-
-
 
 GO
 SET ANSI_NULLS ON
@@ -4807,7 +4822,7 @@ else
   if @insupddelflag = 'D'
   begin
   delete from [POSDashboard].[dbo].[RouteDetails] where routeid = @RouteId and StopId = @StopId  
-
+  end
 
 declare @sid int
 declare @Var2 int
@@ -4878,7 +4893,7 @@ END
 CLOSE db_cursor  
 DEALLOCATE db_cursor 
 
-end
+
 end
 
 /****** Object:  StoredProcedure [dbo].[InsUpdDelRoles]    Script Date: 07/01/2016 16:13:42 ******/
@@ -5145,7 +5160,7 @@ declare @fc varchar(10)
 	RAISERROR ('Already user login exists',16,1);
  
 		-- insert user role
-		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId 
+		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId,'I' 
    if @logincnt = 0 
    begin
 
@@ -5160,13 +5175,13 @@ declare @fc varchar(10)
 
 							
 
-							--the login will be assigned once the user buys the license. this is for testing
-							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+							----the login will be assigned once the user buys the license. this is for testing
+							--select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
 
-							 if @flogincnt = 0
-							   begin
-								insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
-							   end
+							-- if @flogincnt = 0
+							--   begin
+							--	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+							--   end
 			   end
 			   else
 			    if  @UserName is not null
@@ -5192,7 +5207,7 @@ end
  where id = @userid
  
 -- insert user role
-		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId
+		exec InsUpdDelUserRoles -1,@RoleId, @currid, @cmpId,'I'
  
  select @logincnt = COUNT(*) from userlogins where  userid = @userid
  
@@ -5274,7 +5289,6 @@ else
 					 WHERE [UserId] = @currid
  
  end
- 
  
  end
  
@@ -5928,10 +5942,19 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getFares]
+CREATE procedure [dbo].[GetFare]
+(@srcId int,@destId int, @btposid varchar(10),@routeid int)
 as
 begin
-select * from Fares
+
+select distinct amount from fleetbtpos fp 
+inner join btposdetails pos
+on pos.id = fp.btposid
+inner join foroutefare vf on vf.vehicleid = fp.vehicleid
+where vf.sourceid = @srcId and vf.destinationid = @destId 
+and vf.routeid = @routeid
+
+
 end
 
 GO
@@ -6234,21 +6257,20 @@ end
  end
 
 --assign fleet owner role to user
-exec [InsUpdDelUserRoles] -1,6,@currid,@cmpid
+exec [InsUpdDelUserRoles] -1,6,@currid,@cmpid,'I'
 
-declare @logincnt int
+--declare @logincnt int
 
---the login will be assigned once the user buys the license. this is for testing
-select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+----the login will be assigned once the user buys the license. this is for testing
+--select @logincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
 
- if @logincnt = 0
-   begin
-	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
-   end
+-- if @logincnt = 0
+--   begin
+--	insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+--   end
    --insert into edit history
 
 end
-
 
 
 GO
@@ -6666,13 +6688,12 @@ if @insupddelflag = 'U'
 begin
 
 UPDATE [POSDashboard].[dbo].[LicenseDetails]
-   SET [FeatureTypeId] = @FeatureTypeId
-      ,[FeatureLabel] = @FeatureLabel
+   SET [FeatureLabel] = @FeatureLabel
       ,[FeatureValue] = @FeatureValue
       ,[LabelClass] = @LabelClass
       ,[fromDate] = @fromDate
       ,[toDate] = @toDate
- WHERE [LicenseTypeId] = @LicenseTypeId
+ WHERE [LicenseTypeId] = @LicenseTypeId and [FeatureTypeId] = @FeatureTypeId
  
  
    exec InsEditHistory 'LicenseDetails','Name', @FeatureTypeId,'LicenseDetails updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
@@ -6703,7 +6724,7 @@ else
 if @insupddelflag = 'D'
 begin
 DELETE FROM [POSDashboard].[dbo].[LicenseDetails]
-      WHERE [LicenseTypeId] = @LicenseTypeId
+      WHERE [LicenseTypeId] = @LicenseTypeId and [FeatureTypeId] = @FeatureTypeId
 end
 end
 
@@ -7884,33 +7905,6 @@ INSERT INTO [dbo].[VehicleLayout]
 
 End
 
-/****** Object:  Table [dbo].[UserInfo]    Script Date: 06/07/2016 12:29:24 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[WebsiteUserInfo](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[FirstName] [varchar](50) NULL,
-	[LastName] [nvarchar](50) NULL,
-	[UserName] [nvarchar](50) NULL,
-	[EmailAddress] [nvarchar](50) NULL,
-	[Password] [nvarchar](50) NULL,
-	[ConfirmPassword] [nvarchar](50) NULL,
-	[Gender] [nvarchar](50) NULL
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-
 /****** Object:  Table [dbo].[WebsiteUserLogin]    Script Date: 06/08/2016 16:10:38 ******/
 SET ANSI_NULLS ON
 GO
@@ -7935,115 +7929,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-
-/****** Object:  StoredProcedure [dbo].[WebsiteUserInfo]    Script Date: 06/08/2016 16:09:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetWebsiteUserInfo]
-
-AS
-BEGIN
-
-SELECT U.[Id]
-      ,U.[FirstName]
-      ,U.[LastName]      
-      
-      ,U.[EmailAddress]
-     
-      ,ul.logininfo as UserName
-      ,ul.passkey as [Password]            
-      
-  FROM [POSDashboard].[dbo].[WebsiteUserInfo] U
-  
- 
-left OUTER join dbo.websiteUserLogin ul on ul.userid = U.id    
- left OUTER join dbo.WebsiteUserInfo u2 on ul.userid = U.id   
-end
-
-/****** Object:  StoredProcedure [dbo].[GetinterbusUserLogin]    Script Date: 06/08/2016 16:08:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetwebsiteUserLogin]
-
-AS
-BEGIN
-
-SELECT U.[Id]
-        
-      ,U.[Active]
-      
-      ,UserName as logininfo
-      ,[Password] as passkey            
-      
-  FROM [POSDashboard].[dbo].[websiteUserLogin] U
-  
-  left outer join dbo.WebsiteUserInfo u1 on u.userid = U.id    
-  
-end
-
-
-
-
-/****** Object:  StoredProcedure [dbo].[InsUpdWebsiteUserInfo]    Script Date: 06/08/2016 16:06:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create procedure [dbo].[InsUpdWebsiteUserInfo](
-@FirstName varchar(50)
-,@LastName varchar(50)
-,@UserName varchar(50)  
-,@Password varchar(50)  
-,@EmailAddress varchar(50)
-,@ConfirmPassword varchar(50)
-,@Gender varchar(50),@salt varchar(50)=null,@Active int=1,@userid int = -1)
-
- AS
-BEGIN
-DECLARE @LASTID int
-	
-INSERT INTO [POSDashboard].[dbo].[WebsiteUserInfo]
-           ([FirstName]
-           ,[LastName]
-           ,[UserName]
-           ,[EmailAddress]
-           ,[Password]
-           ,[ConfirmPassword]
-           ,[Gender])
-     VALUES
-           (@FirstName
-           ,@LastName
-           ,@UserName
-           ,@EmailAddress
-           ,@Password
-           ,@ConfirmPassword
-           ,@Gender
-       )
-           
- set @LASTID=SCOPE_IDENTITY();
-           
-           INSERT INTO [POSDashboard].[dbo].[WebsiteUserLogin]
-           ([LoginInfo]
-           ,[PassKey]
-       
-           ,[UserId]
-           ,[salt]
-           ,[Active])
-     VALUES
-           (@UserName
-           ,@Password
-           ,@LASTID
-           ,@salt
-           ,@Active
-           )
-           
-
-
-END
 
 
 /****** Object:  StoredProcedure [dbo].[ValidateCredentials]    Script Date: 06/08/2016 16:05:29 ******/
@@ -9057,20 +8942,48 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
        ,[Gender] = @Gender 
        ,[Address]= @Address
 
- exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,'I'
+ 
+END
+
+--[dbo].[InsUpdDelCompany](@active int,@code varchar(50),@desc varchar(50) = null,@Id int,@Name varchar(50),@Address varchar(500),@EmailId varchar(50),
+--@ContactNo1 varchar(50),@ContactNo2 varchar(50)= null,@Fax varchar(50)= null,@Title varchar(50)= null,@Caption varchar(50)= null,@Country varchar(50)= null,
+--@ZipCode int = null,@State varchar(50),@insupdflag varchar(1),@userid int = -1)
+
+declare 
+@cmpcode varchar(10),@empno varchar(10),@cmpid int,@foCount int = 0
+
+select @cmpcode = 'CMP00' + ltrim(rtrim(STR((max(Id)+1)))) from company
+select @empno = 'FL00' + ltrim(rtrim(STR((max(Id)+1)))) from users
+
+select @cmpid = id from company where upper(name) = upper(@CompanyName)
+
+if @cmpid is null
+exec InsUpdDelCompany 1, @cmpcode, null,-1,@CompanyName,@Address,@EmailAddress,@PhoneNo,null,null,@Title,null,null,null,null,'I',-1
+
+select @cmpid = id from company where upper(name) = upper(@CompanyName)
+
+
+--exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,@insupdflag
+
+--create procedure [dbo].[InsUpdUsers](@FirstName varchar(40),@LastName varchar(40),@MiddleName varchar(40) = ''
+--,@EmpNo varchar(15),@Email varchar(40) = '',@AdressId int,@MobileNo varchar(50) = '',@RoleId int,@cmpId int,@Active int
+--,@UserName varchar(30)  = null,@Password varchar(30)  = '',@insupdflag varchar(10),@ManagerId int = null,@userid int = -1)
+select @foCount = COUNT(*) from Users u where u.Email = @EmailAddress
+
+if @foCount > 0 
+begin
+RAISERROR ('Fleet owner with emailid already exists',16,1); 
+end
+
+exec [InsUpdUsers] @FirstName,@LastName,null,@empno,@EmailAddress,0,@PhoneNo,6,@cmpid,1,null,null,'I',null,-1--  @CompanyName,@Description,@insupdflag
 
 select FleetOwnerCode from dbo.FleetOwner f 
 inner join Users u on u.Id = f.UserId
 where u.FirstName = @FirstName and u.LastName = @LastName
 
-
-END
 end
-
-
-/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSRecords]    Script Date: 07/18/2016 14:22:47 ******/
-SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -9696,6 +9609,29 @@ CREATE PROCEDURE [dbo].[GetBTPOSId]
 AS
 BEGIN
 
+
+	declare @fleetownerid int = -1, @posid int = -1, @btposId varchar(15)
+	
+	select @fleetownerid = id from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+	if(@fleetownerid is null or @fleetownerid  = -1)
+	begin
+		RAISERROR ('Invalid fleet owner code',16,1);
+	end
+	
+	select @posid = ID from BTPOSDetails where FleetOwnerId = @fleetownerid and upper(IMEI) = upper(@imei)
+	
+	if(@posid is null or @posid  = -1)
+	begin
+		RAISERROR ('POS with IMEI is not found code',16,1);
+	end
+	
+	select @btposId = 'POS'+ UPPER(@fleetownercode)+ cast(@posid as varchar(3))
+	
+	UPDATE BTPOSDetails
+        SET POSID = @btposId,statusid = 2
+    FROM BTPOSDetails
+    where FleetOwnerId = @fleetownerid and upper(IMEI) = upper(@imei)and StatusId = 4
+	
 SELECT b.[CompanyId]
       ,[POSID]
       ,[StatusId]
@@ -9704,9 +9640,10 @@ SELECT b.[CompanyId]
       ,b.[FleetOwnerId]
   FROM [POSDashboard].[dbo].[BTPOSDetails] b
   inner join fleetowner fo on fo.id  = b.fleetownerid
-where (IMEI = @imei and @fleetownercode like '%'+@fleetownerCode+'%')
+where (upper(IMEI) = upper(@imei) and (FleetOwnerCode) = UPPER(@fleetownercode))
 
 end
+
 GO
 
 /****** Object:  Table [dbo].[SmsGatewayeConfiguration]    Script Date: 07/11/2016 10:49:39 ******/
@@ -11600,7 +11537,7 @@ CREATE PROCEDURE [dbo].[InsUpdDelUserLicenseConfirmDetails]
 (@foId int,
 @userId int,
 @TransId varchar(50),
-@GatewayTransId varchar(50),
+@GatewayTransId varchar(20),
 @ULId int,
 @ULPymtId int,
 @units int,
@@ -11698,8 +11635,12 @@ FETCH NEXT FROM db_cursor INTO @posid
 WHILE @@FETCH_STATUS = 0  
 BEGIN  
 
+declare @cid int
+
+select @cid = companyid from FleetOwner where Id = @foId
+
 update [POSDashboard].[dbo].[BTPOSDetails]
-set FleetOwnerId = @foId, CompanyId = 2--(select [CompanyId] from FleetOwner where Id = @foId)
+set FleetOwnerId = @foId, CompanyId = @cid
 where Id = @posid
  
 FETCH NEXT FROM db_cursor INTO @posid  
@@ -11798,66 +11739,9 @@ select @userloginid username
 END
 
 
-GO
-
-/****** Object:  Table [dbo].[BTPOSTrans]    Script Date: 08/01/2016 13:53:59 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[BTPOSTrans](
-	[BTPOSId] [varchar](50) NOT NULL,
-	[transTypeId] [int] NOT NULL,
-	[amount] [decimal](18, 0) NOT NULL,
-	[gatewayId] [varchar](50) NOT NULL,
-	[datetime] [varchar](50) NOT NULL,
-	[srcId] [varchar](50) NOT NULL,
-	[destid] [varchar](50) NOT NULL,
-	[Id] [int] IDENTITY(1,1) NOT NULL
-) ON [PRIMARY]
 
 GO
 
-SET ANSI_PADDING OFF
-GO
-
-
-
-GO
-/****** Object:  StoredProcedure [dbo].[InsUpdDelregisterform]    Script Date: 08/01/2016 13:44:24 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create procedure [dbo].[InsUpdDelBTPOSTrans](@BTPOSId varchar(max),
-@transTypeId int,@amount Decimal(18,0),@gatewayId varchar(max),
-@datetime varchar(max),@srcId varchar(max),@destid varchar(max))
-as
-begin
-
-INSERT INTO 
-[BTPOSTrans] VALUES
-           (@BTPOSId,
-              
-          
-           @transTypeId,
-		     @amount,
-			    @gatewayId,
-           @datetime,
-           @srcId,
-           @destid
-         
-         )
-   
-
-end
-
-GO
 
 /****** Object:  Table [dbo].[Country]    Script Date: 08/05/2016 17:57:39 ******/
 SET ANSI_NULLS ON
@@ -12024,6 +11908,7 @@ DECLARE @COUNT int
 set @COUNT = 0
 	if @COUNT = 0
 	begin
+	 if not exists (select * from WebsiteUserInfo where UserName = @UserName)
 INSERT INTO [POSDashboard].[dbo].[WebsiteUserInfo]
            ([FirstName]
            ,[LastName]
@@ -12066,3 +11951,341 @@ else
 
 END
 
+GO
+
+/****** Object:  Table [dbo].[Schedules]    Script Date: 08/10/2016 18:42:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Schedules](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SNo] [int] NOT NULL,
+	[ServiceNo] [nvarchar](50) NOT NULL,
+	[From] [char](50) NOT NULL,
+	[To] [char](50) NOT NULL,
+	[CoachType] [nvarchar](50) NOT NULL,
+	[DepartureTime] [datetime] NOT NULL,
+	[ApproxJourneytime] [datetime] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[GetSchedules]    Script Date: 08/10/2016 18:36:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[GetSchedules]
+
+as begin 
+SELECT  [Id]
+      ,[SNo]
+      ,[ServiceNo]
+      ,[From]
+      ,[To]
+      ,[CoachType]
+      ,[DepartureTime]
+      ,[ApproxJourneytime]
+  FROM [POSDashboard].[dbo].[Schedules]
+         
+end
+Go
+
+/****** Object:  Table [dbo].[BTPOSTransactions]    Script Date: 08/15/2016 12:23:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[BTPOSTransactions](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[BTPOSId] [varchar](50) NOT NULL,
+	[Date] [datetime] NULL,
+	[TotalAmount] [decimal](18, 0) NULL,
+	[AmountPaid] [decimal](18, 0) NULL,
+	[ChangeRendered] [decimal](18, 0) NULL,
+	[ChangeGiven] [decimal](18, 0) NULL,
+	[TransId] [int] NULL,
+	[GatewayTransId] [varchar](50) NULL,
+	[TransCode] [varchar](50) NULL,
+	[PaymentCategoryId] [int] NULL,
+	[PaymentTypeId] [int] NULL,
+	[PaymentModeId] [int] NULL,
+	[TransStatusId] [int] NULL,
+	[TransDetails] [varchar](500) NULL,
+	[noofSeats] [int] NULL,
+	[unitPrice] [decimal](18, 0) NULL,
+	[luggageTypeId] [int] NULL,
+	[luggageAmt] [decimal](18, 0) NULL,
+	[taxes] [decimal](18, 0) NULL,
+	[disc] [decimal](18, 0) NULL,
+	[TicketNo] [varchar](50) NULL,
+	[SrcId] [int] NULL,
+	[DestId] [int] NULL,
+	[RouteId] [int] NULL,
+	[OperatorId] [int] NULL,
+	[TransApproved] [int] NULL,
+	[Reason] [varchar](250) NULL,
+	[ApprovedById] [int] NULL,
+	[FleetOwnerId] [int] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_TotalAmount]  DEFAULT ((0)) FOR [TotalAmount]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_AmountPaid]  DEFAULT ((0)) FOR [AmountPaid]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_ChangeRendered]  DEFAULT ((0)) FOR [ChangeRendered]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_ChangeGiven]  DEFAULT ((0)) FOR [ChangeGiven]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_unitPrice]  DEFAULT ((0)) FOR [unitPrice]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_luggageTypeId]  DEFAULT ((0)) FOR [luggageTypeId]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_luggageAmt]  DEFAULT ((0)) FOR [luggageAmt]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_taxes]  DEFAULT ((0)) FOR [taxes]
+GO
+
+ALTER TABLE [dbo].[BTPOSTransactions] ADD  CONSTRAINT [DF_BTPOSTransactions_disc]  DEFAULT ((0)) FOR [disc]
+GO
+
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE GetBTPOSTransactions
+	(@BTPOSId varchar(50))
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    SELECT [Id]
+      ,[BTPOSId]
+      ,[Date]
+      ,[TotalAmount]
+      ,[AmountPaid]
+      ,[ChangeRendered]
+      ,[ChangeGiven]
+      ,[TransId]
+      ,[GatewayTransId]
+      ,[TransCode]
+      ,[PaymentCategoryId]
+      ,[PaymentTypeId]
+      ,[PaymentModeId]
+      ,[TransStatusId]
+      ,[TransDetails]
+      ,[noofSeats]
+      ,[unitPrice]
+      ,[luggageTypeId]
+      ,[luggageAmt]
+      ,[taxes]
+      ,[disc]
+      ,[TicketNo]
+      ,[SrcId]
+      ,[DestId]
+      ,[RouteId]
+      ,[OperatorId]
+      ,[TransApproved]
+      ,[Reason]
+      ,[ApprovedById]
+      ,[FleetOwnerId]
+  FROM [POSDashboard].[dbo].[BTPOSTransactions]
+  where [BTPOSId] = @BTPOSId
+
+
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE procedure [dbo].[InsUpdDelBTPOSTrans](@Id int = -1
+           ,@BTPOSId varchar(50)
+           ,@Date datetime = null
+           ,@TotalAmount decimal(18,0) = 0
+           ,@AmountPaid decimal(18,0) = 0
+           ,@ChangeRendered decimal(18,0) = 0
+           ,@ChangeGiven decimal(18,0) = 0
+           ,@TransId int = 0
+           ,@GatewayTransId varchar(50) = 0
+           ,@TransCode varchar(50) = null
+           ,@PaymentCategoryId int = 0
+           ,@PaymentTypeId int = 0
+           ,@PaymentModeId int = 0
+           ,@TransStatusId int = 0
+           ,@TransDetails varchar(500) = null
+           ,@noofSeats int = 0
+           ,@unitPrice decimal(18,0) = 0
+           ,@luggageTypeId int = 0
+           ,@luggageAmt decimal(18,0) = 0
+           ,@taxes decimal(18,0) = 0
+           ,@disc decimal(18,0) = 0
+           ,@TicketNo varchar(50) = null
+           ,@SrcId int = 0
+           ,@DestId int = 0
+           ,@RouteId int = 0
+           ,@OperatorId int = 0
+           ,@TransApproved int = 0
+           ,@Reason varchar(250) = null
+           ,@ApprovedById int = 0
+           ,@FleetOwnerId int = 0
+           ,@insupdflag varchar
+           ,@posTransId int output)
+as
+begin
+
+set @posTransId  = -1
+
+if @insupdflag = 'I'
+begin
+
+
+
+INSERT INTO [POSDashboard].[dbo].[BTPOSTransactions]
+           ([BTPOSId]
+           ,[Date]
+           ,[TotalAmount]
+           ,[AmountPaid]
+           ,[ChangeRendered]
+           ,[ChangeGiven]
+           ,[TransId]
+           ,[GatewayTransId]
+           ,[TransCode]
+           ,[PaymentCategoryId]
+           ,[PaymentTypeId]
+           ,[PaymentModeId]
+           ,[TransStatusId]
+           ,[TransDetails]
+           ,[noofSeats]
+           ,[unitPrice]
+           ,[luggageTypeId]
+           ,[luggageAmt]
+           ,[taxes]
+           ,[disc]
+           ,[TicketNo]
+           ,[SrcId]
+           ,[DestId]
+           ,[RouteId]
+           ,[OperatorId]
+           ,[TransApproved]
+           ,[Reason]
+           ,[ApprovedById]
+           ,[FleetOwnerId])
+     VALUES
+           (@BTPOSId
+           ,@Date
+           ,@TotalAmount
+           ,@AmountPaid
+           ,@ChangeRendered
+           ,@ChangeGiven
+           , @TransId
+           ,@GatewayTransId
+           ,(select 'POSTR'+ltrim(rtrim(STR((max(Id)+1)))) from [BTPOSTransactions])
+           ,@PaymentCategoryId
+           ,@PaymentTypeId
+           ,@PaymentModeId
+           ,@TransStatusId
+           ,@TransDetails
+           ,@noofSeats
+           ,@unitPrice
+           ,@luggageTypeId
+           ,@luggageAmt
+           ,@taxes
+           ,@disc
+           ,@TicketNo
+           ,@SrcId
+           ,@DestId
+           ,@RouteId
+           ,@OperatorId
+           ,@TransApproved
+           ,@Reason
+           ,@ApprovedById
+           ,@FleetOwnerId)   
+           
+           SELECT @posTransId = SCOPE_IDENTITY()
+           
+          
+end
+else
+if @insupdflag = 'U'
+begin
+
+UPDATE [POSDashboard].[dbo].[BTPOSTransactions]
+   SET [Date] = @Date
+      ,[TotalAmount] = @TotalAmount
+      ,[AmountPaid] = @AmountPaid
+      ,[ChangeRendered] = @ChangeRendered
+      ,[ChangeGiven] = @ChangeGiven
+      ,[TransId] = @TransId
+      ,[GatewayTransId] = @GatewayTransId
+      ,[TransCode] = @TransCode
+      ,[PaymentCategoryId] = @PaymentCategoryId
+      ,[PaymentTypeId] = @PaymentTypeId
+      ,[PaymentModeId] = @PaymentModeId
+      ,[TransStatusId] = @TransStatusId
+      ,[TransDetails] = @TransDetails
+      ,[noofSeats] = @noofSeats
+      ,[unitPrice] = @unitPrice
+      ,[luggageTypeId] = @luggageTypeId
+      ,[luggageAmt] = @luggageAmt
+      ,[taxes] = @taxes
+      ,[disc] = @disc
+      ,[TicketNo] = @TicketNo
+      ,[SrcId] = @SrcId
+      ,[DestId] = @DestId
+      ,[RouteId] = @RouteId
+      ,[OperatorId] = @OperatorId
+      ,[TransApproved] = @TransApproved
+      ,[Reason] = @Reason
+      ,[ApprovedById] = @ApprovedById
+      ,[FleetOwnerId] = @FleetOwnerId
+ WHERE  Id = @Id 
+ 
+end
+end
+Go

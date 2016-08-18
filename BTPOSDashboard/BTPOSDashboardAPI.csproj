@@ -436,6 +436,7 @@
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
+    <Content Include="UI\extra.html" />
     <Content Include="UI\FleetAvailability.html" />
     <Content Include="UI\FleetBtpos.html" />
     <Content Include="UI\FleetDetails.html" />
@@ -452,7 +453,9 @@
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
     <Content Include="UI\getregistrationform.html" />
+    <Content Include="UI\images\bkgRd3.png" />
     <Content Include="UI\images\dashboard.png" />
+    <Content Include="UI\Index_FO.html" />
     <Content Include="UI\InventoryItems.html" />
     <Content Include="UI\InventoryPurchases.html" />
     <Content Include="UI\InventorySales.html" />

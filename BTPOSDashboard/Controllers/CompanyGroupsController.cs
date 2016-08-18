@@ -121,7 +121,7 @@ namespace POSDBAccess.Controllers
                 gsab.Value = n.desc;
                 cmd.Parameters.Add(gsab);
 
-                SqlParameter gsac = new SqlParameter("@Id",SqlDbType.Int);
+                SqlParameter gsac = new SqlParameter("@Id", SqlDbType.Int);
                 gsac.Value = n.Id;
                 cmd.Parameters.Add(gsac);
 
@@ -192,14 +192,14 @@ namespace POSDBAccess.Controllers
                 gst.Value = n.State;
                 cmd.Parameters.Add(gst);
 
-                SqlParameter log = new SqlParameter();               
-                log.ParameterName = "@Logo";
-                log.SqlDbType = SqlDbType.VarChar;
-                ImageConverter imgCon = new ImageConverter();
-                log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
-                cmd.Parameters.Add(log);  
+                //SqlParameter log = new SqlParameter();               
+                //log.ParameterName = "@Logo";
+                //log.SqlDbType = SqlDbType.VarChar;
+                //ImageConverter imgCon = new ImageConverter();
+                //log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
+                //cmd.Parameters.Add(log);  
 
-                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar,1);
+                SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 1);
                 insupdflag.Value = n.insupdflag;
                 cmd.Parameters.Add(insupdflag);
 
@@ -210,7 +210,7 @@ namespace POSDBAccess.Controllers
             }
             catch (Exception ex)
             {
-                if(conn !=null && conn.State == ConnectionState.Open)
+                if (conn != null && conn.State == ConnectionState.Open)
                 {
                     conn.Close();
                 }

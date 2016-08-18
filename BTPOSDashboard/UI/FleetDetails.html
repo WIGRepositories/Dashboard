@@ -531,7 +531,7 @@
 
                                                                                 <div class="col-md-6">
                                                                                     <div>
-                                                                                        <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span>
+                                                                                        <input id="Description" type="text" class="form-control" ng-keypress="filterValue($event)" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span>
 
 
                                                                                     </div>
@@ -666,7 +666,7 @@
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-4 control-label">Seating Capacity <span class='require'>*</span></label>
 
-                                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.SeatingCapacity}}" ng-model="currVD.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
+                                                                                    <div class="col-md-6"><input id="Description" type="text" class="form-control" value="{{currVD.SeatingCapacity}}" ng-keypress="filterValue($event)"ng-model="currVD.newfleet.SeatingCapacity" /><span class="help-block"></span></div>
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <label for="Description" class="col-md-5 control-label">Date Of Registration:<span class='require'>*</span></label>
