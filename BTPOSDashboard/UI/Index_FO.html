@@ -28,7 +28,8 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetDashboardDS();" ng-model="dashboardDS">    
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetDashboardDS();" ng-model="dashboardDS">
+
     <!--BEGIN THEME SETTING-->
     <!--BEGIN BACK TO TOP-->
     <a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -47,8 +48,8 @@
                         <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
                             <li><p>You have 0 new alerts</p></li>
                         </ul>
-                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
-                            <li><p>{{A.Message}}</p></li>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li ng-repeat="A in dashboardDS.Table2"><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -56,8 +57,8 @@
                         <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
                             <li><p>You have 0 new notifications</p></li>
                         </ul>
-                        <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
-                            <li><p>{{A.Message}}</p></li>
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li ng-repeat="A in dashboardDS.Table1"><p>{{A.Message}}</p></li>
                         </ul>
                     </li>
                     <li class="dropdown topbar-user">
@@ -379,67 +380,74 @@
                                                         <div class="col-sm-6 col-md-3">
                                                             <div class="panel profit db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
                                                                 <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-shopping-cart"></i></p><h4 class="value"><span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0"></span><span>$</span></h4>
-                                                                    <p class="description">Profit description</p>
-                                                                    <div class="progress progress-sm mbn">
-                                                                        <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;" class="progress-bar progress-bar-success"><span class="sr-only">80% Complete (success)</span></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-3">
-                                                            <div class="panel income db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
-                                                                <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-money"></i></p><h4 class="value"><span>215</span><span>$</span></h4>
-                                                                    <p class="description">Income detail</p>
-                                                                    <div class="progress progress-sm mbn">
-                                                                        <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" class="progress-bar progress-bar-info"><span class="sr-only">60% Complete (success)</span></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-3">
-                                                            <div class="panel task db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
-                                                                <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-signal"></i></p><h4 class="value"><span>215</span></h4>
-                                                                    <p class="description">Task completed</p>
-                                                                    <div class="progress progress-sm mbn">
-                                                                        <div role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-danger"><span class="sr-only">50% Complete (success)</span></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-3">
-                                                            <div class="panel visit db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
-                                                                <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-group"></i></p><h4 class="value"><span>128</span></h4>
-                                                                    <p class="description">Visitor description</p>
-                                                                    <div class="progress progress-sm mbn">
-                                                                        <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;" class="progress-bar progress-bar-warning"><span class="sr-only">70% Complete (success)</span></div>
-                                                                    </div>
+                                                                    <p class="icon"><i class="icon fa fa-gears"></i></p><h3 class="value">
+                                                                        <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0"></span><span>0</span>
+                                                                    </h3>
+                                                                    <p class="description" data-toggle="tooltip" data-placement="right" title="BTPOS License:0 ,License Types:0, Advt License:0"><b>Licenses configured</b></p>
+                                                                    <a href="LicenseTypes.html"><button class="btn btn-danger" type="button">Configure Now</button></a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-md-3">
                                                             <div class="panel profit db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
                                                                 <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-shopping-cart"></i></p><h4 class="value"><span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0"></span><span>$</span></h4>
-                                                                    <p class="description">Fleet Owner</p>
-                                                                    <a href="FleetOwners.html"><button type="button" data-toggle="tooltip" data-placement="right" title="Fleet Owner">Click Me!</button></a>
-    <div class="progress progress-sm mbn">
-        <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;" class="progress-bar progress-bar-success"><span class="sr-only">80% Complete (success)</span></div>
-    </div>
-</div>
+                                                                    <p class="icon"><i class="icon fa fa-gears"></i></p><h3 class="value">
+                                                                        <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0"></span><span>0</span>
+                                                                    </h3>
+                                                                    <p class="description" data-toggle="tooltip" data-placement="right" title="Assigned:0 ,UnAssigned:0,InActive:0,Registerd:0,Total:0,UnRegisterd:0"><b>BT POS Procured</b></p>
+                                                                    <a href="InventoryPurchases.html"><button class="btn btn-danger" type="button">Enter Purchase order Now</button></a>
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6 col-md-3">
+                                                            <div class="panel profit db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
+                                                                <div class="panel-body">
+                                                                    <p class="icon"><i class="icon fa fa-gears"></i></p><h3 class="value">
+                                                                        <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0"></span><span>0</span>
+                                                                    </h3>
+                                                                    <p class="description"><b>Stops configured</b></p>
+                                                                    <a href="Stops.html"><button class="btn btn-danger" type="button">Configure Now</button></a>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6 col-md-3">
+                                                            <div class="panel profit db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
+                                                                <div class="panel-body">
+                                                                    <p class="icon"><i class="icon fa fa-gears"></i></p><h3 class="value">
+                                                                        <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0"></span><span>0</span>
+                                                                    </h3>
+                                                                    <p class="description" data-toggle="tooltip" data-placement="right" title="WebInGate Fo:2,ZupCo Fo:3,Unassigned routes:0,Total routes:0"><b>Routes configured</b></p>
+                                                                    <a href="Routes.html"><button class="btn btn-danger" type="button">Configure Now</button></a>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="sum_box" class="row mbl">
+                                                        <div class="col-sm-6 col-md-3">
                                                             <div class="panel income db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
                                                                 <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-money"></i></p><h4 class="value"><span>215</span><span>$</span></h4>
-                                                                    <p class="description">BTPOS Details</p>
-                                                                    <a href="BTPOSDetails.html"><button type="button" data-toggle="tooltip" data-placement="right" title="BTPOS Details">Click Me!</button></a>
-                                                                     <div class="progress progress-sm mbn">                                                                        
+                                                                    <p class="icon"><i class="icon fa fa-money"></i></p><h4 class="value"><span>0</span><span>$</span></h4>
+                                                                    <p class="description" data-toggle="tooltip" data-placement="right" title="FO License income:$10,BTPos license income:$15,Avt license income:$20,Tickets income:$20">Income & Expense Details</p>
+                                                                    <div class="progress progress-sm mbn">
                                                                         <div role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;" class="progress-bar progress-bar-info"><span class="sr-only">60% Complete (success)</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-3">
+                                                            <div class="panel visit db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
+                                                                <div class="panel-body">
+                                                                    <!--<div><input type="text"/></div>-->
+                                                                    <p class="icon"><i class="icon fa fa-group"></i></p><h4 class="value"><span>0</span></h4>
+                                                                    <p class="description" data-toggle="tooltip" data-placement="right" title="FleetOwner Name:CMP1,License Expired on:3/06/16">Fleet Owners</p>
+                                                                    <a href="FleetOwners.html"><button class="btn btn-danger" type="button">Details</button></a>
+                                                                    <div class="progress progress-sm mbn">
+                                                                        s
+                                                                        <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;" class="progress-bar progress-bar-warning"><span class="sr-only">70% Complete (success)</span></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -447,9 +455,9 @@
                                                         <div class="col-sm-6 col-md-3">
                                                             <div class="panel task db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
                                                                 <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-signal"></i></p><h4 class="value"><span>215</span></h4>
-                                                                    <p class="description">Alerts</p>
-                                                                    <a href="Alerts.html"><button type="button" data-toggle="tooltip" data-placement="right" title="Alerts">Click Me!</button></a>
+                                                                    <p class="icon"><i class="icon fa fa-signal"></i></p><h4 class="value"><span>0</span></h4>
+                                                                    <p class="description">Licenses Details</p>
+                                                                    <a href="LicenseDetails.html"><button class="btn btn-danger" type="button">Details</button></a>
                                                                     <div class="progress progress-sm mbn">
                                                                         <div role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-danger"><span class="sr-only">50% Complete (success)</span></div>
                                                                     </div>
@@ -459,15 +467,26 @@
                                                         <div class="col-sm-6 col-md-3">
                                                             <div class="panel visit db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
                                                                 <div class="panel-body">
-                                                                    <p class="icon"><i class="icon fa fa-group"></i></p><h4 class="value"><span>128</span></h4>
-                                                                    <p class="description">Notifications</p>
-                                                                    <a href="Notifications.html"><button type="button" data-toggle="tooltip" data-placement="right" title="Notifications">Click Me!</button></a>
+                                                                    <p class="icon"><i class="icon fa fa-group"></i></p><h4 class="value"><span>0</span></h4>
+                                                                    <p class="description" data-toggle="tooltip" data-placement="right" title="New:2,Assigned:3,Unassigned:0,Resolved:0,Pending:0, Need additional info:0,Invalid:0">Trouble Tickets</p>
+                                                                    <a href="TroubleTicketingDetails.html"><button class="btn btn-danger" type="button">Details</button></a>
                                                                     <div class="progress progress-sm mbn">
                                                                         <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;" class="progress-bar progress-bar-warning"><span class="sr-only">70% Complete (success)</span></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <!--<div class="col-sm-6 col-md-3">
+                                                            <div class="panel task db mbm" style="border: 8px solid #b8bac7; margin-bottom: 10px">
+                                                                <div class="panel-body">
+                                                                    <p class="icon"><i class="icon fa fa-signal"></i></p><h4 class="value"><span>0</span></h4>
+                                                                    <p class="description">Inventory Details</p>
+                                                                    <div class="progress progress-sm mbn">
+                                                                        <div role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;" class="progress-bar progress-bar-danger"><span class="sr-only">50% Complete (success)</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
                                                     </div>
 
                                                     <div style="border: 8px solid #b8bac7; margin-bottom: 10px; ">
@@ -476,7 +495,7 @@
                                                                 <div class="panel">
                                                                     <div class="portlet box">
                                                                         <div class="portlet-header">
-                                                                            <div class="caption">Scatter plot</div>
+                                                                            <div class="caption">InterBus</div>
                                                                             <!--<div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>-->
                                                                         </div>
                                                                         <div class="portlet-body">
@@ -489,7 +508,7 @@
                                                     </div>
 
 
-                                                    <div style="border: 8px solid #b8bac7; margin-bottom: 10px; ">
+                                                    <!--<div style="border: 8px solid #b8bac7; margin-bottom: 10px; ">
                                                         <div class="row mbl">
                                                             <div class="col-lg-12">
                                                                 <div class="panel">
@@ -497,9 +516,9 @@
                                                                         <div class="profile">
                                                                             <div style="margin-bottom: 15px" class="row">
                                                                                 <div class="col-xs-12 col-sm-8">
-                                                                                    <h2>John Doe</h2>
-                                                                                    <p><strong>About:</strong> Web Designer / UI.</p>
-                                                                                    <p><strong>Hobbies:</strong> Read, out with friends, listen to music, draw and learn new things.</p>
+                                                                                    <h2>{{uname}}</h2>
+                                                                                    <p><strong>About:</strong> Interbus administrator.</p>
+                                                                                    <p><strong>Tasks:</strong> Configure licenses, routes, fares, vehicle layouts, staff and roles.</p>
                                                                                     <p><strong class="mrs">Skills:</strong><span class="label label-green mrs">html5</span><span class="label label-green mrs">css3</span><span class="label label-green mrs">jquery</span></p>
                                                                                 </div>
                                                                                 <div class="col-xs-12 col-sm-4 text-center">
@@ -571,7 +590,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                     <div style="border: 8px solid #b8bac7; margin-bottom: 10px">
                                                         <div class="row mb">
                                                             <div class="col-lg-12">
@@ -584,39 +603,34 @@
                                                                             <li class="clearfix">
                                                                                 <span class="drag-drop"><i></i></span>
                                                                                 <div class="todo-check pull-left"><input type="checkbox" value="" /></div>
-                                                                                <div class="todo-title">Sed ut perspiciatis unde omnis iste</div>
+                                                                                <div class="todo-title">Configure license types, license pricing and license details</div>
                                                                                 <div class="todo-actions pull-right clearfix"><a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit"><i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o"></i></a></div>
                                                                             </li>
                                                                             <li class="clearfix">
                                                                                 <span class="drag-drop"><i></i></span>
                                                                                 <div class="todo-check pull-left"><input type="checkbox" value="" /></div>
-                                                                                <div class="todo-title">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium</div>
+                                                                                <div class="todo-title">Create stops, routes and configure routes with add stops </div>
                                                                                 <div class="todo-actions pull-right clearfix"><a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit"><i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o"></i></a></div>
                                                                             </li>
                                                                             <li class="clearfix">
                                                                                 <span class="drag-drop"><i></i></span>
                                                                                 <div class="todo-check pull-left"><input type="checkbox" value="" /></div>
-                                                                                <div class="todo-title">Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id</div>
+                                                                                <div class="todo-title">Enter the purchase order to enter the initial BT POS stock</div>
                                                                                 <div class="todo-actions pull-right clearfix"><a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit"><i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o"></i></a></div>
                                                                             </li>
                                                                             <li class="clearfix">
                                                                                 <span class="drag-drop"><i></i></span>
                                                                                 <div class="todo-check pull-left"><input type="checkbox" value="" /></div>
-                                                                                <div class="todo-title">Et harum quidem rerum facilis est</div>
+                                                                                <div class="todo-title">Configure staff and assign roles to the staff</div>
                                                                                 <div class="todo-actions pull-right clearfix"><a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit"><i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o"></i></a></div>
                                                                             </li>
                                                                             <li class="clearfix">
                                                                                 <span class="drag-drop"><i></i></span>
                                                                                 <div class="todo-check pull-left"><input type="checkbox" value="" /></div>
-                                                                                <div class="todo-title">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</div>
+                                                                                <div class="todo-title">Configure vehicle layouts and seating</div>
                                                                                 <div class="todo-actions pull-right clearfix"><a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit"><i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o"></i></a></div>
                                                                             </li>
-                                                                            <li class="clearfix">
-                                                                                <span class="drag-drop"><i></i></span>
-                                                                                <div class="todo-check pull-left"><input type="checkbox" value="" /></div>
-                                                                                <div class="todo-title">Excepteur sint occaecat cupidatat non proident</div>
-                                                                                <div class="todo-actions pull-right clearfix"><a href="#" class="todo-complete"><i class="fa fa-check"></i></a><a href="#" class="todo-edit"><i class="fa fa-edit"></i></a><a href="#" class="todo-remove"><i class="fa fa-trash-o"></i></a></div>
-                                                                            </li>
+
                                                                         </ul>
                                                                     </div>
                                                                 </div>
