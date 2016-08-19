@@ -12289,3 +12289,68 @@ UPDATE [POSDashboard].[dbo].[BTPOSTransactions]
 end
 end
 Go
+
+
+USE [POSDashboard]
+GO
+/****** Object:  StoredProcedure [dbo].[GetBTPOSDetails1]    Script Date: 08/19/2016 09:29:31 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[GetBTPOSDetails1]
+(@cmpId int = -1, @fleetownerId int =-1,@pageNum int = 5,@pageSize int = 10)
+AS
+BEGIN
+--declare Row_Number int 
+
+	
+--SELECT b.[Id]
+--      ,c.[Id] as CompanyId
+--      ,c.Name as companyname
+--      ,[POSID]
+--      ,[StatusId]
+--      ,t.Name as [status]
+--      ,[IMEI]
+--      ,[ipconfig]
+--      ,b.[active]
+--      ,u.FirstName + ' '+ u.LastName as fleetowner
+--      ,f.Id as fleetownerid
+--  FROM [POSDashboard].[dbo].[BTPOSDetails] b
+--  left outer join Types t on t.Id = statusid
+--  left outer join Company c on c.Id = CompanyId
+--  left outer join fleetowner f on f.id = FleetOwnerId 
+--  left outer join Users u on u.Id = f.userId 
+--where (c.Id = @cmpId or @cmpId = -1)
+--and(f.Id = @fleetownerId or @fleetownerId = -1)
+
+select COUNT(*) Row_count  from BTPOSDetails
+
+DECLARE @PageNumber AS INT, @RowspPage AS INT
+--SET @PageNumber = 2
+--SET @Pagesize = 10
+SELECT *  FROM (
+             SELECT ROW_NUMBER() OVER(ORDER BY b.Id) AS ROWNUMBER,
+      c.Name as companyname
+      ,[POSID]
+    
+      ,[StatusId]
+      ,t.Name as [status]
+      ,[IMEI]
+      ,[ipconfig]
+      ,b.[active]
+      ,u.FirstName + ' '+ u.LastName as fleetowner
+      ,f.Id as fleetownerid FROM BTPOSDetails b
+      left outer join Types t on t.Id = statusid
+  left outer join Company c on c.Id = CompanyId
+  left outer join fleetowner f on f.id = FleetOwnerId 
+  left outer join Users u on u.Id = f.userId 
+               ) AS TBL
+WHERE ROWNUMBER > ((@pageNum - 1) * @pageSize ) AND 
+ROWNUMBER <= (@pageNum * @Pagesize)
+end
+
+--exec [dbo].[GetBTPOSDetails] @pageNum = 6,@pageSize = 3
+
+/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSDetails]    Script Date: 07/18/2016 12:22:26 ******/
+SET ANSI_NULLS ON

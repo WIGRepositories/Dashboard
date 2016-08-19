@@ -373,29 +373,6 @@
 
                                                     </div>
 
-                                                    <!--<div class="row mbm">
-                                                    <!--<div class="col-xs-4">
-                                                        <label for="search">Page Number:</label>
-                                                        <input type="number" min="1" max="10" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize">
-                                                    </div>-->
-                                                    <!--<div style="height: 6%;">
-                                                        Page Size:
-                                                        <select onchange="onPageSizeChanged(this.value)">
-                                                            <option value="10">10</option>
-                                                            <option value="10">20</option>
-                                                            <option value="10">30</option>
-                                                            <option value="10">40</option>
-                                                            <option value="10">50</option>
-                                                            <option value="10">100</option>
-                                                            <option value="100">200</option>
-                                                            <option value="10">300</option>
-                                                            <option value="10">400</option>
-                                                            <option value="500" selected>500</option>
-
-                                                        </select>
-                                                    </div>-->
-                                                    <!--<div style="height: 94%;" id="myGrid" class="ag-fresh"></div>-->
-
 
 
 
@@ -576,9 +553,10 @@
                                                 <div class="col-lg-6">
                                                     <div class="pagination-panel" ng-init="GetBTPOSDetails();" >
                                                         Page
+                                                        <a href="#" class="btn btn-sm btn-default btn-prev" ><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
                                                         &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
-
-                                                        of {{ totalpages }} | View
+                                                        <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
+                                                        of {{ totalpages}} | View
                                                         &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize" ng-value="pagesize">
                                                             
                                                             <option value="5" selected="selected">5</option>
@@ -590,15 +568,18 @@
                                                             <option value="-1">All</option>
                                                         </select>&nbsp;
                                                         <div ng-model="BTPOSdetails1">
+                                                            <br />
                                                             <div ng-repeat="b in BTPOSdetails1">
-                                                                records | Found total {{b.Row_count}} records
 
-                                                         </div>
+
+                                                                Found total {{b.Row_count}} records
+
+                                                            </div>
                                                         </div>
                                                         
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 text-right">
+                                                <!--<div class="col-lg-6 text-right">
                                                     <div class="pagination-panel"ng-model="BTPOSdetails1">
                                                        
                                                             <ul class="pagination pagination-sm man">
@@ -612,7 +593,7 @@
                                                             </ul>
                                                        
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
                                             <!--cid, foid, pno, psize-->
                                            
@@ -677,7 +658,9 @@
                                         <div class="col-lg-6">
                                             <div class="pagination-panel" ng-init="GetBTPOSDetails();">
                                                 Page
+                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
                                                 &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
+                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
                                                 of {{ totalpages }} | View
                                                 &nbsp;<select class="form-control input-xsmall input-sm input-inline">
                                                     <option value="">select</option>
@@ -689,22 +672,22 @@
                                                     <option value="150">150</option>
                                                     <option value="-1">All</option>
                                                 </select>&nbsp;
-                                                <div ng-model="BTPOSdetails1">
+                                                <div ng-model="BTPOSdetails1"><br />
                                                     <div ng-repeat="b in BTPOSdetails1">
 
 
-                                                        records | Found total {{b.Row_count}} records
+                                                       Found total {{b.Row_count}} records
 
                                                     </div>
                                                 </div>
                                             </div>
                                           </div>
                                         <div style="align-content:center" class="col-lg-6">
-                                            Default Page:1
+                                            Default Page:{{ currpagefirst }}
                                         </div>
                                         <div class="col-lg-6 text-right">
 
-                                            <div class="pagination-panel">
+                                            <!--<div class="pagination-panel">
                                                 <ul class="pagination pagination-sm man">
                                                     <li><a href="#" ng-click="perviousPage();">&laquo;</a></li>
                                                     <li><a href="#" ng-click="Paging(cId,  foId,  pno, psize)">1</a></li>
@@ -714,7 +697,7 @@
                                                     <li><a href="#" ng-click="paging(cid, foid, pno, psize)">5</a></li>
                                                     <li><a href="#" ng-click="nextPage();">&raquo;</a></li>
                                                 </ul>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
 
