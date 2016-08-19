@@ -36,15 +36,17 @@ $scope.GetLicenseCategories = function () {
 }
   
 $scope.GetLicenseFeatures = function () {
-    var selCat = $scope.l;
+  //  var selCat = $scope.l;
 
     if (selCat == null) {
-        $scope.ldetails = null;
+        $scope.features = null;
         return;
     }
+   
 
     $http.get('http://localhost:1476/api/LicenseDetails/getLicenseDetails?catId=' + selCat.Id).then(function (res, data) {
         $scope.features = res.data;
+        //$('input[name *= "FeatureName"]').attr("disabled", true);
     });
 }
 $scope.saveLicenseType = function (licenseType, flag) {

@@ -12291,14 +12291,14 @@ end
 Go
 
 
-USE [POSDashboard]
+
 GO
 /****** Object:  StoredProcedure [dbo].[GetBTPOSDetails1]    Script Date: 08/19/2016 09:29:31 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[GetBTPOSDetails1]
+create PROCEDURE [dbo].[GetBTPOSDetails1]
 (@cmpId int = -1, @fleetownerId int =-1,@pageNum int = 5,@pageSize int = 10)
 AS
 BEGIN
