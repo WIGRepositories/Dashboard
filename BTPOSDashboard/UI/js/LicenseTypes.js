@@ -11,7 +11,8 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.dashboardDS = $localStorage.dashboardDS;
 $scope.GetLicenseCat = function () {
     $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
-        $scope.LicenseCat = res.data;            
+        $scope.LicenseCat = res.data;
+       // $scope.LicenseCat= GetLicenseCategoriess();
     });
 }
 
@@ -37,7 +38,7 @@ $scope.GetLicenseCategories = function () {
   
 }
 var range = [];
-$scope.GetLicenseCategories = function () {
+$scope.GetLicenseCategoriess = function () {
     $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
         $scope.lcat = res.data;
         document.getElementById('btnAdd').disabled = true;
@@ -45,6 +46,10 @@ $scope.GetLicenseCategories = function () {
 
     $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
         $scope.FreqTypes = res.data;
+    });
+    $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
+        $scope.Lfeatures = res.data;
+        //$('input[name *= "FeatureName"]').attr("disabled", true);
     });
 
 
@@ -54,21 +59,21 @@ $scope.GetLicenseCategories = function () {
     $scope.range = range;
 }
   
-$scope.GetLFeatures = function () {
-  //  var selCat = $scope.l;
+//$scope.GetLFeatures = function () {
+//  //  var selCat = $scope.l;
 
-    //if (selCat == null)
-    //{
-    //    $scope.features = null;
-    //    return;
-    //}
+//    //if (selCat == null)
+//    //{
+//    //    $scope.features = null;
+//    //    return;
+//    //}
    
-    $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
-        $scope.Lfeatures = res.data;
-        //$('input[name *= "FeatureName"]').attr("disabled", true);
-    });
+//    $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
+//        $scope.Lfeatures = res.data;
+//        //$('input[name *= "FeatureName"]').attr("disabled", true);
+//    });
 
-}
+//}
 $scope.saveLicenseType = function (licenseType, flag) {
 
     if (licenseType == null) {
@@ -85,6 +90,10 @@ $scope.saveLicenseType = function (licenseType, flag) {
         return;
     }
 
+    //if (FreqTypes == null) {
+    //    alert('Please enter values.');
+    //    return;
+    //}
 
     var currLicenseType = {
 
@@ -93,11 +102,67 @@ $scope.saveLicenseType = function (licenseType, flag) {
         Desc: licenseType.Description,
         LicenseCategoryId: $scope.s.Id,
         Active: 1, // licenseType.Active
-        //LicenseFrequency: FreqTypes.LicenseFrequency,
-        //Renewalfrequency: FreqTypes.Renewalfrequency,
-        //UnitPrice: FreqTypes.UnitPrice,
-        //FromDate:FreqTypes. FromDate,
-        //ToDate: FreqTypes.ToDate
+        //LicenseId: licenseType.LicenseId,
+        //LicenseFrequency: licenseType.LicenseFrequency,
+        //Renewalfrequency: licenseType.Renewalfrequency,
+        //UnitPrice: licenseType.UnitPrice,
+       // FromDate: licenseType.FromDate,
+       // ToDate: licenseType.ToDate
+    };
+
+    var req = {
+        method: 'POST',
+        url: 'http://localhost:1476/api/License/SaveLicenseType',
+        data: currLicenseType
+    }
+    $http(req).then(function (response) {
+
+        $scope.showDialog("Saved successfully!");
+
+        $scope.Group = null;
+
+    }, function (errres) {
+        var errdata = errres.data;
+        var errmssg = "";
+        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+        $scope.showDialog(errmssg);
+    });
+    $scope.currGroup = null;
+};
+$scope.saveLicenseType1 = function (licenseType, flag) {
+
+    if (licenseType == null) {
+        alert('Please enter values.');
+        return;
+    }
+
+    if (licenseType.LicenseType == null) {
+        alert('Please enter license type.');
+        return;
+    }
+    if ($scope.s == null) {
+        alert('Please select category.');
+        return;
+    }
+
+    //if (FreqTypes == null) {
+    //    alert('Please enter values.');
+    //    return;
+    //}
+
+    var currLicenseType = {
+
+        Id: (flag == 'I') ? '-1' : licenseType.Id,
+        LicenseType: licenseType.LicenseType,
+        Desc: licenseType.Description,
+        LicenseCategoryId: $scope.s.Id,
+        Active: 1, // licenseType.Active
+        LicenseId: licenseType.LicenseId,
+        LicenseFrequency: licenseType.LicenseFrequency,
+        Renewalfrequency: licenseType.Renewalfrequency,
+        UnitPrice: licenseType.UnitPrice,
+         FromDate: licenseType.FromDate,
+         ToDate: licenseType.ToDate
     };
 
     var req = {
