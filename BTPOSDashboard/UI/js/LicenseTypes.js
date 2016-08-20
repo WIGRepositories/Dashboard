@@ -32,22 +32,42 @@ $scope.GetLicenseCategories = function () {
 
     $http.get('http://localhost:1476/api/subcategory/getsubcategory?catid=' + 6).then(function (res, data) {
         $scope.SubCategories = res.data;
+
     });
+  
+}
+var range = [];
+$scope.GetLicenseCategories = function () {
+    $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+        $scope.lcat = res.data;
+        document.getElementById('btnAdd').disabled = true;
+    });
+
+    $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
+        $scope.FreqTypes = res.data;
+    });
+
+
+    for (var i = 1; i <= 100; i++) {
+        range.push(i);
+    }
+    $scope.range = range;
 }
   
-$scope.GetLicenseFeatures = function () {
+$scope.GetLFeatures = function () {
   //  var selCat = $scope.l;
 
-    if (selCat == null) {
-        $scope.features = null;
-        return;
-    }
+    //if (selCat == null)
+    //{
+    //    $scope.features = null;
+    //    return;
+    //}
    
-
-    $http.get('http://localhost:1476/api/LicenseDetails/getLicenseDetails?catId=' + selCat.Id).then(function (res, data) {
-        $scope.features = res.data;
+    $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
+        $scope.Lfeatures = res.data;
         //$('input[name *= "FeatureName"]').attr("disabled", true);
     });
+
 }
 $scope.saveLicenseType = function (licenseType, flag) {
 
@@ -72,7 +92,12 @@ $scope.saveLicenseType = function (licenseType, flag) {
         LicenseType: licenseType.LicenseType,
         Desc: licenseType.Description,
         LicenseCategoryId: $scope.s.Id,
-        Active: 1// licenseType.Active
+        Active: 1, // licenseType.Active
+        //LicenseFrequency: FreqTypes.LicenseFrequency,
+        //Renewalfrequency: FreqTypes.Renewalfrequency,
+        //UnitPrice: FreqTypes.UnitPrice,
+        //FromDate:FreqTypes. FromDate,
+        //ToDate: FreqTypes.ToDate
     };
 
     var req = {

@@ -12305,24 +12305,7 @@ BEGIN
 --declare Row_Number int 
 
 	
---SELECT b.[Id]
---      ,c.[Id] as CompanyId
---      ,c.Name as companyname
---      ,[POSID]
---      ,[StatusId]
---      ,t.Name as [status]
---      ,[IMEI]
---      ,[ipconfig]
---      ,b.[active]
---      ,u.FirstName + ' '+ u.LastName as fleetowner
---      ,f.Id as fleetownerid
---  FROM [POSDashboard].[dbo].[BTPOSDetails] b
---  left outer join Types t on t.Id = statusid
---  left outer join Company c on c.Id = CompanyId
---  left outer join fleetowner f on f.id = FleetOwnerId 
---  left outer join Users u on u.Id = f.userId 
---where (c.Id = @cmpId or @cmpId = -1)
---and(f.Id = @fleetownerId or @fleetownerId = -1)
+
 
 select COUNT(*) Row_count  from BTPOSDetails
 
