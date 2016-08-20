@@ -219,6 +219,8 @@ CREATE TABLE [dbo].[Company](
 	[State] [varchar](50) NULL,
 	[FleetSize] [int] NULL,
 	[StaffSize] [int] NULL,
+	[PermanentAddress] [varchar](500) NULL,
+	[TemporaryAddress] [varchar](500) NULL,
 	[AddressId] [int] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
@@ -2078,7 +2080,11 @@ SELECT distinct c.[active]
       ,[Caption]
       ,[Country]
       ,[ZipCode]
-      ,[State]      
+      ,[State] 
+	   ,[FleetSize]
+      ,[StaffSize]
+      ,[PermanentAddress]
+      ,[TemporaryAddress]     
       ,c.[Id]
       ,[Name]
   FROM [POSDashboard].[dbo].[Company] c
@@ -2109,8 +2115,10 @@ create procedure [dbo].[InsUpdDelCompany](
 @Country varchar(50)= null,
 @ZipCode int = null,
 @State varchar(50),
---@FleetSize int ,
---@StaffSize int,
+@FleetSize int ,
+@StaffSize int,
+@PermanentAddress varchar(500),
+@TemporaryAddress varchar(500),
 @insupdflag varchar(1),
 @userid int = -1
 )
@@ -2137,7 +2145,8 @@ if @insupdflag = 'I'
 
 			if @cnt = 0 
 			begin
-			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State)
+			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State,StaffSize,FleetSize,PermanentAddress,
+			TemporaryAddress) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State,@StaffSize,@FleetSize,@PermanentAddress,@TemporaryAddress)
 			
 			SELECT @newCmpId = SCOPE_IDENTITY()
 			
@@ -2186,7 +2195,7 @@ else
 				if @cnt = 0 
 				begin
 					update Company
-					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId = @EmailId,ContactNo1 =@ContactNo1,active = @active
+					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId = @EmailId,ContactNo1 =@ContactNo1,ContactNo2=@ContactNo2,Fax=@Fax,Title=@Title,Caption=@Caption,Country=@Country,ZipCode=@ZipCode,State=@State,FleetSize=@FleetSize,StaffSize=@StaffSize,PermanentAddress=@PermanentAddress,TemporaryAddress=@TemporaryAddress,active = @active
 					where Id = @Id						
 						
 						--insert into edit history
