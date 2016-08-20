@@ -355,7 +355,7 @@
                                         <div>
                                             <div id="tab-general">
                                                 <label for="inputMiddleName" class="col-md-3">Block List:<span class='require'>*</span></label>
-                                                <select class="col-md-3"  ng-model="selectedId" ng-change="GetBlockDetails();">
+                                                <select class="col-md-3" ng-model="selectedId" ng-change="GetBlockDetails(selectedId);">
                                                     <option value="0">select</option>
                                                     <option value="1">Company</option>
                                                     <option value="2">Users</option>
@@ -389,18 +389,19 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="B in blocklist" class="gradeA">
+                                                        <tr ng-repeat="B in blocklist" ng-model="myseclval" class="gradeA">
                                                             <td>
                                                                 <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(B, checkedArr)" ng-click="toggle(B, checkedArr);" />
                                                             </td>
 
-                                                            <td>{{B.Item}}</td>
-                                                            <td>{{B.BlockedBy}}</td>
-                                                            <td>{{B.BlockedOn}}</td>
+                                                            <td>{{B.Name}}</td>
+                                                            <td>{{B.Code}}</td>
+                                                            <td>{{B.Address}}</td>
                                                             <td>{{B.Reason}}</td>
 
 
                                                         </tr>
+
                                                     </tbody>
                                                 </table>
 

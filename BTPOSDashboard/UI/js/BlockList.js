@@ -13,15 +13,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.blocklist = [];   
 
 
-    $scope.Getblocklist = function () {
+    //$scope.Getblocklist = function () {
 
-        $http.get('http://localhost:1476/api/blocklistnew/Getblocklist').then(function (response, req) {
-            $scope.blocklist = response.data;
+    //    //$http.get('http://localhost:1476/api/blocklistnew/Getblocklist').then(function (response, req) {
+    //        $scope.blocklist = response.data;
 
-        });
-    }
+    //    });
+    //}
 
-    $scope.GetBlockDetails = function () {
+    $scope.GetBlockDetails = function (selectedId) {
 
         if ($scope.selectedId == null) {
             $scope.blocklist = null;
@@ -30,7 +30,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         $http.get('http://localhost:1476/api/blocklistnew/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
             
-                $scope.blocklist = res.data;
+            $scope.blocklist = res.data;
             
         });
     }
