@@ -8900,6 +8900,13 @@ create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
            @FleetSize int,         
            @Gender varchar(20),      
            @Address varchar(50),
+		   @FleetStaff int,
+      @Country varchar(50),
+      @Code varchar(50),
+      @Fax varchar(50),
+      @PermanentAddress varchar(500),
+      @TemporaryAddres varchar(500),
+      @state varchar (50),
            @insupdflag varchar(10)
            )
  
@@ -8918,7 +8925,14 @@ INSERT INTO [dbo].[FleetOwnerRequestDetails]
            ,[CompanyEmployeSize]
              ,[FleetSize]      
               ,[Gender]        
-              ,[Address])
+              ,[Address]
+			  ,[FleetStaff]
+      ,[Country]
+      ,[Code]
+      ,[Fax]
+      ,[PermanentAddress]
+      ,[TemporaryAddres]
+      ,[state])
      VALUES
           (@FirstName    
            ,@LastName
@@ -8930,7 +8944,14 @@ INSERT INTO [dbo].[FleetOwnerRequestDetails]
            ,@CompanyEmployeSize 
            ,@FleetSize     
           , @Gender   
-          , @Address)
+          , @Address
+		  ,@FleetStaff
+     ,@Country
+      ,@Code 
+      ,@Fax
+      ,@PermanentAddress 
+      ,@TemporaryAddres
+      ,@state)
           
   end
   
