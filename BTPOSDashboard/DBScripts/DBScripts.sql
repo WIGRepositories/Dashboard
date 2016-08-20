@@ -11499,62 +11499,168 @@ GO
 
 
 GO
-/****** Object:  StoredProcedure [dbo].[GetBlockListNew]    Script Date: 07/23/2016 07:20:16 ******/
+/****** Object:  StoredProcedure [dbo].[GetBlockListNew]    Script Date: 08/20/2016 09:15:49 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE [dbo].[GetBlockListNew]
+ALTER PROCEDURE [dbo].[GetBlockListNew]
 (@selectedId int)
 AS
 BEGIN
 
-if  @selectedId = 1
+if @selectedId =1
+begin                                                            
+SELECT 
+cmp.Name as ItemName
+      ,[ItemId]
+      ,[ItemTypeId]
+      ,[Formdate]
+      ,[Todate]   
+      ,[Reason]
+      ,[Blockedby]
+      ,[UnBlockedby]
+      ,[Blockedon]
+      ,[UnBlockedon]
+  FROM company cmp
+  left outer join 
+  [POSDashboard].[dbo].[Blocklist] bl
+  on cmp.id = bl.ItemId
+  and ItemTypeId = 1
+end
+else
 
-select * from Company
-
-else if @selectedId =2
-
-select * from Users
-
-else if @selectedId =3
-
-select * from BTPOSDetails
-
-else if @selectedId = 4
-
-select * from Routes 
-
-else if @selectedId = 5
-
-select * from Stops
+if @selectedId =2
+begin
+SELECT 
+u.FirstName+' '+ u.lastname as ItemName
+      ,[ItemId]
+      ,[ItemTypeId]
+      ,[Formdate]
+      ,[Todate]   
+      ,[Reason]
+      ,[Blockedby]
+      ,[UnBlockedby]
+      ,[Blockedon]
+      ,[UnBlockedon]
+  FROM users u
+  left outer join 
+  [POSDashboard].[dbo].[Blocklist] bl
+  on u.id = bl.ItemId
+  and ItemTypeId = 1
  
 END
 
---INSERT INTO [POSDashboard].[dbo].[BtposPayment]
---           ([PosId]
---           ,[DateTime]
---           ,[Amount]
---           ,[TransactionId]
---           ,[TransactionTypeId]
---           ,[OperatorId]
---           ,[StatusId]
---           ,[GatewayId]
---           ,[Deatails])
---     VALUES
---           (PosId, varchar(50)
---           ,DateTime, datetime
---           ,Amount, int
---           ,TransactionId, nvarchar(50)
---           ,TransactionTypeId, int
---           ,OperatorId, int
---           ,StatusId, int
---           ,GatewayId, int
---           ,Deatails, varchar(50)
+if @selectedId =3
+begin
+SELECT 
+u.FirstName+' '+ u.lastname as ItemName
+      ,[ItemId]
+      ,[ItemTypeId]
+      ,[Formdate]
+      ,[Todate]   
+      ,[Reason]
+      ,[Blockedby]
+      ,[UnBlockedby]
+      ,[Blockedon]
+      ,[UnBlockedon]
+  FROM FleetOwner f
+  inner join users u on u.Id = f.UserId
+  left outer join 
+  [POSDashboard].[dbo].[Blocklist] bl
+  on u.id = bl.ItemId
+  and ItemTypeId = 3
+ 
+END
+
+if @selectedId =4
+begin
+SELECT 
+b.POSID as ItemName
+      ,[ItemId]
+      ,[ItemTypeId]
+      ,[Formdate]
+      ,[Todate]   
+      ,[Reason]
+      ,[Blockedby]
+      ,[UnBlockedby]
+      ,[Blockedon]
+      ,[UnBlockedon]
+  FROM BTPOSDetails b
+  left outer join 
+  [POSDashboard].[dbo].[Blocklist] bl
+  on b.id = bl.ItemId
+  and ItemTypeId = 4
+ 
+END
+
+if @selectedId =5
+begin
+SELECT 
+r.RouteName as ItemName
+      ,[ItemId]
+      ,[ItemTypeId]
+      ,[Formdate]
+      ,[Todate]   
+      ,[Reason]
+      ,[Blockedby]
+      ,[UnBlockedby]
+      ,[Blockedon]
+      ,[UnBlockedon]
+  FROM Routes r
+  left outer join 
+  [POSDashboard].[dbo].[Blocklist] bl
+  on r.id = bl.ItemId
+  and ItemTypeId = 5
+ 
+END
+
+if @selectedId =6
+begin
+SELECT 
+s.Name as ItemName
+      ,[ItemId]
+      ,[ItemTypeId]
+      ,[Formdate]
+      ,[Todate]   
+      ,[Reason]
+      ,[Blockedby]
+      ,[UnBlockedby]
+      ,[Blockedon]
+      ,[UnBlockedon]
+  FROM stops s
+  left outer join 
+  [POSDashboard].[dbo].[Blocklist] bl
+  on s.id = bl.ItemId
+  and ItemTypeId = 6
+ 
+END
+
+if @selectedId =7
+begin
+SELECT 
+u.LoginInfo as ItemName
+      ,[ItemId]
+      ,[ItemTypeId]
+      ,[Formdate]
+      ,[Todate]   
+      ,[Reason]
+      ,[Blockedby]
+      ,[UnBlockedby]
+      ,[Blockedon]
+      ,[UnBlockedon]
+  FROM UserLogins u
+  left outer join 
+  [POSDashboard].[dbo].[Blocklist] bl
+  on u.id = bl.ItemId
+  and ItemTypeId = 7
+ 
+END
+ 
+END
 
 
---/****** Object:  StoredProcedure [dbo].[InsUpdDelUserLicenseDetails]    Script Date: 07/24/2016 22:33:52 ******/
---SET ANSI_NULLS ON
+
 GO
 SET QUOTED_IDENTIFIER ON
 GO
@@ -12322,8 +12428,9 @@ Go
 
 
 
+
 GO
-/****** Object:  StoredProcedure [dbo].[GetBTPOSDetails1]    Script Date: 08/19/2016 09:29:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetBTPOSDetails1]    Script Date: 08/20/2016 17:59:37 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12335,7 +12442,24 @@ BEGIN
 --declare Row_Number int 
 
 	
-
+--SELECT b.[Id]
+--      ,c.[Id] as CompanyId
+--      ,c.Name as companyname
+--      ,[POSID]
+--      ,[StatusId]
+--      ,t.Name as [status]
+--      ,[IMEI]
+--      ,[ipconfig]
+--      ,b.[active]
+--      ,u.FirstName + ' '+ u.LastName as fleetowner
+--      ,f.Id as fleetownerid
+--  FROM [POSDashboard].[dbo].[BTPOSDetails] b
+--  left outer join Types t on t.Id = statusid
+--  left outer join Company c on c.Id = CompanyId
+--  left outer join fleetowner f on f.id = FleetOwnerId 
+--  left outer join Users u on u.Id = f.userId 
+--where (c.Id = @cmpId or @cmpId = -1)
+--and(f.Id = @fleetownerId or @fleetownerId = -1)
 
 select COUNT(*) Row_count  from BTPOSDetails
 

@@ -1464,6 +1464,34 @@ namespace BTPOSDashboardAPI.Models
         public int LicenseCategoryId { set; get; }
 
     }
+
+   
+          
+           
+    public class LicenseTypes1
+    {
+        public List<licenses> lltypes { get; set; }
+        public int Id { set; get; }
+        public int Active { set; get; }
+        public string LicenseType { set; get; }
+        public string Desc { set; get; }
+        public string LicenseCategory { set; get; }
+        public int LicenseCategoryId { set; get; }
+    }
+    public class licenses
+    {
+        public int LicenseId { set; get; }
+        public int RenewalFreqTypeId { set; get; }
+
+        public int RenewalFreq { set; get; }
+        public Decimal UnitPrice { set; get; }
+        public DateTime fromdate { set; get; }
+
+        public DateTime todate { set; get; }        
+
+        public char insupddelflag { set; get; }
+
+    }
     public class Inventory
     {
         public int Active { set; get; }

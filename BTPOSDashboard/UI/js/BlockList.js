@@ -10,7 +10,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
-    $scope.blocklist = [];   
+    //$scope.blocklist = [];   
 
 
     //$scope.Getblocklist = function () {
@@ -21,17 +21,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     //    });
     //}
 
-    $scope.GetBlockDetails = function (selectedId) {
+    $scope.GetBlockDetails = function () {
 
         if ($scope.selectedId == null) {
             $scope.blocklist = null;
             return;
         }
+       if ($scope.selectedId == null) {
+           $scope.blocklist1 = null;
+                return;
+        }
 
         $http.get('http://localhost:1476/api/blocklistnew/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
             
             $scope.blocklist = res.data;
-            
+          
         });
     }
 

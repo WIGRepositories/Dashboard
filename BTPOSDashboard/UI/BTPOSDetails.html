@@ -571,100 +571,162 @@
                                             </div>
 
                                             </div>
-                                        
-                                            <!--<div class="row mbm">
+                                            <div class="row mbm">
                                                 <div class="col-lg-6">
-                                                    <div class="pagination-panel">
+                                                    <div class="pagination-panel" ng-init="GetBTPOSDetails();">
                                                         Page
-                                                        &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
-                                                        of 6 | View
-                                                        &nbsp;<select class="form-control input-xsmall input-sm input-inline">
-                                                            <option value="20" selected="selected">20</option>
+                                                        <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
+                                                        &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
+                                                        <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
+                                                        of {{ totalpages}} | View
+                                                        &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize" ng-value="pagesize">
+
+                                                            <option value="5" selected="selected">5</option>
+                                                            <option value="10">10</option>
+                                                            <option value="20">20</option>
                                                             <option value="50">50</option>
                                                             <option value="100">100</option>
                                                             <option value="150">150</option>
                                                             <option value="-1">All</option>
                                                         </select>&nbsp;
-                                                        records | Found total 58 records
+                                                        <div ng-model="BTPOSdetails1">
+                                                            <br />
+                                                            <div ng-repeat="b in BTPOSdetails1">
+
+                                                                Found total {{b.Row_count}} records
+
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 text-right">
-                                                    <div class="pagination-panel">
-                                                        <ul class="pagination pagination-sm man">
-                                                            <li><a href="#">&laquo;</a></li>
-                                                            <li><a href="#">1</a></li>
-                                                            <li><a href="#">2</a></li>
-                                                            <li><a href="#">3</a></li>
-                                                            <li><a href="#">4</a></li>
-                                                            <li><a href="#">5</a></li>
-                                                            <li><a href="#">&raquo;</a></li>
-                                                        </ul>
+
+                                                <!--<div class="row mbm">
+            <div class="col-lg-6">
+                <div class="pagination-panel">
+                    Page
+                    &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-left"></i></a>&nbsp;<input type="text" maxlenght="5" value="1" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><i class="fa fa-angle-right"></i></a>&nbsp;
+                    of 6 | View
+                    &nbsp;<select class="form-control input-xsmall input-sm input-inline">
+                        <option value="20" selected="selected">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="-1">All</option>
+                    </select>&nbsp;
+                    records | Found total 58 records
+                </div>
+            </div>
+            <div class="col-lg-6 text-right">
+                <div class="pagination-panel">
+                    <ul class="pagination pagination-sm man">
+                        <li><a href="#">&laquo;</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>-->
+        </div><table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+    <thead>
+        <tr>
+
+            <th>POSID</th>
+            <th>IMEI</th>
+            <th>Company Name</th>
+            <th>IP Config</th>
+            <th>Fleet Owner</th>
+            <th>Status</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr ng-repeat="pos in BTPOS1.Table1" class="gradeA">
+            <td>{{pos.POSID}}</td>
+            <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);" /></td>
+
+            <td>{{pos.companyname}}</td>
+            <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" ng-change="addpos(pos);" /></td>
+            <td>{{pos.fleetowner}}</td>
+            <td>
+                <span class="label label-sm label-success" ng-if="pos.StatusId == 2">
+                    {{pos.status}}
+                </span>
+                <span class="label label-sm label-info" ng-if="pos.StatusId == 4">
+                    {{pos.status}}
+                </span>
+                <span class="label label-sm label-warning" ng-if="pos.StatusId == 1">
+                    {{pos.status}}
+                </span>
+                <span class="label label-sm label-danger" ng-if="pos.StatusId == 3">
+                    {{pos.status}}
+                </span>
+            </td>
+            <td>
+
+                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
+                    <i class="fa fa-edit"></i>&nbsp;
+                    Edit
+                </button>
+            </td>
+
+        </tr>
+
+
+    </tbody>
+
+
+</table>
+
+
+                                            </div>
+
+                                </div>
+                                    <br />
+                                    <div class="row mbm">
+                                        <div class="col-lg-6">
+                                            <div class="pagination-panel" ng-init="GetBTPOSDetails();">
+                                                Page
+                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
+                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
+                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
+                                                of {{ totalpages}} | View
+                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize" ng-value="pagesize">
+
+                                                    <option value="5" selected="selected">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                    <option value="150">150</option>
+                                                    <option value="-1">All</option>
+                                                </select>&nbsp;
+                                                <div ng-model="BTPOSdetails1">
+                                                    <br />
+                                                    <div ng-repeat="b in BTPOSdetails1">
+
+                                                        Found total {{b.Row_count}} records
+
                                                     </div>
                                                 </div>
-                                            </div>-->  
-                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                            <thead>
-                                                <tr>
 
-                                                    <th>POSID</th>
-                                                    <th>IMEI</th>
-                                                    <th>Company Name</th>
-                                                    <th>IP Config</th>
-                                                    <th>Fleet Owner</th>
-                                                    <th>Status</th>
-                                                    <th>Update</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                            </div>
+                                        </div>
 
-                                                <tr ng-repeat="pos in BTPOS1" class="gradeA">
-                                                    <td>{{pos.POSID}}</td>
-                                                    <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);" /></td>
 
-                                                    <td>{{pos.companyname}}</td>
-                                                    <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" ng-change="addpos(pos);" /></td>
-                                                    <td>{{pos.fleetowner}}</td>
-                                                    <td>
-                                                        <span class="label label-sm label-success" ng-if="pos.StatusId == 2">
-                                                            {{pos.status}}
-                                                        </span>
-                                                        <span class="label label-sm label-info" ng-if="pos.StatusId == 4">
-                                                            {{pos.status}}
-                                                        </span>
-                                                        <span class="label label-sm label-warning" ng-if="pos.StatusId == 1">
-                                                            {{pos.status}}
-                                                        </span>
-                                                        <span class="label label-sm label-danger" ng-if="pos.StatusId == 3">
-                                                            {{pos.status}}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
-                                                            <i class="fa fa-edit"></i>&nbsp;
-                                                            Edit
-                                                        </button>
-                                                    </td>
+                                        <div class="modal-footer">
 
-                                                </tr>
+                                            <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
 
-                                            </tbody>
-
-                                        </table>
+                                            <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                        </div>
 
 
                                     </div>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                   
-                                    <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
-
-                                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
-                                    </div>
-                                
-                                    
-                                </div>
 
                             </div>
                     </div>
@@ -728,7 +790,9 @@
 <script src="js/angular.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
 <script src="js/ngStorage.js"></script>
-<script src="js/BTPOSDetails.js"></script>
+<!--<script src="js/BTPOSDetails.js"></script>-->
+                        <script src="js/Btposdetails1.js"></script>
+
 
 
 </body>
