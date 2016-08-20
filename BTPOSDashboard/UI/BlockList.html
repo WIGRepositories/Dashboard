@@ -389,20 +389,18 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="B in blocklist" ng-model="myseclval" class="gradeA">
+                                                        <tr ng-repeat="B in blocklist" ng-model="selectedId" class="gradeA">
                                                             <td>
                                                                 <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(B, checkedArr)" ng-click="toggle(B, checkedArr);" />
                                                             </td>
 
-                                                            <td>{{B.Name}}</td>
-                                                            <td>{{B.Code}}</td>
-                                                            <td>{{B.Address}}</td>
+                                                            <td>{{B.ItemName}}</td>
+                                                            <td>{{B.BlockedBy}}</td>
+                                                            <td>{{B.BlockedOn}}</td>
                                                             <td>{{B.Reason}}</td>
-
-
                                                         </tr>
-
-                                                    </tbody>
+                                                        </tbody>                                                      
+                                                
                                                 </table>
 
 
