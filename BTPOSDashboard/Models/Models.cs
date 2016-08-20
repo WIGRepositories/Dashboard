@@ -554,7 +554,11 @@ namespace BTPOSDashboardAPI.Models
         public int ZipCode { get; set; }
         public string State { get; set; }
 
-        public string Logo { get; set; }
+        public int FleetSize{get;set;}
+        public int StaffSize{get;set;}
+        public string PermanentAddress {get;set;}
+        public string TemporaryAddress{get;set;} 
+       // public string Logo { get; set; }
 
         public string insupdflag { get; set; }
 

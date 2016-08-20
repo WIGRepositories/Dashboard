@@ -51,8 +51,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Country:Group.Country,
             ZipCode:Group.ZipCode,
             State: Group.State,
+            FleetSize:Group.FleetSize,
+            StaffSize:Group.StaffSize,
+            PermanentAddress:Group.PermanentAddress,
+            TemporaryAddress:Group.TemporaryAddress,
             //Logo: Group.Logo,
-            active: (Group.active == false)? 1 : 0,
+            active: (Group.active == true)? 1 : 0,
             insupdflag:flag 
         }
         
@@ -110,6 +114,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             Country:Group.Country,
             ZipCode:Group.ZipCode,
             State: Group.State,
+            FleetSize: Group.FleetSize,
+            StaffSize: Group.StaffSize,
+            PermanentAddress: Group.PermanentAddress,
+            TemporaryAddress: Group.TemporaryAddress,
             //Logo:Group.Logo,
             active: (Group.active == true) ? 1 : 0,
             insupdflag: flag

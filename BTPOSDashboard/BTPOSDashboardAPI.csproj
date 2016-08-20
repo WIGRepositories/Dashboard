@@ -2272,6 +2272,7 @@
     <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\LicenseDetailsController.cs" />
     <Compile Include="Controllers\LicensePricingController.cs" />
+    <Compile Include="Controllers\licenseTController.cs" />
     <Compile Include="Controllers\List.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\PaymentGatewayConfigurationController.cs" />

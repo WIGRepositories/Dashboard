@@ -192,6 +192,31 @@ namespace POSDBAccess.Controllers
                 gst.Value = n.State;
                 cmd.Parameters.Add(gst);
 
+                SqlParameter fs = new SqlParameter();
+                fs.ParameterName = "@FleetSize";
+                fs.SqlDbType = SqlDbType.VarChar;
+                fs.Value = n.FleetSize;
+                cmd.Parameters.Add(fs);
+
+                SqlParameter sts = new SqlParameter();
+                sts.ParameterName = "@StaffSize";
+                sts.SqlDbType = SqlDbType.VarChar;
+                sts.Value = n.StaffSize;
+                cmd.Parameters.Add(sts);
+
+                SqlParameter PAdd = new SqlParameter();
+                PAdd.ParameterName = "@PermanentAddress";
+                PAdd.SqlDbType = SqlDbType.VarChar;
+                PAdd.Value = n.PermanentAddress;
+                cmd.Parameters.Add(PAdd);
+
+
+                SqlParameter TAdd = new SqlParameter();
+                TAdd.ParameterName = "@TemporaryAddress";
+                TAdd.SqlDbType = SqlDbType.VarChar;
+                TAdd.Value = n.TemporaryAddress;
+                cmd.Parameters.Add(TAdd);
+
                 //SqlParameter log = new SqlParameter();               
                 //log.ParameterName = "@Logo";
                 //log.SqlDbType = SqlDbType.VarChar;
