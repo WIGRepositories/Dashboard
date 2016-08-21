@@ -1065,7 +1065,7 @@ namespace BTPOSDashboardAPI.Models
 
     }
 
-    public class login
+    public class resetpassword
     {
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -1178,4 +1178,5 @@ namespace BTPOSDashboardAPI.Models
         public String Description { get; set; }
         public string insupdflag { get; set; }
     }
+   
 }
