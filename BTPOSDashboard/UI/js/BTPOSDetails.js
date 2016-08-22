@@ -1,4 +1,4 @@
-//var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.currpagefirst = 1;
     //$scope.currpage = 0;
