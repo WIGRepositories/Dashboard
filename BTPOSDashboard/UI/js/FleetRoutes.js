@@ -264,6 +264,7 @@ $scope.saveNewFleetRoutes = function (initdata) {
 errdata.Message;
         $scope.showDialog(errmssg);
     });
+
     $scope.currGroup = null;
 };
 
