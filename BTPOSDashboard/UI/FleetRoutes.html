@@ -553,7 +553,7 @@
                                                             <label for="descr" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();">
+                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
