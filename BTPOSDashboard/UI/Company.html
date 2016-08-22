@@ -438,13 +438,20 @@
 
                                                                         </div>-->
                                                                         <div class="col-md-6">
-                                                                            <div class="text-center mbl"><img src="images/user.jpg" style="width:50px;height:50px" alt="" class="img-responsive" /></div>
+                                                                            <!--<div class="text-center mbl"><img src="images/user.jpg" style="width:50px;height:50px" alt="" class="img-responsive" /></div>-->
                                                                             <div class="text-center mbl">
-                                                                                <a href="#" class="btn btn-green">
+                                                                                <img ng-src="{{imageSrc}}" width="150px" height="150px"/>
+
+                                                                                <a href="#" class="btn btn-green" ng-click="UploadImg();">
                                                                                     <i class="fa fa-upload"></i>&nbsp;
                                                                                     Upload Logo
                                                                                 </a>
                                                                             </div>
+
+                                                                          
+
+                                                                            <input type="file" name="fileInput" id="fileInput" ng-file-select="onFileSelect($files)" class="btn btn-green" accept=".jpg,.png,.gif,.jpeg" style="display:none" />
+
                                                                         </div>
                                                                         
                                                                         <div class="col-md-6">
@@ -1057,7 +1064,8 @@
     <!--<script src="js/fileupload/FileAPI.js"></script>
     <script src="js/fileupload/ng-file-upload.js"></script>
     <script src="js/fileupload/ng-file-upload-shim.js"></script>-->
-   
+    
 <script src="js/CompanyGroups.js"></script>
+    <script src="js/fileupload/Upload.js"></script>   
 </body>
 </html>

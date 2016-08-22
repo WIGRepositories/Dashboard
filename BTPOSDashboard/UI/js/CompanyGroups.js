@@ -1,5 +1,194 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal,$upload,$timeout) {
+
+
+
+app.directive('file-input', function ($parse)
+{
+    return {
+        restrict: "EA",
+        template: "<input type='file' />",
+        replace: true,
+        link: function (scope, element, attrs)
+        {
+
+            var modelGet = $parse(attrs.fileInput);
+            var modelSet = modelGet.assign;
+            var onChange = $parse(attrs.onChange);
+
+            var updateModel = function ()
+            {
+                scope.$apply(function ()
+                {
+                    modelSet(scope, element[0].files[0]);
+                    onChange(scope);
+                });
+            };
+
+            element.bind('change', updateModel);
+        }
+    };
+});
+
+app.directive("ngFileSelect", function ()
+{
+
+    return {
+
+        link: function ($scope, el)
+        {
+
+            el.on('click', function ()
+            {
+
+                this.value = '';
+
+            });
+
+            el.bind("change", function (e)
+            {
+
+                $scope.file = (e.srcElement || e.target).files[0];
+
+
+
+                var allowed = ["jpeg", "png", "gif", "jpg"];
+
+                var found = false;
+
+                var img;
+
+                img = new Image();
+
+                allowed.forEach(function (extension)
+                {
+
+                    if ($scope.file.type.match('image/' + extension))
+                    {
+
+                        found = true;
+
+                    }
+
+                });
+
+                if (!found)
+                {
+
+                    alert('file type should be .jpeg, .png, .jpg, .gif');
+
+                    return;
+
+                }
+
+                img.onload = function ()
+                {
+
+                    var dimension = $scope.selectedImageOption.split(" ");
+
+                    if (dimension[0] == this.width && dimension[2] == this.height)
+                    {
+
+                        allowed.forEach(function (extension)
+                        {
+
+                            if ($scope.file.type.match('image/' + extension))
+                            {
+
+                                found = true;
+
+                            }
+
+                        });
+
+                        if (found)
+                        {
+
+                            if ($scope.file.size <= 1048576)
+                            {
+
+                                $scope.getFile();
+
+                            } else
+                            {
+
+                                alert('file size should not be grater then 1 mb.');
+
+                            }
+
+                        } else
+                        {
+
+                            alert('file type should be .jpeg, .png, .jpg, .gif');
+
+                        }
+
+                    } else
+                    {
+
+                        alert('selected image dimension is not equal to size drop down.');
+
+                    }
+
+                };
+
+              //  img.src = _URL.createObjectURL($scope.file);
+
+
+
+            });
+
+        }
+
+    };
+
+});
+
+
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal, $upload, $timeout, fileReader)
+{
+
+    
+    $scope.getFile = function ()
+    {
+
+        var dimension = $scope.selectedImageOption.split(" ");
+
+        fileReader.readAsDataUrl($scope.file, $scope)
+
+                      .then(function (result)
+                      {
+
+                          $scope.imagePreview = true;
+
+                          $scope.upladButtonDivErrorFlag = false;
+
+                          $('#uploadButtonDiv').css('border-color', '#999');
+
+                          $scope.imageSrc = result;
+
+                          var data = {
+
+                              "height": dimension[2],
+
+                              "weight": dimension[0],
+
+                              "imageBean": {
+
+                                  "imgData": result,
+
+                                  "imgName": $scope.file.name
+
+                              }
+
+                          }
+
+                          $scope.imagePreviewDataObject = data;
+
+                      });
+
+    }
+
+
     if ($localStorage.uname == null)
     {
         window.location.href = "login.html";
@@ -174,119 +363,22 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         if (isNaN(String.fromCharCode($event.keyCode))) {
             $event.preventDefault();
         }
+    };   
+
+    $scope.UploadImg = function ()
+    {
+        var fileinput = document.getElementById('fileInput');
+        fileinput.click();
+
+      //  $scope.file = fileinput.files[0];
+
+        fileReader.readAsDataUrl($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
+        fileReader.onLoad($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
     };
-   
-
-    //$scope.uploadFile = function () {
-    //    var file = $scope.Logo;
-    //    console.log('file is ' + JSON.stringify(file));
-        
-    //};
-
-    $scope.upload = [];
-    $scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
-
-    var UploadDataModel = { testString1: "Test string 1", testString2: "Test string 2" };
-
-    $scope.upload = function (file) {
-        Upload.upload({
-            url: "http://localhost:1476/api/files/upload",
-            data: { file: file, 'username': $scope.username }
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
-
-    $scope.onFileSelect1 = function ($files) {
-        $scope.files = $files;
-    }
-
-    $scope.onFileSelect = function () {
-       var files = $scope.files;
-        //$files: an array of files selected, each file has name, size, and type.
-       for (var i = 0; i < files.length; i++) {
-           var $file = files[i];
-            (function (index) {
-                $scope.upload[index] = $upload.upload({
-                    url: "http://localhost:1476/api/files/upload", // webapi url
-                    method: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                    // data: UploadDataModel,
-                    file: $file
-                }).progress(function (evt) {
-                    // get upload percentage
-                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                }).success(function (data, status, headers, config) {
-                    // file is uploaded successfully
-                    console.log(data);
-                }).error(function (data, status, headers, config) {
-                    // file failed to upload
-                    console.log(data);
-                });
-            })(i);
-        }
-    }
-
-    $scope.abortUpload = function (index) {
-        $scope.upload[index].abort();
-    }
 
 });
 
-var filectrl = app.controller('UploadCtrl', function ($scope, $http, $timeout, $upload ) {
-    $scope.upload = [];
-    $scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
 
-    var UploadDataModel = { testString1: "Test string 1", testString2: "Test string 2" };
-
-    $scope.upload = function (file) {
-        Upload.upload({
-            url: "http://localhost:1476/api/files/upload",
-            data: { file: file, 'username': $scope.username }
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
-
-    $scope.onFileSelect = function ($files) {
-        //$files: an array of files selected, each file has name, size, and type.
-        for (var i = 0; i < $files.length; i++) {
-            var $file = $files[i];
-            (function (index) {
-                $scope.upload[index] = $upload.upload({
-                    url: "http://localhost:1476/api/files/upload", // webapi url
-                    method: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                   // data: UploadDataModel,
-                    file: $file
-                }).progress(function (evt) {
-                    // get upload percentage
-                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                }).success(function (data, status, headers, config) {
-                    // file is uploaded successfully
-                    console.log(data);
-                }).error(function (data, status, headers, config) {
-                    // file failed to upload
-                    console.log(data);
-                });
-            })(i);
-        }
-    }
-
-    $scope.abortUpload = function (index) {
-        $scope.upload[index].abort();
-    }
-});
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
