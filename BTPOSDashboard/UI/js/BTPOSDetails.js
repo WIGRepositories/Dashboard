@@ -33,7 +33,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
         var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
             $scope.totalRecords = $scope.BTPOS1.Row_count;
             //  $scope.btpossize.push(BTPOSdetails);
@@ -52,7 +52,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
         var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
 
             //  $scope.btpossize.push(BTPOSdetails);
@@ -94,7 +94,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
             var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+            $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
                 $scope.BTPOS1 = response.data;
 
             });
@@ -218,7 +218,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetBTPOSDetails = function () {
 
 
-        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?&pagesize=' + $scope.pagesize).then(function (response, req) {
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOSdetails1 = response.data;
             $scope.totalrec = $scope.BTPOSdetails1;
             // $scope.pcnt = $scope.totalrec / $scope.pagesize;
@@ -240,7 +240,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
         var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
         if ($scope.pageno == 1) {
-            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=5').then(function (response, req) {
+            $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=5').then(function (response, req) {
                 $scope.BTPOSdetailsl = response.data;
                 //  $scope.btpossize.push(BTPOSdetails);
                 //  $localStorage.BTPOSOld = response.data;
@@ -248,7 +248,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             })
         }
         else if ($scope.pageno == 2) {
-            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=2' + '&pagesize=5').then(function (response, req) {
+            $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=2' + '&pagesize=5').then(function (response, req) {
                 $scope.BTPOSdetails2 = response.data;
                 //  $scope.btpossize.push(BTPOSdetails);
                 //  $localStorage.BTPOSOld = response.data;
@@ -257,7 +257,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
 
         else if ($scope.pageno == 3) {
-            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=3' + '&pagesize=5').then(function (response, req) {
+            $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=3' + '&pagesize=5').then(function (response, req) {
                 $scope.BTPOSdetails3 = response.data;
                 //  $scope.btpossize.push(BTPOSdetails);
                 //  $localStorage.BTPOSOld = response.data;
@@ -265,7 +265,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             })
         }
         else if ($scope.pageno == 4) {
-            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=4' + '&pagesize=5').then(function (response, req) {
+            $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=4' + '&pagesize=5').then(function (response, req) {
                 $scope.BTPOSdetails4 = response.data;
                 //  $scope.btpossize.push(BTPOSdetails);
                 //  $localStorage.BTPOSOld = response.data;
@@ -274,7 +274,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         else ($scope.pageno == 5)
         {
-            $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=5' + '&pagesize=5').then(function (response, req) {
+            $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpid=' + cmpId + '&fId=-1' + '&pageno=5' + '&pagesize=5').then(function (response, req) {
                 $scope.BTPOSdetails5 = response.data;
                 //  $scope.btpossize.push(BTPOSdetails);
                 //  $localStorage.BTPOSOld = response.data;
@@ -291,7 +291,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //      //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
     //      //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-    //      $http.get('http://localhost:1476/api/Btposcontroller1/Paging?').then(function (response, req) {
+    //      $http.get('http://localhost:1476/api/BTPOSDetails/Paging?').then(function (response, req) {
     //          $scope.paging = response.data;
     //          //  $scope.btpossize.push(BTPOSdetails);
     //          //  $localStorage.BTPOSOld = response.data;
@@ -355,7 +355,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currpagefirst = 1;
         var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
         var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
-        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
         });
     };
@@ -377,7 +377,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currpagefirst = $scope.totalpages - 1;
         var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
         var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
-        $http.get('http://localhost:1476/api/Btposcontroller1/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + ($scope.totalpages) + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+        $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + ($scope.totalpages) + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
         });
     };
