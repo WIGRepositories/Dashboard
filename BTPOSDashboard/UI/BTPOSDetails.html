@@ -365,9 +365,10 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()" id="test1">
-    <option value="">All</option>
-</select>
-                                                        </div>
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>                                                         
+                                                      
 
                                                         <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button>
 
@@ -705,6 +706,8 @@
                                                     <option value="150">150</option>
                                                     <option value="-1">All</option>
                                                 </select>&nbsp;
+
+
                                                 <div ng-model="BTPOSdetails1">
                                                     <br />
                                                     <div ng-repeat="b in BTPOSdetails1">
