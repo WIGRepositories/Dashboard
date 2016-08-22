@@ -12,9 +12,78 @@ namespace BTPOSDashboardAPI.Controllers
 {
     public class BTPOSDetailsController : ApiController
     {
+        //[HttpGet]
+
+        //public DataTable GetBTPOSDetails(int cmpId, int fId)
+        //{
+        //    DataTable Tbl = new DataTable();
+
+
+        //    //connect to database
+        //    SqlConnection conn = new SqlConnection();
+        //    //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+        //    conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.CommandText = "getBTPOSDetails";
+        //    cmd.Connection = conn;
+
+        //    SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);
+        //    cmp.Value = cmpId;
+        //    cmd.Parameters.Add(cmp);
+
+        //    SqlParameter fo = new SqlParameter("@fleetownerId", SqlDbType.Int);
+        //    fo.Value = fId;
+        //    cmd.Parameters.Add(fo);
+
+        //    SqlDataAdapter db = new SqlDataAdapter(cmd);            
+        //    db.Fill(Tbl);
+            
+        //    return Tbl;
+        //}
+        //[HttpGet]
+
+        //public DataTable GetBTPOSDetails1(int cmpId, int fId, int pageno, int pagesize)
+        //{
+
+        //    DataTable Tbl = new DataTable();
+
+        //    //connect to database
+        //    SqlConnection conn = new SqlConnection();
+        //    //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+        //    conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+        //    SqlCommand cmd = new SqlCommand();
+        //    cmd.CommandType = CommandType.StoredProcedure;
+        //    cmd.CommandText = "GetBTPOSDetails";
+        //    cmd.Connection = conn;
+
+        //    SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);
+        //    cmp.Value = cmpId;
+        //    cmd.Parameters.Add(cmp);
+
+        //    SqlParameter fo = new SqlParameter("@fleetownerId", SqlDbType.Int);
+        //    fo.Value = fId;
+        //    cmd.Parameters.Add(fo);
+
+        //    SqlParameter pNo = new SqlParameter("@pageno", SqlDbType.Int);
+        //    pNo.Value = pageno;
+        //    cmd.Parameters.Add(pNo);
+
+        //    SqlParameter pSize = new SqlParameter("@pagesize", SqlDbType.Int);
+        //    pSize.Value = pagesize;
+        //    cmd.Parameters.Add(pSize);
+
+        //    SqlDataAdapter db = new SqlDataAdapter(cmd);
+        //    db.Fill(Tbl);
+
+        //    return Tbl;
+        //}
+
         [HttpGet]
 
-        public DataTable GetBTPOSDetails(int cmpId, int fId)
+        public DataTable GetBTPOSDetails()
         {
             DataTable Tbl = new DataTable();
 
@@ -26,28 +95,28 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "getBTPOSDetails";
+            cmd.CommandText = "GetBTPOSDetails1";
             cmd.Connection = conn;
 
-            SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);
-            cmp.Value = cmpId;
-            cmd.Parameters.Add(cmp);
+            //SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);
+            //cmp.Value = cmpId;
+            //cmd.Parameters.Add(cmp);
 
-            SqlParameter fo = new SqlParameter("@fleetownerId", SqlDbType.Int);
-            fo.Value = fId;
-            cmd.Parameters.Add(fo);
+            //SqlParameter fo = new SqlParameter("@fleetownerId", SqlDbType.Int);
+            //fo.Value = fId;
+            //cmd.Parameters.Add(fo);
 
-            SqlDataAdapter db = new SqlDataAdapter(cmd);            
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-            
+
             return Tbl;
         }
         [HttpGet]
 
-        public DataTable GetBTPOSDetails1(int cmpId, int fId, int pageno, int pagesize)
+        public DataSet Paging(int cmpId, int fId, int pageno, int pagesize)
         {
 
-            DataTable Tbl = new DataTable();
+            DataSet Tbl = new DataSet();
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -67,7 +136,7 @@ namespace BTPOSDashboardAPI.Controllers
             fo.Value = fId;
             cmd.Parameters.Add(fo);
 
-            SqlParameter pNo = new SqlParameter("@pageno", SqlDbType.Int);
+            SqlParameter pNo = new SqlParameter("@pagenum", SqlDbType.Int);
             pNo.Value = pageno;
             cmd.Parameters.Add(pNo);
 
@@ -80,8 +149,6 @@ namespace BTPOSDashboardAPI.Controllers
 
             return Tbl;
         }
-
-        
         
 
         [HttpPost]
