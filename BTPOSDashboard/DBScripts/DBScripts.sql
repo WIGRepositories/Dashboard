@@ -8825,7 +8825,14 @@ CREATE TABLE [dbo].[FleetOwnerRequestDetails](
 	[FleetSize] [int] NOT NULL,
 	[CompanyEmployeSize] [int] NOT NULL,
 	[Gender] [int] NOT NULL,
-	[Address] [varchar](50) NOT NULL
+	[Address] [varchar](50) NULL,
+	[StaffSize] [int] NULL,
+	[Country] [varchar](50) NULL,
+	[Code] [varchar](50) NOT NULL,
+	[Fax] [varchar](50) NULL,
+	[PermanentAddress] [varchar](500) NULL,
+	[TemporaryAddres] [varchar](500) NULL,
+	[state] [varchar](50) NULL
 ) ON [PRIMARY]
 
 GO
@@ -8900,14 +8907,14 @@ create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
            @FleetSize int,         
            @Gender varchar(20),      
            @Address varchar(50),
-		   @FleetStaff int,
+      @StaffSize int,
       @Country varchar(50),
       @Code varchar(50),
       @Fax varchar(50),
       @PermanentAddress varchar(500),
       @TemporaryAddres varchar(500),
       @state varchar (50),
-           @insupdflag varchar(10)
+      @insupdflag varchar(10)
            )
  
 AS
@@ -8926,7 +8933,7 @@ INSERT INTO [dbo].[FleetOwnerRequestDetails]
              ,[FleetSize]      
               ,[Gender]        
               ,[Address]
-			  ,[FleetStaff]
+      ,[StaffSize]
       ,[Country]
       ,[Code]
       ,[Fax]
@@ -8945,13 +8952,13 @@ INSERT INTO [dbo].[FleetOwnerRequestDetails]
            ,@FleetSize     
           , @Gender   
           , @Address
-		  ,@FleetStaff
+          ,@StaffSize
      ,@Country
       ,@Code 
       ,@Fax
       ,@PermanentAddress 
       ,@TemporaryAddres
-      ,@state)
+      ,@state )
           
   end
   
@@ -8971,47 +8978,18 @@ UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
       ,[FleetSize] = @FleetSize  
        ,[Gender] = @Gender 
        ,[Address]= @Address
+       
 
- 
-END
-
---[dbo].[InsUpdDelCompany](@active int,@code varchar(50),@desc varchar(50) = null,@Id int,@Name varchar(50),@Address varchar(500),@EmailId varchar(50),
---@ContactNo1 varchar(50),@ContactNo2 varchar(50)= null,@Fax varchar(50)= null,@Title varchar(50)= null,@Caption varchar(50)= null,@Country varchar(50)= null,
---@ZipCode int = null,@State varchar(50),@insupdflag varchar(1),@userid int = -1)
-
-declare 
-@cmpcode varchar(10),@empno varchar(10),@cmpid int,@foCount int = 0
-
-select @cmpcode = 'CMP00' + ltrim(rtrim(STR((max(Id)+1)))) from company
-select @empno = 'FL00' + ltrim(rtrim(STR((max(Id)+1)))) from users
-
-select @cmpid = id from company where upper(name) = upper(@CompanyName)
-
-if @cmpid is null
-exec InsUpdDelCompany 1, @cmpcode, null,-1,@CompanyName,@Address,@EmailAddress,@PhoneNo,null,null,@Title,null,null,null,null,'I',-1
-
-select @cmpid = id from company where upper(name) = upper(@CompanyName)
-
-
---exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,@insupdflag
-
---create procedure [dbo].[InsUpdUsers](@FirstName varchar(40),@LastName varchar(40),@MiddleName varchar(40) = ''
---,@EmpNo varchar(15),@Email varchar(40) = '',@AdressId int,@MobileNo varchar(50) = '',@RoleId int,@cmpId int,@Active int
---,@UserName varchar(30)  = null,@Password varchar(30)  = '',@insupdflag varchar(10),@ManagerId int = null,@userid int = -1)
-select @foCount = COUNT(*) from Users u where u.Email = @EmailAddress
-
-if @foCount > 0 
-begin
-RAISERROR ('Fleet owner with emailid already exists',16,1); 
-end
-
-exec [InsUpdUsers] @FirstName,@LastName,null,@empno,@EmailAddress,0,@PhoneNo,6,@cmpid,1,null,null,'I',null,-1--  @CompanyName,@Description,@insupdflag
+ exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,'I'
 
 select FleetOwnerCode from dbo.FleetOwner f 
 inner join Users u on u.Id = f.UserId
 where u.FirstName = @FirstName and u.LastName = @LastName
 
+
+END
 end
+
 GO
 
 SET QUOTED_IDENTIFIER ON
