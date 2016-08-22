@@ -436,7 +436,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                        
-                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="currFR.newfleet.v">
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" value="{{currFR.vehicles}}" ng- ng-change="GetFleetRoutes();" ng-model="currFR.newfleet.v">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -524,11 +524,12 @@
                                                 <td>{{R.EffectiveTill}}</td>
 
                                                 <td>
-
                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setRoute(R);">
                                                         <i class="fa fa-edit"></i>&nbsp;
                                                         Edit
                                                     </button>
+
+                                                  
                                                 </td>
                                                 <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(R);"><i class="fa fa-trash-o"></i></a></div></td>
                                                 <!--<td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>-->
@@ -553,8 +554,7 @@
                                                             <label for="descr" class="col-md-4 control-label" style="color:red;"> Company: <span class='require'>*</span></label>
                                                         </div>
                                                         <div class="col-md-6">
-
-                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp1" ng-change="GetFleetOwners();">
+                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="GetFleetOwners();">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
@@ -566,7 +566,7 @@
                                                             <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
+                                                            <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="s1" ng-change="GetRoutesForFO();">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>

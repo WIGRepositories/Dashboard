@@ -192,7 +192,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $http(req).then(function (res) {
             $scope.initdata = res.data;
         });
-        $scope.GetCompanies();
+
     }
 
     /* $scope.GetFleetDetails = function () {
@@ -220,7 +220,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             alert('Please enter ChasisNo.');
             return;
         }
-
+        
         //if (Fleet.group == null || Fleet.VehicleTypeId.group.Id == null) {
         //    alert('Please select a type group');
         //    return;
@@ -258,11 +258,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         $http(req).then(function (res) {
             $scope.showDialog("Updated successfully!");
-
+           
         });
 
-        $scope.GetCompanies();
-    };
+        $scope. GetCompanies();
+    }
 
     $scope.savenewfleetdetails = function (initdata, flag) {
         var newVD = initdata.newfleet;

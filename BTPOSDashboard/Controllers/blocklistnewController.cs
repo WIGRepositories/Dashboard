@@ -77,5 +77,83 @@ namespace BTPOSDashboard.Controllers
         }
 
 
+        [HttpPost]
+
+        public HttpResponseMessage saveBocklist(IEnumerable<BKlist> Blist)
+        {
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+
+
+                //connect to database
+
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelBlocklist";
+                cmd.Connection = conn;
+                conn.Open();
+
+                foreach (BKlist b in Blist)
+                {
+
+                    SqlParameter rid = new SqlParameter();
+                    rid.ParameterName = "@ItemId";
+                    rid.SqlDbType = SqlDbType.Int;
+                    rid.Value = b.ItemId;
+                    cmd.Parameters.Add(rid);
+
+                    SqlParameter sid = new SqlParameter();
+                    sid.ParameterName = "@Reason";
+                    sid.SqlDbType = SqlDbType.VarChar;
+                    sid.Value = b.Reason;
+                    cmd.Parameters.Add(sid);
+
+                    //SqlParameter cmpid = new SqlParameter();
+                    //cmpid.ParameterName = "@cmpId";
+                    //cmpid.SqlDbType = SqlDbType.Int;
+                    //cmpid.Value = b.CompanyId;
+                    //cmd.Parameters.Add(cmpid);
+
+
+                    //SqlParameter fid = new SqlParameter();
+                    //fid.ParameterName = "@fleetOwnerId";
+                    //fid.SqlDbType = SqlDbType.Int;
+                    //fid.Value = b.FleetOwnerId;
+                    //cmd.Parameters.Add(fid);
+
+
+
+
+                    SqlParameter flag = new SqlParameter();
+                    flag.ParameterName = "@insupddelflag";
+                    flag.SqlDbType = SqlDbType.VarChar;
+                    flag.Value = b.insupddelflag;
+                    cmd.Parameters.Add(flag);
+
+                    cmd.ExecuteScalar();
+
+                    cmd.Parameters.Clear();
+                }
+
+                conn.Close();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+        }
     }
 }
+      
+ 
+   

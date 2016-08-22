@@ -380,7 +380,7 @@
                                                 </div>-->
                                                 <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
-                                                        <tr>
+                                                        <tr> 
                                                             <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
                                                             <th>Item Name</th>
                                                             <th>Blocked By</th>
@@ -398,7 +398,7 @@
                                                             <td>{{B.BlockedBy}}</td>
                                                             <td>{{B.BlockedOn}}</td>
                                                            
-                                                            <td><input type="text" class="form-control" id="Reason"/></td>
+                                                            <td><input type="text" class="form-control" id="Reason" ng-model="B.Reason" /></td>
 
                                                         </tr>
                                                         </tbody>                                                      

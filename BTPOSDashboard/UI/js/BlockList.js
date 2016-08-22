@@ -39,6 +39,47 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         });
     }
 
+    
+
+   
+    $scope.saveBTPOSList = function () {
+
+        var BlockLt = [];
+
+        for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
+
+            if ($scope.checkedArr[cnt].assigned == 0) {
+                var fr = {
+                    Id: -1,
+                    //FleetOwnerId: $scope.s.Id,
+                    //CompanyId: $scope.cmp.Id,
+                    ItemName: $scope.checkedArr[cnt].ItemName,
+                    Reason: $scope.checkedArr[cnt].Reason,
+                    //From: $scope.checkedArr[cnt].FromDate,
+                    //To: $scope.checkedArr[cnt].ToDate,
+                    //Active: 1,
+                    insupddelflag: 'I'
+                }
+
+                BlockLt.push(fr);
+            }
+        }
+        $http({
+            url: 'http://localhost:1476/api/blocklistnew/saveBocklist',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: BlockLt,
+
+        }).success(function (data, status, headers, config) {
+            alert('Saved successfully');
+            $scope.GetBlockDetails();
+        }).error(function (ata, status, headers, config) {
+            alert(ata);
+        });
+    };
+    
+
+
     $scope.toggle = function (item) {
         var idx = $scope.checkedArr.indexOf(item);
         if (idx > -1) {
@@ -56,29 +97,31 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.uncheckedArr.push(item);
         }
     };
-
+    
+    
 
     $scope.toggleAll = function () {
-        if ($scope.checkedArr.length === $scope.blocklist.length) {
+        if ($scope.checkedArr.length === $scope.Blist.length) {
             $scope.uncheckedArr = $scope.checkedArr.slice(0);
             $scope.checkedArr = [];
 
-        } else if ($scope.checkedArr.length === 0 || $scope.blocklist.length > 0) {
-            $scope.checkedArr = $scope.blocklist.slice(0);
+        } else if ($scope.checkedArr.length === 0 || $scope.Blist.length > 0) {
+            $scope.checkedArr = $scope.Blist.slice(0);
             $scope.uncheckedArr = [];
         }
-
+      
     };
 
     $scope.exists = function (item, list) {
         return list.indexOf(item) > -1;
     };
-
-
+  
+   
     $scope.isChecked = function () {
-        return $scope.checkedArr.length === $scope.blocklist.length;
+        return $scope.checkedArr.length === $scope.Blist.length;
     };
 
-
-
+  
 });
+
+

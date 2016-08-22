@@ -208,7 +208,7 @@ $scope.save = function (currFR) {
 
     }
     $http(req).then(function (res) { });
-
+    $scope.showDialog("Updated successfully!");
 
 }
 

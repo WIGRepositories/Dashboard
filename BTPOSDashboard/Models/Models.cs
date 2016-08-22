@@ -1693,6 +1693,13 @@ namespace BTPOSDashboardAPI.Models
         public string testString2 { get; set; }
     }
 
+    public class BKlist
+    {
+        //public int Id { get; set; }
 
+        public int ItemId { get; set; }
+        public string Reason { get; set; }
+        public string insupddelflag { get; set; }
+    }
    
 }

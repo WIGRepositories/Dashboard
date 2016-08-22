@@ -214,24 +214,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             }
         }
 
-        for (var cnt = 0; cnt < $scope.uncheckedArr.length; cnt++) {
-
-            if ($scope.uncheckedArr[cnt].assigned == 1) {
-                var fr = {
-                    Id: -1,
-                    FleetOwnerId: $scope.s.Id,
-                    CompanyId: $scope.cmp.Id,
-                    RouteId: $scope.uncheckedArr[cnt].RouteId,
-                    From: $scope.uncheckedArr[cnt].FromDate,
-                    To: $scope.uncheckedArr[cnt].ToDate,
-                    Active: 1,
-                    insupddelflag: 'D'
-                }
-
-                FleetOwnerRoutes.push(fr);
-            }
-        }      
-
+        
         $http({
             url: 'http://localhost:1476/api/FleetOwnerRoute/saveFleetOwnerRoute',
             method: 'POST',
