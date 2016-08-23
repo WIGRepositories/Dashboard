@@ -498,7 +498,7 @@
                                             </div>
                                         </div>
 
-                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="cmproles == null">
                                             <thead>
                                                 <tr>
                                                     <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
@@ -508,7 +508,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat=" role in cmproles" ng-on-finish-render>
+                                                <tr ng-repeat="role in cmproles" ng-on-finish-render>
                                                     <td>
                                                         <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-click="toggle(role, checkedArr);" checked />
                                                     </td>
@@ -522,7 +522,7 @@
                                         </table>
 
                                     </div>
-                                    <div class="modal-footer" >
+                                    <div class="modal-footer" ng-hide="cmproles == null" ng-show="cmproles.length != 0">
                                         <button type="button" class="btn btn-green" data--dismiss="modal" ng-click="SaveCmpRoles();">Save</button>
 
                                         <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
