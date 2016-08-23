@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTPOSDashboardAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -79,7 +80,7 @@ namespace BTPOSDashboard.Controllers
 
         [HttpPost]
 
-        public HttpResponseMessage saveBocklist(IEnumerable<BKlist> Blist)
+        public HttpResponseMessage saveBocklist(IEnumerable<Sblocklist> Blist)
         {
             SqlConnection conn = new SqlConnection();
             try
@@ -97,13 +98,13 @@ namespace BTPOSDashboard.Controllers
                 cmd.Connection = conn;
                 conn.Open();
 
-                foreach (BKlist b in Blist)
+                foreach (Sblocklist b in Blist)
                 {
 
                     SqlParameter rid = new SqlParameter();
-                    rid.ParameterName = "@ItemId";
+                    rid.ParameterName = "@ItemName";
                     rid.SqlDbType = SqlDbType.Int;
-                    rid.Value = b.ItemId;
+                    rid.Value = b.ItemName;
                     cmd.Parameters.Add(rid);
 
                     SqlParameter sid = new SqlParameter();
