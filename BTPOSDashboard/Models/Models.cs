@@ -558,7 +558,7 @@ namespace BTPOSDashboardAPI.Models
         public int StaffSize{get;set;}
         public string PermanentAddress {get;set;}
         public string TemporaryAddress{get;set;} 
-       // public string Logo { get; set; }
+        public string Logo { get; set; }
 
         public string insupdflag { get; set; }
 
@@ -1470,13 +1470,26 @@ namespace BTPOSDashboardAPI.Models
            
     public class LicenseTypes1
     {
-        public List<licenses> lltypes { get; set; }
+       // public List<licenses> lltypes { get; set; }
         public int Id { set; get; }
         public int Active { set; get; }
         public string LicenseType { set; get; }
         public string Desc { set; get; }
         public string LicenseCategory { set; get; }
         public int LicenseCategoryId { set; get; }
+        public int LicenseId { set; get; }
+        public int RenewalFreqTypeId { set; get; }
+
+        public int RenewalFreq { set; get; }
+        public Decimal UnitPrice { set; get; }
+        public DateTime fromdate { set; get; }
+
+        public DateTime todate { set; get; }
+
+        public char insupddelflag { set; get; }
+        public string FeatureName { set; get; }
+        public string FeatureLabel { set; get; }
+        public string FeatureValue { set; get; }
     }
     public class licenses
     {
@@ -1490,7 +1503,9 @@ namespace BTPOSDashboardAPI.Models
         public DateTime todate { set; get; }        
 
         public char insupddelflag { set; get; }
-
+        public string Featurename { set; get; }
+        public string Featurelabel { set; get; }
+        public string Featurevalue { set; get; }
     }
     public class Inventory
     {

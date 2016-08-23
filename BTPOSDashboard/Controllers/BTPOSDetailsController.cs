@@ -95,7 +95,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetBTPOSDetails1";
+            cmd.CommandText = "GetBTPOSDetails";
             cmd.Connection = conn;
 
             //SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);

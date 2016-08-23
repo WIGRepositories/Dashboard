@@ -103,11 +103,15 @@ $scope.saveLicenseType = function (licenseType, flag) {
         LicenseCategoryId: $scope.s.Id,
         Active: 1, // licenseType.Active
         //LicenseId: licenseType.LicenseId,
-        //LicenseFrequency: licenseType.LicenseFrequency,
-        //Renewalfrequency: licenseType.Renewalfrequency,
-        //UnitPrice: licenseType.UnitPrice,
-       // FromDate: licenseType.FromDate,
-       // ToDate: licenseType.ToDate
+        //LicenseFrequency: ftype.LicenseFrequency,
+        //Renewalfrequency: freq.Renewalfrequency,
+        //UnitPrice: newUnitPrice.UnitPrice,
+        // FromDate: nfd.FromDate,
+        // ToDate: ntd.ToDate,
+        //FeatureName: L.FeatureName,
+        //FeatureValue: L.FeatureValue,
+        //FeatureLabel:L.FeatureLabel
+
     };
 
     var req = {
@@ -129,61 +133,61 @@ $scope.saveLicenseType = function (licenseType, flag) {
     });
     $scope.currGroup = null;
 };
-$scope.saveLicenseType1 = function (licenseType, flag) {
+//$scope.saveLicenseType1 = function (licenseType, flag) {
 
-    if (licenseType == null) {
-        alert('Please enter values.');
-        return;
-    }
+//    if (licenseType == null) {
+//        alert('Please enter values.');
+//        return;
+//    }
 
-    if (licenseType.LicenseType == null) {
-        alert('Please enter license type.');
-        return;
-    }
-    if ($scope.s == null) {
-        alert('Please select category.');
-        return;
-    }
+//    if (licenseType.LicenseType == null) {
+//        alert('Please enter license type.');
+//        return;
+//    }
+//    if ($scope.s == null) {
+//        alert('Please select category.');
+//        return;
+//    }
 
-    //if (FreqTypes == null) {
-    //    alert('Please enter values.');
-    //    return;
-    //}
+//    //if (FreqTypes == null) {
+//    //    alert('Please enter values.');
+//    //    return;
+//    //}
 
-    var currLicenseType = {
+//    var currLicenseType = {
 
-        Id: (flag == 'I') ? '-1' : licenseType.Id,
-        LicenseType: licenseType.LicenseType,
-        Desc: licenseType.Description,
-        LicenseCategoryId: $scope.s.Id,
-        Active: 1, // licenseType.Active
-        LicenseId: licenseType.LicenseId,
-        LicenseFrequency: licenseType.LicenseFrequency,
-        Renewalfrequency: licenseType.Renewalfrequency,
-        UnitPrice: licenseType.UnitPrice,
-         FromDate: licenseType.FromDate,
-         ToDate: licenseType.ToDate
-    };
+//        Id: (flag == 'I') ? '-1' : licenseType.Id,
+//        LicenseType: licenseType.LicenseType,
+//        Desc: licenseType.Description,
+//        LicenseCategoryId: $scope.s.Id,
+//        Active: 1, // licenseType.Active
+//        LicenseId: licenseType.LicenseId,
+//        LicenseFrequency: licenseType.LicenseFrequency,
+//        Renewalfrequency: licenseType.Renewalfrequency,
+//        UnitPrice: licenseType.UnitPrice,
+//         FromDate: licenseType.FromDate,
+//         ToDate: licenseType.ToDate
+//    };
 
-    var req = {
-        method: 'POST',
-        url: 'http://localhost:1476/api/License/SaveLicenseType',
-        data: currLicenseType
-    }
-    $http(req).then(function (response) {
+//    var req = {
+//        method: 'POST',
+//        url: 'http://localhost:1476/api/License/SaveLicenseType',
+//        data: currLicenseType
+//    }
+//    $http(req).then(function (response) {
 
-        $scope.showDialog("Saved successfully!");
+//        $scope.showDialog("Saved successfully!");
 
-        $scope.Group = null;
+//        $scope.Group = null;
 
-    }, function (errres) {
-        var errdata = errres.data;
-        var errmssg = "";
-        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-        $scope.showDialog(errmssg);
-    });
-    $scope.currGroup = null;
-};
+//    }, function (errres) {
+//        var errdata = errres.data;
+//        var errmssg = "";
+//        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+//        $scope.showDialog(errmssg);
+//    });
+//    $scope.currGroup = null;
+//};
 $scope.showDialog = function (message) {
 
     var modalInstance = $uibModal.open({
