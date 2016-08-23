@@ -1708,11 +1708,11 @@ namespace BTPOSDashboardAPI.Models
         public string testString2 { get; set; }
     }
 
-    public class BKlist
+    public class Sblocklist
     {
         //public int Id { get; set; }
 
-        public int ItemId { get; set; }
+        public int ItemName { get; set; }
         public string Reason { get; set; }
         public string insupddelflag { get; set; }
     }

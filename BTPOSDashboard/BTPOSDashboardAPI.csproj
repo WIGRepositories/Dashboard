@@ -2231,7 +2231,6 @@
     <Compile Include="Controllers\AdvertismentController.cs" />
     <Compile Include="Controllers\AlertsConfigurationController.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
-    <Compile Include="Controllers\BKlist.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
     <Compile Include="Controllers\blocklistnewController.cs" />
     <Compile Include="Controllers\BTPOSConfigController.cs" />
