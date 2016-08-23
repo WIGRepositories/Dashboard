@@ -386,58 +386,61 @@
                                                                 <form action="#" class="form-horizontal">
                                                                     <div class="modal-body">
                                                                         <div class="form-group">
+                                                                           
+                                                                            <label for="TicketTitle" class="col-md-2 control-label">Ticket Title:</label>
+                                                                            <input id="TicketTitle" size="65"><span class="help-block"></span>
+                                                                        </div>
+                                                                        <div class="form-group">
                                                                             <label for="inputFirstName" class="col-md-2 control-label">Ref.Id:<span class='require'>*</span></label>
 
                                                                             <div class="col-md-3"><input id="Ref.Id" type="text" class="form-control" ng-model="Group.RefId" /><span class="help-block"></span></div>
 
-                                                                            <label for="Type" class="col-md-2 control-label">Type:</label>
+                                                                            <label for="Type" class="col-md-2 control-label">Ticket Type:</label>
                                                                             <!--<div class="col-md-3">
                                                                                 <select ng-model="Group.Type" style="width:100%">
                                                                                     <Type Group: <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" ng-change="getselectval(s)">
                                                                                     <option value="">All</option>
                                                                                 </select>
-                                                                            </div>-->
+                                                                            </div>--> 
                                                                             <div class="col-md-3">
                                                                                 <select ng-model="Group.Type" style="width:100%">
                                                                                     <option value="">Select</option>
-                                                                                    <option value="1">A</option>
-                                                                                    <option value="2">N</option>
-
+                                                                                    <option value="1">dashboard password issues</option>
+                                                                                    <option value="2"> web portal password issues</option>
+                                                                                    <option value="3">website trouble in logging in</option>
+                                                                                    <option value="4"> Ticking issues</option>
+                                                                                    <option value="5">Payment issues</option>
+                                                                                    <option value="6">refund issues</option>
+                                                                                    <option value="7">POS issues</option>
+                                                                                    <option value="8"> Ticking issues</option>
+                                                                                    <option value="9">Inventory purchases</option>
+                                                                                    <option value="10">inventory sales</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
 
 
                                                                         <div class="form-group">
-                                                                            <label for="createdBy" class="col-md-2 control-label">created By:</label>
+                                                                            <label for="createdBy" class="col-md-2 control-label">Created By:</label>
                                                                             <div class="col-md-3">
                                                                                 <select ng-model="Group.CreatedBy" style="width:100%">
                                                                                     <option value="">Select</option>
-                                                                                    <option value="1">6</option>
-                                                                                    <option value="2">7</option>
+                                                                                    <option value="1">logged in user</option>
+                                                                                    <option value="2">others</option>
                                                                                 </select>
                                                                             </div>
 
-                                                                            <label for="Raised" class="col-md-2 control-label">Raised:</label>
+                                                                            <label for="Raised" class="col-md-2 control-label">Raised By:</label>
                                                                             <div class="col-md-3">
                                                                                 <select ng-model="Group.Raised" style="width:100%">
                                                                                     <option value="">Select</option>
-                                                                                    <option value="1">4</option>
-                                                                                    <option value="2">5</option>
+                                                                                    <option value="1">logged in user</option>
+                                                                                    <option value="2">others</option>
                                                                                 </select>
                                                                             </div>
 
                                                                         </div>
-                                                                        <div class="form-group">
-                                                                            <label for="TicketTitle" class="col-md-2 control-label">Ticket Title:</label>
-                                                                            <div class="col-md-8">
-                                                                                <select ng-model="Group.TicketTitle" style="width:100%">
-                                                                                    <option value="">Select</option>
-                                                                                    <option value="1">1</option>
-                                                                                    <option value="2">2</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+                                                                       
 
                                                                         <div class="form-group">
                                                                             <label for="IssueDetails" class="col-md-2 control-label">Issue Details:</label>
@@ -453,16 +456,23 @@
                                                                             <div class="col-md-3">
                                                                                 <select ng-model="Group.Status" style="width:100%">
                                                                                     <option value="">Select</option>
-                                                                                    <option value="1">1</option>
-                                                                                    <option value="2">2</option>
-                                                                                    <option value="3">3</option>
+                                                                                    <option value="1">New</option>
+                                                                                    <option value="2">resolved</option>
+                                                                                    <option value="3">assigned</option>
+                                                                                    <option value="1">to be reviewed</option>
+                                                                                    <option value="2">completed</option>
+                                                                                    <option value="3">on hold</option>
+                                                                                    <option value="1">need additional information</option>
+                                                                                    <option value="2">completed</option>
+                                                                                    <option value="3">In progress</option>
+
                                                                                 </select>
                                                                             </div>
 
-                                                                            <label for="" class="col-md-2 control-label">Asign:</label>
+                                                                            <label for="" class="col-md-2 control-label">Assigned To:</label>
                                                                             <div class="col-md-3">
                                                                                 <select ng-model="Group.Asign" style="width:100%">
-                                                                                    <option value="">Select</option>
+                                                                                    <option value="">None</option>
                                                                                     <option value="1">Cancellation</option>
                                                                                     <option value="2">Reservation</option>
                                                                                 </select>
