@@ -2225,6 +2225,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\Trace.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommercialSite\Class1.cs" />
     <Compile Include="Controllers\AddressController.cs" />
