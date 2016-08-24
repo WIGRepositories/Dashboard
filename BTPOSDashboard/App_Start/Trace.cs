@@ -21,7 +21,7 @@ namespace BTPOSDashboard
                     if (!File.Exists(path))
                         File.Create(path);
 
-                    File.AppendAllText(path, category + " -- " +record.Message + "\r\n");
+                    File.AppendAllText(path, DateTime.Now.ToString() + ": " + category + " -- " +record.Message + "\r\n");
                 }
                 catch { }
             }
