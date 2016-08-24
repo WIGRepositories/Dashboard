@@ -18,7 +18,8 @@ namespace BTPOSDashboard.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getBTPOSMonitoring credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -32,7 +33,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getBTPOSMonitoring Credentials completed.");
             // int found = 0;
             return Tbl;
 
@@ -41,6 +42,11 @@ namespace BTPOSDashboard.Controllers
         public DataTable SaveBTPOSMonitoring(BTPOSMoitoringPage BP)
         {
              DataTable Tbl = new DataTable();
+
+
+             LogTraceWriter traceWriter = new LogTraceWriter();
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSMonitoring credentials....");
+
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -90,6 +96,7 @@ namespace BTPOSDashboard.Controllers
                 conn.Close();
                 string str = ex.Message;
             }
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSMonitoring Credentials completed.");
             // int found = 0;
             return Tbl;
         }

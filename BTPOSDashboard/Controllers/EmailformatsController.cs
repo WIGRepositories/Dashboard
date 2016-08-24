@@ -16,6 +16,10 @@ namespace BTPOSDashboardAPI.Controllers
         [HttpGet]
         public DataTable Emailform()//Main Method
         {
+
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetEmailform credentials....");
             DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,13 +35,17 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetEmailform Credentials completed.");
             // int found = 0;
             return Tbl;
         }
         [HttpPost]
         public HttpResponseMessage Emailforms(Gmailformat g)
         {
+
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveEmailform credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -93,7 +101,7 @@ namespace BTPOSDashboardAPI.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveEmailform Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

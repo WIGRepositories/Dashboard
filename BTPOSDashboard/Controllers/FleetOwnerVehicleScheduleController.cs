@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable getFORVehicleSchedule(int fleetownerid, int routeid, int vehicleId)
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getFORVehicleSchedule credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -49,7 +50,7 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(cid);
 
             db.Fill(Tbl);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getFORVehicleSchedule Credentials completed.");
             return Tbl;
         }
 
@@ -57,6 +58,11 @@ namespace BTPOSDashboard.Controllers
         [Route("api/FleetOwnerVehicleSchedule/saveFORSchedule")]
         public HttpResponseMessage saveFORSchedule(FORouteFleetSchedule FVS)
         {
+
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveFORSchedule credentials....");
+
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -159,7 +165,7 @@ namespace BTPOSDashboard.Controllers
                 }
 
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveFORSchedule Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetCountries()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCountries credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -32,6 +33,7 @@ namespace BTPOSDashboard.Controllers
             db.Fill(ds);
             Tbl = ds.Tables[0];
 
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCountries Credentials completed.");
             // int found = 0;
             return Tbl;
         }

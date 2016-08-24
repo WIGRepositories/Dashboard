@@ -17,6 +17,9 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public DataSet VConfig(VehicleConfig vc)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveVehicleConfiguration credentials....");
             //DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -115,7 +118,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
 
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveVehicleConfiguration Credentials completed.");
            // Tbl = ds.Tables[0];
 
             // int found = 0;

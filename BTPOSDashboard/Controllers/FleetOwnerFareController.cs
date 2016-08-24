@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataSet getRouteFare(int routeId, int fleetownerId)
         {
             DataSet rs = new DataSet();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getRouteFare credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -68,7 +69,7 @@ namespace BTPOSDashboard.Controllers
             DataTable dt = stops.Copy();
             rs.Tables.Add(result);
             rs.Tables.Add(dt);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getRouteFare Credentials completed.");
             return rs;
         }
         [HttpPost]
@@ -77,7 +78,8 @@ namespace BTPOSDashboard.Controllers
             SqlConnection conn = new SqlConnection();
             try
             {
-
+                LogTraceWriter traceWriter = new LogTraceWriter();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveRouteFare credentials....");
 
             //connect to database
            
@@ -149,6 +151,8 @@ namespace BTPOSDashboard.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveRouteFare Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

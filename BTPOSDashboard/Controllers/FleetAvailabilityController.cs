@@ -17,7 +17,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable List(int foId, int cmpid)
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetFleetAvailabilityList credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -44,7 +45,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 
             db.Fill(Tbl);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetFleetAvailabilityList Credentials completed.");
             return Tbl;
         }
 
@@ -55,7 +56,8 @@ namespace BTPOSDashboard.Controllers
             SqlConnection conn = new SqlConnection();
             try
             {
-
+                LogTraceWriter traceWriter = new LogTraceWriter();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveSetFleetAvailability credentials....");
             //connect to database
             
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -94,7 +96,7 @@ namespace BTPOSDashboard.Controllers
 
             cmd.ExecuteScalar();
             conn.Close();
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveSetFleetAvailability Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

@@ -17,7 +17,8 @@ namespace BTPOSDashboard.Controllers
         {
             // DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetFleetOwnerRouteDetails credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -44,7 +45,8 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             // Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetFleetOwnerRouteDetails Credentials completed.");
+            
             // int found = 0;
             return ds;
         }
@@ -53,6 +55,10 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public HttpResponseMessage SaveFleetOwnerRouteDetails(IEnumerable<RouteDetails> routestops)
        {
+
+           LogTraceWriter traceWriter = new LogTraceWriter();
+           traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveFleetOwnerRouteDetails credentials....");
+ 
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -95,6 +101,7 @@ namespace BTPOSDashboard.Controllers
             }
             conn.Close();
 
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveFleetOwnerRouteDetails Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

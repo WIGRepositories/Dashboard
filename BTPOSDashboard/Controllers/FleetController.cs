@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataSet List(int cmpId, int fleetOwnerId)
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetList credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -45,7 +46,7 @@ namespace BTPOSDashboard.Controllers
 
             db.Fill(ds);
             // Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetList Credentials completed.");
             // int found = 0;
             return ds;
         }
@@ -56,7 +57,8 @@ namespace BTPOSDashboard.Controllers
             SqlConnection conn = new SqlConnection();
             try
             {
-
+                LogTraceWriter traceWriter = new LogTraceWriter();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveNewFleetDetails credentials....");
                 //connect to database
                
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
@@ -157,7 +159,7 @@ namespace BTPOSDashboard.Controllers
                 cmd.ExecuteScalar();
 
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveNewFleetDetails Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -176,7 +178,8 @@ namespace BTPOSDashboard.Controllers
         public DataSet VehicleConfiguration()
         {
             DataSet ds = new DataSet();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetVehicleConfiguration credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -190,7 +193,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 
             db.Fill(ds);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetVehicleConfiguration Credentials completed.");
             return ds;
         }
 
@@ -199,7 +202,8 @@ namespace BTPOSDashboard.Controllers
         public DataSet VehicleLayoutConfiguration(int vehicleLayoutTypeId)
         {
             DataSet ds = new DataSet();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetVehicleLayoutConfiguration credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -220,7 +224,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
 
             db.Fill(ds);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetVehicleLayoutConfiguration Credentials completed.");
             return ds;
         }
         
