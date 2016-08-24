@@ -49,12 +49,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
         for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
 
-            if ($scope.checkedArr[cnt].assigned == 0) {
+          //  if ($scope.checkedArr[cnt].assigned == 0) {
                 var fr = {
                     Id: -1,
                     //FleetOwnerId: $scope.s.Id,
-                    CompanyId: $scope.cmp.Id,
-                    ItemName: $scope.checkedArr[cnt].ItemName,
+                    ItemTypeId: $scope.selectedId,
+                    ItemId: $scope.checkedArr[cnt].ItemId,
                     Reason: $scope.checkedArr[cnt].Reason,
                     //From: $scope.checkedArr[cnt].FromDate,
                     //To: $scope.checkedArr[cnt].ToDate,
@@ -63,7 +63,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
                 }
 
                 BlockLt.push(fr);
-            }
+           // }
         }
         $http({
             url: 'http://localhost:1476/api/blocklistnew/saveBocklist',

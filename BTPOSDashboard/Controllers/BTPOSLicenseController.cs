@@ -17,6 +17,11 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable BOTPos()//Main Method
         {
             DataTable Tbl = new DataTable();
+
+
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "BTPOSLICENSE credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -32,6 +37,7 @@ namespace BTPOSDashboardAPI.Controllers
             db.Fill(ds);
             Tbl = ds.Tables[0];
 
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "BTPOSLICENSE Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -41,7 +47,9 @@ namespace BTPOSDashboardAPI.Controllers
             SqlConnection conn = new SqlConnection();
             try
             {
-                
+
+                LogTraceWriter traceWriter = new LogTraceWriter();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SAVEBTPOSLICENSE credentials....");
                 //connect to database
                 
                 //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -95,7 +103,7 @@ namespace BTPOSDashboardAPI.Controllers
                
                 cmd.ExecuteScalar();
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SAVEBTPOSLICENSE Credentials completed.");
 
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }

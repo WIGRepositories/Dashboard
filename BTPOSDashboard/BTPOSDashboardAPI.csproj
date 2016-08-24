@@ -804,9 +804,7 @@
     <Content Include="UI\SavePopup.html" />
     <Content Include="UI\Seating.html" />
     <Content Include="UI\ShippingOrder.html" />
-    <Content Include="UI\ShoppingCart.html">
-      <BrowseToURL>ShoppingCart.html</BrowseToURL>
-    </Content>
+    <Content Include="UI\ShoppingCart.html" />
     <Content Include="UI\SmsGatewayConfiguration.html" />
     <Content Include="UI\Stops.html" />
     <Content Include="UI\SubCategory.html" />

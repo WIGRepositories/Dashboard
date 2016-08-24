@@ -87,6 +87,8 @@ namespace BTPOSDashboardAPI.Controllers
         {
             DataTable Tbl = new DataTable();
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -108,7 +110,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails Credentials completed.");
             return Tbl;
         }
         [HttpGet]
@@ -118,6 +120,9 @@ namespace BTPOSDashboardAPI.Controllers
 
             DataSet Tbl = new DataSet();
 
+        
+            //LogTraceWriter traceWriter = new LogTraceWriter();
+            //traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Paging credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -147,6 +152,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
 
+            //traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Validate Credentials completed.");
             return Tbl;
         }
         
@@ -157,8 +163,10 @@ namespace BTPOSDashboardAPI.Controllers
         {
              SqlConnection conn = new SqlConnection();
             try
-            { 
+            {
 
+                LogTraceWriter traceWriter = new LogTraceWriter();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails credentials....");
             // BTPOSDetails n = new BTPOSDetails();
             
                 //connect to database
@@ -227,6 +235,7 @@ namespace BTPOSDashboardAPI.Controllers
                 }
                 conn.Close();
 
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

@@ -16,7 +16,8 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable groups()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSGroups credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,7 +32,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSGroups Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -41,6 +42,8 @@ namespace BTPOSDashboardAPI.Controllers
             SqlConnection conn = new SqlConnection();
             try
             {
+                LogTraceWriter traceWriter = new LogTraceWriter();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSGroups  credentials....");
 
             //connect to database
             
@@ -83,6 +86,7 @@ namespace BTPOSDashboardAPI.Controllers
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
             //db.Fill(ds);
             // Tbl = Tables[0];
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSGroups Credentials completed.");
             cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;
