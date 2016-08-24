@@ -1,5 +1,5 @@
 ﻿var app = angular.module('myApp', ['ngStorage']);
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -10,7 +10,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
-    //$scope.blocklist = [];   
+    $scope.Blist = [];
 
 
     //$scope.Getblocklist = function () {
@@ -25,16 +25,17 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         if ($scope.selectedId == null) {
             $scope.blocklist = null;
+            $scope.checkedArr = [];
+            $scope.uncheckedArr = [];
             return;
         }
-       if ($scope.selectedId == null) {
-           $scope.blocklist1 = null;
-                return;
-        }
+       
 
         $http.get('http://localhost:1476/api/blocklistnew/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
             
             $scope.blocklist = res.data;
+            $scope.checkedArr = $filter('filter')($scope.Blist, { assigned: "1" });
+            $scope.uncheckedArr = $filter('filter')($scope.Blist, { assigned: "0" });
           
         });
     }
@@ -52,7 +53,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
                 var fr = {
                     Id: -1,
                     //FleetOwnerId: $scope.s.Id,
-                    //CompanyId: $scope.cmp.Id,
+                    CompanyId: $scope.cmp.Id,
                     ItemName: $scope.checkedArr[cnt].ItemName,
                     Reason: $scope.checkedArr[cnt].Reason,
                     //From: $scope.checkedArr[cnt].FromDate,
