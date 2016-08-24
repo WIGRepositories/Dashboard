@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -21,6 +23,9 @@ namespace BTPOSDashboardAPI.Controllers
             string username = u.LoginInfo;
             string pwd = u.Passkey;
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Validating credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -45,6 +50,8 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(Tbl);
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Validate Credentials completed.");
             
             return Tbl;
 
