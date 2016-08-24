@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetItems()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventoryItem credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,7 +32,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventoryItem Credentials completed.");
             // int found = 0;
             return Tbl;
 
@@ -65,6 +66,9 @@ namespace BTPOSDashboard.Controllers
         [Route("api/ShoppingCart/SaveCartItems")]
         public HttpResponseMessage SaveCartItems(Shoppingcarts items1)
         {
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveCartItems credentials....");
+
           //  DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
             try
@@ -133,10 +137,11 @@ namespace BTPOSDashboard.Controllers
 
 
                 cmd.ExecuteScalar();
+
                // cmd.Parameters.Clear();
                conn.Close();
 
-
+               traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveCartItems Credentials completed.");
 
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                // conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
@@ -221,6 +226,7 @@ namespace BTPOSDashboard.Controllers
                     //return new HttpResponseMessage(HttpStatusCode.OK);
                 }
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveCartItems Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

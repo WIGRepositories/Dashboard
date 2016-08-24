@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BTPOSDashboardAPI.Models;
+using BTPOSDashboard;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -16,6 +17,10 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable GetUsers(int cmpId)//Main Method
         {
             DataTable Tbl = new DataTable();
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUsers credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();            
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();            
@@ -34,6 +39,7 @@ namespace BTPOSDashboardAPI.Controllers
           
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUsers Credentials completed.");
             
             return Tbl;
         }
@@ -42,6 +48,10 @@ namespace BTPOSDashboardAPI.Controllers
         [HttpPost]
         public DataTable SaveUsers(Users U)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers credentials....");
+ 
             DataTable Tbl = new DataTable();
               SqlConnection conn = new SqlConnection();
             try
@@ -130,6 +140,9 @@ namespace BTPOSDashboardAPI.Controllers
                 conn.Close();
                 string str = ex.Message;
             }
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers Credentials completed.");
+            
             // int found = 0;
             return Tbl;
         }
@@ -139,6 +152,10 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable GetUserRoles(int cmpId) {
             DataTable tbl = new DataTable();
 
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserRoles credentials....");
+ 
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
             SqlCommand cmd = new SqlCommand();
@@ -153,6 +170,7 @@ namespace BTPOSDashboardAPI.Controllers
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(tbl);
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserRoles Credentials completed.");
             
             return tbl;
         }
@@ -161,6 +179,10 @@ namespace BTPOSDashboardAPI.Controllers
         [Route("api/Users/SaveUserRoles")]
         public DataTable SaveUserRoles(userroles U)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles credentials....");
+ 
             DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
             try
@@ -205,6 +227,8 @@ namespace BTPOSDashboardAPI.Controllers
                 conn.Close();
                 string str = ex.Message;
             }
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles Credentials completed.");
+            
             // int found = 0;
             return Tbl;
         }

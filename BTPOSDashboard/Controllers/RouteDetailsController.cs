@@ -17,7 +17,8 @@ namespace BTPOSDashboard.Controllers
         {
            // DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getroutedetails credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -38,7 +39,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
            // Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getroutedetails Credentials completed.");
             // int found = 0;
             return ds;
         }
@@ -49,7 +50,8 @@ namespace BTPOSDashboard.Controllers
          public DataTable saveroutedetails(IEnumerable<RouteDetails> routestops)
          {
              DataTable Tbl = new DataTable();
-
+             LogTraceWriter traceWriter = new LogTraceWriter();
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveroutedetails credentials....");
 
              //connect to database
              SqlConnection conn = new SqlConnection();
@@ -113,7 +115,7 @@ namespace BTPOSDashboard.Controllers
 
              }
              conn.Close();
-             
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveroutedetails Credentials completed.");
              return Tbl;
 
          }

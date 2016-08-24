@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,7 +18,8 @@ namespace BTPOSDashboardAPI.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "gettypegroups credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -31,15 +33,16 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "gettypegroups Credentials completed.");
             // int found = 0;
             return Tbl;
         }
           [HttpPost]
          public HttpResponseMessage savetypegroups(TypeGroups b)
         {
-            
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "savetypegroups credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -94,6 +97,7 @@ namespace BTPOSDashboardAPI.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "savetypegroups Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
               }
               catch (Exception ex)

@@ -15,6 +15,8 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public HttpResponseMessage saveTicketGeneration(TicketGeneration n)
         {
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveTicketGeneration credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
 
@@ -57,6 +59,7 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveTicketGeneration Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

@@ -17,6 +17,8 @@ namespace BTPOSDashboard.Controllers
         [Route("api/VehicleLayout/saveVehicleLayout")]
         public HttpResponseMessage saveVehicleLayout(IEnumerable<VehicleLayout> vcList)
         {
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveVehicleLayout credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -75,7 +77,7 @@ namespace BTPOSDashboard.Controllers
                 }
 
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveVehicleLayout Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -93,7 +95,8 @@ namespace BTPOSDashboard.Controllers
         [Route("api/VehicleLayout/SaveFleetOwnerVehicleLayout")]
         public HttpResponseMessage SaveFleetOwnerVehicleLayout(IEnumerable<FleetOwnerVehicleLayout> FOvcList)
         {
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveFleetOwnerVehicleLayout credentials....");
             //DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -160,7 +163,7 @@ namespace BTPOSDashboard.Controllers
                     cmd.Parameters.Clear();
 
                 }
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveFleetOwnerVehicleLayout Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

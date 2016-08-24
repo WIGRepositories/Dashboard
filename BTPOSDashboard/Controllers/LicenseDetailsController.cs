@@ -17,7 +17,8 @@ namespace BTPOSDashboard.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getLicenseDetails credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -37,7 +38,7 @@ namespace BTPOSDashboard.Controllers
            
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-          
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getLicenseDetails Credentials completed.");
 
             // int found = 0;
             return Tbl;
@@ -46,6 +47,9 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public HttpResponseMessage SaveLicenseDetails(LicenseDetails b)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicenseDetails credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -114,7 +118,7 @@ namespace BTPOSDashboard.Controllers
            
             cmd.ExecuteScalar();
             conn.Close();
-          
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicenseDetails Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -133,7 +137,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetLicenseTypes(int catid)
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicenseTypes credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -151,8 +156,8 @@ namespace BTPOSDashboard.Controllers
             cmd.Parameters.Add(Gid);
 
             SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(Tbl);            
-
+            db.Fill(Tbl);
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicenseTypes Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -160,6 +165,9 @@ namespace BTPOSDashboard.Controllers
         [Route("api/License/SaveLicenseType")]
         public HttpResponseMessage SaveLicenseTypes(LicenseTypes b)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicenseTypes credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -205,6 +213,7 @@ namespace BTPOSDashboard.Controllers
                 cmd.ExecuteScalar();
 
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicenseTypes Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

@@ -19,7 +19,8 @@ namespace BTPOSDashboard.Controllers
 
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInvoices credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -33,7 +34,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
             // Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInvoices Credentials completed.");
             // int found = 0;
             return Tbl;
 

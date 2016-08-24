@@ -16,7 +16,9 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetStates()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetStates credentials....");
+ 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,7 +33,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetStates Credentials completed.");
             // int found = 0;
             return Tbl;
         }

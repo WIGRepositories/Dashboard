@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BTPOSDashboardAPI.Controllers;
 using BTPOSDashboardAPI.Models;
+using BTPOSDashboard;
 
 namespace blocklist1.Controllers
 {
@@ -21,7 +22,8 @@ namespace blocklist1.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetZipCode credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -35,13 +37,16 @@ namespace blocklist1.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetZipCode Credentials completed.");
             // int found = 0;
             return Tbl;
         }
           [HttpPost]
           public HttpResponseMessage pos(ZipCode b)
-          {            
+          {
+
+              LogTraceWriter traceWriter = new LogTraceWriter();
+              traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveZipCode credentials....");
               //connect to database
               SqlConnection conn = new SqlConnection();
 
@@ -78,7 +83,7 @@ namespace blocklist1.Controllers
 
                   cmd.ExecuteScalar();
                   conn.Close();
-
+                  traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveZipCode Credentials completed.");
                   return new HttpResponseMessage(HttpStatusCode.OK);
               }
               catch (Exception ex)

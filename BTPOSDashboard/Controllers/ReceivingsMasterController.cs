@@ -1,4 +1,5 @@
 ﻿
+using BTPOSDashboard;
 using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,9 @@ namespace blocklist1.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetReceivingsMaster credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -34,7 +37,8 @@ namespace blocklist1.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetReceivingsMaster Credentials completed.");
+            
             // int found = 0;
             return Tbl;
         }
@@ -43,6 +47,11 @@ namespace blocklist1.Controllers
         [HttpPost]
           public HttpResponseMessage pos(ReceivingsMaster b)
         {
+
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveReceivingsMaster credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -87,6 +96,8 @@ namespace blocklist1.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveReceivingsMaster Credentials completed.");
+            
              return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

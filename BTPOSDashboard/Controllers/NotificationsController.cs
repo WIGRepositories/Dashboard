@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable getNotification()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getNotification credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,7 +32,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getNotification Credentials completed.");
             // int found = 0;
             return Tbl;
         }

@@ -17,7 +17,9 @@ namespace BTPOSDashboard.Controllers
     {
         [HttpGet]
         [Route("api/MakePayment")]
-        public HttpResponseMessage MakePayment() {           
+        public HttpResponseMessage MakePayment() {      
+     
+
             try
             {
 
@@ -130,6 +132,7 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetPaymentAck(string BTPOSId, decimal amt, string cardno, string cvv, string expirydate)
         {
             int btposTransId = -1;
+            
             SqlConnection conn = new SqlConnection();
 
             try

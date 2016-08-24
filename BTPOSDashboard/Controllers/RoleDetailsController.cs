@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +17,9 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable getroledetails()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getroledetails credentials....");
+ 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,13 +34,17 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getroledetails Credentials completed.");
             // int found = 0;
             return Tbl;
         }
         [HttpPost]
         public HttpResponseMessage saveroledetails(roledetails b)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveroledetails credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -78,6 +85,7 @@ namespace BTPOSDashboardAPI.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveroledetails Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,7 +18,8 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable GetCompanyRoles(int companyId)
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyRoles credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -38,7 +40,8 @@ namespace BTPOSDashboardAPI.Controllers
          
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-           
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyRoles Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -48,7 +51,8 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable GetRoles(int allroles)
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetRoles credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -70,7 +74,8 @@ namespace BTPOSDashboardAPI.Controllers
                        
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-            
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetRoles Credentials completed.");
             return Tbl;
         }
 
@@ -78,6 +83,9 @@ namespace BTPOSDashboardAPI.Controllers
         [HttpPost]
         public HttpResponseMessage saveroles(roles b)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveroles credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
 
@@ -128,6 +136,9 @@ namespace BTPOSDashboardAPI.Controllers
                 // Tbl = Tables[0];
                 cmd.ExecuteScalar();
                 conn.Close();
+
+
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveroles Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

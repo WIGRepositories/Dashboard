@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,7 +18,8 @@ namespace POSDBAccess.Controllers
         public DataTable getTroubleTicketingDetails()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getTroubleTicketingDetails credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -32,7 +34,7 @@ namespace POSDBAccess.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getTroubleTicketingDetails Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -42,7 +44,8 @@ namespace POSDBAccess.Controllers
         public DataTable saveTroubleTicketingDetails(TroubleTicketingDetails n)
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveTroubleTicketingDetails credentials....");
             try
             {
                 //connect to database
@@ -131,6 +134,7 @@ namespace POSDBAccess.Controllers
             {
                 string str = ex.Message;
             }
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveTroubleTicketingDetails Credentials completed.");
             // int found = 0;
             return Tbl;
 

@@ -15,6 +15,8 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public HttpResponseMessage saveRegistrationBTPOS(RegistrationBTPOS n)
         {
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveRegistrationBTPOS credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -62,6 +64,9 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
+
+
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveRegistrationBTPOS Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

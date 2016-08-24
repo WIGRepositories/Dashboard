@@ -18,7 +18,8 @@ namespace BTPOSDashboard.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getVehicleDetails credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -32,7 +33,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getVehicleDetails Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -40,7 +41,8 @@ namespace BTPOSDashboard.Controllers
 
         public HttpResponseMessage saveVehicleDetails(VehicleDetails n)
         {
-           
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveVehicleDetails credentials....");
             SqlConnection conn = new SqlConnection();
 
             try
@@ -155,6 +157,8 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
+
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveVehicleDetails Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

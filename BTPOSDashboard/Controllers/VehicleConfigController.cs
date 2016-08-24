@@ -16,6 +16,9 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public DataSet VConfig(VehicleConfig vc)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Validating credentials....");
             //DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();

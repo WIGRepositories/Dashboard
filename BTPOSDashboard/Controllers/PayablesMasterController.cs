@@ -1,4 +1,5 @@
 ﻿
+using BTPOSDashboard;
 using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,9 @@ namespace blocklist1.Controllers
         public DataTable POSDashboard1()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetPayablesMaster credentials....");
+ 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -32,7 +35,7 @@ namespace blocklist1.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetPayablesMaster Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -41,7 +44,9 @@ namespace blocklist1.Controllers
         [HttpPost]
          public HttpResponseMessage pos(PayablesMaster b)
          {
-            
+             LogTraceWriter traceWriter = new LogTraceWriter();
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SavePayablesMaster credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -87,6 +92,7 @@ namespace blocklist1.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SavePayablesMaster Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

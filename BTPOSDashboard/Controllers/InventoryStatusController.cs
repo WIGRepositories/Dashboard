@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetInventory()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventory credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,6 +32,9 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventory Credentials completed.");
+            
             return Tbl;
             // int found = 0;
             

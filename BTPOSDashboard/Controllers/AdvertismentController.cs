@@ -15,7 +15,9 @@ namespace BTPOSDashboard.UI
         public DataTable GetAdvertisment()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetAdvertisment credentials....");
+ 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -30,7 +32,7 @@ namespace BTPOSDashboard.UI
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetAdvertisment Credentials completed.");
             // int found = 0;
             return Tbl;
 

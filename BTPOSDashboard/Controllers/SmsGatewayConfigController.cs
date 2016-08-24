@@ -17,7 +17,9 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetSmsGatewayConfig()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetSmsGatewayConfig credentials....");
+ 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -32,13 +34,17 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetSmsGatewayConfig Credentials completed.");
             // int found = 0;
             return Tbl;
         }
          [HttpPost]
         public HttpResponseMessage SaveSmsGatewaySettings(SMSGatewayConfiguration b)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveSmsGatewaySettings credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -132,6 +138,7 @@ namespace BTPOSDashboard.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveSmsGatewaySettings Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

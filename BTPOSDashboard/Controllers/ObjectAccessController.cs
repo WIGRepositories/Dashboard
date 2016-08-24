@@ -16,7 +16,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable getObjectAccess()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getObjectAccess credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,7 +32,8 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getObjectAccess Credentials completed.");
+            
             // int found = 0;
             return Tbl;
         }
@@ -41,6 +43,9 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
          public HttpResponseMessage SaveObjectAccess(ObjectAccess b)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveObjectAccess credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -86,6 +91,8 @@ namespace BTPOSDashboard.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveObjectAccess Credentials completed.");
+            
               return new HttpResponseMessage(HttpStatusCode.OK);
               }
               catch (Exception ex)

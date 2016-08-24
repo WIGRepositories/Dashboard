@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -44,7 +45,9 @@ namespace registerform.Controllers
         public HttpResponseMessage pos(Register b)
         
         {
-           
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Saveregisterform credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -120,6 +123,8 @@ namespace registerform.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+
+           traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Saveregisterform Credentials completed.")
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
