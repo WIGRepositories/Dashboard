@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 
 namespace BTPOSDashboard.Controllers
@@ -161,9 +162,6 @@ namespace BTPOSDashboard.Controllers
               traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "VehicleConfiguration Credentials completed.");
               return ds;
           }
-
-
-
 
 
 

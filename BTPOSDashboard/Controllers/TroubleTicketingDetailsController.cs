@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace POSDBAccess.Controllers
 {
@@ -127,14 +128,15 @@ namespace POSDBAccess.Controllers
                 SqlDataAdapter db = new SqlDataAdapter(cmd);
                 db.Fill(Tbl);
                 //Tbl = ds.Tables[0];
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveTroubleTicketingDetails Credentials completed.");
 
             }
             catch (Exception ex)
             {
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in saveTroubleTicketingDetails:" + ex.Message);
             }
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveTroubleTicketingDetails Credentials completed.");
+           
             // int found = 0;
             return Tbl;
 

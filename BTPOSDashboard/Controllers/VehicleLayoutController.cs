@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -87,6 +88,7 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveVehicleLayout Credentials completed.");
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
@@ -173,6 +175,7 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveFleetOwnerVehicleLayout:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

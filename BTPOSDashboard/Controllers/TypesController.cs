@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Text;
 using System.IO;
 using BTPOSDashboard;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -128,6 +129,7 @@ namespace BTPOSDashboardAPI.Controllers
                       conn.Close();
                   }
                   string str = ex.Message;
+                  traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveType:" + ex.Message);
                   return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
               }
           }

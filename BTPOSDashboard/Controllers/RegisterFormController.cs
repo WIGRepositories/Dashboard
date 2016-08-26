@@ -136,6 +136,8 @@ namespace registerform.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in Saveregisterform:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

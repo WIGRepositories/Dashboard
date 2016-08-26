@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {

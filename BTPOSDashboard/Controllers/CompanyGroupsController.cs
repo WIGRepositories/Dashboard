@@ -82,6 +82,7 @@ namespace POSDBAccess.Controllers
             db.Fill(ds);
             Tbl = ds.Tables[0];
             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getfleet Credentials completed.");
+           
             // int found = 0;
             return Tbl;
         }
@@ -320,6 +321,7 @@ namespace POSDBAccess.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in saveAssignDelRoles:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
@@ -395,6 +397,8 @@ namespace POSDBAccess.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveCmpRoles:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

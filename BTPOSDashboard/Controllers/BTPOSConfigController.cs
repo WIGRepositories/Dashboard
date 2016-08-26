@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Text;
 using System.IO;
 using BTPOSDashboardAPI.Models;
+using System.Web.Http.Tracing;
 
 
 namespace BTPOSDashboard.Controllers

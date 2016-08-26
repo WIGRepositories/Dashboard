@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using BTPOSDashboardAPI.Models;
 using BTPOSDashboard;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -133,15 +134,17 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.ExecuteScalar();
                 
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers Credentials completed.");
                 
             }
             catch (Exception ex)
             {
                 conn.Close();
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveUsers:" + ex.Message);
             }
 
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers Credentials completed.");
+            
             
             // int found = 0;
             return Tbl;
@@ -220,14 +223,17 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.ExecuteScalar();
 
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles Credentials completed.");
 
             }
             catch (Exception ex)
             {
                 conn.Close();
                 string str = ex.Message;
+
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveUserRoles:" + ex.Message);
             }
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles Credentials completed.");
+           
             
             // int found = 0;
             return Tbl;

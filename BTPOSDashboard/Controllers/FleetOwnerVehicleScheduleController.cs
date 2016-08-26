@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web.Http.Tracing;
 namespace BTPOSDashboard.Controllers
 {
     public class FleetOwnerVehicleScheduleController : ApiController
@@ -175,6 +176,8 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in saveFORSchedule:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

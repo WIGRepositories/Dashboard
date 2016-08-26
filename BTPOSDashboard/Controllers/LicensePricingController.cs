@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -124,6 +125,7 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveLicensePricing:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
        }

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Configuration;
 using BTPOSDashboardAPI.Models;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -134,6 +135,8 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveNewFleetStaff:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

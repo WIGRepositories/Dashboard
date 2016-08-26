@@ -10,6 +10,7 @@ using System.Web.Http;
 using BTPOSDashboardAPI.Controllers;
 using BTPOSDashboardAPI.Models;
 using BTPOSDashboard;
+using System.Web.Http.Tracing;
 
 namespace blocklist1.Controllers
 {
@@ -93,6 +94,7 @@ namespace blocklist1.Controllers
                       conn.Close();
                   }
                   string str = ex.Message;
+                  traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveZipCode:" + ex.Message);
                   return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
               }
           }
