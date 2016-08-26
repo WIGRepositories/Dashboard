@@ -94,38 +94,93 @@ namespace BTPOSDashboard.Controllers
 
                 SqlCommand cmd = new SqlCommand();
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "InsUpdDelBlocklist";
+                cmd.CommandText = "InsUpdDelELBlockList";
                 cmd.Connection = conn;
                 conn.Open();
 
                 foreach (Sblocklist b in Blist)
                 {
 
-                    SqlParameter rid = new SqlParameter();
-                    rid.ParameterName = "@ItemName";
-                    rid.SqlDbType = SqlDbType.Int;
-                    rid.Value = b.ItemName;
-                    cmd.Parameters.Add(rid);
+                    SqlParameter Aid = new SqlParameter();
+                    Aid.ParameterName = "@Id";
+                    Aid.SqlDbType = SqlDbType.VarChar;
+                    Aid.Value = b.Id;
+                    cmd.Parameters.Add(Aid);
 
-                    SqlParameter sid = new SqlParameter();
-                    sid.ParameterName = "@Reason";
-                    sid.SqlDbType = SqlDbType.VarChar;
-                    sid.Value = b.Reason;
-                    cmd.Parameters.Add(sid);
+                    SqlParameter Gid = new SqlParameter();
+                    Gid.ParameterName = "@ItemId";
+                    Gid.SqlDbType = SqlDbType.Int;
+                    Gid.Value = b.ItemId;
+                    Gid.Value = Convert.ToString(b.ItemId);
+                    cmd.Parameters.Add(Gid);
 
-                    //SqlParameter cmpid = new SqlParameter();
-                    //cmpid.ParameterName = "@cmpId";
-                    //cmpid.SqlDbType = SqlDbType.Int;
-                    //cmpid.Value = b.CompanyId;
-                    //cmd.Parameters.Add(cmpid);
+                    SqlParameter lid = new SqlParameter();
+                    lid.ParameterName = "@ItemTypeId";
+                    lid.SqlDbType = SqlDbType.VarChar;
+                    lid.Value = b.ItemTypeId;
+                    cmd.Parameters.Add(lid);
 
 
-                    //SqlParameter fid = new SqlParameter();
-                    //fid.ParameterName = "@fleetOwnerId";
-                    //fid.SqlDbType = SqlDbType.Int;
-                    //fid.Value = b.FleetOwnerId;
-                    //cmd.Parameters.Add(fid);
+                    SqlParameter pid = new SqlParameter();
+                    pid.ParameterName = "@Formdate ";
+                    pid.SqlDbType = SqlDbType.VarChar;
+                    pid.Value = b.Formdate;
+                    cmd.Parameters.Add(pid);
 
+                    SqlParameter ss = new SqlParameter();
+                    ss.ParameterName = "@Todate";
+                    ss.SqlDbType = SqlDbType.VarChar;
+                    ss.Value = b.Todate;
+                    cmd.Parameters.Add(ss);
+
+
+                    SqlParameter ii = new SqlParameter();
+                    ii.ParameterName = "@Active";
+                    ii.SqlDbType = SqlDbType.VarChar;
+                    ii.Value = b.Active;
+                    cmd.Parameters.Add(ii);
+
+
+                    SqlParameter vv = new SqlParameter();
+                    vv.ParameterName = "@Desc ";
+                    vv.SqlDbType = SqlDbType.VarChar;
+                    vv.Value = b.Desc;
+                    cmd.Parameters.Add(vv);
+
+
+
+                    SqlParameter mm = new SqlParameter();
+                    mm.ParameterName = "@Reason ";
+                    mm.SqlDbType = SqlDbType.VarChar;
+                    mm.Value = b.Reason;
+                    cmd.Parameters.Add(mm);
+
+
+                    SqlParameter nn = new SqlParameter();
+                    nn.ParameterName = "@Blockedby";
+                    nn.SqlDbType = SqlDbType.VarChar;
+                    nn.Value = Convert.ToString(b.Blockedby);
+                    cmd.Parameters.Add(nn);
+
+
+
+                    SqlParameter pp = new SqlParameter();
+                    pp.ParameterName = "@UnBlockedby ";
+                    pp.SqlDbType = SqlDbType.VarChar;
+                    pp.Value = b.UnBlockedby;
+                    cmd.Parameters.Add(pp);
+
+                    SqlParameter kk = new SqlParameter();
+                    kk.ParameterName = "@Blockedon";
+                    kk.SqlDbType = SqlDbType.VarChar;
+                    kk.Value = Convert.ToString(b.Blockedon);
+                    cmd.Parameters.Add(kk);
+                    SqlParameter yy = new SqlParameter();
+                    yy.ParameterName = "@UnBlockedon";
+                    yy.SqlDbType = SqlDbType.VarChar;
+                    yy.Value = Convert.ToString(b.UnBlockedon);
+                    cmd.Parameters.Add(yy);
+            
 
 
 

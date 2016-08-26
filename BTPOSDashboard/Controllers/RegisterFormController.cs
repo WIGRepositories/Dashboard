@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace registerform.Controllers
 {
@@ -124,7 +126,7 @@ namespace registerform.Controllers
             cmd.ExecuteScalar();
             conn.Close();
 
-           traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Saveregisterform Credentials completed.")
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Saveregisterform Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)

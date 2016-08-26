@@ -2231,6 +2231,9 @@
     <Compile Include="Controllers\AlertsConfigurationController.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\Blocklistcontroller.cs" />
+    <Compile Include="Controllers\blocklistnewController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\BTPOSConfigController.cs" />
     <Compile Include="Controllers\Btposcontroller1Controller.cs" />
     <Compile Include="Controllers\BTPOSDetailsController.cs" />
