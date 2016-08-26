@@ -453,6 +453,7 @@
     <Content Include="UI\FleetOwnerVehicleSchedule.html" />
     <Content Include="UI\FleetRoutes.html" />
     <Content Include="UI\FleetStaff.html" />
+    <Content Include="UI\ForgotPassword.html" />
     <Content Include="UI\getregistrationform.html" />
     <Content Include="UI\images\bkgRd3.png" />
     <Content Include="UI\images\dashboard.png" />
@@ -507,6 +508,7 @@
     <Content Include="UI\js\FleetRoutes.js" />
     <Content Include="UI\js\FleetStaff.js" />
     <Content Include="UI\js\FOReports.js" />
+    <Content Include="UI\js\ForgotPassword.js" />
     <Content Include="UI\js\handsontable.full.js" />
     <Content Include="UI\js\html5shiv.js" />
     <Content Include="UI\js\InventoryItem.js" />
