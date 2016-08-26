@@ -36,19 +36,21 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
           [HttpPost]
-          public DataTable savetypegroups(TypeGroups b)
+         public HttpResponseMessage savetypegroups(TypeGroups b)
         {
-            DataTable Tbl = new DataTable();
+            
 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
+              try
+              { 
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
           
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_InsTypeGroups";
+            cmd.CommandText = "InsUpdTypeGroups";
             cmd.Connection = conn;
             conn.Open();
          
@@ -77,6 +79,13 @@ namespace BTPOSDashboardAPI.Controllers
             llid.Value = 1;// b.Active;
             //llid.Value = b.Active;
             cmd.Parameters.Add(llid);
+
+            SqlParameter flag = new SqlParameter();
+            flag.ParameterName = "@insupdflag";
+            flag.SqlDbType = SqlDbType.VarChar;
+            flag.Value = b.insupddelflag;
+            cmd.Parameters.Add(flag);
+           
            
           
             //DataSet ds = new DataSet();
@@ -85,8 +94,17 @@ namespace BTPOSDashboardAPI.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
+            return new HttpResponseMessage(HttpStatusCode.OK);
+              }
+              catch (Exception ex)
+              {
+                  if (conn != null && conn.State == ConnectionState.Open)
+                  {
+                      conn.Close();
+                  }
+                  string str = ex.Message;
+                  return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+              }
         }
         public void Options() { }
 

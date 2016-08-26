@@ -5,13 +5,26 @@ using System.Web;
 
 namespace BTPOSDashboardAPI.Models
 {
-    public class Model
+    public class Alerts
     {
-      public int Id { get; set; }
-      public DateTime Date {get;set;}
-      public string Message { get; set; }
-      public string MessageTypeId { get; set; }
-      public string Status { get; set; }
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public string Message { get; set; }
+        public string MessageTypeId { get; set; }
+        public string StatusId { get; set; }
+        public string UserId { get; set; }
+
+        public string Name { get; set; }
+    }
+    public class Notifications
+    {
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public string Message { get; set; }
+        public string MessageTypeId { get; set; }
+        public string StatusId { get; set; }
+        public string UserId { get; set; }
+        public string Name { get; set; }
     }
     public class Btpos
     {
@@ -22,7 +35,28 @@ namespace BTPOSDashboardAPI.Models
         public string Status { get; set; }
         public string IMEI { get; set; }
         public string Location { get; set; }
+
     }
+
+    public class BtposRecords
+    {
+
+        public int Id { get; set; }
+        public string RecordData { get; set; }
+        public int POSID { get; set; }
+        public string FileName { get; set; }
+        public string Description { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime Downloaded { get; set; }
+
+        public DateTime LastDownloadtime { get; set; }
+
+        public int IsDirty { get; set; }
+
+        public char insupddelflag { get; set; }
+
+    }
+
     public class btposgroups
     {
         public int Id { get; set; }
@@ -30,7 +64,7 @@ namespace BTPOSDashboardAPI.Models
         public string Desc { get; set; }
         public string Active { get; set; }
         public string Code { get; set; }
-       
+
     }
     public class master
     {
@@ -49,7 +83,7 @@ namespace BTPOSDashboardAPI.Models
         public int PerUnitPrice { get; set; }
         public string ReorderPoint { get; set; }
         public int AvailableQty { get; set; }
-   
+
 
     }
     public class roledetails
@@ -68,8 +102,10 @@ namespace BTPOSDashboardAPI.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Active { get; set; }
+        public string IsPublic { get; set; }
         public string Company { get; set; }
         public int CompanyId { get; set; }
+
 
     }
     public class Blocklist
@@ -112,7 +148,6 @@ namespace BTPOSDashboardAPI.Models
         public string Desc { get; set; }
 
     }
-     
     public class UserLogin
     {
         public int Id { set; get; }
@@ -121,18 +156,21 @@ namespace BTPOSDashboardAPI.Models
         public string Passkey { set; get; }
         public string Salt { set; get; }
         public string Active { set; get; }
-      
+
     }
     public class userroles
     {
         public int Id { set; get; }
         public int UserId { set; get; }
-        public int GroupId { set; get; }
+        public int CompanyId { set; get; }
         public int RoleId { set; get; }
+        public int flag { set; get; }
         public string Passkey { set; get; }
-     
+
+        public string insupdflag { set; get; }
+
     }
-  
+
     public class STATE
     {
 
@@ -192,22 +230,24 @@ namespace BTPOSDashboardAPI.Models
     }
     public class ZipCode
     {
-         public int Id { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
         public string Active { get; set; }
 
     }
-    
+
     public class Routes
     {
-        public int Id{set;get;}
-     public string Route {set;get;}
-       public string Code {set;get;}
-      //public string Description {set;get;} 
-      //public string Active {set;get;} 
-      // public string BTPOSGroupId {set;get;}
-      public string Source {set;get;} 
-      public string Destination {set;get;} 
+        public int Id { set; get; }
+        public string RouteName { set; get; }
+        public string Code { set; get; }
+        public string Description { set; get; }
+        public int Active { set; get; }
+        public decimal Distance { set; get; }
+        public string Source { set; get; }
+        public string Destination { set; get; }
+        public int SourceId { set; get; }
+        public int DestinationId { set; get; }
     }
 
     public class Transaction
@@ -271,7 +311,7 @@ namespace BTPOSDashboardAPI.Models
         public string Description { get; set; }
 
         public string Active { get; set; }
-
+        public string insupddelflag { get; set; }
     }
 
     public class Types
@@ -284,56 +324,14 @@ namespace BTPOSDashboardAPI.Models
 
         public string Active { get; set; }
 
-       
+
 
         public string TypeGroupId { get; set; }
 
         public string ListKey { get; set; }
 
         public string Listvalue { get; set; }
-
-    }
-
-    public class RouteFares
-    {
-        public int Id { get; set; }
-
-        public string RouteId { get; set; }
-
-        public string Stopname { get; set; }
-
-        public string Descr { get; set; }
-
-        public string StopCode { get; set; }
-
-        public object ToStop { get; set; }
-
-        public object FromStop { get; set; }
-
-        public object Fare { get; set; }
-
-        public string Route { get; set; }
-
-        public string Active { get; set; }
-
-        public string Source { get; set; }
-
-        public string Destination { get; set; }
-
-        public string Code { get; set; }
-
-        public string BTPOSGrpId { get; set; }
-
-        public string Name { get; set; }
-
-        public int DistFromSource { get; set; }
-
-        public int DistFromDestination { get; set; }
-
-        public int DistFromPrevStop { get; set; }
-
-        public int DistFromNextStop { get; set; }
-
+        public string insupddelflag { get; set; }
     }
 
     public class FleetOwner
@@ -380,6 +378,8 @@ namespace BTPOSDashboardAPI.Models
 
         public int InventoryId { get; set; }
         public string Name { get; set; }
+
+        public string Image { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
         public int AvailableQty { get; set; }
@@ -460,7 +460,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string GroupName { get; set; }
 
-        public string GroupId { get; set; }
+        public string CompanyId { get; set; }
 
         public string IMEI { get; set; }
 
@@ -470,7 +470,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string ipconfig { get; set; }
         public string fleetowner { get; set; }
-        public int fleetownerid { get; set; }
+        public int? fleetownerid { get; set; }
         public int active { get; set; }
 
         public string insupdflag { get; set; }
@@ -509,18 +509,6 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
     }
 
-    public class RouteFare
-    {
-        public int active { get; set; }
-
-        public int fareCodeId { get; set; }
-
-        public int Id { get; set; }
-
-        public int routeId { get; set; }
-
-    }
-
     public class RoutesConfiguration
     {
         public int distanceFromDest { get; set; }
@@ -549,15 +537,45 @@ namespace BTPOSDashboardAPI.Models
 
         public string code { get; set; }
 
-        public string descr { get; set; }
+        public string desc { get; set; }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Address { get; set; }
+        public string ContactNo1 { get; set; }
+        public string ContactNo2 { get; set; }
+        public string Fax { get; set; }
+        public string EmailId { get; set; }
+        public string Title { get; set; }
+        public string Caption { get; set; }
+        public string Country { get; set; }
+        public int ZipCode { get; set; }
+        public string State { get; set; }
+
+        public int FleetSize{get;set;}
+        public int StaffSize{get;set;}
+        public string PermanentAddress {get;set;}
+        public string TemporaryAddress{get;set;} 
+        public string Logo { get; set; }
+
         public string insupdflag { get; set; }
 
     }
 
+    public class CompanyRoles
+    {
+        public int Id { get; set; }
+        public string Role { get; set; }
+        public string RoleId { get; set; }
+        public string Active { get; set; }
+        public string IsPublic { get; set; }
+        public string Company { get; set; }
+        public int CompanyId { get; set; }
+        public int insdelflag { get; set; }
+
+    }
     public class PaymentReceivings
     {
         public int amount { get; set; }
@@ -609,23 +627,26 @@ namespace BTPOSDashboardAPI.Models
 
     public class TroubleTicketingDetails
     {
-        public string addInfo { get; set; }
+        //public int Id { get; set; }
+        public int RefId { get; set; }
 
-        public string createdBy { get; set; }
+        public int Type { get; set; }
 
-        public int createdOn { get; set; }
+        public int createdBy { get; set; }
 
-        public int Id { get; set; }
+        public int Raised { get; set; }
 
-        public string raisedBy { get; set; }
+        public int TicketTitle { get; set; }
 
-        public int status { get; set; }
+        public string IssueDetails { get; set; }
 
-        public string ticketinfo { get; set; }
+        public string AddInfo { get; set; }
 
-        public int ticketTypeId { get; set; }
+        public int Status { get; set; }
 
-        public int TTId { get; set; }
+        public int Asign { get; set; }
+
+
 
     }
     public class TroubleTicketingHandlers
@@ -672,34 +693,39 @@ namespace BTPOSDashboardAPI.Models
         public int userid { get; set; }
     }
 
-    public class SMSEmailConfiguration
+    public class SMSGatewayConfiguration
     {
-        public int AlertTypeId { get; set; }
+        public int Id { get; set; }
 
         public DateTime enddate { get; set; }
 
-        public DateTime hashkey { get; set; }
+        public string hashkey { get; set; }
 
-        public int Id { get; set; }
 
         public string providername { get; set; }
 
         public string pwd { get; set; }
 
-        public DateTime saltkey { get; set; }
+        public string saltkey { get; set; }
 
         public DateTime startdate { get; set; }
 
         public string username { get; set; }
+        public string ClientId { get; set; }
+        public string SecretId { get; set; }
+        public string insupdflag { get; set; }
     }
 
     public class PaymentGatewaySettings
     {
+        public int Id { get; set; }
         public DateTime enddate { get; set; }
 
-        public DateTime hashkey { get; set; }
+        public string hashkey { get; set; }
 
-        public int Id { get; set; }
+        public string ClientId { get; set; }
+
+        public string secretId { get; set; }
 
         public int PaymentGatewayTypeId { get; set; }
 
@@ -707,11 +733,13 @@ namespace BTPOSDashboardAPI.Models
 
         public string pwd { get; set; }
 
-        public DateTime saltkey { get; set; }
+        public string saltkey { get; set; }
 
         public DateTime startdate { get; set; }
 
         public string username { get; set; }
+        public string insupdflag { get; set; }
+
     }
 
     public class Transactions
@@ -963,7 +991,7 @@ namespace BTPOSDashboardAPI.Models
         public string Desc1 { set; get; }
         public int Typegrpid { set; get; }
     }
-   
+
     public class ExpensesClass
     {
         public int Id { set; get; }
@@ -1052,6 +1080,8 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
         public int companyId { set; get; }
         public int Company { set; get; }
+        public int? mgrId { set; get; }
+        public int ManagerName { set; get; }
     }
 
     public class Register
@@ -1062,10 +1092,10 @@ namespace BTPOSDashboardAPI.Models
         public string LastName { get; set; }
         public string Emailaddress { get; set; }
         public string ConfirmPassword { get; set; }
-
+        public string Gender { get; set; }
     }
 
-    public class resetpassword
+    public class login
     {
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -1088,6 +1118,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string Path { get; set; }
         public int Active { get; set; }
+        public string insupdflag { get; set; }
 
     }
     public class ObjectAccess
@@ -1101,15 +1132,21 @@ namespace BTPOSDashboardAPI.Models
     public class RouteDetails
     {
         public int Id { get; set; }
-        public String RouteId { get; set; }
-        public String stopname { get; set; }
-        public String Description { get; set; }
-
+        public int RouteId { get; set; }
+        public decimal DistanceFromSource { get; set; }
+        public decimal DistanceFromDestination { get; set; }
+        public decimal DistanceFromPreviousStop { get; set; }
+        public decimal DistanceFromNextStop { get; set; }
+        public int PreviousStopId { get; set; }
+        public int NextStopId { get; set; }
+        public String StopName { get; set; }
         public String StopCode { get; set; }
-        public int DistanceFromSource { get; set; }
-        public int DistanceFromDestination { get; set; }
-        public int DistanceFromPreviousStop { get; set; }
-        public int DistanceFromNextStop { get; set; }
+        public int stopId { get; set; }
+        public String prevstop { get; set; }
+        public String nextstop { get; set; }
+        public int StopNo { get; set; }
+        public String insupddelflag { get; set; }
+        public int FleetOwnerId { get; set; }
 
     }
     public class ISales
@@ -1130,34 +1167,18 @@ namespace BTPOSDashboardAPI.Models
         public int Quantity { get; set; }
 
         public int PerUnitPrice { get; set; }
-        public String PurchaseDate { get; set; }
-        public int PurchaseOrderNumber { get; set; }
+        public DateTime PurchaseDate { get; set; }
+        public string PurchaseOrderNumber { get; set; }
+        public int subCategoryId { get; set; }
+
+        public string subCategory { get; set; }
     }
-    public class LicenseDetails
-    {
-        public int Id { get; set; }
-
-        public int LicenseTypeId { get; set; }
-        public string FeatureName { get; set; }
-        public String FeatureValue { get; set; }
-        public int FeatureType { get; set; }
-       
-        public String Description { get; set; }
-
-        public DateTime effectiveFrom { get; set; }
-
-        public DateTime effectiveTill { get; set; }
-
-        public String Label { get; set; }
-
-        public String labelclass { get; set; }
-    }
-
     public class InventoryItem
     {
-        public int Id { get; set; }
+        // public int Id { get; set; }
 
         public String ItemName { get; set; }
+        // public String ItemImage { get; set; }
         public String Code { get; set; }
 
         public String Description { get; set; }
@@ -1165,6 +1186,7 @@ namespace BTPOSDashboardAPI.Models
         public String SubCategory { get; set; }
 
         public int ReOrderPoint { get; set; }
+
     }
 
     public class FleetOwnerRequest
@@ -1177,6 +1199,522 @@ namespace BTPOSDashboardAPI.Models
         public String CompanyName { get; set; }
         public String Description { get; set; }
         public string insupdflag { get; set; }
+    }
+
+    public class RouteFare
+    {
+        public int Id { get; set; }
+
+        public int RouteId { get; set; }
+        public string VehicleType { get; set; }
+
+
+        public int SourceStopId { get; set; }
+        public int DestinationStopId { get; set; }
+        public string Distance { get; set; }
+        public int PerUnitPrice { get; set; }
+
+        public int Amount { get; set; }
+
+        public String FareType { get; set; }
+        public int Active { get; set; }
+    }
+    public class FleetownerRoute
+    {
+        public int Id { get; set; }
+        public int FleetOwnerId { get; set; }
+
+        public int CompanyId { get; set; }
+
+        public int RouteId { get; set; }
+
+        public DateTime? From { get; set; }
+
+        public DateTime? To { get; set; }
+        public int Active { get; set; }
+        public string insupddelflag { get; set; }
+    }
+    public class FleetOwnerRouteStop
+    {
+        public int Id { get; set; }
+        public int RouteId { get; set; }
+        public int FleetOwnerId { get; set; }
+
+        public int StopId { get; set; }
+
+        public int StopNo { get; set; }
+        public String PreviousStop { get; set; }
+        public String NextStop { get; set; }
+
+        public int Active { get; set; }
+    }
+
+    public class FORouteFareConfig
+    {
+
+        public List<FORouteFare> routeFare { get; set; }
+        public int Id { get; set; }
+        public int RouteId { get; set; }
+        public string RouteName { get; set; }
+        public string RouteCode { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal Amount { get; set; }
+        public int VehicleId { get; set; }
+        public string VehicleRegNo { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string insupddelflag { get; set; }
+        public string PriceType { get; set; }
+        public int PriceTypeId { get; set; }
+
+        public int SourceId { get; set; }
+        public string Source { get; set; }
+        public int DestinationId { get; set; }
+        public string Destination { get; set; }
+    }
+
+    public class FORouteFare
+    {
+        public int Id { get; set; }
+        public int RouteId { get; set; }
+        public string VehicleTypeId { get; set; }
+        public int FromStopId { get; set; }
+        public int ToStopId { get; set; }
+        public decimal Distance { get; set; }
+        public decimal PerUnitPrice { get; set; }
+        public decimal Amount { get; set; }
+        public String FareType { get; set; }
+        public int FareTypeId { get; set; }
+        public int VehicleId { get; set; }
+        public int Active { get; set; }
+        public int FleetOwnerId { get; set; }
+        public int CompanyId { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string insupddelflag { get; set; }
+
+        public string PricingType { get; set; }
+
+        public Decimal PerkmPrice { get; set; }
+    }
+
+    public class LicenseDetails
+    {
+
+
+        public int Id { get; set; }
+        public int FeatureTypeId { get; set; }
+        public string FeatureName { get; set; }
+        public String FeatureLabel { get; set; }
+        public String LicenseCode { get; set; }
+        public String LicenseName { get; set; }
+        public String FeatureValue { get; set; }
+        public String LabelClass { get; set; }
+
+        public int Active { get; set; }
+        public int LicenseTypeId { get; set; }
+        public int LicenseCatId { get; set; }
+        public DateTime? fromDate { get; set; }
+        public DateTime? toDate { get; set; }
+        public string insupddelflag { get; set; }
+    }
+
+    public class LicensePricing
+    {
+        public int LicenseId { get; set; }
+        public String RenewalFreqType { get; set; }
+        public int RenewalFreqTypeId { get; set; }
+        public int RenewalFreqUnit { get; set; }
+        public string RenewalFreq { get; set; }
+        public decimal UnitPrice { get; set; }
+        public DateTime? fromdate { get; set; }
+        public DateTime? todate { get; set; }
+        public int Id { get; set; }
+
+        public int categoryid { get; set; }
+        public int Active { get; set; }
+        public string insupddelflag { get; set; }
+    }
+
+    public class FleetDetails
+    {
+        public int VehicleLayoutId;
+        public string VehicleLayout;
+        public int Id { get; set; }
+
+        public string VehicleRegNo { get; set; }
+        public int VehicleTypeId { get; set; }
+
+        public String FleetOwnerId { get; set; }
+        public String CompanyId { get; set; }
+        public String ServiceTypeId { get; set; }
+
+        public int Active { get; set; }
+
+        public String EngineNo { get; set; }
+
+        public String FuelUsed { get; set; }
+
+        public DateTime? MonthAndYrOfMfr { get; set; }
+
+        public string ChasisNo { get; set; }
+
+        public int SeatingCapacity { get; set; }
+
+        public DateTime? DateOfRegistration { get; set; }
+        public string insupddelflag { get; set; }
+
+    }
+    public class FleetRoutes
+    {
+        public int Id { get; set; }
+        public string VehicleRegNo { get; set; }
+        public string RouteName { get; set; }
+        public string RouteCode { get; set; }
+        public int VehicleId { get; set; }
+        public int RouteId { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTill { get; set; }
+        public int Active { get; set; }
+        public int cmpId { get; set; }
+        public int fleetownerId { get; set; }
+        public string insupddelflag { get; set; }
+    }
+    public class FleetAvailability
+    {
+        public int Id { get; set; }
+        public string VehicleRegNo { get; set; }
+        public int VehicleId { get; set; }
+        public string FleetOwner { get; set; }
+        public int fleetOwnerId { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public string insupddelflag { get; set; }
+    }
+
+    public class FleetStaff
+    {
+        public int Id { get; set; }
+        public int cmpId { get; set; }
+        public int roleId { get; set; }
+        public int vehicleId { get; set; }
+
+        public int UserId { get; set; }
+
+        public int RoleName { get; set; }
+        public int Company { get; set; }
+
+        public string VechileRegNo { get; set; }
+        public DateTime? FromDate { get; set; }
+
+        public DateTime? ToDate { get; set; }
+
+        public int Active { get; set; }
+        public string insupddelflag { get; set; }
+    }
+
+    public class FleetBTPOS
+    {
+        public int Id { get; set; }
+        public int cmpId { get; set; }
+        public int posId { get; set; }
+        public int vehicleId { get; set; }
+
+        public int fleetOwnerId { get; set; }
+
+        public string BTPOSId { get; set; }
+
+        public string VechileRegNo { get; set; }
+        public DateTime? FromDate { get; set; }
+
+        public DateTime? ToDate { get; set; }
+
+        public string insupddelflag { get; set; }
+    }
+
+    public class VehicleConfig
+    {
+        public int? needFleetDetails { get; set; }
+        public int? needRoutes { get; set; }
+        public int? needRoles { get; set; }
+        public int? needusers { get; set; }
+        public int? needfleetowners { get; set; }
+        public int? needvehicleType { get; set; }
+        public int? needvehicleRegno { get; set; }
+        public int? needServiceType { get; set; }
+        public int? needCompanyName { get; set; }
+        public int? needVehicleLayout { get; set; }
+        public int? needFleetRoute { get; set; }
+        public int? needRouteName { get; set; }
+        public int? needHireVehicle { get; set; }
+        public int? needbtpos { get; set; }
+        public int? cmpId { get; set; }
+        public int? fleetownerId { get; set; }
+        public int? needfleetownerroutes { get; set; }
+
+    }
+
+    public class LicenseTypes
+    {
+        public int Id { set; get; }
+        public int Active { set; get; }
+        public string LicenseType { set; get; }
+        public string Desc { set; get; }
+        public string LicenseCategory { set; get; }
+        public int LicenseCategoryId { set; get; }
+
+    }
+
+   
+          
+           
+    public class LicenseTypes1
+    {
+       // public List<licenses> lltypes { get; set; }
+        public int Id { set; get; }
+        public int Active { set; get; }
+        public string LicenseType { set; get; }
+        public string Desc { set; get; }
+        public string LicenseCategory { set; get; }
+        public int LicenseCategoryId { set; get; }
+        public int LicenseId { set; get; }
+        public int RenewalFreqTypeId { set; get; }
+
+        public int RenewalFreq { set; get; }
+        public Decimal UnitPrice { set; get; }
+        public DateTime fromdate { set; get; }
+
+        public DateTime todate { set; get; }
+
+        public char insupddelflag { set; get; }
+        public string FeatureName { set; get; }
+        public string FeatureLabel { set; get; }
+        public string FeatureValue { set; get; }
+    }
+    public class licenses
+    {
+        public int LicenseId { set; get; }
+        public int RenewalFreqTypeId { set; get; }
+
+        public int RenewalFreq { set; get; }
+        public Decimal UnitPrice { set; get; }
+        public DateTime fromdate { set; get; }
+
+        public DateTime todate { set; get; }        
+
+        public char insupddelflag { set; get; }
+        public string Featurename { set; get; }
+        public string Featurelabel { set; get; }
+        public string Featurevalue { set; get; }
+    }
+    public class Inventory
+    {
+        public int Active { set; get; }
+        public int availableQty { set; get; }
+        public string category { set; get; }
+        public string code { set; get; }
+        public string desc { set; get; }
+        public int InventoryId { set; get; }
+        public string name { set; get; }
+        public int PerUnitPrice { set; get; }
+        public int reorderpoint { set; get; }
+        public string subcat { set; get; }
+    }
+    public class PurchaseOrder
+    {
+        public int Id { set; get; }
+        public string PONum { set; get; }
+        public int TranscationId { set; get; }
+        public DateTime? Date { set; get; }
+        public decimal amount { set; get; }
+        public int itemId { set; get; }
+        public decimal Quantity { set; get; }
+        public int StatusId { set; get; }
+    }
+    public class VehicleLayout
+    {
+        //public int Id { get; set; }
+        public int VehicleLayoutTypeId { get; set; }
+        public int RowNo { get; set; }
+        public int ColNo { get; set; }
+        public int VehicleTypeId { get; set; }
+        public String label { get; set; }
+        public string insupdflag { get; set; }
+        //public int FleetOwnerId { get; set; }
+    }
+    public class FleetOwnerVehicleLayout
+    {
+        public int VehicleLayoutTypeId { get; set; }
+        public int RowNo { get; set; }
+        public int ColNo { get; set; }
+        public int VehicleTypeId { get; set; }
+        public String label { get; set; }
+        public string insupdflag { get; set; }
+        public int FleetOwnerId { get; set; }
+    }
+
+
+    public class reset
+    {
+
+        public string UserName { set; get; }
+        public string OldPassword { set; get; }
+        public string NewPassword { set; get; }
+        public string ReenterNewPassword { set; get; }
+
+    }
+    public class FORouteFleetSchedule
+    {
+        // public int Id { get; set; }
+        public List<VehicleSchedule> VSchedule { get; set; }
+        public int VehicleId { get; set; }
+        public int RouteId { get; set; }
+        public int FleetOwnerId { get; set; }
+        public string insupddelflag { get; set; }
+    }
+
+    public class VehicleSchedule
+    {
+        public string StopName { get; set; }
+        public string StopCode { get; set; }
+        public string StopNo { get; set; }
+        public int StopId { get; set; }
+        public int ArrivalHr { get; set; }
+        public int DepartureHr { get; set; }
+        public decimal? Duration { get; set; }
+        public int ArrivalMin { get; set; }
+        public int DepartureMin { get; set; }
+        public string ArrivalAMPM { get; set; }
+        public string DepartureAmPm { get; set; }
+        public DateTime arrivaltime { get; set; }
+        public DateTime departuretime { get; set; }
+        public string insupddelflag { get; set; }
+    }
+
+    public class ShoppingCart
+    {
+        public int Id { get; set; }
+        public string ItemName { set; get; }
+        public decimal UnitPrice { set; get; }
+        public int ItemId { set; get; }
+
+        // public string insupddelflag { set; get; }
+
+    }
+    public class BTPOSMoitoringPage
+    {
+        public int BTPOSId { get; set; }
+        public float Xcoordinate { get; set; }
+        public float Ycoordinate { get; set; }
+        public string LocationName { get; set; }
+        public int SNo { get; set; }
+        public DateTime DateTime { get; set; }
+
+    }
+    public class Shoppingcarts
+    {
+
+        public List<itemslist> slist { get; set; }
+        public int Item { get; set; }
+        public int Id { get; set; }
+
+        public String SalesOrderNum { get; set; }
+
+
+        public int TransactionId { get; set; }
+
+        public DateTime? Date { get; set; }
+        public Decimal amount { get; set; }
+
+        public Decimal Quantity { get; set; }
+        public int Status { get; set; }
+        //  public int Transactionstatus { get; set; }
+        //  public String Gateway_transId { get; set; }
+        //  public int PaymentMode { get; set; }
+        //   public String Transaction_Num { get; set; }
+
+
+
+
+    }
+
+    public class itemslist
+    {
+        public int TransactionId { get; set; }
+        public String Transaction_Num { get; set; }
+
+        public Decimal amount { get; set; }
+
+        public int PaymentMode { get; set; }
+
+        public DateTime? Date { get; set; }
+
+        public int Transactionstatus { get; set; }
+        public String Gateway_transId { get; set; }
+
+
+    }
+    public class EmailGatewaySettings
+    {
+        public int Id { get; set; }
+        public DateTime enddate { get; set; }
+
+        public string hashkey { get; set; }
+
+
+        public string providername { get; set; }
+
+        public string pwd { get; set; }
+
+        public string saltkey { get; set; }
+
+        public DateTime startdate { get; set; }
+
+        public string username { get; set; }
+        public string ClientId { get; set; }
+        public string SecretId { get; set; }
+
+        public int Port { get; set; }
+        public string insupdflag { get; set; }
+
+    }
+
+    public class Registrationform
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Emailaddress { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string Gender { get; set; }
+    }
+
+
+
+    public class BTPOSTrans
+    {
+        public string BTPOSId { get; set; }
+        public int transTypeId { get; set; }
+        public Decimal amt { get; set; }
+        public string gatewayId { get; set; }
+        public string datetime { get; set; }
+        public string srcId { get; set; }
+        public string destId { get; set; }
+    }
+    public class UploadDataModel
+    {
+        public string testString1 { get; set; }
+        public string testString2 { get; set; }
+    }
+
+    public class Sblocklist
+    {
+        //public int Id { get; set; }
+
+        public int ItemName { get; set; }
+        public string Reason { get; set; }
+        public string insupddelflag { get; set; }
     }
    
 }

@@ -1,8 +1,16 @@
 // JavaScript source code
 // JavaScript source code
-var app = angular.module('myApp', ['ngStorage']);
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
     $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
+    $scope.dashboardDS = $localStorage.dashboardDS;
+
     $http.get('http://localhost:1476/api/Inventory/GetInventory').then(function (response, req) {
         $scope.Group = response.data;
 
@@ -51,44 +59,61 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         var req = {
 
             method: 'POST',
-            url: 'http://localhost:1476/api/Inventory/SaveInventoryItem',
+            url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: invItem
         }
 
         $http(req).then(function (response) {
-            $localStorage.uname = res.data[0].name;
-            alert('saved successfully');
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
-    }
+        $scope.currGroup = null;
+    };
 
     $scope.save = function (Group) {
-        
+
         var Group = {
             Active: Group.Active,
             availableQty: Group.availableQty,
             category: Group.category,
             code: Group.code,
             desc: Group.desc,
-           InventoryId: Group.InventoryId,
+            InventoryId: Group.InventoryId,
             name: Group.name,
             PerUnitPrice: Group.PerUnitPrice,
             reorderpoint: Group.reorderpoint,
             subcat: Group.subcat
         }
         var req = {
-            
+
             method: 'POST',
             url: 'http://localhost:1476/api/Inventory/SaveInventory',
             data: Group
         }
         $http(req).then(function (response) {
-            alert('saved successfully.');
-            $localStorage.uname = res.data[0].name;
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
         });
-
-
-        $scope.Inventory = null;
+        $scope.currGroup = null;
     };
+
+    $scope.Inventory = null;
 
     $scope.setInventory = function (usr) {
         $scope.Inventory = usr;
@@ -98,6 +123,34 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.clearInventory = function () {
         $scope.Inventory = null;
 
-       
+
+    };
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+});
+
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
     };
 });

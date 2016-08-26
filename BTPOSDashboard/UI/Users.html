@@ -1,29 +1,22 @@
-﻿
-<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Home | Users | Users</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/icons/favicon.ico">
-    <link rel="apple-touch-icon" href="images/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/favicon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/favicon-114x114.png">
-    <!--Loading bootstrap css-->    
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  
+    <!--Loading bootstrap css-->        
     <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
-    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-    <link type="text/css" rel="stylesheet" href="vendors/jquery-news-ticker/jquery.news-ticker.css">
+    
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
-<body ng-init="GetUsers();" ng-model="User">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetCompanies();"> 
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -31,34 +24,40 @@
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
                     <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    <a id="logo" href="index.html" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">BTPOS Dashboard</span><span style="display: none" class="logo-text-icon">µ</span></a>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
                 </div>
                 <div class="topbar-main">
                     <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
 
                     <ul class="nav navbar navbar-top-links navbar-right mbn">
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">0</span></a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li><p>You have 0 new notifications</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table2.length==0">
+                                <li><p>You have 0 new alerts</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">0</span></a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li><p>You have 0 new messages</p></li>
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
+                                <li><p>You have 0 new notifications</p></li>
+                            </ul>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
-                                <li><a href="extra-profile.html"><i class="fa fa-user"></i>My Profile</a></li>
+                                <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
                                 <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
+                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success"></span></a></li>
                                 <li class="divider"></li>
                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                                <li><a href="Login.html"><i class="fa fa-key"></i>Log Out</a></li>
+                                <li><a href="../Login.html"><i class="fa fa-key"></i>Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -78,7 +77,7 @@
                                         <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
-                                        <li><a href="Login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+                                        <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="clearfix"></div>
@@ -91,85 +90,241 @@
                                 </a>
                             </li>
 
-                            <li class="active">
-                                <a href="#">
-                                    <i class="fa fa-send-o fa-fw">
-                                        <div class="icon-bg bg-green"></div>
-                                    </i><span class="menu-title">Users</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="Company.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Company</span></a></li>
-                                    <li class="active"><a href="Users.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Users</span></a></li>
-                                    <li><a href="Inventory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Inventory</span></a></li>
-                                    <li><a href="LicensePayments.html"><i class="fa fa-align-left"></i><span class="submenu-title">LicensePayments</span></a></li>
 
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-desktop fa-fw">
-                                        <div class="icon-bg bg-pink"></div>
-                                    </i><span class="menu-title">BT POS</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="BTPOSDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">BT POS Details</span></a></li>
-                                    <li><a href="Routes.html"><i class="fa fa-align-left"></i><span class="submenu-title">Routes</span></a></li>
-                                    <li><a href="GetStops.html"><i class="fa fa-align-left"></i><span class="submenu-title">Stops</span></a></li>
-                                    <li><a href="VehicleDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">Vehicle Details</span></a></li>
-                                </ul>
-                            </li>
 
                             <li>
                                 <a href="#">
-                                    <i class="fa fa-send-o fa-fw">
-                                        <div class="icon-bg bg-green"></div>
-                                    </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                                    <i class="fa fa-sitemap fa-fw">
+                                        <div class="icon-bg bg-dark"></div>
+                                    </i><span class="menu-title">Company and Users</span><span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="TypeGroups.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Type Groups</span></a></li>
-                                    <li><a href="Types.html"><i class="fa fa-th-large"></i><span class="submenu-title">Types</span></a></li>
-                                    <li><a href="Roles.html"><i class="fa fa-hand-o-up"></i><span class="submenu-title">Roles</span></a></li>
-                                </ul>
+
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Company</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
+                                            <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
+                                            <li><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li class="active">
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                    <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
+
                             </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-edit fa-fw">
-                                        <div class="icon-bg bg-violet"></div>
-                                    </i><span class="menu-title">Utilities & Tools</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="form-layouts.html"><i class="fa fa-columns"></i><span class="submenu-title">Edit history</span></a></li>
-                                    <li><a href="TroubleTicketingDetails.html"><i class="fa fa-align-left"></i><span class="submenu-title">TroubleTicketingDetails</span></a></li>
-                                    <li><a href="SubCategory.html"><i class="fa fa-align-left"></i><span class="submenu-title">SubCategory</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-th-list fa-fw">
-                                        <div class="icon-bg bg-blue"></div>
-                                    </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
-                                    <li><a href="FleetRepoprts.Html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
-                                    <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
-                                    <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-envelope-o">
-                                        <div class="icon-bg bg-primary"></div>
-                                    </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
-                                </a>
-                                <ul class="nav nav-second-level">
-                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Inbox</span></a></li>
-                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Compose Mail</span></a></li>
-                                    <li><a href="email-view-mail.html"><i class="fa fa-eye"></i><span class="submenu-title">View Mail</span></a></li>
-                                    <li><a href="email-inbox.html"><i class="fa fa-inbox"></i><span class="submenu-title">Alerts</span></a></li>
-                                    <li><a href="email-compose-mail.html"><i class="fa fa-pencil"></i><span class="submenu-title">Configure Alerts</span></a></li>
-                                </ul>
-                            </li>
+
+
+
+                        </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
+                                <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
+                                <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+                                <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+
+                            </ul>
+
+                        </li>
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-mobile">
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title">Inventory & BTPOS</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="BTPOSDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
+                                        <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                        <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+                                        <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                        <li><a href="BTPOSConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Configuration</span></a></li>
+                                        <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory</span><span class="fa arrow"></span></a>
+
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="InventoryItems.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Items</span></a></li>
+                                        <li><a href="InventoryStatus.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
+                                        <li><a href="InventorySales.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Sales</span></a></li>
+                                        <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
+                                        <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
+                                        <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                        <li><a href="SalesOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Sales orders</span></a></li>
+                                        <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                        <li><a href="ShippingOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Shipping Order</span></a></li>
+
+                                    </ul>
+                                <li>
+                                    <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-gears">
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Master Data</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="TypeGroups.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Type Groups</span></a></li>
+                                        <li><a href="Types.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Types</span></a></li>
+                                        <li><a href="SubCategory.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title"> Sub Categories</span></a></li>
+                                        <li><a href="Stops.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Stops</span></a></li>
+                                        <li><a href="Roles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Roles</span></a></li>
+                                        <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
+                                        <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
+                                        <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Sms Gateway Configuration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Email Gateway Configuration</span></a></li>
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Routes</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
+                                        <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
+                                        <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
+                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
+                                        <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
+
+
+                                    </ul>
+                                </li>
+                                <li><a href="BlockList.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
+
+
+                            </ul>
+                        </li>
+
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-gavel">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Utilties & Tools</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
+                                <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
+
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-th-list fa-fw">
+                                    <div class="icon-bg bg-blue"></div>
+                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
+
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+
+                                        <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
                         </ul>
                     </div>
                 </nav>
@@ -190,275 +345,491 @@
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                     <div class="page-content">
-                        <div id="table-action" class="row">
-                            <div class="col-lg-12">
+                        <div id="tableactionTabContent" class="tab-content">
+                            <div id="table-table-tab" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-container">
+                                            <div class="row mbm">
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetUsersForCmp()">
+                                                            <option value="">Select</option>
+                                                        </select>
+                                                    </div>
 
-                                <div id="tableactionTabContent" class="tab-content">
-                                    <div id="table-table-tab" class="tab-pane fade in active">
-                                        <div class="row">
-                                            <div class="col-lg-12">
+                                                    <div class="actions">
+
+                                                        <a href="AddFleetowner.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add Fleet Owner</button></a>
+
+                                                        <a href="AddNewUser.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add User</button></a>
 
 
-                                                <div class="table-container">
-
-                                                    <div class="row mbm">
-                                                        <div class="row">
-                                                            <!--<div class="col-md-6 mbm">
-                                                                <div class="input-group">
-                                                                    <div class="input-group-btn">
-                                                                        <button type="button" data-toggle="dropdown" class="btn btn-green dropdown-toggle">Search by <i class="fa fa-angle-down"></i></button>
-                                                                        <ul class="dropdown-menu">
-                                                                            <li><a href="#">FirstName</a></li>
-                                                                            <li><a href="#">LastName</a></li>
-                                                                            <li><a href="#">Role</a></li>
-                                                                            <li><a href="#">UserType</a></li>
-
-                                                                        </ul>
+                                                        <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Edit Users</h4>
                                                                     </div>
-                                                                    <input type="text" class="col-md-4 mbm" />
-                                                                &nbsp;&nbsp;    <button type="submit" class="btn btn-defualt col-md-2" style="height: 35px;">Search</button>
-                                                                </div>
-                                                            </div>-->
+                                                                    <div class="modal-body">
 
-                                                            <div class="actions">
+                                                                        <div class="row">
 
-                                                                <a href="Fleetowner.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add FleetOwner</button></a>
-
-                                                                <a href="AddNewUser.html"> <button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add User</button></a>
-
-
-                                                                <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header modal-header-primary">
-                                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                                <h4 id="modal-header-primary-label" class="modal-title">Edit Users</h4>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">First Name:<span class='require'>*</span></label>
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="modal-body" ng-model="User1">
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">First Name:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.FirstName" /></div>
-                                                                                        </div>
-                                                                                    </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.FirstName" /></div>
                                                                                 </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Last Name:</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.LastName" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Middle Name:</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.MiddleName" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">UserType:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-md-5">
-                                                                                        <select id=" selusertype" class="form-control" ng-model="User.UserType">
-                                                                                            <option value="" selected disabled>Select Usertype</option>
-
-                                                                                            <option value="1">INTERBUS staff</option>
-                                                                                            <option value="2">Fleet owner staff</option>
-                                                                                            <option value="3">Guest user</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">EmpNo:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="User1.EmpNo" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-
-
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Email:</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.Email" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">MobileNo:</label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-5">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.MobileNo" /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Role:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="col-md-5">
-                                                                                        <select id=" selusertype" class="form-control" ng-model="User1.Role">
-                                                                                            <option value="" selected disabled>Select Usertype</option>
-
-                                                                                            <option value="1">INTERBUS staff</option>
-                                                                                            <option value="2">Fleet owner staff</option>
-                                                                                            <option value="3">Guest user</option>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row">
-
-                                                                                    <div class="col-md-3">
-                                                                                        <div class="form-group has-success" style="text-align:right">
-                                                                                            <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-4">
-                                                                                        <div class="form-group">
-                                                                                            <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currGroup.active" checked /></div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
                                                                             </div>
-                                                                            <div class="modal-footer">
+                                                                        </div>
+                                                                        <div class="row">
 
-                                                                                <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="save(User1, 'U');">Save</button>
-                                                                                <button type="reset" data-dismiss="modal" class="btn btn-default">close</button>
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Last Name:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.LastName" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Middle Name:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="User1.MiddleName" /></div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Employee No:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ccode" ng-model="User1.EmpNo" disabled /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">E-mail:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="User1.Email" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Mobile No:</label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-5">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" ng-keypress="filterValue($event)" class="form-control" id="ip" ng-model="User1.MobileNo" /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-3">
+                                                                                <div class="form-group has-success" style="text-align:right">
+                                                                                    <label for="inputFirstName" class="control-label">Manager:<span class='require'>*</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <div class="form-group">
+                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cactive" value="{{User1.mgrName}}" readonly /></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
+
+                                                                    <div class="modal-header modal-header-primary">
+
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">User Roles</h4>
+                                                                    </div>
+
+                                                                    <div class="row" style="margin-top:20px">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">Company:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5">
+                                                                            <select ng-options="cmp.Name for cmp in Companies track by cmp.Id" class="form-control" ng-model="cmp" ng-change="getRolesForCompany(cmp)" width="100%" disabled>
+                                                                                <option value="">Select Company</option>
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">Role:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-5">
+                                                                            <select ng-options="r.rolename for r in cmproles track by r.Id" class="form-control" ng-model="role" width="100%">
+                                                                                <option value="">Select Role</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-header modal-header-primary">
+                                                                        <h4 id="modal-header-primary-label" class="modal-title">Login</h4>
+                                                                    </div>
+                                                                    <div class="row" style="margin-top:20px">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">User Name:<span class='require'>*</span></label>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-12"><input type="text" class="form-control" ng-model="User1.UserName" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">Password:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-12"><input type="password" class="form-control" ng-model="User1.Password" /></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group has-success" style="text-align:right">
+                                                                                <label for="inputFirstName" class="control-label">Re Password:<span class='require'>*</span></label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-5">
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-12"><input type="password" class="form-control" ng-model="User1.reenteredPwd" value="{{User1.reenteredPwd}}" /><span class="help-block"></span></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-green" type="button" ng-click="save(User1, 'U');">Save</button>
+                                                                        <button class="btn btn-primary" type="reset" data-dismiss="modal" class="btn btn-default">close</button>
+                                                                    </div>
+
+
                                                                 </div>
+
+
+
                                                             </div>
                                                         </div>
+                                                        <div id="Modal-header-primary2" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary2-label" aria-hidden="true" class="modal fade">
+                                                            <div class="modal-dialog modal-lg">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header modal-header-primary2">
+                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>                                                                       
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-9">
+                                                                            <h2>Edit User</h2>
+                                                                            <div class="row mtl">
+                                                                                <div class="col-md-3">
+                                                                                    <div class="form-group">
+                                                                                        <div class="text-center mbl"><img src="images/user.jpg" style="width:100px;height:100px" alt="" class="img-responsive" /></div>
+                                                                                        <div class="text-center mbl">
+                                                                                            <a href="#" class="btn btn-green">
+                                                                                                <i class="fa fa-upload"></i>&nbsp;
+                                                                                                Upload
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <table class="table table-striped table-hover">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>User Name</td>
+                                                                                                <td><input type="text" placeholder="User Name"></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Email</td>
+                                                                                                <td><input type="email" placeholder="Email"></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Address</td>
+                                                                                                <td><textarea></textarea></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Status</td>
+                                                                                                <td><input type="checkbox" /></td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <td>Member Since</td>
+                                                                                                <td> <input type="text" placeholder="Jun 03, 2014" /></td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                                <div class="col-md-9">                                                                                    
+                                                                                    <div id="generalTabContent" class="tab-content">
+                                                                                        <div id="tab-edit" class="tab-pane fade in active">
+                                                                                            <form action="#" class="form-horizontal">
+                                                                                                <h3>Account Settings</h3>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Email</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-9"><input type="email" ng-model="User1.Email" placeholder="email@yourcompany.com" class="form-control" /></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Username</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-9"><input type="text" placeholder="username" ng-model="User1.UserName" class="form-control" /></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Password</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-4"><input type="password" placeholder="password" ng-model="User1.Password" class="form-control" /></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Confirm Password</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-4"><input type="password" placeholder="password" ng-model="User1.Password" class="form-control" /></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <hr />
+                                                                                                <h3>Profile Setting</h3>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">First Name</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-9"><input type="text" ng-model="User1.FirstName" placeholder="first name" class="form-control" /></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Last Name</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-9"><input type="text" ng-model="User1.LastName" placeholder="last name" class="form-control" /></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Gender</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-9">
+                                                                                                                <div class="radio">
+                                                                                                                    <label class="radio-inline">
+                                                                                                                        <input type="radio" value="0" name="gender" checked="checked" />&nbsp;
+                                                                                                                        Male
+                                                                                                                    </label><label class="radio-inline">
+                                                                                                                        <input type="radio" value="1" name="gender" />&nbsp;
+                                                                                                                        Female
+                                                                                                                    </label>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                
+                                                                                                <hr />
+                                                                                                <h3>Contact Setting</h3>
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Mobile Phone</label>
+                                                                                                    <div class="col-sm-9 controls">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-xs-9"><input type="text" placeholder="mobile phone" ng-keypress="filterValue($event)" ng-model="User1.MobileNo" class="form-control" /></div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                        <div id="tab-messages" class="tab-pane fade in">
+                                                                                            <div class="row mbl">
+                                                                                                <div class="col-lg-6">
+                                                                                                    <span style="margin-left: 15px"></span><input type="checkbox" /><a href="#" class="btn btn-success btn-sm mlm mrm">
+                                                                                                        <i class="fa fa-send-o"></i>&nbsp;
+                                                                                                        Write Mail
+                                                                                                    </a><a href="#" class="btn btn-white btn-sm">
+                                                                                                        <i class="fa fa-trash-o"></i>&nbsp;
+                                                                                                        Delete
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                <div class="col-lg-6">
+                                                                                                    <div class="input-group"><input type="text" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-white">Search</button></span></div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>   
+                                                                    <div class="col-md-offset-6">                                                                       
+                                                                            <button class="btn btn-green" type="button" ng-click="save(User1, 'U');">Save</button>
+                                                                            <button class="btn btn-primary" type="reset" data-dismiss="modal" class="btn btn-default">close</button>
+                                                                        
+                                                                    </div>  
+                                                                </div>
 
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="10%">First Name</th>
-                                                                <th width="10%">Last Name</th>
-                                                                <th width="10%">Middle Name</th>
-                                                                <th width="12%">Email</th>
-                                                                <th width="10%">Role</th>
-                                                                <th width="10%">Company</th>
-                                                                <th width="6%">Active</th>
-                                                                <th width="9%">Update</th>
-
-                                                            </tr>
-                                                        <tbody>
-                                                            <tr ng-repeat="U in User">
-
-                                                                <td>{{U.FirstName}}</td>
-                                                                <td>{{U.LastName}}</td>
-                                                                <td>{{U.MiddleName}}</td>
-                                                                <td>{{U.Email}}</td>
-                                                                <td>{{U.Role}}</td>
-                                                                <td>{{U.Company}}</td>
-                                                                <td><input type="checkbox" ng-checked="U.Active" /></td>
-                                                                <td>
-                                                                    {{U.Update}}
-                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(U);">
-                                                                        <i class="fa fa-edit"></i>&nbsp;
-                                                                        Edit
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
                                                 </div>
+
                                             </div>
+                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="10%">First Name</th>
+                                                        <th width="10%">Last Name</th>
+                                                        <th width="10%">Employee No</th>
+                                                        <th width="12%">Email</th>
+                                                        <th width="10%">Company</th>
+                                                        <th width="6%">Active</th>
+                                                        <th width="9%">Update</th>
+                                                        <th width="10%">Edit</th>
+
+                                                    </tr>
+                                                <tbody>
+                                                    <tr ng-repeat="U in User">
+
+                                                        <td>{{U.FirstName}}</td>
+                                                        <td>{{U.LastName}}</td>
+                                                        <td>{{U.EmpNo}}</td>
+                                                        <td>{{U.Email}}</td>
+                                                        <td>{{U.Company}}</td>
+                                                        <td><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox"  /></td>
+                                                        <td>
+                                                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(U);">
+                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" data-target="#Modal-header-primary2" data-toggle="modal" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-Users"></i>&nbsp;
+                                                                Edit
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <!--END CONTENT--><!--BEGIN FOOTER-->
                         <div id="footer">
-                            <div class="copyright">2016 © Interbus - Bus Ticketing dashboard portal</div>
+                            <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
                         </div>
                         <!--END FOOTER-->
+
                     </div>
                     <!--END PAGE WRAPPER-->
                 </div>
             </div>
         </div>
-    </div>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <script src="vendors/iCheck/custom.min.js"></script>
-    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="js/jquery.menu.js"></script>
-    <script src="vendors/jquery-pace/pace.min.js"></script>
-    <script src="vendors/holder/holder.js"></script>
-    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <script src="js/table-action.js"></script>
-    <!--CORE JAVASCRIPT-->
-    <script src="js/main.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/ngStorage.js"></script>
-    <script src="js/Users.js"></script>
+        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
+            <div class="modal-header">
+                <h3 class="modal-title">Save confirmation!</h3>
+            </div>
+            <div class="modal-body">
+                <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+                {{mssg}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+
+        </script>
+    </div>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="vendors/bootstrap/js/bootstrap.js"></script>
+<script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    
+    
+<script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="vendors/iCheck/icheck.min.js"></script>
+<script src="vendors/iCheck/custom.min.js"></script>
+<script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="js/jquery.menu.js"></script>
+<script src="vendors/jquery-pace/pace.min.js"></script>
+<script src="vendors/holder/holder.js"></script>
+<script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+<!--LOADING SCRIPTS FOR PAGE-->
+<script src="js/table-action.js"></script>
+<!--CORE JAVASCRIPT-->
+<script src="js/main.js"></script>
+<script src="js/angular.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+<script src="js/ngStorage.js"></script>
+<script src="js/Users.js"></script>
+   
 </body>
 
 </html>

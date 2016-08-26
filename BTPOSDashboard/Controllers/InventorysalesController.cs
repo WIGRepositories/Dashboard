@@ -37,15 +37,13 @@ namespace BTPOSDashboard.Controllers
         }
          [HttpPost]
 
-         public DataTable SaveInventorySales(ISales S)
-         {
-             DataTable Tbl = new DataTable();
-
-
+         public HttpResponseMessage SaveInventorySales(ISales S)
+          {
+            SqlConnection conn = new SqlConnection();
+            try
+            {
              //connect to database
-             SqlConnection conn = new SqlConnection();
-             try
-             {
+            
                  // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                  conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -105,44 +103,45 @@ namespace BTPOSDashboard.Controllers
                 #region enter BT POS records
 
                  BTPOSDetailsController btposctrl = new BTPOSDetailsController();
+
                  List<BTPOSDetails> btposlist = new List<BTPOSDetails>();
+
                  for (int count = 0; count < S.Quantity; count++ )
                  {
                      BTPOSDetails btposunit = new BTPOSDetails();
                      btposunit.active = 0;
                      btposunit.fleetownerid = -1;
                      btposunit.Id = -1;
-                     btposunit.GroupId = "-1";
+                     btposunit.CompanyId = "-1";
                      btposunit.IMEI = "";
                      btposunit.ipconfig = "";
                      btposunit.POSID = "";
                      btposunit.insupdflag = "I";
                      btposunit.StatusId = -1;
                      btposunit.active = 1;
+                     btposlist.Add(btposunit);
+                     
+                 }
 
-                     btposlist.Add(btposunit);                   
-                 }
-                 if (btposlist.Count() > 0)
-                 {
-                     btposctrl.SaveBTPOSDetails(btposlist);
-                 }
+                 btposctrl.SaveBTPOSDetails(btposlist);
 
                 #endregion
 
                      conn.Close();
-                
-                 //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                 //db.Fill(ds);
-                 //Tbl = ds.Tables[0];
-             }
-             catch (Exception ex)
-             {
-                 string str = ex.Message;
-             }
-             // int found = 0;
-             return Tbl;
 
-         }
+                     return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+          }
+
          public void Options()
          {
          }

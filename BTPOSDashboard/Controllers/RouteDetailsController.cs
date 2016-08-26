@@ -13,9 +13,9 @@ namespace BTPOSDashboard.Controllers
     public class RouteDetailsController : ApiController
     {
          [HttpGet]
-        public DataTable getroutedetails()
+        public DataSet getroutedetails(int routeid)
         {
-            DataTable Tbl = new DataTable();
+           // DataTable Tbl = new DataTable();
 
 
             //connect to database
@@ -28,93 +28,96 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "getRouteDetails";
             cmd.Connection = conn;
 
+            SqlParameter cid = new SqlParameter();
+            cid.ParameterName = "@routeid";
+            cid.SqlDbType = SqlDbType.Int;
+            cid.Value = routeid;
+            cmd.Parameters.Add(cid);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
-            Tbl = ds.Tables[0];
+           // Tbl = ds.Tables[0];
 
             // int found = 0;
-            return Tbl;
+            return ds;
         }
 
+         
+
+         [HttpPost]
+         public DataTable saveroutedetails(IEnumerable<RouteDetails> routestops)
+         {
+             DataTable Tbl = new DataTable();
 
 
-        [HttpPost]
-        public DataTable saveroutedetails(RouteDetails b)
-        {
-            DataTable Tbl = new DataTable();
+             //connect to database
+             SqlConnection conn = new SqlConnection();
+             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+             SqlCommand cmd = new SqlCommand();
+             cmd.CommandType = CommandType.StoredProcedure;
+             cmd.CommandText = "InsUpdDelRouteDetails";
+             cmd.Connection = conn;
+             conn.Open();
+
+             foreach (RouteDetails s in routestops)
+             {
+
+                 SqlParameter ba = new SqlParameter("@RouteId", SqlDbType.Int);
+                 ba.Value = s.RouteId;
+                 cmd.Parameters.Add(ba);
+
+                 SqlParameter bb = new SqlParameter("@StopId", SqlDbType.Int);
+                 bb.Value = s.stopId;
+                 cmd.Parameters.Add(bb);
+
+                 SqlParameter bd = new SqlParameter("@DistanceFromSource", SqlDbType.VarChar, 20);
+                 bd.Value = s.DistanceFromSource;
+                 cmd.Parameters.Add(bd);
 
 
-            //connect to database
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+                 SqlParameter bf = new SqlParameter("@DistanceFromDestination", SqlDbType.VarChar, 20);
+                 bf.Value = s.DistanceFromDestination;
+                 cmd.Parameters.Add(bf);
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelRouteDetails";
-            cmd.Connection = conn;
-            conn.Open();
-            SqlParameter cc = new SqlParameter();
-            cc.ParameterName = "@Id";
-            cc.SqlDbType = SqlDbType.Int;
-            cc.Value = Convert.ToString(b.Id);
-            cmd.Parameters.Add(cc);
+                 SqlParameter bh = new SqlParameter("@DistanceFromPreviousStop", SqlDbType.Int);
+                 bh.Value = s.DistanceFromPreviousStop;
+                 cmd.Parameters.Add(bh);
 
-            SqlParameter ccw = new SqlParameter();
-            ccw.ParameterName = "@RouteId";
-            ccw.SqlDbType = SqlDbType.VarChar;
-            ccw.Value =Convert.ToInt16(b.RouteId);
-            cmd.Parameters.Add(ccw);
+                 SqlParameter ipconfig = new SqlParameter("@DistanceFromNextStop", SqlDbType.VarChar, 20);
+                 ipconfig.Value = s.DistanceFromNextStop;
+                 cmd.Parameters.Add(ipconfig);
 
-            SqlParameter cname = new SqlParameter();
-            cname.ParameterName = "@stopname";
-            cname.SqlDbType = SqlDbType.VarChar;
-            cname.Value = b.stopname;
-            cmd.Parameters.Add(cname);
 
-            SqlParameter cca = new SqlParameter();
-            cca.ParameterName = "@Description";
-            cca.SqlDbType = SqlDbType.VarChar;
-            cca.Value = b.Description;
-            cmd.Parameters.Add(cca);
+                 SqlParameter active = new SqlParameter("@PreviousStopId", SqlDbType.Int);
+                 active.Value = s.PreviousStopId;
+                 cmd.Parameters.Add(active);
 
-            SqlParameter ccad = new SqlParameter();
-            ccad.ParameterName = "@StopCode";
-            ccad.SqlDbType = SqlDbType.VarChar;
-            ccad.Value =b.StopCode;
-            cmd.Parameters.Add(ccad);
+                 SqlParameter fo = new SqlParameter("@NextStopId", SqlDbType.Int);
+                 fo.Value = s.NextStopId;
+                 cmd.Parameters.Add(fo);
 
-            SqlParameter ccwa = new SqlParameter();
-            ccwa.ParameterName = "@DistanceFromSource";
-            ccwa.SqlDbType = SqlDbType.Int;
-            ccwa.Value = b.DistanceFromSource;
-            cmd.Parameters.Add(ccwa);
+                 SqlParameter sn = new SqlParameter("@StopNo", SqlDbType.Int);
+                 sn.Value = s.StopNo;
+                 cmd.Parameters.Add(sn);
 
-            SqlParameter ccwad = new SqlParameter();
-            ccwad.ParameterName = "@DistanceFromDestination";
-            ccwad.SqlDbType = SqlDbType.Int;
-            ccwad.Value=b.DistanceFromDestination;
-            cmd.Parameters.Add(ccwad);
+                 SqlParameter insupdflag = new SqlParameter("@insupddelflag", SqlDbType.VarChar, 10);
+                 insupdflag.Value = s.insupddelflag;
+                 cmd.Parameters.Add(insupdflag);
 
-                SqlParameter ccwade = new SqlParameter();
-                ccwade.ParameterName = "@DistanceFromPreviousStop";
-            ccwade.SqlDbType = SqlDbType.Int;
-            ccwade.Value =b.DistanceFromPreviousStop;
-            cmd.Parameters.Add(ccwade);
+                 cmd.ExecuteScalar();
 
-               SqlParameter ccwadea = new SqlParameter();
-               ccwadea.ParameterName = "@DistanceFromNextStop";
-            ccwadea.SqlDbType = SqlDbType.Int;
-            ccwadea.Value = b.DistanceFromNextStop;
-            cmd.Parameters.Add(ccwadea);
-             cmd.ExecuteScalar();
-            conn.Close();
-            // int found = 0;
-            return Tbl;
-        
-        }
-        public void Options() { }
+                 cmd.Parameters.Clear();
+
+             }
+             conn.Close();
+             
+             return Tbl;
+
+         }
+         public void Options() { }
 
     }
 }

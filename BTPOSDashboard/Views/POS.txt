@@ -1,0 +1,18 @@
+1) cancel button not working in all workspaces
+2) data filtering is not working
+3) showing js popup
+4) save confirmation not shown in all workspaces
+5) exception handling is missing
+6) connection closing is not done in all places
+7) roles are not applied in all screens
+8) reports are not implemented
+9) advt licensing is not implemented
+10) file generation not implemented
+11) email integration, sms integration, payment gateway integration
+12) duplicates validation not done
+13) multiple schedules for a vehicle
+14) customized logo and login
+15) need to convert screens to popups
+16) purchase and shipping order management
+
+

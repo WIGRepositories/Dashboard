@@ -41,14 +41,13 @@ namespace BTPOSDashboardAPI.Controllers
 
         [HttpPost]
 
-        public DataTable LicensePayment2(LicensePayments n)
+        public HttpResponseMessage LicensePayment2(LicensePayments n)
         {
-            DataTable Tbl = new DataTable();
-
+            SqlConnection conn = new SqlConnection();
             try
             {
                 //connect to database
-                SqlConnection conn = new SqlConnection();
+                
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -117,19 +116,19 @@ namespace BTPOSDashboardAPI.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
-                DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-            return Tbl;
-
         }
+
         public void Options()
         {
         }

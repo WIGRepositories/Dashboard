@@ -27,19 +27,19 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetDashboardDetails";
 
-            //add parametes for user id and roleid
-      
+            SqlParameter uid = new SqlParameter();
+            uid.ParameterName = "@userid";
+            uid.SqlDbType = SqlDbType.Int;
+            uid.Value = userid;
+            cmd.Parameters.Add(uid);
 
-            SqlParameter Gid = new SqlParameter();
-            Gid.ParameterName = "@userid";
-            Gid.SqlDbType = SqlDbType.Int;
-            Gid.Value = userid;
-            cmd.Parameters.Add(Gid);
+
             SqlParameter rid = new SqlParameter();
             rid.ParameterName = "@roleid";
             rid.SqlDbType = SqlDbType.Int;
             rid.Value = roleid;
             cmd.Parameters.Add(rid);
+
 
             cmd.Connection = conn;
             DataSet ds = new DataSet();

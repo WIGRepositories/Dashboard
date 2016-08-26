@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Text;
+using System.IO;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -39,6 +41,14 @@ namespace BTPOSDashboardAPI.Controllers
             db.Fill(ds);
             Tbl = ds.Tables[0];
 
+            //prepare a file
+            StringBuilder str = new StringBuilder();
+
+            str.Append(string.Format("test\n{0}", groupid.ToString()));
+
+            
+
+
             // int found = 0;
             return Tbl;
         }
@@ -46,19 +56,19 @@ namespace BTPOSDashboardAPI.Controllers
 
 
         [HttpPost]
-        public DataTable SaveType(Types b)
+        public HttpResponseMessage SaveType(Types b)
         {
-            DataTable Tbl = new DataTable();
-
-
+           
             //connect to database
             SqlConnection conn = new SqlConnection();
+            try
+            {
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelTypes";
+            cmd.CommandText = "InsUpdTypes";
             cmd.Connection = conn;
             conn.Open();
             SqlParameter Cid = new SqlParameter();
@@ -85,18 +95,36 @@ namespace BTPOSDashboardAPI.Controllers
             pDesc.Value = b.Description;
             cmd.Parameters.Add(pDesc);
 
-            SqlParameter lAct = new SqlParameter();
-            lAct.ParameterName = "@Active";
-            lAct.SqlDbType = SqlDbType.Int;
-            lAct.Value = Convert.ToInt32(b.Active);
+
+            SqlParameter llid = new SqlParameter();
+            llid.ParameterName = "@Active";
+            llid.SqlDbType = SqlDbType.Int;
+            llid.Value = 1;// b.Active;
             //llid.Value = b.Active;
-            cmd.Parameters.Add(lAct);  
+            cmd.Parameters.Add(llid);
+
+            SqlParameter flag = new SqlParameter();
+            flag.ParameterName = "@insupdflag";
+            flag.SqlDbType = SqlDbType.VarChar;
+            flag.Value = b.insupddelflag;
+            //llid.Value = b.Active;
+            cmd.Parameters.Add(flag);
+           
             
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
-        }
+             return new HttpResponseMessage(HttpStatusCode.OK);
+              }
+              catch (Exception ex)
+              {
+                  if (conn != null && conn.State == ConnectionState.Open)
+                  {
+                      conn.Close();
+                  }
+                  string str = ex.Message;
+                  return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+              }
+          }
         public void Options() { }
 
     }

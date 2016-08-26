@@ -12,7 +12,7 @@ namespace BTPOSDashboard.Controllers
 {
     public class InventoryItemController : ApiController
     {
-         [HttpGet]
+
         public DataTable GetInventoryItem()
         {
             DataTable Tbl = new DataTable();
@@ -25,7 +25,7 @@ namespace BTPOSDashboard.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "dbo.GetInventoryItem";
+            cmd.CommandText = "GetInventoryItem";
             cmd.Connection = conn;
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -36,13 +36,14 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-         public DataTable SaveInventoryItem(InventoryItem b)
-        {
-            DataTable Tbl = new DataTable();
-
+        public HttpResponseMessage SaveinventoryItem(InventoryItem b)
+       {
+            SqlConnection conn = new SqlConnection();
+            try
+            {
 
             //connect to database
-            SqlConnection conn = new SqlConnection();
+           
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -51,57 +52,68 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsupdDelInventoryItem";
             cmd.Connection = conn;
             conn.Open();
-            SqlParameter cc = new SqlParameter();
-            cc.ParameterName = "@Id";
-            cc.SqlDbType = SqlDbType.Int;
-            cc.Value = Convert.ToString(b.Id);
-            cmd.Parameters.Add(cc);
-            SqlParameter ccd = new SqlParameter();
-            ccd.ParameterName = "@ItemName";
-            ccd.SqlDbType = SqlDbType.VarChar;
-            ccd.Value = b.ItemName;
-            cmd.Parameters.Add(ccd);
+            //SqlParameter Cid = new SqlParameter();
+            //Cid.ParameterName = "@Id";
+            //Cid.SqlDbType = SqlDbType.Int;
+            //Cid.Value = b.Id;
+            //cmd.Parameters.Add(Cid);
 
-            SqlParameter cname = new SqlParameter();
-            cname.ParameterName = "@Code";
-            cname.SqlDbType = SqlDbType.VarChar;
-            cname.Value = b.Code;
-            cmd.Parameters.Add(cname);
-            SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Description";
-            dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Description;
-            cmd.Parameters.Add(dd);
-            SqlParameter aa = new SqlParameter();
-            aa.ParameterName = "@Category";
-            aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = b.Category;
-            cmd.Parameters.Add(aa);
-            SqlParameter aac = new SqlParameter();
-            aac.ParameterName = "@SubCategory";
-            aac.SqlDbType = SqlDbType.VarChar;
-            aac.Value = b.SubCategory;
-            cmd.Parameters.Add(aac);
-            SqlParameter aacd = new SqlParameter();
-            aacd.ParameterName = "@ReOrderPoint";
-            aacd.SqlDbType = SqlDbType.Int;
-            aacd.Value = Convert.ToString(b.ReOrderPoint);
-            cmd.Parameters.Add(aacd);
+            SqlParameter Gid = new SqlParameter();
+            Gid.ParameterName = "@ItemName";
+            Gid.SqlDbType = SqlDbType.VarChar;
+            Gid.Value = b.ItemName;
+            cmd.Parameters.Add(Gid);
 
+            //SqlParameter li = new SqlParameter();
+            //li.ParameterName = "@ItemImage";
+            //li.SqlDbType = SqlDbType.VarChar;
+            //li.Value = b.ItemImage;
+            //cmd.Parameters.Add(li);
 
-            //DataSet ds = new DataSet();
-            //SqlDataAdapter db = new SqlDataAdapter(cmd);
-            //db.Fill(ds);
-            // Tbl = Tables[0];
+            SqlParameter lid = new SqlParameter();
+            lid.ParameterName = "@Code";
+            lid.SqlDbType = SqlDbType.VarChar;
+            lid.Value = b.Code;
+            cmd.Parameters.Add(lid);
+
+            SqlParameter pDesc = new SqlParameter();
+            pDesc.ParameterName = "@Description";
+            pDesc.SqlDbType = SqlDbType.VarChar;
+            pDesc.Value = b.Description;
+            cmd.Parameters.Add(pDesc);
+
+            SqlParameter lAct = new SqlParameter();
+            lAct.ParameterName = "@CategoryId";
+            lAct.SqlDbType = SqlDbType.Int;
+            lAct.Value = b.Category;
+            //llid.Value = b.Active;
+            cmd.Parameters.Add(lAct);
+            SqlParameter psub = new SqlParameter();
+            psub.ParameterName = "@SubCategoryId";
+            psub.SqlDbType = SqlDbType.Int;
+            psub.Value = b.SubCategory;
+            cmd.Parameters.Add(psub);
+
+            SqlParameter prop = new SqlParameter();
+            prop.ParameterName = "@ReOrderPoint";
+            prop.SqlDbType = SqlDbType.Int;
+            prop.Value = b.ReOrderPoint;
+            cmd.Parameters.Add(prop);
+
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
-        }
-        public void Options()
-        {
-
-        }
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+       }
+        public void Options() { }
     }
-    }
-
+}

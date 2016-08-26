@@ -6,13 +6,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Configuration;
 
 namespace BTPOSDashboard.Controllers
 {
     public class FleetOwnerController : ApiController
     {
         [HttpGet]
-        public DataTable GetFleetOwner()//Main Method
+        public DataTable getFleetOwner()//Main Method
         {
 
 
@@ -24,6 +25,11 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;//Stored Procedure
             cmd.CommandText = "getFleetOwner";
             cmd.Connection = conn;
+            //SqlParameter empid = new SqlParameter("@EmpNo", SqlDbType.Int);
+            //empid.Value = empid;
+           // cmd.Parameters.Add(empid);
+          
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);

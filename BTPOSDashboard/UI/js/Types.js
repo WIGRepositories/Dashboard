@@ -1,15 +1,22 @@
 // JavaScript source code
-var myapp1 = angular.module('myApp', ['ngStorage'])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStorage) {
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
     $scope.uname = $localStorage.uname;
-        
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
+
+    $scope.dashboardDS = $localStorage.dashboardDS;
     $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
         $scope.getselectval();
     });
 
     $scope.getselectval = function (seltype) {
-        var grpid = (seltype) ? seltype.Id: -1;
+        var grpid = (seltype) ? seltype.Id : -1;
+      
 
         $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=' + grpid).then(function (res, data) {
             $scope.Types = res.data;
@@ -45,7 +52,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Active: Types.Active,
             TypeGroupId: Types.TypeGroupId,
             ListKey: Types.ListKey,
-            Listvalue: Types.Listvalue
+            Listvalue: Types.Listvalue,
+            insupddelflag: 'U'
         };
 
         var req = {
@@ -56,14 +64,21 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             data: Types
         }
 
-        $http(req).then(function (res) {
-            alert('Saved successfully');
-            $localStorage.uname = res.data[0].name;
-        });
+        $http(req).then(function (response) {
 
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+    var errdata = errres.data;
+    var errmssg = "";
+    errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    $scope.showDialog(errmssg);
+});
         $scope.currGroup = null;
-
     };
+
 
     $scope.saveNewType = function (newType) {
 
@@ -77,7 +92,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             return;
         }
 
-        if (newType.group ==null || newType.group.Id == null) {
+        if (newType.group == null || newType.group.Id == null) {
             alert('Please select a type group');
             return;
         }       
@@ -90,7 +105,8 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             Active: 1,//newType.Active,
             TypeGroupId: newType.group.Id,
             ListKey: newType.ListKey,
-            Listvalue: newType.Listvalue
+            Listvalue: newType.Listvalue,
+            insupddelflag: 'I'
         };
 
         var req = {
@@ -99,11 +115,37 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
             data: newTypeData
         }
 
-        $http(req).then(function (res) {
-            alert('Saved successfully');
-            newType = null;
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+            
+            $scope.Group = null;
+
+        }, function (errres) {
+      var errdata = errres.data;
+      var errmssg = "";            
+      errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;            
+      $scope.showDialog(errmssg);
         }); 
+        $scope.currGroup = null;
     };
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+
+
 
     $scope.setCompany = function (grp) {
         $scope.currGroup = grp;
@@ -111,5 +153,46 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http, $localStora
 
     $scope.clearGroup = function () {
         $scope.currGroup = null;
+
+    };
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+});
+ 
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
     };    
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
 });

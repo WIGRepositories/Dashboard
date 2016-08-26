@@ -36,13 +36,12 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable roles(userroles b)
+        public HttpResponseMessage roles(userroles b)
         {
-            DataTable Tbl = new DataTable();
-
-
             //connect to database
             SqlConnection conn = new SqlConnection();
+            try
+            {
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -62,9 +61,9 @@ namespace BTPOSDashboardAPI.Controllers
             iid.Value = Convert.ToString(b.UserId);
             cmd.Parameters.Add(iid);
             SqlParameter ii = new SqlParameter();
-            ii.ParameterName = "@GroupId";
+            ii.ParameterName = "@CompanyId";
             ii.SqlDbType = SqlDbType.Int;
-            ii.Value = Convert.ToString(b.GroupId);
+            ii.Value = Convert.ToString(b.CompanyId);
             cmd.Parameters.Add(ii);
             SqlParameter rr = new SqlParameter();
             rr.ParameterName = "@RoleId";
@@ -84,9 +83,18 @@ namespace BTPOSDashboardAPI.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
-        }
+            return new HttpResponseMessage(HttpStatusCode.OK);
+              }
+              catch (Exception ex)
+              {
+                  if (conn != null && conn.State == ConnectionState.Open)
+                  {
+                      conn.Close();
+                  }
+                  string str = ex.Message;
+                  return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+              }
+          }
         public void Options()
         {
 

@@ -36,15 +36,15 @@ namespace BTPOSDashboard.Controllers
         }
         [HttpPost]
 
-        public DataTable SaveInventoryPurchases(IPurchases P)
+        public HttpResponseMessage SaveInventoryPurchases(IPurchases P)
         {
-            DataTable Tbl = new DataTable();
-
-
-            //connect to database
             SqlConnection conn = new SqlConnection();
             try
             {
+
+            //connect to database
+            
+            
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -80,13 +80,13 @@ namespace BTPOSDashboard.Controllers
 
                 SqlParameter gb = new SqlParameter();
                 gb.ParameterName = "@PurchaseDate";
-                gb.SqlDbType = SqlDbType.VarChar;
+                gb.SqlDbType = SqlDbType.DateTime;
                 gb.Value = P.PurchaseDate;
                 cmd.Parameters.Add(gb);
 
                 SqlParameter gid = new SqlParameter();
                 gid.ParameterName = "@PurchaseOrderNumber";
-                gid.SqlDbType = SqlDbType.Int;
+                gid.SqlDbType = SqlDbType.VarChar;               
                 gid.Value = P.PurchaseOrderNumber;
                 cmd.Parameters.Add(gid);
 
@@ -104,9 +104,9 @@ namespace BTPOSDashboard.Controllers
 
                 #region create bt pos instances
 
-                switch (P.ItemName)
+                switch (P.subCategoryId)
                 {
-                    case "BTPOS":
+                    case 1:
                         for (int poscount = 0; poscount < P.Quantity; poscount++)
                         {
                             try
@@ -121,12 +121,12 @@ namespace BTPOSDashboard.Controllers
                                 ba.Value = -1;
                                 cmd.Parameters.Add(ba);
 
-                                SqlParameter bb = new SqlParameter("@GroupId", SqlDbType.Int);
+                                SqlParameter bb = new SqlParameter("@CompanyId", SqlDbType.Int);
                                 bb.Value = 1;
                                 cmd.Parameters.Add(bb);
 
                                 SqlParameter bd = new SqlParameter("@IMEI", SqlDbType.VarChar, 20);
-                                bd.Value = "";
+                                bd.Value = DBNull.Value;
                                 cmd.Parameters.Add(bd);
 
 
@@ -147,9 +147,9 @@ namespace BTPOSDashboard.Controllers
                                 active.Value = 1;
                                 cmd.Parameters.Add(active);
 
-                                SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
-                                fo.Value = 1;
-                                cmd.Parameters.Add(fo);
+                                //SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
+                                //fo.Value = 1;
+                                //cmd.Parameters.Add(fo);
 
                                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                                 insupdflag.Value = "I";
@@ -172,17 +172,17 @@ namespace BTPOSDashboard.Controllers
                  
                 conn.Close();
 
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
-                //Tbl = ds.Tables[0];
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
                 string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
-            // int found = 0;
-            return Tbl;
-
         }
         public void Options()
         {

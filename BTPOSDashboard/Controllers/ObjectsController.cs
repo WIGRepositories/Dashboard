@@ -36,13 +36,12 @@ namespace BTPOSDashboard.Controllers
             return Tbl;
         }
         [HttpPost]
-        public DataTable saveObjects(Objects b)
+        public HttpResponseMessage saveObjects(Objects b)
         {
-            DataTable Tbl = new DataTable();
-
-
             //connect to database
             SqlConnection conn = new SqlConnection();
+            try
+            { 
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -51,21 +50,25 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsUpdDelObjects";
             cmd.Connection = conn;
             conn.Open();
+
             SqlParameter cc = new SqlParameter();
             cc.ParameterName = "@Id";
             cc.SqlDbType = SqlDbType.Int;
-            cc.Value = Convert.ToString(b.Id);
+            cc.Value = b.Id;
             cmd.Parameters.Add(cc);
+
             SqlParameter cname = new SqlParameter();
             cname.ParameterName = "@Name";
             cname.SqlDbType = SqlDbType.VarChar;
             cname.Value = b.Name;
             cmd.Parameters.Add(cname);
+
             SqlParameter dd = new SqlParameter();
             dd.ParameterName = "@Description";
             dd.SqlDbType = SqlDbType.VarChar;
             dd.Value = b.Description;
             cmd.Parameters.Add(dd);
+
             SqlParameter dda = new SqlParameter();
             dda.ParameterName = "@Path";
             dda.SqlDbType = SqlDbType.VarChar;
@@ -79,6 +82,14 @@ namespace BTPOSDashboard.Controllers
             aa.Value = b.Active;
             cmd.Parameters.Add(aa);
 
+            SqlParameter flag = new SqlParameter();
+            flag.ParameterName = "@insupdflag";
+            flag.SqlDbType = SqlDbType.VarChar;
+            flag.Value = b.insupdflag;
+            //llid.Value = b.Active;
+            cmd.Parameters.Add(flag);
+           
+
 
             //DataSet ds = new DataSet();
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -86,8 +97,17 @@ namespace BTPOSDashboard.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
-            // int found = 0;
-            return Tbl;
+            return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         public void Options()
         {

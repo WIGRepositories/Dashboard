@@ -58,71 +58,74 @@ namespace POSDBAccess.Controllers
                 conn.Open();
 
                 SqlParameter gs = new SqlParameter();
-                gs.ParameterName = "@addInfo";
-                gs.SqlDbType = SqlDbType.VarChar;
-                gs.Value = n.addInfo;
+                gs.ParameterName = "@RefId";
+                gs.SqlDbType = SqlDbType.Int;
+                gs.Value = n.RefId;
                 cmd.Parameters.Add(gs);
 
                 SqlParameter gss = new SqlParameter();
-                gss.ParameterName = "@createdBy";
-                gss.SqlDbType = SqlDbType.VarChar;
-                gss.Value = n.createdBy;
+                gss.ParameterName = "@Type";
+                gss.SqlDbType = SqlDbType.Int;
+                gss.Value = n.Type;
                 cmd.Parameters.Add(gss);
 
                 SqlParameter gsa = new SqlParameter();
-                gsa.ParameterName = "@createdOn";
+                gsa.ParameterName = "@createdBy";
                 gsa.SqlDbType = SqlDbType.Int;
-                gsa.Value = Convert.ToString(n.createdOn);
+                gsa.Value = n.createdBy;
                 cmd.Parameters.Add(gsa);
 
-                SqlParameter gsaz = new SqlParameter();
-                gsaz.ParameterName = "@Id";
-                gsaz.SqlDbType = SqlDbType.Int;
-                gsaz.Value = Convert.ToString(n.Id);
-                cmd.Parameters.Add(gsaz);
+                //SqlParameter gsaz = new SqlParameter();
+                //gsaz.ParameterName = "@Id";
+                //gsaz.SqlDbType = SqlDbType.Int;
+                //gsaz.Value = n.Id;
+                //cmd.Parameters.Add(gsaz);
 
                 SqlParameter gssa = new SqlParameter();
-                gssa.ParameterName = "@raisedBy";
-                gssa.SqlDbType = SqlDbType.VarChar;
-                gssa.Value = n.raisedBy;
+                gssa.ParameterName = "@Raised";
+                gssa.SqlDbType = SqlDbType.Int;
+                gssa.Value = n.Raised;
                 cmd.Parameters.Add(gssa);
 
                 SqlParameter gsad = new SqlParameter();
-                gsad.ParameterName = "@status";
-                gsad.SqlDbType = SqlDbType.VarChar;
-                gsad.Value = n.status;
+                gsad.ParameterName = "@TicketTitle";
+                gsad.SqlDbType = SqlDbType.Int;
+                gsad.Value = n.TicketTitle;
                 cmd.Parameters.Add(gsad);
 
                 SqlParameter gid = new SqlParameter();
-                gid.ParameterName = "@ticketinfo";
-                gid.SqlDbType = SqlDbType.VarChar;
-                gid.Value = n.ticketinfo;
+                gid.ParameterName = "@IssueDetails";
+                gid.SqlDbType = SqlDbType.NVarChar;
+                gid.Value = n.IssueDetails;
                 cmd.Parameters.Add(gid);
 
                 SqlParameter gsae = new SqlParameter();
-                gsae.ParameterName = "@ticketTypeId";
-                gsae.SqlDbType = SqlDbType.Int;
-                gsae.Value = Convert.ToString(n.ticketTypeId);
+                gsae.ParameterName = "@AddInfo";
+                gsae.SqlDbType = SqlDbType.NVarChar;
+                gsae.Value = n.AddInfo;
                 cmd.Parameters.Add(gsae);
 
                 SqlParameter gsac = new SqlParameter();
-                gsac.ParameterName = "@TTId";
+                gsac.ParameterName = "@Status";
                 gsac.SqlDbType = SqlDbType.Int;
-                gsac.Value = Convert.ToString(n.TTId);
+                gsac.Value = n.Status;
                 cmd.Parameters.Add(gsac);
 
-                //SqlParameter ga = new SqlParameter();
-                //ga.ParameterName = "@Active";
-                //ga.SqlDbType = SqlDbType.Int;
-                //ga.Value = Convert.ToString(n.Active);
-                //cmd.Parameters.Add(ga);
+                SqlParameter gsab = new SqlParameter();
+                gsab.ParameterName = "@Asign";
+                gsab.SqlDbType = SqlDbType.Int;
+                gsab.Value = n.Asign;
+                cmd.Parameters.Add(gsab);
+               
 
-                cmd.ExecuteScalar();
-                conn.Close();
-                DataSet ds = new DataSet();
-                //SqlDataAdapter db = new SqlDataAdapter(cmd);
-                //db.Fill(ds);
+               // cmd.ExecuteScalar();
+               
+               // DataSet ds = new DataSet();
+                SqlDataAdapter db = new SqlDataAdapter(cmd);
+                db.Fill(Tbl);
                 //Tbl = ds.Tables[0];
+
+
             }
             catch (Exception ex)
             {

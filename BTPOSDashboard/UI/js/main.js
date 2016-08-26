@@ -27,15 +27,20 @@ $(function () {
 
     //BEGIN CHECKBOX & RADIO
     if($('#demo-checkbox-radio').length <= 0){
-        $('input[type="checkbox"]:not(".switch")').iCheck({
+        $('input[type="checkbox"]:not(".switch,.activeCheckbox")').iCheck({
             checkboxClass: 'icheckbox_minimal-grey',
-            increaseArea: '20%' // optional
+            increaseArea: '20%', // optional
+            disabled:false
         });
+       
         $('input[type="radio"]:not(".switch")').iCheck({
             radioClass: 'iradio_minimal-grey',
             increaseArea: '20%' // optional
         });
     }
+    //$('.datepicker-filter').datepicker({
+    //    autoclose: true
+    //});
     //END CHECKBOX & RADIO
 
     //BEGIN TOOTLIP
@@ -303,11 +308,11 @@ $(function () {
     });
     //END CHECKBOX TABLE
 
-    //BEGIN JQUERY NEWS UPDATE
-    $('#news-update').ticker({
-        controls: false,
-        titleText: ''
-    });
+    ////BEGIN JQUERY NEWS UPDATE
+    //$('#news-update').ticker({
+    //    controls: false,
+    //    titleText: ''
+    //});
     //END JQUERY NEWS UPDATE
 
     $('.option-demo').hover(function() {

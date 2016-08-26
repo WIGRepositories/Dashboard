@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en">
 <head>
     <title>Pricing Table | Extras</title>
     <meta charset="utf-8">
@@ -27,14 +27,14 @@
 
                 var result = checkCode(document.getElementById('Text1').value);
                 if (result > 0)
-                window.location.href = "http://localhost:1476/CommercialSite/LicenseConfirmation.html";
+                window.location.href = "http://154.120.237.198:1476/CommercialSite/LicenseConfirmation.html";
                 else
                     alert('invalid fleet owner code');
             }
         }
     </script>-->
 </head>
-<body style="text-align:center">
+<body ng-app="myApp" ng-controller="myCtrl"  style="text-align:center">
 <div>
 
     <h1>Please choose below license options available:</h1>

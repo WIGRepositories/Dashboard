@@ -1,11 +1,27 @@
 // JavaScript source code
-var myapp1 = angular.module('myApp', [])
-var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
+var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+    if ($localStorage.uname == null) {
+        window.location.href = "login.html";
+    }
+    $scope.uname = $localStorage.uname;
+    $scope.userdetails = $localStorage.userdetails;
+    $scope.Roleid = $scope.userdetails[0].roleid;
 
-    $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
-        $scope.Categories = response.data;
-        $scope.getselectval();
-    })
+    $scope.dashboardDS = $localStorage.dashboardDS;
+    $scope.GetCategories = function () {
+        $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
+            $scope.Categories = response.data;
+           // $scope.getselectval();
+        });
+    }
+
+    $scope.GetCategoriesList = function () {
+        $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
+            $scope.Categories = response.data;
+             $scope.getselectval();
+        });
+    }
 
 
     $scope.getselectval = function (seltype) {
@@ -19,6 +35,10 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
 
     $scope.save = function (SubCategory) {
 
+        if (SubCategory.CATEGORY == null) {
+            alert('Please enter Category.');
+            return;
+        }
         if (SubCategory == null) {
             alert('Please enter values.');
             return;
@@ -28,10 +48,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             alert('Please enter name.');
             return;
         }
-        if (SubCategory.Category == null) {
-            alert('Please enter Category.');
-            return;
-        }
+        
 
 
         var currSubCategory = {
@@ -40,7 +57,7 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             Name: SubCategory.Name,
             Description: SubCategory.Description,
             Active:  SubCategory.Active,
-            TypeGroupId: SubCategory.Category.Id
+            TypeGroupId: SubCategory.CategoryId
 
         };
 
@@ -49,11 +66,19 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
             url: 'http://localhost:1476/api/subcategory/savesubcategory',
             data: currSubCategory
         }
-        $http(req).then(function (response) { });
+        $http(req).then(function (response) {
 
+            $scope.showDialog("Saved successfully!");
 
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
         $scope.currGroup = null;
-
     };
 
     $scope.saveNewSubCategory = function (SubCategory) {
@@ -105,4 +130,32 @@ var mycrtl1 = myapp1.controller('Mycntrlr', function ($scope, $http) {
         $scope.currGroup = null;
     };
 
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+
+});
+ 
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

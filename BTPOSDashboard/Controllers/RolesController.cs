@@ -12,8 +12,40 @@ namespace BTPOSDashboardAPI.Controllers
 {
     public class RolesController : ApiController
     {
+
         [HttpGet]
-        public DataTable getroles(int companyId)
+        public DataTable GetCompanyRoles(int companyId)
+        {
+            DataTable Tbl = new DataTable();
+
+
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "getCompanyRoles";
+            cmd.Connection = conn;
+
+            SqlParameter rolesFlag = new SqlParameter();
+            rolesFlag.ParameterName = "@cmpId";
+            rolesFlag.SqlDbType = SqlDbType.Int;
+            rolesFlag.Value = companyId;
+            cmd.Parameters.Add(rolesFlag);
+
+         
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+           
+            // int found = 0;
+            return Tbl;
+        }
+
+        [HttpGet]
+        [Route("api/Roles/GetRoles")]
+        public DataTable GetRoles(int allroles)
         {
             DataTable Tbl = new DataTable();
 
@@ -26,79 +58,87 @@ namespace BTPOSDashboardAPI.Controllers
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetRoles";
+         
 
-            SqlParameter cmpid = new SqlParameter();
-            cmpid.ParameterName = "@companyId";
-            cmpid.SqlDbType = SqlDbType.Int;
-            cmpid.Value = companyId;
-            cmd.Parameters.Add(cmpid);
+            SqlParameter rolesFlag = new SqlParameter();
+            rolesFlag.ParameterName = "@allroles";
+            rolesFlag.SqlDbType = SqlDbType.Int;
+            rolesFlag.Value = allroles;
+            cmd.Parameters.Add(rolesFlag);
 
             cmd.Connection = conn;
-
-            DataSet ds = new DataSet();
+                       
             SqlDataAdapter db = new SqlDataAdapter(cmd);
-            db.Fill(ds);
-            Tbl = ds.Tables[0];
-
-            // int found = 0;
+            db.Fill(Tbl);
+            
             return Tbl;
         }
 
 
         [HttpPost]
-        public DataTable saveroles(roles b)
+        public HttpResponseMessage saveroles(roles b)
         {
-            DataTable Tbl = new DataTable();
-
-
             //connect to database
             SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelRoles";
-            cmd.Connection = conn;
-            conn.Open();
-            SqlParameter cc = new SqlParameter();
-            cc.ParameterName = "@Id";
-            cc.SqlDbType = SqlDbType.Int;
-            cc.Value =Convert.ToString (b.Id);
-            cmd.Parameters.Add(cc);
+            try
+            {
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-            SqlParameter cname = new SqlParameter();
-            cname.ParameterName = "@Name";
-            cname.SqlDbType = SqlDbType.VarChar;
-            cname.Value = b.Name;
-            cmd.Parameters.Add(cname);
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelRoles";
+                cmd.Connection = conn;
+                conn.Open();
+                SqlParameter cc = new SqlParameter();
+                cc.ParameterName = "@Id";
+                cc.SqlDbType = SqlDbType.Int;
+                cc.Value = Convert.ToString(b.Id);
+                cmd.Parameters.Add(cc);
 
-            SqlParameter dd = new SqlParameter();
-            dd.ParameterName = "@Description";
-            dd.SqlDbType = SqlDbType.VarChar;
-            dd.Value = b.Description;
-            cmd.Parameters.Add(dd);
-       
-            SqlParameter aa = new SqlParameter();
-            aa.ParameterName = "@Active";
-            aa.SqlDbType = SqlDbType.VarChar;
-            aa.Value = b.Active;
-            cmd.Parameters.Add(aa);
+                SqlParameter cname = new SqlParameter();
+                cname.ParameterName = "@Name";
+                cname.SqlDbType = SqlDbType.VarChar;
+                cname.Value = b.Name;
+                cmd.Parameters.Add(cname);
 
-            SqlParameter cmpid = new SqlParameter();
-            cmpid.ParameterName = "@companyId";
-            cmpid.SqlDbType = SqlDbType.Int;
-            cmpid.Value = b.CompanyId;
-            cmd.Parameters.Add(cmpid);
+                SqlParameter dd = new SqlParameter();
+                dd.ParameterName = "@Description";
+                dd.SqlDbType = SqlDbType.VarChar;
+                dd.Value = b.Description;
+                cmd.Parameters.Add(dd);
 
-            //DataSet ds = new DataSet();
-            //SqlDataAdapter db = new SqlDataAdapter(cmd);
-            //db.Fill(ds);
-            // Tbl = Tables[0];
-            cmd.ExecuteScalar();
-            conn.Close();
-            // int found = 0;
-            return Tbl;
+                SqlParameter aa = new SqlParameter();
+                aa.ParameterName = "@Active";
+                aa.SqlDbType = SqlDbType.Int;
+                aa.Value = b.Active;
+                cmd.Parameters.Add(aa);
+
+                SqlParameter aab = new SqlParameter();
+                aab.ParameterName = "@IsPublic";
+                aab.SqlDbType = SqlDbType.Int;
+                aab.Value = b.IsPublic;
+                cmd.Parameters.Add(aab);
+
+
+                //DataSet ds = new DataSet();
+                //SqlDataAdapter db = new SqlDataAdapter(cmd);
+                //db.Fill(ds);
+                // Tbl = Tables[0];
+                cmd.ExecuteScalar();
+                conn.Close();
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
         }
         public void Options()
         {

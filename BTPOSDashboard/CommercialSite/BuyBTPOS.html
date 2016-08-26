@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<html lang="en">
 <head>
     <title>User List | Extras</title>
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="../ui/css/themes/style1/orange-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
 </head>
-<body style="text-align:center">
+<body ng-app="myApp" ng-controller="myCtrl"  style="text-align:center">
     <div>
         <h2>Please choose below available inventory to purchase:</h2>
         <h3>Enter fleet owner code: <input id="Text1" type="text" ng-model="txt" /></h3>
@@ -113,8 +113,8 @@
     <script src="js/jquery-ui.js"></script><!--loading bootstrap js-->
     <script src="../ui/vendors/bootstrap/js/bootstrap.min.js"></script>
     <script src="../ui/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
+    
+    
     <script src="../ui/vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="../ui/vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="../ui/vendors/jquery-cookie/jquery.cookie.js"></script>

@@ -1,5 +1,5 @@
 ﻿
-<html lang="en" ng-app="myApp" ng-controller="Mycntrlr">
+<html lang="en">
 <head>
     <title>Form Layouts | Forms</title>
     <meta charset="utf-8">
@@ -19,7 +19,7 @@
     <link type="text/css" rel="stylesheet" href="../ui/css/themes/style2/pink-blue.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="../ui/css/style-responsive.css">
 </head>
-<body ng-model="Fleet">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-model="Fleet">
 
 
     <div class="page-form">
@@ -61,7 +61,7 @@
                 </div>
                 <center>
 
-                    <button type="submit" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-primary" ng-click="save(Fleet,'I')" onclick="validate();">
+                    <button  data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-primary" ng-click="save(Fleet,'I')" onclick="validate();">
                         Submit
                     </button>
 
@@ -74,27 +74,48 @@
 
             </div>
         </form>
+        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+            <div class="modal-header">
+                <h3 class="modal-title">Save confirmation!</h3>
+            </div>
+            <div class="modal-body">
+                <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+                {{mssg}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+
+        </script>
     </div>
 
-    <script src="../ui/js/jquery-1.10.2.min.js"></script>
-    <script src="../ui/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="../ui/js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="../ui/vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../ui/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="../ui/js/html5shiv.js"></script>
-    <script src="../ui/js/respond.min.js"></script>
-    <script src="../ui/vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../ui/vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="../ui/vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="../ui/vendors/iCheck/icheck.min.js"></script>
-    <script src="../ui/vendors/iCheck/custom.min.js"></script>
-    <script src="../ui/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="../ui/js/jquery.menu.js"></script>
-    <script src="../ui/vendors/jquery-pace/pace.min.js"></script>
-    <script src="../ui/vendors/holder/holder.js"></script>
-    <script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script>
-    <script src="js/angular.js"></script>
-    <script src="js/createfleet.js"></script>
+<script src="../ui/js/jquery-1.10.2.min.js"></script>
+<script src="../ui/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="../ui/js/jquery-ui.js"></script>
+<!--loading bootstrap js-->
+<script src="../ui/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="../ui/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="../ui/js/html5shiv.js"></script>
+<script src="../ui/js/respond.min.js"></script>
+<script src="../ui/vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="../ui/vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="../ui/vendors/jquery-cookie/jquery.cookie.js"></script>
+<script src="../ui/vendors/iCheck/icheck.min.js"></script>
+<script src="../ui/vendors/iCheck/custom.min.js"></script>
+<script src="../ui/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+<script src="../ui/js/jquery.menu.js"></script>
+<script src="../ui/vendors/jquery-pace/pace.min.js"></script>
+<script src="../ui/vendors/holder/holder.js"></script>
+<script src="../ui/vendors/responsive-tabs/responsive-tabs.js"></script>
+<script src="js/angular.js"></script>
+    <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+<script src="js/createfleet.js"></script>
 </body>
 </html>
