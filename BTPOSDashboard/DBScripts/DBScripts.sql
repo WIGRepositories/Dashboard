@@ -12465,8 +12465,36 @@ SELECT *  FROM (
 WHERE ROWNUMBER > ((@pageNum - 1) * @pageSize ) AND 
 ROWNUMBER <= (@pageNum * @Pagesize)
 end
+GO
 
 --exec [dbo].[GetBTPOSDetails] @pageNum = 6,@pageSize = 3
-
-/****** Object:  StoredProcedure [dbo].[InsUpdDelBTPOSDetails]    Script Date: 07/18/2016 12:22:26 ******/
+/****** Object:  StoredProcedure [dbo].[RetrivePassword]    Script Date: 08/27/2016 12:25:50 ******/
 SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[RetrivePassword]
+	-- Add the parameters for the stored procedure here
+	@email varchar(100)
+	
+AS
+BEGIN
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+        
+    select ul.LoginInfo,ul.PassKey from Users u
+    inner join UserLogins ul on ul.UserId = u.Id
+    where upper(u.Email) = upper(@email)
+    
+    
+END
+GO

@@ -56,9 +56,10 @@ namespace BTPOSDashboard.Controllers
         public HttpResponseMessage NewFleetDetails(FleetDetails n)
         {
             SqlConnection conn = new SqlConnection();
+            LogTraceWriter traceWriter = new LogTraceWriter();
             try
             {
-                LogTraceWriter traceWriter = new LogTraceWriter();
+              
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveNewFleetDetails credentials....");
                 //connect to database
                

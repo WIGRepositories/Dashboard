@@ -123,6 +123,8 @@ namespace BTPOSDashboardAPI.Models
         public string Blockedon { get; set; }
         public string UnBlockedon { get; set; }
 
+        public string insupddelflag { get; set; }
+
     }
     public class COUNTRY
     {

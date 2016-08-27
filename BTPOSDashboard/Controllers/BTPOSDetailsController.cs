@@ -164,10 +164,11 @@ namespace BTPOSDashboardAPI.Controllers
         public HttpResponseMessage SaveBTPOSDetails(IEnumerable<BTPOSDetails> posList)
         {
              SqlConnection conn = new SqlConnection();
+             LogTraceWriter traceWriter = new LogTraceWriter();
             try
             {
 
-                LogTraceWriter traceWriter = new LogTraceWriter();
+                
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails credentials....");
             // BTPOSDetails n = new BTPOSDetails();
             

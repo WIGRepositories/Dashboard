@@ -55,9 +55,10 @@ namespace BTPOSDashboard.Controllers
         public HttpResponseMessage SetFleetAvailability(FleetAvailability fa)
         {
             SqlConnection conn = new SqlConnection();
+            LogTraceWriter traceWriter = new LogTraceWriter();
             try
             {
-                LogTraceWriter traceWriter = new LogTraceWriter();
+                
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveSetFleetAvailability credentials....");
             //connect to database
             

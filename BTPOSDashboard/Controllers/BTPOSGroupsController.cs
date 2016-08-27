@@ -42,9 +42,10 @@ namespace BTPOSDashboardAPI.Controllers
         public HttpResponseMessage btpos(btposgroups b)
         {
             SqlConnection conn = new SqlConnection();
+            LogTraceWriter traceWriter = new LogTraceWriter();
             try
             {
-                LogTraceWriter traceWriter = new LogTraceWriter();
+              
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSGroups  credentials....");
 
             //connect to database

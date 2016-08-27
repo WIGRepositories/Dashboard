@@ -77,9 +77,10 @@ namespace BTPOSDashboard.Controllers
         public HttpResponseMessage saveRouteFare(RouteFare b)
          {
             SqlConnection conn = new SqlConnection();
+            LogTraceWriter traceWriter = new LogTraceWriter();
             try
             {
-                LogTraceWriter traceWriter = new LogTraceWriter();
+                
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveRouteFare credentials....");
 
             //connect to database

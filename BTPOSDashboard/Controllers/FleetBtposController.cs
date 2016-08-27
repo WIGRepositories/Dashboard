@@ -55,10 +55,9 @@ namespace BTPOSDashboard.Controllers
         public HttpResponseMessage AssignFleetBTPOS(FleetBTPOS fb)
         {
             SqlConnection conn = new SqlConnection();
+            LogTraceWriter traceWriter = new LogTraceWriter();
             try
-            {
-
-                LogTraceWriter traceWriter = new LogTraceWriter();
+            {               
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveAssignFleetBTPOS credentials....");
                 //connect to database
 

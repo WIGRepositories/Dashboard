@@ -97,8 +97,9 @@ namespace BTPOSDashboard.Controllers
             {
                 conn.Close();
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveBTPOSMonitoring:" + ex.Message);
             }
-            traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveBTPOSMonitoring:" + ex.Message);
+            
             // int found = 0;
             return Tbl;
         }

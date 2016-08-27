@@ -80,7 +80,7 @@ namespace BTPOSDashboard.Controllers
 
         [HttpPost]
 
-        public HttpResponseMessage saveBocklist(IEnumerable<Sblocklist> Blist)
+        public HttpResponseMessage saveBocklist(IEnumerable<Blocklist> Blist)
         {
             SqlConnection conn = new SqlConnection();
             try
@@ -98,7 +98,7 @@ namespace BTPOSDashboard.Controllers
                 cmd.Connection = conn;
                 conn.Open();
 
-                foreach (Sblocklist b in Blist)
+                foreach (Blocklist b in Blist)
                 {
 
                     SqlParameter Aid = new SqlParameter();

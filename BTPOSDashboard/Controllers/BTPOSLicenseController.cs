@@ -47,10 +47,10 @@ namespace BTPOSDashboardAPI.Controllers
         public HttpResponseMessage BOTPosPs(BOTPOSL B)
         {
             SqlConnection conn = new SqlConnection();
-            try
-            {
+            LogTraceWriter traceWriter = new LogTraceWriter();
 
-                LogTraceWriter traceWriter = new LogTraceWriter();
+            try
+            {                
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SAVEBTPOSLICENSE credentials....");
                 //connect to database
                 

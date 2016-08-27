@@ -56,8 +56,61 @@ namespace BTPOSDashboardAPI.Controllers
             return Tbl;
 
         }
-  
-       
+
+    [HttpGet]
+        public DataTable RetrivePassword(string email) {
+        
+        DataTable Tbl = new DataTable();
+        SqlConnection conn = new SqlConnection();
+        LogTraceWriter traceWriter = new LogTraceWriter();
+
+            try
+            {                
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Retriving password....");
+
+                //connect to database
+                
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "dbo.RetrivePassword";
+
+                cmd.Connection = conn;
+
+                SqlParameter lUserName = new SqlParameter("@email", SqlDbType.VarChar, 50);
+                lUserName.Value = email;
+                lUserName.Direction = ParameterDirection.Input;
+                cmd.Parameters.Add(lUserName);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(Tbl);
+
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Retrive password completed.");
+                if (Tbl.Rows.Count == 1)
+                { 
+                    //send the email and return success
+                }
+                if (Tbl.Rows.Count > 1)
+                {
+                    throw new Exception("Multiple users found");
+                }
+                return Tbl;
+            }
+            catch (Exception ex)
+            { 
+                if(conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error during retrive password:." + ex.Message);
+               // return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                throw ex;
+            }
+
+          
+        }
          public void Options() { }
 
 
