@@ -139,6 +139,7 @@
     <Content Include="CommercialSite\multiplicationofcells.html" />
     <Content Include="CommercialSite\Request.html" />
     <Content Include="CommercialSite\LicensePage.html" />
+    <Content Include="DBScripts\Countires.sql" />
     <Content Include="DBScripts\Data.sql" />
     <Content Include="DBScripts\DBScripts.sql" />
     <Content Include="DBScripts\Init.sql" />
@@ -304,6 +305,7 @@
     <Content Include="DBScripts\Sprocs\dbo.InsUpdTypeGroups.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdTypes.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdUsers.sql" />
+    <Content Include="DBScripts\States.sql" />
     <Content Include="DBScripts\Tables\dbo.Alerts.sql" />
     <Content Include="DBScripts\Tables\dbo.Blocklist.sql" />
     <Content Include="DBScripts\Tables\dbo.BTPOSAuditDetails.sql" />

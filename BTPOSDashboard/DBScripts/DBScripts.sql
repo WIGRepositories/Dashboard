@@ -183,14 +183,9 @@ BEGIN
            ,@Field2)
 
 END
-
-
-
 GO
 
-GO
-
-/****** Object:  Table [dbo].[Company]    Script Date: 07/01/2016 12:23:02 ******/
+/****** Object:  Table [dbo].[Company]    Script Date: 08/28/2016 11:38:50 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -206,7 +201,6 @@ CREATE TABLE [dbo].[Company](
 	[Code] [varchar](50) NOT NULL,
 	[Desc] [varchar](50) NULL,
 	[Active] [int] NOT NULL,
-	[Logo] [image] NULL,
 	[Address] [varchar](500) NOT NULL,
 	[ContactNo1] [varchar](50) NOT NULL,
 	[ContactNo2] [varchar](50) NULL,
@@ -219,18 +213,15 @@ CREATE TABLE [dbo].[Company](
 	[State] [varchar](50) NULL,
 	[FleetSize] [int] NULL,
 	[StaffSize] [int] NULL,
-	[PermanentAddress] [varchar](500) NULL,
-	[TemporaryAddress] [varchar](500) NULL,
-	[AddressId] [int] NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+	[AlternateAddress] [varchar](500) NULL,
+	[ShippingAddress] [varchar](500) NULL,
+	[AddressId] [int] NULL,
+	[Logo] [varchar](max) NULL
+) ON [PRIMARY]
 
 GO
 
 SET ANSI_PADDING OFF
-GO
-
-
-
 GO
 
 /****** Object:  Table [dbo].[CompanyRoles]    Script Date: 05/05/2016 10:16:38 ******/
@@ -1834,6 +1825,30 @@ CREATE TABLE [dbo].[Fares](
 ) ON [PRIMARY]
 
 GO
+
+/****** Object:  Table [dbo].[Country]    Script Date: 08/27/2016 22:17:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Country](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Latitude] [varchar](15) NULL,
+	[Longitude] [varchar](15) NULL,
+	[ISOCode] [varchar](5) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1992,14 +2007,6 @@ end
 
 go
 
-/****** Object:  StoredProcedure [dbo].[InsUpdDelCompanyRoles]    Script Date: 07/18/2016 14:52:38 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-/****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
-
 /****** Object:  StoredProcedure [dbo].[InsUpdDelCompanyRoles]    Script Date: 08/08/2016 17:08:33 ******/
 SET ANSI_NULLS ON
 GO
@@ -2083,8 +2090,8 @@ SELECT distinct c.[active]
       ,[State] 
 	   ,[FleetSize]
       ,[StaffSize]
-      ,[PermanentAddress]
-      ,[TemporaryAddress]     
+      ,[AlternateAddress]
+      ,[ShippingAddress]     
       ,c.[Id]
       ,[Name]
   FROM [POSDashboard].[dbo].[Company] c
@@ -2100,11 +2107,11 @@ GO
 /****** Object:  StoredProcedure [dbo].[InsUpdDelCompany]    Script Date: 05/04/2016 17:22:18 ******/
 
 create procedure [dbo].[InsUpdDelCompany](
+@Id int,
+@Name varchar(50),
 @active int,
 @code varchar(50),
 @desc varchar(50) = null,
-@Id int,
-@Name varchar(50),
 @Address varchar(500),
 @EmailId varchar(50),
 @ContactNo1 varchar(50),
@@ -2114,11 +2121,11 @@ create procedure [dbo].[InsUpdDelCompany](
 @Caption varchar(50)= null,
 @Country varchar(50)= null,
 @ZipCode int = null,
-@State varchar(50),
-@FleetSize int ,
-@StaffSize int,
-@PermanentAddress varchar(500),
-@TemporaryAddress varchar(500),
+@State varchar(50) = null,
+@FleetSize int = null,
+@StaffSize int = null,
+@AlternateAddress varchar(500) = null,
+@logo varchar(max) = null,
 @insupdflag varchar(1),
 @userid int = -1
 )
@@ -2145,8 +2152,8 @@ if @insupdflag = 'I'
 
 			if @cnt = 0 
 			begin
-			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State,StaffSize,FleetSize,PermanentAddress,
-			TemporaryAddress) values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State,@StaffSize,@FleetSize,@PermanentAddress,@TemporaryAddress)
+			insert into Company (active,code,[desc],Name,Address,ContactNo1,ContactNo2,Fax,EmailId,Title,Caption,Country,ZipCode,State,StaffSize,FleetSize,AlternateAddress,Logo)
+			 values(@active,@code,@desc,@Name,@Address,@ContactNo1,@ContactNo2,@Fax,@EmailId,@Title,@Caption,@Country,@ZipCode,@State,@StaffSize,@FleetSize,@AlternateAddress,@logo)
 			
 			SELECT @newCmpId = SCOPE_IDENTITY()
 			
@@ -2195,7 +2202,9 @@ else
 				if @cnt = 0 
 				begin
 					update Company
-					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId = @EmailId,ContactNo1 =@ContactNo1,ContactNo2=@ContactNo2,Fax=@Fax,Title=@Title,Caption=@Caption,Country=@Country,ZipCode=@ZipCode,State=@State,FleetSize=@FleetSize,StaffSize=@StaffSize,PermanentAddress=@PermanentAddress,TemporaryAddress=@TemporaryAddress,active = @active
+					set Name = @Name, code = @code, [desc] = @desc,Address =@Address,EmailId = @EmailId,ContactNo1 =@ContactNo1,ContactNo2=@ContactNo2,Fax=@Fax,Title=@Title
+					,Caption=@Caption,Country=@Country,ZipCode=@ZipCode,State=@State,FleetSize=@FleetSize,StaffSize=@StaffSize
+					,AlternateAddress=@AlternateAddress,Logo=@logo,active = @active
 					where Id = @Id						
 						
 						--insert into edit history
@@ -2216,6 +2225,7 @@ else
      delete from Company where Id = @Id
 end
 end
+
 
 Go
 
@@ -11858,21 +11868,6 @@ END
 GO
 
 
-/****** Object:  Table [dbo].[Country]    Script Date: 08/05/2016 17:57:39 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[Country](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Countries] [nvarchar](50) NOT NULL
-) ON [PRIMARY]
-
-GO
-
-GO
 /****** Object:  StoredProcedure [dbo].[GetCountries]    Script Date: 08/05/2016 18:02:13 ******/
 SET ANSI_NULLS ON
 GO
@@ -12498,3 +12493,56 @@ BEGIN
     
 END
 GO
+
+/****** Object:  StoredProcedure [dbo].[GetCompanyDetails]    Script Date: 08/28/2016 10:17:34 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetCompanyDetails]
+	-- Add the parameters for the stored procedure here
+	@cmpId int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+   SELECT 
+      [Id]
+      ,[Name]
+      ,[Code]
+      ,[Desc]
+      ,[Active]
+      ,[Logo]
+      ,[Address]
+      ,[ContactNo1]
+      ,[ContactNo2]
+      ,[Fax]
+      ,[EmailId]
+      ,[Title]
+      ,[Caption]
+      ,[Country]
+      ,[ZipCode]
+      ,[State]
+      ,[FleetSize]
+      ,[StaffSize]
+      ,[AlternateAddress]
+      ,[ShippingAddress]
+      ,[AddressId]
+  FROM [POSDashboard].[dbo].[Company]
+  WHERE [Id] = @cmpId
+
+
+END
+
+GO
+
+

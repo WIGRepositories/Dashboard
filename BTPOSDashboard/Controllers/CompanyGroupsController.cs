@@ -87,6 +87,42 @@ namespace POSDBAccess.Controllers
             return Tbl;
         }
 
+        [HttpGet]
+        [Route("api/GetCompanyDetails")]
+        public DataTable GetComapanyDetails(int cmpId) {
+            DataTable Tbl = new DataTable();
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getting Company details....");
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetCompanyDetails";
+
+            SqlParameter uid = new SqlParameter();
+            uid.ParameterName = "@cmpId";
+            uid.SqlDbType = SqlDbType.Int;
+            uid.Value = cmpId;
+            cmd.Parameters.Add(uid);
+
+
+            cmd.Connection = conn;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            Tbl = ds.Tables[0];
+
+            //Tbl.Rows[0]["Logo"] = Convert.ToBase64String((byte[])Tbl.Rows[0]["Logo"]);
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getting Company details completed.");
+
+            // int found = 0;
+            return Tbl;
+        }
 
         [HttpPost]
         [Route("api/CompanyGroups/SaveCompanyGroups")]
@@ -214,24 +250,25 @@ namespace POSDBAccess.Controllers
                 cmd.Parameters.Add(sts);
 
                 SqlParameter PAdd = new SqlParameter();
-                PAdd.ParameterName = "@PermanentAddress";
+                PAdd.ParameterName = "@AlternateAddress";
                 PAdd.SqlDbType = SqlDbType.VarChar;
-                PAdd.Value = n.PermanentAddress;
+                PAdd.Value = n.AlternateAddress;
                 cmd.Parameters.Add(PAdd);
 
 
-                SqlParameter TAdd = new SqlParameter();
-                TAdd.ParameterName = "@TemporaryAddress";
-                TAdd.SqlDbType = SqlDbType.VarChar;
-                TAdd.Value = n.TemporaryAddress;
-                cmd.Parameters.Add(TAdd);
+                //SqlParameter TAdd = new SqlParameter();
+                //TAdd.ParameterName = "@TemporaryAddress";
+                //TAdd.SqlDbType = SqlDbType.VarChar;
+                //TAdd.Value = n.TemporaryAddress;
+                //cmd.Parameters.Add(TAdd);
 
-                //SqlParameter log = new SqlParameter();               
-                //log.ParameterName = "@Logo";
-                //log.SqlDbType = SqlDbType.VarChar;
-                //ImageConverter imgCon = new ImageConverter();
-                //log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
-                //cmd.Parameters.Add(log);  
+                SqlParameter logo = new SqlParameter();
+                logo.ParameterName = "@Logo";
+                logo.SqlDbType = SqlDbType.VarChar;
+               // ImageConverter imgCon = new ImageConverter();
+               // logo.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
+                logo.Value = n.Logo;
+                cmd.Parameters.Add(logo);  
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 1);
                 insupdflag.Value = n.insupdflag;
