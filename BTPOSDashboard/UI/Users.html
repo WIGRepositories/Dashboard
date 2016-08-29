@@ -70,11 +70,11 @@
                     <div class="sidebar-collapse menu-scroll">
                         <ul id="side-menu" class="nav">
                             <li class="user-panel">
-                                <div class="thumb"><img src="images/user.jpg" alt="" class="img-circle" /></div>
+                                <div class="thumb"><img src="images/user.jpg" height="20" width="20" alt="" class="img-circle" /></div>
                                 <div class="info">
                                     <p>{{uname}}</p>
                                     <ul class="list-inline list-unstyled">
-                                        <li><a href="extra-profile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                        <li><a href="UserProfile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
                                         <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
                                         <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
                                         <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
@@ -82,18 +82,16 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </li>
-                            <li>
-                                <a href="index.html">
+                            <li >
+                                <a href="#">
                                     <i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
 
-
-
-                            <li>
-                                <a href="#">
+                            <li class="active">
+                                <a href="Company.html">
                                     <i class="fa fa-sitemap fa-fw">
                                         <div class="icon-bg bg-dark"></div>
                                     </i><span class="menu-title">Company and Users</span><span class="fa arrow"></span>
@@ -114,7 +112,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
                                         <ul class="nav nav-third-level">
                                             <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
-                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li class="active">  <a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
                                             <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
 
                                         </ul>
@@ -123,14 +121,8 @@
                                     <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
 
                             </li>
-
-
-
                         </ul>
                         </li>
-
-
-
                         <li>
                             <a href="#">
                                 <i class="fa fa-truck">
@@ -140,6 +132,7 @@
                             <ul class="nav nav-second-level">
 
                                 <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
                                 <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
                                 <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
                                 <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
@@ -148,9 +141,7 @@
                                 <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
 
                             </ul>
-
                         </li>
-
 
                         <li>
                             <a href="#">
@@ -165,7 +156,8 @@
                                 <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
                                 <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
                                 <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
-                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="Advertisment.html"><i class="fa fa-tablet"></i><span class="submenu-title">Advertisment</span></a></li>
+
                             </ul>
                         </li>
 
@@ -230,8 +222,9 @@
                                         <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
                                         <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
                                         <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
-                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Sms Gateway Configuration</span></a></li>
-                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Email Gateway Configuration</span></a></li>
+                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">SmsGatewayConfiguration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">EmailGatewayConfiguration</span></a></li>
+
                                     </ul>
                                 </li>
 
@@ -242,6 +235,13 @@
                                         <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
                                         <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
                                         <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="FleetOwnerFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+
+                                        <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                        <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+
+
+                                        <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
 
                                     </ul>
                                 </li>
@@ -252,7 +252,6 @@
                                         <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
                                         <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
                                         <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
-
 
                                     </ul>
                                 </li>
@@ -270,10 +269,24 @@
                                 </i><span class="menu-title">Utilties & Tools</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level">
-
+                                <li><a href="DataLoad.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Data Load</span></a></li>
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
-                                <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
-                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
+                                <li><a href="paymentHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
+                                <!--<li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>-->
+
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-gavel">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Trouble Ticket</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li class="active"><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticketing Details</span></a></li>
+                                <li><a href="TroubleTicketHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Ticket History</span></a></li>
 
 
                             </ul>
@@ -318,7 +331,7 @@
                                     <ul class="nav nav-third-level">
 
                                         <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
-                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">NotificationConfiguration </span></a></li>
 
                                     </ul>
                                 </li>
@@ -363,7 +376,7 @@
                                                         <a href="AddFleetowner.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add Fleet Owner</button></a>
 
                                                         <a href="AddNewUser.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add User</button></a>
-
+                                                    </div>
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -723,7 +736,7 @@
 
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                   
                                                 </div>
 
                                             </div>

@@ -123,7 +123,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     }
     $scope.GetFleetOwners = function () {
-
+        if ($scope.cmp == null)
+        {
+            $scope.cmpdata = null;
+            $scope.cmpdata1 = null;
+            return;
+        }
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id

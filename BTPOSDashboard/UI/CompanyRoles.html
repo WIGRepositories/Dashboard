@@ -369,65 +369,11 @@
                                                     </div>
 
 
-                                                    <div class="actions">
+                                                    <div class="actions" ng-hide="cmproles == null">
                                                         <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Assign Roles</button>
                                                     </div>
 
-                                                    <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header modal-header-primary">
-                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                            <h4 id="modal-header-primary-label" class="modal-title">Edit Roles</h4>
-                                                        </div>
-                                                        <div class="modal-body" ng-model="currRole">
-                                                            <div class="row">
-
-                                                                <div class="col-md-3">
-                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">Name:<span class='require'>*</span></label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="currRole.Name" /></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-
-                                                                <div class="col-md-3">
-                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">Description:</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-5">
-                                                                    <div class="form-group">
-                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currRole.Description" /></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-
-                                                                <div class="col-md-3">
-                                                                    <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">Active:<span class='require'>*</span></label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <div class="form-group">
-                                                                        <div class="input-icon right"><input type="checkbox" class="form-control" id="cactive" ng-model="currRole.Active" checked /></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveRoles(currRole);">Save</button>
-                                                            <button type="reset" data-dismiss="modal" class="btn btn-default">Close</button>
-
-                                                        </div>
-                                                    </div>-->
+                                                    
                                                 </div>
                                             </div>
                                             <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -487,7 +433,7 @@
                                                                 <div class="col-md-offset-3 col-md-9">
                                                                     <button class="btn btn-green" type="button" ng-click="AssignRole(newrole);">Save</button>
 
-                                                                    <a href="CompanyRoles.html" class="btn btn-primary" ng-click="clearGroup()">Cancel</a>
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -501,7 +447,7 @@
                                         <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="cmproles == null">
                                             <thead>
                                                 <tr>
-                                                    <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
+                                                    <th width="20%">Select/Unselect </th>
                                                     <th>Role Name</th>
                                                     <th>Description</th>
                                                     <!--<th>Delete</th>-->

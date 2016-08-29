@@ -287,7 +287,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             AlternateAddress: Group.AlternateAddress,
           //  TemporaryAddress:Group.TemporaryAddress,
             Logo: $scope.imageSrc,
-            active: (Group.active == true)? 1 : 0,
+            active: 1,
             insupdflag:flag 
         }
         
@@ -376,7 +376,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             StaffSize: Group.StaffSize,
             AlternateAddress: Group.AlternateAddress,
             Logo: $scope.imageSrc,
-            active: (Group.active == true) ? 1 : 0,
+            active: (document.getElementById('cmpactive').checked) ? 1 : 0,
             insupdflag: flag
 
         }
@@ -450,6 +450,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $http.get('http://localhost:1476/api/GetCompanyDetails?cmpId='+cmp.Id).then(function (response, data) {
             $scope.currGroup = response.data[0];
             $scope.imageSrc = $scope.currGroup.Logo;
+            document.getElementById('cmpactive').checked = ($scope.currGroup.Active == 1);
         });
        
     };
