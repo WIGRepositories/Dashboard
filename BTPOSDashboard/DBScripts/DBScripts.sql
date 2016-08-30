@@ -8812,8 +8812,6 @@ SET ANSI_PADDING OFF
 GO
 
 
-GO
-
 /****** Object:  Table [dbo].[FleetOwnerRequestDetails]    Script Date: 06/16/2016 18:21:09 ******/
 SET ANSI_NULLS ON
 GO
@@ -8827,23 +8825,38 @@ GO
 CREATE TABLE [dbo].[FleetOwnerRequestDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[FirstName] [varchar](50) NOT NULL,
+	[MiddleName] [varchar](50) NULL,
 	[LastName] [varchar](50) NOT NULL,
 	[PhoneNo] [varchar](50) NOT NULL,
+	[AltPhoneNo] [varchar](50) NULL,
 	[EmailAddress] [varchar](50) NOT NULL,
-	[CompanyName] [varchar](20) NOT NULL,
-	[Description] [varchar](50) NOT NULL,
-	[Title] [varchar](20) NOT NULL,
-	[FleetSize] [int] NOT NULL,
-	[CompanyEmployeSize] [int] NOT NULL,
+	[Address] [varchar](50) NOT NULL,
 	[Gender] [int] NOT NULL,
-	[Address] [varchar](50) NULL,
-	[StaffSize] [int] NULL,
-	[Country] [varchar](50) NULL,
+
+	[CompanyName] [varchar](50) NOT NULL,
+	[CmpEmailAddress] [varchar](50) NOT NULL,
+	[CmpTitle] [varchar](20) NULL,
+	[CmpCaption] [varchar](20) NULL,
+	[FleetSize] [int] NOT NULL default 0,
+	[StaffSize] [int] NOT NULL default 0,
+	[Country] [int] NOT NULL,
 	[Code] [varchar](50) NOT NULL,
-	[Fax] [varchar](50) NULL,
-	[PermanentAddress] [varchar](500) NULL,
-	[TemporaryAddres] [varchar](500) NULL,
-	[state] [varchar](50) NULL
+	[CmpFax] [varchar](50) NULL,
+	[CmpAddress] [varchar](500) NOT NULL,
+	[CmpAltAddress] [varchar](500) NULL,
+	[state] [int] NOT NULL,
+	[ZipCode] [varchar](20) NULL,
+	[CmpPhoneNo] [varchar](50) NOT NULL,
+	[CmpAltPhoneNo] [varchar](50) NULL,	  
+	[CurrentSystemInUse] [varchar](50) NULL,
+	[howdidyouhearaboutus] [varchar](50) NULL,
+	[SendNewProductsEmails] [bit] NOT NULL default 0,
+	[Agreetotermsandconditions] [bit] NOT NULL default 0,
+	[CreatedOn] [datetime] not null,      
+	[IsNewCompany] int default 0,
+	[userPhoto] [varchar](max) NULL,
+	[CmpLogo] [varchar](max) NULL
+
 ) ON [PRIMARY]
 
 GO
@@ -8906,92 +8919,144 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
-		   @FirstName varchar(50),   
-           @LastName varchar(50),
-           @PhoneNo  varchar(50),
-           @EmailAddress varchar(20),
-           @CompanyName varchar(20),
-           @Description varchar(50) ,
-           @Title varchar(20),
-           @CompanyEmployeSize int,
-           @FleetSize int,         
-           @Gender varchar(20),      
-           @Address varchar(50),
-      @StaffSize int,
-      @Country varchar(50),
-      @Code varchar(50),
-      @Fax varchar(50),
-      @PermanentAddress varchar(500),
-      @TemporaryAddres varchar(500),
-      @state varchar (50),
-      @insupdflag varchar(10)
-           )
- 
+create PROCEDURE[dbo].[InsupdFleetOwnerRequestDetails](
+		  @FirstName varchar(50),   
+		  @MiddleName varchar(50),
+          @LastName varchar(50),
+          @EmailAddress varchar(50),
+          @PhoneNo  varchar(20), 
+          @Gender int,  
+          @Address varchar(250),  
+          @userPhoto varchar(max) = null,
+          @AltPhoneNo varchar(20) = null,                    
+           
+           
+          @CompanyName varchar(50),
+          @Code varchar(50),
+          @CmpEmailAddress varchar(50),
+          @CmpTitle varchar(50) = null,   
+          @CmpCaption varchar(50) = null,   
+          @CmpPhoneNo varchar(20),     
+          @CmpAltPhoneNo varchar(20) = null,  
+                   
+          @FleetSize int = 0, 
+		  @StaffSize int = 0,
+		  @Country int,
+		  @state int,	  
+		  
+		  @CmpFax varchar(50) = null,   
+		  @CmpAddress varchar(500),
+		  @CmpAltAddress varchar(500) = null,   
+		  
+	      @ZipCode varchar(20) = null,   
+	      @CmpLogo varchar(max) = null,     
+       
+          @CurrentSystemInUse int = 0,
+          @SentNewProductsEmails bit = 0,      
+          @howdidyouhearaboutus int = 0,
+          @Agreetotermsandconditions bit = 0
+ ) 
 AS
 BEGIN	
-if @insupdflag = 'I' 
-begin
-INSERT INTO [dbo].[FleetOwnerRequestDetails]
+
+INSERT INTO [POSDashboard].[dbo].[FleetOwnerRequestDetails]
            ([FirstName]
+           ,[MiddleName]
            ,[LastName]
            ,[PhoneNo]
+           ,[AltPhoneNo]
            ,[EmailAddress]
+           ,[Address]
+           ,[Gender]
            ,[CompanyName]
-           ,[Description]
-           ,[Title]
-           ,[CompanyEmployeSize]
-             ,[FleetSize]      
-              ,[Gender]        
-              ,[Address]
-      ,[StaffSize]
-      ,[Country]
-      ,[Code]
-      ,[Fax]
-      ,[PermanentAddress]
-      ,[TemporaryAddres]
-      ,[state])
+           ,[CmpEmailAddress]
+           ,[CmpTitle]
+           ,[CmpCaption]
+           ,[FleetSize]
+           ,[StaffSize]
+           ,[Country]
+           ,[Code]
+           ,[CmpFax]
+           ,[CmpAddress]
+           ,[CmpAltAddress]
+           ,[state]
+           ,[ZipCode]
+           ,[CmpPhoneNo]
+           ,[CmpAltPhoneNo]
+           ,[CurrentSystemInUse]
+           ,[howdidyouhearaboutus]
+           ,[SendNewProductsEmails]
+           ,[Agreetotermsandconditions]
+           ,[CreatedOn]
+           ,[IsNewCompany]
+           ,[userPhoto]
+           ,[CmpLogo])
      VALUES
-          (@FirstName    
+           (@FirstName
+           ,@MiddleName
            ,@LastName
-          , @PhoneNo
+           ,@PhoneNo
+           ,@AltPhoneNo
            ,@EmailAddress
+           ,@Address
+           ,@Gender
            ,@CompanyName
-           ,@Description 
-           ,@Title
-           ,@CompanyEmployeSize 
-           ,@FleetSize     
-          , @Gender   
-          , @Address
-          ,@StaffSize
-     ,@Country
-      ,@Code 
-      ,@Fax
-      ,@PermanentAddress 
-      ,@TemporaryAddres
-      ,@state )
-          
-  end
-  
-          else
-  if @insupdflag = 'U' 
-  begin
-UPDATE [POSDashboard].[dbo].[FleetOwnerRequestDetails]
-   SET
-      [FirstName] = @FirstName
-      ,[LastName] = @LastName
-      ,[PhoneNo] = @PhoneNo
-      ,[EmailAddress] = @EmailAddress
-      ,[CompanyName] = @CompanyName
-      ,[Description] = @Description
-      ,[Title] = @Title
-      ,[CompanyEmployeSize] = @CompanyEmployeSize 
-      ,[FleetSize] = @FleetSize  
-       ,[Gender] = @Gender 
-       ,[Address]= @Address
-       
+           ,@CmpEmailAddress
+           ,@CmpTitle
+           ,@CmpCaption
+           ,@FleetSize
+           ,@StaffSize
+           ,@Country
+           ,@Code
+           ,@CmpFax
+           ,@CmpAddress
+           ,@CmpAltAddress
+           ,@state
+           ,@ZipCode
+           ,@CmpPhoneNo
+           ,@CmpAltPhoneNo
+           ,@CurrentSystemInUse
+           ,@howdidyouhearaboutus
+           ,@SentNewProductsEmails
+           ,@Agreetotermsandconditions
+           ,GETDATE()
+           ,0
+           ,@userPhoto
+           ,@CmpLogo)
 
- exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,'I'
+ 
+--[dbo].[InsUpdDelCompany](@active int,@code varchar(50),@desc varchar(50) = null,@Id int,@Name varchar(50),@Address varchar(500),@EmailId varchar(50),
+--@ContactNo1 varchar(50),@ContactNo2 varchar(50)= null,@Fax varchar(50)= null,@Title varchar(50)= null,@Caption varchar(50)= null,@Country varchar(50)= null,
+--@ZipCode int = null,@State varchar(50),@insupdflag varchar(1),@userid int = -1)
+
+declare 
+@cmpcode varchar(10),@empno varchar(10),@cmpid int,@foCount int = 0
+
+select @cmpcode = 'CMP00' + ltrim(rtrim(STR((max(Id)+1)))) from company
+select @empno = 'FL00' + ltrim(rtrim(STR((max(Id)+1)))) from users
+
+select @cmpid = id from company where upper(name) = upper(@CompanyName)
+
+if @cmpid is null
+exec InsUpdDelCompany 1, @cmpcode, null,-1,@CompanyName,@Address,@EmailAddress,@PhoneNo,null,null,@CmpTitle,null,null,null,null,'I',-1
+
+select @cmpid = id from company where upper(name) = upper(@CompanyName)
+
+
+--exec [InsupdCreateFleetOwner] -1,@FirstName,@LastName,@EmailAddress,@PhoneNo,@CompanyName,@Description,@insupdflag
+
+--create procedure [dbo].[InsUpdUsers](@FirstName varchar(40),@LastName varchar(40),@MiddleName varchar(40) = ''
+--,@EmpNo varchar(15),@Email varchar(40) = '',@AdressId int,@MobileNo varchar(50) = '',@RoleId int,@cmpId int,@Active int
+--,@UserName varchar(30)  = null,@Password varchar(30)  = '',@insupdflag varchar(10),@ManagerId int = null,@userid int = -1)
+select @foCount = COUNT(*) from Users u where u.Email = @EmailAddress
+
+if @foCount > 0 
+begin
+RAISERROR ('Fleet owner with emailid already exists',16,1); 
+end
+
+exec [InsUpdUsers] @FirstName,@LastName,null,@empno,@EmailAddress,0,@PhoneNo,6,@cmpid,1,null,null,'I',null,-1--  @CompanyName,@Description,@insupdflag
+
 
 select FleetOwnerCode from dbo.FleetOwner f 
 inner join Users u on u.Id = f.UserId
@@ -8999,7 +9064,6 @@ where u.FirstName = @FirstName and u.LastName = @LastName
 
 
 END
-end
 
 GO
 
