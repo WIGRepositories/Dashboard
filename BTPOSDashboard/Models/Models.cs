@@ -1302,9 +1302,9 @@ namespace BTPOSDashboardAPI.Models
 
     public class LicenseDetails
     {
-
-
         public int Id { get; set; }
+        public int LicenseTypeId { get; set; }
+        public int LicenseCatId { get; set; }
         public int FeatureTypeId { get; set; }
         public string FeatureName { get; set; }
         public String FeatureLabel { get; set; }
@@ -1312,13 +1312,11 @@ namespace BTPOSDashboardAPI.Models
         public String LicenseName { get; set; }
         public String FeatureValue { get; set; }
         public String LabelClass { get; set; }
-
-        public int Active { get; set; }
-        public int LicenseTypeId { get; set; }
-        public int LicenseCatId { get; set; }
+        public int Active { get; set; }        
         public DateTime? fromDate { get; set; }
         public DateTime? toDate { get; set; }
         public string insupddelflag { get; set; }
+       public int LicenseTypeGroupId { get; set; }
     }
 
     public class LicensePricing
@@ -1459,17 +1457,41 @@ namespace BTPOSDashboardAPI.Models
     public class LicenseTypes
     {
         public int Id { set; get; }
-        public int Active { set; get; }
         public string LicenseType { set; get; }
+        public string LicenseCode { set; get; }
+        public int LicenseCategoryId { set; get; }
+        public int Active { set; get; }        
         public string Desc { set; get; }
         public string LicenseCategory { set; get; }
-        public int LicenseCategoryId { set; get; }
+        public DateTime? fromDate { get; set; }
+        public DateTime? toDate { get; set; }
+        public int LicenseId { get; set; }
+         public int LicensePricingId { get; set; }
+        public String RenewalFreqType { get; set; }
+        public int RenewalFreqTypeId { get; set; }
+        public int RenewalFreqUnit { get; set; }
+        public string RenewalFreq { get; set; }
+        public decimal UnitPrice { get; set; }
+        public DateTime? Pfromdate { get; set; }
+        public DateTime? Ptodate { get; set; }
+       
+        public int PActive { get; set; }
+        public string insupddelflag { get; set; }
 
+        //license pos      
+	    public int LPOSId { get; set; }
+         public int BTPOSTypeId { get; set; }
+         public int NoOfUnits { get; set; }
+	    public string POSType { get; set; }
+        public String POSLabel { get; set; }
+        public String POSLabelClass { get; set; }	
+        public DateTime? POSfromdate { get; set; }
+        public DateTime? POStodate { get; set; }       
+        public int POSActive { get; set; }
+
+        public List<LicenseDetails> licenseDetails { get; set; }
     }
-
-   
-          
-           
+               
     public class LicenseTypes1
     {
        // public List<licenses> lltypes { get; set; }
@@ -1554,8 +1576,6 @@ namespace BTPOSDashboardAPI.Models
         public string insupdflag { get; set; }
         public int FleetOwnerId { get; set; }
     }
-
-
     public class reset
     {
 
@@ -1692,8 +1712,6 @@ namespace BTPOSDashboardAPI.Models
         public string Gender { get; set; }
     }
 
-
-
     public class BTPOSTrans
     {
         public string BTPOSId { get; set; }
@@ -1718,5 +1736,37 @@ namespace BTPOSDashboardAPI.Models
         public string Reason { get; set; }
         public string insupddelflag { get; set; }
     }
+
+    //public class LicenseConfigDetails {
+    //    public int Id { get; set; }
+    //    public int FeatureTypeId { get; set; }
+    //    public string FeatureName { get; set; }
+    //    public String FeatureLabel { get; set; }
+    //    public String LicenseCode { get; set; }
+    //    public String LicenseName { get; set; }
+    //    public String FeatureValue { get; set; }
+    //    public String LabelClass { get; set; }
+
+    //    public int Active { get; set; }
+    //    public int LicenseTypeId { get; set; }
+    //    public int LicenseCatId { get; set; }
+    //    public DateTime? fromDate { get; set; }
+    //    public DateTime? toDate { get; set; }
+    //    public string insupddelflag { get; set; }
+
+    //    public int LicenseId { get; set; }
+    //    public String RenewalFreqType { get; set; }
+    //    public int RenewalFreqTypeId { get; set; }
+    //    public int RenewalFreqUnit { get; set; }
+    //    public string RenewalFreq { get; set; }
+    //    public decimal UnitPrice { get; set; }
+    //    public DateTime? fromdate { get; set; }
+    //    public DateTime? todate { get; set; }
+    //    public int Id { get; set; }
+
+    //    public int categoryid { get; set; }
+    //    public int Active { get; set; }
+    //    public string insupddelflag { get; set; }
+    //}
    
 }

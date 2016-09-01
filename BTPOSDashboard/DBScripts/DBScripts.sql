@@ -1801,13 +1801,18 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[FleetOwner](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[UserId] [int] NOT NULL,
-	[CompanyId] [int] NULL,
-	[Active] [int] NOT NULL,
-	[FleetOwnerCode] [varchar](10) NULL
-) ON [PRIMARY]
+
+CREATE TABLE [dbo].[FleetOwner]
+	(
+	Id int NOT NULL IDENTITY (1, 1),
+	UserId int NOT NULL,
+	CompanyId int NOT NULL,
+	Active int NOT NULL,
+	FleetOwnerCode varchar(15) NOT NULL,
+	IsEmailVerified int NULL,
+	CreatedOn datetime NULL,
+	EmailId varchar(50) NULL
+	)  ON [PRIMARY]
 
 GO
 SET ANSI_NULLS ON
@@ -5124,7 +5129,7 @@ create procedure [dbo].[InsUpdUsers](
 @FirstName varchar(40)
 ,@LastName varchar(40)
 ,@MiddleName varchar(40) = ''
-,@EmpNo varchar(15)
+,@EmpNo varchar(15) = null
 ,@Email varchar(40) = ''
 ,@AdressId int
 ,@MobileNo varchar(50) = ''
@@ -5138,25 +5143,27 @@ create procedure [dbo].[InsUpdUsers](
 ,@userid int = -1)
  as begin
  
- declare @currid int
- declare @cnt int
- declare @logincnt int
- declare @ulogincnt int
- declare @edithistoryid int
- declare @dt datetime
+ declare @currid int, @cnt int, @logincnt int, @ulogincnt int, @edithistoryid int, @dt datetime, @fc varchar(10),@flogincnt int, @UId varchar(10)
 set @dt = GETDATE()
-declare @fc varchar(10)
- declare @flogincnt int
+
+ set @UId = replace(CONVERT(VARCHAR(20), GETDATE(), 114),':','') 
+ 
 
  if @insupdflag = 'I'
  begin
  
- select @cnt = COUNT(*)  from Users where UPPER(EmpNo) = @EmpNo
+ if @EmpNo is null 
+ begin
+ SELECT @EmpNo = 'EMP'+@UId
+ end 
+ 
+ select @cnt = COUNT(*)  from Users where UPPER(Email) = @Email
  
  select @logincnt = COUNT(*) from userlogins where upper(logininfo) = UPPER(@username) 
  
  if @cnt > 0
- RAISERROR ('User already exists',16,1);
+ RAISERROR ('User email address already exists',16,1);
+ 
  
   
  if @cnt = 0 
@@ -5239,19 +5246,16 @@ end
 			   if @RoleId = 6 
 			   begin
 			      
-							 set @fc = case when (select COUNT(*) from fleetowner) = 0
-													   then '1' 
-													   else (select ltrim(rtrim(STR((max(Id)+1)))) from fleetowner ) 
-													   end  
+							 set @fc = 'FL'+replace(CONVERT(VARCHAR(20), GETDATE(), 114),':','')  
 
 							
 
 							--the login will be assigned once the user buys the license. this is for testing
-							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = 'FL00'+@fc
+							select @flogincnt = COUNT(*) from userlogins where upper(logininfo) = @fc
 
 							 if @flogincnt = 0
 							   begin
-								insert into userlogins(logininfo,PassKey,active,userid)values('FL00'+@fc,'FL00'+@fc,1,@currid)
+								insert into userlogins(logininfo,PassKey,active,userid)values(@fc,@fc,1,@currid)
 							   end
 			   end
 			   else
@@ -5298,19 +5302,20 @@ else
 					   (@currid
 						,@cmpId
 					   ,1
-					   ,@EmpNo)
+					   ,'FL'+@UId)
 								
 				else
 					UPDATE [POSDashboard].[dbo].[FleetOwner]
 						SET 
 						[CompanyId] = @cmpId
 						,[Active] = 1
-						,[FleetOwnerCode] = @EmpNo
+						,[FleetOwnerCode] = 'FL'+@UId
 					 WHERE [UserId] = @currid
  
  end
  
  end
+ 
  
 GO
 SET ANSI_NULLS ON
@@ -6335,7 +6340,8 @@ CREATE TABLE [dbo].[LicenseDetails](
 	[LabelClass] [varchar](50)  NULL,
 	[Active] [int] NOT NULL CONSTRAINT [DF_LicenseDetails_Active]  DEFAULT ((1)),
 	[fromDate] [datetime] NULL,
-	[toDate] [datetime] NULL
+	[toDate] [datetime] NULL,
+	[LicenseTypeGroupId] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -7053,10 +7059,13 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[LicenseTypes](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[LicenseCatId] [int] NOT NULL,
 	[LicenseType] [varchar](50)  NOT NULL,
+	[LicenseCode] [varchar](55)  NOT NULL,
+	[LicenseCatId] [int] NOT NULL,
 	[Description] [varchar](500)  NULL,
 	[Active] [int] NOT NULL CONSTRAINT [DF_LicenseTypes_Active]  DEFAULT ((1)),
+	[EffectiveFrom] [datetime] NULL,
+	[EffectiveTill] [datetime] NULL
 ) ON [PRIMARY]
 
 GO
@@ -8919,7 +8928,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE[dbo].[InsupdFleetOwnerRequestDetails](
+create PROCEDURE[dbo].[InSupdFleetOwnerRequestDetails](
 		  @FirstName varchar(50),   
 		  @MiddleName varchar(50),
           @LastName varchar(50),
@@ -8928,8 +8937,7 @@ create PROCEDURE[dbo].[InsupdFleetOwnerRequestDetails](
           @Gender int,  
           @Address varchar(250),  
           @userPhoto varchar(max) = null,
-          @AltPhoneNo varchar(20) = null,                    
-           
+          @AltPhoneNo varchar(20) = null,     
            
           @CompanyName varchar(50),
           @Code varchar(50),
@@ -8951,13 +8959,20 @@ create PROCEDURE[dbo].[InsupdFleetOwnerRequestDetails](
 	      @ZipCode varchar(20) = null,   
 	      @CmpLogo varchar(max) = null,     
        
-          @CurrentSystemInUse int = 0,
+          @CurrentSystemInUse varchar(50) = null,
           @SentNewProductsEmails bit = 0,      
-          @howdidyouhearaboutus int = 0,
+          @howdidyouhearaboutus varchar(50) = null,
           @Agreetotermsandconditions bit = 0
  ) 
 AS
 BEGIN	
+
+declare 
+@empno varchar(10),@cmpid int,@foCount int = 0,@cmpCount int = 0
+
+select @empno = 'FL' + replace(CONVERT(VARCHAR(8),GETDATE(),108),':','')
+
+select @cmpid = id from company where upper(name) = upper(@CompanyName)
 
 INSERT INTO [POSDashboard].[dbo].[FleetOwnerRequestDetails]
            ([FirstName]
@@ -9020,25 +9035,31 @@ INSERT INTO [POSDashboard].[dbo].[FleetOwnerRequestDetails]
            ,@SentNewProductsEmails
            ,@Agreetotermsandconditions
            ,GETDATE()
-           ,0
+           ,case when @cmpid Is null then 1 else 0 end
            ,@userPhoto
            ,@CmpLogo)
 
- 
---[dbo].[InsUpdDelCompany](@active int,@code varchar(50),@desc varchar(50) = null,@Id int,@Name varchar(50),@Address varchar(500),@EmailId varchar(50),
---@ContactNo1 varchar(50),@ContactNo2 varchar(50)= null,@Fax varchar(50)= null,@Title varchar(50)= null,@Caption varchar(50)= null,@Country varchar(50)= null,
---@ZipCode int = null,@State varchar(50),@insupdflag varchar(1),@userid int = -1)
-
-declare 
-@cmpcode varchar(10),@empno varchar(10),@cmpid int,@foCount int = 0
-
-select @cmpcode = 'CMP00' + ltrim(rtrim(STR((max(Id)+1)))) from company
-select @empno = 'FL00' + ltrim(rtrim(STR((max(Id)+1)))) from users
-
-select @cmpid = id from company where upper(name) = upper(@CompanyName)
+--select @cmpcode = 'CMP00' + ltrim(rtrim(STR((max(Id)+1)))) from company
 
 if @cmpid is null
-exec InsUpdDelCompany 1, @cmpcode, null,-1,@CompanyName,@Address,@EmailAddress,@PhoneNo,null,null,@CmpTitle,null,null,null,null,'I',-1
+begin
+
+select @cmpCount = count(*) from company where upper(emailid) = upper(@CmpEmailAddress)
+
+if @cmpCount > 0 
+begin
+RAISERROR ('Company with emailid already exists',16,1); 
+end
+
+--[dbo].[InsUpdDelCompany](@Id int,@Name varchar(50),@active int,@code varchar(50),@desc varchar(50) = null,@Address varchar(500),
+--@EmailId varchar(50),@ContactNo1 varchar(50),@ContactNo2 varchar(50)= null,@Fax varchar(50)= null,@Title varchar(50)= null,@Caption varchar(50)= null,
+--@Country varchar(50)= null,@ZipCode int = null,@State varchar(50) = null,@FleetSize int = null,@StaffSize int = null,@AlternateAddress varchar(500) = null,
+--@logo varchar(max) = null,@insupdflag varchar(1),@userid int = -1)
+
+exec InsUpdDelCompany -1,@CompanyName,1, @Code, null,@CmpAddress,@CmpEmailAddress,@CmpPhoneNo,@CmpAltPhoneNo,@CmpFax
+,@CmpTitle,@CmpCaption,@Country,@ZipCode,@state,@FleetSize,@StaffSize,@CmpAltAddress,@CmpLogo,'I',-1
+
+end
 
 select @cmpid = id from company where upper(name) = upper(@CompanyName)
 
@@ -9048,20 +9069,19 @@ select @cmpid = id from company where upper(name) = upper(@CompanyName)
 --create procedure [dbo].[InsUpdUsers](@FirstName varchar(40),@LastName varchar(40),@MiddleName varchar(40) = ''
 --,@EmpNo varchar(15),@Email varchar(40) = '',@AdressId int,@MobileNo varchar(50) = '',@RoleId int,@cmpId int,@Active int
 --,@UserName varchar(30)  = null,@Password varchar(30)  = '',@insupdflag varchar(10),@ManagerId int = null,@userid int = -1)
-select @foCount = COUNT(*) from Users u where u.Email = @EmailAddress
+select @foCount = COUNT(*) from Users u where upper(u.Email) = upper(@EmailAddress)
 
 if @foCount > 0 
 begin
 RAISERROR ('Fleet owner with emailid already exists',16,1); 
 end
 
-exec [InsUpdUsers] @FirstName,@LastName,null,@empno,@EmailAddress,0,@PhoneNo,6,@cmpid,1,null,null,'I',null,-1--  @CompanyName,@Description,@insupdflag
+exec [InsUpdUsers] @FirstName,@LastName,@MiddleName,@empno,@EmailAddress,0,@PhoneNo,6,@cmpid,1,null,null,'I',null,-1--  @CompanyName,@Description,@insupdflag
 
 
 select FleetOwnerCode from dbo.FleetOwner f 
 inner join Users u on u.Id = f.UserId
-where u.FirstName = @FirstName and u.LastName = @LastName
-
+where u.FirstName = @FirstName and u.LastName = @LastName and u.Email = @EmailAddress
 
 END
 
@@ -12606,6 +12626,155 @@ BEGIN
 
 
 END
+
+GO
+
+
+/****** Object:  Table [dbo].[LicenseBTPOS]    Script Date: 09/01/2016 07:07:33 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[LicenseBTPOS](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[LicenseTypeId] [int] NOT NULL,
+	[BTPOSTypeId] [int] NOT NULL,
+	[NoOfUnits] [int] NOT NULL,
+	[Label] [varchar](50) NOT NULL,
+	[LableClass] [varchar](50) NULL,
+	[fromdate] [datetime] NULL,
+	[todate] [datetime] NULL,
+	[Active] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[LicenseBTPOS] ADD  CONSTRAINT [DF_LicenseBTPOS_Active]  DEFAULT ((1)) FOR [Active]
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[GetLicenseConfigDetails]    Script Date: 08/31/2016 20:24:18 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER procedure [dbo].[GetLicenseConfigDetails]
+@ltypeId int = -1
+as 
+begin 
+
+SELECT [Id]
+      ,[LicenseType]
+      ,[LicenseCode]
+      ,[LicenseCatId]
+      ,[Description]
+      ,[Active]
+      ,[EffectiveFrom]
+      ,[EffectiveTill]
+  FROM [POSDashboard].[dbo].[LicenseTypes]
+  where Id = @ltypeId
+
+ 
+
+SELECT ld.[Id]
+      ,[LicenseTypeId]
+      ,t.name [FeatureName]
+      ,t.id FeatureTypeId
+      ,t.TypeGroupId
+      ,[FeatureLabel]
+      ,[FeatureValue]
+      ,[LabelClass]
+      ,ld.[Active]
+      ,[fromDate]
+      ,[toDate]
+      ,[LicenseTypeGroupId]
+      ,case when ld.id IS null then 0 else 1 end assigned
+  FROM Types t
+  left outer join [POSDashboard].[dbo].[LicenseDetails] ld on t.id = ld.featuretypeid
+  and ([LicenseTypeId] = @ltypeId)
+  where t.typegroupId = 9 
+   
+  SELECT [Id]
+      ,[LicenseId]
+      ,[RenewalFreqTypeId]
+      ,[RenewalFreq]
+      ,[UnitPrice]
+      ,[fromdate]
+      ,[todate]
+      ,[Active]
+  FROM [POSDashboard].[dbo].[LicensePricing]
+  where LicenseId = @ltypeId
+
+ 
+  SELECT I.[Id]
+  ,[ItemName]
+  ,[Code]
+      ,[LicenseTypeId]
+      ,[BTPOSTypeId]
+      ,[NoOfUnits]
+      ,[Label]
+      ,[LableClass]
+      ,[fromdate]
+      ,[todate]
+      ,[Active]
+       ,case when b.id IS null then 0 else 1 end assigned
+  FROM [POSDashboard].[dbo].[InventoryItem] I
+  left outer join [POSDashboard].[dbo].[LicenseBTPOS] b on b.btpostypeid = I.Id
+  and licensetypeid = @ltypeId
+  where I.SubCategoryId = 1
+  
+  
+end
+GO
+
+USE [POSDashboard]
+GO
+
+/****** Object:  StoredProcedure [dbo].[GetLicenceCatergories]    Script Date: 08/31/2016 20:59:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetLicenceCatergories]
+AS
+BEGIN
+	
+SELECT t.Id, t.Name, t.[Description],t.Active, tg.name as TypeGroup, TypeGroupId, listkey, listvalue
+	 from [Types] t
+	 inner join TypeGroups tg on tg.Id = t.TypeGroupId	 
+	  where (TypeGroupId = 3)
+
+SELECT t.Id, t.Name, t.[Description],t.Active, tg.name as TypeGroup, TypeGroupId, listkey, listvalue
+	 from [Types] t
+	 inner join TypeGroups tg on tg.Id = t.TypeGroupId	 
+	  where (TypeGroupId = 9)
+  
+  
+  SELECT [Id]
+      ,[ItemName]
+      ,[Code]
+      ,[Description]
+      ,[CategoryId]
+      ,[SubCategoryId]      
+      ,[ItemImage]
+  FROM [POSDashboard].[dbo].[InventoryItem] I
+  where I.SubCategoryId = 1
+  
+  
+end
+
 
 GO
 

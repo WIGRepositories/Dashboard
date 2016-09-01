@@ -229,165 +229,65 @@ namespace BTPOSDashboard.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
-        //[HttpPost]
-        //[Route("api/License/SaveLicenseType")]
-        //public HttpResponseMessage SaveLicenseTypes1(LicenseTypes1 b)
-        //{
-        //    SqlConnection conn = new SqlConnection();
-        //    try
-        //    {
-        //        //connect to database
 
-        //        //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-        //        conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+        [HttpGet]
+        [Route("api/License/GetLicenseConfigDetails")]
+        public DataTable GetLicenseConfigDetails(int licTypeId)
+        {
+            DataTable Tbl = new DataTable();
 
-        //        SqlCommand cmd = new SqlCommand();
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.CommandText = "InsUpdLicenseTypes";
-        //        cmd.Connection = conn;
-        //        conn.Open();
-        //        SqlParameter Aid = new SqlParameter();
-        //        Aid.ParameterName = "@Id";
-        //        Aid.SqlDbType = SqlDbType.Int;
-        //        Aid.Value = Convert.ToString(b.Id);
-        //        cmd.Parameters.Add(Aid);
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicenseConfigDetails ....");
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-        //        SqlParameter lid = new SqlParameter();
-        //        lid.ParameterName = "@LicenseCatId";
-        //        lid.SqlDbType = SqlDbType.Int;
-        //        lid.Value = Convert.ToString(b.LicenseCategoryId);
-        //        cmd.Parameters.Add(lid);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetLicenseConfigDetails";
+            cmd.Connection = conn;
 
-        //        SqlParameter ss = new SqlParameter();
-        //        ss.ParameterName = "@LicenseType";
-        //        ss.SqlDbType = SqlDbType.VarChar;
-        //        ss.Value = b.LicenseType;
-        //        cmd.Parameters.Add(ss);
-
-        //        SqlParameter ii = new SqlParameter();
-        //        ii.ParameterName = "@Description";
-        //        ii.SqlDbType = SqlDbType.VarChar;
-        //        ii.Value = b.Desc;
-
-        //        cmd.Parameters.Add(ii);
-        //        SqlParameter ll = new SqlParameter();
-        //        ll.ParameterName = "@Active";
-        //        ll.SqlDbType = SqlDbType.VarChar;
-        //        ll.Value = b.Active;
-
-        //        cmd.ExecuteScalar();
-
-        //        conn.Close();
-        //        //// conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-        //        //SqlCommand cmd1 = new SqlCommand();
-        //        //cmd1.CommandType = CommandType.StoredProcedure;
-        //        //cmd1.CommandText = "InsUpdDelLicensePricing";
-        //        //cmd1.Connection = conn;
-        //        //// conn.Open();
-
-              
+            SqlParameter Gid = new SqlParameter();
+            Gid.ParameterName = "@ltypeId";
+            Gid.SqlDbType = SqlDbType.Int;
+            Gid.Value = licTypeId;
+            cmd.Parameters.Add(Gid);
 
 
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicenseConfigDetails completed.");
 
-        //        ////SqlParameter Aidd = new SqlParameter();
-        //        ////Aidd.ParameterName = "@Id";
-        //        ////Aidd.SqlDbType = SqlDbType.Int;
-        //        ////Aidd.Value = Convert.ToString(b.Id);
-        //        ////cmd1.Parameters.Add(Aidd);
+            // int found = 0;
+            return Tbl;
+        }
 
-        //        //SqlParameter lsid = new SqlParameter();
-        //        //lsid.ParameterName = "@LicenseId";
-        //        //lsid.SqlDbType = SqlDbType.Int;
-        //        //lsid.Value = Convert.ToString(b.LicenseId);
-        //        //cmd1.Parameters.Add(lsid);
+        [HttpGet]
+        [Route("api/License/GetLicenceCatergories")]
+        public DataSet GetLicenceCatergories()
+        {
+            DataSet Tbl = new DataSet();
 
-        //        //SqlParameter Rf = new SqlParameter();
-        //        //Rf.ParameterName = "@RenewalFreqTypeId";
-        //        //Rf.SqlDbType = SqlDbType.Int;
-        //        //Rf.Value = b.RenewalFreqTypeId;
-        //        //cmd1.Parameters.Add(Rf);
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicenceCatergories ....");
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
-        //        //SqlParameter pid = new SqlParameter();
-        //        //pid.ParameterName = "@RenewalFreq";
-        //        //pid.SqlDbType = SqlDbType.Int;
-        //        //pid.Value = b.RenewalFreq;
-        //        //cmd1.Parameters.Add(pid);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetLicenceCatergories";
+            cmd.Connection = conn;
 
-        //        //SqlParameter sid = new SqlParameter();
-        //        //sid.ParameterName = "@UnitPrice";
-        //        //sid.SqlDbType = SqlDbType.Decimal;
-        //        //sid.Value = b.UnitPrice;
-        //        //cmd1.Parameters.Add(sid);
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(Tbl);
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicenceCatergories completed.");
 
-        //        //SqlParameter gid = new SqlParameter();
-        //        //gid.ParameterName = "@todate";
-        //        //gid.SqlDbType = SqlDbType.DateTime;
-        //        //gid.Value = b.todate;
-        //        //cmd1.Parameters.Add(gid);
-
-        //        //SqlParameter fid = new SqlParameter();
-        //        //fid.ParameterName = "@fromdate";
-        //        //fid.SqlDbType = SqlDbType.DateTime;
-        //        //fid.Value = b.fromdate;
-        //        //cmd1.Parameters.Add(fid);
-
-
-        //        //SqlParameter nActive = new SqlParameter("@insupddelflag", SqlDbType.Char);
-        //        //nActive.Value = b.insupddelflag;
-        //        //cmd1.Parameters.Add(nActive);
-
-        //        //cmd1.ExecuteScalar();
-        //        //conn.Close();
-
-
-              
-
-        //        //SqlCommand cmd2 = new SqlCommand();
-        //        //cmd2.CommandType = CommandType.StoredProcedure;
-        //        //cmd2.CommandText = "InsUpdDelLicenseDetails1";
-        //        //cmd2.Connection = conn;
-
-        //        //SqlParameter idd = new SqlParameter();
-        //        //idd.ParameterName = "@Id";
-        //        //idd.SqlDbType = SqlDbType.Int;
-        //        //idd.Value = Convert.ToString(b.Id);
-        //        //cmd1.Parameters.Add(idd);
-
-              
-        //        //SqlParameter nn = new SqlParameter();
-        //        //nn.ParameterName = "@FeatureTypeId";
-        //        //nn.SqlDbType = SqlDbType.Int;
-        //        //nn.Value = b.FeatureName;
-        //        //cmd.Parameters.Add(nn);
-
-        //        //SqlParameter nm = new SqlParameter();
-        //        //nm.ParameterName = "@FeatureLabel";
-        //        //nm.SqlDbType = SqlDbType.VarChar;
-        //        //nm.Value = b.FeatureLabel;
-        //        //cmd.Parameters.Add(nm);
-
-        //        //SqlParameter mn = new SqlParameter();
-        //        //mn.ParameterName = "@FeatureValue";
-        //        //mn.SqlDbType = SqlDbType.VarChar;
-        //        //mn.Value = b.FeatureValue;
-        //        //cmd.Parameters.Add(mn);
-
-
-
-        //        return new HttpResponseMessage(HttpStatusCode.OK);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        if (conn != null && conn.State == ConnectionState.Open)
-        //        {
-        //            conn.Close();
-        //        }
-        //        string str = ex.Message;
-        //        return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
-        //    }
-        //}
-        //public void Options() { }
+            // int found = 0;
+            return Tbl;
+        }
     }
 }
 
