@@ -7115,8 +7115,12 @@ declare @edithistoryid int
 declare @oldLicenseType varchar(50)
 declare @oldDescription varchar(500)
 declare @oldActive int
-select @oldLicenseType = LicenseType, @oldActive = Active, @oldDescription = Description from LicenseTypes where Id = @Id
 
+declare @lcCode varchar(15)
+ 
+set @lcCode = 'LC'+replace(CONVERT(VARCHAR(20), GETDATE(), 108),':','')
+
+select @oldLicenseType = LicenseType, @oldActive = Active, @oldDescription = Description from LicenseTypes where Id = @Id
 
 if @@rowcount = 0
 begin
@@ -7124,12 +7128,14 @@ INSERT INTO [POSDashboard].[dbo].[LicenseTypes]
            ([LicenseCatId]
            ,[LicenseType]
            ,[Description]
-           ,[Active])
+           ,[Active]
+           ,LicenseCode)
      VALUES
            (@LicenseCatId
            ,@LicenseType
            ,@Description
-           ,@Active)
+           ,@Active
+           ,@lcCode)
            
            exec InsEditHistory 'LicenseTypes','Name', @LicenseType,'LicenseTypes Creation',@dt,'Admin','Insertion',@edithistoryid = @edithistoryid output
 		              
@@ -7156,10 +7162,6 @@ exec InsEditHistoryDetails @edithistoryid,@oldDescription,@Description,'Modicati
 
 if @oldActive <> @Active
 exec InsEditHistoryDetails @edithistoryid,@oldActive,@Active,'Modication','Active',null			
-	
-
-
-
 
 END
 

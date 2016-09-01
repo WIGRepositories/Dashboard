@@ -230,6 +230,74 @@ namespace BTPOSDashboard.Controllers
             }
         }
 
+
+        [HttpPost]
+        [Route("api/License/SaveLicenseConfigDetails")]
+        public HttpResponseMessage SaveLicenseConfigDetails(LicenseTypes b)
+        {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicenseConfigDetails....");
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+                //connect to database
+
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdLicenseConfigDetails";
+                cmd.Connection = conn;
+                conn.Open();
+                SqlParameter Aid = new SqlParameter();
+                Aid.ParameterName = "@Id";
+                Aid.SqlDbType = SqlDbType.Int;
+                Aid.Value = Convert.ToString(b.Id);
+                cmd.Parameters.Add(Aid);
+
+                SqlParameter lid = new SqlParameter();
+                lid.ParameterName = "@LicenseCatId";
+                lid.SqlDbType = SqlDbType.Int;
+                lid.Value = Convert.ToString(b.LicenseCategoryId);
+                cmd.Parameters.Add(lid);
+
+                SqlParameter ss = new SqlParameter();
+                ss.ParameterName = "@LicenseType";
+                ss.SqlDbType = SqlDbType.VarChar;
+                ss.Value = b.LicenseType;
+                cmd.Parameters.Add(ss);
+
+                SqlParameter ii = new SqlParameter();
+                ii.ParameterName = "@Description";
+                ii.SqlDbType = SqlDbType.VarChar;
+                ii.Value = b.Desc;
+
+                cmd.Parameters.Add(ii);
+                SqlParameter ll = new SqlParameter();
+                ll.ParameterName = "@Active";
+                ll.SqlDbType = SqlDbType.VarChar;
+                ll.Value = b.Active;
+
+                cmd.ExecuteScalar();
+
+                conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicenseConfigDetails completed.");
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveLicenseTypes:" + ex.Message);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+            }
+        }
+
         [HttpGet]
         [Route("api/License/GetLicenseConfigDetails")]
         public DataTable GetLicenseConfigDetails(int licTypeId)

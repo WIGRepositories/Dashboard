@@ -1,6 +1,5 @@
 ﻿// JavaScript source code
 var myapp1 = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
-
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
@@ -10,312 +9,387 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
+    $scope.GetLicenseCat = function () {
+        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+            $scope.LicenseCat = res.data;
+            // $scope.LicenseCat= GetLicenseCategoriess();
+        });
+    }
 
-    $scope.checkedArr = new Array();
-    $scope.uncheckedArr = new Array();
-    $scope.FORoutes = [];
+    $scope.getLicenseTypes = function (selCat) {
 
-$scope.GetLicenseCat = function () {
-    $http.get('http://localhost:1476/api/License/GetLicenceCatergories').then(function (res, data) {
-        $scope.LicenseCat = res.data;       
-        var range = [];
+        if (selCat == null) {
+            $scope.LicenseTypes = null;
+            return;
+        }
+
+        $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
+            $scope.LicenseTypes = res.data;
+        });
+    }
+
+    $scope.GetLicenseCategories = function () {
+
+        $http.get('http://localhost:1476/api/subcategory/getsubcategory?catid=' + 6).then(function (res, data) {
+            $scope.SubCategories = res.data;
+
+        });
+
+    }
+    var range = [];
+    $scope.GetLicenseCategoriess = function () {
+        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+            $scope.lcat = res.data;
+            document.getElementById('btnAdd').disabled = true;
+        });
+
+        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
+            $scope.FreqTypes = res.data;
+        });
+        $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
+            $scope.Lfeatures = res.data;
+            //$('input[name *= "FeatureName"]').attr("disabled", true);
+        });
+
 
         for (var i = 1; i <= 100; i++) {
             range.push(i);
         }
         $scope.range = range;
-
-    });
-}
-
-$scope.setLCCode = function () {
-
-    $scope.FORoutes = null;
-    $scope.checkedArr = [];
-    $scope.uncheckedArr = [];
-
-    var date = new Date();
-    var components = [
-        date.getHours(),
-        date.getMinutes(),
-        date.getSeconds()
-    ];
-
-    var id = components.join("");
-    $scope.lcCode = 'LC' + id;
-}
-
-$scope.toggle = function (item) {
-    var idx = $scope.checkedArr.indexOf(item);
-    if (idx > -1) {
-        $scope.checkedArr.splice(idx, 1);
-    }
-    else {
-        $scope.checkedArr.push(item);
     }
 
-    var idx = $scope.uncheckedArr.indexOf(item);
-    if (idx > -1) {
-        $scope.uncheckedArr.splice(idx, 1);
-    }
-    else {
-        $scope.uncheckedArr.push(item);
-    }
-};
+    //$scope.GetLFeatures = function () {
+    //  //  var selCat = $scope.l;
 
+    //    //if (selCat == null)
+    //    //{
+    //    //    $scope.features = null;
+    //    //    return;
+    //    //}
 
-$scope.getLicenseTypes = function (selCat) {
+    //    $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
+    //        $scope.Lfeatures = res.data;
+    //        //$('input[name *= "FeatureName"]').attr("disabled", true);
+    //    });
 
-    if (selCat == null)
-    {
-        $scope.LicenseTypes = null;
-        return;
-    }
-
-    $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
-        $scope.LicenseTypes = res.data;
-    });
-}
-
-$scope.GetLicenseConfigDetails = function (licTypeId)
-{
-    $http.get('http://localhost:1476/api/License/GetLicenseConfigDetails?licTypeId=' + licTypeId).then(function (res, data) {
-        $scope.LicenseConfigDetails = res.data;
-    });
-}
-
-      
-$scope.saveLicenseType = function (licenseType, flag) {
-
-    if (licenseType == null) {
-        alert('Please enter values.');
-        return;
-    }
-
-    if (licenseType.LicenseType == null) {
-        alert('Please enter license type.');
-        return;
-    }       
-    if ($scope.s == null) {
-        alert('Please select category.');
-        return;
-    }
-
-    //if (FreqTypes == null) {
-    //    alert('Please enter values.');
-    //    return;
     //}
+    $scope.saveLicenseType = function (licenseType, flag) {
 
-    var currLicenseType = {
+        if (licenseType == null) {
+            alert('Please enter values.');
+            return;
+        }
 
-        Id: (flag == 'I')?'-1':licenseType.Id,
-        LicenseType: licenseType.LicenseType,
-        Desc: licenseType.Description,
-        LicenseCategoryId: $scope.s.Id,
-        Active: 1, // licenseType.Active
-        //LicenseId: licenseType.LicenseId,
-        //LicenseFrequency: ftype.LicenseFrequency,
-        //Renewalfrequency: freq.Renewalfrequency,
-        //UnitPrice: newUnitPrice.UnitPrice,
-        // FromDate: nfd.FromDate,
-        // ToDate: ntd.ToDate,
-        //FeatureName: L.FeatureName,
-        //FeatureValue: L.FeatureValue,
-        //FeatureLabel:L.FeatureLabel
+        if (licenseType.LicenseType == null) {
+            alert('Please enter license type.');
+            return;
+        }
+        if ($scope.s == null) {
+            alert('Please select category.');
+            return;
+        }
 
+        //if (FreqTypes == null) {
+        //    alert('Please enter values.');
+        //    return;
+        //}
+
+        var currLicenseType = {
+
+            Id: (flag == 'I') ? '-1' : licenseType.Id,
+            LicenseType: licenseType.LicenseType,
+            Desc: licenseType.Description,
+            LicenseCategoryId: $scope.s.Id,
+            Active: 1, // licenseType.Active
+            //LicenseId: licenseType.LicenseId,
+            //LicenseFrequency: ftype.LicenseFrequency,
+            //Renewalfrequency: freq.Renewalfrequency,
+            //UnitPrice: newUnitPrice.UnitPrice,
+            // FromDate: nfd.FromDate,
+            // ToDate: ntd.ToDate,
+            //FeatureName: L.FeatureName,
+            //FeatureValue: L.FeatureValue,
+            //FeatureLabel:L.FeatureLabel
+
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/License/SaveLicenseType',
+            data: currLicenseType
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
     };
+    //$scope.saveLicenseType1 = function (licenseType, flag) {
 
-    var req = {
-        method: 'POST',
-        url: 'http://localhost:1476/api/License/SaveLicenseType',
-        data: currLicenseType
-    }
-    $http(req).then(function (response) {
+    //    if (licenseType == null) {
+    //        alert('Please enter values.');
+    //        return;
+    //    }
 
-        $scope.showDialog("Saved successfully!");
+    //    if (licenseType.LicenseType == null) {
+    //        alert('Please enter license type.');
+    //        return;
+    //    }
+    //    if ($scope.s == null) {
+    //        alert('Please select category.');
+    //        return;
+    //    }
 
-        $scope.Group = null;
+    //    //if (FreqTypes == null) {
+    //    //    alert('Please enter values.');
+    //    //    return;
+    //    //}
 
-    }, function (errres) {
-        var errdata = errres.data;
-        var errmssg = "";
-        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-        $scope.showDialog(errmssg);
-    });
-    $scope.currGroup = null;
-};
+    //    var currLicenseType = {
 
-$scope.showDialog = function (message) {
+    //        Id: (flag == 'I') ? '-1' : licenseType.Id,
+    //        LicenseType: licenseType.LicenseType,
+    //        Desc: licenseType.Description,
+    //        LicenseCategoryId: $scope.s.Id,
+    //        Active: 1, // licenseType.Active
+    //        LicenseId: licenseType.LicenseId,
+    //        LicenseFrequency: licenseType.LicenseFrequency,
+    //        Renewalfrequency: licenseType.Renewalfrequency,
+    //        UnitPrice: licenseType.UnitPrice,
+    //         FromDate: licenseType.FromDate,
+    //         ToDate: licenseType.ToDate
+    //    };
 
-    var modalInstance = $uibModal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
-        resolve: {
-            mssg: function () {
-                return message;
-            }
-        }
-    });
-}
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/License/SaveLicenseType',
+    //        data: currLicenseType
+    //    }
+    //    $http(req).then(function (response) {
 
-$scope.currLicenseType = null;
+    //        $scope.showDialog("Saved successfully!");
 
-$scope.saveNewLicense = function (License) {
+    //        $scope.Group = null;
 
-    if (License == null) {
-        alert('Please enter values.');
-        return;
-    }
+    //    }, function (errres) {
+    //        var errdata = errres.data;
+    //        var errmssg = "";
+    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+    //        $scope.showDialog(errmssg);
+    //    });
+    //    $scope.currGroup = null;
+    //};
+    $scope.showDialog = function (message) {
 
-    //if (License.FeatureName == null) {
-    //    alert('Please enter Featurename.');
-    //    return;
-    //}
-    //if (License.FeatureValue == null) {
-    //    alert('Please enter Value.');
-    //    return;
-    //}
-    var pos = null;
-    for (i = 0 ; i < $scope.LicenseCat.Table3.length; i++) {
-        if ($scope.LicenseCat.Table3[i]) {
-            pos = $scope.LicenseCat.Table3[i];
-            break;
-        }
-    }
-
-        var licenseDetails1 = [];
-
-        for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
-
-            if ($scope.checkedArr[cnt]) {
-                var fr = {
-                    Id: $scope.checkedArr[cnt].Id,
-                    FeatureName: $scope.checkedArr[cnt].FeatureName,
-                    FeatureValue: $scope.checkedArr[cnt].FeatureValue,
-                    FeatureLabel: $scope.checkedArr[cnt].FeatureLabel,
-                    Active: 1                 
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
                 }
-
-                licenseDetails1.push(fr);
             }
+        });
+    }
+
+
+    $scope.currLicenseType = null;
+
+
+
+    $scope.getselectval = function (seltype) {
+        var grpid = (seltype) ? seltype.Id : -1;
+
+        $http.get('http://localhost:1476/api/license/getlicense?Subcatid=' + grpid).then(function (res, data) {
+            $scope.License = res.data;
+
+        });
+    }
+
+    $scope.GetLicenseFeatures = function () {
+        var selCat = $scope.l;
+
+        if (selCat == null) {
+            $scope.ldetails = null;
+            return; var selCat = $scope.l
         }
 
-    var NewLicense = {
+        $http.get('http://localhost:1476/api/LicenseDetails/getLicenseDetails?catId' + selCat.Id).then(function (res, data) {
+            $scope.ldetails = res.data;
+        });
+    }
 
-        Id: -1,
-        LicenseType: License.LicenseType,
-        LicenseCode: $scope.lcCode,
-        LicenseCategoryId: $scope.s.Id,
-        Active:1,
-        Desc:License.desc,
-        fromDate: $scope.nfd,
-        toDate: $scope.ntd,
 
-        RenewalFreqTypeId: $scope.ftype.Id,
-        RenewalFreq: $scope.freq,
-        UnitPrice: License.unitprice,
-        Pfromdate: $scope.npfd,
-        Ptodate: $scope.nptd,
-        PActive:1,
-        insupddelflag: 'I', 
-        
-        LPOSId:-1,
-        BTPOSTypeId: pos.Id,
-        NoOfUnits: pos.FeatureValue,
-        POSLabel: pos.FeatureLabel,
-    POSLabelClass: null,
-    POSfromdate: null,
-    POStodate: null,
-    POSActive: 1,
-    licenseDetails: licenseDetails1
+    //$scope.save = function (License) {
+
+    //    if (License == null) {
+    //        alert('Please enter values.');
+    //        return;
+    //    }
+
+    //    if (License.FeatureName == null) {
+    //        alert('Please enter FeatureName.');
+    //        return;
+    //    }
+    //    if (License.FeatureValue == null) {
+    //        alert('Please enter FeatureValue.');
+    //        return;
+    //    }
+
+
+    //    var currLicense = {
+
+    //        Id: License.Id,
+    //        LicenseTypeId: License.LicenseTypeId,
+    //        FeatureName: License.FeatureName,
+    //        FeatureValue: License.FeatureValue,
+    //        FeatureType: License.FeatureType,
+    //        Description: License.Description,
+    //        effectiveFrom: License.effectiveFrom,
+    //        effectiveTill: License.effectiveTill,
+    //        Label: License.Label,
+    //        labelclass: License.labelclass,
+
+    //    };
+
+    //    var req = {
+    //        method: 'POST',
+    //        url: 'http://localhost:1476/api/license/savelicense',
+    //        data: currLicense
+    //    }
+    //    $http(req).then(function (response) { });
+
+
+    //    $scope.currGroup = null;
+
+    //};
+
+
+
+    $scope.saveNewLicense = function (License) {
+
+        if (License == null) {
+            alert('Please enter values.');
+            return;
+        }
+
+        if (License.FeatureName == null) {
+            alert('Please enter Featurename.');
+            return;
+        }
+        if (License.FeatureValue == null) {
+            alert('Please enter Value.');
+            return;
+        }
+
+
+        var NewLicense = {
+
+            Id: -1,
+            LicenseTypeId: License.LicenseTypeId,
+            FeatureName: License.FeatureName,
+            FeatureValue: License.FeatureValue,
+            FeatureType: License.FeatureType,
+            Description: License.Description,
+            effectiveFrom: License.effectiveFrom,
+            effectiveTill: License.effectiveTill,
+            Label: License.Label,
+            labelclass: License.labelclass,
+        };
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/subcategory/savesubcategory',
+            data: NewLicense
+        }
+
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+
+
+        $scope.currRole = null;
+
+    };
+    $scope.Save = function (currSelLicense) {
+
+        var newLicensePricing = {
+            Id: currSelLicense.Id,
+            LicenseId: currSelLicense.LicenseId,
+            RenewalFreqTypeId: currSelLicense.ftype.Id,
+            RenewalFreq: currSelLicense.freq,
+            UnitPrice: currSelLicense.UnitPrice,
+            fromdate: currSelLicense.fd,
+            todate: currSelLicense.td,
+            insupddelflag: 'U'
+        }
+
+        var req = {
+            method: 'POST',
+            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
+            //headers: {
+            //    'Content-Type': undefined
+
+            data: newLicensePricing
+
+
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully!");
+
+            $scope.Group = null;
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
+    };
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
+    $scope.setCurrLicenseType = function (lt) {
+        $scope.currLicenseType = lt;
     };
 
- 
+    $scope.clearCurrLicenseType = function () {
+        $scope.currLicenseType = null;
+    };
 
 
-    var req = {
-        method: 'POST',
-        url: 'http://localhost:1476/api/License/SaveLicenseType',
-        data: NewLicense
-    }
 
-    $http(req).then(function (response) {
-
-        $scope.showDialog("Saved successfully!");
-
-        $scope.Group = null;
-
-    }, function (errres) {
-        var errdata = errres.data;
-        var errmssg = "";
-        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-        $scope.showDialog(errmssg);
-    });
-
-
-    $scope.currRole = null;
-
-};
-$scope.Save = function (currSelLicense) {
-
-    var newLicensePricing = {
-        Id: currSelLicense.Id,
-        LicenseId: currSelLicense.LicenseId,
-        RenewalFreqTypeId: currSelLicense.ftype.Id,
-        RenewalFreq: currSelLicense.freq,
-        UnitPrice: currSelLicense.UnitPrice,
-        fromdate: currSelLicense.fd,
-        todate: currSelLicense.td,
-        insupddelflag: 'U'
-    }
-
-    var req = {
-        method: 'POST',
-        url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
-        //headers: {
-        //    'Content-Type': undefined
-
-        data: newLicensePricing
-
-
-    }
-    $http(req).then(function (response) {
-
-        $scope.showDialog("Saved successfully!");
-
-        $scope.Group = null;
-
-    }, function (errres) {
-        var errdata = errres.data;
-        var errmssg = "";
-        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-        $scope.showDialog(errmssg);
-    });
-    $scope.currGroup = null;
-};
-$scope.showDialog = function (message) {
-
-    var modalInstance = $uibModal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceCtrl',
-        resolve: {
-            mssg: function () {
-                return message;
-            }
-        }
-    });
-}
-
-$scope.setCurrLicenseType = function (lt) {
-    $scope.currLicenseType = lt;
-};
-
-$scope.clearCurrLicenseType = function () {
-    $scope.currLicenseType = null;
-};
-    
 });
 
 myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
@@ -323,11 +397,11 @@ myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg
     $scope.mssg = mssg;
     $scope.ok = function () {
         $uibModalInstance.close('test');
-};
+    };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
-};
+    };
 });
 
 

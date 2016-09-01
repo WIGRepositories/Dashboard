@@ -523,6 +523,8 @@
     <Content Include="UI\js\libs\angular-ui-router.js" />
     <Content Include="UI\js\libs\ocLazyLoad.js" />
     <Content Include="UI\js\libs\ui-bootstrap.js" />
+    <Content Include="UI\js\LicenseConfiguration.js" />
+    <Content Include="UI\js\LicenseTypes.js" />
     <Content Include="UI\js\NotificationsConfigurations.js" />
     <Content Include="UI\js\PaymentGateWayConfiguration.js" />
     <Content Include="UI\js\registrationform.js" />
@@ -532,7 +534,6 @@
     <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
     <Content Include="UI\js\LicensePricing.js" />
-    <Content Include="UI\js\LicenseTypes.js" />
     <Content Include="UI\js\ngHandsontable.js" />
     <Content Include="UI\js\ngStorage.js" />
     <Content Include="UI\js\Notifications.js" />
@@ -558,6 +559,7 @@
     <Content Include="UI\js\ui-bootstrap-tpls-1.3.3.js" />
     <Content Include="UI\js\UserLicense.js" />
     <Content Include="UI\js\VehicleLayout.js" />
+    <Content Include="UI\LicenseConfguration.html" />
     <Content Include="UI\LicenseDetails.html" />
     <Content Include="UI\LicensePricing.html" />
     <Content Include="UI\LicenseTypes.html" />
