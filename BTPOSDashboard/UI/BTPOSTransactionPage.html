@@ -18,7 +18,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="Myctrlr" ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl" ng-model="dashboardDS">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -91,12 +91,6 @@
                                     </i><span class="menu-title">Dashboard</span>
                                 </a>
                             </li>
-
-
-
-
-
-
                             <li class="active">
                                 <a href="#">
                                     <i class="fa fa-sitemap fa-fw">
@@ -126,15 +120,9 @@
                                     </li>
                                     <li>
                                     <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
-
                             </li>
-
-
-
                         </ul>
                         </li>
-
-
 
                         <li>
                             <a href="#">
@@ -337,12 +325,12 @@
                     <!--BEGIN TITLE & BREADCRUMB PAGE-->
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
-                            <div class="page-title">User License</div>
+                            <div class="page-title">BT POS Transactions</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li><a href="Users.html">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li>  <a href="UserLicense.html">UserLicense</a>
+                            <li><a href="Users.html">Fleet Owner</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li>  <a href="UserLicense.html">BT POS Transaction</a>
                             <li>
                         </ol>
                         <div class="clearfix"></div>
@@ -360,6 +348,71 @@
 
                                                 <div class="table-container">
                                                     <div class="row mbm">
+
+                                                        <div class="col-md-1" style="text-align:right">
+                                                            Company :
+                                                        </div>
+                                                        <div class="col-md-2" ng-init="GetCompanies();">
+                                                            <select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test" style="width:100%">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-1" style="text-align:right">
+                                                            Fleet Owner:
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSList()" id="test1" style="width: 100%">
+
+    <option value="">Select</option>
+</select>
+                                                        </div>
+                                                        <div class="col-md-1" style="text-align:right">
+                                                            BT POSId:
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <select ng-options="b.BTPOSID for b in cmpdata.Table track by b.Id" ng-model="b"  id="test1" style="width: 100%">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-1" style="text-align:right">
+                                                            Transaction Type:
+                                                        </div>
+                                                        <div class="col-md-2">
+
+                                                            <select ng-options="b.BTPOSID for b in cmpdata.Table track by b.Id" ng-model="b"  id="test1" style="width:100%">
+
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+                                                        </div>
+                                                        <div class="row mbm">
+                                                            <div class="col-md-1" style="text-align:right">
+                                                                From:
+                                                            </div>
+                                                                <div class="col-md-2" style="text-align:left">
+                                                                    <input type="date" ng-model="frmDtTm" style="width:100%"/>
+                                                                </div>
+                                                            <div class="col-md-1" style="text-align:right">
+                                                                To:
+                                                            </div>
+                                                                <div class="col-md-2">
+                                                                    <input type="date" ng-model="toDtTm" style="width:100%" />
+                                                                </div>
+                                                            <div class="col-md-1" style="text-align:right">
+                                                                Status:
+                                                            </div>
+                                                                <div class="col-md-2">
+                                                                    <select ng-options="b.BTPOSID for b in cmpdata.Table track by b.Id" ng-model="b"  id="test1" style="width:100%">
+
+                                                                        <option value="">All</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-3" style="text-align:right">
+                                                                    <button type="button" class="btn btn-green" ng-click="GetBTPOSTransactions();">Get Transactions</button>
+                                                                </div>
+
+                                                            </div>
 
                                                         <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                             <div class="modal-dialog">
@@ -407,39 +460,48 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
-
-                                                    </div>
                                                     <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                         <thead>
-                                                            <tr>                                                            
-                                                                <th>Licensed for</th>
-                                                                <th>License Code</th>
-                                                                <th>License Type</th>
-                                                                <th>Start date</th>
-                                                                <th>expiry date</th>
-                                                                <th>Renewal Frequency</th>                                                                
-                                                                <th>License Category</th>
+                                                            <tr>
+                                                                <th>BT POS Id</th>
+                                                                <th>Transaction Date</th>
+                                                                <th>Amount</th>
+                                                                <th>Transaction Id</th>
+                                                                <th>Transaction Type</th>
+                                                                <th>Transaction Status</th>
                                                                 <th>Details</th>
 
                                                             </tr>
                                                         </thead>
                                                         <tbody>
 
-                                                            <tr ng-repeat="group in Group" class="gradeA">
+                                                            <tr ng-repeat="tran in posTrans" class="gradeA">
 
-                                                                <td>{{group.UName}}</td>
-                                                                <td>{{group.licenseCode}}</td>
-                                                                <td>{{group.LicenseType}}</td>
-                                                                <td>{{group.StartDate}}</td>
-                                                                <td>{{group.ExpiryOn}}</td>
-                                                                <td>{{group.RenewFreq}}</td>
-                                                                <td>{{group.LicenseCat}}</td>
-                                                                <td><button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="ShowLicenseDetails(group);">
-    <i class="fa fa-edit"></i>&nbsp;
-    Details
-</button></td>
+                                                                <td>{{tran.BTPOSId}}</td>
+                                                                <td>{{tran.Date}}</td>
+                                                                <td>{{tran.TotalAmount}}</td>
+                                                                <td>{{tran.TransCode}}</td>
+                                                                <td>Ticketing</td>
+                                                                <td>
+                                                                    <span class="label label-sm label-success" ng-if="tran.TransStatusId == 2">
+                                                                       Success
+                                                                    </span>
+                                                                    <span class="label label-sm label-info" ng-if="tran.TransStatusId == 4">
+                                                                        Failed
+                                                                    </span>
+                                                                    <span class="label label-sm label-warning" ng-if="tran.TransStatusId == 1">
+                                                                        New
+                                                                    </span>
+                                                                    <span class="label label-sm label-danger" ng-if="tran.TransStatusId == 3">
+                                                                        In progress
+                                                                    </span>
+                                                                </td>                                                                
+                                                                <td>
+                                                                    <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="ShowTransDetails(tran);">
+                                                                        <i class="fa fa-edit"></i>&nbsp;
+                                                                        Details
+                                                                    </button>
+                                                                </td>
                                                             </tr>
 
 
@@ -525,7 +587,7 @@
     <script src="js/ngStorage.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
     <script src="js/source.js"></script>
-    <script src="js/UserLicense.js"></script>
+    <script src="js/BTPOSTransactions.js"></script>
 
     <!--<script src="js/Alerts.js"></script>
 

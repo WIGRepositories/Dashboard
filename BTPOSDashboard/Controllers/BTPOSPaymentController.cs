@@ -28,9 +28,7 @@ namespace BTPOSDashboard.Controllers
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetBtposPayment";
-            cmd.Connection = conn;        
-
-
+            cmd.Connection = conn;
 
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
@@ -40,6 +38,37 @@ namespace BTPOSDashboard.Controllers
             // int found = 0;
             return Tbl;
         }
+
+         [HttpGet]
+         
+         public DataTable GetBTPOSTransactions(string btposId, int fleetOwnerId) {
+
+             DataTable Tbl = new DataTable();
+             LogTraceWriter traceWriter = new LogTraceWriter();
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSTransactions....");
+
+
+             //connect to database
+             SqlConnection conn = new SqlConnection();
+             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+             SqlCommand cmd = new SqlCommand();
+             cmd.CommandType = CommandType.StoredProcedure;
+             cmd.CommandText = "GetBTPOSTransactions";
+             cmd.Connection = conn;
+
+             cmd.Parameters.Add("@fleetOwnerId", SqlDbType.Int).Value = fleetOwnerId;
+             cmd.Parameters.Add("@POSId", SqlDbType.VarChar).Value = btposId;
+
+             DataSet ds = new DataSet();
+             SqlDataAdapter db = new SqlDataAdapter(cmd);
+             db.Fill(ds);
+             Tbl = ds.Tables[0];
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSTransactions completed.");
+             // int found = 0;
+             return Tbl;
+         }
     }
     
 }

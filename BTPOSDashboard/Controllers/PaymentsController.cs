@@ -17,9 +17,8 @@ namespace BTPOSDashboard.Controllers
     {
         [HttpGet]
         [Route("api/MakePayment")]
-        public HttpResponseMessage MakePayment() {      
-     
-
+        public DataTable MakePayment(decimal amt)
+        {        
             try
             {
 
@@ -37,11 +36,11 @@ namespace BTPOSDashboard.Controllers
                     amount = new Amount()
                     {
                         currency = "USD",
-                        total = "50",
+                        total = amt.ToString(),
                         details = new Details()
                         {
                             shipping = "0",
-                            subtotal = "50",
+                            subtotal = amt.ToString(),
                             tax = "0"
                         }
                     },
@@ -54,7 +53,7 @@ namespace BTPOSDashboard.Controllers
                         {
                             name = "Fleet Owner License",
                             currency = "USD",
-                            price = "50",
+                            price = amt.ToString(),
                             quantity = "1",
                             sku = "sku"
                         }
@@ -113,16 +112,28 @@ namespace BTPOSDashboard.Controllers
                     payer = payer,
                     transactions = new List<Transaction>() { transaction }
                 };
-
+                                
                 // Create a payment using a valid APIContext
-                var createdPayment = payment.Create(apiContext);               
+                var createdPayment = payment.Create(apiContext);
 
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                DataTable dt = new DataTable();
+                dt.Columns.Add("result");
+                dt.Columns.Add("detail");
+
+                DataRow dr = dt.NewRow();
+                dr[0] = "Success";
+                dr[1] = createdPayment.id;
+
+                dt.Rows.Add(dr);
+
+
+                return dt;
             }
             catch (Exception ex)
             {               
                 string str = ex.Message;
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                //return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                throw ex;
             }
         }
 

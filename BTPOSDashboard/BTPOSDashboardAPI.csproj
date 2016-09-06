@@ -407,6 +407,7 @@
     <Content Include="UI\BTPOSMonitoringPage.html" />
     <Content Include="UI\BtposReports.html" />
     <Content Include="UI\BtposRoutes.html" />
+    <Content Include="UI\BTPOSTransactionPage.html" />
     <Content Include="UI\CartDetails.html" />
     <Content Include="UI\CheckOut.html" />
     <Content Include="UI\CompanyHierarchy.html" />
@@ -483,6 +484,7 @@
     <Content Include="UI\js\BTPOSMonitoringPage.js" />
     <Content Include="UI\js\BTPosReports.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
+    <Content Include="UI\js\BTPOSTransactions.js" />
     <Content Include="UI\js\charts-highchart-line.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\CompanyReports.js" />

@@ -323,7 +323,7 @@ namespace BTPOSDashboard.Controllers
 
                     foreach (DataRow dr1 in dt.Rows)
                     {
-                        strBldr.AppendLine(string.Format("{0}<{1},{2}<{3}>", dr1[0].ToString(), dr1[1].ToString(), dr1[2].ToString(), dr1[3].ToString()));
+                        strBldr.AppendLine(string.Format("{0}<{1},{2},{3}>", dr1[0].ToString(), dr1[1].ToString(), dr1[2].ToString(), dr1[3].ToString()));
                     } 
                    
                     strBldr.Append("~");

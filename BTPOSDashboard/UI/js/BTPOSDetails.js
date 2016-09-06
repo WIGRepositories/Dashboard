@@ -448,7 +448,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             var Group = {
                 Id: pos.Id,
                 GroupName: pos.GroupName,
-                CompanyId: 1,//pos.CompanyId,
+                CompanyId: pos.CompanyId,
                 IMEI: pos.IMEI,
                 POSID: pos.POSID,
                 StatusId: 4,//pos.StatusId,

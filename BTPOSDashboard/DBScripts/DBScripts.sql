@@ -2603,9 +2603,10 @@ DECLARE @PageNumber AS INT, @RowspPage AS INT
 --SET @Pagesize = 10
 SELECT *  FROM (
              SELECT ROW_NUMBER() OVER(ORDER BY b.Id) AS ROWNUMBER,
-      c.Name as companyname
+			  b.[Id]
+      ,c.Name as companyname
       ,[POSID]
-    
+    ,c.[Id] as CompanyId
       ,[StatusId]
       ,t.Name as [status]
       ,[IMEI]
@@ -3454,10 +3455,40 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[getLicensePayments]
+CREATE procedure [dbo].[GetLicensePayments]
 as
 begin
-select * from LicensePayments
+SELECT 
+us.FirstName + '' + us.LastName as UName
+,'LC001' as licenseCode
+,lt.LicenseType
+,[StartDate]
+,[ExpiryOn]
+,r.Name as RenewFreq
+,lc.Name as LicenseCat
+,u.[Id]
+,u.[UserId]           
+,[FOId]      
+,[LicenseTypeId]            
+      ,[GracePeriod]
+      ,[ActualExpiry]
+      ,[LastUpdatedOn]
+      ,[RenewFreqTypeId]
+
+      ,u.[Active]
+      ,u.[StatusId]
+     ,f.FleetOwnerCode
+   --  ,uld.Tax
+   --  ,uld.Discount
+     --,ulp.UnitPrice
+  FROM [POSDashboard].[dbo].[UserLicense]u
+  inner join Users us on us.Id=u.UserId
+  inner join FleetOwner f on f.Id=u.FOId
+  inner join Types r on r.Id = RenewFreqTypeId
+  inner join LicenseTypes lt on lt.Id = LicenseTypeId
+  inner join Types lc on lc.Id = lt.LicenseCatId
+  --inner join UserLicensePayments ulp on ulp.Id = u.Id
+  --inner join ULPymtTransDetails uld on uld.Id = u.id
 end
 
 GO
@@ -3538,28 +3569,7 @@ INSERT INTO
 	END
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[Get LicenceCatergories]
-AS
-BEGIN
-	
-select * from LicenceCatergories
-end
 
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-create PROCEDURE [dbo].[GetLicenceCatergories]
-AS
-BEGIN
-	
-select * from LicenceCatergories
-end
 
 GO
 SET ANSI_NULLS ON
@@ -5918,17 +5928,7 @@ end
 
 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE procedure [dbo].[InsUpdDelFleetOwner](@Id int,@UserId varchar(50),@BTPOSgroupid varchar(50),@Active varchar(50))
-as
-begin
-insert into FleetOwner values(@Id,@UserId,@BTPOSgroupid,@Active)
-end
 
-GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6393,45 +6393,45 @@ declare @oldCode varchar(250)
 declare @oldDescription varchar(50)
 declare @oldActive int
 declare @oldSourceId int
-declare @oldDestinationId int
+declare @oldDestinationId int,@rtCount int
+
+select @rtCount= COUNT(*) from [POSDashboard].[dbo].[Routes] where UPPER(ltrim(rtrim(Code))) = UPPER(ltrim(rtrim(@Code)))
+--select @oldRouteName = RouteName, @oldCode = Code, @oldActive = Active from Routes where Id = @Id
+
+--UPDATE [POSDashboard].[dbo].[Routes]
+--   SET [RouteName] = @RouteName
+--      ,[Code] = @Code
+--      ,[Description] = @Description
+--      ,[Active] = @Active
+--      ,[SourceId] = @SourceId
+--      ,[DestinationId] = @DestinationId
+--      ,[Distance] = @Distance
+-- WHERE Id = @Id
+-- exec InsEditHistory 'Routes','Name', @RouteName,'Type updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
+
+--if @oldRouteName <> @RouteName
+--exec InsEditHistoryDetails @edithistoryid,@oldRouteName,@RouteName,'Modication','RouteName',null		
+
+--if @oldCode <> @Code
+--exec InsEditHistoryDetails @edithistoryid,@oldCode,@Code,'Modication','Code',null		
+
+--if @oldDescription <> @Description
+--exec InsEditHistoryDetails @edithistoryid,@oldDescription,@Description,'Modication','Description',null		
+
+--if @oldActive <> @Active
+--exec InsEditHistoryDetails @edithistoryid,@oldActive,@Active,'Modication','Active',null		
+
+--if @oldSourceId <> @SourceId
+--exec InsEditHistoryDetails @edithistoryid,@oldSourceId,@SourceId,'Modication','SourceId',null		
+
+--if @oldDestinationId <> @DestinationId
+--exec InsEditHistoryDetails @edithistoryid,@oldDestinationId,@DestinationId,'Modication','DestinationId',null		
 
 
-select @oldRouteName = RouteName, @oldCode = Code, @oldActive = Active from Routes where Id = @Id
-
-UPDATE [POSDashboard].[dbo].[Routes]
-   SET [RouteName] = @RouteName
-      ,[Code] = @Code
-      ,[Description] = @Description
-      ,[Active] = @Active
-      ,[SourceId] = @SourceId
-      ,[DestinationId] = @DestinationId
-      ,[Distance] = @Distance
- WHERE Id = @Id
- exec InsEditHistory 'Routes','Name', @RouteName,'Type updation',@dt,'Admin','Modification',@edithistoryid = @edithistoryid output           
-
-if @oldRouteName <> @RouteName
-exec InsEditHistoryDetails @edithistoryid,@oldRouteName,@RouteName,'Modication','RouteName',null		
-
-if @oldCode <> @Code
-exec InsEditHistoryDetails @edithistoryid,@oldCode,@Code,'Modication','Code',null		
-
-if @oldDescription <> @Description
-exec InsEditHistoryDetails @edithistoryid,@oldDescription,@Description,'Modication','Description',null		
-
-if @oldActive <> @Active
-exec InsEditHistoryDetails @edithistoryid,@oldActive,@Active,'Modication','Active',null		
-
-if @oldSourceId <> @SourceId
-exec InsEditHistoryDetails @edithistoryid,@oldSourceId,@SourceId,'Modication','SourceId',null		
-
-if @oldDestinationId <> @DestinationId
-exec InsEditHistoryDetails @edithistoryid,@oldDestinationId,@DestinationId,'Modication','DestinationId',null		
 
 
 
-
-
-if @@rowcount = 0 
+if @rtCount = 0 
 begin
 
 INSERT INTO [POSDashboard].[dbo].[Routes]
@@ -6525,7 +6525,7 @@ INSERT INTO [POSDashboard].[dbo].[RouteDetails]
 end
 end
 
-GO
+
 
 SET QUOTED_IDENTIFIER ON
 GO
@@ -9209,7 +9209,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[ValidateFleetOwnerCode]
-	@fleetownercode varchar(10),
+	@fleetownercode varchar(15),
 	@result int out 
 AS
 BEGIN
@@ -9219,9 +9219,9 @@ declare @fid int = 0
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	
-	select @fid = id from FleetOwner where UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
+	select @fid = id from FleetOwner where UPPER(ltrim(rtrim(FleetOwnerCode))) = UPPER(ltrim(rtrim(@fleetownercode)))
 	
-	if @fid is not null 
+	if @fid is not null
 	begin	
 	select f.id foid, u.id userid, f.FleetOwnerCode from FleetOwner f inner join Users u on f.UserId = u.Id and UPPER(FleetOwnerCode) = UPPER(@fleetownercode)
 			
@@ -11752,6 +11752,7 @@ CREATE PROCEDURE [dbo].[InsUpdDelUserLicenseConfirmDetails]
 @ULId int,
 @ULPymtId int,
 @units int,
+@POSUnits int,
 @isRenewal int,
 @itemId int,
 @address varchar(250) = null,
@@ -11760,7 +11761,8 @@ CREATE PROCEDURE [dbo].[InsUpdDelUserLicenseConfirmDetails]
 	
 AS
 BEGIN
-declare @expDt datetime,  @currDate datetime,@userloginid varchar(10) =  null ,@shipOrder varchar(10),@licenseCode varchar(20) = 'LC0001',@posid int
+declare @expDt datetime,  @currDate datetime,@userloginid varchar(10) =  null 
+,@shipOrder varchar(10),@licenseCode varchar(20) = 'LC0001',@posid int
 ,@soId int
 
 select @currDate = GETDATE()
@@ -11794,8 +11796,8 @@ begin
     UPDATE [POSDashboard].[dbo].[UserLicense]
    SET 
       [StartDate] = @currDate
-      ,[ExpiryOn] = @expDt     
-      ,[ActualExpiry] = @expDt--(@expDt + (select [graceperiod] from UserLicense WHERE [Id] = @ULId)) 
+      ,[ExpiryOn] =  @expDt    
+      ,[ActualExpiry] = DATEADD(day,7,@expDt)--(@expDt + (select [graceperiod] from UserLicense WHERE [Id] = @ULId)) 
       ,[LastUpdatedOn] = @currDate
       ,[Active] = 1
       ,[StatusId] = 3      
@@ -11821,7 +11823,7 @@ UPDATE [POSDashboard].[dbo].[UserLicensePymtTransactions]
 end
 
 ----if there are POS units to be sent then update the details and generate SO and shipping orders
-if @units > 0 
+if @POSUnits > 0 
 begin
 
 --check if it is renewal
@@ -11832,12 +11834,12 @@ begin
     --  --  ,CompanyId = (select [CompanyId] from FleetOwner where Id = @foId)
     --FROM BTPOSDetails
     --INNER JOIN (
-    --    SELECT TOP(@units) ID FROM BTPOSDetails WHERE FleetOwnerId is null
+    --    SELECT TOP(@POSUnits) ID FROM BTPOSDetails WHERE FleetOwnerId is null
     --     ORDER BY ID
     --) AS InnerMyTable ON BTPOSDetails.ID = InnerMyTable.ID
     
 DECLARE db_cursor CURSOR FOR  
-SELECT TOP(@units) id from [POSDashboard].[dbo].[BTPOSDetails] where FleetOwnerId is null or fleetownerid  = 0 ORDER BY ID
+SELECT TOP(@POSUnits) id from [POSDashboard].[dbo].[BTPOSDetails] where FleetOwnerId is null or fleetownerid  = 0 ORDER BY ID
 
 
 OPEN db_cursor  
@@ -11876,7 +11878,7 @@ declare @sonum varchar(20),@shipOrderNum varchar(20)
      VALUES
            (@sonum
            ,@ULPymtId
-           ,@currDate,@amount,@itemId,@units,1)
+           ,@currDate,@amount,@itemId,@POSUnits,1)
            
            SELECT @soId = SCOPE_IDENTITY() 
            
@@ -11917,7 +11919,7 @@ INSERT INTO [POSDashboard].[dbo].[Notifications]
 		--check the availability and if not possible, generate error
 		--if avilable qty falls below reorder point then generate an alert also
 		UPDATE [POSDashboard].[dbo].[Inventory]
-		   SET [availableQty] = ([availableQty] - @units)		 
+		   SET [availableQty] = ([availableQty] - @POSUnits)		 
 		 WHERE [InventoryItemId] = @itemId
         
 end
@@ -11944,12 +11946,10 @@ select @userloginid username
 ,@TransId transId
 ,@expDt expiryon
 , @currDate startdate
-,@units noofunits
+,@POSUnits noofunits
 ,'a.b@c.com' emailid
 
 END
-
-
 
 GO
 
@@ -12212,6 +12212,7 @@ GO
 
 CREATE TABLE [dbo].[BTPOSTransactions](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[POSId] [int] NOT NULL,
 	[BTPOSId] [varchar](50) NOT NULL,
 	[Date] [datetime] NULL,
 	[TotalAmount] [decimal](18, 0) NULL,
@@ -12286,8 +12287,8 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE GetBTPOSTransactions
-	(@BTPOSId varchar(50))
+CREATE PROCEDURE [dbo].[GetBTPOSTransactions]
+	(@fleetOwnerId int, @BTPOSId varchar(50) = '-1')
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -12295,6 +12296,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     SELECT [Id]
+      ,[POSId]
       ,[BTPOSId]
       ,[Date]
       ,[TotalAmount]
@@ -12324,11 +12326,13 @@ BEGIN
       ,[Reason]
       ,[ApprovedById]
       ,[FleetOwnerId]
-  FROM [POSDashboard].[dbo].[BTPOSTransactions]
-  where [BTPOSId] = @BTPOSId
+  FROM [POSDashboard].[dbo].[BTPOSTransactions]  
+  where ([BTPOSId] = @BTPOSId or @BTPOSId = '-1')
+  and FleetOwnerId = @fleetOwnerId
 
 
 END
+
 GO
 
 SET ANSI_NULLS ON
@@ -12377,13 +12381,22 @@ begin
 
 set @posTransId  = -1
 
+declare @posId int = 0
+select @posId = id from btposdetails where upper(ltrim(rtrim(POSID))) = @BTPOSId
+
+if @posId = 0
+begin
+ RAISERROR ('Invalid BT POS Id',16,1);
+end
+
 if @insupdflag = 'I'
 begin
 
 
 
 INSERT INTO [POSDashboard].[dbo].[BTPOSTransactions]
-           ([BTPOSId]
+           ([POSId]
+           ,[BTPOSId]
            ,[Date]
            ,[TotalAmount]
            ,[AmountPaid]
@@ -12413,7 +12426,8 @@ INSERT INTO [POSDashboard].[dbo].[BTPOSTransactions]
            ,[ApprovedById]
            ,[FleetOwnerId])
      VALUES
-           (@BTPOSId
+           (@posId
+           ,@BTPOSId
            ,@Date
            ,@TotalAmount
            ,@AmountPaid
@@ -12484,10 +12498,6 @@ UPDATE [POSDashboard].[dbo].[BTPOSTransactions]
  
 end
 end
-Go
-
-
-
 
 GO
 /****** Object:  StoredProcedure [dbo].[GetBTPOSDetails1]    Script Date: 08/20/2016 17:59:37 ******/
@@ -12670,7 +12680,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER procedure [dbo].[GetLicenseConfigDetails]
+Create procedure [dbo].[GetLicenseConfigDetails]
 @ltypeId int = -1
 as 
 begin 
@@ -12739,8 +12749,6 @@ SELECT ld.[Id]
 end
 GO
 
-USE [POSDashboard]
-GO
 
 /****** Object:  StoredProcedure [dbo].[GetLicenceCatergories]    Script Date: 08/31/2016 20:59:54 ******/
 SET ANSI_NULLS ON
@@ -12780,4 +12788,27 @@ end
 
 GO
 
+/****** Object:  Table [dbo].[States]    Script Date: 09/03/2016 17:38:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[States](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Latitude] [varchar](20) NULL,
+	[Longitude] [varchar](50) NULL,
+	[Code] [varchar](10) NULL,
+	[CountryId] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
 
