@@ -49,7 +49,9 @@
                                 <li><p>You have 0 new alerts</p></li>
                             </ul>
                             <ul class="dropdown-menu dropdown-messages">                                                               
-                                <li ng-repeat="A in dashboardDS.Table2"><p>{{A.Message}}</p></li>
+                                <li ng-repeat="A in dashboardDS.Table2"><p>
+                                                                            <a href="ShippingOrder.html"><i class="fa fa-user"></i>{{A.Message}}</a>
+                                    </p></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -57,8 +59,25 @@
                             <ul class="dropdown-menu dropdown-messages" ng-show="dashboardDS.Table1.length==0">
                                 <li><p>You have 0 new notifications</p></li>
                             </ul>
-                            <ul class="dropdown-menu dropdown-messages" >                                
-                                <li ng-repeat="A in dashboardDS.Table1"><p>{{A.Message}}</p></li>
+
+                            <ul class="dropdown-menu dropdown-messages">
+                                <li><p>You have 14 new messages</p></li>
+                                <li>
+                                    <div class="dropdown-slimscroll">
+                                        <ul>
+                                            <li><a href="#"><span class="avatar"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">Jessica Spencer</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith<span class="label label-blue pull-right">New</span></span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Doe<span class="label label-orange pull-right">10 min</span></span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                            <li><a href="#"><span class="avatar"><img src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/48.jpg" alt="" class="img-responsive img-circle" /></span><span class="info"><span class="name">John Smith</span><span class="desc">Lorem ipsum dolor sit amet...</span></span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="last"><a href="#">Read all messages</a></li>
+                            </ul>
+
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li><p>{{A.Message}}</p></li>
                             </ul>
                         </li>
                         <li class="dropdown topbar-user">
@@ -287,7 +306,7 @@
                                 <li><a href="DataLoad.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Data Load</span></a></li>
                                 <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
                                 <li><a href="paymentHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
-                                <!--<li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>-->
+                                <li><a href="FAQs.html"><i class="fa fa-briefcase"></i><span class="submenu-title">FAQs</span></a></li>
                                 
 
                             </ul>
@@ -495,7 +514,7 @@
                                                                         <div class="panel">
                                                                         <div class="portlet box">
                                                                             <div class="portlet-header">
-                                                                                <div class="caption">InterBus</div>
+                                                                                <div class="caption">Interbus</div>
                                                                                 <!--<div class="tools"><i class="fa fa-chevron-up"></i><i data-toggle="modal" data-target="#modal-config" class="fa fa-cog"></i><i class="fa fa-refresh"></i><i class="fa fa-times"></i></div>-->
                                                                             </div>
                                                                             <div class="portlet-body">

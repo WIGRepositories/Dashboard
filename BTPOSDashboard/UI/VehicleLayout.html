@@ -388,30 +388,30 @@
                                                                 </select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                Rows: <select class="form-control text-center" id="rowSelected" width="100px;"></select>
+                                                                Rows: <select class="form-control text-center" id="rowSelected" ></select>
                                                             </div>
                                                             <div class="col-md-3">
-                                                                Columns:<select class="form-control text-center" textholder="Columns" id="colSelected"></select>
+                                                                Columns:<select class="form-control text-center"  id="colSelected"></select>
 
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <!--<button type="button" id="getTable" class="btn btn-success col-lg-12">Show</button>-->
-                                                                <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success col-lg-12">Show Layout</button>
+                                                                <button type="button" id="test" ng-click="displayLayout();" class="btn btn-success">Show Layout</button>
 
                                                             </div>
 
-                                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter" style="width:100px">
                                                                 <thead>
                                                                     <!--<tr>
-                                                            <th>Destination/Source</th>
-                                                               <th ng-repeat="s in Stops">{{s.Name}}</th>
-                                                                            </tr>-->
+            <th>Destination/Source</th>
+               <th ng-repeat="s in Stops">{{s.Name}}</th>
+                            </tr>-->
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr ng-repeat="r in datarows">
-                                                                        <!--<td ng-repeat="dr in r" ng-if="$index == 0 || r==$parent.$index">{{dr}}</td>-->
-                                                                        <td ng-repeat="dr in r">
-                                                                            <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" style="border:none" ng-model="dr.selected" ng-checked="{{dr.selected==true}}">{{dr.Id}}</input>
+                                                                        <!--<td ng-repeat="dr in r" ng-if="$parent.$index == 2 && $index"></td>-->
+                                                                        <td ng-repeat="dr in r" style="width:10px" ng-click="">
+                                                                            <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" style="border:none" ng-model="dr.selected" ng-checked="{{dr.selected==true}}" />{{dr.Id}}
                                                                         </td>
 
 
@@ -420,6 +420,8 @@
 
                                                             </table>
                                                         </div>
+
+                                                        
                                                     </div>
 
                                                 </div>
@@ -477,13 +479,15 @@
                             }}
                             
                             </div>
-                        </div>
+                       
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
                             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
                         </div>
-
-                    </script>
+                </script>
+</div>
+            </div>
+        </div>
                     <!--END FOOTER-->
                     <!-- Custom Theme JavaScript -->
                     <script type="text/javascript">
@@ -517,7 +521,7 @@
                             else {
                                 buttonContainerDiv.empty();
                                 for (var i = 1; i <= $('#rowSelected').val() ; i++) {
-                                    buttonContainerDiv.append("<div style='width:100px;height:10px'>");
+                                    buttonContainerDiv.append("<div style='width:10px;height:8px'>");
                                     for (var j = 1; j <= $('#colSelected').val() ; j++) {
 
                                         buttonContainerDiv = buttonContainerDiv.append("<input type=checkbox>" + i + j + '</li>');

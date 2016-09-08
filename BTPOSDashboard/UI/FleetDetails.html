@@ -369,18 +369,21 @@
 
                                                     <div class="row mbm">
 
-                                                        <div class="col-md-4" ng-init="GetCompanies();">
-                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
+                                                        <div class="col-md-3" ng-init="GetCompanies();">
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test" style="width:80%">
     <option value="">Select</option>
 </select>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails(s)" id="test1">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails(s)" id="test1" style="width:80%">
 
     <option value="">Select</option>
 </select>
                                                         </div>
                                                         <div class="col-md-4">
+                                                           
+                                                        </div>
+                                                        <div class="col-md-1">
                                                             <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="text-align-last:right">Add Fleet Details</button>
 
 
@@ -388,22 +391,7 @@
 
                                                     </div>
 
-                                                    <!--<div class="actions">
-                                                    <!--<div class="col-md-5">
-                                                        Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
-
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>-->
-                                                    <!--<div class="actions">
-                                                    <!----   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
-                                                    <!--<button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
-                                                    <!-----  </div>----->
+                                                   
 
                                                     <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog modal-lg">
@@ -501,7 +489,7 @@
 
                                                                                 <div class="col-md-6">
 
-                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);"id="test">
+                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);" id="test" ng-disabled="cmp.Id != null && cmp.Id != ''">
                                                                                         <option value="">Select</option>
                                                                                     </select>
                                                                                 </div>
@@ -521,7 +509,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="Description" class="col-md-5 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();"id="test1">
+                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();" id="test1" ng-disabled="s.Id != null && s.Id != ''">
                                                                                         <option value="">Select</option>
                                                                                     </select>
 
@@ -549,8 +537,7 @@
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-5 col-md-9">
                                                                             <button class="btn btn-green" type="button" ng-click="savenewfleetdetails(initdata);">Save</button>
-
-                                                                            <a href="FleetDetails.html" class="btn btn-primary" ng-click="clearGroup()">Cancel</a>
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Cancel</button>
                                                                         </div>
                                                                     </div>
                                                                     <!---- <div class="col-md-6 col-md-offset-2">

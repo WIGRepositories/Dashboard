@@ -1,6 +1,18 @@
-var myapp1 = angular.module('myApp', ['ngStorage'])
+var myapp1 = angular.module('myApp', ['ngStorage', 'ngAnimate', 'treasure-overlay-spinner', 'ui.bootstrap'])
+//var myapp1 = angular.module('myApp', ['ngStorage'])
 
-var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage) {
+var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage, $rootScope, $uibModal) {
+
+    $rootScope.spinner = {
+        active: false,
+        on: function () {
+            this.active = true;
+        },
+        off: function () {
+            this.active = false;
+        }
+    }
+
     $scope.save = function (type) {
 
         var type = {
@@ -31,13 +43,15 @@ var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage)
         var u = $scope.UserName;
         var p = $scope.Password
 
-        if (u == null) {
-            alert('Please enter username');
+        if (u == null || u == "") {
+            $scope.showDialog("Please enter username");
+           // alert('Please enter username');
             return;
         }
 
-        if (p == null) {
-            alert('Please enter password');
+        if (p == null || p == "") {
+            $scope.showDialog("Please enter password");
+            //alert('Please enter password');
             return;
         }
 
@@ -49,10 +63,18 @@ var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage)
             url: 'http://localhost:1476/api/LOGIN/ValidateCredentials/',
             data: inputcred
         }
+          $rootScope.spinner.on();
+      //  angular.element('body').addClass('spinnerOn'); // add Class to body to show spinner
+
 
         $http(req).then(function (res) {
-            if (res.data.length == 0) {
-                alert('invalid credentials');
+           
+           if (res.data.length == 0) {
+                $rootScope.spinner.off();
+             //  $rootScope.$apply();
+               //angular.element('body').removeClass('spinnerOn').then(function () { alert('invalid credentials'); }); // hide spinner
+               // alert('invalid credentials');
+                $scope.showDialog("invalid credentials");
             }
             else {
                 //if the user has role, then get the details and save in session
@@ -94,7 +116,41 @@ var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage)
                         break;
 
                 }
+
+            }
+        },//error
+        function () {
+              $rootScope.spinner.off();
+            //  $rootScope.$apply();
+            //angular.element('body').removeClass('spinnerOn'); // hide spinner
+        });
+    }
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            backdrop: false,
+            templateUrl: 'myModalContent.html',
+              controller: 'ModalInstanceCtrl',            
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
             }
         });
     }
+});
+
+myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+
+        $uibModalInstance.close();       
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });

@@ -47,7 +47,7 @@ namespace BTPOSDashboardAPI.Controllers
             lPassword.Value = pwd;
             lPassword.Direction = ParameterDirection.Input;
             cmd.Parameters.Add(lPassword);
-
+            //System.Threading.Thread.Sleep(10000);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(Tbl);
 

@@ -348,6 +348,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
     };
 
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
+    }
 });
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
