@@ -461,6 +461,7 @@
     <Content Include="UI\getregistrationform.html" />
     <Content Include="UI\images\bkgRd3.png" />
     <Content Include="UI\images\dashboard.png" />
+    <Content Include="UI\images\img5.jpg" />
     <Content Include="UI\Index_cmpUser.html" />
     <Content Include="UI\Index_finAdmin.html" />
     <Content Include="UI\Index_FO.html" />

@@ -454,7 +454,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 StatusId: 4,//pos.StatusId,
                 ipconfig: pos.ipconfig,
                 active: 1,//Group.ipconfig,
-                fleetownerid: null,//pos.FleetOwnerId,
+                fleetownerid: pos.fleetownerid,
                 insupdflag: 'U'
             }
 

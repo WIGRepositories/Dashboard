@@ -261,10 +261,10 @@ namespace BTPOSDashboard.Controllers
                     indexTbl.Columns.Add(filename);
                     //strBldr.AppendLine("Route1<s.no,id,active>");
                     strBldr.Append("~");
-
+                   int rCount = 0;
                     foreach (DataRow dr1 in dt.Rows)
                     {
-                        strBldr.AppendLine(string.Format("{0}<{1},{2}>", dr1[0].ToString(), dr1[1].ToString(), dr1[2].ToString()));
+                        strBldr.AppendLine(string.Format("{0}<{1},{2},{3}>", dr1[0].ToString(), ++rCount, dr1[1].ToString(), dr1[2].ToString()));
                     } 
                  
                     strBldr.Append("~");
