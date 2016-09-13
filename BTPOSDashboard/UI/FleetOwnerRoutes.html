@@ -359,101 +359,101 @@
                                             <div class="col-lg-12">
 
 
-                                                <div class="table-container">
+                                                <div class="table-container" ng-model="FORoutes">
                                                     <div class="row mbm">
 
                                                         <div class="col-md-5">
                                                             Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()" id="test">
-    <option value="">Select</option>
-</select>
+                                                                <option value="">Select</option>
+                                                            </select>
                                                         </div>
                                                         <div class="col-md-5">
                                                             Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute()" id="test1">
 
-    <option value="">Select</option>
-</select>
+                                                                <option value="">Select</option>
+                                                            </select>
                                                         </div>
                                                         <br><br />
 
-                                                        </div>
-                                                        <div id="tableadvancedTabContent">
-                                                            <div id="table-sorter-tab" class="tab-pane fade in active">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
+                                                    </div>
+                                                    <div id="tableadvancedTabContent" ng-hide="s == null">
+                                                        <div id="table-sorter-tab" class="tab-pane fade in active">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
 
 
-                                                                        <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
-                                                                                    <!--<th><input type="checkbox"
-                                                                                    ng-checked="checkedArr.length == FORoutes.length"
-                                                                                    ng-click="toggleAll()">Select</th>-->
+                                                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th width="20%"><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="isChecked()" ng-click="toggleAll();" /> Select All</th>
+                                                                                <!--<th><input type="checkbox"
+                                ng-checked="checkedArr.length == FORoutes.length"
+                                ng-click="toggleAll()">Select</th>-->
 
-                                                                                    <th>Route Name</th>
-                                                                                    <th>Route Code</th>
+                                                                                <th>Route Name</th>
+                                                                                <th>Route Code</th>
 
-                                                                                    <th>From</th>
-                                                                                    <th>To</th>
-                                                                                    <!--<th>Active</th>-->
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
+                                                                                <th>From</th>
+                                                                                <th>To</th>
+                                                                                <!--<th>Active</th>-->
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
 
-                                                                                <tr ng-repeat="route in FORoutes" ng-on-finish-render>
+                                                                            <tr ng-repeat="route in FORoutes" ng-on-finish-render>
 
-                                                                                    <!--<td>
-                                                                                    <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="route.assigned.toString() == '1'" ng-click="toggle(route, checkedArr);" /></td>-->
-                                                                                    <td>
-                                                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(route, checkedArr)" ng-click="toggle(route, checkedArr);" />
-                                                                                    </td>
-
-
-
-                                                                                    <td>{{route.routename}}</td>
-                                                                                    <td>{{route.code}}</td>
-                                                                                    <td class="col-lg-2">
-                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter  input-group-sm mbs"><input type="date" id="{{route.routename}}FDate" class="form-control" /><span class="input-group-addon"></span></div>
-
-
-                                                                                    </td>
-                                                                                    <td class="col-lg-2">
-
-                                                                                        <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="date" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"></span></div>
-                                                                                    </td>
-                                                                                    <!--<td>{{route.FromDate}}</td>
-                                                                                    <td>{{route.ToDate}}</td>-->
-                                                                                    <!--<td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>-->
-                                                                                </tr>
+                                                                                <!--<td>
+                                <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="route.assigned.toString() == '1'" ng-click="toggle(route, checkedArr);" /></td>-->
+                                                                                <td>
+                                                                                    <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(route, checkedArr)" ng-click="toggle(route, checkedArr);" />
+                                                                                </td>
 
 
 
-
-                                                                            </tbody>
-
-
-                                                                        </table>
-
-                                                                        <!--checked: {{checkedArr | json}}
-                                                                        <br />
-                                                                        unchecked: {{uncheckedArr | json}}-->
-                                                                    </div>
+                                                                                <td>{{route.routename}}</td>
+                                                                                <td>{{route.code}}</td>
+                                                                                <td class="col-lg-2">
+                                                                                    <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter  input-group-sm mbs"><input type="date" id="{{route.routename}}FDate" class="form-control" /><span class="input-group-addon"></span></div>
 
 
+                                                                                </td>
+                                                                                <td class="col-lg-2">
+
+                                                                                    <div data-date-format="dd-mm-yyyy" class="input-group date datepicker-filter input-group-sm"><input type="date" id="{{route.Id}}Date" class="form-control" ng-model="route.ToDate" /><span class="input-group-addon"></span></div>
+                                                                                </td>
+                                                                                <!--<td>{{route.FromDate}}</td>
+                                <td>{{route.ToDate}}</td>-->
+                                                                                <!--<td><input type="checkbox" class="form-control" id="Active" ng-model="F.Active" checked /></td>-->
+                                                                            </tr>
+
+
+
+
+                                                                        </tbody>
+
+
+                                                                    </table>
+
+                                                                    <!--checked: {{checkedArr | json}}
+                    <br />
+                    unchecked: {{uncheckedArr | json}}-->
                                                                 </div>
 
-                                                                <div class="form-actions">
-                                                                    <div style="text-align:center">
-                                                                        <button class="btn btn-primary" type="button" ng-click="saveFORoutes();">Save</button>
 
-                                                                        <button class="btn btn-green" ng-click="clearGroup()">Cancel</button>
-                                                                    </div>
-                                                                </div>
                                                             </div>
 
+                                                            <div class="form-actions">
+                                                                <div style="text-align:center">
+                                                                    <button class="btn btn-primary" type="button" ng-click="saveFORoutes();">Save</button>
 
+                                                                    <button class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
+
+
                                                     </div>
+                                                </div>
                                                 </div>
                                             </div>
 

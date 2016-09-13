@@ -417,6 +417,7 @@
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\css\bootstrap.min.css" />
     <Content Include="UI\css\handsontable.full.min.css" />
+    <Content Include="UI\css\treasure-overlay-spinner.css" />
     <Content Include="UI\CustomizeRoutes.html" />
     <Content Include="UI\AddNewVehicleDetails.html" />
     <Content Include="UI\AddNewCompany.html" />
@@ -534,6 +535,7 @@
     <Content Include="UI\js\registrationform.js" />
     <Content Include="UI\js\ShoppingCart.js" />
     <Content Include="UI\js\SmsGatewayConfiguration.js" />
+    <Content Include="UI\js\treasure-overlay-spinner.js" />
     <Content Include="UI\js\treetable.js" />
     <Content Include="UI\js\jstree.min.js" />
     <Content Include="UI\js\LicenseDetails.js" />
