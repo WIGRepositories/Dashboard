@@ -218,7 +218,7 @@ namespace BTPOSDashboard.Controllers
             strBldr.Append("~");
             foreach (DataRow dr1 in dt.Rows)
             {
-                strBldr.AppendLine(dr1[0].ToString());
+                strBldr.Append(dr1[0].ToString()+",");
             }           
             strBldr.Append("~");
             dr[0] = strBldr.ToString();

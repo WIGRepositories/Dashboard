@@ -43,7 +43,7 @@ namespace blocklist1.Controllers
 
 
         [HttpPost]
-          public HttpResponseMessage pos(COUNTRY b)
+          public HttpResponseMessage pos(Country b)
        {
 
            LogTraceWriter traceWriter = new LogTraceWriter();

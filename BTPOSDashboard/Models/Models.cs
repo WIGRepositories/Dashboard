@@ -126,12 +126,15 @@ namespace BTPOSDashboardAPI.Models
         public string insupddelflag { get; set; }
 
     }
-    public class COUNTRY
+    public class Country
     {
+        //Id, Name, Latitude, Longitude,ISOCode, HasOperations
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
-        public string Active { get; set; }
+        public string ISOCode { get; set; }
+        public string HasOperations { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
     }
     public class Payables

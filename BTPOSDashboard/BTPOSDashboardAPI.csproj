@@ -306,6 +306,7 @@
     <Content Include="DBScripts\Sprocs\dbo.InsUpdTypes.sql" />
     <Content Include="DBScripts\Sprocs\dbo.InsUpdUsers.sql" />
     <Content Include="DBScripts\States.sql" />
+    <Content Include="DBScripts\Stops.sql" />
     <Content Include="DBScripts\Tables\dbo.Alerts.sql" />
     <Content Include="DBScripts\Tables\dbo.Blocklist.sql" />
     <Content Include="DBScripts\Tables\dbo.BTPOSAuditDetails.sql" />
@@ -414,6 +415,7 @@
     <Content Include="UI\CompanyReports.html" />
     <Content Include="UI\CompanyRoles.html" />
     <Content Include="UI\BTPOSConfiguration.html" />
+    <Content Include="UI\Countries.html" />
     <Content Include="UI\createfleet.html" />
     <Content Include="UI\css\bootstrap.min.css" />
     <Content Include="UI\css\handsontable.full.min.css" />
@@ -491,6 +493,7 @@
     <Content Include="UI\js\charts-highchart-line.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\CompanyReports.js" />
+    <Content Include="UI\js\Countries.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\DataLoad.js" />
     <Content Include="UI\js\EditHistory.js" />
@@ -2305,7 +2308,6 @@
     <Compile Include="Controllers\VehicleConfigController.cs" />
     <Compile Include="Controllers\VehicleDetailsController.cs" />
     <Compile Include="Controllers\CompanyGroupsController.cs" />
-    <Compile Include="Controllers\countryController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmailformatsController.cs" />
     <Compile Include="Controllers\FleetOwnerController.cs" />
