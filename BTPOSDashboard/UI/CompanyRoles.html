@@ -362,16 +362,19 @@
 
                                                 <div class="table-container">
 
-                                                    <div class="col-md-5">
-                                                        Company: <select ng-options="s.Name for s in Companies track by s.Id"  ng-model="s" ng-change="getRolesForCompany(s)" id="test">
-    <option value="">Select</option>
-</select>
+                                                    <div class="col-md-1" style="text-align:right">
+                                                        Company: 
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <select ng-options="s.Name for s in Companies track by s.Id" ng-model="s" ng-change="getRolesForCompany(s)" id="test" style="width:100%">
+                                                            <option value="">Select</option>
+                                                        </select>
                                                     </div>
 
 
-                                                    <div class="actions" ng-hide="cmproles == null">
+                                                    <!--<div class="actions" ng-hide="cmproles == null">
                                                         <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Assign Roles</button>
-                                                    </div>
+                                                    </div>-->
 
                                                     
                                                 </div>
@@ -443,12 +446,12 @@
 
                                             </div>
                                         </div>
-
+                                        <br />
                                         <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="cmproles == null">
                                             <thead>
                                                 <tr>
-                                                    <th width="20%">Select/Unselect </th>
-                                                    <th>Role Name</th>
+                                                    <th width="10%">Select/Unselect </th>
+                                                    <th width="20%">Role Name</th>
                                                     <th>Description</th>
                                                     <!--<th>Delete</th>-->
                                                 </tr>
@@ -456,7 +459,7 @@
                                             <tbody>
                                                 <tr ng-repeat="role in cmproles" ng-on-finish-render>
                                                     <td>
-                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-click="toggle(role, checkedArr);" checked />
+                                                        <input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="exists(role, checkedArr)" ng-click="toggle(role, checkedArr);" />
                                                     </td>
                                                     <td>{{role.rolename}}</td>
                                                     <td>{{role.description}}</td>

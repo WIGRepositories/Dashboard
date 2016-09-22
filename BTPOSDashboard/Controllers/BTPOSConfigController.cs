@@ -18,7 +18,7 @@ namespace BTPOSDashboard.Controllers
     {       
 
         [HttpGet]
-        public DataTable GetFleeBTPosRecords(int POSID, int Id)
+        public DataTable GetBTPosDetails(int POSID, int Id)
         {
             DataTable Tbl = new DataTable();
 
@@ -35,39 +35,7 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetBTPOSRecords";
             cmd.Connection = conn;
-
-            //SqlParameter cid1 = new SqlParameter();
-            //cid1.ParameterName = "@Id";
-            //cid1.SqlDbType = SqlDbType.Int;
-            //cid1.Value = Id;
-            //cmd.Parameters.Add(cid1);
-
-            //SqlParameter cid = new SqlParameter();
-            //cid.ParameterName = "@POSID";
-            //cid.SqlDbType = SqlDbType.Int;
-            //cid.Value = POSID;
-            //cmd.Parameters.Add(cid);
-
-            //SqlParameter fid1 = new SqlParameter();
-            //fid1.ParameterName = "@FileName";
-            //fid1.SqlDbType = SqlDbType.VarChar;
-            //fid1.Value = FileName;
-            //cmd.Parameters.Add(fid1);
-
-            //SqlParameter fid2 = new SqlParameter();
-            //fid2.ParameterName = "@Description";
-            //fid2.SqlDbType = SqlDbType.VarChar;
-            //fid2.Value = Description;
-            //cmd.Parameters.Add(fid2);
-
-
-            //SqlParameter fid3 = new SqlParameter();
-            //fid3.ParameterName = "@LastDownloadtime";
-            //fid3.SqlDbType = SqlDbType.VarChar;
-            //fid3.Value = LastDownloadtime;
-            //cmd.Parameters.Add(fid3);
-
-
+            
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
             // Tbl = ds.Tables[0];
@@ -79,17 +47,7 @@ namespace BTPOSDashboard.Controllers
 
             str.Append(string.Format("test\n{0}", POSID.ToString()));
 
-            //  str.Append("Id,filename,Description,LastModifiedtime");
-
-            //  str.Append(string.Format("test\n{1}", FileName.ToString()));
-
-
-            //    str.Append(string.Format("test\n{2}", Description.ToString()));
-
-            //   str.Append(string.Format("test\n{3}", LastDownloadtime.ToString()));
-
-
-
+         
             for (int i = 0; i < Tbl.Rows.Count; i++)
             {
                 // str.Append(Tbl.Rows[i]["POSID"].ToString()+",");

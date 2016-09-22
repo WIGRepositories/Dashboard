@@ -20,7 +20,7 @@ namespace BTPOSDashboardAPI.Controllers
             DataTable Tbl = new DataTable();
 
             LogTraceWriter traceWriter = new LogTraceWriter();
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUsers credentials....");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUsers ....");
  
             //connect to database
             SqlConnection conn = new SqlConnection();            
@@ -40,7 +40,7 @@ namespace BTPOSDashboardAPI.Controllers
           
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUsers Credentials completed.");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUsers  completed.");
             
             return Tbl;
         }
@@ -51,7 +51,7 @@ namespace BTPOSDashboardAPI.Controllers
         {
 
             LogTraceWriter traceWriter = new LogTraceWriter();
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers credentials....");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers ....");
  
             DataTable Tbl = new DataTable();
               SqlConnection conn = new SqlConnection();
@@ -99,11 +99,11 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.Parameters.Add(UEmail);
 
                 SqlParameter UAdressId = new SqlParameter("@AdressId",SqlDbType.Int);
-                UAdressId.Value = U.AdressId;
+                UAdressId.Value = U.Address;
                 cmd.Parameters.Add(UAdressId);
 
                 SqlParameter UMobileNo = new SqlParameter("@MobileNo",SqlDbType.VarChar, 15);
-                UMobileNo.Value = U.MobileNo;
+                UMobileNo.Value = U.ContactNo1;
                 cmd.Parameters.Add(UMobileNo);
 
                 SqlParameter URole1 = new SqlParameter("@RoleId",SqlDbType.Int);
@@ -115,11 +115,11 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.Parameters.Add(UActive);
 
                 SqlParameter UUserName = new SqlParameter("@UserName",SqlDbType.VarChar,15);
-                UUserName.Value = U.UserName;
+                UUserName.Value = U.DUserName;
                 cmd.Parameters.Add(UUserName);
                 
                 SqlParameter UPassword = new SqlParameter("@Password",SqlDbType.VarChar,15);
-                UPassword.Value = U.Password;
+                UPassword.Value = U.DPassword;
                 cmd.Parameters.Add(UPassword);
 
                 SqlParameter MgrId = new SqlParameter("@ManagerId", SqlDbType.Int);
@@ -134,7 +134,7 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.ExecuteScalar();
                 
                 conn.Close();
-                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers Credentials completed.");
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUsers completed.");
                 
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace BTPOSDashboardAPI.Controllers
 
 
             LogTraceWriter traceWriter = new LogTraceWriter();
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserRoles credentials....");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserRoles ....");
  
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
@@ -173,7 +173,7 @@ namespace BTPOSDashboardAPI.Controllers
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(tbl);
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserRoles Credentials completed.");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserRoles  completed.");
             
             return tbl;
         }
@@ -184,7 +184,7 @@ namespace BTPOSDashboardAPI.Controllers
         {
 
             LogTraceWriter traceWriter = new LogTraceWriter();
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles credentials....");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles ....");
  
             DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
@@ -223,7 +223,7 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.ExecuteScalar();
 
                 conn.Close();
-                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles Credentials completed.");
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveUserRoles  completed.");
 
             }
             catch (Exception ex)

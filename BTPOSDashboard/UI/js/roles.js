@@ -237,10 +237,11 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             if ($scope.checkedArr[cnt].assigned == 0) {
                 var fr = {
                     Id: -1,
-                    CompanyId: $scope.cmp.Id,
-                    rolename: $scope.rolename,
-                    description: $scope.description, 
-                    insdelflag: '0'
+                    CompanyId: $scope.s.Id,
+                    roleid: $scope.checkedArr[cnt].id,
+                    //description: $scope.description,
+                    Active:0,
+                    insdelflag: '1'
                 }
 
                 CompanyRole.push(fr);
@@ -252,10 +253,11 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             if ($scope.uncheckedArr[cnt].assigned == 1) {
                 var fr = {
                     Id: -1,
-                    CompanyId: $scope.cmp.Id,
-                    rolename: $scope.rolename,
-                    description: $scope.description, 
-                    insdelflag: '1'
+                    CompanyId: $scope.s.Id,
+                    roleid: $scope.uncheckedArr[cnt].id,
+                   // description: $scope.description,
+                    Active: 1,
+                    insdelflag: '0'
                 }
 
                 CompanyRole.push(fr);
