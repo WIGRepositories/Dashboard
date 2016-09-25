@@ -369,7 +369,7 @@
                                                         </div>
 
                                                         <div class="actions">
-                                                            <a href="#"><button type="button" data-target="#Modal-header-primary-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add License Type</button></a>
+                                                            <a href="#" ng-hide="s.Id == null"><button type="button" data-target="#Modal-header-primary-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add License Type</button></a>
 
                                                         </div>
                                                         <div id="Modal-header-primary-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
@@ -418,7 +418,7 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <select ng-options="s.Name for s in LicenseCat track by s.Id" ng-model="s">
+                                                                                        <select ng-options="s.Name for s in LicenseCat track by s.Id" ng-model="s" disabled>
                                                                                             <option value="">Select</option>
                                                                                         </select>
                                                                                     </div>
@@ -436,7 +436,7 @@
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <input type="checkbox" class="form-control" id="cactive" ng-checked="currGroup.Active" />
+                                                                                        <input type="checkbox" class="form-control" id="cactive" ng-checked="currGroup.Active" checked />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -499,7 +499,7 @@
                                                                             <div class="col-md-5">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <select ng-options="s.Name for s in LicenseCat track by s.Id" ng-model="s">
+                                                                                        <select ng-options="s.Name for s in LicenseCat track by s.Id" ng-model="s" disabled>
                                                                                             <option value="currLicenseType.LicenseCatId">{{currLicenseType.licenseCategory}}</option>
                                                                                         </select>
                                                                                     </div>
@@ -517,7 +517,7 @@
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
                                                                                     <div class="input-icon right">
-                                                                                        <input type="checkbox" class="form-control" id="cactive" ng-checked="currLicenseType.Active" />
+                                                                                        <input type="checkbox" class="form-control" id="cactive" ng-checked="currLicenseType.Active" checked />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -588,18 +588,20 @@
                 <!--END PAGE WRAPPER-->
             </div>
         </div>
-        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+    </div>
+
+        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static" style="z-index:1055">
 
             <div class="modal-header">
                 <h3 class="modal-title">Save confirmation!</h3>
             </div>
             <div class="modal-body">
                 <!--<ul>
-                    <li ng-repeat="item in items">
-                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>-->
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
                 {{mssg}}
             </div>
             <div class="modal-footer">
@@ -608,7 +610,7 @@
             </div>
 
         </script>
-    </div>
+   
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/jquery-ui.js"></script>

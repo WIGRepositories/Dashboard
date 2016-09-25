@@ -57,7 +57,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
         $scope.range = range;
     }
-
     //$scope.GetLFeatures = function () {
     //  //  var selCat = $scope.l;
 
@@ -73,6 +72,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     //    });
 
     //}
+    
     $scope.saveLicenseType = function (licenseType, flag) {
 
         if (licenseType == null) {
@@ -123,6 +123,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
+            $scope.getLicenseTypes($scope.s);
 
         }, function (errres) {
             var errdata = errres.data;
@@ -227,8 +228,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.ldetails = res.data;
         });
     }
-
-
+     
     //$scope.save = function (License) {
 
     //    if (License == null) {
@@ -272,8 +272,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     //    $scope.currGroup = null;
 
     //};
-
-
 
     $scope.saveNewLicense = function (License) {
 

@@ -376,7 +376,7 @@
 
                                                         <div class="actions">
 
-                                                            <button type="button" data-target="#Modal-header-primary-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;" id="btnAdd">Add Pricing</button>
+                                                            <button ng-hide="s.Id == null" type="button" data-target="#Modal-header-primary-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;" id="btnAdd">Add Pricing</button>
 
                                                         </div>
 
@@ -395,15 +395,15 @@
                                                         <div class="modal-body" ng-model="currSelLicense">
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">License Category:<span class='require'>*</span></label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">License Category:<span class='require'>*</span></label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
-                                                                            <select readonly disabled>
+                                                                            <select disabled style="width:100%">
                                                                                 <option value="">{{s.Name}}</option>
                                                                             </select>
                                                                         </div>
@@ -412,16 +412,16 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">License Type:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">License Type:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
 
-                                                                            <select ng-options="l.LicenseType for l in lTypes track by l.Id" ng-model="l" ng-change="GetLicenseFeatures()">
+                                                                            <select ng-options="l.LicenseType for l in lTypes track by l.Id" ng-model="l" ng-change="GetLicenseFeatures()" style="width:100%">
                                                                                 <option value="">Select</option>
                                                                             </select>
 
@@ -431,16 +431,16 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">License Frequency:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">License Frequency:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
 
-                                                                            <select ng-options="ft.Name for ft in FreqTypes track by ft.Id" ng-model="ftype">
+                                                                            <select ng-options="ft.Name for ft in FreqTypes track by ft.Id" ng-model="ftype" style="width:100%">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -449,15 +449,15 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">Renewal Frequency:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">Renewal Frequency:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
-                                                                            <select ng-model="freq">
+                                                                            <select ng-model="freq" style="width:100%">
                                                                                 <option value="">Select</option>
                                                                                 <option ng-repeat="i in range" value="{{i}}">{{i}}</option>
                                                                             </select>
@@ -467,20 +467,20 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">Unit Price:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">Unit Price:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
-                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="newUnitPrice" /></div>
+                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="newUnitPrice" ng-keypress="filterValue($event)" /></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
                                                                         <label for="inputFirstName" class="control-label">From Date:</label>
                                                                     </div>
@@ -495,7 +495,7 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
                                                                         <label for="inputFirstName" class="control-label">To Date:</label>
                                                                     </div>
@@ -535,15 +535,15 @@
                                                         <div class="modal-body" ng-model="currSelLicense">
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">License Category:<span class='require'>*</span></label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">License Category:<span class='require'>*</span></label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
-                                                                            <select readonly disabled>
+                                                                            <select disabled style="width:100%">
                                                                                 <option value="">{{s.Name}}</option>
                                                                             </select>
                                                                         </div>
@@ -552,16 +552,16 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">License Type:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">License Type:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
 
-                                                                            <select readonly disabled>
+                                                                            <select disabled style="width:100%">
                                                                                 <option value="">{{currSelLicense.LicenseType}}</option>
                                                                             </select>
 
@@ -571,16 +571,16 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">License Frequency:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">License Frequency:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
 
-                                                                            <select ng-options="ft.Name for ft in FreqTypes track by ft.Id" ng-model="currSelLicense.ftype">
+                                                                            <select ng-options="ft.Name for ft in FreqTypes track by ft.Id" ng-model="currSelLicense.ftype" style="width:100%">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -589,15 +589,15 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">Renewal Frequency:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">Renewal Frequency:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
                                                                         <div class="input-icon right">
-                                                                            <select ng-model="currSelLicense.freq">
+                                                                            <select ng-model="currSelLicense.freq" style="width:100%">
                                                                                 <option value="">Select</option>
                                                                                 <option ng-repeat="i in range" value="{{i}}">{{i}}</option>
                                                                             </select>
@@ -607,20 +607,20 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
-                                                                        <label for="inputFirstName" class="control-label">Unit Price:</label>
+                                                                        <label for="inputFirstName" class="control-label" style="color:red;">Unit Price:</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
-                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currSelLicense.UnitPrice" /></div>
+                                                                        <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currSelLicense.UnitPrice" ng-keypress="filterValue($event)" /></div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
                                                                         <label for="inputFirstName" class="control-label">From Date:</label>
                                                                     </div>
@@ -635,7 +635,7 @@
                                                             </div>
                                                             <div class="row">
 
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <div class="form-group has-success" style="text-align:right">
                                                                         <label for="inputFirstName" class="control-label">To Date:</label>
                                                                     </div>
@@ -716,7 +716,8 @@
                 </div>
                 <!--END PAGE WRAPPER-->
             </div>
-            </div>
+        </div>
+    </div>
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">
@@ -736,12 +737,8 @@
                 <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
             </div>
 
-        </script>
-        </div>
-    
-    
-    
-   
+        </script>      
+      
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>

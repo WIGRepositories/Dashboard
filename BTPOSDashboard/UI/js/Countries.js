@@ -43,7 +43,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         }
 
         for (var cnt = 0; cnt < $scope.uncheckedArr.length; cnt++) {
-            if ($scope.checkedArr[cnt].HasOperations == 1) {
+            if ($scope.uncheckedArr[cnt].HasOperations == 1) {
                 var fr = {
                     Id: $scope.uncheckedArr[cnt].Id,
                     HasOperations: 0

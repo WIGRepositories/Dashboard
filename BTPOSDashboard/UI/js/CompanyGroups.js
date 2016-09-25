@@ -1,7 +1,5 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload'])
 
-
-
 app.directive('file-input', function ($parse)
 {
     return {

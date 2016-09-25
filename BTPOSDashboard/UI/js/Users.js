@@ -123,7 +123,7 @@ app.directive("ngFileSelect", function () {
 
 });
 
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal, $upload, $timeout, fileReader) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal, $upload, $timeout, fileReader, $filter) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -143,23 +143,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
 
-            if ($scope.userCmpId != 1) {
-                //loop throug the companies and identify the correct one
-                for (i = 0; i < response.data.length; i++) {
-                    if (response.data[i].Id == $scope.userCmpId) {
-                        $scope.cmp = response.data[i];
-                        document.getElementById('test').disabled = true;
-                        break
-                    }
-                }
-            }
-            else {
-                document.getElementById('test').disabled =false;
-            }
+        //    if ($scope.userCmpId != 1) {
+        //        //loop throug the companies and identify the correct one
+        //        for (i = 0; i < response.data.length; i++) {
+        //            if (response.data[i].Id == $scope.userCmpId) {
+        //                $scope.cmp = response.data[i];
+        //                document.getElementById('test').disabled = true;
+        //                break
+        //            }
+        //        }
+        //    }
+        //    else {
+        //        document.getElementById('test').disabled =false;
+        //    }
 
-            $scope.getUserRolesForCompany($scope.cmp);
+        //    $scope.getUserRolesForCompany($scope.cmp);
         });
-        if ($scope.Roleid != 1) { $scope.cmpId = $scope.UserCmpid;}
+        //if ($scope.Roleid != 1) { $scope.cmpId = $scope.UserCmpid;}
     }
 
     $scope.GetUsersForCmp = function () {
@@ -202,8 +202,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        if ($scope.EmpNo == null) {
-            alert('Please enter FleetOwnerCode.');
+        if (User.EmpNo == null) {
+            alert('Please enter employee no.');
             return;
         }       
 
@@ -214,15 +214,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
 
         var U = {
-            Id: -1,
+            Id: ((flag == 'U') ? User.Id : -1),
             FirstName: User.FirstName,
             LastName: User.LastName,
             MiddleName: User.MiddleName,
-            EmpNo: $scope.EmpNo,
+            EmpNo: (flag == 'U') ? User.EmpNo : $scope.EmpNo,
             Email: User.EmailId,
             ContactNo1: User.ContactNo1,
             ContactNo2: User.ContactNo2,
-            mgrId: ($scope.mgr == null )? null: $scope.mgr.Id,
+            mgrId: User.ManagerId,//($scope.mgr == null) ? null : $scope.mgr.Id,
             CountryId: User.Country,
             StateId:User.State,
             GenderId:User.Gender,
@@ -238,8 +238,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             DUserName: User.DUserName,
             DPassword: User.DPassword,
 
-            WUserName: User.DUserName,
-            WPassword: User.DPassword,
+           // WUserName: User.DUserName,
+          //  WPassword: User.DPassword,
 
             Photo: $scope.imageSrc,
         
@@ -285,6 +285,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.setUsers = function (usr) {
         $scope.User1 = usr;
+        $scope.imageSrc = null;
+        document.getElementById('cmpNewLogo').src = "";
+        $scope.imageSrc = usr.photo;
+        document.getElementById('uactive').checked = (usr.Active == 1);
+
     }
 
     $scope.clearUsers = function () {
@@ -297,11 +302,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         if (cmp == null) {
             $scope.userRoles = null;
+            $scope.checkedArr = [];
+            $scope.uncheckedArr = [];
             return;
         }
 
         $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.userRoles = res.data;
+            $scope.checkedArr = res.data;
+           // $scope.uncheckedArr = $filter('filter')($scope.userRoles, { assigned: "0" });
+
         });
     }
 

@@ -24,7 +24,7 @@ namespace POSDBAccess.Controllers
             DataTable Tbl = new DataTable();
 
             LogTraceWriter traceWriter = new LogTraceWriter();
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyGroups credentials....");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyGroups ...");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -46,7 +46,7 @@ namespace POSDBAccess.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyGroups Credentials completed.");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyGroups completed.");
             
             // int found = 0;
             return Tbl;
@@ -227,7 +227,7 @@ namespace POSDBAccess.Controllers
 
                 SqlParameter gzp = new SqlParameter();
                 gzp.ParameterName = "@ZipCode";
-                gzp.SqlDbType = SqlDbType.Int;
+                gzp.SqlDbType = SqlDbType.VarChar;
                 gzp.Value = n.ZipCode;
                 cmd.Parameters.Add(gzp);
 

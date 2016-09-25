@@ -52,10 +52,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.Save = function (currSelLicense,flag) {
 
             if (currSelLicense.LicenseTypeId == null) {
-                alert('Please select the Feature name');
+                $scope.showDialog('Please select the Feature name');
                 return
             }
-
+            if (currSelLicense.FeatureTypeId == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+            if (currSelLicense.FeatureValue == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+            if (currSelLicense.FeatureLabel == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
             var currSelLicense = {
                 LicenseTypeId: currSelLicense.LicenseTypeId,
                 FeatureTypeId: currSelLicense.FeatureTypeId,
@@ -81,7 +92,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
                 $scope.showDialog("Saved successfully!");
 
-                $scope.Group = null;
+                $scope.currSelLicense = null;
+                $scope.GetLicenseFeatures();
 
             }, function (errres) {
                 var errdata = errres.data;
@@ -89,7 +101,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
                 $scope.showDialog(errmssg);
             });
-            $scope.currGroup = null;
+            $scope.currSelLicense = null;
         };
 
         $scope.SaveNewFeature = function (currSelLicense, flag) {
@@ -97,14 +109,24 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             var selCat = $scope.l;
 
             if (selCat == null) {
-                alert('Please select license type.');
+                $scope.showDialog('Please select license type.');
                 return;
             }
 
-            if ($scope.f.Id == null) {
-                alert('Please select the Feature name');
+            if ($scope.f == null) {
+                $scope.showDialog('Please select the Feature name');
                 return
             }
+            
+            if (currSelLicense.FeatureValue == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+            if (currSelLicense.FeatureLabel == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+
 
             var currSelLicense = {
                 LicenseTypeId: selCat.Id,
@@ -131,7 +153,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
                 $scope.showDialog("Saved successfully!");
 
-                $scope.newFeature = null;
+                $scope.currSelLicense = null;
+                $scope.GetLicenseFeatures();
 
             }, function (errres) {
                 var errdata = errres.data;
@@ -139,7 +162,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
                 $scope.showDialog(errmssg);
             });
-            $scope.currGroup = null;
+            $scope.currSelLicense = null;
         };
     $scope.showDialog = function (message) {
 

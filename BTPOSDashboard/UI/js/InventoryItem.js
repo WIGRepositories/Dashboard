@@ -20,43 +20,47 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetInventoryItems = function () {
 
-        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem').then(function (response, req) {
+        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem?subCatId=-1').then(function (response, req) {
             $scope.InventoryItems = response.data;
-            $scope.getselectval();
+          //  $scope.getselectval();
 
         });
     }
 
-      $scope.getselectval = function (seltype) {
-        var grpid = (seltype) ? seltype.Id : -1;
-    //to save new inventory item
-        $http.get('http://localhost:1476/api/Inventory/getsubcategory?subcatid=1' + grpid).then(function (res, data) {
-            $scope.Item = res.data;
-        });
-      }
-      $scope.getselectval = function (seltype) {
-          var grpid = (seltype) ? seltype.Id : -1;
-          //to save new inventory item
-          $http.get('http://localhost:1476/api/Inventory/getsubcategory?catid=6' + grpid).then(function (res, data) {
-              $scope.Item = res.data;
-          });
-      }
+    //  $scope.getselectval = function (seltype) {
+    //    var grpid = (seltype) ? seltype.Id : -1;
+    ////to save new inventory item
+    //    $http.get('http://localhost:1476/api/Inventory/getsubcategory?subcatid=1' + grpid).then(function (res, data) {
+    //        $scope.Item = res.data;
+    //    });
+    //  }
+    //  $scope.getselectval = function (seltype) {
+    //      var grpid = (seltype) ? seltype.Id : -1;
+    //      //to save new inventory item
+    //      $http.get('http://localhost:1476/api/Inventory/getsubcategory?catid=6' + grpid).then(function (res, data) {
+    //          $scope.Item = res.data;
+    //      });
+    //  }
 
 
       $scope.saveNewItem = function (Item) {
           if (Item == null) {
-              alert('Please enter ItemName.');
+              alert('Please enter Item Name.');
               return;
           }
 
           if (Item.ItemName == null) {
-              alert('Please enter ItemName.');
+              alert('Please enter Item Name.');
               return;
           }
           if (Item.Code == null) {
-              alert('please enter Code')
+              alert('please enter Code');
+              return;
           }
-
+          if (Item.SubCategory == null) {
+              alert('please select subcategory');
+              return;
+          }
           var Item = {
               Id: -1,
               ItemName: Item.ItemName,
@@ -64,7 +68,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
               Code: Item.Code,
               Description: Item.Description,
               Category: 6,// Item.Category.Id,
-              SubCategory: 1,//Item.SubCategory.Id,
+              SubCategory:Item.SubCategory.Id,
               ReOrderPoint: Item.ReOrderPoint
           }
 
@@ -78,6 +82,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
               $scope.showDialog("Saved successfully!");
 
               $scope.Group = null;
+              $scope.GetInventoryItems();
 
           }, function (errres) {
               var errdata = errres.data;
@@ -89,7 +94,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
       };
 
         $scope.save = function (Item) {
+            if (Item == null) {
+                alert('Please enter Item Name.');
+                return;
+            }
 
+            if (Item.ItemName == null) {
+                alert('Please enter Item Name.');
+                return;
+            }
+            if (Item.Code == null) {
+                alert('please enter Code');
+                return;
+            }
+            if (Item.SubCategory == null) {
+                alert('please select subcategory');
+                return;
+            }
             var Item = {
                 Id: Item.Id,
                 ItemName: Item.ItemName,
@@ -97,7 +118,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 Code: Item.Code,
                 Description: Item.Description,
                 Category: Item.Category,
-                SubCategory: Item.SubCategory,
+                SubCategory: Item.SubCategory.Id,
                 ReOrderPoint: Item.ReOrderPoint
             }
 
@@ -111,6 +132,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 $scope.showDialog("Saved successfully!");
 
                 $scope.Group = null;
+                $scope.GetInventoryItems();
 
             }, function (errres) {
                 var errdata = errres.data;

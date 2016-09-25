@@ -356,34 +356,32 @@
                         <div id="table-action" class="row">
                             <div class="col-lg-12">
 
-
-
                                 <div id="tableactionTabContent" class="tab-content">
                                     <div id="table-table-tab" class="tab-pane fade in active">
                                         <div class="row">
+
                                             <div class="col-lg-12">
 
-
                                                 <div class="table-container">
-
-
-                                                    <div class="actions">
+                                                    <div class="row mbm">
                                                         <div class="col-lg-4">
 
-                                                            License Category: <select ng-options="s.Name for s in lcat track by s.Id" ng-model="s" ng-change="getLicenseTypes()">
+                                                            License Category:
+                                                            <select ng-options="s.Name for s in lcat track by s.Id" ng-model="s" ng-change="getLicenseTypes()" style="width:70%">
                                                                 <option value="">Select</option>
                                                             </select>
 
                                                         </div>
                                                         <div class="col-lg-4">
 
-                                                            License Type: <select ng-options="l.LicenseType for l in lTypes track by l.Id" ng-model="l" ng-change="GetLicenseFeatures()">
+                                                            License Type: <select ng-options="l.LicenseType for l in lTypes track by l.Id" ng-model="l" ng-change="GetLicenseFeatures()" style="width:70%">
                                                                 <option value="">Select</option>
                                                             </select>
 
                                                         </div>
-                                                        <button  type="button" data-target="#Modal-header-primary-New" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add Feature</button>
-
+                                                        <div style="height:15px">
+                                                            <button ng-hide="l.Id == null" type="button" data-target="#Modal-header-primary-New" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">Add Feature</button>
+                                                        </div>
                                                     </div>
 
                                                     <div id="Modal-header-primary-New" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal" ng-model="newFeature">
@@ -398,11 +396,11 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Feature Name:<span class='require'>*</span></label>
+                                                                                <label for="inputFirstName" class="control-label" style="color:red;">Feature Name:<span class='require'>*</span></label>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-5" width="100%">
-                                                                            <select ng-options="f.Name for f in Types track by f.Id" ng-model="f">
+                                                                        <div class="col-md-5">
+                                                                            <select ng-options="f.Name for f in Types track by f.Id" ng-model="f" style="width:100%">
                                                                                 <option value="">Select</option>
                                                                             </select>
                                                                         </div>
@@ -416,7 +414,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Feature Value:</label>
+                                                                                <label for="inputFirstName" class="control-label" style="color:red;">Feature Value:</label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
@@ -429,7 +427,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Feature Label:</label>
+                                                                                <label for="inputFirstName" class="control-label" style="color:red;">Feature Label:</label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
@@ -490,7 +488,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Feature Name:<span class='require'>*</span></label>
+                                                                                <label for="inputFirstName" class="control-label" style="color:red;">Feature Name:<span class='require'>*</span></label>
                                                                             </div>
                                                                         </div>
 
@@ -510,7 +508,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Feature Value:</label>
+                                                                                <label for="inputFirstName" class="control-label" style="color:red;">Feature Value:</label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
@@ -523,7 +521,7 @@
 
                                                                         <div class="col-md-3">
                                                                             <div class="form-group has-success" style="text-align:right">
-                                                                                <label for="inputFirstName" class="control-label">Feature Label:</label>
+                                                                                <label for="inputFirstName" class="control-label" style="color:red;">Feature Label:</label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-5">
@@ -536,14 +534,14 @@
 
                                                                     <!----     <div class="form-group">
 
-                                                                <label for="selCountry" class="col-md-3 control-label">License Catagory</label>
-                                                                <div class="col-md-5">
-                                                                    <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
-                                                                        <option value="">All</option>
-                                                                    </select>
-                                                                </div>
+                                                                        <label for="selCountry" class="col-md-3 control-label">License Catagory</label>
+                                                                        <div class="col-md-5">
+                                                                            <select ng-options="s.Name for s in TypeGroups track by s.Id" ng-model="s" class="form-control" ng-change="getselectval(s)">
+                                                                                <option value="">All</option>
+                                                                            </select>
+                                                                        </div>
 
-                                                            </div>---->
+                                                                    </div>---->
 
 
 
@@ -589,7 +587,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <button type="button" class="btn btn-default btn-xs">
-                                                                        <i class="fa fa-trash-o"></i>&nbsp;                                                                       
+                                                                        <i class="fa fa-trash-o"></i>&nbsp;
                                                                     </button>
                                                                 </td>
                                                             </tr>
@@ -618,6 +616,7 @@
 
             </div>
         </div>
+    </div>
         <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
             <div class="modal-header">
@@ -638,7 +637,7 @@
             </div>
 
         </script>
-        </div>
+       
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/jquery-ui.js"></script>

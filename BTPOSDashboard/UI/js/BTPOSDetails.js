@@ -2,9 +2,10 @@ var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     $scope.currpagefirst = 1;
     //$scope.currpage = 0;
-    $scope.totalRecords = 12;
+    $scope.totalRecords = 0;
     // $scope.totalpages = 12;
     $scope.pagesize = 5;
+
     $scope.myFunction = function () {
         if ($scope.currpage >= 1) {
             $scope.currpage++;
@@ -25,11 +26,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
    
 
     $scope.decPageNo = function () {
-        if ($scope.currpagefirst <= 0)
-            return;
-        else {
+        $scope.currpagefirst = $scope.currpagefirst - 1;
 
-            $scope.currpagefirst = $scope.currpagefirst - 1;
+        if ($scope.currpagefirst <= 0)
+        {
+            $scope.currpagefirst = 1;
+            return;
         }
 
         var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
@@ -37,14 +39,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
-            $scope.totalRecords = $scope.BTPOS1.Row_count;
+            $scope.totalRecords = $scope.BTPOS1.Table[0].Row_count;
+            $scope.totalpages = Math.ceil($scope.totalRecords / $scope.pagesize);
+            
             //  $scope.btpossize.push(BTPOSdetails);
             //  $localStorage.BTPOSOld = response.data;
             // $scope.setPage();
         })
 
     }
-    $scope.totalpages = $scope.totalRecords;
+ //   $scope.totalpages = $scope.totalRecords;
 
   
 
@@ -59,7 +63,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + $scope.currpagefirst + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
-
+            $scope.totalRecords = $scope.BTPOS1.Table[0].Row_count;
+            $scope.totalpages = Math.ceil($scope.totalRecords / $scope.pagesize);
             //  $scope.btpossize.push(BTPOSdetails);
             //  $localStorage.BTPOSOld = response.data;
             // $scope.setPage();
@@ -99,10 +104,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
             var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
 
-            $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
-                $scope.BTPOS1 = response.data;
+            //$http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
+            //    $scope.BTPOS1 = response.data;
 
-            });
+            //});
             if ($scope.userCmpId != 1) {
                 //loop throug the companies and identify the correct one
                 for (i = 0; i < res.data.length; i++) {
@@ -118,6 +123,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
 
             $scope.GetFleetOwners($scope.cmp);
+            $scope.FirstPage();
         });
 
 
@@ -198,7 +204,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1').then(function (response, req) {
             $scope.BTPOS1 = response.data;
-
+            $scope.totalRecords = $scope.BTPOS1.Table[0].Row_count;
+            $scope.totalpages = Math.ceil($scope.totalRecords / $scope.pagesize);
             //  $localStorage.BTPOSOld = response.data;
             // $scope.setPage();
         })
@@ -231,16 +238,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOSdetails1 = response.data;
             $scope.totalrec = $scope.BTPOSdetails1;
+            $scope.totalpages = Math.ceil($scope.totalRecords / $scope.pagesize);
             // $scope.pcnt = $scope.totalrec / $scope.pagesize;
         })
 
 
     };
-
-
-
-
-
 
 
     //$scope.GetBTPOSDetailslist = function (pageno) {
@@ -359,7 +362,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //       $scope.currpage++;
     //   };
     $scope.pageCount = function (pagesize) {
-        return Math.ceil(parseInt($scope.totalrec) / parseInt($scope.pagesize));
+        return Math.ceil(parseInt($scope.totalRecords) / parseInt($scope.pagesize));
     };
     $scope.FirstPage = function (pageno) {
         $scope.currpagefirst = 1;
@@ -367,6 +370,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=1' + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
+            $scope.totalRecords = $scope.BTPOS1.Table[0].Row_count;
+            $scope.totalpages = Math.ceil($scope.totalRecords / $scope.pagesize);
         });
     };
 
@@ -389,6 +394,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=-1' + '&pageno=' + ($scope.totalpages) + '&pagesize=' + $scope.pagesize).then(function (response, req) {
             $scope.BTPOS1 = response.data;
+            $scope.totalRecords = $scope.BTPOS1.Table[0].Row_count;
+            $scope.totalpages = Math.ceil($scope.totalRecords / $scope.pagesize);
         });
     };
 
@@ -414,6 +421,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http.get('http://localhost:1476/api/BTPOSDetails/GetBTPOSDetails?cmpId=' + cmpId + '&fId=' + fId).then(function (response, req) {
             $scope.BTPOS1 = response.data;
+            $scope.totalRecords = $scope.BTPOS1.Table[0].Row_count;
+            $scope.totalpages = Math.ceil($scope.totalRecords / $scope.pagesize);
             //  $localStorage.BTPOSOld = response.data;
         })
     }
@@ -589,6 +598,75 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //    }
 
     //}
+
+    $scope.GetInventoryItems = function () {
+        $scope.Group = null;
+        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem?subCatId=1').then(function (response, req) {
+            $scope.InventoryItem = response.data;
+
+        });
+    }
+
+    $scope.savepurchases = function (Group) {
+        if (Group == null) {
+            alert('please select Item')
+            return;
+        }
+        if (Group.Item.ItemName == null) {
+            alert('please enter Item name')
+            return;
+        }
+        if (Group.PerUnitPrice == null)
+        {
+            alert('please enter the Per Unit Price');
+            return;
+        }
+        if (Group.Quantity == null) {
+            alert('please enter the quantity');
+            return;
+        }
+        if (Group.PurchaseOrderNumber == null) {
+            alert('please enter Purchase Order Number');
+            return;
+        }
+        
+        if (Group.PurchaseDate == null)
+        {
+            alert('please enter the purchase order date');
+            return;
+        }
+        var Group = {
+            Id: -1,
+            ItemName: Group.Item.ItemName,
+            subCategoryId: Group.Item.SubCategoryId,
+            Quantity: Group.Quantity,
+            PerUnitPrice: Group.PerUnitPrice,
+            PurchaseDate: Group.PurchaseDate,
+            PurchaseOrderNumber: Group.PurchaseOrderNumber,
+            ItemTypeId: Group.Item.Id
+        }
+
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:1476/api/InventoryPurchase/SaveInventoryPurchases',
+            data: Group
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully! " + Group.Quantity + " no of POS units created");
+
+            $scope.Group = null;
+            $scope.FirstPage();
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
+    };
+
 
 });
 

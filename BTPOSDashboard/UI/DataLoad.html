@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetDataLoad();" ng-model="initdata">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-model="initdata">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -359,7 +359,7 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-3">
-                                                            Select file type: <select>
+                                                            Select file type: <select width="100%">
                                                                 <option value="">Select</option>
                                                                 <option value="1">Company</option>
                                                                 <option value="2">Users</option>
@@ -372,17 +372,38 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            <input type="file" width="100%"/>                                                                   
+                                                            <!--<input type="file" width="100%" ng-model="filename" accept=".csv" />-->
+                                                            <input type="file" file-reader="fileContent" accept=".csv"/>
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            <input type="button" value="Download template" />
+                                                        <div class="col-md-6" style="text-align:right">
+                                                            <!--<input type="button" value="Download template" ng-click="saveJSON();" />-->
+
+                                                            <a target="_self" ng-href="{{csv_link}}">
+                                                                <button class="btn btn-green">download csv</button>
+                                                            </a>
+                                                            <input type="button" class="btn btn-green" ng-click="importData();" value="Load data" />
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            <input type="button" value="Load data" />
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
-                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-primary">
+                                                        <div class="panel-heading">Mandatory columns</div>
+                                                        <div class="panel-body">{{mandatoryCols}}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-green">
+                                                        <div class="panel-heading">Log:</div>
+                                                        <div class="panel-body" style="text-align:right">
+                                                            <button ng-click="saveJSON()">Export Log</button>
+
+                                                                <textarea rows="20" class="form-control" ng-model="logdata" style="margin-top:3px"></textarea>
+
+</div>
+                                                    </div>
+                                                </div>
+                                                <!--<table class="table table-hover table-striped table-bordered table-advanced tablesorter">
                                                     <thead>
                                                         <tr>
                                                             <th>FileName</th>
@@ -421,7 +442,7 @@
 
                                                     </tbody>
 
-                                                </table>
+                                                </table>-->
 
 
 

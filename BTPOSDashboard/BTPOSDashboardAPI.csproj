@@ -2693,6 +2693,7 @@
     <Content Include="UI\orgchart\assets\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="UI\orgchart\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="UI\orgchart\assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="UI\DataUploadTemplates\CompanyList.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

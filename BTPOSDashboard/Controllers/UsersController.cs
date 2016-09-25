@@ -98,13 +98,21 @@ namespace BTPOSDashboardAPI.Controllers
                 UEmail.Value = U.Email;
                 cmd.Parameters.Add(UEmail);
 
-                SqlParameter UAdressId = new SqlParameter("@AdressId",SqlDbType.Int);
+                SqlParameter UAdressId = new SqlParameter("@Address",SqlDbType.VarChar,250);
                 UAdressId.Value = U.Address;
                 cmd.Parameters.Add(UAdressId);
 
-                SqlParameter UMobileNo = new SqlParameter("@MobileNo",SqlDbType.VarChar, 15);
+                SqlParameter AltAddress = new SqlParameter("@AltAddress",SqlDbType.VarChar,250);
+                AltAddress.Value = U.AltAdress;
+                cmd.Parameters.Add(AltAddress);
+
+                SqlParameter UMobileNo = new SqlParameter("@ContactNo1",SqlDbType.VarChar, 15);
                 UMobileNo.Value = U.ContactNo1;
                 cmd.Parameters.Add(UMobileNo);
+
+                 SqlParameter ContactNo2 = new SqlParameter("@ContactNo2",SqlDbType.VarChar, 15);
+                ContactNo2.Value = U.ContactNo2;
+                cmd.Parameters.Add(ContactNo2);
 
                 SqlParameter URole1 = new SqlParameter("@RoleId",SqlDbType.Int);
                 URole1.Value = U.RoleId;
@@ -114,23 +122,65 @@ namespace BTPOSDashboardAPI.Controllers
                 UActive.Value = U.Active;
                 cmd.Parameters.Add(UActive);
 
-                SqlParameter UUserName = new SqlParameter("@UserName",SqlDbType.VarChar,15);
+                SqlParameter UUserName = new SqlParameter("@DUserName",SqlDbType.VarChar,15);
                 UUserName.Value = U.DUserName;
                 cmd.Parameters.Add(UUserName);
                 
-                SqlParameter UPassword = new SqlParameter("@Password",SqlDbType.VarChar,15);
+                SqlParameter UPassword = new SqlParameter("@DPassword",SqlDbType.VarChar,15);
                 UPassword.Value = U.DPassword;
                 cmd.Parameters.Add(UPassword);
+
+                //  SqlParameter WUserName = new SqlParameter("@WUserName",SqlDbType.VarChar,15);
+                //WUserName.Value = U.WUserName;
+                //cmd.Parameters.Add(WUserName);
+                
+                //SqlParameter WPassword = new SqlParameter("@WPassword",SqlDbType.VarChar,15);
+                //WPassword.Value = U.WPassword;
+                //cmd.Parameters.Add(WPassword);
 
                 SqlParameter MgrId = new SqlParameter("@ManagerId", SqlDbType.Int);
                 MgrId.Value = U.mgrId;
                 cmd.Parameters.Add(MgrId);
 
+
+                SqlParameter ZipCode = new SqlParameter("@ZipCode",SqlDbType.VarChar,15);
+                ZipCode.Value = U.ZipCode;
+                cmd.Parameters.Add(ZipCode);
+
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                 insupdflag.Value = U.insupdflag;
                 cmd.Parameters.Add(insupdflag);
 
-                                
+        SqlParameter StateId = new SqlParameter("@StateId",SqlDbType.Int);
+                StateId.Value = U.StateId;
+                cmd.Parameters.Add(StateId);
+
+                 SqlParameter CountryId = new SqlParameter("@CountryId",SqlDbType.Int);
+                CountryId.Value = U.CountryId;
+                cmd.Parameters.Add(CountryId);
+
+                SqlParameter GenderId = new SqlParameter("@GenderId", SqlDbType.Int);
+                GenderId.Value = U.GenderId;
+                cmd.Parameters.Add(GenderId);
+       
+                SqlParameter RFromDate = new SqlParameter();
+                RFromDate.ParameterName = "@RFromDate";
+                RFromDate.SqlDbType = SqlDbType.DateTime;
+                RFromDate.Value = U.RFromDate;
+                cmd.Parameters.Add(RFromDate);
+                
+                SqlParameter RToDate = new SqlParameter();
+                RToDate.ParameterName = "@RToDate";
+                RToDate.SqlDbType = SqlDbType.DateTime;
+                RToDate.Value = U.RToDate;
+                cmd.Parameters.Add(RToDate);
+
+                SqlParameter Photo = new SqlParameter();
+                Photo.ParameterName = "@Photo";
+                Photo.SqlDbType = SqlDbType.VarChar;
+                Photo.Value = U.Photo;
+                cmd.Parameters.Add(Photo);  
+
                 cmd.ExecuteScalar();
                 
                 conn.Close();
@@ -142,6 +192,7 @@ namespace BTPOSDashboardAPI.Controllers
                 conn.Close();
                 string str = ex.Message;
                 traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveUsers:" + ex.Message);
+                throw ex;
             }
 
             

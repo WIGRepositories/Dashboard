@@ -359,315 +359,152 @@
 
                                                     <div class="actions">
                                                         <div class="col-md-4">
-                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()"id="test">
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetBTPOSList()"id="test"
+                                                                            style="width:80%">
                                                                 <option value="">All</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()" id="test1">
-                                                                <option value="">All</option>
-                                                            </select>
-                                                        </div>                                                         
-                                                      
-                                                        <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add Purchase Order</button>
-                                                        <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button>
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetBTPOSListByFleetOwner()" id="test1" style="width:80%">
+    <option value="">All</option>
+</select>
+                                                        </div> 
+                                                        <div class="col-md-4">
 
+                                                            <button type="button" data-target="#Modal-header-new-I" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add Purchase Order</button>
+                                                            <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px"> Add New BT POS</button>
+                                                        </div>                                                        
                                                     </div>
                                                     
 
-                                                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Edit BT POS Details</h4>
-                                                                </div>
-                                                                <div class="modal-body" ng-model="currGroup">
-                                                                   
-                                                                    <div class="row mbm">
+                                            </div>
 
-                                                                        <label for="inputFirstName" class="col-md-4 control-label">POSID:<span class='require'>*</span></label>
-                                                                          
-                                                                <div class="col-md-6">
-                                                                    
-                                                                        <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.POSID" /></div>
-                                                                    </div>
-                                                                </div>
-                                                                   
-                                                                    
+                                            </div>
+                                            <div class="row mbm" ng-hide="BTPOS1.Table1 == null || BTPOS1.Table1.length == 0">
 
-                                                                    <div class="row mbm">
-
-                                                                        <label for="inputFirstName" class="col-md-4 control-label">IMEI:<span class='require'>*</span></label>
-                                                                        <div class="col-md-6">
-                                                                       
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.IMEI" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                   
-
-                                                                    <div class="row mbm">
-
-                                                                      
-                                                                        <label for="inputFirstName" class="col-md-4 control-label">IP Config:<span class='require'>*</span></label>
-                                                                            
-                                                                        <div class="col-md-6">
-                                                                            
-                                                                                <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.ipconfig" /></div>
-                                                                            </div>
-                                                                        </div>
-                                                                   
-
-                                                                    <div class="row mbm">
-
-                                                                        <label for="inputFirstName" class="col-md-4 control-label">Company Name:<span class='require'>*</span></label>
-                                                                           
-                                                                        <div class="col-md-5">
-                                                                            
-                                                                            <select ng-options="c.Name for c in Companies1 track by c.Id" class="form-control" ng-model="cmp1" ng-change="GetPopupFleetOwners();" value="{{currGroup.CompanyId}}">
-                                                                                <option value="">Select</option>
-                                                                            </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        
+                                                <div class="col-lg-12">
 
 
-                                                                    <div class="row mbm">
-
-                                                                        <label for="inputFirstName" class="col-md-4 control-label">Fleet Owner:<span class='require'>*</span></label>
-                                                                           
-                                                                       
-                                                                        <div class="col-md-5">
-                                                                          
-                                                                            <select ng-options="s.Name for s in fdata.Table track by s.Id" class="form-control" ng-model="s1" value="{{currGroup.fleetownerid}}">
-
-                                                                                <option value="">Select</option>
-                                                                            </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        
+                                                    <div class="table-container">
 
 
-                                                                    <div class="row mbm">
-
-                                                                        <label for="inputFirstName" class="col-md-4 control-label">Status:<span class='require'>*</span></label>
-                                                                            
-                                                                        <div class="col-md-5">
-                                                                            
-                                                                            <select ng-options="t.Name for t in Types track by t.Id" class="form-control" ng-model="currGroup.Status" value="{{currGroup.StatusId}}">
-
-                                                                                <option value="0">Select</option>
-                                                                            </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup, 'U');">Save</button>
-
-                                                                    <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup();">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                        </div>
-                                                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header modal-header-primary">
-                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New BTPOSDetails</h4>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                  
-
-                                                                    <div class="row mbm">
-
-                                                                        <label for="IMEI" class="col-md-4 control-label" style="color:red;">IMEI: <span class='require'>*</span></label>
-
-                                                                        <div class="col-md-6">
-                                                                            <input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span>
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                    <div class="row mbm">
-                                                                        <label for="IMEI" class="col-md-4 control-label" style="color:red;">IP Config: <span class='require'>*</span></label>
-                                                                        <div class="col-md-6">
-                                                                            <input id="ipconfig" type="text" ng-model="Group.ipconfig" class="form-control" /><span class="help-block"></span>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <div class="row mbm">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Company name:</label>
-
-                                                                        <div class="col-md-6">
-                                                                            <select id="selcmp" class="form-control" ng-model="Group.GroupId" disabled>
-                                                                                <option value="">INTERBUS</option>
-                                                                                <option selected value="1">Cmp1</option>
-                                                                                <option value="5">cmp2</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mbm">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Fleet Owner:</label>
-
-
-                                                                        <div class="col-md-6">
-                                                                            <select id="selusertype" class="form-control" ng-model="Group.FleetOwnerId" disabled>
-                                                                                <option value="">None</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row mbm">
-                                                                        <label for="selCountry" class="col-md-4 control-label">Status:</label>
-                                                                        <div class="col-md-6">
-                                                                            <select id="selstatus" class="form-control" ng-model="Group.StatusId" disabled>
-                                                                                <option value="">New</option>
-                                                                                <!--<option selected value="4">New</option>-->
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                              
-                                                                <div class="form-actions">
-                                                                    <div class="col-md-offset-3 col-md-9">
-                                                                        <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
-
-                                                                        <a href="btposdetails.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
-                                                                    </div>
-                                                                </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="pagination-panel" ng-init="GetBTPOSDetails();">
+                                                                Page
+                                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
+                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlength="5" min="1" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
+                                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
+                                                                of {{ totalpages }} | Per page
+                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize" ng-value="pagesize" ng-change="FirstPage();">
+    <option value="5" selected="selected">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+    <option value="150">150</option>
+    <!--<option value="-1">All</option>-->
+</select>&nbsp;
+                                                                Found total {{totalRecords}} records
+                                                                <div style="height:15px;"></div>                                                                
                                                             </div>
                                                         </div>
 
+                                                        <div class="tab-content">
+
+                                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>S.No</th>
+                                                                        <th>POSID</th>
+                                                                        <th>IMEI</th>
+                                                                        <th>Company Name</th>
+                                                                        <th>POS Type</th>
+                                                                        <th>Fleet Owner</th>
+                                                                        <th>PO Num</th>
+                                                                        <th>Activation Date</th>
+                                                                        <th>Status</th>
+                                                                        <th>Update</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+                                                                    <tr ng-repeat="pos in BTPOS1.Table1" class="gradeA">
+                                                                        <td>{{pos.ROWNUMBER}}</td>
+                                                                        <td>{{pos.POSID}}</td>
+                                                                        <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);" /></td>
+
+                                                                        <td>{{pos.companyname}}</td>
+                                                                        <td>{{pos.POSType}}</td>
+                                                                        <td>{{pos.fleetowner}}</td>
+                                                                        
+                                                                        <td>{{pos.PONum}}</td>
+                                                                        <td>{{pos.ActivatedOn}}</td>
+                                                                        <td>
+                                                                            <span class="label label-sm label-success" ng-if="pos.StatusId == 2">
+                                                                                {{pos.status}}
+                                                                            </span>
+                                                                            <span class="label label-sm label-info" ng-if="pos.StatusId == 4">
+                                                                                {{pos.status}}
+                                                                            </span>
+                                                                            <span class="label label-sm label-warning" ng-if="pos.StatusId == 1">
+                                                                                {{pos.status}}
+                                                                            </span>
+                                                                            <span class="label label-sm label-danger" ng-if="pos.StatusId == 3">
+                                                                                {{pos.status}}
+                                                                            </span>
+                                                                        </td>
+                                                                        <td>
+
+                                                                            <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
+                                                                                <i class="fa fa-edit"></i>&nbsp;
+                                                                                Edit
+                                                                            </button>
+                                                                        </td>
+
+                                                                    </tr>
 
 
+                                                                </tbody>
+
+
+                                                            </table>
+                                                        </div>
+
+                                                        <div class="col-lg-6">
+                                                            <div class="pagination-panel" ng-init="GetBTPOSDetails();">
+                                                                Page
+                                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
+                                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
+                                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
+                                                                of {{ totalpages}} | Per page
+                                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize" ng-value="pagesize" ng-change="FirstPage();">
+
+    <option value="5" selected="selected">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+    <option value="150">150</option>
+    <!--<option value="-1">All</option>-->
+</select>&nbsp;Found total {{totalRecords}} records
+
+
+
+                                                            </div>
+                                                        </div>
                                                     </div>
-
                                                 </div>
                                             </div>
 
-                                            </div>
-                                            <div class="row mbm" ng-hide="BTPOS1.Table1.length == 0">
-                                                <div class="col-lg-6">
-                                                    <div class="pagination-panel" ng-init="GetBTPOSDetails();">
-                                                        Page
-                                                        <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
-                                                        &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlength="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
-                                                        <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
-                                                        of {{ totalpages}} | View
-                                                        &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize" ng-value="pagesize">
+                                                    
 
-                                                            <option value="5" selected="selected">5</option>
-                                                            <option value="10">10</option>
-                                                            <option value="20">20</option>
-                                                            <option value="50">50</option>
-                                                            <option value="100">100</option>
-                                                            <option value="150">150</option>
-                                                            <option value="-1">All</option>
-                                                        </select>&nbsp;
-                                                        <div ng-model="BTPOSdetails1">
-                                                            <br />
-                                                            <div ng-repeat="b in BTPOSdetails1">
 
-                                                                Found total {{b.Row_count}} records
-
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
                                                 </div>
 
-
                                             </div>
-                                            
-                                            <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
-    <thead>
-        <tr>
-
-            <th>POSID</th>
-            <th>IMEI</th>
-            <th>Company Name</th>
-            <th>IP Config</th>
-            <th>Fleet Owner</th>
-            <th>Status</th>
-            <th>Update</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr ng-repeat="pos in BTPOS1.Table1" class="gradeA">
-            <td>{{pos.POSID}}</td>
-            <td><input type="text" class="form-control" id="IMEI" ng-model="pos.IMEI" ng-change="addpos(pos);" /></td>
-
-            <td>{{pos.companyname}}</td>
-            <td><input type="text" class="form-control" id="ipconfig" ng-model="pos.ipconfig" ng-change="addpos(pos);" /></td>
-            <td>{{pos.fleetowner}}</td>
-            <td>
-                <span class="label label-sm label-success" ng-if="pos.StatusId == 2">
-                    {{pos.status}}
-                </span>
-                <span class="label label-sm label-info" ng-if="pos.StatusId == 4">
-                    {{pos.status}}
-                </span>
-                <span class="label label-sm label-warning" ng-if="pos.StatusId == 1">
-                    {{pos.status}}
-                </span>
-                <span class="label label-sm label-danger" ng-if="pos.StatusId == 3">
-                    {{pos.status}}
-                </span>
-            </td>
-            <td>
-
-                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setBTPOS(pos);">
-                    <i class="fa fa-edit"></i>&nbsp;
-                    Edit
-                </button>
-            </td>
-
-        </tr>
-
-
-    </tbody>
-
-
-</table>
-
-
-                                            </div>
-
-                                </div>
                                     <br />
-                                    <div class="row mbm" ng-hide="BTPOS1.Table1.length == 0">
-                                        <div class="col-lg-6">
-                                            <div class="pagination-panel" ng-init="GetBTPOSDetails();">
-                                                Page
-                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
-                                                &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
-                                                <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="lastPage();"><i class="fa fa-angle-double-right"></i></button></a>
-                                                of {{ totalpages}} | View
-                                                &nbsp;<select class="form-control input-xsmall input-sm input-inline" ng-model="pagesize" ng-value="pagesize">
+                                    <div class="row mbm" ng-hide="BTPOS1.Table1 == null || BTPOS1.Table1.length == 0">
 
-                                                    <option value="5" selected="selected">5</option>
-                                                    <option value="10">10</option>
-                                                    <option value="20">20</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                    <option value="150">150</option>
-                                                    <option value="-1">All</option>
-                                                </select>&nbsp;
-
-
-                                                <div ng-model="BTPOSdetails1">
-                                                    <br />
-                                                    <div ng-repeat="b in BTPOSdetails1">
-
-                                                        Found total {{b.Row_count}} records
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
 
 
                                         <div class="modal-footer" ng-hide="BTPOS1.Table1.length == 0">
@@ -685,6 +522,262 @@
              
 </div>
                         </div>
+
+
+                    <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header modal-header-primary">
+                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                    <h4 id="modal-header-primary-label" class="modal-title">Edit BT POS Details</h4>
+                                </div>
+                                <div class="modal-body" ng-model="currGroup">
+
+                                    <div class="row mbm">
+
+                                        <label for="inputFirstName" class="col-md-4 control-label">POSID:<span class='require'>*</span></label>
+
+                                        <div class="col-md-6">
+
+                                            <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.POSID" /></div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mbm">
+
+                                        <label for="inputFirstName" class="col-md-4 control-label">IMEI:<span class='require'>*</span></label>
+                                        <div class="col-md-6">
+
+                                            <div class="input-icon right"><input type="text" class="form-control" id="IMEI" ng-model="currGroup.IMEI" /></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mbm">
+
+
+                                        <label for="inputFirstName" class="col-md-4 control-label">IP Config:<span class='require'>*</span></label>
+
+                                        <div class="col-md-6">
+
+                                            <div class="input-icon right"><input type="text" class="form-control" id="ip" ng-model="currGroup.ipconfig" /></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mbm">
+
+                                        <label for="inputFirstName" class="col-md-4 control-label">Company Name:<span class='require'>*</span></label>
+
+                                        <div class="col-md-5">
+
+                                            <select ng-options="c.Name for c in Companies1 track by c.Id" class="form-control" ng-model="cmp1" ng-change="GetPopupFleetOwners();" value="{{currGroup.CompanyId}}">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mbm">
+
+                                        <label for="inputFirstName" class="col-md-4 control-label">Fleet Owner:<span class='require'>*</span></label>
+
+
+                                        <div class="col-md-5">
+
+                                            <select ng-options="s.Name for s in fdata.Table track by s.Id" class="form-control" ng-model="s1" value="{{currGroup.fleetownerid}}">
+
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mbm">
+
+                                        <label for="inputFirstName" class="col-md-4 control-label">Status:<span class='require'>*</span></label>
+
+                                        <div class="col-md-5">
+
+                                            <select ng-options="t.Name for t in Types track by t.Id" class="form-control" ng-model="currGroup.Status" value="{{currGroup.StatusId}}">
+
+                                                <option value="0">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="save(currGroup, 'U');">Save</button>
+
+                                        <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup();">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header modal-header-primary">
+                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                    <h4 id="modal-header-primary-label" class="modal-title">Add New BTPOSDetails</h4>
+                                </div>
+                                <div class="modal-body">
+
+
+                                    <div class="row mbm">
+
+                                        <label for="IMEI" class="col-md-4 control-label" style="color:red;">IMEI: <span class='require'>*</span></label>
+
+                                        <div class="col-md-6">
+                                            <input id="IMEI" type="text" ng-model="Group.IMEI" class="form-control" /><span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mbm">
+                                        <label for="IMEI" class="col-md-4 control-label" style="color:red;">IP Config: <span class='require'>*</span></label>
+                                        <div class="col-md-6">
+                                            <input id="ipconfig" type="text" ng-model="Group.ipconfig" class="form-control" /><span class="help-block"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mbm">
+                                        <label for="selCountry" class="col-md-4 control-label">Company name:</label>
+
+                                        <div class="col-md-6">
+                                            <select id="selcmp" class="form-control" ng-model="Group.GroupId" disabled>
+                                                <option value="">INTERBUS</option>
+                                                <option selected value="1">Cmp1</option>
+                                                <option value="5">cmp2</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mbm">
+                                        <label for="selCountry" class="col-md-4 control-label">Fleet Owner:</label>
+
+
+                                        <div class="col-md-6">
+                                            <select id="selusertype" class="form-control" ng-model="Group.FleetOwnerId" disabled>
+                                                <option value="">None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mbm">
+                                        <label for="selCountry" class="col-md-4 control-label">Status:</label>
+                                        <div class="col-md-6">
+                                            <select id="selstatus" class="form-control" ng-model="Group.StatusId" disabled>
+                                                <option value="">New</option>
+                                                <!--<option selected value="4">New</option>-->
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-actions">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <button class="btn btn-primary" type="button" ng-click="save(Group, 'I');">Save</button>
+
+                                            <a href="btposdetails.html" class="btn btn-green" ng-click="clearGroup()">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div id="Modal-header-new-I" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header modal-header-primary">
+                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                    <h4 id="modal-header-primary-label" class="modal-title">New Inventory Purchases</h4>
+                                </div>
+                                <div class="modal-body" ng-init="GetInventoryItems();" ng-model="group">
+
+
+                                    <div class="row mbm">
+
+                                        <label for="Name" class="col-md-4 control-label" style="color:red;"> Item:<span class='require'>*</span></label>
+
+                                        <div class="col-md-6">
+                                            <select ng-options="I.ItemName for I in InventoryItem track by I.Id" class="form-control" ng-model="Group.Item">
+                                                <option value="">Select</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mbm">
+                                        <label for="code" class="col-md-4 control-label" style="color:red;">SubCategory<span class='require'></span></label>
+
+                                        <div class="col-md-6">
+
+                                            <select ng-options="s.SubCategory for s in InventoryItem track by s.subcategoryid" class="form-control" ng-model="Item.SubCategory" disabled>
+                                                <option value="">Select</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="row mbm">
+                                        <label for="descr" class="col-md-4 control-label" style="color:red;">Quantity:  <span class='require'></span></label>
+
+                                        <div class="col-md-6">
+                                            <input id="Description" type="text" class="form-control" ng-model="Group.Quantity" /><span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mbm">
+                                        <label for="active" class="col-md-4 control-label" style="color:red;">Per Unit Price: <span class='require'></span></label>
+
+
+                                        <div class="col-md-6">
+                                            <input id="Description" type="text" class="form-control" ng-model="Group.PerUnitPrice" /><span class="help-block"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="row mbm">
+                                        <label for="selCompany" class="col-md-4 control-label" style="color:red;">Purchase Order Number:</label>
+
+                                        <div class="col-md-6">
+                                            <input id="Description" type="text" class="form-control" ng-model="Group.PurchaseOrderNumber" /><span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mbm">
+                                        <label for="selCompany" class="col-md-4 control-label" style="color:red;">Purchase Date:<span class='require'>*</span></label>
+                                        <div class="col-md-6">
+                                            <input type="date" ng-model="Group.PurchaseDate" ng-value="Date();"><div style="width:50%" data-date-format="dd/mm/yyyy" class="input-group date datepicker-filter mbs">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-actions" style="text-align:center">
+                                        <div>
+                                            <button class="btn btn-primary" type="button" ng-click="savepurchases(Group);">Save</button>
+
+                                            <button data-dismiss="modal" class="btn btn-green" ng-click="clearGroup()">Cancel</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
            
                     <!--END CONTENT--><!--BEGIN FOOTER-->
                     <div id="footer">
@@ -696,8 +789,8 @@
             </div>
         </div>
 
-                <!--END PAGE WRAPPER-->
-            <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+   <!--END PAGE WRAPPER-->
+   <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
                 <div class="modal-header">
                     <h3 class="modal-title">Save confirmation!</h3>

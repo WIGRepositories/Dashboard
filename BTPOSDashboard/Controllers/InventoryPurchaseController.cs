@@ -44,14 +44,10 @@ namespace BTPOSDashboard.Controllers
         {
 
             LogTraceWriter traceWriter = new LogTraceWriter();
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveInventoryPurchases credentials....");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveInventoryPurchases....");
             SqlConnection conn = new SqlConnection();
             try
             {
-
-            //connect to database
-            
-            
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -153,10 +149,19 @@ namespace BTPOSDashboard.Controllers
                                 SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
                                 active.Value = 1;
                                 cmd.Parameters.Add(active);
+                                
+                                SqlParameter pup = new SqlParameter("@PerUnitPrice", SqlDbType.Decimal);
+                                pup.Value = P.PerUnitPrice;
+                                cmd.Parameters.Add(pup);
 
-                                //SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
-                                //fo.Value = 1;
-                                //cmd.Parameters.Add(fo);
+                                SqlParameter potypeid = new SqlParameter("@POSTypeId", SqlDbType.Int);
+                                potypeid.Value = P.ItemTypeId;
+                                cmd.Parameters.Add(potypeid);
+
+                                SqlParameter ponum = new SqlParameter("@PONum", SqlDbType.VarChar,15);
+                                ponum.Value = P.PurchaseOrderNumber;
+                                cmd.Parameters.Add(ponum);
+
 
                                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                                 insupdflag.Value = "I";
@@ -179,7 +184,7 @@ namespace BTPOSDashboard.Controllers
                  
                 conn.Close();
 
-                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveInventoryPurchases Credentials completed.");
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveInventoryPurchases completed.");
             
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }

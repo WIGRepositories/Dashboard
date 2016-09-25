@@ -33,7 +33,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     }
     $scope.savepurchases = function (Group) {
         if (Group == null) {
-            alert('please enter ItemName')
+            alert('please select Item')
         }
         if (Group.ItemName == null) {
             alert('please enter Itemname')

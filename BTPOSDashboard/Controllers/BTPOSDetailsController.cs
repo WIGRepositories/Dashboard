@@ -85,9 +85,9 @@ namespace BTPOSDashboardAPI.Controllers
 
         [HttpGet]
 
-        public DataTable GetBTPOSDetails()
+        public DataSet GetBTPOSDetails()
         {
-            DataTable Tbl = new DataTable();
+            DataSet Tbl = new DataSet();
 
             LogTraceWriter traceWriter = new LogTraceWriter();
             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails credentials....");
