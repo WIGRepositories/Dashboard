@@ -1,7 +1,7 @@
 // JavaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
-    //$http.get('http://localhost:1476/api/loginpage/log').then(function (response, req) {
+    //$http.get('/api/loginpage/log').then(function (response, req) {
     //    $scope.Group = response.data;
 
     //});
@@ -9,7 +9,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.save = function (Group) {
         alert("saved");
 
-        $http.get('http://localhost:1476/api/loginpage/saveloginpage?userid=' + Group.userid + '&pwd=' + Group.password).then(function (response, req) {
+        $http.get('/api/loginpage/saveloginpage?userid=' + Group.userid + '&pwd=' + Group.password).then(function (response, req) {
             $scope.Group = response.data;
 
         });
@@ -24,7 +24,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         //var req = {
         //    method: 'POST',
-        //    url: 'http://localhost:1476/api/loginpage/saveloginpage',
+        //    url: '/api/loginpage/saveloginpage',
 
         //    data: Group1
 

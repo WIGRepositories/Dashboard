@@ -11,7 +11,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetAlerts = function () {
 
-        $http.get('http://localhost:1476/api/Alerts/GetAlerts').then(function (response, req) {
+        $http.get('/api/Alerts/GetAlerts').then(function (response, req) {
             $scope.GetAlerts = response.data;
 
         });
@@ -40,7 +40,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
 //        var req = {
 //            method: 'POST',
-//            url: 'http://localhost:1476/api/alert/savealerts',
+//            url: '/api/alert/savealerts',
 //            data: Alerts
 //        }
 //        $http(req).then(function (response) {

@@ -19,7 +19,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
    
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -48,7 +48,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
     //        data: vc
@@ -66,7 +66,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
             return;
         }
        
-        $http.get('http://localhost:1476/api/FleetAvailability/GetFleetAvailability?foid=-1&cmpId='+$scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/FleetAvailability/GetFleetAvailability?foid=-1&cmpId='+$scope.cmp.Id).then(function (res, data) {
             $scope.FleetAvailability = res.data;
 
         });
@@ -82,7 +82,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -109,7 +109,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
             $scope.GetFleetDetails($scope.s);
 
         });
-        //$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        //$http.get('/api/Getfleet').then(function (res, data) {
         //    $scope.fleet = res.data;
 
         //    if ($scope.userSId != 1) {
@@ -141,7 +141,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
 
@@ -167,7 +167,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -204,7 +204,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetAvailability/SetFleetAvailability',
+            url: '/api/FleetAvailability/SetFleetAvailability',
             //headers: {
             //    'Content-Type': undefined
 
@@ -252,7 +252,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetAvailability/SetFleetAvailability',
+            url: '/api/FleetAvailability/SetFleetAvailability',
             //headers: {
             //    'Content-Type': undefined
 
@@ -278,13 +278,13 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetAvailability/SetFleetAvailability',
+            url: '/api/FleetAvailability/SetFleetAvailability',
             data: FAvaliability
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/FleetAvailability/GetFleetAvailability?VehicleId=' + R.VehicleId).then(function (res, data) {
+            $http.get('/api/FleetAvailability/GetFleetAvailability?VehicleId=' + R.VehicleId).then(function (res, data) {
                 $scope.FleetAvailability = res.data;
             });
 

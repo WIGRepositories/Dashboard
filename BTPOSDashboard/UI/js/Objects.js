@@ -13,7 +13,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.dashboardDS = $localStorage.dashboardDS;
  
-    $http.get('http://localhost:1476/api/objects/getobjects').then(function (res, data) {
+    $http.get('/api/objects/getobjects').then(function (res, data) {
         $scope.NewObjects = res.data;
     });
     $scope.save = function (NewObject,flag) {
@@ -50,7 +50,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/objects/saveObjects',
+            url: '/api/objects/saveObjects',
             data: SelNewObjects
         }
         $http(req).then(function (response) {
@@ -99,7 +99,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Objects/saveObjects',
+            url: '/api/Objects/saveObjects',
             data: SelNewObjects
         }
 

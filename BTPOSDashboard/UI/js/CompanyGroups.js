@@ -215,7 +215,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;    
 
     $scope.GetCompanys = function () {
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
 
         });
@@ -292,7 +292,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CompanyGroups/SaveCompanyGroups',
+            url: '/api/CompanyGroups/SaveCompanyGroups',
             data: newCmp
         }
         $http(req).then(function (response) {
@@ -382,7 +382,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CompanyGroups/SaveCompanyGroups',
+            url: '/api/CompanyGroups/SaveCompanyGroups',
             data: Group
         }
         $http(req).then(function (response) {
@@ -445,7 +445,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.imageSrc = null;
         document.getElementById('cmpNewLogo').src = "";
 
-        $http.get('http://localhost:1476/api/GetCompanyDetails?cmpId='+cmp.Id).then(function (response, data) {
+        $http.get('/api/GetCompanyDetails?cmpId='+cmp.Id).then(function (response, data) {
             $scope.currGroup = response.data[0];
             $scope.imageSrc = $scope.currGroup.Logo;
             document.getElementById('cmpactive').checked = ($scope.currGroup.Active == 1);

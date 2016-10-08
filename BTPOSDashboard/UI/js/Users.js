@@ -140,7 +140,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     /* user details functions */
     $scope.GetCompanies = function () {    
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
 
         //    if ($scope.userCmpId != 1) {
@@ -171,12 +171,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/Users/GetUsers?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.User = res.data;
             $scope.MgrUsers = res.data;
         });
 
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/Roles/GetCompanyRoles?companyId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.cmproles = res.data;
         });
     }
@@ -248,7 +248,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/users/saveusers',
+            url: '/api/users/saveusers',
             data: U
         }
         $http(req).then(function (response) {
@@ -307,7 +307,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.userRoles = res.data;
             $scope.checkedArr = res.data;
            // $scope.uncheckedArr = $filter('filter')($scope.userRoles, { assigned: "0" });
@@ -331,7 +331,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.EmpNo = 'EMP' + id;
 
         //get companies list   
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
         });
     }
@@ -344,11 +344,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         var cmpId = (seltype) ? seltype.Id : -1;
 
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
         });
 
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
             $scope.MgrUsers = res.data;
         });
         //get users for the company or all users based on company
@@ -362,11 +362,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         var cmpId = ($scope.s == null) ? -1 : $scope.s.Id;
 
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles1 = res.data;
         });
 
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
             $scope.cmpUsers1 = res.data;
         });
     }
@@ -395,7 +395,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Users/SaveUserRoles',
+            url: '/api/Users/SaveUserRoles',
             //headers: {
             //    'Content-Type': undefined
             data: userrole
@@ -461,13 +461,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Users/GetUsers?cmpId=-1',
+            url: '/api/Users/GetUsers?cmpId=-1',
             data: userrole
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+            $http.get('/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
                 $scope.userRoles = res.data;
             });
 

@@ -11,7 +11,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetRoutes = function () {
-        $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
+        $http.get('/api/Routes/GetRoutes').then(function (res, data) {
             $scope.routes = res.data;
         });
     }
@@ -22,7 +22,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.IsVisible = $scope.ShowPassport;
     }
     $scope.GetStops = function () {
-        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {          
+        $http.get('/api/Stops/GetStops').then(function (res, data) {          
             $scope.Stops = res.data;
         });
     }
@@ -77,7 +77,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Routes/SaveRoutes',
+            url: '/api/Routes/SaveRoutes',
             //headers: {
             //    'Content-Type': undefined
             data: newroute
@@ -105,7 +105,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
             var req = {
                 method: 'POST',
-                url: 'http://localhost:1476/api/Routes/SaveRoutes',
+                url: '/api/Routes/SaveRoutes',
                 //headers: {
                 //    'Content-Type': undefined
                 data: retroutes

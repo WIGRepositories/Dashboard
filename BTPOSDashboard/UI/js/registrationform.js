@@ -4,7 +4,7 @@ var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 
     $scope.getdata = function () {
-        $http.get('http://localhost:1476/api/registrationform/getregdata').then(function (res, data) {
+        $http.get('/api/registrationform/getregdata').then(function (res, data) {
             $scope.register = res.data;
 
             //alerts("hi");
@@ -28,7 +28,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/registrationform/pos',
+            url: '/api/registrationform/pos',
             //headers: {
             //    'Content-Type': undefined
 

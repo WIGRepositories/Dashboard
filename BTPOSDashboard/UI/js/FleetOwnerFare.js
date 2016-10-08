@@ -20,7 +20,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
         ];
 
     $scope.GetStops = function () {
-        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+        $http.get('/api/Stops/GetStops').then(function (res, data) {
             $scope.Stops = res.data;
         });
 

@@ -15,7 +15,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
    
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
             $scope.Companies1 = res.data;
 
@@ -51,7 +51,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -89,7 +89,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        $http.get('http://localhost:1476/api/BtposPayment/GetBTPOSTransactions?btposId=-1&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/BtposPayment/GetBTPOSTransactions?btposId=-1&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.posTrans = res.data;            
         });
         }

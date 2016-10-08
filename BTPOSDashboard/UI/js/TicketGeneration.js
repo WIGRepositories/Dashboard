@@ -12,7 +12,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/TicketGeneration/saveTicketGeneration',
+            url: '/api/TicketGeneration/saveTicketGeneration',
             data: Group
         }
  

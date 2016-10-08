@@ -30,7 +30,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -53,7 +53,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     $scope.GetFleetOwners = function () {
         
      
-        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        $http.get('/api/Getfleet').then(function (res, data) {
             $scope.fleet= res.data;
 
             if ($scope.userSId != 1) {

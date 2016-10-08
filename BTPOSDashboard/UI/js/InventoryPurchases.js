@@ -14,20 +14,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetInventoryItems = function () {
 
-        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem?InventoryId=-1').then(function (response, req) {
+        $http.get('/api/InventoryItem/GetInventoryItem?InventoryId=-1').then(function (response, req) {
             $scope.InventoryItem = response.data;
 
         });
     }
     $scope.GetInventoryPurchases = function () {
-        $http.get('http://localhost:1476/api/InventoryPurchase/GetInventoryPurchases').then(function (res, data) {
+        $http.get('/api/InventoryPurchase/GetInventoryPurchases').then(function (res, data) {
             $scope.Group = res.data;
         });
     }
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.Id : -1;
         //to save new inventory item
-        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem?InventoryId=' + grpid).then(function (res, data) {
+        $http.get('/api/InventoryItem/GetInventoryItem?InventoryId=' + grpid).then(function (res, data) {
             $scope.Group = res.data;
         });
     }
@@ -51,7 +51,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/InventoryPurchase/SaveInventoryPurchases',
+            url: '/api/InventoryPurchase/SaveInventoryPurchases',
             data: Group
         }
         $http(req).then(function (response) {
@@ -82,7 +82,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/InventoryPurchase/SaveInventoryPurchases',
+            url: '/api/InventoryPurchase/SaveInventoryPurchases',
             data: Group
         }
         $http(req).then(function (response) {

@@ -10,11 +10,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;
 
         $scope.GetLicenseCategories = function () {
-            $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+            $http.get('/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
                 $scope.lcat = res.data;
             });
 
-            $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=9').then(function (res, data) {
+            $http.get('/api/Types/TypesByGroupId?groupid=9').then(function (res, data) {
                 $scope.Types = res.data;
             });
         }
@@ -28,7 +28,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 return;
             }
 
-            $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
+            $http.get('/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
                 $scope.lTypes = res.data;
             });
         }
@@ -41,7 +41,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 return;
             }
 
-            $http.get('http://localhost:1476/api/LicenseDetails/getLicenseDetails?catId=' + selCat.Id).then(function (res, data) {
+            $http.get('/api/LicenseDetails/getLicenseDetails?catId=' + selCat.Id).then(function (res, data) {
                 $scope.ldetails = res.data;
             });
         }
@@ -80,7 +80,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             var req = {
                 method: 'POST',
-                url: ('http://localhost:1476/api/LicenseDetails/SaveLicenseDetails'),
+                url: ('/api/LicenseDetails/SaveLicenseDetails'),
                 //headers: {
                 //    'Content-Type': undefined
 
@@ -141,7 +141,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             var req = {
                 method: 'POST',
-                url: ('http://localhost:1476/api/LicenseDetails/SaveLicenseDetails'),
+                url: ('/api/LicenseDetails/SaveLicenseDetails'),
                 //headers: {
                 //    'Content-Type': undefined
 

@@ -13,14 +13,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetSubCategories = function () {
 
-        $http.get('http://localhost:1476/api/SubCategory/getsubcategory?catid=6').then(function (response, req) {
+        $http.get('/api/SubCategory/getsubcategory?catid=6').then(function (response, req) {
             $scope.SubCategory = response.data;
         });
     }
 
     $scope.GetInventoryItems = function () {
 
-        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem?subCatId=-1').then(function (response, req) {
+        $http.get('/api/InventoryItem/GetInventoryItem?subCatId=-1').then(function (response, req) {
             $scope.InventoryItems = response.data;
           //  $scope.getselectval();
 
@@ -30,14 +30,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     //  $scope.getselectval = function (seltype) {
     //    var grpid = (seltype) ? seltype.Id : -1;
     ////to save new inventory item
-    //    $http.get('http://localhost:1476/api/Inventory/getsubcategory?subcatid=1' + grpid).then(function (res, data) {
+    //    $http.get('/api/Inventory/getsubcategory?subcatid=1' + grpid).then(function (res, data) {
     //        $scope.Item = res.data;
     //    });
     //  }
     //  $scope.getselectval = function (seltype) {
     //      var grpid = (seltype) ? seltype.Id : -1;
     //      //to save new inventory item
-    //      $http.get('http://localhost:1476/api/Inventory/getsubcategory?catid=6' + grpid).then(function (res, data) {
+    //      $http.get('/api/Inventory/getsubcategory?catid=6' + grpid).then(function (res, data) {
     //          $scope.Item = res.data;
     //      });
     //  }
@@ -74,7 +74,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
           var req = {
               method: 'POST',
-              url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
+              url: '/api/InventoryItem/SaveInventoryItem',
               data: Item
           }
           $http(req).then(function (response) {
@@ -124,7 +124,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             var req = {
                 method: 'POST',
-                url: 'http://localhost:1476/api/InventoryItem/SaveInventoryItem',
+                url: '/api/InventoryItem/SaveInventoryItem',
                 data: Item
             }
             $http(req).then(function (response) {

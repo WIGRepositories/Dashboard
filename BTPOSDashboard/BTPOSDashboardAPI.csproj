@@ -835,6 +835,7 @@
     <Content Include="UI\Users.html" />
     <Content Include="UI\VehicleDetails.html" />
     <Content Include="UI\VehicleLayout.html" />
+    <Content Include="UI\VehicleScheduleList.html" />
     <Content Include="UI\vendors\animate.css\animate.css" />
     <Content Include="UI\vendors\bootstrap-clockface\CHANGELOG.txt" />
     <Content Include="UI\vendors\bootstrap-clockface\css\clockface.css" />

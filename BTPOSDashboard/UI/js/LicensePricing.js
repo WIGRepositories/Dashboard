@@ -13,12 +13,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetLicenseCategories = function ()
     {
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
             $scope.lcat = res.data;
             document.getElementById('btnAdd').disabled = true;
         });
 
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
             $scope.FreqTypes = res.data;
         });
      
@@ -41,12 +41,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        $http.get('http://localhost:1476/api/LicensePricing/LicensePricing?categoryid=' + selCat.Id).then(function (res, data) {
+        $http.get('/api/LicensePricing/LicensePricing?categoryid=' + selCat.Id).then(function (res, data) {
             $scope.lpricing = res.data;
 
         });
 
-        $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
+        $http.get('/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
             $scope.lTypes = res.data;
         });
     }
@@ -101,7 +101,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
+            url: ('/api/LicensePricing/SaveLicensePricing'),
             //headers: {
             //    'Content-Type': undefined
 
@@ -159,7 +159,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
+            url: ('/api/LicensePricing/SaveLicensePricing'),
             //headers: {
             //    'Content-Type': undefined
 

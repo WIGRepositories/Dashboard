@@ -112,7 +112,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails Credentials completed.");
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails completed.");
             return Tbl;
         }
         [HttpGet]
@@ -169,7 +169,7 @@ namespace BTPOSDashboardAPI.Controllers
             {
 
                 
-                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails credentials....");
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails ...");
             // BTPOSDetails n = new BTPOSDetails();
             
                 //connect to database

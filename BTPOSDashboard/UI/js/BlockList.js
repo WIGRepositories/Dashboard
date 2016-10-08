@@ -15,7 +15,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
     //$scope.Getblocklist = function () {
 
-    //    //$http.get('http://localhost:1476/api/blocklistnew/Getblocklist').then(function (response, req) {
+    //    //$http.get('/api/blocklistnew/Getblocklist').then(function (response, req) {
     //        $scope.blocklist = response.data;
 
     //    });
@@ -31,7 +31,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         }
        
 
-        $http.get('http://localhost:1476/api/Blocklist/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
+        $http.get('/api/Blocklist/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
             
             $scope.blocklist = res.data;
             $scope.checkedArr = $filter('filter')($scope.Blist, { assigned: "1" });
@@ -66,7 +66,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
            // }
         }
         $http({
-            url: 'http://localhost:1476/api/Blocklist/saveBocklist',
+            url: '/api/Blocklist/saveBocklist',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             data: BlockLt,

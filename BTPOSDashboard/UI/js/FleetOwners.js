@@ -14,7 +14,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -51,7 +51,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
             data: vc
@@ -92,7 +92,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         //}
         //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
         //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
-        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/FleetOwner/getFleetOwner?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FleetOwner = res.data;
            
         });
@@ -130,7 +130,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/users/saveusers',
+            url: '/api/users/saveusers',
             data:  FleetOwner
         }
        

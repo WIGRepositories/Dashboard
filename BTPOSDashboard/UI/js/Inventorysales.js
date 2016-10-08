@@ -14,13 +14,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
 
     $scope.GetInventoryItem = function () {
 
-        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem?InventoryId=-1').then(function (response, req) {
+        $http.get('/api/InventoryItem/GetInventoryItem?InventoryId=-1').then(function (response, req) {
             $scope.InventoryItem = response.data;
 
         });
     }
         $scope.GetInventorySales = function () {
-            $http.get('http://localhost:1476/api/Inventorysales/GetInventorySales').then(function (res, data) {
+            $http.get('/api/Inventorysales/GetInventorySales').then(function (res, data) {
                 $scope.Sales = res.data;
             });
         }
@@ -29,7 +29,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.Id : -1;
         //to save new inventory item
-        $http.get('http://localhost:1476/api/InventoryItem/GetInventoryItem?InventoryId=' + grpid).then(function (res, data) {
+        $http.get('/api/InventoryItem/GetInventoryItem?InventoryId=' + grpid).then(function (res, data) {
             $scope.Sales = res.data;
         });
     }
@@ -48,7 +48,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Inventorysales/SaveInventorySales',
+            url: '/api/Inventorysales/SaveInventorySales',
             data: Sales
         }
 
@@ -80,7 +80,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Inventorysales/SaveInventorySales',
+            url: '/api/Inventorysales/SaveInventorySales',
             data: Sales
         }
         $http(req).then(function (response) {

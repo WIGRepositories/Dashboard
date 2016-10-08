@@ -17,7 +17,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage,$uibM
         //    return
         //}
 
-        $http.get('http://localhost:1476/api/LOGIN/RetrivePassword?email='+$scope.email).then(function (response, data) {
+        $http.get('/api/LOGIN/RetrivePassword?email='+$scope.email).then(function (response, data) {
             $scope.result = response.data;        
        
             if ($scope.result.length == 0)

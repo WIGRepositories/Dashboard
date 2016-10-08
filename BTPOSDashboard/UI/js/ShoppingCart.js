@@ -49,14 +49,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     //}
 
     $scope.GetItems = function () {
-        $http.get('http://localhost:1476/api/ShoppingCart/GetItems').then(function (response, req) {
+        $http.get('/api/ShoppingCart/GetItems').then(function (response, req) {
             $scope.sitems = response.data;
             $scope.Shoppingcarts = $scope.sitems;
         });
     }
 
     $scope.GetItems1 = function () {
-        $http.get('http://localhost:1476/api/ShoppingCart/GetItems1').then(function (response, req) {
+        $http.get('/api/ShoppingCart/GetItems1').then(function (response, req) {
             $scope.items = response.data;
             $scope.Shoppingcarts = $scope.items;
         });
@@ -103,21 +103,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         }
 
         $http({
-            url: 'http://localhost:1476/api/ShoppingCart/SaveCartItems',
+            url: '/api/ShoppingCart/SaveCartItems',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             data: items1,
 
         }).success(function (data, status, headers, config) {
             alert('saved successfully');
-            window.location.href = "http://localhost:1476/UI/CheckOut.html";
+            window.location.href = "/UI/CheckOut.html";
         }).error(function (ata, status, headers, config) {
             alert(ata);
         });
       
     }
     $scope.CheckOut = function () {
-        window.location.href = "http://localhost:1476/UI/CheckOut.html";
+        window.location.href = "/UI/CheckOut.html";
     }
 
 });

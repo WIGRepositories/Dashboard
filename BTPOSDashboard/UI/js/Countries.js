@@ -17,7 +17,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         $scope.checkedArr = [];
         $scope.uncheckedArr = [];
 
-        $http.get('http://localhost:1476/api/Countries/GetCountries').then(function (response, req) {
+        $http.get('/api/Countries/GetCountries').then(function (response, req) {
             $scope.Countries = response.data;
             $scope.checkedArr = $filter('filter')($scope.Countries, { HasOperations: "1" });
             $scope.uncheckedArr = $filter('filter')($scope.Countries, { HasOperations: "0" });
@@ -53,7 +53,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         }
         
         $http({
-            url: 'http://localhost:1476/api/Countries/SaveCountries',
+            url: '/api/Countries/SaveCountries',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             data: countries,

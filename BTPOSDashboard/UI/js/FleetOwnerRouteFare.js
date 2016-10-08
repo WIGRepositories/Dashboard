@@ -38,7 +38,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
             data: vc
@@ -62,7 +62,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -82,7 +82,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRoute/GetFleetOwnerRouteAssigned?fleetownerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/FleetOwnerRoute/GetFleetOwnerRouteAssigned?fleetownerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FORoutes = res.data;
           
         });
@@ -106,7 +106,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
             var req = {
                 method: 'POST',
-                url: 'http://localhost:1476/api/FleetRoutes/getFleetRoutesList',
+                url: '/api/FleetRoutes/getFleetRoutesList',
                 //headers: {
                 //    'Content-Type': undefined
                 data: fr
@@ -133,7 +133,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRouteFare/GetFOVehicleFareConfig?vehicleId=' + $scope.v.VehicleId + '&routeId=' + $scope.r.RouteId).then(function (res, data) {
+        $http.get('/api/FleetOwnerRouteFare/GetFOVehicleFareConfig?vehicleId=' + $scope.v.VehicleId + '&routeId=' + $scope.r.RouteId).then(function (res, data) {
             $scope.FOVFare = res.data.Table;
             $scope.FOVFareConfig = res.data.Table1;
             $scope.puprc = $scope.FOVFare[0].UnitPrice;
@@ -195,7 +195,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
         }
 
         $http({
-            url: 'http://localhost:1476/api/FleetOwnerRouteFare/saveFleetOwnerRoutefare',
+            url: '/api/FleetOwnerRouteFare/saveFleetOwnerRoutefare',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             data: RouteFareConfig,

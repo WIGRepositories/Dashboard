@@ -10,7 +10,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetPaymentGateway = function () {
 
-        $http.get('http://localhost:1476/api/PaymentGatewayConfiguration/GetPaymentGateway').then(function (response, req) {
+        $http.get('/api/PaymentGatewayConfiguration/GetPaymentGateway').then(function (response, req) {
             $scope.GetPaymentGateway = response.data;
             for (cnt = 0; cnt < response.data.length; cnt++) {
                 $scope.GetPaymentGateway[cnt].startdate = new Date($scope.GetPaymentGateway[cnt].startdate);
@@ -48,7 +48,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/PaymentGatewayConfiguration/SavePaymentGatewaySettings',
+            url: '/api/PaymentGatewayConfiguration/SavePaymentGatewaySettings',
             data: newCmp
         }
         $http(req).then(function (response) {
@@ -89,7 +89,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/PaymentGatewayConfiguration/SavePaymentGatewaySettings',
+            url: '/api/PaymentGatewayConfiguration/SavePaymentGatewaySettings',
             data: Group
         }
         $http(req).then(function (response) {

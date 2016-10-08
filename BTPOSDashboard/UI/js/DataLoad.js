@@ -37,7 +37,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetDataLoad = function () {
 
-        $http.get('http://localhost:1476/api/DataLoad/GetDataLoad').then(function (response, req) {
+        $http.get('/api/DataLoad/GetDataLoad').then(function (response, req) {
             $scope.GetDataLoad = response.data;
         });
     }

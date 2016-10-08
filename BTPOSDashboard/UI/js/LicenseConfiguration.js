@@ -16,7 +16,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.FORoutes = [];
 
     $scope.GetLicenseCat = function () {
-        $http.get('http://localhost:1476/api/License/GetLicenceCatergories').then(function (res, data) {
+        $http.get('/api/License/GetLicenceCatergories').then(function (res, data) {
             $scope.LicenseCat = res.data;
             var range = [];
 
@@ -71,13 +71,13 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             return;
         }
 
-        $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
+        $http.get('/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
             $scope.LicenseTypes = res.data;
         });
     }
 
     $scope.GetLicenseConfigDetails = function (licTypeId) {
-        $http.get('http://localhost:1476/api/License/GetLicenseConfigDetails?licTypeId=' + licTypeId).then(function (res, data) {
+        $http.get('/api/License/GetLicenseConfigDetails?licTypeId=' + licTypeId).then(function (res, data) {
             $scope.LicenseConfigDetails = res.data;
         });
     }
@@ -125,7 +125,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/License/SaveLicenseType',
+            url: '/api/License/SaveLicenseType',
             data: currLicenseType
         }
         $http(req).then(function (response) {
@@ -234,7 +234,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/License/SaveLicenseConfigDetails',
+            url: '/api/License/SaveLicenseConfigDetails',
             data: NewLicense
         }
 
@@ -270,7 +270,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
+            url: ('/api/LicensePricing/SaveLicensePricing'),
             //headers: {
             //    'Content-Type': undefined
 

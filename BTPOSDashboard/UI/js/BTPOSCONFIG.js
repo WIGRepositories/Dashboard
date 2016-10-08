@@ -31,14 +31,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.BTPos = null;
         }
 
-        $http.get('http://localhost:1476/api/BTPOSConfig/GetFleeBTPosDetails?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id + '&BTPosId=' + $scope.b.Id).then(function (res, data) {
+        $http.get('/api/BTPOSConfig/GetFleeBTPosDetails?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id + '&BTPosId=' + $scope.b.Id).then(function (res, data) {
             $scope.BTPos = res.data;
         });
     }
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -62,7 +62,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.GetFleetOwners = function () {
 
 
-        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        $http.get('/api/Getfleet').then(function (res, data) {
             $scope.fleet = res.data;
 
             if ($scope.userSId != 1) {
@@ -97,7 +97,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 

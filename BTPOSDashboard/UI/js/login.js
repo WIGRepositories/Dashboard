@@ -26,7 +26,7 @@ var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage,
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/UserLogins/ResetPassword',
+            url: '/api/UserLogins/ResetPassword',
             //headers: {
             //    'Content-Type': undefined
             data: type
@@ -60,7 +60,7 @@ var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage,
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/LOGIN/ValidateCredentials/',
+            url: '/api/LOGIN/ValidateCredentials/',
             data: inputcred
         }
           $rootScope.spinner.on();

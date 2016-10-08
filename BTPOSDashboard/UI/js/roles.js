@@ -14,7 +14,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.cmproles = [];
     $scope.GetRoles = function()
     {
-        $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=-1').then(function (response, data) {
+        $http.get('/api/Roles/GetRoles?allroles=-1').then(function (response, data) {
             $scope.roles = response.data;            
         });
     }    
@@ -41,7 +41,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/roles/saveroles',
+            url: '/api/roles/saveroles',
             data: selRole
         }
         $http(req).then(function (response) {
@@ -82,7 +82,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/roles/saveroles',
+            url: '/api/roles/saveroles',
             data: selRole
         }
         $http(req).then(function (response) {
@@ -110,7 +110,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -144,7 +144,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
         var cmpId = (seltype) ? seltype.Id : -1;        
 
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
             $scope.checkedArr = $filter('filter')($scope.cmproles, { assigned: "1" });
             $scope.uncheckedArr = $filter('filter')($scope.cmproles, { assigned: "0" });
@@ -169,7 +169,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
         var cmpId = (seltype.Id == 1) ? 0 : 1;
 
-        $http.get('http://localhost:1476/api/Roles/GetRoles?allroles=' + cmpId).then(function (response, data) {
+        $http.get('/api/Roles/GetRoles?allroles=' + cmpId).then(function (response, data) {
             $scope.roles = response.data;
         });
        
@@ -204,7 +204,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/AssignDelRoles',
+            url: '/api/AssignDelRoles',
             data: cmprole
         }
         $http(req).then(function (response) {
@@ -265,7 +265,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         }
 
         $http({
-            url: 'http://localhost:1476/api/SaveCmpRoles',
+            url: '/api/SaveCmpRoles',
             method: 'POST',
             //headers: { 'Content-Type': 'application/json' },
             data: CompanyRole,
@@ -291,13 +291,13 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/AssignDelRoles',
+            url: '/api/AssignDelRoles',
             data: cmprole
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
             
-            $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + role.CompanyId).then(function (res, data) {
+            $http.get('/api/Roles/GetCompanyRoles?companyId=' + role.CompanyId).then(function (res, data) {
                 $scope.cmproles = res.data;
             });
 

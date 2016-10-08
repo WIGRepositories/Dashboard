@@ -34,7 +34,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CreateFleetOwner/Savenewfleet',
+            url: '/api/CreateFleetOwner/Savenewfleet',
             data: Fleet
         }
         $http(req).then(function (response) {

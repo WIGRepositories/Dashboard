@@ -10,7 +10,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetLicenseCat = function () {
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
             $scope.LicenseCat = res.data;
             // $scope.LicenseCat= GetLicenseCategoriess();
         });
@@ -23,14 +23,14 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             return;
         }
 
-        $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
+        $http.get('/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
             $scope.LicenseTypes = res.data;
         });
     }
 
     $scope.GetLicenseCategories = function () {
 
-        $http.get('http://localhost:1476/api/subcategory/getsubcategory?catid=' + 6).then(function (res, data) {
+        $http.get('/api/subcategory/getsubcategory?catid=' + 6).then(function (res, data) {
             $scope.SubCategories = res.data;
 
         });
@@ -38,15 +38,15 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     }
     var range = [];
     $scope.GetLicenseCategoriess = function () {
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
             $scope.lcat = res.data;
             document.getElementById('btnAdd').disabled = true;
         });
 
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
             $scope.FreqTypes = res.data;
         });
-        $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
+        $http.get('/api/licenseT/getLicenseDetails').then(function (res, data) {
             $scope.Lfeatures = res.data;
             //$('input[name *= "FeatureName"]').attr("disabled", true);
         });
@@ -66,7 +66,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     //    //    return;
     //    //}
 
-    //    $http.get('http://localhost:1476/api/licenseT/getLicenseDetails').then(function (res, data) {
+    //    $http.get('/api/licenseT/getLicenseDetails').then(function (res, data) {
     //        $scope.Lfeatures = res.data;
     //        //$('input[name *= "FeatureName"]').attr("disabled", true);
     //    });
@@ -115,7 +115,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/License/SaveLicenseType',
+            url: '/api/License/SaveLicenseType',
             data: currLicenseType
         }
         $http(req).then(function (response) {
@@ -171,7 +171,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/License/SaveLicenseType',
+    //        url: '/api/License/SaveLicenseType',
     //        data: currLicenseType
     //    }
     //    $http(req).then(function (response) {
@@ -210,7 +210,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.Id : -1;
 
-        $http.get('http://localhost:1476/api/license/getlicense?Subcatid=' + grpid).then(function (res, data) {
+        $http.get('/api/license/getlicense?Subcatid=' + grpid).then(function (res, data) {
             $scope.License = res.data;
 
         });
@@ -224,7 +224,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             return; var selCat = $scope.l
         }
 
-        $http.get('http://localhost:1476/api/LicenseDetails/getLicenseDetails?catId' + selCat.Id).then(function (res, data) {
+        $http.get('/api/LicenseDetails/getLicenseDetails?catId' + selCat.Id).then(function (res, data) {
             $scope.ldetails = res.data;
         });
     }
@@ -263,7 +263,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/license/savelicense',
+    //        url: '/api/license/savelicense',
     //        data: currLicense
     //    }
     //    $http(req).then(function (response) { });
@@ -306,7 +306,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/subcategory/savesubcategory',
+            url: '/api/subcategory/savesubcategory',
             data: NewLicense
         }
 
@@ -342,7 +342,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
+            url: ('/api/LicensePricing/SaveLicensePricing'),
             //headers: {
             //    'Content-Type': undefined
 

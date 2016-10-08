@@ -12,7 +12,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetPaymentHistory = function () {
 
-        $http.get('http://localhost:1476/api/PaymentHistory/GetPaymentHistory').then(function (res, data) {
+        $http.get('/api/PaymentHistory/GetPaymentHistory').then(function (res, data) {
             $scope.PaymentHistory = res.data;
         });
     }
