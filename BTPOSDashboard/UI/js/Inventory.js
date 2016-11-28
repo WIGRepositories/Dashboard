@@ -10,12 +10,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-
-    $http.get('http://localhost:1476/api/Inventory/GetInventory').then(function (response, req) {
+  $http.get('http://localhost:1476/api/Inventory/GetInventory').then(function (response, req) {
         $scope.Group = response.data;
 
-    });
-   
+  });
+
+    //this is to test the chagnes in git
+     
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.id : -1;
 
