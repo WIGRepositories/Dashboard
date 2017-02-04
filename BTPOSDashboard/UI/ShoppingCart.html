@@ -13,7 +13,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">    
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
@@ -361,42 +361,6 @@
                                                     <button type="button" data-type="jplist-grid-view" class="jplist-view jplist-grid-view btn btn-default"><i class="fa fa-th"></i></button>
                                                     <button type="button" data-type="jplist-thumbs-view" class="jplist-view jplist-thumbs-view btn btn-default"><i class="fa fa-reorder"></i></button>
                                                 </div>
-                                                <!--<ul class="nav navbar navbar-top-links navbar-right mbn">
-                                                    <li class="dropdown">
-                                                        <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i><span class="badge badge-green">{{additem.length}}</span></a>
-
-                                                        <ul class="dropdown-menu dropdown-messages" ng-repeat="i in items">
-                                                           
-                                                            <li> <p>{{additem.length}}items added to Cart</p></li>
-                                                            <li class="dropdown topbar-user">
-                                                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/adapter.jpeg" height="30" width="30" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{i.ItemName}}</span>&nbsp;<span class="caret"></span></a>
-                                                                <ul class="dropdown-menu dropdown-user pull-right">
-                                                                    <li><a href="UserProfile.html"><i class="fa fa-user"></i>My Profile</a></li>
-                                                                  
-                                                                    <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
-                                                                    <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
-                                                                    <li class="divider"></li>
-                                                                    <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
-                                                                    <li><a href="../Login.html"><i class="fa fa-key"></i>Log Out</a></li>
-                                                                </ul>
-                                                            </li>
-
-
-
-                                                        </ul>
-                                                            
-                  
-                                                           
-                                                                --   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>
-                                                           
-                                                    <a href="CheckOut.html"> <p><input type="button" value="CheckOut" data-target="#Modal-header-new" data-toggle="modal" style="margin: 10px;" ng-click="Save(items1);" /></p></a>
-
-
-
-
-
-                                                    </li> 
-                                                </ul>-->
                                                               
                                                 <div class="topbar-main">
                                                               
@@ -419,63 +383,7 @@
                                                             </ul>
                                                     </li>
                                                     </ul>
-                                                </div>
-
-
-</div>
-                                                
-                                                <!--<div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade"width="50"height="50">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                              
-                                                            <div class="modal-body" ng-init="GetItems();" ng-model="initdata">
-                                                                <div class="row">
-                                                                    <div class="col-md-offset-5 col-md-12">
-                                                                        <a href="CheckOut.html">    <h1><input type="button" class="btn btn-green" ng-click="CheckOut();">CHECKOUT</h1></a>
-
-
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="row">
-
-                                                                </div>
-
-
-                                                                <div class="row">
-
-                                                                </div>
-
-
-
-
-
-
-
-
-
-
-                                                                -- <div class="col-md-6 col-md-offset-2">
-            <button class="btn btn-primary" type="button">Save</button>
-            <button class="btn btn-primary" type="button">Cancel</button>
-        </div>
-
-
-
-                                                            </div>
-
-
-
-                                                        </div>
-
-
-                                                    </div>
-
-                                                </div>-->
-                                                
-                                                
-
-
+                                               
                                                 <ul class="box text-shadow ul-li-list">
                                                     <!--<item>1</item>-->
                                                     <li class="list-item"ng-repeat="i in sitems">
@@ -521,110 +429,9 @@
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                        <!--<div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" class="modal fade">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header modal-header-primary">
-                                                                        <button type="button" data-dismiss="modal" class="close">&times;</button>
-                                                                        <h4 id="modal-header-primary-label" class="modal-title">Cart Details</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Item Name:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.PONumber" /></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Vendor Id:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.VendorId" /></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Date:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.Date" /></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Total Amount:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.TotalAmount" /></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Status:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.StatusId" /></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group has-success" style="text-align:right">
-                                                                                    <label for="inputFirstName" class="control-label">Shipped To:<span class='require'>*</span></label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-5">
-                                                                                <div class="form-group">
-                                                                                    <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="SubCategory1.ShippedTo" /></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="form-actions">
-                                                                            <div class="col-md-offset-3 col-md-9">
-                                                                                <button class="btn btn-primary" type="button" ng-click="addPurchase(SubCategory1,'I');">Save</button>
-                                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>-->
+                                                        
                                             </div>
-                                            <!--<div class="col-md-6 col-md-offset-2">
-                                                <button class="btn btn-primary" type="button" ng-click="Save(items);">Save</button>
-                                                <button class="btn btn-primary" type="button">Cancel</button>
-                                            </div>-->
+                                           
 
                                         </div>
 
@@ -663,6 +470,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>

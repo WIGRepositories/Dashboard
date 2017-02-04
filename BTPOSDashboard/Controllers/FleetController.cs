@@ -60,7 +60,7 @@ namespace BTPOSDashboard.Controllers
             try
             {
               
-                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveNewFleetDetails credentials....");
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "New Fleet Details....");
                 //connect to database
                
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";

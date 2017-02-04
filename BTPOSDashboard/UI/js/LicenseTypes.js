@@ -13,6 +13,12 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $http.get('/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
             $scope.LicenseCat = res.data;
             // $scope.LicenseCat= GetLicenseCategoriess();
+
+            if ($scope.LicenseCat.length > 0) {
+                $scope.s = $scope.LicenseCat[0];
+                $scope.getLicenseTypes($scope.s);
+            }
+
         });
     }
 
@@ -25,6 +31,8 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         $http.get('/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
             $scope.LicenseTypes = res.data;
+
+           
         });
     }
 
@@ -119,9 +127,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             data: currLicenseType
         }
         $http(req).then(function (response) {
-
-            $scope.showDialog("Saved successfully!");
-
+            
             $scope.Group = null;
             $scope.getLicenseTypes($scope.s);
 

@@ -489,5 +489,49 @@ namespace BTPOSDashboard.Controllers
 
             return indexTbl;
         }
+
+        [HttpGet]
+        [Route("api/RegisterBTPOS")]
+        public DataTable RegisterBTPOS(string posSN)
+        {
+
+            DataTable Tbl = new DataTable();
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "RegisterBTPOS....");
+
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "RegisterBTPOS";
+                cmd.Connection = conn;
+
+                SqlParameter cid = new SqlParameter();
+                cid.ParameterName = "@posSN";
+                cid.SqlDbType = SqlDbType.VarChar;
+                cid.Value = posSN;
+                cmd.Parameters.Add(cid);
+
+                SqlDataAdapter db = new SqlDataAdapter(cmd);
+                db.Fill(Tbl);
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "End RegisterBTPOS....");
+                return Tbl;
+            }
+            catch (Exception ex) {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in RegisterBTPOS:" + ex.Message);
+                //return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                return Tbl;
+            }
+        }
     }
 }

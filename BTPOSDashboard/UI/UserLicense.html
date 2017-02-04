@@ -14,11 +14,11 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
 
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="Myctrlr" ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="Myctrlr" ng-model="dashboardDS" ng-init="GetLicenses();">
     <div>
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP--><a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
@@ -342,7 +342,7 @@
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                             <li><a href="Users.html">Users</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li>  <a href="UserLicense.html">UserLicense</a>
+                            <li>  <a href="UserLicense.html">User License</a>
                             <li>
                         </ol>
                         <div class="clearfix"></div>

@@ -119,7 +119,7 @@ var myCtrl = myapp1.controller('myCtrl', function ($scope, $http, $localStorage,
 
             }
         },//error
-        function () {
+        function (res) {
               $rootScope.spinner.off();
             //  $rootScope.$apply();
             //angular.element('body').removeClass('spinnerOn'); // hide spinner

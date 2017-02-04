@@ -15,7 +15,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker3.css">  
     <link type="text/css" rel="stylesheet" href="vendors/bootstrap-datepicker/css/datepicker.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
@@ -682,8 +682,8 @@
                                             <tbody>
 
                                                 <tr ng-repeat="L in lpricing" class="gradeA">
-
-                                                    <td>{{L.LicenseType}}</td>
+                                                    
+                                                    <td><a href="LicenseDetails.html"> <font color="blue"> <u> {{L.LicenseType}}</u></font></a></td>
                                                     <td>{{L.licensefreq}}</td>
                                                     <td>{{L.freq}}</td>
                                                     <td>{{L.UnitPrice}}</td>
