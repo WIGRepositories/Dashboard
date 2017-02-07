@@ -496,7 +496,8 @@
                                                                 <th>Amount</th>
                                                                 <th>Transaction Id</th>
                                                                 <th>Transaction Type</th>
-                                                                <th>Transaction Status</th>
+                                                                <th>Payment Mode</th>
+                                                                <th>Payment Status</th>
                                                                 <th>Details</th>
 
                                                             </tr>
@@ -510,17 +511,18 @@
                                                                 <td>{{tran.TotalAmount}}</td>
                                                                 <td>{{tran.TransCode}}</td>
                                                                 <td>Ticketing</td>
+                                                                <td>{{tran.paymentmode}}</td>
                                                                 <td>
-                                                                    <span class="label label-sm label-success" ng-if="tran.TransStatusId == 2">
+                                                                    <span class="label label-sm label-success" ng-if="tran.TransStatusId == 30">
                                                                         Success
                                                                     </span>
-                                                                    <span class="label label-sm label-info" ng-if="tran.TransStatusId == 4">
+                                                                    <span class="label label-sm label-info" ng-if="tran.TransStatusId == 31">
                                                                         Failed
                                                                     </span>
-                                                                    <span class="label label-sm label-warning" ng-if="tran.TransStatusId == 1">
+                                                                    <span class="label label-sm label-warning" ng-if="tran.TransStatusId == 32">
                                                                         New
                                                                     </span>
-                                                                    <span class="label label-sm label-danger" ng-if="tran.TransStatusId == 3">
+                                                                    <span class="label label-sm label-danger" ng-if="tran.TransStatusId == 33">
                                                                         In progress
                                                                     </span>
                                                                 </td>

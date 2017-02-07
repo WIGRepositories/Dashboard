@@ -220,13 +220,21 @@ namespace BTPOSDashboardAPI.Controllers
                     fo.Value = n.fleetownerid;
                     cmd.Parameters.Add(fo);
 
-                    //SqlParameter fo1 = new SqlParameter("@pageno", SqlDbType.Int);
-                    //fo1.Value = n.fleetownerid;
-                    //cmd.Parameters.Add(fo1);
+                    SqlParameter fo1 = new SqlParameter("@PerUnitPrice", SqlDbType.Decimal);
+                    fo1.Value = n.PerUnitPrice;
+                    cmd.Parameters.Add(fo1);
 
-                    //SqlParameter fo2 = new SqlParameter("@pagesize", SqlDbType.Int);
-                    //fo2.Value = n.fleetownerid;
-                    //cmd.Parameters.Add(fo2);
+                    SqlParameter fo2 = new SqlParameter("@POSTypeId", SqlDbType.Int);
+                    fo2.Value = n.POSTypeId;
+                    cmd.Parameters.Add(fo2);
+
+                    SqlParameter fo3 = new SqlParameter("@ActivatedOn", SqlDbType.Date);
+                    fo3.Value = n.ActivatedOn;
+                    cmd.Parameters.Add(fo3);
+
+                    SqlParameter fo4 = new SqlParameter("@PONum", SqlDbType.VarChar,15);
+                    fo4.Value = n.PONum;
+                    cmd.Parameters.Add(fo4);
 
                     SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                     insupdflag.Value = n.insupdflag;

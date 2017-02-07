@@ -372,8 +372,10 @@
                                                                 <tr>
                                                                     <th>Reg No</th>
                                                                     <th>POSID</th>
-                                                                    <th>Route</th>
-
+                                                                    <th>Route Name</th>
+                                                                    <th>Route Code</th>
+                                                                    <th>Source</th>
+                                                                    <th>Destination</th>
                                                                     <th>Active</th>
                                                                     <th>Update</th>
                                                                 </tr>
@@ -382,12 +384,12 @@
                                                                 <tr ng-repeat="B in BtposRoutes" class="gradeA">
 
                                                                     <td>{{B.VehicleRegNo}}</td>
-
                                                                     <td>{{B.POSID}}</td>
-
-                                                                    <td>{{B.route}}</td>
-
-
+                                                                    <td>{{B.RouteName}}</td>
+                                                                    <td>{{B.Code}}</td>
+                                                                    <td>{{B.src}}</td>
+                                                                    <td>{{B.dest}}</td>
+                                                                    
                                                                     <td><input type="checkbox" class="form-control" id="Active" ng-model="B.Active" checked /></td>
                                                                     <td>
 

@@ -32,7 +32,7 @@ namespace BTPOSDashboard.Controllers
 
               SqlCommand cmd = new SqlCommand();
               cmd.CommandType = CommandType.StoredProcedure;
-              cmd.CommandText = "[GetFleetDetails]";
+              cmd.CommandText = "GetBTposRoutes";
               cmd.Connection = conn;
 
               SqlParameter gid = new SqlParameter();

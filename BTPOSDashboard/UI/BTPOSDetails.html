@@ -389,7 +389,7 @@
 
 
                                                         <div class="col-lg-6">
-                                                            <div class="pagination-panel" ng-init="GetBTPOSDetails();">
+                                                            <div class="pagination-panel">
                                                                 Page
                                                                 <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
                                                                 &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlength="5" min="1" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
@@ -471,7 +471,7 @@
                                                         </div>
 
                                                         <div class="col-lg-6">
-                                                            <div class="pagination-panel" ng-init="GetBTPOSDetails();">
+                                                            <div class="pagination-panel">
                                                                 Page
                                                                 <a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="FirstPage(pno);"><i class="fa fa-angle-double-left"></i></button></a>
                                                                 &nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="decPageNo();"><i class="fa fa-angle-left"></i></button></a>&nbsp;<input type="text" maxlenght="5" value="{{ currpagefirst }}" class="pagination-panel-input form-control input-mini input-inline input-sm text-center" />&nbsp;<a href="#" class="btn btn-sm btn-default btn-prev"><button ng-click="IncPageNo();"><i class="fa fa-angle-right"></i></button></a>&nbsp;
@@ -509,7 +509,7 @@
 
                                         <div class="modal-footer" ng-hide="BTPOS1.Table1.length == 0">
 
-                                            <button type="button" class="btn btn-primary" data--dismiss="modal" ng-click="saveBTPOSList();">Save</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveBTPOSList();">Save</button>
 
                                             <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
                                         </div>

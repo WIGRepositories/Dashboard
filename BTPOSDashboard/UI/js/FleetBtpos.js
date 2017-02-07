@@ -56,6 +56,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 document.getElementById('test').disabled = false;
             }
             $scope.GetFleetOwners($scope.cmp);
+            if ($scope.cmp == null)
+            {
+                $scope.GetFleeBTPosDetails();
+            }
         });
 
 
@@ -103,7 +107,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             else {
                 document.getElementById('test1').disabled = false;
             }
-            //    $scope.GetFleeBTPosDetails($scope.s);
+                $scope.GetFleeBTPosDetails($scope.s);
 
         });
 
@@ -286,8 +290,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
-
+          //  $scope.showDialog("Saved successfully!");
+            $scope.GetFleeBTPosDetails();
             $scope.Group = null;
 
         }, function (errres) {
