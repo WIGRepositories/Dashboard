@@ -9,7 +9,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-    $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
+    $http.get('/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
     });
 
@@ -36,7 +36,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/typegroups/savetypegroups',
+            url: '/api/typegroups/savetypegroups',
             //headers: {
             //    'Content-Type': undefined
             data: SelTypeGroup
@@ -82,7 +82,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/typegroups/savetypegroups',
+            url: '/api/typegroups/savetypegroups',
             //headers: {
             //    'Content-Type': undefined
             data: SelTypeGroup

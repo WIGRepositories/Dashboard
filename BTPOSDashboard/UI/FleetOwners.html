@@ -13,7 +13,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
@@ -54,7 +54,7 @@
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
-                                <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                              
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
                                 <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success"></span></a></li>
                                 <li class="divider"></li>
@@ -367,19 +367,14 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="table-container">
-                                                    <div class="row mbm">
+                                                    <div class="row mbm">                                                       
 
-                                                        <div class="col-md-5">
-                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
+                                                        <div class="col-md-3" ng-init="GetCompanies();">
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()" id="test" style="width:80%">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-md-5">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="getFleetOwnerRoute(s)" ng-checked="ShowHide()" id="test1">
-
-    <option value="">Select</option>
-</select>
-                                                        </div>
+                                                       
 
                                                         <div class="actions">
                                                           
@@ -599,12 +594,12 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="F in FleetOwner" class="gradeA">
+                                                        <tr ng-repeat="F in FleetOwner.Table" class="gradeA">
 
                                                             <td>{{F.Name}}</td>
-                                                            <td>{{F.Company}}</td>
+                                                            <td>{{F.CompanyName}}</td>
                                                             <td>{{F.FleetOwnerCode}}</td>
-                                                            <td><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" checked /></td>
+                                                            <td><input type="checkbox" class="icheckbox_minimal-grey" checked /></td>
                                                             <td>
                                                                 <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setUsers(F);">
                                                                     <i class=" fa fa-edit">

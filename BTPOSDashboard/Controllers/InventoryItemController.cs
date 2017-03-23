@@ -7,16 +7,20 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
     public class InventoryItemController : ApiController
     {
 
-        public DataTable GetInventoryItem()
+        public DataTable GetInventoryItem(int subCatId)
         {
             DataTable Tbl = new DataTable();
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventoryItem ....");
+ 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -27,17 +31,27 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetInventoryItem";
             cmd.Connection = conn;
+
+            SqlParameter Gid = new SqlParameter();
+            Gid.ParameterName = "@subCatId";
+            Gid.SqlDbType = SqlDbType.Int;
+            Gid.Value = subCatId;
+            cmd.Parameters.Add(Gid);
+            
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventoryItem completed.");
             // int found = 0;
             return Tbl;
         }
         [HttpPost]
         public HttpResponseMessage SaveinventoryItem(InventoryItem b)
        {
+
+           LogTraceWriter traceWriter = new LogTraceWriter();
+           traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveinventoryItem ...");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -52,11 +66,12 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandText = "InsupdDelInventoryItem";
             cmd.Connection = conn;
             conn.Open();
-            //SqlParameter Cid = new SqlParameter();
-            //Cid.ParameterName = "@Id";
-            //Cid.SqlDbType = SqlDbType.Int;
-            //Cid.Value = b.Id;
-            //cmd.Parameters.Add(Cid);
+
+            SqlParameter Cid = new SqlParameter();
+            Cid.ParameterName = "@Id";
+            Cid.SqlDbType = SqlDbType.Int;
+            Cid.Value = b.Id;
+            cmd.Parameters.Add(Cid);
 
             SqlParameter Gid = new SqlParameter();
             Gid.ParameterName = "@ItemName";
@@ -102,6 +117,8 @@ namespace BTPOSDashboard.Controllers
 
             cmd.ExecuteScalar();
             conn.Close();
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveinventoryItem completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -111,6 +128,7 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveinventoryItem:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
        }

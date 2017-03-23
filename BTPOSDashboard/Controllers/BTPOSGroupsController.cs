@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -16,7 +18,8 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable groups()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSGroups credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,7 +34,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSGroups Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -39,8 +42,11 @@ namespace BTPOSDashboardAPI.Controllers
         public HttpResponseMessage btpos(btposgroups b)
         {
             SqlConnection conn = new SqlConnection();
+            LogTraceWriter traceWriter = new LogTraceWriter();
             try
             {
+              
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSGroups  credentials....");
 
             //connect to database
             
@@ -83,6 +89,7 @@ namespace BTPOSDashboardAPI.Controllers
             //SqlDataAdapter db = new SqlDataAdapter(cmd);
             //db.Fill(ds);
             // Tbl = Tables[0];
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSGroups Credentials completed.");
             cmd.ExecuteScalar();
             conn.Close();
             // int found = 0;
@@ -95,6 +102,7 @@ namespace BTPOSDashboardAPI.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveBTPOSGroups:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

@@ -45,50 +45,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
     $scope.FORoutes = [];
-
-    //$scope.GetCompanies = function () {
-
-    //    var vc = {
-    //        needCompanyName: '1'
-    //    };
-
-    //    var req = {
-    //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-    //        //headers: {
-    //        //    'Content-Type': undefined
-    //        data: vc
-    //                }
-    //    $http(req).then(function (res) {
-    //        $scope.initdata = res.data;
-    //    });
-
-    //}
-
-    //$scope.GetFleetOwners = function () {
-    //    if ($scope.cmp == null) {
-    //        $scope.FleetOwners = null;
-    //        return;
-    //    }
-    //    var vc = {
-    //        needfleetowners: '1',
-    //        cmpId: $scope.cmp.Id
-    //    };
-
-    ////    var req = {
-    ////        method: 'POST',
-    ////        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
-    ////        //headers: {
-    ////        //    'Content-Type': undefined
-
-    ////        data: vc
-
-
-    ////                }
-    ////    $http(req).then(function (res) {
-    ////        $scope.cmpdata = res.data;
-    ////    });
-    ////}
+       
 
     $scope.getFleetOwnerRoute = function () {
 
@@ -99,7 +56,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetOwnerRoute/getFleetOwnerRoute?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/FleetOwnerRoute/getFleetOwnerRoute?cmpId=' + $scope.cmp.Id + '&fleetownerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FORoutes = res.data;
             $scope.checkedArr = $filter('filter')($scope.FORoutes, { assigned: "1" });
             $scope.uncheckedArr = $filter('filter')($scope.FORoutes, { assigned: "0" });
@@ -108,7 +65,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -132,24 +89,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
     $scope.GetFleetOwners = function () {
 
 
-        //$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
-        //    $scope.fleet = res.data;
-
-        //    if ($scope.userSId != 1) {
-        //        //loop throug the companies and identify the correct one
-        //        for (i = 0; i < res.data.length; i++) {
-        //            if (res.data[i].Id == $scope.userSId) {
-        //                $scope.s = res.data[i];
-        //                document.getElementById('test1').disabled = true;
-        //                break
-        //            }
-        //        }
-        //    }
-        //    else {
-        //        document.getElementById('test1').disabled = false;
-        //    }
-        //    $scope.getFleetOwnerRoute($scope.s);
-        //});
+        if ($scope.cmp == null)
+        {
+            $scope.cmpdata = null;
+            return;
+        }
 
         var vc = {
             needfleetowners: '1',
@@ -158,7 +102,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -213,7 +157,6 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
                 FleetOwnerRoutes.push(fr);
             }
         }
-
         for (var cnt = 0; cnt < $scope.uncheckedArr.length; cnt++) {
 
             if ($scope.uncheckedArr[cnt].assigned == 1) {
@@ -230,10 +173,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
 
                 FleetOwnerRoutes.push(fr);
             }
-        }      
-
+        }
+        
         $http({
-            url: 'http://localhost:1476/api/FleetOwnerRoute/saveFleetOwnerRoute',
+            url: '/api/FleetOwnerRoute/saveFleetOwnerRoute',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             data: FleetOwnerRoutes,

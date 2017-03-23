@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -16,7 +17,8 @@ namespace BTPOSDashboard.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventoryPurchases credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -31,6 +33,8 @@ namespace BTPOSDashboard.Controllers
             db.Fill(ds);
             Tbl = ds.Tables[0];
 
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetInventoryPurchases Credentials completed.");
+            
             // int found = 0;
             return Tbl;
         }
@@ -38,13 +42,12 @@ namespace BTPOSDashboard.Controllers
 
         public HttpResponseMessage SaveInventoryPurchases(IPurchases P)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveInventoryPurchases....");
             SqlConnection conn = new SqlConnection();
             try
             {
-
-            //connect to database
-            
-            
                 // connetionString = "Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
@@ -146,10 +149,19 @@ namespace BTPOSDashboard.Controllers
                                 SqlParameter active = new SqlParameter("@active", SqlDbType.Int);
                                 active.Value = 1;
                                 cmd.Parameters.Add(active);
+                                
+                                SqlParameter pup = new SqlParameter("@PerUnitPrice", SqlDbType.Decimal);
+                                pup.Value = P.PerUnitPrice;
+                                cmd.Parameters.Add(pup);
 
-                                //SqlParameter fo = new SqlParameter("@fleetownerid", SqlDbType.Int);
-                                //fo.Value = 1;
-                                //cmd.Parameters.Add(fo);
+                                SqlParameter potypeid = new SqlParameter("@POSTypeId", SqlDbType.Int);
+                                potypeid.Value = P.ItemTypeId;
+                                cmd.Parameters.Add(potypeid);
+
+                                SqlParameter ponum = new SqlParameter("@PONum", SqlDbType.VarChar,15);
+                                ponum.Value = P.PurchaseOrderNumber;
+                                cmd.Parameters.Add(ponum);
+
 
                                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                                 insupdflag.Value = "I";
@@ -172,6 +184,8 @@ namespace BTPOSDashboard.Controllers
                  
                 conn.Close();
 
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveInventoryPurchases completed.");
+            
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -181,6 +195,7 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveInventoryPurchases:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

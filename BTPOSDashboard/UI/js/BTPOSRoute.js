@@ -28,7 +28,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
             return;
         }
 
-        $http.get('http://localhost:1476/api/BtposRoutes/GetFleetBtposRoutes?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/BtposRoutes/GetFleetBtposRoutes?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.BtposRoutes = res.data;
         });
     }
@@ -36,7 +36,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -59,7 +59,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
     $scope.GetFleetOwners = function () {
 
 
-        $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        $http.get('/api/Getfleet').then(function (res, data) {
             $scope.fleet = res.data;
 
             if ($scope.userSId != 1) {
@@ -87,7 +87,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
     //        data: vc
@@ -115,7 +115,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
 
@@ -132,7 +132,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
 
   /*  $scope.getBtposRoutes = function () {
 
-        $http.get('http://localhost:1476/api/BtposRoutes/getBtposRoutes').then(function (res, data) {
+        $http.get('/api/BtposRoutes/getBtposRoutes').then(function (res, data) {
             $scope.BtposRoutes = res.data;
         });
     }*/
@@ -148,7 +148,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 

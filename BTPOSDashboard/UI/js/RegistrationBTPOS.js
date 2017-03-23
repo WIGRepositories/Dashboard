@@ -15,7 +15,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/RegistrationBTPOS/saveRegistrationBTPOS',
+            url: '/api/RegistrationBTPOS/saveRegistrationBTPOS',
 
             data: RegistrationBTPOS
 

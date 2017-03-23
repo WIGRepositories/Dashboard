@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BTPOSDashboard.Controllers;
+using BTPOSDashboard;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -19,7 +21,8 @@ namespace BTPOSDashboardAPI.Controllers
         
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicensePayments credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -34,7 +37,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetLicensePayments Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -43,6 +46,9 @@ namespace BTPOSDashboardAPI.Controllers
 
         public HttpResponseMessage LicensePayment2(LicensePayments n)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicensePayments credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -116,6 +122,7 @@ namespace BTPOSDashboardAPI.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveLicensePayments Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -125,6 +132,7 @@ namespace BTPOSDashboardAPI.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveLicensePayments:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

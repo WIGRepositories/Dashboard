@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -17,7 +18,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable GetPaymentGateway()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetPaymentGateway credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -32,13 +34,16 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetPaymentGateway Credentials completed.");
             // int found = 0;
             return Tbl;
         }
          [HttpPost]
         public HttpResponseMessage SavePaymentGatewaySettings(PaymentGatewaySettings b)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SavePaymentGatewaySettings credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -133,6 +138,8 @@ namespace BTPOSDashboard.Controllers
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SavePaymentGatewaySettings Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -142,6 +149,7 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SavePaymentGatewaySettings:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

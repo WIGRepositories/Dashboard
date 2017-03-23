@@ -22,7 +22,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -150,7 +150,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         //write the post logic and test
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleLayout/saveVehicleLayout',
+            url: '/api/VehicleLayout/saveVehicleLayout',
             data: checkedArr
 
         }

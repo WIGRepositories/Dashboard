@@ -1,13 +1,13 @@
-var app = angular.module('myApp', ['ngStorage']);
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap']);
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {    
     if ($localStorage.uname == null) {
-        window.location.href = "../login.html";
+        window.location.href = "login.html";
     }
     $scope.uname = $localStorage.uname;
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
-    $scope.dashboardDS = $localStorage.dashboardDS;
+  //  $scope.dashboardDS = $localStorage.dashboardDS;
 
 
     //if ($localStorage.userdetails && $localStorage.userdetails.length > 0 && $localStorage.userdetails[0])
@@ -28,7 +28,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             return;
         }
 
-        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.Fleet = res.data.Table;
         });
     }
@@ -41,7 +41,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
             data: vc
@@ -66,7 +66,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -91,7 +91,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -140,7 +140,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
 
     $scope.getBTPOSMonitoring = function () {
-        $http.get('http://localhost:1476/api/BTPOSMonitoringPage/GetBTPOSMonitoring').then(function (response, data) {
+        $http.get('/api/BTPOSMonitoringPage/GetBTPOSMonitoring').then(function (response, data) {
             $scope.BTPOSMonitoring = response.data;
 
             $scope.locations = response.data;
@@ -151,7 +151,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetDashboardDS = function ()
     {
-        $http.get('http://localhost:1476/api/dashboard/getdashboard?userid=-1&roleid=-1').then(function (res, data)
+        //retive the userid and roleid
+        var roleid = $localStorage.userdetails[0].roleid;
+
+        $http.get('/api/dashboard/getdashboard?userid=-1&roleid=' + roleid).then(function (res, data)
         {
             $scope.dashboardDS = res.data;
             $localStorage.dashboardDS = res.data;
@@ -166,9 +169,100 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         
     }
 
+    $scope.GetInventoryItems = function () {
+        $scope.Group = null;
+        $http.get('/api/InventoryItem/GetInventoryItem?subCatId=1').then(function (response, req) {
+            $scope.InventoryItem = response.data;
+
+        });
+    }
+
+    $scope.savepurchases = function (Group) {
+        if (Group == null) {
+            alert('please select Item')
+            return;
+        }
+        if (Group.Item.ItemName == null) {
+            alert('please enter Item name')
+            return;
+        }
+        if (Group.PerUnitPrice == null) {
+            alert('please enter the Per Unit Price');
+            return;
+        }
+        if (Group.Quantity == null) {
+            alert('please enter the quantity');
+            return;
+        }
+        if (Group.PurchaseOrderNumber == null) {
+            alert('please enter Purchase Order Number');
+            return;
+        }
+
+        if (Group.PurchaseDate == null) {
+            alert('please enter the purchase order date');
+            return;
+        }
+        var Group = {
+            Id: -1,
+            ItemName: Group.Item.ItemName,
+            subCategoryId: Group.Item.SubCategoryId,
+            Quantity: Group.Quantity,
+            PerUnitPrice: Group.PerUnitPrice,
+            PurchaseDate: Group.PurchaseDate,
+            PurchaseOrderNumber: Group.PurchaseOrderNumber,
+            ItemTypeId: Group.Item.Id
+        }
+
+        var req = {
+            method: 'POST',
+            url: '/api/InventoryPurchase/SaveInventoryPurchases',
+            data: Group
+        }
+        $http(req).then(function (response) {
+
+            $scope.showDialog("Saved successfully! " + Group.Quantity + " no of POS units created");
+
+            $scope.Group = null;
+          //  $scope.FirstPage();
+
+        }, function (errres) {
+            var errdata = errres.data;
+            var errmssg = "";
+            errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
+            $scope.showDialog(errmssg);
+        });
+        $scope.currGroup = null;
+    };
+
+    $scope.showDialog = function (message) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            resolve: {
+                mssg: function () {
+                    return message;
+                }
+            }
+        });
+    }
+
 });
 
 
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
+
+    $scope.mssg = mssg;
+    $scope.ok = function () {
+        $uibModalInstance.close('test');
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
 
 
 

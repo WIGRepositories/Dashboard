@@ -11,7 +11,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetRoutes = function () {
-        $http.get('http://localhost:1476/api/Routes/GetRoutes').then(function (res, data) {
+        $http.get('/api/Routes/GetRoutes').then(function (res, data) {
             $scope.routes = res.data;
         });
     }
@@ -22,7 +22,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.IsVisible = $scope.ShowPassport;
     }
     $scope.GetStops = function () {
-        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {          
+        $http.get('/api/Stops/GetStops').then(function (res, data) {          
             $scope.Stops = res.data;
         });
     }
@@ -77,7 +77,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Routes/SaveRoutes',
+            url: '/api/Routes/SaveRoutes',
             //headers: {
             //    'Content-Type': undefined
             data: newroute
@@ -105,7 +105,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
             var req = {
                 method: 'POST',
-                url: 'http://localhost:1476/api/Routes/SaveRoutes',
+                url: '/api/Routes/SaveRoutes',
                 //headers: {
                 //    'Content-Type': undefined
                 data: retroutes
@@ -145,6 +145,97 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             }
         });
     }
+
+
+    //var map;
+    //$(document).ready(function () {
+    //    prettyPrint();
+    //    map = new GMaps({
+    //        div: '#map',
+    //        lat: -12.043333,
+    //        lng: -77.028333
+    //    });
+    //    map.setContextMenu({
+    //        control: 'map',
+    //        options: [{
+    //            title: 'Add marker',
+    //            name: 'add_marker',
+    //            action: function (e) {
+    //                this.addMarker({
+    //                    lat: e.latLng.lat(),
+    //                    lng: e.latLng.lng(),
+    //                    title: 'New marker'
+    //                });
+    //                this.hideContextMenu();
+    //            }
+    //        }, {
+    //            title: 'Center here',
+    //            name: 'center_here',
+    //            action: function (e) {
+    //                this.setCenter(e.latLng.lat(), e.latLng.lng());
+    //            }
+    //        }]
+    //    });
+    //});
+
+    $scope.SetMap = function () {
+        $scope.map = new GMaps({
+            div: '#map',
+            lat: -20.1325066,
+            lng: 28.626479000000018,
+            enableNewStyle: true
+        });
+
+        $scope.map.setContextMenu({
+            control: 'map',
+            options: [{
+                title: 'Add Stop',
+                name: 'add_marker',
+                action: function (e) {
+
+                    this.addMarker({
+                        lat: e.latLng.lat(),
+                        lng: e.latLng.lng(),
+                        title: 'New marker'
+                        //,icon : {
+                        //    size : new google.maps.Size(32, 32),
+                        //    url : icon
+                        //}
+                       , click: function(e){
+                        if(console.log)
+                            console.log(e);
+                        alert('You clicked in this marker');
+                    }
+
+                    });
+                }
+            }, {
+                title: 'Center here',
+                name: 'center_here',
+                action: function(e) {
+                    this.setCenter(e.latLng.lat(), e.latLng.lng());
+                }
+            }]
+        });
+
+       // angular.getElementById('map') = $scope.map;
+        //lat : item.location.lat,
+        //lng : item.location.lng,
+        //title : item.name,
+        //icon : {
+        //    size : new google.maps.Size(32, 32),
+        //    url : icon
+        //}
+
+       
+        
+
+    }
+
+    $scope.test = function () {
+        alert();
+    }
+
    
 });
 myapp1.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {

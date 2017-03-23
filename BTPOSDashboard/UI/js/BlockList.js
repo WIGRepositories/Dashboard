@@ -1,5 +1,5 @@
 ﻿var app = angular.module('myApp', ['ngStorage']);
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $filter) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -10,12 +10,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.checkedArr = new Array();
     $scope.uncheckedArr = new Array();
-    //$scope.blocklist = [];   
+    $scope.Blist = [];
 
 
     //$scope.Getblocklist = function () {
 
-    //    //$http.get('http://localhost:1476/api/blocklistnew/Getblocklist').then(function (response, req) {
+    //    //$http.get('/api/blocklistnew/Getblocklist').then(function (response, req) {
     //        $scope.blocklist = response.data;
 
     //    });
@@ -25,19 +25,61 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         if ($scope.selectedId == null) {
             $scope.blocklist = null;
+            $scope.checkedArr = [];
+            $scope.uncheckedArr = [];
             return;
         }
-       if ($scope.selectedId == null) {
-           $scope.blocklist1 = null;
-                return;
-        }
+       
 
-        $http.get('http://localhost:1476/api/blocklistnew/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
+        $http.get('/api/Blocklist/GetBlockDetails?selectedId=' + $scope.selectedId).then(function (res, data) {
             
             $scope.blocklist = res.data;
+            $scope.checkedArr = $filter('filter')($scope.Blist, { assigned: "1" });
+            $scope.uncheckedArr = $filter('filter')($scope.Blist, { assigned: "0" });
           
         });
     }
+
+    
+
+   
+    $scope.saveBTPOSList = function () {
+
+        var BlockLt = [];
+
+        for (var cnt = 0; cnt < $scope.checkedArr.length; cnt++) {
+
+          //  if ($scope.checkedArr[cnt].assigned == 0) {
+                var fr = {
+                    Id: -1,
+                    //FleetOwnerId: $scope.s.Id,
+                    ItemTypeId: $scope.selectedId,
+                    ItemId: $scope.checkedArr[cnt].ItemId,
+                    Reason: $scope.checkedArr[cnt].Reason,
+                    //From: $scope.checkedArr[cnt].FromDate,
+                    //To: $scope.checkedArr[cnt].ToDate,
+                    //Active: 1,
+                    insupddelflag: 'I'
+                }
+
+                BlockLt.push(fr);
+           // }
+        }
+        $http({
+            url: '/api/Blocklist/saveBocklist',
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: BlockLt,
+
+        }).success(function (data, status, headers, config) {
+            alert('Saved successfully');
+            $scope.GetBlockDetails();
+        }).error(function (ata, status, headers, config) {
+            alert(ata);
+        });
+    };
+    
+
 
     $scope.toggle = function (item) {
         var idx = $scope.checkedArr.indexOf(item);
@@ -56,29 +98,31 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.uncheckedArr.push(item);
         }
     };
-
+    
+    
 
     $scope.toggleAll = function () {
-        if ($scope.checkedArr.length === $scope.blocklist.length) {
+        if ($scope.checkedArr.length === $scope.Blist.length) {
             $scope.uncheckedArr = $scope.checkedArr.slice(0);
             $scope.checkedArr = [];
 
-        } else if ($scope.checkedArr.length === 0 || $scope.blocklist.length > 0) {
-            $scope.checkedArr = $scope.blocklist.slice(0);
+        } else if ($scope.checkedArr.length === 0 || $scope.Blist.length > 0) {
+            $scope.checkedArr = $scope.Blist.slice(0);
             $scope.uncheckedArr = [];
         }
-
+      
     };
 
     $scope.exists = function (item, list) {
         return list.indexOf(item) > -1;
     };
-
-
+  
+   
     $scope.isChecked = function () {
-        return $scope.checkedArr.length === $scope.blocklist.length;
+        return $scope.checkedArr.length === $scope.Blist.length;
     };
 
-
-
+  
 });
+
+

@@ -13,12 +13,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetLicenseCategories = function ()
     {
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
             $scope.lcat = res.data;
             document.getElementById('btnAdd').disabled = true;
         });
 
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=7').then(function (res, data) {
             $scope.FreqTypes = res.data;
         });
      
@@ -41,12 +41,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        $http.get('http://localhost:1476/api/LicensePricing/LicensePricing?categoryid=' + selCat.Id).then(function (res, data) {
+        $http.get('/api/LicensePricing/LicensePricing?categoryid=' + selCat.Id).then(function (res, data) {
             $scope.lpricing = res.data;
 
         });
 
-        $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
+        $http.get('/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
             $scope.lTypes = res.data;
         });
     }
@@ -56,7 +56,37 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.currSelLicense = L;
     }
 
+    $scope.filterValue = function ($event) {
+        if (isNaN(String.fromCharCode($event.keyCode)) && $event.keyCode != 46) {
+            $event.preventDefault();
+        }
+        else
+        {
+            if ($event.keyCode == 46 && $scope.newUnitPrice.indexOf('.') > -1)
+                $event.preventDefault();
+        }
+    };
+
     $scope.SaveNewPricing = function () {
+
+        if ($scope.l == null) {
+            $scope.showDialog('Please select license type.');
+            return;
+        }
+
+        if ($scope.ftype == null) {
+            $scope.showDialog('Please select license frequency.');
+            return;
+        }
+
+        if ($scope.freq == null) {
+            $scope.showDialog('Please select license renewal frequency.');
+            return;
+        }
+        if ($scope.newUnitPrice == null) {
+            $scope.showDialog('Please enter unit price.');
+            return;
+        }
 
         var newLicensePricing = {
             Id:-1,
@@ -71,7 +101,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
+            url: ('/api/LicensePricing/SaveLicensePricing'),
             //headers: {
             //    'Content-Type': undefined
 
@@ -80,10 +110,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         }
         $http(req).then(function (response) {
-
-            $scope.showDialog("Saved successfully!");
-
             $scope.Group = null;
+            $scope.getLicensePricing();
 
         }, function (errres) {
             var errdata = errres.data;
@@ -95,6 +123,25 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     };
 
     $scope.Save = function (currSelLicense) {
+
+        if (currSelLicense.LicenseId == null) {
+            $scope.showDialog('Please select license type.');
+            return;
+        }
+
+        if (currSelLicense.ftype == null) {
+            $scope.showDialog('Please select license frequency.');
+            return;
+        }
+
+        if (currSelLicense.freq == null) {
+            $scope.showDialog('Please select license renewal frequency.');
+            return;
+        }
+        if (currSelLicense.newUnitPrice == null) {
+            $scope.showDialog('Please enter unit price.');
+            return;
+        }
 
         var newLicensePricing = {
             Id: currSelLicense.Id,
@@ -109,7 +156,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: ('http://localhost:1476/api/LicensePricing/SaveLicensePricing'),
+            url: ('/api/LicensePricing/SaveLicensePricing'),
             //headers: {
             //    'Content-Type': undefined
 
@@ -122,6 +169,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             $scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
+            $scope.getLicensePricing();
 
         }, function (errres) {
             var errdata = errres.data;

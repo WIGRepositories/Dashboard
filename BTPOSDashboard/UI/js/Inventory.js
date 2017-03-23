@@ -10,17 +10,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-  $http.get('http://localhost:1476/api/Inventory/GetInventory').then(function (response, req) {
+
+    $http.get('/api/Inventory/GetInventory').then(function (response, req) {
         $scope.Group = response.data;
 
-  });
-
-    //this is to test the chagnes in git
-     
+    });
+   
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.id : -1;
 
-        $http.get('http://localhost:1476/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
+        $http.get('/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
             $scope.Group = res.data;
 
         });
@@ -32,7 +31,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.getselectval1 = function (seltype1) {
         var grpid = (seltype1) ? seltype1.id : -1;
 
-        $http.get('http://localhost:1476/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
+        $http.get('/api/Inventory/GetInventory?groupid=' + grpid).then(function (res, data) {
             $scope.Group = res.data;
 
         });
@@ -60,7 +59,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var req = {
 
             method: 'POST',
-            url: 'http://localhost:1476/api/Inventory/SaveInventory',
+            url: '/api/Inventory/SaveInventory',
             data: invItem
         }
 
@@ -96,7 +95,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var req = {
 
             method: 'POST',
-            url: 'http://localhost:1476/api/Inventory/SaveInventory',
+            url: '/api/Inventory/SaveInventory',
             data: Group
         }
         $http(req).then(function (response) {

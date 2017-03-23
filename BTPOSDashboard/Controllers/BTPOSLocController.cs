@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 
 namespace BTPOSDashboardAPI.Controllers
@@ -17,6 +19,8 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable BTPOSLOC()//Main Method
         {
             DataTable Tbl = new DataTable();
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSLoc credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -31,13 +35,16 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSLoc Credentials completed.");
             // int found = 0;
             return Tbl;
         }
         [HttpPost]
         public HttpResponseMessage Btoploc(BTPOSLoc L)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveBtoploc credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -85,7 +92,7 @@ namespace BTPOSDashboardAPI.Controllers
                 cmd.Parameters.Add(Ldate);
                 cmd.ExecuteScalar();
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveBtoploc Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -95,6 +102,7 @@ namespace BTPOSDashboardAPI.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in saveBtoploc:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

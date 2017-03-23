@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -17,7 +19,8 @@ namespace BTPOSDashboardAPI.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserLogins credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -31,14 +34,16 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserLogins Credentials completed.");
             // int found = 0;
             return Tbl;
         }
         [HttpPost]
         public HttpResponseMessage userlogins(UserLogin b)
         {
-             //connect to database
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Saveuserlogins credentials...."); 
+            //connect to database
             SqlConnection conn = new SqlConnection();
             try
             { 
@@ -87,6 +92,7 @@ namespace BTPOSDashboardAPI.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Saveuserlogins Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -96,6 +102,7 @@ namespace BTPOSDashboardAPI.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in Saveuserlogins:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
@@ -111,8 +118,9 @@ namespace BTPOSDashboardAPI.Controllers
         [Route("api/UserLogins/ResetPassword")]
         public HttpResponseMessage savepassword(reset b)
         {
-           
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveResetPassword credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -162,6 +170,8 @@ namespace BTPOSDashboardAPI.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveResetPassword Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -171,6 +181,7 @@ namespace BTPOSDashboardAPI.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveResetPassword:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

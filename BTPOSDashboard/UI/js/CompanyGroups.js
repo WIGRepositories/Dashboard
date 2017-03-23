@@ -1,5 +1,209 @@
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload'])
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal,$upload,$timeout) {
+
+app.directive('file-input', function ($parse)
+{
+    return {
+        restrict: "EA",
+        template: "<input type='file' />",
+        replace: true,
+        link: function (scope, element, attrs)
+        {
+
+            var modelGet = $parse(attrs.fileInput);
+            var modelSet = modelGet.assign;
+            var onChange = $parse(attrs.onChange);
+
+            var updateModel = function ()
+            {
+                scope.$apply(function ()
+                {
+                    modelSet(scope, element[0].files[0]);
+                    onChange(scope);
+                });
+            };
+
+            element.bind('change', updateModel);
+        }
+    };
+});
+
+app.directive("ngFileSelect", function ()
+{
+
+    return {
+
+        link: function ($scope, el)
+        {
+
+            el.on('click', function ()
+            {
+
+                this.value = '';
+
+            });
+
+            el.bind("change", function (e)
+            {
+
+                $scope.file = (e.srcElement || e.target).files[0];
+
+
+
+                var allowed = ["jpeg", "png", "gif", "jpg"];
+
+                var found = false;
+
+                var img;
+
+                img = new Image();
+
+                allowed.forEach(function (extension)
+                {
+
+                    if ($scope.file.type.match('image/' + extension))
+                    {
+
+                        found = true;
+
+                    }
+
+                });
+
+                if (!found)
+                {
+
+                    alert('file type should be .jpeg, .png, .jpg, .gif');
+
+                    return;
+
+                }
+
+                img.onload = function ()
+                {
+
+                    var dimension = $scope.selectedImageOption.split(" ");
+
+                    if (dimension[0] == this.width && dimension[2] == this.height)
+                    {
+
+                        allowed.forEach(function (extension)
+                        {
+
+                            if ($scope.file.type.match('image/' + extension))
+                            {
+
+                                found = true;
+
+                            }
+
+                        });
+
+                        if (found)
+                        {
+
+                            if ($scope.file.size <= 1048576)
+                            {
+
+                                $scope.getFile();
+
+                            } else
+                            {
+
+                                alert('file size should not be grater then 1 mb.');
+
+                            }
+
+                        } else
+                        {
+
+                            alert('file type should be .jpeg, .png, .jpg, .gif');
+
+                        }
+
+                    } else
+                    {
+
+                        alert('selected image dimension is not equal to size drop down.');
+
+                    }
+
+                };
+
+              //  img.src = _URL.createObjectURL($scope.file);
+
+
+
+            });
+
+        }
+
+    };
+
+});
+
+
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal, $upload, $timeout, fileReader)
+{
+
+    $scope.cmpCode = null;
+
+    $scope.setCMPCode = function () {
+        
+        $scope.imageSrc = null;
+        document.getElementById('cmpLogo').src = "";
+
+        var date = new Date();
+        var components = [           
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()           
+        ];
+
+        var id = components.join("");
+        $scope.cmpCode = 'CMP'+id;
+    }
+
+    $scope.getFile = function ()
+    {
+
+        var dimension = $scope.selectedImageOption.split(" ");
+
+        fileReader.readAsDataUrl($scope.file, $scope)
+
+                      .then(function (result)
+                      {
+
+                          $scope.imagePreview = true;
+
+                          $scope.upladButtonDivErrorFlag = false;
+
+                          $('#uploadButtonDiv').css('border-color', '#999');
+
+                          $scope.imageSrc = result;
+
+                          var data = {
+
+                              "height": dimension[2],
+
+                              "weight": dimension[0],
+
+                              "imageBean": {
+
+                                  "imgData": result,
+
+                                  "imgName": $scope.file.name
+
+                              }
+
+                          }
+
+                          $scope.imagePreviewDataObject = data;
+
+                      });
+
+    }
+
+
     if ($localStorage.uname == null)
     {
         window.location.href = "login.html";
@@ -11,7 +215,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;    
 
     $scope.GetCompanys = function () {
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
 
         });
@@ -19,17 +223,43 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.save = function (Group, flag) {
 
         if (Group == null) {
-            alert('Please enter CompanyName.');
+            alert('Please enter Company name.');
             return;
         }
         if (Group.Name == null || Group.Name == "") {
-            alert('Please enter CompanyName.');
+            alert('Please enter Company name.');
             return;
         }        
-        if (Group.code == null || Group.code == "") {
-            alert('Please enter code.');
+        if ($scope.cmpCode == null || $scope.cmpCode == "") {
+            alert('Please enter Company code.');
             return;
         }
+        //emailid
+        if (Group.EmailId == null) {
+            alert('Please enter email-id.');
+            return;
+        }
+        //contact no
+        if (Group.ContactNo1 == null) {
+            alert('Please enter ContactNo1.');
+            return;
+        }
+        //address
+        if (Group.Address == null) {
+            alert('Please enter Address.');
+            return;
+        }
+        //country
+        if (Group.Country == null) {
+            alert('Please select Country.');
+            return;
+        }
+        //state
+        if (Group.State == null) {
+            alert('Please select State.');
+            return;
+        }
+
         //if (!angular.element('EmailId').$valid)
         //{
         //    alert('invalid email id');
@@ -37,9 +267,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         var newCmp = {
 
             Id: Group.Id,
-            Name: Group.Name,
-            admin: Group.admin,
-            code: Group.code,
+            Name: Group.Name,           
+            code: $scope.cmpCode,
             desc: Group.desc,            
             Address: Group.Address,
             ContactNo1: Group.ContactNo1,
@@ -53,23 +282,23 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             State: Group.State,
             FleetSize:Group.FleetSize,
             StaffSize:Group.StaffSize,
-            PermanentAddress:Group.PermanentAddress,
-            TemporaryAddress:Group.TemporaryAddress,
-            //Logo: Group.Logo,
-            active: (Group.active == true)? 1 : 0,
+            AlternateAddress: Group.AlternateAddress,
+          //  TemporaryAddress:Group.TemporaryAddress,
+            Logo: $scope.imageSrc,
+            active: 1,
             insupdflag:flag 
         }
         
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CompanyGroups/SaveCompanyGroups',
+            url: '/api/CompanyGroups/SaveCompanyGroups',
             data: newCmp
         }
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!!");
-            
+            //$scope.showDialog("Saved successfully!!");
+            alert("Saved successfully");
             $scope.Group = null;
             //$scope.GetCompanys();
 
@@ -77,7 +306,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             var errdata = errres.data;
             var errmssg = "";
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-            $scope.showDialog(errmssg);
+            // $scope.showDialog(errmssg);
+            alert(errmssg);
         });
 
      
@@ -87,22 +317,48 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.saveCmpChanges = function (Group, flag) {
 
         if (Group == null) {
-            alert('Please enter CompanyName.');
+            alert('Please enter Company name.');
             return;
         }
         if (Group.Name == null || Group.Name == "") {
-            alert('Please enter CompanyName.');
+            alert('Please enter Company name.');
             return;
         }
-        if (Group.code == null || Group.code == "") {
-            alert('Please enter code.');
+        if (Group.Code == null || Group.Code == "") {
+            alert('Please enter Company Code.');
             return;
         }
+        //emailid
+        if (Group.EmailId == null) {
+            alert('Please enter email-id.');
+            return;
+        }
+        //contact no
+        if (Group.ContactNo1 == null) {
+            alert('Please enter ContactNo1.');
+            return;
+        }
+        //address
+        if (Group.Address == null) {
+            alert('Please enter Address.');
+            return;
+        }
+        //country
+        if (Group.Country == null) {
+            alert('Please select Country.');
+            return;
+        }
+        //state
+        if (Group.State == null) {
+            alert('Please select State.');
+            return;
+        }
+
+        
         var Group = {
             Id: Group.Id,
-            Name: Group.Name,
-            admin: Group.admin,
-            code: Group.code,
+            Name: Group.Name,            
+            code: Group.Code,
             desc: Group.desc,
             Address:Group.Address,
             EmailId:Group.EmailId,
@@ -116,10 +372,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             State: Group.State,
             FleetSize: Group.FleetSize,
             StaffSize: Group.StaffSize,
-            PermanentAddress: Group.PermanentAddress,
-            TemporaryAddress: Group.TemporaryAddress,
-            //Logo:Group.Logo,
-            active: (Group.active == true) ? 1 : 0,
+            AlternateAddress: Group.AlternateAddress,
+            Logo: $scope.imageSrc,
+            active: (document.getElementById('cmpactive').checked) ? 1 : 0,
             insupdflag: flag
 
         }
@@ -127,28 +382,75 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/CompanyGroups/SaveCompanyGroups',
+            url: '/api/CompanyGroups/SaveCompanyGroups',
             data: Group
         }
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!!");
+            //$scope.showDialog("Saved successfully!!");
+            alert("Saved successfully!").
+            $scope.GetCompanys();
+            $scope.currGroup = null;
             
         }
         , function (errres) {
             var errdata = errres.data;
             var errmssg = "";            
             errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;            
-            $scope.showDialog(errmssg);
-           
+           // $scope.showDialog(errmssg);
+            alert(errmssg);
         });
-        $scope.GetCompanys();
-        $scope.currGroup = null;
+        
     };
       
+    $scope.GetId = function () {
+        $scope.imageSrc = null;
+        document.getElementById('cmpLogo').src = "";
+
+        var date = new Date();
+        var components = [
+            date.getYear(),
+            date.getMonth(),
+            date.getDate(),
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds(),
+            date.getMilliseconds()
+        ];
+
+        var id = components.join("");
+        return id;
+        //this.length = 8;
+        //this.timestamp = +new Date;
+
+        //var _getRandomInt = function (min, max) {
+        //    return Math.floor(Math.random() * (max - min + 1)) + min;
+        //}
+
+        //this.generate = function () {
+        //    var ts = this.timestamp.toString();
+        //    var parts = ts.split("").reverse();
+        //    var id = "";
+
+        //    for (var i = 0; i < this.length; ++i) {
+        //        var index = _getRandomInt(0, parts.length - 1);
+        //        id += parts[index];
+        //    }
+
+        //    return id;
+        //}
+    }
 
     $scope.setCompany = function (cmp) {
-        $scope.currGroup = cmp;
+        $scope.imageSrc = null;
+        document.getElementById('cmpNewLogo').src = "";
+
+        $http.get('/api/GetCompanyDetails?cmpId='+cmp.Id).then(function (response, data) {
+            $scope.currGroup = response.data[0];
+            $scope.imageSrc = $scope.currGroup.Logo;
+            document.getElementById('cmpactive').checked = ($scope.currGroup.Active == 1);
+        });
+       
     };
 
     $scope.clearGroup = function () {        
@@ -174,119 +476,33 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         if (isNaN(String.fromCharCode($event.keyCode))) {
             $event.preventDefault();
         }
+    };   
+
+    $scope.UploadImg = function ()
+    {
+        var fileinput = document.getElementById('fileInput');
+        fileinput.click();
+
+      //  
+        //if ($scope.file == null)
+        //{ $scope.file = fileinput.files[0]; }
+        //fileReader.readAsDataUrl($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
+        //fileReader.onLoad($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
     };
-   
-
-    //$scope.uploadFile = function () {
-    //    var file = $scope.Logo;
-    //    console.log('file is ' + JSON.stringify(file));
-        
-    //};
-
-    $scope.upload = [];
-    $scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
-
-    var UploadDataModel = { testString1: "Test string 1", testString2: "Test string 2" };
-
-    $scope.upload = function (file) {
-        Upload.upload({
-            url: "http://localhost:1476/api/files/upload",
-            data: { file: file, 'username': $scope.username }
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
-
-    $scope.onFileSelect1 = function ($files) {
-        $scope.files = $files;
-    }
 
     $scope.onFileSelect = function () {
-       var files = $scope.files;
-        //$files: an array of files selected, each file has name, size, and type.
-       for (var i = 0; i < files.length; i++) {
-           var $file = files[i];
-            (function (index) {
-                $scope.upload[index] = $upload.upload({
-                    url: "http://localhost:1476/api/files/upload", // webapi url
-                    method: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                    // data: UploadDataModel,
-                    file: $file
-                }).progress(function (evt) {
-                    // get upload percentage
-                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                }).success(function (data, status, headers, config) {
-                    // file is uploaded successfully
-                    console.log(data);
-                }).error(function (data, status, headers, config) {
-                    // file failed to upload
-                    console.log(data);
-                });
-            })(i);
-        }
+        fileReader.readAsDataUrl($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
     }
 
-    $scope.abortUpload = function (index) {
-        $scope.upload[index].abort();
-    }
+    $scope.clearImg = function () {
+        $scope.imageSrc = null;
+        document.getElementById('cmpLogo').src = "";
+        document.getElementById('cmpNewLogo').src = "";
+   }
 
 });
 
-var filectrl = app.controller('UploadCtrl', function ($scope, $http, $timeout, $upload ) {
-    $scope.upload = [];
-    $scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
 
-    var UploadDataModel = { testString1: "Test string 1", testString2: "Test string 2" };
-
-    $scope.upload = function (file) {
-        Upload.upload({
-            url: "http://localhost:1476/api/files/upload",
-            data: { file: file, 'username': $scope.username }
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
-    };
-
-    $scope.onFileSelect = function ($files) {
-        //$files: an array of files selected, each file has name, size, and type.
-        for (var i = 0; i < $files.length; i++) {
-            var $file = $files[i];
-            (function (index) {
-                $scope.upload[index] = $upload.upload({
-                    url: "http://localhost:1476/api/files/upload", // webapi url
-                    method: "POST",
-                    contentType: 'application/json; charset=utf-8',
-                   // data: UploadDataModel,
-                    file: $file
-                }).progress(function (evt) {
-                    // get upload percentage
-                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                }).success(function (data, status, headers, config) {
-                    // file is uploaded successfully
-                    console.log(data);
-                }).error(function (data, status, headers, config) {
-                    // file failed to upload
-                    console.log(data);
-                });
-            })(i);
-        }
-    }
-
-    $scope.abortUpload = function (index) {
-        $scope.upload[index].abort();
-    }
-});
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 

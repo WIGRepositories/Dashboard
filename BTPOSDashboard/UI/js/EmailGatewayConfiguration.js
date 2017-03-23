@@ -10,7 +10,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetEmailGateway = function () {
 
-        $http.get('http://localhost:1476/api/EmailGatewayConfig/GetEmailGateway').then(function (response, req) {
+        $http.get('/api/EmailGatewayConfig/GetEmailGateway').then(function (response, req) {
             $scope.GetEmailGateway = response.data;
             for (cnt = 0; cnt < response.data.length; cnt++) {
                 $scope.GetEmailGateway[cnt].startdate = new Date($scope.GetEmailGateway[cnt].startdate);
@@ -39,7 +39,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/EmailGatewayConfig/SaveEmailGatewaySettings',
+            url: '/api/EmailGatewayConfig/SaveEmailGatewaySettings',
             data: newCmp
         }
         $http(req).then(function (response) {
@@ -79,7 +79,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/EmailGatewayConfig/SaveEmailGatewaySettings',
+            url: '/api/EmailGatewayConfig/SaveEmailGatewaySettings',
             data: newCmp
         }
         $http(req).then(function (response) {

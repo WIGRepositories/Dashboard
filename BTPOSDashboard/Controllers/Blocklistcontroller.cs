@@ -14,8 +14,8 @@ namespace blocklist1.Controllers
     public class Blocklistcontroller : ApiController
     {
         [HttpGet]
-
-        public DataTable POSDashboard1()
+        [Route("api/Blocklist/GetBlockDetails")]
+        public DataTable GetBlockDetails(int selectedId)
         {
             DataTable Tbl = new DataTable();
 
@@ -29,6 +29,13 @@ namespace blocklist1.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetBlockList";
             cmd.Connection = conn;
+
+            SqlParameter gid = new SqlParameter();
+            gid.ParameterName = "@selectedId";
+            gid.SqlDbType = SqlDbType.Int;
+            gid.Value = selectedId;
+            cmd.Parameters.Add(gid);
+
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
@@ -36,27 +43,34 @@ namespace blocklist1.Controllers
 
             // int found = 0;
             return Tbl;
+
         }
 
 
+
+
+
         [HttpPost]
-        public HttpResponseMessage pos(Blocklist b)
+        public HttpResponseMessage saveBocklist(IEnumerable<Blocklist> Blist)
         {
-           
-
-
-            //connect to database
             SqlConnection conn = new SqlConnection();
             try
-            { 
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-          
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "InsUpdDelELBlockList";
-            cmd.Connection = conn;
-            conn.Open();
+            {
+
+
+                //connect to database
+
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "InsUpdDelBlocklist";
+                cmd.Connection = conn;
+                conn.Open();
+
+                foreach (Blocklist b in Blist)
+                {
             SqlParameter Aid = new SqlParameter();
             Aid.ParameterName = "@Id";
             Aid.SqlDbType = SqlDbType.VarChar;
@@ -105,14 +119,14 @@ namespace blocklist1.Controllers
 
 
 
-SqlParameter mm = new SqlParameter();
+            SqlParameter mm = new SqlParameter();
             mm.ParameterName = "@Reason ";
             mm.SqlDbType = SqlDbType.VarChar;
             mm.Value = b.Reason ;
             cmd.Parameters.Add(mm);
 
 
-SqlParameter nn = new SqlParameter();
+            SqlParameter nn = new SqlParameter();
             nn.ParameterName = "@Blockedby";
             nn.SqlDbType = SqlDbType.VarChar;
             nn.Value =Convert.ToString(b.Blockedby);
@@ -120,18 +134,18 @@ SqlParameter nn = new SqlParameter();
             
 
 
-SqlParameter pp= new SqlParameter();
+            SqlParameter pp= new SqlParameter();
             pp.ParameterName = "@UnBlockedby ";
             pp.SqlDbType = SqlDbType.VarChar;
             pp.Value = b.UnBlockedby;
             cmd.Parameters.Add(pp);
 
-SqlParameter kk= new SqlParameter();
+            SqlParameter kk= new SqlParameter();
             kk.ParameterName = "@Blockedon";
             kk.SqlDbType = SqlDbType.VarChar;
             kk.Value =Convert.ToString(b.Blockedon);
             cmd.Parameters.Add(kk);
-SqlParameter yy= new SqlParameter();
+            SqlParameter yy= new SqlParameter();
             yy.ParameterName = "@UnBlockedon";
             yy.SqlDbType = SqlDbType.VarChar;
             yy.Value =Convert.ToString(b.UnBlockedon);
@@ -145,9 +159,12 @@ SqlParameter yy= new SqlParameter();
             //db.Fill(ds);
            // Tbl = Tables[0];
             cmd.ExecuteScalar();
-            conn.Close();
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            cmd.Parameters.Clear();
+                }
+
+                conn.Close();
+                return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
@@ -159,12 +176,8 @@ SqlParameter yy= new SqlParameter();
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
-
-        public void Options() { }
-
     }
 }
-
 
 
 

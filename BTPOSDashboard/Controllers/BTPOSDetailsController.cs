@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -83,10 +85,12 @@ namespace BTPOSDashboardAPI.Controllers
 
         [HttpGet]
 
-        public DataTable GetBTPOSDetails()
+        public DataSet GetBTPOSDetails()
         {
-            DataTable Tbl = new DataTable();
+            DataSet Tbl = new DataSet();
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -95,7 +99,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlCommand cmd = new SqlCommand();
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "GetBTPOSDetails1";
+            cmd.CommandText = "GetBTPOSDetails";
             cmd.Connection = conn;
 
             //SqlParameter cmp = new SqlParameter("@cmpId", SqlDbType.Int);
@@ -108,7 +112,7 @@ namespace BTPOSDashboardAPI.Controllers
 
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails completed.");
             return Tbl;
         }
         [HttpGet]
@@ -118,6 +122,9 @@ namespace BTPOSDashboardAPI.Controllers
 
             DataSet Tbl = new DataSet();
 
+        
+            //LogTraceWriter traceWriter = new LogTraceWriter();
+            //traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Paging credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -147,6 +154,7 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
 
+            //traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Validate Credentials completed.");
             return Tbl;
         }
         
@@ -156,9 +164,12 @@ namespace BTPOSDashboardAPI.Controllers
         public HttpResponseMessage SaveBTPOSDetails(IEnumerable<BTPOSDetails> posList)
         {
              SqlConnection conn = new SqlConnection();
+             LogTraceWriter traceWriter = new LogTraceWriter();
             try
-            { 
+            {
 
+                
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails ...");
             // BTPOSDetails n = new BTPOSDetails();
             
                 //connect to database
@@ -209,13 +220,21 @@ namespace BTPOSDashboardAPI.Controllers
                     fo.Value = n.fleetownerid;
                     cmd.Parameters.Add(fo);
 
-                    //SqlParameter fo1 = new SqlParameter("@pageno", SqlDbType.Int);
-                    //fo1.Value = n.fleetownerid;
-                    //cmd.Parameters.Add(fo1);
+                    SqlParameter fo1 = new SqlParameter("@PerUnitPrice", SqlDbType.Decimal);
+                    fo1.Value = n.PerUnitPrice;
+                    cmd.Parameters.Add(fo1);
 
-                    //SqlParameter fo2 = new SqlParameter("@pagesize", SqlDbType.Int);
-                    //fo2.Value = n.fleetownerid;
-                    //cmd.Parameters.Add(fo2);
+                    SqlParameter fo2 = new SqlParameter("@POSTypeId", SqlDbType.Int);
+                    fo2.Value = n.POSTypeId;
+                    cmd.Parameters.Add(fo2);
+
+                    SqlParameter fo3 = new SqlParameter("@ActivatedOn", SqlDbType.Date);
+                    fo3.Value = n.ActivatedOn;
+                    cmd.Parameters.Add(fo3);
+
+                    SqlParameter fo4 = new SqlParameter("@PONum", SqlDbType.VarChar,15);
+                    fo4.Value = n.PONum;
+                    cmd.Parameters.Add(fo4);
 
                     SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 10);
                     insupdflag.Value = n.insupdflag;
@@ -227,6 +246,7 @@ namespace BTPOSDashboardAPI.Controllers
                 }
                 conn.Close();
 
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -236,6 +256,7 @@ namespace BTPOSDashboardAPI.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveBTPOSDetails:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

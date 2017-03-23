@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Text;
 using System.IO;
 using BTPOSDashboardAPI.Models;
+using System.Web.Http.Tracing;
 
 
 namespace BTPOSDashboard.Controllers
@@ -17,10 +18,13 @@ namespace BTPOSDashboard.Controllers
     {       
 
         [HttpGet]
-        public DataTable GetFleeBTPosRecords(int POSID, int Id)
+        public DataTable GetBTPosDetails(int POSID, int Id)
         {
             DataTable Tbl = new DataTable();
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSConfig....");
+ 
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -31,39 +35,7 @@ namespace BTPOSDashboard.Controllers
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "GetBTPOSRecords";
             cmd.Connection = conn;
-
-            //SqlParameter cid1 = new SqlParameter();
-            //cid1.ParameterName = "@Id";
-            //cid1.SqlDbType = SqlDbType.Int;
-            //cid1.Value = Id;
-            //cmd.Parameters.Add(cid1);
-
-            //SqlParameter cid = new SqlParameter();
-            //cid.ParameterName = "@POSID";
-            //cid.SqlDbType = SqlDbType.Int;
-            //cid.Value = POSID;
-            //cmd.Parameters.Add(cid);
-
-            //SqlParameter fid1 = new SqlParameter();
-            //fid1.ParameterName = "@FileName";
-            //fid1.SqlDbType = SqlDbType.VarChar;
-            //fid1.Value = FileName;
-            //cmd.Parameters.Add(fid1);
-
-            //SqlParameter fid2 = new SqlParameter();
-            //fid2.ParameterName = "@Description";
-            //fid2.SqlDbType = SqlDbType.VarChar;
-            //fid2.Value = Description;
-            //cmd.Parameters.Add(fid2);
-
-
-            //SqlParameter fid3 = new SqlParameter();
-            //fid3.ParameterName = "@LastDownloadtime";
-            //fid3.SqlDbType = SqlDbType.VarChar;
-            //fid3.Value = LastDownloadtime;
-            //cmd.Parameters.Add(fid3);
-
-
+            
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
             // Tbl = ds.Tables[0];
@@ -75,17 +47,7 @@ namespace BTPOSDashboard.Controllers
 
             str.Append(string.Format("test\n{0}", POSID.ToString()));
 
-            //  str.Append("Id,filename,Description,LastModifiedtime");
-
-            //  str.Append(string.Format("test\n{1}", FileName.ToString()));
-
-
-            //    str.Append(string.Format("test\n{2}", Description.ToString()));
-
-            //   str.Append(string.Format("test\n{3}", LastDownloadtime.ToString()));
-
-
-
+         
             for (int i = 0; i < Tbl.Rows.Count; i++)
             {
                 // str.Append(Tbl.Rows[i]["POSID"].ToString()+",");
@@ -105,6 +67,9 @@ namespace BTPOSDashboard.Controllers
             file.WriteLine(str.ToString());
             file.Flush();
             file.Close();
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Validate Credentials completed.");
+            
             // Show(str1);
 
             // int found = 0;
@@ -116,7 +81,9 @@ namespace BTPOSDashboard.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveFleetBTPOS....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -156,6 +123,8 @@ namespace BTPOSDashboard.Controllers
 
             SqlDataAdapter db = new SqlDataAdapter(cmd1);
             db.Fill(Tbl);
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveFleetBTPOS Credentials completed.");
+            
             return Tbl;
         }
 
@@ -207,7 +176,7 @@ namespace BTPOSDashboard.Controllers
             strBldr.Append("~");
             foreach (DataRow dr1 in dt.Rows)
             {
-                strBldr.AppendLine(dr1[0].ToString());
+                strBldr.Append(dr1[0].ToString()+",");
             }           
             strBldr.Append("~");
             dr[0] = strBldr.ToString();
@@ -250,10 +219,10 @@ namespace BTPOSDashboard.Controllers
                     indexTbl.Columns.Add(filename);
                     //strBldr.AppendLine("Route1<s.no,id,active>");
                     strBldr.Append("~");
-
+                   int rCount = 0;
                     foreach (DataRow dr1 in dt.Rows)
                     {
-                        strBldr.AppendLine(string.Format("{0}<{1},{2}>", dr1[0].ToString(), dr1[1].ToString(), dr1[2].ToString()));
+                        strBldr.AppendLine(string.Format("{0}<{1},{2},{3}>", dr1[0].ToString(), ++rCount, dr1[1].ToString(), dr1[2].ToString()));
                     } 
                  
                     strBldr.Append("~");
@@ -312,7 +281,7 @@ namespace BTPOSDashboard.Controllers
 
                     foreach (DataRow dr1 in dt.Rows)
                     {
-                        strBldr.AppendLine(string.Format("{0}<{1},{2}<{3}>", dr1[0].ToString(), dr1[1].ToString(), dr1[2].ToString(), dr1[3].ToString()));
+                        strBldr.AppendLine(string.Format("{0}<{1},{2},{3}>", dr1[0].ToString(), dr1[1].ToString(), dr1[2].ToString(), dr1[3].ToString()));
                     } 
                    
                     strBldr.Append("~");
@@ -446,79 +415,163 @@ namespace BTPOSDashboard.Controllers
             DataTable indexTbl = new DataTable();
             indexTbl.Columns.Add("Status");
 
-            SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
-            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
-
-            SqlCommand cmd1 = new SqlCommand();
-            cmd1.CommandType = CommandType.StoredProcedure;
-            cmd1.CommandText = "InsUpdDelBTPOSTrans";
-            cmd1.Connection = conn;
-
-            SqlParameter cid = new SqlParameter();
-            cid.ParameterName = "@BTPOSId";
-            cid.SqlDbType = SqlDbType.VarChar;
-            cid.Value = BTPOSId;
-            cmd1.Parameters.Add(cid);
-
-            SqlParameter fid1 = new SqlParameter();
-            fid1.ParameterName = "@transTypeId";
-            fid1.SqlDbType = SqlDbType.Int;
-            fid1.Value = transTypeId;
-            cmd1.Parameters.Add(fid1);
-
-            SqlParameter fi = new SqlParameter();
-            fi.ParameterName = "@amt";
-            fi.SqlDbType = SqlDbType.Decimal;
-            fi.Value = amt;
-            cmd1.Parameters.Add(fi);
-
-            SqlParameter f = new SqlParameter();
-            f.ParameterName = "@datetime";
-            f.SqlDbType = SqlDbType.VarChar;
-            f.Value = datetime;
-            cmd1.Parameters.Add(f);
-
-            SqlParameter f1 = new SqlParameter();
-            f1.ParameterName = "@gatewayId";
-            f1.SqlDbType = SqlDbType.VarChar;
-            f1.Value = gatewayId;
-            cmd1.Parameters.Add(f1);
-
-            SqlParameter ff = new SqlParameter();
-            ff.ParameterName = "@srcId";
-            ff.SqlDbType = SqlDbType.VarChar;
-            ff.Value = srcId;
-            cmd1.Parameters.Add(ff);
-
-            SqlParameter fid2 = new SqlParameter();
-            fid2.ParameterName = "@destId";
-            fid2.SqlDbType = SqlDbType.VarChar;
-            fid2.Value = destId;
-            cmd1.Parameters.Add(fid2);
-
-            //insert into db
-
-            int btposTransId = (int)cmd1.ExecuteScalar();
-
-            if (btposTransId > 0)
+            try
             {
-                //make paypal payment
-                //update the paypal payment id back
+                SqlConnection conn = new SqlConnection();
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd1 = new SqlCommand();
+                cmd1.CommandType = CommandType.StoredProcedure;
+                cmd1.CommandText = "InsUpdDelBTPOSTrans";
+                cmd1.Connection = conn;
+
+                SqlParameter cid = new SqlParameter();
+                cid.ParameterName = "@BTPOSId";
+                cid.SqlDbType = SqlDbType.VarChar;
+                cid.Value = BTPOSId;
+                cmd1.Parameters.Add(cid);
+
+                //cash
+                //SqlParameter fid1 = new SqlParameter();
+                //fid1.ParameterName = "@PaymentTypeId";
+                //fid1.SqlDbType = SqlDbType.Int;
+                //fid1.Value = 25;
+                //cmd1.Parameters.Add(fid1);
+
+                SqlParameter fid11 = new SqlParameter();
+                fid11.ParameterName = "@PaymentTypeId";
+                fid11.SqlDbType = SqlDbType.Int;
+                fid11.Value = 25;
+                cmd1.Parameters.Add(fid11);
+
+                //success
+                SqlParameter fid12 = new SqlParameter();
+                fid12.ParameterName = "@TransStatusId";
+                fid12.SqlDbType = SqlDbType.Int;
+                fid12.Value = 30;
+                cmd1.Parameters.Add(fid12);
+
+                SqlParameter fi = new SqlParameter();
+                fi.ParameterName = "@AmountPaid";
+                fi.SqlDbType = SqlDbType.Decimal;
+                fi.Value = amt;
+                cmd1.Parameters.Add(fi);
+
+                SqlParameter f = new SqlParameter();
+                f.ParameterName = "@date";
+                f.SqlDbType = SqlDbType.VarChar;
+                f.Value = DateTime.Now;
+                cmd1.Parameters.Add(f);
+
+                SqlParameter f1 = new SqlParameter();
+                f1.ParameterName = "@GatewayTransId";
+                f1.SqlDbType = SqlDbType.VarChar;
+                f1.Value = gatewayId;
+                cmd1.Parameters.Add(f1);
+
+                SqlParameter ff = new SqlParameter();
+                ff.ParameterName = "@srcId";
+                ff.SqlDbType = SqlDbType.VarChar;
+                ff.Value = srcId;
+                cmd1.Parameters.Add(ff);
+
+                SqlParameter fid2 = new SqlParameter();
+                fid2.ParameterName = "@destId";
+                fid2.SqlDbType = SqlDbType.VarChar;
+                fid2.Value = destId;
+                cmd1.Parameters.Add(fid2);
+
+                SqlParameter flag = new SqlParameter();
+                flag.ParameterName = "@insupdflag";
+                flag.SqlDbType = SqlDbType.VarChar;
+                flag.Value = "I";
+                //llid.Value = b.Active;
+                cmd1.Parameters.Add(flag);
+
+                SqlParameter tid = new SqlParameter();
+                tid.ParameterName = "@posTransId";
+                tid.SqlDbType = SqlDbType.Int;
+                tid.Direction = ParameterDirection.Output;
+                cmd1.Parameters.Add(tid);
 
 
+
+                //insert into db
+                conn.Open();
+                object btposTransId = cmd1.ExecuteScalar();
+                conn.Close();
+
+                DataRow dr = indexTbl.NewRow();
+                dr[0] = 1;
+                //if (Convert.IsDBNull(btposTransId))
+                //{
+                //    //make paypal payment
+                //    //update the paypal payment id back
+                //    dr[0] = 0;
+
+                //}
+                //else
+                //{
+                //    if(Convert.ToInt32(btposTransId) > 0)
+                //        dr[0] = 1;
+                //}
+
+                indexTbl.Rows.Add(dr);
+
+                return indexTbl;
             }
-            
-            
+            catch{
+                  DataRow dr = indexTbl.NewRow();
+                dr[0] = 0;
+                    indexTbl.Rows.Add(dr);
 
+                return indexTbl;
+            }
+        }
 
+        [HttpGet]
+        [Route("api/RegisterBTPOS")]
+        public DataTable RegisterBTPOS(string posSN)
+        {
 
-            DataRow dr = indexTbl.NewRow();
-            dr[0] =  1;
-            
-            indexTbl.Rows.Add(dr);
+            DataTable Tbl = new DataTable();
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            try
+            {
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "RegisterBTPOS....");
 
-            return indexTbl;
+                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+                conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "RegisterBTPOS";
+                cmd.Connection = conn;
+
+                SqlParameter cid = new SqlParameter();
+                cid.ParameterName = "@posSN";
+                cid.SqlDbType = SqlDbType.VarChar;
+                cid.Value = posSN;
+                cmd.Parameters.Add(cid);
+
+                SqlDataAdapter db = new SqlDataAdapter(cmd);
+                db.Fill(Tbl);
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "End RegisterBTPOS....");
+                return Tbl;
+            }
+            catch (Exception ex) {
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in RegisterBTPOS:" + ex.Message);
+                //return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
+                return Tbl;
+            }
         }
     }
 }

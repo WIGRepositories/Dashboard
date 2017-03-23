@@ -1,8 +1,129 @@
 
 // JavaScript source code
-var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap', 'angularFileUpload'])
 
-var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
+app.directive('file-input', function ($parse) {
+    return {
+        restrict: "EA",
+        template: "<input type='file' />",
+        replace: true,
+        link: function (scope, element, attrs) {
+
+            var modelGet = $parse(attrs.fileInput);
+            var modelSet = modelGet.assign;
+            var onChange = $parse(attrs.onChange);
+
+            var updateModel = function () {
+                scope.$apply(function () {
+                    modelSet(scope, element[0].files[0]);
+                    onChange(scope);
+                });
+            };
+
+            element.bind('change', updateModel);
+        }
+    };
+});
+
+app.directive("ngFileSelect", function () {
+
+    return {
+
+        link: function ($scope, el) {
+
+            el.on('click', function () {
+
+                this.value = '';
+
+            });
+
+            el.bind("change", function (e) {
+
+                $scope.file = (e.srcElement || e.target).files[0];
+
+
+
+                var allowed = ["jpeg", "png", "gif", "jpg"];
+
+                var found = false;
+
+                var img;
+
+                img = new Image();
+
+                allowed.forEach(function (extension) {
+
+                    if ($scope.file.type.match('image/' + extension)) {
+
+                        found = true;
+
+                    }
+
+                });
+
+                if (!found) {
+
+                    alert('file type should be .jpeg, .png, .jpg, .gif');
+
+                    return;
+
+                }
+
+                img.onload = function () {
+
+                    var dimension = $scope.selectedImageOption.split(" ");
+
+                    if (dimension[0] == this.width && dimension[2] == this.height) {
+
+                        allowed.forEach(function (extension) {
+
+                            if ($scope.file.type.match('image/' + extension)) {
+
+                                found = true;
+
+                            }
+
+                        });
+
+                        if (found) {
+
+                            if ($scope.file.size <= 1048576) {
+
+                                $scope.getFile();
+
+                            } else {
+
+                                alert('file size should not be grater then 1 mb.');
+
+                            }
+
+                        } else {
+
+                            alert('file type should be .jpeg, .png, .jpg, .gif');
+
+                        }
+
+                    } else {
+
+                        alert('selected image dimension is not equal to size drop down.');
+
+                    }
+
+                };
+
+                //  img.src = _URL.createObjectURL($scope.file);
+
+
+
+            });
+
+        }
+
+    };
+
+});
+
+var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal, $upload, $timeout, fileReader, $filter) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
     }
@@ -19,26 +140,26 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     /* user details functions */
     $scope.GetCompanies = function () {    
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
 
-            if ($scope.userCmpId != 1) {
-                //loop throug the companies and identify the correct one
-                for (i = 0; i < response.data.length; i++) {
-                    if (response.data[i].Id == $scope.userCmpId) {
-                        $scope.cmp = response.data[i];
-                        document.getElementById('test').disabled = true;
-                        break
-                    }
-                }
-            }
-            else {
-                document.getElementById('test').disabled =false;
-            }
+        //    if ($scope.userCmpId != 1) {
+        //        //loop throug the companies and identify the correct one
+        //        for (i = 0; i < response.data.length; i++) {
+        //            if (response.data[i].Id == $scope.userCmpId) {
+        //                $scope.cmp = response.data[i];
+        //                document.getElementById('test').disabled = true;
+        //                break
+        //            }
+        //        }
+        //    }
+        //    else {
+        //        document.getElementById('test').disabled =false;
+        //    }
 
-            $scope.getUserRolesForCompany($scope.cmp);
+        //    $scope.getUserRolesForCompany($scope.cmp);
         });
-        if ($scope.Roleid != 1) { $scope.cmpId = $scope.UserCmpid;}
+        //if ($scope.Roleid != 1) { $scope.cmpId = $scope.UserCmpid;}
     }
 
     $scope.GetUsersForCmp = function () {
@@ -50,12 +171,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/Users/GetUsers?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.User = res.data;
             $scope.MgrUsers = res.data;
         });
 
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/Roles/GetCompanyRoles?companyId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.cmproles = res.data;
         });
     }
@@ -76,20 +197,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        if (User.Email == null) {
+        if (User.EmailId == null) {
             alert('Please enter Email.');
             return;
         }
 
         if (User.EmpNo == null) {
-            alert('Please enter FleetOwnerCode.');
+            alert('Please enter employee no.');
             return;
-        }
-
-        if (User.Password != $scope.reenteredPwd) {
-            alert('The passwords do not match.');
-            return;
-        }
+        }       
 
         if ($scope.cmp == null)
         {
@@ -97,28 +213,43 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        var User = {
-            Id: User.Id,
+        var U = {
+            Id: ((flag == 'U') ? User.Id : -1),
             FirstName: User.FirstName,
             LastName: User.LastName,
             MiddleName: User.MiddleName,
-            EmpNo: User.EmpNo,
-            Email: User.Email,
-            AdressId: User.AdressId,
-            MobileNo: User.MobileNo,
-            RoleId: (role == -1) ? $scope.r.RoleId : 6,
+            EmpNo: (flag == 'U') ? User.EmpNo : $scope.EmpNo,
+            Email: User.EmailId,
+            ContactNo1: User.ContactNo1,
+            ContactNo2: User.ContactNo2,
+            mgrId: User.ManagerId,//($scope.mgr == null) ? null : $scope.mgr.Id,
+            CountryId: User.Country,
+            StateId:User.State,
+            GenderId:User.Gender,
+            Address:User.Address,
+            AltAdress:User.AlternateAddress,
+            ZipCode: User.ZipCode,
+            RoleId: User.RoleId,
+            RFromDate: User.RFromDate,
+            RToDate: User.RToDate,
             companyId: $scope.cmp.Id,
             Active: 1,
-            UserName: User.UserName,
-            Password: User.Password,
-            mgrId: ($scope.mgr == null )? null: $scope.mgr.Id,
-            insupdflag: flag
-        }
+           
+            DUserName: User.DUserName,
+            DPassword: User.DPassword,
+
+           // WUserName: User.DUserName,
+          //  WPassword: User.DPassword,
+
+            Photo: $scope.imageSrc,
+        
+            insupdflag: flag     
+    }
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/users/saveusers',
-            data: User
+            url: '/api/users/saveusers',
+            data: U
         }
         $http(req).then(function (response) {
 
@@ -154,6 +285,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.setUsers = function (usr) {
         $scope.User1 = usr;
+        $scope.imageSrc = null;
+        document.getElementById('cmpNewLogo').src = "";
+        $scope.imageSrc = usr.photo;
+        document.getElementById('uactive').checked = (usr.Active == 1);
+
     }
 
     $scope.clearUsers = function () {
@@ -166,17 +302,36 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         if (cmp == null) {
             $scope.userRoles = null;
+            $scope.checkedArr = [];
+            $scope.uncheckedArr = [];
             return;
         }
 
-        $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.userRoles = res.data;
+            $scope.checkedArr = res.data;
+           // $scope.uncheckedArr = $filter('filter')($scope.userRoles, { assigned: "0" });
+
         });
     }
 
     $scope.GetUsersinitData = function () {
+
+        $scope.imageSrc = null;
+        document.getElementById('cmpLogo').src = "";
+
+        var date = new Date();
+        var components = [
+            date.getHours(),
+            date.getMinutes(),
+            date.getSeconds()
+        ];
+
+        var id = components.join("");
+        $scope.EmpNo = 'EMP' + id;
+
         //get companies list   
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (response, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (response, data) {
             $scope.Companies = response.data;
         });
     }
@@ -189,11 +344,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         var cmpId = (seltype) ? seltype.Id : -1;
 
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles = res.data;
         });
 
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
             $scope.MgrUsers = res.data;
         });
         //get users for the company or all users based on company
@@ -207,11 +362,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         var cmpId = ($scope.s == null) ? -1 : $scope.s.Id;
 
-        $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
             $scope.cmproles1 = res.data;
         });
 
-        $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+        $http.get('/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
             $scope.cmpUsers1 = res.data;
         });
     }
@@ -240,7 +395,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Users/SaveUserRoles',
+            url: '/api/Users/SaveUserRoles',
             //headers: {
             //    'Content-Type': undefined
             data: userrole
@@ -306,13 +461,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Users/GetUsers?cmpId=-1',
+            url: '/api/Users/GetUsers?cmpId=-1',
             data: userrole
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
+            $http.get('/api/Users/GetUsers?cmpId=' + cmpId).then(function (res, data) {
                 $scope.userRoles = res.data;
             });
 
@@ -369,7 +524,26 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     };
 
 
+    $scope.UploadImg = function () {
+        var fileinput = document.getElementById('fileInput');
+        fileinput.click();
 
+        //  
+        //if ($scope.file == null)
+        //{ $scope.file = fileinput.files[0]; }
+        //fileReader.readAsDataUrl($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
+        //fileReader.onLoad($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
+    };
+
+    $scope.onFileSelect = function () {
+        fileReader.readAsDataUrl($scope.file, $scope).then(function (result) { $scope.imageSrc = result; });
+    }
+
+    $scope.clearImg = function () {
+        $scope.imageSrc = null;
+        document.getElementById('cmpLogo').src = "";
+        document.getElementById('cmpNewLogo').src = "";
+    }
 });
 
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {

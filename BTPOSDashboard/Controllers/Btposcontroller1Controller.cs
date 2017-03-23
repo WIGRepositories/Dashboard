@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -17,6 +18,8 @@ namespace BTPOSDashboard.Controllers
         {
             DataTable Tbl = new DataTable();
 
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -39,6 +42,9 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
 
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetBTPOSDetails Credentials completed.");
+            
+
             return Tbl;
         }
         [HttpGet]
@@ -47,6 +53,9 @@ namespace BTPOSDashboard.Controllers
         {
 
             DataSet Tbl = new DataSet();
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Paging credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -76,6 +85,8 @@ namespace BTPOSDashboard.Controllers
 
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(Tbl);
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Paging Credentials completed.");
 
             return Tbl;
         }

@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Text;
 using System.IO;
+using BTPOSDashboard;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboardAPI.Controllers
 {
@@ -19,7 +21,9 @@ namespace BTPOSDashboardAPI.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetTypesByGroupId credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -46,9 +50,9 @@ namespace BTPOSDashboardAPI.Controllers
 
             str.Append(string.Format("test\n{0}", groupid.ToString()));
 
-            
 
 
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetTypesByGroupId Credentials completed.");
             // int found = 0;
             return Tbl;
         }
@@ -58,7 +62,9 @@ namespace BTPOSDashboardAPI.Controllers
         [HttpPost]
         public HttpResponseMessage SaveType(Types b)
         {
-           
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveType credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -113,6 +119,7 @@ namespace BTPOSDashboardAPI.Controllers
             
             cmd.ExecuteScalar();
             conn.Close();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveType Credentials completed.");
              return new HttpResponseMessage(HttpStatusCode.OK);
               }
               catch (Exception ex)
@@ -122,6 +129,7 @@ namespace BTPOSDashboardAPI.Controllers
                       conn.Close();
                   }
                   string str = ex.Message;
+                  traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveType:" + ex.Message);
                   return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
               }
           }

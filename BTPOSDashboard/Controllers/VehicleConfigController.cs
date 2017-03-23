@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -16,6 +17,9 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public DataSet VConfig(VehicleConfig vc)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveVehicleConfig credentials....");
             //DataTable Tbl = new DataTable();
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -113,7 +117,7 @@ namespace BTPOSDashboard.Controllers
             DataSet ds = new DataSet();
             SqlDataAdapter db = new SqlDataAdapter(cmd);
                    db.Fill(ds);
-
+                   traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveVehicleConfig Credentials completed.");
 
            // Tbl = ds.Tables[0];
 

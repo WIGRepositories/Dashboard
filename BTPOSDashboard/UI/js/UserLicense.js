@@ -6,11 +6,13 @@ var ctrl = app.controller('Myctrlr', function ($scope, $http, $localStorage) {
 
     /* user details functions */
     $scope.uname = $localStorage.uname;
-    $http.get('http://localhost:1476/api/GetLicensePayments').then(function (response, req) {
-        $scope.Group = response.data;
 
-    });
+    $scope.GetLicenses = function () {
+        $http.get('/api/GetLicensePayments').then(function (response, req) {
+            $scope.Group = response.data;
 
+        });
+    }
 
     
 

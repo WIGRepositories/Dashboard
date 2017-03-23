@@ -1,0 +1,813 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!--Loading bootstrap css-->
+    <link type="text/css" rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
+    <!--LOADING STYLESHEET FOR PAGE--><!--Loading style vendors-->
+    <link type="text/css" rel="stylesheet" href="vendors/animate.css/animate.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
+    <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
+    <!--Loading style-->
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
+
+    <script src="orgchart/go.js"></script>
+    <link href="orgchart/assets/css/goSamples.css" rel="stylesheet" type="text/css" />  <!-- you don't need to use this -->
+    <script src="orgchart/goSamples.js"></script>  <!-- this is only for the GoJS Samples framework -->
+    <link rel='stylesheet' href='orgchart/assets/css/dataInspector.css' />
+    <script src="orgchart/assets/js/dataInspector.js"></script>
+    <script id="code">
+    function init()
+    {
+        if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+        var $ = go.GraphObject.make;  // for conciseness in defining templates
+
+        myDiagram =
+          $(go.Diagram, "myDiagramDiv", // must be the ID or reference to div
+            {
+                initialContentAlignment: go.Spot.Center,
+                // make sure users can only create trees
+                validCycle: go.Diagram.CycleDestinationTree,
+                // users can select only one part at a time
+                maxSelectionCount: 1,
+                layout:
+                  $(go.TreeLayout,
+                    {
+                        treeStyle: go.TreeLayout.StyleLastParents,
+                        arrangement: go.TreeLayout.ArrangementHorizontal,
+                        // properties for most of the tree:
+                        angle: 90,
+                        layerSpacing: 35,
+                        // properties for the "last parents":
+                        alternateAngle: 0,
+                        alternateLayerSpacing: 35,
+                        alternateAlignment: go.TreeLayout.AlignmentStart,
+                        alternateNodeIndent: 10,
+                        alternateNodeIndentPastParent: 1.0,
+                        alternateNodeSpacing: 10,
+                        alternateLayerSpacing: 30,
+                        alternateLayerSpacingParentOverlap: 1.0,
+                        alternatePortSpot: new go.Spot(0.01, 1, 10, 0),
+                        alternateChildPortSpot: go.Spot.Left
+                    }),
+                // support editing the properties of the selected person in HTML
+                "ChangedSelection": onSelectionChanged,
+                "TextEdited": onTextEdited,
+                // enable undo & redo
+                "undoManager.isEnabled": true
+            });
+
+        // when the document is modified, add a "*" to the title and enable the "Save" button
+        myDiagram.addDiagramListener("Modified", function (e)
+        {
+            var button = document.getElementById("SaveButton");
+            if (button) button.disabled = !myDiagram.isModified;
+            var idx = document.title.indexOf("*");
+            if (myDiagram.isModified)
+            {
+                if (idx < 0) document.title += "*";
+            } else
+            {
+                if (idx >= 0) document.title = document.title.substr(0, idx);
+            }
+        });
+
+        var graygrad = $(go.Brush, "Linear",
+                         { 0: "rgb(125, 125, 125)", 0.5: "rgb(86, 86, 86)", 1: "rgb(86, 86, 86)" });
+
+        // when a node is double-clicked, add a child to it
+        function nodeDoubleClick(e, obj)
+        {
+            var clicked = obj.part;
+            if (clicked !== null)
+            {
+                var thisemp = clicked.data;
+                myDiagram.startTransaction("add employee");
+                var nextkey = (myDiagram.model.nodeDataArray.length + 1).toString();
+                var newemp = { key: nextkey, name: "(new person)", title: "" };
+                myDiagram.model.addNodeData(newemp);
+                myDiagram.model.addLinkData({ from: thisemp.key, to: nextkey });
+                myDiagram.commitTransaction("add employee");
+            }
+        }
+
+        // this is used to determine feedback during drags
+        function mayWorkFor(node1, node2)
+        {
+            if (!(node1 instanceof go.Node)) return false;  // must be a Node
+            if (node1 === node2) return false;  // cannot work for yourself
+            if (node2.isInTreeOf(node1)) return false;  // cannot work for someone who works for you
+            return true;
+        }
+
+        // This function provides a common style for most of the TextBlocks.
+        // Some of these values may be overridden in a particular TextBlock.
+        function textStyle()
+        {
+            return { font: "9pt sans-serif", stroke: "white" };
+        }
+
+        // define the Node template
+        myDiagram.nodeTemplate =
+          $(go.Node, "Auto",
+            { doubleClick: nodeDoubleClick },
+            { // handle dragging a Node onto a Node to (maybe) change the reporting relationship
+                mouseDragEnter: function (e, node, prev)
+                {
+                    var diagram = node.diagram;
+                    var selnode = diagram.selection.first();
+                    if (!mayWorkFor(selnode, node)) return;
+                    var shape = node.findObject("SHAPE");
+                    if (shape) shape.fill = "darkred";
+                },
+                mouseDragLeave: function (e, node, next)
+                {
+                    var shape = node.findObject("SHAPE");
+                    if (shape) shape.fill = graygrad;
+                },
+                mouseDrop: function (e, node)
+                {
+                    var diagram = node.diagram;
+                    var selnode = diagram.selection.first();  // assume just one Node in selection
+                    if (mayWorkFor(selnode, node))
+                    {
+                        // find any existing link into the selected node
+                        var link = selnode.findTreeParentLink();
+                        if (link !== null)
+                        {  // reconnect any existing link
+                            link.fromNode = node;
+                        } else
+                        {  // else create a new link
+                            diagram.toolManager.linkingTool.insertLink(node, node.port, selnode, selnode.port);
+                        }
+                    }
+                }
+            },
+            { // this tooltip Adornment is shared by all nodes
+                toolTip:  //??
+                  $(go.Adornment, "Auto",
+                    $(go.Shape, { fill: "#FFFFCC" }),
+                    $(go.TextBlock, { margin: 4 },  // the tooltip shows the result of calling nodeInfo(data)
+                      new go.Binding("text", "", function (a)
+                      {
+                          return a.adornedPart._treeParentNode + "\n" + a.adornedPart.findTreeParentNode();
+                      }).ofObject()))
+            },
+            // for sorting, have the Node.text be the data.name
+            new go.Binding("text", "name"),
+            // bind the Part.layerName to control the Node's layer depending on whether it isSelected
+            new go.Binding("layerName", "isSelected", function (sel) { return sel ? "Foreground" : ""; }).ofObject(),
+            // define the node's outer shape
+            $(go.Shape, "RoundedRectangle",
+              {
+                  name: "SHAPE",
+                  fill: graygrad, stroke: "black",
+                  portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer"
+              }),
+            // define the panel where the text will appear
+            $(go.Panel, "Table",
+              {
+                  maxSize: new go.Size(150, 999),
+                  margin: new go.Margin(3, 3, 0, 3),
+                  defaultAlignment: go.Spot.Left
+              },
+              $(go.RowColumnDefinition, { column: 2, width: 4 }),
+              $(go.TextBlock,  // the name
+                {
+                    row: 0, column: 0, columnSpan: 5,
+                    font: "bold 9pt sans-serif",
+                    editable: true, isMultiline: false,
+                    stroke: "white", minSize: new go.Size(10, 14)
+                },
+                new go.Binding("text", "name").makeTwoWay()),
+              $(go.TextBlock, "Title: ", textStyle(),
+                { row: 1, column: 0 }),
+              $(go.TextBlock, textStyle(),
+                {
+                    row: 1, column: 1, columnSpan: 4,
+                    editable: true, isMultiline: false,
+                    minSize: new go.Size(10, 14),
+                    margin: new go.Margin(0, 0, 0, 3)
+                },
+                new go.Binding("text", "title").makeTwoWay()),
+              $(go.TextBlock, "ID: ", textStyle(),  // the ID and the boss
+                { row: 2, column: 0 }),
+              $(go.TextBlock, textStyle(),
+                { row: 2, column: 1 },
+                new go.Binding("text", "key")),
+              $(go.TextBlock, "Boss: ", textStyle(),
+                { row: 2, column: 3 }),
+              $(go.TextBlock, textStyle(),
+                { row: 2, column: 4, },
+                new go.Binding("text", "parent")),
+              $(go.TextBlock,  // the comments
+                {
+                    row: 3, column: 0, columnSpan: 5,
+                    font: "italic 9pt sans-serif",
+                    wrap: go.TextBlock.WrapFit,
+                    editable: true,  // by default newlines are allowed
+                    stroke: "white",
+                    minSize: new go.Size(10, 14)
+                },
+                new go.Binding("text", "comments").makeTwoWay()),
+              $("TreeExpanderButton",
+                { row: 4, columnSpan: 99, alignment: go.Spot.Center })
+            )  // end Table Panel
+          );  // end Node
+
+        // define the Link template
+        myDiagram.linkTemplate =
+          $(go.Link, go.Link.Orthogonal,
+            { corner: 5, relinkableFrom: true, relinkableTo: true },
+            $(go.Shape, { strokeWidth: 2 }));  // the link shape
+
+        myDiagram.linkTemplateMap.add("Support",
+          $(go.Link, go.Link.Bezier,
+            { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+            { relinkableFrom: true, relinkableTo: true },
+            $(go.Shape,
+              { stroke: "green", strokeWidth: 2 }),
+            $(go.Shape,
+              { toArrow: "OpenTriangle", stroke: "green", strokeWidth: 2 }),
+            $(go.TextBlock,
+              new go.Binding("text", "text"),
+              {
+                  stroke: "green", background: "rgba(255,255,255,0.75)",
+                  maxSize: new go.Size(80, NaN)
+              })));
+
+        myDiagram.linkTemplateMap.add("Motion",
+          $(go.Link, go.Link.Bezier,
+            { isLayoutPositioned: false, isTreeLink: false, curviness: -50 },
+            { relinkableFrom: true, relinkableTo: true },
+            $(go.Shape,
+              { stroke: "orange", strokeWidth: 2 }),
+            $(go.Shape,
+              { toArrow: "OpenTriangle", stroke: "orange", strokeWidth: 2 }),
+            $(go.TextBlock,
+              new go.Binding("text", "text"),
+              {
+                  stroke: "orange", background: "rgba(255,255,255,0.75)",
+                  maxSize: new go.Size(80, NaN)
+              })));
+
+        // read in the JSON-format data from the "mySavedModel" element
+        load();
+    }
+
+    // Allow the user to edit text when a single node is selected
+    function onSelectionChanged(e)
+    {
+        var node = e.diagram.selection.first();
+        if (node instanceof go.Node)
+        {
+            updateProperties(node.data);
+        } else
+        {
+            updateProperties(null);
+        }
+    }
+
+    // Update the HTML elements for editing the properties of the currently selected node, if any
+    function updateProperties(data)
+    {
+        if (data === null)
+        {
+            document.getElementById("propertiesPanel").style.display = "none";
+            document.getElementById("name").value = "";
+            document.getElementById("title").value = "";
+            document.getElementById("comments").value = "";
+        } else
+        {
+            document.getElementById("propertiesPanel").style.display = "block";
+            document.getElementById("name").value = data.name || "";
+            document.getElementById("title").value = data.title || "";
+            document.getElementById("comments").value = data.comments || "";
+        }
+    }
+
+    // This is called when the user has finished inline text-editing
+    function onTextEdited(e)
+    {
+        var tb = e.subject;
+        if (tb === null || !tb.name) return;
+        var node = tb.part;
+        if (node instanceof go.Node)
+        {
+            updateData(tb.text, tb.name);
+            updateProperties(node.data);
+        }
+    }
+
+    // Update the data fields when the text is changed
+    function updateData(text, field)
+    {
+        var node = myDiagram.selection.first();
+        // maxSelectionCount = 1, so there can only be one Part in this collection
+        var data = node.data;
+        if (node instanceof go.Node && data !== null)
+        {
+            var model = myDiagram.model;
+            model.startTransaction("modified " + field);
+            if (field === "name")
+            {
+                model.setDataProperty(data, "name", text);
+            } else if (field === "title")
+            {
+                model.setDataProperty(data, "title", text);
+            } else if (field === "comments")
+            {
+                model.setDataProperty(data, "comments", text);
+            }
+            model.commitTransaction("modified " + field);
+        }
+    }
+
+    // Show the diagram's model in JSON format
+    function save()
+    {
+        document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+        myDiagram.isModified = false;
+    }
+    function load()
+    {
+        myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+    }
+    </script>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetCompanys()" onload="init()">
+    <div>
+        <!--BEGIN THEME SETTING-->
+        <!--BEGIN BACK TO TOP-->
+        <a id="totop" href="#"><i class="fa fa-angle-up"></i></a><!--END BACK TO TOP--><!--BEGIN TOPBAR-->
+        <div id="header-topbar-option-demo" class="page-header-topbar">
+            <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
+                <div class="navbar-header">
+                    <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a id="logo" href="index.html" class="navbar-brand"><img src="images/dashboard.png" height="25" width="25" align="left" alt="" class="img-responsive"><font size="3">Smart Tickets Dashboard</font></><span style="display: none" class="logo-text-icon">µ</span></a>
+                </div>
+                <div class="topbar-main">
+                    <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+                    <ul class="nav navbar navbar-top-links navbar-right mbn">
+                        <li class="dropdown">
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">{{dashboardDS.Table2.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table2">
+                                <li ng-hide="dashboardDS.Table2.length==0"><p>You have 0 new messages</p></li>
+                                <li><p>{{A.Message}}</p></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">{{dashboardDS.Table1.length}}</span></a>
+                            <ul class="dropdown-menu dropdown-messages" ng-repeat="A in dashboardDS.Table1">
+                                <li ng-hide="dashboardDS.Table1.length==0"><p>You have 0 new messages</p></li>
+                                <li><p>{{A.Message}}</p></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown topbar-user">
+                            <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-user pull-right">
+                                <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
+                                <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                                <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
+                                <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success"></span></a></li>
+                                <li class="divider"></li>
+                                <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
+                                <li><a href="../Login.html"><i class="fa fa-key"></i>Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--END TOPBAR-->
+            <div id="wrapper">
+                <!--BEGIN SIDEBAR MENU-->
+                <nav id="sidebar" role="navigation" data-step="2" data-position="right" class="navbar-default navbar-static-side">
+                    <div class="sidebar-collapse menu-scroll">
+                        <ul id="side-menu" class="nav">
+                            <li class="user-panel">
+                                <div class="thumb"><img src="images/user.jpg" alt="" class="img-circle" /></div>
+                                <div class="info">
+                                    <p>{{uname}}</p>
+                                    <ul class="list-inline list-unstyled">
+                                        <li><a href="UserProfile.html" data-hover="tooltip" title="Profile"><i class="fa fa-user"></i></a></li>
+                                        <li><a href="email-inbox.html" data-hover="tooltip" title="Mail"><i class="fa fa-envelope"></i></a></li>
+                                        <li><a href="#" data-hover="tooltip" title="Setting" data-toggle="modal" data-target="#modal-config"><i class="fa fa-cog"></i></a></li>
+                                        <li><a href="login.html" data-hover="tooltip" title="Logout"><i class="fa fa-sign-out"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                            <li>
+                                <a href="index.html">
+                                    <i class="fa fa-tachometer fa-fw">
+                                        <div class="icon-bg bg-orange"></div>
+                                    </i><span class="menu-title">Dashboard</span>
+                                </a>
+                            </li>
+
+                            <li class="active">
+                                <a href="Company.html">
+                                    <i class="fa fa-sitemap fa-fw">
+                                        <div class="icon-bg bg-dark"></div>
+                                    </i><span class="menu-title">Company and Users</span><span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level">
+
+                                    <li class="active">
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Company</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="Company.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Details</span></a></li>
+                                            <li><a href="CompanyRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Roles</span></a></li>
+                                            <li class="active"><a href="CompanyHierarchy.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Company Hierarchy</span></a></li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Users</span><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></a></li>
+                                            <li><a href="Users.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Details</span></a></li>
+                                            <li><a href="UserRoles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">User Roles</span></a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                    <li><a href="UserLicense.html"><i class="fa fa-briefcase"></i><span class="submenu-title">User License</span></a></li>
+
+                            </li>
+
+
+
+                        </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li><a href="FleetDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Details</span></a></li>
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Routes</span></a></li>
+                                <li><a href="FleetStaff.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Staff</span></a></li>
+                                <li><a href="FleetBtpos.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+                                <li><a href="FleetAvailability.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Availability</span></a></li>
+                                <li><a href="VehicleLayout.html"><i class="fa fa-briefcase"></i><span class="submenu-title">VehicleLayout</span></a></li>
+
+                            </ul>
+
+                        </li>
+
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-truck">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Fleet Owner</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="FleetOwners.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owners</span></
+                                <li><a href="FleetOwnerRoutes.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Routes</span></a></li>
+                                <li><a href="FleetOwnerVehicleLayOut.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Fleet Owner Vehicle Layout</span></a></li>
+                                <li><a href="FleetOwnerRouteDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+                                <li><a href="FleetOwnerVehicleSchedule.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Vehicle Schedule</span></a></li>
+                                <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-mobile">
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title">Inventory & BTPOS</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">BTPOS</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="BTPOSDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Details</span></a></li>
+                                        <li><a href="BtposLicense.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS License</span></a></li>
+                                        <li><a href="FleetBtpos.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet BTPOS</span></a></li>
+                                        <li><a href="BtposRoutes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Routes</span></a></li>
+                                        <li><a href="BTPOSConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Configuration</span></a></li>
+                                        <li><a href="BTPOSMonitoringPage.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">BTPOS Monitoring Page</span></a></li>
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory</span><span class="fa arrow"></span></a>
+
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="InventoryItems.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Items</span></a></li>
+                                        <li><a href="InventoryStatus.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Status</span></a></li>
+                                        <li><a href="InventorySales.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Sales</span></a></li>
+                                        <li><a href="InventoryPurchases.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Inventory Purchases</span></a></li>
+                                        <li><a href="Invoices.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Invoices</span></a></li>
+                                        <li><a href="PurchaseOrders.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Purchase orders</span></a></li>
+                                        <li><a href="SalesOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Sales orders</span></a></li>
+                                        <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                        <li><a href="ShippingOrder.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Shipping Order</span></a></li>
+
+
+                                    </ul>
+                                <li>
+                                    <a href="ShoppingCart.html"><i class="fa fa-angle-right"></i><span class="submenu-title">ShoppingCart</span><span class="fa arrow"></span></a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-gears">
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title">Configuration</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Master Data</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="TypeGroups.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Type Groups</span></a></li>
+                                        <li><a href="Types.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Types</span></a></li>
+                                        <li><a href="SubCategory.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title"> Sub Categories</span></a></li>
+                                        <li><a href="Stops.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Stops</span></a></li>
+                                        <li><a href="Roles.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Roles</span></a></li>
+                                        <li><a href="RoleDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Role Details</span></a></li>
+                                        <li><a href="Objects.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Objects</span></a></li>
+                                        <li><a href="PaymentGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Payment Gateway Configuration</span></a></li>
+                                        <li><a href="SmsGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Sms Gateway Configuration</span></a></li>
+                                        <li><a href="EmailGatewayConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Email Gateway Configuration</span></a></li>
+
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Routes</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="Routes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Routes</span></a></li>
+                                        <li><a href="Routedetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Details</span></a></li>
+                                        <li><a href="RouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Route Fare</span></a></li>
+                                        <li><a href="FleetOwnerRoutesDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Details</span></a></li>
+
+
+                                        <li><a href="FleetOwnerRouteFare.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Fleet Owner Route Fare</span></a></li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title"> Licenses</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="LicenseTypes.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Types</span></a></li>
+                                        <li><a href="LicensePricing.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Pricing</span></a></li>
+                                        <li><a href="LicensePayments.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Payments </span></a></li>
+                                        <li><a href="LicenseDetails.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">License Details </span></a></li>
+
+
+                                    </ul>
+                                </li>
+                                <li><a href="BlockList.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
+
+
+                            </ul>
+                        </li>
+
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-gavel">
+                                    <div class="icon-bg bg-green"></div>
+                                </i><span class="menu-title">Utilties & Tools</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li><a href="EditHistory.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
+                                <li><a href="paymentHistory.html"><i class="fa fa-angle-right"></i><span class="submenu-title">Payment history</span></a></li>
+                                <li><a href="TroubleTicketingDetails.html"><i class="fa fa-briefcase"></i><span class="submenu-title">Trouble Tickets</span></a></li>
+
+
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-th-list fa-fw">
+                                    <div class="icon-bg bg-blue"></div>
+                                </i><span class="menu-title">Reports</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="CompanyReports.html"><i class="fa fa-th-large"></i><span class="submenu-title">Company reports</span></a></li>
+                                <li><a href="FleetOwnerReports.html"><i class="fa fa-tablet"></i><span class="submenu-title">Fleet owner reports</span></a></li>
+                                <li><a href="AdminReports.html"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">Admin reports</span></a></li>
+                                <li><a href="TroubleTicketReports.html"><i class="fa fa-filter"></i><span class="submenu-title">Trouble ticket reports</span></a></li>
+                                <li><a href="BtposReports.html"><i class="fa fa-filter"></i><span class="submenu-title">BtposReports</span></a></li>
+
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-send-o fa-fw">
+                                    <div class="icon-bg bg-dark"></div>
+                                </i><span class="menu-title">Alerts & Notifications</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Alerts</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li><a href="Alerts.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts</span></a></li>
+                                        <li><a href="AlertsConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Alerts Configuration </span></a></li>
+
+                                    </ul>
+                                </li>
+
+
+                                <li>
+                                    <a href="#"><i class="fa fa-angle-right"></i><span class="submenu-title">Notifications</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+
+                                        <li><a href="Notifications.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notifications</span></a></li>
+                                        <li><a href="NotificationConfiguration.html"><i class="fa fa-angle-double-right"></i><span class="submenu-title">Notification Configuration </span></a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
+                <div id="page-wrapper">
+                    <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                    <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                        <div class="page-header pull-left">
+                            <div class="page-title">Company Hierarchy</div>
+                        </div>
+                        <ol class="breadcrumb page-breadcrumb pull-right">
+                            <li><i class="fa fa-home"></i>&nbsp;<a href="index.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="Company.html">Company</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li><a href="#">Company Hierarchy </a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        </ol>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                    <div class="page-content">
+                        <div id="table-action" class="row">
+                            <div id="treeviewTabContent" class="tab-content">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        
+
+                                        <div id="sample">
+                                            <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; height: 550px"></div>
+                                            <div>
+                                                <div id="propertiesPanel" style="display: none; background-color: aliceblue; border: solid 1px black">
+                                                    <b>Properties</b><br />
+                                                    Name: <input type="text" id="name" value="" onchange="updateData(this.value, 'name')" /><br />
+                                                    Title: <input type="text" id="title" value="" onchange="updateData(this.value, 'title')" /><br />
+                                                    Comments: <input type="text" id="comments" value="" onchange="updateData(this.value, 'comments')" /><br />
+                                                </div>
+                                            </div>
+                                            <p>
+                                                Double click on a node in order to add a person.
+                                                Drag a node onto another in order to change relationships.
+                                                You can also draw a link from a node's background to other nodes that have no "boss".
+                                            </p>
+                                            <p>
+                                                This is the <a href="orgChartEditor.html">Org Chart Editor</a> sample,
+                                                but each node includes a TreeExpanderButton,
+                                                and there are additional non-tree links connecting some of the nodes.
+                                            </p>
+                                            <div>
+                                                <div>
+                                                    <button id="SaveButton" onclick="save()">Write</button>
+                                                    <button onclick="load()">Read</button>
+                                                    Diagram Model saved in JSON format:
+                                                </div>
+                                                <textarea id="mySavedModel" style="width:100%;height:300px">
+                                                    { "class": "go.GraphLinksModel",
+                                                    "nodeDataArray": [
+                                                    {"key":"1", "name":"Corrado 'Junior' Soprano", "title":"The Boss"},
+                                                    {"key":"2", "name":"Tony Soprano", "title":"Underboss"},
+                                                    {"key":"3", "name":"Herman 'Hesh' Rabkin", "title":"Advisor"},
+                                                    {"key":"4", "name":"Paulie Walnuts", "title":"Capo"},
+                                                    {"key":"5", "name":"Ralph Cifaretto", "title":"Capo MIA"},
+                                                    {"key":"6", "name":"Silvio Dante", "title":"Consigliere"},
+                                                    {"key":"7", "name":"Bobby Baccilien", "title":"Capo"},
+                                                    {"key":"8", "name":"Sal Bonpensiero", "title":"MIA"},
+                                                    {"key":"9", "name":"Christopher Moltisanti", "title":"Made Man"},
+                                                    {"key":"10", "name":"Furio Giunta", "title":"Muscle"},
+                                                    {"key":"11", "name":"Patsy Parisi", "title":"Accountant"}
+                                                    ],
+  "linkDataArray": [
+{"from":"1", "to":"2"},
+{"from":"1", "to":"3"},
+{"from":"2", "to":"4"},
+{"from":"2", "to":"5"},
+{"from":"2", "to":"6"},
+{"from":"2", "to":"7"},
+{"from":"4", "to":"8"},
+{"from":"4", "to":"9"},
+{"from":"4", "to":"10"},
+{"from":"4", "to":"11"},
+{"from":"11", "to":"6", "category":"Support", "text":"50% support"},
+{"from":"9", "to":"7", "category":"Motion", "text":"will change here in 2 months"}
+ ]
+                                                    }
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--END PAGE WRAPPER-->
+                    <!--BEGIN FOOTER-->
+                    <div id="footer">
+
+                        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+                    </div>
+                    <!--END FOOTER-->
+                </div>
+            </div>
+
+        </div>
+        <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+            <div class="modal-header">
+                <h3 class="modal-title">Save confirmation!</h3>
+            </div>
+            <div class="modal-body">
+                <!--<ul>
+                    <li ng-repeat="item in items">
+                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ selected.item }}</b>-->
+                {{mssg}}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+
+        </script>
+    </div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <!--loading bootstrap js-->
+    <script src="vendors/bootstrap/js/bootstrap.js"></script>
+    <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/jstree.min.js"></script>
+    <script src="js/treetable.js"></script>
+    <script src="js/treeview.js"></script>
+    <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
+    <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
+    <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
+    <script src="vendors/iCheck/icheck.min.js"></script>
+    <script src="vendors/iCheck/custom.min.js"></script>
+    <script src="vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+    <script src="js/jquery.menu.js"></script>
+    <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/holder/holder.js"></script>
+    <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+    <!--LOADING SCRIPTS FOR PAGE-->
+    <script src="js/table-action.js"></script>
+
+    <!--CORE JAVASCRIPT-->
+    <script src="js/main.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ngStorage.js"></script>
+    <script src="js/CompanyHierarchy.js"></script>
+
+</body>
+
+</html>

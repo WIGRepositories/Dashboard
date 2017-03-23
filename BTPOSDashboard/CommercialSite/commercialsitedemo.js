@@ -9,11 +9,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             return false;
         }
         else {
-            $http.get('http://154.120.237.198:1476/api/fleetownerlicense/validatefleetowner?fleetownercode=' + code).then(function (response, req) {
+            $http.get('/api/fleetownerlicense/validatefleetowner?fleetownercode=' + code).then(function (response, req) {
                 $scope.result = response.data;
 
                 if ($scope.result > 0)
-                    window.location.href = "http://154.120.237.198:1476/CommercialSite/LicenseConfirmation.html";
+                    window.location.href = "/CommercialSite/LicenseConfirmation.html";
                 else
                     alert('invalid fleet owner code');
 
@@ -32,7 +32,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
                 return false;
             }
             else {
-                $http.get('http://154.120.237.198:1476/api/fleetownerlicense/updatebtpos?fleetownercode=' + code+ '&units='+units).then(function (response, req) {
+                $http.get('/api/fleetownerlicense/updatebtpos?fleetownercode=' + code+ '&units='+units).then(function (response, req) {
                     $scope.result = response.data;
 
                     if ($scope.result == 0)

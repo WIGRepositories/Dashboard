@@ -15,14 +15,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.GetFleeBTPosDetails = function () {
 
-        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?foId=-1&cmpid=-1&initdata.newfleet.fdid=-1').then(function (res, data) {
+        $http.get('/api/FleetBtpos/GetFleebtDetails?foId=-1&cmpid=-1&initdata.newfleet.fdid=-1').then(function (res, data) {
         $scope.FleetBtposList = res.data;
     });
 }
    
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
             $scope.Companies1 = res.data;
 
@@ -57,7 +57,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -106,7 +106,7 @@ $scope.GetRoutesForFO = function () {
 
     var req = {
         method: 'POST',
-        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+        url: '/api/VehicleConfig/VConfig',
         //headers: {
         //    'Content-Type': undefined
         data: vc
@@ -136,7 +136,7 @@ $scope.GetFleetRoutes = function () {
 
     var req = {
         method: 'POST',
-        url: 'http://localhost:1476/api/FleetRoutes/getFleetRoutesList',
+        url: '/api/FleetRoutes/getFleetRoutesList',
         //headers: {
         //    'Content-Type': undefined
         data: fr
@@ -158,7 +158,7 @@ $scope.GetFleetRoutes = function () {
 
 //    var req = {
 //        method: 'POST',
-//        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+//        url: '/api/VehicleConfig/VConfig',
 //        //headers: {
 //        //    'Content-Type': undefined
 
@@ -199,7 +199,7 @@ $scope.save = function (currFR) {
 
     var req = {
         method: 'POST',
-        url: 'http://localhost:1476/api/FleetRoutes/NewFleetRoutes',
+        url: '/api/FleetRoutes/NewFleetRoutes',
         //headers: {
         //    'Content-Type': undefined
 
@@ -208,7 +208,7 @@ $scope.save = function (currFR) {
 
     }
     $http(req).then(function (res) { });
-
+    $scope.showDialog("Updated successfully!");
 
 }
 
@@ -244,7 +244,7 @@ $scope.saveNewFleetRoutes = function (initdata) {
 
     var req = {
         method: 'POST',
-        url: 'http://localhost:1476/api/FleetRoutes/NewFleetRoutes',
+        url: '/api/FleetRoutes/NewFleetRoutes',
         //headers: {
         //    'Content-Type': undefined
 
@@ -260,10 +260,12 @@ $scope.saveNewFleetRoutes = function (initdata) {
     }, function (errres) {
         var errdata = errres.data;
         var errmssg = "";
-        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : 
+        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : 
+
 errdata.Message;
         $scope.showDialog(errmssg);
     });
+
     $scope.currGroup = null;
 };
 
@@ -280,13 +282,13 @@ $scope.testdel = function (R) {
 
     var req = {
         method: 'POST',
-        url: 'http://localhost:1476/api/FleetRoutes/NewFleetRoutes',
+        url: '/api/FleetRoutes/NewFleetRoutes',
         data: FRoutes
     }
     $http(req).then(function (response) {
         alert('Removed successfully.');
 
-        $http.get('http://localhost:1476/api/FleetRoutes/getFleetRoutesList?VehicleId=' + R.VehicleId).then(function (res, data) {
+        $http.get('/api/FleetRoutes/getFleetRoutesList?VehicleId=' + R.VehicleId).then(function (res, data) {
     $scope.FleetRoute = res.data;
 });
 
@@ -329,7 +331,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 
 
 
-//$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+//$http.get('/api/Getfleet').then(function (res, data) {
 //    $scope.fleet = res.data;
 
 //    if ($scope.userSId != 1) {

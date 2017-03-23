@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 
 namespace BTPOSDashboard.Controllers
@@ -19,7 +20,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable getBtposRoutes(int cmpId, int fleetOwnerId)
           {
               DataTable Tb1 = new DataTable();
-
+              LogTraceWriter traceWriter = new LogTraceWriter();
+              traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getBtposRoutes credentials....");
 
               //connect to database
               SqlConnection conn = new SqlConnection();
@@ -30,7 +32,7 @@ namespace BTPOSDashboard.Controllers
 
               SqlCommand cmd = new SqlCommand();
               cmd.CommandType = CommandType.StoredProcedure;
-              cmd.CommandText = "[GetFleetDetails]";
+              cmd.CommandText = "GetBTposRoutes";
               cmd.Connection = conn;
 
               SqlParameter gid = new SqlParameter();
@@ -64,7 +66,7 @@ namespace BTPOSDashboard.Controllers
               SqlDataAdapter db = new SqlDataAdapter(cmd);
               db.Fill(ds);
              Tb1= ds.Tables[0];
-
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getBtposRoutes Credentials completed.");
               // int found = 0;
               return Tb1;
 
@@ -142,7 +144,8 @@ namespace BTPOSDashboard.Controllers
           public DataSet VehicleConfiguration()
           {
               DataSet ds = new DataSet();
-
+              LogTraceWriter traceWriter = new LogTraceWriter();
+              traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "VehicleConfiguration credentials....");
               //connect to database
               SqlConnection conn = new SqlConnection();
               //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -156,12 +159,9 @@ namespace BTPOSDashboard.Controllers
               SqlDataAdapter db = new SqlDataAdapter(cmd);
 
               db.Fill(ds);
-
+              traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "VehicleConfiguration Credentials completed.");
               return ds;
           }
-
-
-
 
 
 

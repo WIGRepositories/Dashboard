@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -18,7 +19,8 @@ namespace BTPOSDashboard.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getBTPOSMonitoring credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -32,7 +34,7 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getBTPOSMonitoring Credentials completed.");
             // int found = 0;
             return Tbl;
 
@@ -41,6 +43,11 @@ namespace BTPOSDashboard.Controllers
         public DataTable SaveBTPOSMonitoring(BTPOSMoitoringPage BP)
         {
              DataTable Tbl = new DataTable();
+
+
+             LogTraceWriter traceWriter = new LogTraceWriter();
+             traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSMonitoring credentials....");
+
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -83,13 +90,16 @@ namespace BTPOSDashboard.Controllers
                 cmd.ExecuteScalar();
 
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSMonitoring Credentials completed.");
 
             }
             catch (Exception ex)
             {
                 conn.Close();
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveBTPOSMonitoring:" + ex.Message);
             }
+            
             // int found = 0;
             return Tbl;
         }

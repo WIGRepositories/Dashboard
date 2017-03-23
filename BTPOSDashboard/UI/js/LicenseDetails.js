@@ -10,11 +10,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;
 
         $scope.GetLicenseCategories = function () {
-            $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
+            $http.get('/api/Types/TypesByGroupId?groupid=3').then(function (res, data) {
                 $scope.lcat = res.data;
             });
 
-            $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=9').then(function (res, data) {
+            $http.get('/api/Types/TypesByGroupId?groupid=9').then(function (res, data) {
                 $scope.Types = res.data;
             });
         }
@@ -28,7 +28,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 return;
             }
 
-            $http.get('http://localhost:1476/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
+            $http.get('/api/License/GetLicenseTypes?catid=' + selCat.Id).then(function (res, data) {
                 $scope.lTypes = res.data;
             });
         }
@@ -41,7 +41,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 return;
             }
 
-            $http.get('http://localhost:1476/api/LicenseDetails/getLicenseDetails?catId=' + selCat.Id).then(function (res, data) {
+            $http.get('/api/LicenseDetails/getLicenseDetails?catId=' + selCat.Id).then(function (res, data) {
                 $scope.ldetails = res.data;
             });
         }
@@ -52,10 +52,21 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         $scope.Save = function (currSelLicense,flag) {
 
             if (currSelLicense.LicenseTypeId == null) {
-                alert('Please select the Feature name');
+                $scope.showDialog('Please select the Feature name');
                 return
             }
-
+            if (currSelLicense.FeatureTypeId == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+            if (currSelLicense.FeatureValue == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+            if (currSelLicense.FeatureLabel == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
             var currSelLicense = {
                 LicenseTypeId: currSelLicense.LicenseTypeId,
                 FeatureTypeId: currSelLicense.FeatureTypeId,
@@ -69,7 +80,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             var req = {
                 method: 'POST',
-                url: ('http://localhost:1476/api/LicenseDetails/SaveLicenseDetails'),
+                url: ('/api/LicenseDetails/SaveLicenseDetails'),
                 //headers: {
                 //    'Content-Type': undefined
 
@@ -79,9 +90,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
             $http(req).then(function (response) {
 
-                $scope.showDialog("Saved successfully!");
-
-                $scope.Group = null;
+                $scope.currSelLicense = null;
+                $scope.GetLicenseFeatures();
 
             }, function (errres) {
                 var errdata = errres.data;
@@ -89,7 +99,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
                 $scope.showDialog(errmssg);
             });
-            $scope.currGroup = null;
+            $scope.currSelLicense = null;
         };
 
         $scope.SaveNewFeature = function (currSelLicense, flag) {
@@ -97,14 +107,24 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             var selCat = $scope.l;
 
             if (selCat == null) {
-                alert('Please select license type.');
+                $scope.showDialog('Please select license type.');
                 return;
             }
 
-            if ($scope.f.Id == null) {
-                alert('Please select the Feature name');
+            if ($scope.f == null) {
+                $scope.showDialog('Please select the Feature name');
                 return
             }
+            
+            if (currSelLicense.FeatureValue == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+            if (currSelLicense.FeatureLabel == null) {
+                $scope.showDialog('Please select the Feature name');
+                return
+            }
+
 
             var currSelLicense = {
                 LicenseTypeId: selCat.Id,
@@ -119,7 +139,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             var req = {
                 method: 'POST',
-                url: ('http://localhost:1476/api/LicenseDetails/SaveLicenseDetails'),
+                url: ('/api/LicenseDetails/SaveLicenseDetails'),
                 //headers: {
                 //    'Content-Type': undefined
 
@@ -131,7 +151,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
                 $scope.showDialog("Saved successfully!");
 
-                $scope.newFeature = null;
+                $scope.currSelLicense = null;
+                $scope.GetLicenseFeatures();
 
             }, function (errres) {
                 var errdata = errres.data;
@@ -139,7 +160,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
                 $scope.showDialog(errmssg);
             });
-            $scope.currGroup = null;
+            $scope.currSelLicense = null;
         };
     $scope.showDialog = function (message) {
 

@@ -17,7 +17,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
             $scope.Companies1 = res.data;
 
@@ -54,7 +54,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -91,7 +91,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
     //        data: vc
@@ -116,7 +116,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
 
@@ -128,7 +128,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
     //        $scope.cmp1data = res.data;
     //    });
         
-    //    $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp1.Id).then(function (res, data) {
+    //    $http.get('/api/Users/GetUserRoles?cmpId=' + $scope.cmp1.Id).then(function (res, data) {
     //        $scope.userRoles = res.data;
     //    });
     //}
@@ -154,7 +154,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
             data: vc
@@ -174,15 +174,15 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
         }
         var cmpId = (s == null) ? -1 : s.Id;
 
-        //$http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?companyId=' + cmpId + '&UserId=' + UserId).then(function (res, data) {
+        //$http.get('/api/FleetStaff/getUsersnRoles?companyId=' + cmpId + '&UserId=' + UserId).then(function (res, data) {
         //    $scope.cmpUsers1 = res.data;
         //});
 
-        //$http.get('http://localhost:1476/api/FleetStaff/getUsersnRoles?cmpId=' + cmpId + '&RoleId=' + RoleId).then(function (res, data) {
+        //$http.get('/api/FleetStaff/getUsersnRoles?cmpId=' + cmpId + '&RoleId=' + RoleId).then(function (res, data) {
         //    $scope.cmproles1 = res.data;
         //});
 
-        $http.get('http://localhost:1476/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/Users/GetUserRoles?cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.userRoles = res.data;
         });
     }
@@ -216,7 +216,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+            url: '/api/FleetStaff/NewFleetStaff',
             //headers: {
             //    'Content-Type': undefined
 
@@ -265,7 +265,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+            url: '/api/FleetStaff/NewFleetStaff',
             //headers: {
             //    'Content-Type': undefined
 
@@ -310,7 +310,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+    //        url: '/api/FleetStaff/NewFleetStaff',
     //        //headers: {
     //        //    'Content-Type': undefined
 
@@ -343,7 +343,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             return;
         }
 
-        $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?foId=' + $scope.s.Id + '&cmpId=' + $scope.cmp.Id).then(function (res, data) {
+        $http.get('/api/FleetStaff/GetFleetStaff?foId=' + $scope.s.Id + '&cmpId=' + $scope.cmp.Id).then(function (res, data) {
             $scope.FleetStaff = res.data;
         });
     }
@@ -368,13 +368,13 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetStaff/NewFleetStaff',
+            url: '/api/FleetStaff/NewFleetStaff',
             data: FRoutes
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/FleetStaff/GetFleetStaff?roleid=' + Fleet.RoleId).then(function (res, data) {
+            $http.get('/api/FleetStaff/GetFleetStaff?roleid=' + Fleet.RoleId).then(function (res, data) {
                 $scope.FleetStaff = res.data;
             });
 

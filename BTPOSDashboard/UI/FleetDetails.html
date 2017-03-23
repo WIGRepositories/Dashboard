@@ -13,7 +13,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
 
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
@@ -53,7 +53,7 @@
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">Admin Admin</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
                                 <li><a href="MyProfile.html"><i class="fa fa-user"></i>My Profile</a></li>
-                                <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                              
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox</a></li>
                                 <li><a href="#"><i class="fa fa-tasks"></i>My Tasks</a></li>
                                 <li class="divider"></li>
@@ -369,18 +369,21 @@
 
                                                     <div class="row mbm">
 
-                                                        <div class="col-md-4" ng-init="GetCompanies();">
-                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test">
+                                                        <div class="col-md-3" ng-init="GetCompanies();">
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners(cmp)" id="test" style="width:80%">
     <option value="">Select</option>
 </select>
                                                         </div>
                                                         <div class="col-md-3">
-                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails(s)" id="test1">
+                                                            Fleet Owner:<select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" ng-change="GetFleetDetails(s)" id="test1" style="width:70%">
 
     <option value="">Select</option>
 </select>
                                                         </div>
                                                         <div class="col-md-4">
+                                                           
+                                                        </div>
+                                                        <div class="col-md-1">
                                                             <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="text-align-last:right">Add Fleet Details</button>
 
 
@@ -388,22 +391,7 @@
 
                                                     </div>
 
-                                                    <!--<div class="actions">
-                                                    <!--<div class="col-md-5">
-                                                        Company:<select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()">
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        Fleet Owner:<select ng-options="s.Name for s in cmpdata track by s.Id" ng-model="s" ng-change="GetFleetDetails()">
-
-                                                            <option value="">Select</option>
-                                                        </select>
-                                                    </div>-->
-                                                    <!--<div class="actions">
-                                                    <!----   <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
-                                                    <!--<button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Fleet Details</button>-->
-                                                    <!-----  </div>----->
+                                                   
 
                                                     <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                         <div class="modal-dialog modal-lg">
@@ -500,7 +488,8 @@
                                                                                 <label for="Description" class="col-md-5 control-label">Company: <span class='require'>*</span></label>
 
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);"id="test">
+
+                                                                                    <select ng-options="c.Name for c in initdata.Table2 track by c.Id" ng-model="cmp" class="form-control" ng-change="GetFleetOwners(cmp);" id="test" ng-disabled="cmp.Id != null && cmp.Id != ''">
                                                                                         <option value="">Select</option>
                                                                                     </select>
                                                                                 </div>
@@ -520,7 +509,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="Description" class="col-md-5 control-label">Fleet Owner:<span class='require'>*</span></label>
                                                                                 <div class="col-md-6">
-                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();"id="test1">
+                                                                                    <select ng-options="s.Name for s in cmpdata.Table track by s.Id" ng-model="s" class="form-control" ng-change="GetFleetDetails();" id="test1" ng-disabled="s.Id != null && s.Id != ''">
                                                                                         <option value="">Select</option>
                                                                                     </select>
 
@@ -533,7 +522,7 @@
 
                                                                                 <div class="col-md-6">
                                                                                     <div>
-                                                                                        <input id="Description" type="text" class="form-control" ng-keypress="filterValue($event)" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span>
+                                                                                        <input id="Description" type="text" class="form-control" ng-model="initdata.newfleet.SeatingCapacity" /><span class="help-block"></span>
 
 
                                                                                     </div>
@@ -548,8 +537,7 @@
                                                                     <div class="form-actions">
                                                                         <div class="col-md-offset-5 col-md-9">
                                                                             <button class="btn btn-green" type="button" ng-click="savenewfleetdetails(initdata);">Save</button>
-
-                                                                            <a href="FleetDetails.html" class="btn btn-primary" ng-click="clearGroup()">Cancel</a>
+                                                                            <button type="button" data-dismiss="modal" class="btn btn-default" ng-click="clearGroup()">Cancel</button>
                                                                         </div>
                                                                     </div>
                                                                     <!---- <div class="col-md-6 col-md-offset-2">
@@ -609,7 +597,7 @@
                                                                             <div class="col-md-6">
                                                                                 <label for="Description" class="col-md-5 control-label">Fuel Used <span class='require'>*</span></label>
 
-                                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control" ng-keypress="filterValue($event)" value="{{currVD.FuelUsed}}" ng-m ng-model="currVD.FuelUsed" /><span class="help-block"></span></div>
+                                                                                <div class="col-md-6"><input id="Description" type="text" class="form-control"  value="{{currVD.FuelUsed}}" ng-m ng-model="currVD.FuelUsed" /><span class="help-block"></span></div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -814,7 +802,7 @@
                         {{F.SeatingCapacity}}
                     </td>-->
 
-                                                    <td><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" checked  id="Active" ng-model="F.Active"/></td>
+                                                    <td><input type="checkbox" class="icheckbox_minimal-grey activeCheckbox" ng-checked="F.Active == 1" id="Active" ng-model="F.Active" /></td>
                                                     <td>
 
                                                         <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setFleet(F);">

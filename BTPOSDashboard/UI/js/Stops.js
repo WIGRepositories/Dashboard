@@ -12,7 +12,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage,$uibM
     $scope.dashboardDS = $localStorage.dashboardDS;
 
     $scope.GetStops = function () {
-        $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+        $http.get('/api/Stops/GetStops').then(function (res, data) {
             $scope.Stops = res.data;
         });
     }
@@ -47,7 +47,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage,$uibM
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Stops/saveStops',
+            url: '/api/Stops/saveStops',
             data: newStop
         }
         $http(req).then(function (response) {
@@ -96,7 +96,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage,$uibM
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Stops/saveStops',
+            url: '/api/Stops/saveStops',
             data: Stops
         }
         $http(req).then(function (response) {

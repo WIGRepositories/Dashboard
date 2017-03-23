@@ -19,19 +19,19 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.RouteDetails = [];
 
     //$scope.GetRoutes = function () {
-    //    $http.get('http://localhost:1476/api/FleetOwnerRouteDetails/GetRoutes').then(function (res, data) {
+    //    $http.get('/api/FleetOwnerRouteDetails/GetRoutes').then(function (res, data) {
     //        $scope.routes = res.data;
     //        // GetRouteDetails($scope.routes[0].Id);
     //    });
 
-    //    $http.get('http://localhost:1476/api/Stops/GetStops').then(function (res, data) {
+    //    $http.get('/api/Stops/GetStops').then(function (res, data) {
     //        $scope.Stops = res.data;
     //    });
 
     //}
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -61,7 +61,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -85,11 +85,11 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             else {
                 document.getElementById('test1').disabled = false;
             }
-            $scope.getFleetOwnerRoute($scope.s);
+            $scope.GetFORoutes($scope.s);
 
         });
 
-        //$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        //$http.get('/api/Getfleet').then(function (res, data) {
         //    $scope.fleet = res.data;
 
         //    if ($scope.userSId != 1) {
@@ -121,7 +121,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
 
@@ -157,7 +157,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -178,7 +178,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.RouteDetails = [];
             return;
         }
-        $http.get('http://localhost:1476/api/FleetOwnerRouteDetails/GetFleetOwnerRouteDetails?fleetownerid=' + $scope.s.Id + '&routeid=' + $scope.r.RouteId).then(function (res, data) {
+        $http.get('/api/FleetOwnerRouteDetails/GetFleetOwnerRouteDetails?fleetownerid=' + $scope.s.Id + '&routeid=' + $scope.r.RouteId).then(function (res, data) {
             $scope.RouteDetails = res.data;
         });
       
@@ -216,7 +216,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         //write the post logic and test
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetOwnerRouteDetails/SaveFleetOwnerRouteDetails',
+            url: '/api/FleetOwnerRouteDetails/SaveFleetOwnerRouteDetails',
             data: fleetownerstops
 
         }

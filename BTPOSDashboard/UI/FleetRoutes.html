@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">    
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
@@ -56,7 +56,7 @@
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">Admin Admin</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
-                                <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                              
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox</a></li>
                                 <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password</a></li>
                                 <li class="divider"></li>
@@ -436,7 +436,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                        
-                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" ng-change="GetFleetRoutes();" ng-model="currFR.newfleet.v">
+                                                                        <select ng-options="v.VehicleRegNo for v in vehicles.Table track by v.Id" class="form-control" value="{{currFR.vehicles}}" ng- ng-change="GetFleetRoutes();" ng-model="currFR.newfleet.v">
                                                                             <option value="">Select</option>
                                                                         </select>
 
@@ -524,11 +524,12 @@
                                                 <td>{{R.EffectiveTill}}</td>
 
                                                 <td>
-
                                                     <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setRoute(R);">
                                                         <i class="fa fa-edit"></i>&nbsp;
                                                         Edit
                                                     </button>
+
+                                                  
                                                 </td>
                                                 <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(R);"><i class="fa fa-trash-o"></i></a></div></td>
                                                 <!--<td><div class="col-md-3 col-sm-4"><a href=""><i class="fa fa-trash-o"></i></a></div></td>-->
@@ -565,7 +566,7 @@
                                                             <label for="descr" class="col-md-4" style="color:red;">Fleet Owner:<span class='require'>*</span></label>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="s" ng-change="GetRoutesForFO();">
+                                                            <select ng-options="f.Name for f in cmpdata.Table track by f.Id" class="form-control" ng-model="s1" ng-change="GetRoutesForFO();">
                                                                 <option value="">Select</option>
                                                             </select>
                                                         </div>

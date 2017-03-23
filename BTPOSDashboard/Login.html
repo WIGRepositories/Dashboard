@@ -8,11 +8,12 @@
     <!--Loading bootstrap css-->        
     <link type="text/css" rel="stylesheet" href="UI/vendors/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="UI/vendors/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="UI/css/treasure-overlay-spinner.css">
     <!--Loading style vendors-->
     
     <link type="text/css" rel="stylesheet" href="UI/vendors/iCheck/skins/all.css">
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="UI/css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="UI/css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="UI/css/style-responsive.css">
     <link rel="shortcut icon" href="UI/images/favicon.ico">
     <style>
@@ -24,110 +25,155 @@
             background-position: 0% 0%;
             background-size: contain;            
         }*/
+       /*body.spinnerOn #spinner { 
+            display: block;
+            height: 100%;
+            width: 100%;
+            background: rgba(207, 13, 48, 0.72) url(ui/images/icons/loading.gif) center center no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
 
+        body.spinnerOn main.content {
+            position: static;
+        }*/
+        /* and whatever content needs to be moved below your fixed loader div */
         body {
-            background: rgba(0, 0, 0, 0) url("UI/images/bkgRd3.png") no-repeat scroll center center / cover;
-            height:80%;
+            /*background: rgba(0, 0, 0, 0) url("UI/images/bkgRd3.png") no-repeat scroll center center / cover;*/
+            background: rgba(0, 0, 0, 0) url("UI/images/img5.jpg") no-repeat scroll center center / cover;
+            height: 60%;
         }
     </style>
 </head>
-<body ng-app="myApp" ng-controller="myCtrl" ng-model="type" class="col-md-offset-8" style="margin-top:150px">
-
-    <div class="page-form" style="align-content:center;background-color:blue">
-        <form class="form-validate-signin">
-            <div class="header-content">
-                <h3>Smart Ticketing Dashboard Portal</h3><h1>Log in</h1>
-                <div class="form-group" style="margin-left: 28px;">
-                    <img src="UI/images/dashboard.png" style="width:300px; height:275px" />
-                </div>
-                <div class="body-content">
-                    <div class="form-group">
-                        <table>
-                            <tr>
-                                <td height="5px" align="left">
-                                    <div style="margin-right:10px" class="row">
-                                        <div class="input-icon right:col-md-2">
-                                            <i class="fa fa-user"></i>
-                                            <input type="text" placeholder="Username" name="username" class="form-control" ng-model="UserName">
-                                            <!--<span ng-show="!UserName"><font color="red">Please enter UserName</font></span>-->
-                                        </div>
-                                    </div>
-                                </td>
-                                <td height="5px" align="right">
-                                    <div style="margin-left:5px" class="row">
-                                        <div class="input-icon right:col-md-2">
-                                            <i class="fa fa-key"></i>
-                                            <input type="password" placeholder="Password" name="password" class="form-control" ng-model="Password">
-                                            <!--<span ng-show="!Password"><font color="red">Please enter Password</font></span>-->
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+<body ng-app="myApp">
+    <treasure-overlay-spinner active='spinner.active'>
+        <!--<div style="height:100vh;width:100vw"></div>-->
+        <!--<div id="spinner"></div>-->
+        <div class="page-form" style="background-color: blue; margin-top: 170px; float: right;margin-right:5%" ng-controller="myCtrl" ng-model="type">
+            <form class="form-validate-signin">
+                <div class="header-content">
+                    <h3>Smart Ticketing Dashboard Portal</h3><h1>Log in</h1>
+                    <div class="form-group" style="margin-left: 28px;">
+                        <img src="UI/images/dashboard.png" style="width:300px; height:205px" />
                     </div>
-                    <!--<div class="form-group pull-left">
-                        <div class="checkbox-list">
-                            <label>
-                                <input type="checkbox">&nbsp;
-                                Keep me signed in
-                            </label>
-                        </div>
-                    </div>-->
-                    <div class="form-group" style="text-align:center">
-                        <button ng-click="Signin()" class="btn btn-success">
-                            Log In
-                            &nbsp;<i class="fa fa-chevron-circle-right"></i>
-                        </button>
-                        <br />
-                        <!--<div class="clearfix"></div>-->
+                    <div class="body-content">
                         <div class="form-group">
-                            <b> Forgot your Password?</b><a style="color:blue" href='ResetPassword.html' class='btn-forgot-pwd'>Click Here</a>
+                            <table>
+                                <tr>
+                                    <td height="5px" align="left">
+                                        <div style="margin-right:10px" class="row">
+                                            <div class="input-icon right:col-md-2">
+                                                <i class="fa fa-user"></i>
+                                                <input type="text" placeholder="Username" name="username" class="form-control" ng-model="UserName">
+                                                <!--<span ng-show="!UserName"><font color="red">Please enter UserName</font></span>-->
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td height="5px" align="right">
+                                        <div style="margin-left:5px" class="row">
+                                            <div class="input-icon right:col-md-2">
+                                                <i class="fa fa-key"></i>
+                                                <input type="password" placeholder="Password" name="password" class="form-control" ng-model="Password">
+                                                <!--<span ng-show="!Password"><font color="red">Please enter Password</font></span>-->
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
+                        <!--<div class="form-group pull-left">
+                            <div class="checkbox-list">
+                                <label>
+                                    <input type="checkbox">&nbsp;
+                                    Keep me signed in
+                                </label>
+                            </div>
+                        </div>-->
+                        <div class="form-group" style="text-align:center">
+                            <button ng-click="Signin()" class="btn btn-success">
+                                Log In
+                                &nbsp;<i class="fa fa-chevron-circle-right"></i>
+                            </button>
+                            <br />
+                            <!--<div class="clearfix"></div>-->
+                            <div class="form-group">
+                                <b> Forgot your Password?</b><a style="color:blue" href='UI/ForgotPassword.html' class='btn-forgot-pwd'>Click Here</a>
+                            </div>
+                        </div>
+                        <!--<hr>
+                        <p>Don't have an account? <a id="btn-register" href="UI/extra-signup.html">Register Now</a></p>
+                        <p>
+                            Don't have an account?
+                            <br />Please contact INTERBUS administrator
+                        </p>-->
                     </div>
-                    <!--<hr>
-                    <p>Don't have an account? <a id="btn-register" href="UI/extra-signup.html">Register Now</a></p>
-                    <p>
-                        Don't have an account?
-                        <br />Please contact INTERBUS administrator
-                    </p>-->
                 </div>
-            </div>
-        </form>
-    </div>
-    <script src="UI/js/jquery-1.10.2.min.js"></script>
-    <script src="UI/js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="UI/js/jquery-ui.js"></script>
-    <!--loading bootstrap js-->
-    <script src="UI/vendors/bootstrap/js/bootstrap.js"></script>
-    <script src="UI/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="UI/vendors/metisMenu/jquery.metisMenu.js"></script>
-    <script src="UI/vendors/slimScroll/jquery.slimscroll.js"></script>
-    <script src="UI/vendors/jquery-cookie/jquery.cookie.js"></script>
-    <script src="UI/vendors/iCheck/icheck.min.js"></script>
-    <script src="UI/vendors/iCheck/custom.min.js"></script>
-    <script src="UI/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
-    <script src="UI/js/jquery.menu.js"></script>
-    <script src="UI/vendors/jquery-pace/pace.min.js"></script>
-    <script src="UI/vendors/holder/holder.js"></script>
-    <script src="UI/vendors/responsive-tabs/responsive-tabs.js"></script>
-    <!--LOADING SCRIPTS FOR PAGE-->
-    <!--<script>
-        //BEGIN CHECKBOX & RADIO
-        $('input[type="checkbox"]').iCheck({
-            checkboxClass: 'icheckbox_minimal-grey',
-            increaseArea: '20%' // optional
-        });
-        $('input[type="radio"]').iCheck({
-            radioClass: 'iradio_minimal-grey',
-            increaseArea: '20%' // optional
-        });
-        //END CHECKBOX & RADIO</script>
+            </form>
+        </div>
 
-    <script src="UI/js/main.js"></script>-->
+    </treasure-overlay-spinner>
+
+    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+        <div class="modal-header">
+            <h3 class="modal-title">Validation!</h3>
+        </div>
+        <div class="modal-body">
+            <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+            <h3>{{mssg}}</h3>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </script>
+
+        <script src="UI/js/jquery-1.10.2.min.js"></script>
+        <script src="UI/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="UI/js/jquery-ui.js"></script>
+        <!--loading bootstrap js-->
+        <script src="UI/vendors/bootstrap/js/bootstrap.js"></script>
+        <script src="UI/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+        <script src="UI/vendors/metisMenu/jquery.metisMenu.js"></script>
+        <script src="UI/vendors/slimScroll/jquery.slimscroll.js"></script>
+        <script src="UI/vendors/jquery-cookie/jquery.cookie.js"></script>
+        <script src="UI/vendors/iCheck/icheck.min.js"></script>
+        <script src="UI/vendors/iCheck/custom.min.js"></script>
+        <script src="UI/vendors/jquery-news-ticker/jquery.news-ticker.js"></script>
+        <script src="UI/js/jquery.menu.js"></script>
+        <script src="UI/vendors/jquery-pace/pace.min.js"></script>
+        <script src="UI/vendors/holder/holder.js"></script>
+        <script src="UI/vendors/responsive-tabs/responsive-tabs.js"></script>
+        <!--LOADING SCRIPTS FOR PAGE-->
+        <!--<script>
+            //BEGIN CHECKBOX & RADIO
+            $('input[type="checkbox"]').iCheck({
+                checkboxClass: 'icheckbox_minimal-grey',
+                increaseArea: '20%' // optional
+            });
+            $('input[type="radio"]').iCheck({
+                radioClass: 'iradio_minimal-grey',
+                increaseArea: '20%' // optional
+            });
+            //END CHECKBOX & RADIO</script>
+
+        <script src="UI/js/main.js"></script>-->
 
 
-    <script src="UI/js/angular.js"></script>
-    <script src="UI/js/ngStorage.js"></script>
-    <script src="UI/js/login.js"></script>
+        <script src="UI/js/angular.js"></script>
+    <script src='UI/js/angular-animate.js'></script>
+        <script src="UI/js/ngStorage.js"></script>
+    <script src='UI/js/treasure-overlay-spinner.js'></script>
+    <script src="UI/js/ui-bootstrap-tpls-1.3.3.js"></script>
+        <script src="UI/js/login.js"></script>
+
 </body>
 </html>

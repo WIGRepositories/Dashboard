@@ -10,7 +10,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetSmsGatewayConfig = function () {
 
-        $http.get('http://localhost:1476/api/SmsGatewayConfig/GetSmsGatewayConfig').then(function (response, req) {
+        $http.get('/api/SmsGatewayConfig/GetSmsGatewayConfig').then(function (response, req) {
             $scope.GetSmsGatewayConfig = response.data;
            
             for (cnt = 0; cnt < response.data.length; cnt++) {
@@ -41,7 +41,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/SmsGatewayConfig/SaveSmsGatewaySettings',
+            url: '/api/SmsGatewayConfig/SaveSmsGatewaySettings',
             data: newCmp
         }
         $http(req).then(function (response) {
@@ -82,7 +82,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/SmsGatewayConfig/SaveSmsGatewaySettings',
+            url: '/api/SmsGatewayConfig/SaveSmsGatewaySettings',
             data: Group
         }
         $http(req).then(function (response) {

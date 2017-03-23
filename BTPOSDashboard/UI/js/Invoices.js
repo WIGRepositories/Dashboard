@@ -12,7 +12,7 @@ var ctrl = app.controller('myctrl', function ($scope, $http, $localStorage) {
 
     $scope.GetInvoices = function () {
 
-        $http.get('http://localhost:1476/api/Invoices/GetInvoices').then(function (res, data) {
+        $http.get('/api/Invoices/GetInvoices').then(function (res, data) {
             $scope.Invoices = res.data;
         });
     }

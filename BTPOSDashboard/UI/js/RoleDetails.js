@@ -9,7 +9,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     $scope.dashboardDS = $localStorage.dashboardDS;
 
-    $http.get('http://localhost:1476/api/Roledetails/getroledetails').then(function (res, data) {
+    $http.get('/api/Roledetails/getroledetails').then(function (res, data) {
         $scope.Roledetails = res.data;
     });
 
@@ -22,7 +22,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
             data: vc
@@ -38,7 +38,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
             var cmpId = (seltype) ? seltype.Id : -1;
 
-            $http.get('http://localhost:1476/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
+            $http.get('/api/Roles/GetCompanyRoles?companyId=' + cmpId).then(function (res, data) {
                 $scope.cmproles = res.data;
             });
         }
@@ -57,7 +57,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Roledetails/saveroledetails',
+            url: '/api/Roledetails/saveroledetails',
             data: Roledetails
         }
         $http(req).then(function (response) {

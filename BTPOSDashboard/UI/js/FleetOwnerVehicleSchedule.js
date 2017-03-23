@@ -25,8 +25,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-
-
     fovslist = [];
     $scope.StopCount = [];
 
@@ -38,7 +36,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
             data: vc
@@ -48,8 +46,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         });
 
     }
-
-
+    
     $scope.GetFleetOwners = function () {
         if ($scope.cmp == null) {
             $scope.FleetOwners = null;
@@ -62,7 +59,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -90,7 +87,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -122,7 +119,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetRoutes/getFleetRoutesList',
+            url: '/api/FleetRoutes/getFleetRoutesList',
             //headers: {
             //    'Content-Type': undefined
             data: fr
@@ -139,7 +136,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             $scope.RouteVehicleSchedule = [];
             return;
         }
-        $http.get('http://localhost:1476/api/FleetOwnerVehicleSchedule/getFORVehicleSchedule?fleetownerid=' + $scope.s.Id + '&routeid='
+        $http.get('/api/FleetOwnerVehicleSchedule/getFORVehicleSchedule?fleetownerid=' + $scope.s.Id + '&routeid='
             + $scope.r.RouteId + '&vehicleId=' + $scope.v.VehicleId).then(function (res, data) {
                 $scope.RouteVehicleSchedule = res.data;
             });
@@ -151,7 +148,6 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         $scope.currStopIndx = indx;
     }
 
-
     $scope.GetshowDivStopDetails = function () {
 
         if (StopCount > 0) {
@@ -162,10 +158,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             document.getElementById("StopDetails").style.display = 'none';
         }
     }
-
-
-
-
+    
     $scope.$on('ngRepeatFinished', function () {
 
         $("input[id*='Date']").datetimepicker({
@@ -237,7 +230,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     }
         foSchedule.VSchedule = FleetOwnerVS;
         $http({
-            url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
+            url: '/api/FleetOwnerVehicleSchedule/saveFORSchedule',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             data: foSchedule,
@@ -249,48 +242,34 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             alert(ata);
         });
     }
+    
+    /*vehicle schedule list*/
 
-    //$scope.save = function (stop, flag) {
+    $scope.GetVehicleScheduleList = function () {
 
-    //    //  var test = $scope.RouteVehicleSchedule;
+        var rid, vid;
+        if ($scope.cmp == null) {
+            $scope.cmpdata = null;
+            return;
+        }
 
-    //    //var FOVS = {
-    //    //    //Id: stop.Id,
-    //    //    StopNmae: stop.StopNmae,
-    //    //    StopNo: stop.StopNo,
-    //    //    StopCode: stop.StopCode,
-    //    //    ArrivalHr: stop.ArrivalHr,
-    //    //    DepartureHr: stop.DepartureHr,
-    //    //    Duration: stop.Duration,
-    //    //    ArrivalMin: stop.ArrivalMin,
-    //    //    DepartureMin: stop.DepartureMin,
-    //    //    ArrivalAMPM: stop.ArrivalAMPM,
-    //    //    DepartureAmPm: stop.DepartureAmPmtopId,
-    //    //    arrivaltime: stop.arrivaltime,
-    //    //    departuretime: stop.departuretime,
-    //    //    insupdflag: flag
-    //    //}
+        if ($scope.s == null) {
+            $scope.Fleet = null;
+            return;
+        }
+        if ($scope.r == null) {
+            rid = -1;            
+        }
+        if ($scope.v == null) {
+            vid = -1;
+        }
 
+        $http.get('/api/FleetOwnerVehicleSchedule/getVehicleScheduleList?&routeId=' + $scope.r.Id + '&vehicleId=' + $scope.v.Id).then(function (res, data) {
+            $scope.VScheduleList = res.data.Table;
+        });
+    }
 
-    //    var req = {
-    //        method: 'POST',
-    //        url: 'http://localhost:1476/api/FleetOwnerVehicleSchedule/saveFORSchedule',
-    //        data: $scope.RouteVehicleSchedule
-    //    }
-    //    $http(req).then(function (response) {
-
-    //        $scope.showDialog("Saved successfully!!");
-
-    //        $scope.Group = null;
-
-    //    }, function (errres) {
-    //        var errdata = errres.data;
-    //        var errmssg = "";
-    //        errmssg = (errdata && errdata.ExceptionMessage) ? errdata.ExceptionMessage : errdata.Message;
-    //        $scope.showDialog(errmssg);
-    //    });
-    //}
-
+    /*end of  vehicle schedule list*/
     $scope.showDialog = function (message) {
 
         var modalInstance = $uibModal.open({

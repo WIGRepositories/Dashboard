@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -19,6 +20,9 @@ namespace BTPOSDashboard.Controllers
 
 
             DataTable Tbl = new DataTable();
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserType credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
@@ -31,6 +35,7 @@ namespace BTPOSDashboard.Controllers
             db.Fill(ds);
             Tbl = ds.Tables[0];
 
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetUserType Credentials completed.");
             // int found = 0;
             return Tbl;
         }

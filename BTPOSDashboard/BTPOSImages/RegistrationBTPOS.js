@@ -9,7 +9,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
             return false;
         }
         else {
-            $http.get('http://154.120.237.198:1476/api/fleetownerlicense/registerpos?fleetownercode=' + Group.code + '&ipconfig=' + Group.ipconfig).then(function (response, req) {
+            $http.get('/api/fleetownerlicense/registerpos?fleetownercode=' + Group.code + '&ipconfig=' + Group.ipconfig).then(function (response, req) {
                 $scope.result = response.data;
 
                 if ($scope.result > 0)
@@ -21,7 +21,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
             });
         }        
-       // window.location.href = "http://154.120.237.198:1476/BTPOSImages/poweron.html";
+       // window.location.href = "/BTPOSImages/poweron.html";
 
 
     };

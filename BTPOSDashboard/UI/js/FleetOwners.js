@@ -14,7 +14,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -30,39 +30,20 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             else {
                 document.getElementById('test').disabled = false;
             }
-            $scope.GetFleetOwners($scope.cmp);
+           
         });
-
-
-
     }
     
-   // $scope.EmpNo = $localStorage.eno;
+   
 
     $scope.GetFleetOwners = function () {
-
-
-    //    $http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
-    //        $scope.fleet = res.data;
-
-    //        if ($scope.userSId != 1) {
-    //            //loop throug the companies and identify the correct one
-    //            for (i = 0; i < res.data.length; i++) {
-    //                if (res.data[i].Id == $scope.userSId) {
-    //                    $scope.s = res.data[i];
-    //                    document.getElementById('test1').disabled = true;
-    //                    break
-    //                }
-    //            }
-    //        }
-    //        else {
-    //            document.getElementById('test1').disabled = false;
-    //        }
-    //        $scope.getFleetOwnerRoute($scope.s);
-    //    });
-    //}
-
        
+        if ($scope.cmp == null || $scope.cmp.Id == null)
+        {
+            $scope.FleetOwner = null;
+            return;
+        }
+
         var vc = {
             needfleetowners: '1',
             cmpId: $scope.cmp.Id
@@ -70,16 +51,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
-
             data: vc
-
-
         }
         $http(req).then(function (res) {
-            $scope.cmpdata = res.data;
+            $scope.FleetOwner = res.data;
 
             if ($scope.userSId != 1) {
                 //loop throug the fleetowners and identify the correct one
@@ -94,10 +72,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             else {
                 document.getElementById('test1').disabled = false;
             }
-            $scope.getFleetOwnerRoute($scope.s);
+          //  $scope.getFleetOwnerRoute($scope.s);
 
         });
-        if ($scope.Fleetownerid != 1) { $scope.cmpId = $scope.UserCmpid; }
+       // if ($scope.Fleetownerid != 1) { $scope.cmpId = $scope.UserCmpid; }
     }
     
     $scope.getFleetOwnerRoute = function () {
@@ -114,7 +92,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
         //}
         //var cmpId = ($scope.cmp == null || $scope.cmp.Id == null) ? -1 : $scope.cmp.Id;
         //var fId = ($scope.s == null || $scope.s.Id == null) ? -1 : $scope.s.Id;
-        $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/FleetOwner/getFleetOwner?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.FleetOwner = res.data;
            
         });
@@ -152,22 +130,12 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/users/saveusers',
+            url: '/api/users/saveusers',
             data:  FleetOwner
         }
-        //        $http(req).then(function (response) {
+       
 
-        //            $scope.showDialog("Saved successfully!");
-
-
-        //        })
-        //    }
-        //}
-        //});
-
-        $http(req).then(function (response) {
-
-           
+        $http(req).then(function (response) {           
 
         })
      , function (errres) {
@@ -186,21 +154,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             $scope.User1 = grp;
         };
     }
-    //$scope.getEmpNo = function () {
-      //  if( eno== null)
-        //{
-          //  alert("enter EmpNo");
-            //return;
-        //}
-
-       // else
-        //{
-          //  $http.get('http://localhost:1476/api/FleetOwner/getFleetOwner?EmpNo=' + $scope.EmpNo).then(function (res, data) {
-            //    $scope.FleetOwner = res.data;
-            //})
-
-            //}
-    //}
+    
 
     $scope.filterValue = function ($event) {
         if (isNaN(String.fromCharCode($event.keyCode))) {

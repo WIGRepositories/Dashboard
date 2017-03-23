@@ -26,14 +26,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             return;
         }
 
-        $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+        $http.get('/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
             $scope.Fleet = res.data.Table;
         });
     }
 
     $scope.GetCompanies = function () {
 
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -59,7 +59,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.GetFleetOwners = function () {
 
 
-        //$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        //$http.get('/api/Getfleet').then(function (res, data) {
         //    $scope.fleet = res.data;
 
         //    if ($scope.userSId != 1) {
@@ -86,7 +86,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
             var req = {
                 method: 'POST',
-                url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+                url: '/api/VehicleConfig/VConfig',
                 //headers: {
                 //    'Content-Type': undefined
 
@@ -131,7 +131,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        headers: {
     //            'Content-Type': undefined
     //        data: vc
@@ -156,7 +156,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        headers: {
     //            'Content-Type': undefined
 
@@ -181,7 +181,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -197,7 +197,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     /* $scope.GetFleetDetails = function () {
  
-         $http.get('http://localhost:1476/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
+         $http.get('/api/Fleet/getFleetList?cmpId=' + $scope.cmp.Id + '&fleetOwnerId=' + $scope.s.Id).then(function (res, data) {
              $scope.Fleet = res.data.Table;
          });
      }*/
@@ -248,7 +248,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Fleet/NewFleetDetails',
+            url: '/api/Fleet/NewFleetDetails',
             //headers: {
             //    'Content-Type': undefined
 
@@ -258,10 +258,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         $http(req).then(function (res) {
             $scope.showDialog("Updated successfully!");
-            GetFleetDetails();
+           
         });
 
-
+        $scope. GetCompanies();
     }
 
     $scope.savenewfleetdetails = function (initdata, flag) {
@@ -303,7 +303,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Fleet/NewFleetDetails',
+            url: '/api/Fleet/NewFleetDetails',
             //headers: {
             //    'Content-Type': undefined
 
@@ -348,6 +348,9 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
     };
 
+    $scope.clearGroup = function () {
+        $scope.currGroup = null;
+    }
 });
 app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, mssg) {
 

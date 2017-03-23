@@ -10,7 +10,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-    $http.get('http://localhost:1476/api/GetLicensePayments').then(function (response, req) {
+    $http.get('/api/GetLicensePayments').then(function (response, req) {
         $scope.Group = response.data;
 
     });
@@ -31,7 +31,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http,$localStorage) {
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/LicensePayments/LicensePayment2',
+            url: '/api/LicensePayments/LicensePayment2',
             data: Group
         }
         $http(req).then(function (response) {

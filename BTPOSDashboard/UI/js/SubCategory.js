@@ -10,14 +10,14 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
     $scope.dashboardDS = $localStorage.dashboardDS;
     $scope.GetCategories = function () {
-        $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
+        $http.get('/api/subcategory/getcategory').then(function (response, data) {
             $scope.Categories = response.data;
            // $scope.getselectval();
         });
     }
 
     $scope.GetCategoriesList = function () {
-        $http.get('http://localhost:1476/api/subcategory/getcategory').then(function (response, data) {
+        $http.get('/api/subcategory/getcategory').then(function (response, data) {
             $scope.Categories = response.data;
              $scope.getselectval();
         });
@@ -27,7 +27,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.getselectval = function (seltype) {
         var grpid = (seltype) ? seltype.Id : -1;
 
-        $http.get('http://localhost:1476/api/subcategory/getsubcategory?catid=' + grpid).then(function (res, data) {
+        $http.get('/api/subcategory/getsubcategory?catid=' + grpid).then(function (res, data) {
             $scope.SubCategory = res.data;
 
         });
@@ -63,7 +63,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/subcategory/savesubcategory',
+            url: '/api/subcategory/savesubcategory',
             data: currSubCategory
         }
         $http(req).then(function (response) {
@@ -109,7 +109,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/subcategory/savesubcategory',
+            url: '/api/subcategory/savesubcategory',
             data: NewSubCategory
         }
 

@@ -1,4 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 
 namespace POSDBAccess.Controllers
@@ -21,7 +23,8 @@ namespace POSDBAccess.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyGroups ...");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -43,7 +46,8 @@ namespace POSDBAccess.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetCompanyGroups completed.");
+            
             // int found = 0;
             return Tbl;
         }
@@ -54,7 +58,8 @@ namespace POSDBAccess.Controllers
         {
             DataTable Tbl = new DataTable();
 
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getfleet credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -76,16 +81,56 @@ namespace POSDBAccess.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getfleet Credentials completed.");
+           
+            // int found = 0;
+            return Tbl;
+        }
+
+        [HttpGet]
+        [Route("api/GetCompanyDetails")]
+        public DataTable GetComapanyDetails(int cmpId) {
+            DataTable Tbl = new DataTable();
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getting Company details....");
+            //connect to database
+            SqlConnection conn = new SqlConnection();
+            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "GetCompanyDetails";
+
+            SqlParameter uid = new SqlParameter();
+            uid.ParameterName = "@cmpId";
+            uid.SqlDbType = SqlDbType.Int;
+            uid.Value = cmpId;
+            cmd.Parameters.Add(uid);
+
+
+            cmd.Connection = conn;
+            DataSet ds = new DataSet();
+            SqlDataAdapter db = new SqlDataAdapter(cmd);
+            db.Fill(ds);
+            Tbl = ds.Tables[0];
+
+            //Tbl.Rows[0]["Logo"] = Convert.ToBase64String((byte[])Tbl.Rows[0]["Logo"]);
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getting Company details completed.");
 
             // int found = 0;
             return Tbl;
         }
 
-
         [HttpPost]
         [Route("api/CompanyGroups/SaveCompanyGroups")]
         public HttpResponseMessage SaveCompanyGroups(CompanyGroups n)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveCompanyGroups credentials....");
             //DataTable Tbl = new DataTable();
             SqlConnection conn = new SqlConnection();
 
@@ -182,7 +227,7 @@ namespace POSDBAccess.Controllers
 
                 SqlParameter gzp = new SqlParameter();
                 gzp.ParameterName = "@ZipCode";
-                gzp.SqlDbType = SqlDbType.Int;
+                gzp.SqlDbType = SqlDbType.VarChar;
                 gzp.Value = n.ZipCode;
                 cmd.Parameters.Add(gzp);
 
@@ -205,24 +250,25 @@ namespace POSDBAccess.Controllers
                 cmd.Parameters.Add(sts);
 
                 SqlParameter PAdd = new SqlParameter();
-                PAdd.ParameterName = "@PermanentAddress";
+                PAdd.ParameterName = "@AlternateAddress";
                 PAdd.SqlDbType = SqlDbType.VarChar;
-                PAdd.Value = n.PermanentAddress;
+                PAdd.Value = n.AlternateAddress;
                 cmd.Parameters.Add(PAdd);
 
 
-                SqlParameter TAdd = new SqlParameter();
-                TAdd.ParameterName = "@TemporaryAddress";
-                TAdd.SqlDbType = SqlDbType.VarChar;
-                TAdd.Value = n.TemporaryAddress;
-                cmd.Parameters.Add(TAdd);
+                //SqlParameter TAdd = new SqlParameter();
+                //TAdd.ParameterName = "@TemporaryAddress";
+                //TAdd.SqlDbType = SqlDbType.VarChar;
+                //TAdd.Value = n.TemporaryAddress;
+                //cmd.Parameters.Add(TAdd);
 
-                //SqlParameter log = new SqlParameter();               
-                //log.ParameterName = "@Logo";
-                //log.SqlDbType = SqlDbType.VarChar;
-                //ImageConverter imgCon = new ImageConverter();
-                //log.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
-                //cmd.Parameters.Add(log);  
+                SqlParameter logo = new SqlParameter();
+                logo.ParameterName = "@Logo";
+                logo.SqlDbType = SqlDbType.VarChar;
+               // ImageConverter imgCon = new ImageConverter();
+               // logo.Value = (byte[])imgCon.ConvertTo(n.Logo, typeof(byte[]));
+                logo.Value = n.Logo;
+                cmd.Parameters.Add(logo);  
 
                 SqlParameter insupdflag = new SqlParameter("@insupdflag", SqlDbType.VarChar, 1);
                 insupdflag.Value = n.insupdflag;
@@ -230,7 +276,7 @@ namespace POSDBAccess.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
-               
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveCompanyGroups Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -239,7 +285,9 @@ namespace POSDBAccess.Controllers
                 {
                     conn.Close();
                 }
+
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveCompanyGroups:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
             // int found = 0;
@@ -250,6 +298,9 @@ namespace POSDBAccess.Controllers
         [Route("api/AssignDelRoles")]
         public HttpResponseMessage AssignDelRoles(CompanyRoles r)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveAssignDelRoles credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -297,7 +348,7 @@ namespace POSDBAccess.Controllers
                 
                 cmd.ExecuteScalar();
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveAssignDelRoles Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -307,6 +358,7 @@ namespace POSDBAccess.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in saveAssignDelRoles:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
@@ -315,6 +367,12 @@ namespace POSDBAccess.Controllers
         [Route("api/SaveCmpRoles")]
         public HttpResponseMessage SaveCmpRoles(IEnumerable<CompanyRoles> cRoles) 
         {
+
+
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveCmpRoles credentials....");
+            
             SqlConnection conn = new SqlConnection();
             try
             {
@@ -366,7 +424,7 @@ namespace POSDBAccess.Controllers
                 cmd.Parameters.Clear();
                 }
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveCmpRoles Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -376,6 +434,8 @@ namespace POSDBAccess.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveCmpRoles:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

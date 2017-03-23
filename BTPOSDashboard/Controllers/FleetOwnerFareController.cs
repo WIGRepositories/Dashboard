@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
 using BTPOSDashboardAPI.Models;
+using System.Web.Http.Tracing;
 
 namespace BTPOSDashboard.Controllers
 {
@@ -16,7 +17,8 @@ namespace BTPOSDashboard.Controllers
         public DataSet getRouteFare(int routeId, int fleetownerId)
         {
             DataSet rs = new DataSet();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getRouteFare credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -68,16 +70,18 @@ namespace BTPOSDashboard.Controllers
             DataTable dt = stops.Copy();
             rs.Tables.Add(result);
             rs.Tables.Add(dt);
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "getRouteFare Credentials completed.");
             return rs;
         }
         [HttpPost]
         public HttpResponseMessage saveRouteFare(RouteFare b)
          {
             SqlConnection conn = new SqlConnection();
+            LogTraceWriter traceWriter = new LogTraceWriter();
             try
             {
-
+                
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveRouteFare credentials....");
 
             //connect to database
            
@@ -149,6 +153,8 @@ namespace BTPOSDashboard.Controllers
             // Tbl = Tables[0];
             cmd.ExecuteScalar();
             conn.Close();
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "saveRouteFare Credentials completed.");
             return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -158,6 +164,8 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in saveRouteFare:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
          }

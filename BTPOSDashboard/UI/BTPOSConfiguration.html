@@ -14,7 +14,7 @@
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
     
     <!--Loading style-->
-    <link type="text/css" rel="stylesheet" href="css/themes/style2/pink-violet.css" id="theme-change" class="style-change color-change">
+    <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
@@ -54,7 +54,7 @@
                             <a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/user.jpg" alt="" class="img-responsive img-circle" />&nbsp;<span class="hidden-xs">{{uname}}</span>&nbsp;<span class="caret"></span></a>
                             <ul class="dropdown-menu dropdown-user pull-right">
                                 <li><a href="UserProfile.html"><i class="fa fa-user"></i>User Profile</a></li>
-                                <li><a href="page-calendar.html"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                              
                                 <li><a href="email-inbox.html"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger"></span></a></li>
                                 <li><a href="ResetPassword.html"><i class="fa fa-tasks"></i>Reset Password<span class="badge badge-success"></span></a></li>
                                 <li class="divider"></li>
@@ -355,21 +355,21 @@
                                                 <div class="table-container">
                                                     <div class="row mbm">
                                                         <div class="col-md-4">
-                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()" id="test">
+                                                            Company:<select ng-options="c.Name for c in Companies track by c.Id" ng-model="cmp" ng-change="GetFleetOwners()" id="test" style="width:70%">
     <option value="">Select</option>
 </select>
                                                         </div>
-                                                        <div class="col-md-4" style="text-align:right">
-                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetBTPosForFO ()" id="test1">
+                                                        <div class="col-md-4">
+                                                            Fleet Owner:<select ng-options="s.Name for s in fleet track by s.Id" ng-model="s" ng-change="GetBTPosForFO ()" id="test1" style="width:70%">
 
     <option value="">Select</option>
 </select>
                                                         </div>
-                                                        <div class="col-md-3">
-                                                            BTPOS: <select ng-options="b.POSID for b in sdata.Table track by b.Id" ng-model="b" ng-change="GetFleeBTPosDetails()">
+                                                        <div class="col-md-4">
+                                                            BTPOS: <select ng-options="b.POSID for b in sdata.Table track by b.Id" ng-model="b" ng-change="GetBTPosDetails()" style="width:70%">
 
-                                                                <option value="">All</option>
-                                                            </select>
+    <option value="">All</option>
+</select>
                                                         </div>
                                                         </div>
 

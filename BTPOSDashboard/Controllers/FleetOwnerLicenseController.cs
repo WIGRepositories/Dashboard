@@ -1,5 +1,5 @@
-﻿using BTPOSDashboardAPI.Models;
-
+﻿using BTPOSDashboard;
+using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 
 namespace BTPOSDashboardAPI.Controllers
@@ -18,6 +19,9 @@ namespace BTPOSDashboardAPI.Controllers
         public DataTable FleetOwner()//Main Method
         {
             DataTable Tbl = new DataTable();
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetFleetOwner credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -32,17 +36,21 @@ namespace BTPOSDashboardAPI.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetFleetOwner Credentials completed.");
             // int found = 0;
             return Tbl;
         }
         [HttpPost]
         public HttpResponseMessage FleetOL(FleetOL B)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveFleetOwnerLicense credentials....");
             SqlConnection conn = new SqlConnection();
             try
             {
 
+               
                 //connect to database
                 
                 //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -101,7 +109,7 @@ namespace BTPOSDashboardAPI.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
-
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveFleetOwnerLicense Credentials completed.");
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -111,6 +119,7 @@ namespace BTPOSDashboardAPI.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveFleetOwnerLicense:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }
@@ -118,6 +127,10 @@ namespace BTPOSDashboardAPI.Controllers
         [HttpGet]
         public int validatefleetowner(string fleetownercode)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getvalidatefleetowner credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -140,9 +153,11 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.ExecuteNonQuery();
 
             conn.Close();
-
+           
             int result = -1;
             result = Convert.ToInt32(mm.Value);
+
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getvalidatefleetowner Credentials completed.");
             return result;
 
         }
@@ -151,6 +166,10 @@ namespace BTPOSDashboardAPI.Controllers
         [HttpGet]
         public int updatebtpos(string fleetownercode, string units)
         {
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getupdatebtpos credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -178,7 +197,7 @@ namespace BTPOSDashboardAPI.Controllers
             cmd.ExecuteNonQuery();
 
             conn.Close();
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getupdatebtpos Credentials completed.");
             int result = -1;
             result = Convert.ToInt32(mm.Value);
             return result;
@@ -188,6 +207,11 @@ namespace BTPOSDashboardAPI.Controllers
         [HttpGet]
         public int registerpos(string fleetownercode, string ipconfig)
         {
+
+
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getregisterpos credentials....");
+ 
             //connect to database
             SqlConnection conn = new SqlConnection();
             //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
@@ -220,6 +244,7 @@ namespace BTPOSDashboardAPI.Controllers
 
                 int result = -1;
                 result = Convert.ToInt32(mm.Value);
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getregisterpos Credentials completed.");
                 return result;
             }
             catch {

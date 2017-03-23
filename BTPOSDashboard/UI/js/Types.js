@@ -9,7 +9,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
     $scope.Roleid = $scope.userdetails[0].roleid;
 
     $scope.dashboardDS = $localStorage.dashboardDS;
-    $http.get('http://localhost:1476/api/typegroups/gettypegroups').then(function (res, data) {
+    $http.get('/api/typegroups/gettypegroups').then(function (res, data) {
         $scope.TypeGroups = res.data;
         $scope.getselectval();
     });
@@ -18,7 +18,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
         var grpid = (seltype) ? seltype.Id : -1;
       
 
-        $http.get('http://localhost:1476/api/Types/TypesByGroupId?groupid=' + grpid).then(function (res, data) {
+        $http.get('/api/Types/TypesByGroupId?groupid=' + grpid).then(function (res, data) {
             $scope.Types = res.data;
 
         });
@@ -58,7 +58,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Types/SaveType',
+            url: '/api/Types/SaveType',
             //headers: {
             //    'Content-Type': undefined
             data: Types
@@ -111,7 +111,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/Types/SaveType',           
+            url: '/api/Types/SaveType',           
             data: newTypeData
         }
 

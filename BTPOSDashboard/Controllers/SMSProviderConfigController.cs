@@ -1,4 +1,5 @@
 ﻿
+using BTPOSDashboard;
 using BTPOSDashboardAPI.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Tracing;
 
 namespace blocklist1.Controllers
 {
@@ -19,7 +21,8 @@ namespace blocklist1.Controllers
         public DataTable POSDashboard1()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetSMSProviderConfig credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -34,13 +37,16 @@ namespace blocklist1.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "GetSMSProviderConfig Credentials completed.");
             // int found = 0;
             return Tbl;
         }
           [HttpPost]
           public HttpResponseMessage pos(SMSProviderConfig b)
           {
+
+              LogTraceWriter traceWriter = new LogTraceWriter();
+              traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveSMSProviderConfig credentials....");
               //connect to database
               SqlConnection conn = new SqlConnection();
               try
@@ -100,6 +106,8 @@ namespace blocklist1.Controllers
                   // Tbl = Tables[0];
                   cmd.ExecuteScalar();
                   conn.Close();
+
+                  traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveSMSProviderConfig Credentials completed.");
                   return new HttpResponseMessage(HttpStatusCode.OK);
               }
               catch (Exception ex)
@@ -109,6 +117,8 @@ namespace blocklist1.Controllers
                       conn.Close();
                   }
                   string str = ex.Message;
+
+                  traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveSMSProviderConfig:" + ex.Message);
                   return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
               }
           }

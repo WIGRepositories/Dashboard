@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Data;
 using System.Data.SqlClient;
 using BTPOSDashboardAPI.Models;
+using System.Web.Http.Tracing;
 
 
 namespace BTPOSDashboard.Controllers
@@ -20,7 +21,8 @@ namespace BTPOSDashboard.Controllers
         public DataTable getregdata()
         {
             DataTable Tbl = new DataTable();
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getregistrationform credentials....");
 
             //connect to database
             SqlConnection conn = new SqlConnection();
@@ -35,7 +37,8 @@ namespace BTPOSDashboard.Controllers
             SqlDataAdapter db = new SqlDataAdapter(cmd);
             db.Fill(ds);
             Tbl = ds.Tables[0];
-
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Getregistrationform Credentials completed.");
+            
             // int found = 0;
             return Tbl;
         }
@@ -44,7 +47,8 @@ namespace BTPOSDashboard.Controllers
         [HttpPost]
         public HttpResponseMessage pos(Registrationform b)
         {
-
+            LogTraceWriter traceWriter = new LogTraceWriter();
+            traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveRegistrationform credentials....");
             //connect to database
             SqlConnection conn = new SqlConnection();
             try
@@ -112,6 +116,8 @@ namespace BTPOSDashboard.Controllers
 
                 cmd.ExecuteScalar();
                 conn.Close();
+                traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveRegistrationform Credentials completed.");
+            
                 return new HttpResponseMessage(HttpStatusCode.OK);
             }
             catch (Exception ex)
@@ -121,6 +127,7 @@ namespace BTPOSDashboard.Controllers
                     conn.Close();
                 }
                 string str = ex.Message;
+                traceWriter.Trace(Request, "1", TraceLevel.Info, "{0}", "Error in SaveRegistrationform:" + ex.Message);
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, ex);
             }
         }

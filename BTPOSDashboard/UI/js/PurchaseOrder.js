@@ -12,7 +12,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.GetPurchaseOrder = function () {
 
-        $http.get('http://localhost:1476/api/PurchaseOrder/GetPurchaseOrder').then(function (res,data) {
+        $http.get('/api/PurchaseOrder/GetPurchaseOrder').then(function (res,data) {
             $scope.PurchaseOrder = res.data;
         });
     }

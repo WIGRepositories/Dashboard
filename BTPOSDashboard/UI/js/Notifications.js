@@ -12,7 +12,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
     $scope.getNotification = function () {
 
-        $http.get('http://localhost:1476/api/Notifications/getNotification').then(function (response, req) {
+        $http.get('/api/Notifications/getNotification').then(function (response, req) {
             $scope.Notifications = response.data;
 
         });
@@ -37,7 +37,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
         //var req = {
         //    method: 'POST',
-        //    url: 'http://localhost:1476/api/notifications/savenotification',
+        //    url: '/api/notifications/savenotification',
         //    data: Notifications
         //}
         //$http(req).then(function (response) {

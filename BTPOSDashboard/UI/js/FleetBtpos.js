@@ -30,7 +30,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var foid = $scope.s.Id;
         var cmpid = $scope.cmp.Id;
-        $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=' + foid + '&cmpid=' + cmpid).then(function (res, data) {
+        $http.get('/api/FleetBtpos/GetFleebtDetails?sId=' + foid + '&cmpid=' + cmpid).then(function (res, data) {
             $scope.FleetBtposList = res.data;
         });
     }
@@ -39,7 +39,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         //$scope.FleetBtposList = null;
         //$scope.cmpdata = null;
         //$scope.cmpdata1 = null;
-        $http.get('http://localhost:1476/api/GetCompanyGroups?userid=-1').then(function (res, data) {
+        $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
 
             if ($scope.userCmpId != 1) {
@@ -56,6 +56,10 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
                 document.getElementById('test').disabled = false;
             }
             $scope.GetFleetOwners($scope.cmp);
+            if ($scope.cmp == null)
+            {
+                $scope.GetFleeBTPosDetails();
+            }
         });
 
 
@@ -78,7 +82,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -103,11 +107,11 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             else {
                 document.getElementById('test1').disabled = false;
             }
-            //    $scope.GetFleeBTPosDetails($scope.s);
+                $scope.GetFleeBTPosDetails($scope.s);
 
         });
 
-        //$http.get('http://localhost:1476/api/Getfleet').then(function (res, data) {
+        //$http.get('/api/Getfleet').then(function (res, data) {
         //    $scope.fleet = res.data;
 
         //    if ($scope.userSId != 1) {
@@ -141,7 +145,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+            url: '/api/VehicleConfig/VConfig',
             //headers: {
             //    'Content-Type': undefined
 
@@ -181,7 +185,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetBtpos/AssignFleetBTPOS',
+            url: '/api/FleetBtpos/AssignFleetBTPOS',
             //headers: {
             //    'Content-Type': undefined
 
@@ -210,7 +214,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
     //    var req = {
     //        method: 'POST',
-    //        url: 'http://localhost:1476/api/VehicleConfig/VConfig',
+    //        url: '/api/VehicleConfig/VConfig',
     //        //headers: {
     //        //    'Content-Type': undefined
 
@@ -236,13 +240,13 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetBtpos/AssignFleetBTPOS',
+            url: '/api/FleetBtpos/AssignFleetBTPOS',
             data: FBTPOS
         }
         $http(req).then(function (response) {
             alert('Removed successfully.');
 
-            $http.get('http://localhost:1476/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
+            $http.get('/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
                 $scope.FleetBtposList = res.data;
             });
 
@@ -277,7 +281,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:1476/api/FleetBtpos/AssignFleetBTPOS',
+            url: '/api/FleetBtpos/AssignFleetBTPOS',
             //headers: {
             //    'Content-Type': undefined
 
@@ -286,8 +290,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
-
+          //  $scope.showDialog("Saved successfully!");
+            $scope.GetFleeBTPosDetails();
             $scope.Group = null;
 
         }, function (errres) {
