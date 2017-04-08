@@ -28,7 +28,7 @@ namespace BTPOSDashboardAPI.Controllers
  
             //connect to database
             SqlConnection conn = new SqlConnection();
-            //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+            //connetionString = "Data Source=localhost;Initial Catalog=POSDashboard;UserID=admin;Password=admin";
             conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
             SqlCommand cmd = new SqlCommand();
@@ -69,8 +69,8 @@ namespace BTPOSDashboardAPI.Controllers
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "Retriving password....");
 
                 //connect to database
-                
-                //connetionString="Data Source=ServerName;Initial Catalog=DatabaseName;User ID=UserName;Password=Password"
+
+                //connetionString = "Data Source=localhost;Initial Catalog=POSDashboard;User ID=admin;Password=admin";
                 conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["btposdb"].ToString();
 
                 SqlCommand cmd = new SqlCommand();
@@ -114,5 +114,7 @@ namespace BTPOSDashboardAPI.Controllers
          public void Options() { }
 
 
+
+         public string connetionString { get; set; }
     }
 }

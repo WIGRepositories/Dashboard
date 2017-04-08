@@ -93,8 +93,10 @@
     </Content>
     <Content Include="BTPOSImages\adapter.jpeg" />
     <Content Include="BTPOSImages\angular.js" />
+    <Content Include="BTPOSImages\bulb.jpg" />
     <Content Include="BTPOSImages\busticket.html" />
     <Content Include="BTPOSImages\busticket.jpg" />
+    <Content Include="BTPOSImages\D-Link DIR-605L Wireless N Cloud Router.jpg" />
     <Content Include="BTPOSImages\Loginpage.html" />
     <Content Include="BTPOSImages\loginpage.jpeg" />
     <Content Include="BTPOSImages\loginpage.js" />
@@ -110,6 +112,7 @@
     <Content Include="BTPOSImages\RegistrationBTPOS.js" />
     <Content Include="BTPOSImages\restart.html" />
     <Content Include="BTPOSImages\restart.jpg" />
+    <Content Include="BTPOSImages\speaker.jpg" />
     <Content Include="BTPOSImages\TicketGeneration.html" />
     <Content Include="BTPOSImages\TicketGeneration.jpg" />
     <Content Include="BTPOSImages\TicketGeneration.js" />
@@ -169,6 +172,12 @@
     <Content Include="UI\BtposReports.html" />
     <Content Include="UI\BtposRoutes.html" />
     <Content Include="UI\BTPOSTransactionPage.html" />
+    <Content Include="UI\CardDetails.html" />
+    <Content Include="UI\CardList.html" />
+    <Content Include="UI\CardTransaction.html" />
+    <Content Include="UI\CardTransactionDetails.html" />
+    <Content Include="UI\CardTrasactionDetails.html" />
+    <Content Include="UI\CardUser.html" />
     <Content Include="UI\CartDetails.html" />
     <Content Include="UI\CheckOut.html" />
     <Content Include="UI\CompanyHierarchy.html" />
@@ -201,6 +210,7 @@
     <Content Include="UI\css\style-responsive.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
     <Content Include="UI\DataLoad.html" />
+    <Content Include="UI\DataLoad1.html" />
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
@@ -229,6 +239,8 @@
     <Content Include="UI\images\14.jpg" />
     <Content Include="UI\images\bkgRd3.png" />
     <Content Include="UI\images\dashboard.png" />
+    <Content Include="UI\images\earphone.jpg" />
+    <Content Include="UI\images\speaker.jpg" />
     <Content Include="UI\Index_cmpUser.html" />
     <Content Include="UI\Index_finAdmin.html" />
     <Content Include="UI\Index_FO.html" />
@@ -260,8 +272,10 @@
     <Content Include="UI\js\Countries.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\DataLoad.js" />
+    <Content Include="UI\js\DataLoad1.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\EmailGatewayConfiguration.js" />
+    <Content Include="UI\js\faqs.js" />
     <Content Include="UI\js\fileupload\angular-file-upload-shim.js" />
     <Content Include="UI\js\fileupload\angular-file-upload.js" />
     <Content Include="UI\js\fileupload\FileAPI.js" />
@@ -2036,6 +2050,7 @@
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\EmailGatewayConfigController.cs" />
+    <Compile Include="Controllers\faqsController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FleetAvailabilityController.cs" />
     <Compile Include="Controllers\FleetBtposController.cs" />

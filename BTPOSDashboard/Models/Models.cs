@@ -1778,5 +1778,22 @@ namespace BTPOSDashboardAPI.Models
     //    public int Active { get; set; }
     //    public string insupddelflag { get; set; }
     //}
-   
+
+    public class faqs 
+    {
+
+        public string flag { get; set; }
+        public int id { get; set; }
+        public string question { get; set; }
+
+        public string answer { get; set; }
+        public string createdon { get; set; }
+        public string createdby { get; set; }
+        public string updatedon { get; set; }
+        public string updatedby { get; set; }
+        public int active { get; set; }
+        public int category { get; set; }
+
+    }
+
 }

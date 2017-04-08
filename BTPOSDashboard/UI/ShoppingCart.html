@@ -378,7 +378,7 @@
                                                                 <li><a href="extra-lock-screen.html"><i class="fa fa-lock"></i>Lock Screen</a></li>
                                                                 <li><a href="../Login.html"><i class="fa fa-key"></i>Log Out</a></li>
                                                                 <li><a  href="#" class="dropdown-toggle"><img src="images/adapter.jpeg" height="20" width="20" alt="" class="img-responsive img-circle" /><span class="hidden-xs">{{i.ItemName}}</span></a></li>
-
+                                                                
                                                                 <a href="CheckOut.html"><p><input type="button" value="CheckOut" data-target="#Modal-header-new" data-toggle="modal" style="margin: 10px;" ng-click="Save(items1);" /></p></a>
                                                             </ul>
                                                     </li>
@@ -390,7 +390,21 @@
                                                         <div class="list-box">
                                                             <!--<img/>-->
                                                             <div class="img"><a href="cables.html"><img src="images/adapter.jpeg" height="70" width="70" alt="" title="" /></a></div>
-
+                                                            <div>
+                                                                <div class="form-group has-success">
+                                                                    <!--<p>Item Id:{{i.Id}}</p>
+                                                                    <p>ItemName:{{i.ItemName}}</p>
+                                                                    <p>Code:{{i.Code}}</p>
+                                                                    <p>Category:{{i.Category}}</p>
+                                                                    <p>SubCategory:{{i.SubCategory}}</p>-->
+                                                                </div>
+                                                                <b>Description :</b>Deliver reliable power back-up to your Toshiba, GATEWAY or Acer TravelMate laptops with the Lapcare Adapter 
+                                                                For Toshiba 19V 3.42A 65W -Black. With its efficient power conversion ratio, the recharger allows a seamless 
+                                                                and stable energy supply to your device to reinvigorate its empty battery. The ripple noise caused is also 
+                                                                trifling little so that your laptop gets charged up silently while you can focus better on your work. The 
+                                                                compatible models of laptops are Toshiba Satellite A100, Satellite A105, Satellite A110, Satellite A130, 
+                                                                Satellite A135 and Satellite A200 series, GATEWAY Solo and 4000 series and Acer TravelMate 500 and TravelMate 800 series.
+                                                            </div>
                                                             <!--<data></data>-->
                                                             <div class="block">
                                                                 <form>
@@ -417,17 +431,66 @@
                                                                         <p><input type="button" value="Add to Cart" style="width:100px;" ng-click="addtocart(i);">
                                                                        <input type="button" value="Remove from Cart" style="width:125px;"></p>
                                                                        
-                                                                        <div class="form-group has-success" >
-                                                                            <p>Item Id:{{i.Id}}</p>
-                                                                            <p>ItemName:{{i.ItemName}}</p>
-                                                                            <p>Code:{{i.Code}}</p>
-                                                                            <p>Category:{{i.Category}}</p>
-                                                                            <p>SubCategory:{{i.SubCategory}}</p>
-                                                                        </div>
+                                                                        
 
                                                                     </div>
                                                                 </form>
                                                             </div>
+                                                            <br />
+                                                            <br />
+                                                            <!--<img/>-->
+                                                            <div class="img"><a href="cables.html"> <img src="images/earphone.jpg" height="70" width="70" alt="" title="" /></a></div>
+
+                                                             <div>
+                                                                <div class="form-group has-success">
+                                                                    <!--<p>Item Id:{{i.Id}}</p>
+                                                                    <p>ItemName:{{i.ItemName}}</p>
+                                                                    <p>Code:{{i.Code}}</p>
+                                                                    <p>Category:{{i.Category}}</p>
+                                                                    <p>SubCategory:{{i.SubCategory}}</p>-->
+                                                                </div>
+                                                                <b>Description :</b>This pair of Sennheiser Earphones is a replacement for all the old ways of listening
+                                                                                    to music. Earphones form a necessary part of an accessory list. Switching to these 
+                                                                                    stylish headphones will allow you to not only flaunt your style but serve your purpose 
+                                                                                    as well. Be it tuning into your favourite FM Radio, watching the latest video or audio, 
+                                                                                    you are sure to get habitual of its high quality sound as soon as you start using it. 
+                                                                                    Now you can enjoy music while travelling, catch up your favourite shows with the utmost sound clarity and enjoy gaming with sound to enhance the experience.
+                                                            </div>
+                                                            <!--<data></data>-->
+                                                            <div class="block">
+                                                                <form>
+                                                                    <div class="list-box">
+                                                                        <!--<p>
+                    <input type="hidden" name="op" value="add">
+                    <input type="hidden" name="OptionCount" value="1">
+                    qty
+                    <input type="number" min="1" max="50" class="form-control ng-valid ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-touched" ng-model="pageSize" size="2"
+                           name="item_qty" value="1" style="width:100px;">
+
+                </p>-->
+                                                                        <input type="hidden" name="item_desc" value='Round Dinner Plate<br>11"'>
+                                                                        <input type="hidden" name="item_price" value="38.95">
+                                                                        <input type="hidden" name="item_id" value="JDR">
+                                                                        <input type="hidden" name="product_shipping_class" value="0">
+                                                                        <input type="hidden" name="cid" value="000">
+
+                                                                        <p id="qty">
+                                                                            <button type="button" class=" fa fa-plus" style="width:100px;" onclick="increasecart(i)"></button>
+                                                                            <button type="button" class=" fa fa-minus" style="width:100px;" onclick="subtractQty(i)"></button>
+
+                                                                        </p>
+                                                                        <p>
+                                                                            <input type="button" value="Add to Cart" style="width:100px;" ng-click="addtocart(i);">
+                                                                            <input type="button" value="Remove from Cart" style="width:125px;">
+                                                                        </p>
+
+
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+
                                                         </div>
                                                         
                                             </div>
