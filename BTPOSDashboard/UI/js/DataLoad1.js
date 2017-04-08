@@ -135,19 +135,24 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
   {
             "3": { "Col1": "UserId", "Col2": "RoleId" }
+  },
+
+{
+    "4": { "Col1": "VehicleRegno", "Col2": "CompanyId", "Col2": "Active" }
+},
+{
+    "5": { "Col1": "Name",  "Col2": "Active" }
+},
+{
+    "6": { "Col1": "Routename", "Col2": "Active" }
 },
 
 {
-    "4": { "Col1": "Userid", "Col2": "RoleId" }
+    "7": { "Col1": "CompanyId", "Col2": "FleetownerId" }
 },
+
 {
-    "5": { "Col1": "VehicleRegno", "Col2": "CompanyId", "Col2": "Active" }
-},
-{
-    "6": { "Col1": "Name",  "Col2": "Active" }
-},
-{
-    "7": { "Col1": "CompanyId", "Col2": "Active" }
+    "8": { "Col1": "itemname", "Col2": "CategoryId" }
 },
     ]
 

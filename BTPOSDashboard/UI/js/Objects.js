@@ -3,6 +3,24 @@
 // JavaScript source code
 // JavaScript source code
 var app = angular.module('myApp', ['ngStorage', 'ui.bootstrap'])
+
+
+
+app.directive('onFinishRender', function ($timeout) {
+
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit('ngRepeatFinished');
+                });
+            }
+        }
+    }
+});
+
+
 var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uibModal) {
     if ($localStorage.uname == null) {
         window.location.href = "login.html";
@@ -11,11 +29,16 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
     $scope.userdetails = $localStorage.userdetails;
     $scope.Roleid = $scope.userdetails[0].roleid;
 
+    $scope.isSuperUser = ($scope.Roleid == 1) ? 1 : 0;
+
     $scope.dashboardDS = $localStorage.dashboardDS;
  
-    $http.get('/api/objects/getobjects').then(function (res, data) {
+    $http.get('/api/objects/getObjects').then(function (res, data) {
         $scope.NewObjects = res.data;
+       
+     
     });
+   
     $scope.save = function (NewObject,flag) {
         
         if (NewObject == null)
@@ -25,21 +48,29 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
         }
         if (NewObject.Name == null)
         {
-            alert('Please Enter Nmae');
+            alert('Please Enter Name');
             return;
         }
        
-        if (NewObject.Path == null)
+        if (NewObject.ParentId == null)
         {
-            alert('Please Enter Path');
+            alert('Please Enter ParentId');
+            return;
+        }
+
+        
+
+        if (NewObject.RootObjectId == null) {
+            alert('Please Enter RootObjectId');
             return;
         }
    
         var SelNewObjects = {
-            Id:1,
             Name: NewObject.Name,
             Description: NewObject.Description,
-            Path: NewObject.Path,
+            ParentId: NewObject.ParentId,
+            
+            RootObjectId:NewObject.RootObjectId,
             Access: NewObject.Access,
             insupdflag: 'I',
             Active:1,
@@ -70,7 +101,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 
 
-    $scope.saveNewObjects = function (NewObject) {
+    $scope.newChildObject = function (NewObject) {
 
         if (NewObject == null) {
             alert('Please enter name.');
@@ -85,13 +116,14 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
 
 
+
         var SelNewObjects = {
 
 
             Id: -1,
             Name: NewObject.Name,
             Description: NewObject.Description,
-            Path: NewObject.Path,
+            ParentId: $scope.ParentId,
 
             Active: 1,
             insupdflag: 'U'
@@ -139,7 +171,15 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             }
         });
     }
+    $scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+        //you also get the actual event object
+        //do stuff, execute functions -- whatever...
+        //alert("ng-repeat finished");
+        $("#example-advanced").treetable({ initialState: 'expanded', expandable: true }, true);
+        $("#example-advanced tbody tr:first").toggleClass("selected");
 
+
+    });
 
 });
 

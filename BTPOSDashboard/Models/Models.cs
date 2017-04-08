@@ -1130,6 +1130,10 @@ namespace BTPOSDashboardAPI.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
+        public int ParentId { get; set; }
+
+        public string RootObjectId { get; set; }
+
         public string Path { get; set; }
         public int Active { get; set; }
         public string insupdflag { get; set; }
@@ -1778,7 +1782,7 @@ namespace BTPOSDashboardAPI.Models
     //    public int Active { get; set; }
     //    public string insupddelflag { get; set; }
     //}
-
+   
     public class faqs 
     {
 

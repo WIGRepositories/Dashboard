@@ -11,7 +11,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
 
     $scope.setfaqs = function (type) {
         alert(type);
-        $scope.question = type;
+        question = $scope.question;
+        answer = $scope.answer;
 
 
     }
@@ -23,7 +24,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http) {
     }
 
     $http(req).then(function (response) {
-        alert("save successfully!!");
+        //alert("save successfully!!");
         //window.location.href = "Register.html";
     },
     function (errres) {

@@ -467,7 +467,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             data: btposlist,
 
         }).success(function (data, status, headers, config) {
-            $scope.showDialog('saved btpos details successfully');
+            //$scope.showDialog('saved btpos details successfully');
             btposlist = [];
         }).error(function (ata, status, headers, config) {
             var errdata = ata;
@@ -502,7 +502,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
+            //$scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
 

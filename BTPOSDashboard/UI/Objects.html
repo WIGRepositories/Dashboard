@@ -11,7 +11,8 @@
 
     <link type="text/css" rel="stylesheet" href="vendors/jquery-pace/pace.css">
     <link type="text/css" rel="stylesheet" href="vendors/iCheck/skins/all.css">
-
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-treetable/stylesheets/jquery.treetable.css">
+    <link type="text/css" rel="stylesheet" href="vendors/jquery-treetable/stylesheets/jquery.treetable.theme.custom.css">
     <!--Loading style-->
     <link type="text/css" rel="stylesheet" href="css/themes/style2/Custom.css" id="theme-change" class="style-change color-change">
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
@@ -386,10 +387,10 @@
 
                                                 <div class="actions">
                                                     <!-----   <a href="NewObject.html"><button type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add New Object</button></a>--->
-                                                    <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add New Object</button>
+                                                    <button ng-hide="isSuperUser == 0" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"> Add New Object</button>
                                                 </div>
 
-                                                <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header modal-header-primary">
@@ -429,7 +430,7 @@
 
                                                                     <div class="col-md-3">
                                                                         <div class="form-group has-success" style="text-align:right">
-                                                                            <label for="inputFirstName" class="control-label">Path:<span class='require'>*</span></label>
+                                                                            <label for="Path" class="control-label">Path:<span class='require'></span></label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-5">
@@ -465,125 +466,131 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
 
-
-
-
-                                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                                <table id="example-advanced">
+                                                    <!--<caption class="mbl mtl"><a href="#" onclick="jQuery('#example-advanced').treetable('expandAll'); return false;">Expand all</a>&nbsp; | &nbsp;<a href="#" onclick="jQuery('#example-advanced').treetable('collapseAll'); return false;">Collapse all</a></caption>-->
                                                     <thead>
                                                         <tr>
 
                                                             <th>Name</th>
-                                                            <th>Description</th>
-                                                            <th>Path</th>
-                                                            <th>Access</th>
-                                                            <th>Active</th>
-                                                            <th>Update</th>
-
-
+                                                            <th>Details</th>
+                                                            <th>Add Child</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
 
-                                                        <tr ng-repeat="T in NewObjects">
-
-
-                                                            <td>{{T.Name}}</td>
-                                                            <td>{{T.Description}}</td>
-                                                            <td>{{T.Path}}</td>
-                                                            <td>{{T.ParentId}}</td>
-                                                            <td>{{T.RouteObjectId}}</td>
+                                                        <tr ng-repeat="a in NewObjects" data-tt-id="{{a.ID}}" data-tt-parent-id="{{a.ParentID}}" on-finish-render>
                                                             <td>
-                                                                {{T.Access}}
-                                                                <!--<div class="col-md-3">
-                                                                    <select>
-                                                                        <option value="">View</option>
-                                                                    </select>
-                                                                </div>
-                                                            </td>-->
-                                                            <td><input type="checkBox" checked /></td>
-
-
+                                                                <span class="folder">{{a.Name}}</span>
+                                                              
+                                                            </td>
+                                                            
+                                                            <td style="text-align:center">
+                                                                <button ng-click="ViewDetails(a)" class="btn btn-default btn-sm">Details</button>
+                                                            </td>
+                                                            <td style="text-align:center">
+                                                                <button ng-click="remove_node(a)" ng-disabled="CanUploadDoc == 0" ng-hide="a.ParentID == null" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                            </td>
                                                             <td>
-                                                                {{T.Update}}
-                                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="setCurrRole(T);">
-                                                                    <i class="fa fa-edit"></i>&nbsp;
-                                                                    Edit
-                                                                </button>
+                                                                <button ng-disabled="CanUploadDoc == 0" ng-click="AddChildObj(a)" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm" style="float: right; margin: 10px;">Add Child Equipment</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
-
                                                 </table>
-                                                <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header modal-header-primary">
-                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                <h4 id="modal-header-primary-label" class="modal-title">Add New Object</h4>
-                                                            </div>
-                                                            <div class="modal-body" ng-model="NewObject">
-
-                                                                <div class="row mbm">
-                                                                    <div style="text-align:right">
-                                                                        <label for="Name" class="col-md-4 control-label" style="color:red;"> Name <span class='require'>*</span></label>
-                                                                    </div>
-                                                                    <div class="col-md-6">
-                                                                        <input id="inputFirstName" type="text" ng-model="NewObject.Name" class="form-control" /><span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
+                                            </div>
 
 
-                                                                <div class="row mbm">
-                                                                    <div style="text-align:right">
-                                                                        <label for="Description" class="col-md-4 control-label"> Description <span class='require'></span></label>
-                                                                    </div>
-
-                                                                    <div class="col-md-6">
-                                                                        <input id="Description" type="text" ng-model="NewObject.Description" class="form-control" /><span class="help-block"></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                           
+                                                
+                                            <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header modal-header-primary">
+                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                            <h4 id="modal-header-primary-label" class="modal-title">Add New Object</h4>
+                                                        </div>
+                                                        <div class="modal-body" ng-model="NewObject">
 
                                                             <div class="row mbm">
                                                                 <div style="text-align:right">
-                                                                    <label for="Parent" class="col-md-4 control-label" style="color:red;">ParentId<span class='require'>*</span></label>
+                                                                    <label for="Name" class="col-md-4 control-label" style="color:red;"> Name <span class='require'>*</span></label>
                                                                 </div>
-                                                                <div class="col-md-6"><input id="Parent" type="text" ng-model="NewObject.ParentId" class="form-control" /><span class="help-block"></span></div>
-                                                            </div>
-                                                            <div class="row mbm">
-                                                                <div style="text-align:right">
-                                                                    <label for="RouteObject" class="col-md-4 control-label" style="color:red;"> RouteObjectId <span class='require'>*</span></label>
+                                                                <div class="col-md-6">
+                                                                    <input id="Name" type="text" ng-model="NewObject.Name" class="form-control" /><span class="help-block"></span>
                                                                 </div>
-                                                                <div class="col-md-6"><input id="RouteObject" type="text" ng-model="NewObject.RouteObjectId" class="form-control" /><span class="help-block"></span></div>
                                                             </div>
+
 
                                                             <div class="row mbm">
                                                                 <div style="text-align:right">
-                                                                    <label for="Active" class="col-md-4 control-label">Active<span class='require'></span></label>
+                                                                    <label for="Description" class="col-md-4 control-label"> Description <span class='require'></span></label>
                                                                 </div>
 
                                                                 <div class="col-md-6">
-                                                                    <div><input type="checkbox" checked /></div>
-
+                                                                    <input id="Description" type="text" ng-model="NewObject.Description" class="form-control" /><span class="help-block"></span>
                                                                 </div>
-                                                                </div>
-                                                            
-                                                                <div class="form-actions">
-                                                                    <div class="col-md-offset-3 col-md-9">
-                                                                        <button type="button" class="btn btn-primary" ng-click="save(NewObject,'I');">Save</button>
-
-                                                                        <a href="Objects.html" class="btn btn-green">Cancel</a>
-                                                                    </div>
-                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mbm">
+                                                            <div style="text-align:right">
+                                                                <label for="selCountry" class="col-md-4 control-label" style="color:red;">Parent:<span class='require'>*</span></label>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                 <!---- <input type="text" disabled ng-model="NewObject.ParentId" class="form-control" />-->
+                                                                <select ng-options="O.Name for O in NewObjects track by O.ParentId" class="form-control" ng-value="NewObject.ParentId" ng-model="NewObject.ParentId">
+                                                                    <option value="">Select</option>
+                                                                </select>
+                                                                    
+                                                               
                                                             </div>
                                                         </div>
 
 
 
+
+                                                        <div class="row mbm">
+                                                            <div style="text-align:right">
+
+
+                                                                <label for="RootObject" class="col-md-4 control-label" style="color:red;"> RootObjectId <span class='require'>*</span></label>
+
+                                                                <select class="col-md-4 control-label" ng-model="NewObject.RootObjectId">
+                                                                    <option value="">select</option>
+                                                                    <option value="1">1</option>
+
+
+                                                                </select>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                        <div class="row mbm">
+                                                            <div style="text-align:right">
+                                                                <label for="Active" class="col-md-4 control-label">Active<span class='require'></span></label>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div><input type="checkbox" checked /></div>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-actions">
+                                                            <div class="col-md-offset-3 col-md-9">
+                                                                <button type="button" class="btn btn-primary" ng-click="save(NewObject,'o');">Save</button>
+
+                                                                <a href="Objects.html" class="btn btn-green">Cancel</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                </div>
+
+
+
+                                            </div>
 
                                                 </div>
                                                 <!--<div class="row">
@@ -634,6 +641,16 @@
                             <!--END FOOTER-->
                         </div>
                     </div>
+
+            
+                           
+                            <!--<div class="row mbm">
+            <div style="text-align:right">
+                <label for="Active" class="col-md-4 control-label">Active:<span class='require'></span></label>
+            </div>
+            <input type="checkbox" class="col-md-4 control-label" id="cactive" ng-checked="Types.Active" />
+        </div>-->
+                       
                     <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
 
                         <div class="modal-header">
@@ -690,27 +707,39 @@
     <!--loading bootstrap js-->
     <script src="vendors/bootstrap/js/bootstrap.js"></script>
     <script src="vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-
-
+   
     <script src="vendors/metisMenu/jquery.metisMenu.js"></script>
     <script src="vendors/slimScroll/jquery.slimscroll.js"></script>
     <script src="vendors/jquery-cookie/jquery.cookie.js"></script>
     <script src="vendors/iCheck/icheck.min.js"></script>
     <script src="vendors/iCheck/custom.min.js"></script>
-
+    
     <script src="js/jquery.menu.js"></script>
     <script src="vendors/jquery-pace/pace.min.js"></script>
+    <script src="vendors/jstree/dist/jstree.min.js"></script>
+    <script src="vendors/jquery-treetable/javascripts/src/jquery.treetable.js"></script>
+
     <script src="vendors/holder/holder.js"></script>
     <script src="vendors/responsive-tabs/responsive-tabs.js"></script>
+
+   
     <!--LOADING SCRIPTS FOR PAGE-->
     <!--CORE JAVASCRIPT-->
+
+    <script src="js/TreeView/ng-tree-dnd.js"></script>
     <script src="js/main.js"></script>
+    
     <script src="js/angular.js"></script>
+    
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
+    
     <script src="js/ngStorage.js"></script>
-
+    
+    <!--<script src="js/TreeView/nd.js"></script>-->
+    
     <script src="js/Objects.js"></script>
-
+    
+    
     <!--<script src="js/Alerts.js"></script>
 
     <script src="js/Notifications.js"></script>-->

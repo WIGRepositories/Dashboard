@@ -182,7 +182,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             data: FleetOwnerRoutes,
 
         }).success(function (data, status, headers, config) {
-            alert('Fleet owner routes successfully');
+            //alert('Fleet owner routes successfully');
             $scope.getFleetOwnerRoute();
         }).error(function (ata, status, headers, config) {
             alert(ata);

@@ -342,6 +342,8 @@
     <Content Include="UI\js\tableexportjspdf.js" />
     <Content Include="UI\js\tableexportsprintf.js" />
     <Content Include="UI\js\treeview.js" />
+    <Content Include="UI\js\TreeView\main.js" />
+    <Content Include="UI\js\TreeView\ng-tree-dnd.js" />
     <Content Include="UI\js\TTReports.js" />
     <Content Include="UI\js\ui-bootstrap-tpls-1.3.3.js" />
     <Content Include="UI\js\UserLicense.js" />

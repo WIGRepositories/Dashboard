@@ -236,7 +236,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
             data: foSchedule,
 
         }).success(function (data, status, headers, config) {
-            alert('Fleet owner Vehicle Schedule Saved successfully');
+            //alert('Fleet owner Vehicle Schedule Saved successfully');
             $scope.GetFORoutes();
         }).error(function (ata, status, headers, config) {
             alert(ata);

@@ -208,7 +208,7 @@ $scope.save = function (currFR) {
 
     }
     $http(req).then(function (res) { });
-    $scope.showDialog("Updated successfully!");
+    //$scope.showDialog("Updated successfully!");
 
 }
 
@@ -253,7 +253,7 @@ $scope.saveNewFleetRoutes = function (initdata) {
 
     $http(req).then(function (response) {
 
-        $scope.showDialog("Saved successfully!");
+       // $scope.showDialog("Saved successfully!");
 
         $scope.Group = null;
 
@@ -286,7 +286,7 @@ $scope.testdel = function (R) {
         data: FRoutes
     }
     $http(req).then(function (response) {
-        alert('Removed successfully.');
+       // alert('Removed successfully.');
 
         $http.get('/api/FleetRoutes/getFleetRoutesList?VehicleId=' + R.VehicleId).then(function (res, data) {
     $scope.FleetRoute = res.data;

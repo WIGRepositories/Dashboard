@@ -72,7 +72,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $fil
             data: BlockLt,
 
         }).success(function (data, status, headers, config) {
-            alert('Saved successfully');
+            //alert('Saved successfully');
             $scope.GetBlockDetails();
         }).error(function (ata, status, headers, config) {
             alert(ata);
