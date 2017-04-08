@@ -76,11 +76,27 @@ namespace BTPOSDashboard.Controllers
             dd.Value = b.Description;
             cmd.Parameters.Add(dd);
 
-            SqlParameter dda = new SqlParameter();
-            dda.ParameterName = "@Path";
-            dda.SqlDbType = SqlDbType.VarChar;
-            dda.Value = b.Path;
-            cmd.Parameters.Add(dda);
+            //SqlParameter dda = new SqlParameter();
+            //dda.ParameterName = "@Path";
+            //dda.SqlDbType = SqlDbType.VarChar;
+            //dda.Value = b.Path;
+            //cmd.Parameters.Add(dda);
+
+           
+
+            SqlParameter fd = new SqlParameter();
+            fd.ParameterName = "@ParentId";
+            fd.SqlDbType = SqlDbType.VarChar;
+            fd.Value = b.ParentId;
+            cmd.Parameters.Add(fd);
+
+            SqlParameter gd = new SqlParameter();
+            gd.ParameterName = "@RootObjectId";
+            gd.SqlDbType = SqlDbType.VarChar;
+            gd.Value = b.RootObjectId;
+            cmd.Parameters.Add(gd);
+
+          
 
 
             SqlParameter aa = new SqlParameter();

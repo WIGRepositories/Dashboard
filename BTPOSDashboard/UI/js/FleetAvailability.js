@@ -213,7 +213,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
+           // $scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
 
@@ -261,7 +261,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
 
         }
         $http(req).then(function (res) { });
-        alert('updated successfully.');
+        //alert('updated successfully.');
 
     }
 
@@ -282,7 +282,7 @@ var ctrl = app.controller('Mycntrl', function ($scope, $http,$localStorage) {
             data: FAvaliability
         }
         $http(req).then(function (response) {
-            alert('Removed successfully.');
+            //alert('Removed successfully.');
 
             $http.get('/api/FleetAvailability/GetFleetAvailability?VehicleId=' + R.VehicleId).then(function (res, data) {
                 $scope.FleetAvailability = res.data;

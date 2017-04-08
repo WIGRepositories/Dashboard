@@ -169,6 +169,9 @@ namespace BTPOSDashboardAPI.Controllers
             {
 
                 
+
+
+
                 traceWriter.Trace(Request, "0", TraceLevel.Info, "{0}", "SaveBTPOSDetails ...");
             // BTPOSDetails n = new BTPOSDetails();
             
@@ -333,6 +336,10 @@ namespace BTPOSDashboardAPI.Controllers
         public void Options()
         {
         }
+
+
+
+
 
     }
 }

@@ -194,7 +194,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
 
         }
         $http(req).then(function (res) {
-            $scope.showDialog("Updated successfully!");
+            //$scope.showDialog("Updated successfully!");
             GetFleetDetails();
         });
 
@@ -244,7 +244,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage, $uib
             data: FBTPOS
         }
         $http(req).then(function (response) {
-            alert('Removed successfully.');
+            //alert('Removed successfully.');
 
             $http.get('/api/FleetBtpos/GetFleebtDetails?sId=-1&cmpid=-1').then(function (res, data) {
                 $scope.FleetBtposList = res.data;

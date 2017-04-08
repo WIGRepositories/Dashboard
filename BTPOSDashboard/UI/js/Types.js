@@ -66,7 +66,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
+           
 
             $scope.Group = null;
 
@@ -117,7 +117,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
+            
             
             $scope.Group = null;
 

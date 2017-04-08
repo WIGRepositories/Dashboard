@@ -225,7 +225,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         $http(req).then(function (response) {
 
-            $scope.showDialog("Saved successfully!");
+           // $scope.showDialog("Saved successfully!");
 
             $scope.Group = null;
 
@@ -274,7 +274,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
 
         }
         $http(req).then(function (res) {
-            $scope.showDialog("Updated successfully!");
+           // $scope.showDialog("Updated successfully!");
             GetFleetDetails();
         });
 
@@ -372,7 +372,7 @@ var mycrtl1 = app.controller('myCtrl', function ($scope, $http, $localStorage, $
             data: FRoutes
         }
         $http(req).then(function (response) {
-            alert('Removed successfully.');
+            //alert('Removed successfully.');
 
             $http.get('/api/FleetStaff/GetFleetStaff?roleid=' + Fleet.RoleId).then(function (res, data) {
                 $scope.FleetStaff = res.data;

@@ -201,6 +201,7 @@
     <Content Include="UI\css\style-responsive.css" />
     <Content Include="UI\css\themes\style2\pink-violet.css" />
     <Content Include="UI\DataLoad.html" />
+    <Content Include="UI\DataLoad1.html" />
     <Content Include="UI\DefaultRoutePricing.html" />
     <Content Include="UI\EditHistory.html" />
     <Content Include="UI\EmailGatewayConfiguration.html" />
@@ -260,8 +261,10 @@
     <Content Include="UI\js\Countries.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\DataLoad.js" />
+    <Content Include="UI\js\DataLoad1.js" />
     <Content Include="UI\js\EditHistory.js" />
     <Content Include="UI\js\EmailGatewayConfiguration.js" />
+    <Content Include="UI\js\faqs.js" />
     <Content Include="UI\js\fileupload\angular-file-upload-shim.js" />
     <Content Include="UI\js\fileupload\angular-file-upload.js" />
     <Content Include="UI\js\fileupload\FileAPI.js" />
@@ -328,6 +331,8 @@
     <Content Include="UI\js\tableexportjspdf.js" />
     <Content Include="UI\js\tableexportsprintf.js" />
     <Content Include="UI\js\treeview.js" />
+    <Content Include="UI\js\TreeView\main.js" />
+    <Content Include="UI\js\TreeView\ng-tree-dnd.js" />
     <Content Include="UI\js\TTReports.js" />
     <Content Include="UI\js\ui-bootstrap-tpls-1.3.3.js" />
     <Content Include="UI\js\UserLicense.js" />
@@ -2036,6 +2041,7 @@
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\EmailGatewayConfigController.cs" />
+    <Compile Include="Controllers\faqsController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\FleetAvailabilityController.cs" />
     <Compile Include="Controllers\FleetBtposController.cs" />
