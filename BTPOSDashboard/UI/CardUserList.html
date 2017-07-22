@@ -28,7 +28,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetDashboardDS();" ng-model="dashboardDS">
+<body ng-app="myApp" ng-init="init();" ng-controller="myCtrl" ng-model="dashboardDS">
 
     <!--BEGIN THEME SETTING-->
     <!--BEGIN BACK TO TOP-->
@@ -155,7 +155,7 @@
 
                         </li>
                     </ul>
-                    </li>
+
                     <li>
                         <a href="#">
                             <i class="fa fa-truck">
@@ -293,12 +293,9 @@
                                 </ul>
                             </li>
                             <li><a href="BlockList.html" data-toggle="tooltip" data-placement="right" title="Details of BlockList"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
-
-
                         </ul>
                     </li>
 
-                    </li>
                     <li>
                         <a href="#">
                             <i class="fa fa-gavel">
@@ -310,8 +307,6 @@
                             <li><a href="EditHistory.html" data-toggle="tooltip" data-placement="right" title="Details of EditHistory"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
                             <li><a href="paymentHistory.html" data-toggle="tooltip" data-placement="right" title="Details of paymentHistory"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
                             <li><a href="FAQs.html" data-toggle="tooltip" data-placement="right" title="Details of FAQs"><i class="fa fa-briefcase"></i><span class="submenu-title">FAQs</span></a></li>
-
-
                         </ul>
 
                     </li>
@@ -389,7 +384,6 @@
 
                         </ul>
                     </li>
-
                     <li>
                         <a href="#">
                             <i class="fa fa-send-o fa-fw">
@@ -402,214 +396,317 @@
                             <li><a href="CardUser.html" data-toggle="tooltip" data-placement="right" title="Details of Admin reports"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">CardUser</span></a></li>
                             <li><a href="CardTransaction.html" data-toggle="tooltip" data-placement="right" title="Details of Trouble ticket reports"><i class="fa fa-filter"></i><span class="submenu-title">CardTransaction</span></a></li>
                             <li><a href="CardTrasactionDetails.html" data-toggle="tooltip" data-placement="right" title="Details of Fleet"><i class="fa fa-filter"></i><span class="submenu-title">CardTrasactionDetails</span></a></li>
+                            <li><a href="CardUserList.html" data-toggle="tooltip" data-placement="right" title="Details of Fleet"><i class="fa fa-filter"></i><span class="submenu-title">CardUserList</span></a></li>
                         </ul>
                     </li>
 
 
-
-
-                    </ul>
                 </div>
             </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
             <div id="page-wrapper">
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-                    <div class="page-header pull-left">
-                        <div class="page-title">TransactionDetails</div>
-                    </div>
-                    <!--<ol class="breadcrumb page-breadcrumb pull-right">
+                    <!------  <div class="page-header pull-left">
+                          <div class="page-title">Dashboard</div>
+                      </div>---->
+                    <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                    </ol>-->
+                    </ol>
                     <div class="clearfix"></div>
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
                 <div class="page-content">
                     <div id="table-action" class="row">
                         <div class="col-lg-12">
+
                             <div id="tableactionTabContent" class="tab-content">
                                 <div id="table-table-tab" class="tab-pane fade in active">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-container">
+                                                <!--<div class="row mbm">
+                                                <div class="col-lg-6">
+                                                        <label for="Date" class="control-label">FromDate:<span class='require'></span></label>
+                                                        <div data-date-format="dd/mm/yyyy" class="col-md-6 input-group date datepicker-filter mbs ">
+                                                            <input type="date"
+                                                                   name="dateField"
+                                                                   ng-model="dt.FromDate"
+                                                                   ng-min="'2015-01-20'"
+                                                                   ng-max="'2016-01-20'" class=" form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                <div class="col-lg-6">
+                                                <label for="Name" class="control-label">ToDate:<span class='require'></span></label>
+                                                      <div data-date-format="dd/mm/yyyy" class="col-md-6 input-group date datepicker-filter mbs">
+                                                          <input type="date"
+                                                                 name="dateField"
+                                                                 ng-model="dt.ToDate"
+                                                                 ng-min="'2015-01-20'"
+                                                                 ng-max="'2016-01-20'" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                      </div>
+                                                </div>-->
 
-                                    <div class="col-lg-12">
-                                        <div class="table-container">
-                                            <div class="row mbm">
-                                                <div class="col-md-3" style="text-align:left">
-                                                    Transactionid:<select ng-options="s.name for s in Locations track by s.id" ng-model="s" style="width:100%">
-                                                        <option value="">All</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2" style="text-align:left">
-                                                    TransactionNo:<select ng-options="a.Name for a in jobStatus track by a.Id" ng-model="a" style="width:100%">
-                                                        <option value="">All</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2" style="text-align:left">
-                                                    TransactionLocation: <select ng-options="c.Client for c in Customers track by c.Id" ng-model="c" style="width:100%">
-                                                        <option value="">All</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3" style="text-align:left">
-                                                    TransactionType: <select ng-options="j.Name for j in jobsList1|filter:{LocationID:s.id, StatusId:a.Id,CustomerID:c.Id} track by j.ID" ng-model="j" ng-change="getJobDetails(j.ID)" style="width:100%">
+                                                <div class="col-md-6">
+                                                    CardCategory:<select ng-options="s.Name for s in CategoriesLists track by s.id" ng-model="s" ng-change="GetCategoriesLists(s)" id="test1">
                                                         <option value="">Select</option>
                                                     </select>
                                                 </div>
-
-                                                <div class="col-md-2" style="text-align:left">
-                                                    <!--<button class="btn btn-primary" type="button" ng-click="AddnewCard();">Create new job</button>-->
+                                                <div class="col-md-6">
+                                                    <br />
+                                                    <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" ng-click="GetAllCardOptions()"> Add New Card Data</button><br /><br />
                                                 </div>
-
                                             </div>
-
                                         </div>
                                     </div>
 
-                                      <div class="row" ng-model="currJob">
-                                            <div class=" col-md-11" style="padding: 10px 20px 0px 20px; width: 100%">
 
-                                                <div class="portlet box portlet-grey" style="margin-bottom:10px">
+                                    <!-------------------------------------------------------------------------------AddNewCardData----------------------------------------------------->
+                                    <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                    <div class=" modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                    <div class="modal-header modal-header-primary">
+                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                          <h5 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h5>
+                                               </div>
 
-                                                    <div class="portlet-header" style="background-color: #f5f5f5; border: 1px solid #e5e5e5; color: #b8adb7">
-                                                        <div class="caption"><a href="">Transaction Details</a></div>
-                                                        <div class="tools"><i class="fa fa-chevron-up"></i></div>
-                                                    </div>
+                                                       <div class="modal-body" ng-model="CardListNew">
+                                                       <div class="row mbm">
+                                                       <div class="col-md-6">
+                                                             <div class="form-group has-success" style="text-align:right">
+                                                             <label for="CardNumber" class="control-label" style="color:red;">CardNumber:<span class='require'>*</span></label>
+                                                             </div>
+                                                       </div>
+                                                       <div class="col-md-6">
+                                                        <div class="form-group">
+                                                          <div class="input-icon right">
+                                                               <input type="text" class="form-control" id="cName" ng-model="CardListNew.CardNumber" />
+                                                          </div>
+                                                          </div>
+                                                              </div>
+                                                           </div>
 
-                                                    <div id="collapse0" class="panel-collapse list-group portlet-body" style="padding: 0px; display: none; border: 1px solid #e5e5e5;">
-
-                                                        <div class="panel-body">
-
-                                                            <div class="row mbm">
-                                                                <div class="col-md-12">
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="Description" class="control-label" style="color:red;">Tranasaction Name:<span class='require'>*</span></label>
-                                                                            <div>
-                                                                                <input id="inputJobID" type="text" ng-model="currJob.Name" class="form-control" style="width:100%" /><span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="Description" class="control-label" style="color:red;">Transaction#:<span class='require'>*</span></label>
-                                                                            <div>
-                                                                                <input id="inputJobID" type="text" ng-model="currJob.JobID" class="form-control" /><span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <label for="selCountry" class=" control-label" style="color:red;">Transactionid#:<span class='require'>*</span></label>
-                                                                        <div>
-                                                                            <input id="inputDateRate" type="text" ng-model="currJob.WellNo" class="form-control" /><span class="help-block"></span>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-md-3">
-                                                                        <label for="selCountry" class=" control-label" style="color:red;">Transaction Status:<span class='require'>*</span></label>
-                                                                        <div>
-
-                                                                            <select ng-options="js.Name for js in jobStatus track by js.Id" ng-model="js" ng-value="js.Id" style="width:100%">
-                                                                                <option value="">Select</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
+                                                           <div class="row mbm">
+                                                               <div style="text-align:right">
+                                                                   <label for="code" class="col-md-4 control-label" style="color:red;">CardModel:<span class='require'>*</span></label>
+                                                               </div>
+                                                               <div class="col-md-6">
+                                                                   <select ng-options="f.CardModel for f in CardModelData.Table1 track by f.Id" class="form-control" ng-model="f" ng-change="CardModelData(f);" id="test1">
+                                                                       <option value="">All</option>
+                                                                   </select>
+                                                               </div>
+                                                           </div>
 
 
-                                                                </div>
+                                                           <div class="row mbm">
+                                                               <div style="text-align:right">
+
+                                                                   <label for="selCountry" class="col-md-4 control-label" style="color:red;">CardType:<span class='require'>*</span></label>
+                                                               </div>
+
+                                                               <div class="col-md-6">
+                                                                   <select ng-options="v.CardType for v in CardTypeData.Table1 track by v.Id" class="form-control" ng-model="v" ng-change="CardTypeData(v);">
+                                                                       <option value="">All</option>
+                                                                   </select>
+                                                               </div>
+                                                           </div>
+
+                                                           <div class="row mbm">
+                                                               <div style="text-align:right">
+                                                                   <label for="selCountry" class="col-md-4 control-label" style="color:red;">CardCategory:<span class='require'>*</span></label>
+                                                               </div>
+
+                                                               <div class="col-md-6">
+                                                                   <select ng-options="b.CardCategory for b in CategoriesLists.Table1 track by b.Id" class="form-control" ng-model="b" ng-change="GetCaetegoriesLists(b);">
+                                                                       <option value="">All</option>
+                                                                   </select>
+                                                               </div>
+                                                           </div>
+                                                           <div class="form-actions">
+                                                               <div class="col-md-offset-3 col-md-9">
+                                                                   <button class="btn btn-green" type="button" ng-click="save(Cards);">Save</button>
+                                                                   <button class="btn btn-primary" type="button" ng-click="save(c);">Save</button>
+
+                                                                   <a href="CardsList.html" class="btn btn-primary">Cancel</a>
+                                                               </div>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                              </div>-->
+
+                                    <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal-header-primary">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                    <h4 id="modal-header-primary-label" class="modal-title">Add New Card Data</h4>
+                                                </div>
+                                                <div class="modal-body" ng-model="list">
+
+                                                    <div class="row mbm">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group has-success" style="text-align:right">
+                                                                <label for="Name" class="control-label" style="color:red;">CardNumber:<span class='require'>*</span></label>
                                                             </div>
-                                                            <div class="row mbm">
-                                                                <div class="col-md-12">
-
-                                                                    <div class="col-md-3">
-                                                                        <label for="Description" class=" control-label" style="color:red;">Customer: <span class='require'>*</span></label>
-                                                                        <div>
-
-                                                                            <select ng-options="jc.Client for jc in Customers track by jc.Id" ng-model="jc" ng-value="jc.Id" style="width:100%">
-                                                                                <option value="">Select</option>
-                                                                            </select>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <label for="Description" class=" control-label" style="color:red;">Location:<span class='require'>*</span></label>
-                                                                        <div>
-                                                                            <select ng-options="jl.name for jl in Locations track by jl.id" ng-model="jl" ng-value="jl.LocationID" style="width:100%">
-                                                                                <option value="">Select</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <label for="Description" class=" control-label" style="color:red;">Customer POC:<span class='require'>*</span></label>
-                                                                        <div>
-                                                                            <input id="inputCustomerPOC" type="text" ng-model="currJob.CustPOC" class="form-control" /><span class="help-block"></span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <label for="Description" class=" control-label">Transaction Type:</label>
-                                                                        <div>
-                                                                            <input id="inputCustomerPOC" type="text" ng-model="currJob.JobType" class="form-control" /><span class="help-block"></span>
-
-                                                                        </div>
-                                                                    </div>
-
-
-                                                                </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="list.CardNumber" /></div>
                                                             </div>
-
-                                                            <div class="row mbm">
-                                                                <div class="col-md-12">
-                                                                    <div class="col-md-3">
-                                                                        <label for="Description" class=" control-label" style="color:red;">To date:<span class='require'>*</span></label>
-                                                                        <div>
-                                                                            <!--<input id="inputActEndDt" placeholder="mm-dd-yyyy" type="date" ng-model="currJob.EstEndDt" class="form-control" /><span class="help-block"></span>-->
-
-                                                                            <div data-date-format="mm/dd/yyyy" style="width:100%" class="input-group date datepicker-filter mbs col-md-6"><input type="text" placeholder="mm/dd/yyyy" class="form-control" ng-model="currJob.EstEndDt" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <label for="selCountry" class=" control-label">From date:</label>
-                                                                        <div>
-                                                                            <!--<input id="inputActEndDt" type="date" ng-model="currJob.ActEndDt" class="form-control" /><span class="help-block"></span>-->
-
-                                                                            <div data-date-format="mm/dd/yyyy" style="width:100%" class="input-group date datepicker-filter mbs col-md-6"><input type="text" placeholder="mm/dd/yyyy" class="form-control" ng-model="currJob.ActualEndDt" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span></div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="form-actions">
-                                                                <div style="text-align:center">
-                                                                    <button ng-disabled="j==null || isSuperUser == 0" class="btn btn-green" ng-click="saveJobDetails(currJob, 'U')">Save</button>
-                                                                    &nbsp;
-                                                                    <button type="button" class="btn btn-danger" ng-click="getJobDetails(currJob.ID)">Cancel</button>
-                                                                </div>
-                                                            </div>
-
-
                                                         </div>
                                                     </div>
 
+                                                    <div class="row mbm">
+                                                        <div style="text-align:right">
+                                                            <label for="CardModel" class="col-md-4 control-label" style="color:red;">CardModel:<span class='require'>*</span></label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <select ng-options="f.Name  for f in cardmodel track by f.Id" class="form-control" ng-model="list.CardModel" id="test1">
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+                                                        {{list.CardModel}}
+                                                    </div>
+
+
+                                                    <div class="row mbm">
+                                                        <div style="text-align:right">
+
+                                                            <label for="CardType" class="col-md-4 control-label" style="color:red;">CardType:<span class='require'>*</span></label>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <select ng-options="v.Name for v in cardtype track by v.Id" class="form-control" ng-model="list.CardType">
+                                                                <option value="">All</option>
+
+                                                            </select>
+                                                        </div>
+                                                        {{list.CardType}}
+                                                    </div>
+
+                                                    <div class="row mbm">
+                                                        <div style="text-align:right">
+                                                            <label for="CardCategory" class="col-md-4 control-label" style="color:red;">CardCategory:<span class='require'>*</span></label>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+
+                                                            <select ng-options="b.Name for b in cardcat track by b.Id" class="form-control" ng-model="list.CardCategory">
+                                                                <option value="">All</option>
+                                                            </select>
+                                                        </div>
+                                                        {{list.CardCategory}}
+                                                    </div>
+                                                    <div class="form-actions">
+                                                        <div class="col-md-offset-3 col-md-9">
+                                                            <button class="btn btn-green" type="button" data-dismiss="modal" ng-click="saveNew(list,'I');">Save</button>
+                                                            <a href="CardsList.html" data-dismiss="modal" class="btn btn-primary">Cancel</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </iv>
+                                    </div>
+                                </div>
+
+                                <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                    <thead>
+                                        <tr>
+                                            <th>CardNumber</th>
+                                            <th>CardType </th>
+                                            <th>CardModel</th>
+                                            <th>CardCategory</th>
+                                            <th>StatusId</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="j in  CardListData|filter:{CardCategory:s.Name}">
+                                            <td>{{ j.CardNumber }}</td>
+                                            <td>{{ j.CardType }} </td>
+                                            <td>{{ j.CardModel }}</td>
+                                            <td>{{ j.CardCategory }}</td>
+                                            <td>{{ j.StatusId }}</td>
+                                            <td>
+                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="CardList(j);">
+                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                    Edit
+                                                </button>
+                                            </td>
+                                            <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(R);"><i class="fa fa-trash-o"></i></a></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--END CONTENT-->
-
             </div>
-            <!--END PAGE WRAPPER-->
-            <!--BEGIN FOOTER-->
-            <div id="footer">
-                <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
-            </div>
-            <!--END FOOTER-->
         </div>
+        <!--<div style="width: 15%; float: left; padding: 5px; " ng-repeat="j in  CardList | filter:{StatusId:'Active'||'!'}">
+            <div class="panel panel-dark" style="background-color: green; min-height:100px">
+
+                <a href="CardDetails.html?Cardid={{j.Id}}">
+
+                    <div class="panel-body" ng-style="j.StatusId">
+                        <span style="text-decoration-color: white"><font color="white"> {{j.CardName}}</font></span>
+                        <br /><span style="text-decoration-color: white"><font color="white"> CardType: {{j.CardType}}</font></span>
+                    </div>
+                </a>
+            </div>
+        </div>-->
+    </div>
+    <!---<h3 ng-show="pend.length != 0">Pending Cards</h3>-->
+    </div>
+    <!--BEGIN FOOTER-->
+    <div id="footer">
+        <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
     </div>
 
     </div>
+    </div>
+
+    </div>
+    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+        <div class="modal-header">
+            <h3 class="modal-title">Save confirmation!</h3>
+        </div>
+        <div class="modal-body">
+            <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+            {{mssg}}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </script>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!--END PAGE WRAPPER-->
+    <!--BEGIN FOOTER-->
+    <!----  <div id="footer">
+          <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+      </div>
+      <!--END FOOTER-->
+    ---->
+
+
 
     <div id="newPO" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
         <div class="modal-dialog">
@@ -742,8 +839,6 @@
     <script src="js/main.js"></script>
 
     <script src="js/angular.js"></script>
-
-
     <script src="js/libs/angular-route.js"></script>
     <script src="js/libs/angular-ui-router.js"></script>
     <script src="js/libs/ocLazyLoad.js"></script>
@@ -759,7 +854,7 @@
     <script src="js/charts-highchart-line.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
+    <script src="js/CardsList.js"></script>
 
 </body>
 

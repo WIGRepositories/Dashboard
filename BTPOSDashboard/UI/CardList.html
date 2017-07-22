@@ -28,7 +28,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl" ng-init="GetDashboardDS();" ng-model="dashboardDS">
+<body ng-app="myApp" ng-init="init();" ng-controller="myCtrl" ng-model="dashboardDS">
 
     <!--BEGIN THEME SETTING-->
     <!--BEGIN BACK TO TOP-->
@@ -155,7 +155,7 @@
 
                         </li>
                     </ul>
-                    </li>
+
                     <li>
                         <a href="#">
                             <i class="fa fa-truck">
@@ -293,12 +293,9 @@
                                 </ul>
                             </li>
                             <li><a href="BlockList.html" data-toggle="tooltip" data-placement="right" title="Details of BlockList"><i class="fa fa-briefcase"></i><span class="submenu-title">Block List</span></a></li>
-
-
                         </ul>
                     </li>
 
-                    </li>
                     <li>
                         <a href="#">
                             <i class="fa fa-gavel">
@@ -310,8 +307,6 @@
                             <li><a href="EditHistory.html" data-toggle="tooltip" data-placement="right" title="Details of EditHistory"><i class="fa fa-briefcase"></i><span class="submenu-title">Edit History</span></a></li>
                             <li><a href="paymentHistory.html" data-toggle="tooltip" data-placement="right" title="Details of paymentHistory"><i class="fa fa-briefcase"></i><span class="submenu-title">Payment History</span></a></li>
                             <li><a href="FAQs.html" data-toggle="tooltip" data-placement="right" title="Details of FAQs"><i class="fa fa-briefcase"></i><span class="submenu-title">FAQs</span></a></li>
-
-
                         </ul>
 
                     </li>
@@ -389,7 +384,6 @@
 
                         </ul>
                     </li>
-
                     <li>
                         <a href="#">
                             <i class="fa fa-send-o fa-fw">
@@ -402,21 +396,19 @@
                             <li><a href="CardUser.html" data-toggle="tooltip" data-placement="right" title="Details of Admin reports"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">CardUser</span></a></li>
                             <li><a href="CardTransaction.html" data-toggle="tooltip" data-placement="right" title="Details of Trouble ticket reports"><i class="fa fa-filter"></i><span class="submenu-title">CardTransaction</span></a></li>
                             <li><a href="CardTrasactionDetails.html" data-toggle="tooltip" data-placement="right" title="Details of Fleet"><i class="fa fa-filter"></i><span class="submenu-title">CardTrasactionDetails</span></a></li>
+                            <li><a href="CardUserList.html" data-toggle="tooltip" data-placement="right" title="Details of Fleet"><i class="fa fa-filter"></i><span class="submenu-title">CardUserList</span></a></li>
                         </ul>
                     </li>
 
 
-
-
-                    </ul>
                 </div>
             </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
             <div id="page-wrapper">
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-                    <div class="page-header pull-left">
-                        <div class="page-title">Dashboard</div>
-                    </div>
+                    <!------  <div class="page-header pull-left">
+                          <div class="page-title">Dashboard</div>
+                      </div>---->
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a href="#">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
                         <li><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
@@ -424,285 +416,300 @@
                     <div class="clearfix"></div>
                 </div>
                 <!--END TITLE & BREADCRUMB PAGE--><!--BEGIN CONTENT-->
-               
                 <div class="page-content">
                     <div id="table-action" class="row">
                         <div class="col-lg-12">
+
                             <div id="tableactionTabContent" class="tab-content">
                                 <div id="table-table-tab" class="tab-pane fade in active">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div class="row mbm">
-                                                <div class="col-md-3" style="text-align:left">
-                                                    EffectiveFrom: <select ng-options="s.name for s in Locations track by s.id" ng-model="s" ng-change="GetCardListByCategory()" style="width:60%">
-                                                        <option value="">All</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3" style="text-align:left">
-                                                    EffectiveTo:  <select ng-options="js.Name for js in jobStatus|filter:{Id:'!9'} track by js.Id" ng-model="a" ng-change="GetCardListByCategory()" style="width:60%">
-                                                                  <option value="">All</option>
-                                                                  </select>
-                                                </div>
-                                                <div class="col-md-3" style="text-align:left">
-                                                    CardCategory <select ng-options="c.Client  for c in Customers track by c.Id" ng-model="c" ng-change="GetCardListByCategory()" style="width:60%">
-                                                                 <option value="">All</option>
-                                                                 </select>
-                                                </div>
-                                                <div class="col-md-3" style="text-align:left">
-                                                    <button ng-disabled="isSuperUser == 0 && CanCreate == 0" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm" style="float: right; margin: 10px;">Add CardData</button>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-
-                                                <div class="container-fliud">
-
-                                                    <!--<div class="row">
-                                            <h3 ng-show="act.length != 0">Active jobs</h3>
-                                            <div style="width: 15%; float: left; padding: 5px; " ng-repeat="j in  jobsList1 | filter:{Status:'Active'||'!'}">
-                                                <div class="panel panel-dark" style="background-color: green; min-height:100px">
-
-                                                    <a href="JobDetails.html?jobId={{j.ID}}">
-
-                                                        <div class="panel-body" ng-style="j.Status">
-                                                            <span style="text-decoration-color: white"><font color="white"> {{j.Name}}</font></span>
-                                                            <br /><span style="text-decoration-color: white"><font color="white"> Location: {{j.Location}}</font></span>
+                                            <div class="table-container">
+                                                <!--<div class="row mbm">
+                                                <div class="col-lg-6">
+                                                        <label for="Date" class="control-label">FromDate:<span class='require'></span></label>
+                                                        <div data-date-format="dd/mm/yyyy" class="col-md-6 input-group date datepicker-filter mbs ">
+                                                            <input type="date"
+                                                                   name="dateField"
+                                                                   ng-model="dt.FromDate"
+                                                                   ng-min="'2015-01-20'"
+                                                                   ng-max="'2016-01-20'" class=" form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>-->
-                                                    <!--<h3 ng-show="pend.length != 0">Pending jobs</h3>-->
+                                                    </div>
+                                                <div class="col-lg-6">
+                                                <label for="Name" class="control-label">ToDate:<span class='require'></span></label>
+                                                      <div data-date-format="dd/mm/yyyy" class="col-md-6 input-group date datepicker-filter mbs">
+                                                          <input type="date"
+                                                                 name="dateField"
+                                                                 ng-model="dt.ToDate"
+                                                                 ng-min="'2015-01-20'"
+                                                                 ng-max="'2016-01-20'" class="form-control" /><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                      </div>
+                                                </div>-->
 
-                                                    <table class="table table-bordered table-advanced tablesorter">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>CardNo#</th>
-                                                                <th>CardName</th>
-                                                                <th>CardType#</th>
-                                                                <th>CardModel</th>
-                                                                <th>CardCategory</th>
-                                                                <th>Customer</th>
-                                                                <th>EffectiveFrom</th>
-                                                                <th>EffectiveTo</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="J in jobsList1|filter:{StatusId :'!9'}" ng-style="(J.StatusId == '7') ? {'background-color':'#F2DEDE'}:(J.StatusId == '8') ?{'background-color':'#DFF0D8'}:''">
-                                                                <td><a href="JobDetails.html?jobId={{J.ID}}"><font color="blue"> <u> {{J.JobID}}</u></font></a></td>
-                                                                <td>{{J.CardNo}}</td>
-                                                                <td>{{J.CardName}}</td>
-                                                                <td>{{J.CardType}}</td>
-                                                                <td>{{J.CardModel}}</td>
-                                                                <td>{{J.CardCategory}}</td>
-                                                                <td>{{J.Customer}}</td>
-                                                                <td>{{J.EffectiveFrom | date:'MM-dd-yyyy'}}</td>
-                                                                <td>{{J.EffectiveTo | date:'MM-dd-yyyy'}}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                                    <!--<div class="panel panel-dark" style="min-height: 100px" ng-style="(j.StatusId == '7') ? {'background-color':'#F2DEDE'}:(j.StatusId == '8') ?{'background-color':'GREEN'}:''">
-
-                                            <a href="JobDetails.html?jobId={{j.ID}}">
-
-                                                <div class="panel-body" ng-style="j.Status">
-                                                    <span style="text-decoration-color: white"><font color="white"> {{j.Name}}</font></span>
-                                                    <br /><span style="text-decoration-color: white"><font color="white"> Location: {{j.Location}}</font></span>
-                                                </div>
-                                            </a>
-                                        </div>-->
-
-                                                </div>
-
-                                            </div>
+                                                    <div class="col-md-6">
+                                                        CardCategory:<select ng-options="s.Name for s in CategoriesLists track by s.id" ng-model="s" ng-change="GetCategoriesLists(s)" id="test1">
+                                                                     <option value="">Select</option>
+                                                                     </select> 
+                                                    </div> 
+                                                    <div class="col-md-6">
+                                                        <br /> 
+                                                        <button type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" ng-click="GetAllCardOptions()"> Add New Card Data</button><br /><br />
+                                                   </div>
+                                               </div>
+                                               </div>
                                         </div>
-                                    </div>
-                                </div>
+
+
+                                                <!-------------------------------------------------------------------------------AddNewCardData----------------------------------------------------->
+                              
+                                        
+                                        
+                                         <!--<div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                         <div class=" modal-dialog modal-lg">
+                                         <div class="modal-content">
+                                         <div class="modal-header modal-header-primary">
+                                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                               <h5 id="modal-header-primary-label" class="modal-title">Edit Fleet Details</h5>
+                                                    </div>
+
+                                                            <div class="modal-body" ng-model="CardListNew">
+                                                            <div class="row mbm">
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group has-success" style="text-align:right">
+                                                                  <label for="CardNumber" class="control-label" style="color:red;">CardNumber:<span class='require'>*</span></label>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                             <div class="form-group">
+                                                               <div class="input-icon right">
+                                                                    <input type="text" class="form-control" id="cName" ng-model="CardListNew.CardNumber" />
+                                                               </div>
+                                                               </div>
+                                                                   </div>
+                                                                </div>
+
+                                                                <div class="row mbm">
+                                                                    <div style="text-align:right">
+                                                                        <label for="code" class="col-md-4 control-label" style="color:red;">CardModel:<span class='require'>*</span></label>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="f.CardModel for f in CardModelData.Table1 track by f.Id" class="form-control" ng-model="f" ng-change="CardModelData(f);" id="test1">
+                                                                            <option value="">All</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="row mbm">
+                                                                    <div style="text-align:right">
+
+                                                                        <label for="selCountry" class="col-md-4 control-label" style="color:red;">CardType:<span class='require'>*</span></label>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="v.CardType for v in CardTypeData.Table1 track by v.Id" class="form-control" ng-model="v" ng-change="CardTypeData(v);">
+                                                                            <option value="">All</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row mbm">
+                                                                    <div style="text-align:right">
+                                                                        <label for="selCountry" class="col-md-4 control-label" style="color:red;">CardCategory:<span class='require'>*</span></label>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <select ng-options="b.CardCategory for b in CategoriesLists.Table1 track by b.Id" class="form-control" ng-model="b" ng-change="GetCaetegoriesLists(b);">
+                                                                            <option value="">All</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="col-md-offset-3 col-md-9">
+                                                                        <button class="btn btn-green" type="button" ng-click="save(Cards);">Save</button>
+                                                                        <button class="btn btn-primary" type="button" ng-click="save(c);">Save</button>
+
+                                                                        <a href="CardsList.html" class="btn btn-primary">Cancel</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   </div>-->
+
+                                                <div id="Modal-header-new" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header modal-header-primary">
+                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                                                                <h4 id="modal-header-primary-label" class="modal-title">Add New Card Data</h4>
+                                                            </div>
+                                                            <div class="modal-body" ng-model="list">
+                                                               
+                                                            <div class="row mbm">
+                                                               <div class="col-md-6">
+                                                                    <div class="form-group has-success" style="text-align:right">
+                                                                        <label for="Name" class="control-label" style="color:red;">CardNumber:<span class='require'>*</span></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <div class="input-icon right"><input type="text" class="form-control" id="cName" ng-model="list.CardNumber" /></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="CardModel" class="col-md-4 control-label" style="color:red;">CardModel:<span class='require'>*</span></label>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="f.Name  for f in cardmodel track by f.Id" class="form-control" ng-model="list.CardModel"  id="test1">
+                                                                                <option value="">All</option>
+                                                                            </select>
+                                                                        </div>
+                                                                {{list.CardModel}}
+                                                              </div>
+
+
+                                                             <div class="row mbm">
+                                                                        <div style="text-align:right">
+
+                                                                            <label for="CardType" class="col-md-4 control-label" style="color:red;">CardType:<span class='require'>*</span></label>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <select ng-options="v.Name for v in cardtype track by v.Id" class="form-control" ng-model="list.CardType">
+                                                                                <option value="">All</option>
+                                                                              
+                                                                            </select>
+                                                                        </div>
+                                                                                     {{list.CardType}}
+                                                              </div>
+
+                                                             <div class="row mbm">
+                                                                        <div style="text-align:right">
+                                                                            <label for="CardCategory" class="col-md-4 control-label" style="color:red;">CardCategory:<span class='require'>*</span></label>
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+
+                                                                            <select ng-options="b.Name for b in cardcat track by b.Id" class="form-control" ng-model="list.CardCategory">
+                                                                                <option value="">All</option>
+                                                                            </select>
+                                                                        </div>
+                                                                 {{list.CardCategory}}
+                                                               </div>
+                                                                 <div class="form-actions">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button class="btn btn-green" type="button" data-dismiss="modal" ng-click="saveNew(list,'I');">Save</button>
+                                                                            <a href="CardsList.html" data-dismiss="modal" class="btn btn-primary">Cancel</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                
+                                    <table class="table table-hover table-striped table-bordered table-advanced tablesorter">
+                                    <thead>
+                                        <tr>
+                                            <th>CardNumber</th>
+                                            <th>CardType </th>
+                                            <th>CardModel</th>
+                                            <th>CardCategory</th>
+                                            <th>StatusId</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="j in  CardListData|filter:{CardCategory:s.Name}">
+                                            <td>{{ j.CardNumber }}</td>
+                                            <td>{{ j.CardType }} </td>
+                                            <td>{{ j.CardModel }}</td>
+                                            <td>{{ j.CardCategory }}</td>
+                                            <td>{{ j.StatusId }}</td>
+                                            <td>
+                                                <button type="button" data-target="#Modal-header-primary" data-toggle="modal" class="btn btn-default btn-xs" ng-click="CardList(j);">
+                                                    <i class="fa fa-edit"></i>&nbsp;
+                                                    Edit
+                                                </button>
+                                            </td>
+                                            <td><div class="col-md-3 col-sm-4"><a ng-click="testdel(R);"><i class="fa fa-trash-o"></i></a></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
-                <div>
-                    <h3 class="mtn">License Details</h3>
-
-                    <div class="alert alert-danger" style="grid-row-align:end">No License Details to show</div>
-
-                    <span class="label label-sm label-info" ng-show="dashboardDS.Table3.length > 5"><a style=" color:white" href="LicenseDetails.html">More...</a></span>
-                </div>
-                <div style="width:100%;">
-                    <div class="tab-content" style="width:49%;float:left; ">
-                        <h3><b>Alerts</b></h3>
-                        <div id="home" class="tab-pane fade in active">
-                            <div class="list-group mail-box" ng-repeat="A in dashboardDS.Table1" ng-hide="dashboardDS.Table1.length == 0">
-                                <a href="#" class="list-group-item">
-                                    <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{A.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name"></span><span>{{A.LastName}}</span>&nbsp;<span style="font-size: 11px;" class="text-muted"></span>{{A.Message}}<span class="time-badge">{{A.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="alert alert-danger" ng-show="dashboardDS.Table1.length == 0">No Alerts to show</div>
-                        </br>
-                        <span class="label label-sm label-info" ng-show="dashboardDS.Table1.length > 5"><a style=" color:white" href="Alerts.html">More...</a></span>
-                    </div>
-
-                </div>
-                <div class="tab-content" style="width:49%;float:right; ">
-                    <h3><b>Notifications</b></h3>
-                    <div id="home" class="tab-pane fade in active">
-                        <div class="list-group mail-box" ng-repeat="N in dashboardDS.Table2" ng-hide="dashboardDS.Table2.length == 0">
-                            <a href="#" class="list-group-item">
-                                <input type="checkbox" /><span class="fa fa-star-o mrm mlm"></span>{{N.FirstName}}<span style="min-width: 120px; display: inline-block;" class="name">{{N.LastName}}</span><span>{{N.Message}}</span>&nbsp;  &nbsp;<span style="font-size: 11px;" class="text-muted"></span><span class="time-badge">{{N.Date}}</span><span class="pull-right mrl"><span class="glyphicon glyphicon-paperclip"></span></span>
-                            </a>
-
-                        </div>
-                    </div>
-                    <div class="alert alert-danger" ng-show="dashboardDS.Table2.length == 0">No Notifications to show</div><br />
-                    <!--<a style="float:right" href="Notifications.html" class="button" ng-click="label label-sm label-success">More...</a>-->
-                    <span class="label label-sm label-info" ng-show="dashboardDS.Table2.length > 5"><a style="color:white" href="Notifications.html">More...</a></span>
-
-                </div>
-
             </div>
         </div>
+     <!--<div style="width: 15%; float: left; padding: 5px; " ng-repeat="j in  CardList | filter:{StatusId:'Active'||'!'}">
+        <div class="panel panel-dark" style="background-color: green; min-height:100px">
 
-    </div>
+            <a href="CardDetails.html?Cardid={{j.Id}}">
 
-    <!--<div class="row" ng-hide="dashboardDS.Table.length == 0">
-        <div class="col-lg-12">
-            <div class="panel panel-violet">
-                <div class="panel-heading">
-                    BTPOS Tracking
-                    <div style="float:right;">
-                        <a id="btposstatus" style="color:white" ng-click="toggle()">Show</a>
-                    </div>
+                <div class="panel-body" ng-style="j.StatusId">
+                    <span style="text-decoration-color: white"><font color="white"> {{j.CardName}}</font></span>
+                    <br /><span style="text-decoration-color: white"><font color="white"> CardType: {{j.CardType}}</font></span>
                 </div>
-            </div>
-            <div ng-show="myVar">
-                <div><h3> BTPOS tracking</h3></div>
-                <div class="tab-content">
-                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-
-                    <div style='overflow: hidden; height: 400px; width: 100%;'>
-                        <div id='gmap_canvas' style='height: 400px; width:100% ;'></div>
-                        <style>
-                            #gmap_canvas img {
-                                max-width: none !important;
-                                background: none !important;
-                            }
-                        </style>
-                    </div>
-                    <a href='https://www.add-map.net/'>BT POS tracking</a>
-                    <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=19cc11156f11fadab1362a8ca4ecee14a47fc51d'></script>
-                    <script type='text/javascript'>
-                        /*function init_map()
-                        {
-                            var locations = [
-                               ['Bondi Beach', -33.890542, 151.274856, 4],
-                               ['Coogee Beach', -33.923036, 151.259052, 5],
-                               ['Cronulla Beach', -34.028249, 151.157507, 3],
-                               ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-                               ['Maroubra Beach', -33.950198, 151.259302, 1]
-                             ];
-
-
-                            var myOptions = { zoom: 12, center: new google.maps.LatLng(17.4493156, 78.41981340000007), mapTypeId: google.maps.MapTypeId.ROADMAP };
-                            map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-
-
-                          //  marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(17.4493156, 78.41981340000007) });
-                            infowindow = new google.maps.InfoWindow({ content: '<strong>google maps</strong><br>mothinagar<br>500018 hyderabad<br>' });
-                            google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); });
-
-
-                            var marker, i;
-                            for (i = 0; i < locations.length; i++)
-                            {
-                                marker = new google.maps.Marker({
-                                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                                    map: map
-                                });
-
-                                google.maps.event.addListener(marker, 'click', (function (marker, i)
-                                {
-                                    return function ()
-                                    {
-                                        infowindow.setContent(locations[i][0]);
-                                        infowindow.open(map, marker);
-                                    }
-                                })(marker, i));
-                            }
-
-
-                            infowindow.open(map, marker);
-
-
-                        } google.maps.event.addDomListener(window, 'load', init_map);
-                                                                                */
-
-                        var locations = [
-                               ['Bondi Beach', -17.8295, 31.0337, 4],
-                               ['Coogee Beach', -17.8295, 31.0358, 5],
-                               ['Cronulla Beach', -17.8295, 31.0345, 3],
-                               ['Manly Beach', -17.8295, 31.0331, 2],
-                               ['Maroubra Beach', -17.8295, 31.0331, 1]
-                        ];
-
-
-                        var map = new google.maps.Map(document.getElementById('gmap_canvas'), {
-                            zoom: 15,
-                            center: new google.maps.LatLng(-17.8252, 31.0335), //17.8252° S, 31.0335° E
-                            mapTypeId: google.maps.MapTypeId.ROADMAP
-                        });
-
-
-                        var infowindow = new google.maps.InfoWindow();
-
-
-                        var marker, i;
-
-
-                        for (i = 0; i < locations.length; i++) {
-                            marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                                map: map
-                            });
-
-
-                            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                                return function () {
-                                    infowindow.setContent(locations[i][0]);
-                                    infowindow.open(map, marker);
-                                }
-                            })(marker, i));
-                        }
-
-                    </script>
-                </div>
-
-
-            </div>
-
+            </a>
         </div>
-
     </div>-->
     </div>
-
-
-
-    <!--END CONTENT-->
-    </div>
-    <!--END PAGE WRAPPER-->
+    <!---<h3 ng-show="pend.length != 0">Pending Cards</h3>-->
+     </div>
     <!--BEGIN FOOTER-->
     <div id="footer">
         <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
     </div>
-    <!--END FOOTER-->
+
     </div>
     </div>
 
     </div>
+    <script type="text/ng-template" id="myModalContent.html" data-backdrop="static">
+
+        <div class="modal-header">
+            <h3 class="modal-title">Save confirmation!</h3>
+        </div>
+        <div class="modal-body">
+            <!--<ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>-->
+            {{mssg}}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </script>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!--END PAGE WRAPPER-->
+    <!--BEGIN FOOTER-->
+    <!----  <div id="footer">
+          <div class="copyright">2016 © Interbus - Smart Ticketing Dashboard portal</div>
+      </div>
+      <!--END FOOTER-->
+    ---->
+
+
 
     <div id="newPO" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal fade">
         <div class="modal-dialog">
@@ -833,10 +840,8 @@
     <!--LOADING SCRIPTS FOR PAGE-->
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
+    
     <script src="js/angular.js"></script>
-
-
     <script src="js/libs/angular-route.js"></script>
     <script src="js/libs/angular-ui-router.js"></script>
     <script src="js/libs/ocLazyLoad.js"></script>
@@ -845,14 +850,14 @@
     <script src="js/charts-highchart-line.js"></script>
     <script src="js/ui-bootstrap-tpls-1.3.3.js"></script>
     <script src="js/source.js"></script>
-
+    
 
     <script src="vendors/jquery-highcharts/highcharts.js"></script>
     <script src="vendors/jquery-highcharts/exporting.js"></script>
     <script src="js/charts-highchart-line.js"></script>
     <!--CORE JAVASCRIPT-->
     <script src="js/main.js"></script>
-
+    <script src="js/CardsList.js"></script>
 
 </body>
 

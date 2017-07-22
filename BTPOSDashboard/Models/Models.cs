@@ -5,6 +5,19 @@ using System.Web;
 
 namespace BTPOSDashboardAPI.Models
 {
+
+    public class CardUsers
+    {
+        public int CardType { get; set; }
+        public int CardNumber { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Emailid { get; set; }
+        public string MobileNo { get; set; }
+        public string Address { get; set; }
+    }
+    
     public class Alerts
     {
         public int Id { get; set; }
@@ -155,24 +168,24 @@ namespace BTPOSDashboardAPI.Models
     }
     public class UserLogin
     {
-        public int Id { set; get; }
-        public int UserId { set; get; }
-        public string LoginInfo { set; get; }
-        public string Passkey { set; get; }
-        public string Salt { set; get; }
-        public string Active { set; get; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string LoginInfo { get; set; }
+        public string Passkey { get; set; }
+        public string Salt { get; set; }
+        public string Active { get; set; }
 
     }
     public class userroles
     {
-        public int Id { set; get; }
-        public int UserId { set; get; }
-        public int CompanyId { set; get; }
-        public int RoleId { set; get; }
-        public int flag { set; get; }
-        public string Passkey { set; get; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int CompanyId { get; set; }
+        public int RoleId { get; set; }
+        public int flag { get; set; }
+        public string Passkey { get; set; }
 
-        public string insupdflag { set; get; }
+        public string insupdflag { get; set; }
 
     }
 
@@ -243,16 +256,16 @@ namespace BTPOSDashboardAPI.Models
 
     public class Routes
     {
-        public int Id { set; get; }
-        public string RouteName { set; get; }
-        public string Code { set; get; }
-        public string Description { set; get; }
-        public int Active { set; get; }
-        public decimal Distance { set; get; }
-        public string Source { set; get; }
-        public string Destination { set; get; }
-        public int SourceId { set; get; }
-        public int DestinationId { set; get; }
+        public int Id { get; set; }
+        public string RouteName { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
+        public int Active { get; set; }
+        public decimal Distance { get; set; }
+        public string Source { get; set; }
+        public string Destination { get; set; }
+        public int SourceId { get; set; }
+        public int DestinationId { get; set; }
     }
 
     public class Transaction
@@ -844,248 +857,300 @@ namespace BTPOSDashboardAPI.Models
 
     public class BOTPOSL
     {
-        public int Id { set; get; }
-        public int BTPOSid { set; get; }
-        public int licenseId { set; get; }
-        public DateTime FromDate { set; get; }
-        public DateTime EndDate { set; get; }
-        public DateTime NotificationDate { set; get; }
-        public int TransactionId { set; get; }
-        public DateTime RenewedOn { set; get; }
+        public int Id { get; set; }
+        public int BTPOSid { get; set; }
+        public int licenseId { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public DateTime NotificationDate { get; set; }
+        public int TransactionId { get; set; }
+        public DateTime RenewedOn { get; set; }
     }
     public class FleetOL
     {
-        public int Id { set; get; }
-        public int FleetOwnerId { set; get; }
-        public int LicenseId { set; get; }
-        public int Code { set; get; }
-        public DateTime FromDate { set; get; }
-        public DateTime EndDate { set; get; }
-        public DateTime NotificationDate { set; get; }
-        public int TransactionId { set; get; }
-        public DateTime RenewedOn { set; get; }
+        public int Id { get; set; }
+        public int FleetOwnerId { get; set; }
+        public int LicenseId { get; set; }
+        public int Code { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public DateTime NotificationDate { get; set; }
+        public int TransactionId { get; set; }
+        public DateTime RenewedOn { get; set; }
     }
     public class Payment
     {
-        public int Id { set; get; }
-        public int PaymentTypeId { set; get; }
-        public int Amount { set; get; }
-        public DateTime date { set; get; }
-        public int TransactionId { set; get; }
+        public int Id { get; set; }
+        public int PaymentTypeId { get; set; }
+        public int Amount { get; set; }
+        public DateTime date { get; set; }
+        public int TransactionId { get; set; }
     }
     public class Smsformat
     {
-        public int Id { set; get; }
-        public string message { set; get; }
-        public int Active { set; get; }
-        public string Desc1 { set; get; }
-        public string fromaddr { set; get; }
-        public string ToAddr { set; get; }
-        public int BTPOSGrpId { set; get; }
+        public int Id { get; set; }
+        public string message { get; set; }
+        public int Active { get; set; }
+        public string Desc1 { get; set; }
+        public string fromaddr { get; set; }
+        public string ToAddr { get; set; }
+        public int BTPOSGrpId { get; set; }
     }
     public class Gmailformat
     {
-        public int Id { set; get; }
-        public string message { set; get; }
-        public int Active { set; get; }
-        public string Desc1 { set; get; }
-        public string Fromaddr { set; get; }
-        public string Toaddrs { set; get; }
-        public int BTPOSGrpId { set; get; }
+        public int Id { get; set; }
+        public string message { get; set; }
+        public int Active { get; set; }
+        public string Desc1 { get; set; }
+        public string Fromaddr { get; set; }
+        public string Toaddrs { get; set; }
+        public int BTPOSGrpId { get; set; }
     }
     public class BTPOSOPRTR
     {
-        public int Id { set; get; }
-        public int BTPOSId { set; get; }
-        public int Userid { set; get; }
-        public int Active { set; get; }
+        public int Id { get; set; }
+        public int BTPOSId { get; set; }
+        public int Userid { get; set; }
+        public int Active { get; set; }
     }
     public class BTPOSLoc
     {
-        public int Id { set; get; }
-        public int BTPOSid { set; get; }
-        public int Xcord { set; get; }
-        public int Ycord { set; get; }
-        public TimeSpan time { set; get; }
-        public DateTime date { set; get; }
+        public int Id { get; set; }
+        public int BTPOSid { get; set; }
+        public int Xcord { get; set; }
+        public int Ycord { get; set; }
+        public TimeSpan time { get; set; }
+        public DateTime date { get; set; }
 
     }
     public class Address
     {
-        public int Id { set; get; }
-        public int cityid { set; get; }
-        public int stateid { set; get; }
-        public int countryid { set; get; }
-        public string street1 { set; get; }
-        public string street2 { set; get; }
-        public int zipcodeid { set; get; }
-        public string City { set; get; }
-        public string country { set; get; }
-        public string State { set; get; }
-        public string zipcode { set; get; }
+        public int Id { get; set; }
+        public int cityid { get; set; }
+        public int stateid { get; set; }
+        public int countryid { get; set; }
+        public string street1 { get; set; }
+        public string street2 { get; set; }
+        public int zipcodeid { get; set; }
+        public string City { get; set; }
+        public string country { get; set; }
+        public string State { get; set; }
+        public string zipcode { get; set; }
     }
     public class SMSEmailSettings
     {
-        public int AlertTypeId { set; get; }
-        public string fromaddress { set; get; }
-        public int Id { set; get; }
-        public string smsemailtext { set; get; }
-        public string toaddres { set; get; }
+        public int AlertTypeId { get; set; }
+        public string fromaddress { get; set; }
+        public int Id { get; set; }
+        public string smsemailtext { get; set; }
+        public string toaddres { get; set; }
     }
     public class PrinterData
     {
-        public int BtPOSidId { set; get; }
-        public int Id { set; get; }
-        public string ipconfig { set; get; }
-        public string printeddata { set; get; }
-        public string transactionId { set; get; }
+        public int BtPOSidId { get; set; }
+        public int Id { get; set; }
+        public string ipconfig { get; set; }
+        public string printeddata { get; set; }
+        public string transactionId { get; set; }
     }
     public class SecurityLog
     {
-        public int Id { set; get; }
-        public string logdata { set; get; }
-        public DateTime logedon { set; get; }
-        public string source { set; get; }
+        public int Id { get; set; }
+        public string logdata { get; set; }
+        public DateTime logedon { get; set; }
+        public string source { get; set; }
     }
     public class ReportsFields
     {
-        public string fieldName { set; get; }
-        public int Id { set; get; }
-        public string ReportTypeId { set; get; }
+        public string fieldName { get; set; }
+        public int Id { get; set; }
+        public string ReportTypeId { get; set; }
     }
     public class SystemLog
     {
-        public int Id { set; get; }
-        public string logdata { set; get; }
-        public DateTime logedon { set; get; }
-        public string source { set; get; }
+        public int Id { get; set; }
+        public string logdata { get; set; }
+        public DateTime logedon { get; set; }
+        public string source { get; set; }
     }
     public class UserLog
     {
-        public int Id { set; get; }
-        public string logdata { set; get; }
-        public DateTime logedon { set; get; }
-        public string source { set; get; }
-        public int userid { set; get; }
+        public int Id { get; set; }
+        public string logdata { get; set; }
+        public DateTime logedon { get; set; }
+        public string source { get; set; }
+        public int userid { get; set; }
     }
     public class ErrorCodes
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string Desc1 { set; get; }
-        public string ErrrorCode { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string Desc1 { get; set; }
+        public string ErrrorCode { get; set; }
+        public int Typegrpid { get; set; }
     }
     public class ReportsTypes
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string Desc1 { set; get; }
-        public string ReportType { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string Desc1 { get; set; }
+        public string ReportType { get; set; }
+        public int Typegrpid { get; set; }
+    }
+
+    public class Cards
+    {
+        public int Id { get; set; }
+        public int CardNumber { get; set; }
+        public string CardName { get; set; }
+        public string CardType { get; set; }
+        public string CardModel { get; set; }
+        public string CardCategory { get; set; }
+        public string Customer { get; set; }
+        public DateTime EffectiveFrom { get; set; }
+        public DateTime EffectiveTo { get; set; }
+        public int StatusId { get; set; }
+
+        public string flag { get; set; }
+
+        public int id { get; set; }
+
+        public int UserId { get; set; }
+
+        public int CardStatus { get; set; }
+
+        public string PIN { get; set; }
+
+        public int CVV2 { get; set; }
+
+        public int CVV { get; set; }
+
+        public DateTime ValidTillDate { get; set; }
+
+        public DateTime EstimatedEndDate { get; set; }
+
+        public DateTime EstimatedStartDate { get; set; }
+
+        public int ReferenceId { get; set; }
+
+        public string NameOnCard { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string EmaiId { get; set; }
+
+        public int  MobileNumber { get; set; }
+
+        public string Address { get; set; }
+
+        public string MiddleName { get; set; }
+
+        public object EmailId { get; set; }
     }
     public class CardStatuses
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string CardStatus { set; get; }
-        public string Desc1 { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string CardStatus { get; set; }
+        public string Desc1 { get; set; }
+        public int Typegrpid { get; set; }
     }
 
     public class ExpensesClass
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string ExpenseType { set; get; }
-        public string Desc1 { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string ExpenseType { get; set; }
+        public string Desc1 { get; set; }
+        public int Typegrpid { get; set; }
     }
     public class NOCBtPosStatus
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string NOCBtPostatus { set; get; }
-        public string Desc1 { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string NOCBtPostatus { get; set; }
+        public string Desc1 { get; set; }
+        public int Typegrpid { get; set; }
     }
     public class CardTypes
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string Cardtype { set; get; }
-        public string Desc1 { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string Cardtype { get; set; }
+        public string Desc1 { get; set; }
+        public int Typegrpid { get; set; }
     }
     public class Types1
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string GroupName { set; get; }
-        public string Desc1 { set; get; }
-        public int Key1 { set; get; }
-        public string Name { set; get; }
-        public int Typegrpid { set; get; }
-        public string Value { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string GroupName { get; set; }
+        public string Desc1 { get; set; }
+        public int Key1 { get; set; }
+        public string Name { get; set; }
+        public int Typegrpid { get; set; }
+        public string Value { get; set; }
     }
     public class RouteType
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string Routetype { set; get; }
-        public string Desc1 { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string Routetype { get; set; }
+        public string Desc1 { get; set; }
+        public int Typegrpid { get; set; }
     }
     public class AccessType
     {
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string Accesstype { set; get; }
-        public string Desc1 { set; get; }
-        public int Typegrpid { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string Accesstype { get; set; }
+        public string Desc1 { get; set; }
+        public int Typegrpid { get; set; }
     }
     public class LicenseKeyFile
     {
-        public int Id { set; get; }
-        public int BTPOSid { set; get; }
-        public string EncrptyKey1 { set; get; }
-        public string EncrptyKey2 { set; get; }
-        public string keyfilename { set; get; }
+        public int Id { get; set; }
+        public int BTPOSid { get; set; }
+        public string EncrptyKey1 { get; set; }
+        public string EncrptyKey2 { get; set; }
+        public string keyfilename { get; set; }
     }
     public class FirmwareDetails
     {
-        public int Id { set; get; }
-        public int BTPOSid { set; get; }
-        public string Desc1 { set; get; }
-        public string FirmwareVersion { set; get; }
-        public string Ipconfig { set; get; }
+        public int Id { get; set; }
+        public int BTPOSid { get; set; }
+        public string Desc1 { get; set; }
+        public string FirmwareVersion { get; set; }
+        public string Ipconfig { get; set; }
     }
     public class Users
     {
-        public int Id { set; get; }
-        public string FirstName { set; get; }
-        public string LastName { set; get; }
-        public string MiddleName { set; get; }
-        public string EmpNo { set; get; }
-        public string Email { set; get; }
-        public string ContactNo1 { set; get; }
-        public string ContactNo2 { set; get; }
-        public int? mgrId { set; get; }
-        public int ManagerName { set; get; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MiddleName { get; set; }
+        public string EmpNo { get; set; }
+        public string Email { get; set; }
+        public string ContactNo1 { get; set; }
+        public string ContactNo2 { get; set; }
+        public int? mgrId { get; set; }
+        public int ManagerName { get; set; }
         public string Country { get; set; }
         public string ZipCode { get; set; }
         public string State { get; set; }
-        public int StateId { set; get; }
-        public int CountryId { set; get; }
+        public int StateId { get; set; }
+        public int CountryId { get; set; }
         public int Active { get; set; }
         public int GenderId { get; set; }
-        public string UserType { set; get; }
-        public int UserTypeId { set; get; }      
-        public string Address { set; get; }
-        public string AltAdress { set; get; }
+        public string UserType { get; set; }
+        public int UserTypeId { get; set; }      
+        public string Address { get; set; }
+        public string AltAdress { get; set; }
         public string Photo { get; set; }             
-        public string Role { set; get; }
-        public int RoleId { set; get; }
+        public string Role { get; set; }
+        public int RoleId { get; set; }
         public DateTime? RFromDate { get; set; }
         public DateTime? RToDate { get; set; }
         public string DUserName { get; set; }
@@ -1093,8 +1158,8 @@ namespace BTPOSDashboardAPI.Models
         public string WUserName { get; set; }
         public string WPassword { get; set; }
         public string insupdflag { get; set; }
-        public int companyId { set; get; }
-        public string Company { set; get; }
+        public int companyId { get; set; }
+        public string Company { get; set; }
      
     }
 
@@ -1470,13 +1535,13 @@ namespace BTPOSDashboardAPI.Models
 
     public class LicenseTypes
     {
-        public int Id { set; get; }
-        public string LicenseType { set; get; }
-        public string LicenseCode { set; get; }
-        public int LicenseCategoryId { set; get; }
-        public int Active { set; get; }        
-        public string Desc { set; get; }
-        public string LicenseCategory { set; get; }
+        public int Id { get; set; }
+        public string LicenseType { get; set; }
+        public string LicenseCode { get; set; }
+        public int LicenseCategoryId { get; set; }
+        public int Active { get; set; }        
+        public string Desc { get; set; }
+        public string LicenseCategory { get; set; }
         public DateTime? fromDate { get; set; }
         public DateTime? toDate { get; set; }
         public int LicenseId { get; set; }
@@ -1509,65 +1574,65 @@ namespace BTPOSDashboardAPI.Models
     public class LicenseTypes1
     {
        // public List<licenses> lltypes { get; set; }
-        public int Id { set; get; }
-        public int Active { set; get; }
-        public string LicenseType { set; get; }
-        public string Desc { set; get; }
-        public string LicenseCategory { set; get; }
-        public int LicenseCategoryId { set; get; }
-        public int LicenseId { set; get; }
-        public int RenewalFreqTypeId { set; get; }
+        public int Id { get; set; }
+        public int Active { get; set; }
+        public string LicenseType { get; set; }
+        public string Desc { get; set; }
+        public string LicenseCategory { get; set; }
+        public int LicenseCategoryId { get; set; }
+        public int LicenseId { get; set; }
+        public int RenewalFreqTypeId { get; set; }
 
-        public int RenewalFreq { set; get; }
-        public Decimal UnitPrice { set; get; }
-        public DateTime fromdate { set; get; }
+        public int RenewalFreq { get; set; }
+        public Decimal UnitPrice { get; set; }
+        public DateTime fromdate { get; set; }
 
-        public DateTime todate { set; get; }
+        public DateTime todate { get; set; }
 
-        public char insupddelflag { set; get; }
-        public string FeatureName { set; get; }
-        public string FeatureLabel { set; get; }
-        public string FeatureValue { set; get; }
+        public char insupddelflag { get; set; }
+        public string FeatureName { get; set; }
+        public string FeatureLabel { get; set; }
+        public string FeatureValue { get; set; }
     }
     public class licenses
     {
-        public int LicenseId { set; get; }
-        public int RenewalFreqTypeId { set; get; }
+        public int LicenseId { get; set; }
+        public int RenewalFreqTypeId { get; set; }
 
-        public int RenewalFreq { set; get; }
-        public Decimal UnitPrice { set; get; }
-        public DateTime fromdate { set; get; }
+        public int RenewalFreq { get; set; }
+        public Decimal UnitPrice { get; set; }
+        public DateTime fromdate { get; set; }
 
-        public DateTime todate { set; get; }        
+        public DateTime todate { get; set; }        
 
-        public char insupddelflag { set; get; }
-        public string Featurename { set; get; }
-        public string Featurelabel { set; get; }
-        public string Featurevalue { set; get; }
+        public char insupddelflag { get; set; }
+        public string Featurename { get; set; }
+        public string Featurelabel { get; set; }
+        public string Featurevalue { get; set; }
     }
     public class Inventory
     {
-        public int Active { set; get; }
-        public int availableQty { set; get; }
-        public string category { set; get; }
-        public string code { set; get; }
-        public string desc { set; get; }
-        public int InventoryId { set; get; }
-        public string name { set; get; }
-        public int PerUnitPrice { set; get; }
-        public int reorderpoint { set; get; }
-        public string subcat { set; get; }
+        public int Active { get; set; }
+        public int availableQty { get; set; }
+        public string category { get; set; }
+        public string code { get; set; }
+        public string desc { get; set; }
+        public int InventoryId { get; set; }
+        public string name { get; set; }
+        public int PerUnitPrice { get; set; }
+        public int reorderpoint { get; set; }
+        public string subcat { get; set; }
     }
     public class PurchaseOrder
     {
-        public int Id { set; get; }
-        public string PONum { set; get; }
-        public int TranscationId { set; get; }
-        public DateTime? Date { set; get; }
-        public decimal amount { set; get; }
-        public int itemId { set; get; }
-        public decimal Quantity { set; get; }
-        public int StatusId { set; get; }
+        public int Id { get; set; }
+        public string PONum { get; set; }
+        public int TranscationId { get; set; }
+        public DateTime? Date { get; set; }
+        public decimal amount { get; set; }
+        public int itemId { get; set; }
+        public decimal Quantity { get; set; }
+        public int StatusId { get; set; }
     }
     public class VehicleLayout
     {
@@ -1593,10 +1658,10 @@ namespace BTPOSDashboardAPI.Models
     public class reset
     {
 
-        public string UserName { set; get; }
-        public string OldPassword { set; get; }
-        public string NewPassword { set; get; }
-        public string ReenterNewPassword { set; get; }
+        public string UserName { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string ReenterNewPassword { get; set; }
 
     }
     public class FORouteFleetSchedule
@@ -1630,11 +1695,11 @@ namespace BTPOSDashboardAPI.Models
     public class ShoppingCart
     {
         public int Id { get; set; }
-        public string ItemName { set; get; }
-        public decimal UnitPrice { set; get; }
-        public int ItemId { set; get; }
+        public string ItemName { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int ItemId { get; set; }
 
-        // public string insupddelflag { set; get; }
+        // public string insupddelflag { get; set; }
 
     }
     public class BTPOSMoitoringPage

@@ -1,4 +1,4 @@
-// JavaScript source code
+// javaScript source code
 var myapp1 = angular.module('myApp', [])
 var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http) {
 

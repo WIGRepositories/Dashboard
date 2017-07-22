@@ -398,8 +398,8 @@
 
 
                                                     <div class="actions">
-                                                        <!----   <button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add TypeGroup</button>--->
-                                                        <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;">Add Type Group</button>
+                                                      <!----<button ng-disabled="Roleid != 1" type="button" data-target="#modal-header-primary" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float:right;margin:10px;">  Add TypeGroup</button>---->
+                                                        <button ng-disabled="Roleid != 1" type="button" data-target="#Modal-header-new" data-toggle="modal" class="btn btn-info btn-sm fa fa-plus" style="float: right; margin: 10px;"ng-click="saveNew(TypeGroups);">Add Type Group</button>
                                                     </div>
                                                     <div id="Modal-header-primary" tabindex="-1" role="dialog" aria-labelledby="modal-header-primary-label" aria-hidden="true" class="modal">
                                                         <div class="modal-dialog">
@@ -491,7 +491,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header modal-header-primary">
                                                                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
-                                                                <h4 id="modal-header-primary-label" class="modal-title">Add Type Group</h4>
+                                                                <h4 id="modal-header-primary-label" class="modal-title" ng-click="">Add Type Group</h4>
                                                             </div>
                                                             <div class="modal-body" ng-model="TypeGroups">
                                                                 <div class="row">

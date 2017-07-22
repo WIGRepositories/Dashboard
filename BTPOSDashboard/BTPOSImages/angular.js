@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.4.7
+ * @license AngularjS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -133,9 +133,9 @@ function minErr(module, ErrorConstructor) {
   concat: true,
   sliceArgs: true,
   bind: true,
-  toJsonReplacer: true,
-  toJson: true,
-  fromJson: true,
+  tojsonReplacer: true,
+  tojson: true,
+  fromjson: true,
   convertTimezoneToLocal: true,
   timezoneToOffset: true,
   startingTag: true,
@@ -148,7 +148,7 @@ function minErr(module, ErrorConstructor) {
   bootstrap: true,
   getTestability: true,
   snake_case: true,
-  bindJQuery: true,
+  bindjQuery: true,
   assertArg: true,
   assertArgFn: true,
   assertNotHasOwnProperty: true,
@@ -174,8 +174,8 @@ function minErr(module, ErrorConstructor) {
  * @description
  *
  * # ng (core module)
- * The ng module is loaded by default when an AngularJS application is started. The module itself
- * contains the essential components for an AngularJS application to function. The table below
+ * The ng module is loaded by default when an AngularjS application is started. The module itself
+ * contains the essential components for an AngularjS application to function. The table below
  * lists a high level breakdown of each of the services/factories, filters, directives and testing
  * components available within this core module.
  *
@@ -272,7 +272,7 @@ function isArrayLike(obj) {
   }
 
   // Support: iOS 8.2 (not reproducible in simulator)
-  // "length" in obj used to prevent JIT error (gh-11508)
+  // "length" in obj used to prevent jIT error (gh-11508)
   var length = "length" in Object(obj) && obj.length;
 
   if (obj.nodeType === NODE_TYPE_ELEMENT && length) {
@@ -384,7 +384,7 @@ function reverseParams(iteratorFn) {
  * A consistent way of creating unique IDs in angular.
  *
  * Using simple numbers allows us to generate 28.6 million unique ids per second for 10 years before
- * we hit number precision issues in JavaScript.
+ * we hit number precision issues in javaScript.
  *
  * Math.pow(2,53) / 60 / 60 / 24 / 365 / 10 = 28.6M
  *
@@ -581,8 +581,8 @@ function isDefined(value) {return typeof value !== 'undefined';}
  * @kind function
  *
  * @description
- * Determines if a reference is an `Object`. Unlike `typeof` in JavaScript, `null`s are not
- * considered to be objects. Note that JavaScript arrays are objects.
+ * Determines if a reference is an `Object`. Unlike `typeof` in javaScript, `null`s are not
+ * considered to be objects. Note that javaScript arrays are objects.
  *
  * @param {*} value Reference to check.
  * @returns {boolean} True if `value` is an `Object` but not `null`.
@@ -630,7 +630,7 @@ function isString(value) {return typeof value === 'string';}
  * This includes the "special" numbers `NaN`, `+Infinity` and `-Infinity`.
  *
  * If you wish to exclude these then you can use the native
- * [`isFinite'](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isFinite)
+ * [`isFinite'](https://developer.mozilla.org/en-US/docs/Web/javaScript/Reference/Global_Objects/isFinite)
  * method.
  *
  * @param {*} value Reference to check.
@@ -1000,8 +1000,8 @@ function shallowCopy(src, dst) {
  * * Both objects or values pass `===` comparison.
  * * Both objects or values are of the same type and all of their properties are equal by
  *   comparing them with `angular.equals`.
- * * Both values are NaN. (In JavaScript, NaN == NaN => false. But we consider two NaN as equal)
- * * Both values represent the same regular expression (In JavaScript,
+ * * Both values are NaN. (In javaScript, NaN == NaN => false. But we consider two NaN as equal)
+ * * Both values represent the same regular expression (In javaScript,
  *   /abc/ == /abc/ => false. But we consider two regular expressions as equal when their textual
  *   representation matches).
  *
@@ -1095,10 +1095,10 @@ var csp = function() {
 /**
  * @ngdoc directive
  * @module ng
- * @name ngJq
+ * @name ngjq
  *
  * @element ANY
- * @param {string=} ngJq the name of the library available under `window`
+ * @param {string=} ngjq the name of the library available under `window`
  * to be used for angular.element
  * @description
  * Use this directive to force the angular.element library.  This should be
@@ -1111,7 +1111,7 @@ var csp = function() {
  * others ignored.
  *
  * @example
- * This example shows how to force jqLite using the `ngJq` directive to the `html` tag.
+ * This example shows how to force jqLite using the `ngjq` directive to the `html` tag.
  ```html
  <!doctype html>
  <html ng-app ng-jq>
@@ -1194,7 +1194,7 @@ function bind(self, fn) {
 }
 
 
-function toJsonReplacer(key, value) {
+function tojsonReplacer(key, value) {
   var val = value;
 
   if (typeof key === 'string' && key.charAt(0) === '$' && key.charAt(1) === '$') {
@@ -1213,49 +1213,49 @@ function toJsonReplacer(key, value) {
 
 /**
  * @ngdoc function
- * @name angular.toJson
+ * @name angular.tojson
  * @module ng
  * @kind function
  *
  * @description
- * Serializes input into a JSON-formatted string. Properties with leading $$ characters will be
+ * Serializes input into a jSON-formatted string. Properties with leading $$ characters will be
  * stripped since angular uses this notation internally.
  *
- * @param {Object|Array|Date|string|number} obj Input to be serialized into JSON.
- * @param {boolean|number} [pretty=2] If set to true, the JSON output will contain newlines and whitespace.
- *    If set to an integer, the JSON output will contain that many spaces per indentation.
- * @returns {string|undefined} JSON-ified string representing `obj`.
+ * @param {Object|Array|Date|string|number} obj Input to be serialized into jSON.
+ * @param {boolean|number} [pretty=2] If set to true, the jSON output will contain newlines and whitespace.
+ *    If set to an integer, the jSON output will contain that many spaces per indentation.
+ * @returns {string|undefined} jSON-ified string representing `obj`.
  */
-function toJson(obj, pretty) {
+function tojson(obj, pretty) {
   if (typeof obj === 'undefined') return undefined;
   if (!isNumber(pretty)) {
     pretty = pretty ? 2 : null;
   }
-  return JSON.stringify(obj, toJsonReplacer, pretty);
+  return jSON.stringify(obj, tojsonReplacer, pretty);
 }
 
 
 /**
  * @ngdoc function
- * @name angular.fromJson
+ * @name angular.fromjson
  * @module ng
  * @kind function
  *
  * @description
- * Deserializes a JSON string.
+ * Deserializes a jSON string.
  *
- * @param {string} json JSON string to deserialize.
- * @returns {Object|Array|string|number} Deserialized JSON string.
+ * @param {string} json jSON string to deserialize.
+ * @returns {Object|Array|string|number} Deserialized jSON string.
  */
-function fromJson(json) {
+function fromjson(json) {
   return isString(json)
-      ? JSON.parse(json)
+      ? jSON.parse(json)
       : json;
 }
 
 
 function timezoneToOffset(timezone, fallback) {
-  var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
+  var requestedTimezoneOffset = Date.parse('jan 01, 1970 00:00:00 ' + timezone) / 60000;
   return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
 }
 
@@ -1433,16 +1433,16 @@ function getNgAttribute(element, ngAttr) {
  *
  * @description
  *
- * Use this directive to **auto-bootstrap** an AngularJS application. The `ngApp` directive
+ * Use this directive to **auto-bootstrap** an AngularjS application. The `ngApp` directive
  * designates the **root element** of the application and is typically placed near the root element
  * of the page - e.g. on the `<body ng-app="myApp" ng-controller="myCtrl" >` or `<html>` tags.
  *
- * Only one AngularJS application can be auto-bootstrapped per HTML document. The first `ngApp`
+ * Only one AngularjS application can be auto-bootstrapped per HTML document. The first `ngApp`
  * found in the document will be used to define the root element to auto-bootstrap as an
  * application. To run multiple applications in an HTML document you must manually bootstrap them using
- * {@link angular.bootstrap} instead. AngularJS applications cannot be nested within each other.
+ * {@link angular.bootstrap} instead. AngularjS applications cannot be nested within each other.
  *
- * You can specify an **AngularJS module** to be used as the root module for the application.  This
+ * You can specify an **AngularjS module** to be used as the root module for the application.  This
  * module will be loaded into the {@link auto.$injector} when the application is bootstrapped. It
  * should contain the application code needed or have dependencies on other modules that will
  * contain the code. See {@link angular.module} for more information.
@@ -1731,12 +1731,12 @@ function snake_case(name, separator) {
   });
 }
 
-var bindJQueryFired = false;
-var skipDestroyOnNextJQueryCleanData;
-function bindJQuery() {
+var bindjQueryFired = false;
+var skipDestroyOnNextjQueryCleanData;
+function bindjQuery() {
   var originalCleanData;
 
-  if (bindJQueryFired) {
+  if (bindjQueryFired) {
     return;
   }
 
@@ -1744,7 +1744,7 @@ function bindJQuery() {
   var jqName = jq();
   jQuery = isUndefined(jqName) ? window.jQuery :   // use jQuery (if present)
            !jqName             ? undefined     :   // use jqLite
-                                 window[jqName];   // use jQuery specified by `ngJq`
+                                 window[jqName];   // use jQuery specified by `ngjq`
 
   // Use jQuery if it exists with proper functionality, otherwise default to us.
   // Angular 1.2+ requires jQuery 1.7+ for on()/off() support.
@@ -1753,11 +1753,11 @@ function bindJQuery() {
   if (jQuery && jQuery.fn.on) {
     jqLite = jQuery;
     extend(jQuery.fn, {
-      scope: JQLitePrototype.scope,
-      isolateScope: JQLitePrototype.isolateScope,
-      controller: JQLitePrototype.controller,
-      injector: JQLitePrototype.injector,
-      inheritedData: JQLitePrototype.inheritedData
+      scope: jQLitePrototype.scope,
+      isolateScope: jQLitePrototype.isolateScope,
+      controller: jQLitePrototype.controller,
+      injector: jQLitePrototype.injector,
+      inheritedData: jQLitePrototype.inheritedData
     });
 
     // All nodes removed from the DOM via various jQuery APIs like .remove()
@@ -1766,7 +1766,7 @@ function bindJQuery() {
     originalCleanData = jQuery.cleanData;
     jQuery.cleanData = function(elems) {
       var events;
-      if (!skipDestroyOnNextJQueryCleanData) {
+      if (!skipDestroyOnNextjQueryCleanData) {
         for (var i = 0, elem; (elem = elems[i]) != null; i++) {
           events = jQuery._data(elem, "events");
           if (events && events.$destroy) {
@@ -1774,18 +1774,18 @@ function bindJQuery() {
           }
         }
       } else {
-        skipDestroyOnNextJQueryCleanData = false;
+        skipDestroyOnNextjQueryCleanData = false;
       }
       originalCleanData(elems);
     };
   } else {
-    jqLite = JQLite;
+    jqLite = jQLite;
   }
 
   angular.element = jqLite;
 
   // Prevent double-proxying.
-  bindJQueryFired = true;
+  bindjQueryFired = true;
 }
 
 /**
@@ -2246,8 +2246,8 @@ function setupModuleLoader(window) {
 function serializeObject(obj) {
   var seen = [];
 
-  return JSON.stringify(obj, function(key, val) {
-    val = toJsonReplacer(key, val);
+  return jSON.stringify(obj, function(key, val) {
+    val = tojsonReplacer(key, val);
     if (isObject(val)) {
 
       if (seen.indexOf(val) >= 0) return '...';
@@ -2339,7 +2339,7 @@ function toDebugString(obj) {
   $$HashMapProvider,
   $HttpProvider,
   $HttpParamSerializerProvider,
-  $HttpParamSerializerJQLikeProvider,
+  $HttpParamSerializerjQLikeProvider,
   $HttpBackendProvider,
   $xhrFactoryProvider,
   $LocationProvider,
@@ -2368,7 +2368,7 @@ function toDebugString(obj) {
  * @name angular.version
  * @module ng
  * @description
- * An object that contains information about the current AngularJS version.
+ * An object that contains information about the current AngularjS version.
  *
  * This object has the following properties:
  *
@@ -2399,8 +2399,8 @@ function publishExternalAPI(angular) {
     'injector': createInjector,
     'noop': noop,
     'bind': bind,
-    'toJson': toJson,
-    'fromJson': fromJson,
+    'tojson': tojson,
+    'fromjson': fromjson,
     'identity': identity,
     'isUndefined': isUndefined,
     'isDefined': isDefined,
@@ -2498,7 +2498,7 @@ function publishExternalAPI(angular) {
         $interval: $IntervalProvider,
         $http: $HttpProvider,
         $httpParamSerializer: $HttpParamSerializerProvider,
-        $httpParamSerializerJQLike: $HttpParamSerializerJQLikeProvider,
+        $httpParamSerializerjQLike: $HttpParamSerializerjQLikeProvider,
         $httpBackend: $HttpBackendProvider,
         $xhrFactory: $xhrFactoryProvider,
         $location: $LocationProvider,
@@ -2535,7 +2535,7 @@ function publishExternalAPI(angular) {
  *     Or gives undesired access to variables likes document or window?    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* global JQLitePrototype: true,
+/* global jQLitePrototype: true,
   addEventListenerFn: true,
   removeEventListenerFn: true,
   BOOLEAN_ATTR: true,
@@ -2543,7 +2543,7 @@ function publishExternalAPI(angular) {
 */
 
 //////////////////////////////////
-//JQLite
+//jQLite
 //////////////////////////////////
 
 /**
@@ -2611,7 +2611,7 @@ function publishExternalAPI(angular) {
  * Angular also provides the following additional methods and events to both jQuery and jqLite:
  *
  * ### Events
- * - `$destroy` - AngularJS intercepts all jqLite/jQuery's DOM destruction apis and fires this event
+ * - `$destroy` - AngularjS intercepts all jqLite/jQuery's DOM destruction apis and fires this event
  *    on all DOM nodes being removed.  This can be used to clean up any 3rd party bindings to the DOM
  *    element before it is removed.
  *
@@ -2635,9 +2635,9 @@ function publishExternalAPI(angular) {
  * @returns {Object} jQuery object.
  */
 
-JQLite.expando = 'ng339';
+jQLite.expando = 'ng339';
 
-var jqCache = JQLite.cache = {},
+var jqCache = jQLite.cache = {},
     jqId = 1,
     addEventListenerFn = function(element, type, fn) {
       element.addEventListener(type, fn, false);
@@ -2649,7 +2649,7 @@ var jqCache = JQLite.cache = {},
 /*
  * !!! This is an undocumented "private" function !!!
  */
-JQLite._data = function(node) {
+jQLite._data = function(node) {
   //jQuery always returns an object on cache miss
   return this.cache[node[this.expando]] || {};
 };
@@ -2766,8 +2766,8 @@ function jqLiteParseHTML(html, context) {
 }
 
 /////////////////////////////////////////////
-function JQLite(element) {
-  if (element instanceof JQLite) {
+function jQLite(element) {
+  if (element instanceof jQLite) {
     return element;
   }
 
@@ -2777,11 +2777,11 @@ function JQLite(element) {
     element = trim(element);
     argIsString = true;
   }
-  if (!(this instanceof JQLite)) {
+  if (!(this instanceof jQLite)) {
     if (argIsString && element.charAt(0) != '<') {
       throw jqLiteMinErr('nosel', 'Looking up elements via selectors is not supported by jqLite! See: http://docs.angularjs.org/api/angular.element');
     }
-    return new JQLite(element);
+    return new jQLite(element);
   }
 
   if (argIsString) {
@@ -3014,7 +3014,7 @@ function jqLiteDocumentLoaded(action, win) {
 //////////////////////////////////////////
 // Functions which are declared directly.
 //////////////////////////////////////////
-var JQLitePrototype = JQLite.prototype = {
+var jQLitePrototype = jQLite.prototype = {
   ready: function(fn) {
     var fired = false;
 
@@ -3031,7 +3031,7 @@ var JQLitePrototype = JQLite.prototype = {
       this.on('DOMContentLoaded', trigger); // works for modern browsers and IE9
       // we can not use jqLite since we are not done loading and jQuery could be loaded later.
       // jshint -W064
-      JQLite(window).on('load', trigger); // fallback to window.onload for others
+      jQLite(window).on('load', trigger); // fallback to window.onload for others
       // jshint +W064
     }
   },
@@ -3089,7 +3089,7 @@ forEach({
   removeData: jqLiteRemoveData,
   hasData: jqLiteHasData
 }, function(fn, name) {
-  JQLite[name] = fn;
+  jQLite[name] = fn;
 });
 
 forEach({
@@ -3210,7 +3210,7 @@ forEach({
   /**
    * Properties: writes return selection, reads return first value
    */
-  JQLite.prototype[name] = function(arg1, arg2) {
+  jQLite.prototype[name] = function(arg1, arg2) {
     var i, key;
     var nodeCount = this.length;
 
@@ -3384,7 +3384,7 @@ forEach({
   replaceWith: function(element, replaceNode) {
     var index, parent = element.parentNode;
     jqLiteDealoc(element);
-    forEach(new JQLite(replaceNode), function(node) {
+    forEach(new jQLite(replaceNode), function(node) {
       if (index) {
         parent.insertBefore(node, index.nextSibling);
       } else {
@@ -3412,7 +3412,7 @@ forEach({
     var nodeType = element.nodeType;
     if (nodeType !== NODE_TYPE_ELEMENT && nodeType !== NODE_TYPE_DOCUMENT_FRAGMENT) return;
 
-    node = new JQLite(node);
+    node = new jQLite(node);
 
     for (var i = 0, ii = node.length; i < ii; i++) {
       var child = node[i];
@@ -3423,7 +3423,7 @@ forEach({
   prepend: function(element, node) {
     if (element.nodeType === NODE_TYPE_ELEMENT) {
       var index = element.firstChild;
-      forEach(new JQLite(node), function(child) {
+      forEach(new jQLite(node), function(child) {
         element.insertBefore(child, index);
       });
     }
@@ -3446,7 +3446,7 @@ forEach({
 
   after: function(element, newElement) {
     var index = element, parent = element.parentNode;
-    newElement = new JQLite(newElement);
+    newElement = new jQLite(newElement);
 
     for (var i = 0, ii = newElement.length; i < ii; i++) {
       var node = newElement[i];
@@ -3529,7 +3529,7 @@ forEach({
   /**
    * chaining functions
    */
-  JQLite.prototype[name] = function(arg1, arg2, arg3) {
+  jQLite.prototype[name] = function(arg1, arg2, arg3) {
     var value;
 
     for (var i = 0, ii = this.length; i < ii; i++) {
@@ -3547,15 +3547,15 @@ forEach({
   };
 
   // bind legacy bind/unbind to on/off
-  JQLite.prototype.bind = JQLite.prototype.on;
-  JQLite.prototype.unbind = JQLite.prototype.off;
+  jQLite.prototype.bind = jQLite.prototype.on;
+  jQLite.prototype.unbind = jQLite.prototype.off;
 });
 
 
 // Provider for private $$jqLite service
 function $$jqLiteProvider() {
   this.$get = function $$jqLite() {
-    return extend(JQLite, {
+    return extend(jQLite, {
       hasClass: function(node, classes) {
         if (node.attr) node = node[0];
         return jqLiteHasClass(node, classes);
@@ -3684,14 +3684,14 @@ var $$HashMapProvider = [function() {
  * Sometimes you want to get access to the injector of a currently running Angular app
  * from outside Angular. Perhaps, you want to inject and compile some markup after the
  * application has been bootstrapped. You can do this using the extra `injector()` added
- * to JQuery/jqLite elements. See {@link angular.element}.
+ * to jQuery/jqLite elements. See {@link angular.element}.
  *
  * *This is fairly rare but could be the case if a third party library is injecting the
  * markup.*
  *
  * In the following example a new block of HTML containing a `ng-controller`
- * directive is added to the end of the document body by JQuery. We then compile and link
- * it into the current AngularJS scope.
+ * directive is added to the end of the document body by jQuery. We then compile and link
+ * it into the current AngularjS scope.
  *
  * ```js
  * var $div = $('<div ng-controller="MyCtrl">{{content.label}}</div>');
@@ -3791,7 +3791,7 @@ function annotate(fn, strictDi, name) {
  *
  * # Injection Function Annotation
  *
- * JavaScript does not have annotations, and annotations are needed for dependency injection. The
+ * javaScript does not have annotations, and annotations are needed for dependency injection. The
  * following are all valid ways of annotating function with injection arguments and are equivalent.
  *
  * ```js
@@ -3809,7 +3809,7 @@ function annotate(fn, strictDi, name) {
  *
  * ## Inference
  *
- * In JavaScript calling `toString()` on a function returns the function definition. The definition
+ * In javaScript calling `toString()` on a function returns the function definition. The definition
  * can then be parsed and the function arguments can be extracted. This method of discovering
  * annotations is disallowed when the injector is in strict mode.
  * *NOTE:* This does not work with minification, and obfuscation tools since these tools change the
@@ -3864,7 +3864,7 @@ function annotate(fn, strictDi, name) {
  * @ngdoc method
  * @name $injector#instantiate
  * @description
- * Create a new instance of JS type. The method takes a constructor function, invokes the new
+ * Create a new instance of jS type. The method takes a constructor function, invokes the new
  * operator, and supplies all of the arguments to the constructor function as specified by the
  * constructor annotation.
  *
@@ -5269,7 +5269,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *   animation if element already contains the CSS class or if the class is removed at a later step.
        *   Note that class-based animations are treated differently compared to structural animations
        *   (like enter, move and leave) since the CSS classes may be added/removed at different points
-       *   depending if CSS or JavaScript animations are used.
+       *   depending if CSS or javaScript animations are used.
        *
        * @param {DOMElement} element the element which the CSS classes will be applied to
        * @param {string} className the CSS class(es) that will be added (multiple classes are separated via spaces)
@@ -5293,7 +5293,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *   animation if element does not contain the CSS class or if the class is added at a later step.
        *   Note that class-based animations are treated differently compared to structural animations
        *   (like enter, move and leave) since the CSS classes may be added/removed at different points
-       *   depending if CSS or JavaScript animations are used.
+       *   depending if CSS or javaScript animations are used.
        *
        * @param {DOMElement} element the element which the CSS classes will be applied to
        * @param {string} className the CSS class(es) that will be removed (multiple classes are separated via spaces)
@@ -5317,7 +5317,7 @@ var $AnimateProvider = ['$provide', function($provide) {
        *    `$animate.removeClass`, `setClass` will only evaluate the classes being added/removed once a digest has
        *    passed. Note that class-based animations are treated differently compared to structural animations
        *    (like enter, move and leave) since the CSS classes may be added/removed at different points
-       *    depending if CSS or JavaScript animations are used.
+       *    depending if CSS or javaScript animations are used.
        *
        * @param {DOMElement} element the element which the CSS classes will be applied to
        * @param {string} add the CSS class(es) that will be added (multiple classes are separated via spaces)
@@ -5339,9 +5339,9 @@ var $AnimateProvider = ['$provide', function($provide) {
        * @kind function
        *
        * @description Performs an inline animation on the element which applies the provided to and from CSS styles to the element.
-       * If any detected CSS transition, keyframe or JavaScript matches the provided className value then the animation will take
+       * If any detected CSS transition, keyframe or javaScript matches the provided className value then the animation will take
        * on the provided styles. For example, if a transition animation is set for the given className then the provided from and
-       * to styles will be applied alongside the given transition. If a JavaScript animation is detected then the provided styles
+       * to styles will be applied alongside the given transition. If a javaScript animation is detected then the provided styles
        * will be given in as function paramters into the `animate` method (or as apart of the `options` parameter).
        *
        * @param {DOMElement} element the element which the CSS styles will be applied to
@@ -6203,7 +6203,7 @@ function $CacheFactoryProvider() {
  * <div ng-include=" 'templateId.html' "></div>
  * ```
  *
- * or get it via Javascript:
+ * or get it via javascript:
  * ```js
  * $templateCache.get('templateId.html')
  * ```
@@ -6493,7 +6493,7 @@ function $TemplateCacheProvider() {
  *
  * #### `templateNamespace`
  * String representing the document type used by the markup in the template.
- * AngularJS needs this information as those elements need to be created and cloned
+ * AngularjS needs this information as those elements need to be created and cloned
  * in a special way when they are defined outside their usual containers like `<svg>` and `<math>`.
  *
  * * `html` - All root nodes in the template are HTML. Root nodes may also be
@@ -6672,7 +6672,7 @@ function $TemplateCacheProvider() {
  * ### Transclusion
  *
  * Transclusion is the process of extracting a collection of DOM elements from one part of the DOM and
- * copying them to another part of the DOM, while maintaining their connection to the original AngularJS
+ * copying them to another part of the DOM, while maintaining their connection to the original AngularjS
  * scope from where they were taken.
  *
  * Transclusion is used (often with {@link ngTransclude}) to insert the
@@ -6703,7 +6703,7 @@ function $TemplateCacheProvider() {
  * </div>
  *
  * If you want to manually control the insertion and removal of the transcluded content in your directive
- * then you must use this transclude function. When you call a transclude function it returns a a jqLite/JQuery
+ * then you must use this transclude function. When you call a transclude function it returns a a jqLite/jQuery
  * object that contains the compiled DOM, which is linked to the correct transclusion scope.
  *
  * When you call a transclusion function you can pass in a **clone attach function**. This function accepts
@@ -7538,7 +7538,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         } else if (cloneConnectFn) {
           // important!!: we must call our jqLite.clone() since the jQuery one is trying to be smart
           // and sometimes changes the structure of the DOM.
-          $linkNode = JQLitePrototype.clone.call($compileNodes);
+          $linkNode = jQLitePrototype.clone.call($compileNodes);
         } else {
           $linkNode = $compileNodes;
         }
@@ -7807,7 +7807,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
           } catch (e) {
             // turns out that under some circumstances IE9 throws errors when one attempts to read
             // comment's node value.
-            // Just ignore it and continue. (Can't seem to reproduce in test case.)
+            // just ignore it and continue. (Can't seem to reproduce in test case.)
           }
           break;
       }
@@ -7875,7 +7875,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      * @param {function(angular.Scope, cloneAttachFn=)} transcludeFn A linking function, where the
      *                                                  scope argument is auto-generated to the new
      *                                                  child of the transcluded parent scope.
-     * @param {JQLite} jqCollection If we are working on the root of the compile tree then this
+     * @param {jQLite} jqCollection If we are working on the root of the compile tree then this
      *                              argument has the root jqLite array so that we can replace nodes
      *                              on it.
      * @param {Object=} originalReplaceDirective An optional directive that will be ignored when
@@ -8697,9 +8697,9 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      * This is a special jqLite.replaceWith, which can replace items which
      * have no parents, provided that the containing jqLite collection is provided.
      *
-     * @param {JqLite=} $rootElement The root of the compile tree. Used so that we can replace nodes
+     * @param {jqLite=} $rootElement The root of the compile tree. Used so that we can replace nodes
      *                               in the root of the tree.
-     * @param {JqLite} elementsToRemove The jqLite element which we are going to replace. We keep
+     * @param {jqLite} elementsToRemove The jqLite element which we are going to replace. We keep
      *                                  the shell, but replace its DOM node reference.
      * @param {Node} newNode The new DOM node.
      */
@@ -8762,7 +8762,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
           // that would break if another library patches the method after Angular does (one
           // example is jQuery UI). Instead, set a flag indicating scope destroying should be
           // skipped this one time.
-          skipDestroyOnNextJQueryCleanData = true;
+          skipDestroyOnNextjQueryCleanData = true;
           jQuery.cleanData([firstElementToRemove]);
         }
       }
@@ -9271,14 +9271,14 @@ var $$ForceReflowProvider = function() {
   }];
 };
 
-var APPLICATION_JSON = 'application/json';
-var CONTENT_TYPE_APPLICATION_JSON = {'Content-Type': APPLICATION_JSON + ';charset=utf-8'};
-var JSON_START = /^\[|^\{(?!\{)/;
-var JSON_ENDS = {
+var APPLICATION_jSON = 'application/json';
+var CONTENT_TYPE_APPLICATION_jSON = {'Content-Type': APPLICATION_jSON + ';charset=utf-8'};
+var jSON_START = /^\[|^\{(?!\{)/;
+var jSON_ENDS = {
   '[': /]$/,
   '{': /}$/
 };
-var JSON_PROTECTION_PREFIX = /^\)\]\}',?\n/;
+var jSON_PROTECTION_PREFIX = /^\)\]\}',?\n/;
 var $httpMinErr = minErr('$http');
 var $httpMinErrLegacyFn = function(method) {
   return function() {
@@ -9288,7 +9288,7 @@ var $httpMinErrLegacyFn = function(method) {
 
 function serializeValue(v) {
   if (isObject(v)) {
-    return isDate(v) ? v.toISOString() : toJson(v);
+    return isDate(v) ? v.toISOString() : tojson(v);
   }
   return v;
 }
@@ -9331,10 +9331,10 @@ function $HttpParamSerializerProvider() {
   };
 }
 
-function $HttpParamSerializerJQLikeProvider() {
+function $HttpParamSerializerjQLikeProvider() {
   /**
    * @ngdoc service
-   * @name $httpParamSerializerJQLike
+   * @name $httpParamSerializerjQLike
    * @description
    *
    * Alternative {@link $http `$http`} params serializer that follows
@@ -9348,7 +9348,7 @@ function $HttpParamSerializerJQLikeProvider() {
    *   url: myUrl,
    *   method: 'GET',
    *   params: myParams,
-   *   paramSerializer: '$httpParamSerializerJQLike'
+   *   paramSerializer: '$httpParamSerializerjQLike'
    * });
    * ```
    *
@@ -9359,13 +9359,13 @@ function $HttpParamSerializerJQLikeProvider() {
    * form data for submission:
    *
    * ```js
-   * .controller(function($http, $httpParamSerializerJQLike) {
+   * .controller(function($http, $httpParamSerializerjQLike) {
    *   //...
    *
    *   $http({
    *     url: myUrl,
    *     method: 'POST',
-   *     data: $httpParamSerializerJQLike(myData),
+   *     data: $httpParamSerializerjQLike(myData),
    *     headers: {
    *       'Content-Type': 'application/x-www-form-urlencoded'
    *     }
@@ -9406,12 +9406,12 @@ function $HttpParamSerializerJQLikeProvider() {
 function defaultHttpResponseTransform(data, headers) {
   if (isString(data)) {
     // Strip json vulnerability protection prefix and trim whitespace
-    var tempData = data.replace(JSON_PROTECTION_PREFIX, '').trim();
+    var tempData = data.replace(jSON_PROTECTION_PREFIX, '').trim();
 
     if (tempData) {
       var contentType = headers('Content-Type');
-      if ((contentType && (contentType.indexOf(APPLICATION_JSON) === 0)) || isJsonLike(tempData)) {
-        data = fromJson(tempData);
+      if ((contentType && (contentType.indexOf(APPLICATION_jSON) === 0)) || isjsonLike(tempData)) {
+        data = fromjson(tempData);
       }
     }
   }
@@ -9419,9 +9419,9 @@ function defaultHttpResponseTransform(data, headers) {
   return data;
 }
 
-function isJsonLike(str) {
-    var jsonStart = str.match(JSON_START);
-    return jsonStart && JSON_ENDS[jsonStart[0]].test(str);
+function isjsonLike(str) {
+    var jsonStart = str.match(jSON_START);
+    return jsonStart && jSON_ENDS[jsonStart[0]].test(str);
 }
 
 /**
@@ -9560,7 +9560,7 @@ function $HttpProvider() {
 
     // transform outgoing request data
     transformRequest: [function(d) {
-      return isObject(d) && !isFile(d) && !isBlob(d) && !isFormData(d) ? toJson(d) : d;
+      return isObject(d) && !isFile(d) && !isBlob(d) && !isFormData(d) ? tojson(d) : d;
     }],
 
     // default headers
@@ -9568,9 +9568,9 @@ function $HttpProvider() {
       common: {
         'Accept': 'application/json, text/plain, */*'
       },
-      post:   shallowCopy(CONTENT_TYPE_APPLICATION_JSON),
-      put:    shallowCopy(CONTENT_TYPE_APPLICATION_JSON),
-      patch:  shallowCopy(CONTENT_TYPE_APPLICATION_JSON)
+      post:   shallowCopy(CONTENT_TYPE_APPLICATION_jSON),
+      put:    shallowCopy(CONTENT_TYPE_APPLICATION_jSON),
+      patch:  shallowCopy(CONTENT_TYPE_APPLICATION_jSON)
     },
 
     xsrfCookieName: 'XSRF-TOKEN',
@@ -9682,7 +9682,7 @@ function $HttpProvider() {
      * @description
      * The `$http` service is a core Angular service that facilitates communication with the remote
      * HTTP servers via the browser's [XMLHttpRequest](https://developer.mozilla.org/en/xmlhttprequest)
-     * object or via [JSONP](http://en.wikipedia.org/wiki/JSONP).
+     * object or via [jSONP](http://en.wikipedia.org/wiki/jSONP).
      *
      * For unit testing applications that use `$http` service, see
      * {@link ngMock.$httpBackend $httpBackend mock}.
@@ -9836,12 +9836,12 @@ function $HttpProvider() {
      * Request transformations (`$httpProvider.defaults.transformRequest` and `$http.defaults.transformRequest`):
      *
      * - If the `data` property of the request configuration object contains an object, serialize it
-     *   into JSON format.
+     *   into jSON format.
      *
      * Response transformations (`$httpProvider.defaults.transformResponse` and `$http.defaults.transformResponse`):
      *
      *  - If XSRF prefix is detected, strip it (see Security Considerations section below).
-     *  - If JSON response is detected, deserialize it using a JSON parser.
+     *  - If jSON response is detected, deserialize it using a jSON parser.
      *
      *
      * ### Overriding the Default Transformations Per Request
@@ -9989,20 +9989,20 @@ function $HttpProvider() {
      *
      * When designing web applications, consider security threats from:
      *
-     * - [JSON vulnerability](http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx)
+     * - [jSON vulnerability](http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx)
      * - [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery)
      *
      * Both server and the client must cooperate in order to eliminate these threats. Angular comes
      * pre-configured with strategies that address these issues, but for this to work backend server
      * cooperation is required.
      *
-     * ### JSON Vulnerability Protection
+     * ### jSON Vulnerability Protection
      *
-     * A [JSON vulnerability](http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx)
-     * allows third party website to turn your JSON resource URL into
-     * [JSONP](http://en.wikipedia.org/wiki/JSONP) request under some conditions. To
-     * counter this your server can prefix all JSON requests with following string `")]}',\n"`.
-     * Angular will automatically strip the prefix before processing it as JSON.
+     * A [jSON vulnerability](http://haacked.com/archive/2008/11/20/anatomy-of-a-subtle-json-vulnerability.aspx)
+     * allows third party website to turn your jSON resource URL into
+     * [jSONP](http://en.wikipedia.org/wiki/jSONP) request under some conditions. To
+     * counter this your server can prefix all jSON requests with following string `")]}',\n"`.
+     * Angular will automatically strip the prefix before processing it as jSON.
      *
      * For example if your server needs to return:
      * ```js
@@ -10015,7 +10015,7 @@ function $HttpProvider() {
      * ['one','two']
      * ```
      *
-     * Angular will strip the prefix, before processing the JSON.
+     * Angular will strip the prefix, before processing the jSON.
      *
      *
      * ### Cross Site Request Forgery (XSRF) Protection
@@ -10024,15 +10024,15 @@ function $HttpProvider() {
      * an unauthorized site can gain your user's private data. Angular provides a mechanism
      * to counter XSRF. When performing XHR requests, the $http service reads a token from a cookie
      * (by default, `XSRF-TOKEN`) and sets it as an HTTP header (`X-XSRF-TOKEN`). Since only
-     * JavaScript that runs on your domain could read the cookie, your server can be assured that
-     * the XHR came from JavaScript running on your domain. The header will not be set for
+     * javaScript that runs on your domain could read the cookie, your server can be assured that
+     * the XHR came from javaScript running on your domain. The header will not be set for
      * cross-domain requests.
      *
-     * To take advantage of this, your server needs to set a token in a JavaScript readable session
+     * To take advantage of this, your server needs to set a token in a javaScript readable session
      * cookie called `XSRF-TOKEN` on the first HTTP GET request. On subsequent XHR requests the
      * server can verify that the cookie matches `X-XSRF-TOKEN` HTTP header, and therefore be sure
-     * that only JavaScript running on your domain could have sent the request. The token must be
-     * unique for each user and must be verifiable by the server (to prevent the JavaScript from
+     * that only javaScript running on your domain could have sent the request. The token must be
+     * unique for each user and must be verifiable by the server (to prevent the javaScript from
      * making up its own tokens). We recommend that the token is a digest of your site's
      * authentication cookie with a [salt](https://en.wikipedia.org/wiki/Salt_(cryptography&#41;)
      * for added security.
@@ -10075,7 +10075,7 @@ function $HttpProvider() {
      *      {@link $injector $injector}, which means you can create your own serializer
      *      by registering it as a {@link auto.$provide#service service}.
      *      The default serializer is the {@link $httpParamSerializer $httpParamSerializer};
-     *      alternatively, you can use the {@link $httpParamSerializerJQLike $httpParamSerializerJQLike}
+     *      alternatively, you can use the {@link $httpParamSerializerjQLike $httpParamSerializerjQLike}
      *    - **cache** – `{boolean|Cache}` – If true, a default $http cache will be used to cache the
      *      GET request, otherwise if a cache instance built with
      *      {@link ng.$cacheFactory $cacheFactory}, this cache will be used for
@@ -10102,19 +10102,19 @@ function $HttpProvider() {
   <div ng-controller="FetchController">
     <select ng-model="method" aria-label="Request method">
       <option>GET</option>
-      <option>JSONP</option>
+      <option>jSONP</option>
     </select>
     <input type="text" ng-model="url" size="80" aria-label="URL" />
     <button id="fetchbtn" ng-click="fetch()">fetch</button><br>
     <button id="samplegetbtn" ng-click="updateModel('GET', 'http-hello.html')">Sample GET</button>
     <button id="samplejsonpbtn"
-      ng-click="updateModel('JSONP',
-                    'https://angularjs.org/greet.php?callback=JSON_CALLBACK&name=Super%20Hero')">
-      Sample JSONP
+      ng-click="updateModel('jSONP',
+                    'https://angularjs.org/greet.php?callback=jSON_CALLBACK&name=Super%20Hero')">
+      Sample jSONP
     </button>
     <button id="invalidjsonpbtn"
-      ng-click="updateModel('JSONP', 'https://angularjs.org/doesntexist&callback=JSON_CALLBACK')">
-        Invalid JSONP
+      ng-click="updateModel('jSONP', 'https://angularjs.org/doesntexist&callback=jSON_CALLBACK')">
+        Invalid jSONP
       </button>
     <pre>http status code: {{status}}</pre>
     <pre>http response data: {{data}}</pre>
@@ -10155,8 +10155,8 @@ function $HttpProvider() {
   var data = element(by.binding('data'));
   var fetchBtn = element(by.id('fetchbtn'));
   var sampleGetBtn = element(by.id('samplegetbtn'));
-  var sampleJsonpBtn = element(by.id('samplejsonpbtn'));
-  var invalidJsonpBtn = element(by.id('invalidjsonpbtn'));
+  var samplejsonpBtn = element(by.id('samplejsonpbtn'));
+  var invalidjsonpBtn = element(by.id('invalidjsonpbtn'));
 
   it('should make an xhr GET request', function() {
     sampleGetBtn.click();
@@ -10166,16 +10166,16 @@ function $HttpProvider() {
   });
 
 // Commented out due to flakes. See https://github.com/angular/angular.js/issues/9185
-// it('should make a JSONP request to angularjs.org', function() {
-//   sampleJsonpBtn.click();
+// it('should make a jSONP request to angularjs.org', function() {
+//   samplejsonpBtn.click();
 //   fetchBtn.click();
 //   expect(status.getText()).toMatch('200');
 //   expect(data.getText()).toMatch(/Super Hero!/);
 // });
 
-  it('should make JSONP request to invalid URL and invoke the error handler',
+  it('should make jSONP request to invalid URL and invoke the error handler',
       function() {
-    invalidJsonpBtn.click();
+    invalidjsonpBtn.click();
     fetchBtn.click();
     expect(status.getText()).toMatch('0');
     expect(data.getText()).toMatch('Request failed');
@@ -10366,10 +10366,10 @@ function $HttpProvider() {
      * @name $http#jsonp
      *
      * @description
-     * Shortcut method to perform `JSONP` request.
+     * Shortcut method to perform `jSONP` request.
      *
      * @param {string} url Relative or absolute URL specifying the destination of the request.
-     *                     The name of the callback should be the string `JSON_CALLBACK`.
+     *                     The name of the callback should be the string `jSON_CALLBACK`.
      * @param {Object=} config Optional configuration object
      * @returns {HttpPromise} Future object
      */
@@ -10475,7 +10475,7 @@ function $HttpProvider() {
 
 
       if ((config.cache || defaults.cache) && config.cache !== false &&
-          (config.method === 'GET' || config.method === 'JSONP')) {
+          (config.method === 'GET' || config.method === 'jSONP')) {
         cache = isObject(config.cache) ? config.cache
               : isObject(defaults.cache) ? defaults.cache
               : defaultCache;
@@ -10622,7 +10622,7 @@ function $xhrFactoryProvider() {
  *
  * @description
  * HTTP backend used by the {@link ng.$http service} that delegates to
- * XMLHttpRequest object or JSONP and deals with browser incompatibilities.
+ * XMLHttpRequest object or jSONP and deals with browser incompatibilities.
  *
  * You should never need to use this service directly, instead use the higher-level abstractions:
  * {@link ng.$http $http} or {@link ngResource.$resource $resource}.
@@ -10649,7 +10649,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
         callbacks[callbackId].called = true;
       };
 
-      var jsonpDone = jsonpReq(url.replace('JSON_CALLBACK', 'angular.callbacks.' + callbackId),
+      var jsonpDone = jsonpReq(url.replace('jSON_CALLBACK', 'angular.callbacks.' + callbackId),
           callbackId, function(status, text) {
         completeRequest(callback, status, callbacks[callbackId].data, "", text);
         callbacks[callbackId] = noop;
@@ -10711,7 +10711,7 @@ function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDoc
           // known to throw when setting the value "json" as the response type. Other older
           // browsers implementing the responseType
           //
-          // The json response type can be ignored if not supported, because JSON payloads are
+          // The json response type can be ignored if not supported, because jSON payloads are
           // parsed on the client-side regardless.
           if (responseType !== 'json') {
             throw e;
@@ -10897,7 +10897,7 @@ function $InterpolateProvider() {
           value = '' + value;
           break;
         default:
-          value = toJson(value);
+          value = tojson(value);
       }
 
       return value;
@@ -11033,7 +11033,7 @@ function $InterpolateProvider() {
       // Concatenating expressions makes it hard to reason about whether some combination of
       // concatenated values are unsafe to use and could easily lead to XSS.  By requiring that a
       // single expression be used for iframe[src], object[src], etc., we ensure that the value
-      // that's used is assigned or constructed by some JS code somewhere that is more testable or
+      // that's used is assigned or constructed by some jS code somewhere that is more testable or
       // make it obvious that you bound the value to some user controlled value.  This helps reduce
       // the load when auditing for XSS issues.
       if (trustedContext && concat.length > 1) {
@@ -12503,16 +12503,16 @@ var $parseMinErr = minErr('$parse');
 // Sandboxing Angular Expressions
 // ------------------------------
 // Angular expressions are generally considered safe because these expressions only have direct
-// access to `$scope` and locals. However, one can obtain the ability to execute arbitrary JS code by
-// obtaining a reference to native JS functions such as the Function constructor.
+// access to `$scope` and locals. However, one can obtain the ability to execute arbitrary jS code by
+// obtaining a reference to native jS functions such as the Function constructor.
 //
 // As an example, consider the following Angular expression:
 //
-//   {}.toString.constructor('alert("evil JS code")')
+//   {}.toString.constructor('alert("evil jS code")')
 //
 // This sandboxing technique is not perfect and doesn't aim to be. The goal is to prevent exploits
 // against the expression language, but not to prevent exploits that were enabled by exposing
-// sensitive JavaScript or browser APIs on Scope. Exposing such objects on a Scope is never a good
+// sensitive javaScript or browser APIs on Scope. Exposing such objects on a Scope is never a good
 // practice and therefore we are not even trying to protect against interaction with an object
 // explicitly exposed in this way.
 //
@@ -12536,12 +12536,12 @@ function ensureSafeMemberName(name, fullExpression) {
 }
 
 function getStringValue(name, fullExpression) {
-  // From the JavaScript docs:
+  // From the javaScript docs:
   // Property names must be strings. This means that non-string objects cannot be used
   // as keys in an object. Any non-string object, including a number, is typecasted
   // into a string via the toString method.
   //
-  // So, to ensure that we are checking the same `name` that JavaScript would use,
+  // So, to ensure that we are checking the same `name` that javaScript would use,
   // we cast it to a string, if possible.
   // Doing `name + ''` can cause a repl error if the result to `toString` is not a string,
   // this is, this will handle objects that misbehave.
@@ -14193,9 +14193,9 @@ function getValueOf(value) {
  *      `context`.
  *
  *    The returned function also has the following properties:
- *      * `literal` – `{boolean}` – whether the expression's top-level node is a JavaScript
+ *      * `literal` – `{boolean}` – whether the expression's top-level node is a javaScript
  *        literal.
- *      * `constant` – `{boolean}` – whether the expression is made entirely of JavaScript
+ *      * `constant` – `{boolean}` – whether the expression is made entirely of javaScript
  *        constant literals.
  *      * `assign` – `{?function(context, value)}` – if the expression is assignable, this will be
  *        set to a function to change its value on the given context.
@@ -14444,7 +14444,7 @@ function $ParseProvider() {
  *
  * The streamlined ES6 style promise is essentially just using $q as a constructor which takes a `resolver`
  * function as the first argument. This is similar to the native Promise implementation from ES6 Harmony,
- * see [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+ * see [MDN](https://developer.mozilla.org/en-US/docs/Web/javaScript/Reference/Global_Objects/Promise).
  *
  * While the constructor-style use is supported, not all of the supporting methods from ES6 Harmony promises are
  * available yet.
@@ -14478,9 +14478,9 @@ function $ParseProvider() {
  *
  * Note: progress/notify callbacks are not currently supported via the ES6-style interface.
  *
- * However, the more traditional CommonJS-style usage is still available, and documented below.
+ * However, the more traditional CommonjS-style usage is still available, and documented below.
  *
- * [The CommonJS Promise proposal](http://wiki.commonjs.org/wiki/Promises) describes a promise as an
+ * [The CommonjS Promise proposal](http://wiki.commonjs.org/wiki/Promises) describes a promise as an
  * interface for interacting with an object that represents the result of an action that is
  * performed asynchronously, and may or may not be finished at any given point in time.
  *
@@ -14845,7 +14845,7 @@ function qFactory(nextTick, exceptionHandler) {
    * a promise chain, you don't need to worry about it.
    *
    * When comparing deferreds/promises to the familiar behavior of try/catch/throw, think of
-   * `reject` as the `throw` keyword in JavaScript. This also means that if you "catch" an error via
+   * `reject` as the `throw` keyword in javaScript. This also means that if you "catch" an error via
    * a promise error callback and you want to forward the error to the promise derived from the
    * current promise, you have to "rethrow" the error by returning a rejection constructed via
    * `reject`.
@@ -15308,8 +15308,8 @@ function $RootScopeProvider() {
        * - The `listener` is called only when the value from the current `watchExpression` and the
        *   previous call to `watchExpression` are not equal (with the exception of the initial run,
        *   see below). Inequality is determined according to reference inequality,
-       *   [strict comparison](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators)
-       *    via the `!==` Javascript operator, unless `objectEquality == true`
+       *   [strict comparison](https://developer.mozilla.org/en-US/docs/Web/javaScript/Reference/Operators/Comparison_Operators)
+       *    via the `!==` javascript operator, unless `objectEquality == true`
        *   (see next point)
        * - When `objectEquality == true`, inequality of the `watchExpression` is determined
        *   according to the {@link angular.equals} function. To save the value of the object for
@@ -15889,7 +15889,7 @@ function $RootScopeProvider() {
        * @description
        * Broadcasted when a scope and its children are being destroyed.
        *
-       * Note that, in AngularJS, there is also a `$destroy` jQuery event, which can be used to
+       * Note that, in AngularjS, there is also a `$destroy` jQuery event, which can be used to
        * clean up DOM bindings before an element is removed from the DOM.
        */
 
@@ -15908,11 +15908,11 @@ function $RootScopeProvider() {
        * {@link ng.directive:ngRepeat ngRepeat} for managing the
        * unrolling of the loop.
        *
-       * Just before a scope is destroyed, a `$destroy` event is broadcasted on this scope.
+       * just before a scope is destroyed, a `$destroy` event is broadcasted on this scope.
        * Application code can register a `$destroy` event handler that will give it a chance to
        * perform any necessary cleanup.
        *
-       * Note that, in AngularJS, there is also a `$destroy` jQuery event, which can be used to
+       * Note that, in AngularjS, there is also a `$destroy` jQuery event, which can be used to
        * clean up DOM bindings before an element is removed from the DOM.
        */
       $destroy: function() {
@@ -16486,7 +16486,7 @@ var SCE_CONTEXTS = {
   // RESOURCE_URL is a subtype of URL used in contexts where a privileged resource is sourced from a
   // url.  (e.g. ng-include, script src, templateUrl)
   RESOURCE_URL: 'resourceUrl',
-  JS: 'js'
+  jS: 'js'
 };
 
 // Helper functions follow.
@@ -16538,10 +16538,10 @@ function adjustMatchers(matchers) {
  * @description
  *
  * `$sceDelegate` is a service that is used by the `$sce` service to provide {@link ng.$sce Strict
- * Contextual Escaping (SCE)} services to AngularJS.
+ * Contextual Escaping (SCE)} services to AngularjS.
  *
  * Typically, you would configure or override the {@link ng.$sceDelegate $sceDelegate} instead of
- * the `$sce` service to customize the way Strict Contextual Escaping works in AngularJS.  This is
+ * the `$sce` service to customize the way Strict Contextual Escaping works in AngularjS.  This is
  * because, while the `$sce` provides numerous shorthand methods, etc., you really only need to
  * override 3 core functions (`trustAs`, `getTrusted` and `valueOf`) to replace the way things
  * work because `$sce` delegates to `$sceDelegate` for these operations.
@@ -16551,7 +16551,7 @@ function adjustMatchers(matchers) {
  * The default instance of `$sceDelegate` should work out of the box with little pain.  While you
  * can override it completely to change the behavior of `$sce`, the common case would
  * involve configuring the {@link ng.$sceDelegateProvider $sceDelegateProvider} instead by setting
- * your own whitelists and blacklists for trusting URLs used for loading AngularJS resources such as
+ * your own whitelists and blacklists for trusting URLs used for loading AngularjS resources such as
  * templates.  Refer {@link ng.$sceDelegateProvider#resourceUrlWhitelist
  * $sceDelegateProvider.resourceUrlWhitelist} and {@link
  * ng.$sceDelegateProvider#resourceUrlBlacklist $sceDelegateProvider.resourceUrlBlacklist}
@@ -16733,7 +16733,7 @@ function $SceDelegateProvider() {
     byType[SCE_CONTEXTS.HTML] = generateHolderType(trustedValueHolderBase);
     byType[SCE_CONTEXTS.CSS] = generateHolderType(trustedValueHolderBase);
     byType[SCE_CONTEXTS.URL] = generateHolderType(trustedValueHolderBase);
-    byType[SCE_CONTEXTS.JS] = generateHolderType(trustedValueHolderBase);
+    byType[SCE_CONTEXTS.jS] = generateHolderType(trustedValueHolderBase);
     byType[SCE_CONTEXTS.RESOURCE_URL] = generateHolderType(byType[SCE_CONTEXTS.URL]);
 
     /**
@@ -16867,11 +16867,11 @@ function $SceDelegateProvider() {
  *
  * @description
  *
- * `$sce` is a service that provides Strict Contextual Escaping services to AngularJS.
+ * `$sce` is a service that provides Strict Contextual Escaping services to AngularjS.
  *
  * # Strict Contextual Escaping
  *
- * Strict Contextual Escaping (SCE) is a mode in which AngularJS requires bindings in certain
+ * Strict Contextual Escaping (SCE) is a mode in which AngularjS requires bindings in certain
  * contexts to result in a value that is marked as safe to use for that context.  One example of
  * such a context is binding arbitrary html controlled by the user via `ng-bind-html`.  We refer
  * to these contexts as privileged or SCE contexts.
@@ -16916,7 +16916,7 @@ function $SceDelegateProvider() {
  * allowing only the files in a specific directory to do this.  Ensuring that the internal API
  * exposed by that code doesn't markup arbitrary values as safe then becomes a more manageable task.
  *
- * In the case of AngularJS' SCE service, one uses {@link ng.$sce#trustAs $sce.trustAs}
+ * In the case of AngularjS' SCE service, one uses {@link ng.$sce#trustAs $sce.trustAs}
  * (and shorthand methods such as {@link ng.$sce#trustAsHtml $sce.trustAsHtml}, etc.) to
  * obtain values that will be accepted by SCE / privileged contexts.
  *
@@ -16992,8 +16992,8 @@ function $SceDelegateProvider() {
  * | `$sce.HTML`         | For HTML that's safe to source into the application.  The {@link ng.directive:ngBindHtml ngBindHtml} directive uses this context for bindings. If an unsafe value is encountered and the {@link ngSanitize $sanitize} module is present this will sanitize the value instead of throwing an error. |
  * | `$sce.CSS`          | For CSS that's safe to source into the application.  Currently unused.  Feel free to use it in your own directives. |
  * | `$sce.URL`          | For URLs that are safe to follow as links.  Currently unused (`<a href=` and `<img src=` sanitize their urls and don't constitute an SCE context. |
- * | `$sce.RESOURCE_URL` | For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application.  Examples include `ng-include`, `src` / `ngSrc` bindings for tags other than `IMG` (e.g. `IFRAME`, `OBJECT`, etc.)  <br><br>Note that `$sce.RESOURCE_URL` makes a stronger statement about the URL than `$sce.URL` does and therefore contexts requiring values trusted for `$sce.RESOURCE_URL` can be used anywhere that values trusted for `$sce.URL` are required. |
- * | `$sce.JS`           | For JavaScript that is safe to execute in your application's context.  Currently unused.  Feel free to use it in your own directives. |
+ * | `$sce.RESOURCE_URL` | For URLs that are not only safe to follow as links, but whose contents are also safe to include in your application.  Examples include `ng-include`, `src` / `ngSrc` bindings for tags other than `IMG` (e.g. `IFRAME`, `OBjECT`, etc.)  <br><br>Note that `$sce.RESOURCE_URL` makes a stronger statement about the URL than `$sce.URL` does and therefore contexts requiring values trusted for `$sce.RESOURCE_URL` can be used anywhere that values trusted for `$sce.URL` are required. |
+ * | `$sce.jS`           | For javaScript that is safe to execute in your application's context.  Currently unused.  Feel free to use it in your own directives. |
  *
  * ## Format of items in {@link ng.$sceDelegateProvider#resourceUrlWhitelist resourceUrlWhitelist}/{@link ng.$sceDelegateProvider#resourceUrlBlacklist Blacklist} <a name="resourceUrlPatternItem"></a>
  *
@@ -17028,7 +17028,7 @@ function $SceDelegateProvider() {
  *      matched against the **entire** *normalized / absolute URL* of the resource being tested
  *      (even when the RegExp did not have the `^` and `$` codes.)  In addition, any flags
  *      present on the RegExp (such as multiline, global, ignoreCase) are ignored.
- *    - If you are generating your JavaScript from some other templating engine (not
+ *    - If you are generating your javaScript from some other templating engine (not
  *      recommended, e.g. in issue [#4006](https://github.com/angular/angular.js/issues/4006)),
  *      remember to escape your regular expression (and be aware that you might need more than
  *      one level of escaping depending on your templating engine and the way you interpolated
@@ -17036,7 +17036,7 @@ function $SceDelegateProvider() {
  *      enough before coding your own.  E.g. Ruby has
  *      [Regexp.escape(str)](http://www.ruby-doc.org/core-2.0.0/Regexp.html#method-c-escape)
  *      and Python has [re.escape](http://docs.python.org/library/re.html#re.escape).
- *      Javascript lacks a similar built in function for escaping.  Take a look at Google
+ *      javascript lacks a similar built in function for escaping.  Take a look at Google
  *      Closure library's [goog.string.regExpEscape(s)](
  *      http://docs.closure-library.googlecode.com/git/closure_goog_string_string.js.source.html#line962).
  *
@@ -17327,15 +17327,15 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-     * @name $sce#trustAsJs
+     * @name $sce#trustAsjs
      *
      * @description
-     * Shorthand method.  `$sce.trustAsJs(value)` →
-     *     {@link ng.$sceDelegate#trustAs `$sceDelegate.trustAs($sce.JS, value)`}
+     * Shorthand method.  `$sce.trustAsjs(value)` →
+     *     {@link ng.$sceDelegate#trustAs `$sceDelegate.trustAs($sce.jS, value)`}
      *
      * @param {*} value The value to trustAs.
-     * @returns {*} An object that can be passed to {@link ng.$sce#getTrustedJs
-     *     $sce.getTrustedJs(value)} to obtain the original value.  (privileged directives
+     * @returns {*} An object that can be passed to {@link ng.$sce#getTrustedjs
+     *     $sce.getTrustedjs(value)} to obtain the original value.  (privileged directives
      *     only accept expressions that are either literal constants or are the
      *     return value of {@link ng.$sce#trustAs $sce.trustAs}.)
      */
@@ -17408,14 +17408,14 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-     * @name $sce#getTrustedJs
+     * @name $sce#getTrustedjs
      *
      * @description
-     * Shorthand method.  `$sce.getTrustedJs(value)` →
-     *     {@link ng.$sceDelegate#getTrusted `$sceDelegate.getTrusted($sce.JS, value)`}
+     * Shorthand method.  `$sce.getTrustedjs(value)` →
+     *     {@link ng.$sceDelegate#getTrusted `$sceDelegate.getTrusted($sce.jS, value)`}
      *
      * @param {*} value The value to pass to `$sce.getTrusted`.
-     * @returns {*} The return value of `$sce.getTrusted($sce.JS, value)`
+     * @returns {*} The return value of `$sce.getTrusted($sce.jS, value)`
      */
 
     /**
@@ -17488,11 +17488,11 @@ function $SceProvider() {
 
     /**
      * @ngdoc method
-     * @name $sce#parseAsJs
+     * @name $sce#parseAsjs
      *
      * @description
-     * Shorthand method.  `$sce.parseAsJs(value)` →
-     *     {@link ng.$sce#parseAs `$sce.parseAs($sce.JS, value)`}
+     * Shorthand method.  `$sce.parseAsjs(value)` →
+     *     {@link ng.$sce#parseAs `$sce.parseAs($sce.jS, value)`}
      *
      * @param {string} expression String expression to compile.
      * @returns {function(context, locals)} a function which represents the compiled expression:
@@ -17998,7 +17998,7 @@ function urlIsSameOrigin(requestUrl) {
  *
  * @description
  * A reference to the browser's `window` object. While `window`
- * is globally available in JavaScript, it causes testability problems, because
+ * is globally available in javaScript, it causes testability problems, because
  * it is a global variable. In angular we always refer to it through the
  * `$window` service, so it may be overridden, removed or mocked for testing.
  *
@@ -18286,8 +18286,8 @@ function $FilterProvider($provide) {
  *
  *     Note that a named property will match properties on the same level only, while the special
  *     `$` property will match properties on the same level or deeper. E.g. an array item like
- *     `{name: {first: 'John', last: 'Doe'}}` will **not** be matched by `{name: 'John'}`, but
- *     **will** be matched by `{$: 'John'}`.
+ *     `{name: {first: 'john', last: 'Doe'}}` will **not** be matched by `{name: 'john'}`, but
+ *     **will** be matched by `{$: 'john'}`.
  *
  *   - `function(value, index, array)`: A predicate function can be used to write arbitrary filters.
  *     The function is called for each element of the array, with the element, its index, and
@@ -18317,12 +18317,12 @@ function $FilterProvider($provide) {
  * @example
    <example>
      <file name="index.html">
-       <div ng-init="friends = [{name:'John', phone:'555-1276'},
+       <div ng-init="friends = [{name:'john', phone:'555-1276'},
                                 {name:'Mary', phone:'800-BIG-MARY'},
                                 {name:'Mike', phone:'555-4321'},
                                 {name:'Adam', phone:'555-5678'},
-                                {name:'Julie', phone:'555-8765'},
-                                {name:'Juliette', phone:'555-5678'}]"></div>
+                                {name:'julie', phone:'555-8765'},
+                                {name:'juliette', phone:'555-5678'}]"></div>
 
        <label>Search: <input ng-model="searchText"></label>
        <table id="searchTextResults">
@@ -18362,22 +18362,22 @@ function $FilterProvider($provide) {
 
          searchText.clear();
          searchText.sendKeys('76');
-         expectFriendNames(['John', 'Julie'], 'friend');
+         expectFriendNames(['john', 'julie'], 'friend');
        });
 
        it('should search in specific fields when filtering with a predicate object', function() {
          var searchAny = element(by.model('search.$'));
          searchAny.clear();
          searchAny.sendKeys('i');
-         expectFriendNames(['Mary', 'Mike', 'Julie', 'Juliette'], 'friendObj');
+         expectFriendNames(['Mary', 'Mike', 'julie', 'juliette'], 'friendObj');
        });
        it('should use a equal comparison when comparator is true', function() {
          var searchName = element(by.model('search.name'));
          var strict = element(by.model('strict'));
          searchName.clear();
-         searchName.sendKeys('Julie');
+         searchName.sendKeys('julie');
          strict.click();
-         expectFriendNames(['Julie'], 'friendObj');
+         expectFriendNames(['julie'], 'friendObj');
        });
      </file>
    </example>
@@ -18684,9 +18684,9 @@ function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
       fractionSize = Math.min(Math.max(pattern.minFrac, fractionLen), pattern.maxFrac);
     }
 
-    // safely round numbers in JS without hitting imprecisions of floating-point arithmetics
+    // safely round numbers in jS without hitting imprecisions of floating-point arithmetics
     // inspired by:
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
+    // https://developer.mozilla.org/en-US/docs/Web/javaScript/Reference/Global_Objects/Math/round
     number = +(Math.round(+(number.toString() + 'e' + fractionSize)).toString() + 'e' + -fractionSize);
 
     var fraction = ('' + number).split(DECIMAL_SEP);
@@ -18785,7 +18785,7 @@ function timeZoneGetter(date, formats, offset) {
 }
 
 function getFirstThursdayOfYear(year) {
-    // 0 = index of January
+    // 0 = index of january
     var dayOfWeekOnFirst = (new Date(year, 0, 1)).getDay();
     // 4 = index of Thursday (+1 to account for 1st = 5)
     // 11 = index of *next* Thursday (+1 account for 1st = 12)
@@ -18871,8 +18871,8 @@ var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZEwG']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|
  *   * `'yyyy'`: 4 digit representation of year (e.g. AD 1 => 0001, AD 2010 => 2010)
  *   * `'yy'`: 2 digit representation of year, padded (00-99). (e.g. AD 2001 => 01, AD 2010 => 10)
  *   * `'y'`: 1 digit representation of year, e.g. (AD 1 => 1, AD 199 => 199)
- *   * `'MMMM'`: Month in year (January-December)
- *   * `'MMM'`: Month in year (Jan-Dec)
+ *   * `'MMMM'`: Month in year (january-December)
+ *   * `'MMM'`: Month in year (jan-Dec)
  *   * `'MM'`: Month in year, padded (01-12)
  *   * `'M'`: Month in year (1-12)
  *   * `'dd'`: Day in month, padded (01-31)
@@ -19034,14 +19034,14 @@ function dateFilter($locale) {
  * @kind function
  *
  * @description
- *   Allows you to convert a JavaScript object into JSON string.
+ *   Allows you to convert a javaScript object into jSON string.
  *
  *   This filter is mostly useful for debugging. When using the double curly {{value}} notation
- *   the binding is automatically converted to JSON.
+ *   the binding is automatically converted to jSON.
  *
- * @param {*} object Any JavaScript object (including arrays and primitive types) to filter.
+ * @param {*} object Any javaScript object (including arrays and primitive types) to filter.
  * @param {number=} spacing The number of spaces to use per indentation, defaults to 2.
- * @returns {string} JSON string.
+ * @returns {string} jSON string.
  *
  *
  * @example
@@ -19064,7 +19064,7 @@ function jsonFilter() {
     if (isUndefined(spacing)) {
         spacing = 2;
     }
-    return toJson(object, spacing);
+    return tojson(object, spacing);
   };
 }
 
@@ -19260,11 +19260,11 @@ function limitToFilter() {
          angular.module('orderByExample', [])
            .controller('ExampleController', ['$scope', function($scope) {
              $scope.friends =
-                 [{name:'John', phone:'555-1212', age:10},
+                 [{name:'john', phone:'555-1212', age:10},
                   {name:'Mary', phone:'555-9876', age:19},
                   {name:'Mike', phone:'555-4321', age:21},
                   {name:'Adam', phone:'555-5678', age:35},
-                  {name:'Julie', phone:'555-8765', age:29}];
+                  {name:'julie', phone:'555-8765', age:29}];
            }]);
        </script>
        <div ng-controller="ExampleController">
@@ -19293,11 +19293,11 @@ function limitToFilter() {
          angular.module('orderByExample', [])
            .controller('ExampleController', ['$scope', function($scope) {
              $scope.friends =
-                 [{name:'John', phone:'555-1212', age:10},
+                 [{name:'john', phone:'555-1212', age:10},
                   {name:'Mary', phone:'555-9876', age:19},
                   {name:'Mike', phone:'555-4321', age:21},
                   {name:'Adam', phone:'555-5678', age:35},
-                  {name:'Julie', phone:'555-8765', age:29}];
+                  {name:'julie', phone:'555-8765', age:29}];
              $scope.predicate = 'age';
              $scope.reverse = true;
              $scope.order = function(predicate) {
@@ -19374,11 +19374,11 @@ function limitToFilter() {
         .controller('ExampleController', ['$scope', '$filter', function($scope, $filter) {
           var orderBy = $filter('orderBy');
           $scope.friends = [
-            { name: 'John',    phone: '555-1212',    age: 10 },
+            { name: 'john',    phone: '555-1212',    age: 10 },
             { name: 'Mary',    phone: '555-9876',    age: 19 },
             { name: 'Mike',    phone: '555-4321',    age: 21 },
             { name: 'Adam',    phone: '555-5678',    age: 35 },
-            { name: 'Julie',   phone: '555-8765',    age: 29 }
+            { name: 'julie',   phone: '555-8765',    age: 29 }
           ];
           $scope.order = function(predicate, reverse) {
             $scope.friends = orderBy($scope.friends, predicate, reverse);
@@ -20393,7 +20393,7 @@ function FormController(element, attrs, $scope, $animate, $interpolate) {
  * These classes are: `.ng-pristine`, `.ng-dirty`, `.ng-invalid` and `.ng-valid` as well as any
  * other validations that are performed within the form. Animations in ngForm are similar to how
  * they work in ngClass and animations can be hooked into using CSS transitions, keyframes as well
- * as JS animations.
+ * as jS animations.
  *
  * The following example shows a simple way to utilize CSS transitions to style a form element
  * that has been rendered as invalid after it has been validated:
@@ -20884,7 +20884,7 @@ var inputType = {
    * Input with time validation and transformation. In browsers that do not yet support
    * the HTML5 date input, a text element will be used. In that case, the text must be entered in a valid ISO-8601
    * local time format (HH:mm:ss), for example: `14:57:00`. Model must be a Date object. This binding will always output a
-   * Date object to the model of January 1, 1970, or local date `new Date(1970, 0, 1, HH, mm, ss)`.
+   * Date object to the model of january 1, 1970, or local date `new Date(1970, 0, 1, HH, mm, ss)`.
    *
    * The model must always be a Date object, otherwise Angular will throw an error.
    * Invalid `Date` objects (dates whose `getTime()` is `NaN`) will be rendered as an empty string.
@@ -21768,7 +21768,7 @@ function createDateParser(regexp, mapping) {
     }
 
     if (isString(iso)) {
-      // When a date is JSON'ified to wraps itself inside of an extra
+      // When a date is jSON'ified to wraps itself inside of an extra
       // set of double quotes. This makes the date parsing code unable
       // to match the date string and parse it as a date.
       if (iso.charAt(0) == '"' && iso.charAt(iso.length - 1) == '"') {
@@ -22523,7 +22523,7 @@ var ngBindHtmlDirective = ['$sce', '$parse', '$compile', function($sce, $parse, 
  *
  * @description
  * Evaluate the given expression when the user changes the input.
- * The expression is evaluated immediately, unlike the JavaScript onchange event
+ * The expression is evaluated immediately, unlike the javaScript onchange event
  * which only triggers at the end of a change (usually, when the user leaves the
  * form element or presses the return key).
  *
@@ -22912,7 +22912,7 @@ var ngClassDirective = classDirective('', true);
  * @example
    <example>
      <file name="index.html">
-        <ol ng-init="names=['John', 'Mary', 'Cate', 'Suz']">
+        <ol ng-init="names=['john', 'Mary', 'Cate', 'Suz']">
           <li ng-repeat="name in names">
            <span ng-class-odd="'odd'" ng-class-even="'even'">
              {{name}}
@@ -22960,7 +22960,7 @@ var ngClassOddDirective = classDirective('Odd', 0);
  * @example
    <example>
      <file name="index.html">
-        <ol ng-init="names=['John', 'Mary', 'Cate', 'Suz']">
+        <ol ng-init="names=['john', 'Mary', 'Cate', 'Suz']">
           <li ng-repeat="name in names">
            <span ng-class-odd="'odd'" ng-class-even="'even'">
              {{name}} &nbsp; &nbsp; &nbsp;
@@ -23133,7 +23133,7 @@ var ngCloakDirective = ngDirective({
  *      .controller('SettingsController1', SettingsController1);
  *
  *    function SettingsController1() {
- *      this.name = "John Smith";
+ *      this.name = "john Smith";
  *      this.contacts = [
  *        {type: 'phone', value: '408 555 1212'},
  *        {type: 'email', value: 'john.smith@example.org'} ];
@@ -23161,7 +23161,7 @@ var ngCloakDirective = ngDirective({
  *     it('should check controller as', function() {
  *       var container = element(by.id('ctrl-as-exmpl'));
  *         expect(container.element(by.model('settings.name'))
- *           .getAttribute('value')).toBe('John Smith');
+ *           .getAttribute('value')).toBe('john Smith');
  *
  *       var firstRepeat =
  *           container.element(by.repeater('contact in settings.contacts').row(0));
@@ -23216,7 +23216,7 @@ var ngCloakDirective = ngDirective({
  *     .controller('SettingsController2', ['$scope', SettingsController2]);
  *
  *   function SettingsController2($scope) {
- *     $scope.name = "John Smith";
+ *     $scope.name = "john Smith";
  *     $scope.contacts = [
  *       {type:'phone', value:'408 555 1212'},
  *       {type:'email', value:'john.smith@example.org'} ];
@@ -23245,7 +23245,7 @@ var ngCloakDirective = ngDirective({
  *      var container = element(by.id('ctrl-exmpl'));
  *
  *      expect(container.element(by.model('name'))
- *          .getAttribute('value')).toBe('John Smith');
+ *          .getAttribute('value')).toBe('john Smith');
  *
  *      var firstRepeat =
  *          container.element(by.repeater('contact in contacts').row(0));
@@ -23313,7 +23313,7 @@ var ngControllerDirective = [function() {
  * however, triggers a CSP error to be logged in the console:
  *
  * ```
- * Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of
+ * Refused to evaluate a string as javaScript because 'unsafe-eval' is not an allowed source of
  * script in the following Content Security Policy directive: "default-src 'self'". Note that
  * 'script-src' was not explicitly set, so 'default-src' is used as a fallback.
  * ```
@@ -23870,7 +23870,7 @@ forEach(
  * Specify custom behavior on focus event.
  *
  * Note: As the `focus` event is executed synchronously when calling `input.focus()`
- * AngularJS executes the expression using `scope.$evalAsync` if the event is fired
+ * AngularjS executes the expression using `scope.$evalAsync` if the event is fired
  * during an `$apply` to ensure a consistent state.
  *
  * @element window, input, select, textarea, a
@@ -23894,7 +23894,7 @@ forEach(
  *
  * Note: As the `blur` event is executed synchronously also during DOM manipulations
  * (e.g. removing a focussed input),
- * AngularJS executes the expression using `scope.$evalAsync` if the event is fired
+ * AngularjS executes the expression using `scope.$evalAsync` if the event is fired
  * during an `$apply` to ensure a consistent state.
  *
  * @element window, input, select, textarea, a
@@ -25499,7 +25499,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
  * on the input element which is attached to the model. These classes are: `.ng-pristine`, `.ng-dirty`,
  * `.ng-invalid` and `.ng-valid` as well as any other validations that are performed on the model itself.
  * The animations that are triggered within ngModel are similar to how they work in ngClass and
- * animations can be hooked into using CSS transitions, keyframes as well as JS animations.
+ * animations can be hooked into using CSS transitions, keyframes as well as jS animations.
  *
  * The following example shows a simple way to utilize CSS transitions to style an input element
  * that has been rendered as invalid after it has been validated:
@@ -26744,7 +26744,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
  * Angular expression}; these are evaluated on the current scope for its bound value.
  *
  * The `when` attribute specifies the mappings between plural categories and the actual
- * string to be displayed. The value of the attribute should be a JSON object.
+ * string to be displayed. The value of the attribute should be a jSON object.
  *
  * The following example shows how to configure ngPluralize:
  *
@@ -26773,7 +26773,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
  * # Configuring ngPluralize with offset
  * The `offset` attribute allows further customization of pluralized text, which can result in
  * a better user experience. For example, instead of the message "4 people are viewing this document",
- * you might display "John, Kate and 2 others are viewing this document".
+ * you might display "john, Kate and 2 others are viewing this document".
  * The offset attribute allows you to offset a number by any desired value.
  * Let's take a look at an example:
  *
@@ -26789,10 +26789,10 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
  *
  * Notice that we are still using two plural categories(one, other), but we added
  * three explicit number rules 0, 1 and 2.
- * When one person, perhaps John, views the document, "John is viewing" will be shown.
+ * When one person, perhaps john, views the document, "john is viewing" will be shown.
  * When three people view the document, no explicit number rule is found, so
  * an offset of 2 is taken off 3, and Angular uses 1 to decide the plural category.
- * In this case, plural category 'one' is matched and "John, Mary and one other person are viewing"
+ * In this case, plural category 'one' is matched and "john, Mary and one other person are viewing"
  * is shown.
  *
  * Note that when you specify offsets, you must provide explicit number rules for
@@ -26928,7 +26928,7 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
         }
 
         // If both `count` and `lastCount` are NaN, we don't need to re-register a watch.
-        // In JS `NaN !== NaN`, so we have to exlicitly check.
+        // In jS `NaN !== NaN`, so we have to exlicitly check.
         if ((count !== lastCount) && !(countIsNaN && isNumber(lastCount) && isNaN(lastCount))) {
           watchRemover();
           var whenExpFn = whensExpFns[count];
@@ -26988,14 +26988,14 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
  * <div ng-repeat="(key, value) in myObj"> ... </div>
  * ```
  *
- * You need to be aware that the JavaScript specification does not define the order of keys
+ * You need to be aware that the javaScript specification does not define the order of keys
  * returned for an object. (To mitigate this in Angular 1.3 the `ngRepeat` directive
  * used to sort the keys alphabetically.)
  *
  * Version 1.4 removed the alphabetic sorting. We now rely on the order returned by the browser
  * when running `for key in myObj`. It seems that browsers generally follow the strategy of providing
  * keys in the order in which they were defined, although there are exceptions when keys are deleted
- * and reinstated. See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/delete#Cross-browser_issues
+ * and reinstated. See https://developer.mozilla.org/en-US/docs/Web/javaScript/Reference/Operators/delete#Cross-browser_issues
  *
  * If this is not desired, the recommended workaround is to convert your object into an array
  * that is sorted into the order that you prefer before providing it to `ngRepeat`.  You could
@@ -27037,7 +27037,7 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
  * If you are working with objects that have an identifier property, you can track
  * by the identifier instead of the whole object. Should you reload your data later, `ngRepeat`
  * will not have to rebuild the DOM elements for items it has already rendered, even if the
- * JavaScript objects in the collection have been substituted for new ones:
+ * javaScript objects in the collection have been substituted for new ones:
  * ```html
  *    <div ng-repeat="model in collection track by model.id">
  *      {{model.name}}
@@ -27102,7 +27102,7 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
  *   </footer>
  * ```
  *
- * The custom start and end points for ngRepeat also support all other HTML directive syntax flavors provided in AngularJS (such
+ * The custom start and end points for ngRepeat also support all other HTML directive syntax flavors provided in AngularjS (such
  * as **data-ng-repeat-start**, **x-ng-repeat-start** and **ng:repeat-start**).
  *
  * @animations
@@ -27169,10 +27169,10 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
   <example module="ngAnimate" deps="angular-animate.js" animations="true">
     <file name="index.html">
       <div ng-init="friends = [
-        {name:'John', age:25, gender:'boy'},
-        {name:'Jessie', age:30, gender:'girl'},
-        {name:'Johanna', age:28, gender:'girl'},
-        {name:'Joy', age:15, gender:'girl'},
+        {name:'john', age:25, gender:'boy'},
+        {name:'jessie', age:30, gender:'girl'},
+        {name:'johanna', age:28, gender:'girl'},
+        {name:'joy', age:15, gender:'girl'},
         {name:'Mary', age:28, gender:'girl'},
         {name:'Peter', age:95, gender:'boy'},
         {name:'Sebastian', age:50, gender:'boy'},
@@ -27232,8 +27232,8 @@ var ngPluralizeDirective = ['$locale', '$interpolate', '$log', function($locale,
 
       it('should render initial data set', function() {
         expect(friends.count()).toBe(10);
-        expect(friends.get(0).getText()).toEqual('[1] John who is 25 years old.');
-        expect(friends.get(1).getText()).toEqual('[2] Jessie who is 30 years old.');
+        expect(friends.get(0).getText()).toEqual('[1] john who is 25 years old.');
+        expect(friends.get(1).getText()).toEqual('[2] jessie who is 30 years old.');
         expect(friends.last().getText()).toEqual('[10] Samantha who is 60 years old.');
         expect(element(by.binding('friends.length')).getText())
             .toMatch("I have 10 friends. They are:");
@@ -27311,7 +27311,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
 
       if (aliasAs && (!/^[$a-zA-Z_][$a-zA-Z0-9_]*$/.test(aliasAs) ||
           /^(null|undefined|this|\$index|\$first|\$middle|\$last|\$even|\$odd|\$parent|\$root|\$id)$/.test(aliasAs))) {
-        throw ngRepeatMinErr('badident', "alias '{0}' is invalid --- must be a valid JS identifier which is not a reserved name.",
+        throw ngRepeatMinErr('badident', "alias '{0}' is invalid --- must be a valid jS identifier which is not a reserved name.",
           aliasAs);
       }
 
@@ -27492,7 +27492,7 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
  * The `ngShow` directive shows or hides the given HTML element based on the expression
  * provided to the `ngShow` attribute. The element is shown or hidden by removing or adding
  * the `.ng-hide` CSS class onto the element. The `.ng-hide` CSS class is predefined
- * in AngularJS and sets the display style to none (using an !important flag).
+ * in AngularjS and sets the display style to none (using an !important flag).
  * For CSP mode please add `angular-csp.css` to your html file (see {@link ng.directive:ngCsp ngCsp}).
  *
  * ```html
@@ -27566,7 +27566,7 @@ var NG_HIDE_IN_PROGRESS_CLASS = 'ng-hide-animate';
  * .my-element.ng-hide-remove.ng-hide-remove-active { ... }
  * ```
  *
- * Keep in mind that, as of AngularJS version 1.3.0-beta.11, there is no need to change the display
+ * Keep in mind that, as of AngularjS version 1.3.0-beta.11, there is no need to change the display
  * property to block during animation states--ngAnimate will handle the style toggling automatically for you.
  *
  * @animations
@@ -27666,7 +27666,7 @@ var ngShowDirective = ['$animate', function($animate) {
  * The `ngHide` directive shows or hides the given HTML element based on the expression
  * provided to the `ngHide` attribute. The element is shown or hidden by removing or adding
  * the `ng-hide` CSS class onto the element. The `.ng-hide` CSS class is predefined
- * in AngularJS and sets the display style to none (using an !important flag).
+ * in AngularjS and sets the display style to none (using an !important flag).
  * For CSP mode please add `angular-csp.css` to your html file (see {@link ng.directive:ngCsp ngCsp}).
  *
  * ```html
@@ -27730,7 +27730,7 @@ var ngShowDirective = ['$animate', function($animate) {
  * .my-element.ng-hide-remove.ng-hide-remove-active { ... }
  * ```
  *
- * Keep in mind that, as of AngularJS version 1.3.0-beta.11, there is no need to change the display
+ * Keep in mind that, as of AngularjS version 1.3.0-beta.11, there is no need to change the display
  * property to block during animation states--ngAnimate will handle the style toggling automatically for you.
  *
  * @animations
@@ -28756,14 +28756,14 @@ var minlengthDirective = function() {
 };
 
 if (window.angular.bootstrap) {
-  //AngularJS is already loaded, so we can return here...
+  //AngularjS is already loaded, so we can return here...
   console.log('WARNING: Tried to load angular more than once.');
   return;
 }
 
 //try to bind to jquery now so that one can write jqLite(document).ready()
 //but we will rebind on bootstrap again.
-bindJQuery();
+bindjQuery();
 
 publishExternalAPI(angular);
 
@@ -28812,13 +28812,13 @@ $provide.value("$locale", {
     ],
     "FIRSTDAYOFWEEK": 6,
     "MONTH": [
-      "January",
+      "january",
       "February",
       "March",
       "April",
       "May",
-      "June",
-      "July",
+      "june",
+      "july",
       "August",
       "September",
       "October",
@@ -28835,13 +28835,13 @@ $provide.value("$locale", {
       "Sat"
     ],
     "SHORTMONTH": [
-      "Jan",
+      "jan",
       "Feb",
       "Mar",
       "Apr",
       "May",
-      "Jun",
-      "Jul",
+      "jun",
+      "jul",
       "Aug",
       "Sep",
       "Oct",

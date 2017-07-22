@@ -245,12 +245,12 @@ namespace BTPOSDashboard.Controllers
                         //,
                         //    shipping_address = new ShippingAddress
                         //    {
-                        //        city = "Johnstown",
+                        //        city = "johnstown",
                         //        country_code = "US",
                         //        line1 = "52 N Main ST",
                         //        postal_code = "43210",
                         //        state = "OH",
-                        //        recipient_name = "Joe Buyer"
+                        //        recipient_name = "joe Buyer"
                         //    }
                     },
                     invoice_number = Common.GetRandomInvoiceNumber()
@@ -268,7 +268,7 @@ namespace BTPOSDashboard.Controllers
                         {
                             //billing_address = new Address()
                             //{
-                            //    city = "Johnstown",
+                            //    city = "johnstown",
                             //    country_code = "US",
                             //    line1 = "52 N Main ST",
                             //    postal_code = "43210",
@@ -517,7 +517,7 @@ namespace BTPOSDashboard.Controllers
 
     public static class Common
     {
-        public static string FormatJsonString(string json)
+        public static string FormatjsonString(string json)
         {
             if (string.IsNullOrEmpty(json))
             {
@@ -527,7 +527,7 @@ namespace BTPOSDashboard.Controllers
             if (json.StartsWith("["))
             {
                 // Hack to get around issue with the older Newtonsoft library
-                // not handling a JSON array that contains no outer element.
+                // not handling a jSON array that contains no outer element.
                 json = "{\"list\":" + json + "}";
                 var formattedText = JObject.Parse(json).ToString(Formatting.Indented);
                 formattedText = formattedText.Substring(13, formattedText.Length - 14).Replace("\n  ", "\n");

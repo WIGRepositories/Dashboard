@@ -45,8 +45,8 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="PayPal, Version=1.7.3.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -55,12 +55,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -72,12 +72,12 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -160,6 +160,7 @@
     <Content Include="UI\AddFleetStaff.html" />
     <Content Include="UI\AddLicenseFeature.html" />
     <Content Include="UI\AddNewBTPOSDetails.html" />
+    <Content Include="UI\AddNewCardData.html" />
     <Content Include="UI\AddNewInventoryItem.html" />
     <Content Include="UI\AddNewSeats.html" />
     <Content Include="UI\AdminReports.html" />
@@ -172,12 +173,14 @@
     <Content Include="UI\BtposReports.html" />
     <Content Include="UI\BtposRoutes.html" />
     <Content Include="UI\BTPOSTransactionPage.html" />
+    <Content Include="UI\CardCategory.html" />
     <Content Include="UI\CardDetails.html" />
+    <Content Include="UI\CardInformation.html" />
     <Content Include="UI\CardList.html" />
     <Content Include="UI\CardTransaction.html" />
-    <Content Include="UI\CardTransactionDetails.html" />
     <Content Include="UI\CardTrasactionDetails.html" />
     <Content Include="UI\CardUser.html" />
+    <Content Include="UI\CardUserList.html" />
     <Content Include="UI\CartDetails.html" />
     <Content Include="UI\CheckOut.html" />
     <Content Include="UI\CompanyHierarchy.html" />
@@ -254,6 +257,7 @@
     <Content Include="UI\InventorySales.html" />
     <Content Include="UI\InventoryStatus.html" />
     <Content Include="UI\Invoices.html" />
+    <Content Include="UI\js\AddNewCardData.js" />
     <Content Include="UI\js\Advertisment.js" />
     <Content Include="UI\js\Alerts.js" />
     <Content Include="UI\js\AlertsConfiguration.js" />
@@ -266,9 +270,18 @@
     <Content Include="UI\js\BTPosReports.js" />
     <Content Include="UI\js\BTPOSRoute.js" />
     <Content Include="UI\js\BTPOSTransactions.js" />
+    <Content Include="UI\js\CardCategory.js" />
+    <Content Include="UI\js\CardDetails.js" />
+    <Content Include="UI\js\CardDetails1.js" />
+    <Content Include="UI\js\CardsList.js" />
+    <Content Include="UI\js\CardTransaction.js" />
+    <Content Include="UI\js\CardTransactionDetails.js" />
+    <Content Include="UI\js\CardUser.js" />
+    <Content Include="UI\js\CardUserList.js" />
     <Content Include="UI\js\charts-highchart-line.js" />
     <Content Include="UI\js\CompanyHierarchy.js" />
     <Content Include="UI\js\CompanyReports.js" />
+    <Content Include="UI\js\CompletedCardList.js" />
     <Content Include="UI\js\Countries.js" />
     <Content Include="UI\js\createfleet.js" />
     <Content Include="UI\js\DataLoad.js" />
@@ -316,6 +329,7 @@
     <Content Include="UI\js\registrationform.js" />
     <Content Include="UI\js\ShoppingCart.js" />
     <Content Include="UI\js\SmsGatewayConfiguration.js" />
+    <Content Include="UI\js\table-action.js" />
     <Content Include="UI\js\treasure-overlay-spinner.js" />
     <Content Include="UI\js\treetable.js" />
     <Content Include="UI\js\jstree.min.js" />
@@ -1628,6 +1642,7 @@
     <Content Include="UI\vendors\jquery-tablesorter\themes\blue\sort_desc.png" />
     <Content Include="UI\vendors\jquery-tablesorter\themes\blue\style-custom.css" />
     <Content Include="UI\vendors\jquery-tablesorter\themes\blue\style.css" />
+    <Content Include="UI\vendors\jquery-tickernews\jquery-tickerNews.js" />
     <Content Include="UI\vendors\jquery-toastr\demo.html" />
     <Content Include="UI\vendors\jquery-toastr\toastr-icon.png" />
     <Content Include="UI\vendors\jquery-toastr\toastr.css" />
@@ -2046,9 +2061,12 @@
     <Compile Include="Controllers\BTPOSPaymentController.cs" />
     <Compile Include="Controllers\BtposRoutesController.cs" />
     <Compile Include="Controllers\BtposTicketDetailsController.cs" />
+    <Compile Include="Controllers\CardsController.cs" />
+    <Compile Include="Controllers\CardUser.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\CreateFleetOwnerController.cs" />
     <Compile Include="Controllers\DataLoadController.cs" />
+    <Compile Include="Controllers\Datatable.cs" />
     <Compile Include="Controllers\EditHistoryController.cs" />
     <Compile Include="Controllers\EditHistoryDetailsController.cs" />
     <Compile Include="Controllers\EmailGatewayConfigController.cs" />

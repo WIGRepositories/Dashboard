@@ -1,5 +1,5 @@
-// JavaScript source code
-// JavaScript source code
+// javaScript source code
+// javaScript source code
 var app = angular.module('myApp', [])
 var ctrl = app.controller('myCtrl', function ($scope, $http) {
     $scope.GetUsers = function () {

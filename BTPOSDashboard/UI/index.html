@@ -28,7 +28,7 @@
     <link type="text/css" rel="stylesheet" href="css/style-responsive.css">
 </head>
 
-<body ng-app="myApp" ng-controller="myCtrl"  ng-init="GetDashboardDS();" ng-model="dashboardDS">
+<body ng-app="myApp" ng-controller="myCtrl"  ng-model="dashboardDS">
  
         <!--BEGIN THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
@@ -384,7 +384,8 @@
                                 <li>
                                     <a href="Website/Carousel.html" data-toggle="tooltip" data-placement="right" title="Details of Carousel Configuration"><span class="fa fa-angle-right"></span><span class="submenu-title">Carousel Configuration</span></a>
                                 </li>                                   
-
+                            </ul>
+                       </li>
                         <li>
                             <a href="#">
                                 <i class="fa fa-send-o fa-fw">
@@ -395,15 +396,15 @@
                                 <li><a href="CardList.html" data-toggle="tooltip" data-placement="right" title="Details of Company reports"><i class="fa fa-th-large"></i><span class="submenu-title">CardList</span></a></li>
                                 <li><a href="CardDetails.html" data-toggle="tooltip" data-placement="right" title="Details of Fleet owner reports"><i class="fa fa-tablet"></i><span class="submenu-title">CardDetails</span></a></li>
                                 <li><a href="CardUser.html" data-toggle="tooltip" data-placement="right" title="Details of Admin reports"><i class="fa fa-tencent-weibo"></i><span class="submenu-title">CardUser</span></a></li>
+                                <li><a href="CardUserList.html" data-toggle="tooltip" data-placement="right" title="Details of Trouble ticket reports"><i class="fa fa-filter"></i><span class="submenu-title">CardUserList</span></a></li>
                                 <li><a href="CardTransaction.html" data-toggle="tooltip" data-placement="right" title="Details of Trouble ticket reports"><i class="fa fa-filter"></i><span class="submenu-title">CardTransaction</span></a></li>
                                 <li><a href="CardTrasactionDetails.html" data-toggle="tooltip" data-placement="right" title="Details of Fleet"><i class="fa fa-filter"></i><span class="submenu-title">CardTrasactionDetails</span></a></li>
+                                <li><a href="CardCategory.html" data-toggle="tooltip" data-placement="right" title="Details of Fleet owner reports"><i class="fa fa-tablet"></i><span class="submenu-title">CardCategory</span></a></li>
                             </ul>
                         </li>
 
 
 
-
-                        </ul>
                     </div>
                 </nav>                <!--END CHAT FORM--><!--BEGIN PAGE WRAPPER-->
                 <div id="page-wrapper">
@@ -615,7 +616,7 @@
                                                     </div>
 
 
-                                                    <div id="tab-general">
+                                                 <!--   <div id="tab-general">
                                                         <h3 class="mtn">BTPOS Details</h3>
                                                         <table class="table table-hover table-striped table-bordered table-advanced tablesorter" ng-hide="dashboardDS.Table.length == 0">
                                                             <thead>

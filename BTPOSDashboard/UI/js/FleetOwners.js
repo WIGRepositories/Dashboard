@@ -12,7 +12,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
 
    
 
-    $scope.GetCompanies = function () {
+  /*  $scope.GetCompanies = function () {
 
         $http.get('/api/GetCompanyGroups?userid=-1').then(function (res, data) {
             $scope.Companies = res.data;
@@ -32,10 +32,8 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             }
            
         });
-    }
+    } */
     
-   
-
     $scope.GetFleetOwners = function () {
        
         if ($scope.cmp == null || $scope.cmp.Id == null)
@@ -116,7 +114,7 @@ var ctrl = app.controller('myCtrl', function ($scope, $http, $localStorage) {
             FirstName: FleetOwner.FirstName,
             LastName: FleetOwner.LastName,
             MiddleName: FleetOwner.MiddleName,
-           EmpNo: FleetOwner.EmpNo,
+            EmpNo: FleetOwner.EmpNo,
             Email: FleetOwner.Email,
             MobileNo: FleetOwner.MobileNo,
             Active: FleetOwner.Active,
