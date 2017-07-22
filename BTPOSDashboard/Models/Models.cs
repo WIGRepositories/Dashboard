@@ -1041,7 +1041,7 @@ namespace BTPOSDashboardAPI.Models
 
         public string EmaiId { get; set; }
 
-        public int  MobileNumber { get; set; }
+        public string  MobileNumber { get; set; }
 
         public string Address { get; set; }
 

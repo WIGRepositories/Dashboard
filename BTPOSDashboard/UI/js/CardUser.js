@@ -686,7 +686,7 @@ var mycrtl1 = myapp1.controller('myCtrl', function ($scope, $http, $localStorage
                 FirstName: currCard.FirstName,
                 LastName: currCard.LastName,
                 EmailId: currCard.EmailId,
-                MobileNumber:currCard.MobileNumber,
+                MobileNumber: currCard.MobileNumber,
                 Address: currCard.AddressId,
                 CardType: currCard.Name.id,
                 CardNumber: currCard.CardNumber.CardNumber,
